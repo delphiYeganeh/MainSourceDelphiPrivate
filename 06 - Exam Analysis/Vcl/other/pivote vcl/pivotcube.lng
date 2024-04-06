@@ -1,0 +1,305 @@
+RowTotalName=Total by ROWS
+ColumnTotalName=Total by COLUMNS
+PanelRowsCaption=Rows
+PanelColumnsCaption=Columns
+PanelDimsCaption=Dimensions
+CustomFilter=Custom Filter
+
+pvToolBarCollapseError=Could not collapse TOOLBAR without border alignment
+pvToolBarTreeFilterWarn=Cannot use incremental filtering on hierarhical dimensions!
+pvToolBarNoFilter=No filter
+pvToolBarCustomFilter=Custom filter
+
+pvCubeErr1=Could not load dimension data! 
+pvCubeErr2=Could not load measure data! 
+pvCubeErr3=: You must specify dataset for dimension!
+pvCubeErr4=Could not load dimension items! Dimension: %s  Dimension item: %s 
+pvCubeErr5=Could not start building cube! Unknown error
+pvCubeErr6=You must set appropriate EventHandler for custom wrapped dimensions! : %s
+pvCubeErr7=You must set FactTableDataSet property!
+
+pvCubeErr8=You must set at least ONE measure
+pvCubeErr9=You must set at least ONE dimension
+
+pvMapErr1=Invalid measure index 
+pvMapErr2=One measure always must be visible! 
+
+pvGridExcel0=Export note
+pvGridExcel1=Number of columns more than 256. Only first 255 columns will be exported!
+pvGridExcel2=Number of columns must be more than 0!
+pvGridExcel3=Number of rows must be more than 0!
+pvGridExcel4=Could not export data to Excel! Check your MS Excel installation
+
+// add measure form
+pvAMFAddMeasureForm=Calculated measures manager
+pvAMFAddMeasureBtn=Add new measure
+pvAMFEditMeasureBtn=Edit measure name
+pvAMFDelMeasureBtn=Delete calculated measure
+pvAMFCalcLabel=Calculated measures
+pvAMFCalcEditLabel=Calculation formula
+pvAMFMeasureLabel=Available measures
+pvAMFViewsLabel=Available views
+pvAMFCheckBtn=Check formula 
+pvAMFSynaxError=Syntax Error
+pvAMFFormulaError=: Error in formula 
+pvAMFDuplicateError=Duplicate measure name
+pvAMFCheckOKName=Checked!
+
+
+pvToolBarDDOKBtnHint=Accept changes
+pvToolBarDDCancelBtnHint=Cancel changes
+pvToolBarDDFillBtnHint=Set all items to selected
+pvToolBarDDClearBtnHint=Set all items to un-selected
+pvToolBarDDRevertBtnHint=Set all selected items to unselected and all select all unselected items
+pvToolBarDDExpandBtnHint=Expand/Collapse all tree nodes(if any)
+
+// map view names
+pvMapValueName=Value
+pvMapRowPercentName=Percents by ROW
+pvMapColPercentName=Percents by COLUMN
+pvMapRecordCountName=Count
+pvMapRankName=Rank[Column]
+pvMapRankRName=Rank[Row]
+pvMapSubPrevCName=Difference with previous Column
+pvMapSubPrevRName=Difference with previous Row
+pvMapAddPrevCName=Sum with previous Column
+pvMapAddPrevRName=Sum with previous Row
+pvMapRunningTotalName1=Running Total by Column
+pvMapRunningTotalName2=Running Total by Row
+
+  // button hints
+pvBtnHintAccept=Accept
+pvBtnHintCancel=Cancel
+pvBtnHintExpandTree=Expand/Collapse tree nodes
+pvBtnHintCalcMeasureDialog=Run calculated measure dialog - to create,edit or delete calculate measures
+pvBtnHintMeasureFillEnable=Set all measures to enabled state
+pvBtnHintMeasureFillDisable=Set all measures to disabled state
+pvBtnHintMeasureRevert=Toggle measure state - enabled to disabled, disabled to enabled
+
+pvBtnHintDimFillActive=Set all dimensions to visible state
+pvBtnHintDimFillHided=Set all dimensions to invisible state
+pvBtnHintDimFillFiltered=Set all dimensions to filtered state
+pvBtnHintDimRevert=Circular shift of dimension state - visible to invisible, invisible to filtered filtered to visible
+pvBtnHintDimAddGroup=Add hierarchy group
+pvBtnHintDimDelGroup=Delete hierarchy group
+
+  // map builder
+mbFormCaption=Map builder
+mbRowsCaption=Rows
+mbColumnsCaption=Columns
+mbDimsCaption=Dimensions
+mbDisabledDimsCaption=Disabled Dimensions
+mbRunEditBtnHint=Execute dimension editor for selected dimension
+mbTreeViewHint=Drag''n''Drop dimension lable to choosen group. Dbl-click to run dimension editor
+
+
+  // dimensions
+DimensionFormCaption=Dimension editor : 
+dimDisplayName=Caption
+dimCount=Items count
+dimSOrtBtn=Sort
+dimSortBtnHint=Sort dimension items for specified order
+dimActiveItems=Active items
+dimInActiveItems=Repository(inactive items)
+dimSearch=Find
+dimTVHint=Drag''n''drop selected item(s) to group or repository area
+dimSortByName=Sort by name
+dimSortByKey=Sort by key
+dimNoSort=Unsorted
+dimSortAscending=Ascending
+dimSortDescending=Descending
+dimForecastingCB1=Enable prev. forecast value
+dimForecastingCB2=Enable next. forecast value
+dimForecastingType=Forecasting method
+dimForecastingMethod1=Simple moving average
+dimForecastingMethod2=Weighted Moving Average
+dimForecastingMethod3=Double Exponential Smoothing
+dimForecastingMethod4=Triple Exponential Smoothing
+dimForecastingMethod5=Show Data Margins Only
+dimForecastingMethod6=Show First and Last members
+
+dimFilterError=At least 1 dimension item must be active!
+
+
+  // measure
+MeasureCommonFormCaption=Measure manager
+MFormatBtnName=Build format
+MFormatFormCaption=Build format string
+
+pvMapMVFmt0=Change measure type
+
+pvMapMVFmt1=Cell
+pvMapMVFmt2=Percent by Column
+pvMapMVFmt3=Percent by Row
+pvMapMVFmt4=Record count
+pvMapMVFmt5=Rank by Column
+pvMapMVFmt6=Rank by Row
+pvMapMVFmt7=Previous member by Row
+pvMapMVFmt8=Next member by Row
+pvMapMVFmt9=Previous member by Column
+pvMapMVFmt10=Next member by Column
+pvMapMVFmt11=Running Total by Column
+pvMapMVFmt12=Running Total by Row
+
+pmMapMVOp1=Value
+pmMapMVOp2=Subtract
+pmMapMVOp3=Add
+pmMapMVOp4=Divide
+pmMapMVOp5=Multiply
+
+pvMeasureCommon5=Min. value
+pvMeasureCommon6=Max. value
+pvMeasureCommon9=Value
+pvMeasureCommon10=Operation
+pvMeasureCommon11=Only one measure visible
+pvMeasureCommon12=Value representation
+pvMeasureCommon13=Filters
+pvMeasureCommon14=Filter by Map cells
+pvMeasureCommon15=Filter by fact table records
+pvMeasureCommon16=Measure formating
+pvMeasureCommon17=Formula (is calculated measure)
+pvMeasureCommon18=Enabled
+pvMeasureCommon19=Running Total by Column
+pvMeasureCommon20=Running Total by Row
+pvMeasureCommon21=Display caption
+
+MeasureFilterError= Measure filter error
+mfeWrongValue=Wrong value in  measure filter: 
+MeasureCommonFormDistinctName=Distinct
+
+// grid search
+pvgSearchFormCaption=Search
+pvgSearchArea=Search area
+pvgSearchRow=Row header
+pvgSearchCol=Column header
+pvgSearchText=Text for search
+pvgSearch1=Next
+pvgSearch2=Forward
+pvgSearch3=Case sensitive
+pvgSearchBtn=Find again
+pvgSearchFinish=Cannot find more
+
+// html export
+uHtmBuildHeaders=building headers...
+uHtmPreparing=prepearing...
+uHtmColTotal=Total by COLUMNS
+uHtmRowTotal=Total by ROWS
+uHtmExportColHeader=exporting column headers...
+uHtmExportCells=exporting row headers, cell values and row totals...
+uHtmExportColTotal=exporting column totals...
+uHtmSave=saving and executing...
+uHtmLabel=Action...
+
+ChartDDRows=Rows
+ChartDDColumns=Columns
+
+pvGridSubTotal=Subtotal
+pvGridSubTotalwName=Sub-total by 
+MFormatCount=3
+MFormatName0=Generic
+MFormatValue0=#0.00
+MFormatName1=Price (US)
+MFormatValue1=$ #0.00
+MFormatName2=Summa
+MFormatValue2=# ##0.00
+MFormatCap1=Predefined formats
+MFormatCap2=Format string
+MFormatCap3=Number of decimals
+MFormatCap4=Before
+MFormatCap5=After
+MFormatCap6=Design
+MFormatCap7=Symbol
+MFormatCap8=Example
+MFormatCap9=Thousand separator
+
+uXLSActionLabel=Action
+uXLSAction1=Prepearing basic fonts
+uXLSAction2=Prepearing basic formats
+uXLSAction3=Applying row totals headers merging
+uXLSAction4=Applying cells format
+uXLSAction5=Applying columns headers merging
+uXLSAction6=Applying rows headers merging
+uXLSAction7=Applying column totals headers merging
+uXLSAction8=Applying auto width for columns
+
+uXLActionLabel=Action
+uXLAction1=Prepearing cells array
+uXLAction2=Prepearing column headers
+uXLAction3=Processing
+uXLAction4=Merging column headers
+uXLAction5=Merging row headers
+uXLAction6=Merging row total headers
+uXLAction7=Applying cells format
+
+pvGridPrint1=Print All
+pvGridPrint2=Print selected
+pvGridPrint3=Right click to scale menu
+
+uXLSActionLabel2=Action progress
+uXLSActionLabel2=Full progress
+uHtmLabel2=Action progress
+uHtmLabel3=Full progress
+
+pvGridEditor1=Table
+pvGridEditor2=Chart
+pvGridEditor3=Method
+pvGridEditor4=Summa
+pvGridEditor5=Count
+pvGridEditor6=Average
+pvGridEditor7=Equal
+pvGridEditor8=Proportional
+
+pvGridPrintLocked=Process locked! Please wait....
+
+pvCubeNullDim=[Null]
+pvCubeUnknownDim=[Unknown]
+pvCubePrecItem=[Preceding]
+pvCubeConsItem=[Consequent]
+
+
+PvCubeMeasureCType=Calculation type
+
+PvCubeMeasureType0=ctSumma
+PvCubeMeasureType1=ctCount
+PvCubeMeasureType2=ctAverage
+PvCubeMeasureType3=ctMax
+PvCubeMeasureType4=ctMin
+PvCubeMeasureType5=ctWAverage
+PvCubeMeasureType6=ctMedian
+PvCubeMeasureType7=ctVariance
+PvCubeMeasureType8=ctDeviation
+PvCubeMeasureType9=ctCoeffDeviation
+PvCubeMeasureType10=ct1stQuartile
+PvCubeMeasureType11=ct3rdQuartile
+PvCubeMeasureType12=ctInterQuartile
+PvCubeMeasureType13=ctQuartileDeviation
+PvCubeMeasureType14=ctCoeffQuartVariance
+PvCubeMeasureType15=ctSkewness
+PvCubeMeasureType16=ctKurtosis
+PvCubeMeasureType17=ctMeanAbsDeviation
+PvCubeMeasureType18=ctMeanStError
+PvCubeMeasureType19=ctRepeatableSet
+PvCubeMeasureType20=ctCustom
+
+
+// ActiveX
+ddChartViews=Views
+ddChartLegend=Legend
+ddChartMarks=Marks
+ChartXNextPage=Next page
+ChartXPrevPage=Prev. page
+CubeButtonCaption=Cube
+ChartButtonCaption=Chart
+
+pvGridPrint4=Print preview
+pvGridPrint5=Scale page
+pvGridPrint6=Scale print
+pvGridPrint7=Fit page
+pvGridPrint8=Fit width
+pvGridPrint9=Fit height
+pvGridPrint10=50%
+pvGridPrint11=100%
+pvGridPrint12=200%
+pvGridPrint13=400%
+
+dimNewGroupDefName=New hierarchy group

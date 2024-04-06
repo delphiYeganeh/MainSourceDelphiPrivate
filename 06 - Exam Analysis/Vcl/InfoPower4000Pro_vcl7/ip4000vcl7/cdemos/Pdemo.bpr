@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="Pdemo.exe"/>
+    <OBJFILES value="Pdemo.obj Demo.obj Combos.obj DemoLoc.obj Filtdlg.obj Grdbitmp.obj 
+      Grdbttn.obj Grdlook.obj Grdmemo.obj isearch.obj Lkdtl.obj Lkquery.obj 
+      multi.obj Packdlgs.obj Packtest.obj Pictures.obj Qbe.obj rcdvw.obj 
+      Search.obj savefilt.obj selfilt.obj wwsavflt.obj dtpicker.obj 
+      monthcalu.obj mnthyear.obj navmany.obj navigatorcomb.obj Rcdpnldemo.obj 
+      rcdpnldemo2.obj DataInspectorU.obj dbchecku.obj gridctrl.obj 
+      GridMasterDetail.obj GridExpand.obj"/>
+    <RESFILES value="Pdemo.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) Demo.dfm Combos.dfm DemoLoc.dfm Filtdlg.dfm Grdbitmp.dfm 
+      Grdbttn.dfm Grdlook.dfm Grdmemo.dfm isearch.dfm Lkdtl.dfm Lkquery.dfm 
+      multi.dfm Packdlgs.dfm Packtest.dfm Pictures.dfm Qbe.dfm rcdvw.dfm 
+      Search.dfm savefilt.dfm selfilt.dfm dtpicker.dfm monthcalu.dfm 
+      mnthyear.dfm navmany.dfm navigatorcomb.dfm Rcdpnldemo.dfm rcdpnldemo2.dfm 
+      DataInspectorU.dfm dbchecku.dfm gridctrl.dfm GridMasterDetail.dfm 
+      GridExpand.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="ip3000v6.lib"/>
+    <SPARELIBS value="rtl.lib vcl.lib vclx.lib dbrtl.lib vcldb.lib bdertl.lib vcldbx.lib 
+      ip3000v6.lib"/>
+    <PACKAGES value="vclx.bpi rtl.bpi vcl.bpi dbrtl.bpi vcldb.bpi bdertl.bpi vcldbx.bpi 
+      ip3000v6.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT;USEPACKAGES"/>
+    <MAINSOURCE value="Pdemo.cpp"/>
+    <INCLUDEPATH value="$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp"/>
+    <CFLAG1 value="-Od -H=c:\PROGRA~1\borland\CBUILD~2\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 
+      -b- -k -y -v -vi- -c -tW -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="Pdemo.cpp" FORMNAME="" UNITNAME="Pdemo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Demo.cpp" FORMNAME="MainDemo" UNITNAME="Demo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Pdemo.res" FORMNAME="" UNITNAME="Pdemo" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Combos.cpp" FORMNAME="LookupForm" UNITNAME="Combos" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DemoLoc.cpp" FORMNAME="Locate" UNITNAME="DemoLoc" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Filtdlg.cpp" FORMNAME="FilterDialogForm" UNITNAME="Filtdlg" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Grdbitmp.cpp" FORMNAME="BitmapForm" UNITNAME="Grdbitmp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Grdbttn.cpp" FORMNAME="BtnGridForm" UNITNAME="Grdbttn" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Grdlook.cpp" FORMNAME="GridDemo" UNITNAME="Grdlook" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Grdmemo.cpp" FORMNAME="GridMemoApp" UNITNAME="Grdmemo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="isearch.cpp" FORMNAME="SearchForm" UNITNAME="isearch" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Lkdtl.cpp" FORMNAME="DetailComboForm" UNITNAME="Lkdtl" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Lkquery.cpp" FORMNAME="TableQueryForm" UNITNAME="Lkquery" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="multi.cpp" FORMNAME="MultiSelectForm" UNITNAME="multi" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Packdlgs.cpp" FORMNAME="GetTablesForm" UNITNAME="Packdlgs" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Packtest.cpp" FORMNAME="PackMain" UNITNAME="Packtest" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Pictures.cpp" FORMNAME="PictureForm" UNITNAME="Pictures" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Qbe.cpp" FORMNAME="QBEForm" UNITNAME="Qbe" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="rcdvw.cpp" FORMNAME="RecordViewDemoForm" UNITNAME="rcdvw" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Search.cpp" FORMNAME="IncrSearch" UNITNAME="Search" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="savefilt.cpp" FORMNAME="SaveFilterDemo" UNITNAME="savefilt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="selfilt.cpp" FORMNAME="SelectSaveFilter" UNITNAME="selfilt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="wwsavflt.cpp" FORMNAME="" UNITNAME="wwsavflt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="dtpicker.cpp" FORMNAME="DateTimePickerForm" UNITNAME="dtpicker" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="monthcalu.cpp" FORMNAME="MonthCalendarForm" UNITNAME="monthcalu" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="mnthyear.cpp" FORMNAME="YearCalendar" UNITNAME="mnthyear" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="navmany.cpp" FORMNAME="NavigatorForm1" UNITNAME="navmany" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="navigatorcomb.cpp" FORMNAME="CombinedForm" UNITNAME="navigatorcomb" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Rcdpnldemo.cpp" FORMNAME="RecordPanelDemo" UNITNAME="Rcdpnldemo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="rcdpnldemo2.cpp" FORMNAME="RecordViewDemoForm2" UNITNAME="rcdpnldemo2" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DataInspectorU.cpp" FORMNAME="DataInspectorDemo" UNITNAME="DataInspectorU" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="dbchecku.cpp" FORMNAME="CustomFramingForm" UNITNAME="dbchecku" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="gridctrl.cpp" FORMNAME="GridControlsForm" UNITNAME="gridctrl" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="GridMasterDetail.cpp" FORMNAME="MasterDetailGridForm" UNITNAME="GridMasterDetail" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="GridExpand.cpp" FORMNAME="GridExpandForm" UNITNAME="GridExpand" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlUnitAliases]
+Count=1
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE
+
+[Debugging]
+DebugSourceDirs=
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=1
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

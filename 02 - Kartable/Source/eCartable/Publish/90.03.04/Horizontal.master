@@ -1,0 +1,90 @@
+﻿<%@ master language="C#" autoeventwireup="true" inherits="Cartable.UI.Horizontal, App_Web_un5ihvym" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>اتوماسیون اداري يگانه</title>
+
+    <script language="javascript" type="text/javascript">
+			function confirmation()
+			{
+				if (window.confirm("Are you sure ?")==false)
+					{
+						event.returnValue=false;
+					}
+			}
+			
+    </script>
+
+</head>
+<body dir="rtl">
+    <form id="form1" runat="server">
+        <div id="mainDiv">
+            <div id="divHeader">
+                <div id="top-edge">
+                </div>
+                <div id="top-blank">
+                </div>
+                <div id="divNavBar">
+                    <div class="m-t-r">
+                        <div class="t-r-1">
+                            <asp:LinkButton CssClass="top-text-nav-exit" runat="server" ID="btnLExit" Text="خروج"
+                                OnClick="btnLExit_Click" TabIndex="13"></asp:LinkButton></div>
+                        <div class="t-r-1">
+                            <div class="seperator">
+                                |</div>
+                        </div>
+                        <div class="t-r-1">
+                            <asp:Label CssClass="top-text-nav" runat="server" ID="lblNow" /></div>
+                        <div class="t-r-1">
+                            <div class="seperator">
+                                |</div>
+                        </div>
+                        <div class="t-r-1">
+                            <asp:Label CssClass="top-text-nav" runat="server" ID="lblWelcome"></asp:Label></div>
+                        <div class="t-r-4">
+                            تغییر ظاهر سیستم :
+                            <asp:DropDownList runat="server" ID="cmbStyle" CssClass="combobox" AutoPostBack="true" OnSelectedIndexChanged="cmbStyle_SelectedIndexChanged">
+                                <asp:ListItem Text="پیش فرض" Value="Default" cssclass="combobox"></asp:ListItem>
+                                <asp:ListItem Text="سبز" Value="Green" cssclass="combobox"></asp:ListItem>
+                            </asp:DropDownList></div>
+                    </div>
+                </div>
+                <div class="banner">
+                    <div class="logo">
+                    </div>
+                    <div class="image">
+                    </div>
+                </div>
+                <div id="divMenuBar">
+                    <div class="top-buttob-bg">
+                        <asp:Menu CssClass="nav-menu" runat="server" ID="mainMenu" SkinID="mainMenu" 
+                            DataSourceID="dsSiteMap" onmenuitemclick="mainMenu_MenuItemClick">
+                            <StaticMenuItemStyle CssClass="nav-menu" />
+                            <DynamicHoverStyle CssClass="nav-menu-hover" />
+                            <DynamicMenuStyle CssClass="nav-selected" />
+                            <StaticSelectedStyle CssClass="nav-selected" />
+                            <DynamicSelectedStyle CssClass="d-nav-selected" />
+                            <DynamicMenuItemStyle CssClass="d-nav-menu" />
+                            <StaticHoverStyle CssClass="nav-menu-hover" />
+                        </asp:Menu>
+                    </div>
+                </div>
+            </div>
+            <div id="divContent">
+                <asp:ContentPlaceHolder ID="plcContent" runat="server">
+                </asp:ContentPlaceHolder>
+                <asp:SiteMapDataSource ID="dsSiteMap" runat="server" ShowStartingNode="False" />
+            </div>
+            <div class="footer">
+                <div class="copyright">
+                    Copyright © 2003-2007 Yeganeh soft .</div>
+            </div>
+            <div class="top-blank">
+            </div>
+            <div class="top-edge ">
+            </div>
+        </div>
+    </form>
+</body>
+</html>

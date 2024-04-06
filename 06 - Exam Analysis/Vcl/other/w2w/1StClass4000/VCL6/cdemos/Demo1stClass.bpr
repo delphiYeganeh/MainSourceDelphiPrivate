@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="Demo1stClass.exe"/>
+    <OBJFILES value="Demo1stClass.obj MainU.obj OutlookBar\outlookbaru.obj 
+      OutlookBar\paintu.obj OutlookBar\infounit.obj ButtonGroup\tabbuttons.obj 
+      Buttons\shapeu.obj Buttons\mapu.obj Buttons\imagebuttonu.obj 
+      ColorDemo\colordemou.obj ImageForm\imagetabformu.obj TreeView\TreeDemo.obj 
+      DBTreeView\DBTreeSample.obj Imager\TilerUnit.obj Imager\ImagerMain.obj 
+      Labels\labelu.obj StatusBar\statusbaru.obj StatusBar\proportionalu.obj 
+      ImageForm\orderformu.obj ButtonGroup\buttongroupdemo.obj 
+      TreeCombos\TreeCombos.obj Imager\PicEdt.obj Framing\FrameU.obj"/>
+    <RESFILES value="Demo1stClass.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) MainU.dfm OutlookBar\outlookbaru.dfm OutlookBar\paintu.dfm 
+      OutlookBar\infounit.dfm ButtonGroup\tabbuttons.dfm Buttons\shapeu.dfm 
+      Buttons\mapu.dfm Buttons\imagebuttonu.dfm ColorDemo\colordemou.dfm 
+      ImageForm\imagetabformu.dfm TreeView\TreeDemo.dfm 
+      DBTreeView\DBTreeSample.dfm Imager\TilerUnit.dfm Imager\ImagerMain.dfm 
+      Labels\labelu.dfm StatusBar\statusbaru.dfm StatusBar\proportionalu.dfm 
+      ImageForm\orderformu.dfm ButtonGroup\buttongroupdemo.dfm 
+      TreeCombos\TreeCombos.dfm Imager\PicEdt.dfm Framing\FrameU.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="fc4000v6.lib vclx.lib bcbsmp.lib bdertl.lib vcldb.lib dbrtl.lib 
+      fc4000v6.lib vcl.lib rtl.lib"/>
+    <SPARELIBS value="rtl.lib vcl.lib fc4000v6.lib dbrtl.lib vcldb.lib bdertl.lib bcbsmp.lib 
+      vclx.lib fc4000v6.lib"/>
+    <PACKAGES value="rtl.bpi vcl.bpi vclx.bpi bcbsmp.bpi dbrtl.bpi vcldb.bpi bdertl.bpi 
+      vcldbx.bpi fc4000v6.bpi"/>
+    <PATHCPP value=".;OutlookBar;OutlookBar;OutlookBar;ButtonGroup;Buttons;Buttons;Buttons;ColorDemo;ImageForm;TreeView;DBTreeView;Imager;Imager;Labels;StatusBar;StatusBar;ImageForm;ButtonGroup;TreeCombos;Imager;Framing"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT"/>
+    <MAINSOURCE value="Demo1stClass.cpp"/>
+    <INCLUDEPATH value="TreeCombos;Framing;000vcl5\cdemos\Framing;&quot;&quot;TreeCombos;$(BCB)\include;$(BCB)\include\vcl;StatusBar;Labels;Imager;DBTreeView;TreeView;ImageForm;ColorDemo;Buttons;ButtonGroup;OutlookBar"/>
+    <LIBPATH value="TreeCombos;Framing;000vcl5\cdemos\Framing;&quot;&quot;TreeCombos;StatusBar;Labels;Imager;DBTreeView;TreeView;ImageForm;ColorDemo;Buttons;ButtonGroup;OutlookBar;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-ITreeCombos -IFraming -I000vcl5\cdemos\Framing -I&quot;&quot;TreeCombos 
+      -I$(BCB)\include -I$(BCB)\include\vcl -IStatusBar -ILabels -IImager 
+      -IDBTreeView -ITreeView -IImageForm -IColorDemo -IButtons -IButtonGroup 
+      -IOutlookBar -src_suffix cpp"/>
+    <CFLAG1 value="-Od -H=c:\PROGRA~1\borland\CBUILD~2\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 
+      -b- -k -y -v -vi- -c -tW -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="Demo1stClass.cpp" FORMNAME="" UNITNAME="Demo1stClass" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Demo1stClass.res" FORMNAME="" UNITNAME="Demo1stClass" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="MainU.cpp" FORMNAME="MainForm" UNITNAME="MainU" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="OutlookBar\outlookbaru.cpp" FORMNAME="OutlookBarForm" UNITNAME="outlookbaru" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="OutlookBar\paintu.cpp" FORMNAME="PaintForm" UNITNAME="paintu" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="OutlookBar\infounit.cpp" FORMNAME="InfoForm" UNITNAME="infounit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ButtonGroup\tabbuttons.cpp" FORMNAME="TabBtnGroupForm" UNITNAME="tabbuttons" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Buttons\shapeu.cpp" FORMNAME="ShapeBtnDemoForm" UNITNAME="shapeu" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Buttons\mapu.cpp" FORMNAME="MapForm" UNITNAME="mapu" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Buttons\imagebuttonu.cpp" FORMNAME="ImageBtnDemoForm" UNITNAME="imagebuttonu" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ColorDemo\colordemou.cpp" FORMNAME="ColorDemoForm" UNITNAME="colordemou" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ImageForm\imagetabformu.cpp" FORMNAME="ImageTabForm" UNITNAME="imagetabformu" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TreeView\TreeDemo.cpp" FORMNAME="TreeViewDemoForm" UNITNAME="TreeDemo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DBTreeView\DBTreeSample.cpp" FORMNAME="DMTreeViewForm" UNITNAME="DBTreeSample" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Imager\TilerUnit.cpp" FORMNAME="TilerDemoForm" UNITNAME="TilerUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Imager\ImagerMain.cpp" FORMNAME="ImagerForm" UNITNAME="ImagerMain" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Labels\labelu.cpp" FORMNAME="LabelForm" UNITNAME="labelu" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="StatusBar\statusbaru.cpp" FORMNAME="StatusBarDemoForm" UNITNAME="statusbaru" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="StatusBar\proportionalu.cpp" FORMNAME="ProportionalStatusBarForm" UNITNAME="proportionalu" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ImageForm\orderformu.cpp" FORMNAME="OrderForm" UNITNAME="orderformu" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ButtonGroup\buttongroupdemo.cpp" FORMNAME="ButtonGroupDemoForm" UNITNAME="buttongroupdemo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TreeCombos\TreeCombos.cpp" FORMNAME="TreeComboDemoForm" UNITNAME="TreeCombos" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Imager\PicEdt.cpp" FORMNAME="fcPicEditor" UNITNAME="PicEdt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Framing\FrameU.cpp" FORMNAME="FrameDemoForm" UNITNAME="FrameU" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=4
+Item0=Framing;000vcl5\cdemos\Framing;E:\Program Files\Woll2Woll\1stClass2000vcl5\cdemos\Framing\;E:\Program Files\Woll2Woll\1stClass2000vcl5\demos\framing\;TreeCombos;$(BCB)\include;$(BCB)\include\vcl;StatusBar;Labels;Imager;DBTreeView;TreeView;ImageForm;ColorDemo;Buttons;ButtonGroup;OutlookBar
+Item1=Framing;000vcl5\cdemos\Framing;E:\Program Files\Woll2Woll\1stClass2000vcl5\cdemos\Framing;E:\Program Files\Woll2Woll\1stClass2000vcl5\demos\framing;TreeCombos;$(BCB)\include;$(BCB)\include\vcl;StatusBar;Labels;Imager;DBTreeView;TreeView;ImageForm;ColorDemo;Buttons;ButtonGroup;OutlookBar
+Item2=TreeCombos;$(BCB)\include;$(BCB)\include\vcl;StatusBar;Labels;Imager;DBTreeView;TreeView;ImageForm;ColorDemo;Buttons;ButtonGroup;OutlookBar
+Item3=TreeCombos;StatusBar;Labels;Imager;DBTreeView;TreeView;ImageForm;ColorDemo;Buttons;ButtonGroup;OutlookBar;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=4
+Item0=Framing;000vcl5\cdemos\Framing;E:\Program Files\Woll2Woll\1stClass2000vcl5\cdemos\Framing\;E:\Program Files\Woll2Woll\1stClass2000vcl5\demos\framing\;TreeCombos;StatusBar;Labels;Imager;DBTreeView;TreeView;ImageForm;ColorDemo;Buttons;ButtonGroup;OutlookBar;$(BCB)\lib\obj;$(BCB)\lib
+Item1=Framing;000vcl5\cdemos\Framing;E:\Program Files\Woll2Woll\1stClass2000vcl5\cdemos\Framing;E:\Program Files\Woll2Woll\1stClass2000vcl5\demos\framing;TreeCombos;StatusBar;Labels;Imager;DBTreeView;TreeView;ImageForm;ColorDemo;Buttons;ButtonGroup;OutlookBar;$(BCB)\lib\obj;$(BCB)\lib
+Item2=TreeCombos;StatusBar;Labels;Imager;DBTreeView;TreeView;ImageForm;ColorDemo;Buttons;ButtonGroup;OutlookBar;$(BCB)\lib\obj;$(BCB)\lib
+Item3=$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=2
+Item0=$(BCB)\source\vcl
+Item1=$(BCB)\source\vcl
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

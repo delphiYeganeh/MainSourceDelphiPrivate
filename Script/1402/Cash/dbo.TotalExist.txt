@@ -1,0 +1,93 @@
+
+
+ALTER FUNCTION [dbo].[TotalExist]
+( 
+	@AccountID int,
+	@dateTo char(10), 
+	@AccountTypeID INT=0 
+)            
+RETURNS bigint            
+AS            
+BEGIN         
+    Declare @SumAmount BigInt            
+
+
+	IF @AccountTypeID=0
+		SELECT  @AccountTypeID=ACCOUNTTYPEID  FROM ACCOUNT WHERE ACCOUNTID=@AccountID
+ 
+	IF @AccountID=4        
+	BEGIN      
+		SELECT @SumAmount=DBO.F_SOODVAM('1300/01/01',@DateTo)--sum(Case when @AccountID=DebtorAccountID   then -Amount else +Amount end)          
+		Set @SumAmount=isnull(@SumAmount,0)          
+	END      
+	ELSE IF @AccountID=1             
+	BEGIN      
+		Select @SumAmount=sum(Case when @AccountID=DebtorAccountID   then -Amount else +Amount end)            
+			From Payment            
+			Where Date <=@dateTo  AND (@AccountID in (DebtorAccountID,CreditorAccountID))            
+		set @SumAmount=isnull(@SumAmount,0)            
+	END      
+	ELSE   IF @ACCOUNTTYPEID<>1           
+	BEGIN      
+		Select @SumAmount=sum(Case when @AccountID=DebtorAccountID   then -Amount else +Amount end)            
+			From Payment            
+			Where Date <=@dateTo  AND (@AccountID in (DebtorAccountID,CreditorAccountID))            
+		set @SumAmount=isnull(@SumAmount,0)            
+	END     
+	ELSE   IF @ACCOUNTTYPEID=1           
+	BEGIN 
+		Declare @D Char(10)
+		Set @D = Left(@dateTo, 4) + '/01/01'
+		
+		--parsa
+		DECLARE  @TableTemp TABLE (paymentId INT,Amount bigint ,DebtorAccountID INT,CreditorAccountID INT)
+		
+		INSERT INTO @TableTemp (paymentId,Amount,DebtorAccountID,CreditorAccountID)
+		SELECT  p.paymentId ,p.Amount,p.DebtorAccountID,p.CreditorAccountID
+		FROM Payment p
+		--LEFT JOIN ForcePayment fp ON fp.PaymentID = p.PaymentID 
+		WHERE   p.Date <= @dateTo  AND (@AccountID in (p.DebtorAccountID,p.CreditorAccountID))            
+		                 AND p.PayTypeid <> 7 
+		                 
+		SELECT @SumAmount =  sum((Case when @AccountID = [@TableTemp].DebtorAccountID  then -[@TableTemp].Amount else +[@TableTemp].Amount END))
+		From @TableTemp 
+		  
+		DECLARE @loaninterest BIGINT
+		
+		SELECT @loaninterest = SUM(fp.InterestAmount) 
+		From ForcePayment fp
+		INNER JOIN @TableTemp  ON  fp.PaymentID = [@TableTemp].PaymentID  and fp.InterestAmount > 0  AND fp.Paid = 0
+					                 
+		--parsa                  
+		/*
+		Select @SumAmount = sum((Case when @AccountID = DebtorAccountID   then -Amount else +Amount END)/* - dbo.FN_GetLoanInterest(PaymentID)*/)
+		From Payment         
+		Where Date <= @dateTo  
+		AND (@AccountID in (DebtorAccountID,CreditorAccountID))            
+		and PayTypeid <> 7  
+	
+		DECLARE @loaninterest BIGINT
+		
+		SELECT @loaninterest = SUM(fp.InterestAmount) 
+		From Payment 
+		INNER JOIN Loan ON Loan.PaymentID = Payment.PaymentID  
+		INNER JOIN ForcePayment fp ON fp.ParentID = Loan.LoanID   AND fp.InterestAmount <> 0  AND fp.Paid = 0  
+		Where Date <= @D  AND (59 in (Payment.DebtorAccountID,Payment.CreditorAccountID))      	     
+		--Where Date <='1399/01/01'  AND (59 in (DebtorAccountID,CreditorAccountID))            
+		and PayTypeid <> 7 
+		AND fp.InterestAmount <> 0  
+		AND fp.Paid = 0
+		*/
+			
+		SET @loaninterest = isnull(@loaninterest,0) 	      
+		SET @SumAmount = isnull(@SumAmount - @loaninterest,0)            
+	END      
+
+RETURN @SumAmount            
+            
+END
+
+
+GO
+
+

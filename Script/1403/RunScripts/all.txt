@@ -1,0 +1,23 @@
+  IF COL_LENGTH('dbo.tblAppVer', 'LastTableScriptNumber') IS  NULL  
+    ALTER TABLE dbo.tblAppVer  ADD LastTableScriptNumber INT NULL ;
+    
+  IF COL_LENGTH('dbo.tblAppVer', 'LastViewScriptNumber') IS  NULL  
+    ALTER TABLE dbo.tblAppVer  ADD LastViewScriptNumber INT NULL ;  
+
+IF NOT EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N'[DBO].[TBLAPPVER]') AND TYPE IN (N'U'))
+BEGIN 
+CREATE TABLE [dbo].[tblAppVer](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ver] [varchar](50) NOT NULL,
+	[changeDate] [datetime] NOT NULL,
+	[Descript] [nvarchar](2000) NULL,
+	[LastTableScriptNumber] [int] NULL,
+	[LastViewScriptNumber] [int] NULL,
+ CONSTRAINT [PK_tblAppVer] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END 
+GO
+

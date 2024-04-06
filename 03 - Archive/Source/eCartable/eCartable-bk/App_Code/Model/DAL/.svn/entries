@@ -1,0 +1,52 @@
+8
+
+dir
+131
+svn://dlib.itrc.ac.ir/eCartable/App_Code/Model/DAL
+svn://dlib.itrc.ac.ir/eCartable
+
+
+
+2008-01-13T06:07:52.525375Z
+113
+mahdi
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+76e0edb9-7613-5b4a-9688-4d125da3a7a4
+
+IDataAccess.cs
+file
+
+
+
+
+2008-02-26T08:47:06.546875Z
+5a635572503bc8afd69e210f10ffb40c
+2008-01-13T06:07:52.525375Z
+113
+mahdi
+
+IProviderModel.cs
+file
+
+
+
+
+2008-02-26T08:47:06.625000Z
+d705817df138bb72c2602641299b4b5d
+2008-01-13T06:07:52.525375Z
+113
+mahdi
+

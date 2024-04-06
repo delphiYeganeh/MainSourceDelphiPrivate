@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TfrxReport Version="4.5" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="40757.5925546065" ReportOptions.Description.Text="" ReportOptions.LastChange="42384.7775267477" ScriptLanguage="PascalScript" ScriptText.Text="    &#13;&#10;&#13;&#10;begin          &#13;&#10;end." PropData="044C65667403E80003546F70020C08446174617365747301010C2B00000020446174615365743D226672785265706F72742220446174615365744E616D653D22CFC7E6D8E1C8EDE4220000095661726961626C65730100055374796C650100">
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" Columns="1" ColumnWidth="190" ColumnPositions.Text="0" HGuides.Text="" VGuides.Text="">
+    <TfrxMasterData Name="MasterData1" Height="57.26773606" Left="0" Top="151.1812" Width="718.1107" ColumnWidth="0" ColumnGap="0" DataSet="frxReport" DataSetName="��������" RowCount="0">
+      <TfrxShapeView Name="Shape2" Align="baLeft" Left="0" Top="1.32282" Width="718.11023622" Height="56.69295"/>
+      <TfrxPictureView Name="Picture1" Left="138.72449" Top="5.57483" Width="79.37013" Height="47.24408472" Center="True" DataField="ژ�" DataSet="frxReport" DataSetName="��������" HightQuality="False"/>
+      <TfrxMemoView Name="Memo2" Left="609.06339" Top="21.13389" Width="105.82673748" Height="18.89765" DataField="�� �������" DataSet="frxReport" DataSetName="��������" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="1" HAlign="haRight" ParentFont="False" RTLReading="True" Text="[داوطلبين.&#34;کد داوطلبي&#34;]"/>
+      <TfrxMemoView Name="Memo3" Left="420.42548" Top="21.25201" Width="181.41733748" Height="18.89765" DataField="��� ����" DataSet="frxReport" DataSetName="��������" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="1" HAlign="haRight" ParentFont="False" RTLReading="True" Text="[داوطلبين.&#34;نام کامل&#34;]"/>
+      <TfrxMemoView Name="Memo5" Left="325.37817" Top="22.03154" Width="86.92908748" Height="18.89765" DataField="����� �����" DataSet="frxReport" DataSetName="��������" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="1" HAlign="haRight" ParentFont="False" RTLReading="True" Text="[داوطلبين.&#34;شماره صندلي&#34;]"/>
+      <TfrxMemoView Name="Memo6" Left="231.11039" Top="22.25201" Width="86.92908748" Height="18.89765" DataField="���� �ѐ���� �����" DataSet="frxReport" DataSetName="��������" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="1" HAlign="haRight" ParentFont="False" RTLReading="True" Text="[داوطلبين.&#34;گروه برگزاري آزمون&#34;]"/>
+      <TfrxLineView Name="Line6" Left="604.7248" Top="1.51181102" Width="0" Height="56.69290606" Diagonal="True"/>
+      <TfrxLineView Name="Line7" Left="415.7483" Top="1.51181102362205" Width="0" Height="56.69290606" Diagonal="True"/>
+      <TfrxLineView Name="Line8" Left="321.26005" Top="1.51181102362205" Width="0" Height="56.69290606" Diagonal="True"/>
+      <TfrxLineView Name="Line9" Left="226.55133" Top="1.51181102362205" Width="0" Height="56.69290606" Diagonal="True"/>
+      <TfrxLineView Name="Line10" Left="133.03937008" Top="1.51181102362205" Width="0" Height="56.6929133858268" Diagonal="True"/>
+    </TfrxMasterData>
+    <TfrxPageHeader Name="PageHeader1" Height="72.57483" Left="0" Top="18.89765" Width="718.1107">
+      <TfrxShapeView Name="Shape1" Align="baLeft" Left="0" Top="42.33859" Width="718.1107" Height="30.23624"/>
+      <TfrxMemoView Name="Memo7" Left="422.08689" Top="48.23624" Width="181.41731795" Height="18.89765" DisplayFormat.DecimalSeparator="." Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="1" HAlign="haCenter" ParentFont="False" RTLReading="True" Text="نام داوطلب"/>
+      <TfrxMemoView Name="Memo9" Left="327.26005" Top="48.23624" Width="86.92919" Height="18.89765" DisplayFormat.DecimalSeparator="." Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="1" HAlign="haCenter" ParentFont="False" RTLReading="True" Text="شماره صندلي"/>
+      <TfrxMemoView Name="Memo10" Left="238.43321" Top="48.23624" Width="75.5906" Height="18.89765" DisplayFormat.DecimalSeparator="." Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="1" HAlign="haCenter" ParentFont="False" RTLReading="True" Text="گروه آزمون"/>
+      <TfrxMemoView Name="Memo1" Left="612.16574" Top="48.45671" Width="102.04731" Height="18.89765" DisplayFormat.DecimalSeparator="." Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="1" HAlign="haCenter" ParentFont="False" RTLReading="True" Text="کد داوطلبي"/>
+      <TfrxMemoView Name="Memo4" Left="137.82684" Top="48.23624" Width="86.92919" Height="18.89765" DisplayFormat.DecimalSeparator="." Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="1" HAlign="haCenter" ParentFont="False" RTLReading="True" Text="عکس دانشجو"/>
+      <TfrxMemoView Name="Memo8" Left="55.55906" Top="48.23624" Width="34.01577" Height="18.89765" DisplayFormat.DecimalSeparator="." Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="1" HAlign="haCenter" ParentFont="False" RTLReading="True" Text="امضاء"/>
+      <TfrxLineView Name="Line1" Left="605.50433" Top="41.67718" Width="0" Height="30.23622047" Diagonal="True"/>
+      <TfrxLineView Name="Line2" Left="416.52783" Top="41.67718" Width="0" Height="30.23622047" Diagonal="True"/>
+      <TfrxLineView Name="Line3" Left="321.92146" Top="41.67718" Width="0" Height="30.23622047" Diagonal="True"/>
+      <TfrxLineView Name="Line4" Left="227.43321" Top="41.67718" Width="0" Height="30.23622047" Diagonal="True"/>
+      <TfrxLineView Name="Line5" Left="133.16543" Top="41.67718" Width="0" Height="30.23622047" Diagonal="True"/>
+      <TfrxMemoView Name="Memo11" Left="192.75603" Top="11.33859" Width="336.37817" Height="18.89765" DisplayFormat.DecimalSeparator="." Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="tahoma" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="ليست دانشجويان آزمون : [داوطلبين.&#34;عنوان آزمون&#34;]"/>
+      <TfrxMemoView Name="Memo16" Left="18.77953" Top="10.77953" Width="170.07885" Height="18.89765" DisplayFormat.DecimalSeparator="." Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="tahoma" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="تاريخ : [داوطلبين.&#34;ShamsiDate&#34;]"/>
+    </TfrxPageHeader>
+    <TfrxPageFooter Name="PageFooter1" Height="60.47248" Left="0" Top="268.34663" Width="718.1107">
+      <TfrxShapeView Name="Shape3" Left="-0.22047" Top="0" Width="718.1107" Height="60.47248"/>
+      <TfrxMemoView Name="Memo13" Left="646.29963" Top="22.67718" Width="52.91342" Height="18.89765" DisplayFormat.DecimalSeparator="." Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="0" ParentFont="False" Text="نام مراقب"/>
+      <TfrxMemoView Name="Memo14" Left="456.22078" Top="22.67718" Width="71.81107" Height="18.89765" DisplayFormat.DecimalSeparator="." Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="0" ParentFont="False" Text="تعداد حاظرين"/>
+      <TfrxMemoView Name="Memo15" Left="275.90569" Top="22.67718" Width="64.25201" Height="18.89765" DisplayFormat.DecimalSeparator="." Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="0" ParentFont="False" Text="تعداد غايبين"/>
+      <TfrxMemoView Name="Memo12" Left="118.92919" Top="22.67718" Width="30.23624" Height="18.89765" DisplayFormat.DecimalSeparator="." Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="tahoma" Font.Style="0" ParentFont="False" Text="امضاء"/>
+    </TfrxPageFooter>
+  </TfrxReportPage>
+</TfrxReport>

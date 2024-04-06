@@ -1,0 +1,130 @@
+inherited FrDatabaseMaintenance: TFrDatabaseMaintenance
+  Left = 359
+  Top = 359
+  BorderStyle = bsDialog
+  Caption = #1578#1607#1610#1607' '#1606#1587#1582#1607' '#1662#1588#1578#1610#1576#1575#1606
+  ClientHeight = 134
+  ClientWidth = 521
+  Color = clBtnFace
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel [0]
+    Left = 0
+    Top = 0
+    Width = 521
+    Height = 93
+    Align = alClient
+    TabOrder = 0
+    DesignSize = (
+      521
+      93)
+    object Lpath: TLabel
+      Left = 400
+      Top = 13
+      Width = 93
+      Height = 13
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      Caption = #1605#1587#1610#1585' '#1601#1575#1610#1604' '#1662#1588#1578#1610#1576#1575#1606':'
+    end
+    object SpBtn: TSpeedButton
+      Left = 372
+      Top = 8
+      Width = 24
+      Height = 25
+      Anchors = [akTop, akRight]
+      Caption = '...'
+      OnClick = SpBtnClick
+    end
+    object StaticText1: TLabel
+      Left = 315
+      Top = 39
+      Width = 189
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1575#1610#1606' '#1593#1605#1604' '#1585#1575' '#1585#1608#1610' '#1705#1575#1605#1662#1610#1608#1578#1585' '#1587#1585#1608#1585' '#1575#1606#1580#1575#1605' '#1583#1607#1610#1583
+    end
+    object EPath: TEdit
+      Left = 16
+      Top = 10
+      Width = 353
+      Height = 21
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      ParentBiDiMode = False
+      ParentColor = True
+      TabOrder = 0
+      OnChange = EPathChange
+    end
+    object ProgressBar1: TProgressBar
+      Left = 16
+      Top = 65
+      Width = 489
+      Height = 16
+      TabOrder = 1
+    end
+  end
+  object Panel2: TPanel [1]
+    Left = 0
+    Top = 93
+    Width = 521
+    Height = 41
+    Align = alBottom
+    TabOrder = 1
+    object BitBtn1: TBitBtn
+      Left = 208
+      Top = 7
+      Width = 81
+      Height = 28
+      Caption = #1578#1575#1610#1610#1583
+      Default = True
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtn1Click
+      Glyph.Data = {
+        06030000424D06030000000000003600000028000000100000000F0000000100
+        180000000000D002000000000000000000000000000000000000008080008080
+        0080800080808000008000000080800080800080800080800080800080800080
+        8000808000808000808000808000808000808080000000800000800080000000
+        8080008080008080008080008080008080008080008080008080008080008080
+        8000000080000080000080000080008000000080800080800080800080800080
+        8000808000808000808000808080000000800000800000800000800000800000
+        8000800000008080008080008080008080008080008080008080800000008000
+        00800000800000FF000080000080000080000080008000000080800080800080
+        8000808000808000808000800000800000800000FF0000808000808000800000
+        800000800080000000808000808000808000808000808000808000FF00008000
+        00FF0000808000808000808000FF000080000080000080008000000080800080
+        8000808000808000808000808000FF0000808000808000808000808000808000
+        FF00008000008000008000800000008080008080008080008080008080008080
+        00808000808000808000808000808000808000FF000080000080000080008000
+        0000808000808000808000808000808000808000808000808000808000808000
+        808000808000FF00008000008000008000800000008080008080008080008080
+        00808000808000808000808000808000808000808000808000FF000080000080
+        0000800080000000808000808000808000808000808000808000808000808000
+        808000808000808000808000FF00008000008000008000800000008080008080
+        00808000808000808000808000808000808000808000808000808000808000FF
+        0000800000800080000000808000808000808000808000808000808000808000
+        808000808000808000808000808000808000FF00008000008000008080008080
+        0080800080800080800080800080800080800080800080800080800080800080
+        8000808000FF00008080}
+    end
+  end
+  inherited Grid_PopupMenu: TPopupMenu
+    Top = 4
+  end
+  object ActionManager: TActionManager
+    Left = 184
+    StyleName = 'XP Style'
+    object Aclose: TAction
+      Caption = 'Aclose'
+      ShortCut = 27
+      OnExecute = AcloseExecute
+    end
+  end
+end

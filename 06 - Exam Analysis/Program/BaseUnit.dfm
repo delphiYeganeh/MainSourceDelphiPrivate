@@ -1,0 +1,74 @@
+object MBaseForm: TMBaseForm
+  Left = 138
+  Top = 154
+  Width = 625
+  Height = 407
+  BiDiMode = bdRightToLeft
+  Caption = 'MBaseForm'
+  Color = 15656678
+  Font.Charset = ARABIC_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  ParentBiDiMode = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object ActionList: TActionList
+    Left = 247
+    Top = 112
+    object APrint: TAction
+      Caption = 'APrint'
+      ShortCut = 16464
+      OnExecute = APrintExecute
+    end
+    object ACustomizePrint: TAction
+      Caption = 'ACustomizePrint'
+      ShortCut = 16459
+      OnExecute = ACustomizePrintExecute
+    end
+    object AexportToWord: TAction
+      ShortCut = 16471
+      OnExecute = AexportToWordExecute
+    end
+    object CloseForm: TAction
+      Caption = 'CloseForm'
+      ShortCut = 27
+      OnExecute = CloseFormExecute
+    end
+  end
+  object xpWindow1: TxpWindow
+    Active = True
+    SizeInfo.MaxSizeWidth = 1448
+    SizeInfo.MaxSizeHeight = 878
+    SizeInfo.MaxPositionX = 0
+    SizeInfo.MaxPositionY = 0
+    SizeInfo.MinTrackWidth = 123
+    SizeInfo.MinTrackHeight = 34
+    SizeInfo.MaxTrackWidth = 1452
+    SizeInfo.MaxTrackHeight = 912
+    SizeInfo.UseSystemSettings = False
+    StickWindow.Active = True
+    xpCaption.Height = 26
+    xpCaption.ImageAlign = iaCenter
+    xpCaption.Font.Charset = DEFAULT_CHARSET
+    xpCaption.Font.Color = clWindowText
+    xpCaption.Font.Height = -11
+    xpCaption.Font.Name = 'MS Sans Serif'
+    xpCaption.Font.Style = []
+    xpCaption.BorderColor = 13903108
+    xpCaption.BorderInActiveColor = 14594977
+    xpCaption.GradientFill = False
+    xpCaption.FillDirection = fdTopToBottom
+    xpCaption.ActiveStartColor = 14961664
+    xpCaption.ActiveEndColor = 16675077
+    xpCaption.InActiveStartColor = 15381654
+    xpCaption.InActiveEndColor = 15180928
+    Left = 248
+    Top = 72
+  end
+end

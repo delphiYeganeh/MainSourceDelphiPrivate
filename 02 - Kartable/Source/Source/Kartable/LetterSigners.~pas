@@ -1,0 +1,405 @@
+unit LetterSigners;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, ADODB, Grids, DBGrids, YDbgrid, StdCtrls, ExtCtrls, ExtDlgs,
+  clipbrd, wordxp,ShlObj, ExcelXP;
+
+type
+  TfmLetterSigners = class(TForm)
+    Panel1: TPanel;
+    Button1: TButton;
+    YDBGrid1: TYDBGrid;
+    dLetterSign: TDataSource;
+    Button2: TButton;
+    QrUserSign: TADOQuery;
+    QrUserSignUserID: TIntegerField;
+    QrUserSignSecoundSign: TBlobField;
+    QrUserSignTitle: TWideStringField;
+    QrUserSignUserName: TWideStringField;
+    QrUserSignPassword: TWideStringField;
+    OpenPictureDialog: TOpenPictureDialog;
+    qryUpdate: TADOQuery;
+    qrySecoundSign: TADOQuery;
+    qrySecoundSignSecoundSign: TBlobField;
+    qryWord: TADOQuery;
+    qryWordLetterDataID: TAutoIncField;
+    qryWordLetterID: TIntegerField;
+    qryWordPageNumber: TIntegerField;
+    qryWordImage: TBlobField;
+    qryWordextention: TWordField;
+    qryWordDescription: TWideStringField;
+    qryWordLastUpdate: TDateTimeField;
+    qryWordUniqueID: TLargeintField;
+    qryWordListItemsID: TIntegerField;
+    qryWordIsCorrectedImage: TBooleanField;
+    qryWordVersionNo: TStringField;
+    qryWordVersionDate: TStringField;
+    Button3: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    function AddUserSign(WordFile: string; UserID: integer; paraph: string=''; ty : Integer = 3):boolean;
+    procedure CopyFilesToClipboard(FileList: string);
+    procedure Button3Click(Sender: TObject);
+  private
+    { Private declarations }
+    procedure OpenFileExcel(strFileName : String);
+  public
+    LetterID : integer;
+    { Public declarations }
+  end;
+
+var
+  fmLetterSigners: TfmLetterSigners;
+
+implementation
+
+uses Dmu, BaseUnit, InputPassU, businessLayer, YShamsiDate, UMain,
+  YInputBox;
+
+{$R *.dfm}
+
+procedure TfmLetterSigners.Button1Click(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfmLetterSigners.Button2Click(Sender: TObject);
+var
+  wf , paraph, strType: string;
+begin
+  Try
+    dm._LetterID := LetterID;
+
+    dm.QrUserSign.Close;
+    dm.QrUserSign.Parameters.ParamByName('Pa_UserID').Value := _Userid;
+    dm.QrUserSign.Open;
+
+    if dm.QrUserSign.RecordCount = 0 then
+    begin
+      MBaseForm.MessageShowString('ﬂ«—»— ê—«„Ì : ‘„« œ«—«Ì «„÷« ‰„Ì »«‘Ìœ'+ #13#13+
+            ' ÊÃÂ : ÃÂ  œ«‘ ‰ Ì«  €ÌÌ— «„÷«Ì ŒÊœ »Â ›—„  ⁄—Ì› ò«—»— œ— œ»Ì—Œ«‰Â „—«Ã⁄Â ‰„«ÌÌœ', False);
+      Exit;
+    end;
+
+    //Add Saneye 950604
+    // ‰ŸÌ„«  œ—ŒÊ«”  òœ «„‰Ì Ì
+    if (GetUserSetting('Signature_RequestPass') = '0') or (GetUserSetting('Signature_RequestPass') = 'False') then
+    begin
+      FInputPass := TFInputPass.Create(Application);
+      FInputPass.UserPassword := Trim(dm.QrUserSignPassword.AsString);
+      FInputPass.ShowModal;
+      if FInputPass.ModalResult = mrOK then
+      begin
+        //paraph := InputBox( '·ÿ›« „ ‰ Å«—«› —« Ê«—œ ò‰Ìœ','', '');
+        FInputPass := TFInputPass.Create(Application);
+        FInputPass.UserPassword := '';
+        FInputPass.Caption := 'Å«—«› ‰«„Â';
+        FInputPass.Label1.Caption := '·ÿ›« „ ‰ Å«—«› —« Ê«—œ ò‰Ìœ';
+        FInputPass.MaskEdit1.PasswordChar := #0;
+        FInputPass.ShowModal;
+        paraph := _paraph;
+        qryWord.Close;
+        qryWord.Parameters[0].Value := LetterID;
+        qryWord.Open;
+
+        if qryWordextention.AsInteger = 3 then
+          _OpenedWordFile := _TempPath + _WordFileName
+        else
+          _OpenedWordFile := _TempPath + _ExcelFileName;
+
+        qryWordImage.SaveToFile(_OpenedWordFile);
+        if (AddUserSign(_OpenedWordFile, _UserID, paraph, qryWordextention.AsInteger)) then
+          With TADOQuery.Create(nil) do
+          begin
+            Connection := dm.YeganehConnection;
+            SQL.Text := 'UPDATE LetterSign SET IsOld=1 WHERE LetterID='+dm.Sp_InboxLetterID.AsString+' AND UserID='+IntToStr(_Userid);
+            ExecSQL;
+            Active := false;
+            SQL.Text := 'INSERT INTO LetterSign([LetterID],[UserID],[Date],[Time],[paraph]) VALUES('+dm.Sp_InboxLetterID.AsString+','+IntToStr(_Userid)+','''+_Today+''','''+Exec_Get_NowTime+''','''+paraph+''')';
+            ExecSQL;
+          end;
+        end;
+      end
+      else
+      begin
+        qryWord.Close;
+        qryWord.Parameters[0].Value := LetterID;
+        qryWord.Open;
+
+        if qryWordextention.AsInteger = 3 then
+          _OpenedWordFile := _TempPath + _WordFileName
+        else
+          _OpenedWordFile := _TempPath + _ExcelFileName;
+
+        qryWordImage.SaveToFile(_OpenedWordFile);
+        if (AddUserSign(_OpenedWordFile, _UserID, paraph, qryWordextention.AsInteger)) then
+          With TADOQuery.Create(nil) do
+          begin
+            Connection := dm.YeganehConnection;
+            SQL.Text := 'UPDATE LetterSign SET IsOld=1 WHERE LetterID='+dm.Sp_InboxLetterID.AsString+' AND UserID='+IntToStr(_Userid);
+            ExecSQL;
+            Active := false;
+            SQL.Text := 'INSERT INTO LetterSign([LetterID],[UserID],[Date],[Time],[paraph]) VALUES('+dm.Sp_InboxLetterID.AsString+','+IntToStr(_Userid)+','''+_Today+''','''+Exec_Get_NowTime+''','''+paraph+''')';
+            ExecSQL;
+          end;
+      end;
+      //End Sanaye...
+
+   Finally
+      dm.QrUserSign.Close;
+      dm.qLetterSign.close;
+      dm.qLetterSign.Open;
+   end;
+   MainForm.RefreshQuery;
+   Button3.Enabled:=True;
+
+end;
+
+function TfmLetterSigners.AddUserSign(WordFile: string; UserID: integer; paraph: string=''; ty : Integer = 3):boolean;
+var
+  TemPicName , str : string;
+  FS : TFileStream;
+  buf : array [0..50] of byte;
+  b2: boolean;
+  i : integer;
+  OReadOnly,olv,emp,f,f1,fals,tru,fn, wap, r,
+  SignText, ReplaceSignText:OleVariant;
+  blnOk :Boolean;
+  Bitmap: TBitmap;
+  Picture: TPicture;
+  selst : Integer;
+  w :  widestring;
+begin
+  Result := false;
+  Try
+    QrUserSign.Close;
+    QrUserSign.Parameters.ParamByName('Pa_UserID').Value := _Userid;
+    QrUserSign.Open;
+
+    if (QrUserSign.IsEmpty) then
+      Exit;
+
+    b2 := True;
+    if (QrUserSignSecoundSign.IsNull) then
+    begin
+      b2 := false;
+      ShowMessage('«„÷«¡ „Êﬁ  »—«Ì ‘„«  ⁄—Ì› ‰‘œÂ «” '+#13+
+         '·ÿ›« «„÷« „Êﬁ  ŒÊœ —« «‰ Œ«» ò‰Ìœ'+#13+
+         ' —ÃÌÕ« ”«Ì“ «„÷« „Êﬁ  »—«»— »« «„÷« «’·Ì »«‘œ');
+      OpenPictureDialog.Title := '«‰ Œ«» «„÷« „Êﬁ ';
+
+      if OpenPictureDialog.Execute then
+      begin
+        CopyFile(pchar(OpenPictureDialog.FileName),pchar(_TempPath+'\yeganehsign.jpg'),false);
+        FS := TFileStream.Create(_TempPath+'\yeganehsign.jpg',fmOpenReadWrite);
+        FS.seek(FS.Size,soFromBeginning);
+        str := 'Yeganeh UserID:'+ IntToStr(_Userid);
+        for i:=0 to length(str) do
+          buf[i] := ord(str[i]);
+        FS.Write(buf,50);
+        FS.Free;
+        qryUpdate.Close;
+        qryUpdate.Parameters[0].LoadFromFile(_TempPath+'\yeganehsign.jpg',ftVarBytes);
+        qryUpdate.Parameters[1].Value := _Userid;
+        qryUpdate.ExecSQL;
+        b2 := true;
+      end;
+    end;
+
+    if b2 then
+    begin
+      TemPicName := _TempPath + 'tmpJPG.jpg';
+      qrySecoundSign.Close;
+      qrySecoundSign.Parameters[0].Value := _Userid;
+      qrySecoundSign.Open;
+      qrySecoundSignSecoundSign.SaveToFile(TemPicName);
+      _isSigning := True;
+
+      if ty = 3 then
+      begin
+        if Dm.ExecGet_LetterWordFile(LetterID, False) then
+        begin
+          _isSigning := false;
+          CopyFilesToClipboard(TemPicName);
+          with dm.WordApplication do
+          begin
+             ActiveDocument.ActiveWindow.Selection.WholeStory;
+             w := ActiveDocument.ActiveWindow.Selection.Text;
+             selst:=pos(':«„÷«',ActiveDocument.ActiveWindow.Selection.Text);
+             if selst <> 0 then // has with Sign Caption
+             begin
+               ActiveDocument.ActiveWindow.Selection.SetRange(selst, selst);
+               ActiveDocument.ActiveWindow.Selection.Find.ClearFormatting;
+               fals := False;
+               SignText:=':«„÷«';
+               ReplaceSignText := '';
+               r:=wdReplaceAll;
+               wap := wdFindContinue;
+               ActiveDocument.ActiveWindow.Selection.Find.Text:= ':«„÷«';
+               ActiveDocument.ActiveWindow.Selection.Find.Replacement.Text := '';
+               ActiveDocument.ActiveWindow.Selection.Find.Execute(SignText,fals,fals,fals,fals,fals,tru,wap,fals,ReplaceSignText,r,fals,fals,fals,fals);
+               ActiveDocument.ActiveWindow.Selection.SetRange(selst , selst);
+               ActiveDocument.ActiveWindow.Selection.Paste;
+             end else
+             begin
+               ActiveDocument.ActiveWindow.Selection.SetRange(2147483646, 2147483647);
+               ActiveDocument.ActiveWindow.Selection.InsertAfter(#13);
+               ActiveDocument.ActiveWindow.Selection.SetRange(2147483646, 2147483647);
+               ActiveDocument.ActiveWindow.Selection.ParagraphFormat.Alignment := wdAlignParagraphLeft;
+               ActiveDocument.ActiveWindow.Selection.Paste;
+             end;
+
+             ActiveDocument.ActiveWindow.Selection.InsertAfter(paraph);
+             Visible := True;
+          end;
+        end;
+      end
+      else
+      begin
+        if Dm.ExecGet_LetterWordFile(LetterID, False, True, ty) then
+        begin
+          _isSigning := False;
+          Bitmap := TBitmap.Create;
+          try
+            Picture := TPicture.Create;
+            try
+              //Picture.LoadFromFile('C:\Users\Hojjat\AppData\Local\Temp\yeganehsign2.jpg');
+              Picture.LoadFromFile(TemPicName);
+              Bitmap.Width := Picture.Width;
+              Bitmap.Height := Picture.Height;
+              Bitmap.Canvas.Draw(0, 0, Picture.Graphic);
+              Clipboard.Assign(Bitmap);
+            finally
+              Picture.Free;
+            end;
+          finally
+            Bitmap.Free;
+          end;
+          Dm.ExcelApplication.DisplayAlerts[LCID] := False;
+
+          Dm.ExcelApplication.Visible[LCID] := False;
+          Dm.ExcelApplication.Connect;
+          Dm.ExcelApplication.Workbooks.Add(WordFile, LCID);
+
+          Dm.ExcelWorksheet.ConnectTo(DM.ExcelApplication.Sheets[1] as _Worksheet);
+
+          DM.ExcelWorksheet.Range['a1','a1'].Select;
+          DM.ExcelWorksheet.Paste;
+
+          Clipboard.AsText := paraph;
+          DM.ExcelWorksheet.Paste;
+
+          Dm.ExcelApplication.ActiveWorkbook._SaveAs(WordFile, xlNormal, '', '', False, False, xlNoChange,
+                    xlUserResolution, False, EmptyParam, EmptyParam, LCID);
+          Dm.ExcelApplication.Disconnect;
+
+          Sleep(1000);
+          OpenFileExcel(WordFile);
+        end;
+      end;
+      {
+      //blnOk := Dm.ExecGet_LetterWordFile(Letterid,False, True, ty);
+      blnOk := True;
+      //if Dm.ExecGet_LetterWordFile(LetterID,false) then
+      if blnOk then
+      begin
+        _isSigning := false;
+        CopyFilesToClipboard(TemPicName);
+
+        Bitmap := TBitmap.Create;
+        try
+          Picture := TPicture.Create;
+          try
+            //Picture.LoadFromFile('C:\Users\Hojjat\AppData\Local\Temp\yeganehsign2.jpg');
+            Picture.LoadFromFile(TemPicName);
+            Bitmap.Width := Picture.Width;
+            Bitmap.Height := Picture.Height;
+            Bitmap.Canvas.Draw(0, 0, Picture.Graphic);
+            Clipboard.Assign(Bitmap);
+          finally
+            Picture.Free;
+          end;
+        finally
+          Bitmap.Free;
+        end;
+        Dm.ExcelApplication.DisplayAlerts[LCID] := False;
+
+        Dm.ExcelApplication.Visible[LCID] := False;
+        Dm.ExcelApplication.Connect;
+        Dm.ExcelApplication.Workbooks.Add(WordFile, LCID);
+        Dm.ExcelWorksheet.ConnectTo(DM.ExcelApplication.Sheets[1] as _Worksheet);
+
+        Dm.ExcelWorksheet.ConnectTo(DM.ExcelApplication.Sheets[1] as _Worksheet);
+        DM.ExcelWorksheet.Range['a1','a1'].Select;
+        DM.ExcelWorksheet.Paste;
+
+        Dm.ExcelApplication.ActiveWorkbook._SaveAs(WordFile, xlNormal, '', '', false, false, xlNoChange,
+                  xlUserResolution, false, EmptyParam, EmptyParam, LCID);
+        Dm.ExcelApplication.Disconnect;
+
+        Sleep(1000);
+        OpenFileExcel(WordFile);
+
+        with dm.WordApplication do
+        begin
+           ActiveDocument.ActiveWindow.Selection.SetRange(2147483646, 2147483647);
+           ActiveDocument.ActiveWindow.Selection.InsertAfter(#13);
+           ActiveDocument.ActiveWindow.Selection.SetRange(2147483646, 2147483647);
+           ActiveDocument.ActiveWindow.Selection.ParagraphFormat.Alignment := wdAlignParagraphLeft;
+           ActiveDocument.ActiveWindow.Selection.Paste;
+           ActiveDocument.ActiveWindow.Selection.InsertAfter(paraph);
+           Visible := true;
+        end;
+      end;}
+    end;
+  Finally
+    qrySecoundSign.Close;
+    Clipboard.Clear;
+    if FileExists(TemPicName) then
+      DeleteFile(Pchar(TemPicName));
+    Result := true;
+  end;
+
+end;
+
+procedure TfmLetterSigners.CopyFilesToClipboard(FileList: string);
+var
+   DropFiles: PDropFiles;
+   hGlobal: THandle;
+   iLen: Integer;
+begin
+   iLen := Length(FileList) + 2;
+   FileList := FileList + #0#0;
+   hGlobal := GlobalAlloc( GMEM_SHARE or GMEM_MOVEABLE or GMEM_ZEROINIT,
+   SizeOf(TDropFiles) + iLen );
+   if (hGlobal = 0) then
+      raise Exception.Create('Could not allocate memory.');
+   begin
+      DropFiles := GlobalLock(hGlobal);
+      DropFiles^.pFiles := SizeOf(TDropFiles);
+      Move(FileList[1], (PChar(DropFiles) + SizeOf(TDropFiles))^, iLen);
+      GlobalUnlock(hGlobal);
+      Clipboard.SetAsHandle(CF_HDROP, hGlobal);
+   end;
+end;
+
+procedure TfmLetterSigners.Button3Click(Sender: TObject);
+begin
+  MainForm.SendToSecretariat.Execute;
+  close;
+end;
+
+procedure TfmLetterSigners.OpenFileExcel(strFileName: String);
+begin
+  DM.ExcelApplication.DisplayAlerts[LCID] := False;
+
+  DM.ExcelApplication.Visible[LCID] := False;
+  DM.ExcelApplication.Connect;
+  DM.ExcelApplication.Visible[LCID] := True;
+  DM.ExcelApplication.Workbooks.Add(strFileName, LCID);
+end;
+
+end.

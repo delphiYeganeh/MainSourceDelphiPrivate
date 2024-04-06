@@ -1,0 +1,253 @@
+unit UApplicantImport;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, BaseUnit, xpWindow, ActnList, ComCtrls, ExtCtrls, StdCtrls,
+  OleServer, ExcelXP, ComObj, Grids, ValEdit, Buttons, DB, ADODB;
+
+type
+  TFmApplicantImport = class(TMBaseForm)
+    Panel2: TPanel;
+    PageControl1: TPageControl;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    OpenDialog1: TOpenDialog;
+    ExcelApplication1: TExcelApplication;
+    Panel1: TPanel;
+    Button1: TButton;
+    Label2: TLabel;
+    StringGrid1: TStringGrid;
+    btnPrev: TBitBtn;
+    btnNext: TBitBtn;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
+    cmbFirstName: TComboBox;
+    cmbLastName: TComboBox;
+    cmbFatherName: TComboBox;
+    cmbApplicantCode: TComboBox;
+    cmbTermCode: TComboBox;
+    cmbCustomField1: TComboBox;
+    cmbCustomField2: TComboBox;
+    cmbCustomField3: TComboBox;
+    cmbCustomField4: TComboBox;
+    cmbMajorTitle: TComboBox;
+    cmbMajorCode: TComboBox;
+    cmbLevelTitle: TComboBox;
+    cmbEduGrpTitle: TComboBox;
+    cmbEduGrpCode: TComboBox;
+    cmbFacultyTitle: TComboBox;
+    cmbFacultyCode: TComboBox;
+    cmbCustomField5: TComboBox;
+    Label20: TLabel;
+    Button2: TButton;
+    sp_inport_Applicant: TADOStoredProc;
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure btnNextClick(Sender: TObject);
+    procedure btnPrevClick(Sender: TObject);
+    procedure loadCombos;
+    procedure Button2Click(Sender: TObject);
+    function  LoopCondition(rowNum : integer):boolean;
+    function  GetCell(i,j : integer) : string;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FmApplicantImport: TFmApplicantImport;
+  Excel : variant;
+implementation
+
+uses dmu;
+
+{$R *.dfm}
+
+procedure TFmApplicantImport.FormCreate(Sender: TObject);
+var
+   i : integer;
+begin
+  inherited;
+   Caption := 'Ê—Êœ «ÿ·«⁄«  '+_ApplicentEntityPlural+' «“ ›«Ì· Œ«—ÃÌ';
+   Button1.Caption := '«‰ Œ«» ›«Ì· Ê—ÊœÌ «ÿ·«⁄«  '+_ApplicentEntityPlural;
+   Label2.Caption := ' ÊÃÂ : «Ê·Ì‰ ”ÿ— ›«Ì· Ê—ÊœÌ »«Ìœ ⁄‰Ê«‰ ” Ê‰ Â« »«‘œ Ê «“ ”ÿ— œÊ„ »Â »⁄œ »«Ìœ «ÿ·«⁄«  '+_ApplicentEntityPlural+' ﬁ—«— œ«œÂ ‘Ê‰œ'+#13+
+                     'œ— ’Ê—  Œ«·Ì »Êœ‰ Œ«‰Â Â«Ì ›«Ì· Ê—ÊœÌ° ÃœÊ· —‘ Â° ê—ÊÂ Ê œ«‰‘òœÂ »« ⁄»«—  ‰«„‘Œ’ Å— ŒÊ«Âœ ‘œ'+#13+
+                     'œ— ’Ê—  Œ«·Ì »Êœ‰ ” Ê‰ Â«Ì „—»Êÿ »Â '+_ApplicentEntityPlural+'° ÃœÊ· '+_ApplicentEntityPlural+' »« —‘ Â Œ«·Ì Å— ŒÊ«Âœ ‘œ';
+   Excel := CreateOleObject('Excel.Application');
+
+   for i:= 0 to PageControl1.PageCount -1 do
+      PageControl1.Pages[i].TabVisible := false;
+   PageControl1.ActivePageIndex := 1;
+   Label6.Caption := _ApplicentCodeEntityCaption;
+
+   dm.sp_Table_CustomFieldsCaption.Close;
+   dm.sp_Table_CustomFieldsCaption.Parameters.ParamByName('@TableName').Value := 'Applicant';
+   dm.sp_Table_CustomFieldsCaption.Open;
+
+   Label8.Caption  := dm.sp_Table_CustomFieldsCaptionCFC1.AsString;
+   Label9.Caption  := dm.sp_Table_CustomFieldsCaptionCFC2.AsString;
+   Label10.Caption := dm.sp_Table_CustomFieldsCaptionCFC3.AsString;
+   Label11.Caption := dm.sp_Table_CustomFieldsCaptionCFC4.AsString;
+   Label12.Caption := dm.sp_Table_CustomFieldsCaptionCFC5.AsString;
+end;
+
+procedure TFmApplicantImport.Button1Click(Sender: TObject);
+var
+   j,colCount : integer;
+begin
+  inherited;
+   if OpenDialog1.Execute then
+   begin
+      StringGrid1.Visible := false;
+      Excel.WorkBooks.Open(OpenDialog1.FileName);
+      StringGrid1.RowCount := 2;
+      StringGrid1.Cells[1,0] := '—œÌ›';
+      StringGrid1.Cells[2,0] := '‰«„ ” Ê‰Â«';
+      for j:= 200 downto 1 do
+         if trim(Excel.ActiveSheet.Cells[1,j].Value) <>'' then
+         begin
+            colCount := j;
+            break;
+         end;
+
+      for j:=1 to colCount do
+      begin
+         StringGrid1.Cells[1,j] := IntToStr(j);
+         StringGrid1.Cells[2,j] := trim(Excel.ActiveSheet.Cells[1,j].Value);
+         StringGrid1.RowCount := StringGrid1.RowCount+1;
+      end;
+      StringGrid1.RowCount := StringGrid1.RowCount-1;
+      StringGrid1.Visible := true;
+      btnNext.Enabled := true;
+      loadCombos;
+   end;
+end;
+
+procedure TFmApplicantImport.btnNextClick(Sender: TObject);
+begin
+  inherited;
+   PageControl1.ActivePageIndex := PageControl1.ActivePageIndex -1;
+   btnPrev.Enabled := true;
+   if PageControl1.ActivePageIndex = 0 then
+      btnNext.Enabled := false;
+end;
+
+procedure TFmApplicantImport.btnPrevClick(Sender: TObject);
+begin
+  inherited;
+   PageControl1.ActivePageIndex := PageControl1.ActivePageIndex +1;
+   btnNext.Enabled := true;
+   if PageControl1.ActivePageIndex = 1 then
+      btnPrev.Enabled := false;
+end;
+
+procedure TFmApplicantImport.loadCombos;
+var
+   i,j : integer;
+begin
+   for i:=0 to ComponentCount-1 do
+   begin
+      if Components[i].ClassNameIs('TComboBox') then
+         if TComboBox(Components[i]).Tag = 1 then
+         begin
+            TComboBox(Components[i]).Items.Clear;
+            TComboBox(Components[i]).Items.Add('');
+            for j := 1 to StringGrid1.RowCount - 1 do
+               TComboBox(Components[i]).Items.Add(StringGrid1.Cells[2,j]);
+         end;
+   end;
+end;
+
+procedure TFmApplicantImport.Button2Click(Sender: TObject);
+var
+   i,j : integer;
+   b : boolean;
+begin
+  inherited;
+   i := 2;
+   b := false;
+   while LoopCondition(i) do
+   begin
+      sp_inport_Applicant.Close;
+      sp_inport_Applicant.Parameters.ParamByName('@ApplicantCode').Value := GetCell(i,cmbApplicantCode.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@FirstName').Value := GetCell(i,cmbFirstName.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@LastName').Value := GetCell(i,cmbLastName.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@FatherName').Value := GetCell(i,cmbFatherName.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@Termcode').Value := GetCell(i,cmbTermCode.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@CustomField1').Value := GetCell(i,cmbCustomField1.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@CustomField2').Value := GetCell(i,cmbCustomField2.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@CustomField3').Value := GetCell(i,cmbCustomField3.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@CustomField4').Value := GetCell(i,cmbCustomField4.ItemIndex);;
+      sp_inport_Applicant.Parameters.ParamByName('@CustomField5').Value := GetCell(i,cmbCustomField5.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@MajorCode').Value := GetCell(i,cmbMajorCode.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@MajorTitle').Value := GetCell(i,cmbMajorTitle.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@EducationGroupCode').Value := GetCell(i,cmbEduGrpCode.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@EducationGroupTitle').Value := GetCell(i,cmbEduGrpTitle.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@FacultyCode').Value := GetCell(i,cmbFacultyCode.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@FacultyTitle').Value := GetCell(i,cmbFacultyTitle.ItemIndex);
+      sp_inport_Applicant.Parameters.ParamByName('@LevelTitle').Value := GetCell(i,cmbLevelTitle.ItemIndex);
+      try
+         sp_inport_Applicant.ExecProc;
+      except
+         b := true;
+         break;
+      end;
+      inc(i)
+   end;
+   if not b then
+   begin
+      Excel.Workbooks.Close;
+      ShowMessage('«‰ ﬁ«· «ÿ·«⁄«  »« „Ê›ﬁÌ  »Â Å«Ì«‰ —”Ìœ');
+      close;
+   end
+   else
+   begin
+      ShowMessage('«‰ ﬁ«· «ÿ·«⁄«  œ— —œÌ› '+IntToStr(i)+' »« Œÿ« „Ê«ÃÂ ‘œ');
+      ShowMessage('·ÿ›« «ÿ·«⁄«  «‰ ﬁ«· Ì«› Â —« «“ ›«Ì· „»œ« Õ–› ò—œÂ Ê Å” «“ —›⁄ „‘ò· „Ãœœ«  ·«‘ ò‰Ìœ');
+   end;
+end;
+
+function TFmApplicantImport.LoopCondition(rowNum: integer): boolean;
+var
+   j : integer;
+   b : boolean;
+begin
+   b := false;
+   for j :=1 to StringGrid1.RowCount-1 do
+   begin
+      b := b or (trim(Excel.ActiveSheet.Cells[rowNum,j].Value)<>'');
+      if b then
+         break;
+   end;
+   result := b;
+end;
+
+function TFmApplicantImport.GetCell(i, j: integer): string;
+begin
+   if j < 1 then
+      result := ''
+   else
+      result := trim(Excel.ActiveSheet.Cells[i,j].Value);
+end;
+
+end.

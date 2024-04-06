@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="" title="Main"  description="">
+		<siteMapNode url="Default.aspx" title="مکاتبات" description="" >
+			<siteMapNode url="Container.aspx?page=OutgoingLetter&amp;mode=Draft" title="ثبت پیش نویس" description=""></siteMapNode>
+			<siteMapNode url="Container.aspx?page=InnerLetter" title="ثبت نامه داخلی" description=""></siteMapNode>
+			<siteMapNode url="Container.aspx?page=IncomingLetter&amp;mode=Received" title="ثبت نامه وارده" description=""></siteMapNode>
+			<siteMapNode url="Container.aspx?page=OutgoingLetter&amp;mode=Sent" title="ثبت نامه صادره" description=""></siteMapNode>
+		</siteMapNode>
+		<siteMapNode url="" title="امکانات"  description="" >
+			<siteMapNode url="ArchiveFolder.aspx" title="پرونده های بايگاني" description=""/>
+			<siteMapNode url="ChangePassword.aspx" title="تغيير رمز عبور" description=""/>
+		</siteMapNode>
+    </siteMapNode>
+</siteMap>

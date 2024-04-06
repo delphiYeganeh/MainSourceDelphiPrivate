@@ -1,0 +1,47 @@
+
+ALTER FUNCTION [dbo].[Exist](@AccountID int,@dateTo char(10))      
+RETURNS bigint      
+AS      
+BEGIN   
+Declare @SumAmount bigint      
+  
+IF @AccountID=4    
+BEGIN  
+ select @SumAmount=DBO.F_SOODVAM('1300/01/01',@dateTo)--sum(Case when @AccountID=DebtorAccountID   then -Amount else +Amount end)      
+ --from Payment      
+ --where Date <=@dateTo  AND (4 in (DebtorAccountID,CreditorAccountID) OR PAYTYPEID=7)      
+ --and paytypeid in (1,2,8)      
+ set @SumAmount=isnull(@SumAmount,0)      
+END  
+ELSE  
+BEGIN  
+ select @SumAmount=sum(Case when @AccountID=DebtorAccountID   then -Amount else +Amount end)      
+ from Payment      
+ where [Date] <=@dateTo  AND (@AccountID in (DebtorAccountID,CreditorAccountID))   
+ --parsa   
+ --and paytypeid in (1,2,8)     
+ and paytypeid <> 7    
+ --parsa
+ set @SumAmount=isnull(@SumAmount,0)
+ 
+ /*DECLARE @Credit bigint
+select @Credit =sum(Amount)      
+ from Payment 
+ WHERE CreditorAccountID= @AccountID AND 
+		Date<=@DateTo and paytypeid in (1,2,8)
+		
+DECLARE @Debt bigint
+select @Debt =sum(Amount)      
+ from Payment 
+ WHERE debtorAccountID= @AccountID AND 
+		Date<=@DateTo and paytypeid in (1,2,8)
+		
+SET @SumAmount= isnull(@Credit, 0)- isnull(@Debt, 0) */    
+END     
+      
+RETURN @SumAmount      
+      
+END      
+GO
+
+

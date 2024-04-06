@@ -1,0 +1,113 @@
+inherited SearchAdoDataSet: TSearchAdoDataSet
+  Left = 438
+  Top = 135
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsToolWindow
+  Caption = #1580#1587#1578#1580#1608
+  ClientHeight = 269
+  ClientWidth = 392
+  Constraints.MinHeight = 300
+  Constraints.MinWidth = 400
+  OldCreateOrder = True
+  Position = poMainFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel [0]
+    Left = 0
+    Top = 0
+    Width = 392
+    Height = 35
+    Align = alTop
+    TabOrder = 0
+    DesignSize = (
+      392
+      35)
+    object Label2: TLabel
+      Left = 342
+      Top = 9
+      Width = 35
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1580#1587#1578#1580#1608
+    end
+    object LookupEdit: TEdit
+      Left = 9
+      Top = 6
+      Width = 329
+      Height = 21
+      Anchors = [akLeft, akTop, akRight]
+      Constraints.MinWidth = 300
+      TabOrder = 0
+      OnChange = LookupEditChange
+      OnKeyDown = LookupEditKeyDown
+    end
+  end
+  object Panel2: TPanel [1]
+    Left = 0
+    Top = 35
+    Width = 392
+    Height = 234
+    Align = alClient
+    TabOrder = 1
+    object DBG: TYDBGrid
+      Left = 1
+      Top = 1
+      Width = 390
+      Height = 232
+      Cursor = crHandPoint
+      Align = alClient
+      Color = 16773881
+      DataSource = DSForm
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Charset = ARABIC_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      OnDblClick = DBGDblClick
+      YeganehColor = True
+      YeganehFinish = False
+      PageNumber = False
+      RecordNumber = False
+      HasTime = False
+      Oriention = poPortrait
+      HasDate = False
+      HasIndex = False
+      PrintTitle = #1593#1606#1608#1575#1606
+      InvertFarsiDate = True
+      TitleSort = True
+      AutoInsert = False
+      FooterFields = 'Count'
+    end
+  end
+  inherited DSForm: TDataSource
+    DataSet = SearchF
+    Left = 40
+    Top = 56
+  end
+  inherited ActionList: TActionList
+    Left = 216
+    Top = 48
+  end
+  object SearchF: TADODataSet
+    Parameters = <>
+    Left = 104
+    Top = 40
+  end
+  object ActionList1: TActionList
+    Left = 152
+    Top = 48
+    object Adone: TAction
+      Caption = 'done'
+      ShortCut = 13
+      OnExecute = AdoneExecute
+    end
+    object AFail: TAction
+      Caption = 'AFail'
+      ShortCut = 27
+      OnExecute = AFailExecute
+    end
+  end
+end

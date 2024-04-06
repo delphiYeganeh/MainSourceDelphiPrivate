@@ -1,0 +1,64 @@
+object ShowMessageF: TShowMessageF
+  Left = 424
+  Top = 256
+  BiDiMode = bdRightToLeft
+  BorderIcons = []
+  BorderStyle = bsSingle
+  ClientHeight = 106
+  ClientWidth = 492
+  Color = clBtnFace
+  Constraints.MaxHeight = 140
+  Constraints.MaxWidth = 500
+  Constraints.MinHeight = 140
+  Constraints.MinWidth = 500
+  Font.Charset = ARABIC_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  ParentBiDiMode = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object yes: TLabel
+    Left = 82
+    Top = 83
+    Width = 13
+    Height = 13
+    Caption = #1576#1604#1607
+    Visible = False
+  end
+  object Label1: TLabel
+    Left = 0
+    Top = 9
+    Width = 492
+    Height = 60
+    Alignment = taCenter
+    AutoSize = False
+    WordWrap = True
+  end
+  object BitBtn1: TBitBtn
+    Left = 260
+    Top = 76
+    Width = 75
+    Height = 25
+    Caption = #1578#1575#1610#1610#1583
+    TabOrder = 0
+    OnClick = BitBtn1Click
+    Kind = bkOK
+  end
+  object BitBtn2: TBitBtn
+    Left = 172
+    Top = 76
+    Width = 75
+    Height = 25
+    Caption = #1582#1610#1585
+    TabOrder = 1
+    OnClick = BitBtn2Click
+    Kind = bkCancel
+  end
+end

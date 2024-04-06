@@ -1,0 +1,34 @@
+BEGIN TRANSACTION
+
+DROP FUNCTION IF EXISTS dbo.ShamsiLastYearDate;  
+go
+
+create FUNCTION [dbo].[ShamsiLastYearDate]
+(
+	@DATE datetime
+)
+RETURNS Varchar(10)
+AS
+BEGIN
+	DECLARE @MDate VARCHAR(10)  , 
+	        @dateTo char(10)  , 
+	        @Year char(4)   
+	
+	SET @MDate = CONVERT(VARCHAR, DATEPART(yyyy, @DATE)) 
+		   + '/' + RIGHT('00' +CONVERT(VARCHAR, DATEPART(mm, @DATE)),2) 
+		   + '/' + RIGHT('00' +CONVERT(VARCHAR, DATEPART(dd, @DATE)),2)
+		  
+		  
+	SET @Year =  SUBSTRING(dbo.MiladiToShamsi(@MDate),1,4)  
+	 
+	IF @Year IN ('1399','1403','1408','1412','1465','1441','1445','1494','1498','1503','1507') 
+	  SET @dateTo  =  @Year +'/12/30'
+	ELSE  SET @dateTo  =  @Year +'/12/29' 	
+		   
+	RETURN @dateTo
+END
+GO
+
+COMMIT
+GO
+

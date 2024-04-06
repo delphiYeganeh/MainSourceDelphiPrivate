@@ -1,0 +1,258 @@
+ unit EditPaymentU;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, BaseUnit, ActnMan, StdCtrls, DBCtrls, Mask, ExtCtrls, ActnList,
+  Buttons, DBActns, UemsVCL, Grids, DBGrids, YDbgrid, XPStyleActnCtrls,
+  Menus, DB, ADODB;
+
+type
+  TFrEditPayment = class(TYBaseForm)
+    ActionManager1: TActionManager;
+    Acancel: TDataSetCancel;
+    asearchCheque: TAction;
+    Action1: TAction;
+    PAccountDeatil: TPanel;
+    Label2: TLabel;
+    Panel1: TPanel;
+    LblAmount: TLabel;
+    StatusLabel: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label10: TLabel;
+    Label12: TLabel;
+    DBEAmount: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBEdit8: TDBEdit;
+    MajorAccount: TDBLookupComboBox;
+    FinancialNotePanel: TPanel;
+    Apost: TAction;
+    Panel2: TPanel;
+    BitBtn1: TBitBtn;
+    DoBtn: TBitBtn;
+    PrintBtn: TBitBtn;
+    xpBitBtn1: TBitBtn;
+    xpBitBtn2: TBitBtn;
+    DBEdit1: TDBEdit;
+    procedure FormShow(Sender: TObject);
+    procedure DBEAmountChange(Sender: TObject);
+    Procedure SetCashIsDebtor(value : boolean);
+    procedure RefreshPayment;
+    procedure FormCreate(Sender: TObject);
+    procedure PrintBtnClick(Sender: TObject);
+    procedure AExitExecute(Sender: TObject);
+    procedure DoBtnClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure ApostExecute(Sender: TObject);
+    procedure xpBitBtn2Click(Sender: TObject);
+    procedure xpBitBtn1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+    FCashIsDebtor:boolean;
+  public
+   PaymentID :integer;
+   Property CashIsDebtor: boolean read FCashIsDebtor write    SetCashIsDebtor;
+    { Public declarations }
+  end;
+
+var
+  FrEditPayment: TFrEditPayment;
+implementation
+
+uses dmu, YShamsiDate, BusinessLayer, AccountDetailsU,
+  QrPaymentU, AddFinancialNoteU, FinancialNoteDetailU,
+  FinancialNoteDetail_NewU;
+{$R *.dfm}
+
+
+Procedure TFrEditPayment.SetCashIsDebtor(value : boolean);
+  begin
+    FCashIsDebtor:=value;
+     if value then
+      StatusLabel.Caption:='Ê«—Ì“ »Â Õ”«»'
+     else
+      StatusLabel.Caption:='»—œ«‘  «“ Õ”«»';
+      Caption:=StatusLabel.Caption;
+end;
+
+procedure TFrEditPayment.RefreshPayment;
+begin
+     with dm,Select_Payment do
+     begin
+      Open_Payment(PaymentID);
+      if CashIsDebtor then
+       FrAccountDetails.AccountID:= dm.Select_PaymentCreditorAccountID.AsInteger
+      else
+       FrAccountDetails.AccountID:= dm.Select_PaymentDebtorAccountID.AsInteger;
+
+      edit;
+      DoBtn.Enabled:=true;
+       if CashIsDebtor then
+          MajorAccount.DataField:='DebtorAccountID'
+        else
+          MajorAccount.DataField:='CreditorAccountID';
+
+       Select_PaymentLastUserID.AsInteger:=_Userid;
+       {Ranjbar}
+       //Select_PaymentLastUpDate.AsString:=_Today;
+       Select_PaymentLastUpDate.AsString := _Today;
+       //---
+     end;
+ end;
+
+procedure TFrEditPayment.FormShow(Sender: TObject);
+begin
+  inherited;
+  RefreshPayment  ;
+   Dm.FinancialNote_Detail.Close;
+   Dm.FinancialNote_Master.Close;
+   IF _FinancialNoteid>0 THEN
+   BEGIN
+      Dm.FinancialNote_Master.Open;
+      Dm.FinancialNote_Detail.Open;
+      dm.FinancialNote_Detail.Locate('FinancialNote_DetailID',_FinancialNoteid,[loCaseInsensitive]);
+      Dm.FinancialNote_Master.Locate('FinancialNote_MasterID',_FinancialNote_MasterID,[loCaseInsensitive]);
+   END;
+   //MajorAccount.SetFocus;
+end;
+
+procedure TFrEditPayment.DBEAmountChange(Sender: TObject);
+begin
+  inherited;
+  if Tdbedit(Sender).Text<>'' then
+    FrFinancialNoteDetail_New.DefaultAmount:= StrToInt64(DeleteComma(Tdbedit(Sender).Text))
+  else
+    FrFinancialNoteDetail_New.DefaultAmount:=0;
+
+//  try Label12.Caption:=Bill(StrToInt64(DeleteComma(Tdbedit(Sender).Text)))+' —Ì«·'; except end
+  try Label12.Caption:=Bill(StrToInt64(DeleteComma(Tdbedit(Sender).Text)))+' ' +Get_SystemSetting('EdtMoneyUnit')+' '; except end
+  end;
+
+procedure TFrEditPayment.FormCreate(Sender: TObject);
+VAR _D:Integer; SqlText:STRING;
+begin
+  inherited;
+  IF  (Dm.Report_Payment_ByDocumentNoFinancialNote_DetailID.IsNull) OR
+      (Dm.Report_Payment_ByDocumentNoFinancialNote_DetailID.AsInteger=0) THEN
+   _FinancialNoteid:=-1
+   ELSE
+    _FinancialNoteid:=Dm.Report_Payment_ByDocumentNoFinancialNote_DetailID.AsInteger;
+
+   SqlText:=' SELECT  ISNULL(FinancialNote_MasterID,0) FROM FinancialNote_Detail WHERE FinancialNote_DetailID='+IntToStr(_FinancialNoteid);
+   IF  Qry_GetResult(sqlText,Dm.YeganehConnection)='' THEN
+      _FinancialNote_MasterID:=0
+   ELSE
+      _FinancialNote_MasterID:=STRTOINT(Qry_GetResult(sqlText,Dm.YeganehConnection));
+
+   FrAccountDetails:=TFrAccountDetails.Create(Application);
+   FrAccountDetails.ShowInPanel( PAccountDeatil);
+   FrFinancialNoteDetail_New:=TFrFinancialNoteDetail_New.Create(Application);
+   FrFinancialNoteDetail_New.ShowInPanel(FinancialNotePanel);
+end;
+
+procedure TFrEditPayment.PrintBtnClick(Sender: TObject);
+begin
+  inherited;
+
+  FrQrPayment:=TFrQrPayment.Create(Application);
+  FrQrPayment.IsPay:=CashIsDebtor;
+//  FrQrPayment.QuickRep1.Preview;
+  FrQrPayment.QRLblSoftTitle.Caption := _SoftTitle;
+  FrQrPayment.QRLblSoftTitle2.Caption := _SoftTitle;
+  FrQrPayment.QRLblSoftTitle3.Caption := _SoftTitle;
+  FrQrPayment.QRLblSoftTitle4.Caption := _SoftTitle;
+  FrQrPayment.QRLblSoftTitle_N1.Caption := _SoftTitle;
+  FrQrPayment.QRLblSoftTitle_N2.Caption := _SoftTitle;
+  //---
+  FrQrPayment.QuickRep4.Preview;
+
+end;
+
+procedure TFrEditPayment.AExitExecute(Sender: TObject);
+begin
+  inherited;
+dm.Select_Payment.Cancel;
+Close;
+end;
+
+procedure TFrEditPayment.DoBtnClick(Sender: TObject);
+VAR S :STRING;
+begin
+  Inherited;
+   S := DBEdit1.Text;
+   IF Not isValidDate(S) Then
+   Begin
+      ShowMyMessage('ÅÌ€«„','„ﬁœ«— ›Ì·œ  «—ÌŒ «‘ »«Â „Ì»«‘œ',[mbOK],mtInformation);
+      DBEdit1.Text := '13'+IntToStr(_Year)+'/  /  ';
+   End;
+
+
+   IF MajorAccount.KeyValue=Null Then
+   Begin
+      ShowMessage('«» œ« ’‰œÊﬁ —« «‰ Œ«» ò‰Ìœ');
+      MajorAccount.SetFocus;
+   End
+   Else
+    Apost.Execute;
+end;
+
+procedure TFrEditPayment.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+   Close;
+end;
+
+procedure TFrEditPayment.ApostExecute(Sender: TObject);
+begin
+  inherited;
+  dm.Select_PaymentFinancialNote_DetailID.AsInteger:=FrFinancialNoteDetail_New.FinancialNoteid;
+{  IF NOT CashIsDebtor and (Dm.Select_PaymentAmount.Value>dm.Select_Account_DetailsExist.Value) then
+   Begin
+     ShowMessage('„ÊÃÊœÌ Õ”«» ò«›Ì ‰Ì” ');
+     exit;
+   End;  }
+dm.Select_Payment.Post;
+PrintBtn.show;
+DoBtn.Enabled:=false;
+End;
+
+
+
+procedure TFrEditPayment.xpBitBtn2Click(Sender: TObject);
+begin
+  inherited;
+   dm.PrintPayment_ByDocumentNo(dm.Select_PaymentDocumentNo.AsString);
+
+end;
+
+procedure TFrEditPayment.xpBitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  FrQrPayment:=TFrQrPayment.Create(Application);
+//  FrQrPayment.QuickRep1.Preview;
+  FrQrPayment.QRLblSoftTitle.Caption    := _SoftTitle;
+  FrQrPayment.QRLblSoftTitle2.Caption   := _SoftTitle;
+  FrQrPayment.QRLblSoftTitle3.Caption   := _SoftTitle;
+  FrQrPayment.QRLblSoftTitle4.Caption   := _SoftTitle;
+  FrQrPayment.QRLblSoftTitle_N1.Caption := _SoftTitle;
+  FrQrPayment.QRLblSoftTitle_N2.Caption := _SoftTitle;
+  //---
+  FrQrPayment.QuickRep4.Preview;
+
+end;
+
+procedure TFrEditPayment.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+ if Assigned(FrAccountDetails) then
+  FrAccountDetails.Free;
+ if Assigned(FrFinancialNoteDetail_New) then
+  FrFinancialNoteDetail_New.Free;
+
+end;
+
+end.

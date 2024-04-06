@@ -1,0 +1,61 @@
+8
+
+dir
+131
+svn://dlib.itrc.ac.ir/eCartable/App_Code/DAL
+svn://dlib.itrc.ac.ir/eCartable
+
+
+
+2008-02-24T17:15:57.192250Z
+129
+mahdi
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+76e0edb9-7613-5b4a-9688-4d125da3a7a4
+
+DataAccess.cs
+file
+
+
+
+
+2008-02-26T08:47:06.359375Z
+e9f6dda081cf8d33edeae8999ce78196
+2008-01-13T06:07:52.525375Z
+113
+mahdi
+
+Helper.cs
+file
+
+
+
+
+2008-02-26T08:47:06.359375Z
+5d034f1189ebfd068e67b30489bcbac2
+2008-01-13T06:07:52.525375Z
+113
+mahdi
+
+Details
+dir
+
+Providers
+dir
+
+SQLClient
+dir
+

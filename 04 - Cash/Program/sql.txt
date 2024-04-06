@@ -1,0 +1,1 @@
+INSERT INTO PaymentInterestAmerce(CreditorAccountID,DebtorAccountID,Date,Time,PayTypeID,Amount,Comment,InsertUserID,FinancialNoteID,RelatedId,DocumentNo,FinancialNote_DetailID,Crtr_DetAccountID) VALUES(31,7,'1392/03/21','10:04:43',7,100000,'”Êœ ﬁ”ÿ   «—ÌŒ 1387/08/01 Ê«„ ‘„«—Â0042',5,0,1184,'25',0,31)

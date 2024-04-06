@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ecartable", "ecartable\ecartable.vdproj", "{ED3A3E54-2895-4501-9E31-4BC2D1064EAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED3A3E54-2895-4501-9E31-4BC2D1064EAB}.Debug|Default.ActiveCfg = Debug
+		{ED3A3E54-2895-4501-9E31-4BC2D1064EAB}.Debug|Default.Build.0 = Debug
+		{ED3A3E54-2895-4501-9E31-4BC2D1064EAB}.Release|Default.ActiveCfg = Release
+		{ED3A3E54-2895-4501-9E31-4BC2D1064EAB}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,256 @@
+object SHORT_CUTS_LIST_FRM: TSHORT_CUTS_LIST_FRM
+  Left = 577
+  Top = 171
+  BorderStyle = bsDialog
+  Caption = '----'
+  ClientHeight = 415
+  ClientWidth = 221
+  Color = clMoneyGreen
+  Font.Charset = ARABIC_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 80
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'F9 : '#1576#1575#1610#1711#1575#1606#1610' '#1587#1606#1583
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 8
+    Top = 8
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'F7 : '#1579#1576#1578' '#1587#1606#1583
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 8
+    Top = 32
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Alt + Enter : '#1606#1605#1575#1610#1588' '#1587#1606#1583
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 8
+    Top = 56
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'CTRL + DEL : '#1581#1584#1601' '#1587#1606#1583
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label6: TLabel
+    Left = 8
+    Top = 104
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Ctrl + R : '#1575#1585#1580#1575#1593' '#1588#1608#1606#1583#1711#1575#1606
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label7: TLabel
+    Left = 8
+    Top = 128
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Ctrl + W : Word'
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label8: TLabel
+    Left = 8
+    Top = 152
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Ctrl + M : WORD '#1582#1608#1575#1606#1583#1606' '#1601#1575#1610#1604
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label9: TLabel
+    Left = 8
+    Top = 248
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = '---------------------------'
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Visible = False
+  end
+  object Label10: TLabel
+    Left = 8
+    Top = 176
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Ctrl + Y : '#1578#1594#1610#1610#1585' '#1587#1575#1604' '#1580#1575#1585#1610
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label11: TLabel
+    Left = 8
+    Top = 200
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Ctrl + D : '#1578#1594#1610#1610#1585' '#1576#1575#1610#1711#1575#1606#1610' '#1580#1575#1585#1610
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label12: TLabel
+    Left = 8
+    Top = 224
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Esc : '#1582#1585#1608#1580' '#1575#1586' '#1587#1610#1587#1578#1605
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label13: TLabel
+    Left = 8
+    Top = 344
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = '---------------------------'
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label14: TLabel
+    Left = 8
+    Top = 272
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = '---------------------------'
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Visible = False
+  end
+  object Label15: TLabel
+    Left = 8
+    Top = 296
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = '---------------------------'
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Visible = False
+  end
+  object Label16: TLabel
+    Left = 8
+    Top = 320
+    Width = 209
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = '---------------------------'
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Visible = False
+  end
+  object BitBtn1: TBitBtn
+    Left = 75
+    Top = 376
+    Width = 75
+    Height = 25
+    Caption = #1578#1575#1610#1610#1583
+    TabOrder = 0
+    OnClick = BitBtn1Click
+  end
+end

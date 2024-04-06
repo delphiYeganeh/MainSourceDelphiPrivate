@@ -1,0 +1,673 @@
+inherited FromOrgForm: TFromOrgForm
+  Tag = 12
+  Left = 414
+  Top = 163
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = #1670#1575#1585#1578' '#1587#1575#1586#1605#1575#1606#1610
+  ClientHeight = 432
+  ClientWidth = 508
+  Constraints.MinHeight = 412
+  Constraints.MinWidth = 481
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label10: TLabel [0]
+    Left = 449
+    Top = 3
+    Width = 48
+    Height = 13
+    Anchors = [akTop, akRight]
+    Caption = #1587#1575#1586#1605#1575#1606' '#1607#1575
+  end
+  object Panel3: TPanel [1]
+    Left = 0
+    Top = 0
+    Width = 364
+    Height = 352
+    Align = alClient
+    Caption = 'Panel3'
+    TabOrder = 2
+    DesignSize = (
+      364
+      352)
+    object PageControl: TPageControl
+      Left = 1
+      Top = 1
+      Width = 362
+      Height = 350
+      ActivePage = TabSheet1
+      Align = alClient
+      TabOrder = 0
+      object TabSheet1: TTabSheet
+        Caption = 'tree'
+        OnShow = TabSheet1Show
+        object FromOrganizationsTree: TTreeView
+          Left = 0
+          Top = 0
+          Width = 354
+          Height = 322
+          Align = alClient
+          Images = Dm.LetterImages
+          Indent = 19
+          TabOrder = 0
+          OnChange = FromOrganizationsTreeChange
+          OnDblClick = FromOrganizationsTreeDblClick
+          OnExpanding = FromOrganizationsTreeExpanding
+          OnGetImageIndex = FromOrganizationsTreeGetImageIndex
+        end
+      end
+      object TabSheet2: TTabSheet
+        Caption = 'list'
+        ImageIndex = 1
+        OnShow = TabSheet2Show
+        DesignSize = (
+          354
+          322)
+        object Label2: TLabel
+          Left = 306
+          Top = 12
+          Width = 35
+          Height = 13
+          Anchors = [akTop, akRight]
+          Caption = #1580#1587#1578#1580#1608
+        end
+        object DBGFromORG: TYDBGrid
+          Left = 0
+          Top = 46
+          Width = 354
+          Height = 276
+          Cursor = crHandPoint
+          Align = alBottom
+          DataSource = DFromOrg
+          TabOrder = 1
+          TitleFont.Charset = ARABIC_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          OnDblClick = FromOrganizationsTreeDblClick
+          YeganehColor = True
+          YeganehFinish = False
+          PageNumber = False
+          RecordNumber = False
+          HasTime = False
+          Oriention = poPortrait
+          HasDate = False
+          HasIndex = False
+          PrintTitle = #1593#1606#1608#1575#1606
+          InvertFarsiDate = True
+          TitleSort = True
+          AutoInsert = False
+          FooterFields = 'Count'
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'code'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = #1705#1583
+              Width = 48
+              Visible = True
+            end
+            item
+              Color = 16434943
+              Expanded = False
+              FieldName = 'Title'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = #1593#1606#1608#1575#1606
+              Width = 126
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'ResponsibleStaffer'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = #1605#1587#1574#1608#1604
+              Width = 133
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'parentid'
+              Title.Caption = #1705#1583' '#1576#1575#1604#1575#1578#1585
+              Visible = False
+            end>
+        end
+        object SEdit: TEdit
+          Left = 9
+          Top = 10
+          Width = 289
+          Height = 21
+          Anchors = [akTop, akRight]
+          TabOrder = 0
+          OnChange = SEditChange
+        end
+      end
+    end
+    object Panel1: TPanel
+      Left = -15
+      Top = 0
+      Width = 377
+      Height = 25
+      Anchors = [akTop, akRight]
+      BevelOuter = bvNone
+      TabOrder = 1
+      DesignSize = (
+        377
+        25)
+      object SpeedButton1: TSpeedButton
+        Left = 244
+        Top = 1
+        Width = 59
+        Height = 22
+        Cursor = crHandPoint
+        Anchors = [akTop, akRight]
+        GroupIndex = 1
+        Caption = #1604#1610#1587#1578
+        OnClick = SpeedButton1Click
+      end
+      object SpeedButton2: TSpeedButton
+        Left = 305
+        Top = 1
+        Width = 67
+        Height = 22
+        Cursor = crHandPoint
+        Anchors = [akTop, akRight]
+        GroupIndex = 1
+        Down = True
+        Caption = #1583#1585#1582#1578#1608#1575#1585#1607
+        OnClick = SpeedButton2Click
+      end
+    end
+  end
+  object GroupBox1: TGroupBox [2]
+    Left = 0
+    Top = 352
+    Width = 508
+    Height = 80
+    Align = alBottom
+    Caption = #1575#1591#1604#1575#1593#1575#1578' '#1587#1575#1586#1605#1575#1606
+    Color = clBtnFace
+    ParentColor = False
+    TabOrder = 0
+    DesignSize = (
+      508
+      80)
+    object Label9: TLabel
+      Left = 462
+      Top = 52
+      Width = 38
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1605#1587#1574#1608#1604':'
+    end
+    object Label1: TLabel
+      Left = 462
+      Top = 26
+      Width = 15
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1705#1583':'
+      FocusControl = ECode
+    end
+    object Erespon: TEdit
+      Left = 132
+      Top = 48
+      Width = 325
+      Height = 21
+      Anchors = [akTop, akRight]
+      Ctl3D = True
+      ParentCtl3D = False
+      ReadOnly = True
+      TabOrder = 0
+      OnEnter = TEditEnter
+      OnExit = TEditExit
+    end
+    object ECode: TEdit
+      Left = 370
+      Top = 22
+      Width = 88
+      Height = 21
+      Anchors = [akTop, akRight]
+      ReadOnly = True
+      TabOrder = 1
+      OnEnter = TEditEnter
+      OnExit = TEditExit
+    end
+  end
+  object Panel2: TPanel [3]
+    Left = 364
+    Top = 0
+    Width = 144
+    Height = 352
+    Align = alRight
+    TabOrder = 1
+    DesignSize = (
+      144
+      352)
+    object Image2: TImage
+      Left = 42
+      Top = 8
+      Width = 62
+      Height = 55
+      Anchors = [akTop, akRight]
+      Picture.Data = {
+        07544269746D617076020000424D760200000000000076000000280000002000
+        0000200000000100040000000000000200000000000000000000100000001000
+        0000000000000000800000800000008080008000000080008000808000008080
+        8000C0C0C0000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+        FF00888777888888888888887777777777788000078888888888888000000000
+        077880EE0788888888888880EEEEEEE7077880EE0000000000000000E00000E7
+        077880EE07E7E7E7E7E7E7E0E07770E7077880EE077E7E7E7E7E7E70E07770E7
+        077880EE07E7E7E7E7E7E7E0E00000E7077880EE077E7E7E7E7E7E70EEEEEEE7
+        077880EE07E7E7E7E7E7E7E0E00000E7077880EE077E7E7E7E7E7E70E07770E7
+        077880EE0777777777777770E07770E7077880EE0000000000000000E00000E7
+        077880EEEEEEEEEEEEEEEEEEEEEEEEE707788000000000000000000000000000
+        078880F0888888888880FF9999999FFF078880F0898777777780FFFF00FFFFFF
+        078880F0888888888880FFFF0FFFFFFF078880F0000000000000FFFFF00FFFFF
+        078880FFF077777770FFFFFFFFF00FFF078880FFF07E7E7E70FFFFFFFFFFF00F
+        078880FFF077E7E770FFFFFF1FFFF00F078880FFF07E7E7E70FFFFF11FFF0FFF
+        078880FFF077777770FFFF1111F0FFFF078880FFF000000000FFF199911FFFFF
+        078880FFFFFFFFFFFFFFFFFF191FFFFF07888077777777777777777777777777
+        07788000000000000000000000000000077880E777777777770FE77777777777
+        077880EE7E7E7E7E770FEE7E7E7E7E77077880E7E7E7E7E7E70FE7E7E7E7E7E7
+        077880EEEEEEEEEEEE0FEEEEEEEEEEEE07788000000000000000000000000000
+        0888}
+      Stretch = True
+      Transparent = True
+    end
+    object Label5: TLabel
+      Left = 21
+      Top = 255
+      Width = 98
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1578#1585#1578#1610#1576' '#1576#1585' '#1575#1587#1575#1587' '#1593#1606#1608#1575#1606
+    end
+    object Label4: TLabel
+      Left = 5
+      Top = 275
+      Width = 114
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1587#1575#1586#1605#1575#1606' '#1607#1575#1610' '#1591#1585#1601' '#1605#1603#1575#1578#1576#1607
+    end
+    object BBOK: TBitBtn
+      Left = 32
+      Top = 75
+      Width = 75
+      Height = 28
+      Cursor = crHandPoint
+      Anchors = [akTop, akRight]
+      Caption = #1578#1575#1610#1610#1583
+      Default = True
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ModalResult = 1
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BBOKClick
+      Glyph.Data = {
+        06030000424D06030000000000003600000028000000100000000F0000000100
+        180000000000D002000000000000000000000000000000000000008080008080
+        0080800080808000008000000080800080800080800080800080800080800080
+        8000808000808000808000808000808000808080000000800000800080000000
+        8080008080008080008080008080008080008080008080008080008080008080
+        8000000080000080000080000080008000000080800080800080800080800080
+        8000808000808000808000808080000000800000800000800000800000800000
+        8000800000008080008080008080008080008080008080008080800000008000
+        00800000800000FF000080000080000080000080008000000080800080800080
+        8000808000808000808000800000800000800000FF0000808000808000800000
+        800000800080000000808000808000808000808000808000808000FF00008000
+        00FF0000808000808000808000FF000080000080000080008000000080800080
+        8000808000808000808000808000FF0000808000808000808000808000808000
+        FF00008000008000008000800000008080008080008080008080008080008080
+        00808000808000808000808000808000808000FF000080000080000080008000
+        0000808000808000808000808000808000808000808000808000808000808000
+        808000808000FF00008000008000008000800000008080008080008080008080
+        00808000808000808000808000808000808000808000808000FF000080000080
+        0000800080000000808000808000808000808000808000808000808000808000
+        808000808000808000808000FF00008000008000008000800000008080008080
+        00808000808000808000808000808000808000808000808000808000808000FF
+        0000800000800080000000808000808000808000808000808000808000808000
+        808000808000808000808000808000808000FF00008000008000008080008080
+        0080800080800080800080800080800080800080800080800080800080800080
+        8000808000FF00008080}
+    end
+    object BBCancel: TBitBtn
+      Left = 32
+      Top = 107
+      Width = 75
+      Height = 28
+      Cursor = crHandPoint
+      Anchors = [akTop, akRight]
+      Cancel = True
+      Caption = #1575#1606#1589#1585#1575#1601
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = BBCancelClick
+      Glyph.Data = {
+        AA030000424DAA03000000000000360000002800000011000000110000000100
+        1800000000007403000000000000000000000000000000000000008080008080
+        0080800080800080800080800080800080800080800080800080800080800080
+        800080800080800080805465D400008080008080008080008080008080008080
+        0080800080800080800080800080800080800080800080800080803B4CD10000
+        C0000080800000BF0006C13446CF008080008080008080008080008080008080
+        008080008080008080008080263BD10001C54153D4000080800000C50013C800
+        0CC72E43D2008080008080008080008080008080008080008080008080132AD1
+        0000C93B4FD7008080000080800080801027D10010CE000DCD1026D200808000
+        80800080800080800080800080800017D10006CE4356DA008080008080000080
+        800080800080804053DD000FD4000CD30080800080800080800080808D9AE705
+        1DD50005D24355DD008080008080008080000080800080800080800080806A7B
+        E5000ED9000BD80080800080807385E60016D80008D64558E000808000808000
+        8080008080000080800080800080800080800080800080800822DF0000FF0000
+        FF0018DC000BDA485CE300808000808000808000808000808000008080008080
+        008080008080008080008080008080162EE30013E00013E04A5EE60080800080
+        8000808000808000808000808000008080008080008080008080008080008080
+        3D52E90016E20015E3001AE50A26EA97A4F00080800080800080800080800080
+        80000080800080800080800080800080802740EB000DE7000EE75467EC008080
+        011DEC0018ED8B99F10080800080800080800080800000808000808000808000
+        80801E37ED000FEC000EEC5165EF008080008080008080132DF3000EF28F9EF4
+        00808000808000808000008080008080008080112BF00013EF0010EF5063F100
+        80800080800080800080800080803148F6000DF891A0F6008080008080000080
+        800080800011F20015F30012F35B6DF500808000808000808000808000808000
+        80800080806074F80014FD798AFA008080000080800014F70019F8000EF8586C
+        F700808000808000808000808000808000808000808000808000808092A2FA88
+        98FA00808000008080000DFD000EFC586CF90080800080800080800080800080
+        80008080008080008080008080008080008080008080008080000080802D47FC
+        7588FB0080800080800080800080800080800080800080800080800080800080
+        8000808000808000808000808000}
+    end
+    object BBInsert: TBitBtn
+      Left = 32
+      Top = 152
+      Width = 75
+      Height = 28
+      Cursor = crHandPoint
+      Action = AInsert
+      Anchors = [akTop, akRight]
+      Caption = #1580#1583#1610#1583
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Glyph.Data = {
+        76050000424D7605000000000000360000002800000015000000150000000100
+        1800000000004005000000000000000000000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFC7E4C80085000A91160A8D130A8E13088C120A8C
+        12007C00C6E3C6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFC8E4C821AF3D4ADD813CD16E3DD2703DCF6D3DD2
+        71099D25C6E2C7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFC7E3C727B13E51E0813AD26A3CD36C3DD16B3CD2
+        6D089D23C6E1C6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFC7E3C829B13F53E2823BD46C3ED56E3DD16C3CD3
+        6E079D23C6E1C6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFC6E4C72BB44155E3843CD36C3ED46E3DD36D3ED3
+        70099F24C5E2C7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFCDE6CE31B6465DE68B3FD57041D77140D67040D6
+        720BA026CDE5CDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00E2F2E2C2E4C5
+        C6E4C7C6E5C8C6E4C8CBE6CD99CE9B2CB74559E68941D97242D97341D87242D7
+        7310A02998C997CAE2CAC4DFC4C5DFC4C4DFC4C5DFC4C5E0C60078C67E27BB43
+        12AE3114AF3214AE3212AD3119AE3439CC6248E07B45DB7544DC7644D97341D8
+        742EBA500F9C26089A2108981F06971F05961F079720007100008BD1918DFFB0
+        5AEA8957EA8757E98855E88653E68450E2814CE07B46DD7846DD7845DC7643DA
+        7442DA7543DA7640D7723FD5713ED36F3DD36E3ED37108820E0089D1908DFBAC
+        63EB8D5EEA895EE98B5CE88857E78555E58353E3804EE17C4EE17C46DE7845DB
+        7543DA7441D8723FD56F3DD46D3DD16B3BD16B3BCF6C06830D008BD19191FDAF
+        69EE9263EC8F64ED8D60EC8B5DE98959E78855E68352E28052E3804EE27C46DD
+        7744DC7542DA7440D6703ED46E3ED46E3CD26C3CD06D07840E008BD19191FDAF
+        6BEE9365ED9065ED8E62EC8C5EEA8A5AE88855E68452E28152E3804EE27C46DE
+        7845DB7642D9733FD66F3CD46D3CD36C3AD26B3BCF6C07840E008CD394A6FFC2
+        8FFCAE8DFCAE8CFBAD8AFAAB87F9A97EF4A163EB8D55E58455E68453E3814BE0
+        7C4BE17E60E88E60E78C59E58656E28454E1834CDE7F0887120079CA8141C754
+        42C55441C45442C45440C25344C25578E18B7DF4A05AE88759E88855E6834FE3
+        7F38CB602FB64632B5462DB2412AB04028B03F22AF3D007C0000E1F3E3C2E6C5
+        C6E7C8C5E6C8C6E6C8CBE8CD96D19A43C15386F8A95EE98A5EE98A57E78552E5
+        8213A72D97CB98CCE6CDC6E2C6C6E2C7C6E2C6C7E3C8C6E2C700FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFCBE8CC40C25189FBAB61EC8C60EC8B5CE98853E6
+        850DA62ACAE5CAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFC5E6C742C2528CFBAE65ED8F64ED8E5FE98C54E7
+        860FA729C5E2C5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFC5E6C741C3528CFCAD65EC8F64EC905DEA8955E7
+        8510A82AC6E2C6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFC5E6C740C3538FFBAF6CEE936BEE9365EC8E58E8
+        870EA829C5E3C6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFC2E5C440C555A6FFC292FDB093FCB08FFCAD8DFE
+        B021B43BC0E2C2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFE1F3E379CB818CD3948BD1928BD1938BD0918DD2
+        9377C67FE1F1E3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00}
+    end
+    object deleteBtn: TBitBtn
+      Left = 32
+      Top = 184
+      Width = 75
+      Height = 28
+      Cursor = crHandPoint
+      Action = Adelete
+      Anchors = [akTop, akRight]
+      Caption = #1581#1584#1601
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      Glyph.Data = {
+        AA030000424DAA03000000000000360000002800000011000000110000000100
+        1800000000007403000000000000000000000000000000000000FFFFFF7270C9
+        0B0A9D5251B3DDDCEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA4A3DE7373
+        C3F1EFF8FFFFFFFFFFFFFFFFFF00BDBCE4000AC21F63FF0B3CF30004AB908ED8
+        FFFEFEFFFFFFFFFFFFFFFFFFA29FDD0001B70026EC0002AC5153C6E2E1F6FFFF
+        FF00484BB51247FD1E51FF1C50FF1C59FF000EC26F70D0F4F2F8FFFFFF9D9CDA
+        0513BA104BFF0F46FF0A47FF001BDE5052C4FAF9FB006969C01033D82156FF1D
+        4EFF1D4FFF1F59FF0827D36265C7928ECC1729C30F46FE1346FF1042FF0D3FFF
+        0C47FF000DCBB0B0DE00EEEBF4000CA9275FFF2051FF1F50FF1F50FF1E54FF12
+        34D70E23C01346F6184CFF1445FF1344FF1041FF1048FF0024EB5C5DBD00E1DF
+        F20000B42A66FF2558FF2153FF2051FF2052FF1E50FD1C4DFC1C4FFF184AFF16
+        48FF1445FF144BFF0029E42532C3C4C3E500F9F9FD6B6CCB0318BE194FF6275E
+        FF2557FF2252FF2053FF2051FF1D4EFF1A4CFF184BFF144DFF0022E13D40BED2
+        D0EDFFFFFF00FFFFFFFDFCFCCECDEA7378D2263DCE214EF02658FF2354FF2153
+        FF1F51FF1D50FF1848FA2136C69897D8F1F0F8FFFFFFFFFFFF00FFFFFFFFFFFF
+        FFFFFFFFFFFF9089C81C3DE02C5EFF2657FF2555FF2354FF1F50FF1B51FC2425
+        A9EEEBF5FFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFBFAFE2727B12F66FF
+        2C5BFF295AFF285AFF2557FF2252FF2056FF1140F1514EB7FEFDFEFFFFFFFFFF
+        FF00FFFFFFFFFFFFFFFFFF9E99D4294ADF3165FF2E5EFF2D5FFF2452F32253F8
+        2557FF2151FF1C53FF1331D89896D5FFFFFFFFFFFF00FFFFFFFFFFFFFFFFFF58
+        57BE2858ED3466FF3162FF2A5CFA232EBC1B2BC22358FF2354FF1F53FF1344F4
+        2B39C7D7D4EEFFFFFF00FFFFFFFFFFFFCFCDE93D50D43263F93565FF3165FF21
+        41D88986CE9792D01529C7255DFF2052FF1F54FF052CE06264C6FFFFFF00FFFF
+        FFFFFFFF9897D4284BDD3C6FFF3768FF2C5DF64447BBF5F3F9FFFFFF8E89CE03
+        1CC72760FF1E50FF1B51FF051EC5BBBAE000FFFFFFFFFFFF8D8BCE1834D1437B
+        FF4179FF1D32CBB0ACDDFFFFFFFFFFFFFFFFFF6B69C90020D02460FF205BFF0B
+        44FF282BAA00FFFFFFFFFFFFF1F0F97274CF010CAE1337DC4745B7FFFFFFFFFF
+        FFFFFFFFFFFFFFF8F7FC474BC60026DB0016CA1B24B7A1A1DB00FFFFFFFFFFFF
+        FFFFFFFFFFFFF5F4FA7877C6E3E2F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6E5
+        F55F5EC0B3B2DEFEFDFCFFFFFF00}
+    end
+    object orderByTitle: TCheckBox
+      Left = 120
+      Top = 254
+      Width = 16
+      Height = 17
+      Anchors = [akTop, akRight]
+      TabOrder = 4
+      OnClick = innerOrgClick
+    end
+    object outerOrg: TCheckBox
+      Left = 123
+      Top = 274
+      Width = 13
+      Height = 17
+      Anchors = [akTop, akRight]
+      Checked = True
+      State = cbChecked
+      TabOrder = 5
+      OnClick = innerOrgClick
+    end
+  end
+  inherited DSForm: TDataSource
+    DataSet = PFromOrg
+    Left = 157
+    Top = 229
+  end
+  inherited ActionList: TActionList
+    Left = 275
+    Top = 251
+  end
+  inherited xpWindow1: TxpWindow
+    Left = 272
+    Top = 192
+  end
+  object ActionManager1: TActionManager
+    ActionBars.SessionCount = 113
+    ActionBars = <
+      item
+        Items = <
+          item
+            Items = <
+              item
+                Action = DataSetEdit1
+                ImageIndex = 7
+                ShortCut = 115
+              end>
+            Caption = #1585#1705#1608#1585#1583
+          end
+          item
+            Action = AClose
+            ShortCut = 27
+          end>
+        AutoSize = False
+      end>
+    Images = Dm.LetterImages
+    Left = 268
+    Top = 142
+    StyleName = 'XP Style'
+    object DataSetEdit1: TDataSetEdit
+      Tag = 1
+      Category = #1585#1705#1608#1585#1583
+      Caption = #1608#1610#1585#1575#1610#1588' '
+      Hint = 'Edit'
+      ImageIndex = 48
+      ShortCut = 115
+      DataSource = DSForm
+    end
+    object AClose: TAction
+      Tag = 2
+      Caption = #1582#1585#1608#1580
+      ShortCut = 27
+      OnExecute = ACloseExecute
+    end
+    object Action2: TAction
+      Tag = 3
+      Category = #1585#1705#1608#1585#1583
+      Caption = #1604#1610#1587#1578
+      ImageIndex = 10
+    end
+    object AInsert: TAction
+      Tag = 4
+      Category = #1585#1705#1608#1585#1583
+      Caption = #1580#1583#1610#1583
+      ImageIndex = 16
+      ShortCut = 45
+      OnExecute = AInsertExecute
+    end
+    object Apost: TAction
+      Tag = 5
+      Category = #1585#1705#1608#1585#1583
+      Caption = #1584#1582#1610#1585#1607
+      ImageIndex = 40
+      ShortCut = 113
+      OnExecute = ApostExecute
+    end
+    object Adelete: TAction
+      Tag = 6
+      Category = #1585#1705#1608#1585#1583
+      Caption = #1581#1584#1601
+      ImageIndex = 29
+      ShortCut = 16430
+      OnExecute = AdeleteExecute
+    end
+    object Action1: TAction
+      Category = #1585#1705#1608#1585#1583
+      Caption = #1578#1594#1610#1610#1585' '#1605#1583#1610#1585#1610#1578
+      ShortCut = 16499
+    end
+  end
+  object FromOrg: TADODataSet
+    Connection = Dm.YeganehConnection
+    CursorType = ctStatic
+    AfterScroll = FromOrgAfterScroll
+    CommandText = 
+      'select ID, code,Title, ResponsibleStaffer ,parentid from FromOrg' +
+      'anizations'#13#10'where Title like '#39'%'#39
+    Parameters = <>
+    Left = 54
+    Top = 161
+    object FromOrgTitle: TWideStringField
+      FieldName = 'Title'
+      Size = 100
+    end
+    object FromOrgResponsibleStaffer: TWideStringField
+      FieldName = 'ResponsibleStaffer'
+      Size = 50
+    end
+    object FromOrgparentid: TIntegerField
+      FieldName = 'parentid'
+    end
+    object FromOrgID: TAutoIncField
+      FieldName = 'ID'
+      ReadOnly = True
+    end
+    object FromOrgcode: TWideStringField
+      FieldName = 'code'
+      Size = 10
+    end
+  end
+  object DFromOrg: TDataSource
+    DataSet = FromOrg
+    Left = 51
+    Top = 210
+  end
+  object PFromOrg: TADODataSet
+    Connection = Dm.YeganehConnection
+    CursorType = ctStatic
+    CommandText = 
+      'select TOP 200 ID, Title, ResponsibleStaffer,Code from FromOrgan' +
+      'izations'#13#10'where  ParentID= :ParentID order by id desc'
+    Parameters = <
+      item
+        Name = 'ParentID'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 1
+      end>
+    Left = 156
+    Top = 162
+    object PFromOrgID: TAutoIncField
+      FieldName = 'ID'
+      ReadOnly = True
+    end
+    object PFromOrgTitle: TWideStringField
+      FieldName = 'Title'
+      Size = 100
+    end
+  end
+end

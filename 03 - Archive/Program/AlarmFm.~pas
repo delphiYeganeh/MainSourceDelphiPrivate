@@ -1,0 +1,180 @@
+unit AlarmFm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, StdCtrls, CheckLst, YchecklistBox, UemsVCL, ComCtrls,
+  wwriched, Mask, DBCtrls, Buttons, BaseUnit, xpWindow, ExtActns, ActnList,
+  DB;
+
+type
+  TFmAlarm = class(TMBaseForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Label6: TLabel;
+    DBETitle: TDBEdit;
+    Label1: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    DBETimeAlarm: TDBEdit;
+    Label3: TLabel;
+    DBEUsersTitle_LK: TDBEdit;
+    ChLBUsers: TYchecklistBox;
+    Label13: TLabel;
+    DBNav1: TDBNavigator;
+    SpeedButton1: TSpeedButton;
+    DBEDateAlarm: TDBEdit;
+    RichEdit1: TDBMemo;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure DBNav1Click(Sender: TObject; Button: TNavigateBtn);
+    procedure DBNav1BeforeAction(Sender: TObject; Button: TNavigateBtn);
+  private
+
+  public
+    LetterID : Integer;
+  end;
+
+var
+  FmAlarm: TFmAlarm;
+
+implementation
+
+Uses AlarmDM,DMu,YShamsiDate, StrUtils;
+
+{$R *.dfm}
+
+procedure TFmAlarm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   inherited;
+   if DMAlarm.QrAlarm.State in [dsEdit,dsInsert] then
+      if ShowMyMessage('ÅÌ€«„','ﬂ«—»— ê—«„Ì ° «ÿ·«⁄«  œ— Õ«·  ÊÌ—«Ì‘ „Ì »«‘œ ¬Ì« „«Ì· »Â –ŒÌ—Â «ÿ·«⁄«  Â” Ìœø',mbOKCancel,mtWarning)=mrok then
+         DMAlarm.QrAlarm.Post
+      else
+         DMAlarm.QrAlarm.Cancel;
+
+   Qry_CloseAllQry(DMAlarm);
+   FreeAndNil(DMAlarm);
+end;
+
+procedure TFmAlarm.FormCreate(Sender: TObject);
+begin
+   inherited;
+   DMAlarm := TDMAlarm.Create(Self);
+   DBNav_Setup(DBNav1);
+end;
+
+procedure TFmAlarm.FormShow(Sender: TObject);
+begin
+   inherited;
+
+   With DMAlarm do
+   begin
+      LetterID2 := Self.LetterID;
+      QrUsers.Open;
+      //ChLBUsers Å— ﬂ—œ‰ ‰«„ ﬂ«—»—«‰ œ— ﬂ‰ —·
+      ChLBUsers.Fill;
+
+      QrAlarm.Close;
+      QrAlarm.Parameters.ParamByName('LetterID').Value := Self.LetterID; 
+      QrAlarm.Parameters.ParamByName('UsersID').Value := _UserId;
+      QrAlarm.Open;
+      if QrAlarm.RecordCount = 0 then
+         //QrAlarm.Insert;
+         DBNav1.BtnClick(nbInsert);
+
+      QrAlarm_Users.Close;
+      QrAlarm_Users.Parameters.ParamByName('AlarmID').Value := QrAlarmAlarmID.AsInteger;
+      QrAlarm_Users.Open;
+      //AlarmUsers «‰ Œ«» ‰«„ ﬂ«—»—«‰ «“ —ÊÌ ÃœÊ·
+      ChLB_SelectItemsFromTable(ChLBUsers,QrAlarm_Users,'UsersID');   
+   end;
+end;
+
+procedure TFmAlarm.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   inherited;
+   //DBNav1 ﬁ—«—œ«œ‰ ﬂ·ÌœÂ«Ì „Ì«‰»— »—«Ì «Ì‰ ›—„ Ê ﬂ‰ —·
+   Form_SetShortCut(FmAlarm,DBNav1,nil,nil,Sender,Key,Shift);
+   
+   if Key = Vk_Return then
+      SelectNext(ActiveControl as TWinControl,True,True);
+end;
+
+procedure TFmAlarm.SpeedButton1Click(Sender: TObject);
+begin
+   inherited;
+   Close;
+end;
+
+
+procedure TFmAlarm.DBNav1Click(Sender: TObject; Button: TNavigateBtn);
+Var
+   I : Integer;
+begin
+   inherited;
+
+   With DMAlarm do
+      if Button = nbPost then
+      begin
+         While QrAlarm_Users.RecordCount > 0 do
+            QrAlarm_Users.Delete;
+
+         for I:=0 to ChLBUsers.Items.Count -1 do
+         begin
+            //ﬂ«—»— ”«“‰œÂ ¬·«—„ ‰Ì“ »«Ìœ œ«—«Ì  Ìﬂ ‘Êœ
+            if ChLBUsers.Codes[I] = _UserId then
+               ChLBUsers.Checked[I] := True;
+
+            if ChLBUsers.Checked[I] then
+            begin
+               QrAlarm_Users.Insert;
+               QrAlarm_UsersUsersID.AsInteger := ChLBUsers.Codes[I];
+               QrAlarm_UsersAlarmID.AsInteger := QrAlarmAlarmID.AsInteger;
+               QrAlarm_Users.Post;
+            end;
+         end;
+      end;
+
+      if Button in [nbInsert,nbEdit] then
+      begin
+         ChLBUsers.Enabled := True;
+         DBETitle.SetFocus;
+      end
+         else
+         begin
+            if Button = nbDelete then
+            begin
+               ChLBUsers.Enabled := True;
+               For I:=0 to ChLBUsers.Items.Count-1 do
+                  ChLBUsers.Checked[I] := False;
+            end;
+            //AlarmUsers «‰ Œ«» ‰«„ ﬂ«—»—«‰ «“ —ÊÌ ÃœÊ·
+            ChLB_SelectItemsFromTable(ChLBUsers,DMAlarm.QrAlarm_Users,'UsersID');
+            ChLBUsers.Enabled := False;
+         end;
+end;
+
+procedure TFmAlarm.DBNav1BeforeAction(Sender: TObject;
+  Button: TNavigateBtn);
+begin
+   inherited;
+   if Button = nbPost then
+   begin
+      DBEUsersTitle_LK.SetFocus;
+      if Time_IsTime(DMAlarm.QrAlarmTimeAlarm.AsString) = False then
+      begin
+         ShowMessage('ﬂ«—»— ê—«„Ì „ﬁœ«— ›Ì·œ "”«⁄ " «‘ »«Â „Ì »«‘œ ° ·ÿ›«  ’ÕÌÕ ‰„«ÌÌœ');
+         DBETimeAlarm.SetFocus;
+         Abort;
+      end;
+   end;
+end;
+
+end.

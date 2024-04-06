@@ -1,0 +1,91 @@
+<%--
+Default skin template. The following skins are provided as examples only.
+
+1. Named control skin. The SkinId should be uniquely defined because
+   duplicate SkinId's per control type are not allowed in the same theme.
+
+<asp:GridView runat="server" SkinId="gridviewSkin" BackColor="White" >
+   <AlternatingRowStyle BackColor="Blue" />
+</asp:GridView>
+
+2. Default skin. The SkinId is not defined. Only one default 
+   control skin per control type is allowed in the same theme.
+
+<asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
+--%>
+<asp:Menu runat="server" SkinID="mainMenu" Orientation="Horizontal" StaticPopOutImageUrl="~/App_Themes/Default/Images/arrdown.gif" StaticBottomSeparatorImageUrl="~/App_Themes/Default/Images/seperate-menu-top.gif">
+</asp:Menu>
+
+<asp:Textbox runat="server" CssClass="textBox" />
+
+<asp:DropDownList runat="server" CssClass="dropDown" />
+
+<asp:GridView runat="server" CssClass="gridView" />
+
+<asp:ImageButton SkinID="btnLogin" runat="server" ImageUrl="Images/btnLogin.gif" />
+
+<asp:ImageButton SkinID="btnSearch" runat="server" ImageUrl="Images/btnSearch.gif" />
+
+<asp:ImageButton SkinID="btnCancel" runat="server" ImageUrl="Images/btnCancel.gif" />
+
+<asp:ImageButton SkinID="btnOk" runat="server" ImageUrl="Images/btnOk.gif" />
+
+<asp:Image runat="server" SkinID="btnMaximize" ImageUrl="Images/Maximize.gif" />
+
+<asp:Image runat="server" SkinID="btnMinimize" ImageUrl="Images/Minimize.gif" />
+
+<asp:ImageButton runat="server" SkinID="btnExit" ImageUrl="Images/exit.gif" />
+
+<asp:ImageButton runat="server" SkinID="btnDo" ImageUrl="Images/btnDo.gif" />
+
+<asp:ImageButton runat="server" SkinID="btnReset" ImageUrl="Images/reset.gif"  />
+
+<asp:ImageButton runat="server" SkinID="btnNewFolder" ImageUrl="Images/btnNewFolder.gif"/>
+
+<asp:ImageButton runat="server" SkinID="btnDeleteFolder" ImageUrl="Images/btnDeleteFolder.gif"/>
+
+<asp:ImageButton runat="server" SkinID="btnEditFolder" ImageUrl="Images/btnEditFolder.gif"/>
+
+<asp:ImageButton runat="server" SkinID="imgAttach" ImageUrl="Images/attachment-small.gif" />
+
+<asp:ImageButton runat="server" SkinID="imgRecommite" ImageUrl="Images/recommite-small.gif" />
+
+<asp:ImageButton runat="server" SkinID="imgArchive" ImageUrl="Images/archive-small.gif" />
+
+<asp:ImageButton runat="server" SkinID="imgActivate" ImageUrl="Images/activate-small.gif" />
+
+<asp:ImageButton runat="server" SkinID="imgAnswer" ImageUrl="Images/answer-small.gif" />
+
+<asp:ImageButton runat="server" SkinID="imgSendDraft" ImageUrl="Images/sendDraft-small.gif" />
+
+<asp:ImageButton runat="server" SkinID="imgDelete" ImageUrl="Images/delete.gif" />
+
+<asp:ImageButton runat="server" SkinID="btnNewAttach" ImageUrl="Images/btnAddAttach.gif"/>
+
+<asp:ImageButton runat="server" SkinID="btnRecommite" ImageUrl="Images/recommite.gif"/>
+
+<asp:ImageButton runat="server" SkinID="btnInnerLetter" ImageUrl="Images/btnInner.gif"/>
+
+<asp:ImageButton runat="server" SkinID="btnSentLetter" ImageUrl="Images/btnSentLetter.gif"/>
+
+<asp:ImageButton runat="server" SkinID="btnReceivedLetter" ImageUrl="Images/btnReceivedLetter.gif"/>
+
+<asp:Image runat="server" SkinID="imgView" ImageUrl="Images/view.gif" width="16" />
+
+<asp:ImageButton runat="server" SkinID="imgPreview" ImageUrl="Images/preview.gif"/>
+
+<asp:ImageButton runat="server" SkinID="imgInfo" ImageUrl="Images/info-small.gif"/>
+
+<asp:ImageButton runat="server" SkinID="btnDraft" ImageUrl="Images/btnDraft.gif"/>
+
+<asp:Menu runat="server" SkinID="mnuTabStrip" >
+    <Items>
+         <asp:MenuItem ImageUrl="Images/attachment-small.gif"  Text="íæÓÊ åÇ" Value="0" Selected="true" ></asp:MenuItem>
+         <asp:MenuItem ImageUrl="Images/Recommits-small.gif"  Text="ÓæÇÈÞ ÇÑÌÇÚ" Value="1" ></asp:MenuItem>
+         <asp:MenuItem ImageUrl="Images/letterDetails.gif"  Text="ÌÒííÇÊ äÇãå" Value="2" ></asp:MenuItem>
+         <asp:MenuItem ImageUrl="Images/archive.gif"  Text="ÇÞÏÇã æ ÈÇíÇäí" Value="3" ></asp:MenuItem>
+         <asp:MenuItem ImageUrl="Images/archive.gif"  Text="ÓæÇÈÞ ÈÇíÇäí" Value="4" ></asp:MenuItem>
+    </Items>
+</asp:Menu>
+
+<asp:TreeView runat="server" SkinID="trvRecommites" NodeStyle-ImageUrl="Images/Recommite-small.gif" />

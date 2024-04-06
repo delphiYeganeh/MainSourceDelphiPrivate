@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Exceptions xmlns="Exceptions">
+	<Exception>
+		<code>0</code>
+		<message>خطاي نا مشخص</message>
+		<context>
+		</context>
+		<innerCode>0</innerCode>
+		<location>
+		</location>
+	</Exception>
+	<Exception>
+		<code>1</code>
+		<message> SQL Server خطا در اتصال به</message>
+		<context>
+		</context>
+		<innerCode>4060</innerCode>
+		<location>Dal</location>
+	</Exception>
+	<Exception>
+		<code>2</code>
+		<message> SQL Server خطا در اتصال به</message>
+		<context>
+		</context>
+		<innerCode>53</innerCode>
+		<location>Dal</location>
+	</Exception>
+	
+	<Exception>
+		<code>4</code>
+		<message>نام كاربري يا رمز عبور اشتباه است. .SQL Server خطا در اتصال به</message>
+		<context>
+		</context>
+		<innerCode>18452</innerCode>
+		<location>Dal</location>
+	</Exception>
+	<Exception>
+		<code>5</code>
+		<message> يكي از روالهاي موجود در SQL Server پيدا نشد. </message>
+		<context>
+		</context>
+		<innerCode>2812</innerCode>
+		<location>Dal</location>
+	</Exception>
+	<Exception>
+		<code>9999</code>
+		<message> SQL Server خطاي ناشناخته در </message>
+		<context>
+		</context>
+		<innerCode>0</innerCode>
+		<location></location>
+	</Exception>
+	<Exception>
+		<code>6</code>
+		<message>يكي از ماژولها پيدا نشد.</message>
+		<context>
+		</context>
+		<innerCode>-2147467259</innerCode>
+		<location>UI</location>
+	</Exception>
+</Exceptions>

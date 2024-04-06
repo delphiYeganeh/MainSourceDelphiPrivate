@@ -1,0 +1,605 @@
+inherited FSession: TFSession
+  Left = 489
+  Top = 115
+  Width = 501
+  Height = 277
+  Caption = #1578#1606#1592#1610#1605#1575#1578' '#1589#1608#1585#1578' '#1580#1604#1587#1607
+  Color = clBtnFace
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pageControl: TPageControl [0]
+    Left = 0
+    Top = 0
+    Width = 493
+    Height = 202
+    ActivePage = TabSheet1
+    Align = alClient
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    Style = Sender
+    TabOrder = 0
+    TabWidth = 243
+    object TabSheet1: TTabSheet
+      Caption = #1580#1587#1578#1580#1608
+      object YDBGrid1: TYDBGrid
+        Left = 0
+        Top = 0
+        Width = 485
+        Height = 174
+        Cursor = crHandPoint
+        Align = alClient
+        Color = clCream
+        FixedColor = clGradientInactiveCaption
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        ReadOnly = True
+        TabOrder = 0
+        TitleFont.Charset = ARABIC_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        OnDblClick = YDBGrid1DblClick
+        YeganehColor = False
+        YeganehFinish = False
+        PageNumber = False
+        RecordNumber = False
+        HasTime = False
+        Oriention = poPortrait
+        HasDate = False
+        HasIndex = False
+        PrintTitle = #1604#1610#1587#1578' '#1578#1607#1610#1607' '#1588#1583#1607' '#1578#1608#1587#1591' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1610#1711#1575#1606#1607
+        InvertFarsiDate = True
+        TitleSort = True
+        AutoInsert = False
+        FooterFields = 'Count'
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'Code'
+            ImeName = 'Code'
+            Title.Caption = #1588#1605#1575#1585#1607' '#1580#1604#1587#1607
+            Width = 96
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SessionDate'
+            Title.Caption = #1578#1575#1585#1610#1582
+            Width = 71
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Comment'
+            Title.Caption = #1578#1608#1590#1610#1581#1575#1578
+            Width = 60
+            Visible = True
+          end>
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = #1589#1608#1585#1578' '#1580#1604#1587#1607
+      DesignSize = (
+        485
+        174)
+      object Panel2: TPanel
+        Left = 17
+        Top = 8
+        Width = 458
+        Height = 89
+        Anchors = [akTop, akRight]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = True
+        ParentFont = False
+        TabOrder = 0
+        DesignSize = (
+          458
+          89)
+        object label1: TLabel
+          Left = 374
+          Top = 13
+          Width = 69
+          Height = 13
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          BiDiMode = bdLeftToRight
+          Caption = ':'#1588#1605#1575#1585#1607'  '#1580#1604#1587#1607
+          Font.Charset = ARABIC_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentBiDiMode = False
+          ParentFont = False
+        end
+        object Label15: TLabel
+          Left = 374
+          Top = 63
+          Width = 44
+          Height = 13
+          Anchors = [akTop, akRight]
+          Caption = #1605#1608#1590#1608#1593#1575#1578
+          Font.Charset = ARABIC_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label14: TLabel
+          Left = 374
+          Top = 37
+          Width = 60
+          Height = 13
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          BiDiMode = bdLeftToRight
+          Caption = ':'#1578#1575#1585#1610#1582' '#1580#1604#1587#1607' '
+          Font.Charset = ARABIC_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentBiDiMode = False
+          ParentFont = False
+        end
+        object DBEdit1: TDBEdit
+          Left = 291
+          Top = 9
+          Width = 80
+          Height = 21
+          Anchors = [akTop, akRight]
+          DataField = 'Code'
+          Font.Charset = ARABIC_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+        end
+        object DBEdit2: TDBEdit
+          Left = 14
+          Top = 62
+          Width = 357
+          Height = 21
+          Anchors = [akTop, akRight]
+          DataField = 'Comment'
+          Font.Charset = ARABIC_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+        end
+        object DBEdit4: TDBEdit
+          Left = 291
+          Top = 36
+          Width = 80
+          Height = 21
+          Anchors = [akTop, akRight]
+          BiDiMode = bdLeftToRight
+          DataField = 'SessionDate'
+          Font.Charset = ARABIC_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentBiDiMode = False
+          ParentFont = False
+          TabOrder = 2
+        end
+      end
+      object GroupBox1: TGroupBox
+        Left = 19
+        Top = 105
+        Width = 457
+        Height = 60
+        Anchors = [akTop, akRight]
+        Caption = #1605#1578#1606' '#1589#1608#1585#1578#1580#1604#1587#1607
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        DesignSize = (
+          457
+          60)
+        object xpBitBtn2: TBitBtn
+          Left = 74
+          Top = 20
+          Width = 122
+          Height = 28
+          Anchors = [akTop, akRight]
+          Caption = #1605#1588#1575#1607#1583#1607' '#1605#1578#1606' '#1589#1608#1585#1578#1580#1604#1587#1607
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          OnClick = xpBitBtn2Click
+        end
+        object xpBitBtn4: TBitBtn
+          Left = 200
+          Top = 20
+          Width = 122
+          Height = 28
+          Anchors = [akTop, akRight]
+          Caption = #1584#1582#1610#1585#1607' '#1583#1585' '#1601#1575#1610#1604
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          OnClick = xpBitBtn4Click
+        end
+        object xpBitBtn3: TBitBtn
+          Left = 326
+          Top = 20
+          Width = 123
+          Height = 28
+          Anchors = [akTop, akRight]
+          Caption = #1601#1585#1575#1582#1608#1575#1606#1610' '#1601#1575#1610#1604
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          OnClick = xpBitBtn3Click
+        end
+      end
+    end
+  end
+  object Panel1: TPanel [1]
+    Left = 0
+    Top = 202
+    Width = 493
+    Height = 41
+    Align = alBottom
+    TabOrder = 1
+    DesignSize = (
+      493
+      41)
+    object xpBitBtn5: TBitBtn
+      Left = 8
+      Top = 7
+      Width = 75
+      Height = 26
+      Caption = #1582#1585#1608#1580
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnClick = xpBitBtn5Click
+    end
+    object EditBtn: TBitBtn
+      Left = 327
+      Top = 8
+      Width = 75
+      Height = 25
+      Action = DataSetEdit1
+      Anchors = [akTop, akRight]
+      Caption = #1608#1610#1585#1575#1610#1588
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FFFF
+        FF00FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000000000000000
+        0000000000000000000000000000FF00FF00000000000000000000000000FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000000000FFFF00FFFF
+        FF0000FFFF00FFFFFF0000FFFF000000000000000000FFFF000000000000FFFF
+        FF0000000000FFFF0000FFFF0000FFFF0000FFFF000000000000000000000000
+        0000FFFFFF0000FFFF00FFFFFF0000FFFF0000000000FFFF000000000000FFFF
+        FF00FFFFFF000000000000000000FFFFFF0000000000FFFFFF0000FFFF00FFFF
+        FF0000FFFF00FFFFFF0000FFFF00FFFFFF0000000000FFFF000000000000FFFF
+        FF00FFFF00000000000000FFFF00000000000000000000000000000000000000
+        0000FFFFFF0000FFFF00FFFFFF0000FFFF0000000000FFFF000000000000FFFF
+        FF00FFFFFF00FFFFFF0000000000FFFFFF0000FFFF00FFFFFF0000FFFF00FFFF
+        FF0000FFFF00FFFFFF0000FFFF00FFFFFF0000000000FFFF000000000000FFFF
+        FF00FFFF0000FFFF0000FFFF0000000000000000000000000000000000000000
+        00000000000000000000FFFFFF0000FFFF0000000000FFFF000000000000FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000000000FFFF00000000000000
+        000000FFFF00FFFFFF0000FFFF0000000000000000000000000000000000FFFF
+        FF00FFFF0000FFFF0000FFFF0000FFFF0000FFFF00000000000000FFFF000000
+        0000000000000000000000000000FF00FF00FF00FF00FF00FF0000000000FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000000000FF
+        FF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000
+        0000FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+        000000FFFF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+        0000848484000000000084848400000000008484840000000000848484000000
+        00000000000000FFFF0000000000FF00FF00FF00FF00FF00FF00FF00FF000000
+        0000848484000000000084848400000000008484840000000000848484000000
+        0000FF00FF00000000000000FF0000000000FF00FF00FF00FF0000000000FF00
+        FF0000000000FF00FF0000000000FF00FF0000000000FF00FF0000000000FF00
+        FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00}
+    end
+    object PostBtn: TBitBtn
+      Left = 248
+      Top = 8
+      Width = 76
+      Height = 25
+      Action = DataSetPost1
+      Anchors = [akTop, akRight]
+      Caption = #1584#1582#1610#1585#1607
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF000000FF0000000000FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF000000FF000000FF000000FF0000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF000000FF000000FF000000FF0000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF000000FF000000FF000000FF000000FF000000FF0000000000FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF000000FF000000FF000000FF000000FF000000FF000000FF0000000000FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF008484
+        84000000FF000000FF0000000000FF00FF000000FF000000FF000000FF000000
+        0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00848484000000
+        FF0000000000FF00FF00FF00FF00FF00FF00FF00FF000000FF000000FF000000
+        0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000FF000000FF000000
+        FF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000FF000000
+        FF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+        FF000000FF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00848484000000FF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00848484000000FF0000000000FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF000000FF000000FF0000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+    end
+    object Delbtn: TBitBtn
+      Left = 89
+      Top = 8
+      Width = 76
+      Height = 25
+      Action = DataSetDelete1
+      Anchors = [akTop, akRight]
+      Caption = #1581#1584#1601
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+    end
+    object CancelBtn: TBitBtn
+      Left = 168
+      Top = 8
+      Width = 76
+      Height = 25
+      Action = DataSetCancel1
+      Anchors = [akTop, akRight]
+      Caption = #1604#1594#1608
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF000000FF000000FF000000FF00FF00FF00FF00FF0084848400000000008484
+        8400FF00FF00FF00FF000000FF000000FF000000FF00FF00FF00FF00FF00FF00
+        FF00FF00FF000000FF000000FF000000FF00FF00FF0000000000000000000000
+        0000FF00FF000000FF000000FF000000FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF000000FF000000FF000000FF0084848400000000008484
+        84000000FF000000FF000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF000000FF000000FF000000FF00FF00FF000000
+        FF000000FF000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF000000FF000000FF00000000000000
+        FF000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000008400000000000000
+        8400FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF000000FF0000008400000000000000
+        84000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF000000FF000000FF0000000000000000000000
+        00000000FF000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF000000FF000000FF000000FF0000000000000000000000
+        00000000FF000000FF000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF000000FF000000FF000000FF00FF00FF0000000000000000000000
+        0000FF00FF000000FF000000FF000000FF00FF00FF00FF00FF00FF00FF00FF00
+        FF000000FF000000FF000000FF00FF00FF00FF00FF0084848400000000008484
+        8400FF00FF00FF00FF000000FF000000FF000000FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+    end
+    object xpBitBtn1: TBitBtn
+      Left = 407
+      Top = 8
+      Width = 75
+      Height = 25
+      Action = DataSetInsert1
+      Anchors = [akTop, akRight]
+      Caption = #1575#1610#1580#1575#1583
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+    end
+  end
+  inherited ahmadvand: TActionList
+    Left = 16
+    Top = 51
+  end
+  inherited Grid_PopupMenu: TPopupMenu
+    Left = 39
+    Top = 108
+  end
+  object ActionManager1: TActionManager
+    ActionBars.SessionCount = 23
+    ActionBars = <
+      item
+        Items = <
+          item
+            Action = DataSetDelete1
+            ImageIndex = 17
+            ShortCut = 16430
+          end
+          item
+            Action = DataSetEdit1
+            ImageIndex = 48
+            ShortCut = 115
+          end
+          item
+            Action = DataSetPost1
+            ImageIndex = 0
+            ShortCut = 113
+          end
+          item
+            Action = DataSetCancel1
+            ImageIndex = 56
+            ShortCut = 32776
+          end>
+        AutoSize = False
+      end>
+    Left = 126
+    Top = 101
+    StyleName = 'XP Style'
+    object DataSetDelete1: TDataSetDelete
+      Category = 'Dataset'
+      Caption = #1581#1584#1601
+      Hint = 'Delete'
+      ImageIndex = 17
+      ShortCut = 16430
+      OnExecute = DataSetDelete1Execute
+    end
+    object DataSetEdit1: TDataSetEdit
+      Category = 'Dataset'
+      Caption = #1608#1610#1585#1575#1610#1588
+      Hint = 'Edit'
+      ImageIndex = 48
+      ShortCut = 115
+    end
+    object DataSetPost1: TDataSetPost
+      Category = 'Dataset'
+      Caption = #1584#1582#1610#1585#1607
+      Hint = 'Post'
+      ImageIndex = 0
+      ShortCut = 113
+    end
+    object DataSetCancel1: TDataSetCancel
+      Category = 'Dataset'
+      Caption = #1604#1594#1608
+      Hint = 'Cancel'
+      ImageIndex = 56
+      ShortCut = 32776
+    end
+    object Asearch: TAction
+      Category = 'Dataset'
+      Caption = #1580#1587#1578#1580#1608
+      ShortCut = 114
+    end
+    object DataSetInsert1: TDataSetInsert
+      Category = 'Dataset'
+      Caption = #1575#1610#1580#1575#1583
+    end
+  end
+  object OpenDialog: TOpenDialog
+    Left = 121
+    Top = 48
+  end
+  object SaveDialog: TSaveDialog
+    Filter = #1601#1575#1610#1604' '#1607#1575#1610' '#1608#1585#1583'|*.doc'
+    Left = 173
+    Top = 47
+  end
+end

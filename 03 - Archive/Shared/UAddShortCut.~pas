@@ -1,0 +1,60 @@
+unit UAddShortCut;
+
+interface
+
+uses
+ DB, BaseUnit, ExtActns, ActnMan, Buttons, StdCtrls, Mask, DBCtrls,
+  Controls, Classes, Windows,ActnList, XPStyleActnCtrls, xpWindow, xpBitBtn,
+  ExtCtrls;
+
+type
+  TFrAddShortCut = class(TMBaseForm)
+    Panel1: TPanel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    Panel2: TPanel;
+    GroupBox1: TGroupBox;
+    Label2: TLabel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Title: TDBEdit;
+    Key: TDBComboBox;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrAddShortCut: TFrAddShortCut;
+
+implementation
+
+uses Dmu;
+
+{$R *.dfm}
+
+procedure TFrAddShortCut.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+dm.UserShortCut.Post;
+close;
+end;
+
+procedure TFrAddShortCut.BitBtn2Click(Sender: TObject);
+begin
+  inherited;
+dm.UserShortCut.Cancel;
+close;
+end;
+
+procedure TFrAddShortCut.FormShow(Sender: TObject);
+begin
+  inherited;
+Title.SetFocus;
+end;
+
+end.
