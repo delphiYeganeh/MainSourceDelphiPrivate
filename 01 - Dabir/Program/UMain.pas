@@ -1895,7 +1895,10 @@ begin
   if not DataSetPost then
     Exit;
 
-  if _Word_Is_Opened then
+  { TODO -oparsa : 14030119 }
+  //if _Word_Is_Opened then
+  if _Word_Is_Opened and Application_Is_Run('winword.exe') then
+  { TODO -oparsa : 14030119 }
   begin
     messageShow(86,False);
     Exit;
@@ -2027,7 +2030,10 @@ begin
 
   if (blnHas_WordPage) then
   begin
-    if not Dm.ExecGet_LetterWordFile(intOldLetterId, False, False) or (_Word_Is_Opened) then
+    { TODO -oparsa : 14030119 }
+    //if not Dm.ExecGet_LetterWordFile(intOldLetterId, False, False) or (_Word_Is_Opened) then
+    if not Dm.ExecGet_LetterWordFile(intOldLetterId, False, False) or ((_Word_Is_Opened) and Application_Is_Run('winword.exe')) then
+    { TODO -oparsa : 14030119 }
     begin
       messageShow(86,False);
       blnDisableRefresh := False;

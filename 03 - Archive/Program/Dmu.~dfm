@@ -3856,4 +3856,29 @@ object Dm: TDm
     Left = 284
     Top = 524
   end
+  object qryAutoRunScript: TADOQuery
+    Connection = YeganehConnection
+    CommandTimeout = 100
+    Parameters = <>
+    SQL.Strings = (
+      
+        'IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(' +
+        'N'#39'[DBO].[TBLAPPSETTING]'#39') AND TYPE IN (N'#39'U'#39'))'
+      'BEGIN'
+      
+        #9'IF EXISTS(SELECT 1 FROM TBLAPPVER) AND COL_LENGTH('#39'dbo.TBLAPPSE' +
+        'TTING'#39', '#39'Last_TableScriptNumber'#39') IS  NOT NULL  '
+      
+        #9#9'SELECT TOP 1 ISNULL(Last_TableScriptNumber,0) AS  LastTableScr' +
+        'iptNumber,ISNULL(Last_ViewScriptNumber,0) AS  LastViewScriptNumb' +
+        'er FROM dbo.TBLAPPSETTING order by id desc'
+      #9'ELSE'
+      #9#9'SELECT 0 AS LastTableScriptNumber,0 AS LastViewScriptNumber '
+      'END'
+      'ELSE'
+      #9'SELECT 0 AS LastTableScriptNumber, 0 AS LastViewScriptNumber '
+      #9)
+    Left = 542
+    Top = 595
+  end
 end

@@ -1,20 +1,30 @@
 [Closed Files]
 File_0=SourceModule,'D:\matin\03 - Archive\Program\UFillLetterData.pas',0,1,468,62,480,0,0
-File_1=SourceModule,'D:\matin\03 - Archive\Program\Dmu.pas',0,1,1118,33,1130,1,0
-File_2=SourceModule,'c:\program files (x86)\borland\delphi7\source\rtl\Sys\sysutils.pas',0,1,5367,1,5381,0,0
-File_3=SourceModule,'D:\matin\03 - Archive\Program\FolderToLetterFm.pas',0,1,544,38,550,0,0
-File_4=SourceModule,'D:\matin\03 - Archive\Program\UMain.pas',0,1,1991,56,1999,1,0
-File_5=SourceModule,'D:\Barzegar\03 - Archive\Program\Dmu.pas',0,1,1121,31,1133,0,0
-File_6=SourceModule,'D:\Barzegar\03 - Archive\Shared\backupF.pas',0,1,240,6,251,0,0
-File_7=SourceModule,'C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas',0,1,744,1,772,0,0
-File_8=SourceModule,'D:\matin\03 - Archive\Shared\businessLayer.pas',0,1,1,98,7,0,0
+File_1=SourceModule,'c:\program files (x86)\borland\delphi7\source\rtl\Sys\sysutils.pas',0,1,5367,1,5381,0,0
+File_2=SourceModule,'D:\matin\03 - Archive\Program\FolderToLetterFm.pas',0,1,544,38,550,0,0
+File_3=SourceModule,'D:\Barzegar\03 - Archive\Program\Dmu.pas',0,1,1121,31,1133,0,0
+File_4=SourceModule,'D:\Barzegar\03 - Archive\Shared\backupF.pas',0,1,240,6,251,0,0
+File_5=SourceModule,'C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas',0,1,744,1,772,0,0
+File_6=SourceModule,'D:\matin\03 - Archive\Shared\businessLayer.pas',0,1,1,98,7,0,0
 
 [Modules]
-Module0=D:\matin\03 - Archive\Program\Dmu.pas
-Module1=D:\matin\03 - Archive\shared\backupF.pas
-Module2=D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr
-Count=3
+Module0=D:\matin\03 - Archive\Program\UMain.pas
+Module1=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
+Module2=D:\matin\03 - Archive\Program\Dmu.pas
+Module3=D:\matin\03 - Archive\shared\backupF.pas
+Module4=D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr
+Count=5
 EditWindowCount=1
+
+[D:\matin\03 - Archive\Program\UMain.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\ArchiveOrganize.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
 
 [D:\matin\03 - Archive\Program\Dmu.pas]
 ModuleType=SourceModule
@@ -39,16 +49,14 @@ FormOnTop=0
 FormState=0
 FormOnTop=0
 
-[D:\matin\03 - Archive\Program\FolderToLetterDM.pas]
-FormState=0
-FormOnTop=0
-
 [EditWindow0]
-ViewCount=3
-CurrentView=1
+ViewCount=5
+CurrentView=2
 View0=0
 View1=1
 View2=2
+View3=3
+View4=4
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -66,9 +74,9 @@ LeftPanelSize=140
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=110
+BottomPanelSize=85
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=0000040000000000B005000000000000026E00000000000000010000000000000000000000000100000000BD050000000000000100000000B00500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=0000040000000000B005000000000000025500000000000000010000000000000000000000000100000000BD050000000000000100000000B00500000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr
@@ -79,12 +87,26 @@ LeftCol=1
 
 [View1]
 Module=D:\matin\03 - Archive\Program\Dmu.pas
-CursorX=48
-CursorY=1118
+CursorX=39
+CursorY=1125
 TopLine=1109
 LeftCol=1
 
 [View2]
+Module=D:\matin\03 - Archive\Program\UMain.pas
+CursorX=84
+CursorY=1649
+TopLine=1646
+LeftCol=1
+
+[View3]
+Module=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
+CursorX=22
+CursorY=336
+TopLine=328
+LeftCol=1
+
+[View4]
 Module=D:\matin\03 - Archive\shared\backupF.pas
 CursorX=6
 CursorY=251
@@ -124,13 +146,14 @@ LRDockWidth=1180
 Dockable=1
 
 [Breakpoints]
-Count=6
+Count=7
 Breakpoint0='D:\barzegar\03 - Archive\Program\UMain.pas',1921,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint1='D:\matin\03 - Archive\Program\FolderToLetterFm.pas',545,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint2='D:\matin\03 - Archive\Program\UFillLetterData.pas',489,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint3='D:\matin\03 - Archive\Program\UEditUserExtention.pas',74,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint4='D:\matin\03 - Archive\Program\UFillLetterData.pas',521,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint5='D:\matin\03 - Archive\Program\UFillLetterData.pas',681,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint6='D:\matin\03 - Archive\Program\UMain.pas',1649,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -286,12 +309,12 @@ State=0
 Left=0
 Top=12
 Width=140
-Height=746
+Height=771
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=746
-TBDockHeight=859
+ClientHeight=771
+TBDockHeight=771
 LRDockWidth=140
 Dockable=1
 
@@ -302,12 +325,12 @@ State=0
 Left=12
 Top=0
 Width=1444
-Height=110
+Height=85
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1444
-ClientHeight=110
-TBDockHeight=110
+ClientHeight=85
+TBDockHeight=85
 LRDockWidth=443
 Dockable=1
 

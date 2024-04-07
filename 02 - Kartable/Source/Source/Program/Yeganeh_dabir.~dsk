@@ -19,7 +19,7 @@ EditWindowCount=1
 [H:\Yeganeh\Windows\Delphi\Source\02 - Kartable\Source\Source\Program\UMain.pas]
 ModuleType=SourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
 [H:\Yeganeh\Windows\Delphi\Source\02 - Kartable\Source\Source\shared\businessLayer.pas]
 ModuleType=SourceModule
@@ -30,19 +30,19 @@ FormOnTop=0
 FormState=0
 FormOnTop=0
 
-[E:\backup14020424\Source\02 - Kartable\Source\Source\Program\Yeganeh_dabir.dpr]
+[D:\matin\02 - Kartable\Source\Source\Program\Yeganeh_dabir.dpr]
 FormState=0
 FormOnTop=0
 
-[E:\backup14020424\Source\02 - Kartable\Source\Source\Program\UMain.pas]
+[D:\matin\02 - Kartable\Source\Source\Program\UMain.pas]
 FormState=0
 FormOnTop=0
 
-[E:\backup14020424\Source\02 - Kartable\Source\Source\shared\BaseUnit.pas]
+[D:\matin\02 - Kartable\Source\Source\shared\BaseUnit.pas]
 FormState=0
 FormOnTop=0
 
-[E:\backup14020424\Source\02 - Kartable\Source\Source\Program\Dmu.pas]
+[D:\matin\02 - Kartable\Source\Source\Program\Dmu.pas]
 FormState=0
 FormOnTop=0
 
@@ -56,27 +56,27 @@ MessageView=MessageView@EditWindow0
 Create=1
 Visible=1
 State=0
-Left=333
-Top=108
-Width=1350
-Height=917
+Left=200
+Top=147
+Width=1472
+Height=910
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1334
-ClientHeight=878
-LeftPanelSize=0
+ClientWidth=1456
+ClientHeight=871
+LeftPanelSize=140
 LeftPanelClients=CodeExplorer@EditWindow0
-LeftPanelData=00000400010000000C000000436F64654578706C6F7265728C00000000000000026D0300000000000001000000008C00000000000000FFFFFFFF
+LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
 RightPanelSize=0
 BottomPanelSize=85
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=000004000000000000000000000000000000000000000000000100000000000000000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=0000040000000000B005000000000000025500000000000000010000000000000000000000000100000000BD050000000000000100000000B00500000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=H:\Yeganeh\Windows\Delphi\Source\02 - Kartable\Source\Source\Program\UMain.pas
-CursorX=1
-CursorY=1
-TopLine=1
+CursorX=53
+CursorY=2851
+TopLine=2805
 LeftCol=1
 
 [View1]
@@ -95,8 +95,8 @@ WatchShowColumnHeaders=1
 Create=1
 Visible=0
 State=0
-Left=201
-Top=1016
+Left=223
+Top=964
 Width=1196
 Height=196
 MaxLeft=-1
@@ -116,31 +116,29 @@ Count=0
 [Main Window]
 Create=1
 Visible=1
-State=2
+State=0
 Left=0
-Top=0
+Top=1
 Width=1680
 Height=123
 MaxLeft=-1
 MaxTop=-1
-MaxWidth=1936
-MaxHeight=123
-ClientWidth=1920
+ClientWidth=1664
 ClientHeight=84
 
 [ProjectManager]
 Create=1
-Visible=1
+Visible=0
 State=0
-Left=0
-Top=0
-Width=317
-Height=844
+Left=369
+Top=372
+Width=446
+Height=318
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=317
-ClientHeight=844
-TBDockHeight=865
+ClientWidth=430
+ClientHeight=279
+TBDockHeight=318
 LRDockWidth=446
 Dockable=1
 
@@ -178,18 +176,18 @@ ClientHeight=60
 Create=1
 Visible=1
 State=0
-Left=0
-Top=0
-Width=317
-Height=844
+Left=-3
+Top=378
+Width=208
+Height=620
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=317
-ClientHeight=844
+ClientWidth=192
+ClientHeight=581
 TBDockHeight=556
 LRDockWidth=190
 Dockable=1
-SplitPos=147
+SplitPos=85
 ArrangeBy=Name
 SelectedItem=Caption
 ExpandedItems=Title
@@ -199,16 +197,48 @@ HiddenCategories=
 Create=1
 Visible=1
 State=0
-Left=0
-Top=0
-Width=317
-Height=844
+Left=-1
+Top=122
+Width=190
+Height=243
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=317
-ClientHeight=844
-TBDockHeight=370
+ClientWidth=174
+ClientHeight=204
+TBDockHeight=358
 LRDockWidth=190
+Dockable=1
+
+[fmGrepResults]
+Create=1
+Visible=0
+State=0
+Left=640
+Top=166
+Width=639
+Height=748
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=623
+ClientHeight=709
+TBDockHeight=748
+LRDockWidth=639
+Dockable=1
+
+[fmMacroLibrary]
+Create=1
+Visible=0
+State=0
+Left=666
+Top=302
+Width=347
+Height=416
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=331
+ClientHeight=377
+TBDockHeight=416
+LRDockWidth=347
 Dockable=1
 
 [DsmToolWindow]
@@ -229,17 +259,17 @@ Dockable=1
 
 [CodeExplorer@EditWindow0]
 Create=1
-Visible=0
+Visible=1
 State=0
 Left=0
 Top=12
 Width=140
-Height=865
+Height=771
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=865
-TBDockHeight=865
+ClientHeight=771
+TBDockHeight=859
 LRDockWidth=140
 Dockable=1
 
@@ -249,36 +279,16 @@ Visible=1
 State=0
 Left=12
 Top=0
-Width=1322
+Width=1444
 Height=85
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1322
+ClientWidth=1444
 ClientHeight=85
 TBDockHeight=85
 LRDockWidth=443
 Dockable=1
 
 [DockHosts]
-DockHostCount=1
-
-[DockSite0]
-DockSiteType=1
-Create=1
-Visible=1
-State=0
-Left=-3
-Top=108
-Width=341
-Height=912
-MaxLeft=-1
-MaxTop=-1
-ClientWidth=325
-ClientHeight=873
-TBDockHeight=912
-LRDockWidth=296
-Dockable=1
-TabPosition=0
-ActiveTab=Object Inspector
-TabDockClients=ObjectTree,PropertyInspector,ProjectManager
+DockHostCount=0
 

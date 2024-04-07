@@ -30357,7 +30357,25 @@ inherited LoginForm: TLoginForm
     Transparent = True
     Visible = False
   end
-  object Password: TEdit [17]
+  object ScriptUpdate: TLabel [17]
+    Left = 280
+    Top = 283
+    Width = 111
+    Height = 16
+    Alignment = taCenter
+    AutoSize = False
+    BiDiMode = bdLeftToRight
+    Caption = '*AutoScriptError*'
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clFuchsia
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentBiDiMode = False
+    ParentFont = False
+    Transparent = True
+  end
+  object Password: TEdit [18]
     Left = 119
     Top = 143
     Width = 163
@@ -30378,7 +30396,7 @@ inherited LoginForm: TLoginForm
     OnExit = PasswordExit
     OnKeyDown = PasswordKeyDown
   end
-  object UserName: TEdit [18]
+  object UserName: TEdit [19]
     Left = 118
     Top = 104
     Width = 164

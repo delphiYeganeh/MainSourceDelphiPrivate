@@ -8,15 +8,21 @@ File_5=SourceModule,'C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Sour
 File_6=SourceModule,'D:\matin\03 - Archive\Shared\businessLayer.pas',0,1,1,98,7,0,0
 
 [Modules]
-Module0=D:\matin\03 - Archive\Program\UMain.pas
-Module1=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
-Module2=D:\matin\03 - Archive\Program\Dmu.pas
-Module3=D:\matin\03 - Archive\shared\backupF.pas
+Module0=D:\matin\03 - Archive\Program\Dmu.pas
+Module1=D:\matin\03 - Archive\Program\LogOn.pas
+Module2=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
+Module3=D:\matin\03 - Archive\Program\UMain.pas
 Module4=D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr
-Count=5
+Module5=D:\matin\03 - Archive\shared\backupF.pas
+Count=6
 EditWindowCount=1
 
-[D:\matin\03 - Archive\Program\UMain.pas]
+[D:\matin\03 - Archive\Program\Dmu.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\Program\LogOn.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -26,17 +32,17 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\03 - Archive\Program\Dmu.pas]
+[D:\matin\03 - Archive\Program\UMain.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\03 - Archive\shared\backupF.pas]
+[D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr]
+[D:\matin\03 - Archive\shared\backupF.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -50,13 +56,14 @@ FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=5
-CurrentView=2
+ViewCount=6
+CurrentView=1
 View0=0
 View1=1
 View2=2
 View3=3
 View4=4
+View5=5
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -80,33 +87,40 @@ BottomPanelData=0000040000000000B00500000000000002550000000000000001000000000000
 
 [View0]
 Module=D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr
-CursorX=35
+CursorX=41
 CursorY=140
 TopLine=127
 LeftCol=1
 
 [View1]
 Module=D:\matin\03 - Archive\Program\Dmu.pas
-CursorX=39
-CursorY=1125
-TopLine=1109
+CursorX=43
+CursorY=1184
+TopLine=1176
 LeftCol=1
 
 [View2]
+Module=D:\matin\03 - Archive\Program\LogOn.pas
+CursorX=63
+CursorY=466
+TopLine=453
+LeftCol=1
+
+[View3]
 Module=D:\matin\03 - Archive\Program\UMain.pas
 CursorX=84
 CursorY=1649
 TopLine=1646
 LeftCol=1
 
-[View3]
+[View4]
 Module=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
-CursorX=22
-CursorY=336
-TopLine=328
+CursorX=37
+CursorY=335
+TopLine=360
 LeftCol=1
 
-[View4]
+[View5]
 Module=D:\matin\03 - Archive\shared\backupF.pas
 CursorX=6
 CursorY=251
@@ -234,7 +248,7 @@ LRDockWidth=190
 Dockable=1
 SplitPos=85
 ArrangeBy=Name
-SelectedItem=Name
+SelectedItem=Caption
 ExpandedItems=Title
 HiddenCategories=
 

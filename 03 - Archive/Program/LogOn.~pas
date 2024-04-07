@@ -40,6 +40,7 @@ type
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
+    ScriptUpdate: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure BtnLoginClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -475,6 +476,9 @@ begin
   end;
   Password.Font.Color := labelActiveColor;
   lblDate.Caption := _SoftLastUpdate;
+  { TODO -oparsa : 14030108 }
+  ScriptUpdate.Visible := _CountError <> 0;
+  { TODO -oparsa : 14030108 }
 end;
 
 procedure TLoginForm.Label3MouseEnter(Sender: TObject);

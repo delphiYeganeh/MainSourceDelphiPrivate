@@ -376,7 +376,8 @@ type
     qryGetDbVer: TADOQuery;
     GetfieldValueByLetterIDFieldValue: TMemoField;
     WordApplication: TWordApplication;
-    spUpd_latererdata: TADOStoredProc;
+    spIns_laterdata: TADOStoredProc;
+    qryAutoRunScript: TADOQuery;
 
     function  GetValue(variableID:word):variant;
     Procedure SetValue(VariableId:word;value:variant);
@@ -537,6 +538,9 @@ type
     function getDelphiVer:String;
     function getDBVer:String;
     function HTTPGet(Url, Parameters:String):TStringList;
+    { TODO -oparsa : 14030108 }
+    procedure AutoUpdateDatabase;
+    { TODO -oparsa : 14030108 }
   end;
 
 Var
@@ -577,7 +581,8 @@ Var
    _IsServer : Boolean;
    _EXEDIR : string;
    _SoftVersion, _DbVersion : String;
-  _SoftVersion1      :string;
+   _SoftVersion1      :string;
+   _CountError : Integer;
    //ARM LOCK
    // ﬁ›· ”Œ  «›“«—Ì ÃœÌœ
 //   _ARM_CoName, _ARM_IPServer, _ARM_AUSKey, _ARM_ReadKey, _ARM_WriteKey, _ARM_SafeKey1, _ARM_SafeKey2 : String;
@@ -1197,6 +1202,10 @@ begin
       frmUpdateDbScripts.Free;
     end;
   end;
+
+  { TODO -oparsa : 14030108 }
+  AutoUpdateDatabase;
+  { TODO -oparsa : 14030108 }
 
   LoginForm := TLoginForm.Create(Application);
   LoginForm.Label1.Caption:= GetSystemSetting('OrgName');
@@ -2321,6 +2330,242 @@ begin
   FreeAndNil(SSLIO);
   FreeAndNil(Http);
 end;
+
+{ TODO -oparsa : 14030108 }
+procedure Tdm.AutoUpdateDatabase;
+var
+  FileName : string ;
+  FilePath : string ;
+  MainStrFilePath : string ;
+  updateOK : Boolean;
+  strCommand : WideString ;
+  SectionCommand : string ;
+  SectionSTR : string ;
+  index : Integer ;
+  index2 : Integer ;
+  lastViewNo : Integer;
+  LastTaleNo : Integer;
+  MaxSectionNo : Integer;
+  MaxSectionTableNo : Integer;
+  MaxSectionViewNo : Integer;
+  CurrentSectionNo : Integer;
+  CntSectionNo  : Integer;
+  LengthMax :Integer;
+  PosF , PosS , PosE , PosFirstSec , PosFirstLen  , PosLastSec , PosLastLen : Integer ;
+  FistScript : Integer;
+  //qryAutoRunScript :TADOQuery;
+
+  function GetTxtFileAsString(const fn:String):WideString;
+  var
+    doc: TextFile;
+    character: Char;
+    strResult : WideString;
+    w : ansistring;
+    bomidx : integer;
+
+  const
+    utf8bom : array [0..2] of char = (#$EF, #$BB, #$BF);
+
+  begin
+    strResult := '';
+    AssignFile(doc, fn);
+    reset(doc);
+    w := '';
+    bomidx := 0;
+    while not EOF(doc) do
+    begin
+      read(doc, character);
+
+      if (bomidx < length(utf8bom)) and (utf8bom[bomidx] = character) then
+      begin
+        inc(bomidx);
+        continue;
+      end;
+      inc(bomidx);
+
+      if character = ' ' then
+      begin
+        strResult := strResult + Utf8ToAnsi(w) + ' ';
+        w := '';
+      end
+      else
+        w := w + character;
+
+    end;
+    CloseFile(doc);
+
+    if w <> '' then
+      strResult := strResult + Utf8ToAnsi(w);
+
+    Result := strResult;
+  end;
+begin
+
+  qryAutoRunScript.Close;
+  qryAutoRunScript.Open;
+
+  LastTaleNo:= qryAutoRunScript.Fields.Fields[0].AsInteger;
+  lastViewNo:= qryAutoRunScript.Fields.Fields[1].AsInteger;
+
+  FilePath := ExpandFileName(GetCurrentDir + '\Archive_AutoScripts\');
+  FistScript := 1;
+
+  try
+
+  for index := 1 to 2 do
+  begin
+
+    updateOK := True ;
+
+    if  index = 1 then
+      FileName := 'TableViewScripts.txt'
+    else
+      FileName := 'FuncProceScripts.txt';
+
+    MainStrFilePath := FilePath + FileName;
+
+    if not FileExists(MainStrFilePath) then
+      updateOK := false ;
+
+     if updateOK then
+     begin
+
+       qryAutoRunScript.SQL.Text := '';
+       strCommand := GetTxtFileAsString(MainStrFilePath);
+
+       LengthMax  := Length('[SECTION_MAX_NO]=') ;
+       PosF := Pos('[SECTION_MAX_NO]=',strCommand) ;
+       PosS := Pos('[BEGIN_S_NO]',strCommand) ;
+       PosE := Pos('[END_S_NO]',strCommand) ;
+
+     end ;
+
+     if updateOK and (PosF >0) and (PosS >0) and  (PosE >0)  then
+     begin
+       MaxSectionNo := StrToInt(Trim(StringReplace(StringReplace(Copy(strCommand, PosF + LengthMax, PosS - (LengthMax + 1) ),#13,' ',[rfReplaceAll]),#10,' ',[rfReplaceAll])  )) ;
+
+       if  index = 1 then
+       begin
+         CurrentSectionNo  := LastTaleNo + 1 ;
+         MaxSectionTableNo := MaxSectionNo;
+
+       end
+       else
+       begin
+         CurrentSectionNo := lastViewNo + 1 ;
+         MaxSectionViewNo := MaxSectionNo;
+
+       end;
+
+       CntSectionNo := CurrentSectionNo ;
+       for  index2 := CurrentSectionNo to MaxSectionNo  do
+       begin
+
+         SectionCommand := '' ;
+         PosFirstSec := Pos('[BEGIN_S_NO]='+IntTostr(CntSectionNo),strCommand);
+         strCommand  := Copy(strCommand ,PosFirstSec-1,Length(strCommand));
+         PosFirstSec := Pos('[BEGIN_S_NO]='+IntTostr(CntSectionNo),strCommand);
+
+         PosFirstLen := Length('[BEGIN_S_NO]='+IntTostr(CntSectionNo)) ;
+
+         PosLastSec := Pos('[END_S_NO]',strCommand);
+         PosLastLen := Length('[END_S_NO]') ;
+
+         SectionCommand := Trim(Copy(strCommand, (PosFirstSec + PosFirstLen) , (PosLastSec - (PosFirstSec + PosFirstLen  )) )) ;
+
+         if SectionCommand <> '' then
+         begin
+           try
+
+             if  MaxSectionTableNo>0 then
+             begin
+               qryAutoRunScript.SQL.Text   :=  ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U'')) ' +
+                                               '   UPDATE [dbo].[TBLAPPSETTING] set Max_TableScriptNumber = '+  IntToStr(MaxSectionTableNo) ;
+               qryAutoRunScript.ExecSQL;
+             end ;
+
+             if  MaxSectionViewNo>0 then
+             begin
+               qryAutoRunScript.SQL.Text   :=  ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U'')) ' +
+                                               '   UPDATE [dbo].[TBLAPPSETTING] set Max_ViewScriptNumber = '+  IntToStr(MaxSectionViewNo) ;
+               qryAutoRunScript.ExecSQL;
+             end;
+
+             //qryAutoRunScript.SQL.Text :=  ' BEGIN TRANSACTION  '+ #13#10 + SectionCommand + #13#10 +' COMMIT TRANSACTION  GO ';
+             //qryAutoRunScript.SQL.Text :=  ' BEGIN TRANSACTION  '+ #13#10 + SectionCommand + #13#10 +' COMMIT TRANSACTION ';
+             qryAutoRunScript.SQL.Text :=   SectionCommand ;
+             qryAutoRunScript.ExecuteOptions := [eoAsyncFetch];
+             qryAutoRunScript.ExecSQL;
+
+             if (FistScript = 1 )  then
+             begin
+               qryAutoRunScript.SQL.Text   :=  ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U'')) ' +
+                                               '   INSERT INTO [dbo].[TBLAPPSETTING] (Last_TableScriptNumber,Last_ViewScriptNumber,AppVersion,Date) VALUES ( '+ IntToStr(LastTaleNo)+','+ IntToStr(lastViewNo)+','''+_SoftVersion+''',GETDATE() ) ' ;
+               qryAutoRunScript.ExecSQL;
+
+               if  MaxSectionTableNo>0 then
+               begin
+                 qryAutoRunScript.SQL.Text   :=  ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U'')) ' +
+                                                 '   UPDATE [dbo].[TBLAPPSETTING] set Max_TableScriptNumber = '+  IntToStr(MaxSectionTableNo) ;
+                 qryAutoRunScript.ExecSQL;
+               end ;
+
+               if  MaxSectionViewNo>0 then
+               begin
+                 qryAutoRunScript.SQL.Text   :=  ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U'')) ' +
+                                                 '   UPDATE [dbo].[TBLAPPSETTING] set Max_ViewScriptNumber = '+  IntToStr(MaxSectionViewNo) ;
+                 qryAutoRunScript.ExecSQL;
+               end;
+
+             end;
+
+             Inc(FistScript);             
+
+             if  index = 1 then
+               qryAutoRunScript.SQL.Text :=  ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U'')) ' +
+                                             ' BEGIN   UPDATE dbo.TBLAPPSETTING SET Last_TableScriptNumber ='+ IntToStr(CntSectionNo)  + ' END '
+             else
+               qryAutoRunScript.SQL.Text :=  ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U'')) ' +
+                                             ' BEGIN  UPDATE dbo.TBLAPPSETTING SET Last_ViewScriptNumber ='+ IntToStr(CntSectionNo) + ' END ' ;
+
+             qryAutoRunScript.ExecSQL;
+
+           except // on E:Exception do
+            // begin
+               if  index = 1 then
+                 qryAutoRunScript.SQL.Text :=  ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U'')) ' +
+                                             ' BEGIN   UPDATE dbo.TBLAPPSETTING SET Error_RunTableScriptNumber ='+ IntToStr(CntSectionNo)  +{ ', Descript ='+E.Message+}' END '
+               else
+                 qryAutoRunScript.SQL.Text :=  ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U'')) ' +
+                                             ' BEGIN  UPDATE dbo.TBLAPPSETTING SET Error_RunViewScriptNumber ='+ IntToStr(CntSectionNo) +{ ', Descript ='+E.Message+}' END ' ;
+               qryAutoRunScript.ExecSQL;
+            // end ;
+
+              Exit;
+
+           end;
+         end ;
+         inc(CntSectionNo);
+
+       end;
+
+     end;
+  end;
+  finally
+    qryAutoRunScript.SQL.Text := 'IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U''))'+
+                                    ' SELECT TOP 1 (ISNULL(Max_TableScriptNumber,0)-ISNULL(Last_TableScriptNumber,0)) + ( ISNULL(Max_ViewScriptNumber,0) - ISNULL(Last_ViewScriptNumber ,0)) CountError   '+
+                                    ' FROM [dbo].[TBLAPPSETTING] ORDER BY id DESC '+
+                                    ' ELSE SELECT 0 CountError' ;
+
+    qryAutoRunScript.Close;
+    qryAutoRunScript.Open;
+
+    _CountError:= qryAutoRunScript.Fields.Fields[0].AsInteger;
+  end;
+//
+
+end;
+{ TODO -oparsa : 14030108 }
 
 end.
 
