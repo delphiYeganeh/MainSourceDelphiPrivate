@@ -1,6 +1,6 @@
 object MBaseForm: TMBaseForm
-  Left = 0
-  Top = 102
+  Left = 629
+  Top = 239
   Anchors = [akTop, akRight]
   AutoScroll = False
   BiDiMode = bdRightToLeft

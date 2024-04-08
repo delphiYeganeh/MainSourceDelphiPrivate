@@ -639,29 +639,40 @@ begin
 
 
       if FileExists(strTempFileName) then
-        DeleteFile(pchar(strTempFileName));
+        { TODO -oparsa : 14030119 }
+        //DeleteFile(pchar(strTempFileName));
+        SysUtils.DeleteFile(strTempFileName);
+        { TODO -oparsa : 14030119 }
 
-      if CopyFileW(replacePWC(StringToPWide(OpenDialog.filename,i)), StringToPWide(strTempFileName, i), False) then
-      { TODO -oparsa : 14030105 }
-        //Get_LetterWordFileImage.LoadFromFile(strTempFileName)
-      begin
-        Get_LetterWordFileImage.LoadFromFile(strTempFileName) ;
-        Get_LetterWordFileFileType.AsString := StringReplace(ExtractFileExt(OpenDialog.FileName), '.', '', [rfReplaceAll, rfIgnoreCase]) ;
-        Get_LetterWordFileFILENAME.AsString := ExtractFilename(OpenDialog.FileName);
+      { TODO -oparsa : 14030119 }
+      try
+      { TODO -oparsa : 14030119 }
+        if CopyFileW(replacePWC(StringToPWide(OpenDialog.filename,i)), StringToPWide(strTempFileName, i), False) then
+        { TODO -oparsa : 14030105 }
+          //Get_LetterWordFileImage.LoadFromFile(strTempFileName)
+        begin
+          Get_LetterWordFileImage.LoadFromFile(strTempFileName) ;
+          Get_LetterWordFileFileType.AsString := StringReplace(ExtractFileExt(OpenDialog.FileName), '.', '', [rfReplaceAll, rfIgnoreCase]) ;
+          Get_LetterWordFileFILENAME.AsString := ExtractFilename(OpenDialog.FileName);
 
-      end
-      { TODO -oparsa : 14030105 }
-      else if CopyFileW(StringToPWide(OpenDialog.filename,i), StringToPWide(strTempFileName,i), False) then
-      { TODO -oparsa : 14030105 }
-        //Get_LetterWordFileImage.LoadFromFile(strTempFileName)
-      begin
-        Get_LetterWordFileImage.LoadFromFile(strTempFileName) ;
-        Get_LetterWordFileFileType.AsString := StringReplace(ExtractFileExt(OpenDialog.FileName), '.', '', [rfReplaceAll, rfIgnoreCase]) ;
-        Get_LetterWordFileFILENAME.AsString := ExtractFilename(OpenDialog.FileName);
+        end
+        { TODO -oparsa : 14030105 }
+        else if CopyFileW(StringToPWide(OpenDialog.filename,i), StringToPWide(strTempFileName,i), False) then
+        { TODO -oparsa : 14030105 }
+          //Get_LetterWordFileImage.LoadFromFile(strTempFileName)
+        begin
+          Get_LetterWordFileImage.LoadFromFile(strTempFileName) ;
+          Get_LetterWordFileFileType.AsString := StringReplace(ExtractFileExt(OpenDialog.FileName), '.', '', [rfReplaceAll, rfIgnoreCase]) ;
+          Get_LetterWordFileFILENAME.AsString := ExtractFilename(OpenDialog.FileName);
 
-      end
-      else
-        ShowMessage('Œÿ« œ— ŒÊ«‰œ‰ ›«Ì· „»œ«');
+        end
+        else
+          ShowMessage('Œÿ« œ— ŒÊ«‰œ‰ ›«Ì· „»œ«');
+      { TODO -oparsa : 14030119 }
+      except  on E: Exception do
+       showMessage(Format('Œÿ« œ— ŒÊ«‰œ‰ ›«Ì· „»œ« %s',[E.Message]));
+      end;
+      { TODO -oparsa : 14030119 }
 
       Post;
     end;
@@ -681,9 +692,13 @@ begin
           InsertCopy(Exacts);
     end;
   end;
+   { TODO -oparsa : 14030119 }
+   //if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
+   { TODO -oparsa : 14030119 }
+
    if FileExists(pchar(_TempPath+_WordFileName)) then
      DeleteFile(pchar(_TempPath+_WordFileName));
-  
+
   Close;
 end;
 

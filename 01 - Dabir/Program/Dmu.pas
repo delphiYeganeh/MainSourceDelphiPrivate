@@ -2164,6 +2164,13 @@ begin
    if qry.FieldByName('Value').AsString='1' then
      _WordFileName := UpperCase(_EYeganeh) + '_WORD_FILE.DOC';
    qry.Free;
+
+  { TODO -oparsa : 14030119 }
+  if FileExists(pchar(_TempPath+_WordFileName)) then
+    //DeleteFile(pchar(_TempPath+_WordFileName));
+    SysUtils.DeleteFile(_TempPath+_WordFileName);
+  _Word_Is_Opened := false ;
+  { TODO -oparsa : 14030119 }
 end;
 
 procedure TDm.updateAddedInfoRecord(PrimaryCode,Fieldname,FieldValue,LetterWhere:string);
@@ -2338,7 +2345,13 @@ begin
     f := ExtractFileName(Filename);
     _Word_Is_Opened := true;
     //Documents.Open(f,fals,OReadOnly,fals,emp,emp,fals,emp,emp,olv,emp,tru,fals,tru,tru);
-    Documents.Open(f,EmptyParam,OReadOnly,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam);
+    try
+      Documents.Open(f,EmptyParam,OReadOnly,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam);
+    except  on e:exception do
+       begin
+         ShowMessage('WORD ERROR  '+Char(10) + e.Message);
+       end
+    end;
 
     if ParaphText<>'' then
     begin
@@ -2522,9 +2535,14 @@ begin
     end;
     SetWordClosed(Get_LetterWordFileLetterID.AsInteger, _UserID);
   except on e:exception do
+  begin
     ShowMessage('WORD ERROR D: ' + e.Message);
+    { TODO -oparsa : 14030119 }
+    SetWordClosed(Get_LetterWordFileLetterID.AsInteger, _UserID);
+    { TODO -oparsa : 14030119 }
         //Timer_SaveWord.Enabled := true;
         //ShowMessage('–ŒÌ—Â ›«Ì· Ê—œ «‰Ã«„ ‰‘œ° ›«Ì·  Ê”ÿ Å—Ê”” œÌê—Ì œ— Õ«· «” ›«œÂ «” ');
+  end;
   end;
 
   end;
@@ -3117,6 +3135,7 @@ procedure TDm.SetWordClosed(LetterID, UserID: integer);
 Var
    ADOSP:TADOStoredProc;
 begin
+
   ADOSP:=TADOStoredProc.create(nil);
   ADOSP.ProcedureName:='Set_Word_Closed';
 
@@ -3138,10 +3157,12 @@ begin
 
   ADOSP.Connection:=dm.YeganehConnection;
   ADOSP.ExecProc;
+
    { TODO -oparsa : 1402-12-19 }
-   if FileExists(pchar(_TempPath+_WordFileName)) then
-     DeleteFile(pchar(_TempPath+_WordFileName));
-   { TODO -oparsa : 1402-12-19 }
+  if FileExists(pchar(_TempPath+_WordFileName)) then
+    SysUtils.DeleteFile(_TempPath+_WordFileName);
+  { TODO -oparsa : 1402-12-19 }
+   
 end;
 
 

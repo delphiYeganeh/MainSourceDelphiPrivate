@@ -11,24 +11,14 @@ File_8=SourceModule,'D:\Tahami\06 - Exam Analysis\Program\UApplicantExamInput.pa
 File_9=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl2\xp style\xpWindow.pas',0,1,1588,1,1615,0,0
 
 [Modules]
-Module0=D:\Tahami\06 - Exam Analysis\Program\UMainForm.pas
-Module1=C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas
-Module2=D:\Tahami\06 - Exam Analysis\Program\UFrLogin.pas
-Module3=D:\Tahami\06 - Exam Analysis\Program\dmu.pas
-Module4=D:\Tahami\06 - Exam Analysis\Program\UInputExam.pas
+Module0=D:\Tahami\06 - Exam Analysis\Program\UFrLogin.pas
+Module1=D:\Tahami\06 - Exam Analysis\Program\dmu.pas
+Module2=D:\Tahami\06 - Exam Analysis\Program\UInputExam.pas
+Module3=D:\Tahami\06 - Exam Analysis\Program\UMainForm.pas
+Module4=C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas
 Module5=D:\Tahami\06 - Exam Analysis\Program\ExamAnalyser.dpr
 Count=6
 EditWindowCount=1
-
-[D:\Tahami\06 - Exam Analysis\Program\UMainForm.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
 
 [D:\Tahami\06 - Exam Analysis\Program\UFrLogin.pas]
 ModuleType=SourceModule
@@ -45,6 +35,16 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
+[D:\Tahami\06 - Exam Analysis\Program\UMainForm.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
 [D:\Tahami\06 - Exam Analysis\Program\ExamAnalyser.dpr]
 ModuleType=SourceModule
 FormState=0
@@ -54,13 +54,21 @@ FormOnTop=0
 FormState=0
 FormOnTop=0
 
-[D:\Tahami\06 - Exam Analysis\Program\BaseUnit.pas]
+[D:\matin\06 - Exam Analysis\Program\ExamAnalyser.dpr]
+FormState=0
+FormOnTop=0
+
+[D:\matin\06 - Exam Analysis\Program\dmu.pas]
+FormState=0
+FormOnTop=0
+
+[D:\matin\06 - Exam Analysis\Program\BaseUnit.pas]
 FormState=0
 FormOnTop=0
 
 [EditWindow0]
 ViewCount=6
-CurrentView=2
+CurrentView=4
 View0=0
 View1=1
 View2=2
@@ -72,21 +80,21 @@ MessageView=MessageView@EditWindow0
 Create=1
 Visible=1
 State=0
-Left=253
-Top=117
-Width=1419
+Left=200
+Top=147
+Width=1472
 Height=910
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1403
+ClientWidth=1456
 ClientHeight=871
 LeftPanelSize=140
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=315
+BottomPanelSize=0
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=00000400000000007B05000000000000023B01000000000000010000000000000000000000000100000000BD050000000000000100000000B00500000000000001000000007B0500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=00000400010000000B0000004D65737361676556696577B005000000000000025500000000000000010000000000000000000000000100000000BD050000000000000100000000B005000000000000FFFFFFFF
 
 [View0]
 Module=D:\Tahami\06 - Exam Analysis\Program\ExamAnalyser.dpr
@@ -97,9 +105,9 @@ LeftCol=1
 
 [View1]
 Module=D:\Tahami\06 - Exam Analysis\Program\dmu.pas
-CursorX=16
-CursorY=428
-TopLine=415
+CursorX=55
+CursorY=413
+TopLine=404
 LeftCol=1
 
 [View2]
@@ -118,9 +126,9 @@ LeftCol=1
 
 [View4]
 Module=D:\Tahami\06 - Exam Analysis\Program\UFrLogin.pas
-CursorX=46
-CursorY=51
-TopLine=35
+CursorX=87
+CursorY=87
+TopLine=78
 LeftCol=1
 
 [View5]
@@ -228,19 +236,19 @@ Visible=1
 State=0
 Left=-3
 Top=378
-Width=343
+Width=208
 Height=620
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=327
+ClientWidth=192
 ClientHeight=581
 TBDockHeight=556
 LRDockWidth=190
 Dockable=1
-SplitPos=132
+SplitPos=85
 ArrangeBy=Name
-SelectedItem=OnShow
-ExpandedItems=Font.Style,Title
+SelectedItem=Top
+ExpandedItems=Title
 HiddenCategories=
 
 [ObjectTree]
@@ -314,28 +322,28 @@ State=0
 Left=0
 Top=12
 Width=140
-Height=541
+Height=859
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=541
-TBDockHeight=541
+ClientHeight=859
+TBDockHeight=859
 LRDockWidth=140
 Dockable=1
 
 [MessageView@EditWindow0]
 Create=1
-Visible=1
+Visible=0
 State=0
 Left=12
 Top=0
-Width=1391
-Height=315
+Width=1444
+Height=85
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1391
-ClientHeight=315
-TBDockHeight=315
+ClientWidth=1444
+ClientHeight=85
+TBDockHeight=85
 LRDockWidth=443
 Dockable=1
 
