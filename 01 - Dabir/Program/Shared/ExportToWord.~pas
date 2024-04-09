@@ -638,10 +638,10 @@ begin
         strTempFileName := _TempPath + _ExcelFileName;
 
 
-      //if FileExists(strTempFileName) then
+      if FileExists(strTempFileName) then
         { TODO -oparsa : 14030119 }
         //DeleteFile(pchar(strTempFileName));
-       // SysUtils.DeleteFile(strTempFileName);
+        SysUtils.DeleteFile(strTempFileName);
         { TODO -oparsa : 14030119 }
 
       { TODO -oparsa : 14030119 }

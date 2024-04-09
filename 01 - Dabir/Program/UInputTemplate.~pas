@@ -101,6 +101,10 @@ var
 procedure TEditTemplates.FormCreate(Sender: TObject);
 begin
   inherited;
+  { TODO -oparsa : 1402-12-19 }
+   if FileExists(pchar(_TempPath+_WordFileName)) then
+     DeleteFile(pchar(_TempPath+_WordFileName));
+  { TODO -oparsa : 1402-12-19 }    
   IsReadOnly := True;
   Saved := False;
   with Dm.LetterTemplate do

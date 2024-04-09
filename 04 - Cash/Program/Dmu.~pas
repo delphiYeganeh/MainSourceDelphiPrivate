@@ -4862,8 +4862,8 @@ begin
              end;
 
              //qryAutoRunScript.SQL.Text :=  ' BEGIN TRANSACTION  '+ #13#10 + SectionCommand + #13#10 +' COMMIT TRANSACTION  GO ';
-             qryAutoRunScript.SQL.Text :=  ' BEGIN TRANSACTION  '+ #13#10 + SectionCommand + #13#10 +' COMMIT TRANSACTION ';
-             //qryAutoRunScript.SQL.Text :=   SectionCommand ;
+             //qryAutoRunScript.SQL.Text :=  ' BEGIN TRANSACTION  '+ #13#10 + SectionCommand + #13#10 +' COMMIT TRANSACTION ';
+             qryAutoRunScript.SQL.Text :=   SectionCommand ;
              qryAutoRunScript.ExecuteOptions := [eoAsyncFetch];
              qryAutoRunScript.ExecSQL;
 

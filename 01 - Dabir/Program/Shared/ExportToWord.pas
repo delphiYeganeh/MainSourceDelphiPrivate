@@ -692,9 +692,6 @@ begin
           InsertCopy(Exacts);
     end;
   end;
-   { TODO -oparsa : 14030119 }
-   //if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
-   { TODO -oparsa : 14030119 }
 
    if FileExists(pchar(_TempPath+_WordFileName)) then
      DeleteFile(pchar(_TempPath+_WordFileName));

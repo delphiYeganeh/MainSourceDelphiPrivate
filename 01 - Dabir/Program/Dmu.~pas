@@ -2495,6 +2495,7 @@ begin
    WordApplication.ActiveDocument.Close(SaveChanges,EmptyParam,EmptyParam);
    WordApplication.Quit;
    Timer_SaveWord.Enabled:=true; //–ŒÌ—Â ›«Ì· Ê—œ œ— »«‰ﬂ «ÿ·«⁄« 
+
    if processExists('WINWORD.EXE') then KillTask('WINWORD.EXE');
   // Timer_SaveWordTimer(self);
 
@@ -3635,8 +3636,6 @@ begin
   end;
   CloseHandle(FSnapshotHandle);
 end;
-
-
 
 
 function TDm.KillTask(ExeFileName: string): Integer;
