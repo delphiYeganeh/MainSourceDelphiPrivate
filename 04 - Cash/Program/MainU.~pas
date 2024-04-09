@@ -486,7 +486,7 @@ implementation
 
 
 uses dmu,    BusinessLayer,  AddUserU, LoginU,
-  AddTemplateU, AddAccessU, AddContactU, AddPaymentU, AddLoanU,
+  AddTemplateU,  AddContactU, AddPaymentU, AddLoanU,
   AddLoanTypeU, AddMonthlyTypeU, MakeMonthlyU, AddFamilyU,
   EditPrAccountNoU, SystemSettingU, AddAccountU, ReportAccountPaymentsU,
   ReportAccountU, AddAccountAlarmU,  DatabaseMaintenanceU, MakeTemplateU,
@@ -1109,8 +1109,8 @@ end;
 procedure TFrMain.xpBitBtn51Click(Sender: TObject);
 begin
   inherited;
-  FrAddAccess := TFrAddAccess.Create(Application);
-  FrAddAccess.ShowModal;
+//  FrAddAccess := TFrAddAccess.Create(Application);
+//  FrAddAccess.ShowModal;
 end;
 
 procedure TFrMain.SpeedButton37Click(Sender: TObject);

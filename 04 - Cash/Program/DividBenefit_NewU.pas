@@ -278,7 +278,9 @@ end;
 
 function TFrDividBenefit_New.CheckMaxBenifitPercent: real;
 var
-   sumAnualAvg, balanceBaseAccount : Largeint;
+   //sumAnualAvg,
+   balanceBaseAccount : Largeint;
+   sumAnualAvg :Real;
    i : integer;
    canDo : boolean;
 begin
@@ -290,7 +292,10 @@ begin
   dm.PAY_BENEFIT_New.First;
   while not dm.PAY_BENEFIT_New.Eof do
   begin
-    sumAnualAvg := sumAnualAvg + dm.PAY_BENEFIT_NewAnnualAvragePrice.AsInteger;
+    { TODO -oparsa : 1403.01.21 }
+    //sumAnualAvg := sumAnualAvg + dm.PAY_BENEFIT_NewAnnualAvragePrice.AsInteger;
+    sumAnualAvg := sumAnualAvg + dm.PAY_BENEFIT_NewAnnualAvragePrice.AsFloat;
+    { TODO -oparsa : 1403.01.21 }
     dm.PAY_BENEFIT_New.Next;
   end;
 

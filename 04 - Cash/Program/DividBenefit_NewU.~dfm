@@ -1,6 +1,6 @@
 inherited FrDividBenefit_New: TFrDividBenefit_New
-  Left = 306
-  Top = 260
+  Left = 350
+  Top = 267
   Width = 953
   Height = 605
   Caption = #1575#1593#1591#1575#1610' '#1587#1608#1583' '#1587#1662#1585#1583#1607

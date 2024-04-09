@@ -1,8 +1,8 @@
-[SECTION_MAX_NO]=3
+[SECTION_MAX_NO]=4
 
 [BEGIN_S_NO]=1
 
-CREATE OR ALTER FUNCTION [dbo].[ShamsiLastYearDate]
+CREATE FUNCTION [dbo].[ShamsiLastYearDate]
 (
 	@DATE datetime
 )
@@ -116,5 +116,24 @@ AS
 
 [END_S_NO]
 
+[BEGIN_S_NO]=4
+
+INSERT INTO [dbo].[Account] ([AccountTitle]
+      ,[AccountNo]
+      ,[ContactID]
+      ,[AccountDate]
+      ,[IsActive]
+      ,[MonthlyTypeID]
+      ,[AccountTypeID]
+      ,[IsBlocked])
+SELECT 'اسناد در جريان وصول' ,'2001003',[ContactID]
+      ,[AccountDate]
+      ,[IsActive]
+      ,[MonthlyTypeID]
+      ,[AccountTypeID]
+      ,[IsBlocked] FROM [dbo].[Account] WHERE ( SELECT COUNT(accountid) FROM [dbo].[Account] WHERE [AccountNo] = '2001003' ) = 0
+                                                                        AND [AccountNo] = '2001001'
+
+[END_S_NO]
 
 
