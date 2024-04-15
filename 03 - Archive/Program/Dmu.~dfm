@@ -2831,8 +2831,12 @@ object Dm: TDm
         DataType = ftInteger
         Precision = 10
         Value = Null
+      end
+      item
+        Name = '@LetterID'
+        Value = Null
       end>
-    Left = 499
+    Left = 500
     Top = 467
     object Get_LetterData_by_LetterDataIDLetterDataID: TAutoIncField
       FieldName = 'LetterDataID'
@@ -2848,6 +2852,9 @@ object Dm: TDm
       DisplayWidth = 100
       FieldName = 'Path'
       Size = 100
+    end
+    object Get_LetterData_by_LetterDataIDLetterID: TIntegerField
+      FieldName = 'LetterID'
     end
   end
   object Get_LetterData_by_LetterID: TADOStoredProc
@@ -3662,8 +3669,8 @@ object Dm: TDm
   end
   object DGetfieldValueByLetterID: TDataSource
     DataSet = GetfieldValueByLetterID
-    Left = 87
-    Top = 162
+    Left = 80
+    Top = 163
   end
   object qDC: TADOQuery
     Connection = YeganehConnection

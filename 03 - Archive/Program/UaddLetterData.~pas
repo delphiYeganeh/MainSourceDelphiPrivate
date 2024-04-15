@@ -171,11 +171,14 @@ var
  AQry : TADOQuery;
 begin
    inherited;
+   dm.Get_LetterData_by_LetterID.Insert;
+   dm.Get_LetterData_by_LetterIDletterid.AsInteger:=StrToIntDef(Dm.SelectLetter,0);
    FrAddLetterDataDialog:=TFrAddLetterDataDialog.Create(Application);
+   { TODO -oparsa : 14030126 }
+   dm.Get_LetterData_by_LetterID.Post;
+   { TODO -oparsa : 14030126 }
    FrAddLetterDataDialog.ShowModal;
-
-   if dm.Get_LetterData_by_LetterID.State in [dsedit,dsInsert] then
-     dm.Get_LetterData_by_LetterID.Post;
+   dm.Get_LetterData_by_LetterID.Post;
 
    Exec_insert_UserLog(BtnInsert.Name , LetterID);
    AQry := TADOQuery.Create(nil);

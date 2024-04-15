@@ -300,8 +300,8 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
     Top = 1
   end
   inherited xpWindow1: TxpWindow
-    Left = 216
-    Top = 16
+    Left = 198
+    Top = 4
   end
   object OpenDialog: TOpenDialog
     Filter = #1607#1605#1607' '#1601#1575#1610#1604' '#1607#1575'|*.*'
@@ -323,5 +323,11 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
     ProxySettings.Port = 0
     Left = 22
     Top = 185
+  end
+  object ADOQuery1: TADOQuery
+    Connection = Dm.YeganehConnection
+    Parameters = <>
+    Left = 67
+    Top = 138
   end
 end

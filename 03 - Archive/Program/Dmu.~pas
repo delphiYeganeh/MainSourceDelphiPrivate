@@ -378,6 +378,7 @@ type
     WordApplication: TWordApplication;
     spIns_laterdata: TADOStoredProc;
     qryAutoRunScript: TADOQuery;
+    Get_LetterData_by_LetterDataIDLetterID: TIntegerField;
 
     function  GetValue(variableID:word):variant;
     Procedure SetValue(VariableId:word;value:variant);

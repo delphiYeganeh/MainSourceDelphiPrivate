@@ -945,6 +945,13 @@ end;
 procedure TFrAddDocument.BBExportToWordClick(Sender: TObject);
 begin
   inherited;
+  // ⁄ÌÌ‰ ”ÿÕ œ” —”Ì
+  if Not Dm.GetActionAccess(MainForm.AExpotToWord.Name,MainForm.Tag) then
+  begin
+    ShowMyMessage('ÅÌ€«„','ﬂ«—»— ê—«„Ì ‘„« »Â «Ì‰ ﬁ”„  œ” —”Ì ‰œ«—Ìœ',[mbOK],mtInformation);
+    Abort;
+  end;
+
   if DataSetEdit.Visible then  // bug ... when user dont Editable
     if not DataSetEdit.Enabled then
     begin

@@ -33,6 +33,7 @@ type
     TntOpenDialog: TTntOpenDialog;
     ProgressBar1: TProgressBar;
     IdFTP1: TIdFTP;
+    ADOQuery1: TADOQuery;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -83,10 +84,14 @@ Uses AddLetterDataDM , Dmu, UaddLetterData, YShamsiDate, SysUtils,
 
 procedure TFrAddLetterDataDialog.add_file_to_db;
 Var
-   ID,i: integer;
+   i: integer;
 begin
-    //dm.Get_LetterData_by_LetterID.Post;
-    ID := Dm.Get_LetterData_by_LetterIDLetterDataID.AsInteger;
+
+   { TODO -oparsa : 14030126 }
+   if (dm.Get_LetterData_by_LetterID.State in [dsInsert]) then
+     dm.Get_LetterData_by_LetterID.Post;
+   { TODO -oparsa : 14030126 }
+ //   ID := Dm.Get_LetterData_by_LetterIDLetterDataID.AsInteger;
 //    Dm.Get_LetterData_by_LetterID.Close;
 //    Dm.Get_LetterData_by_LetterID.Parameters.ParamByName('@LetterID').Value := FraddLetterData.LetterID;
 //    Dm.Get_LetterData_by_LetterID.Open;
@@ -109,13 +114,15 @@ begin
          ShowMessage('Œÿ« œ— ŒÊ«‰œ‰ ›«Ì· „»œ«');
 
       Post;
-      DeleteFile(pchar(path.Text+'tmp'));
+
+      DeleteFile(pchar(path.Text+'tmpFile'));
       if FileExists(_ApplicationPath+'tmpFile')then
        DeleteFile(pchar(_ApplicationPath+'tmpFile'));
       AddTxtToDB(Dm.Get_LetterData_by_LetterDataIDLetterDataID.AsInteger,DBLookupComboBox1.KeyValue);
    end;
    if (ChBFolder.Checked)and FileExists(FileNamePath)and Not File_IsInUse(FileNamePath) then
       DeleteFile(FileNamePath);
+
    close;
 end;
 

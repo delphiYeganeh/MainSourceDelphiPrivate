@@ -2061,7 +2061,7 @@ inherited FrAddDocument: TFrAddDocument
       object Panel2: TPanel
         Left = 0
         Top = 40
-        Width = 715
+        Width = 716
         Height = 496
         Align = alClient
         ParentColor = True
@@ -2272,7 +2272,7 @@ inherited FrAddDocument: TFrAddDocument
         object YDBGrid1: TYDBGrid
           Left = 1
           Top = 1
-          Width = 713
+          Width = 714
           Height = 494
           Align = alClient
           DataSource = dsExcel_Select
@@ -2509,7 +2509,7 @@ inherited FrAddDocument: TFrAddDocument
       object Panel3: TPanel
         Left = 0
         Top = 536
-        Width = 715
+        Width = 716
         Height = 39
         Align = alBottom
         Color = 15266815
@@ -2517,7 +2517,7 @@ inherited FrAddDocument: TFrAddDocument
         object Shape1: TShape
           Left = 1
           Top = 1
-          Width = 713
+          Width = 714
           Height = 37
           Align = alClient
           Brush.Color = 15266815
@@ -2604,7 +2604,7 @@ inherited FrAddDocument: TFrAddDocument
       object Panel4: TPanel
         Left = 0
         Top = 0
-        Width = 715
+        Width = 716
         Height = 40
         Align = alTop
         Color = 16773847
@@ -2618,7 +2618,7 @@ inherited FrAddDocument: TFrAddDocument
         object Shape2: TShape
           Left = 1
           Top = 1
-          Width = 713
+          Width = 714
           Height = 38
           Align = alClient
           Brush.Color = 16773847

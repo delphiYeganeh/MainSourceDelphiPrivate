@@ -2012,9 +2012,15 @@ procedure TMainForm.lettersDbGridMouseMove(Sender: TObject;Shift: TShiftState; X
 Var
    pt: TGridcoord;
    r,j,i: byte;
+
+   aPt: TPoint;
+   Coord: TGridCoord;
+   afieldname: String;
 begin
    DblclickAction :=viewLetter;
 
+  { TODO -oparsa : 14030107 }
+   (*
    pt:= lettersDbGrid.MouseCoord(x, y);
    j:=0;
    r:=0;
@@ -2043,6 +2049,29 @@ begin
            if r = 4 then
               DblclickAction := ViewAlarm ; //äãÇíÔ ÝÑã ÂáÇÑã
            //---
+
+   *)
+
+   aPt := lettersDbGrid.ScreenToClient(Mouse.CursorPos);
+   Coord := lettersDbGrid.MouseCoord(aPt.X, aPt.Y);
+   if (Coord.X) -1 >= 0 then
+     afieldname := lettersDbGrid.Columns[(Coord.X)-1].FieldName;
+
+   if afieldname = 'has_Page' then
+      DblclickAction := ViewJpg
+   else
+      if afieldname = 'has_WordPage'  then
+         DblclickAction:= ViewWord
+      else
+         if afieldname = 'has_file'  then
+            DblclickAction:= ViewPdf
+         else
+           if afieldname = 'HasLetterAlerm'  then
+              DblclickAction:= ViewAlarm
+            else
+              DblclickAction:= viewLetter;
+
+   { TODO -oparsa : 14030107 }
 end;
 
 procedure TMainForm.ExporttoWord1Click(Sender: TObject);

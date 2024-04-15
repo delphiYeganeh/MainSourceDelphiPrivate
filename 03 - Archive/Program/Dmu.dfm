@@ -2832,7 +2832,7 @@ object Dm: TDm
         Precision = 10
         Value = Null
       end>
-    Left = 499
+    Left = 500
     Top = 467
     object Get_LetterData_by_LetterDataIDLetterDataID: TAutoIncField
       FieldName = 'LetterDataID'
@@ -3662,8 +3662,8 @@ object Dm: TDm
   end
   object DGetfieldValueByLetterID: TDataSource
     DataSet = GetfieldValueByLetterID
-    Left = 87
-    Top = 162
+    Left = 80
+    Top = 163
   end
   object qDC: TADOQuery
     Connection = YeganehConnection

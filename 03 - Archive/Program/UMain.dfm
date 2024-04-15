@@ -65,7 +65,6 @@ inherited MainForm: TMainForm
     Top = 0
     Width = 1262
     Height = 26
-    UseSystemFont = False
     ActionManager = MainActionManager
     Caption = 'ActionMainMenuBar1'
     ColorMap.HighlightColor = clWhite
@@ -73,7 +72,7 @@ inherited MainForm: TMainForm
     ColorMap.UnusedColor = clWhite
     EdgeOuter = esRaised
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clMenuText
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []

@@ -175,7 +175,9 @@ begin
    dm.Get_LetterData_by_LetterIDletterid.AsInteger:=StrToIntDef(Dm.SelectLetter,0);
    FrAddLetterDataDialog:=TFrAddLetterDataDialog.Create(Application);
    FrAddLetterDataDialog.ShowModal;
-   dm.Get_LetterData_by_LetterID.Post;
+   { TODO -oparsa : 14030126 }
+   //dm.Get_LetterData_by_LetterID.Post;
+   { TODO -oparsa : 14030126 }
 
    Exec_insert_UserLog(BtnInsert.Name , LetterID);
    AQry := TADOQuery.Create(nil);
