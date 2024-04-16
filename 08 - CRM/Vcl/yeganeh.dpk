@@ -1,0 +1,72 @@
+package yeganeh;
+
+{$R *.res}
+{$R 'uCiaTrayIcon.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  vcljpg,
+  dbrtl,
+  vcldb,
+  bdertl,
+  vclx,
+  adortl,
+  vclactnband,
+  fs7,
+  frx7,
+  frxDB7,
+  vclZipForged7,
+  designide,
+  qrpt,
+  indy,
+  fqb70,
+  fsDB7,
+  dclOfficeXP;
+
+contains
+  UemsVCL in 'UemsVCL.pas',
+  AcquireImage in 'acquireimage.pas',
+  twainh in 'TWAINH.PAS',
+  uCiaTrayIcon in 'uCiaTrayIcon.pas',
+  YLargeIntField in 'YLargeIntField.pas',
+  YCheckGroupBox in 'YCheckGroupBox.pas',
+  YchecklistBox in 'YchecklistBox.pas',
+  YDBCheckGroupBox in 'YDBCheckGroupBox.pas',
+  YDBEDit in 'YDBEDit.pas',
+  Yeganeh_Word in 'Yeganeh_Word.pas',
+  YFillPictureFields in 'YFillPictureFields.pas',
+  YINtegerField in 'YINtegerField.pas',
+  YQRAngelLabel in 'YQRAngelLabel.pas',
+  YRotateLabel in 'YRotateLabel.pas',
+  DBTreeViewReg in 'DBTreeViewReg.pas',
+  YeganehCheckMail in 'YeganehCheckMail.pas',
+  YAmountEdit in 'YAmountEdit.pas',
+  YEdit in 'YEdit.pas',
+  DBTreeView in 'DBTreeView.pas',
+  YShamsiDate in 'YShamsiDate.pas',
+  YWhereEdit in 'YWhereEdit.pas';
+
+end.

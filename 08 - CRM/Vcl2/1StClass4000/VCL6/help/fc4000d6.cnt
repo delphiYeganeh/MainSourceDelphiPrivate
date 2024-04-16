@@ -1,0 +1,23 @@
+:Base fc4000.hlp
+:Title 1stClass 4000 Online Help
+:Index Delphi 6 VCL =del6vcl.hlp
+1 1stClass 4000 Components
+2 TfcButtonGroup=TfcButtonGroup
+2 TfcCalcEdit=TfcCalcEdit
+2 TfcColorCombo=TfcColorCombo
+2 TfcColorList=TfcColorList
+2 TfcDBImager=TfcDBImager
+2 TfcDBTreeView=TfcDBTreeView
+2 TfcFontCombo=TfcFontCombo
+2 TfcGroupBox=TfcGroupBox
+2 TfcImageBtn=TfcImageBtn
+2 TfcImageForm=TfcImageForm
+2 TfcImager=TfcImager
+2 TfcLabel=TfcLabel
+2 TfcOutlookBar=TfcOutlookBar
+2 TfcPanel=TfcPanel
+2 TfcShapeBtn=TfcShapeBtn
+2 TfcStatusBar=TfcStatusBar
+2 TfcTreeHeader=TfcTreeHeader
+2 TfcTreeView=TfcTreeView
+2 TfcTreeCombo=TfcTreeCombo

@@ -1,0 +1,2904 @@
+                   --Yeganeh123
+
+--[LastNum]=18
+
+------------------------------------------------
+[Num]=10
+-----------------------------------------------
+-----------Ver 1.0.0.1
+
+
+IF  not EXISTS (SELECT * FROM DBO.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Serial]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Serial](
+	[Serial_ID] [int] NOT NULL,
+	[SoftSerial] [nvarchar](20)  NULL,
+	[BaseSerial] [int] NOT NULL,
+	[Serial2] [nchar](10)  NULL,
+	[Kit] [nchar](5)  NULL,
+	[Network] [smallint] NULL,
+	[HaveCust] [smallint] NULL,
+	[SerialUsed] [smallint] NULL,
+	[SerDate] [nvarchar](15)  NULL,
+	[SerTime] [nvarchar](5)  NULL,
+	[ProductID] [tinyint] NULL,
+	[CustomerID] [int] NULL
+) ON [PRIMARY]
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+
+ALTER TABLE dbo.Serial ADD CONSTRAINT
+	PK_Serial PRIMARY KEY CLUSTERED 
+	(
+	Serial_ID
+	) ON [PRIMARY]
+
+
+COMMIT
+END
+GO
+
+IF  EXISTS (SELECT * FROM DBO.sysobjects WHERE id = OBJECT_ID(N'[dbo].[GetUserSetting]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[GetUserSetting]
+GO
+
+CREATE PROCEDURE [dbo].[GetUserSetting]
+@UserID  int ,@VariableName varchar(50),@Value nvarchar(255) output
+AS
+SELECT     @Value=Value
+FROM         Settings
+WHERE     (UserID = @UserID) AND (VariableName = @VariableName)
+
+set @Value=isnull(@Value,'Not Found')
+
+GO
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+
+IF  not EXISTS (SELECT * FROM DBO.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Tmp_Settings]') AND type in (N'U'))
+CREATE TABLE dbo.Tmp_Settings
+	(
+	SettingID int NOT NULL IDENTITY (1, 1),
+	UserID int NULL,
+	VariableName varchar(50) NULL,
+	Value nvarchar(100) NULL
+	)  ON [PRIMARY]
+
+SET IDENTITY_INSERT dbo.Tmp_Settings ON
+
+IF EXISTS(SELECT * FROM dbo.Settings)
+	 EXEC('INSERT INTO dbo.Tmp_Settings (SettingID, UserID, VariableName, Value)
+		SELECT SettingID, UserID, VariableName, Value FROM Settings WITH (HOLDLOCK TABLOCKX)')
+
+SET IDENTITY_INSERT dbo.Tmp_Settings OFF
+
+declare @str nvarchar(100)
+set @str = 'ALTER TABLE [Settings] DROP CONSTRAINT ['
+				+ (SELECT name FROM dbo.sysindexes WHERE id = OBJECT_ID(N'[dbo].[Settings]') 
+					and (OBJECTPROPERTY(id, N'IsPRIMARYKEY') = 1))+']'
+	
+
+execute(@str)
+
+DROP TABLE dbo.Settings
+
+EXECUTE sp_rename N'dbo.Tmp_Settings', N'Settings', 'OBJECT' 
+
+ALTER TABLE Settings WITH NOCHECK ADD CONSTRAINT PK_SettingsID PRIMARY KEY CLUSTERED (SettingID)ON [PRIMARY]
+COMMIT
+GO
+
+
+
+IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[ContractType]') AND type in (N'U'))
+begin
+CREATE TABLE [dbo].[ContractType] (
+	[ContractTypeID] [tinyint] IDENTITY (1, 1) NOT NULL ,
+	[ContractTypeTitle] [nvarchar] (50) COLLATE Arabic_CI_AS NOT NULL ,
+	[ContractTypeCode] [nvarchar] (50) COLLATE Arabic_CI_AS NULL 
+) ON [PRIMARY]
+ 
+
+ALTER TABLE [dbo].[ContractType] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ContractType] PRIMARY KEY  CLUSTERED 
+	(
+		[ContractTypeID]
+	)  ON [PRIMARY] 
+ 
+
+End
+GO
+
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='ContractTypeCode' AND o.name='ContractType')            
+alter table ContractType add ContractTypeCode nvarchar(50) null
+GO
+
+IF  not EXISTS (SELECT * FROM DBO.sysindexes WHERE id = object_id(N'[dbo].[ContractType]') AND name = N'PK_ContractType')
+ALTER TABLE [dbo].[ContractType] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ContractType] PRIMARY KEY  CLUSTERED 
+	(
+		[ContractTypeID]
+	)  ON [PRIMARY] 
+GO
+IF  not EXISTS (SELECT * FROM DBO.SYSindexes WHERE id = object_id(N'[dbo].[ContractType]') AND name = N'IX_ContractType')
+ CREATE  INDEX [IX_ContractType] ON [dbo].[ContractType]([ContractTypeCode]) ON [PRIMARY]
+GO
+
+
+
+-- IF  not EXISTS (SELECT * FROM sys.indexes WHERE id = object_id(N'[dbo].[ContractType]') AND name = N'PK_ContractType')
+-- ALTER TABLE [dbo].[ContractType] WITH NOCHECK ADD 
+-- 	CONSTRAINT [PK_ContractType] PRIMARY KEY  CLUSTERED 
+-- 	(
+-- 		[ContractTypeID]
+-- 	)  ON [PRIMARY] 
+-- 
+-- GO
+-- 
+-- 
+-- IF  not EXISTS (SELECT * FROM sys.indexes WHERE id = object_id(N'[dbo].[ContractType]') AND name = N'IX_ContractType')
+-- CREATE NONCLUSTERED INDEX [IX_ContractType] ON [dbo].[ContractType] 
+-- (
+-- 	[ContractTypeCode] ASC
+-- )WITH (SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+-- GO
+
+
+-- IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[UserType]') AND type in (N'U'))
+-- begin
+-- 	CREATE TABLE [dbo].[UserType](
+-- 		[UserTypeId] [int] IDENTITY(1,1) NOT NULL,
+-- 		[UserTypeTitle] [nvarchar](50)  NOT NULL,
+-- 		[UserTypeCode] [nvarchar](50)  NOT NULL,
+-- 	 CONSTRAINT [PK_UserType] PRIMARY KEY CLUSTERED 
+-- 	(
+-- 		[UserTypeId] ASC
+-- 	)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+-- 	) ON [PRIMARY]
+-- 
+-- 	CREATE UNIQUE NONCLUSTERED INDEX [IX_CUserType] ON [dbo].[UserType] 
+-- 	(
+-- 		[UserTypeCode] ASC
+-- 	)WITH (SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+-- 
+-- 
+-- end
+-- GO
+
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[UserType]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+BEGIN
+CREATE TABLE [dbo].[UserType] (
+	[UserTypeId] [int] IDENTITY (1, 1) NOT NULL ,
+	[UserTypeTitle] [nvarchar] (50) COLLATE Arabic_CI_AS NOT NULL ,
+	[UserTypeCode] [nvarchar] (50) COLLATE Arabic_CI_AS NOT NULL 
+) ON [PRIMARY]
+
+--if not exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[UserType]') and OBJECTPROPERTY(id, N'IsPRIMARYKEY') = 1)
+ALTER TABLE [dbo].[UserType] WITH NOCHECK ADD 
+	CONSTRAINT [PK_UserType] PRIMARY KEY  CLUSTERED 
+	(
+		[UserTypeId]
+	)  ON [PRIMARY] 
+--IF  not EXISTS (SELECT * FROM sys.indexes WHERE id = object_id(N'[dbo].[ContractType]') AND name = N'IX_UserType')
+ CREATE  INDEX [IX_UserType] ON [dbo].[UserType]([UserTypeCode]) ON [PRIMARY]
+END
+GO
+
+
+-- IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[UserTypeContractType]') AND type in (N'U'))
+-- begin	
+-- 	CREATE TABLE [dbo].[UserTypeContractType](
+-- 				[UserTypeContractTypeID] [int] IDENTITY(1,1) NOT NULL,
+-- 				[UserTypeId] [int] NOT NULL,
+-- 				[ContractTypeId] [tinyint] NOT NULL,
+-- 			 CONSTRAINT [PK_UserTypeContractType] PRIMARY KEY CLUSTERED 
+-- 			(
+-- 				[UserTypeContractTypeID] ASC
+-- 			)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+-- 			) ON [PRIMARY]
+-- 
+-- 			
+-- 			ALTER TABLE [dbo].[UserTypeContractType]  WITH CHECK ADD  CONSTRAINT [FK_UserTypeContractType_UserType] FOREIGN KEY([UserTypeId])
+-- 			REFERENCES [dbo].[UserType] ([UserTypeId])
+-- 			
+-- 			ALTER TABLE [dbo].[UserTypeContractType]  WITH CHECK ADD  CONSTRAINT [FK_UserTypeContractType_UserTypeContractType] FOREIGN KEY([ContractTypeId])
+-- 			REFERENCES [dbo].[ContractType] ([ContractTypeID])
+-- 
+-- CREATE UNIQUE NONCLUSTERED INDEX [IX_UserTypeContractType] ON [dbo].[UserTypeContractType] 
+-- (
+-- 	[ContractTypeId] ASC,
+-- 	[UserTypeId] ASC
+-- )WITH (SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+-- end
+-- GO
+
+if NOT exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[UserTypeContractType]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+BEGIN 
+CREATE TABLE [dbo].[UserTypeContractType] (
+	[UserTypeContractTypeID] [int] IDENTITY (1, 1) NOT NULL ,
+	[UserTypeId] [int] NOT NULL ,
+	[ContractTypeId] [tinyint] NOT NULL 
+) ON [PRIMARY]
+ 
+ALTER TABLE [dbo].[UserTypeContractType] WITH NOCHECK ADD 
+	CONSTRAINT [PK_UserTypeContractType] PRIMARY KEY  CLUSTERED 
+	(
+		[UserTypeContractTypeID]
+	)  ON [PRIMARY] 
+
+
+ CREATE  INDEX [IX_UserTypeContractType] ON [dbo].[UserTypeContractType]([ContractTypeId], [UserTypeId]) ON [PRIMARY]
+
+END
+GO
+if NOT exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_UserTypeContractType_ContractType]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+BEGIN
+ALTER TABLE [dbo].[UserTypeContractType] ADD 
+	CONSTRAINT [FK_UserTypeContractType_ContractType] FOREIGN KEY 
+	(
+		[ContractTypeId]
+	) REFERENCES [dbo].[ContractType] (
+		[ContractTypeID]
+	)
+END	
+if NOT exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_UserTypeContractType_UserType]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+BEGIN
+   ALTER TABLE [dbo].[UserTypeContractType] ADD 
+	CONSTRAINT [FK_UserTypeContractType_UserType] FOREIGN KEY 
+	(
+		[UserTypeId]
+	) REFERENCES [dbo].[UserType] (
+		[UserTypeId]
+	)
+END
+
+GO
+-- IF  not EXISTS (SELECT [name] FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[ContractSubType]') AND type in (N'U'))
+-- begin
+-- 	CREATE TABLE [dbo].[ContractSubType](
+-- 		[ContractSubTypeID] [tinyint] IDENTITY(1,1) NOT NULL,
+-- 		[ContractSubTypeCode] [nvarchar](50) NULL,
+-- 		[ContractTypeID] [tinyint] NOT NULL,
+-- 		[ContractSubTypeTitle] [nvarchar](50) NOT NULL,
+-- 	 CONSTRAINT [PK_ContractTypeSub] PRIMARY KEY CLUSTERED 
+-- 	(
+-- 		[ContractSubTypeID] ASC
+-- 	)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+-- 	) ON [PRIMARY]
+-- 
+-- 	ALTER TABLE [dbo].[ContractSubType]  WITH CHECK ADD  CONSTRAINT [FK_ContractSubType_ContractType] FOREIGN KEY([ContractTypeID])
+-- 	REFERENCES [dbo].[ContractType] ([ContractTypeID])
+-- 
+-- End
+-- GO
+-- 
+-- 
+-- IF  not EXISTS (SELECT * FROM sys.indexes WHERE id = object_id(N'[dbo].[ContractSubType]') AND name = N'IX_ContractSubType')
+-- CREATE UNIQUE NONCLUSTERED INDEX [IX_ContractSubType] ON [dbo].[ContractSubType] 
+-- (
+-- 	[ContractSubTypeCode] ASC,
+-- 	[ContractTypeID] ASC
+-- )WITH (SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+-- 
+-- GO
+-- 
+-- BEGIN TRANSACTION
+-- SET QUOTED_IDENTIFIER ON
+-- SET ARITHABORT ON
+-- SET NUMERIC_ROUNDABORT OFF
+-- SET CONCAT_NULL_YIELDS_NULL ON
+-- SET ANSI_NULLS ON
+-- SET ANSI_PADDING ON
+-- SET ANSI_WARNINGS ON
+-- COMMIT
+-- BEGIN TRANSACTION
+-- 
+-- CREATE TABLE dbo.Tmp_ContractType
+-- 	(
+-- 	ContractTypeID tinyint NOT NULL IDENTITY (1, 1),
+-- 	ContractTypeTitle nvarchar(50) NOT NULL,
+-- 	ContractTypeCode nvarchar(50) NULL
+-- 	)  ON [PRIMARY]
+-- 
+-- SET IDENTITY_INSERT dbo.Tmp_ContractType ON
+-- 
+-- IF EXISTS(SELECT * FROM dbo.ContractType)
+-- 	 EXEC('INSERT INTO dbo.Tmp_ContractType (ContractTypeID, ContractTypeTitle, ContractTypeCode)
+-- 		SELECT ContractTypeID, ContractTypeTitle, ContractTypeCode FROM dbo.ContractType WITH (HOLDLOCK TABLOCKX)')
+-- 
+-- SET IDENTITY_INSERT dbo.Tmp_ContractType OFF
+-- 
+-- ALTER TABLE dbo.ContractSubType
+-- 	DROP CONSTRAINT FK_ContractSubType_ContractType
+-- 
+-- ALTER TABLE dbo.UserTypeContractType
+-- 	DROP CONSTRAINT FK_UserTypeContractType_UserTypeContractType
+-- 
+-- DROP TABLE dbo.ContractType
+-- 
+-- EXECUTE sp_rename N'dbo.Tmp_ContractType', N'ContractType', 'OBJECT' 
+-- 
+-- ALTER TABLE dbo.ContractType ADD CONSTRAINT
+-- 	PK_ContractType PRIMARY KEY CLUSTERED 
+-- 	(
+-- 	ContractTypeID
+-- 	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+-- 
+-- 
+-- CREATE NONCLUSTERED INDEX IX_ContractType ON dbo.ContractType
+-- 	(
+-- 	ContractTypeCode
+-- 	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+-- 
+-- COMMIT
+-- BEGIN TRANSACTION
+-- 
+-- ALTER TABLE dbo.UserTypeContractType ADD CONSTRAINT
+-- 	FK_UserTypeContractType_UserTypeContractType FOREIGN KEY
+-- 	(
+-- 	ContractTypeId
+-- 	) REFERENCES dbo.ContractType
+-- 	(
+-- 	ContractTypeID
+-- 	) ON UPDATE  NO ACTION 
+-- 	 ON DELETE  NO ACTION 
+-- 	
+-- 
+-- COMMIT
+-- BEGIN TRANSACTION
+-- 
+-- ALTER TABLE dbo.ContractSubType ADD CONSTRAINT
+-- 	FK_ContractSubType_ContractType FOREIGN KEY
+-- 	(
+-- 	ContractTypeID
+-- 	) REFERENCES dbo.ContractType
+-- 	(
+-- 	ContractTypeID
+-- 	) ON UPDATE  NO ACTION 
+-- 	 ON DELETE  NO ACTION 
+-- 	
+-- 
+-- COMMIT
+-- GO
+-- 
+-- alter table ContractType
+-- alter column ContractTypeCode nvarchar(50)
+-- GO
+-- 
+-- declare @i int ,@Str nvarchar(1000)
+-- set @i = 18
+-- while @i > 0
+-- begin
+-- 	if @i >= 10
+-- 	set @Str = 	'IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+-- 		WHERE o.xtype=''U'' AND c.name=''FreeField0'+cast((19 - @i) as nvarchar(2))+''' AND o.name=''Customer'')            
+-- 		alter table Customer add FreeField0'+cast((19 - @i) as nvarchar(2))+' nvarchar(100) NULL'
+-- 	else 
+-- 	set @Str = 	'IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+-- 		WHERE o.xtype=''U'' AND c.name=''FreeField'+cast((19 - @i) as nvarchar(2))+''' AND o.name=''Customer'')            
+-- 		alter table Customer add FreeField'+cast((19 - @i) as nvarchar(2))+' nvarchar(100) NULL'
+-- 	exec(@Str)
+-- 		set @i = @i - 1
+-- end
+-- GO
+-- 
+
+IF NOT Exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ContractSubType]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+BEGIN
+	CREATE TABLE [dbo].[ContractSubType] (
+		[ContractSubTypeID] [tinyint] IDENTITY (1, 1) NOT NULL ,
+		[ContractSubTypeCode] [nvarchar] (50) COLLATE Arabic_CI_AS NULL ,
+		[ContractTypeID] [tinyint] NOT NULL ,
+		[ContractSubTypeTitle] [nvarchar] (50) COLLATE Arabic_CI_AS NOT NULL 
+	) ON [PRIMARY]
+	 
+	ALTER TABLE [dbo].[ContractSubType] WITH NOCHECK ADD 
+		CONSTRAINT [PK_ContractSubType] PRIMARY KEY  CLUSTERED 
+		(
+			[ContractSubTypeID]
+		)  ON [PRIMARY] 
+	 
+END
+GO
+if NOT exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ContractSubType_ContractType]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+BEGIN
+	ALTER TABLE [dbo].[ContractSubType] ADD 
+		CONSTRAINT [FK_ContractSubType_ContractType] FOREIGN KEY 
+		(
+			[ContractTypeID]
+		) REFERENCES [dbo].[ContractType] (
+			[ContractTypeID]
+		)
+END
+
+GO
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+
+CREATE TABLE DBO.TMP_CONTRACTTYPE
+	(
+	CONTRACTTYPEID TINYINT NOT NULL IDENTITY (1, 1),
+	CONTRACTTYPETITLE NVARCHAR(50) NOT NULL,
+	CONTRACTTYPECODE NVARCHAR(50) NULL
+	)  ON [PRIMARY]
+
+SET IDENTITY_INSERT DBO.TMP_CONTRACTTYPE ON
+
+IF EXISTS(SELECT * FROM DBO.CONTRACTTYPE)
+	 EXEC('INSERT INTO DBO.TMP_CONTRACTTYPE (CONTRACTTYPEID, CONTRACTTYPETITLE, CONTRACTTYPECODE)
+		SELECT CONTRACTTYPEID, CONTRACTTYPETITLE, CONTRACTTYPECODE FROM DBO.CONTRACTTYPE WITH (HOLDLOCK TABLOCKX)')
+
+SET IDENTITY_INSERT DBO.TMP_CONTRACTTYPE OFF
+
+--ALTER TABLE DBO.CONTRACTSUBTYPE
+--	DROP CONSTRAINT FK_CONTRACTSUBTYPE_CONTRACTTYPE
+
+--ALTER TABLE DBO.USERTYPECONTRACTTYPE
+--	DROP CONSTRAINT FK_USERTYPECONTRACTTYPE_USERTYPECONTRACTTYPE
+
+--TRUNCATE  TABLE DBO.CONTRACTTYPE
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ContractSubType_ContractType]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE dbo.ContractSubType	DROP CONSTRAINT FK_ContractSubType_ContractType
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_UserTypeContractType_UserTypeContractType]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE dbo.UserTypeContractType DROP CONSTRAINT FK_UserTypeContractType_UserTypeContractType
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_UserTypeContractType_ContractType]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE dbo.UserTypeContractType DROP CONSTRAINT FK_UserTypeContractType_ContractType
+DROP TABLE dbo.ContractType
+
+
+
+EXECUTE SP_RENAME N'DBO.TMP_CONTRACTTYPE', N'CONTRACTTYPE', 'OBJECT' 
+
+
+	ALTER TABLE [dbo].[CONTRACTTYPE] WITH NOCHECK ADD 
+		CONSTRAINT [PK_CONTRACTTYPE] PRIMARY KEY  CLUSTERED 
+		(
+			[CONTRACTTYPEID]
+		)  ON [PRIMARY] 
+	 
+
+ CREATE  INDEX [IX_CONTRACTTYPE] ON [dbo].[ContractType]([ContractTypeCode]) ON [PRIMARY]
+
+COMMIT
+BEGIN TRANSACTION
+
+ 
+	ALTER TABLE [dbo].[USERTYPECONTRACTTYPE] ADD 
+		CONSTRAINT [FK_USERTYPECONTRACTTYPE_USERTYPECONTRACTTYPE] FOREIGN KEY 
+		(
+			[CONTRACTTYPEID]
+		) REFERENCES [dbo].[ContractType] (
+			[ContractTypeID]
+		)
+ 
+ 
+
+COMMIT
+BEGIN TRANSACTION
+
+ALTER TABLE DBO.CONTRACTSUBTYPE ADD 
+   CONSTRAINT	FK_CONTRACTSUBTYPE_CONTRACTTYPE FOREIGN KEY
+	(
+	CONTRACTTYPEID
+	) REFERENCES DBO.CONTRACTTYPE
+	(
+	CONTRACTTYPEID
+	)  
+	
+
+COMMIT
+GO
+
+
+ALTER TABLE CONTRACTTYPE ALTER COLUMN CONTRACTTYPECODE NVARCHAR(50)
+GO
+
+DECLARE @I INT ,@STR NVARCHAR(1000)
+SET @I = 18
+WHILE @I > 0
+BEGIN
+	IF @I >= 10
+	SET @STR = 	'IF NOT EXISTS (SELECT * FROM DBO.SYSCOLUMNS C INNER JOIN DBO.SYSOBJECTS O ON O.ID = C.ID 
+		WHERE O.XTYPE=''U'' AND C.NAME=''FREEFIELD0'+CAST((19 - @I) AS NVARCHAR(2))+''' AND O.NAME=''CUSTOMER'')            
+		ALTER TABLE CUSTOMER ADD FREEFIELD0'+CAST((19 - @I) AS NVARCHAR(2))+' NVARCHAR(100) NULL'
+	ELSE 
+	SET @STR = 	'IF NOT EXISTS (SELECT * FROM DBO.SYSCOLUMNS C INNER JOIN DBO.SYSOBJECTS O ON O.ID = C.ID 
+		WHERE O.XTYPE=''U'' AND C.NAME=''FREEFIELD'+CAST((19 - @I) AS NVARCHAR(2))+''' AND O.NAME=''CUSTOMER'')            
+		ALTER TABLE CUSTOMER ADD FREEFIELD'+CAST((19 - @I) AS NVARCHAR(2))+' NVARCHAR(100) NULL'
+	EXEC(@STR)
+		SET @I = @I - 1
+END
+GO
+
+
+--------------------------------OK
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='UserTypeId' AND o.name='ActionType')            
+alter table ActionType add UserTypeId INT NULL 
+GO
+
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='WordAttachment' AND o.name='FollowUp')            
+alter table FollowUp add WordAttachment IMAGE NULL
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='PicAttachment' AND o.name='FollowUp')            
+alter table FollowUp add PicAttachment IMAGE NULL
+GO
+ 
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='InnerPhone' AND o.name='customer')            
+alter table customer add InnerPhone NVARCHAR(50) NULL
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='ExportCustomerList' AND o.name='users')            
+alter table users add ExportCustomerList bit null
+GO
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='ShowContract' AND o.name='users')            
+alter table users add ShowContract bit null
+GO
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='ExportFollow' AND o.name='users')            
+alter table users add ExportFollow bit null
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='EditContract' AND o.name='users')            
+alter table users add EditContract bit null
+GO
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='ShowAllCustomer' AND o.name='users')            
+	alter table users add ShowAllCustomer bit default 1
+GO
+
+IF NOT ((SELECT COUNT(*) FROM Users WHERE ShowAllCustomer <> null) > 0)
+UPDATE Users SET ShowAllCustomer = 1
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='StateID' AND o.name='Customer')            
+alter table Customer add StateID tinyint null
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='ProductID' AND o.name='Contract')            
+alter table Contract add ProductID tinyint null
+GO
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='ContractTypeID' AND o.name='Contract')            
+alter table Contract add ContractTypeID tinyint null
+GO
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='ContractSubTypeID' AND o.name='Contract')            
+alter table Contract add ContractSubTypeID tinyint null
+GO
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='ContractText' AND o.name='Contract')            
+alter table Contract add ContractText image null
+GO
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='TaxPercentage' AND o.name='Contract')            
+alter table Contract add TaxPercentage float null
+GO
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='GoodJobPercentage' AND o.name='Contract')            
+alter table Contract add GoodJobPercentage float null
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='ByCashAmount' AND o.name='Contract')            
+alter table Contract add ByCashAmount float null
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='ByCashFishNo' AND o.name='Contract')            
+alter table Contract add ByCashFishNo float null
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='InsuranceAccount' AND o.name='Contract')            
+alter table Contract add InsuranceAccount float null
+GO
+
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='TaxFish' AND o.name='Contract')            
+alter table Contract add TaxFish image null
+GO
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Select_Contract_By_Date]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Select_Contract_By_Date]
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='ContractFinished' AND o.name='CustomerProduct')            
+alter table CustomerProduct add ContractFinished tinyint null
+GO
+
+
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='UserTypeId' AND o.name='Users')  
+ALTER TABLE Users ADD
+	UserTypeId tinyint NULL
+GO
+
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Select_UserTypeContractType_By_UserTypeID]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Select_UserTypeContractType_By_UserTypeID]
+GO
+
+CREATE proc [dbo].[Select_UserTypeContractType_By_UserTypeID]
+(
+	@UserTypeID int
+)
+as
+Select UTT.*,ContractTypeCode,ContractTypeTitle from UserTypeContractType UTT 
+					left join ContractType CT on (UTT.ContractTypeId = CT.ContractTypeId)
+where UserTypeID = @UserTypeID
+GO
+
+IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[TaxPerYear]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)     
+BEGIN
+           CREATE TABLE [dbo].[TaxPerYear](
+		[TaxPerYearID] [int] IDENTITY(1,1) NOT NULL,
+		[Year] [int] NOT NULL,
+		[TaxPercentage] [float] NOT NULL)
+
+end
+GO
+
+IF NOT Exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[PK_TaxPerYear]') and OBJECTPROPERTY(id, N'ISPRIMARYKEY') = 1)
+BEGIN
+	ALTER TABLE [dbo].[TaxPerYear] WITH NOCHECK ADD 
+		CONSTRAINT [PK_TaxPerYear] PRIMARY KEY  CLUSTERED 
+		(
+			[TaxPerYearID]
+		)  ON [PRIMARY] 
+	 
+END
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Search_ContractDetail]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Search_ContractDetail]
+GO
+CREATE proc [dbo].[Search_ContractDetail]
+(
+@StartDate		nvarchar(10)
+,@EndDate		nvarchar(10)
+,@ContractTypeID	int
+,@MarketerID	int
+,@ProductId		int
+,@TaxPercentage float
+,@GoodJobPercentage float
+,@customerid	int
+,@UserTypeID	int
+)
+as
+
+
+DECLARE  @TaxDate CHAR(10)
+	set @TaxDate =(SELECT [VALUE] from Settings WHERE VariableName = 'TaxDate')
+
+
+Select Contract.*,ContractTypeTitle,ContractSubTypeTitle,ProductTitle,MarketerTitle
+,(CASE WHEN (@TaxDate <> '')AND (BeginDate >=@TaxDate) THEN 				
+					Round(Amount+(
+					(isnull((select TaxPercentage from TaxPerYear where [Year] = substring(BeginDate,1,4)),0)/100)*Amount
+									) ,0)  
+				ELSE 	Amount	END
+				)AS 							
+									TotalAmount
+
+from Contract 
+		left join ContractType on (Contract.ContractTypeId = ContractType.ContractTypeID)
+		left join ContractSubType on (Contract.ContractSubTypeId = ContractSubType.ContractSubTypeID)
+		left join Product on   (Contract.ProductId = Product.ProductId)
+		left join Marketer on (Contract.MarketerID = Marketer.MarketerID)
+
+where customerid=@customerid
+and (Contract.ContractTypeId in (select ContractTypeId from UserTypeContractType where UserTypeID =  @UserTypeID) or @UserTypeID = 0)
+	and (
+			( BeginDate >= @StartDate or @StartDate = '') and ( (EndDate <= @EndDate) or @EndDate = '') 
+			)
+	and (Contract.ContractTypeID = @ContractTypeID  or @ContractTypeID	= 0)
+	and (Contract.MarketerID				 = @MarketerID		or @MarketerID		= 0)
+	and (Contract.ProductId		 = @ProductId		or @ProductId		= 0) 
+	and (isnull(TaxPercentage,0) = @TaxPercentage or @TaxPercentage = -1)
+	and (isnull(GoodJobPercentage,0) = @GoodJobPercentage or @GoodJobPercentage = -1)
+GO
+
+
+IF not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[ContractCheque]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+begin
+		CREATE TABLE [dbo].[ContractCheque](
+			[ContractchequeID] [int] IDENTITY(1,1) NOT NULL,
+			[ContractID] [int] NOT NULL,
+			[ChequeAmount] [float] NOT NULL,
+			[ChequeNo] [nvarchar](50) COLLATE Arabic_CI_AS NOT NULL,
+			[Date] [char](10) COLLATE Arabic_CI_AS NOT NULL,
+			[AccountNumber] [nvarchar](50) COLLATE Arabic_CI_AS NULL,
+			[AccountName] [nvarchar](50) COLLATE Arabic_CI_AS NULL,
+			[BankName] [nvarchar](30) COLLATE Arabic_CI_AS NULL,
+			[Comment] [nvarchar](150) COLLATE Arabic_CI_AS NULL)
+
+	ALTER TABLE [dbo].[ContractCheque] WITH NOCHECK ADD 
+		CONSTRAINT [PK_ContractCheque] PRIMARY KEY  CLUSTERED 
+		(
+			[ContractchequeID]
+		)  ON [PRIMARY] 
+	 
+
+        ALTER TABLE [dbo].[ContractCheque]  ADD  CONSTRAINT [FK_ContractCheque_Contract]     FOREIGN KEY([ContractID])      REFERENCES [dbo].[Contract] ([ContractID])
+
+
+ CREATE  INDEX [IX_ContractCheque] ON [dbo].[ContractCheque]([ChequeNo] ,[AccountNumber] ) ON [PRIMARY]
+
+end
+
+
+
+IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[ContractCheque]') AND type in (N'U'))
+begin
+		CREATE TABLE [dbo].[ContractCheque](
+			[ContractchequeID] [int] IDENTITY(1,1) NOT NULL,
+			[ContractID] [int] NOT NULL,
+			[ChequeAmount] [float] NOT NULL,
+			[ChequeNo] [nvarchar](50) COLLATE Arabic_CI_AS NOT NULL,
+			[Date] [char](10) COLLATE Arabic_CI_AS NOT NULL,
+			[AccountNumber] [nvarchar](50) COLLATE Arabic_CI_AS NULL,
+			[AccountName] [nvarchar](50) COLLATE Arabic_CI_AS NULL,
+			[BankName] [nvarchar](30) COLLATE Arabic_CI_AS NULL,
+			[Comment] [nvarchar](150) COLLATE Arabic_CI_AS NULL,
+			[ChequeImage] [image] NULL
+)
+
+ALTER TABLE [dbo].[ContractCheque] WITH NOCHECK ADD CONSTRAINT [PK_ContractCheque]  PRIMARY KEY CLUSTERED([ContractchequeID] ) ON [PRIMARY]
+ALTER TABLE [dbo].[ContractCheque]  ADD CONSTRAINT [FK_ContractCheque_Contract]      FOREIGN KEY ([ContractID])     REFERENCES [dbo].[Contract] ([ContractID])
+CREATE  INDEX [IX_ContractCheque] ON [dbo].[ContractCheque]([ChequeNo] ,[AccountNumber]) ON [PRIMARY]
+
+end
+GO
+
+IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[ContractPayByCash]') AND type in (N'U'))
+Begin
+	CREATE TABLE [dbo].[ContractPayByCash](
+		[ContractPayByCashID] [int] IDENTITY(1,1) NOT NULL,
+		[ContractID] [int] NOT NULL,
+		[Amount] [float] NOT NULL,
+		[Date] [char](10) COLLATE Arabic_CI_AS NOT NULL,
+		[FishNo] [nvarchar](50) COLLATE Arabic_CI_AS NULL,
+		[AccountNo] [nvarchar](40) COLLATE Arabic_CI_AS NULL,
+		[BankName] [nvarchar](50) COLLATE Arabic_CI_AS NULL,
+		[Comment] [nvarchar](150) COLLATE Arabic_CI_AS NULL,
+		[FishImage] [image] NULL)ON [PRIMARY]
+	ALTER TABLE [dbo].[ContractPayByCash] WITH NOCHECK ADD CONSTRAINT [PK_ContractPayByCash] PRIMARY KEY CLUSTERED([ContractPayByCashID])ON [PRIMARY]
+	ALTER TABLE [dbo].[ContractPayByCash] ADD  CONSTRAINT [FK_ContractPayByCash_Contract]  FOREIGN KEY ([ContractID])REFERENCES [dbo].[Contract] ([ContractID])
+	CREATE  INDEX [IX_ContractPayByCash]ON [dbo].[ContractPayByCash]([FishNo] ,[AccountNo] ) ON [PRIMARY]
+end
+GO
+
+
+
+IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GuaranteeType]') AND type in (N'U'))
+BEGIN
+		CREATE TABLE [dbo].[GuaranteeType](
+			[GuaranteeTypeID] [tinyint] IDENTITY(1,1) NOT NULL,
+			[Title] [nvarchar](50) COLLATE Arabic_CI_AS NOT NULL)ON [PRIMARY]
+
+	ALTER TABLE [dbo].[GuaranteeType]     WITH NOCHECK ADD CONSTRAINT [PK_GuaranteeType]     PRIMARY KEY CLUSTERED([GuaranteeTypeID]) ON [PRIMARY]
+
+END
+GO
+
+
+
+IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[ContractGuarantee]') AND type in (N'U'))
+BEGIN
+		CREATE TABLE [dbo].[ContractGuarantee](
+			[ContractGuaranteeID] [int] IDENTITY(1,1) NOT NULL,
+			[ContractID] [int] NOT NULL,
+			[Sake] [tinyint] NOT NULL,
+			[GuaranteeTypeID] [tinyint] NOT NULL,
+			[StartDate] [nchar](10) COLLATE Arabic_CI_AS NOT NULL,
+			[EndDate] [nchar](10) COLLATE Arabic_CI_AS NOT NULL,
+			[Amount] [float] NOT NULL,
+			[GuaranteeImage] [image] NULL)ON [PRIMARY]
+
+        ALTER TABLE [dbo].[ContractGuarantee] WITH NOCHECK ADD CONSTRAINT [PK_ContractGuarantee] PRIMARY KEY CLUSTERED([ContractGuaranteeID]) ON [PRIMARY]
+	ALTER TABLE [dbo].[ContractGuarantee] ADD  CONSTRAINT [FK_ContractGuarantee_Contract]  FOREIGN KEY([ContractID])         REFERENCES [dbo].[Contract] ([ContractID])
+	ALTER TABLE [dbo].[ContractGuarantee] ADD  CONSTRAINT [FK_ContractGuarantee_GuaranteeType] FOREIGN KEY([GuaranteeTypeID])REFERENCES [dbo].[GuaranteeType] ([GuaranteeTypeID])
+END
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[fn_FinishedContractBycustomerId]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION [dbo].[fn_FinishedContractBycustomerId]
+GO
+
+CREATE function [dbo].[fn_FinishedContractBycustomerId]( @CustomerID  int)
+returns  NVARCHAR(2000)
+begin
+declare @result nvarchar(2000)
+set @result=''
+select @result=@result+','+ replace(ProductTitle,'Ì','Ì')
+FROM CustomerProduct--CONTRACT
+LEFT JOIN  Product ON (Product.ProductID = CustomerProduct.ProductID) 
+WHERE CustomerProduct.ContractFinished = 1
+AND      (CustomerProduct.CustomerID =@CustomerID)
+			--AND CONTRACT.EndDate>=dbo.Shamsi(GETDATE())
+order by Product.ProductID
+
+if @result<>'' 
+  set @result=right(@result,len(@result)-1)  
+else
+  set @result='' 
+  
+ return(@result)   
+end
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[fn_ProductIDByCustomerID]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION [dbo].[fn_ProductIDByCustomerID]
+GO
+
+CREATE function [dbo].[fn_ProductIdByCustomerID]( @CustomerID  int)
+returns  nvarchar(2000)
+begin
+declare @result nvarchar(2000)
+set @result=''
+select @result=@result+','+ cast(Product.ProductId AS NVARCHAR) 
+FROM         CustomerProduct
+INNER JOIN  Product ON CustomerProduct.ProductID = Product.ProductID
+WHERE     (CustomerProduct.CustomerID =@CustomerID)
+order by Product.ProductID
+
+ return(@result)   
+end
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Select_Customer]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Select_Customer]
+GO
+
+
+CREATE Procedure [dbo].[Select_Customer]      
+(@likeWhere nvarchar(1000),@MarketerID int ,@GroupId int,@CityId int,@ProductId int,@CustomerStatusId int =1,@Top int =1000
+,@StateID		int
+,@ContactNumber	nvarchar(100)
+,@Email			nvarchar(100)
+)      
+As      
+      
+Declare @sqlCommand nvarchar(4000),@where nvarchar(1000)      
+		Set @sqlCommand='
+						Update CustomerProduct set ContractFinished = 0
+						
+						Update CustomerProduct set ContractFinished = 1 FROM CustomerProduct
+						INNER JOIN (
+						SELECT ProductID,CustomerID FROM [CONTRACT] GROUP BY ProductID,CustomerID
+						HAVING max(CONTRACT.EndDate) < dbo.Shamsi(GETDATE())
+							AND not ProductID IS NULL) t
+							ON (t.ProductID = CustomerProduct.ProductID AND t.CustomerID = CustomerProduct.CustomerID ) 												
+							'
+		
+		Exec sp_executesql @sqlCommand  
+		SET @sqlCommand = ''
+
+Set @sqlCommand='SELECT  top '+cast(@top as varchar(10))+' isnull(CompanyName,'''')+''(''+isnull(PersonTitle,'''')+isnull('' - ''+Treater,'''')+'')''  as NickName    
+,Customer.CustomerID, Customer.CustomerNo ,cast(1 as bigint) as RowNo /*Row_Number() over (order  by insertdate desc )  as RowNo */         
+,[PersonTitle],[Address],[Phone],[Notes],[CompanyName],Customer.CityID,Customer.GroupID,Customer.MarketerID         
+,[IsActive],[SenderType],[Priority],[Treater],[CompaginID],[PostalCode],[EmailAddress],[WorkPhone1]      
+,[Website],[MobilePhone],[FaxNumber],[competitiveNote],[Insertdate],[LastUpdate],[CancelReasonID]      
+,[CancelComment],[CancelDate],Customer.CustomerStatusID,UserTableLinkedID,CityTitle,GroupTitle,MarketerTitle    
+,CustomerStatusTitle,(select max(Tododate) from followup where customerid=customer.customerid and donestatusid=2) latestFollowup    
+,(select min(Tododate) from followup where customerid=customer.customerid and donestatusid=1) nextFollowup
+,FreeField01,FreeField02,FreeField03,FreeField04,FreeField05,FreeField06
+,FreeField07,FreeField08,FreeField09,FreeField10,FreeField11,FreeField12
+,FreeField13,FreeField14,FreeField15,FreeField16,FreeField17,FreeField18      
+,dbo.fn_FinishedContractBycustomerId(customerid) FinishedContractProducts    
+,dbo.fn_ProductByCustomerID(customerid) products,InnerPhone  
+,dbo.fn_ProductIdByCustomerID(customerid)+'','' ProductsID
+, cast(CustomerId as nvarchar)+''|''+isnull(PostalCode,'''')+''|''+isnull(CustomerNo,'''')+''|''+isnull(PersonTitle,'''')+''|''
+								+ isnull(Treater,'''')+''|''+isnull(Address,'''')+''|''+isnull(Notes,'''')+''|''+isnull(CompanyName,'''')
+		SearchStr
+ , ( isnull(Phone,'''')+''|''+isnull(FaxNumber,'''')+''|''+isnull(WorkPhone1,'''')+''|''+isnull(MobilePhone,'''')) SearchInt
+,city.stateid
+
+FROM Customer       
+left join Marketer on Marketer.MarketerID=Customer.MarketerID      
+left join Groups on Groups.GroupID=Customer.GroupID      
+left join City on City.CityID=Customer.CityID      
+left join CustomerStatus on CustomerStatus.CustomerStatusID=Customer.CustomerStatusID  '      
+      
+Set @likeWhere=isnull(ltrim(rtrim(@likeWhere)),'')      
+      
+Set @where=''      
+if @likeWhere<>''       
+ set @where=@where+' where '+@likeWhere      
+      
+      
+Set @where=Replace(@where,'ò','ﬂ')      
+      
+if @MarketerID<>0       
+  if @where<>''       
+    set @where=@where+' and ('+cast(@MarketerID as varchar(3))+' in (select marketerid from followup where customerid =customer.customerid) or customer.Marketerid='+cast(@MarketerID as varchar(3))+' or '+cast(@MarketerID as varchar(3))+'=-1)'      
+   else      
+    set @where=@where+' where ('+cast(@MarketerID as varchar(3))+' in (select marketerid from followup where customerid =customer.customerid) or customer.Marketerid='+cast(@MarketerID as varchar(3))+' or '+cast(@MarketerID as varchar(3))+'=-1)'      
+else      
+  if @where<>''       
+    Set @where=@where+' and (isnull(Customer.GroupID,0)<>17)'      
+   else      
+    Set @where=@where+' where (isnull(Customer.GroupID,0)<>17)'      
+      
+if @CustomerStatusId<>0       
+  if @where<>''       
+    Set @where=@where+' and Customer.CustomerStatusId='+cast(@CustomerStatusId as varchar(3))      
+   else      
+    Set @where=@where+' where Customer.CustomerStatusId='+cast(@CustomerStatusId as varchar(3))      
+      
+if @GroupId<>0       
+  if @where<>''       
+    Set @where=@where+' and isnull(Customer.GroupId,0)='+cast(@GroupId as varchar(3))      
+   else      
+    Set @where=@where+' where isnull(Customer.GroupId,0)='+cast(@GroupId as varchar(3))      
+      
+if @CityId<>0       
+  if @where<>''       
+    Set @where=@where+' and Customer.CityId='+cast(@CityId as varchar(10))      
+   else      
+    Set @where=@where+' where Customer.CityId='+cast(@CityId as varchar(10))      
+      
+if @ProductId<>0       
+  if @where<>''       
+    Set @where=@where+' and CustomerID in (SELECT CustomerID FROM  CustomerProduct WHERE ProductID = ' + cast(@ProductId as varchar(3))+')'      
+   else      
+    Set @where=@where+' where CustomerID in (SELECT CustomerID FROM  CustomerProduct WHERE ProductID = ' + cast(@ProductId as varchar(3))+')'      
+
+if @StateID<>0       
+  if @where<>''       
+    Set @where=@where+' and (Customer.StateID  = ' + cast(@StateID  as varchar(3))+')'      
+   else      
+    Set @where=@where+' where (Customer.StateID = ' + cast(@StateID   as varchar(3))+')'      
+
+if @Email<>''       
+  if @where<>''       
+    Set @where=@where+' and (Customer.EmailAddress  like ''%' + @Email+'%'')'      
+   else      
+    Set @where=@where+' where (Customer.EmailAddress like ''%' +@Email+'%'')'      
+
+if @ContactNumber<>''       
+  if @where<>''       
+    Set @where=@where+' and ((Phone like ''%'+@ContactNumber+'%'') or (WorkPhone1 like ''%'+@ContactNumber+'%'') or '+
+							' (MobilePhone like ''%'+@ContactNumber+'%'') or (FaxNumber like ''%'+@ContactNumber+'%'')  )'
+   else      
+    Set @where=@where+' where ((Phone like ''%'+@ContactNumber+'%'') or (WorkPhone1 like ''%'+@ContactNumber+'%'') or '+
+      ' (MobilePhone like ''%'+@ContactNumber+'%'') or (FaxNumber like ''%'+@ContactNumber+'%'')  )'
+
+      
+Set @sqlCommand=@sqlCommand+@where+' order  by insertdate desc '      
+Exec sp_executesql @sqlCommand      
+--Print @sqlCommand 
+
+
+GO
+
+
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CommisionPercent]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[CommisionPercent](
+	[CommisionPercentID] [int] IDENTITY(1,1) NOT NULL,
+	[ProductID] [int] NOT NULL,
+	[CommisionPercent] [tinyint] NOT NULL ,
+	[Effectivedate] [nchar](10) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL )--ON PRIMARY
+ALTER TABLE [dbo].[CommisionPercent] WITH NOCHECK ADD CONSTRAINT [PK_CommisionPercent]  PRIMARY KEY CLUSTERED([CommisionPercentID]) ON [PRIMARY]
+END
+GO
+
+
+
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[fn_ProductCommisionPercent]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION [dbo].[fn_ProductCommisionPercent]
+GO
+
+
+CREATE function [dbo].[fn_ProductCommisionPercent](@ProductId INT,@ContractDate NCHAR(10))
+returns  tinyint
+begin
+declare @result TINYINT
+
+		
+set @result=0
+
+set @result = 
+(SELECT top 1 CommisionPercent FROM CommisionPercent WHERE productId = @ProductId AND  Effectivedate <= @ContractDate
+ORDER BY Effectivedate DESC)
+
+IF @result IS NULL
+select top 1 @result=  CommisionPercent
+FROM   Product WHERE ProductID = @ProductId
+		order by Product.ProductID
+
+ return(@result)   
+end
+GO
+
+CREATE PROCEDURE  [dbo].[Select_Contract_By_Date](@FromDate char(10),@ToDate char(10),
+@MarketerID int =0 )
+AS
+
+BEGIN
+	SELECT     Customer.PersonTitle, Customer.CompanyName, Contract.ContractID, Contract.CustomerID, Contract.BeginDate, Contract.EndDate, Contract.Amount, 
+                      Marketer.MarketerTitle, Customer.CustomerNo,ContractTypeTitle
+				--, dbo.fn_ProductByCustomerID(Contract.CustomerID) AS Product,
+						,ProductTitle AS Product,
+--dbo.fn_ProductPercentByCustomerID(Contract.CustomerID)*Contract.Amount/100 Comission
+dbo.[fn_ProductCommisionPercent](CONTRACT.ProductID,Contract.BeginDate)*Contract.Amount/100 Comission
+FROM         Contract
+					left join product on (Contract.productID = product.productID)
+                    inner JOIN   Customer ON Contract.CustomerID = Customer.CustomerID 
+                    inner JOIN  Marketer ON Contract.MarketerID = Marketer.MarketerID
+		    left join ContractType CT on (CT.ContractTypeId = Contract.ContractTypeId) 
+
+where begindate between @FromDate  and @ToDate and (Marketer.MarketerID=@MarketerID or @MarketerID=0)
+order by BeginDate desc 
+END
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Search_Contract_Advance]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Search_Contract_Advance]
+
+GO
+
+CREATE proc [dbo].[Search_Contract_Advance]
+(
+@StartDate		nvarchar(10)
+,@EndDate		nvarchar(10)
+,@MarketerID		int =0 
+,@ContractTypeID	int
+,@ProductID		int
+,@CustomerId		int
+,@UserTypeID		int
+)
+as
+
+
+DECLARE  @TaxDate CHAR(10)
+	set @TaxDate =(SELECT [VALUE] from Settings WHERE VariableName = 'TaxDate')
+
+
+SELECT     Customer.PersonTitle, Customer.CompanyName, Contract.ContractID, Contract.CustomerID, Contract.BeginDate, Contract.EndDate, Contract.Amount, 
+                      Marketer.MarketerTitle, Customer.CustomerNo
+				--, dbo.fn_ProductByCustomerID(Contract.CustomerID) AS Product,
+					,ContractTypeTitle						
+						,ProductTitle AS Product,
+--dbo.fn_ProductPercentByCustomerID(Contract.CustomerID)*Contract.Amount/100 Comission
+dbo.[fn_ProductCommisionPercent](CONTRACT.ProductID,Contract.BeginDate)*Contract.Amount/100 Comission
+
+,(CASE WHEN (@TaxDate <> '')AND (BeginDate >=@TaxDate) THEN 				
+					Round(Amount+(
+					(isnull((select TaxPercentage from TaxPerYear where [Year] = substring(BeginDate,1,4)),0)/100)*Amount
+									) ,0)  
+				ELSE 	Amount	END
+				)AS 							
+									TotalAmount
+
+FROM         Contract
+					left join product on (Contract.productID = product.productID)
+                    inner JOIN   Customer ON Contract.CustomerID = Customer.CustomerID 
+                    inner JOIN  Marketer ON Contract.MarketerID = Marketer.MarketerID
+					left join ContractType CT on (CT.ContractTypeId = Contract.ContractTypeId) 
+where	
+	(Contract.ProductId		 = @ProductId		or @ProductId		= 0) 
+	and (
+			( BeginDate >= @StartDate or @StartDate = '') and ( (BeginDate <= @EndDate) or @EndDate = '') 
+			)
+	and (Contract.ContractTypeID = @ContractTypeID  or @ContractTypeID	= 0)
+
+	and (Marketer.MarketerID=@MarketerID or @MarketerID=0)
+	and (Customer.CustomerId =@CustomerId or @CustomerId=0)
+	and (Contract.ContractTypeId in (select ContractTypeId from UserTypeContractType where UserTypeID =  @UserTypeID) or @UserTypeID  = 0 )
+
+order by BeginDate desc
+GO
+
+if (Select count(*) from ContractType) = 0 
+begin
+	insert into ContractType select '3','ﬁ—«—œ«œ ›—Ê‘'
+	insert into ContractType select '2','ﬁ—«—œ«œ Å‘ Ì»«‰Ì'
+	insert into ContractType select '1','«‰Ã«„ Œœ„« '
+	insert into ContractType select '0','‰« „‘Œ’'
+end
+GO
+if (Select count(*) from ContractSubType) = 0 
+begin
+	insert into ContractSubType select '1',1,'‰—„ «›“«—'
+	insert into ContractSubType select '1',2,'”«·Ì«‰Â'
+	insert into ContractSubType select '2',2,'›«ò Ê—Ì'
+	insert into ContractSubType select '1',3,'Œœ„«  œ«Œ·Ì'
+	insert into ContractSubType select '2',3,'Œœ„«  „‘ —Ì'
+end
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[VWCities]') and OBJECTPROPERTY(id, N'IsView') = 1)
+DROP VIEW [dbo].[VWCities]
+GO
+
+CREATE VIEW [dbo].[VWCities]      
+AS      
+ 
+SELECT (Case When IsNull(RTrim(City.CityTitle),'') = '' then '»œÊ‰ ‘Â—(' + RTrim(State.StateTitle) + ')'
+        else RTrim(City.CityTitle) + ' (' + RTrim(State.StateTitle) + ')' 
+        end ) AS StateCityTitle
+       , State.StateTitle, dbo.City.*      
+FROM dbo.City Right JOIN      
+     dbo.State ON dbo.City.StateID = dbo.State.StateID 
+
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[SetUserSetting]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[SetUserSetting]
+GO
+
+
+CREATE PROCEDURE [dbo].[SetUserSetting]
+@UserID  int ,@VariableName varchar(50),@Value nvarchar(255)
+AS
+if not exists(select * from Settings WHERE (UserID = @UserID) AND (VariableName = @VariableName))
+insert into Settings(UserID,VariableName,Value) values(@UserID,@VariableName,@Value)
+Update Settings 
+set Value=@Value
+WHERE     (UserID = @UserID) AND (VariableName = @VariableName)
+ 
+GO
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GetSystemSetting]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[GetSystemSetting]
+GO
+
+CREATE PROCEDURE [dbo].[GetSystemSetting]
+@VariableName varchar(50),@Value nvarchar(255)  output
+AS
+ exec GetUserSetting -1,@VariableName,@value output
+
+
+
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GetSystemSetting]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[GetSystemSetting]
+GO
+
+CREATE PROCEDURE [dbo].[GetSystemSetting]
+@VariableName varchar(50),@Value nvarchar(255)  output
+AS
+ exec GetUserSetting -1,@VariableName,@value output
+
+
+
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[SetSystemSetting]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[SetSystemSetting]
+GO
+
+CREATE PROCEDURE [dbo].[SetSystemSetting]
+@VariableName varchar(50),@Value nvarchar(255)
+AS
+exec SetUserSetting -1 ,@VariableName ,@Value
+
+GO
+
+Update customer set customer.StateId = City.StateId
+from customer left join city on (city.CityId = Customer.cityID)
+GO
+
+if (Select count(*) from GuaranteeType) = 0
+begin
+	Insert into GuaranteeType select '÷„«‰  ‰«„Â »«‰òÌ'
+	Insert into GuaranteeType select 'çò'
+	Insert into GuaranteeType select '”› Â'
+end
+GO
+
+If (select count(*) from UserType)  = 0
+begin
+Insert Into UserType select '›—Ê‘','1'
+Insert Into UserType select 'Å‘ Ì»«‰Ì','2'
+Insert Into UserType select 'Œœ„« ','3'
+end
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Report_Customer]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Report_Customer]
+GO
+
+
+
+
+
+
+
+CREATE  PROCEDURE [dbo].[Report_Customer]
+(@ProductID tinyint,@where nvarchar(2000),@Top int )
+as
+declare @sqlCommand nvarchar(4000)
+set @sqlCommand='SELECT Top '+cast(@top as varchar(10))+' 
+ case when lTrim(rtrim(CompanyName))<>'''' then CompanyName+''(''+PersonTitle+'')'' else PersonTitle end as nickname,
+    Customer.*,                       Groups.GroupTitle, Groups.GroupNo, Marketer.MarketerNo, Marketer.MarketerTitle, VWCities.CityTitle
+FROM         Customer left JOIN
+                      Groups ON Customer.GroupId = Groups.GroupID left JOIN
+                      Marketer ON Customer.MarketerID = Marketer.MarketerID left JOIN
+                      VWCities ON Customer.CityId = VWCities.CityID '
+
+
+set @where=isnull(ltrim(rtrim(@where)),'')
+if @ProductId<>0 
+  if @where<>'' 
+    set @where=@where+' and CustomerID in (SELECT CustomerID FROM  CustomerProduct WHERE ProductID = '+cast(@ProductId as varchar(3))+')'
+   else
+    set @where=@where+'  CustomerID in (SELECT CustomerID FROM  CustomerProduct WHERE ProductID = '+cast(@ProductId as varchar(3))+')'
+
+if @where<>'' 
+ set @sqlCommand=@sqlCommand+' where '+@where
+ set @sqlCommand=@sqlCommand
+
+exec sp_executesql @sqlCommand
+
+GO
+
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='ProductID' AND o.name='Serial')            
+alter table Serial add ProductID tinyint null
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.syscolumns c INNER JOIN dbo.sysobjects o ON o.id = C.id 
+WHERE o.xtype='U' AND c.name='CustomerID' AND o.name='Serial')            
+alter table Serial add CustomerID int null
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Search_Serial]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Search_Serial]
+GO
+CREATE proc [dbo].[Search_Serial]
+(
+@Network tinyint
+,@StartDate nvarchar(15),@EndDate nvarchar(15)
+,@ProductId tinyint
+,@customerId int
+)
+as
+
+Select Serial.CustomerID,PersonTitle,companyName,Serial.* ,productTitle,dbo.shamsi(SerDate) SerDateShamsi
+			from Serial left join customer on (Customer.CustomerId = Serial.CustomerId)
+					left join Product on (Product.productId = Serial.productID)
+		where (Network  = @Network  or @Network = 2)
+				and
+			(dbo.shamsi(SerDate)  >= @StartDate or @StartDate = '') 
+				and
+			(dbo.shamsi(SerDate)  <= @EndDate or @EndDate = '') 
+				and
+			(Serial.ProductID = @ProductId or @ProductId = 0)
+				and
+			(Serial.CustomerId = @customerId or @customerId = 0)
+
+GO
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+
+CREATE TABLE dbo.Tmp_WordTemplate
+	(
+	WordTemplateID int NOT NULL IDENTITY (1, 1),
+	WordTemplate image NULL,
+	TemplateTitle nvarchar(50) NOT NULL
+	)  ON [PRIMARY]
+	 TEXTIMAGE_ON [PRIMARY]
+
+SET IDENTITY_INSERT dbo.Tmp_WordTemplate ON
+
+IF EXISTS(SELECT * FROM dbo.WordTemplate)
+	 EXEC('INSERT INTO dbo.Tmp_WordTemplate (WordTemplateID, WordTemplate, TemplateTitle)
+		SELECT WordTemplateID, WordTemplate, TemplateTitle FROM dbo.WordTemplate WITH (HOLDLOCK TABLOCKX)')
+
+SET IDENTITY_INSERT dbo.Tmp_WordTemplate OFF
+
+DROP TABLE dbo.WordTemplate
+
+EXECUTE sp_rename N'dbo.Tmp_WordTemplate', N'WordTemplate', 'OBJECT' 
+
+ALTER TABLE dbo.WordTemplate          WITH NOCHECK ADD CONSTRAINT PK_WordTemplate        PRIMARY KEY CLUSTERED(WordTemplateID)  ON [PRIMARY]
+
+
+COMMIT
+GO
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CheckCustomer]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[CheckCustomer]
+GO
+CREATE PROC [dbo].[CheckCustomer]
+(
+@CustotomerID	INT		
+)
+AS
+DECLARE @result TINYINT
+SET @result = 0
+
+IF (SELECT count(*) FROM [Contract] WHERE CustomerID = @CustotomerID) > 0 
+	SET @result = 1
+
+IF (SELECT count(*) FROM FollowUp WHERE CustomerID = @CustotomerID) > 0 
+	SET @result = 2
+
+IF (SELECT count(*) FROM Person WHERE CustomerID = @CustotomerID) > 0 
+	SET @result = 3
+	
+	
+	SELECT @result ERROR
+
+GO
+
+
+
+
+UPDATE Customer
+SET
+	CompanyName = REPLACE(CompanyName,CHAR(223),CHAR(152)),
+	PersonTitle = REPLACE(PersonTitle,CHAR(223),CHAR(152)),
+	Treater     = REPLACE(Treater,CHAR(223),CHAR(152)),
+	ADDRESS     = REPLACE(ADDRESS,CHAR(223),CHAR(152)),
+	Notes       = REPLACE(Notes,CHAR(223),CHAR(152))
+GO
+
+
+IF (SELECT COUNT(*) FROM Settings WHERE VariableName = 'TaxDate')  = 0
+INSERT INTO Settings SELECT -1, 'TaxDate',dbo.Shamsi(GETDATE())
+GO
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Select_FollowUP_By_CustomerID]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Select_FollowUP_By_CustomerID]
+GO
+
+
+
+CREATE procedure [dbo].[Select_FollowUP_By_CustomerID]
+@customerid int,@orgID int =1 
+as
+Select *
+from followup
+inner join marketer on marketer.marketerid=followup.marketerid
+where customerid=@customerid
+and (marketer.orgid=@orgid or @orgid=6)
+ORDER BY ToDoDate 
+GO
+
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Select_FollowUP]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Select_FollowUP]
+GO
+
+CREATE procedure [dbo].[Select_FollowUP]
+@customerid int,@orgID int =1
+,@DoneDate	CHAR(10)
+,@TodODate	CHAR(10)
+,@MarketerID	INT
+,@DoneStatusID	TINYINT
+
+as
+Select *
+from followup
+inner join marketer on marketer.marketerid=followup.marketerid
+where customerid=@customerid
+and (marketer.orgid=@orgid or @orgid=6)
+AND (ToDoDate = @TodODate OR @TodODate = '')
+AND (Donedate = @DoneDate OR @DoneDate = '')
+AND (followup.MarketerID = @MarketerID OR @MarketerID = 0)
+AND (DoneStatusID = @DoneStatusID or @DoneStatusID = 0)
+ORDER BY ToDoDate 
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[YCRM_Select_Letter_By_CustomerID]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[YCRM_Select_Letter_By_CustomerID]
+GO
+
+CREATE PROCEDURE [dbo].[YCRM_Select_Letter_By_CustomerID]
+@CustomerID INT , @DBName VARCHAR(100)
+AS
+
+DECLARE @Sql VARCHAR(4000)
+
+SET @Sql='
+SELECT list1.*,fo.Title+fo.ResponsibleStaffer AS ToOrgIDDesc FROM 
+(
+SELECT	fo.title,
+		l.indicatorId,
+		l.SecretariatID,
+		s.SecTitle SecretariatDesc,
+		l.LetterID,    
+		l.MYear, 		 
+		l.Letter_Type,
+		lt.Title Letter_TypeDesc,
+		l.letterformat,
+		lf.Title letterformatDesc,
+		l.IncommingNO,                                        
+		l.Incommingdate, 
+		l.CenterNo,
+		l.CenterDate,
+		l.FromOrgID,
+		fo.Title+fo.ResponsibleStaffer AS FromOrgDesc,
+		l.ToOrgID,
+		l.Signerid,
+		l.ClassificationID, 
+		c.Title ClassificationDesc,
+		l.UrgencyID,		
+		u2.Title UrgencyDesc,
+		l.Memo,
+		l.AttachTitle,                                                                                                                                                                                                                                                     
+		l.NumberOfAttachPages, 
+		l.NumberOfPage,
+		l.ReceiveTypeID,
+		rt.Title ReceiveTypeDesc,
+		u.UserName,
+		l.RetroactionNo,
+		l.UserMemo,
+		l.RegistrationDate,
+		l.RegistrationTime,
+		l.FollowLetterNo,
+		l.ToStaffer,	
+		l.SentLetterID,
+		l.TemplateID,
+		l.HeaderID,
+		l.LetterRecommites,                                                                                                                                                                                                                                                
+		l.PreCode,
+		l.fromstaffer,                                       
+		l.Finalized,
+		l.SendStatusID,
+		ss.SendStatusTitle SendStatusDesc,
+		l.LatestActionTypeID,
+		at.ActionTypeTitle AS latestActionTypeDesc,
+		sb.SubjectTitle
+
+FROM '+CAST(@DBName AS VARCHAR(100))+'..Letter L 
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..Secretariats s ON s.SecID = L.SecretariatID
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..LetterTypes lt ON lt.ID = L.Letter_Type
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..LetterFormats lf ON L.letterformat=lf.Code
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..FromOrganizations fo ON l.FromOrgID=fo.ID 
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..ReceiveTypes rt ON l.ReceiveTypeID=rt.ID
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..Users u ON l.UserID=u.Id
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..SendStatus ss ON l.SendStatusID=ss.SendStatusID
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..ActionType at ON l.LatestActionTypeID=at.ActionTypeID
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..Urgenceis u2 ON l.UrgencyID=u2.ID
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..Classifications c ON l.ClassificationID=c.ID
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..Subject sb ON l.SubjectID=sb.SubjectID
+
+WHERE L.CustomerID='+CAST(@CustomerID AS VARCHAR(50))+
+' ) AS list1
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..FromOrganizations fo ON list1.ToOrgID=fo.ID'
+
+EXEC (@Sql)
+GO
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Report_Contract]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Report_Contract]
+GO
+
+
+
+
+
+
+CREATE   procedure [dbo].[Report_Contract]
+@where nvarchar(1000)
+as
+declare @sqlCommand nvarchar(4000)
+set @sqlCommand='SELECT C.CustomerNo, C.PersonTitle, Marketer.MarketerTitle ContactMarketerTitle, C.Address, C.Phone,
+ C.Notes, C.CompanyName,  C.EmailAddress, C.PostalCode, C.Treater, C.WorkPhone1, C.Website,
+ C.MobilePhone,  C.FaxNumber, C.CompetitiveNote, C.Insertdate, Groups.GroupTitle, CustomerStatus.CustomerStatusTitle, City.CityTitle, 
+Compagin.CompaginTitle,StateTitle,  Marketer_1.MarketerTitle CustomerMarketerTitle,dbo.fn_ProductByCustomerID(C.CustomerID) Products,   Contract.*,
+ProductTitle ,ContractTypeTitle,
+Contract.Amount*dbo.fn_ProductPercentByCustomerID(c.CustomerID)/100 Comission
+FROM Customer C
+inner JOIN  Contract ON C.CustomerID = Contract.CustomerID 
+Left JOIN Marketer ON C.MarketerID = Marketer.MarketerID 
+Left JOIN  Marketer AS Marketer_1 ON C.MarketerID = Marketer_1.MarketerID 
+Left JOIN Groups ON C.GroupId = Groups.GroupID
+Left JOIN CustomerStatus ON C.CustomerStatusID = CustomerStatus.CustomerStatusID 
+Left JOIN Compagin ON C.CompaginID = Compagin.CompaginID
+Left JOIN City ON C.CityId = City.CItyId
+left join State on City.StateId = State.StateId
+Left join product on product.productID = Contract.productId
+Left Join ContractType on Contract.ContractTypeID = ContractType.ContractTypeID
+Left Join ContractSubType on Contract.ContractSubTypeID = ContractSubType.ContractSubTypeID'
+set @Where=isnull(ltrim(rtrim(@Where)),'')
+if @Where<>'' 
+ set @where=' where '+@Where
+
+set @sqlCommand=@sqlCommand+@where
+exec sp_executesql @sqlCommand
+print @sqlCommand
+
+
+
+
+
+
+
+
+GO
+
+
+
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Select_FollowUP_By_date1]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Select_FollowUP_By_date1]
+GO
+
+
+
+CREATE Procedure [dbo].[Select_FollowUP_By_date1](@MarketerID int ,@BDate char(10), @Edate char(10),
+@DonStatusID int,@ActionTypeID int=0,@Comment_like nvarchar(255)='',@BSuccess tinyint=0,@ESuccess tinyint=100,@DoneComment_like nvarchar(255)='' )
+as
+if @DonStatusID<=1 
+SELECT   FollowUPID, FollowUp.CustomerID, FollowUp.DoneStatusID, FollowUp.MarketerID, Comment, ToDoDate, 
+                      DoneDate, ToDoTime, SuccessChance, Customer.*, 
+                      ActionType.ActionTypeTitle, DoneStatus.DoneStatustitle, Marketer.MarketerTitle,
+Phone,WorkPhone1,InnerPhone
+FROM  FollowUp 
+INNER JOIN   Customer ON FollowUp.CustomerID = Customer.CustomerID 
+INNER JOIN   ActionType ON FollowUp.ActionTypeID = ActionType.ActionTypeID 
+INNER JOIN   DoneStatus ON FollowUp.DoneStatusID = DoneStatus.DoneStatusID 
+INNER JOIN   Marketer ON FollowUp.MarketerID = Marketer.MarketerID
+WHERE     (@MarketerID = 0 or FollowUp.MarketerID = @MarketerID) AND 
+(FollowUp.ToDoDate between  @BDate and @Edate) and 
+(@DonStatusID=0 or FollowUp.DoneStatusID = @DonStatusID)and 
+(FollowUp.ActionTypeID = @ActionTypeID or @ActionTypeID = 0) AND 
+(isnull(Comment,'') like '%'+@Comment_like+'%') AND
+(isnull(SuccessChance,0) between  @BSuccess and @ESuccess) AND 
+(isnull(DoneComment,'') like '%'+@DoneComment_like+'%')
+order by tododate,todotime
+else
+
+SELECT   FollowUPID, FollowUp.CustomerID, FollowUp.DoneStatusID, FollowUp.MarketerID, Comment, ToDoDate, 
+                      DoneDate, ToDoTime, SuccessChance, Customer.*, 
+                      ActionType.ActionTypeTitle, DoneStatus.DoneStatustitle, Marketer.MarketerTitle,
+Phone,WorkPhone1
+FROM  FollowUp 
+INNER JOIN   Customer ON FollowUp.CustomerID = Customer.CustomerID 
+INNER JOIN   ActionType ON FollowUp.ActionTypeID = ActionType.ActionTypeID 
+INNER JOIN   DoneStatus ON FollowUp.DoneStatusID = DoneStatus.DoneStatusID 
+INNER JOIN   Marketer ON FollowUp.MarketerID = Marketer.MarketerID
+WHERE     (@MarketerID = 0 or FollowUp.MarketerID = @MarketerID) AND 
+(FollowUp.DoneDate between  @BDate and @Edate) and 
+(@DonStatusID=0 or FollowUp.DoneStatusID = @DonStatusID)and 
+(FollowUp.ActionTypeID = @ActionTypeID or @ActionTypeID = 0) AND 
+(isnull(Comment,'') like '%'+@Comment_like+'%') AND
+(isnull(SuccessChance,0) between  @BSuccess and @ESuccess) AND 
+(isnull(DoneComment,'') like '%'+@DoneComment_like+'%')
+order by tododate,todotime
+
+GO
+
+-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW
+-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW
+-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW
+-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW
+
+--declare @default sysname, @sql nvarchar(4000)
+
+--select @default = name 
+--from sys.default_constraints where parent_id = object_id('Contract')
+--AND type = 'D'
+--AND parent_column_id = (
+--    select column_id 
+--    from sys.columns 
+--    where id = object_id('Contract')
+--    and name = 'TaxPercentage'
+--    )
+
+--set @sql = N'alter table Contract drop constraint ' + @default
+--exec sp_executesql @sql
+--GO
+
+
+-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW
+-----I  DONT KNOW ---------declare @default sysname, @sql nvarchar(4000)
+
+--------------select @default = name 
+--------------from sys.default_constraints 
+--------------where parent_id = object_id('Contract')
+--------------AND type = 'D'
+--------------AND parent_column_id = (
+--------------    select column_id 
+--------------    from sys.columns 
+--------------    where id = object_id('Contract')
+--------------    and name = 'GoodJobPercentage'
+--------------    )
+
+--------------set @sql = N'alter table Contract drop constraint ' + @default
+--------------exec sp_executesql @sql
+
+--------------GO
+
+--END -----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW
+-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW
+-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW
+-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW-----I  DONT KNOW
+
+
+UPDATE CONTRACT SET ProductID = (SELECT PRoductId FROM CustomerProduct cp WHERE cp.CustomerID = ct.customerId )
+FROM CONTRACT ct
+WHERE  (CustomerId IN
+(SELECT distinct CustomerID
+	  FROM [CONTRACT] GROUP BY ProductID,CustomerID
+						HAVING max(CONTRACT.EndDate) < dbo.Shamsi(GETDATE())
+						AND COUNT(*) = 1 AND ProductID IS NULL))
+AND customerId IN (	SELECT CustomerId FROM CustomerProduct cp group by CustomerId having COUNT(*)=1 )
+GO
+
+UPDATE Contract
+SET ProductID = (select ProductID FROM CustomerProduct cp WHERE cp.CustomerID = Contract.CustomerID) 
+WHERE CustomerID in
+(
+SELECT cp.CustomerId FROM CustomerProduct cp
+						inner JOIN Customer c ON c.CustomerID = cp.CustomerID  
+WHERE cp.CustomerId  IN (SELECT c.CustomerID FROM [Contract] c) 
+GROUP BY cp.CustomerId having COUNT(ProductID) = 1  
+)
+GO
+
+
+
+IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CaseOriginal]') AND type in (N'U'))
+BEGIN
+	CREATE TABLE [dbo].[CaseOriginal](
+		[CaseOriginalId] [tinyint] IDENTITY(1,1) NOT NULL,
+		[CaseOriginalTitle] [nvarchar](50)  NOT NULL)ON [PRIMARY]
+	ALTER TABLE [dbo].[CaseOriginal]      WITH NOCHECK ADD CONSTRAINT [PK_CaseOriginal]      PRIMARY KEY CLUSTERED([CaseOriginalId]) ON [PRIMARY]
+END
+GO
+
+IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CasePriority]') AND type in (N'U'))
+BEGIN
+	CREATE TABLE [dbo].[CasePriority](
+		[CasePriorityID] [tinyint] IDENTITY(1,1) NOT NULL,
+		[CasePriorityTitle] [nvarchar](50)  NOT NULL)ON [PRIMARY]
+
+        ALTER TABLE [dbo].[CasePriority] WITH NOCHECK ADD CONSTRAINT [PK_CasePriority] PRIMARY KEY CLUSTERED([CasePriorityID]) ON [PRIMARY]
+	
+	insert into CasePriority select '⁄«œÌ'
+	insert into CasePriority select '÷—Ê—Ì'
+	insert into CasePriority select 'ŒÌ·Ì ÷—Ê—Ì'
+
+END
+GO
+
+IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[TaskStatus]') AND type in (N'U'))
+BEGIN
+			
+		CREATE TABLE [dbo].[TaskStatus](
+			[TaskStatusID] [tinyint] IDENTITY(1,1) NOT NULL,
+			[TaskStatusTitle] [nvarchar](50)  NOT NULL)ON [PRIMARY]
+
+
+	ALTER TABLE [dbo].[TaskStatus] WITH NOCHECK ADD CONSTRAINT [PK_CaseStatus] PRIMARY KEY CLUSTERED ([TaskStatusID]) ON [PRIMARY]
+
+	INSERT INTO TaskStatus select 'œ—Õ«· «‰Ã«„'
+	INSERT INTO TaskStatus select 'œ—Õ«· »——”Ì'
+	INSERT INTO TaskStatus select '„⁄·ﬁ'
+	INSERT INTO TaskStatus select '«‰Ã«„ ‘œÂ'
+	INSERT INTO TaskStatus select 'œ—Ì«›  Ã“∆Ì« '
+	INSERT INTO TaskStatus select '«‰’—«›'	
+					
+END
+GO
+IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CaseType]') AND type in (N'U'))
+BEGIN
+		
+	CREATE TABLE [dbo].[CaseType](
+		[CaseTypeID] [tinyint] IDENTITY(1,1) NOT NULL,
+		[CaseTypeTitle] [nvarchar](50)  NOT NULL,
+		[ManagerUserID] [int] NULL) ON [PRIMARY]
+
+        ALTER TABLE [dbo].[CaseType] WITH NOCHECK ADD 
+	CONSTRAINT [PK_CaseType] PRIMARY KEY  CLUSTERED 
+	(
+		[CaseTypeID]
+	)  ON [PRIMARY] 
+	
+	INSERT INTO CaseType select 'œ—ŒÊ«” ',NULL
+	INSERT INTO CaseType select '«ÌœÂ',NULL	
+	INSERT INTO CaseType select 'Œÿ«',NULL
+	INSERT INTO CaseType select '”Ê«·'	,NULL
+END
+GO
+
+
+
+IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Cases]') AND type in (N'U'))
+BEGIN
+	CREATE TABLE [dbo].[Cases](
+		[CaseID] [bigint] IDENTITY(1,1) NOT NULL,
+		[CaseTitle] [nvarchar](50)  NOT NULL,
+		[Comment] [nvarchar](250)  NULL,
+		[ProductId] [int] NULL,
+		[ProductVersion] [int] NULL,
+		[CaseTypeID] [tinyint] NULL,
+		[CasePriorityId] [tinyint] NULL,
+		[CustomerID] [int] NULL,
+		[CaseOrigiranlId] [tinyint] NULL,
+		[RegisterDate] [nchar](10)  NULL,
+		[RegisterUserID] [int] NULL,
+		[Completed] [bit] NOT NULL CONSTRAINT [DF_Cases_Status]  DEFAULT ((0)),
+		[CompleteDate] [nchar](10)  NULL,
+		[CompleteComment] [nvarchar](300)  NULL) ON [PRIMARY]
+        ALTER TABLE [dbo].[Cases]             WITH NOCHECK ADD CONSTRAINT [PK_Cases]             PRIMARY KEY CLUSTERED([CaseID]) ON [PRIMARY]
+
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Tasks]') AND type in (N'U'))
+BEGIN
+	CREATE TABLE [dbo].[Tasks](
+		[TaskID] [int] IDENTITY(1,1) NOT NULL,
+		[CaseId] [int] NOT NULL,
+		[Comment] [nvarchar](300)  NULL,
+		[TodoDate] [nchar](10)  NULL,
+		[StatusId] [int] NULL,
+		[AssignedUserId] [int] NOT NULL,
+		[AssignedDate] [nchar](10)  NULL,
+		[EstimatedDate] [nchar](10)  NULL) ON [PRIMARY]
+        ALTER TABLE [dbo].[Tasks] WITH NOCHECK ADD CONSTRAINT [PK_Tasks] PRIMARY KEY CLUSTERED([TaskID]) ON [PRIMARY]
+	
+END
+GO
+
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[select_Tasks]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[select_Tasks]
+GO
+CREATE PROC [dbo].[select_Tasks]
+@CaseID INT
+AS
+SELECT * 
+  FROM Tasks 		
+WHERE CaseID = @CaseID
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Select_Case]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Select_Case]
+GO
+
+CREATE PROC [dbo].[Select_Case]
+(
+@RegisterUserID INT)
+AS
+
+SELECT c.*,p.ProductTitle,ct.CaseTypeTitle,cp.CasePriorityTitle,ctr.CompanyName
+		,u.UserName
+  FROM Cases c 
+			LEFT JOIN Product p			ON c.ProductId = p.ProductID
+			LEFT JOIN CaseType ct		ON ct.CaseTypeID = c.CaseTypeID
+			LEFT JOIN CasePriority cp	ON cp.CasePriorityID = c.CasePriorityId
+			LEFT JOIN Customer ctr		ON ctr.CustomerID = c.CustomerID
+			LEFT JOIN Users u			ON u.Id = c.RegisterUserID
+WHERE RegisterUserID = @RegisterUserID OR @RegisterUserID = -1 
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Insert_Task]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Insert_Task]
+GO
+
+CREATE PROC [dbo].[Insert_Task]
+@CaseId INT
+,@Desc NVARCHAR(500)
+,@UserRefrence INT
+
+AS
+
+Insert into Tasks (CaseId,Comment,StatusId,AssignedUserId,AssignedDate)values(@CaseId,@Desc,1,@UserRefrence,dbo.Shamsi(GETDATE()))
+        
+        
+RETURN SCOPE_IDENTITY();                                
+GO
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GetActionAccessByAccessID]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[GetActionAccessByAccessID]
+GO
+
+CREATE Procedure [dbo].[GetActionAccessByAccessID](@AccessID int)
+as
+Select aa.*,a.Title
+from dbo.ActionsAccess aa
+		LEFT JOIN Actions a ON a.ActionName = aa.ActionName 		
+where AccessID=@AccessID
+GO
+
+
+IF (SELECT COUNT(a.FormID) FROM Actions a WHERE a.ActionName = 'N56') = 0 
+INSERT INTO Actions
+(
+	ActionName,
+	FormID,
+	Title
+)
+VALUES
+(
+	'N56',
+	1,
+	'«ÌÃ«œ ﬁ›· ”Œ  «›“«—Ì'
+) 
+GO
+
+
+
+
+IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CaseFiles]') AND type in (N'U'))
+BEGIN
+
+	CREATE TABLE [dbo].[CaseFiles](
+		[CaseFilesID] [int] IDENTITY(1,1) NOT NULL,
+		[title] [nvarchar](150) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+		[Data] [image] NULL,
+		[FileType] [nchar](10) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+		[CaseId] [int] NOT NULL) ON [PRIMARY] 
+	ALTER TABLE [dbo].[CaseFiles]         WITH NOCHECK ADD CONSTRAINT [PK_CaseFiles] PRIMARY KEY CLUSTERED([CaseFilesID]) ON [PRIMARY]
+
+END
+GO
+
+IF  not EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[TaskFiles]') AND type in (N'U'))
+BEGIN
+        CREATE TABLE [dbo].[TaskFiles](
+	[TaskFilesID] [int] IDENTITY(1,1) NOT NULL,
+	[title] [nvarchar](150) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[Data] [image] NULL,
+	[FileType] [nchar](10) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[TaskId] [int] NOT NULL)ON [PRIMARY]
+
+        ALTER TABLE [dbo].[TaskFiles]  WITH NOCHECK ADD CONSTRAINT [PK_TaskFiles] PRIMARY KEY CLUSTERED([TaskFilesID]) ON [PRIMARY]
+END
+GO
+
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Report_Contract]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Report_Contract]
+GO
+
+
+
+
+
+
+
+CREATE   procedure [dbo].[Report_Contract]
+@where nvarchar(1000)
+as
+declare @sqlCommand nvarchar(4000)
+set @sqlCommand='SELECT C.CustomerNo, C.PersonTitle, Marketer.MarketerTitle ContactMarketerTitle, C.Address, C.Phone,
+ C.Notes, C.CompanyName,  C.EmailAddress, C.PostalCode, C.Treater, C.WorkPhone1, C.Website,
+ C.MobilePhone,  C.FaxNumber, C.CompetitiveNote, C.Insertdate, Groups.GroupTitle, CustomerStatus.CustomerStatusTitle, City.CityTitle, 
+Compagin.CompaginTitle,StateTitle,  Marketer_1.MarketerTitle CustomerMarketerTitle,dbo.fn_ProductByCustomerID(C.CustomerID) Products,   Contract.*,
+ProductTitle ,ContractTypeTitle,
+Contract.Amount*dbo.fn_ProductPercentByCustomerID(c.CustomerID)/100 Comission
+,InsuranceAccount,GoodJobPercentage,TaxPercentage
+,(Case when isnull(Sake,8) = 0 then ''œ«—«Ì ÷„«‰  ÅÌ‘ Å—œ«Œ ''
+		when isnull(Sake,8) = 1 then ''œ«—«Ì ÷„«‰   Õ”‰ «‰Ã«„ ﬂ«—''
+		end) SakeTitle 
+FROM Customer C
+inner JOIN  Contract ON C.CustomerID = Contract.CustomerID 
+Left JOIN Marketer ON C.MarketerID = Marketer.MarketerID 
+Left JOIN  Marketer AS Marketer_1 ON C.MarketerID = Marketer_1.MarketerID 
+Left JOIN Groups ON C.GroupId = Groups.GroupID
+Left JOIN CustomerStatus ON C.CustomerStatusID = CustomerStatus.CustomerStatusID 
+Left JOIN Compagin ON C.CompaginID = Compagin.CompaginID
+Left JOIN City ON C.CityId = City.CItyId
+left join State on City.StateId = State.StateId
+Left join product on product.productID = Contract.productId
+Left Join ContractType on Contract.ContractTypeID = ContractType.ContractTypeID
+Left Join ContractSubType on Contract.ContractSubTypeID = ContractSubType.ContractSubTypeID
+left join ContractGuarantee on Contract.ContractID = ContractGuarantee.ContractID
+'
+set @Where=isnull(ltrim(rtrim(@Where)),'')
+if @Where<>'' 
+ set @where=' where '+@Where
+
+set @sqlCommand=@sqlCommand+@where
+exec sp_executesql @sqlCommand
+print @sqlCommand
+
+
+
+GO
+
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Customer_NDayReport]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Customer_NDayReport]
+GO
+create PROC [dbo].[Customer_NDayReport]
+@Number	 INT
+AS
+
+Select cast(t.CustomerId as nvarchar) CustomerIdStr,t.CustomerId,isnull(CompanyName,'')+'('+isnull(PersonTitle,'')+isnull(' - '+Treater,'')+')'  as NickName
+			,ProductTitle,t.productid, f  ContractFinish FROM CustomerProduct cp
+						INNER JOIN (
+						SELECT ProductID,CustomerID,dbo.[ShamsiDateDiff](max(CONTRACT.EndDate),dbo.shamsi(GETDATE())) AS f FROM [CONTRACT] GROUP BY ProductID,CustomerID
+						HAVING dbo.[ShamsiDateDiff](max(CONTRACT.EndDate),dbo.shamsi(GETDATE())) <= @Number 
+							AND not ProductID IS NULL) t
+							ON (t.ProductID = cp.ProductID AND t.CustomerID = cp.CustomerID )
+			LEFT JOIN Product p ON p.productid = cp.ProductID
+			LEFT JOIN Customer c ON cp.CustomerID = c.CustomerID
+		
+WHERE f > 0				
+ORDER BY cp.CustomerId DESC
+GO
+
+
+
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[YCRM_Select_Letter_By_CustomerID]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[YCRM_Select_Letter_By_CustomerID]
+GO
+
+CREATE PROCEDURE [dbo].[YCRM_Select_Letter_By_CustomerID]
+@CustomerID INT , @DBName VARCHAR(100)
+AS
+
+DECLARE @Sql VARCHAR(4000)
+
+SET @Sql='
+SELECT list1.*,fo.Title+fo.ResponsibleStaffer AS ToOrgIDDesc FROM 
+(
+SELECT	fo.title,
+		l.indicatorId,
+		l.SecretariatID,
+		s.SecTitle SecretariatDesc,
+		l.LetterID,    
+		l.MYear, 		 
+		l.Letter_Type,
+		lt.Title Letter_TypeDesc,
+		l.letterformat,
+		lf.Title letterformatDesc,
+		l.IncommingNO,                                        
+		l.Incommingdate, 
+		l.CenterNo,
+		l.CenterDate,
+		l.FromOrgID,
+		fo.Title+fo.ResponsibleStaffer AS FromOrgDesc,
+		l.ToOrgID,
+		l.Signerid,
+		l.ClassificationID, 
+		c.Title ClassificationDesc,
+		l.UrgencyID,		
+		u2.Title UrgencyDesc,
+		l.Memo,
+		l.AttachTitle,                                                                                                                                                                                                                                                     
+		l.NumberOfAttachPages, 
+		l.NumberOfPage,
+		l.ReceiveTypeID,
+		rt.Title ReceiveTypeDesc,
+		u.UserName,
+		l.RetroactionNo,
+		l.UserMemo,
+		l.RegistrationDate,
+		l.RegistrationTime,
+		l.FollowLetterNo,
+		l.ToStaffer,	
+		l.SentLetterID,
+		l.TemplateID,
+		l.HeaderID,
+		l.LetterRecommites,                                                                                                                                                                                                                                                
+		l.PreCode,
+		l.fromstaffer,                                       
+		l.Finalized,
+		l.SendStatusID,
+		ss.SendStatusTitle SendStatusDesc,
+		l.LatestActionTypeID,
+		at.ActionTypeTitle AS latestActionTypeDesc,
+		sb.SubjectTitle
+
+FROM '+CAST(@DBName AS VARCHAR(100))+'..Letter L 
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..Secretariats s ON s.SecID = L.SecretariatID
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..LetterTypes lt ON lt.ID = L.Letter_Type
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..LetterFormats lf ON L.letterformat=lf.Code
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..FromOrganizations fo ON l.FromOrgID=fo.ID 
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..ReceiveTypes rt ON l.ReceiveTypeID=rt.ID
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..Users u ON l.UserID=u.Id
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..SendStatus ss ON l.SendStatusID=ss.SendStatusID
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..ActionType at ON l.LatestActionTypeID=at.ActionTypeID
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..Urgenceis u2 ON l.UrgencyID=u2.ID
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..Classifications c ON l.ClassificationID=c.ID
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..Subject sb ON l.SubjectID=sb.SubjectID
+
+WHERE L.CustomerID='+CAST(@CustomerID AS VARCHAR(50))+
+' ) AS list1
+LEFT JOIN '+CAST(@DBName AS VARCHAR(100))+'..FromOrganizations fo ON list1.ToOrgID=fo.ID'
+
+EXEC (@Sql)
+GO
+------------------------------------------
+[Num]=11
+
+IF EXISTS( SELECT * FROM sysobjects WHERE NAME='insGroupsRecord' AND xtype='TR' )
+DROP TRIGGER insGroupsRecord
+
+GO
+
+CREATE TRIGGER [insGroupsRecord] 
+   ON  [dbo].[Groups] 
+   AFTER INSERT,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @GroupNO VARCHAR(50)
+
+	SELECT @GroupNO=LTRIM(RTRIM(GroupNo)) FROM INSERTED	
+	IF ( SELECT COUNT(GroupID) FROM Groups WHERE GroupNo=@GroupNO ) > 1 
+	BEGIN
+		RAISERROR('ﬂœ  ﬂ—«—Ì „Ì »«‘œ',16,10)
+		ROLLBACK
+	END			
+END
+
+GO
+
+IF EXISTS( SELECT * FROM sysobjects WHERE NAME='trMarketerdelete' AND xtype='TR' )
+DROP TRIGGER trMarketerdelete
+
+GO
+
+IF EXISTS( SELECT * FROM sysobjects WHERE NAME='trgDelMarketer' AND xtype='TR' )
+DROP TRIGGER trgDelMarketer
+
+GO
+
+CREATE TRIGGER [trgDelMarketer] 
+   ON  [dbo].[Marketer] 
+   AFTER DELETE
+AS 
+BEGIN
+	SET NOCOUNT ON
+	
+	DECLARE @MarketerID INT
+	
+	SELECT @MarketerID=MarketerID FROM DELETED
+	
+	IF OBJECT_ID('tempdb..#tmp') IS NOT NULL DROP TABLE #tmp
+	SELECT list1.MarketerID INTO #tmp 
+	FROM
+	(
+		SELECT MarketerID FROM Customer WHERE MarketerID=@MarketerID
+			UNION ALL 
+		SELECT MarketerID FROM Users WHERE MarketerID=@MarketerID
+			UNION ALL  
+		SELECT MarketerID FROM CONTRACT WHERE MarketerID=@MarketerID
+			UNION ALL 
+		SELECT MarketerID FROM FollowUp WHERE MarketerID=@MarketerID
+	) AS list1
+	
+	IF (SELECT COUNT(*) FROM #tmp)>0
+	BEGIN
+	    RAISERROR ('»«“«—Ì«» œ— »—‰«„Â «” ›«œÂ ‘œÂ «”  »‰«»—«Ì‰ «„ﬂ«‰ Õ–› ‰œ«—Ìœ',16,10)
+		ROLLBACK
+	END
+ 
+END
+GO
+
+ALTER procedure [dbo].[Select_FollowUP]
+@customerid int,
+@orgID int =1
+,@DoneDate	CHAR(10)
+,@TodODate	CHAR(10)
+,@MarketerID	INT
+,@DoneStatusID	TINYINT
+
+AS
+
+Select *
+from followup
+inner join marketer on marketer.marketerid=followup.marketerid
+where customerid=@customerid
+and (marketer.orgid=@orgid or @orgid=6 OR ISNULL(marketer.orgid,0)=@orgid)
+AND (ToDoDate = @TodODate OR @TodODate = '')
+AND (Donedate = @DoneDate OR @DoneDate = '')
+AND (followup.MarketerID = @MarketerID OR @MarketerID = 0)
+AND (DoneStatusID = @DoneStatusID or @DoneStatusID = 0)
+ORDER BY ToDoDate 
+
+GO
+------------------------------------------
+[Num]=12
+IF Not Exists ( Select * 
+                From SysColumns c,sysObjects o
+                Where o.id=c.id and 
+                      o.Name='Users' and 
+                      c.Name='ShowMyAction')
+
+   ALTER TABLE [dbo].[Users]          ADD  ShowMyAction   BIT NULL
+ELSE
+   ALTER TABLE [dbo].[Users] ALTER COLUMN  ShowMyAction   BIT 
+Go
+
+IF Not Exists ( Select * 
+                From SysColumns c,sysObjects o
+                Where o.id=c.id and 
+                      o.Name='Users' and 
+                      c.Name='BtnAllContract')
+
+   ALTER TABLE [dbo].[Users]          ADD  BtnAllContract  BIT NULL
+ELSE
+   ALTER TABLE [dbo].[Users] ALTER COLUMN  BtnAllContract  BIT 
+Go
+
+IF Not Exists ( Select * 
+                From SysColumns c,sysObjects o
+                Where o.id=c.id and 
+                      o.Name='Users' and 
+                      c.Name='BtnAllAct')
+
+   ALTER TABLE [dbo].[Users]       ADD     BtnAllAct  BIT NULL
+ELSE
+   ALTER TABLE [dbo].[Users] ALTER COLUMN  BtnAllAct  BIT 
+Go
+
+--------------------------------------------
+[Num]=13
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[insert_newActionsAccess_New]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[insert_newActionsAccess_New] 
+GO
+
+
+
+CREATE  PROCEDURE [dbo].[insert_newActionsAccess_New]  
+AS  
+delete from ActionsAccess where str(formID)+ActionName not in (select str(formID)+ActionName from  
+actions)  
+  
+INSERT INTO [dbo].[ActionsAccess]   
+  ( [AccessID],  ActionName,  FormID,  [HasAccess])  
+
+ 
+
+  
+SELECT     Accesses.ID,  Actions.ActionName,Actions.FormID,0   
+FROM         Accesses,Actions   
+where ActionName IN(SELECT  ActionName  From Actions Where Str(formID)+ActionName Not IN 
+(select str(formID)+ActionName From ActionsAccess) ) 
+ 
+go 
+  
+
+--------------------------------------------------------------
+[Num]=14
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[insert_newActionsAccess_New]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[insert_newActionsAccess_New] 
+GO
+
+
+
+CREATE  PROCEDURE [dbo].[insert_newActionsAccess_New]  
+AS  
+delete from ActionsAccess where str(formID)+ActionName not in (select str(formID)+ActionName from  
+actions)  
+  
+INSERT INTO [dbo].[ActionsAccess]   
+  ( [AccessID],  ActionName,  FormID,  [HasAccess])  
+
+ 
+
+  
+SELECT     Accesses.ID,  Actions.ActionName,Actions.FormID,0   
+FROM         Accesses,Actions   
+where ActionName IN(SELECT  ActionName  From Actions Where Str(formID)+ActionName Not IN 
+(select str(formID)+ActionName From ActionsAccess) ) 
+ 
+go 
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Report_Cancles]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Report_Cancles] 
+GO
+
+CREATE PROC Report_Cancles 
+
+ @CancelReasonId INT,
+ @MarketerID INT,
+ @ProductID INT,
+ @InsertDateFrom  CHAR(10),
+ @InsertDateTo  CHAR(10),
+ @CancelDateFrom CHAR(10),
+ @CancelDateTo CHAR(10)
+  
+AS
+--DECLARE @CancelReasonId INT
+--DECLARE @MarketerID INT 
+--DECLARE @ProductID INT 
+--DECLARE @InsertDateFrom  CHAR(10) 
+--DECLARE @InsertDateTo  CHAR(10) 
+--DECLARE @CancelDateFrom CHAR(10) 
+--DECLARE @CancelDateTo CHAR(10)
+--       
+--SET @CancelReasonId=0
+--SET @MarketerID=0
+--SET @ProductID=0
+--SET @InsertDateFrom='0'
+--SET @InsertDateTo='0'
+--SET @CancelDateFrom='0'
+--SET @CancelDateTo='0'
+ 
+IF ltrim(rtrim(@InsertDateFrom))=''
+  SET @InsertDateFrom='0'
+
+IF ltrim(rtrim(@InsertDateTo))=''	
+	SET @InsertDateTo='0'
+IF ltrim(rtrim(@CancelDateFrom))=''
+    SET @CancelDateFrom='0'
+
+IF ltrim(rtrim(@CancelDateTo))=''
+	SET @CancelDateTo='0'
+ 
+
+
+SELECT     Customer.CustomerID, Customer.CustomerNo, Customer.PersonTitle, CancelReason.CancelReasonTitle, Customer.CancelComment, 
+                      Customer.Insertdate, Customer.CancelDate, CustomerStatus.CustomerStatusTitle, Customer.CompanyName, Customer.Notes, Marketer_1.MarketerNo, 
+                      Marketer_1.MarketerTitle, dbo.fn_ProductByCustomerID(Customer.CustomerID) AS Products,
+                          (SELECT     COUNT(1) AS Expr1
+                             FROM         FollowUp INNER JOIN
+                                                   Marketer ON Marketer.MarketerID = FollowUp.MarketerID AND FollowUp.MarketerID = Marketer.MarketerID
+                             WHERE     (FollowUp.CustomerID = Customer.CustomerID)) AS TotalNoOfPeygiri,
+                          (SELECT     COUNT(1) AS Expr1
+                             FROM         FollowUp AS FollowUp_1 INNER JOIN
+                                                   Marketer AS Marketer_2 ON Marketer_2.MarketerID = FollowUp_1.MarketerID
+                             WHERE     (FollowUp_1.CustomerID = Customer.CustomerID)) AS NoOfPeygiriByMarketer, Product.ProductTitle,
+                              CustomerProduct.ProductID
+FROM         Product INNER JOIN
+                      CustomerProduct ON Product.ProductID = CustomerProduct.ProductID RIGHT OUTER JOIN
+                      Customer INNER JOIN
+                      CustomerStatus ON CustomerStatus.CustomerStatusID = Customer.CustomerStatusID INNER JOIN
+                      CancelReason ON CancelReason.CancelReasonID = Customer.CancelReasonID INNER JOIN
+                      Marketer AS Marketer_1 ON Customer.MarketerID = Marketer_1.MarketerID ON CustomerProduct.CustomerID = Customer.CustomerID
+WHERE     (Customer.CustomerStatusID = 3) AND
+          (CancelReason.CancelReasonId=@CancelReasonId or  @CancelReasonId =0) AND
+          (Customer.MarketerID=@MarketerID OR @MarketerID=0) AND
+          (CustomerProduct.ProductID=@ProductID OR @ProductID=0) AND
+          ((Customer.Insertdate >=@InsertDateFrom AND Customer.Insertdate<=@InsertDateTo) OR (@InsertDateFrom='0' AND @InsertDateTo='0')) AND
+          ((Customer.CancelDate >=@CancelDateFrom AND Customer.CancelDate<=@CancelDateTo)OR (@CancelDateFrom='0' AND @CancelDateTo='0'))  
+
+
+
+GO
+           
+
+--------------------------------------------------------------
+[Num]=15
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Select_Customer]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Select_Customer]
+GO
+
+
+CREATE Procedure [dbo].[Select_Customer]      
+(@likeWhere nvarchar(1000),@MarketerID int ,@GroupId int,@CityId int,@ProductId int,@CustomerStatusId int =1,@Top int =1000
+,@StateID		int
+,@ContactNumber	nvarchar(100)
+,@Email			nvarchar(100)
+)      
+As      
+      
+Declare @sqlCommand nvarchar(4000),@where nvarchar(1000)      
+		Set @sqlCommand='
+						Update CustomerProduct set ContractFinished = 0
+						
+						Update CustomerProduct set ContractFinished = 1 FROM CustomerProduct
+						INNER JOIN (
+						SELECT ProductID,CustomerID FROM [CONTRACT] GROUP BY ProductID,CustomerID
+						HAVING max(CONTRACT.EndDate) < dbo.Shamsi(GETDATE())
+							AND not ProductID IS NULL) t
+							ON (t.ProductID = CustomerProduct.ProductID AND t.CustomerID = CustomerProduct.CustomerID ) 												
+							'
+		
+		Exec sp_executesql @sqlCommand  
+		SET @sqlCommand = ''
+
+Set @sqlCommand='SELECT  top '+cast(@top as varchar(10))+' isnull(CompanyName,'''')+''(''+isnull(PersonTitle,'''')+isnull('' - ''+Treater,'''')+'')''  as NickName    
+,Customer.CustomerID, Customer.CustomerNo ,cast(1 as bigint) as RowNo /*Row_Number() over (order  by insertdate desc )  as RowNo */         
+,[PersonTitle],[Address],[Phone],[Notes],[CompanyName],Customer.CityID,Customer.GroupID,Customer.MarketerID         
+,[IsActive],[SenderType],[Priority],[Treater],[CompaginID],[PostalCode],[EmailAddress],[WorkPhone1]      
+,[Website],[MobilePhone],[FaxNumber],[competitiveNote],[Insertdate],[LastUpdate],[CancelReasonID]      
+,[CancelComment],[CancelDate],Customer.CustomerStatusID,UserTableLinkedID,CityTitle,GroupTitle,MarketerTitle    
+,CustomerStatusTitle,(select max(Tododate) from followup where customerid=customer.customerid and donestatusid=2) latestFollowup    
+,(select min(Tododate) from followup where customerid=customer.customerid and donestatusid=1) nextFollowup
+,FreeField01,FreeField02,FreeField03,FreeField04,FreeField05,FreeField06
+,FreeField07,FreeField08,FreeField09,FreeField10,FreeField11,FreeField12
+,FreeField13,FreeField14,FreeField15,FreeField16,FreeField17,FreeField18      
+,dbo.fn_FinishedContractBycustomerId(customerid) FinishedContractProducts    
+,dbo.fn_ProductByCustomerID(customerid) products,InnerPhone  
+,dbo.fn_ProductIdByCustomerID(customerid)+'','' ProductsID
+, cast(CustomerId as nvarchar)+''|''+isnull(PostalCode,'''')+''|''+isnull(CustomerNo,'''')+''|''+isnull(PersonTitle,'''')+''|''
+								+ isnull(Treater,'''')+''|''+isnull(Address,'''')+''|''+isnull(Notes,'''')+''|''+isnull(CompanyName,'''')
+		SearchStr
+ , ( isnull(Phone,'''')+''|''+isnull(FaxNumber,'''')+''|''+isnull(WorkPhone1,'''')+''|''+isnull(MobilePhone,'''')) SearchInt
+,city.stateid
+
+FROM Customer       
+left join Marketer on Marketer.MarketerID=Customer.MarketerID      
+left join Groups on Groups.GroupID=Customer.GroupID      
+left join City on City.CityID=Customer.CityID      
+left join CustomerStatus on CustomerStatus.CustomerStatusID=Customer.CustomerStatusID  '      
+      
+Set @likeWhere=isnull(ltrim(rtrim(@likeWhere)),'')      
+      
+Set @where=''      
+if @likeWhere<>''       
+ set @where=@where+' where '+@likeWhere      
+      
+      
+Set @where=Replace(@where,'ò','ﬂ')      
+      
+if @MarketerID<>0       
+  if @where<>''       
+    set @where=@where+' and ('+cast(@MarketerID as varchar(3))+' in (select marketerid from followup where customerid =customer.customerid) or customer.Marketerid='+cast(@MarketerID as varchar(3))+' or '+cast(@MarketerID as varchar(3))+'=-1)'      
+   else      
+    set @where=@where+' where ('+cast(@MarketerID as varchar(3))+' in (select marketerid from followup where customerid =customer.customerid) or customer.Marketerid='+cast(@MarketerID as varchar(3))+' or '+cast(@MarketerID as varchar(3))+'=-1)'      
+else      
+  if @where<>''       
+    Set @where=@where+' and (isnull(Customer.GroupID,0)<>17)'      
+   else      
+    Set @where=@where+' where (isnull(Customer.GroupID,0)<>17)'      
+      
+if @CustomerStatusId<>0       
+  if @where<>''       
+    Set @where=@where+' and Customer.CustomerStatusId='+cast(@CustomerStatusId as varchar(3))      
+   else      
+    Set @where=@where+' where Customer.CustomerStatusId='+cast(@CustomerStatusId as varchar(3))      
+      
+if @GroupId<>0       
+  if @where<>''       
+    Set @where=@where+' and isnull(Customer.GroupId,0)='+cast(@GroupId as varchar(3))      
+   else      
+    Set @where=@where+' where isnull(Customer.GroupId,0)='+cast(@GroupId as varchar(3))      
+      
+if @CityId<>0       
+  if @where<>''       
+    Set @where=@where+' and Customer.CityId='+cast(@CityId as varchar(10))      
+   else      
+    Set @where=@where+' where Customer.CityId='+cast(@CityId as varchar(10))      
+      
+if @ProductId<>0       
+  if @where<>''       
+    Set @where=@where+' and CustomerID in (SELECT CustomerID FROM  CustomerProduct WHERE ProductID = ' + cast(@ProductId as varchar(3))+')'      
+   else      
+    Set @where=@where+' where CustomerID in (SELECT CustomerID FROM  CustomerProduct WHERE ProductID = ' + cast(@ProductId as varchar(3))+')'      
+
+if @StateID<>0       
+  if @where<>''       
+    Set @where=@where+' and (Customer.StateID  = ' + cast(@StateID  as varchar(3))+')'      
+   else      
+    Set @where=@where+' where (Customer.StateID = ' + cast(@StateID   as varchar(3))+')'      
+
+if @Email<>''       
+  if @where<>''       
+    Set @where=@where+' and (Customer.EmailAddress  like ''%' + @Email+'%'')'      
+   else      
+    Set @where=@where+' where (Customer.EmailAddress like ''%' +@Email+'%'')'      
+
+if @ContactNumber<>''       
+  if @where<>''       
+    Set @where=@where+' and ((Phone like ''%'+@ContactNumber+'%'') or (WorkPhone1 like ''%'+@ContactNumber+'%'') or '+
+							' (MobilePhone like ''%'+@ContactNumber+'%'') or (FaxNumber like ''%'+@ContactNumber+'%'')  )'
+   else      
+    Set @where=@where+' where ((Phone like ''%'+@ContactNumber+'%'') or (WorkPhone1 like ''%'+@ContactNumber+'%'') or '+
+      ' (MobilePhone like ''%'+@ContactNumber+'%'') or (FaxNumber like ''%'+@ContactNumber+'%'')  )'
+
+      
+Set @sqlCommand=@sqlCommand+@where+' order  by insertdate desc '      
+Exec sp_executesql @sqlCommand      
+--Print @sqlCommand 
+
+
+GO
+
+
+
+--------------------------------------------------------------
+[Num]=16
+
+
+    IF NOT EXISTS(SELECT [CustomerStatusID],[CustomerStatusTitle] FROM  [CustomerStatus] WHERE     [CustomerStatusID]=0)
+    BEGIN
+		if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[CustomerStatus]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+		drop table [dbo].[CustomerStatus]
+		 
+
+		CREATE TABLE [dbo].[CustomerStatus] (
+			[CustomerStatusID] [tinyint] IDENTITY (1, 1) NOT NULL ,
+			[CustomerStatusTitle] [nvarchar] (50) COLLATE Arabic_CI_AS NOT NULL 
+		) ON [PRIMARY]
+		 
+
+		ALTER TABLE [dbo].[CustomerStatus] WITH NOCHECK ADD 
+			CONSTRAINT [PK_CustomerStatus] PRIMARY KEY  CLUSTERED 
+			(
+				[CustomerStatusID]
+			)  ON [PRIMARY] 
+		     
+        SET IDENTITY_insert dbo.CustomerStatus ON
+        
+        INSERT into  [CustomerStatus](CustomerStatusID,CustomerStatusTitle)
+        SELECT       0,'Â„Â'
+        INSERT into  [CustomerStatus](CustomerStatusID,CustomerStatusTitle)
+        SELECT       1,'œ— Õ«· ÅÌêÌ—Ì'
+        INSERT into  [CustomerStatus](CustomerStatusID,CustomerStatusTitle)
+        SELECT       2,'„‘ —Ì ﬁÿ⁄Ì'
+        INSERT into  [CustomerStatus](CustomerStatusID,CustomerStatusTitle)
+        SELECT       3,'«‰’—«› «“ Œ—Ìœ'
+        INSERT into  [CustomerStatus](CustomerStatusID,CustomerStatusTitle)
+        SELECT       4,'«ÿ·«⁄«   „«”'
+        INSERT into  [CustomerStatus](CustomerStatusID,CustomerStatusTitle)
+        SELECT       5,'‰«„‘Œ’'
+        
+        SET IDENTITY_insert dbo.CustomerStatus OFF
+
+    END
+
+GO
+
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------
+[Num]=17
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Select_Customer]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Select_Customer]
+GO
+
+
+  
+CREATE Procedure [dbo].[Select_Customer]        
+(@likeWhere nvarchar(1000),@MarketerID int ,@GroupId int,@CityId int,@ProductId int,@CustomerStatusId int =1,@Top int =1000  
+,@StateID  int  
+,@ContactNumber nvarchar(100)  
+,@Email   nvarchar(100)  
+)        
+As        
+        
+Declare @sqlCommand nvarchar(4000),@where nvarchar(1000)        
+  Set @sqlCommand='  
+      Update CustomerProduct set ContractFinished = 0  
+        
+      Update CustomerProduct set ContractFinished = 1 FROM CustomerProduct  
+      INNER JOIN (  
+      SELECT ProductID,CustomerID FROM [CONTRACT] GROUP BY ProductID,CustomerID  
+      HAVING max(CONTRACT.EndDate) < dbo.Shamsi(GETDATE())  
+       AND not ProductID IS NULL) t  
+       ON (t.ProductID = CustomerProduct.ProductID AND t.CustomerID = CustomerProduct.CustomerID )               
+       '  
+    
+  Exec sp_executesql @sqlCommand    
+  SET @sqlCommand = ''  
+  
+Set @sqlCommand='SELECT  top '+cast(@top as varchar(10))+' isnull(CompanyName,'''')+''(''+isnull(PersonTitle,'''')+isnull('' - ''+Treater,'''')+'')''  as NickName      
+,Customer.CustomerID, Customer.CustomerNo , cast(1 as bigint) as RowNo  /*  Row_Number() over (order  by insertdate desc )  as RowNo   */
+,[PersonTitle],[Address],[Phone],[Notes],[CompanyName],Customer.CityID,Customer.GroupID,Customer.MarketerID           
+,[IsActive],[SenderType],[Priority],[Treater],[CompaginID],[PostalCode],[EmailAddress],[WorkPhone1]        
+,[Website],[MobilePhone],[FaxNumber],[competitiveNote],[Insertdate],[LastUpdate],[CancelReasonID]        
+,[CancelComment],[CancelDate],Customer.CustomerStatusID,UserTableLinkedID,CityTitle,GroupTitle,MarketerTitle      
+,CustomerStatusTitle,(select max(Tododate) from followup where customerid=customer.customerid and donestatusid=2) latestFollowup      
+,(select min(Tododate) from followup where customerid=customer.customerid and donestatusid=1) nextFollowup  
+,FreeField01,FreeField02,FreeField03,FreeField04,FreeField05,FreeField06  
+,FreeField07,FreeField08,FreeField09,FreeField10,FreeField11,FreeField12  
+,FreeField13,FreeField14,FreeField15,FreeField16,FreeField17,FreeField18        
+/*,dbo.fn_FinishedContractBycustomerId(customerid) FinishedContractProducts      */
+,dbo.fn_FinishedContractBycustomerId_NEW(customerid) FinishedContractProducts      
+,dbo.fn_ProductByCustomerID(customerid) products,InnerPhone    
+,dbo.fn_ProductIdByCustomerID(customerid)+'','' ProductsID  
+, cast(CustomerId as nvarchar)+''|''+isnull(PostalCode,'''')+''|''+isnull(CustomerNo,'''')+''|''+isnull(PersonTitle,'''')+''|''  
+        + isnull(Treater,'''')+''|''+isnull(Address,'''')+''|''+isnull(Notes,'''')+''|''+isnull(CompanyName,'''')  
+  SearchStr  
+ , ( isnull(Phone,'''')+''|''+isnull(FaxNumber,'''')+''|''+isnull(WorkPhone1,'''')+''|''+isnull(MobilePhone,'''')) SearchInt  
+,city.stateid  
+  
+FROM Customer         
+left join Marketer on Marketer.MarketerID=Customer.MarketerID        
+left join Groups on Groups.GroupID=Customer.GroupID        
+left join City on City.CityID=Customer.CityID        
+left join CustomerStatus on CustomerStatus.CustomerStatusID=Customer.CustomerStatusID  '        
+        
+Set @likeWhere=isnull(ltrim(rtrim(@likeWhere)),'')        
+        
+Set @where=''        
+if @likeWhere<>''         
+ set @where=@where+' where '+@likeWhere        
+        
+        
+Set @where=Replace(@where,'ò','ﬂ')        
+        
+if @MarketerID<>0         
+  if @where<>''         
+    set @where=@where+' and ('+cast(@MarketerID as varchar(3))+' in (select marketerid from followup where customerid =customer.customerid) or customer.Marketerid='+cast(@MarketerID as varchar(3))+' or '+cast(@MarketerID as varchar(3))+'=-1)'        
+   else        
+    set @where=@where+' where ('+cast(@MarketerID as varchar(3))+' in (select marketerid from followup where customerid =customer.customerid) or customer.Marketerid='+cast(@MarketerID as varchar(3))+' or '+cast(@MarketerID as varchar(3))+'=-1)'        
+else        
+  if @where<>''         
+    Set @where=@where+' and (isnull(Customer.GroupID,0)<>17)'        
+   else        
+    Set @where=@where+' where (isnull(Customer.GroupID,0)<>17)'        
+     
+if @CustomerStatusId<>0         
+  if @where<>''         
+    Set @where=@where+' and Customer.CustomerStatusId='+cast(@CustomerStatusId as varchar(3))        
+   else        
+    Set @where=@where+' where Customer.CustomerStatusId='+cast(@CustomerStatusId as varchar(3))        
+        
+if @GroupId<>0         
+  if @where<>''         
+    Set @where=@where+' and isnull(Customer.GroupId,0)='+cast(@GroupId as varchar(3))        
+   else        
+    Set @where=@where+' where isnull(Customer.GroupId,0)='+cast(@GroupId as varchar(3))        
+        
+if @CityId<>0         
+  if @where<>''         
+    Set @where=@where+' and Customer.CityId='+cast(@CityId as varchar(10))        
+   else        
+    Set @where=@where+' where Customer.CityId='+cast(@CityId as varchar(10))        
+        
+if @ProductId<>0         
+  if @where<>''         
+    Set @where=@where+' and CustomerID in (SELECT CustomerID FROM  CustomerProduct WHERE ProductID = ' + cast(@ProductId as varchar(3))+')'        
+   else        
+    Set @where=@where+' where CustomerID in (SELECT CustomerID FROM  CustomerProduct WHERE ProductID = ' + cast(@ProductId as varchar(3))+')'        
+  
+if @StateID<>0         
+  if @where<>''         
+    Set @where=@where+' and (Customer.StateID  = ' + cast(@StateID  as varchar(3))+')'        
+   else        
+    Set @where=@where+' where (Customer.StateID = ' + cast(@StateID   as varchar(3))+')'        
+  
+if @Email<>''         
+  if @where<>''         
+    Set @where=@where+' and (Customer.EmailAddress  like ''%' + @Email+'%'')'        
+   else        
+    Set @where=@where+' where (Customer.EmailAddress like ''%' +@Email+'%'')'        
+  
+if @ContactNumber<>''         
+  if @where<>''         
+    Set @where=@where+' and ((Phone like ''%'+@ContactNumber+'%'') or (WorkPhone1 like ''%'+@ContactNumber+'%'') or '+  
+       ' (MobilePhone like ''%'+@ContactNumber+'%'') or (FaxNumber like ''%'+@ContactNumber+'%'')  )'  
+   else        
+    Set @where=@where+' where ((Phone like ''%'+@ContactNumber+'%'') or (WorkPhone1 like ''%'+@ContactNumber+'%'') or '+  
+      ' (MobilePhone like ''%'+@ContactNumber+'%'') or (FaxNumber like ''%'+@ContactNumber+'%'')  )'  
+  
+        
+Set @sqlCommand=@sqlCommand+@where+' order  by insertdate desc '        
+Exec sp_executesql @sqlCommand        
+--Print @sqlCommand   
+  
+  
+  
+GO
+
+--------------------------
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[fn_FinishedContractBycustomerId]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION [dbo].[fn_FinishedContractBycustomerId]
+GO
+CREATE function [dbo].[fn_FinishedContractBycustomerId]( @CustomerID  int)  
+returns  NVARCHAR(2000)  
+Begin  
+Declare @result nvarchar(2000)  
+Set @result=''  
+Select @result=@result+','+ replace(ProductTitle,'Ì','Ì')  
+FROM  CustomerProduct LEFT JOIN  
+      Product ON (Product.ProductID = CustomerProduct.ProductID)   
+WHERE        CustomerProduct.ContractFinished = 1  
+        AND (CustomerProduct.CustomerID =@CustomerID)  
+      
+order by Product.ProductID  
+  
+if @result<>''   
+  set @result=right(@result,len(@result)-1)    
+else  
+  set @result=''   
+    
+ return(@result)     
+end  
+
+GO 
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[fn_FinishedContractBycustomerId_NEW]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION [dbo].[fn_FinishedContractBycustomerId_NEW]
+GO
+
+ 
+CREATE function [dbo].[fn_FinishedContractBycustomerId_NEW]( @CustomerID  int)  
+returns  NVARCHAR(2000)  
+Begin  
+Declare @result nvarchar(2000)  
+Set @result=''  
+Select @result=@result+','+ replace(ProductTitle,'Ì','Ì') +'( '+(SELECT MAX(ISNULL(ENDDATE,'0')) FROM CONTRACT WHERE CUSTOMERID=@CustomerID)  +' )' 
+FROM  CustomerProduct LEFT JOIN  
+      Product ON (Product.ProductID = CustomerProduct.ProductID)   
+WHERE        CustomerProduct.ContractFinished = 1  
+        AND (CustomerProduct.CustomerID =@CustomerID)  
+      
+order by Product.ProductID  
+  
+if @result<>''   
+  set @result=right(@result,len(@result)-1)    
+else  
+  set @result=''   
+    
+ return(@result)     
+end  
+
+GO 
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Select_Customer]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Select_Customer]
+GO
+
+
+  
+CREATE Procedure [dbo].[Select_Customer]        
+(@likeWhere nvarchar(1000),@MarketerID int ,@GroupId int,@CityId int,@ProductId int,@CustomerStatusId int =1,@Top int =1000  
+,@StateID  int  
+,@ContactNumber nvarchar(100)  
+,@Email   nvarchar(100)  
+)        
+As        
+        
+Declare @sqlCommand nvarchar(4000),@where nvarchar(1000)        
+  Set @sqlCommand='  
+      Update CustomerProduct set ContractFinished = 0  
+        
+      Update CustomerProduct set ContractFinished = 1 FROM CustomerProduct  
+      INNER JOIN (  
+      SELECT ProductID,CustomerID FROM [CONTRACT] GROUP BY ProductID,CustomerID  
+      HAVING max(CONTRACT.EndDate) < dbo.Shamsi(GETDATE())  
+       AND not ProductID IS NULL) t  
+       ON (t.ProductID = CustomerProduct.ProductID AND t.CustomerID = CustomerProduct.CustomerID )               
+       '  
+    
+  Exec sp_executesql @sqlCommand    
+  SET @sqlCommand = ''  
+  
+Set @sqlCommand='SELECT  top '+cast(@top as varchar(10))+' isnull(CompanyName,'''')+''(''+isnull(PersonTitle,'''')+isnull('' - ''+Treater,'''')+'')''  as NickName      
+,Customer.CustomerID, Customer.CustomerNo , cast(1 as bigint) as RowNo  /*  Row_Number() over (order  by insertdate desc )  as RowNo   */
+,[PersonTitle],[Address],[Phone],[Notes],[CompanyName],Customer.CityID,Customer.GroupID,Customer.MarketerID           
+,[IsActive],[SenderType],[Priority],[Treater],[CompaginID],[PostalCode],[EmailAddress],[WorkPhone1]        
+,[Website],[MobilePhone],[FaxNumber],[competitiveNote],[Insertdate],[LastUpdate],[CancelReasonID]        
+,[CancelComment],[CancelDate],Customer.CustomerStatusID,UserTableLinkedID,CityTitle,GroupTitle,MarketerTitle      
+,CustomerStatusTitle,(select max(Tododate) from followup where customerid=customer.customerid and donestatusid=2) latestFollowup      
+,(select min(Tododate) from followup where customerid=customer.customerid and donestatusid=1) nextFollowup  
+,FreeField01,FreeField02,FreeField03,FreeField04,FreeField05,FreeField06  
+,FreeField07,FreeField08,FreeField09,FreeField10,FreeField11,FreeField12  
+,FreeField13,FreeField14,FreeField15,FreeField16,FreeField17,FreeField18        
+/*,dbo.fn_FinishedContractBycustomerId(customerid) FinishedContractProducts      */
+,dbo.fn_FinishedContractBycustomerId_NEW(customerid) FinishedContractProducts      
+,dbo.fn_ProductByCustomerID(customerid) products,InnerPhone    
+,dbo.fn_ProductIdByCustomerID(customerid)+'','' ProductsID  
+, cast(CustomerId as nvarchar)+''|''+isnull(PostalCode,'''')+''|''+isnull(CustomerNo,'''')+''|''+isnull(PersonTitle,'''')+''|''  
+        + isnull(Treater,'''')+''|''+isnull(Address,'''')+''|''+isnull(Notes,'''')+''|''+isnull(CompanyName,'''')  
+  SearchStr  
+ , ( isnull(Phone,'''')+''|''+isnull(FaxNumber,'''')+''|''+isnull(WorkPhone1,'''')+''|''+isnull(MobilePhone,'''')) SearchInt  
+,city.stateid  
+  
+FROM Customer         
+left join Marketer on Marketer.MarketerID=Customer.MarketerID        
+left join Groups on Groups.GroupID=Customer.GroupID        
+left join City on City.CityID=Customer.CityID        
+left join CustomerStatus on CustomerStatus.CustomerStatusID=Customer.CustomerStatusID  '        
+        
+Set @likeWhere=isnull(ltrim(rtrim(@likeWhere)),'')        
+        
+Set @where=''        
+if @likeWhere<>''         
+ set @where=@where+' where '+@likeWhere        
+        
+        
+Set @where=Replace(@where,'ò','ﬂ')        
+        
+if @MarketerID<>0         
+  if @where<>''         
+    set @where=@where+' and ('+cast(@MarketerID as varchar(3))+' in (select marketerid from followup where customerid =customer.customerid) or customer.Marketerid='+cast(@MarketerID as varchar(3))+' or '+cast(@MarketerID as varchar(3))+'=-1)'        
+   else        
+    set @where=@where+' where ('+cast(@MarketerID as varchar(3))+' in (select marketerid from followup where customerid =customer.customerid) or customer.Marketerid='+cast(@MarketerID as varchar(3))+' or '+cast(@MarketerID as varchar(3))+'=-1)'        
+else        
+  if @where<>''         
+    Set @where=@where+' and (isnull(Customer.GroupID,0)<>17)'        
+   else        
+    Set @where=@where+' where (isnull(Customer.GroupID,0)<>17)'        
+     
+if @CustomerStatusId<>0         
+  if @where<>''         
+    Set @where=@where+' and Customer.CustomerStatusId='+cast(@CustomerStatusId as varchar(3))        
+   else        
+    Set @where=@where+' where Customer.CustomerStatusId='+cast(@CustomerStatusId as varchar(3))        
+        
+if @GroupId<>0         
+  if @where<>''         
+    Set @where=@where+' and isnull(Customer.GroupId,0)='+cast(@GroupId as varchar(3))        
+   else        
+    Set @where=@where+' where isnull(Customer.GroupId,0)='+cast(@GroupId as varchar(3))        
+        
+if @CityId<>0         
+  if @where<>''         
+    Set @where=@where+' and Customer.CityId='+cast(@CityId as varchar(10))        
+   else        
+    Set @where=@where+' where Customer.CityId='+cast(@CityId as varchar(10))        
+        
+if @ProductId<>0         
+  if @where<>''         
+    Set @where=@where+' and CustomerID in (SELECT CustomerID FROM  CustomerProduct WHERE ProductID = ' + cast(@ProductId as varchar(3))+')'        
+   else        
+    Set @where=@where+' where CustomerID in (SELECT CustomerID FROM  CustomerProduct WHERE ProductID = ' + cast(@ProductId as varchar(3))+')'        
+  
+if @StateID<>0         
+  if @where<>''         
+    Set @where=@where+' and (Customer.StateID  = ' + cast(@StateID  as varchar(3))+')'        
+   else        
+    Set @where=@where+' where (Customer.StateID = ' + cast(@StateID   as varchar(3))+')'        
+  
+if @Email<>''         
+  if @where<>''         
+    Set @where=@where+' and (Customer.EmailAddress  like ''%' + @Email+'%'')'        
+   else        
+    Set @where=@where+' where (Customer.EmailAddress like ''%' +@Email+'%'')'        
+  
+if @ContactNumber<>''         
+  if @where<>''         
+    Set @where=@where+' and ((Phone like ''%'+@ContactNumber+'%'') or (WorkPhone1 like ''%'+@ContactNumber+'%'') or '+  
+       ' (MobilePhone like ''%'+@ContactNumber+'%'') or (FaxNumber like ''%'+@ContactNumber+'%'')  )'  
+   else        
+    Set @where=@where+' where ((Phone like ''%'+@ContactNumber+'%'') or (WorkPhone1 like ''%'+@ContactNumber+'%'') or '+  
+      ' (MobilePhone like ''%'+@ContactNumber+'%'') or (FaxNumber like ''%'+@ContactNumber+'%'')  )'  
+  
+        
+Set @sqlCommand=@sqlCommand+@where+' order  by insertdate desc '        
+Exec sp_executesql @sqlCommand        
+--Print @sqlCommand   
+  
+  
+  
+GO
+
+-----------------------------------------------
+------------------------------------------------
+[Num]=18
+-----------------------------------------------
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[Search_ContractDetail]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Search_ContractDetail]
+GO
+
+
+CREATE proc [dbo].[Search_ContractDetail]  
+(  
+  @StartDate   char(10)  
+,@EndDate  char(10)  
+,@ContractTypeID int  
+,@MarketerID int  
+,@ProductId  int  
+,@TaxPercentage float  
+,@GoodJobPercentage float  
+,@customerid int  
+,@UserTypeID int  
+)  
+as  
+
+-- DECLARE @StartDate  char(10)  
+-- ,@EndDate  char(10)  
+-- ,@ContractTypeID int  
+-- ,@MarketerID int  
+-- ,@ProductId  int  
+-- ,@TaxPercentage float  
+-- ,@GoodJobPercentage float  
+-- ,@customerid int  
+-- ,@UserTypeID int  
+
+  
+-- SET @StartDate=''
+-- SET @EndDate= '' 
+-- SET @ContractTypeID=0
+-- SET @MarketerID=0 
+-- SET @ProductId=0
+-- SET @TaxPercentage=-1 
+-- SET @GoodJobPercentage=-1  
+-- SET @customerid=15  
+-- SET @UserTypeID=1  
+
+
+  
+DECLARE  @TaxDate CHAR(10)  
+ set @TaxDate =(SELECT [VALUE] from Settings WHERE VariableName = 'TaxDate')  
+  
+  
+Select Contract.*,ContractTypeTitle,ContractSubTypeTitle,ProductTitle,MarketerTitle  
+,(CASE WHEN (@TaxDate <> '')AND (BeginDate >=@TaxDate) THEN       
+     Round(Amount+(  
+     (isnull((select TaxPercentage from TaxPerYear where [Year] = substring(BeginDate,1,4)),0)/100)*Amount  
+         ) ,0)    
+    ELSE  Amount END  
+    )AS          
+         TotalAmount  
+  
+from Contract   
+  left join ContractType on (Contract.ContractTypeId = ContractType.ContractTypeID)  
+  left join ContractSubType on (Contract.ContractSubTypeId = ContractSubType.ContractSubTypeID)  
+  left join Product on   (Contract.ProductId = Product.ProductId)  
+  left join Marketer on (Contract.MarketerID = Marketer.MarketerID)  
+  
+where customerid=@customerid  
+and (Contract.ContractTypeId in (select ContractTypeId from UserTypeContractType where UserTypeID =  @UserTypeID) or @UserTypeID = 0)  
+ and (  
+   ( BeginDate >= @StartDate or @StartDate = '') and ( (EndDate <= @EndDate) or @EndDate = '')   
+   )  
+ and (Contract.ContractTypeID = @ContractTypeID  or @ContractTypeID = 0)  
+ and (Contract.MarketerID     = @MarketerID  or @MarketerID  = 0)  
+ and (Contract.ProductId   = @ProductId  or @ProductId  = 0)   
+ and (isnull(TaxPercentage,0) = @TaxPercentage or @TaxPercentage = -1)  
+ and (isnull(GoodJobPercentage,0) = @GoodJobPercentage or @GoodJobPercentage = -1)  
+
+GO

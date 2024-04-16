@@ -1,0 +1,37 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = dclfrxDB7.bpl dclfrxTee7.bpl frx7.bpl frxDB7.bpl frxTee7.bpl \
+  dclfrx7.bpl
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+
+dclfrxDB7.bpl: dclfrxDB7.dpk
+  $(DCC)
+
+dclfrxTee7.bpl: dclfrxTee7.dpk
+  $(DCC)
+
+frx7.bpl: frx7.dpk
+  $(DCC)
+
+frxDB7.bpl: frxDB7.dpk
+  $(DCC)
+
+frxTee7.bpl: frxTee7.dpk
+  $(DCC)
+
+dclfrx7.bpl: dclfrx7.dpk
+  $(DCC)
+
+

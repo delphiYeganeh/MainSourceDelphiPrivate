@@ -1,0 +1,74 @@
+package yeganeh;
+
+{$R *.res}
+{$R 'uCiaTrayIcon.dcr'}
+{$R 'c:\program files\borland\delphi7\Imports\AcroPDFLib_TLB.dcr'}
+{$R 'c:\program files\borland\delphi7\Imports\ScanLibCtl_TLB.dcr'}
+{$R 'c:\program files\borland\delphi7\Imports\TINYLib_TLB.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  vcljpg,
+  dbrtl,
+  vcldb,
+  bdertl,
+  vclx,
+  adortl,
+  vclactnband,
+  fs7,
+  frx7,
+  frxDB7,
+  vclZipForged7,
+  designide,
+  qrpt,
+  indy,
+  dclOfficeXP;
+
+contains
+  UemsVCL in 'UemsVCL.pas',
+  AcquireImage in 'acquireimage.pas',
+  DBTreeView in 'DBTreeView.pas',
+  twainh in 'TWAINH.PAS',
+  uCiaTrayIcon in 'uCiaTrayIcon.pas',
+  YLargeIntField in 'YLargeIntField.pas',
+  YCheckGroupBox in 'YCheckGroupBox.pas',
+  YchecklistBox in 'YchecklistBox.pas',
+  YDBCheckGroupBox in 'YDBCheckGroupBox.pas',
+  YDBEDit in 'YDBEDit.pas',
+  Yeganeh_Word in 'Yeganeh_Word.pas',
+  YFillPictureFields in 'YFillPictureFields.pas',
+  YINtegerField in 'YINtegerField.pas',
+  YQRAngelLabel in 'YQRAngelLabel.pas',
+  YRotateLabel in 'YRotateLabel.pas',
+  YWhereEdit in 'YWhereEdit.pas',
+  DBTreeViewReg in 'DBTreeViewReg.pas',
+  AcroPDFLib_TLB in 'C:\Program Files\Borland\Delphi7\Imports\AcroPDFLib_TLB.pas',
+  ScanLibCtl_TLB in 'C:\Program Files\Borland\Delphi7\Imports\ScanLibCtl_TLB.pas',
+  TINYLib_TLB in 'C:\Program Files\Borland\Delphi7\Imports\TINYLib_TLB.pas',
+  YeganehCheckMail in 'YeganehCheckMail.pas',
+  YAmountEdit in 'YAmountEdit.pas';
+
+end.

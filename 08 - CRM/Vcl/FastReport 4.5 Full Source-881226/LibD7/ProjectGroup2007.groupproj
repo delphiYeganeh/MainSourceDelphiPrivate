@@ -1,0 +1,84 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{b8362d09-ea1a-4c8e-882b-053fe431e172}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="dclfs9.bdsproj" />
+    <Projects Include="dclfsADO9.bdsproj" />
+    <Projects Include="dclfsBDE9.bdsproj" />
+    <Projects Include="dclfsDB9.bdsproj" />
+    <Projects Include="dclfsIBX9.bdsproj" />
+    <Projects Include="dclfsTee9.bdsproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="dclfsTee9">
+    <MSBuild Projects="dclfsTee9.bdsproj" Targets="" />
+  </Target>
+  <Target Name="dclfsTee9:Clean">
+    <MSBuild Projects="dclfsTee9.bdsproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfsTee9:Make">
+    <MSBuild Projects="dclfsTee9.bdsproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfs9">
+    <MSBuild Projects="dclfs9.bdsproj" Targets="" />
+  </Target>
+  <Target Name="dclfs9:Clean">
+    <MSBuild Projects="dclfs9.bdsproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfs9:Make">
+    <MSBuild Projects="dclfs9.bdsproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfsADO9">
+    <MSBuild Projects="dclfsADO9.bdsproj" Targets="" />
+  </Target>
+  <Target Name="dclfsADO9:Clean">
+    <MSBuild Projects="dclfsADO9.bdsproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfsADO9:Make">
+    <MSBuild Projects="dclfsADO9.bdsproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfsBDE9">
+    <MSBuild Projects="dclfsBDE9.bdsproj" Targets="" />
+  </Target>
+  <Target Name="dclfsBDE9:Clean">
+    <MSBuild Projects="dclfsBDE9.bdsproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfsBDE9:Make">
+    <MSBuild Projects="dclfsBDE9.bdsproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfsDB9">
+    <MSBuild Projects="dclfsDB9.bdsproj" Targets="" />
+  </Target>
+  <Target Name="dclfsDB9:Clean">
+    <MSBuild Projects="dclfsDB9.bdsproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfsDB9:Make">
+    <MSBuild Projects="dclfsDB9.bdsproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfsIBX9">
+    <MSBuild Projects="dclfsIBX9.bdsproj" Targets="" />
+  </Target>
+  <Target Name="dclfsIBX9:Clean">
+    <MSBuild Projects="dclfsIBX9.bdsproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfsIBX9:Make">
+    <MSBuild Projects="dclfsIBX9.bdsproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="dclfsTee9;dclfs9;dclfsADO9;dclfsBDE9;dclfsDB9;dclfsIBX9" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="dclfsTee9:Clean;dclfs9:Clean;dclfsADO9:Clean;dclfsBDE9:Clean;dclfsDB9:Clean;dclfsIBX9:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="dclfsTee9:Make;dclfs9:Make;dclfsADO9:Make;dclfsBDE9:Make;dclfsDB9:Make;dclfsIBX9:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

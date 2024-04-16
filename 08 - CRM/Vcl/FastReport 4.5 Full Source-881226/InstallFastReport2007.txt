@@ -1,0 +1,8 @@
+To Install FastReport 2007 do these step :
+
+1- Run CodeGear Delphi2007
+2- FileMenu -> Open -> FastScript 
+3- select all dpk extended file that have 9 number and start with dcl prefix
+4- then compile and install them
+5- Go to LibD7 Folder and select all dpk extended file that have 9 number and start with dcl prefix
+6- then compile and install them

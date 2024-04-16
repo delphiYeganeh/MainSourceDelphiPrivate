@@ -1,0 +1,31 @@
+install sql 2008 R2
+
+Setup.exe /q /ACTION=Install /FEATURES=SQL /INSTANCENAME=MSSQLSERVER /SQLSVCACCOUNT="<DomainName\UserName>" /SQLSVCPASSWORD="<StrongPassword>" /SQLSYSADMINACCOUNTS="<DomainName\UserName>" /AGTSVCACCOUNT="NT AUTHORITY\Network Service"
+
+Setup.exe /q /ACTION=Install /FEATURES=SQL /INSTANCENAME=MSSQLSERVER /SQLSVCACCOUNT="<DomainName\UserName>" /SQLSVCPASSWORD="<StrongPassword>" /SQLSYSADMINACCOUNTS="<DomainName\UserName>" /AGTSVCACCOUNT="NT AUTHORITY\Network Service"
+
+
+Upgrade SQL 2000 or 2005
+
+
+Setup.exe /q /ACTION=upgrade /INSTANCENAME=MSSQLSERVER /RSUPGRADEDATABASEACCOUNT="<Provide a SQL Server logon account that can connect to the report server during upgrade>" /RSUPGRADEPASSWORD="<Provide a password for the report server upgrade account>" /ISSVCAccount="NT Authority\Network Service"
+
+Setup.exe /q /ACTION=upgrade /INSTANCENAME=MSSQLSERVER /RSUPGRADEDATABASEACCOUNT="<Provide a SQL Server logon account that can connect to the report server during upgrade>" /RSUPGRADEPASSWORD="<Provide a password for the report server upgrade account>" /ISSVCAccount="NT Authority\Network Service"
+
+
+Upgrade SQL2008
+
+
+Setup.exe /q /ACTION=editionupgrade /INSTANCENAME=MSSQLSERVER /PID=<PID key for new edition>"
+
+Setup.exe /q /ACTION=editionupgrade /INSTANCENAME=MSSQLSERVER /PID=<PID key for new edition>"
+
+
+repare
+Setup.exe /q /ACTION=Repair /INSTANCENAME=<instancename>
+
+
+To uninstall an existing instance of SQL Server(MSSQLSERVER) like (MSSQLServer2000).
+
+Setup.exe /Action=Uninstall /FEATURES=SQL,AS,RS,IS,Tools /INSTANCENAME=MSSQLSERVER
+

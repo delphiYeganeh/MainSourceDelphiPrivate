@@ -1,0 +1,342 @@
+inherited frCustomerLetter: TfrCustomerLetter
+  Left = 364
+  Top = 221
+  Width = 1033
+  Height = 528
+  Caption = ''
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object dbgFollow: TYDBGrid [0]
+    Left = 0
+    Top = 0
+    Width = 1025
+    Height = 453
+    Cursor = crHandPoint
+    TabStop = False
+    Align = alClient
+    DataSource = Dm.DsYCRM_Select_Letter_By_CustomerID
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 0
+    TitleFont.Charset = ARABIC_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = [fsBold]
+    YeganehColor = False
+    YeganehFinish = False
+    PageNumber = False
+    RecordNumber = False
+    HasTime = False
+    Oriention = poPortrait
+    HasDate = False
+    HasIndex = False
+    PrintTitle = #1575#1602#1583#1575#1605#1575#1578' '#1605#1588#1578#1585#1610#1575#1606
+    InvertFarsiDate = True
+    TitleSort = True
+    AutoInsert = False
+    FooterFields = 'Count'
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'SecretariatDesc'
+        Title.Alignment = taCenter
+        Title.Caption = #1606#1575#1605' '#1583#1576#1610#1585#1582#1575#1606#1607
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 99
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'IncommingNO'
+        Title.Alignment = taCenter
+        Title.Caption = #1588#1605#1575#1585#1607' '#1606#1575#1605#1607
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 100
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Memo'
+        Title.Alignment = taCenter
+        Title.Caption = #1575#1606#1583#1610#1603#1575#1578#1608#1585
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 67
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'FromOrgDesc'
+        Title.Alignment = taCenter
+        Title.Caption = #1601#1585#1587#1578#1606#1583#1607
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ToOrgIDDesc'
+        Title.Alignment = taCenter
+        Title.Caption = #1711#1610#1585#1606#1583#1607
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 46
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'latestActionTypeDesc'
+        Title.Alignment = taCenter
+        Title.Caption = #1606#1608#1593' '#1575#1602#1583#1575#1605' '
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 141
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'SubjectTitle'
+        Title.Alignment = taCenter
+        Title.Caption = #1605#1608#1590#1608#1593' '#1606#1575#1605#1607
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 100
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'RegistrationDate'
+        Title.Alignment = taCenter
+        Title.Caption = #1578#1575#1585#1610#1582' '#1579#1576#1578
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 72
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'IncommingNO'
+        Title.Alignment = taCenter
+        Title.Caption = #1588#1605#1575#1585#1607' '#1606#1575#1605#1607' '#1608#1575#1585#1583#1607
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 145
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Incommingdate'
+        Title.Caption = #1578#1575#1585#1610#1582' '#1608#1575#1585#1583#1607
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'FollowLetterNo'
+        Title.Caption = #1662#1610#1585#1608
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'RetroactionNo'
+        Title.Caption = #1593#1591#1601
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'UrgencyDesc'
+        Title.Caption = #1601#1608#1585#1610#1578
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Letter_TypeDesc'
+        Title.Caption = #1606#1608#1593
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'SendStatusDesc'
+        Title.Caption = #1608#1590#1593#1610#1578' '#1575#1606#1578#1602#1575#1604
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CenterNo'
+        Title.Caption = #1588#1605#1575#1585#1607' '#1583#1576#1610#1585#1582#1575#1606#1607' '#1605#1585#1705#1586#1610
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 111
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'UserName'
+        Title.Alignment = taCenter
+        Title.Caption = #1579#1576#1578' '#1603#1606#1606#1583#1607
+        Title.Font.Charset = ARABIC_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = []
+        Width = 122
+        Visible = True
+      end>
+  end
+  object Panel1: TPanel [1]
+    Left = 0
+    Top = 453
+    Width = 1025
+    Height = 41
+    Align = alBottom
+    TabOrder = 1
+    DesignSize = (
+      1025
+      41)
+    object SpeedButton4: TSpeedButton
+      Left = 989
+      Top = 10
+      Width = 25
+      Height = 22
+      Hint = #1575#1606#1578#1582#1575#1576' '#1587#1578#1608#1606
+      Anchors = [akTop, akRight]
+      Flat = True
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        1800000000000003000000000000000000000000000000000000FBCB87FB970F
+        FCA31EF9A01AFDA41EDB8F1EE8981EE7931EFFA91CF79C19FFA520F39815FFA8
+        21F19716FF9E14FFB953E5BE8CE7F5FFF0F4FFD8E1FDE3F0FF228FFF54BBFF5A
+        95FFFFFFFFCCCDFAFDFFFFC3BCE9FFFFFFB5AAD1FFFEFFFFA833E9C189CAC2D1
+        D2C3C0CDBFB6CAC0D0306CFF4A80FF6B7DE1EBD6B7C1ABA9DAC3C1BEA19EDDBF
+        BCB99792D2BBD7F0A136EBC38BD6D7E7E5DBDAD5CCC8D8D6E83473FF5C96FF73
+        8CF1F2E6D5CEBCBEE4DDDDC9AFB0ECDDDDBDA2A0E7D9EDF6A937EBC38CE2E7F6
+        EEE6E5DDD9D4E6E5F85092FF74B1FF7791F5FFFAE1D0C1C4F5E9E9CAB4B4FAE7
+        E7C1A4A2F4E5FFFBAC3EE8C38BBCC2D1C6C4C3C5C0B8BCBDCE0D4BFF2C60FF61
+        78E0E3D1B5BAADB0CCBEBEB8A3A3CEB9B9B49A98C3B5D1EC9C30ECC690EAF3FF
+        FBFBF9E2DFDCEFF4FF5998FF86C3FF7F9BFFFFFFF2DAD1D1FBF9F9D3BEBEFFFE
+        FEC4AAAAFFFAFFFFB23EE9C38DC7D0DFD1D0CECCCAC2C7CBDB2562FF407AFF66
+        7FEAEFE3C8BEB5B6D9CECEBCAAAADCC6C6B89E9DD0C1E0F0A035EAC58FE1EBFA
+        EFEFEDDBD9D6E3E7F64483FF6FAAFF7894FAFDF6E6D2CBCCF1EFEFCCBBBBF9F0
+        F0C1A9A8F5EBFFFBAD3CEAC58DCDD7E6D9D8D8D0CEC8CFD3E13775FF548FFF6D
+        88EDF0E6D0C5BDBEDFD7D7C1AFAFE3D3D3BBA3A1DACFE9F4A535E9C38DD6E0EF
+        DCDBDAD7D4CCD4D8EA2462FE4A81FF6D88F0FEF2D7C8BEBEEBDBDAC4B2B1EFD5
+        D5BDA29FE4D1EFF7A538EAC693E5F7FFF3F9FFDDE1E8E8F4FF4B95FF76BCFF74
+        9AFFFFFFFFD5D2DDF7FCFFCCBFC9FFFDFFBFACB4FEF9FFFEB141E9C388C9C4B8
+        D1C7B3D1C4ACC8C3B94C76BD5A80BC7C89BAECD4ADC6B2A1D9C2B0C4AB98DBBB
+        A7C2A18CD0B7B9F2A12EFEBE5DF28000F28400F48600F48600F28300F28300F4
+        8600F48600F48600F28500F48600F28500F58700F08600FC9300FECA83F1A357
+        F0A152F1A352F1A352F4A552F4A552F3A452F0A254F1A353F0A353F1A354F0A3
+        53F1A457F09E44FD9200FFDCACFE9C0FFEA420FEA421FEA421FEA421FEA421FE
+        A421FEA421FEA421FEA421FEA421FEA421FEA621FE9E10FFD08A}
+      OnClick = SpeedButton4Click
+    end
+    object btnShowContractWord: TBitBtn
+      Left = 29
+      Top = 5
+      Width = 99
+      Height = 33
+      Caption = #1582#1585#1608#1580#1610' '#1576#1607' Word'
+      TabOrder = 0
+      OnClick = btnShowContractWordClick
+      Glyph.Data = {
+        AA030000424DAA03000000000000360000002800000011000000110000000100
+        1800000000007403000000000000000000000000000000000000A9542AA24B19
+        A24815A449159E4715964513934210934211853D0F853C0E7D390D76350E7032
+        0B71320B6A2F086A310D4E210400C36A43BD7A5EA1715B9E6E599C6E599C6E59
+        986B56946A519066529065518A604C875D4B865D49875C49865E4B87543A6A31
+        0D00C26C43BB8670FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFFFCFA
+        FFF8F6FFF5F3FFF5F2FFF1EDFFFFFE865E4A6B2F0800C2734BBF8C77FFFFFFFF
+        FFFFFFFFFFFFFFFFFFFBFAFAF4F3FFFFFFFFFFFFFFFCFBF8EBE8F5E6E1F4E6E1
+        FFF1ED865D4970320A00C57650C08D77FFFFFFE4D3CCA16E56946246E1D3CBFE
+        FAF8905B3B816246735A3AF9EDEAF9EBE8F5E6E1FFF5F2875D4B71330D00C87B
+        57BF8D78FFFFFFDAC7C0C3795BBA5828996B50FEFDFD9D43189348227D360CA5
+        9A89FFF7F5F7E8E6FFF5F2885F4A78370D00CC8160C69682FFFFFFDDCCC4C988
+        6DD579509F5026D4C3B9AF6341B95A30AA4E24694420F2E9E5F9F0EDFFF8F68C
+        624E823B1000D18665C69783FFFFFFDFCDC6D29478D3835FC5724A945F42B976
+        5CC06239C35F337E370CAEA090FFFAFAFFFCF99367528A3E1100D58A6BC99C88
+        FFFFFFE1D1C9DA9A80B4735AD99377B86D4AC47C5EC96D41B4623BCE6C406843
+        1FF1EAE8FFFFFF9467548C411300DA9070CBA08CFFFFFFE9D2CAE2A892B0735A
+        B7846DD89479CD7B58CB724C955B40B6705290481CA99B89FFFFFF986D579748
+        1900DD9271CA9F8BFFFFFFEED7CEE4AB95B07258DACDC6D39E86D68F70D07B54
+        AA6B4FC8B1A6BE6A436C4925FFFFFFA0725F9A4A1A00E19A7CCDA492FFFFFFD8
+        A591E8B39EC1846BDDCAC0D6BAAEDB9D83D08564B27459F3F6F5B5765DA2542D
+        AFAD9FA274619C4C1C00E29B7ED2AF9FEBC8BBD68A6CE5AD96E3A68CAC674CE9
+        DBD5C5886DD78F72BC7A60E9C6B7C77454D18261C16C4398614AA6512300E59D
+        80D0AA99FDF5F2F2DDD5F0DAD1F0D8CFF1D6CDFDF9F8F3E5DEECCFC3EED1C5F6
+        ECE6E9CABDE9CBBEF0D2C7A4705AA54F2100E8A082CEA897FFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA
+        7A66A6502000EBA587D0A997CEA997CEA896CFA997CCA492CB9E8ACB9E8BC596
+        82C59682C49581BF8C76BF8B75C08A73B9826CBC7B60A8552300E1916FEBA487
+        E7A082E69F82E39C7FE39C7EDB9578DA9277DA8E6DD58868D08362CF805CCA79
+        54C9744EC36F47C46F46AA5B3000}
+    end
+  end
+end

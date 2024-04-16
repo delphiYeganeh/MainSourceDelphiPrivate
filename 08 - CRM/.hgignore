@@ -1,0 +1,7 @@
+syntax: glob
+*.~ddp
+*.~dfm
+*.~pas
+*.dcu
+*.ddp
+*.svn-base

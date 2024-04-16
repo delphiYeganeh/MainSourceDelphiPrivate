@@ -1,0 +1,334 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{99675cab-8e9d-44d0-a2e0-bb751574a871}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="..\FastQB\fqb90.dproj" />
+    <Projects Include="dclfrx9.dproj" />
+    <Projects Include="dclfrxADO9.dproj" />
+    <Projects Include="dclfrxBDE9.dproj" />
+    <Projects Include="dclfrxcs9.dproj" />
+    <Projects Include="dclfrxDB9.dproj" />
+    <Projects Include="dclfrxDBX9.dproj" />
+    <Projects Include="dclfrxe9.dproj" />
+    <Projects Include="dclfrxIBX9.dproj" />
+    <Projects Include="dclfrxTee9.dproj" />
+    <Projects Include="dclfs9.dproj" />
+    <Projects Include="dclfsADO9.dproj" />
+    <Projects Include="dclfsBDE9.dproj" />
+    <Projects Include="dclfsDB9.dproj" />
+    <Projects Include="dclfsIBX9.dproj" />
+    <Projects Include="dclfsTee9.dproj" />
+    <Projects Include="frx9.dproj" />
+    <Projects Include="frxADO9.dproj" />
+    <Projects Include="frxBDE9.dproj" />
+    <Projects Include="frxcs9.dproj" />
+    <Projects Include="frxDB9.dproj" />
+    <Projects Include="frxDBX9.dproj" />
+    <Projects Include="frxe9.dproj" />
+    <Projects Include="frxIBX9.dproj" />
+    <Projects Include="frxTee9.dproj" />
+    <Projects Include="fs9.dproj" />
+    <Projects Include="fsADO9.dproj" />
+    <Projects Include="fsBDE9.dproj" />
+    <Projects Include="fsDB9.dproj" />
+    <Projects Include="fsIBX9.dproj" />
+    <Projects Include="fsTee9.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="fs9">
+    <MSBuild Projects="fs9.dproj" Targets="" />
+  </Target>
+  <Target Name="fs9:Clean">
+    <MSBuild Projects="fs9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="fs9:Make">
+    <MSBuild Projects="fs9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="fsTee9">
+    <MSBuild Projects="fsTee9.dproj" Targets="" />
+  </Target>
+  <Target Name="fsTee9:Clean">
+    <MSBuild Projects="fsTee9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="fsTee9:Make">
+    <MSBuild Projects="fsTee9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="frx9">
+    <MSBuild Projects="frx9.dproj" Targets="" />
+  </Target>
+  <Target Name="frx9:Clean">
+    <MSBuild Projects="frx9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="frx9:Make">
+    <MSBuild Projects="frx9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfrx9">
+    <MSBuild Projects="dclfrx9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfrx9:Clean">
+    <MSBuild Projects="dclfrx9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfrx9:Make">
+    <MSBuild Projects="dclfrx9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfrxADO9">
+    <MSBuild Projects="dclfrxADO9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfrxADO9:Clean">
+    <MSBuild Projects="dclfrxADO9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfrxADO9:Make">
+    <MSBuild Projects="dclfrxADO9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="fqb90">
+    <MSBuild Projects="..\FastQB\fqb90.dproj" Targets="" />
+  </Target>
+  <Target Name="fqb90:Clean">
+    <MSBuild Projects="..\FastQB\fqb90.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="fqb90:Make">
+    <MSBuild Projects="..\FastQB\fqb90.dproj" Targets="Make" />
+  </Target>
+  <Target Name="fsBDE9">
+    <MSBuild Projects="fsBDE9.dproj" Targets="" />
+  </Target>
+  <Target Name="fsBDE9:Clean">
+    <MSBuild Projects="fsBDE9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="fsBDE9:Make">
+    <MSBuild Projects="fsBDE9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="frxBDE9">
+    <MSBuild Projects="frxBDE9.dproj" Targets="" />
+  </Target>
+  <Target Name="frxBDE9:Clean">
+    <MSBuild Projects="frxBDE9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="frxBDE9:Make">
+    <MSBuild Projects="frxBDE9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfrxBDE9">
+    <MSBuild Projects="dclfrxBDE9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfrxBDE9:Clean">
+    <MSBuild Projects="dclfrxBDE9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfrxBDE9:Make">
+    <MSBuild Projects="dclfrxBDE9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="frxe9">
+    <MSBuild Projects="frxe9.dproj" Targets="" />
+  </Target>
+  <Target Name="frxe9:Clean">
+    <MSBuild Projects="frxe9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="frxe9:Make">
+    <MSBuild Projects="frxe9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="frxcs9">
+    <MSBuild Projects="frxcs9.dproj" Targets="" />
+  </Target>
+  <Target Name="frxcs9:Clean">
+    <MSBuild Projects="frxcs9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="frxcs9:Make">
+    <MSBuild Projects="frxcs9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfrxcs9">
+    <MSBuild Projects="dclfrxcs9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfrxcs9:Clean">
+    <MSBuild Projects="dclfrxcs9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfrxcs9:Make">
+    <MSBuild Projects="dclfrxcs9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfrxDB9">
+    <MSBuild Projects="dclfrxDB9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfrxDB9:Clean">
+    <MSBuild Projects="dclfrxDB9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfrxDB9:Make">
+    <MSBuild Projects="dclfrxDB9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="frxDBX9">
+    <MSBuild Projects="frxDBX9.dproj" Targets="" />
+  </Target>
+  <Target Name="frxDBX9:Clean">
+    <MSBuild Projects="frxDBX9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="frxDBX9:Make">
+    <MSBuild Projects="frxDBX9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfrxDBX9">
+    <MSBuild Projects="dclfrxDBX9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfrxDBX9:Clean">
+    <MSBuild Projects="dclfrxDBX9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfrxDBX9:Make">
+    <MSBuild Projects="dclfrxDBX9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfrxe9">
+    <MSBuild Projects="dclfrxe9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfrxe9:Clean">
+    <MSBuild Projects="dclfrxe9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfrxe9:Make">
+    <MSBuild Projects="dclfrxe9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfrxIBX9">
+    <MSBuild Projects="dclfrxIBX9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfrxIBX9:Clean">
+    <MSBuild Projects="dclfrxIBX9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfrxIBX9:Make">
+    <MSBuild Projects="dclfrxIBX9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfrxTee9">
+    <MSBuild Projects="dclfrxTee9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfrxTee9:Clean">
+    <MSBuild Projects="dclfrxTee9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfrxTee9:Make">
+    <MSBuild Projects="dclfrxTee9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfs9">
+    <MSBuild Projects="dclfs9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfs9:Clean">
+    <MSBuild Projects="dclfs9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfs9:Make">
+    <MSBuild Projects="dclfs9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfsADO9">
+    <MSBuild Projects="dclfsADO9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfsADO9:Clean">
+    <MSBuild Projects="dclfsADO9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfsADO9:Make">
+    <MSBuild Projects="dclfsADO9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfsBDE9">
+    <MSBuild Projects="dclfsBDE9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfsBDE9:Clean">
+    <MSBuild Projects="dclfsBDE9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfsBDE9:Make">
+    <MSBuild Projects="dclfsBDE9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfsDB9">
+    <MSBuild Projects="dclfsDB9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfsDB9:Clean">
+    <MSBuild Projects="dclfsDB9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfsDB9:Make">
+    <MSBuild Projects="dclfsDB9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="fsIBX9">
+    <MSBuild Projects="fsIBX9.dproj" Targets="" />
+  </Target>
+  <Target Name="fsIBX9:Clean">
+    <MSBuild Projects="fsIBX9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="fsIBX9:Make">
+    <MSBuild Projects="fsIBX9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfsIBX9">
+    <MSBuild Projects="dclfsIBX9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfsIBX9:Clean">
+    <MSBuild Projects="dclfsIBX9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfsIBX9:Make">
+    <MSBuild Projects="dclfsIBX9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclfsTee9">
+    <MSBuild Projects="dclfsTee9.dproj" Targets="" />
+  </Target>
+  <Target Name="dclfsTee9:Clean">
+    <MSBuild Projects="dclfsTee9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclfsTee9:Make">
+    <MSBuild Projects="dclfsTee9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="fsADO9">
+    <MSBuild Projects="fsADO9.dproj" Targets="" />
+  </Target>
+  <Target Name="fsADO9:Clean">
+    <MSBuild Projects="fsADO9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="fsADO9:Make">
+    <MSBuild Projects="fsADO9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="frxADO9">
+    <MSBuild Projects="frxADO9.dproj" Targets="" />
+  </Target>
+  <Target Name="frxADO9:Clean">
+    <MSBuild Projects="frxADO9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="frxADO9:Make">
+    <MSBuild Projects="frxADO9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="frxDB9">
+    <MSBuild Projects="frxDB9.dproj" Targets="" />
+  </Target>
+  <Target Name="frxDB9:Clean">
+    <MSBuild Projects="frxDB9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="frxDB9:Make">
+    <MSBuild Projects="frxDB9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="frxIBX9">
+    <MSBuild Projects="frxIBX9.dproj" Targets="" />
+  </Target>
+  <Target Name="frxIBX9:Clean">
+    <MSBuild Projects="frxIBX9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="frxIBX9:Make">
+    <MSBuild Projects="frxIBX9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="frxTee9">
+    <MSBuild Projects="frxTee9.dproj" Targets="" />
+  </Target>
+  <Target Name="frxTee9:Clean">
+    <MSBuild Projects="frxTee9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="frxTee9:Make">
+    <MSBuild Projects="frxTee9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="fsDB9">
+    <MSBuild Projects="fsDB9.dproj" Targets="" />
+  </Target>
+  <Target Name="fsDB9:Clean">
+    <MSBuild Projects="fsDB9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="fsDB9:Make">
+    <MSBuild Projects="fsDB9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="fs9;fsTee9;frx9;dclfrx9;dclfrxADO9;fqb90;fsBDE9;frxBDE9;dclfrxBDE9;frxe9;frxcs9;dclfrxcs9;dclfrxDB9;frxDBX9;dclfrxDBX9;dclfrxe9;dclfrxIBX9;dclfrxTee9;dclfs9;dclfsADO9;dclfsBDE9;dclfsDB9;fsIBX9;dclfsIBX9;dclfsTee9;fsADO9;frxADO9;frxDB9;frxIBX9;frxTee9;fsDB9" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="fs9:Clean;fsTee9:Clean;frx9:Clean;dclfrx9:Clean;dclfrxADO9:Clean;fqb90:Clean;fsBDE9:Clean;frxBDE9:Clean;dclfrxBDE9:Clean;frxe9:Clean;frxcs9:Clean;dclfrxcs9:Clean;dclfrxDB9:Clean;frxDBX9:Clean;dclfrxDBX9:Clean;dclfrxe9:Clean;dclfrxIBX9:Clean;dclfrxTee9:Clean;dclfs9:Clean;dclfsADO9:Clean;dclfsBDE9:Clean;dclfsDB9:Clean;fsIBX9:Clean;dclfsIBX9:Clean;dclfsTee9:Clean;fsADO9:Clean;frxADO9:Clean;frxDB9:Clean;frxIBX9:Clean;frxTee9:Clean;fsDB9:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="fs9:Make;fsTee9:Make;frx9:Make;dclfrx9:Make;dclfrxADO9:Make;fqb90:Make;fsBDE9:Make;frxBDE9:Make;dclfrxBDE9:Make;frxe9:Make;frxcs9:Make;dclfrxcs9:Make;dclfrxDB9:Make;frxDBX9:Make;dclfrxDBX9:Make;dclfrxe9:Make;dclfrxIBX9:Make;dclfrxTee9:Make;dclfs9:Make;dclfsADO9:Make;dclfsBDE9:Make;dclfsDB9:Make;fsIBX9:Make;dclfsIBX9:Make;dclfsTee9:Make;fsADO9:Make;frxADO9:Make;frxDB9:Make;frxIBX9:Make;frxTee9:Make;fsDB9:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

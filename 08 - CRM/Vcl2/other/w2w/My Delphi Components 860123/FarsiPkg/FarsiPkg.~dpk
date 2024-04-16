@@ -1,0 +1,54 @@
+package FarsiPkg;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  dbrtl,
+  bdertl,
+  vcldb,
+  adortl,
+  visualclx,
+  ip4000v6;
+
+contains
+  FCalendar in '..\FCalendar.pas',
+  ErrMsg in '..\LIB\Errmsg.pas' {ErrMsgForm},
+  TDate3 in '..\LIB\TDate3.pas',
+  PasswordDlg in '..\PasswordDlg.pas' {PasswordDlgFrm},
+  SSDBGrid in '..\SSDBGrid.pas',
+  FTime in '..\Ftime.pas',
+  FarsiDBEdit in '..\FarsiDBEdit.pas',
+  MyLibU in '..\Mylibu.pas',
+  FEdit in '..\FEdit.pas',
+  TMydate in '..\TMyDate.pas',
+  FDate in '..\FDate.pas',
+  SCSGrid in '..\SCSGrid.pas',
+  XPMenu in '..\XPMenu.pas',
+  wwSortedDBGrid in '..\wwSortedDBGrid.pas',
+  GradPnl in '..\Gradpnl.pas';
+
+end.
