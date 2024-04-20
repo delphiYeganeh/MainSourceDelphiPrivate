@@ -1,10 +1,10 @@
 inherited PropertiesForm: TPropertiesForm
-  Left = 190
-  Top = 207
+  Left = 603
+  Top = 233
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1601#1585#1605' '#1579#1576#1578' '#1608' '#1575#1589#1604#1575#1581' '#1605#1588#1582#1589#1575#1578' '#1605#1588#1578#1585#1610#1575#1606
-  ClientHeight = 628
+  ClientHeight = 605
   ClientWidth = 787
   KeyPreview = True
   OldCreateOrder = True
@@ -13,7 +13,7 @@ inherited PropertiesForm: TPropertiesForm
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
-    Top = 576
+    Top = 553
     Width = 787
     Height = 52
     Align = alBottom
@@ -242,14 +242,14 @@ inherited PropertiesForm: TPropertiesForm
     Left = 0
     Top = 41
     Width = 787
-    Height = 535
+    Height = 512
     Align = alClient
     TabOrder = 1
     object PageControl1: TPageControl
       Left = 1
       Top = 1
       Width = 785
-      Height = 533
+      Height = 510
       ActivePage = TabSheet1
       Align = alClient
       TabHeight = 30
@@ -259,10 +259,10 @@ inherited PropertiesForm: TPropertiesForm
         Caption = #1575#1591#1604#1575#1593#1575#1578' '#1575#1589#1604#1610
         DesignSize = (
           777
-          493)
+          470)
         object Label12: TLabel
           Left = 718
-          Top = 342
+          Top = 318
           Width = 43
           Height = 13
           Anchors = [akTop, akRight]
@@ -276,7 +276,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label11: TLabel
           Left = 706
-          Top = 295
+          Top = 271
           Width = 28
           Height = 13
           Anchors = [akTop, akRight]
@@ -290,7 +290,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label7: TLabel
           Left = 706
-          Top = 164
+          Top = 140
           Width = 27
           Height = 13
           Anchors = [akTop, akRight]
@@ -304,7 +304,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label15: TLabel
           Left = 706
-          Top = 141
+          Top = 117
           Width = 49
           Height = 13
           Anchors = [akTop, akRight]
@@ -313,7 +313,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label2: TLabel
           Left = 362
-          Top = 215
+          Top = 191
           Width = 35
           Height = 13
           Anchors = [akTop, akRight]
@@ -365,8 +365,8 @@ inherited PropertiesForm: TPropertiesForm
           FocusControl = DBEdit5
         end
         object Label1: TLabel
-          Left = 709
-          Top = 114
+          Left = 706
+          Top = 85
           Width = 33
           Height = 13
           Anchors = [akTop, akRight]
@@ -390,7 +390,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label6: TLabel
           Left = 362
-          Top = 239
+          Top = 215
           Width = 63
           Height = 13
           Anchors = [akTop, akRight]
@@ -399,7 +399,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label8: TLabel
           Left = 706
-          Top = 319
+          Top = 295
           Width = 44
           Height = 13
           Anchors = [akTop, akRight]
@@ -408,7 +408,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label9: TLabel
           Left = 706
-          Top = 260
+          Top = 236
           Width = 25
           Height = 13
           Anchors = [akTop, akRight]
@@ -417,7 +417,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label14: TLabel
           Left = 706
-          Top = 188
+          Top = 164
           Width = 30
           Height = 13
           Anchors = [akTop, akRight]
@@ -426,7 +426,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label17: TLabel
           Left = 706
-          Top = 212
+          Top = 188
           Width = 28
           Height = 13
           Anchors = [akTop, akRight]
@@ -435,7 +435,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label18: TLabel
           Left = 706
-          Top = 236
+          Top = 212
           Width = 27
           Height = 13
           Anchors = [akTop, akRight]
@@ -444,7 +444,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label16: TLabel
           Left = 368
-          Top = 191
+          Top = 167
           Width = 44
           Height = 13
           Anchors = [akTop, akRight]
@@ -453,7 +453,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label19: TLabel
           Left = 390
-          Top = 343
+          Top = 319
           Width = 16
           Height = 13
           Anchors = [akTop, akRight]
@@ -467,7 +467,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label29: TLabel
           Left = 362
-          Top = 263
+          Top = 239
           Width = 63
           Height = 13
           Anchors = [akTop, akRight]
@@ -485,7 +485,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Label4: TLabel
           Left = 512
-          Top = 189
+          Top = 165
           Width = 30
           Height = 13
           Anchors = [akTop, akRight]
@@ -494,23 +494,14 @@ inherited PropertiesForm: TPropertiesForm
         end
         object lblBirthDate: TLabel
           Left = 103
-          Top = 320
+          Top = 296
           Width = 41
           Height = 13
           Caption = #1578#1575#1585#1610#1582' '#1578#1608#1604#1583
         end
-        object Label26: TLabel
-          Left = 710
-          Top = 87
-          Width = 28
-          Height = 13
-          Anchors = [akTop, akRight]
-          Caption = #1587#1605#1578
-          FocusControl = DBEdit13
-        end
         object DBMemo1: TDBMemo
           Left = 416
-          Top = 358
+          Top = 334
           Width = 345
           Height = 116
           Anchors = [akTop, akRight]
@@ -522,7 +513,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBEdit11: TDBEdit
           Left = 19
-          Top = 293
+          Top = 269
           Width = 680
           Height = 21
           Anchors = [akTop, akRight]
@@ -534,7 +525,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBEdit6: TDBEdit
           Left = 434
-          Top = 162
+          Top = 138
           Width = 265
           Height = 21
           Anchors = [akTop, akRight]
@@ -552,7 +543,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBLkCBGroupTitle: TDBLookupComboBox
           Left = 529
-          Top = 138
+          Top = 114
           Width = 170
           Height = 21
           Anchors = [akTop, akRight]
@@ -565,7 +556,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBLookupComboBox3: TDBLookupComboBox
           Left = 185
-          Top = 213
+          Top = 189
           Width = 170
           Height = 21
           Anchors = [akTop, akRight]
@@ -580,7 +571,7 @@ inherited PropertiesForm: TPropertiesForm
           Left = 19
           Top = 24
           Width = 390
-          Height = 116
+          Height = 87
           Anchors = [akTop, akRight]
           Columns = 2
           ItemHeight = 13
@@ -605,9 +596,9 @@ inherited PropertiesForm: TPropertiesForm
           TabOrder = 2
         end
         object DBEdit5: TDBEdit
-          Left = 435
+          Left = 434
           Top = 59
-          Width = 263
+          Width = 265
           Height = 21
           Anchors = [akTop, akRight]
           DataField = 'Treater'
@@ -615,9 +606,9 @@ inherited PropertiesForm: TPropertiesForm
           TabOrder = 3
         end
         object DBEdit1: TDBEdit
-          Left = 432
-          Top = 110
-          Width = 270
+          Left = 434
+          Top = 83
+          Width = 265
           Height = 21
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
@@ -627,7 +618,7 @@ inherited PropertiesForm: TPropertiesForm
           TabOrder = 4
         end
         object DBECustomerNo: TDBEdit
-          Left = 434
+          Left = 433
           Top = 9
           Width = 112
           Height = 21
@@ -641,7 +632,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBLookupComboBox4: TDBLookupComboBox
           Left = 185
-          Top = 237
+          Top = 213
           Width = 170
           Height = 21
           Anchors = [akTop, akRight]
@@ -654,7 +645,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBEdit2: TDBEdit
           Left = 434
-          Top = 317
+          Top = 293
           Width = 265
           Height = 21
           Anchors = [akTop, akRight]
@@ -664,7 +655,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBEdit4: TDBEdit
           Left = 434
-          Top = 258
+          Top = 234
           Width = 265
           Height = 21
           Anchors = [akTop, akRight]
@@ -678,7 +669,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBEdit7: TDBEdit
           Left = 544
-          Top = 187
+          Top = 163
           Width = 155
           Height = 21
           Anchors = [akTop, akRight]
@@ -694,7 +685,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBEdit10: TDBEdit
           Left = 434
-          Top = 211
+          Top = 187
           Width = 265
           Height = 21
           Anchors = [akTop, akRight]
@@ -710,7 +701,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBEdit12: TDBEdit
           Left = 434
-          Top = 234
+          Top = 210
           Width = 265
           Height = 21
           Anchors = [akTop, akRight]
@@ -726,7 +717,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBEdit8: TDBEdit
           Left = 88
-          Top = 189
+          Top = 165
           Width = 265
           Height = 21
           Anchors = [akTop, akRight]
@@ -740,7 +731,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBLookupComboBox5: TDBLookupComboBox
           Left = 185
-          Top = 261
+          Top = 237
           Width = 170
           Height = 21
           Anchors = [akTop, akRight]
@@ -771,7 +762,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBMemo2: TDBMemo
           Left = 19
-          Top = 357
+          Top = 333
           Width = 390
           Height = 117
           Anchors = [akTop, akRight]
@@ -783,7 +774,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object GroupBox1: TGroupBox
           Left = 87
-          Top = 145
+          Top = 121
           Width = 329
           Height = 41
           Anchors = [akTop, akRight]
@@ -827,7 +818,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object DBEdit3: TDBEdit
           Left = 434
-          Top = 187
+          Top = 163
           Width = 73
           Height = 21
           Anchors = [akTop, akRight]
@@ -853,22 +844,12 @@ inherited PropertiesForm: TPropertiesForm
         end
         object edtBirthDate: TDBEdit
           Left = 33
-          Top = 318
+          Top = 294
           Width = 66
           Height = 21
           DataField = 'CustomerBirthDate'
           DataSource = Dm.DSelect_Customer_By_CustomerID
           TabOrder = 23
-        end
-        object DBEdit13: TDBEdit
-          Left = 434
-          Top = 83
-          Width = 266
-          Height = 21
-          Anchors = [akTop, akRight]
-          DataField = 'Organization'
-          DataSource = Dm.DSelect_Customer_By_CustomerID
-          TabOrder = 24
         end
       end
       object TabSheet2: TTabSheet
@@ -876,7 +857,7 @@ inherited PropertiesForm: TPropertiesForm
         ImageIndex = 4
         DesignSize = (
           777
-          493)
+          470)
         object LabelFreeField19: TLabel
           Left = 681
           Top = 85
@@ -1303,7 +1284,7 @@ inherited PropertiesForm: TPropertiesForm
         ImageIndex = 1
         DesignSize = (
           777
-          493)
+          470)
         object LabelFreeField01: TLabel
           Left = 688
           Top = 9
@@ -1799,7 +1780,7 @@ inherited PropertiesForm: TPropertiesForm
           Left = 0
           Top = 81
           Width = 777
-          Height = 369
+          Height = 346
           Cursor = crHandPoint
           Align = alClient
           TabOrder = 0
@@ -1823,7 +1804,7 @@ inherited PropertiesForm: TPropertiesForm
         end
         object Panel3: TPanel
           Left = 0
-          Top = 450
+          Top = 427
           Width = 777
           Height = 43
           Align = alBottom
@@ -1856,7 +1837,7 @@ inherited PropertiesForm: TPropertiesForm
         ImageIndex = 3
         DesignSize = (
           777
-          493)
+          470)
         object Label20: TLabel
           Left = 696
           Top = 21

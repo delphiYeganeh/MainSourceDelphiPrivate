@@ -161,7 +161,7 @@ inherited frmCustStatusReport: TfrmCustStatusReport
     Left = 0
     Top = 41
     Width = 1157
-    Height = 593
+    Height = 592
     Cursor = crHandPoint
     Align = alClient
     DataSource = DSForm
@@ -303,7 +303,7 @@ inherited frmCustStatusReport: TfrmCustStatusReport
   end
   object Panel2: TPanel [2]
     Left = 0
-    Top = 634
+    Top = 633
     Width = 1157
     Height = 41
     Align = alBottom

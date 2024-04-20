@@ -1,7 +1,7 @@
 inherited FRepTasks: TFRepTasks
   Left = 303
   Top = 121
-  Width = 876
+  Width = 880
   Height = 469
   Caption = #1711#1586#1575#1585#1588' '#1705#1575#1585' '#1705#1575#1585#1576#1585#1575#1606
   OldCreateOrder = True
@@ -10,12 +10,12 @@ inherited FRepTasks: TFRepTasks
   object Panel1: TPanel [0]
     Left = 0
     Top = 0
-    Width = 868
+    Width = 864
     Height = 65
     Align = alTop
     TabOrder = 0
     DesignSize = (
-      868
+      864
       65)
     object SpeedButton1: TSpeedButton
       Left = 8
@@ -77,6 +77,7 @@ inherited FRepTasks: TFRepTasks
       Top = 8
       Width = 216
       Height = 49
+      Anchors = [akTop, akRight]
       Caption = #1575#1606#1578#1582#1575#1576' '#1705#1575#1585#1576#1585
       TabOrder = 0
       object SpeedButton4: TSpeedButton
@@ -99,6 +100,7 @@ inherited FRepTasks: TFRepTasks
       Top = 8
       Width = 217
       Height = 49
+      Anchors = [akTop, akRight]
       Caption = #1578#1575#1585#1610#1582
       TabOrder = 1
       object Label1: TLabel
@@ -147,7 +149,7 @@ inherited FRepTasks: TFRepTasks
       end
     end
     object ActionType: TDBLookupComboBox
-      Left = 185
+      Left = 189
       Top = 17
       Width = 150
       Height = 21
@@ -168,10 +170,11 @@ inherited FRepTasks: TFRepTasks
       TabOrder = 2
     end
     object CheckBox1: TCheckBox
-      Left = 336
-      Top = 16
+      Left = 342
+      Top = 19
       Width = 73
       Height = 17
+      Anchors = [akTop, akRight]
       Caption = #1606#1608#1593' '#1575#1602#1583#1575#1605' :'
       TabOrder = 3
       OnClick = CheckBox1Click
@@ -180,8 +183,8 @@ inherited FRepTasks: TFRepTasks
   object Panel2: TPanel [1]
     Left = 0
     Top = 65
-    Width = 868
-    Height = 370
+    Width = 864
+    Height = 365
     Align = alClient
     BorderWidth = 1
     TabOrder = 1
@@ -189,8 +192,8 @@ inherited FRepTasks: TFRepTasks
   object YDBGrid1: TYDBGrid [2]
     Left = 0
     Top = 65
-    Width = 868
-    Height = 370
+    Width = 864
+    Height = 365
     Cursor = crHandPoint
     Align = alClient
     DataSource = DSForm

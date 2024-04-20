@@ -42,7 +42,6 @@ type
     ApplicationEvents: TApplicationEvents;
     WordDocument: TWordDocument;
     WordApplication: TWordApplication;
-    Yeganeh_Word: TYeganeh_Word;
     DMarketer: TDataSource;
     OpenDialog: TOpenDialog;
     DuplicateAddress: TADOStoredProc;
@@ -672,7 +671,91 @@ type
     CustomerFinishedContractProducts: TStringField;
     Report_ContractAmount: TFloatField;
     Select_FollowUP_By_CustomerIDPdfAttachment: TBlobField;
-    Select_Customer_By_CustomerIDOrganization: TWideStringField;
+    CustomerTemp: TADOStoredProc;
+    WideStringField14: TWideStringField;
+    AutoIncField3: TAutoIncField;
+    StringField15: TStringField;
+    WideStringField15: TWideStringField;
+    WideStringField16: TWideStringField;
+    WideStringField17: TWideStringField;
+    WideStringField18: TWideStringField;
+    WideStringField19: TWideStringField;
+    SmallintField1: TSmallintField;
+    IntegerField7: TIntegerField;
+    IntegerField8: TIntegerField;
+    BooleanField1: TBooleanField;
+    WordField6: TWordField;
+    IntegerField9: TIntegerField;
+    WideStringField20: TWideStringField;
+    WordField7: TWordField;
+    WideStringField21: TWideStringField;
+    WideStringField22: TWideStringField;
+    WideStringField23: TWideStringField;
+    StringField16: TStringField;
+    WideStringField24: TWideStringField;
+    WideStringField25: TWideStringField;
+    WideStringField26: TWideStringField;
+    WordField8: TWordField;
+    WordField9: TWordField;
+    WideStringField27: TWideStringField;
+    StringField17: TStringField;
+    StringField18: TStringField;
+    WideStringField28: TWideStringField;
+    WideStringField29: TWideStringField;
+    WideStringField30: TWideStringField;
+    WideStringField31: TWideStringField;
+    StringField19: TStringField;
+    StringField20: TStringField;
+    StringField21: TStringField;
+    IntegerField10: TIntegerField;
+    WideStringField32: TWideStringField;
+    WideStringField33: TWideStringField;
+    WideStringField34: TWideStringField;
+    WideStringField35: TWideStringField;
+    WideStringField36: TWideStringField;
+    WideStringField37: TWideStringField;
+    WideStringField38: TWideStringField;
+    WideStringField39: TWideStringField;
+    WideStringField40: TWideStringField;
+    WideStringField41: TWideStringField;
+    WideStringField42: TWideStringField;
+    WideStringField43: TWideStringField;
+    WideStringField44: TWideStringField;
+    WideStringField45: TWideStringField;
+    WideStringField46: TWideStringField;
+    WideStringField47: TWideStringField;
+    WideStringField48: TWideStringField;
+    WideStringField49: TWideStringField;
+    WideStringField50: TWideStringField;
+    LargeintField1: TLargeintField;
+    StringField22: TStringField;
+    WideStringField51: TWideStringField;
+    WideStringField52: TWideStringField;
+    WideStringField53: TWideStringField;
+    WideStringField54: TWideStringField;
+    IntegerField11: TIntegerField;
+    IntegerField12: TIntegerField;
+    StringField23: TStringField;
+    StringField24: TStringField;
+    IntegerField13: TIntegerField;
+    IntegerField14: TIntegerField;
+    IntegerField15: TIntegerField;
+    IntegerField16: TIntegerField;
+    StringField25: TStringField;
+    StringField26: TStringField;
+    StringField27: TStringField;
+    StringField28: TStringField;
+    StringField29: TStringField;
+    StringField30: TStringField;
+    StringField31: TStringField;
+    StringField32: TStringField;
+    StringField33: TStringField;
+    StringField34: TStringField;
+    StringField35: TStringField;
+    StringField36: TStringField;
+    StringField37: TStringField;
+    StringField38: TStringField;
+    IntegerField17: TIntegerField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
     function GetSql(s:string):Variant;
     function GetNewCode:string;
@@ -880,7 +963,26 @@ begin
    EXCEPT
    END;
 
-   LoginForm:=TLoginForm.Create(Self);
+   { TODO -oparsa : 14030126 }
+   Qry_SetResult(' Declare @Date Char(10)   '+
+     ' set @Date = dbo.Shamsi(GETDATE())  '+
+     ' Update CustomerProduct set ContractFinished = 0 , DateUpDateFinishedContractProducts = @Date   '+
+     ' Update CustomerProduct set ContractFinished = 1  , DateUpDateFinishedContractProducts = @Date  FROM CustomerProduct '+
+     ' INNER JOIN (       '+
+     ' SELECT ProductID,CustomerID FROM [CONTRACT] GROUP BY ProductID,CustomerID   '+
+     ' HAVING max(CONTRACT.EndDate) < @Date   '+
+     '  AND not ProductID IS NULL) t  '+
+     '  ON (t.ProductID = CustomerProduct.ProductID AND t.CustomerID = CustomerProduct.CustomerID ) ',dm.YeganehConnection);
+
+   Qry_SetResult('UPDATE dbo.Customer   '+
+                 ' SET FinishedContractProducts =  dbo.fn_FinishedContractBycustomerId(customerid) ,   '+
+                 ' ProductsSTR = dbo.fn_ProductByCustomerID(customerid) ,  '+
+                 ' ProductsIdSTR = dbo.fn_ProductIdByCustomerID(customerid)  ',dm.YeganehConnection);
+
+
+   { TODO -oparsa : 14030126 }
+
+  LoginForm:=TLoginForm.Create(Self);
 
    LoginForm.ShowModal;
 
@@ -1307,23 +1409,23 @@ begin
          post;
         end;
     end;
-
-
 end;
 
 procedure TDm.MakeLetter(Dataset:Tdataset);
 begin
-if OpenDialog.Execute then
-  with Yeganeh_Word do
-   begin
-    DocumetTemplateFile:=ExtractFileName(OpenDialog.Filename);
-    WordFilePath:=ExtractFilePath(OpenDialog.Filename);
-    Ydataset:=Dataset;
-    PasteRecords;
-   end;
+        {
+  if (OpenDialog.Execute) then
+  begin
+   // with Yeganeh_Word do
+   // begin
+     // Yeganeh_Word.DocumetTemplateFile := ExtractFileName(OpenDialog.Filename);
+     // Yeganeh_Word.WordFilePath := ExtractFilePath(OpenDialog.Filename);
+     // Yeganeh_Word.Ydataset := Dataset;
+    //  Yeganeh_Word.PasteRecords;
+   // end;
+  end;
+       }
 end;
-
-
 
 Procedure Tdm.SetSystemValue(VariableId:word;value:variant);
 begin

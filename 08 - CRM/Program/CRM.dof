@@ -76,9 +76,9 @@ LocaleToUnicode=1
 ImagebaseMultiple=1
 SuspiciousTypecast=1
 PrivatePropAccessor=1
-UnsafeType=1
-UnsafeCode=1
-UnsafeCast=1
+UnsafeType=0
+UnsafeCode=0
+UnsafeCast=0
 [Linker]
 MapFile=0
 OutputObjs=0
@@ -90,10 +90,10 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=D:\Output Directory
-UnitOutputDir=
-PackageDLLOutputDir=
-PackageDCPOutputDir=
+OutputDir=D:\00 - Output\CRM
+UnitOutputDir=D:\00 - Output\CRM\DCU
+PackageDLLOutputDir=D:\00 - Output\CRM\DCU
+PackageDCPOutputDir=D:\00 - Output\CRM\DCU
 SearchPath=
 Packages=vcl;rtl;dbrtl;adortl;vcldb;vclx;bdertl;vcldbx;ibxpress;dsnap;cds;bdecds;qrpt;teeui;teedb;tee;dss;teeqr;visualclx;visualdbclx;dsnapcrba;dsnapcon;VclSmp;vclshlctrls;vclie;xmlrtl;inet;inetdbbde;inetdbxpress;inetdb;nmfast;webdsnap;websnap;dbexpress;dbxcds;indy;dclOffice2k
 Conditionals=
@@ -135,10 +135,25 @@ ProductName=
 ProductVersion=1.8.3.0
 Comments=
 [Excluded Packages]
-c:\program files (x86)\borland\delphi7\Projects\Bpl\PDFTEST.bpl=(untitled)
+c:\program files (x86)\borland\delphi7\Projects\Bpl\dclfrxe7.bpl=FastReport 4.0 Exports
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
-[HistoryLists\hlOutputDirectorry]
+[HistoryLists\hlSearchPath]
 Count=1
-Item0=D:\Output Directory
+Item0=H:\Yeganeh\Windows\Delphi\Component\AlphaControls\AlphaControls 14.31 (D5&DX10.3Rio) (CB6&BuilderCX10.3Rio) OnlyDCUs Retail\D7
+[HistoryLists\hlUnitOutputDirectory]
+Count=2
+Item0=D:\00 - Output\CRM\DCU
+Item1=H:\Temp
+[HistoryLists\hlOutputDirectorry]
+Count=3
+Item0=D:\00 - Output\CRM
+Item1=H:\Lastversion
+Item2=D:\Output Directory
+[HistoryLists\hlBPLOutput]
+Count=1
+Item0=D:\00 - Output\CRM\DCU
+[HistoryLists\hlDCPOutput]
+Count=1
+Item0=D:\00 - Output\CRM\DCU

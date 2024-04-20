@@ -99,7 +99,10 @@ begin
    q.SQL.Text := 'Select * from FollowUp where FollowupID = ' + IntToStr(FFollowupID);
    q.Open;
 
-   if q.FieldValues['ParentFollowUpID'] = 0 then
+   { TODO -oparsa : 14030201 }
+   //if q.FieldValues['ParentFollowUpID'] = 0 then
+   if (q.FieldValues['ParentFollowUpID'] = 0) or (q.FieldValues['ParentFollowUpID'] = null ) then
+   { TODO -oparsa : 14030201 }
       ParentFollowupID := FFollowupID
    else
       ParentFollowupID:= q.FieldValues['ParentFollowUpID'];

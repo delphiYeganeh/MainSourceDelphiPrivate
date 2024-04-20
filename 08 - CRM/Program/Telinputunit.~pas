@@ -158,8 +158,6 @@ type
     Label24: TLabel;
     Label25: TLabel;
     DBLookupComboBox8: TDBLookupComboBox;
-    DBEdit13: TDBEdit;
-    Label26: TLabel;
     procedure DBEdit7Enter(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

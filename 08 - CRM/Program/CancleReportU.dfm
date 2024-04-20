@@ -4,21 +4,22 @@ inherited FrCancleReport: TFrCancleReport
   Width = 801
   Height = 458
   Caption = 'FrCancleReport'
+  OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
     Top = 0
-    Width = 793
-    Height = 383
+    Width = 785
+    Height = 378
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object YDBGrid1: TYDBGrid
       Left = 0
       Top = 98
-      Width = 793
-      Height = 285
+      Width = 785
+      Height = 280
       Cursor = crHandPoint
       Align = alClient
       DataSource = Dm.DReport_Cancles
@@ -112,7 +113,7 @@ inherited FrCancleReport: TFrCancleReport
     object xpPanel1: TxpPanel
       Left = 0
       Top = 0
-      Width = 793
+      Width = 785
       Height = 98
       StartColor = 16511469
       EndColor = 16244694
@@ -137,7 +138,7 @@ inherited FrCancleReport: TFrCancleReport
       Align = alTop
       TabOrder = 1
       DesignSize = (
-        791
+        783
         66)
       object Label5: TLabel
         Left = 422
@@ -256,7 +257,8 @@ inherited FrCancleReport: TFrCancleReport
         Top = 5
         Width = 89
         Height = 21
-        About = 'Created by : Saber Kahalian'
+        Anchors = [akTop, akRight]
+        About = 'Created by : Mohamad Khorsandi'
         BiDiMode = bdRightToLeft
         TabOrder = 4
         Enabled = True
@@ -266,17 +268,34 @@ inherited FrCancleReport: TFrCancleReport
         CheckInputOnExit = True
         Divider = dSlash
         ShowToDay = True
-        ShowCellInColor = False
         MonthObject = moComboBox
         Glyph = gtCalendar
         ShowDefaultDate = False
+        AutoCheck = False
+        AutoDeleteDelimiter = False
+        EnabledDays = [mcSaturday, mcSunday, mcMonday, mcTuesday, mcWednesday, mcThursday, mcFriday]
+        MaskEnabled = False
+        ColorCaptionStart = 13158600
+        ColorCaptionStop = clWhite
+        ColorBodyStart = clWhite
+        ColorBodyStop = clWhite
+        ColorTodayLine = clBlack
+        ColorSelectBrush = 14474460
+        ColorDisableMonth = clGray
+        ColorVacationDay = clRed
+        ColorNormalDay = clBlack
+        ColorStyle = csWhiteGray
+        ButtonStyle = bsRound
+        DataFieldType = dftSolar
+        DataFieldAutoSaveModified = False
       end
       object edtSrchInsertDateTo: TSolarDatePicker
         Left = 489
         Top = 5
         Width = 89
         Height = 21
-        About = 'Created by : Saber Kahalian'
+        Anchors = [akTop, akRight]
+        About = 'Created by : Mohamad Khorsandi'
         BiDiMode = bdRightToLeft
         TabOrder = 5
         Enabled = True
@@ -286,17 +305,34 @@ inherited FrCancleReport: TFrCancleReport
         CheckInputOnExit = True
         Divider = dSlash
         ShowToDay = True
-        ShowCellInColor = False
         MonthObject = moComboBox
         Glyph = gtCalendar
         ShowDefaultDate = False
+        AutoCheck = False
+        AutoDeleteDelimiter = False
+        EnabledDays = [mcSaturday, mcSunday, mcMonday, mcTuesday, mcWednesday, mcThursday, mcFriday]
+        MaskEnabled = False
+        ColorCaptionStart = 13158600
+        ColorCaptionStop = clWhite
+        ColorBodyStart = clWhite
+        ColorBodyStop = clWhite
+        ColorTodayLine = clBlack
+        ColorSelectBrush = 14474460
+        ColorDisableMonth = clGray
+        ColorVacationDay = clRed
+        ColorNormalDay = clBlack
+        ColorStyle = csWhiteGray
+        ButtonStyle = bsRound
+        DataFieldType = dftSolar
+        DataFieldAutoSaveModified = False
       end
       object edtSrchCancleDateTo: TSolarDatePicker
         Left = 489
         Top = 29
         Width = 89
         Height = 21
-        About = 'Created by : Saber Kahalian'
+        Anchors = [akTop, akRight]
+        About = 'Created by : Mohamad Khorsandi'
         BiDiMode = bdRightToLeft
         TabOrder = 6
         Enabled = True
@@ -306,17 +342,34 @@ inherited FrCancleReport: TFrCancleReport
         CheckInputOnExit = True
         Divider = dSlash
         ShowToDay = True
-        ShowCellInColor = False
         MonthObject = moComboBox
         Glyph = gtCalendar
         ShowDefaultDate = False
+        AutoCheck = False
+        AutoDeleteDelimiter = False
+        EnabledDays = [mcSaturday, mcSunday, mcMonday, mcTuesday, mcWednesday, mcThursday, mcFriday]
+        MaskEnabled = False
+        ColorCaptionStart = 13158600
+        ColorCaptionStop = clWhite
+        ColorBodyStart = clWhite
+        ColorBodyStop = clWhite
+        ColorTodayLine = clBlack
+        ColorSelectBrush = 14474460
+        ColorDisableMonth = clGray
+        ColorVacationDay = clRed
+        ColorNormalDay = clBlack
+        ColorStyle = csWhiteGray
+        ButtonStyle = bsRound
+        DataFieldType = dftSolar
+        DataFieldAutoSaveModified = False
       end
       object edtSrchCancleDateFrom: TSolarDatePicker
         Left = 601
         Top = 29
         Width = 89
         Height = 21
-        About = 'Created by : Saber Kahalian'
+        Anchors = [akTop, akRight]
+        About = 'Created by : Mohamad Khorsandi'
         BiDiMode = bdRightToLeft
         TabOrder = 7
         Enabled = True
@@ -326,26 +379,46 @@ inherited FrCancleReport: TFrCancleReport
         CheckInputOnExit = True
         Divider = dSlash
         ShowToDay = True
-        ShowCellInColor = False
         MonthObject = moComboBox
         Glyph = gtCalendar
         ShowDefaultDate = False
+        AutoCheck = False
+        AutoDeleteDelimiter = False
+        EnabledDays = [mcSaturday, mcSunday, mcMonday, mcTuesday, mcWednesday, mcThursday, mcFriday]
+        MaskEnabled = False
+        ColorCaptionStart = 13158600
+        ColorCaptionStop = clWhite
+        ColorBodyStart = clWhite
+        ColorBodyStop = clWhite
+        ColorTodayLine = clBlack
+        ColorSelectBrush = 14474460
+        ColorDisableMonth = clGray
+        ColorVacationDay = clRed
+        ColorNormalDay = clBlack
+        ColorStyle = csWhiteGray
+        ButtonStyle = bsRound
+        DataFieldType = dftSolar
+        DataFieldAutoSaveModified = False
       end
     end
   end
   object Panel2: TPanel [1]
     Left = 0
-    Top = 383
-    Width = 793
+    Top = 378
+    Width = 785
     Height = 41
     Align = alBottom
     TabOrder = 1
+    DesignSize = (
+      785
+      41)
     object SpeedButton3: TSpeedButton
       Left = 676
       Top = 4
       Width = 110
       Height = 29
       Hint = #1575#1585#1587#1575#1604' '#1576#1607' '#1575#1603#1587#1604
+      Anchors = [akTop, akRight]
       Caption = #1575#1585#1587#1575#1604' '#1576#1607' EXCEL'
       Flat = True
       Glyph.Data = {

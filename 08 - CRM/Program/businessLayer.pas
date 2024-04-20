@@ -680,8 +680,6 @@ begin
    end ;
 end;
 
-
-
 Procedure OpenReportCancle(CancelReasonId,MarketerID,ProductID:INTEGER; InsertDateFrom, InsertDateTo,CancelDateFrom,CancelDateTo:String );
 Begin
     with dm.Report_Cancles do

@@ -8,7 +8,8 @@ uses
   ActnList, ActnMan, Buttons, Menus, ToolWin, ActnCtrls, ImgList, ComCtrls,
   DBActns, YDbgrid, DBTreeView, XPStyleActnCtrls, xpPages, UemsVCL,
   xpBitBtn, ActnColorMaps, xpPanel, Spin,dateutils, BaseUnit, ExtActns,
-  YWhereEdit, YAmountEdit, KimiyaEdit,shellAPI, MssCalendarPro ;
+  YWhereEdit, YAmountEdit, KimiyaEdit,shellAPI, MssCalendarPro,
+  acArcControls ;
 
 type
   TMainForm = class(TMBaseForm)
@@ -374,6 +375,9 @@ type
     bbb: TButton;
     N75: TMenuItem;
     N76: TMenuItem;
+    adoState: TADOQuery;
+    adoStateStateID: TIntegerField;
+    adoStateStateTitle: TStringField;
     procedure AinsertExecute(Sender: TObject);
     procedure Action6Execute(Sender: TObject);
     procedure ApropertyExecute(Sender: TObject);
@@ -581,9 +585,15 @@ type
     procedure SearchEditKeyPress(Sender: TObject; var Key: Char);
     procedure edtContactNumberKeyPress(Sender: TObject; var Key: Char);
     procedure N76Click(Sender: TObject);
+    procedure edRecCountKeyPress(Sender: TObject; var Key: Char);
 
   private
     qrydblsrchContractType :TADOQuery;
+    { TODO -oparsa : 14030126 }
+    dblProductoldKeyValue : Integer;
+    ChangeProduct :Boolean;
+    oldTopRecord : Integer;
+    { TODO -oparsa : 14030126 }
     procedure SetdblContractType;
     Function  LoadImageField(Field:TField;Path:String):Boolean;
     Function MakeStrSearch(s:string):string;
@@ -619,7 +629,7 @@ Uses Telinputunit, dmu,  about, Report, ReportPhone,
   SmsCenter1, UAddUserTableDlg, SendSMSForCustomerLockUnit,
   SMSSettingsUnit, GeneralSMSUnit, SMSGeneralUnit, StrUtils,
   USMSEndContract, SMSBirthDateU, SMSAutoTextU, TasksTreeUnit,
-  uCategoryEdit, uLockSoftware, untCustStatusReport;
+  uCategoryEdit, uLockSoftware, untCustStatusReport, UPleaseWait;
 
 {$R *.dfm}
 
@@ -658,14 +668,14 @@ end;
 procedure TMainForm.ApropertyExecute(Sender: TObject);
 var Id :integer;
 begin
-  Id := dm.CustomerCustomerID.AsInteger;
-  propertiesForm := TPropertiesForm.Create(Application,dm.CustomerCustomerID.AsInteger) ;
-  PropertiesForm.Showmodal;
-  if PropertiesForm.Edited = true then
-  begin
-    RefreshCustomer;
-    dm.Customer.Locate('CustomerId',Id,[])
-  end
+   Id := dm.CustomerCustomerID.AsInteger;
+   propertiesForm := TPropertiesForm.Create(Application,dm.CustomerCustomerID.AsInteger) ;
+   PropertiesForm.Showmodal;
+if PropertiesForm.Edited = true then
+   begin
+     RefreshCustomer;
+     dm.Customer.Locate('CustomerId',Id,[])
+    end
 end;
 
 procedure TMainForm.AreportExecute(Sender: TObject);
@@ -687,6 +697,11 @@ begin
    StatusBar1.Panels[1].Text:=dm.ProductProductTitle.AsString;
    BDate.Text :=copy(_today,1,8)+'01';
    eDate.Text :=copy(_today,1,8)+'29' ;
+   { TODO -oparsa : 14030201 }
+   ActDateEditTo.Text :=copy(_today,1,5)+'12/29' ;
+   ContractDateEditTo.Text :=copy(_today,1,5)+'12/29' ;
+   //ActDateEditFrom.Text :=   SELECT MIN(ToDoDate) FROM dbo.FollowUp WHERE ToDoDate <>''
+   { TODO -oparsa : 14030201 }
    cBDate.Text:=copy(_today,1,8)+'01';
    ceDate.Text:=copy(_today,1,8)+'29';
 //   HasAccessToAllAcontact :=
@@ -767,6 +782,10 @@ procedure TMainForm.FormShow(Sender: TObject);
 var fltr:String;
    tmpstr : string;
 begin
+  { TODO -oparsa : 14030201 }
+  oldTopRecord :=  0 ;
+  { TODO -oparsa : 14030201 }
+
    DBGrid_Columns_Caption(PhoneGrid);
    DBGrid_LoadColumns(Self.Name,PhoneGrid);
    DBGrid_LoadColumns(Self.Name,FollowGrid);
@@ -779,6 +798,13 @@ begin
       Groups.Open;
       Groups.Sort:='GroupTitle';
    end;
+
+   { TODO -oparsa : 14030126 }
+   IF not adoState.Active then
+   begin
+      adoState.Open;
+   end;
+   { TODO -oparsa : 14030126 }
 
 //   dblState.KeyValue := StateStateID.Value;
     edtState.Clear;
@@ -829,6 +855,9 @@ begin
 
 
 //-------------------
+   { TODO -oparsa : 14030126 }
+   dblProductoldKeyValue := 0 ;
+   { TODO -oparsa : 14030126 }
    With Dm.Customer,Parameters do
    begin
    where := '';
@@ -839,7 +868,8 @@ begin
       else
       begin
          // Amin 1391/10/04 Start
-         tmpstr:= '(EXISTS(SELECT * FROM Users us WHERE us.isadmin = 1 AND us.Id = '+IntToStr(_UserID)+') or exists(select 1 from UsersCustomerAccess uca where uca.CustomerID = Customer.CustomerID and uca.UserID = '+IntToStr(_UserID)+' and uca.HasAccess = 1))';
+         //tmpstr:= '(EXISTS(SELECT * FROM Users us WHERE us.isadmin = 1 AND us.Id = '+IntToStr(_UserID)+') or exists(select 1 from UsersCustomerAccess uca where uca.CustomerID = Customer.CustomerID and uca.UserID = '+IntToStr(_UserID)+' and uca.HasAccess = 1))';
+         tmpstr:= '(EXISTS(SELECT 1 FROM dbo.Users us  WITH(NOLOCK)  WHERE us.isadmin = 1 AND us.Id = '+IntToStr(_UserID)+') OR EXISTS(select 1 from dbo.UsersCustomerAccess uca  WITH(NOLOCK)  where uca.HasAccess = 1 and uca.CustomerID = Customer.CustomerID and  uca.UserID = '+IntToStr(_UserID)+' ))';
           if where = '' then
             where:= tmpstr
           else
@@ -860,6 +890,10 @@ begin
       except
         ParamByName('@Top').Value:=100;
       end;
+
+      { TODO -oparsa : 14030201 }
+      oldTopRecord :=  ParamByName('@Top').Value ;
+      { TODO -oparsa : 14030201 }
 
       if dblCustomerStatus.KeyValue <> null then
          ParamByName('@Customerstatusid').Value:=dblCustomerStatus.KeyValue
@@ -912,10 +946,10 @@ begin
    end
    else
    begin
-     Result := '(CompanyName like ''%' + s + '%'') or (PersonTitle like ''%' + s +
+      Result := '(CompanyName like ''%' + s + '%'') or (PersonTitle like ''%' + s +
                 '%'') or (Treater like ''%' + s + '%'') ' +
                 ' or (Address like ''%' + s + '%'') or (Notes like ''%' + s + '%'')  ';
-   end;
+      end;
 end;
 
 Function like(s:string):string;
@@ -1323,12 +1357,21 @@ var
   S,Tmp:String;
   i:Integer;
 begin
+     { TODO -oparsa : 14030126 }
+     ChangeProduct  := false ;
+     if (dblProduct.KeyValue <> null) and (dblProductoldKeyValue <> dblProduct.KeyValue) then
+     begin
+       ChangeProduct := True ;
+       dblProductoldKeyValue := dblProduct.KeyValue ;
+     end;
+     RefereshCustomerTimerTimer(self);
+     { TODO -oparsa : 14030126 }
      S := Trim(SearchEdit.Text);
      S := replace(s,char(223),char(152));
      PhoneGrid.SelectedIndex:=0;
 
      if dblProduct.KeyValue <> null then
-         StatusBar1.Panels[1].Text:=dm.ProductProductTitle.AsString
+         StatusBar1.Panels[1].Text := dm.ProductProductTitle.AsString
      else
          StatusBar1.Panels[1].Text:= 'Â„Â „Õ’Ê·« ';
 
@@ -1342,8 +1385,12 @@ begin
           Filtered:=True;
       end;
    CalcRecourdCount;
+   { TODO -oparsa : 14030126 }
+   {
    if dblProduct.KeyValue <> null then
       RefereshCustomerTimerTimer(self);
+      }
+   { TODO -oparsa : 14030126 }
 
 end;
 
@@ -1743,9 +1790,6 @@ procedure TMainForm.PhoneGridDrawColumnCell(Sender: TObject;
   State: TGridDrawState);
 begin
    inherited;
-
-
-
 {//
  DBGrid_SetFocusAfterExit(PhoneGrid,Rect,DataCol,Column,State,clHighlightText);
     if UpperCase(Column.Title.Caption) = UpperCase('—œÌ›') then
@@ -1787,10 +1831,21 @@ end;
 procedure TMainForm.SBRefreshClick(Sender: TObject);
 var Id :integer;
 begin
+
    Id := dm.CustomerCustomerID.AsInteger;
+   { TODO -oparsa : 14030126 }
    dm.Customer.Close;
    dm.Customer.Open;
-   dm.Customer.Locate('CustomerId',Id,[])
+   SearchEditChange(Sender);
+
+  {Application.CreateForm(TFPleaseWait, FPleaseWait);
+  FPleaseWait.OpenState := 'Customer';
+  FPleaseWait.CustomerId := Id;
+  FPleaseWait.ShowModal;
+  FPleaseWait.Free;   }
+   { TODO -oparsa : 14030126 }
+
+   dm.Customer.Locate('CustomerId',Id,[]);
 end;
 
 procedure TMainForm.NHostGroupClick(Sender: TObject);
@@ -1883,10 +1938,6 @@ begin
    ContractGrid.Columns[6].Visible:=false;
    FollowGrid.Columns[9].Visible:=False;
 
-
-
-
-
 end;
   CurrentGrid;
 
@@ -1931,20 +1982,39 @@ end;
 procedure TMainForm.DStateDataChange(Sender: TObject; Field: TField);
 begin
   inherited;
+
 if (dblState.KeyValue <> 0)and(dblState.KeyValue <> null) then
 begin
-  edtState.Text := StateStateID.AsString;
+  //edtState.Text := StateStateID.AsString;
+  edtState.Text := dblState.KeyValue ;
   with dm.CitysFilterByState do
   begin
     Close;
-    Parameters.ParamByName('StateID').Value :=  StateStateID.Value;
+    //Parameters.ParamByName('StateID').Value :=  StateStateID.Value;
+    Parameters.ParamByName('StateID').Value :=  dblState.KeyValue ;
     open;
   end;
   dblCity.Enabled :=True;
   edtcity.Enabled :=True;
 
   edtcity.Clear;
+end
+{ TODO -oparsa : 14030126 }
+else  if (dblState.KeyValue = 0) then
+begin
+
+  edtcity.Clear;
+  edtState.Clear ;
+  dblCity.KeyValue := 0 ;
+
+  dblCity.Enabled := False;
+  edtcity.Enabled := False;
+
+
 end;
+{ TODO -oparsa : 14030126 }
+
+
   //dblCity.KeyValue :=CitysFilterByStateCityId.Value;
 end;
 
@@ -2291,9 +2361,7 @@ procedure TMainForm.dblGroupsKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   inherited;
-
-
-    SearchEditChange(Sender);
+  SearchEditChange(Sender);
 end;
 
 procedure TMainForm.dblCityCloseUp(Sender: TObject);
@@ -2317,11 +2385,11 @@ var Where :WideString;
     txt:String;
 begin
 
-if Trim(edtContactNumber.Text) <> '' then
-      Where := '( SearchInt  like ''%'+ edtContactNumber.Text+'%'' )';
+  if Trim(edtContactNumber.Text) <> '' then
+      Where :=  ' ( SearchInt  like ''%'+ edtContactNumber.Text+'%'' )';
 
-txt :=   replace1(Trim(SearchEdit.Text),char(223),char(152));
-if (Trim(txt) <> '') then
+  txt :=   replace1(Trim(SearchEdit.Text),char(223),char(152));
+  if (Trim(txt) <> '') then
      if Where <> '' then
      Where := Where+ ' and '+' (SearchStr like ''%'+txt+'%'' )'
      else
@@ -2345,24 +2413,32 @@ if (Trim(txt) <> '') then
     else
           Where := '   ProductsID  like ''%|' + IntToStr(dblProduct.KeyValue)+'|%'' ';
 
-
-  if dblGroups.KeyValue <> null then
+  { TODO -oparsa : 14030126 }
+  //if dblGroups.KeyValue <> null then
+  if (dblGroups.KeyValue <> null) and (dblGroups.KeyValue <> 0) then
+  { TODO -oparsa : 14030126 }
      if Where <> '' then
            Where := Where + ' and '+' GroupId ='+IntToStr(dblGroups.KeyValue)
       else
            Where := ' GroupId ='+IntToStr(dblGroups.KeyValue);
 
-  if dblState.KeyValue <> null then
+  { TODO -oparsa : 14030126 }
+  //if dblState.KeyValue <> null then
+  if (dblState.KeyValue <> null) and  (dblState.KeyValue <> 0)  then
+  { TODO -oparsa : 14030126 }
      if Where <> '' then
            Where := Where + ' and '+' StateID ='+IntToStr(dblState.KeyValue)
       else
            Where := ' StateID ='+IntToStr(dblState.KeyValue);
 
-  if dblCity.KeyValue <> null then
+  { TODO -oparsa : 14030126 }
+  //if dblCity.KeyValue <> null then
+  if (dblCity.KeyValue <> null) and  (dblCity.KeyValue <> 0)   then
+  { TODO -oparsa : 14030126 }
      if Where <> '' then
            Where := Where + ' and '+' CityId ='+IntToStr(dblCity.KeyValue)
       else
-           Where := ' CityId ='+IntToStr(dblCity.KeyValue);
+          Where := ' CityId ='+IntToStr(dblCity.KeyValue);
 
   if OnlyCurrentMarketer.Checked then
      if Where <> '' then
@@ -2808,7 +2884,13 @@ end;
 procedure TMainForm.RefereshCustomerTimerTimer(Sender: TObject);
 var fltr:String;
    tmpstr : string;
+   txt : string;
 begin
+   { TODO -oparsa : 14030126 }
+   //if ((dblProduct.KeyValue <> null ) and ( ChangeProduct )) or (oldTopRecord <> strToint(edRecCount.Text)) then
+   //begin
+   { TODO -oparsa : 14030126 }
+
    With Dm.Customer,Parameters do
    begin
    where := '';
@@ -2819,12 +2901,33 @@ begin
       else
       begin
          // Amin 1391/10/04 Start
-         tmpstr:= '(EXISTS(SELECT * FROM Users us WHERE us.isadmin = 1 AND us.Id = '+IntToStr(_UserID)+') or exists(select 1 from UsersCustomerAccess uca where uca.CustomerID = Customer.CustomerID and uca.UserID = '+IntToStr(_UserID)+' and uca.HasAccess = 1))';
+         tmpstr:= '(EXISTS(SELECT 1 FROM Users us WITH(NOLOCK)  WHERE us.isadmin = 1 AND us.Id = '+IntToStr(_UserID)+') OR EXISTS(select 1 from UsersCustomerAccess uca WITH(NOLOCK)  where uca.HasAccess = 1 and  uca.CustomerID = Customer.CustomerID and uca.UserID = '+IntToStr(_UserID)+' ))';
           if where = '' then
             where:= tmpstr
           else
             where := where + ' and '+ tmpstr;
          // Amin 1391/10/04 End
+
+         { TODO -oparsa : 14030201 }
+         txt :=   replace1(Trim(SearchEdit.Text),char(223),char(152));
+         if (Trim(txt) <> '') then
+          if Where <> '' then
+            Where := Where+ ' and '+' ((CompanyName like ''%'+txt+'%'' ) or (Treater like ''%'+txt+'%'' ) or (PersonTitle like ''%'+txt+'%'' ) or (Notes like ''%'+txt+'%'' ) or (Address like ''%'+txt+'%'' ) or (PostalCode like ''%'+txt+'%'' ) )'
+          else
+            Where :=  ' ((CompanyName like ''%'+txt+'%'' ) or (Treater like ''%'+txt+'%'' ) or (PersonTitle like ''%'+txt+'%'' ) or (Notes like ''%'+txt+'%'' ) or (Address like ''%'+txt+'%'' ) or (PostalCode like ''%'+txt+'%'' ) )' ;
+
+         if trim(edtContactNumber.Text) <> '' then
+           if Where <> '' then
+              Where := Where + ' and ' +' ((Phone like ''%'+Trim(edtContactNumber.Text)+'%'' ) or  (WorkPhone1 like ''%'+Trim(edtContactNumber.Text)+'%'' ) or   (MobilePhone like ''%'+Trim(edtContactNumber.Text)+'%'' ) or  (FaxNumber like ''%'+Trim(edtContactNumber.Text)+'%'' ) )'
+           else
+             Where := ' ((Phone like ''%'+Trim(edtContactNumber.Text)+'%'' ) or  (WorkPhone1 like ''%'+Trim(edtContactNumber.Text)+'%'' ) or   (MobilePhone like ''%'+Trim(edtContactNumber.Text)+'%'' ) or  (FaxNumber like ''%'+Trim(edtContactNumber.Text)+'%'' ) )' ;
+
+         if trim(edtEmail.Text) <> '' then
+           if Where <> '' then
+              Where := Where + ' and ' +' EmailAddress like ''%'+Trim(edtEmail.Text)+'%'''
+           else
+             Where := ' EmailAddress like ''%'+Trim(edtEmail.Text)+'%''';
+         { TODO -oparsa : 14030201 }
 
           if where <> '' then where := '('+where+')';
           ParamByName('@likeWhere').Value:=where;
@@ -2841,6 +2944,12 @@ begin
         ParamByName('@Top').Value:=100;
       end;
 
+      { TODO -oparsa : 14030201 }
+      oldTopRecord :=  ParamByName('@Top').Value ;
+      { TODO -oparsa : 14030201 }
+
+      { TODO -oparsa : 14030126 }
+      {
       if dblCustomerStatus.KeyValue <> null then
          ParamByName('@Customerstatusid').Value:=dblCustomerStatus.KeyValue
       else
@@ -2872,6 +2981,26 @@ begin
       else ParamByName('@ProductId').Value := 0;
 
         ParamByName('@Email').Value:=edtEmail.Text;
+        }
+
+      ParamByName('@Customerstatusid').Value := 0;
+
+      ParamByName('@ContactNumber')   .Value:=Trim(edtContactNumber.Text);
+
+      ParamByName('@MarketerID').Value:=-1;//_CurrentMarketerID;;
+
+      ParamByName('@GroupId').Value := 0;
+
+      ParamByName('@CityId').Value := 0;
+
+      ParamByName('@StateId').Value := 0;
+
+      if dblProduct.KeyValue <> null  then
+        ParamByName('@ProductId').Value:= dblProduct.KeyValue
+      else ParamByName('@ProductId').Value := 0;
+
+      { TODO -oparsa : 14030126 }
+
       Open;
       Filter := fltr;
       Filtered:=true;
@@ -2879,7 +3008,10 @@ begin
 
       StatusBar1.Panels[2].Text:=' ⁄œ«œ : '+IntToStr(RecordCount);
    end;
-
+   { TODO -oparsa : 14030126 }
+   //end;
+   ChangeProduct := false;
+   { TODO -oparsa : 14030126 }
    RefereshCustomerTimer.Enabled := false;
 end;
 
@@ -2926,6 +3058,8 @@ var
   S,Tmp:String;
   i:Integer;
 begin
+     { TODO -oparsa : 14030126 }
+     {
      S := Trim(SearchEdit.Text);
      S := replace(s,char(223),char(152));
      PhoneGrid.SelectedIndex:=0;
@@ -2945,8 +3079,12 @@ begin
           Filtered:=True;
       end;
    CalcRecourdCount;
+
    if dblProduct.KeyValue <> null then
-      RefereshCustomerTimerTimer(self);
+      RefereshCustomerTimerTimer(self);  }
+        SearchEditChange(Sender);
+   { TODO -oparsa : 14030126 }
+
 
 end;
 
@@ -2971,6 +3109,13 @@ begin
   Application.CreateForm(TfrmCustStatusReport,frmCustStatusReport);
   frmCustStatusReport.ShowModal;
   frmCustStatusReport.Free;
+end;
+
+procedure TMainForm.edRecCountKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  if Key = #13 then
+    bbbClick(self);
 end;
 
 end.

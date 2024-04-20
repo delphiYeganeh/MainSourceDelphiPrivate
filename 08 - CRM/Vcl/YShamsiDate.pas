@@ -68,7 +68,6 @@ function CommaSeperate(s:string):string; //860613m
 Function ReplaceKaf(S:String):String;
 function Locked(inStr: string; isLocked: Boolean): string;
 
-
 {Ranjbar}
 Function ShowMyMessage(Titile , Msg: String;
                        Const MsgDlgBtn: TMsgDlgButtons = mbYesNoCancel;
@@ -127,7 +126,7 @@ Function Email_GetAddress(aText:String):String;
 
 Procedure DBGrid_LoadColumns(aFormName:String ; aDBGrid: TDBGrid);
 Procedure DBGrid_SaveColumns(aFormName:String ; aDBGrid: TYDBGrid);
-procedure DBGrid_Columns_Caption( aDBGrid: TYDBGrid);
+procedure DBGrid_Columns_Caption(aDBGrid: TYDBGrid);
 Procedure DBGrid_SelectNextCol(aDBGrid:TDBGrid;AppendORNext:Boolean=True;DBGFirstColIndex:Integer=0;Key:Word=Vk_Return;Shift:TShiftState=[]);
 {Ranjbar}
 procedure DBGrid_SetFocusAfterExit(aDBGrid:TYDBGrid;const aRect:TRect;aDataCol:Integer;aColumn:TColumn;aState:TGridDrawState ;
@@ -2363,7 +2362,7 @@ begin
 end;
 
 
-procedure DBGrid_Columns_Caption( aDBGrid: TYDBGrid);    // 920305 Hadi Mohamed For Bug #57 «„ò«‰ „‘«ÂœÂ ” Ê‰ Â«Ì «Œ Ì«—Ì Ê «„ò«‰  €ÌÌ— ‰«„ ” Ê‰ Â«
+procedure DBGrid_Columns_Caption(aDBGrid: TYDBGrid);    // 920305 Hadi Mohamed For Bug #57 «„ò«‰ „‘«ÂœÂ ” Ê‰ Â«Ì «Œ Ì«—Ì Ê «„ò«‰  €ÌÌ— ‰«„ ” Ê‰ Â«
 var
    i: integer;
    s: string;

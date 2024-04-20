@@ -1,6 +1,6 @@
 inherited FmOtherPerson: TFmOtherPerson
-  Left = 586
-  Top = 126
+  Left = 768
+  Top = 128
   Width = 602
   Height = 515
   BorderIcons = [biSystemMenu]
@@ -13,15 +13,15 @@ inherited FmOtherPerson: TFmOtherPerson
   object Panel1: TPanel [0]
     Left = 0
     Top = 0
-    Width = 586
-    Height = 264
+    Width = 594
+    Height = 268
     Align = alClient
     TabOrder = 0
     object YDBGrid1: TYDBGrid
       Left = 1
       Top = 1
-      Width = 584
-      Height = 262
+      Width = 592
+      Height = 266
       Cursor = crHandPoint
       TabStop = False
       Align = alClient
@@ -115,13 +115,13 @@ inherited FmOtherPerson: TFmOtherPerson
   end
   object Panel2: TPanel [1]
     Left = 0
-    Top = 264
-    Width = 586
+    Top = 268
+    Width = 594
     Height = 161
     Align = alBottom
     TabOrder = 1
     DesignSize = (
-      586
+      594
       161)
     object Label20: TLabel
       Left = 512
@@ -301,8 +301,8 @@ inherited FmOtherPerson: TFmOtherPerson
   end
   object Panel3: TPanel [2]
     Left = 0
-    Top = 425
-    Width = 586
+    Top = 429
+    Width = 594
     Height = 52
     Align = alBottom
     TabOrder = 2
@@ -565,7 +565,7 @@ inherited FmOtherPerson: TFmOtherPerson
       OnClick = SBCloseClick
     end
     object DBNavigator1: TDBNavigator
-      Left = 89
+      Left = 97
       Top = 1
       Width = 496
       Height = 50

@@ -1,7 +1,7 @@
 object Fconnect: TFconnect
   Tag = 9
-  Left = 474
-  Top = 368
+  Left = 228
+  Top = 111
   BiDiMode = bdRightToLeft
   BorderStyle = bsNone
   Caption = #1575#1578#1589#1575#1604' '#1576#1607' Server'

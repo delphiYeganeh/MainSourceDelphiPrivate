@@ -1,7 +1,7 @@
 inherited Frep: TFrep
   Left = 525
   Top = 281
-  Width = 618
+  Width = 632
   Height = 611
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = #1711#1586#1575#1585#1588' '#1575#1586' '#1575#1591#1604#1575#1593#1575#1578' '#1605#1588#1578#1585#1610#1575#1606
@@ -11,8 +11,8 @@ inherited Frep: TFrep
   object YDBGrid2: TYDBGrid [0]
     Left = 0
     Top = 206
-    Width = 602
-    Height = 315
+    Width = 616
+    Height = 314
     Cursor = crHandPoint
     Align = alClient
     Color = 16772074
@@ -155,15 +155,15 @@ inherited Frep: TFrep
   object Panel1: TPanel [1]
     Left = 0
     Top = 0
-    Width = 602
+    Width = 616
     Height = 206
     Align = alTop
     TabOrder = 1
     DesignSize = (
-      602
+      616
       206)
     object Label1: TLabel
-      Left = 545
+      Left = 559
       Top = 67
       Width = 47
       Height = 13
@@ -177,7 +177,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object Label2: TLabel
-      Left = 545
+      Left = 559
       Top = 94
       Width = 33
       Height = 13
@@ -191,7 +191,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object Label9: TLabel
-      Left = 283
+      Left = 297
       Top = 67
       Width = 32
       Height = 13
@@ -205,7 +205,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object Label10: TLabel
-      Left = 545
+      Left = 559
       Top = 12
       Width = 53
       Height = 13
@@ -219,7 +219,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object Label11: TLabel
-      Left = 545
+      Left = 559
       Top = 177
       Width = 25
       Height = 13
@@ -233,7 +233,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object Label7: TLabel
-      Left = 545
+      Left = 559
       Top = 122
       Width = 21
       Height = 13
@@ -247,7 +247,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 283
+      Left = 297
       Top = 12
       Width = 49
       Height = 13
@@ -261,7 +261,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 545
+      Left = 559
       Top = 149
       Width = 22
       Height = 13
@@ -275,7 +275,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object Label8: TLabel
-      Left = 283
+      Left = 297
       Top = 94
       Width = 40
       Height = 13
@@ -289,7 +289,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object Label4: TLabel
-      Left = 283
+      Left = 297
       Top = 39
       Width = 42
       Height = 13
@@ -303,7 +303,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 283
+      Left = 297
       Top = 122
       Width = 60
       Height = 13
@@ -317,7 +317,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object Label13: TLabel
-      Left = 283
+      Left = 297
       Top = 177
       Width = 38
       Height = 13
@@ -331,7 +331,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object Label14: TLabel
-      Left = 283
+      Left = 297
       Top = 149
       Width = 53
       Height = 13
@@ -345,7 +345,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object ahmadvand: TLabel
-      Left = 54
+      Left = 68
       Top = 178
       Width = 30
       Height = 13
@@ -353,7 +353,7 @@ inherited Frep: TFrep
       Caption = #1578#1593#1583#1575#1583' :'
     end
     object SBMarketerID: TSpeedButton
-      Left = 254
+      Left = 268
       Top = 63
       Width = 23
       Height = 22
@@ -390,7 +390,7 @@ inherited Frep: TFrep
       OnClick = SBMarketerIDClick
     end
     object SBCityID: TSpeedButton
-      Left = 517
+      Left = 531
       Top = 145
       Width = 23
       Height = 22
@@ -427,7 +427,7 @@ inherited Frep: TFrep
       OnClick = SBCityIDClick
     end
     object SpeedButton1: TSpeedButton
-      Left = 254
+      Left = 268
       Top = 9
       Width = 23
       Height = 22
@@ -464,7 +464,7 @@ inherited Frep: TFrep
       OnClick = SpeedButton1Click
     end
     object SpeedButton2: TSpeedButton
-      Left = 254
+      Left = 268
       Top = 36
       Width = 23
       Height = 22
@@ -501,7 +501,7 @@ inherited Frep: TFrep
       OnClick = SpeedButton2Click
     end
     object Label6: TLabel
-      Left = 545
+      Left = 559
       Top = 39
       Width = 51
       Height = 13
@@ -515,7 +515,7 @@ inherited Frep: TFrep
       ParentFont = False
     end
     object YwhereEdit0: TYWhereEdit
-      Left = 360
+      Left = 374
       Top = 63
       Width = 180
       Height = 21
@@ -540,7 +540,7 @@ inherited Frep: TFrep
       Connection = Dm.YeganehConnection
     end
     object YWhereEdit1: TYWhereEdit
-      Left = 360
+      Left = 374
       Top = 91
       Width = 180
       Height = 21
@@ -565,7 +565,7 @@ inherited Frep: TFrep
       Connection = Dm.YeganehConnection
     end
     object YWhereEdit2: TYWhereEdit
-      Left = 97
+      Left = 111
       Top = 63
       Width = 155
       Height = 21
@@ -593,7 +593,7 @@ inherited Frep: TFrep
       Connection = Dm.YeganehConnection
     end
     object YWhereEdit3: TYWhereEdit
-      Left = 443
+      Left = 457
       Top = 9
       Width = 97
       Height = 21
@@ -618,7 +618,7 @@ inherited Frep: TFrep
       Connection = Dm.YeganehConnection
     end
     object YWhereEdit4: TYWhereEdit
-      Left = 97
+      Left = 111
       Top = 91
       Width = 180
       Height = 21
@@ -643,7 +643,7 @@ inherited Frep: TFrep
       Connection = Dm.YeganehConnection
     end
     object YWhereEdit5: TYWhereEdit
-      Left = 360
+      Left = 374
       Top = 145
       Width = 155
       Height = 21
@@ -671,7 +671,7 @@ inherited Frep: TFrep
       Connection = Dm.YeganehConnection
     end
     object YWhereEdit6: TYWhereEdit
-      Left = 97
+      Left = 111
       Top = 9
       Width = 155
       Height = 21
@@ -699,7 +699,7 @@ inherited Frep: TFrep
       Connection = Dm.YeganehConnection
     end
     object YWhereEdit8: TYWhereEdit
-      Left = 360
+      Left = 374
       Top = 118
       Width = 180
       Height = 21
@@ -724,7 +724,7 @@ inherited Frep: TFrep
       Connection = Dm.YeganehConnection
     end
     object YWhereEdit9: TYWhereEdit
-      Left = 360
+      Left = 374
       Top = 173
       Width = 180
       Height = 21
@@ -749,7 +749,7 @@ inherited Frep: TFrep
       Connection = Dm.YeganehConnection
     end
     object YWhereEdit10: TYWhereEdit
-      Left = 97
+      Left = 111
       Top = 36
       Width = 155
       Height = 21
@@ -777,7 +777,7 @@ inherited Frep: TFrep
       Connection = Dm.YeganehConnection
     end
     object YWhereEdit11: TYWhereEdit
-      Left = 97
+      Left = 111
       Top = 118
       Width = 180
       Height = 21
@@ -802,7 +802,7 @@ inherited Frep: TFrep
       Connection = Dm.YeganehConnection
     end
     object YWhereEdit12: TYWhereEdit
-      Left = 97
+      Left = 111
       Top = 173
       Width = 180
       Height = 21
@@ -827,7 +827,7 @@ inherited Frep: TFrep
       Connection = Dm.YeganehConnection
     end
     object YWhereEdit13: TYWhereEdit
-      Left = 97
+      Left = 111
       Top = 145
       Width = 180
       Height = 21
@@ -852,7 +852,7 @@ inherited Frep: TFrep
       Connection = Dm.YeganehConnection
     end
     object YWhereEdit7: TYWhereEdit
-      Left = 443
+      Left = 457
       Top = 36
       Width = 97
       Height = 21
@@ -879,13 +879,13 @@ inherited Frep: TFrep
   end
   object Panel2: TPanel [2]
     Left = 0
-    Top = 521
-    Width = 602
+    Top = 520
+    Width = 616
     Height = 52
     Align = alBottom
     TabOrder = 2
     DesignSize = (
-      602
+      616
       52)
     object SpeedButton5: TSpeedButton
       Left = 8
@@ -1146,7 +1146,7 @@ inherited Frep: TFrep
       OnClick = SpeedButton5Click
     end
     object BitBtn1: TBitBtn
-      Left = 517
+      Left = 531
       Top = 9
       Width = 80
       Height = 27
@@ -1156,7 +1156,7 @@ inherited Frep: TFrep
       OnClick = BitBtn1Click
     end
     object BitBtn2: TBitBtn
-      Left = 432
+      Left = 446
       Top = 9
       Width = 80
       Height = 27
@@ -1166,7 +1166,7 @@ inherited Frep: TFrep
       OnClick = BitBtn2Click
     end
     object BitBtn3: TBitBtn
-      Left = 350
+      Left = 364
       Top = 9
       Width = 80
       Height = 27
@@ -1176,7 +1176,7 @@ inherited Frep: TFrep
       OnClick = BitBtn3Click
     end
     object BitBtn8: TBitBtn
-      Left = 186
+      Left = 200
       Top = 9
       Width = 80
       Height = 27
@@ -1186,7 +1186,7 @@ inherited Frep: TFrep
       OnClick = BitBtn8Click
     end
     object BitBtn6: TBitBtn
-      Left = 268
+      Left = 282
       Top = 9
       Width = 80
       Height = 27
@@ -1196,7 +1196,7 @@ inherited Frep: TFrep
       OnClick = BitBtn6Click
     end
     object BitBtn7: TBitBtn
-      Left = 105
+      Left = 119
       Top = 9
       Width = 80
       Height = 27

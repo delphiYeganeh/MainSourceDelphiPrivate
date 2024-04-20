@@ -1,6 +1,6 @@
 inherited PropertiesForm: TPropertiesForm
-  Left = 313
-  Top = 222
+  Left = 857
+  Top = 379
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1601#1585#1605' '#1579#1576#1578' '#1608' '#1575#1589#1604#1575#1581' '#1605#1588#1582#1589#1575#1578' '#1605#1588#1578#1585#1610#1575#1606
@@ -499,15 +499,6 @@ inherited PropertiesForm: TPropertiesForm
           Height = 13
           Caption = #1578#1575#1585#1610#1582' '#1578#1608#1604#1583
         end
-        object Label26: TLabel
-          Left = 547
-          Top = 61
-          Width = 28
-          Height = 13
-          Anchors = [akTop, akRight]
-          Caption = #1587#1605#1578
-          FocusControl = DBEdit13
-        end
         object DBMemo1: TDBMemo
           Left = 416
           Top = 334
@@ -605,9 +596,9 @@ inherited PropertiesForm: TPropertiesForm
           TabOrder = 2
         end
         object DBEdit5: TDBEdit
-          Left = 576
+          Left = 434
           Top = 59
-          Width = 123
+          Width = 265
           Height = 21
           Anchors = [akTop, akRight]
           DataField = 'Treater'
@@ -627,7 +618,7 @@ inherited PropertiesForm: TPropertiesForm
           TabOrder = 4
         end
         object DBECustomerNo: TDBEdit
-          Left = 434
+          Left = 433
           Top = 9
           Width = 112
           Height = 21
@@ -859,16 +850,6 @@ inherited PropertiesForm: TPropertiesForm
           DataField = 'CustomerBirthDate'
           DataSource = Dm.DSelect_Customer_By_CustomerID
           TabOrder = 23
-        end
-        object DBEdit13: TDBEdit
-          Left = 434
-          Top = 59
-          Width = 109
-          Height = 21
-          Anchors = [akTop, akRight]
-          DataField = 'Organization'
-          DataSource = Dm.DSelect_Customer_By_CustomerID
-          TabOrder = 24
         end
       end
       object TabSheet2: TTabSheet

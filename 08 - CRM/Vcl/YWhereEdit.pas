@@ -159,7 +159,7 @@ Procedure TYWhereEdit.SetIsLike(value:boolean);
     if isDate then
      begin
        if s='' then s:='1300/01/01';
-       if t='' then t:='1400/12/30';
+       if t='' then t:='1399/12/30';
 
        case NumberofSlash(t) of
          0:  t:=t+'/12/29';
@@ -181,7 +181,7 @@ Procedure TYWhereEdit.SetIsLike(value:boolean);
     if txt='' then
      begin
       s:='1300/01/01';
-      t:='1400/12/30';
+      t:='1399/12/30';
       exit;
      end;
     s:=txt;

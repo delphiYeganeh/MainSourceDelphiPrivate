@@ -103,7 +103,7 @@ begin
       ConnectionString:='Provider=SQLOLEDB.1;Persist Security Info=False;User ID=2;Initial Catalog='+DataBaseName+';Data Source='+ SERVERNAME; //
       ConnectionTimeout:=5;
    end;
-   if (trim(DabirDataBaseName)<>'') then
+   if (trim(DabirServerName)<>'')and(trim(DabirDataBaseName)<>'') then
    begin
       dm.DabirConnection.ConnectionString := 'Provider=SQLOLEDB.1;Persist Security Info=False;User ID=2;Initial Catalog='+DabirDataBaseName+';Data Source='+ DabirSERVERNAME;
       dm.DabirConnection.ConnectionTimeout:=3;

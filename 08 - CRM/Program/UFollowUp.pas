@@ -156,9 +156,6 @@ type
     SpeedButton12: TSpeedButton;
     Label29: TLabel;
     SpeedButton11: TSpeedButton;
-    Label30: TLabel;
-    DBEdit12: TDBEdit;
-    Select_customer_By_CustomerIDInnerPhone: TWideStringField;
     procedure btnWordViewClick(Sender: TObject);
     procedure btnAttachPicClick(Sender: TObject);
     procedure refreshData;
@@ -732,7 +729,6 @@ end;
 procedure TFrFollowUp.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-
   if (Dm.Select_FollowUP_By_CustomerID.State=dsInsert) or (Dm.Select_FollowUP_By_CustomerID.State=dsEdit) then
       Dm.Select_FollowUP_By_CustomerIDToDoDate.AsString:=MssCalendarPro1.Execute('/')
   else
@@ -784,13 +780,8 @@ end;
 procedure TFrFollowUp.Button4Click(Sender: TObject);
 begin
   inherited;
-
   if (Dm.Select_FollowUP_By_CustomerID.State=dsInsert) or (Dm.Select_FollowUP_By_CustomerID.State=dsEdit) then
-   begin
-      if DBEdit10.Text = '' then
-       DBEdit10.Text := ShamsiString(Date);
-      Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString:=ShamsiIncDate(DBEdit10.Text,0,0,1);
-   end
+      Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString:=ShamsiIncDate(DBEdit10.Text,0,0,1)
   else
       ShowMessage('»«Ìœ œ— Õ«·  ÊÌ—«Ì‘ Ì« œ—Ã «ÿ·«⁄«  »«‘Ìœ');
 end;

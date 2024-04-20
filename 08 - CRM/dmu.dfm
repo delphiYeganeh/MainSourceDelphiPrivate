@@ -3,7 +3,7 @@ object Dm: TDm
   OnCreate = DataModuleCreate
   Left = 363
   Top = 107
-  Height = 712
+  Height = 828
   Width = 1041
   object YeganehConnection: TADOConnection
     CommandTimeout = 30000
@@ -5021,25 +5021,15 @@ object Dm: TDm
   object WordDocument: TWordDocument
     AutoConnect = False
     ConnectKind = ckRunningOrNew
-    Left = 790
-    Top = 640
+    Left = 814
+    Top = 616
   end
   object WordApplication: TWordApplication
     AutoConnect = False
     ConnectKind = ckRunningOrNew
     AutoQuit = False
     OnDocumentBeforeClose = WordApplicationDocumentBeforeClose
-    Left = 708
-    Top = 640
-  end
-  object Yeganeh_Word: TYeganeh_Word
-    WordDocument = WordDocument
-    WordTitle = #1610#1711#1575#1606#1607
-    NewPage = True
-    InvertDateNo = False
-    ReplaceInHeader = False
-    invertNumber = False
-    Left = 878
+    Left = 724
     Top = 616
   end
   object Marketer: TADOTable
@@ -7514,8 +7504,8 @@ object Dm: TDm
         Size = 100
         Value = 'Ydabir'
       end>
-    Left = 424
-    Top = 616
+    Left = 336
+    Top = 576
     object SpYCRM_Select_Letter_By_CustomerIDSecretariatID: TIntegerField
       FieldName = 'SecretariatID'
     end
@@ -7678,8 +7668,8 @@ object Dm: TDm
   end
   object DsYCRM_Select_Letter_By_CustomerID: TDataSource
     DataSet = SpYCRM_Select_Letter_By_CustomerID
-    Left = 472
-    Top = 640
+    Left = 336
+    Top = 624
   end
   object tblCaseType: TADOTable
     Connection = YeganehConnection

@@ -118,7 +118,8 @@ uses
   uLockSoftware in 'uLockSoftware.pas' {FrLockSoftware},
   YDbgrid in '..\YDbgrid.pas',
   untCustStatusReport in 'Reports\untCustStatusReport.pas' {frmCustStatusReport},
-  ActionsPro in 'ActionsPro.pas' {frmActionPro};
+  ActionsPro in 'ActionsPro.pas' {frmActionPro},
+  UPleaseWait in '..\..\08 - CRM\Program\UPleaseWait.pas' {FPleaseWait};
 
 //  StoreDM in '..\Yeganeh Shared\Calc\StoreDM.pas' {DMStore: TDataModule},
 //  FirstArtGroupFM in '..\Yeganeh Shared\Calc\FirstArtGroupFM.pas';
@@ -133,7 +134,8 @@ begin
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TfrAttachments, frAttachments);
   Application.CreateForm(TfrCustomerReport, frCustomerReport);
-  Application.CreateForm(TFrCancleReport, FrCancleReport);
+
+  // Application.CreateForm(TFrCancleReport, FrCancleReport);
   Application.CreateForm(TYInputQueryF, YInputQueryF);
   Application.Run;
 end.

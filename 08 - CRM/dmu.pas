@@ -41,7 +41,6 @@ type
     ApplicationEvents: TApplicationEvents;
     WordDocument: TWordDocument;
     WordApplication: TWordApplication;
-    Yeganeh_Word: TYeganeh_Word;
     Marketer: TADOTable;
     MarketerMarketerID: TAutoIncField;
     MarketerMarketerNo: TStringField;
