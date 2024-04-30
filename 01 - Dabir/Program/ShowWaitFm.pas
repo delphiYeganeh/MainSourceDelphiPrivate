@@ -402,7 +402,11 @@ begin
       Attach_FileName := StringReplace(Attach_FileName,'; filename*2*=','',[rfReplaceAll]);
       //Hamed_Ansari_990509_E
       if FileExists(_TempPath+Attach_FileName) and Not(File_IsInUse(_TempPath+Attach_FileName)) then
+      begin
+        SysUtils.FileSetReadOnly(_TempPath+Attach_FileName, false);
         DeleteFile(_TempPath+Attach_FileName);
+      end;
+
 
       TIdAttachment(IdMsgRecive.MessageParts.Items[I]).SaveToFile(_TempPath+Attach_FileName);
       if UpperCase(ExtractFileExt(Attach_FileName))='.XML' then
@@ -468,11 +472,13 @@ begin
               fs.WriteBuffer(fs,fs.InstanceSize);
               fs.Destroy;
               SaveFileToLetterData(tmpFileName , FileChilds.AttributeNodes['Description'].Text);
+              SysUtils.FileSetReadOnly(tmpFileName, false);
               DeleteFile(tmpFileName);
             end;
           end;
 
         end;
+        SysUtils.FileSetReadOnly(_TempPath+Attach_FileName, false);
         DeleteFile(_TempPath+Attach_FileName);
       end
       else
@@ -480,13 +486,17 @@ begin
         //SaveFileToLetterData(_TempPath+Attach_FileName , DecodeEmailHeaderItem(TIdAttachment(IdMsgRecive.MessageParts.Items[I]).FileName));
         //Ataie 990910
         SaveFileToLetterData(_TempPath+Attach_FileName , strFileName);
+        SysUtils.FileSetReadOnly(_TempPath+Attach_FileName, false);
         DeleteFile(_TempPath+Attach_FileName);
       end;
     end;
   end;
 
   if FileExists(TempFileNamePath) then
+  begin
+    SysUtils.FileSetReadOnly(TempFileNamePath, false);
     DeleteFile(TempFileNamePath);
+  end;
 
 end;
 

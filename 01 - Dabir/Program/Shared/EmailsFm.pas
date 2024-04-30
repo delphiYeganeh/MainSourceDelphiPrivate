@@ -370,7 +370,10 @@ begin
     if OpenDialogAttach.Execute then
     begin
       if FileExists(_ApplicationPath+'tmpFile')then
+      begin
+        SysUtils.FileSetReadOnly(pchar(_ApplicationPath+'tmpFile'), false);
         DeleteFile(pchar(_ApplicationPath+'tmpFile'));
+      end;
       if CopyFileW(dm.replacePWC(StringToPWide(OpenDialogAttach.filename,i)), StringToPWide(_ApplicationPath+'tmpFile',i), False) then
         FileNamePath :=_ApplicationPath+'tmpFile'
       else if CopyFileW(StringToPWide(OpenDialogAttach.filename,i), StringToPWide(_ApplicationPath+'tmpFile',i), False) then
@@ -398,7 +401,10 @@ begin
   if OpenDialog1.Execute then
   begin
     if FileExists(_ApplicationPath+'tmpFile')then
+    begin
+      SysUtils.FileSetReadOnly(pchar(_ApplicationPath+'tmpFile'), false);
       DeleteFile(pchar(_ApplicationPath+'tmpFile'));
+    end;
     if CopyFileW(dm.replacePWC(StringToPWide(OpenDialog1.filename,i)), StringToPWide(_ApplicationPath+'tmpFile',i), False) then
       FileNamePath :=_ApplicationPath+'tmpFile'
     else if CopyFileW(StringToPWide(OpenDialog1.filename,i), StringToPWide(_ApplicationPath+'tmpFile',i), False) then
@@ -758,7 +764,10 @@ begin
           Attach_FileName := 'NoName.txt';
 
         if FileExists(_TempPath+Attach_FileName) and not(File_IsInUse(_TempPath+Attach_FileName)) then
+        begin
+          SysUtils.FileSetReadOnly(_TempPath+Attach_FileName, false);
           DeleteFile(_TempPath+Attach_FileName);
+        end;
 
         TIdAttachment(IdMsgRecive.MessageParts.Items[I]).SaveToFile(_TempPath+Attach_FileName);
 

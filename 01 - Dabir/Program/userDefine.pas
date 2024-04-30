@@ -297,6 +297,7 @@ begin
   end;
 
   dm.Users.close;
+  SysUtils.FileSetReadOnly(_TempPath+'\yeganehsign.jpg', false);
   DeleteFile(_TempPath+'\yeganehsign.jpg');
   inherited;
 end;
@@ -725,7 +726,10 @@ begin
            edit;
 
          if FileExists(_ApplicationPath+'tmpFile')then
+         begin
+           SysUtils.FileSetReadOnly(pchar(_ApplicationPath+'tmpFile'), false);
            DeleteFile(pchar(_ApplicationPath+'tmpFile'));
+         end;
          if CopyFileW(replacePWC(StringToPWide(vTmp,i)), StringToPWide(_ApplicationPath+'tmpFile',i), False) then
             s := _ApplicationPath+'tmpFile'
          else if CopyFileW( StringToPWide(vTmp,i), StringToPWide(_ApplicationPath+'tmpFile',i), False) then
@@ -759,7 +763,10 @@ begin
          vTmp := ConvertedImage(OpenPictureDialog.filename);
 
          if FileExists(_ApplicationPath+'tmpFile')then
+         begin
+           SysUtils.FileSetReadOnly(pchar(_ApplicationPath+'tmpFile'), false);
            DeleteFile(pchar(_ApplicationPath+'tmpFile'));
+         end;
          if CopyFileW( dm.replacePWC(StringToPWide(vTmp,i)), StringToPWide(_ApplicationPath+'tmpFile',i), False) then
             s := _ApplicationPath+'tmpFile'
          else if CopyFileW( StringToPWide(vTmp,i), StringToPWide(_ApplicationPath+'tmpFile',i), False) then

@@ -2167,8 +2167,11 @@ begin
 
   { TODO -oparsa : 14030119 }
   if FileExists(pchar(_TempPath+_WordFileName)) then
+  begin
     //DeleteFile(pchar(_TempPath+_WordFileName));
+    SysUtils.FileSetReadOnly(_TempPath+_WordFileName, false);
     SysUtils.DeleteFile(_TempPath+_WordFileName);
+  end;
   _Word_Is_Opened := false ;
   { TODO -oparsa : 14030119 }
 end;
@@ -3161,7 +3164,10 @@ begin
 
    { TODO -oparsa : 1402-12-19 }
   if FileExists(pchar(_TempPath+_WordFileName)) then
+  begin
+    SysUtils.FileSetReadOnly(_TempPath+_WordFileName, false);
     SysUtils.DeleteFile(_TempPath+_WordFileName);
+  end;
   { TODO -oparsa : 1402-12-19 }
    
 end;

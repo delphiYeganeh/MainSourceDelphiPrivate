@@ -80,7 +80,10 @@ begin
    if OpenPictureDialog.Execute then
    begin
       if FileExists(_ApplicationPath+'tmpFile')then
-           DeleteFile(pchar(_ApplicationPath+'tmpFile'));
+      begin
+        SysUtils.FileSetReadOnly(pchar(_ApplicationPath+'tmpFile'), false);
+        DeleteFile(pchar(_ApplicationPath+'tmpFile'));
+      end;
       if CopyFileW( dm.replacePWC(dm.StringToPWide(OpenPictureDialog.filename,i)), dm.StringToPWide(_ApplicationPath+'tmpFile',i), False) then
             s := _ApplicationPath+'tmpFile'
          else if CopyFileW( dm.StringToPWide(OpenPictureDialog.filename,i), dm.StringToPWide(_ApplicationPath+'tmpFile',i), False) then

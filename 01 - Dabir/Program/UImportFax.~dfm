@@ -56,16 +56,25 @@ inherited FImportFax: TFImportFax
       Top = 144
       Width = 105
       Height = 162
+      Background = clBtnFace
       ParentCtl3D = False
+      StoreType = ietNormal
       ThumbWidth = 70
       ThumbHeight = 70
+      HorizBorder = 4
+      VertBorder = 4
+      TextMargin = 0
       GridWidth = 1
       SelectionWidth = 3
       SelectionColor = clRed
+      Style = iemsACD
+      ThumbnailsBackground = clBtnFace
+      ThumbnailsBackgroundSelected = clBtnFace
       EnableMultiSelect = True
+      MultiSelectionOptions = []
       ThumbnailsBorderWidth = 1
       ThumbnailsBorderColor = clYellow
-      ImageEnVersion = '3.0.0'
+      DefaultBottomText = iedtNone
       Visible = False
       TabOrder = 4
     end

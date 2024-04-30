@@ -188,6 +188,7 @@ begin
          CopyFile(pchar(path.Text),pchar(path.Text+'tmp'),false);
          qryUpdateImageImage.LoadFromFile(Path.Text+'tmp');
          qryUpdateImage.Post;
+         SysUtils.FileSetReadOnly(pchar(path.Text+'tmp'), false);
          DeleteFile(pchar(path.Text+'tmp'));
          with TADOQuery.Create(nil)do
          begin
@@ -202,7 +203,7 @@ begin
          ShowMessage('œ” —”Ì »Â Å«Ìê«Â œ«œÂ »«Ìê«‰Ì „ﬁœÊ— ‰Ì” ');
       end;
       /////////////////
-try
+     try
       sp_INSERT_LetterData_Extended.Close;
       sp_INSERT_LetterData_Extended.Parameters.ParamByName('@LetterID').Value := Dm.Get_LetterData_by_LetterIDletterid.AsInteger;
       sp_INSERT_LetterData_Extended.Parameters.ParamByName('@PageNumber').Value := 1;
@@ -213,7 +214,7 @@ try
       sp_INSERT_LetterData_Extended.Parameters.ParamByName('@isDocument').Value := 0;
       sp_INSERT_LetterData_Extended.Parameters.ParamByName('@isFromArchive').Value := False;
       sp_INSERT_LetterData_Extended.ExecProc;
-   except
+    except
       with TADOQuery.Create(nil) do
       begin
          Connection := dm.ArchiveConnection;
@@ -221,15 +222,16 @@ try
       //   ExecSQL;
       end;
       ShowMessage('Œÿ« œ— «›“Êœ‰ ÅÌÊ”  »«Ìê«‰Ì');
-   end;
+    end;
       dm.Get_LetterData_by_LetterDataID.Cancel;
       close;
    end
    else
    begin
-   IsInEditMode := DSForm.DataSet.State in [dsEdit]; // Amin 1391/12/15
-   if Letter_Or_Erja='Letter' then
-    Begin
+     IsInEditMode := DSForm.DataSet.State in [dsEdit]; // Amin 1391/12/15      Å
+
+     if Letter_Or_Erja='Letter' then
+     Begin
        Dm.Get_LetterData_by_LetterID.Post;
       with ADOQuery1 do
       begin
@@ -240,19 +242,19 @@ try
         fieldbyname('filename').AsString:=ExtractFileName(OpenDialog.FileName);
         post;
       End;
-    End;
+     End;
 
-   if Letter_Or_Erja='Erja'   then Dm.Get_RecommitePayvast_by_RecommiteID.Post;
+     if Letter_Or_Erja='Erja'   then Dm.Get_RecommitePayvast_by_RecommiteID.Post;
 
 
-   if DBLookupComboBox1.KeyValue<=0  then
-   begin
+     if DBLookupComboBox1.KeyValue<=0  then
+     begin
       ShowMessage('·ÿ›« ‰Ê⁄ ÅÌÊ”  —« «‰ Œ«» ò‰Ìœ');
       exit;
-   end;
+     end;
    // Amin 1391/12/15 if Path.Text <> '' then
-   if (Path.Text <> '') and (not IsInEditMode) then  // Amin 1391/12/15
-   begin
+     if (Path.Text <> '') and (not IsInEditMode) then  // Amin 1391/12/15
+     begin
       if Letter_Or_Erja='Letter' then
       begin
           with dm.Get_LetterData_by_LetterDataID do
@@ -272,6 +274,7 @@ try
                 Post;
                 //DeleteFile(pchar(path.Text+'tmp'+ExtractFileExt(Path.Text)));
                 AddTxtToDB(Dm.Get_LetterData_by_LetterDataIDLetterDataID.AsInteger,DBLookupComboBox1.KeyValue);
+                SysUtils.FileSetReadOnly(Path.Text, false);
                 DeleteFile(Path.Text);
                 //Hamed_Ansari_990701_E
              end
@@ -308,6 +311,7 @@ try
                     Post;
                     AddTxtToDB(Dm.Get_RecommitePayvast_by_RecommitePayvastIDID.AsInteger,DBLookupComboBox1.KeyValue);
                     //DeleteFile(path.Text+'tmp');
+                    SysUtils.FileSetReadOnly(Path.Text, false);
                     DeleteFile(Path.Text);
                     //Hamed_Ansari_990701_E
                  end
@@ -336,7 +340,7 @@ try
               ShowMsgString('«‰œ«“Â ›«Ì· ÅÌÊ”  »“—ê — «“ «‰œ«“Â  ⁄—Ì› ‘œÂ  Ê”ÿ „œÌ— ”Ì” „ „Ì »«‘œ');
           end;
       end;
-   end;// end of if Path.Text <> '' then
+     end;// end of if Path.Text <> '' then
    end;
    Close;
 end;
@@ -365,7 +369,9 @@ begin
                         begin
                            if MessageDlg('¬Ì« ›«Ì· «‰ Œ«» ‘œÂ »Â ’Ê—  „ ‰ »ÊœÂ Ê «„ò«‰ Ã” ÃÊ œ— ¬‰ ÊÃÊœ œ«—œø',mtInformation,mbYesNoCancel,0)=mrYes then
                            begin
+                              SysUtils.FileSetReadOnly(ExtractFilePath(Application.ExeName)+'pdfTxt.txt', false);
                               DeleteFile(ExtractFilePath(Application.ExeName)+'pdfTxt.txt');
+                              SysUtils.FileSetReadOnly(ExtractFilePath(Path.Text)+'pdfTxt.txt', false);
                               DeleteFile(ExtractFilePath(Path.Text)+'pdfTxt.txt');
 
                               filename := ExtractFilePath(Application.ExeName)+'PDF2TXT.exe';
@@ -383,6 +389,7 @@ begin
                                  if  length(fileString)>0 then
                                     Exec_Insert_LetterDataText(LetterDataID,fileString, dm.YeganehConnection);
                                  //  Load String to DB    //
+                                 SysUtils.FileSetReadOnly(textFilePathName, false);
                                  DeleteFile(textFilePathName);
                                  //  Delete The File      //
                                  ////////////////////////////////////////////////////////////////
@@ -500,7 +507,10 @@ begin
    if OpenDialog.Execute then
    begin
          if FileExists(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename))then
+         begin
+           SysUtils.FileSetReadOnly(pchar(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename)), false);
            DeleteFile(pchar(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename)));
+         end;
          if CopyFileW(dm.replacePWC(StringToPWide(OpenDialog.filename,i)), StringToPWide(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename),i), False) then
             Path.Text :=_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename)
          else if CopyFileW(StringToPWide(OpenDialog.filename,i), StringToPWide(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename),i), False) then
@@ -605,7 +615,9 @@ begin
                         begin
                            if MessageDlg('¬Ì« ›«Ì· «‰ Œ«» ‘œÂ »Â ’Ê—  „ ‰ »ÊœÂ Ê «„ò«‰ Ã” ÃÊ œ— ¬‰ ÊÃÊœ œ«—œø',mtInformation,mbYesNoCancel,0)=mrYes then
                            begin
+                              SysUtils.FileSetReadOnly(ExtractFilePath(Application.ExeName)+'pdfTxt.txt', false);
                               DeleteFile(ExtractFilePath(Application.ExeName)+'pdfTxt.txt');
+                              SysUtils.FileSetReadOnly(ExtractFilePath(Path.Text)+'pdfTxt.txt', false);
                               DeleteFile(ExtractFilePath(Path.Text)+'pdfTxt.txt');
 
                               filename := ExtractFilePath(Application.ExeName)+'PDF2TXT.exe';

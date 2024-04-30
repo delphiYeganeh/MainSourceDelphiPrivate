@@ -122,6 +122,7 @@ begin
     FdataSetPageNumber.AsInteger := 1;
     FdataSet.Post;
     Sleep(1000); // Amin 1391/12/20
+    SysUtils.FileSetReadOnly(Folder+NewFileName, false);
     DeleteFile(Folder+NewFileName); // Amin 1391/12/20
   end
   else
@@ -151,6 +152,7 @@ begin
       AdoImImage.LoadFromFile(Folder+NewFileName);
       ADOImg.Post;
       //Sleep(1000);
+      SysUtils.FileSetReadOnly(Folder+NewFileName, false);
       DeleteFile(Folder+NewFileName);
     end;
   end;
@@ -161,6 +163,7 @@ end;
 Procedure TFImportFax.MoveFile(FileName:string);
 begin
   CopyFile(pchar(Folder+FileName),pchar(folder+'yeganeh_archive\'+FileName),False);
+  SysUtils.FileSetReadOnly(pchar(Folder+FileName), false);
   DeleteFile(pchar(Folder+FileName));
 end;
 

@@ -452,6 +452,7 @@ begin
             Parameters.ParamByName('@LetterdataID').Value := dm.Get_LetterData_by_LetterIDarchiveID.Value;
             Open;
             f :=_TempPath + 'temp' + Get_LetterData_by_LetterDataIDLetterDataID.AsString + '.' + Get_LetterData_by_LetterIDExt.AsString;
+            SysUtils.FileSetReadOnly(pchar(f), false);
             DeleteFile(pchar(f));
             Get_LetterData_by_LetterDataIDImage.SaveToFile(f);
             ShellExecute(Handle, 'open', pchar(f), nil, nil, SW_SHOWNORMAL);
@@ -487,6 +488,7 @@ begin
         Parameters.ParamByName('@LetterdataID').Value := dm.Get_LetterData_by_LetterIDLetterDataID.Value;
         Open;
         f :=_TempPath + 'temp' + Get_LetterData_by_LetterDataIDLetterDataID.AsString + '.' + Get_LetterData_by_LetterIDExt.AsString;
+        SysUtils.FileSetReadOnly(pchar(f), false);
         DeleteFile(pchar(f));
         Get_LetterData_by_LetterDataIDImage.SaveToFile(f);
         //if Get_LetterData_by_LetterIDExt.AsString = 'txt' then
@@ -505,6 +507,7 @@ begin
       Parameters.ParamByName('@RecommitePayvastID').Value := dm.Get_RecommitePayvast_by_RecommiteIDID.Value;
       Open;
       f := _TempPath + 'temp' + Get_RecommitePayvast_by_RecommitePayvastIDID.AsString + '.' + Get_RecommitePayvast_by_RecommiteIDExt.AsString;
+      SysUtils.FileSetReadOnly(pchar(f), false);
       DeleteFile(pchar(f));
       Get_RecommitePayvast_by_RecommitePayvastIDImage.SaveToFile(f);
       ShellExecute(Handle, 'open', pchar(f), nil, nil, SW_SHOWNORMAL)
@@ -685,18 +688,23 @@ begin
         FileChilds := LetterChilds.ChildNodes[k];
         tmpFileName := _TempPath+'123'+IntToStr(k)+'.'+FileChilds.AttributeNodes['Extension'].Text;
         if FileExists(tmpFileName)then
+        begin
+          SysUtils.FileSetReadOnly(pchar(tmpFileName), false);
           DeleteFile(pchar(tmpFileName));
+        end;
         fs := TFileStream.Create(tmpFileName,fmCreate);
         idDecoderMIME1.DecodeToStream(FileChilds.Text,fs);
         fs.WriteBuffer(fs,fs.InstanceSize);
         fs.Destroy;
         SaveFileToLetterData(tmpFileName , FileChilds.AttributeNodes['Description'].Text);
+        SysUtils.FileSetReadOnly(pchar(tmpFileName), false);
         DeleteFile(pchar(tmpFileName));
       end;
     end;
 
   end;
                   //
+  SysUtils.FileSetReadOnly(pchar(_TempPath+Attach_FileName), false);
   DeleteFile(pchar(_TempPath+Attach_FileName));
   dm.YeganehConnection.Execute('DELETE FROM LetterData where LetterDataID='+dm.Get_LetterData_by_LetterIDLetterDataID.AsString);
   id := dm.Get_LetterData_by_LetterIDletterid.AsInteger;

@@ -119,6 +119,7 @@ procedure TFExportToExecl.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
+  SysUtils.FileSetReadOnly(pchar(_TempPath+_ExcelFileName), false);
   DeleteFile(pchar(_TempPath+_ExcelFileName));
   ExcelApplication.Disconnect;
 end;
@@ -159,7 +160,10 @@ if OpenDialog.Execute then
      Get_LetterWordFilePageNumber.AsInteger:=1;
      Get_LetterWordFileextention.AsInteger:=4;
      if FileExists(_ApplicationPath+'tmpFile')then
-           DeleteFile(pchar(_ApplicationPath+'tmpFile'));
+     begin
+       SysUtils.FileSetReadOnly(pchar(_ApplicationPath+'tmpFile'), false);
+       DeleteFile(pchar(_ApplicationPath+'tmpFile'));
+     end;
      if CopyFileW(dm.replacePWC(StringToPWide(OpenDialog.filename,i)), dm.StringToPWide(_ApplicationPath+'tmpFile',i), False) then
          s :=_ApplicationPath+'tmpFile'
       else if CopyFileW(dm.StringToPWide(OpenDialog.filename,i), dm.StringToPWide(_ApplicationPath+'tmpFile',i), False) then

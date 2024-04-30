@@ -508,9 +508,13 @@ begin
 
    tempPDF := _ApplicationPath+'tmp.pdf';
    if FileExists(tempPDF)then
-      DeleteFile(pchar(tempPDF));
+   begin
+     SysUtils.FileSetReadOnly(pchar(tempPDF), false);
+     DeleteFile(pchar(tempPDF));
+   end;
    if WordToPDF(tempDOC,tempPDF) then
    begin
+      SysUtils.FileSetReadOnly(pchar(tempDOC), false);
       DeleteFile(pchar(tempDOC));
       ShellExecute(handle, 'open', pchar(tempPDF), nil, nil, SW_SHOWNORMAL);
    end;

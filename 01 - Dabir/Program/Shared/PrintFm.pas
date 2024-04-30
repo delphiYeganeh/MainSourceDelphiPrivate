@@ -6,7 +6,7 @@ uses
   BaseUnit , Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, Spin, Buttons,Printers,WinSpool,  ExtActns,
   ActnList, DB, ieview, imageenview, ievect, dbimageenvect, imageenio,
-  imageenproc,hyiedefs, dbimageen , StrUtils, Menus;
+  imageenproc,hyiedefs, dbimageen , StrUtils, Menus, AppEvnts;
 
 type
   TFmPrint = class(TMBaseForm)
@@ -202,7 +202,10 @@ begin
          TIEVerticalPos = (ievpTOP, ievpCENTER, ievpBOTTOM);}
          //FmScanImage.ImageEnDBVect1.IO.PrintImage(Printer.Canvas ,0,0,0,0,ievpTOP,iehpLEFT, IESize ,0,0,0);
          if FileExists(_TempPath+'print.jpg') then
-            DeleteFile(_TempPath+'print.jpg');
+         begin
+           SysUtils.FileSetReadOnly(_TempPath+'print.jpg', false);
+           DeleteFile(_TempPath+'print.jpg');
+         end;
          FmScanImage.ImageEnDBView1.IO.SaveToFileJpeg(_TempPath+'print.jpg');
          ImageEnVect1.IO.LoadFromFileJpeg(_TempPath+'print.jpg');
          ImageEnVect1.IO.PrintImage(Printer.Canvas ,0,0,0,0,IEVerticalPos,IEHorizontalPos, IESize ,0,0,0);

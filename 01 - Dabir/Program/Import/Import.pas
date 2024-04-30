@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, BaseUnit, StdCtrls, ComCtrls, ExtActns, ActnList, DB, ExtCtrls,
   ADODB, DBTables, Grids, DBGrids,AdoConEd, YDbgrid, xpWindow, Menus,
-  TntDialogs;
+  TntDialogs, AppEvnts;
 
 type
   TFrImport = class(TMBaseForm)
@@ -136,7 +136,10 @@ if FoxOpenDialog.Execute then
  begin
   BDETable.Close;
   if FileExists(_ApplicationPath+'tmpFile')then
-           DeleteFile(pchar(_ApplicationPath+'tmpFile'));
+  begin
+    SysUtils.FileSetReadOnly(pchar(_ApplicationPath+'tmpFile'), false);
+    DeleteFile(pchar(_ApplicationPath+'tmpFile'));
+  end;
   if CopyFileW(dm.replacePWC(dm.StringToPWide(FoxOpenDialog.filename,i)), dm.StringToPWide(_ApplicationPath+'tmpFile',i), False) then
   begin
          BDETable.DatabaseName:=ExtractFilePath(_ApplicationPath+'tmpFile');

@@ -36,10 +36,11 @@ inherited FmPrint: TFmPrint
       Top = 136
       Width = 193
       Height = 98
+      Background = clBtnFace
       ParentCtl3D = False
+      LegacyBitmap = True
       MouseInteract = [miZoom, miScroll]
       BackgroundStyle = iebsChessboard
-      ImageEnVersion = '3.0.0'
       EnableInteractionHints = True
       Visible = False
       TabOrder = 2

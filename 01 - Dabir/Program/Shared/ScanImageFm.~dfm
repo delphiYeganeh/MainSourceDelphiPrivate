@@ -998,6 +998,7 @@ inherited FmScanImage: TFmScanImage
       GridWidth = 1
       SelectionWidth = 3
       SelectionColor = clRed
+      ImageCacheSize = 100
       Style = iemsACD
       ThumbnailsBackground = clBtnFace
       ThumbnailsBackgroundSelected = clBtnFace
@@ -1010,8 +1011,8 @@ inherited FmScanImage: TFmScanImage
       TabOrder = 1
     end
     object ImageEnDBVect1: TImageEnDBVect
-      Left = -167
-      Top = -111
+      Left = -2
+      Top = -95
       Width = 612
       Height = 455
       Background = clBtnFace

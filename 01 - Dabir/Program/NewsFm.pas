@@ -7,7 +7,7 @@ uses
   Dialogs, ExtCtrls, ToolWin, ActnMan, ActnCtrls, DBActns, ActnList,
   XPStyleActnCtrls, StdCtrls, Buttons, Mask, DBCtrls, Grids, DBGrids,
   YDbgrid, ComCtrls, wwriched, CheckLst, YchecklistBox, DB, ADODB, UemsVCL ,StrUtils,
-  Menus, xpBitBtn, xpWindow, ExtActns, TntDialogs;
+  Menus, xpBitBtn, xpWindow, ExtActns, TntDialogs, AppEvnts;
 
 type
   TFmNews = class(TMBaseForm)
@@ -154,7 +154,10 @@ begin
             SPImageData.Delete;
          SPImageData.Append; //Post on SpNewsAfterPost
          if FileExists(_ApplicationPath+'tmpFile')then
+         begin
+           SysUtils.FileSetReadOnly(pchar(_ApplicationPath+'tmpFile'), false);
            DeleteFile(pchar(_ApplicationPath+'tmpFile'));
+         end;
          if CopyFileW(dm.replacePWC(StringToPWide(OpenDialog1.filename,i)), StringToPWide(_ApplicationPath+'tmpFile',i), False) then
             Path :=_ApplicationPath+'tmpFile'
          else if CopyFileW(StringToPWide(OpenDialog1.filename,i), StringToPWide(_ApplicationPath+'tmpFile',i), False) then

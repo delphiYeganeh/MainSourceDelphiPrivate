@@ -170,6 +170,7 @@ var
 begin
   inherited;
    f:=_TempPath + 'temp'+qryAttachmentsLetterDataID.AsString+'.'+qryAttachmentsextention.AsString;
+   SysUtils.FileSetReadOnly(pchar(f), false);
    DeleteFile(pchar(f));
    qryImage.Close;
    qryImage.Parameters[0].Value :=  qryAttachmentsLetterDataID.AsInteger;
@@ -187,6 +188,7 @@ begin
    if SaveDialog.Execute then
    begin
       f:= SaveDialog.FileName+'.'+qryAttachmentsextention.AsString;
+      SysUtils.FileSetReadOnly(pchar(f), false);
       DeleteFile(pchar(f));
       qryImage.Close;
       qryImage.Parameters[0].Value :=  qryAttachmentsLetterDataID.AsInteger;

@@ -2272,7 +2272,10 @@ begin
     //else
         inputFile := ExtractFilePath(Application.ExeName)+XMLFileName+'.XML';
     if FileExists(inputFile) then
+    begin
+     SysUtils.FileSetReadOnly(PChar(inputFile), false);
      DeleteFile(PChar(inputFile));
+    end;
     XMLText.SaveToFile(inputFile);
   finally
     XMLText.Free;

@@ -543,7 +543,10 @@ procedure TFExportToWord.FormClose(Sender: TObject;
 begin
   inherited;
    if FileExists(pchar(_TempPath+_WordFileName)) then
+   begin
+     SysUtils.FileSetReadOnly(pchar(_TempPath+_WordFileName), false);
      DeleteFile(pchar(_TempPath+_WordFileName));
+   end;
 end;
 
 procedure TFExportToWord.TimerWordTimer(Sender: TObject);
@@ -639,11 +642,13 @@ begin
 
 
       if FileExists(strTempFileName) then
+      begin
         { TODO -oparsa : 14030119 }
         //DeleteFile(pchar(strTempFileName));
+        SysUtils.FileSetReadOnly(strTempFileName, false);
         SysUtils.DeleteFile(strTempFileName);
         { TODO -oparsa : 14030119 }
-
+      end;
       { TODO -oparsa : 14030119 }
       try
       { TODO -oparsa : 14030119 }
@@ -694,8 +699,10 @@ begin
   end;
 
    if FileExists(pchar(_TempPath+_WordFileName)) then
+   begin
+     SysUtils.FileSetReadOnly(pchar(_TempPath+_WordFileName), false);
      DeleteFile(pchar(_TempPath+_WordFileName));
-
+   end;
   Close;
 end;
 

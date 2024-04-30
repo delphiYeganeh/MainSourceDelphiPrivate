@@ -135,7 +135,8 @@ end;
 procedure TFLoadPDF.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
-   DeleteFile(_TempPath +'temp.pdf');
+  SysUtils.FileSetReadOnly(_TempPath +'temp.pdf', false);
+  DeleteFile(_TempPath +'temp.pdf');
 end;
 
 procedure TFLoadPDF.AdeleteExecute(Sender: TObject);

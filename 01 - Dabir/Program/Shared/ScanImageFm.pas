@@ -597,7 +597,10 @@ begin
     QrSelImageIsCorrectedImage.AsBoolean := True;
     //Hamed_Ansari_MRM_990701_S
     if FileExists(aFileName) then
+    begin
+      SysUtils.FileSetReadOnly(aFileName, false);
       DeleteFile(aFileName);
+    end;
     //Hamed_Ansari_MRM_990701_E
     //---
     QrSelImage.Post;
@@ -838,7 +841,9 @@ begin
       begin
          if FileExists(ExtractFilePath(Application.ExeName)+'imageconvertor.exe')and(Get_File_Size1(aFileName,true)>80000000) then
          begin
+            SysUtils.FileSetReadOnly(ExtractFilePath(Application.ExeName)+'ListofSplitterTiff.txt', false);
             DeleteFile(ExtractFilePath(Application.ExeName)+'ListofSplitterTiff.txt');
+            SysUtils.FileSetReadOnly(ExtractFilePath(aFileName)+'ListofSplitterTiff.txt', false);
             DeleteFile(ExtractFilePath(aFileName)+'ListofSplitterTiff.txt');
             filename := ExtractFilePath(Application.ExeName)+'imageconvertor.exe';
             parameters := '"'+aFileName+'"';
@@ -897,9 +902,15 @@ begin
                //       quImage.Close;
                       Application.ProcessMessages;
                       if FileExists(tiffName) then
-                          DeleteFile(tiffName);
+                      begin
+                        SysUtils.FileSetReadOnly(tiffName, false);
+                        DeleteFile(tiffName);
+                      end;
                       if FileExists(jpgName) then
-                          DeleteFile(jpgName);
+                      begin
+                        SysUtils.FileSetReadOnly(jpgName, false);
+                        DeleteFile(jpgName);
+                      end;
                   end
                   else   ///////////////// Edit
                   begin
@@ -920,9 +931,15 @@ begin
                     //  quImage.Close;
                       Application.ProcessMessages;
                       if    FileExists(tiffName) then
-                          DeleteFile(tiffName);
+                      begin
+                        SysUtils.FileSetReadOnly(tiffName, false);
+                        DeleteFile(tiffName);
+                      end;
                       if FileExists(jpgName) then
-                          DeleteFile(jpgName);
+                      begin
+                        SysUtils.FileSetReadOnly(jpgName, false);
+                        DeleteFile(jpgName);
+                      end;
                   end;
                end;
             end;
@@ -965,9 +982,15 @@ begin
                //       quImage.Close;
                       Application.ProcessMessages;
                       if FileExists(_TempPath+'\output'+IntToStr(i+1)+'.tif') then
-                          DeleteFile(_TempPath+'\output'+IntToStr(i+1)+'.tif');
+                      begin
+                        SysUtils.FileSetReadOnly(_TempPath+'\output'+IntToStr(i+1)+'.tif', false);
+                        DeleteFile(_TempPath+'\output'+IntToStr(i+1)+'.tif');
+                      end;
                       if FileExists(_TempPath+'\output'+IntToStr(i+1)+'.jpg') then
-                          DeleteFile(_TempPath+'\output'+IntToStr(i+1)+'.jpg');
+                      begin
+                        SysUtils.FileSetReadOnly(_TempPath+'\output'+IntToStr(i+1)+'.jpg', false);
+                        DeleteFile(_TempPath+'\output'+IntToStr(i+1)+'.jpg');
+                      end;
                   end
                   else   ///////////////// Edit
                   begin
@@ -988,9 +1011,15 @@ begin
                     //  quImage.Close;
                       Application.ProcessMessages;
                       if    FileExists(_TempPath+'\output'+IntToStr(i+1)+'.tif') then
-                          DeleteFile(_TempPath+'\output'+IntToStr(i+1)+'.tif');
+                      begin
+                        SysUtils.FileSetReadOnly(_TempPath+'\output'+IntToStr(i+1)+'.tif', false);
+                        DeleteFile(_TempPath+'\output'+IntToStr(i+1)+'.tif');
+                      end;
                       if FileExists(_TempPath+'\output'+IntToStr(i+1)+'.jpg') then
-                          DeleteFile(_TempPath+'\output'+IntToStr(i+1)+'.jpg');
+                      begin
+                        SysUtils.FileSetReadOnly(_TempPath+'\output'+IntToStr(i+1)+'.jpg', false);
+                        DeleteFile(_TempPath+'\output'+IntToStr(i+1)+'.jpg');
+                      end;
                   end;
                end;
             end;
@@ -1219,11 +1248,13 @@ begin
            if QrSelImage.State = dsEdit then
            begin
               FilePathName := _TempPath + 'TempEditFile.Jpg';
+              SysUtils.FileSetReadOnly(FilePathName, false);
               DeleteFile(FilePathName);
               ImageEnDBView1.IO.SaveToFileJpeg(FilePathName);
               ImageEnDBView1.Clear;
               QrSelImageImage.LoadFromFile(FilePathName);
               Application.ProcessMessages;
+              SysUtils.FileSetReadOnly(FilePathName, false);
               DeleteFile(FilePathName);
               if QrSelImageIsCorrectedImage.AsBoolean = False then
                  QrSelImageIsCorrectedImage.AsBoolean := True;
@@ -1425,6 +1456,7 @@ begin
 *)
   try
     FileNamePath := _TempPath +'Temp.tif';
+    SysUtils.FileSetReadOnly(FileNamePath, false);
     DeleteFile(FileNamePath);
     ImgScan.Image := FileNamePath;
 
@@ -2611,8 +2643,10 @@ begin
    imV1.IO.SaveToFileTIFF(FileName+'.tiff');
    imV1.Free;
    imV2.Free;
+   SysUtils.FileSetReadOnly(_TempPath+'\tmp.bmp', false);
    DeleteFile(_TempPath+'\tmp.bmp');
    FillData(FileName+'.tiff');
+   SysUtils.FileSetReadOnly(FileName+'.tiff', false);
    DeleteFile(FileName+'.tiff');
 end;
 

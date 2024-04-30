@@ -180,7 +180,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           Left = 310
           Top = 3
           Width = 39
-          Height = 20
+          Height = 19
           TabStop = False
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
@@ -202,7 +202,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           Left = 91
           Top = 3
           Width = 96
-          Height = 20
+          Height = 19
           TabStop = False
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
@@ -3257,7 +3257,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Left = 24
             Top = 11
             Width = 94
-            Height = 20
+            Height = 19
             TabStop = False
             Anchors = [akTop, akRight]
             BevelInner = bvLowered

@@ -5110,6 +5110,7 @@ begin
   if FindFirst(fileName, FileAttrs, sr) = 0 then
     repeat
       try
+        SysUtils.FileSetReadOnly(pchar(path + '\'+ sr.Name), false);
         if not DeleteFile(pchar(path + '\'+ sr.Name)) then
           result:=false
       except
@@ -5340,6 +5341,7 @@ begin
     dm.qryArchiveAttachment.Parameters[0].Value:= ID;
     dm.qryArchiveAttachment.Open;
     f:=_TempPath + 'temp'+dm.qryArchiveAttachmentLetterDataID.AsString+'.'+dm.qryArchiveAttachmentextention.AsString;
+    SysUtils.FileSetReadOnly(pchar(f), false);
     DeleteFile(pchar(f));
     dm.qryArchiveAttachmentIMAGE.SaveToFile(f);
     Result := pchar(f);
@@ -5376,6 +5378,7 @@ begin
     Parameters.ParamByName('@LetterdataID').Value:=Get_LetterData_by_LetterIDLetterDataID.Value;
     Open;
     f:=_TempPath + 'temp'+Get_LetterData_by_LetterDataIDLetterDataID.AsString+'.'+Get_LetterData_by_LetterIDExt.AsString;
+    SysUtils.FileSetReadOnly(pchar(f), false);
     DeleteFile(pchar(f));
     Get_LetterData_by_LetterDataIDImage.SaveToFile(f);
     res := pchar(f);

@@ -8,7 +8,7 @@ uses
   ActnList, StdCtrls, Buttons, ExtDlgs, DBActns,  ExtCtrls,
   ComCtrls, ActnMenus, OleCtnrs, Spin, OleServer,Clipbrd,
   ExtActns, WordXP, XPStyleActnCtrls, YDbgrid,  xpBitBtn,
-  OleCtrls, AcroPDFLib_TLB, Menus;
+  OleCtrls, AcroPDFLib_TLB, Menus, AppEvnts;
 
 type
   TFLoadPDF = class(TMBaseForm)

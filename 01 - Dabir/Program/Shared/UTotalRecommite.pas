@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, BaseUnit, ExtCtrls, DBCtrls, StdCtrls, Buttons, Mask, DB,
-  UemsVCL, ComCtrls, Grids, DBGrids, ActnList, ExtActns, Menus, xpWindow;
+  UemsVCL, ComCtrls, Grids, DBGrids, ActnList, ExtActns, Menus, xpWindow,
+  AppEvnts;
 
 type
   TRecommiteGroup = class(TMBaseForm)

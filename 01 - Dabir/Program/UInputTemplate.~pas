@@ -103,8 +103,11 @@ begin
   inherited;
   { TODO -oparsa : 1402-12-19 }
    if FileExists(pchar(_TempPath+_WordFileName)) then
+   begin
+      SysUtils.FileSetReadOnly(pchar(_TempPath+_WordFileName), false);
      DeleteFile(pchar(_TempPath+_WordFileName));
-  { TODO -oparsa : 1402-12-19 }    
+   end;
+  { TODO -oparsa : 1402-12-19 }
   IsReadOnly := True;
   Saved := False;
   with Dm.LetterTemplate do
@@ -250,7 +253,10 @@ begin
     strType := Exec_GetLetterTemplateGroupType(Dm.LetterTemplateTemplateGroupID.AsInteger);
     if strType = 'x' then
       if FileExists(_TempPath + _ExcelFileName) then
+      begin
+        SysUtils.FileSetReadOnly(pchar(_TempPath + _ExcelFileName), false);
         DeleteFile(pchar(_TempPath + _ExcelFileName));
+      end;
     Sleep(1000);
     DM.SaveTemplateToFile(strType);
     Sleep(1000);
@@ -295,7 +301,10 @@ begin
 
     if strType = 'x' then
       if FileExists(_TempPath + _ExcelFileName) then
+      begin
+        SysUtils.FileSetReadOnly(pchar(_TempPath + _ExcelFileName), false);
         DeleteFile(pchar(_TempPath + _ExcelFileName));
+      end;
     Sleep(500);
     DM.SaveTemplateToFile(strType);
     Sleep(500);
@@ -480,7 +489,10 @@ begin
 
    { TODO -oparsa : 1402-12-19 }
    if FileExists(pchar(_TempPath+_WordFileName)) then
+   begin
+     SysUtils.FileSetReadOnly(pchar(_TempPath + _WordFileName), false);
      DeleteFile(pchar(_TempPath+_WordFileName));
+   end;
    { TODO -oparsa : 1402-12-19 }
 end;
 
@@ -529,7 +541,10 @@ begin
            
         //LetterTemplateDocDocument.LoadFromFile(OpenDialog.FileName);
         if FileExists(_ApplicationPath + 'tmpFile')then
+        begin
+          SysUtils.FileSetReadOnly(pchar(_ApplicationPath + 'tmpFile'), false);
           DeleteFile(pchar(_ApplicationPath + 'tmpFile'));
+        end;
         if CopyFileW(replacePWC(StringToPWide(OpenDialog.filename,i)), StringToPWide(strTempFileName, i), False) then
           fn := strTempFileName
         else if CopyFilew(StringToPWide(OpenDialog.filename, i), StringToPWide(strTempFileName, i), False) then

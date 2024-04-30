@@ -16,7 +16,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
     Top = 0
     Width = 824
     Height = 635
-    ActivePage = xpTabSheet1
+    ActivePage = xpForms
     Align = alClient
     ParentShowHint = False
     ShowHint = True
@@ -180,7 +180,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           Left = 310
           Top = 3
           Width = 39
-          Height = 20
+          Height = 19
           TabStop = False
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
@@ -202,7 +202,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           Left = 91
           Top = 3
           Width = 96
-          Height = 20
+          Height = 19
           TabStop = False
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
@@ -3257,7 +3257,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Left = 24
             Top = 11
             Width = 94
-            Height = 20
+            Height = 19
             TabStop = False
             Anchors = [akTop, akRight]
             BevelInner = bvLowered
@@ -4395,8 +4395,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
     end
   end
   object PopupMenu2: TPopupMenu
-    Left = 332
-    Top = 199
+    Left = 328
+    Top = 198
     object N7: TMenuItem
       Caption = #1601#1585#1605' '#1607#1575#1610' '#1662#1610#1608#1587#1578' '#1588#1583#1607
       ImageIndex = 1
