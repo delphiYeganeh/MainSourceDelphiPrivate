@@ -8,16 +8,20 @@ uses
 
 type
   TFrTaxPerYear = class(TMBaseForm)
-    dbgTaxPerYear: TYDBGrid;
-    Panel1: TPanel;
-    btnCancel: TBitBtn;
-    btnSave: TBitBtn;
+    pnlMain: TPanel;
     Panel2: TPanel;
     Label1: TLabel;
     edtTaxDate: TEdit;
+    Panel1: TPanel;
+    btnCancel: TBitBtn;
+    btnSave: TBitBtn;
+    dbgTaxPerYear: TYDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -70,6 +74,24 @@ begin
   inherited;
   Qry.Cancel;
 close;
+end;
+
+procedure TFrTaxPerYear.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 286)  or (NewHeight < 333) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
+end;
+
+procedure TFrTaxPerYear.FormShow(Sender: TObject);
+begin
+  inherited;
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

@@ -9,22 +9,7 @@ uses
 
 type
   TfrmCustStatusReport = class(TMBaseForm)
-    Panel1: TPanel;
-    Label1: TLabel;
-    ComboBox1: TComboBox;
-    CustGrid: TYDBGrid;
-    Panel2: TPanel;
-    BitBtn1: TBitBtn;
     ADOQuery: TADOQuery;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    DBLookupComboBox1: TDBLookupComboBox;
-    Label2: TLabel;
-    Label3: TLabel;
-    DBLookupComboBox2: TDBLookupComboBox;
-    Button1: TButton;
-    Button2: TButton;
     DProduct: TDataSource;
     Product: TADOQuery;
     ProductProductID: TWordField;
@@ -39,27 +24,43 @@ type
     ADOQueryId: TAutoIncField;
     ADOQueryCustomerStatusID: TIntegerField;
     ADOQueryCustomerStatusTitle: TStringField;
-    ADOQueryOne: TIntegerField;
-    ADOQueryTwo: TIntegerField;
-    ADOQueryThree: TIntegerField;
-    ADOQueryFour: TIntegerField;
-    ADOQueryFive: TIntegerField;
-    ADOQuerySix: TIntegerField;
-    ADOQuerySeven: TIntegerField;
-    ADOQueryEight: TIntegerField;
-    ADOQueryNine: TIntegerField;
-    ADOQueryTen: TIntegerField;
-    ADOQueryEleven: TIntegerField;
-    ADOQueryTwelve: TIntegerField;
-    DBLkCBGroupTitle: TDBLookupComboBox;
-    Label4: TLabel;
-    Button3: TButton;
     DGroup: TDataSource;
     Group: TADOQuery;
     GroupGroupID: TAutoIncField;
     GroupGroupTitle: TWideStringField;
     GroupGroupNo: TStringField;
     Groupeffect: TWordField;
+    pnlMain: TPanel;
+    Panel2: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    BitBtn1: TBitBtn;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    ComboBox1: TComboBox;
+    DBLookupComboBox1: TDBLookupComboBox;
+    DBLookupComboBox2: TDBLookupComboBox;
+    Button1: TButton;
+    Button2: TButton;
+    DBLkCBGroupTitle: TDBLookupComboBox;
+    Button3: TButton;
+    CustGrid: TYDBGrid;
+    ADOQueryOne1: TStringField;
+    ADOQueryTwo1: TStringField;
+    ADOQueryThree1: TStringField;
+    ADOQueryFour1: TStringField;
+    ADOQueryFive1: TStringField;
+    ADOQuerySix1: TStringField;
+    ADOQuerySeven1: TStringField;
+    ADOQueryEight1: TStringField;
+    ADOQueryNine1: TStringField;
+    ADOQueryTen1: TStringField;
+    ADOQueryEleven1: TStringField;
+    ADOQueryTwelve1: TStringField;
     procedure BitBtn1Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
@@ -71,6 +72,8 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Panel2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
   public
@@ -244,10 +247,13 @@ end;
 procedure TfrmCustStatusReport.FormShow(Sender: TObject);
 begin
   inherited;
- Dm.Compagin.Open;
- Product.Open;
- dm.Select_Customer_By_CustomerID.Open;
- DBLkCBGroupTitle.KeyValue := Null;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;  
+  Dm.Compagin.Open;
+  Product.Open;
+  dm.Select_Customer_By_CustomerID.Open;
+  DBLkCBGroupTitle.KeyValue := Null;
+  ComboBox1.Text := copy(_today,1,4);
 end;
 
 procedure TfrmCustStatusReport.Button1Click(Sender: TObject);
@@ -272,6 +278,18 @@ procedure TfrmCustStatusReport.Button3Click(Sender: TObject);
 begin
   inherited;
  DBLkCBGroupTitle.KeyValue := Null;
+end;
+
+procedure TfrmCustStatusReport.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 1373)  or (NewHeight < 522) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
 end;
 
 end.

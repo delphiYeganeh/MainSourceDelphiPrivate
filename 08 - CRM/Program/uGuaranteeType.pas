@@ -9,6 +9,7 @@ uses
 
 type
   TfrGuaranteeType = class(TMBaseForm)
+    pnlMain: TPanel;
     dbgTaxPerYear: TYDBGrid;
     Panel1: TPanel;
     btnCancel: TBitBtn;
@@ -16,6 +17,9 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -65,6 +69,25 @@ begin
   if Qry.State in [dsinsert,dsedit] then  Qry.Post;
   close;
 
+end;
+
+procedure TfrGuaranteeType.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 253)  or (NewHeight < 297) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
+end;
+
+procedure TfrGuaranteeType.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

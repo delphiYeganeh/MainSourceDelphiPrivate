@@ -18,20 +18,21 @@ type
     AInsert: TAction;
     Apost: TAction;
     Adelete: TAction;
-    Panel3: TPanel;
-    DBNavigator1: TDBNavigator;
-    SpeedButton1: TSpeedButton;
+    pnlMain: TPanel;
     Panel1: TPanel;
-    Edit1: TEdit;
     Label2: TLabel;
+    Edit1: TEdit;
     Panel2: TPanel;
     DBGFromORG: TYDBGrid;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    DBNavigator1: TDBNavigator;
     Panel4: TPanel;
     Label1: TLabel;
-    DBEGroupTitle: TDBEdit;
     Label3: TLabel;
-    DBEGroupNo: TDBEdit;
     Label4: TLabel;
+    DBEGroupTitle: TDBEdit;
+    DBEGroupNo: TDBEdit;
     DBEeffect: TDBEdit;
     procedure ACloseExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -45,6 +46,8 @@ type
       Shift: TShiftState);
     procedure DBNavigator1BeforeAction(Sender: TObject;
       Button: TNavigateBtn);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
 
   private
 
@@ -86,6 +89,9 @@ end;
 
 procedure TGroupInp.FormShow(Sender: TObject);
 begin
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
    DBNav_Setup(DBNavigator1);
 end;
 
@@ -118,6 +124,18 @@ begin
       if ShowMyMessage('ÅÌ€«„','¬Ì« „«Ì· »Â Õ–› —ﬂÊ—œ Ã«—Ì Â” Ìœø',mbOKCancel,mtWarning) <> mrok then
          Abort;
    end;
+end;
+
+procedure TGroupInp.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 621)  or (NewHeight < 556) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
 end;
 
 end.

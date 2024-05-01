@@ -4,7 +4,7 @@ interface
 
 uses    Forms,dialogs, Classes, DB,StdCtrls,Graphics,DBCtrls,UemsVCL,
   ActnList, Controls, Grids, DBGrids, YDbgrid, DBLookupEdit,sysutils,Windows,YWhereEdit,
-  ExtActns, Menus,variants, Buttons;
+  ExtActns, Menus,variants, Buttons, ExtCtrls;
 
 
 type
@@ -20,6 +20,7 @@ type
     selectall: TAction;
     Aexit: TAction;
     RefreshAction: TAction;
+    ShapeBase: TShape;
    procedure FormClose(Sender: TObject; var Action: TCloseAction);
    procedure TEditEnter(Sender: TObject);
    procedure TEditExit(Sender: TObject);
@@ -44,7 +45,8 @@ type
    private
     { Private declarations }
    public
-
+  //  SelfMinWidth : Integer;
+   // SelfMinHight : Integer;
     { Private declarations }
   end;
 
@@ -212,6 +214,7 @@ end;
 procedure TMBaseForm.FormShow(Sender: TObject);
 var i: integer;
 begin
+   ShapeBase.Brush.Color := _Color1 ;
    for i:=0 to ComponentCount-1 do
     if Components[i].InheritsFrom(TDBLookupComboBox) then
         if  not Assigned(TDBLookupComboBox(Components[i]).OnKeyDown) then TDBLookupComboBox(Components[i]).OnKeyDown:= GotoNext
@@ -367,7 +370,10 @@ end;
 procedure TMBaseForm.FormCreate(Sender: TObject);
 begin
    GetAccess;
- 
+   { TODO -oparsa : 14030203 }
+  // selfMinWidth := Width;
+  // selfMinHight := Hight;
+   { TODO -oparsa : 14030203 }
 end;
 
 

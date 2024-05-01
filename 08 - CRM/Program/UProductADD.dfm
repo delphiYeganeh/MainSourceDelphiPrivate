@@ -1,10 +1,11 @@
 inherited ProductADD: TProductADD
   Left = 333
   Top = 214
-  Width = 644
+  Width = 632
   Height = 581
   Caption = #1575#1582#1578#1589#1575#1589' '#1610#1575' '#1593#1583#1605' '#1575#1582#1578#1589#1575#1589' '#1605#1588#1578#1585#1603#1610#1606' '#1576#1607' '#1605#1581#1589#1608#1604
   OldCreateOrder = True
+  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   object ahmadvand: TLabel [0]
@@ -17,16 +18,20 @@ inherited ProductADD: TProductADD
   object Panel1: TPanel [1]
     Left = 0
     Top = 0
-    Width = 636
-    Height = 214
+    Width = 616
+    Height = 209
     Align = alClient
     TabOrder = 0
+    DesignSize = (
+      616
+      209)
     object Label1: TLabel
-      Left = 524
+      Left = 521
       Top = 15
-      Width = 47
+      Width = 63
       Height = 13
-      Caption = #1606#1575'&'#1605' '#1588#1585#1603#1578
+      Anchors = [akTop, akRight]
+      Caption = #1606#1575'&'#1605' '#1588#1585#1603#1578'    :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -35,11 +40,12 @@ inherited ProductADD: TProductADD
       ParentFont = False
     end
     object Label2: TLabel
-      Left = 524
+      Left = 520
       Top = 44
-      Width = 33
+      Width = 64
       Height = 13
-      Caption = #1605#1583#1610#1585#1610#1578
+      Anchors = [akTop, akRight]
+      Caption = #1605#1583#1610#1585#1610#1578'         :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -49,10 +55,11 @@ inherited ProductADD: TProductADD
     end
     object Label6: TLabel
       Left = 242
-      Top = 39
-      Width = 52
+      Top = 37
+      Width = 62
       Height = 13
-      Caption = #1587#1585#1610#1575#1604' '#1603#1604#1610
+      Anchors = [akTop, akRight]
+      Caption = #1587#1585#1610#1575#1604' '#1603#1604#1610'  :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -61,11 +68,12 @@ inherited ProductADD: TProductADD
       ParentFont = False
     end
     object Label9: TLabel
-      Left = 242
-      Top = 10
-      Width = 32
+      Left = 241
+      Top = 8
+      Width = 63
       Height = 13
-      Caption = #1576#1575#1586#1575#1585#1610#1575#1576
+      Anchors = [akTop, akRight]
+      Caption = #1576#1575#1586#1575#1585#1610#1575#1576'         :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -74,11 +82,12 @@ inherited ProductADD: TProductADD
       ParentFont = False
     end
     object Label10: TLabel
-      Left = 242
+      Left = 241
       Top = 68
-      Width = 11
+      Width = 63
       Height = 13
-      Caption = #1603#1583
+      Anchors = [akTop, akRight]
+      Caption = #1603#1583'                :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -89,9 +98,10 @@ inherited ProductADD: TProductADD
     object Label11: TLabel
       Left = 242
       Top = 126
-      Width = 25
+      Width = 62
       Height = 13
-      Caption = #1570#1583#1585#1587
+      Anchors = [akTop, akRight]
+      Caption = #1570#1583#1585#1587'           :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -100,11 +110,12 @@ inherited ProductADD: TProductADD
       ParentFont = False
     end
     object Label7: TLabel
-      Left = 524
+      Left = 520
       Top = 69
-      Width = 21
+      Width = 64
       Height = 13
-      Caption = #1578#1604#1601#1606
+      Anchors = [akTop, akRight]
+      Caption = #1578#1604#1601#1606'             :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -113,11 +124,12 @@ inherited ProductADD: TProductADD
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 524
-      Top = 123
-      Width = 49
+      Left = 519
+      Top = 125
+      Width = 65
       Height = 13
-      Caption = #1606#1608#1593' '#1601#1593#1575#1604#1610#1578
+      Anchors = [akTop, akRight]
+      Caption = #1606#1608#1593' '#1601#1593#1575#1604#1610#1578'    :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -126,11 +138,12 @@ inherited ProductADD: TProductADD
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 524
-      Top = 95
-      Width = 22
+      Left = 519
+      Top = 98
+      Width = 65
       Height = 13
-      Caption = #1588#1607#1585
+      Anchors = [akTop, akRight]
+      Caption = #1588#1607#1585'             :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -141,9 +154,10 @@ inherited ProductADD: TProductADD
     object Label8: TLabel
       Left = 242
       Top = 97
-      Width = 40
+      Width = 62
       Height = 13
-      Caption = #1578#1608#1590#1610#1581#1575#1578
+      Anchors = [akTop, akRight]
+      Caption = #1578#1608#1590#1610#1581#1575#1578'      :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -152,11 +166,12 @@ inherited ProductADD: TProductADD
       ParentFont = False
     end
     object Label4: TLabel
-      Left = 522
-      Top = 150
-      Width = 42
+      Left = 520
+      Top = 151
+      Width = 64
       Height = 13
-      Caption = #1603#1583' '#1575#1587#1578#1575#1606
+      Anchors = [akTop, akRight]
+      Caption = #1603#1583' '#1575#1587#1578#1575#1606'      :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -165,11 +180,12 @@ inherited ProductADD: TProductADD
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 244
+      Left = 240
       Top = 150
-      Width = 60
+      Width = 64
       Height = 13
-      Caption = #1575#1608#1604#1608#1610#1578' '#1575#1585#1587#1575#1604
+      Anchors = [akTop, akRight]
+      Caption = #1575#1608#1604#1608#1610#1578' '#1575#1585#1587#1575#1604':'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -178,11 +194,12 @@ inherited ProductADD: TProductADD
       ParentFont = False
     end
     object Label13: TLabel
-      Left = 522
-      Top = 180
-      Width = 38
+      Left = 518
+      Top = 177
+      Width = 66
       Height = 13
-      Caption = #1603#1583' '#1602#1576#1604#1610
+      Anchors = [akTop, akRight]
+      Caption = #1603#1583' '#1602#1576#1604#1610'        :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -191,11 +208,12 @@ inherited ProductADD: TProductADD
       ParentFont = False
     end
     object Label14: TLabel
-      Left = 242
+      Left = 244
       Top = 180
-      Width = 53
+      Width = 60
       Height = 13
-      Caption = #1591#1585#1601' '#1605#1603#1575#1578#1576#1607
+      Anchors = [akTop, akRight]
+      Caption = #1591#1585#1601' '#1605#1603#1575#1578#1576#1607' :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -208,6 +226,7 @@ inherited ProductADD: TProductADD
       Top = 11
       Width = 180
       Height = 21
+      Anchors = [akTop, akRight]
       BiDiMode = bdRightToLeft
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -232,6 +251,7 @@ inherited ProductADD: TProductADD
       Top = 39
       Width = 180
       Height = 21
+      Anchors = [akTop, akRight]
       BiDiMode = bdRightToLeft
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -256,6 +276,7 @@ inherited ProductADD: TProductADD
       Top = 4
       Width = 180
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       Color = 16773345
       Font.Charset = ARABIC_CHARSET
@@ -282,6 +303,7 @@ inherited ProductADD: TProductADD
       Top = 63
       Width = 180
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -306,6 +328,7 @@ inherited ProductADD: TProductADD
       Top = 93
       Width = 180
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdRightToLeft
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -330,6 +353,7 @@ inherited ProductADD: TProductADD
       Top = 95
       Width = 180
       Height = 21
+      Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
       Color = 16773345
       Font.Charset = ARABIC_CHARSET
@@ -356,6 +380,7 @@ inherited ProductADD: TProductADD
       Top = 123
       Width = 180
       Height = 21
+      Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
       Color = 16773345
       Font.Charset = ARABIC_CHARSET
@@ -382,6 +407,7 @@ inherited ProductADD: TProductADD
       Top = 33
       Width = 180
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -406,6 +432,7 @@ inherited ProductADD: TProductADD
       Top = 67
       Width = 180
       Height = 21
+      Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -430,6 +457,7 @@ inherited ProductADD: TProductADD
       Top = 123
       Width = 180
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdRightToLeft
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -454,6 +482,7 @@ inherited ProductADD: TProductADD
       Top = 148
       Width = 180
       Height = 21
+      Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
       Color = 16773345
       Font.Charset = ARABIC_CHARSET
@@ -480,6 +509,7 @@ inherited ProductADD: TProductADD
       Top = 147
       Width = 180
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -504,6 +534,7 @@ inherited ProductADD: TProductADD
       Top = 175
       Width = 180
       Height = 21
+      Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -528,6 +559,7 @@ inherited ProductADD: TProductADD
       Top = 176
       Width = 180
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdRightToLeft
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -550,16 +582,20 @@ inherited ProductADD: TProductADD
   end
   object Panel2: TPanel [2]
     Left = 0
-    Top = 506
-    Width = 636
+    Top = 501
+    Width = 616
     Height = 41
     Align = alBottom
     TabOrder = 1
+    DesignSize = (
+      616
+      41)
     object BitBtn1: TBitBtn
       Left = 530
       Top = 9
       Width = 80
       Height = 27
+      Anchors = [akTop, akRight]
       Caption = #1578#1607#1610#1607' '#1711#1586#1575#1585#1588
       TabOrder = 0
       OnClick = BitBtn1Click
@@ -569,6 +605,7 @@ inherited ProductADD: TProductADD
       Top = 9
       Width = 200
       Height = 27
+      Anchors = [akTop, akRight]
       Caption = #1575#1582#1578#1589#1575#1589' '#1576#1607' '#1610#1603' '#1605#1581#1589#1608#1604' '#1583#1610#1711#1585
       Enabled = False
       Font.Charset = ARABIC_CHARSET
@@ -594,6 +631,7 @@ inherited ProductADD: TProductADD
       Top = 9
       Width = 168
       Height = 27
+      Anchors = [akTop, akRight]
       Caption = #1581#1584#1601' '#1575#1586' '#1605#1588#1578#1585#1603#1610#1606' '#1610#1603' '#1605#1581#1589#1608#1604
       Enabled = False
       Font.Charset = ARABIC_CHARSET
@@ -608,8 +646,8 @@ inherited ProductADD: TProductADD
   end
   object YDBGrid2: TYDBGrid [3]
     Left = 0
-    Top = 214
-    Width = 636
+    Top = 209
+    Width = 616
     Height = 292
     Cursor = crHandPoint
     Align = alBottom

@@ -18,26 +18,27 @@ type
     AInsert: TAction;
     Apost: TAction;
     Adelete: TAction;
-    Panel2: TPanel;
-    Edit1: TEdit;
-    Label2: TLabel;
-    Panel3: TPanel;
-    DBGFromORG: TYDBGrid;
-    Panel1: TPanel;
-    SBClose: TSpeedButton;
-    DBNavigator1: TDBNavigator;
-    Panel4: TPanel;
-    Label1: TLabel;
-    DBEMarketerNo: TDBEdit;
-    Label3: TLabel;
-    DBEMarketerTitle: TDBEdit;
-    Label4: TLabel;
-    DBEPPercent: TDBEdit;
-    Button1: TButton;
     PopupMenu1: TPopupMenu;
     N1: TMenuItem;
     N2: TMenuItem;
+    pnlMain: TPanel;
+    Panel3: TPanel;
+    DBGFromORG: TYDBGrid;
+    Panel4: TPanel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    DBEMarketerNo: TDBEdit;
+    DBEMarketerTitle: TDBEdit;
+    DBEPPercent: TDBEdit;
     DBCheckBox1: TDBCheckBox;
+    Panel2: TPanel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    Panel1: TPanel;
+    SBClose: TSpeedButton;
+    DBNavigator1: TDBNavigator;
     procedure ACloseExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Edit1Change(Sender: TObject);
@@ -51,6 +52,8 @@ type
     procedure Button1Click(Sender: TObject);
     procedure N1Click(Sender: TObject);
     procedure N2Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
 
   private
 
@@ -106,6 +109,9 @@ end;
 
 procedure TmarketerInp.FormShow(Sender: TObject);
 begin
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
    DBNav_Setup(DBNavigator1);
 end;
 
@@ -142,6 +148,18 @@ begin
     Dm.Marketer.SQL.Add('SELECT * FROM marketer');
     Dm.Marketer.SQL.Add('WHERE IsActive_=0');
     Dm.Marketer.Open;
+
+end;
+
+procedure TmarketerInp.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 599)  or (NewHeight < 461) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
 
 end;
 

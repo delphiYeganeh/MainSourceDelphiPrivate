@@ -1,24 +1,29 @@
 inherited FUsersSequence: TFUsersSequence
   Left = 339
   Top = 119
-  Width = 682
+  Width = 706
   Height = 512
   Caption = #1578#1593#1585#1610#1601' '#1705#1575#1585#1576#1585#1575#1606' '#1606#1608#1576#1578' '#1662#1575#1587#1582#1711#1608#1610#1610
   OldCreateOrder = True
+  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel [0]
-    Left = 418
+    Left = 434
     Top = 0
     Width = 256
-    Height = 478
+    Height = 473
     Align = alRight
     TabOrder = 0
+    DesignSize = (
+      256
+      473)
     object GroupBox1: TGroupBox
       Left = 11
       Top = 8
       Width = 236
       Height = 57
+      Anchors = [akTop, akRight]
       Caption = #1580#1587#1578#1580#1608
       TabOrder = 0
       object Label1: TLabel
@@ -43,6 +48,7 @@ inherited FUsersSequence: TFUsersSequence
       Width = 236
       Height = 393
       Cursor = crHandPoint
+      Anchors = [akTop, akRight]
       DataSource = DSForm
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       ReadOnly = True
@@ -86,7 +92,7 @@ inherited FUsersSequence: TFUsersSequence
     Left = 0
     Top = 0
     Width = 337
-    Height = 478
+    Height = 473
     Align = alLeft
     TabOrder = 1
     object Label2: TLabel
@@ -162,15 +168,20 @@ inherited FUsersSequence: TFUsersSequence
   object Panel3: TPanel [2]
     Left = 337
     Top = 0
-    Width = 81
-    Height = 478
+    Width = 97
+    Height = 473
     Align = alClient
+    Anchors = [akTop, akRight]
     TabOrder = 2
+    DesignSize = (
+      97
+      473)
     object Button1: TButton
       Left = 16
       Top = 56
-      Width = 49
+      Width = 64
       Height = 25
+      Anchors = [akLeft, akTop, akRight]
       Caption = '>>'
       TabOrder = 0
       OnClick = Button1Click
@@ -178,8 +189,9 @@ inherited FUsersSequence: TFUsersSequence
     object Button2: TButton
       Left = 16
       Top = 88
-      Width = 49
+      Width = 64
       Height = 25
+      Anchors = [akLeft, akTop, akRight]
       Caption = '<<'
       TabOrder = 1
       OnClick = Button2Click

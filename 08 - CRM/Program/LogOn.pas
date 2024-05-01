@@ -5,30 +5,21 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, Buttons, DB, ADODB, Grids, DBGrids, ActnList,
-  jpeg, {WinSkinData,} ComCtrls, xpBitBtn;
+  jpeg, {WinSkinData,} ComCtrls, xpBitBtn, dxGDIPlusClasses;
 
 type
   TLoginForm = class(TForm)
     Panel1: TPanel;
     Label2: TLabel;
-    Panel2: TPanel;
     Label4: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Password: TEdit;
-    BBOK: TxpBitBtn;
-    BitBtn2: TxpBitBtn;
-    UserName: TEdit;
     ActionList1: TActionList;
     Aclose: TAction;
     Alogin: TAction;
     PrivateLogin: TAction;
     Image1: TImage;
     StatusBar1: TStatusBar;
-    Label3: TLabel;
     Label5: TLabel;
     Label8: TLabel;
-    Label1: TLabel;
     QGetSMSSettings: TADOQuery;
     QGetSMSSettingsID: TAutoIncField;
     QGetSMSSettingsTerminalID: TStringField;
@@ -37,6 +28,23 @@ type
     QGetSMSSettingsRegDate: TStringField;
     QGetSMSSettingsSendSMS: TBooleanField;
     lblCompanyName: TLabel;
+    Label9: TLabel;
+    Panel3: TPanel;
+    UserName: TEdit;
+    Label6: TLabel;
+    Label7: TLabel;
+    Password: TEdit;
+    BBOK: TxpBitBtn;
+    BitBtn2: TxpBitBtn;
+    Label1: TLabel;
+    Label3: TLabel;
+    Bevel1: TBevel;
+    Bevel2: TBevel;
+    QGetSMSSettingsSendSMSType2: TBooleanField;
+    QGetSMSSettingsSmsUser: TStringField;
+    QGetSMSSettingsSmsPassWord: TStringField;
+    QGetSMSSettingsSmsTimer: TStringField;
+    QGetSMSSettingsSMSCenterNumber: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure BBOKClick(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
@@ -68,11 +76,12 @@ var correct:boolean;
 procedure TLoginForm.FormCreate(Sender: TObject);
 begin
   correct:=false;
-  Label3.Caption:=Dm.GetSystemValue(2);
+  //.Caption:=Dm.GetSystemValue(2);
   dm.Accesses.Open;
   dm.User.Open;
-  StatusBar1.Panels[3].Text := 'ÊÇÑíÎ  ÂÎÑíä æíÑÇíÔ : '+_LastUpdate;
-  StatusBar1.Panels[2].Text := 'ÊÇÑíÎ ÌÇÑí ÓíÓÊã : '+ShamsiString(Now);
+  //StatusBar1.Panels[3].Text := 'ÊÇÑíÎ  ÂÎÑíä æíÑÇíÔ : '+_LastUpdate;
+  StatusBar1.Panels[2].Text := 'ÊÇÑíÎ  ÂÎÑíä æíÑÇíÔ : '+_LastUpdate;
+  //StatusBar1.Panels[2].Text := 'ÊÇÑíÎ ÌÇÑí ÓíÓÊã : '+ShamsiString(Now);
 end;
 
 procedure TLoginForm.BBOKClick(Sender: TObject);
@@ -117,9 +126,15 @@ begin
 
     if not QGetSMSSettings.IsEmpty then
     begin
-      _TerminalID:=QGetSMSSettingsTerminalID.AsString;
-      _SmsPassWord:=QGetSMSSettingsPassword.AsString;
-      _SendSMS:=QGetSMSSettingsSendSMS.AsBoolean;;
+      _TerminalID       := QGetSMSSettingsTerminalID.AsString;
+      _SmsPassWord      := QGetSMSSettingsPassword.AsString;
+      _SendSMS          := QGetSMSSettingsSendSMS.AsBoolean;
+
+      _SmsPassWordType2 := QGetSMSSettingsSmsPassWord.AsString;
+      _SmsUser          := QGetSMSSettingsSmsUser.AsString;
+      _SendSMSType2     := QGetSMSSettingsSendSMSType2.AsBoolean;
+      _SmsTimer         := QGetSMSSettingsSmsTimer.AsString;
+      _SMSCenterNumber  := QGetSMSSettingsSMSCenterNumber.AsString;
     end;
      with dm do
       begin
@@ -149,6 +164,24 @@ begin
         _UserName:=UserTitle.AsString;
         _ProductID:=UserDefaultProductID.AsInteger;
         _accessID:=UserAccessID.AsInteger;
+        _UserPinFollowUp := UserPinFollowUp.AsBoolean ;
+        _ThemTypeColor   := UserThemTypeColor.AsInteger ;
+        _UserAccAcess    := UserAccAcess.AsBoolean ;
+
+        if  _ThemTypeColor >0 then
+        begin
+          _Color1 := StringToColor( UserColor1.AsString );
+          _Color2 := StringToColor( UserColor2.AsString );
+          _Color3 := StringToColor( UserColor3.AsString );
+          _Color4 := StringToColor( UserColor4.AsString );
+        end
+        else  if _ThemTypeColor = 0 then
+        begin
+          _Color1:=  $00DAF3EC ;
+          _Color2:=  $00FDD0E7 ;
+          _Color3:=  $00E4AFCA ;
+          _Color4:=  $00F9ECF2 ;
+        end;
       end;
      close;
 end;
@@ -184,6 +217,7 @@ begin
  StatusBar1.Panels[0].Text := _SoftVersion+COPY(_SoftVersionDB,1,1)+'.'+ COPY(_SoftVersionDB,2,1);
  try
    lblCompanyName.Caption := GetSystemSetting('CompanyName');
+   Label3    .Caption := GetSystemSetting('CompanyName');
  except
    lblCompanyName.Caption :='';
  end;

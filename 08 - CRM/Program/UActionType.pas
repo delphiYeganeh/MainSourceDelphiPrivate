@@ -26,6 +26,8 @@ type
     procedure BitBtn3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
 
 
   private
@@ -81,6 +83,18 @@ procedure TfrActionType.BitBtn1Click(Sender: TObject);
 begin
    if ShowMyMessage('ÅÌ€«„','¬Ì« „«Ì· »Â Õ–› —ﬂÊ—œ Ã«—Ì Â” Ìœø',mbOKCancel,mtWarning) = mrOK then
       ADQActionType.Delete;
+end;
+
+procedure TfrActionType.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 316)  or (NewHeight < 357) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
 end;
 
 end.

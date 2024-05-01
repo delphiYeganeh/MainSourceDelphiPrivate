@@ -11,31 +11,6 @@ uses
 
 type
   TUserDefineF = class(TMBaseForm)
-    Panel1: TPanel;
-    dbgUserList: TYDBGrid;
-    xpPanel1: TxpPanel;
-    btnCancel: TBitBtn;
-    btnDel: TBitBtn;
-    btnSave: TBitBtn;
-    Panel2: TPanel;
-    Label4: TLabel;
-    Label10: TLabel;
-    Pass: TDBEdit;
-    ConfirmPass: TEdit;
-    Label2: TLabel;
-    DBLookupComboBox2: TDBLookupComboBox;
-    DBEdit4: TDBEdit;
-    Label5: TLabel;
-    dblUserType: TDBLookupComboBox;
-    Label1: TLabel;
-    Label3: TLabel;
-    Label6: TLabel;
-    edtUserName: TEdit;
-    edtFullName: TEdit;
-    btnAdd: TBitBtn;
-    dbckIsActive: TDBCheckBox;
-    dblUserTypesrch: TDBLookupComboBox;
-    SpeedButton9: TSpeedButton;
     User: TADOTable;
     UserId: TIntegerField;
     UserTitle: TWideStringField;
@@ -53,28 +28,54 @@ type
     UserShowContract: TBooleanField;
     UserEditContract: TBooleanField;
     UserShowAllCustomer: TBooleanField;
+    UserExportCustomerList: TBooleanField;
+    UserExportFollow: TBooleanField;
+    UserShowMyAction: TBooleanField;
+    UserBtnAllContract: TBooleanField;
+    UserBtnAllAct: TBooleanField;
+    UserISWinServer: TBooleanField;
+    pnlMain: TPanel;
+    xpPanel1: TxpPanel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label6: TLabel;
+    SpeedButton1: TSpeedButton;
+    edtUserName: TEdit;
+    dblUserTypesrch: TDBLookupComboBox;
+    edtFullName: TEdit;
+    Panel2: TPanel;
+    Label4: TLabel;
+    Label10: TLabel;
+    Label2: TLabel;
+    Label5: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Pass: TDBEdit;
+    ConfirmPass: TEdit;
+    DBLookupComboBox2: TDBLookupComboBox;
+    DBEdit3: TDBEdit;
+    dblUserType: TDBLookupComboBox;
+    dbckIsActive: TDBCheckBox;
     dbchPrintCustomerList: TDBCheckBox;
     DBCheckBox2: TDBCheckBox;
     DBCheckBox3: TDBCheckBox;
     DBCheckBox4: TDBCheckBox;
-    UserExportCustomerList: TBooleanField;
     DBCheckBox1: TDBCheckBox;
-    UserExportFollow: TBooleanField;
     DBCheckBox5: TDBCheckBox;
-    UserShowMyAction: TBooleanField;
     DBCheckBox6: TDBCheckBox;
     DBCheckBox7: TDBCheckBox;
-    UserBtnAllContract: TBooleanField;
-    UserBtnAllAct: TBooleanField;
-    Label7: TLabel;
     DBEdit1: TDBEdit;
-    Label8: TLabel;
     DBEdit2: TDBEdit;
     DBLookupComboBox1: TDBLookupComboBox;
-    Label9: TLabel;
-    UserISWinServer: TBooleanField;
     DBCheckBox8: TDBCheckBox;
     DBCheckBox9: TDBCheckBox;
+    Panel1: TPanel;
+    btnCancel: TBitBtn;
+    btnDel: TBitBtn;
+    btnSave: TBitBtn;
+    btnAdd: TBitBtn;
+    dbgUserList: TYDBGrid;
     procedure Action11Execute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -89,10 +90,13 @@ type
     procedure BitBtn6Click(Sender: TObject);
     procedure setDblDate();
     procedure edtFullNameChange(Sender: TObject);
-    procedure SpeedButton9Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
     procedure DSFormDataChange(Sender: TObject; Field: TField);
     procedure dblUserTypeKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
 
     { Private declarations }
@@ -290,7 +294,7 @@ begin
       Filtered:=True;
 end;
     end;
-procedure TUserDefineF.SpeedButton9Click(Sender: TObject);
+procedure TUserDefineF.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
  dblUserTypesrch.KeyValue :=null;
@@ -315,6 +319,32 @@ begin
           User.edit;
     UserUserTypeId.clear;
   end;
+
+end;
+
+procedure TUserDefineF.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 568)  or (NewHeight < 552) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
+end;
+
+procedure TUserDefineF.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
+  xpPanel1.StartColor := _Color1 ;
+  xpPanel1.EndColor   := _Color2 ;
+
+  xpPanel1.TitleStartColor :=  _Color3;
+  xpPanel1.TitleEndColor   :=  _Color4;
 
 end;
 

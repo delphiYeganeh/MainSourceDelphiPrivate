@@ -22,7 +22,7 @@ type
     QrSerialSerTime: TWideStringField;
     QrSerialSerial2: TWideStringField;
     DSSerial: TDataSource;
-    Panel1: TPanel;
+    pnlMain: TPanel;
     GroupBox1: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -67,6 +67,9 @@ type
     procedure DBLkCBSoftDataClick(Sender: TObject);
     procedure BtnCancelClick(Sender: TObject);
     procedure ChBoNetClick(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     gCustomerID:integer;
     gCompanyName:string;
@@ -320,6 +323,21 @@ procedure TFM_NewDongleWrite.ChBoNetClick(Sender: TObject);
 begin
    lblNetworkUsers.Visible := ChBoNet.Checked;
    edtNetworkUsersCount.Visible := ChBoNet.Checked;
+end;
+
+procedure TFM_NewDongleWrite.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+    { TODO -oparsa : 14030203 }
+    Resize := False
+   { TODO -oparsa : 14030203 }
+
+
+end;
+
+procedure TFM_NewDongleWrite.FormShow(Sender: TObject);
+begin
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

@@ -11,31 +11,7 @@ uses
 
 type
   TFrFollowUp = class(TMBaseForm)
-    OpenDialog: TOpenDialog;          
-    GroupBox1: TGroupBox;
-    GroupBox2: TGroupBox;
-    dbgFollow: TYDBGrid;
-    grpData: TPanel;
-    Panel1: TGroupBox;
-    GroupBox4: TGroupBox;
-    Label3: TLabel;
-    Label2: TLabel;
-    DBLkCBDoneStatusTitle: TDBLookupComboBox;
-    btnAttachPic: TSpeedButton;
-    btnWordView: TSpeedButton;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label9: TLabel;
-    Label10: TLabel;
-    Label12: TLabel;
-    Label1: TLabel;
-    DBLkCBActionTypeTitle: TDBLookupComboBox;
-    DBLookupComboBox3: TDBLookupComboBox;
-    DBMemoComment: TDBMemo;
-    Label4: TLabel;
-    DBMemoDoneComment: TDBMemo;
-    DBCoBoSuccessChance: TDBComboBox;
-    Label5: TLabel;
+    OpenDialog: TOpenDialog;
     Select_customer_By_CustomerID: TADOStoredProc;
     Select_customer_By_CustomerIDCustomerID: TAutoIncField;
     Select_customer_By_CustomerIDCustomerNo: TStringField;
@@ -50,21 +26,8 @@ type
     Select_customer_By_CustomerIDWorkPhone1: TWideStringField;
     Select_customer_By_CustomerIDFaxNumber: TWideStringField;
     Select_customer_By_CustomerIDMobilePhone: TWideStringField;
-    Label8: TLabel;
-    DBEdit2: TDBEdit;
     DSelect_customer_By_CustomerID: TDataSource;
-    Label14: TLabel;
-    DBEdit4: TDBEdit;
-    Label15: TLabel;
-    DBEdit5: TDBEdit;
-    Label16: TLabel;
-    DBEdit6: TDBEdit;
-    Label17: TLabel;
-    DBEdit8: TDBEdit;
     Select_customer_By_CustomerIDProducts: TWideStringField;
-    DBEdit18: TDBEdit;
-    Label28: TLabel;
-    SpeedButton5: TSpeedButton;
     Select_customer_By_CustomerIDCityId: TSmallintField;
     Select_customer_By_CustomerIDGroupId: TIntegerField;
     Select_customer_By_CustomerIDMarketerID: TIntegerField;
@@ -80,35 +43,6 @@ type
     Select_customer_By_CustomerIDCancelReasonID: TWordField;
     Select_customer_By_CustomerIDCancelComment: TWideStringField;
     Select_customer_By_CustomerIDCancelDate: TStringField;
-    Label11: TLabel;
-    DBEdit11: TDBEdit;
-    Panel3: TPanel;
-    BitBtn4: TBitBtn;
-    BitBtn5: TBitBtn;
-    Label13: TLabel;
-    DBEdit3: TDBEdit;
-    BtnCancel: TBitBtn;
-    btnViwCustomer: TBitBtn;
-    btnAdd: TBitBtn;
-    DBEdit1: TDBEdit;
-    Label18: TLabel;
-    btnJpegView: TSpeedButton;
-    btnShowContractWord: TBitBtn;
-    BitBtn3: TBitBtn;
-    BitBtn1: TBitBtn;
-    btnDelEghdamat: TBitBtn;
-    xpPanel1: TxpPanel;
-    btnSrchFollow: TBitBtn;
-    Label19: TLabel;
-    Label20: TLabel;
-    BDate: TShamsiDateEdit;
-    Edate: TShamsiDateEdit;
-    Label21: TLabel;
-    dblMarketer: TDBLookupComboBox;
-    dblDoneStatusID: TDBLookupComboBox;
-    Label22: TLabel;
-    Label23: TLabel;
-    DBEdit7: TDBEdit;
     PPUDate: TPopupMenu;
     N1: TMenuItem;
     N2: TMenuItem;
@@ -119,50 +53,124 @@ type
     N7: TMenuItem;
     N8: TMenuItem;
     N9: TMenuItem;
-    btnWordClear: TSpeedButton;
-    btnJpegClear: TSpeedButton;
-    stb: TStatusBar;
-    DBEdit9: TDBEdit;
-    DBEdit10: TDBEdit;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
     MssCalendarPro1: TMssCalendarPro;
-    Button1: TButton;
-    lblDate1: TLabel;
-    Button2: TButton;
-    lblDate2: TLabel;
-    Button3: TButton;
-    Button4: TButton;
     MssMessage1: TMssMessage;
     acDelEghdamat: TAction;
-    btnAddSub: TBitBtn;
+    Select_customer_By_CustomerIDInnerPhone: TStringField;
+    pnlMain: TPanel;
+    GroupBox1: TGroupBox;
+    Label8: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label28: TLabel;
+    Label13: TLabel;
+    Label18: TLabel;
+    Label23: TLabel;
+    Label30: TLabel;
+    Label31: TLabel;
+    UnPin: TSpeedButton;
+    Pin: TSpeedButton;
+    DBEdit2: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBEdit6: TDBEdit;
+    DBEdit8: TDBEdit;
+    DBEdit14: TDBEdit;
+    DBEdit3: TDBEdit;
+    btnViwCustomer: TBitBtn;
+    DBEdit1: TDBEdit;
+    DBEdit7: TDBEdit;
+    chkShowAllFollowUps: TCheckBox;
+    DBEdit12: TDBEdit;
+    DBEdit13: TDBEdit;
+    GroupBox2: TGroupBox;
+    dbgFollow: TYDBGrid;
+    xpPanel1: TxpPanel;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    btnSrchFollow: TBitBtn;
+    BDate: TShamsiDateEdit;
+    Edate: TShamsiDateEdit;
+    dblMarketer: TDBLookupComboBox;
+    dblDoneStatusID: TDBLookupComboBox;
     GroupBox3: TGroupBox;
     treFollowUps: TDBTreeView;
-    Label24: TLabel;
-    DBText1: TDBText;
+    grpData: TPanel;
+    Panel1: TGroupBox;
+    btnAttachPic: TSpeedButton;
+    btnWordView: TSpeedButton;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label12: TLabel;
+    Label1: TLabel;
+    SpeedButton5: TSpeedButton;
+    Label11: TLabel;
+    btnJpegView: TSpeedButton;
+    btnWordClear: TSpeedButton;
+    btnJpegClear: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    lblDate1: TLabel;
     Label25: TLabel;
     DBText2: TDBText;
-    Splitter1: TSplitter;
-    chkShowAllFollowUps: TCheckBox;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
     SpeedButton6: TSpeedButton;
     Label26: TLabel;
-    SpeedButton7: TSpeedButton;
-    SpeedButton8: TSpeedButton;
-    SpeedButton9: TSpeedButton;
-    Label27: TLabel;
     SpeedButton10: TSpeedButton;
     SpeedButton12: TSpeedButton;
     Label29: TLabel;
     SpeedButton11: TSpeedButton;
+    DBLkCBActionTypeTitle: TDBLookupComboBox;
+    DBLookupComboBox1: TDBLookupComboBox;
+    DBMemoComment: TDBMemo;
+    DBEdit11: TDBEdit;
+    DBEdit9: TDBEdit;
+    Button1: TButton;
+    Button2: TButton;
+    GroupBox4: TGroupBox;
+    Label3: TLabel;
+    Label2: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    SpeedButton2: TSpeedButton;
+    lblDate2: TLabel;
+    Label24: TLabel;
+    DBText1: TDBText;
+    DBLkCBDoneStatusTitle: TDBLookupComboBox;
+    DBMemoDoneComment: TDBMemo;
+    DBCoBoSuccessChance: TDBComboBox;
+    btnAdd: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn1: TBitBtn;
+    btnDelEghdamat: TBitBtn;
+    DBEdit10: TDBEdit;
+    Button3: TButton;
+    Button4: TButton;
+    btnAddSub: TBitBtn;
+    Panel2: TPanel;
+    BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
+    BtnCancel: TBitBtn;
+    btnShowContractWord: TBitBtn;
+    Label27: TLabel;
+    SpeedButton7: TSpeedButton;
+    SpeedButton8: TSpeedButton;
+    SpeedButton9: TSpeedButton;
+    Splitter1: TSplitter;
+    stb: TStatusBar;
     procedure btnWordViewClick(Sender: TObject);
     procedure btnAttachPicClick(Sender: TObject);
     procedure refreshData;
-    procedure BitBtn3Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
-    procedure BitBtn5Click(Sender: TObject);
     procedure BtnCancelClick(Sender: TObject);
     procedure btnDelClick(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
@@ -203,8 +211,12 @@ type
     procedure SpeedButton12Click(Sender: TObject);
     procedure SpeedButton10Click(Sender: TObject);
     procedure SpeedButton11Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure PinClick(Sender: TObject);
   private
    Function  LoadImageField(Field:TField;Path:String):Boolean;
+   procedure SetColorForm ;
     { Private declarations }
   public
     { Public declarations }
@@ -289,7 +301,7 @@ if dblDoneStatusID.KeyValue <> null then
    end;
 end;
 
-procedure TFrFollowUp.BitBtn3Click(Sender: TObject);
+procedure TFrFollowUp.BitBtn2Click(Sender: TObject);
 begin
   inherited;
 
@@ -314,7 +326,7 @@ begin
    }
 end;
 
-procedure TFrFollowUp.BitBtn4Click(Sender: TObject);
+procedure TFrFollowUp.BitBtn3Click(Sender: TObject);
 begin
   inherited;
  FrContract:=TFrContract.Create(Application,Select_customer_By_CustomerIDCustomerID.AsInteger);
@@ -322,7 +334,7 @@ begin
 
 end;
 
-procedure TFrFollowUp.BitBtn5Click(Sender: TObject);
+procedure TFrFollowUp.BitBtn4Click(Sender: TObject);
 begin
   inherited;
 FrCancelCustomer:=TFrCancelCustomer.Create(Application);
@@ -585,8 +597,11 @@ begin
 end;
 
 procedure TFrFollowUp.FormShow(Sender: TObject);
+var
+  PinValue : string;
 begin
   inherited;
+  SetColorForm ;
   if UpperCase(_AreYouYeganeh) =UpperCase('True') then
   begin
    treFollowUps.DataSource:= nil;
@@ -608,6 +623,13 @@ begin
     Dm.Marketer.Open;
 
   dbgFollow.DataSource.DataSet.Locate('FollowUPID',FUID,[]);
+
+  { TODO -oparsa : 14030205 }
+  PinValue := Qry_GetResult(' select 1 FROM dbo.usersPinFollowUP WHERE CustomerID = '+ DBEdit4.text +'  AND  UserID = '+ IntToStr(_UserId ) ,dm.YeganehConnection);
+
+  Pin.Visible    := PinValue = '1' ;
+  UnPin.Visible  := not Pin.Visible  ;
+  { TODO -oparsa : 14030205 }
 
 end;
 
@@ -938,6 +960,84 @@ begin
    begin
    ShellExecute(Handle, nil, PChar(Path), nil,  nil, SW_SHOWNORMAL);
    end;
+end;
+
+procedure TFrFollowUp.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 1106)  or (NewHeight < 714) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
+end;
+
+procedure TFrFollowUp.PinClick(Sender: TObject);
+var
+  qry: TADOQuery;
+  pinfollow : String ;
+begin
+  inherited;
+  Pin.Visible    := not Pin.Visible ;
+  UnPin.Visible  := not UnPin.Visible  ;
+
+  qry := TADOQuery.Create(self);
+  qry.Connection := dm.YeganehConnection;
+
+  if UnPin.Visible then
+  begin
+
+    qry.SQL.Text   := ' IF EXISTS ( SELECT 1 FROM dbo.usersPinFollowUP WHERE CustomerID = '+ DBEdit4.text +' AND  UserID = '+IntToStr(_UserId )+') ' +
+                      '   DELETE FROM dbo.usersPinFollowUP WHERE CustomerID = '+ DBEdit4.text +'  AND  UserID = '+ IntToStr(_UserId );
+
+  end
+  else
+  begin
+    pinfollow :=   Qry_GetResult(' select count(customerid) FROM dbo.usersPinFollowUP WHERE  UserID = '+ IntToStr(_UserId )  ,dm.YeganehConnection) ;
+    if pinfollow <> '5' then
+    begin
+      qry.SQL.Text   := '   INSERT INTO dbo.usersPinFollowUP (CustomerID,UserID) values('+ DBEdit4.text +' , '+ IntToStr(_UserId )+')';
+
+    end
+    else
+    begin
+      ShowMessage(' «„ò«‰ «‰ Œ«» »Ì‘— «“ 5 —òÊ—œ ÅÌ‰ ‘œÂ ÊÃÊœ ‰œ«—œ');
+      Pin.Visible    := not Pin.Visible ;
+      UnPin.Visible  := not UnPin.Visible  ;
+    end
+  end ;
+
+  if qry.SQL.Text <> '' then
+    qry.ExecSQL;
+
+
+  qry.Free;
+  
+  if _UserPinFollowUp then
+  begin
+    with Dm.Select_FollowUP_Pin do
+     begin
+       Close;
+       Parameters.ParamByName('@UserID').Value:= _UserID;
+       Open;
+     end;
+   end;
+
+end;
+
+procedure TFrFollowUp.SetColorForm;
+begin
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
+  xpPanel1.StartColor := _Color1 ;
+  xpPanel1.EndColor   := _Color2 ;
+
+  xpPanel1.TitleStartColor :=  _Color4;
+  xpPanel1.TitleEndColor   :=  _Color3;
+
 end;
 
 end.

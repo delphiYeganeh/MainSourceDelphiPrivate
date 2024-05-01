@@ -55,26 +55,30 @@ uses
   AddUserTableContentFm in 'AddUserTableContentFm.pas' {MBaseForm2},
   AccessInput in 'AccessInput.pas' {AccessForm},
   GroupExportToWord in 'GroupExportToWord.pas' {FrMakeGroupExport},
-  StoreFM in '..\..\yeganeh shared\Calc\StoreFM.pas' {FMStore},
-  FirstArtGroupDM in '..\yeganeh shared\Calc\FirstArtGroupDM.pas' {DMFirstArtGroup: TDataModule},
-  SecendArtGroupFM in '..\yeganeh shared\Calc\SecendArtGroupFM.pas' {FMSecendArtGroup},
-  SecendArtGroupDM in '..\yeganeh shared\Calc\SecendArtGroupDM.pas' {DMSecendArtGroup: TDataModule},
-  UnitFM in '..\yeganeh shared\Calc\UnitFM.pas' {FMUnit},
-  UnitDM in '..\yeganeh shared\Calc\UnitDM.pas' {DMUnit: TDataModule},
-  ArtServiceDM in '..\yeganeh shared\Calc\ArtServiceDM.pas' {DMArtService: TDataModule},
-  ArtServiceFM in '..\yeganeh shared\Calc\ArtServiceFM.pas' {FMArtService},
-  ArticleFM in '..\yeganeh shared\Calc\ArticleFM.pas' {FMArticle},
-  ArticleDM in '..\yeganeh shared\Calc\ArticleDM.pas' {DMArticle: TDataModule},
-  ChequeDM in '..\yeganeh shared\Calc\ChequeDM.pas' {DMCheque: TDataModule},
-  ChequeFM in '..\yeganeh shared\Calc\ChequeFM.pas' {FMCheque},
-  EnterDataFM in '..\yeganeh shared\EnterDataFM.pas' {FMEnterData},
-  EnterDataDM in '..\yeganeh shared\EnterDataDM.pas' {DMEnterData: TDataModule},
-  FactorDM in '..\yeganeh shared\Calc\FactorDM.pas' {DMFactor: TDataModule},
-  FactorFM in '..\yeganeh shared\Calc\FactorFM.pas' {FMFactor},
-  FactorMonyFM in '..\yeganeh shared\Calc\FactorMonyFM.pas' {FMFactorMony},
+
+  StoreFM          in 'ACC\StoreFM.pas' {FMStore},
+  FirstArtGroupDM  in 'ACC\FirstArtGroupDM.pas' {DMFirstArtGroup: TDataModule},
+  SecendArtGroupFM in 'ACC\SecendArtGroupFM.pas' {FMSecendArtGroup},
+  SecendArtGroupDM in 'ACC\SecendArtGroupDM.pas' {DMSecendArtGroup: TDataModule},
+
+  UnitFM in 'ACC\UnitFM.pas' {FMUnit},
+  UnitDM in 'ACC\UnitDM.pas' {DMUnit: TDataModule},
+  ArtServiceDM in 'ACC\ArtServiceDM.pas' {DMArtService: TDataModule},
+  ArtServiceFM in 'ACC\ArtServiceFM.pas' {FMArtService},
+  ArticleFM in 'ACC\ArticleFM.pas' {FMArticle},
+  ArticleDM in 'ACC\ArticleDM.pas' {DMArticle: TDataModule},
+  ChequeDM in 'ACC\ChequeDM.pas' {DMCheque: TDataModule},
+  ChequeFM in 'ACC\ChequeFM.pas' {FMCheque},
+  EnterDataFM in 'ACC\EnterDataFM.pas' {FMEnterData},
+  EnterDataDM in 'ACC\EnterDataDM.pas' {DMEnterData: TDataModule},
+  FactorDM in 'ACC\FactorDM.pas' {DMFactor: TDataModule},
+  FactorFM in 'ACC\FactorFM.pas' {FMFactor},
+  FactorMonyFM in 'ACC\FactorMonyFM.pas' {FMFactorMony},
   UserTableInputFm in 'UserTableInputFm.pas' {FmUserTableInput},
   HostFM in '..\Yeganeh Shared\HostFM.pas' {FMHost},
   HostDM in '..\Yeganeh Shared\HostDM.pas' {DMHost: TDataModule},
+
+
   SetLockFm in 'SetLockFm.pas' {FmSetLock},
   FmNewDongleWrite in 'FmNewDongleWrite.pas' {FM_NewDongleWrite},
   CrackU in 'CrackU.pas' {Fcrack},
@@ -119,10 +123,16 @@ uses
   YDbgrid in '..\YDbgrid.pas',
   untCustStatusReport in 'Reports\untCustStatusReport.pas' {frmCustStatusReport},
   ActionsPro in 'ActionsPro.pas' {frmActionPro},
-  UPleaseWait in '..\..\08 - CRM\Program\UPleaseWait.pas' {FPleaseWait};
+  UPleaseWait in 'UPleaseWait.pas' {FPleaseWait},
+  USingleMessage in 'USingleMessage.pas' {FSingleMessage},
+  UThemColor in 'UThemColor.pas' {FThemColor},
+  //StoreDM in 'ACC\StoreDM.pas' {DMStore: TDataModule},
+  //FirstArtGroupFM in 'ACC\FirstArtGroupFM.pas',
+  //StoreFM in 'ACC\StoreFM.pas',
+  USaleReport in 'Reports\USaleReport.pas' {FSaleReport};
 
-//  StoreDM in '..\Yeganeh Shared\Calc\StoreDM.pas' {DMStore: TDataModule},
-//  FirstArtGroupFM in '..\Yeganeh Shared\Calc\FirstArtGroupFM.pas';
+
+
 
 {$R *.res}
 
@@ -130,6 +140,7 @@ uses
 
 begin
   Application.Initialize;
+  Application.Title := 'CRM';
   Application.CreateForm(TDm, Dm);
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TfrAttachments, frAttachments);

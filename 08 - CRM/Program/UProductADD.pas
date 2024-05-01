@@ -54,6 +54,8 @@ type
     function where:wideString;
     procedure BitBtn2Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
   public
@@ -137,6 +139,18 @@ begin
      Parameters.ParamByName('@Productid').Value:=dm.ProductProductID.AsInteger;
      ExecProc;
     end;
+
+end;
+
+procedure TProductADD.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 632)  or (NewHeight < 581) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
 
 end;
 

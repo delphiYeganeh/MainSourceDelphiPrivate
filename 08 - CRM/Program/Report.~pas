@@ -9,50 +9,7 @@ uses
 
 type
   TFrep = class(TMBaseForm)
-    YDBGrid2: TYDBGrid;
-    Panel1: TPanel;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label9: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
-    Label7: TLabel;
-    Label3: TLabel;
-    Label5: TLabel;
-    Label8: TLabel;
-    YwhereEdit0: TYWhereEdit;
-    YWhereEdit1: TYWhereEdit;
-    YWhereEdit2: TYWhereEdit;
-    YWhereEdit3: TYWhereEdit;
-    YWhereEdit4: TYWhereEdit;
-    YWhereEdit5: TYWhereEdit;
-    YWhereEdit6: TYWhereEdit;
-    YWhereEdit8: TYWhereEdit;
-    YWhereEdit9: TYWhereEdit;
-    Label4: TLabel;
-    YWhereEdit10: TYWhereEdit;
-    Label12: TLabel;
-    YWhereEdit11: TYWhereEdit;
-    Panel2: TPanel;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
-    BitBtn3: TBitBtn;
-    BitBtn8: TBitBtn;
-    BitBtn6: TBitBtn;
-    BitBtn7: TBitBtn;
-    Label13: TLabel;
-    YWhereEdit12: TYWhereEdit;
-    Label14: TLabel;
-    YWhereEdit13: TYWhereEdit;
     Report_Customer: TADOStoredProc;
-    SpeedButton5: TSpeedButton;
-    ahmadvand: TLabel;
-    SBMarketerID: TSpeedButton;
-    SBCityID: TSpeedButton;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    YWhereEdit7: TYWhereEdit;
-    Label6: TLabel;
     Report_Customernickname: TWideStringField;
     Report_CustomerCustomerID: TAutoIncField;
     Report_CustomerCustomerNo: TStringField;
@@ -88,18 +45,65 @@ type
     Report_CustomerMarketerNo: TStringField;
     Report_CustomerMarketerTitle: TWideStringField;
     Report_CustomerCityTitle: TWideStringField;
+    pnlMain: TPanel;
+    YDBGrid1: TYDBGrid;
+    Panel2: TPanel;
+    SpeedButton3: TSpeedButton;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
+    BitBtn5: TBitBtn;
+    BitBtn6: TBitBtn;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label7: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label8: TLabel;
+    Label4: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    ahmadvand: TLabel;
+    SBMarketerID: TSpeedButton;
+    SBCityID: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    Label6: TLabel;
+    YwhereEdit0: TYWhereEdit;
+    YWhereEdit1: TYWhereEdit;
+    YWhereEdit2: TYWhereEdit;
+    YWhereEdit3: TYWhereEdit;
+    YWhereEdit4: TYWhereEdit;
+    YWhereEdit5: TYWhereEdit;
+    YWhereEdit6: TYWhereEdit;
+    YWhereEdit8: TYWhereEdit;
+    YWhereEdit9: TYWhereEdit;
+    YWhereEdit10: TYWhereEdit;
+    YWhereEdit11: TYWhereEdit;
+    YWhereEdit12: TYWhereEdit;
+    YWhereEdit13: TYWhereEdit;
+    YWhereEdit7: TYWhereEdit;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
-    procedure BitBtn8Click(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure BitBtn7Click(Sender: TObject);
     procedure BitBtn6Click(Sender: TObject);
-    procedure SpeedButton5Click(Sender: TObject);
+    procedure BitBtn5Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
     procedure SBMarketerIDClick(Sender: TObject);
     procedure SBCityIDClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -141,17 +145,17 @@ end;
 
 procedure TFrep.BitBtn2Click(Sender: TObject);
 begin
- YDBGrid2.Print;
+ YDBGrid1.Print;
 end;
 
 procedure TFrep.BitBtn3Click(Sender: TObject);
 begin
- YDBGrid2.ExportToWord; 
+ YDBGrid1.ExportToWord;
 end;
 
-procedure TFrep.BitBtn8Click(Sender: TObject);
+procedure TFrep.BitBtn4Click(Sender: TObject);
 begin
-   YDBGrid2.CreateWord;
+   YDBGrid1.CreateWord;
 end;
 
 procedure TFrep.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -159,7 +163,7 @@ begin
  Action:=caFree;
 end;
 
-procedure TFrep.BitBtn7Click(Sender: TObject);
+procedure TFrep.BitBtn6Click(Sender: TObject);
 begin
    inherited;
    FrMakeGroupExport:=TFrMakeGroupExport.Create(Application);
@@ -167,14 +171,14 @@ begin
    FrMakeGroupExport.ShowModal;
 end;
 
-procedure TFrep.BitBtn6Click(Sender: TObject);
+procedure TFrep.BitBtn5Click(Sender: TObject);
 begin
   inherited;
  YDBGrid2.CustomizePrint;
 
 end;
 
-procedure TFrep.SpeedButton5Click(Sender: TObject);
+procedure TFrep.SpeedButton3Click(Sender: TObject);
 begin
    inherited;
    close;
@@ -219,6 +223,26 @@ begin
    shift:=  [ssCtrl,ssRight..ssDouble];
    CtrlSpace(YWhereEdit10,Key,Shift);
 //   Keyboard_Simulation(YWhereEdit10,VK_SPACE,True,False,False);
+end;
+
+procedure TFrep.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 755)  or (NewHeight < 611) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
+end;
+
+procedure TFrep.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
 end;
 
 end.

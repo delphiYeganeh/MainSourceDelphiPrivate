@@ -22,7 +22,7 @@ type
     QrSerialSerTime: TWideStringField;
     QrSerialSerial2: TWideStringField;
     DSSerial: TDataSource;
-    Panel1: TPanel;
+    pnlMain: TPanel;
     GroupBox1: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -56,6 +56,8 @@ type
       DisplayText: Boolean);
     procedure DBLkCBSoftDataClick(Sender: TObject);
     procedure ChBoNetClick(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     procedure ShowLockData;
   public
@@ -76,6 +78,8 @@ uses  Math, dmu, YShamsiDate;
 
 procedure TFmSetLock.FormShow(Sender: TObject);
 begin
+
+  pnlMain.Color := _Color1 ;
       DBLkCBSoftData.KeyValue := 10;
       QrSerial.Open;
       QrSerial.First;
@@ -357,6 +361,14 @@ procedure TFmSetLock.ChBoNetClick(Sender: TObject);
 begin
    lblNetworkUsers.Visible := ChBoNet.Checked;
    edtNetworkUsersCount.Visible := ChBoNet.Checked;
+end;
+
+procedure TFmSetLock.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+     { TODO -oparsa : 14030203 }
+      Resize := False  ;
+      { TODO -oparsa : 14030203 }
 end;
 
 end.

@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons,
   ComCtrls, Menus, wwriched, DB, DBTables, BaseUnit, ExtActns, ActnList,
-  YDbgrid;
+  YDbgrid, dblookup, ADODB;
 
 type
   TFMHost = class(TMBaseForm)
@@ -48,6 +48,8 @@ type
     Label11: TLabel;
     DBEdit2: TDBEdit;
     Label12: TLabel;
+    ADOTable1: TADOTable;
+    DataSource1: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -65,6 +67,7 @@ type
       Button: TNavigateBtn);
     procedure DBGridHostDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure FormResize(Sender: TObject);
   private
     { Private declarations }
   public
@@ -221,6 +224,17 @@ procedure TFMHost.DBGridHostDrawColumnCell(Sender: TObject;
 begin
    inherited;
    DBGrid_SetFocusAfterExit(DBGridHost,Rect,DataCol,Column,State,clHighlightText);//Uses Types,Graphics
+end;
+
+procedure TFMHost.FormResize(Sender: TObject);
+begin
+  inherited;
+  { TODO -oparsa : 14030203 }
+  if Self.width <= 809 then
+   Self.Width := 809 ;
+  if Self.Height <= 585 then
+   Self.Height := 585 ;
+   { TODO -oparsa : 14030203 }
 end;
 
 end.

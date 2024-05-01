@@ -56,6 +56,8 @@ type
       DisplayText: Boolean);
     procedure DBLkCBSoftDataClick(Sender: TObject);
     procedure ChBoNetClick(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     procedure ShowLockData;
   public
@@ -357,6 +359,14 @@ procedure TFmSetLock.ChBoNetClick(Sender: TObject);
 begin
    lblNetworkUsers.Visible := ChBoNet.Checked;
    edtNetworkUsersCount.Visible := ChBoNet.Checked;
+end;
+
+procedure TFmSetLock.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+     { TODO -oparsa : 14030203 }
+      Resize := False  ;
+      { TODO -oparsa : 14030203 }
 end;
 
 end.

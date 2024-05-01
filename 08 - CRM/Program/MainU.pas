@@ -59,26 +59,10 @@ type
     AChangeProduct: TAction;
     AAddProduct: TAction;
     ASetPriority: TAction;
-    pgcMain: TPageControl;
-    xpTabSheet1: TxpTabSheet;
-    xpTabSheet2: TxpTabSheet;
-    Panel2: TPanel;
-    Panel1: TPanel;
     ACustomerFollowUp: TAction;
     AContract: TAction;
-    GridPanel: TPanel;
-    FollowGrid: TYDBGrid;
-    ContractTabSheet: TxpTabSheet;
-    Label2: TLabel;
-    Panel9: TPanel;
-    StatusBar1: TStatusBar;
-    GroupByDate: TPanel;
-    MonthList: TListBox;
     Amonth: TAction;
     N3: TMenuItem;
-    Panel10: TPanel;
-    Panel11: TPanel;
-    PhoneGrid: TYDBGrid;
     keyboardTimer: TTimer;
     Action4: TAction;
     N5: TMenuItem;
@@ -86,13 +70,6 @@ type
     N11: TMenuItem;
     NHost: TMenuItem;
     N25: TMenuItem;
-    Panel13: TPanel;
-    Label18: TLabel;
-    Label19: TLabel;
-    DBEdit6: TDBEdit;
-    DBEdit7: TDBEdit;
-    Label21: TLabel;
-    DBEdit9: TDBEdit;
     MakeLock: TAction;
     N30: TMenuItem;
     N32: TMenuItem;
@@ -109,9 +86,6 @@ type
     AAtachments: TAction;
     N38: TMenuItem;
     Yeganehmenu: TMenuItem;
-    BitBtn1: TBitBtn;
-    BitBtn3: TBitBtn;
-    BitBtn5: TBitBtn;
     NMali: TMenuItem;
     NStore: TMenuItem;
     NFirstArtGroup: TMenuItem;
@@ -135,8 +109,6 @@ type
     GroupsGroupTitle: TWideStringField;
     GroupsGroupNo: TStringField;
     Groupseffect: TWordField;
-    Splitter1: TSplitter;
-    SplitterCity: TSplitter;
     N46: TMenuItem;
     N47: TMenuItem;
     N48: TMenuItem;
@@ -149,123 +121,21 @@ type
     N13: TMenuItem;
     NSystemSettings: TMenuItem;
     N6: TMenuItem;
-    pnlSearchFollow: TxpPanel;
-    Label6: TLabel;
-    BDate: TShamsiDateEdit;
-    Label7: TLabel;
-    Edate: TShamsiDateEdit;
-    Label5: TLabel;
-    DonStatus: TComboBox;
-    Label8: TLabel;
-    Comment: TEdit;
-    Label10: TLabel;
-    Label11: TLabel;
-    Bsuccess: TEdit;
-    Esuccess: TEdit;
-    Label9: TLabel;
-    DonComment: TEdit;
-    ShowAction: TCheckBox;
-    ActionType: TDBLookupComboBox;
-    btnSrchFollow: TBitBtn;
-    Panel5: TPanel;
-    Button22: TBitBtn;
-    Button25: TBitBtn;
-    Button18: TBitBtn;
-    Button21: TBitBtn;
-    Button23: TBitBtn;
-    xpBitBtn1: TBitBtn;
     N51: TMenuItem;
-    Panel6: TPanel;
-    xpBitBtn7: TBitBtn;
-    xpBitBtn5: TBitBtn;
-    xpBitBtn3: TBitBtn;
-    BitBtn7: TBitBtn;
-    pnlSearchContract: TxpPanel;
-    btnSrchContactAdnavce: TBitBtn;
-    Label16: TLabel;
-    Label17: TLabel;
-    CbDate: TEdit;
-    CEDate: TEdit;
-    dblsrchProductID: TDBLookupComboBox;
-    Label20: TLabel;
-    dblSrchContractType: TDBLookupComboBox;
-    Label22: TLabel;
-    Label13: TLabel;
-    edtCustomer: TEdit;
-    Label14: TLabel;
-    DBEdit1: TDBEdit;
-    pnlSearchCustomer: TxpPanel;
-    Label1: TLabel;
-    SearchEdit: TEdit;
-    OnlyCurrentMarketer: TCheckBox;
-    Label28: TLabel;
-    Label29: TLabel;
-    edtContactNumber: TEdit;
-    edtEmail: TEdit;
     N52: TMenuItem;
-    btnContract: TBitBtn;
     State: TADOTable;
     StateStateID: TWordField;
     StateStateTitle: TWideStringField;
     DState: TDataSource;
-    SBRefresh: TSpeedButton;
-    btnHome: TSpeedButton;
-    GroupBox2: TGroupBox;
-    Label32: TLabel;
-    Label33: TLabel;
-    Label34: TLabel;
-    Label35: TLabel;
-    DBEdit2: TDBEdit;
-    DBEdit3: TDBEdit;
-    DBEdit4: TDBEdit;
-    DBEdit5: TDBEdit;
-    Label23: TLabel;
-    DBEdit8: TDBEdit;
-    Label24: TLabel;
-    DBEdit10: TDBEdit;
-    BitBtn2: TBitBtn;
-    Label12: TLabel;
-    dblCustomerStatus: TDBLookupComboBox;
     N53: TMenuItem;
     N54: TMenuItem;
     N55: TMenuItem;
-    TabSheet1: TTabSheet;
-    btnViwCustomer: TBitBtn;
     N56: TMenuItem;
     N26: TMenuItem;
-    Label25: TLabel;
-    DBEdit11: TDBEdit;
     N29: TMenuItem;
     N57: TMenuItem;
-    dblProduct: TDBLookupComboBox;
-    Label30: TLabel;
-    Label31: TLabel;
-    dblGroups: TDBLookupComboBox;
-    dblState: TDBLookupComboBox;
-    dblCity: TDBLookupComboBox;
-    Label26: TLabel;
-    Label27: TLabel;
-    Label15: TLabel;
-    DBEdit12: TDBEdit;
-    ContractGrid: TYDBGrid;
-    chkContractFinished: TCheckBox;
-    dbgMyTasks: TYDBGrid;
-    xpPanel1: TxpPanel;
-    Panel3: TPanel;
-    BitBtn6: TBitBtn;
-    Panel7: TPanel;
-    btnImageBR: TBitBtn;
-    grbReference: TGroupBox;
-    dblUserRefrence: TDBLookupComboBox;
-    btnRefer: TBitBtn;
-    GroupBox4: TGroupBox;
-    BitBtn4: TBitBtn;
-    DBShamsiDateEdit1: TDBShamsiDateEdit;
-    btnFinishCase: TBitBtn;
     N58: TMenuItem;
     N59: TMenuItem;
-    Label38: TLabel;
-    Label36: TLabel;
     qryMyTasks: TADOQuery;
     dsMyTasks: TDataSource;
     qryMyTasksTaskID: TAutoIncField;
@@ -280,50 +150,15 @@ type
     qryMyTasksCaseTypeTitle: TWideStringField;
     qryMyTasksCasePriorityTitle: TWideStringField;
     qryMyTasksTaskStatusTitle: TWideStringField;
-    pnlDescTask: TxpPanel;
-    DBMemo1: TDBMemo;
     qryMyTasksProductTitle: TWideStringField;
-    dblCaseStatus: TDBLookupComboBox;
     qryMyTasksCaseTypeId: TWordField;
     qryMyTasksProductId: TWordField;
     qryMyTasksregisterUserId: TIntegerField;
-    btnCasesAll: TBitBtn;
     qryMyTasksCompleted: TBooleanField;
-    grbReferenceComment: TGroupBox;
-    mmoDescription: TMemo;
-    Panel8: TPanel;
-    btnSaveReference: TBitBtn;
-    btnRefrenceCancel: TBitBtn;
-    grbCaseFinish: TGroupBox;
-    mmoCompleteComment: TMemo;
-    Panel4: TPanel;
-    btnSaveCaseFinish: TBitBtn;
-    btnCaseFinishCancel: TBitBtn;
     N61: TMenuItem;
     SpInsert_Task: TADOStoredProc;
-    btnCustomerReportX: TBitBtn;
-    PnlAllAct: TPanel;
-    ActDateEditTo: TShamsiDateEdit;
-    Label4: TLabel;
-    ActDateEditFrom: TShamsiDateEdit;
-    Label3: TLabel;
-    BtnAllAct: TBitBtn;
-    pnlAllContract: TPanel;
-    Label37: TLabel;
-    Label39: TLabel;
-    ContractDateEditTo: TShamsiDateEdit;
-    ContractDateEditFrom: TShamsiDateEdit;
-    BtnAllContract: TBitBtn;
     N60: TMenuItem;
     Timer1: TTimer;
-    BitBtn8: TBitBtn;
-    edtcity: TYWhereEdit;
-    edtState: TYWhereEdit;
-    Panel12: TPanel;
-    SpeedButton4: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton1: TSpeedButton;
     qryMyTasksCasesComment: TWideStringField;
     qryMyTasksCasePriorityID: TWordField;
     acShowUserSequence: TAction;
@@ -347,37 +182,220 @@ type
     N71: TMenuItem;
     acShowAutoSMSText: TAction;
     N72: TMenuItem;
-    chkCommentType: TCheckBox;
-    Label40: TLabel;
-    SpeedButton5: TSpeedButton;
-    SpeedButton6: TSpeedButton;
     MssCalendarPro1: TMssCalendarPro;
-    BitBtn9: TBitBtn;
-    cboDoneStatus: TDBLookupComboBox;
-    chkDoneStatus: TCheckBox;
-    SpeedButton7: TSpeedButton;
-    SpeedButton8: TSpeedButton;
-    SpeedButton9: TSpeedButton;
-    SpeedButton10: TSpeedButton;
     RefereshCustomerTimer: TTimer;
-    Panel14: TPanel;
-    pgM: TPageControl;
-    TabContract: TTabSheet;
-    TabEghdam: TTabSheet;
-    TabCustomer: TTabSheet;
-    lblCompanyName: TLabel;
-    Label41: TLabel;
-    lcbGroup: TDBLookupComboBox;
-    edRecCount: TEdit;
-    Label42: TLabel;
     N73: TMenuItem;
     N74: TMenuItem;
-    bbb: TButton;
     N75: TMenuItem;
     N76: TMenuItem;
     adoState: TADOQuery;
     adoStateStateID: TIntegerField;
     adoStateStateTitle: TStringField;
+    TimerSendSms: TTimer;
+    MainPnl: TPanel;
+    pgcMain: TPageControl;
+    TabSheet1: TTabSheet;
+    dbgMyTasks: TYDBGrid;
+    xpPanel1: TxpPanel;
+    Panel3: TPanel;
+    BitBtn6: TBitBtn;
+    btnCasesAll: TBitBtn;
+    Panel7: TPanel;
+    btnImageBR: TBitBtn;
+    grbReference: TGroupBox;
+    dblUserRefrence: TDBLookupComboBox;
+    btnRefer: TBitBtn;
+    GroupBox1: TGroupBox;
+    Label38: TLabel;
+    Label36: TLabel;
+    BitBtn4: TBitBtn;
+    DBShamsiDateEdit1: TDBShamsiDateEdit;
+    dblCaseStatus: TDBLookupComboBox;
+    btnFinishCase: TBitBtn;
+    pnlDescTask: TxpPanel;
+    DBMemo1: TDBMemo;
+    grbReferenceComment: TGroupBox;
+    mmoDescription: TMemo;
+    Panel8: TPanel;
+    btnSaveReference: TBitBtn;
+    btnRefrenceCancel: TBitBtn;
+    grbCaseFinish: TGroupBox;
+    mmoCompleteComment: TMemo;
+    Panel4: TPanel;
+    btnSaveCaseFinish: TBitBtn;
+    btnCaseFinishCancel: TBitBtn;
+    ContractTabSheet: TxpTabSheet;
+    Panel6: TPanel;
+    xpBitBtn7: TBitBtn;
+    xpBitBtn5: TBitBtn;
+    xpBitBtn3: TBitBtn;
+    BitBtn7: TBitBtn;
+    BitBtn2: TBitBtn;
+    pnlAllContract: TPanel;
+    Label37: TLabel;
+    Label39: TLabel;
+    SpeedButton11: TSpeedButton;
+    SpeedButton12: TSpeedButton;
+    ContractDateEditTo: TShamsiDateEdit;
+    ContractDateEditFrom: TShamsiDateEdit;
+    BtnAllContract: TBitBtn;
+    pnlSearchContract: TxpPanel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label20: TLabel;
+    Label22: TLabel;
+    Label13: TLabel;
+    SpeedButton9: TSpeedButton;
+    SpeedButton10: TSpeedButton;
+    btnSrchContactAdnavce: TBitBtn;
+    CbDate: TEdit;
+    CEDate: TEdit;
+    dblsrchProductID: TDBLookupComboBox;
+    dblSrchContractType: TDBLookupComboBox;
+    edtCustomer: TEdit;
+    ContractGrid: TYDBGrid;
+    xpTabSheet1: TxpTabSheet;
+    GridPanel: TPanel;
+    FollowGrid: TYDBGrid;
+    Panel13: TPanel;
+    Label18: TLabel;
+    Label19: TLabel;
+    Label21: TLabel;
+    Label14: TLabel;
+    Label23: TLabel;
+    Label15: TLabel;
+    DBText1: TDBText;
+    DBEdit6: TDBEdit;
+    DBEdit7: TDBEdit;
+    DBEdit9: TDBEdit;
+    DBEdit1: TDBEdit;
+    DBEdit8: TDBEdit;
+    DBEdit12: TDBEdit;
+    cboDoneStatus: TDBLookupComboBox;
+    chkDoneStatus: TCheckBox;
+    BBPin: TxpBitBtn;
+    Panel5: TPanel;
+    Button22: TBitBtn;
+    Button25: TBitBtn;
+    Button18: TBitBtn;
+    Button21: TBitBtn;
+    Button23: TBitBtn;
+    xpBitBtn1: TBitBtn;
+    btnViwCustomer: TBitBtn;
+    PnlAllAct: TPanel;
+    Label4: TLabel;
+    Label3: TLabel;
+    SpeedButton7: TSpeedButton;
+    SpeedButton8: TSpeedButton;
+    ActDateEditTo: TShamsiDateEdit;
+    ActDateEditFrom: TShamsiDateEdit;
+    BtnAllAct: TBitBtn;
+    BitBtn9: TBitBtn;
+    PinFollowGrid: TYDBGrid;
+    pnlSearchFollow: TxpPanel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label5: TLabel;
+    Label8: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label9: TLabel;
+    Label40: TLabel;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
+    Label41: TLabel;
+    BDate: TShamsiDateEdit;
+    Edate: TShamsiDateEdit;
+    DonStatus: TComboBox;
+    Comment: TEdit;
+    Bsuccess: TEdit;
+    Esuccess: TEdit;
+    DonComment: TEdit;
+    ShowAction: TCheckBox;
+    ActionType: TDBLookupComboBox;
+    btnSrchFollow: TBitBtn;
+    chkCommentType: TCheckBox;
+    lcbGroup: TDBLookupComboBox;
+    xpTabSheet2: TxpTabSheet;
+    Panel2: TPanel;
+    Label2: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn3: TBitBtn;
+    BitBtn5: TBitBtn;
+    btnContract: TBitBtn;
+    btnCustomerReportX: TBitBtn;
+    BitBtn8: TBitBtn;
+    Panel1: TPanel;
+    Splitter1: TSplitter;
+    SplitterCity: TSplitter;
+    GroupByDate: TPanel;
+    MonthList: TListBox;
+    Panel10: TPanel;
+    Panel11: TPanel;
+    PhoneGrid: TYDBGrid;
+    GroupBox2: TGroupBox;
+    Label32: TLabel;
+    Label33: TLabel;
+    Label34: TLabel;
+    Label35: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBEdit10: TDBEdit;
+    DBEdit11: TDBEdit;
+    bbb: TButton;
+    pnlSearchCustomer: TxpPanel;
+    Label1: TLabel;
+    Label28: TLabel;
+    Label29: TLabel;
+    Label12: TLabel;
+    Label30: TLabel;
+    Label31: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    Label42: TLabel;
+    SearchEdit: TEdit;
+    OnlyCurrentMarketer: TCheckBox;
+    edtContactNumber: TEdit;
+    edtEmail: TEdit;
+    dblCustomerStatus: TDBLookupComboBox;
+    dblProduct: TDBLookupComboBox;
+    dblGroups: TDBLookupComboBox;
+    dblState: TDBLookupComboBox;
+    dblCity: TDBLookupComboBox;
+    chkContractFinished: TCheckBox;
+    edtcity: TYWhereEdit;
+    edtState: TYWhereEdit;
+    edRecCount: TEdit;
+    pnlFilter: TPanel;
+    SBRefresh: TSpeedButton;
+    btnHome: TSpeedButton;
+    Panel9: TPanel;
+    StatusBar1: TStatusBar;
+    Panel12: TPanel;
+    SpeedButton4: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    Panel14: TPanel;
+    lblCompanyName: TLabel;
+    pgM: TPageControl;
+    TabContract: TTabSheet;
+    TabEghdam: TTabSheet;
+    TabCustomer: TTabSheet;
+    Setting: TMenuItem;
+    ColorType: TMenuItem;
+    btnDaily: TxpBitBtn;
+    xpBitBtn2: TxpBitBtn;
+    btnCustomer: TxpBitBtn;
+    btntabContract: TxpBitBtn;
+    N77: TMenuItem;
+    N78: TMenuItem;
+    N79: TMenuItem;
+    N80: TMenuItem;
     procedure AinsertExecute(Sender: TObject);
     procedure Action6Execute(Sender: TObject);
     procedure ApropertyExecute(Sender: TObject);
@@ -586,6 +604,17 @@ type
     procedure edtContactNumberKeyPress(Sender: TObject; var Key: Char);
     procedure N76Click(Sender: TObject);
     procedure edRecCountKeyPress(Sender: TObject; var Key: Char);
+    procedure TimerSendSmsTimer(Sender: TObject);
+    procedure BBPinClick(Sender: TObject);
+    procedure PinFollowGridDblClick(Sender: TObject);
+    procedure PinFollowGridCellClick(Column: TColumn);
+    procedure N78Click(Sender: TObject);
+    procedure SpeedButton11Click(Sender: TObject);
+    procedure SpeedButton12Click(Sender: TObject);
+    procedure ColorTypeClick(Sender: TObject);
+    procedure btnCustomerClick(Sender: TObject);
+    procedure btnDailyClick(Sender: TObject);
+    procedure btntabContractClick(Sender: TObject);
 
   private
     qrydblsrchContractType :TADOQuery;
@@ -599,6 +628,7 @@ type
     Function MakeStrSearch(s:string):string;
     Procedure CalcRecourdCount;
     Function MakeFilterString :WideString;
+    procedure SetColorForm ;
   public
     GroupId: integer;
     CityId: integer;
@@ -613,23 +643,26 @@ var
 implementation
 
 Uses Telinputunit, dmu,  about, Report, ReportPhone,
-     GroupsInp, GroupDialog,   city, marketer, UInputTemplate, ErrorMsg,
-     userDefine, backupF, YShamsiDate, UPublish,UsetPriority,
-     UinputProducts, UchangeProduct, UProductADD, UFollowUp,
-     UContract, UCalenderView, Report_ContractU, AddTimeSheetU, InsertrateRep,
-     sheet,ReportAll,ReportSalaryFm,UInputUserTable, UMakeUserTableRep,
-     UinputRefferenceTable, AccessInput, StoreFM, FirstArtGroupFM,
-     SecendArtGroupFM, UnitFM, ArtServiceFM,  ChequeFM, EnterDataFM,
-     FactorFM, HostFM, FmNewDongleWrite, SetLockFm, CrackU,
-  FmSystemSettings_U, UContractType, BusinessLayer, UUserType, UTaxPerYear,
-  uGuaranteeType, UReportDongle, UActionType,
-  UUpdateOldAttachFile, UdefineHoliday, Types, UCase, UCaseBasicData,
-  UCaseAdd, UCommisionPercent, Uattachments, UCustomerReport,ArticleFM,
-  CancleReportU, UsersSequenceUnit, PoorsantListUnit, RepTasksUnit,
-  SmsCenter1, UAddUserTableDlg, SendSMSForCustomerLockUnit,
-  SMSSettingsUnit, GeneralSMSUnit, SMSGeneralUnit, StrUtils,
-  USMSEndContract, SMSBirthDateU, SMSAutoTextU, TasksTreeUnit,
-  uCategoryEdit, uLockSoftware, untCustStatusReport, UPleaseWait;
+    GroupsInp, GroupDialog,   city, marketer, UInputTemplate, ErrorMsg,
+    userDefine, backupF, YShamsiDate, UPublish,UsetPriority,
+    UinputProducts, UchangeProduct, UProductADD, UFollowUp,
+    UContract, UCalenderView, Report_ContractU, AddTimeSheetU, InsertrateRep,
+    sheet,ReportAll,ReportSalaryFm,UInputUserTable, UMakeUserTableRep,
+    UinputRefferenceTable, AccessInput, //StoreFM, FirstArtGroupFM,
+    //SecendArtGroupFM, UnitFM, ArtServiceFM, ChequeFM,EnterDataFM,
+    //FactorFM,
+    HostFM, FmNewDongleWrite, SetLockFm, CrackU,
+    FmSystemSettings_U, UContractType, BusinessLayer, UUserType, UTaxPerYear,
+    uGuaranteeType, UReportDongle, UActionType,
+    UUpdateOldAttachFile, UdefineHoliday, Types, UCase, UCaseBasicData,
+    UCaseAdd, UCommisionPercent, Uattachments, UCustomerReport,ArticleFM,
+    CancleReportU, UsersSequenceUnit, PoorsantListUnit, RepTasksUnit,
+    SmsCenter1, UAddUserTableDlg, SendSMSForCustomerLockUnit,
+    SMSSettingsUnit, GeneralSMSUnit, SMSGeneralUnit, StrUtils,
+    USMSEndContract, SMSBirthDateU, SMSAutoTextU, TasksTreeUnit,
+    uCategoryEdit, uLockSoftware, untCustStatusReport, StoreFM,
+    SecendArtGroupFM, UnitFM, ArtServiceFM, ChequeFM, EnterDataFM, FactorFM,
+    USaleReport, UThemColor, FirstArtGroupFM;
 
 {$R *.dfm}
 
@@ -688,7 +721,9 @@ procedure TMainForm.FormCreate(Sender: TObject);
 Var  HasAccessToAllAcontact,HasAccessToAllFollow :Boolean;
 
 begin
+
    inherited;
+   //Color := $00FFEAEA ;
    Dm.CustomerStatus.Close;
    Dm.CustomerStatus.Open;
 
@@ -782,16 +817,19 @@ procedure TMainForm.FormShow(Sender: TObject);
 var fltr:String;
    tmpstr : string;
 begin
+  pgcMain.ActivePage := xpTabSheet2; 
   { TODO -oparsa : 14030201 }
   oldTopRecord :=  0 ;
   { TODO -oparsa : 14030201 }
+  SetColorForm ;
 
    DBGrid_Columns_Caption(PhoneGrid);
-   DBGrid_LoadColumns(Self.Name,PhoneGrid);
-   DBGrid_LoadColumns(Self.Name,FollowGrid);
-   DBGrid_LoadColumns(Self.Name,ContractGrid);
-   DBGrid_LoadColumns(Self.Name,dbgMyTasks);
-   
+   DBGrid_LoadColumns(Self.Name,PhoneGrid,PhoneGrid);
+   DBGrid_LoadColumns(Self.Name,FollowGrid,FollowGrid);
+   DBGrid_LoadColumns(Self.Name,ContractGrid,ContractGrid);
+   DBGrid_LoadColumns(Self.Name,dbgMyTasks,dbgMyTasks);
+
+
    State.Active :=TRUE;
    IF not Groups.Active then
    begin
@@ -814,7 +852,7 @@ begin
    pgcMain.ActivePageIndex:=3;
    pgm.ActivePageIndex := 3;
    pgm.ActivePage := TabCustomer;
-   NMali.Visible := false;
+   NMali.Visible :=  _UserAccAcess ;// false;
    With qryMyTasks do
    Begin
     Close;
@@ -934,7 +972,21 @@ begin
       StatusBar1.Panels[2].Text:=' ⁄œ«œ : '+IntToStr(RecordCount);
    end;
 
+   { TODO -oparsa : 14030204 }
+   PinFollowGrid.Visible := _UserPinFollowUp  ;
+   if _UserPinFollowUp then
+     BBPin.ImageIndex := 36 ;
 
+  if _UserPinFollowUp then
+  begin
+    with Dm.Select_FollowUP_Pin do
+     begin
+       Close;
+       Parameters.ParamByName('@UserID').Value:= _UserID;
+       Open;
+     end;
+   end;
+   { TODO -oparsa : 14030204 }
 End;
 
 Function TMainForm.MakeStrSearch(s:string):string;
@@ -1356,7 +1408,7 @@ procedure TMainForm.SearchEditChange(Sender: TObject);
 var
   S,Tmp:String;
   i:Integer;
-begin
+begin                                                                          
      { TODO -oparsa : 14030126 }
      ChangeProduct  := false ;
      if (dblProduct.KeyValue <> null) and (dblProductoldKeyValue <> dblProduct.KeyValue) then
@@ -1374,7 +1426,7 @@ begin
          StatusBar1.Panels[1].Text := dm.ProductProductTitle.AsString
      else
          StatusBar1.Panels[1].Text:= 'Â„Â „Õ’Ê·« ';
-
+       {
       with Dm.Customer do
       begin
           Filtered:=False;
@@ -1384,6 +1436,7 @@ begin
           Filter := Tmp;
           Filtered:=True;
       end;
+      {
    CalcRecourdCount;
    { TODO -oparsa : 14030126 }
    {
@@ -1461,9 +1514,9 @@ end;
 procedure TMainForm.SpeedButton4Click(Sender: TObject);
 begin
    CurrentGrid.CustomizePrint ;
-   Panel1.Align:=alClient;
-   PhoneGrid.Align:=alClient;
-   GroupBox2.Align:=alTop;
+   Panel1.Align    := alClient;
+   PhoneGrid.Align := alClient;
+   GroupBox2.Align := alTop;
 end;
 
 procedure TMainForm.SpeedButton3Click(Sender: TObject);
@@ -2745,6 +2798,7 @@ begin
    DBGrid_SaveColumns(Self.Name,FollowGrid);
    DBGrid_SaveColumns(Self.Name,ContractGrid);
    DBGrid_SaveColumns(Self.Name,dbgMyTasks);
+   DBGrid_SaveColumns(Self.Name,PinFollowGrid);
 end;
 
 procedure TMainForm.acShowUserSequenceExecute(Sender: TObject);
@@ -2910,11 +2964,17 @@ begin
 
          { TODO -oparsa : 14030201 }
          txt :=   replace1(Trim(SearchEdit.Text),char(223),char(152));
+
+         //if (Trim(txt) <> '') then
+         ParamByName('@SearchStr').Value := Trim(SearchEdit.Text) ;
+           {
          if (Trim(txt) <> '') then
           if Where <> '' then
-            Where := Where+ ' and '+' ((CompanyName like ''%'+txt+'%'' ) or (Treater like ''%'+txt+'%'' ) or (PersonTitle like ''%'+txt+'%'' ) or (Notes like ''%'+txt+'%'' ) or (Address like ''%'+txt+'%'' ) or (PostalCode like ''%'+txt+'%'' ) )'
+            Where := Where+ ' and '+' ((CompanyName like ''%'+txt+'%'' ) or (Treater like ''%'+txt+'%'' ) or (PersonTitle like ''%'+txt+'%'' ) or (Notes like ''%'+txt+'%'' ) or (Address like ''%'+txt+'%'' ) or (PostalCode like ''%'+txt+'%'' ) or (CustomerID like ''%'+txt+'%'' ) or (CustomerNo like ''%'+txt+'%'' ) or '+
+                                        ' ( Phone like ''%'+txt+'%'' ) or  (WorkPhone1 like ''%'+txt+'%'' ) or   (MobilePhone like ''%'+txt+'%'' ) or  (FaxNumber like ''%'+txt+'%'' ) or (EmailAddress like ''%'+txt+'%'') or (competitiveNote like ''%'+txt+'%'' ) )'
           else
-            Where :=  ' ((CompanyName like ''%'+txt+'%'' ) or (Treater like ''%'+txt+'%'' ) or (PersonTitle like ''%'+txt+'%'' ) or (Notes like ''%'+txt+'%'' ) or (Address like ''%'+txt+'%'' ) or (PostalCode like ''%'+txt+'%'' ) )' ;
+            Where :=  ' ((CompanyName like ''%'+txt+'%'' ) or (Treater like ''%'+txt+'%'' ) or (PersonTitle like ''%'+txt+'%'' ) or (Notes like ''%'+txt+'%'' ) or (Address like ''%'+txt+'%'' ) or (PostalCode like ''%'+txt+'%'' ) or (CustomerID like ''%'+txt+'%'' ) or (CustomerNo like ''%'+txt+'%'' )  or '+
+                                        ' ( Phone like ''%'+txt+'%'' ) or  (WorkPhone1 like ''%'+txt+'%'' ) or   (MobilePhone like ''%'+txt+'%'' ) or  (FaxNumber like ''%'+txt+'%'' ) or (EmailAddress like ''%'+txt+'%'')  or (competitiveNote like ''%'+txt+'%'' ) )' ;
 
          if trim(edtContactNumber.Text) <> '' then
            if Where <> '' then
@@ -2933,6 +2993,7 @@ begin
                Where := Where + ' and '+' MarketerID ='+IntToStr(_MarketerID)
             else
              Where := ' MarketerID ='+IntToStr(_MarketerID);
+             }
 
          if chkContractFinished.Checked then
             if where <> '' then
@@ -2957,16 +3018,26 @@ begin
 
       { TODO -oparsa : 14030201 }
       oldTopRecord :=  ParamByName('@Top').Value ;
+
+      ParamByName('@ContactNumber')   .Value:=Trim(edtContactNumber.Text);
+
+      ParamByName('@Email').Value:= edtEmail.Text ;
+
+
+      if OnlyCurrentMarketer.Checked then
+         ParamByName('@MarketerID').Value:= _MarketerID
+      else
+         ParamByName('@MarketerID').Value:= -1 ;
       { TODO -oparsa : 14030201 }
 
       { TODO -oparsa : 14030126 }
-      {
+
       if dblCustomerStatus.KeyValue <> null then
          ParamByName('@Customerstatusid').Value:=dblCustomerStatus.KeyValue
       else
          ParamByName('@Customerstatusid').Value := 0;
 
-      ParamByName('@ContactNumber')   .Value:=Trim(edtContactNumber.Text);
+     // ParamByName('@ContactNumber')   .Value:=Trim(edtContactNumber.Text);
 
       if OnlyCurrentMarketer.Checked then
          ParamByName('@MarketerID').Value:=_MarketerID
@@ -2991,24 +3062,7 @@ begin
         ParamByName('@ProductId').Value:= dblProduct.KeyValue
       else ParamByName('@ProductId').Value := 0;
 
-        ParamByName('@Email').Value:=edtEmail.Text;
-        }
-
-      ParamByName('@Customerstatusid').Value := 0;
-
-      ParamByName('@ContactNumber')   .Value:=Trim(edtContactNumber.Text);
-
-      ParamByName('@MarketerID').Value:=-1;//_CurrentMarketerID;;
-
-      ParamByName('@GroupId').Value := 0;
-
-      ParamByName('@CityId').Value := 0;
-
-      ParamByName('@StateId').Value := 0;
-
-      if dblProduct.KeyValue <> null  then
-        ParamByName('@ProductId').Value:= dblProduct.KeyValue
-      else ParamByName('@ProductId').Value := 0;
+      //  ParamByName('@Email').Value:=edtEmail.Text;
 
       { TODO -oparsa : 14030126 }
 
@@ -3127,6 +3181,209 @@ begin
   inherited;
   if Key = #13 then
     bbbClick(self);
+end;
+
+{ TODO -oparsa : 14030204 }
+procedure TMainForm.TimerSendSmsTimer(Sender: TObject);
+var
+  qry,qryUpdate : TADOQuery;
+  i:integer;
+  T:SmsThread;
+begin
+  
+  inherited;
+  if _SendSMSType2 then
+  begin
+    try
+      if dm.YeganehConnection.Connected = false then
+        dm.YeganehConnection.Connected:=True;
+
+      qry:=TADOQuery.Create(self);
+      qry.Connection:=dm.YeganehConnection;
+
+      qryUpdate:=TADOQuery.Create(self);
+      qryUpdate.Connection:=dm.YeganehConnection;
+
+      qry.SQL.Text := 'Select * From OutBox Where  SmsStatus Is null And InProcess=0 And issend=0';
+      qry.Open;
+
+      if qry.RecordCount=0 then
+        Abort;
+
+      qry.First;
+      i:=0;
+      SetLength(arrSmsDetails,0); //Add Sanaye 950428 Œ«·Ì ‰‘œ‰ «ÿ·«⁄«  ﬁ»·Ì Ê «—”«· «” «„ «”  ò—«—Ì
+      while not (qry.eof) do
+      begin
+        SetLength(arrSmsDetails,Length(arrSmsDetails)+1);
+        arrSmsDetails[i].SmsPhone := qry.Fields.Fieldbyname('SmsNumber').AsString;
+        arrSmsDetails[i].SmsText := qry.Fields.Fieldbyname('SmsText').AsString;
+        arrSmsDetails[i].Id := qry.Fields.Fieldbyname('OutBoxId').asinteger ;
+        qryUpdate.SQL.Text := 'update OutBox set InProcess =1 where  OutBoxId ='+qry.Fields.Fieldbyname('OutBoxId').AsString;
+        qryUpdate.ExecSQL;
+        inc(i);
+        qry.Next;
+      end;
+
+      if qry.RecordCount>0 then
+      begin
+        T := SmsThread.Create(True);
+        T.FreeOnTerminate := True;
+        T.Resume;
+      end;
+
+    except
+
+    end;
+    qry.Free;
+    qryUpdate.Free;
+
+  end;
+
+end;
+{ TODO -oparsa : 14030204 }
+
+procedure TMainForm.BBPinClick(Sender: TObject);
+var
+  qry: TADOQuery;
+begin
+  inherited;
+  if BBPin.ImageIndex=35 then
+  begin
+    BBPin.ImageIndex := 36 ;
+    PinFollowGrid.Visible := True ;
+  end
+  else
+  begin
+    BBPin.ImageIndex := 35 ;
+    PinFollowGrid.Visible := False ;
+  end;
+  _UserPinFollowUp :=  PinFollowGrid.Visible ;
+
+  qry := TADOQuery.Create(self);
+  qry.Connection := dm.YeganehConnection;
+  qry.SQL.Text   := 'update dbo.Users set PinFollowUp = '+ BoolToStr(_UserPinFollowUp ) +' where  Id ='+ IntToStr(_UserId );
+  qry.ExecSQL;
+  qry.Free;
+  if _UserPinFollowUp then
+  begin
+    with Dm.Select_FollowUP_Pin do
+     begin
+       Close;
+       Parameters.ParamByName('@UserID').Value:= _UserID;
+       Open;
+     end;
+   end;
+
+end;
+
+procedure TMainForm.PinFollowGridDblClick(Sender: TObject);
+var ID :Integer;
+begin
+   FrFollowUp := TFrFollowUp.Create(Application);
+   FrFollowUp.CustomerID := Dm.Select_FollowUP_PinCustomerId.AsInteger;
+   FrFollowUp.refreshData;
+   FrFollowUp.FUID :=  dm.Select_FollowUP_By_DateFollowUPID.AsInteger;
+   FrFollowUp.Showmodal;
+end;
+
+procedure TMainForm.PinFollowGridCellClick(Column: TColumn);
+begin
+  inherited;
+  if Dm.Select_FollowUP_By_Date.RecordCount >0  then
+    Dm.Select_FollowUP_By_Date.Locate('CustomerId',Dm.Select_FollowUP_PinCustomerId.Value,[])
+end;
+
+procedure TMainForm.N78Click(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TFSaleReport, FSaleReport);
+  FSaleReport.ShowModal;
+  FSaleReport.Free;
+end;
+
+procedure TMainForm.SpeedButton11Click(Sender: TObject);
+begin
+  inherited;
+   ContractDateEditFrom.Text := MssCalendarPro1.Execute('/');
+end;
+
+procedure TMainForm.SpeedButton12Click(Sender: TObject);
+begin
+  inherited;
+  ContractDateEditTo.Text := MssCalendarPro1.Execute('/');
+end;
+
+procedure TMainForm.SetColorForm;
+begin
+  ShapeBase.Brush.Color := _Color1 ;
+  MainPnl.Color         := _Color1 ;
+
+  pnlSearchCustomer.StartColor := _Color1 ;
+  pnlSearchCustomer.EndColor   := _Color2 ;
+
+  pnlSearchCustomer.TitleStartColor :=  _Color3;
+  pnlSearchCustomer.TitleEndColor   :=  _Color4;
+
+  pnlSearchFollow.StartColor := _Color1 ;
+  pnlSearchFollow.EndColor   := _Color2 ;
+
+  pnlSearchFollow.TitleStartColor :=  _Color3;
+  pnlSearchFollow.TitleEndColor   :=  _Color4;
+
+  pnlSearchContract.StartColor := _Color1 ;
+  pnlSearchContract.EndColor   := _Color2 ;
+
+  pnlSearchContract.TitleStartColor :=  _Color3;
+  pnlSearchContract.TitleEndColor   :=  _Color4;
+
+  btnCustomer.EndColor    :=  _Color1 ;
+  btnDaily.EndColor       :=  _Color1 ;
+  btntabContract.EndColor :=  _Color1 ;
+
+  if (pgcMain.ActivePage.PageIndex  =  3)  then
+      btnCustomer.EndColor :=  _Color2
+   else if (pgcMain.ActivePage.PageIndex  =  2)  then
+      btnDaily.EndColor :=  _Color2
+   else if (pgcMain.ActivePage.PageIndex  =  1)  then
+      btntabContract.EndColor :=  _Color2
+
+end;
+
+procedure TMainForm.ColorTypeClick(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TFThemColor, FThemColor);
+  FThemColor.Showmodal;
+  SetColorForm ;
+end;
+
+procedure TMainForm.btnCustomerClick(Sender: TObject);
+begin
+  inherited;
+  pgcMain.ActivePage      := xpTabSheet2;
+  btnCustomer.EndColor    :=  _Color2 ;
+  btnDaily.EndColor       :=  _Color1 ;
+  btntabContract.EndColor :=  _Color1 ;
+
+end;
+
+procedure TMainForm.btnDailyClick(Sender: TObject);
+begin
+  inherited;
+  pgcMain.ActivePage      := xpTabSheet1;
+  btnCustomer.EndColor    :=  _Color1 ;
+  btnDaily.EndColor       :=  _Color2 ;
+  btntabContract.EndColor :=  _Color1 ;
+end;
+
+procedure TMainForm.btntabContractClick(Sender: TObject);
+begin
+  inherited;
+  pgcMain.ActivePage      := ContractTabSheet;
+  btnCustomer.EndColor    :=  _Color1 ;
+  btnDaily.EndColor       :=  _Color1 ;
+  btntabContract.EndColor :=  _Color2 ;
 end;
 
 end.

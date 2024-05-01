@@ -18,8 +18,7 @@ type
     WordApplication: TWordApplication;
     Timer1: TTimer;
     OpenDialog: TOpenDialog;
-    Panel1: TPanel;
-    YDBGrid2: TYDBGrid;
+    pnlMain: TPanel;
     Panel2: TPanel;
     Button1: TBitBtn;
     Button2: TBitBtn;
@@ -29,6 +28,8 @@ type
     Button6: TBitBtn;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
+    Panel1: TPanel;
+    YDBGrid1: TYDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure AcloseExecute(Sender: TObject);
     procedure YDBGridDblClick(Sender: TObject);
@@ -47,6 +48,9 @@ procedure WordApplicationDocumentBeforeClose(ASender: TObject;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
 
   private
 procedure OpenFile(ReadOnly:boolean);
@@ -263,7 +267,7 @@ begin
 Button1.Enabled:=En;
 Button2.Enabled:=en;
 Button3.Enabled:=en;
-YDBGrid2.Enabled:=en;
+YDBGrid1.Enabled:=en;
 if en then OnClose:=nil else OnClose:=AbortClose;
 end;
 
@@ -312,6 +316,28 @@ begin
   inherited;
    if messageShowString('¬Ì« «“ Õ–› „„∆‰ Â” Ìœ',True) then
     dm.WordTemplate.Delete;
+
+end;
+
+procedure TEditTemplates.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 494)  or (NewHeight < 410) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+
+  inherited;
+
+end;
+
+procedure TEditTemplates.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 
 end;
 

@@ -15,10 +15,9 @@ type
     GetUserTableContentByIDID: TAutoIncField;
     GetUserTableContentByIDUserTableLinkedID: TIntegerField;
     GetUserTableContentByIDTableID: TWordField;
-    PageControl1: TPageControl;
-    YDBGrid1: TYDBGrid;
+    pnlMain: TPanel;
     Panel2: TPanel;
-    Label5: TLabel;
+    Label2: TLabel;
     Label1: TLabel;
     DBEDescription: TDBEdit;
     DBLkCBTableID: TDBLookupComboBox;
@@ -26,6 +25,8 @@ type
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
     DBNavigator1: TDBNavigator;
+    PageControl1: TPageControl;
+    YDBGrid1: TYDBGrid;
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
@@ -33,6 +34,8 @@ type
     procedure DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
     procedure YDBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
   public
@@ -52,6 +55,8 @@ uses Dmu, UserTableInputFm , YShamsiDate;
 procedure TFmUserTableContent.FormShow(Sender: TObject);
 begin
    inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
    with GetUserTableContentBYID do
    begin
       Close;
@@ -95,6 +100,19 @@ procedure TFmUserTableContent.YDBGrid1DrawColumnCell(Sender: TObject;
 begin
    inherited;
    DBGrid_SetFocusAfterExit(YDBGrid1,Rect,DataCol,Column,State,clHighlightText);
+end;
+
+procedure TFmUserTableContent.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 620)  or (NewHeight < 389) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+
+  inherited;
+
 end;
 
 end.

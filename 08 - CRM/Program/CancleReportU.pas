@@ -9,31 +9,34 @@ uses
 
 type
   TFrCancleReport = class(TMBaseForm)
+    pnlMain: TPanel;
     Panel1: TPanel;
-    Panel2: TPanel;
     YDBGrid1: TYDBGrid;
     xpPanel1: TxpPanel;
     Label5: TLabel;
-    Label8: TLabel;
+    Label7: TLabel;
     Label1: TLabel;
     Label4: TLabel;
-    dblsrchMarketerID: TDBLookupComboBox;
-    BitBtn1: TBitBtn;
     Label2: TLabel;
     Label3: TLabel;
     Label6: TLabel;
-    SpeedButton3: TSpeedButton;
-    BBOK: TBitBtn;
+    dblsrchMarketerID: TDBLookupComboBox;
+    BitBtn1: TBitBtn;
     dblsrchProductID: TDBLookupComboBox;
     dblsrchCancelReasonID: TDBLookupComboBox;
     edtSrchInsertDateFrom: TSolarDatePicker;
     edtSrchInsertDateTo: TSolarDatePicker;
     edtSrchCancleDateTo: TSolarDatePicker;
     edtSrchCancleDateFrom: TSolarDatePicker;
+    Panel2: TPanel;
+    SpeedButton1: TSpeedButton;
+    BBOK: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
   public
@@ -59,6 +62,14 @@ end;
 procedure TFrCancleReport.FormShow(Sender: TObject);
 begin
   inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
+  xpPanel1.StartColor := _Color1 ;
+  xpPanel1.EndColor   := _Color2 ;
+
+  xpPanel1.TitleStartColor :=  _Color3;
+  xpPanel1.TitleEndColor   :=  _Color4;  
   OpenReportCancle(0,0,0,'0','0','0','0' )
 end;
 
@@ -91,10 +102,22 @@ begin
 
 end;
 
-procedure TFrCancleReport.SpeedButton3Click(Sender: TObject);
+procedure TFrCancleReport.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
   YDBGrid1.ExportToExcel;
+end;
+
+procedure TFrCancleReport.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 801)  or (NewHeight < 458) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
 end;
 
 end.

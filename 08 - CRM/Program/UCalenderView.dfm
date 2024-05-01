@@ -1,6 +1,8 @@
 inherited FrViewByCalender: TFrViewByCalender
-  Left = 218
-  Top = 65
+  Left = 417
+  Top = 178
+  HorzScrollBar.Range = 0
+  VertScrollBar.Range = 0
   AutoScroll = False
   BorderIcons = [biSystemMenu]
   Caption = #1606#1605#1575#1610#1588' '#1605#1575#1607#1610#1575#1606#1607
@@ -12,7 +14,331 @@ inherited FrViewByCalender: TFrViewByCalender
   WindowState = wsMaximized
   PixelsPerInch = 96
   TextHeight = 19
-  object Panel1: TPanel [0]
+  inherited ShapeBase: TShape
+    Top = 26
+    Width = 997
+    Height = 560
+  end
+  inherited Shape1: TShape
+    Top = 26
+    Width = 997
+    Height = 560
+  end
+  object Panel2: TPanel [2]
+    Left = 0
+    Top = 0
+    Width = 997
+    Height = 26
+    Align = alTop
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    DesignSize = (
+      997
+      26)
+    object StaticText1: TStaticText
+      Tag = 901
+      Left = 837
+      Top = 2
+      Width = 71
+      Height = 20
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      Caption = #1601#1585#1608#1585#1583#1610#1606
+      Color = 12615680
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 0
+      OnClick = StaticText1Click
+    end
+    object StaticText2: TStaticText
+      Tag = 902
+      Left = 761
+      Top = 2
+      Width = 71
+      Height = 21
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      Caption = #1575#1585#1583#1610#1576#1607#1588#1578
+      Color = 12615680
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 1
+      OnClick = StaticText1Click
+    end
+    object StaticText3: TStaticText
+      Tag = 903
+      Left = 685
+      Top = 2
+      Width = 71
+      Height = 21
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      Caption = #1582#1585#1583#1575#1583
+      Color = 12615680
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 2
+      OnClick = StaticText1Click
+    end
+    object StaticText4: TStaticText
+      Tag = 904
+      Left = 610
+      Top = 2
+      Width = 71
+      Height = 21
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      Caption = #1578#1610#1585
+      Color = 12615680
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 3
+      OnClick = StaticText1Click
+    end
+    object StaticText5: TStaticText
+      Tag = 905
+      Left = 534
+      Top = 2
+      Width = 71
+      Height = 20
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      Caption = #1605#1585#1583#1575#1583
+      Color = 12615680
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 4
+      OnClick = StaticText1Click
+    end
+    object StaticText6: TStaticText
+      Tag = 906
+      Left = 458
+      Top = 2
+      Width = 71
+      Height = 20
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      Caption = #1588#1607#1585#1610#1608#1585
+      Color = 12615680
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 5
+      OnClick = StaticText1Click
+    end
+    object StaticText7: TStaticText
+      Tag = 907
+      Left = 383
+      Top = 2
+      Width = 71
+      Height = 20
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      Caption = #1605#1607#1585
+      Color = 12615680
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 6
+      OnClick = StaticText1Click
+    end
+    object StaticText8: TStaticText
+      Tag = 908
+      Left = 307
+      Top = 2
+      Width = 71
+      Height = 20
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      Caption = #1570#1576#1575#1606
+      Color = 12615680
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 7
+      OnClick = StaticText1Click
+    end
+    object StaticText9: TStaticText
+      Tag = 909
+      Left = 231
+      Top = 2
+      Width = 71
+      Height = 21
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      Caption = #1570#1584#1585
+      Color = 12615680
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 8
+      OnClick = StaticText1Click
+    end
+    object StaticText10: TStaticText
+      Tag = 910
+      Left = 156
+      Top = 2
+      Width = 71
+      Height = 21
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      Caption = #1583#1610
+      Color = 12615680
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 9
+      OnClick = StaticText1Click
+    end
+    object StaticText11: TStaticText
+      Tag = 911
+      Left = 80
+      Top = 2
+      Width = 71
+      Height = 21
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      Caption = #1576#1607#1605#1606
+      Color = 12615680
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 10
+      OnClick = StaticText1Click
+    end
+    object StaticText12: TStaticText
+      Tag = 912
+      Left = 5
+      Top = 3
+      Width = 71
+      Height = 21
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      Caption = #1575#1587#1601#1606#1583
+      Color = 12615680
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 11
+      OnClick = StaticText1Click
+    end
+    object _year: TEdit
+      Left = 912
+      Top = 2
+      Width = 71
+      Height = 21
+      Anchors = [akTop, akRight]
+      BiDiMode = bdRightToLeft
+      BorderStyle = bsNone
+      Ctl3D = False
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentColor = True
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 12
+      Text = '1381'
+    end
+  end
+  object Panel1: TPanel [3]
     Left = 0
     Top = 26
     Width = 997
@@ -903,9 +1229,9 @@ inherited FrViewByCalender: TFrViewByCalender
       OnDblClick = ListBoxDblClick
     end
   end
-  object Button1: TBitBtn [1]
+  object Button1: TBitBtn [4]
     Left = 14
-    Top = 543
+    Top = 529
     Width = 74
     Height = 28
     Caption = #1582#1585#1608#1580
@@ -917,320 +1243,6 @@ inherited FrViewByCalender: TFrViewByCalender
     ParentFont = False
     TabOrder = 1
     OnClick = Button1Click
-  end
-  object Panel2: TPanel [2]
-    Left = 0
-    Top = 0
-    Width = 997
-    Height = 26
-    Align = alTop
-    Font.Charset = ARABIC_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 2
-    DesignSize = (
-      997
-      26)
-    object StaticText1: TStaticText
-      Tag = 901
-      Left = 837
-      Top = 2
-      Width = 71
-      Height = 20
-      Alignment = taCenter
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      BevelKind = bkFlat
-      BevelOuter = bvNone
-      Caption = #1601#1585#1608#1585#1583#1610#1606
-      Color = 12615680
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 0
-      OnClick = StaticText1Click
-    end
-    object StaticText2: TStaticText
-      Tag = 902
-      Left = 761
-      Top = 2
-      Width = 71
-      Height = 21
-      Alignment = taCenter
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      BevelKind = bkFlat
-      BevelOuter = bvNone
-      Caption = #1575#1585#1583#1610#1576#1607#1588#1578
-      Color = 12615680
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 1
-      OnClick = StaticText1Click
-    end
-    object StaticText3: TStaticText
-      Tag = 903
-      Left = 685
-      Top = 2
-      Width = 71
-      Height = 21
-      Alignment = taCenter
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      BevelKind = bkFlat
-      BevelOuter = bvNone
-      Caption = #1582#1585#1583#1575#1583
-      Color = 12615680
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 2
-      OnClick = StaticText1Click
-    end
-    object StaticText4: TStaticText
-      Tag = 904
-      Left = 610
-      Top = 2
-      Width = 71
-      Height = 21
-      Alignment = taCenter
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      BevelKind = bkFlat
-      BevelOuter = bvNone
-      Caption = #1578#1610#1585
-      Color = 12615680
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 3
-      OnClick = StaticText1Click
-    end
-    object StaticText5: TStaticText
-      Tag = 905
-      Left = 534
-      Top = 2
-      Width = 71
-      Height = 20
-      Alignment = taCenter
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      BevelKind = bkFlat
-      BevelOuter = bvNone
-      Caption = #1605#1585#1583#1575#1583
-      Color = 12615680
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 4
-      OnClick = StaticText1Click
-    end
-    object StaticText6: TStaticText
-      Tag = 906
-      Left = 458
-      Top = 2
-      Width = 71
-      Height = 20
-      Alignment = taCenter
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      BevelKind = bkFlat
-      BevelOuter = bvNone
-      Caption = #1588#1607#1585#1610#1608#1585
-      Color = 12615680
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 5
-      OnClick = StaticText1Click
-    end
-    object StaticText7: TStaticText
-      Tag = 907
-      Left = 383
-      Top = 2
-      Width = 71
-      Height = 20
-      Alignment = taCenter
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      BevelKind = bkFlat
-      BevelOuter = bvNone
-      Caption = #1605#1607#1585
-      Color = 12615680
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 6
-      OnClick = StaticText1Click
-    end
-    object StaticText8: TStaticText
-      Tag = 908
-      Left = 307
-      Top = 2
-      Width = 71
-      Height = 20
-      Alignment = taCenter
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      BevelKind = bkFlat
-      BevelOuter = bvNone
-      Caption = #1570#1576#1575#1606
-      Color = 12615680
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 7
-      OnClick = StaticText1Click
-    end
-    object StaticText9: TStaticText
-      Tag = 909
-      Left = 231
-      Top = 2
-      Width = 71
-      Height = 21
-      Alignment = taCenter
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      BevelKind = bkFlat
-      BevelOuter = bvNone
-      Caption = #1570#1584#1585
-      Color = 12615680
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 8
-      OnClick = StaticText1Click
-    end
-    object StaticText10: TStaticText
-      Tag = 910
-      Left = 156
-      Top = 2
-      Width = 71
-      Height = 21
-      Alignment = taCenter
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      BevelKind = bkFlat
-      BevelOuter = bvNone
-      Caption = #1583#1610
-      Color = 12615680
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 9
-      OnClick = StaticText1Click
-    end
-    object StaticText11: TStaticText
-      Tag = 911
-      Left = 80
-      Top = 2
-      Width = 71
-      Height = 21
-      Alignment = taCenter
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      BevelKind = bkFlat
-      BevelOuter = bvNone
-      Caption = #1576#1607#1605#1606
-      Color = 12615680
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 10
-      OnClick = StaticText1Click
-    end
-    object StaticText12: TStaticText
-      Tag = 912
-      Left = 5
-      Top = 3
-      Width = 71
-      Height = 21
-      Alignment = taCenter
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      BevelKind = bkFlat
-      BevelOuter = bvNone
-      Caption = #1575#1587#1601#1606#1583
-      Color = 12615680
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 11
-      OnClick = StaticText1Click
-    end
-    object _year: TEdit
-      Left = 912
-      Top = 2
-      Width = 71
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdRightToLeft
-      BorderStyle = bsNone
-      Ctl3D = False
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentColor = True
-      ParentCtl3D = False
-      ParentFont = False
-      TabOrder = 12
-      Text = '1381'
-    end
   end
   inherited DSForm: TDataSource
     Left = 96

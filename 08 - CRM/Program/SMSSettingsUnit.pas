@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, BaseUnit, ExtActns, ActnList, DB, ADODB, StdCtrls, Buttons,
-  ExtCtrls, Mask, DBCtrls, ImgList;
+  ExtCtrls, Mask, DBCtrls, ImgList, ComCtrls;
 
 type
   TFSMSSettings = class(TMBaseForm)
@@ -16,28 +16,52 @@ type
     QSMSSettingsRegUserID: TIntegerField;
     QSMSSettingsRegDate: TStringField;
     QCheckSettingsExists: TADOQuery;
-    Panel1: TPanel;
-    BitBtn1: TBitBtn;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    SpeedButton4: TSpeedButton;
-    SpeedButton5: TSpeedButton;
-    Label1: TLabel;
-    Label2: TLabel;
-    DBEdit1: TDBEdit;
-    DBEdit2: TDBEdit;
     acAdd: TAction;
     ImageList1: TImageList;
     acDel: TAction;
     acEdit: TAction;
     acCancel: TAction;
     acPost: TAction;
+    QSMSSettingsSendSMS: TBooleanField;
+    QSMSSettingsSendSMSType2: TBooleanField;
+    QSMSSettingsSMSCenterNumber: TStringField;
+    QSMSSettingsSmsUser: TStringField;
+    QSMSSettingsSmsPassWord: TStringField;
+    QSMSSettingsSmsTimer: TStringField;
+    pnlMain: TPanel;
+    Panel1: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    BitBtn1: TBitBtn;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
     bvl1: TBevel;
+    Bevel1: TBevel;
     grp1: TGroupBox;
     btn1: TButton;
-    QSMSSettingsSendSMS: TBooleanField;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
     DBCheckBox1: TDBCheckBox;
+    DBEdit2: TDBEdit;
+    DBEdit1: TDBEdit;
+    GroupBox2: TGroupBox;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label7: TLabel;
+    lblTerminalID: TLabel;
+    lblSmsPassWord: TLabel;
+    Label4: TLabel;
+    S: TLabel;
+    Label6: TLabel;
+    DBCheckBox2: TDBCheckBox;
+    DBESmsUser: TDBEdit;
+    DBESmsPassWord: TDBEdit;
+    DBESmsTimer: TDBEdit;
+    DBESMSCenterNumber: TDBEdit;
     procedure BitBtn1Click(Sender: TObject);
     procedure acAddExecute(Sender: TObject);
     procedure acAddUpdate(Sender: TObject);
@@ -52,6 +76,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure QSMSSettingsBeforePost(DataSet: TDataSet);
     procedure btn1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     function CheckSMSSettingsExists:Boolean;
@@ -107,6 +132,8 @@ begin
         QSMSSettings.Delete;
         _TerminalID:='';
         _SmsPassWord:='';
+        _SmsPassWordType2:='';
+        _SmsUser := '';
         _SendSMS:=False;
    end;
 end;
@@ -146,6 +173,9 @@ end;
 procedure TFSMSSettings.acPostExecute(Sender: TObject);
 begin
   inherited;
+  if DBCheckBox1.Checked  and  DBCheckBox2.Checked then
+     ShowMessage('›ﬁÿ ÌòÌ «“ «‰Ê«⁄  ‰ŸÌ„«  "«—”«· ÅÌ«„ò" „Ì  Ê«‰œ ›⁄«· »«‘œ')
+  else
   QSMSSettings.Post;
 end;
 
@@ -171,20 +201,61 @@ begin
   begin
       QSMSSettingsRegUserID.AsInteger:=_UserID;
       QSMSSettingsRegDate.AsString:=_Today;
-      _TerminalID:=QSMSSettingsTerminalID.AsString;
-      _SmsPassWord:=QSMSSettingsPassword.AsString;
-      _SendSMS:=QSMSSettingsSendSMS.AsBoolean;
+      _TerminalID       := QSMSSettingsTerminalID.AsString;
+      _SmsPassWord      := QSMSSettingsPassword.AsString;
+      _SendSMS          := QSMSSettingsSendSMS.AsBoolean;
+      _SmsPassWordType2 := QSMSSettingsSmsPassWord.AsString;
+      _SmsUser          := QSMSSettingsSmsUser.AsString;
+      _SendSMSType2     := QSMSSettingsSendSMSType2.AsBoolean;
+      _SmsTimer         := QSMSSettingsSmsTimer.AsString;
+      _SMSCenterNumber  := QSMSSettingsSMSCenterNumber.AsString;
   end;
 end;
 
 procedure TFSMSSettings.btn1Click(Sender: TObject);
 var
   Rio:SmsCenter;
+  url:String;
 begin
   inherited;
-  Rio:=GetSmsCenter(True,'',nil);
-  Btn1.Caption:='»«ﬁÌ„«‰œÂ «⁄ »«— »—«»— «”  »« :'+Rio.getCredit(_TerminalID,_SmsPassWord) + ' —Ì«· ';
+  { TODO -oparsa : 14030204 }
+  //Rio:=GetSmsCenter(True,'',nil);
+  //Btn1.Caption:='»«ﬁÌ„«‰œÂ «⁄ »«— »—«»— «”  »« :'+Rio.getCredit(_TerminalID,_SmsPassWord) + ' —Ì«· ';
 
+  if not (QSMSSettings.State in [dsEdit ,dsInsert] ) then
+  begin
+    if DBCheckBox1.Checked then
+    begin
+
+      try
+        Rio := GetSmsCenter(True,'',nil);
+        Btn1.Caption := '«⁄ »«— »«ﬁÌ „«‰œÂ »—«»— «”  »« :'+Rio.getCredit(_TerminalID,_SmsPassWord) + ' —Ì«· ';
+      except
+        Btn1.Caption:='Œÿ« œ— »—ﬁ—«—Ì «— »«ÿ';
+      end;
+    end
+    else
+    if DBCheckBox2.Checked then
+    begin
+      try
+        url := 'http://parsasms.com/tools/urlservice/credit/?username='+  dmu._SmsUser+'&password='+dmu._SmsPassWordType2;
+        Btn1.Caption:='«⁄ »«— »«ﬁÌ „«‰œÂ »—«»— «”  »« : '+dm.POST(url)+' —Ì«· ';
+      except
+        Btn1.Caption:='Œÿ« œ— »—ﬁ—«—Ì «— »«ÿ';
+      end;
+    end
+    else   Btn1.Caption:='·ÿ›« ÌòÌ «“  ‰ŸÌ„«  «—”«· ÅÌ«„ò «‰ Œ«» ‰„«ÌÌœ';
+
+  end
+  { TODO -oparsa : 14030204 }
+
+end;
+
+procedure TFSMSSettings.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;   
 end;
 
 end.

@@ -112,10 +112,10 @@ RootDir=
 [Version Info]
 IncludeVerInfo=1
 AutoIncBuild=0
-MajorVer=1
-MinorVer=1
-Release=1
-Build=5
+MajorVer=2
+MinorVer=5
+Release=0
+Build=0
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=1256
 [Version Info Keys]
 CompanyName=‘—ò  Ìê«‰Â
 FileDescription=CRM
-FileVersion=1.1.1.5
+FileVersion=2.5.0.0
 InternalName=
 LegalCopyright=
 LegalTrademarks=

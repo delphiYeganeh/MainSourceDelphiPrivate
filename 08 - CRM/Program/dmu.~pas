@@ -5,6 +5,7 @@ interface
 uses
   SysUtils, Classes, DB,ShellAPI, ADODB, ImgList, Controls,Registry,windows,word2000,Graphics,YwhereEdit,
   OleServer, AppEvnts,Dialogs, WordXP, YINtegerField,DBGrids,Forms,
+  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP,
   Yeganeh_Word, ComObj, ActiveX;
 
 type
@@ -756,6 +757,23 @@ type
     StringField37: TStringField;
     StringField38: TStringField;
     IntegerField17: TIntegerField;
+    UserPinFollowUp: TBooleanField;
+    DSelect_FollowUP_Pin: TDataSource;
+    Select_FollowUP_Pin: TADOStoredProc;
+    Select_FollowUP_PinCustomerId: TIntegerField;
+    Select_FollowUP_PinCompanyName: TStringField;
+    Select_Customer_By_CustomerIDCustomerMiscalculationDesc: TStringField;
+    Select_Customer_By_CustomerIDCustomerMiscalculation: TBooleanField;
+    UserThemTypeColor: TIntegerField;
+    UserColor1: TStringField;
+    UserColor2: TStringField;
+    UserColor3: TStringField;
+    UserColor4: TStringField;
+    ADOState: TADOQuery;
+    ADOStateStateID: TIntegerField;
+    ADOStateStateTitle: TStringField;
+    DState2: TDataSource;
+    UserAccAcess: TBooleanField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
     function GetSql(s:string):Variant;
     function GetNewCode:string;
@@ -796,8 +814,11 @@ type
     procedure Select_Customer_By_CustomerIDBeforePost(DataSet: TDataSet);
     procedure MarketerBeforePost(DataSet: TDataSet);
     procedure Select_FollowUP_By_CustomerIDAfterOpen(DataSet: TDataSet);
-    procedure DSelect_FollowUP_By_CustomerIDDataChange(Sender: TObject;
-      Field: TField);
+    procedure DSelect_FollowUP_By_CustomerIDDataChange(Sender: TObject; Field: TField);
+    { TODO -oparsa : 14030204 }
+    procedure SendSmsToOutBox (	SmsNumber,SmsText :String);
+    function  Post(param1:string): string;
+    { TODO -oparsa : 14030204 }
 
   private
     Function MakeFilterResult :Boolean;
@@ -839,6 +860,14 @@ type
 
 
   end;
+
+type
+  TSmsDetails = record
+    Id        : Integer;
+    SmsText   : string;
+    SmsPhone  : string;
+    SendDate  : string;
+  end;  
 
 Var
    Dm: TDm;
@@ -883,14 +912,38 @@ Var
    _SoftVersionDB:String;
    _ActiveUserRefreshTime:Integer;
    _ProjectIsLoaded:boolean; // Amin 1391/12/26
+  { TODO -oparsa : 14030204 }
+  _SmsPassWordType2:String;
+  _SmsUser : string;
+  _SendSMSType2 : Boolean ;
+  _SmsTimer :string;
+  _SMSCenterNumber : string ;
+   arrSmsDetails: array of TSmsDetails;
+  _UserPinFollowUp : Boolean ;
+  _ThemTypeColor : Integer ;
+  _Color1: Tcolor ;
+  _Color2: Tcolor ;
+  _Color3: Tcolor ;
+  _Color4: Tcolor ;  
+  _ColorThem : string ;
+  _UserAccAcess : Boolean ;
+  { TODO -oparsa : 14030204 }
    //---
 //1    gContractPath :String;
 Const
      ProductID = 'Y_Crm';
-     _SoftVersion = '2.4.';
-     _LastUpdate = '1393/08/20';
+     _SoftVersion = '2.5.' ;//'2.4.';
+     _LastUpdate = '1403/02/10'; //'1393/08/20';
     procedure SetQueryDataSet(var DataSourceQry :TDataSource;var ReturnQry :TADOQuery;SQLText :String;QryConnection:TADOConnection;Field0Alignment :Boolean = False);
     Function AddImageField(Field:TField;Dlgfilter:String):String;
+
+Type
+  SmsThread = Class(TThread)
+  private
+  protected
+  procedure Execute; override;
+  procedure UpdateOutBox;
+end;
 
 implementation
 
@@ -966,13 +1019,14 @@ begin
    { TODO -oparsa : 14030126 }
    Qry_SetResult(' Declare @Date Char(10)   '+
      ' set @Date = dbo.Shamsi(GETDATE())  '+
-     ' Update CustomerProduct set ContractFinished = 0 , DateUpDateFinishedContractProducts = @Date   '+
+     ' Update CustomerProduct set ContractFinished = 0 , DateUpDateFinishedContractProducts = @Date  WHERE DateUpDateFinishedContractProducts <> @Date '+
      ' Update CustomerProduct set ContractFinished = 1  , DateUpDateFinishedContractProducts = @Date  FROM CustomerProduct '+
      ' INNER JOIN (       '+
      ' SELECT ProductID,CustomerID FROM [CONTRACT] GROUP BY ProductID,CustomerID   '+
      ' HAVING max(CONTRACT.EndDate) < @Date   '+
      '  AND not ProductID IS NULL) t  '+
-     '  ON (t.ProductID = CustomerProduct.ProductID AND t.CustomerID = CustomerProduct.CustomerID ) ',dm.YeganehConnection);
+     '  ON (t.ProductID = CustomerProduct.ProductID AND t.CustomerID = CustomerProduct.CustomerID ) '+
+     ' WHERE DateUpDateFinishedContractProducts <> @Date ',dm.YeganehConnection);
 
    Qry_SetResult('UPDATE dbo.Customer   '+
                  ' SET FinishedContractProducts =  dbo.fn_FinishedContractBycustomerId(customerid) ,   '+
@@ -1007,6 +1061,13 @@ begin
    if _ApplicationPath <> Reg_GetValue('Software\Yeganeh\CRM','CRMPath',dtString,HKEY_CURRENT_USER) then
       Reg_SetValue('Software\Yeganeh\CRM','CRMPath',_ApplicationPath,dtString,HKEY_CURRENT_USER);
    //---
+  if _ThemTypeColor = 0 then
+  begin
+    _Color1:=  $00DAF3EC ;
+    _Color2:=  $00FDD0E7 ;
+    _Color3:=  $00E4AFCA ;
+    _Color4:=  $00F9ECF2 ;
+  end;
 end;
 
 function Tdm.Search(Y:TYwhereEdit):integer;
@@ -1022,6 +1083,39 @@ begin
       ShowModal;
       Result:=SearchResult;
    end;
+end;
+
+function ReplaceSpace(param1: widestring): WideString;
+var
+  I:integer;
+begin
+  for I:=1 to LENGTH(param1) do
+    if (param1[I] = ' ') then
+      Result:=Result + '%20'
+    else
+      Result:=Result + param1[I];
+end;
+
+function StrConvertToUTF8Encode(const Str: WideString): UTF8String;
+var
+  L: Integer;
+  Temp: UTF8String;
+  TempString:WideString;
+begin
+  Result     := '';
+  TempString := '';
+
+  if STR = '' then
+    Exit;
+
+  TempString := ReplaceSpace(str);
+  SetLength(Temp, Length(TempString) * 3); // SetLength includes space for null terminator
+  L := UnicodeToUtf8(PAnsiChar(Temp), Length(Temp)+1, PWideChar(TempString), Length(TempString));
+  if L > 0 then
+    SetLength(Temp, L-1)
+  else
+    Temp := '';
+  Result := Temp;
 end;
 
 procedure Tdm.Connect;
@@ -2386,6 +2480,91 @@ begin
       end;
    end;
    // Amin 1391/10/18 End
+end;
+
+function Tdm.Post(param1:string): string;
+var
+  lHTTP: TIdHTTP;
+  lParamList: TStringList;
+begin
+  try
+    if (param1 <> Null) and (Trim(param1)<>'') and (Pos('&',param1) > 0) then
+    begin
+      lParamList := TStringList.Create;
+      lParamList.Add('id=2');
+      lHTTP := TIdHTTP.Create(nil);
+      lHTTP.MaxLineLength:=16384;
+      Result := lHTTP.Post(param1,lParamList);
+      lHTTP.Free;
+      lParamList.Free;
+    end;
+  except on e:Exception do
+    ShowMessage('Error POST :' + e.Message);
+  end;
+end;
+
+procedure Tdm.SendSmsToOutBox(SmsNumber, SmsText: String);
+Var
+  qry :TADOQuery;
+begin
+  if not (_SendSMSType2) then
+    abort;
+  qry:= TADOQuery.Create(self);
+  qry.Connection:=YeganehConnection;
+  qry.SQL.Text:='insert into Outbox (SmsNumber,SmsText) values( '+QuotedStr( SmsNumber)+ ','+QuotedStr( SmsText)+')';
+  qry.ExecSQL;
+  qry.Free;
+end;
+
+{ SmsThread }
+
+procedure SmsThread.Execute;
+Var
+  i:integer;
+  qry:TADOQuery;
+  IsSend,res,url:String;
+begin
+  qry:=TADOQuery.Create(nil);
+  qry.Connection:=dm.YeganehConnection;
+
+  if _SmsUser = '' then
+   Terminate;
+  if _SmsPassWord = '' then
+   Terminate;
+  if _SMSCenterNumber = '' then
+   Terminate;
+
+  for i :=0 to Length(arrSmsDetails)-1 do
+  begin
+
+    res:='';
+    url :='http://parsasms.com//tools/urlservice/send/?username='+dmu._SmsUser+'&password='+dmu._SmsPassWordType2
+          +'&from='+dmu._SMSCenterNumber+'&to='+arrSmsDetails[i].SmsPhone+'&message='+StrConvertToUTF8Encode(arrSmsDetails[i].SmsText);
+    try
+      res:=dm.POST(url);
+    except
+      res:='ÎØÇ ÏÑ ÈÑÞÑÇÑí ÇÑÊÈÇØ';
+    end;
+
+    if StrToIntDef( res,0)>1000 then
+      IsSend:='1'
+    else
+      IsSend:='0';
+    qry.SQL.Text:='update OutBox set InProcess=0 ,IsSend='+IsSend+ ' ,SmsStatus='+QuotedStr(res)+' where outboxid= '+vartostr(arrSmsDetails[i].id);
+    qry.ExecSQL;
+  end;
+  Terminate;
+
+end;
+
+procedure SmsThread.UpdateOutBox;
+//var
+  //qry:TADOQuery;
+begin
+//  qry:=TADOQuery.Create(nil);
+//  qry.Connection:=dm.YeganehConnection;
+//  qry.SQL.Text:='update OutBox set InProcess=0 , ErrorMessage='+VarToStr(res)+' where outboxid= '+vartostr(arrSmsDetails[i].id);
+//  qry.ExecSQL;
 end;
 
 end.

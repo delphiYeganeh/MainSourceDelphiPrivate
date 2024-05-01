@@ -17,30 +17,31 @@ type
     ActionsAccessActionTitle: TWideStringField;
     ActionList1: TActionList;
     aclose: TAction;
+    ActionsAccessActionName: TWideStringField;
+    ActionsAccessFormID: TWordField;
+    ActionsActionName: TWideStringField;
+    ActionsFormID: TWordField;
+    ActionsTitle: TWideStringField;
+    ActionsAccessTitle: TWideStringField;
+    pnlMain: TPanel;
+    GroupBox1: TGroupBox;
+    edtTitle: TEdit;
+    rdgAccessFilter: TRadioGroup;
     Panel1: TPanel;
     Label1: TLabel;
     DBLkCBAccesses: TDBLookupComboBox;
     Button1: TBitBtn;
     Button2: TBitBtn;
     Panel2: TPanel;
-    ActionsAccessActionName: TWideStringField;
-    ActionsAccessFormID: TWordField;
-    ActionsActionName: TWideStringField;
-    ActionsFormID: TWordField;
-    ActionsTitle: TWideStringField;
     ProgressBar1: TProgressBar;
+    YDBGrid1: TYDBGrid;
     Panel3: TPanel;
     BitBtn1: TBitBtn;
     BBOK: TBitBtn;
-    YDBGrid1: TYDBGrid;
     Panel4: TPanel;
     SBChAll: TSpeedButton;
     SBChNone: TSpeedButton;
     SBChRev: TSpeedButton;
-    GroupBox1: TGroupBox;
-    edtTitle: TEdit;
-    rdgAccessFilter: TRadioGroup;
-    ActionsAccessTitle: TWideStringField;
     procedure AccessesAfterScroll(DataSet: TDataSet);
     procedure FormShow(Sender: TObject);
     procedure DBGrid1NeedColorCondition(Column: TColumn;
@@ -62,6 +63,8 @@ type
     procedure SBChNoneClick(Sender: TObject);
     procedure SBChRevClick(Sender: TObject);
     procedure edtTitleChange(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
 
   private
     { Private declarations }
@@ -92,6 +95,9 @@ end;
 
 procedure TAccessForm.FormShow(Sender: TObject);
 begin
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
    Dm.Accesses.AfterScroll := AccessesAfterScroll;
    Dm.Accesses.First;
    DBLkCBAccesses.KeyValue := Dm.AccessesID.AsInteger;
@@ -284,6 +290,18 @@ begin
             Filter := '';
             Filtered := False;
         end;
+end;
+
+procedure TAccessForm.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 451)  or (NewHeight < 536) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
 end;
 
 end.

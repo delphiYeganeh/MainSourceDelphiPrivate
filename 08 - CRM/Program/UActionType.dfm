@@ -1,25 +1,26 @@
 inherited frActionType: TfrActionType
   Left = 466
   Top = 222
-  Width = 334
+  Width = 316
   Height = 357
   Caption = ''
   OldCreateOrder = True
+  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox2: TGroupBox [0]
     Left = 0
     Top = 0
-    Width = 326
-    Height = 323
+    Width = 300
+    Height = 318
     Align = alClient
     Caption = '  '#1606#1608#1593' '#1575#1602#1583#1575#1605#1575#1578'  '
     TabOrder = 0
     object dbgActionType: TYDBGrid
       Left = 2
       Top = 15
-      Width = 322
-      Height = 281
+      Width = 296
+      Height = 276
       Cursor = crHandPoint
       Align = alClient
       Options = [dgEditing, dgAlwaysShowEditor, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -59,8 +60,8 @@ inherited frActionType: TfrActionType
     end
     object Panel5: TPanel
       Left = 2
-      Top = 296
-      Width = 322
+      Top = 291
+      Width = 296
       Height = 25
       Align = alBottom
       BevelOuter = bvNone

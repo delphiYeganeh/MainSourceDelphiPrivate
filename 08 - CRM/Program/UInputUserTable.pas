@@ -10,17 +10,18 @@ uses
 
 type
   TFrInputUserTable = class(TMBaseForm)
-    Panel1: TPanel;
-    Label1: TLabel;
-    SearchEdit: TEdit;
+    pnlMain: TPanel;
+    Panel3: TPanel;
+    YDBGrid1: TYDBGrid;
     Panel2: TPanel;
     xpBitBtn4: TBitBtn;
     xpBitBtn1: TBitBtn;
     xpBitBtn2: TBitBtn;
     xpBitBtn5: TBitBtn;
     xpBitBtn3: TBitBtn;
-    Panel3: TPanel;
-    YDBGrid1: TYDBGrid;
+    Panel1: TPanel;
+    Label1: TLabel;
+    SearchEdit: TEdit;
     procedure xpBitBtn4Click(Sender: TObject);
     procedure xpBitBtn2Click(Sender: TObject);
     procedure xpBitBtn5Click(Sender: TObject);
@@ -29,6 +30,9 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SearchEditChange(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -120,6 +124,26 @@ procedure TFrInputUserTable.SearchEditChange(Sender: TObject);
 begin
   inherited;
 Open_UserTable(SearchEdit.Text);
+end;
+
+procedure TFrInputUserTable.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 579)  or (NewHeight < 424) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
+end;
+
+procedure TFrInputUserTable.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
 end;
 
 end.

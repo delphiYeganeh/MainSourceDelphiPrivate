@@ -9,20 +9,6 @@ uses
 
 type
   TFSendSMSForCustomerLock = class(TMBaseForm)
-    Panel1: TPanel;
-    Panel2: TPanel;
-    Panel3: TPanel;
-    BitBtn1: TBitBtn;
-    Button2: TButton;
-    GroupBox1: TGroupBox;
-    RadioGroup1: TRadioGroup;
-    Label1: TLabel;
-    cmbDays: TComboBox;
-    cmbMonths: TComboBox;
-    cmbYears: TComboBox;
-    Button1: TButton;
-    edtMessage: TEdit;
-    Label2: TLabel;
     Customers: TADOQuery;
     CustomersCustomerID: TAutoIncField;
     CustomersPersonTitle: TWideStringField;
@@ -37,15 +23,30 @@ type
     spGetCustomersForLockSMSEXPIREDATE: TStringField;
     spGetCustomersForLockSMSToday_SMS_Recieve: TBooleanField;
     spGetCustomersForLockSMSMean: TStringField;
-    RadioGroup2: TRadioGroup;
-    YDBGrid1: TYDBGrid;
-    lblCount: TLabel;
     QTMP: TADOQuery;
-    Label3: TLabel;
-    Memo1: TMemo;
     pm1: TPopupMenu;
     N1: TMenuItem;
     N2: TMenuItem;
+    pnlMain: TPanel;
+    Panel1: TPanel;
+    lblCount: TLabel;
+    BitBtn1: TBitBtn;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    RadioGroup1: TRadioGroup;
+    cmbDays: TComboBox;
+    cmbMonths: TComboBox;
+    cmbYears: TComboBox;
+    Button1: TButton;
+    RadioGroup2: TRadioGroup;
+    Panel2: TPanel;
+    YDBGrid1: TYDBGrid;
+    Panel3: TPanel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Button2: TButton;
+    edtMessage: TEdit;
+    Memo1: TMemo;
     procedure BitBtn1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure YDBGrid1NeedColorCondition(Column: TColumn;
@@ -57,6 +58,8 @@ type
     procedure Button2Click(Sender: TObject);
     procedure N1Click(Sender: TObject);
     procedure N2Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
     procedure OpenCustomersForSMS;
@@ -124,6 +127,8 @@ end;
 procedure TFSendSMSForCustomerLock.FormShow(Sender: TObject);
 begin
   inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;  
   cmbYears.Visible:=False;
   cmbMonths.Visible:=False;
   cmbDays.Visible:=True;
@@ -320,6 +325,19 @@ begin
            ShowMessage('„Ê—œÌ ÊÃÊœ ‰œ«—œ');
   end;
   Button1Click(Application);
+
+end;
+
+procedure TFSendSMSForCustomerLock.FormCanResize(Sender: TObject;
+  var NewWidth, NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 879)  or (NewHeight < 631) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+
+  inherited;
 
 end;
 

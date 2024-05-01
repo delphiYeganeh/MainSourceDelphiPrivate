@@ -9,9 +9,6 @@ uses
 
 type
   TfrUserType = class(TMBaseForm)
-    Panel1: TPanel;
-    BitBtn2: TBitBtn;
-    BitBtn1: TBitBtn;
     DsUserType: TDataSource;
     SPSelect_UserTypeContractType_By_UserTypeID: TADOStoredProc;
     SPSelect_UserTypeContractType_By_UserTypeIDUserTypeContractTypeID: TAutoIncField;
@@ -21,14 +18,18 @@ type
     SPSelect_UserTypeContractType_By_UserTypeIDContractTypeTitle: TWideStringField;
     SPSelect_UserTypeContractType_By_UserTypeIDUIContractTypeTitle: TWideStringField;
     SPSelect_UserTypeContractType_By_UserTypeIDuu: TWideStringField;
+    pnlMain: TPanel;
+    grdAccessContractType: TGroupBox;
+    dbgContractType: TYDBGrid;
+    Panel3: TPanel;
+    BtnAddContractTypeAccess: TBitBtn;
     GroupBox1: TGroupBox;
     dbgUserType: TYDBGrid;
     Panel2: TPanel;
     btnAddUserType: TBitBtn;
-    grdAccessContractType: TGroupBox;
-    dbgContractType: TYDBGrid;
-    Panel4: TPanel;
-    BtnAddContractTypeAccess: TBitBtn;
+    Panel1: TPanel;
+    BitBtn2: TBitBtn;
+    BitBtn1: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure qryUserTypeAfterScroll(DataSet: TDataSet);
     procedure SPSelect_UserTypeContractType_By_UserTypeIDBeforePost(
@@ -42,6 +43,9 @@ type
     procedure AexitExecute(Sender: TObject);
     procedure ADQActionTypePostError(DataSet: TDataSet; E: EDatabaseError;
       var Action: TDataAction);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     qryUserType : TADOQuery;
     procedure  SetdbgUserType     ;
@@ -181,6 +185,26 @@ begin
 {  ShowMessage('Œÿ« œ— À»  —òÊ—œ ÃœÌœ');
   Abort;
  }
+end;
+
+procedure TfrUserType.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 479)  or (NewHeight < 441) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
+end;
+
+procedure TfrUserType.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
 end;
 
 end.

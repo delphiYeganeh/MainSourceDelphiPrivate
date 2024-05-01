@@ -9,9 +9,7 @@ uses
 
 type
   TFPoorsantList = class(TMBaseForm)
-    Panel2: TPanel;
     QPoorsantList: TADOQuery;
-    YDBGrid1: TYDBGrid;
     QPoorsantListID: TAutoIncField;
     QPoorsantListMYear: TIntegerField;
     QPoorsantListUserID: TIntegerField;
@@ -27,69 +25,72 @@ type
     QAllUsers: TADOQuery;
     QAllUsersid: TAutoIncField;
     QAllUsersTitle: TWideStringField;
-    Panel3: TPanel;
-    GroupBox1: TGroupBox;
-    Label2: TLabel;
-    edtName: TEdit;
-    YDBGridUsers: TYDBGrid;
+    QPoorsantListAutomation_Web: TFloatField;
+    DataSource1: TDataSource;
+    QTemp: TADOQuery;
+    pnlMain: TPanel;
     Panel1: TPanel;
     Button1: TButton;
     Button2: TButton;
-    GroupBox2: TGroupBox;
-    GroupBox3: TGroupBox;
-    SpeedButton2: TSpeedButton;
-    ComboBox1: TComboBox;
-    Label1: TLabel;
-    GroupBox4: TGroupBox;
-    Label3: TLabel;
-    Label4: TLabel;
-    DBEdit1: TDBEdit;
-    DBEdit2: TDBEdit;
-    GroupBox5: TGroupBox;
-    Label5: TLabel;
-    Label6: TLabel;
-    DBEdit3: TDBEdit;
-    DBEdit4: TDBEdit;
-    GroupBox6: TGroupBox;
-    Label7: TLabel;
-    Label8: TLabel;
-    DBEdit5: TDBEdit;
-    DBEdit6: TDBEdit;
-    GroupBox7: TGroupBox;
-    Label9: TLabel;
-    Label10: TLabel;
-    DBEdit7: TDBEdit;
-    DBEdit8: TDBEdit;
-    DBEdit9: TDBEdit;
-    Label12: TLabel;
-    QPoorsantListAutomation_Web: TFloatField;
+    Panel2: TPanel;
+    SpeedButton1: TSpeedButton;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
     SpeedButton5: TSpeedButton;
     SpeedButton6: TSpeedButton;
     SpeedButton7: TSpeedButton;
     SpeedButton8: TSpeedButton;
-    SpeedButton10: TSpeedButton;
-    DataSource1: TDataSource;
-    QTemp: TADOQuery;
+    YDBGrid1: TYDBGrid;
+    GroupBox2: TGroupBox;
+    Label12: TLabel;
+    Label20: TLabel;
+    GroupBox4: TGroupBox;
+    Label3: TLabel;
+    Label4: TLabel;
     Label11: TLabel;
     Label13: TLabel;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    GroupBox5: TGroupBox;
+    Label5: TLabel;
+    Label6: TLabel;
     Label14: TLabel;
     Label15: TLabel;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    GroupBox6: TGroupBox;
+    Label7: TLabel;
+    Label8: TLabel;
     Label16: TLabel;
     Label17: TLabel;
+    DBEdit5: TDBEdit;
+    DBEdit6: TDBEdit;
+    GroupBox7: TGroupBox;
+    Label9: TLabel;
+    Label10: TLabel;
     Label18: TLabel;
     Label19: TLabel;
-    Label20: TLabel;
+    DBEdit7: TDBEdit;
+    DBEdit8: TDBEdit;
+    DBEdit9: TDBEdit;
+    GroupBox3: TGroupBox;
+    SpeedButton2: TSpeedButton;
+    Label1: TLabel;
+    ComboBox1: TComboBox;
+    Panel3: TPanel;
+    GroupBox1: TGroupBox;
+    Label2: TLabel;
+    edtName: TEdit;
+    YDBGridUsers: TYDBGrid;
     procedure SpeedButton2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure SpeedButton10Click(Sender: TObject);
+    procedure SpeedButton8Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
-    procedure SpeedButton4Click(Sender: TObject);
-    procedure SpeedButton7Click(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
-    procedure SpeedButton8Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure SpeedButton7Click(Sender: TObject);
     procedure edtNameChange(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -100,6 +101,8 @@ type
       State: TGridDrawState; var Color: TColor);
     procedure YDBGrid1NeedColorCondition(Column: TColumn;
       State: TGridDrawState; var Color: TColor);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
     Function IS_User_In_List:Boolean;
@@ -141,11 +144,13 @@ end;
 procedure TFPoorsantList.FormShow(Sender: TObject);
 begin
   inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;  
   QAllUsers.Close;
   QAllUsers.Open;
 end;
 
-procedure TFPoorsantList.SpeedButton10Click(Sender: TObject);
+procedure TFPoorsantList.SpeedButton8Click(Sender: TObject);
 begin
   inherited;
   if QPoorsantList.State=dsBrowse then
@@ -154,7 +159,7 @@ begin
   end;
 end;
 
-procedure TFPoorsantList.SpeedButton3Click(Sender: TObject);
+procedure TFPoorsantList.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
   if QPoorsantList.State<>dsBrowse then
@@ -163,7 +168,7 @@ begin
   end;
 end;
 
-procedure TFPoorsantList.SpeedButton4Click(Sender: TObject);
+procedure TFPoorsantList.SpeedButton3Click(Sender: TObject);
 begin
   inherited;
   if QPoorsantList.State<>dsBrowse then
@@ -172,7 +177,7 @@ begin
   end;
 end;
 
-procedure TFPoorsantList.SpeedButton7Click(Sender: TObject);
+procedure TFPoorsantList.SpeedButton6Click(Sender: TObject);
 begin
   inherited;
   if QPoorsantList.State=dsBrowse then
@@ -181,7 +186,7 @@ begin
   end;
 end;
 
-procedure TFPoorsantList.SpeedButton6Click(Sender: TObject);
+procedure TFPoorsantList.SpeedButton5Click(Sender: TObject);
 begin
   inherited;
   if QPoorsantList.State=dsBrowse then
@@ -191,7 +196,7 @@ begin
 
 end;
 
-procedure TFPoorsantList.SpeedButton5Click(Sender: TObject);
+procedure TFPoorsantList.SpeedButton4Click(Sender: TObject);
 begin
   inherited;
   if QPoorsantList.State=dsBrowse then
@@ -201,7 +206,7 @@ begin
 
 end;
 
-procedure TFPoorsantList.SpeedButton8Click(Sender: TObject);
+procedure TFPoorsantList.SpeedButton7Click(Sender: TObject);
 begin
   inherited;
   if QPoorsantList.State=dsBrowse then
@@ -330,6 +335,19 @@ begin
        Color:=$00EAEAEA
   else
        Color:=clWhite;
+end;
+
+procedure TFPoorsantList.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 976)  or (NewHeight < 582) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+
+  inherited;
+
 end;
 
 end.

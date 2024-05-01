@@ -1,13 +1,14 @@
 object FM_NewDongleWrite: TFM_NewDongleWrite
-  Left = 426
-  Top = 70
+  Left = 621
+  Top = 301
   BiDiMode = bdRightToLeft
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1601#1585#1605' '#1578#1606#1592#1610#1605#1575#1578' '#1602#1601#1604
   ClientHeight = 478
-  ClientWidth = 453
+  ClientWidth = 460
   Color = clBtnFace
+  DockSite = True
   Font.Charset = ARABIC_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
@@ -17,32 +18,34 @@ object FM_NewDongleWrite: TFM_NewDongleWrite
   OldCreateOrder = False
   ParentBiDiMode = False
   Position = poDesktopCenter
+  OnCanResize = FormCanResize
   OnKeyDown = FormKeyDown
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 14
-  object Panel1: TPanel
+  object pnlMain: TPanel
     Left = 0
     Top = 0
-    Width = 453
+    Width = 460
     Height = 478
     Align = alClient
     TabOrder = 0
     DesignSize = (
-      453
+      460
       478)
     object GroupBox1: TGroupBox
       Left = 1
       Top = 1
-      Width = 451
+      Width = 458
       Height = 144
       Align = alTop
       Caption = #1578#1593#1610#1610#1606' '#1575#1591#1604#1575#1593#1575#1578
       TabOrder = 0
       DesignSize = (
-        451
+        458
         144)
       object Label1: TLabel
-        Left = 376
+        Left = 383
         Top = 50
         Width = 65
         Height = 14
@@ -50,7 +53,7 @@ object FM_NewDongleWrite: TFM_NewDongleWrite
         Caption = #1606#1575#1605' '#1606#1585#1605' '#1575#1601#1586#1575#1585' :'
       end
       object Label2: TLabel
-        Left = 253
+        Left = 260
         Top = 74
         Width = 21
         Height = 14
@@ -58,7 +61,7 @@ object FM_NewDongleWrite: TFM_NewDongleWrite
         Caption = #1705#1583' :'
       end
       object Label3: TLabel
-        Left = 108
+        Left = 115
         Top = 74
         Width = 72
         Height = 14
@@ -66,7 +69,7 @@ object FM_NewDongleWrite: TFM_NewDongleWrite
         Caption = #1570#1582#1585#1610#1606' '#1606#1711#1575#1585#1588' :'
       end
       object DBText1: TDBText
-        Left = 192
+        Left = 199
         Top = 74
         Width = 55
         Height = 14
@@ -83,7 +86,7 @@ object FM_NewDongleWrite: TFM_NewDongleWrite
         ParentFont = False
       end
       object DBText2: TDBText
-        Left = 54
+        Left = 61
         Top = 74
         Width = 52
         Height = 14
@@ -100,7 +103,7 @@ object FM_NewDongleWrite: TFM_NewDongleWrite
         ParentFont = False
       end
       object Label4: TLabel
-        Left = 332
+        Left = 339
         Top = 22
         Width = 109
         Height = 14
@@ -108,7 +111,7 @@ object FM_NewDongleWrite: TFM_NewDongleWrite
         Caption = #1588#1605#1575#1585#1607' '#1587#1585#1610#1575#1604' '#1575#1589#1604#1610' :'
       end
       object DBTSerial1: TDBText
-        Left = 263
+        Left = 270
         Top = 22
         Width = 65
         Height = 14
@@ -126,7 +129,7 @@ object FM_NewDongleWrite: TFM_NewDongleWrite
         ParentFont = False
       end
       object lblNetworkUsers: TLabel
-        Left = 354
+        Left = 361
         Top = 114
         Width = 88
         Height = 14
@@ -135,7 +138,7 @@ object FM_NewDongleWrite: TFM_NewDongleWrite
         Visible = False
       end
       object ChBoNet: TCheckBox
-        Left = 360
+        Left = 367
         Top = 84
         Width = 81
         Height = 17
@@ -240,16 +243,16 @@ object FM_NewDongleWrite: TFM_NewDongleWrite
     object GroupBox2: TGroupBox
       Left = 1
       Top = 145
-      Width = 451
+      Width = 458
       Height = 65
       Align = alTop
       Caption = #1581#1575#1604#1578#1607#1575#1610' '#1582#1575#1589
       TabOrder = 3
       DesignSize = (
-        451
+        458
         65)
       object LblKit: TLabel
-        Left = 308
+        Left = 315
         Top = 30
         Width = 48
         Height = 14
@@ -258,7 +261,7 @@ object FM_NewDongleWrite: TFM_NewDongleWrite
         Enabled = False
       end
       object CoBoKit: TComboBox
-        Left = 241
+        Left = 248
         Top = 30
         Width = 64
         Height = 22
@@ -281,7 +284,7 @@ object FM_NewDongleWrite: TFM_NewDongleWrite
           'J')
       end
       object ChBoKit: TCheckBox
-        Left = 362
+        Left = 369
         Top = 30
         Width = 81
         Height = 17
@@ -300,7 +303,7 @@ object FM_NewDongleWrite: TFM_NewDongleWrite
       end
     end
     object btnRegisterDataInLock: TButton
-      Left = 8
+      Left = 15
       Top = 222
       Width = 161
       Height = 30

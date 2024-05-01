@@ -1,1209 +1,1222 @@
 inherited Frep: TFrep
-  Left = 525
-  Top = 281
-  Width = 632
+  Left = 673
+  Top = 255
+  Width = 755
   Height = 611
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = #1711#1586#1575#1585#1588' '#1575#1586' '#1575#1591#1604#1575#1593#1575#1578' '#1605#1588#1578#1585#1610#1575#1606
   OldCreateOrder = True
+  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
-  object YDBGrid2: TYDBGrid [0]
-    Left = 0
-    Top = 206
-    Width = 616
-    Height = 314
-    Cursor = crHandPoint
-    Align = alClient
-    Color = 16772074
-    DataSource = DSForm
-    TabOrder = 0
-    TitleFont.Charset = ARABIC_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-    YeganehColor = True
-    YeganehFinish = False
-    PageNumber = False
-    RecordNumber = False
-    HasTime = False
-    Oriention = poPortrait
-    HasDate = False
-    HasIndex = False
-    PrintTitle = #1604#1610#1587#1578' '#1578#1607#1610#1607' '#1588#1583#1607' '#1578#1608#1587#1591' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1610#1711#1575#1606#1607
-    InvertFarsiDate = True
-    TitleSort = True
-    AutoInsert = False
-    FooterFields = 'Count'
-    Columns = <
-      item
-        Alignment = taLeftJustify
-        Expanded = False
-        FieldName = 'CustomerID'
-        Title.Alignment = taCenter
-        Title.Caption = #1603#1583' '#1605#1588#1578#1585#1610
-        Width = 88
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'CustomerNo'
-        Title.Alignment = taCenter
-        Title.Caption = #1603#1583' '#1587#1610#1587#1578#1605
-        Width = 85
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'CompanyName'
-        Title.Alignment = taCenter
-        Title.Caption = #1606#1575#1605' '#1588#1585#1705#1578
-        Width = 202
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'PersonTitle'
-        Title.Alignment = taCenter
-        Title.Caption = #1605#1583#1610#1585#1610#1578
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'Treater'
-        Title.Alignment = taCenter
-        Title.Caption = #1591#1585#1601' '#1605#1603#1575#1578#1576#1607
-        Width = 115
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'CityTitle'
-        Title.Alignment = taCenter
-        Title.Caption = #1588#1607#1585
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'GroupTitle'
-        Title.Alignment = taCenter
-        Title.Caption = #1606#1608#1593' '#1601#1593#1575#1604#1610#1578
-        Width = 110
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'GroupNo'
-        Title.Alignment = taCenter
-        Title.Caption = #1603#1583' '#1601#1593#1575#1604#1610#1578
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'MarketerNo'
-        Title.Alignment = taCenter
-        Title.Caption = #1603#1583' '#1576#1575#1586#1575#1585#1610#1575#1576
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'MarketerTitle'
-        Title.Alignment = taCenter
-        Title.Caption = #1576#1575#1586#1575#1585#1610#1575#1576
-        Width = 96
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'nickname'
-        Title.Alignment = taCenter
-        Title.Caption = #1606#1575#1605' '#1603#1575#1605#1604' '
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'Phone'
-        Title.Alignment = taCenter
-        Title.Caption = #1578#1604#1601#1606'  '
-        Width = 182
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'Address'
-        Title.Alignment = taCenter
-        Title.Caption = #1570#1583#1585#1587
-        Width = 458
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'PostalCode'
-        Title.Alignment = taCenter
-        Title.Caption = #1603#1583' '#1662#1587#1578#1610
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'Notes'
-        Title.Alignment = taCenter
-        Title.Caption = #1578#1608#1590#1610#1581
-        Visible = False
-      end>
+  inherited ShapeBase: TShape
+    Width = 739
+    Height = 572
   end
-  object Panel1: TPanel [1]
+  object pnlMain: TPanel [1]
     Left = 0
     Top = 0
-    Width = 616
-    Height = 206
-    Align = alTop
-    TabOrder = 1
-    DesignSize = (
-      616
-      206)
-    object Label1: TLabel
-      Left = 559
-      Top = 67
-      Width = 47
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1606#1575'&'#1605' '#1588#1585#1603#1578
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label2: TLabel
-      Left = 559
-      Top = 94
-      Width = 33
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1605#1583#1610#1585#1610#1578
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label9: TLabel
-      Left = 297
-      Top = 67
-      Width = 32
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1576#1575#1586#1575#1585#1610#1575#1576
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label10: TLabel
-      Left = 559
-      Top = 12
-      Width = 53
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1603#1583' '#1587#1610#1587#1578#1605
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label11: TLabel
-      Left = 559
-      Top = 177
-      Width = 25
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1570#1583#1585#1587
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label7: TLabel
-      Left = 559
-      Top = 122
-      Width = 21
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1578#1604#1601#1606
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label3: TLabel
-      Left = 297
-      Top = 12
-      Width = 49
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1606#1608#1593' '#1601#1593#1575#1604#1610#1578
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label5: TLabel
-      Left = 559
-      Top = 149
-      Width = 22
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1588#1607#1585
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label8: TLabel
-      Left = 297
-      Top = 94
-      Width = 40
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1578#1608#1590#1610#1581#1575#1578
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label4: TLabel
-      Left = 297
-      Top = 39
-      Width = 42
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1603#1583' '#1575#1587#1578#1575#1606
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label12: TLabel
-      Left = 297
-      Top = 122
-      Width = 60
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1575#1608#1604#1608#1610#1578' '#1575#1585#1587#1575#1604
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label13: TLabel
-      Left = 297
-      Top = 177
-      Width = 38
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1603#1583' '#1602#1576#1604#1610
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label14: TLabel
-      Left = 297
-      Top = 149
-      Width = 53
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1591#1585#1601' '#1605#1603#1575#1578#1576#1607
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object ahmadvand: TLabel
-      Left = 68
-      Top = 178
-      Width = 30
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1578#1593#1583#1575#1583' :'
-    end
-    object SBMarketerID: TSpeedButton
-      Left = 268
-      Top = 63
-      Width = 23
-      Height = 22
-      Anchors = [akTop, akRight]
-      Glyph.Data = {
-        36030000424D3603000000000000360000002800000010000000100000000100
-        1800000000000003000000000000000000000000000000000000FF00FFFF00FF
-        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-        FFAB7B7B314860FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-        00FFFF00FFFF00FFFF00FFFF00FFB67B7B31608F0B73E05084B6FF00FFFF00FF
-        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFB67B7B3160
-        8F1173EA38A1FF31A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-        00FFFF00FFFF00FFB67B7B31608F0B6AE038A1FF38A1FFFF00FFFF00FFFF00FF
-        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFAB7B7B31608F0B73E031A1
-        FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFC08F84CAA18FB68F8498
-        6058FF00FF405058116AD431A1FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FF
-        C0988FE0D4ABFFFFCAFFFFCAFFFFCAF4E0C0A184738F7B73A1CAEA38ABFFFF00
-        FFFF00FFFF00FFFF00FFFF00FFA17373F4F4EAFFFFEAFFFFD4FFFFD3FFFFD3FF
-        FFD3FFEAB6CAA18FC0A1A1FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4CAAB
-        FFFFFFFFFFD4FFFFD4FEFED3FFFFD3FFFED3FEFED3F4D4A1B67B73FF00FFFF00
-        FFFF00FFFF00FFFF00FFB6847BF4EACAFFFFD4FEFED3FEFED3FEFED3FEFED3FF
-        FED3FEFED3FFE098D4AB8FFF00FFFF00FFFF00FFFF00FFFF00FFB69884F4F4CA
-        FFFFD4FEFED3FEFED3FEFED3FEFED3FEFED3FEFED3FFD498E0B698FF00FFFF00
-        FFFF00FFFF00FFFF00FFB68F84F4EACAFFFFD4FFFFD4FFFED3FEFED3FFFED3FE
-        FED3FEFED3FFE0A1D4AB98FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFE0D4AB
-        FFFFD3FFFED3FFFED3FEFED3FEFED3FEFED3FFEAB6FFEAB6B6847BFF00FFFF00
-        FFFF00FFFF00FFFF00FFFF00FFAB8473FFF4B6FFFED3FEFED3FEFED3FEFED3FF
-        F4EAFFFFFFD4B698FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
-        C09884F4D4A1FFE0A1FFE098FFEAB6F4EACACAABABFF00FFFF00FFFF00FFFF00
-        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4AB8FD4AB8FC09884C0
-        987BFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = SBMarketerIDClick
-    end
-    object SBCityID: TSpeedButton
-      Left = 531
-      Top = 145
-      Width = 23
-      Height = 22
-      Anchors = [akTop, akRight]
-      Glyph.Data = {
-        36030000424D3603000000000000360000002800000010000000100000000100
-        1800000000000003000000000000000000000000000000000000FF00FFFF00FF
-        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-        FFAB7B7B314860FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-        00FFFF00FFFF00FFFF00FFFF00FFB67B7B31608F0B73E05084B6FF00FFFF00FF
-        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFB67B7B3160
-        8F1173EA38A1FF31A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-        00FFFF00FFFF00FFB67B7B31608F0B6AE038A1FF38A1FFFF00FFFF00FFFF00FF
-        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFAB7B7B31608F0B73E031A1
-        FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFC08F84CAA18FB68F8498
-        6058FF00FF405058116AD431A1FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FF
-        C0988FE0D4ABFFFFCAFFFFCAFFFFCAF4E0C0A184738F7B73A1CAEA38ABFFFF00
-        FFFF00FFFF00FFFF00FFFF00FFA17373F4F4EAFFFFEAFFFFD4FFFFD3FFFFD3FF
-        FFD3FFEAB6CAA18FC0A1A1FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4CAAB
-        FFFFFFFFFFD4FFFFD4FEFED3FFFFD3FFFED3FEFED3F4D4A1B67B73FF00FFFF00
-        FFFF00FFFF00FFFF00FFB6847BF4EACAFFFFD4FEFED3FEFED3FEFED3FEFED3FF
-        FED3FEFED3FFE098D4AB8FFF00FFFF00FFFF00FFFF00FFFF00FFB69884F4F4CA
-        FFFFD4FEFED3FEFED3FEFED3FEFED3FEFED3FEFED3FFD498E0B698FF00FFFF00
-        FFFF00FFFF00FFFF00FFB68F84F4EACAFFFFD4FFFFD4FFFED3FEFED3FFFED3FE
-        FED3FEFED3FFE0A1D4AB98FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFE0D4AB
-        FFFFD3FFFED3FFFED3FEFED3FEFED3FEFED3FFEAB6FFEAB6B6847BFF00FFFF00
-        FFFF00FFFF00FFFF00FFFF00FFAB8473FFF4B6FFFED3FEFED3FEFED3FEFED3FF
-        F4EAFFFFFFD4B698FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
-        C09884F4D4A1FFE0A1FFE098FFEAB6F4EACACAABABFF00FFFF00FFFF00FFFF00
-        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4AB8FD4AB8FC09884C0
-        987BFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = SBCityIDClick
-    end
-    object SpeedButton1: TSpeedButton
-      Left = 268
-      Top = 9
-      Width = 23
-      Height = 22
-      Anchors = [akTop, akRight]
-      Glyph.Data = {
-        36030000424D3603000000000000360000002800000010000000100000000100
-        1800000000000003000000000000000000000000000000000000FF00FFFF00FF
-        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-        FFAB7B7B314860FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-        00FFFF00FFFF00FFFF00FFFF00FFB67B7B31608F0B73E05084B6FF00FFFF00FF
-        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFB67B7B3160
-        8F1173EA38A1FF31A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-        00FFFF00FFFF00FFB67B7B31608F0B6AE038A1FF38A1FFFF00FFFF00FFFF00FF
-        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFAB7B7B31608F0B73E031A1
-        FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFC08F84CAA18FB68F8498
-        6058FF00FF405058116AD431A1FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FF
-        C0988FE0D4ABFFFFCAFFFFCAFFFFCAF4E0C0A184738F7B73A1CAEA38ABFFFF00
-        FFFF00FFFF00FFFF00FFFF00FFA17373F4F4EAFFFFEAFFFFD4FFFFD3FFFFD3FF
-        FFD3FFEAB6CAA18FC0A1A1FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4CAAB
-        FFFFFFFFFFD4FFFFD4FEFED3FFFFD3FFFED3FEFED3F4D4A1B67B73FF00FFFF00
-        FFFF00FFFF00FFFF00FFB6847BF4EACAFFFFD4FEFED3FEFED3FEFED3FEFED3FF
-        FED3FEFED3FFE098D4AB8FFF00FFFF00FFFF00FFFF00FFFF00FFB69884F4F4CA
-        FFFFD4FEFED3FEFED3FEFED3FEFED3FEFED3FEFED3FFD498E0B698FF00FFFF00
-        FFFF00FFFF00FFFF00FFB68F84F4EACAFFFFD4FFFFD4FFFED3FEFED3FFFED3FE
-        FED3FEFED3FFE0A1D4AB98FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFE0D4AB
-        FFFFD3FFFED3FFFED3FEFED3FEFED3FEFED3FFEAB6FFEAB6B6847BFF00FFFF00
-        FFFF00FFFF00FFFF00FFFF00FFAB8473FFF4B6FFFED3FEFED3FEFED3FEFED3FF
-        F4EAFFFFFFD4B698FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
-        C09884F4D4A1FFE0A1FFE098FFEAB6F4EACACAABABFF00FFFF00FFFF00FFFF00
-        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4AB8FD4AB8FC09884C0
-        987BFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = SpeedButton1Click
-    end
-    object SpeedButton2: TSpeedButton
-      Left = 268
-      Top = 36
-      Width = 23
-      Height = 22
-      Anchors = [akTop, akRight]
-      Glyph.Data = {
-        36030000424D3603000000000000360000002800000010000000100000000100
-        1800000000000003000000000000000000000000000000000000FF00FFFF00FF
-        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-        FFAB7B7B314860FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-        00FFFF00FFFF00FFFF00FFFF00FFB67B7B31608F0B73E05084B6FF00FFFF00FF
-        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFB67B7B3160
-        8F1173EA38A1FF31A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-        00FFFF00FFFF00FFB67B7B31608F0B6AE038A1FF38A1FFFF00FFFF00FFFF00FF
-        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFAB7B7B31608F0B73E031A1
-        FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFC08F84CAA18FB68F8498
-        6058FF00FF405058116AD431A1FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FF
-        C0988FE0D4ABFFFFCAFFFFCAFFFFCAF4E0C0A184738F7B73A1CAEA38ABFFFF00
-        FFFF00FFFF00FFFF00FFFF00FFA17373F4F4EAFFFFEAFFFFD4FFFFD3FFFFD3FF
-        FFD3FFEAB6CAA18FC0A1A1FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4CAAB
-        FFFFFFFFFFD4FFFFD4FEFED3FFFFD3FFFED3FEFED3F4D4A1B67B73FF00FFFF00
-        FFFF00FFFF00FFFF00FFB6847BF4EACAFFFFD4FEFED3FEFED3FEFED3FEFED3FF
-        FED3FEFED3FFE098D4AB8FFF00FFFF00FFFF00FFFF00FFFF00FFB69884F4F4CA
-        FFFFD4FEFED3FEFED3FEFED3FEFED3FEFED3FEFED3FFD498E0B698FF00FFFF00
-        FFFF00FFFF00FFFF00FFB68F84F4EACAFFFFD4FFFFD4FFFED3FEFED3FFFED3FE
-        FED3FEFED3FFE0A1D4AB98FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFE0D4AB
-        FFFFD3FFFED3FFFED3FEFED3FEFED3FEFED3FFEAB6FFEAB6B6847BFF00FFFF00
-        FFFF00FFFF00FFFF00FFFF00FFAB8473FFF4B6FFFED3FEFED3FEFED3FEFED3FF
-        F4EAFFFFFFD4B698FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
-        C09884F4D4A1FFE0A1FFE098FFEAB6F4EACACAABABFF00FFFF00FFFF00FFFF00
-        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4AB8FD4AB8FC09884C0
-        987BFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = SpeedButton2Click
-    end
-    object Label6: TLabel
-      Left = 559
-      Top = 39
-      Width = 51
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1603#1583' '#1605#1588#1578#1585#1610
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object YwhereEdit0: TYWhereEdit
-      Left = 374
-      Top = 63
-      Width = 180
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdRightToLeft
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
-      TabOrder = 2
-      isLike = True
-      isDate = False
-      EveryLike = True
-      isString = True
-      FieldName = 'CompanyName'
-      TableName = 'Customer'
-      CodeField = 'Code'
-      TitleField = 'Title'
-      Connection = Dm.YeganehConnection
-    end
-    object YWhereEdit1: TYWhereEdit
-      Left = 374
-      Top = 91
-      Width = 180
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdRightToLeft
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
-      TabOrder = 3
-      isLike = True
-      isDate = False
-      EveryLike = True
-      isString = True
-      FieldName = 'PersonTitle'
-      TableName = 'Customer'
-      CodeField = 'Code'
-      TitleField = 'Title'
-      Connection = Dm.YeganehConnection
-    end
-    object YWhereEdit2: TYWhereEdit
-      Left = 111
-      Top = 63
-      Width = 155
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdLeftToRight
-      Color = 16773345
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
-      TabOrder = 9
-      OnKeyDown = CtrlSpace
-      isLike = False
-      isDate = False
-      EveryLike = False
-      isString = False
-      FieldName = 'MarketerID'
-      TableName = 'Customer'
-      ListTable = 'marketer'
-      CodeField = 'MarketerID'
-      TitleField = 'MarketerTitle'
-      Connection = Dm.YeganehConnection
-    end
-    object YWhereEdit3: TYWhereEdit
-      Left = 457
-      Top = 9
-      Width = 97
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdLeftToRight
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
+    Width = 739
+    Height = 572
+    Align = alClient
+    Caption = ' '
+    TabOrder = 0
+    object YDBGrid1: TYDBGrid
+      Left = 1
+      Top = 207
+      Width = 737
+      Height = 312
+      Cursor = crHandPoint
+      Align = alClient
+      Color = 16772074
+      DataSource = DSForm
       TabOrder = 0
-      isLike = False
-      isDate = False
-      EveryLike = False
-      isString = True
-      FieldName = 'CustomerNo'
-      TableName = 'Customer'
-      CodeField = 'Code'
-      TitleField = 'Title'
-      Connection = Dm.YeganehConnection
+      TitleFont.Charset = ARABIC_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      YeganehColor = True
+      YeganehFinish = False
+      PageNumber = False
+      RecordNumber = False
+      HasTime = False
+      Oriention = poPortrait
+      HasDate = False
+      HasIndex = False
+      PrintTitle = #1604#1610#1587#1578' '#1578#1607#1610#1607' '#1588#1583#1607' '#1578#1608#1587#1591' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1610#1711#1575#1606#1607
+      InvertFarsiDate = True
+      TitleSort = True
+      AutoInsert = False
+      FooterFields = 'Count'
+      Columns = <
+        item
+          Alignment = taLeftJustify
+          Expanded = False
+          FieldName = 'CustomerID'
+          Title.Alignment = taCenter
+          Title.Caption = #1603#1583' '#1605#1588#1578#1585#1610
+          Width = 88
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CustomerNo'
+          Title.Alignment = taCenter
+          Title.Caption = #1603#1583' '#1587#1610#1587#1578#1605
+          Width = 85
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CompanyName'
+          Title.Alignment = taCenter
+          Title.Caption = #1606#1575#1605' '#1588#1585#1705#1578
+          Width = 202
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PersonTitle'
+          Title.Alignment = taCenter
+          Title.Caption = #1605#1583#1610#1585#1610#1578
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'Treater'
+          Title.Alignment = taCenter
+          Title.Caption = #1591#1585#1601' '#1605#1603#1575#1578#1576#1607
+          Width = 115
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CityTitle'
+          Title.Alignment = taCenter
+          Title.Caption = #1588#1607#1585
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'GroupTitle'
+          Title.Alignment = taCenter
+          Title.Caption = #1606#1608#1593' '#1601#1593#1575#1604#1610#1578
+          Width = 110
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'GroupNo'
+          Title.Alignment = taCenter
+          Title.Caption = #1603#1583' '#1601#1593#1575#1604#1610#1578
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'MarketerNo'
+          Title.Alignment = taCenter
+          Title.Caption = #1603#1583' '#1576#1575#1586#1575#1585#1610#1575#1576
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'MarketerTitle'
+          Title.Alignment = taCenter
+          Title.Caption = #1576#1575#1586#1575#1585#1610#1575#1576
+          Width = 96
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'nickname'
+          Title.Alignment = taCenter
+          Title.Caption = #1606#1575#1605' '#1603#1575#1605#1604' '
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'Phone'
+          Title.Alignment = taCenter
+          Title.Caption = #1578#1604#1601#1606'  '
+          Width = 182
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Address'
+          Title.Alignment = taCenter
+          Title.Caption = #1570#1583#1585#1587
+          Width = 458
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PostalCode'
+          Title.Alignment = taCenter
+          Title.Caption = #1603#1583' '#1662#1587#1578#1610
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Notes'
+          Title.Alignment = taCenter
+          Title.Caption = #1578#1608#1590#1610#1581
+          Visible = False
+        end>
     end
-    object YWhereEdit4: TYWhereEdit
-      Left = 111
-      Top = 91
-      Width = 180
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdRightToLeft
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
-      TabOrder = 10
-      isLike = True
-      isDate = False
-      EveryLike = True
-      isString = True
-      FieldName = 'notes'
-      TableName = 'Customer'
-      CodeField = 'Code'
-      TitleField = 'Title'
-      Connection = Dm.YeganehConnection
-    end
-    object YWhereEdit5: TYWhereEdit
-      Left = 374
-      Top = 145
-      Width = 155
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdLeftToRight
-      Color = 16773345
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
-      TabOrder = 5
-      OnKeyDown = CtrlSpace
-      isLike = False
-      isDate = False
-      EveryLike = False
-      isString = False
-      FieldName = 'CityID'
-      TableName = 'Customer'
-      ListTable = 'vwCities'
-      CodeField = 'CityID'
-      TitleField = 'CityTitle'
-      Connection = Dm.YeganehConnection
-    end
-    object YWhereEdit6: TYWhereEdit
-      Left = 111
-      Top = 9
-      Width = 155
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdLeftToRight
-      Color = 16773345
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
-      TabOrder = 7
-      OnKeyDown = CtrlSpace
-      isLike = False
-      isDate = False
-      EveryLike = False
-      isString = False
-      FieldName = 'GroupID'
-      TableName = 'Customer'
-      ListTable = 'groups'
-      CodeField = 'GroupID'
-      TitleField = 'GroupTitle'
-      Connection = Dm.YeganehConnection
-    end
-    object YWhereEdit8: TYWhereEdit
-      Left = 374
-      Top = 118
-      Width = 180
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdRightToLeft
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
-      TabOrder = 4
-      isLike = True
-      isDate = False
-      EveryLike = False
-      isString = True
-      FieldName = 'Phone'
-      TableName = 'Customer'
-      CodeField = 'Code'
-      TitleField = 'Title'
-      Connection = Dm.YeganehConnection
-    end
-    object YWhereEdit9: TYWhereEdit
-      Left = 374
-      Top = 173
-      Width = 180
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdRightToLeft
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
-      TabOrder = 6
-      isLike = True
-      isDate = False
-      EveryLike = True
-      isString = True
-      FieldName = 'Address'
-      TableName = 'Customer'
-      CodeField = 'Code'
-      TitleField = 'Title'
-      Connection = Dm.YeganehConnection
-    end
-    object YWhereEdit10: TYWhereEdit
-      Left = 111
-      Top = 36
-      Width = 155
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdLeftToRight
-      Color = 16773345
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
-      TabOrder = 8
-      OnKeyDown = CtrlSpace
-      isLike = False
-      isDate = False
-      EveryLike = False
-      isString = False
-      FieldName = 'StateID'
-      TableName = 'VWCities'
-      ListTable = 'State'
-      CodeField = 'StateID'
-      TitleField = 'StateTitle'
-      Connection = Dm.YeganehConnection
-    end
-    object YWhereEdit11: TYWhereEdit
-      Left = 111
-      Top = 118
-      Width = 180
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdLeftToRight
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
-      TabOrder = 11
-      isLike = False
-      isDate = False
-      EveryLike = False
-      isString = False
-      FieldName = 'SendPriority'
-      TableName = 'Customer'
-      CodeField = 'Code'
-      TitleField = 'Title'
-      Connection = Dm.YeganehConnection
-    end
-    object YWhereEdit12: TYWhereEdit
-      Left = 111
-      Top = 173
-      Width = 180
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdLeftToRight
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
-      TabOrder = 13
-      isLike = False
-      isDate = False
-      EveryLike = False
-      isString = True
-      FieldName = 'oldCustomerNo'
-      TableName = 'Customer'
-      CodeField = 'Code'
-      TitleField = 'Title'
-      Connection = Dm.YeganehConnection
-    end
-    object YWhereEdit13: TYWhereEdit
-      Left = 111
-      Top = 145
-      Width = 180
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdRightToLeft
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
-      TabOrder = 12
-      isLike = True
-      isDate = False
-      EveryLike = False
-      isString = True
-      FieldName = 'Treater'
-      TableName = 'Customer'
-      CodeField = 'Code'
-      TitleField = 'Title'
-      Connection = Dm.YeganehConnection
-    end
-    object YWhereEdit7: TYWhereEdit
-      Left = 457
-      Top = 36
-      Width = 97
-      Height = 21
-      Anchors = [akTop, akRight]
-      BiDiMode = bdLeftToRight
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBiDiMode = False
-      ParentFont = False
+    object Panel2: TPanel
+      Left = 1
+      Top = 519
+      Width = 737
+      Height = 52
+      Align = alBottom
       TabOrder = 1
-      isLike = False
-      isDate = False
-      EveryLike = False
-      isString = True
-      FieldName = 'CustomerID'
-      TableName = 'Customer'
-      CodeField = 'Code'
-      TitleField = 'Title'
-      Connection = Dm.YeganehConnection
+      DesignSize = (
+        737
+        52)
+      object SpeedButton3: TSpeedButton
+        Left = 8
+        Top = 1
+        Width = 55
+        Height = 50
+        Caption = #1582#1585#1608#1580
+        Flat = True
+        Glyph.Data = {
+          961E0000424D961E0000000000003600000028000000600000001B0000000100
+          180000000000601E0000120B0000120B00000000000000000000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC6C6C6999999D5
+          D5D5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFE8E8E8D6D6D6EEEEEEFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC6C6C600003700006200
+          01271E1E1E7B7B7BD8D8D8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFE8E8E8ACACACBBBBBBA7A7A7A5A5A5CACACAEFEFEFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC6C6C601023101
+          02B60002D50000790001225A5A5AC3C3C3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFE8E8E8AAAAAAD7D7D7E3E3E3C2C2C2A5A5A5BDBD
+          BDE7E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFABABAB42
+          42420406730104F50004EB000291000125696969D5D5D5FFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDDDDDDB3B3B3C1C1C1EDEDEDEAEAEACBCB
+          CBA6A6A6C3C3C3EEEEEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
+          F0F0696969050651060AEC0003EE0003E00002780001098A8A8AFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9F9F9C3C3C3B5B5B5EBEBEBEBEB
+          EBE6E6E6C3C3C39C9C9CD0D0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFF72727205063A0A0EEC0004EF0003DE0002B40001356C6C6CFCFCFC
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC7C7C7ADADADEBEB
+          EBEBEBEBE5E5E5D7D7D7ABABABC4C4C4FEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFF7272720809510C10F50004EF0003DB0002CA000152696969
+          DBDBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC7C7C7B5B5
+          B5EEEEEEEBEBEBE5E5E5DEDEDEB5B5B5C3C3C3F1F1F1FFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFF6363631013960B0FF50004EB0003D70002C6000269
+          696969F0F0F0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC1C1
+          C1CECECEEEEEEEEAEAEAE3E3E3DDDDDDBDBDBDC3C3C3F9F9F9FFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFCCCCCC020311171AE80509F50003E50003D00003C2
+          000159696969FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBEB
+          EB9F9F9FEAEAEAEEEEEEE8E8E8E1E1E1DBDBDBB8B8B8C3C3C3FFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFF7272721011881013F60004F10003DC0002CA
+          0003BF0001417B7B7BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFC7C7C7C9C9C9EFEFEFECECECE5E5E5DEDEDEDBDBDBAFAFAFCACACAFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFB7B7B70809451317F60307F50003E60002D4
+          0002C60003B2000110DEDEDEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFE2E2E2B1B1B1EFEFEFEEEEEEE8E8E8E2E2E2DDDDDDD6D6D69F9F9FF2F2F2FF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC939393FC
+          FCFCFFFFFFFFFFFFFFFFFFFFFFFFDBDBDB0303231013F6060AF50004ED0003DD
+          0003CF0002C600016B757575FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFEFEFED4D4D4FEFEFEFFFFFFFFFFFFFFFFFFFFFF
+          FFF1F1F1A5A5A5EEEEEEEEEEEEEBEBEBE5E5E5E0E0E0DDDDDDBEBEBEC8C8C8FF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFABABAB42424200015A00
+          0003FCFCFCFFFFFFFFFFFFFFFFFFB4B4B402033F090DF50509F50004F10003E5
+          0003D70003CF0002BE121212FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFDDDDDDB3B3B3B8B8B89A9A9AFEFEFEFFFFFFFFFFFFFFFF
+          FFE1E1E1AFAFAFEEEEEEEDEDEDECECECE8E8E8E3E3E3E0E0E0DADADAA0A0A0FF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7E7E7E0001160002980001736F
+          6F6FFFFFFFFFFFFFFFFFFFCFCFCF4B4B4B0002AC0205F50205F50003F30004EA
+          0003E10003D90002D4000012EAEAEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFCBCBCBA1A1A1CDCDCDC1C1C1C5C5C5FFFFFFFFFFFFFFFFFFECEC
+          ECB7B7B7D4D4D4EDEDEDEDEDEDECECECE9E9E9E7E7E7E4E4E4E2E2E29F9F9FF7
+          F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFABABAB42424200023F0002BA0002C700002CC6
+          C6C6FFFFFFE4E4E487878700000800018A0004ED0003F30205F50104F50004F1
+          0004EB0003E40003DF000112EAEAEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          DDDDDDB3B3B3AFAFAFD9D9D9DDDDDDA8A8A8E8E8E8FFFFFFF4F4F4CFCFCF9C9C
+          9CC9C9C9EAEAEAEDEDEDEDEDEDEDEDEDECECECEAEAEAE7E7E7E5E5E59F9F9FF7
+          F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFB7B7B74E4E4E00012C00029A0002CD0003C90001AF1E1E1E4E
+          4E4E1B1B1B0001150001600002C10003E50003EE0104F5070AF5070AF50408F5
+          0003F40003EE0002C02D2D2DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE2E2E2B8B8B8
+          A8A8A8CECECEDFDFDFDEDEDED5D5D5A5A5A5B8B8B8A4A4A4A0A0A0BABABADCDC
+          DCE8E8E8EBEBEBEDEDEDEEEEEEEDEDEDEEEEEEEDEDEDEBEBEBDBDBDBABABABFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9F9
+          F9ABABAB4B4B4B0000260002950003D60002D40003D20002D00003A300017900
+          028D0003B80003D30003DC0003E60004EF0307F50A0EF50E11F61013F60D10F6
+          080CF50307F5000147969696FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDDDDDDDB7B7B7A6A6A6CCCCCC
+          E3E3E3E2E2E2E1E1E1E1E1E1D1D1D1C3C3C3C9C9C9D8D8D8E1E1E1E5E5E5E8E8
+          E8EBEBEBEDEDEDEEEEEEEEEEEEEFEFEFEEEEEEEEEEEEEDEDEDB1B1B1D5D5D5FF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD8D8D89090905151510000
+          0600024D0002A40003E60003E50004E30003E10003E00003DD0003DB0003DA00
+          03DD0003E10003E80003EE0104F5090DF51013F61418F6171AF6171AF61418F6
+          1014F3040662696969FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFEFEFEFD3D3D3B9B9B99B9B9BB4B4B4D1D1D1E8E8E8E8E8E8
+          E7E7E7E7E7E7E6E6E6E5E5E5E5E5E5E4E4E4E5E5E5E6E6E6E9E9E9EBEBEBEDED
+          EDEEEEEEEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEDEDEDBBBBBBC3C3C3FFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD8D8D801022503056B0508A7070A
+          E7070AF5060AF50408F50408F50104F50003F30004F00004ED0004EB0004EB00
+          04EF0003F40509F50C10F51317F6171AF61C1FF61E21F61F22F61D20F61416C8
+          0405346C6C6CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFEFEFEFA6A6A6BEBEBED3D3D3E9E9E9EDEDEDEDEDEDEEEEEEEEEEEE
+          EDEDEDEDEDEDECECECEBEBEBEAEAEAEAEAEAEBEBEBEDEDEDEEEEEEEEEEEEEFEF
+          EFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFDFDFDFABABABC4C4C4FFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4E4E401011A0607540D0F961719
+          DF1B1EF61C1FF61C1FF61A1DF61619F61215F60D10F6080CF50509F5060AF50A
+          0EF51013F61619F61D20F62224F62427F62528F62325E8191BA8080840303030
+          999999FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFF4F4F4A2A2A2B6B6B6CDCDCDE7E7E7EFEFEFEFEFEFEFEFEFEFEFEF
+          EFEFEFEFEFEFEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEFEFEFEFEFEFEFEFEFF0F0
+          F0F0F0F0F0F0F0EBEBEBD4D4D4AFAFAFACACACD6D6D6FFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4E4E4A8A8A86363631818
+          180C0C491C1DA02C2EF12D2FF72A2CF72427F61D20F6171AF61317F61418F619
+          1CF61E21F61F22D61F21BD1A1B941415740A0B400F0F0F515151BABABAFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFF4F4F4DCDCDCC1C1C1A3A3A3B3B3B3D1D1D1EFEFEFF0F0F0
+          F0F0F0F0F0F0EFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE5E5E5DCDCDCCDCD
+          CDC2C2C2AFAFAF9F9F9FB9B9B9E3E3E3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFB4B4B45A5A5A06061A20228E3335EE3133F72A2CF72224F61618C207074305
+          05290000002121213C3C3C666666878787BDBDBDFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE1E1E1BDBDBDA2A2A2CCCCCC
+          EEEEEEF1F1F1F0F0F0EFEFEFDDDDDDB0B0B0A7A7A7999999A6A6A6B1B1B1C2C2
+          C2CFCFCFE5E5E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFD5D5D56C6C6C06061A2223A02F31F72729F71B1ED9000003D5
+          D5D5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEEEEEC4C4C4
+          A2A2A2D2D2D2F1F1F1F0F0F0E5E5E59A9A9AEEEEEEFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFC3C3C35A5A5A0D0E462426DD1F22F605063AC3
+          C3C3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          E7E7E7BDBDBDB2B2B2E7E7E7EFEFEFADADADE7E7E7FFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8484840304141416AE0C0E9169
+          6969FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFCECECEA0A0A0D6D6D6CBCBCBC3C3C3FFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB4B4B44B4B4B06076200
+          0003FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFE1E1E1B7B7B7BBBBBB9A9A9AFEFEFEFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF999999FC
+          FCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6D6D6FEFEFEFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        Layout = blGlyphTop
+        NumGlyphs = 2
+        Spacing = 0
+        OnClick = SpeedButton3Click
+      end
+      object BitBtn1: TBitBtn
+        Left = 654
+        Top = 9
+        Width = 80
+        Height = 27
+        Anchors = [akTop, akRight]
+        Caption = #1578#1607#1610#1607' '#1711#1586#1575#1585#1588
+        TabOrder = 0
+        OnClick = BitBtn1Click
+      end
+      object BitBtn2: TBitBtn
+        Left = 569
+        Top = 9
+        Width = 80
+        Height = 27
+        Anchors = [akTop, akRight]
+        Caption = #1670#1575#1662
+        TabOrder = 1
+        OnClick = BitBtn2Click
+      end
+      object BitBtn3: TBitBtn
+        Left = 487
+        Top = 9
+        Width = 80
+        Height = 27
+        Anchors = [akTop, akRight]
+        Caption = #1575#1606#1578#1602#1575#1604' '#1576#1607' word'
+        TabOrder = 2
+        OnClick = BitBtn3Click
+      end
+      object BitBtn4: TBitBtn
+        Left = 323
+        Top = 9
+        Width = 80
+        Height = 27
+        Anchors = [akTop, akRight]
+        Caption = #1578#1607#1610#1607' '#1601#1585#1605
+        TabOrder = 3
+        OnClick = BitBtn4Click
+      end
+      object BitBtn5: TBitBtn
+        Left = 405
+        Top = 9
+        Width = 80
+        Height = 27
+        Anchors = [akTop, akRight]
+        Caption = #1575#1606#1578#1582#1575#1576' '#1587#1578#1608#1606' '#1607#1575
+        TabOrder = 4
+        OnClick = BitBtn5Click
+      end
+      object BitBtn6: TBitBtn
+        Left = 242
+        Top = 9
+        Width = 80
+        Height = 27
+        Anchors = [akTop, akRight]
+        Caption = #1589#1583#1608#1585' '#1601#1585#1605
+        TabOrder = 5
+        OnClick = BitBtn6Click
+      end
     end
-  end
-  object Panel2: TPanel [2]
-    Left = 0
-    Top = 520
-    Width = 616
-    Height = 52
-    Align = alBottom
-    TabOrder = 2
-    DesignSize = (
-      616
-      52)
-    object SpeedButton5: TSpeedButton
-      Left = 8
+    object Panel1: TPanel
+      Left = 1
       Top = 1
-      Width = 55
-      Height = 50
-      Caption = #1582#1585#1608#1580
-      Flat = True
-      Glyph.Data = {
-        961E0000424D961E0000000000003600000028000000600000001B0000000100
-        180000000000601E0000120B0000120B00000000000000000000FFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC6C6C6999999D5
-        D5D5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFE8E8E8D6D6D6EEEEEEFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC6C6C600003700006200
-        01271E1E1E7B7B7BD8D8D8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFE8E8E8ACACACBBBBBBA7A7A7A5A5A5CACACAEFEFEFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC6C6C601023101
-        02B60002D50000790001225A5A5AC3C3C3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFE8E8E8AAAAAAD7D7D7E3E3E3C2C2C2A5A5A5BDBD
-        BDE7E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFABABAB42
-        42420406730104F50004EB000291000125696969D5D5D5FFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDDDDDDB3B3B3C1C1C1EDEDEDEAEAEACBCB
-        CBA6A6A6C3C3C3EEEEEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
-        F0F0696969050651060AEC0003EE0003E00002780001098A8A8AFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9F9F9C3C3C3B5B5B5EBEBEBEBEB
-        EBE6E6E6C3C3C39C9C9CD0D0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFF72727205063A0A0EEC0004EF0003DE0002B40001356C6C6CFCFCFC
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC7C7C7ADADADEBEB
-        EBEBEBEBE5E5E5D7D7D7ABABABC4C4C4FEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFF7272720809510C10F50004EF0003DB0002CA000152696969
-        DBDBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC7C7C7B5B5
-        B5EEEEEEEBEBEBE5E5E5DEDEDEB5B5B5C3C3C3F1F1F1FFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFF6363631013960B0FF50004EB0003D70002C6000269
-        696969F0F0F0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC1C1
-        C1CECECEEEEEEEEAEAEAE3E3E3DDDDDDBDBDBDC3C3C3F9F9F9FFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFCCCCCC020311171AE80509F50003E50003D00003C2
-        000159696969FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBEB
-        EB9F9F9FEAEAEAEEEEEEE8E8E8E1E1E1DBDBDBB8B8B8C3C3C3FFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFF7272721011881013F60004F10003DC0002CA
-        0003BF0001417B7B7BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFC7C7C7C9C9C9EFEFEFECECECE5E5E5DEDEDEDBDBDBAFAFAFCACACAFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFB7B7B70809451317F60307F50003E60002D4
-        0002C60003B2000110DEDEDEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFE2E2E2B1B1B1EFEFEFEEEEEEE8E8E8E2E2E2DDDDDDD6D6D69F9F9FF2F2F2FF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC939393FC
-        FCFCFFFFFFFFFFFFFFFFFFFFFFFFDBDBDB0303231013F6060AF50004ED0003DD
-        0003CF0002C600016B757575FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFEFEFED4D4D4FEFEFEFFFFFFFFFFFFFFFFFFFFFF
-        FFF1F1F1A5A5A5EEEEEEEEEEEEEBEBEBE5E5E5E0E0E0DDDDDDBEBEBEC8C8C8FF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFABABAB42424200015A00
-        0003FCFCFCFFFFFFFFFFFFFFFFFFB4B4B402033F090DF50509F50004F10003E5
-        0003D70003CF0002BE121212FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFDDDDDDB3B3B3B8B8B89A9A9AFEFEFEFFFFFFFFFFFFFFFF
-        FFE1E1E1AFAFAFEEEEEEEDEDEDECECECE8E8E8E3E3E3E0E0E0DADADAA0A0A0FF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7E7E7E0001160002980001736F
-        6F6FFFFFFFFFFFFFFFFFFFCFCFCF4B4B4B0002AC0205F50205F50003F30004EA
-        0003E10003D90002D4000012EAEAEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFCBCBCBA1A1A1CDCDCDC1C1C1C5C5C5FFFFFFFFFFFFFFFFFFECEC
-        ECB7B7B7D4D4D4EDEDEDEDEDEDECECECE9E9E9E7E7E7E4E4E4E2E2E29F9F9FF7
-        F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFABABAB42424200023F0002BA0002C700002CC6
-        C6C6FFFFFFE4E4E487878700000800018A0004ED0003F30205F50104F50004F1
-        0004EB0003E40003DF000112EAEAEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        DDDDDDB3B3B3AFAFAFD9D9D9DDDDDDA8A8A8E8E8E8FFFFFFF4F4F4CFCFCF9C9C
-        9CC9C9C9EAEAEAEDEDEDEDEDEDEDEDEDECECECEAEAEAE7E7E7E5E5E59F9F9FF7
-        F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFB7B7B74E4E4E00012C00029A0002CD0003C90001AF1E1E1E4E
-        4E4E1B1B1B0001150001600002C10003E50003EE0104F5070AF5070AF50408F5
-        0003F40003EE0002C02D2D2DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE2E2E2B8B8B8
-        A8A8A8CECECEDFDFDFDEDEDED5D5D5A5A5A5B8B8B8A4A4A4A0A0A0BABABADCDC
-        DCE8E8E8EBEBEBEDEDEDEEEEEEEDEDEDEEEEEEEDEDEDEBEBEBDBDBDBABABABFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9F9
-        F9ABABAB4B4B4B0000260002950003D60002D40003D20002D00003A300017900
-        028D0003B80003D30003DC0003E60004EF0307F50A0EF50E11F61013F60D10F6
-        080CF50307F5000147969696FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDDDDDDDB7B7B7A6A6A6CCCCCC
-        E3E3E3E2E2E2E1E1E1E1E1E1D1D1D1C3C3C3C9C9C9D8D8D8E1E1E1E5E5E5E8E8
-        E8EBEBEBEDEDEDEEEEEEEEEEEEEFEFEFEEEEEEEEEEEEEDEDEDB1B1B1D5D5D5FF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD8D8D89090905151510000
-        0600024D0002A40003E60003E50004E30003E10003E00003DD0003DB0003DA00
-        03DD0003E10003E80003EE0104F5090DF51013F61418F6171AF6171AF61418F6
-        1014F3040662696969FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFEFEFEFD3D3D3B9B9B99B9B9BB4B4B4D1D1D1E8E8E8E8E8E8
-        E7E7E7E7E7E7E6E6E6E5E5E5E5E5E5E4E4E4E5E5E5E6E6E6E9E9E9EBEBEBEDED
-        EDEEEEEEEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEDEDEDBBBBBBC3C3C3FFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD8D8D801022503056B0508A7070A
-        E7070AF5060AF50408F50408F50104F50003F30004F00004ED0004EB0004EB00
-        04EF0003F40509F50C10F51317F6171AF61C1FF61E21F61F22F61D20F61416C8
-        0405346C6C6CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFEFEFEFA6A6A6BEBEBED3D3D3E9E9E9EDEDEDEDEDEDEEEEEEEEEEEE
-        EDEDEDEDEDEDECECECEBEBEBEAEAEAEAEAEAEBEBEBEDEDEDEEEEEEEEEEEEEFEF
-        EFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFDFDFDFABABABC4C4C4FFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4E4E401011A0607540D0F961719
-        DF1B1EF61C1FF61C1FF61A1DF61619F61215F60D10F6080CF50509F5060AF50A
-        0EF51013F61619F61D20F62224F62427F62528F62325E8191BA8080840303030
-        999999FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFF4F4F4A2A2A2B6B6B6CDCDCDE7E7E7EFEFEFEFEFEFEFEFEFEFEFEF
-        EFEFEFEFEFEFEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEFEFEFEFEFEFEFEFEFF0F0
-        F0F0F0F0F0F0F0EBEBEBD4D4D4AFAFAFACACACD6D6D6FFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4E4E4A8A8A86363631818
-        180C0C491C1DA02C2EF12D2FF72A2CF72427F61D20F6171AF61317F61418F619
-        1CF61E21F61F22D61F21BD1A1B941415740A0B400F0F0F515151BABABAFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFF4F4F4DCDCDCC1C1C1A3A3A3B3B3B3D1D1D1EFEFEFF0F0F0
-        F0F0F0F0F0F0EFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE5E5E5DCDCDCCDCD
-        CDC2C2C2AFAFAF9F9F9FB9B9B9E3E3E3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFB4B4B45A5A5A06061A20228E3335EE3133F72A2CF72224F61618C207074305
-        05290000002121213C3C3C666666878787BDBDBDFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE1E1E1BDBDBDA2A2A2CCCCCC
-        EEEEEEF1F1F1F0F0F0EFEFEFDDDDDDB0B0B0A7A7A7999999A6A6A6B1B1B1C2C2
-        C2CFCFCFE5E5E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFD5D5D56C6C6C06061A2223A02F31F72729F71B1ED9000003D5
-        D5D5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEEEEEC4C4C4
-        A2A2A2D2D2D2F1F1F1F0F0F0E5E5E59A9A9AEEEEEEFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFC3C3C35A5A5A0D0E462426DD1F22F605063AC3
-        C3C3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        E7E7E7BDBDBDB2B2B2E7E7E7EFEFEFADADADE7E7E7FFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8484840304141416AE0C0E9169
-        6969FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFCECECEA0A0A0D6D6D6CBCBCBC3C3C3FFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB4B4B44B4B4B06076200
-        0003FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFE1E1E1B7B7B7BBBBBB9A9A9AFEFEFEFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF999999FC
-        FCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6D6D6FEFEFEFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-      Layout = blGlyphTop
-      NumGlyphs = 2
-      Spacing = 0
-      OnClick = SpeedButton5Click
-    end
-    object BitBtn1: TBitBtn
-      Left = 531
-      Top = 9
-      Width = 80
-      Height = 27
-      Anchors = [akTop, akRight]
-      Caption = #1578#1607#1610#1607' '#1711#1586#1575#1585#1588
-      TabOrder = 0
-      OnClick = BitBtn1Click
-    end
-    object BitBtn2: TBitBtn
-      Left = 446
-      Top = 9
-      Width = 80
-      Height = 27
-      Anchors = [akTop, akRight]
-      Caption = #1670#1575#1662
-      TabOrder = 1
-      OnClick = BitBtn2Click
-    end
-    object BitBtn3: TBitBtn
-      Left = 364
-      Top = 9
-      Width = 80
-      Height = 27
-      Anchors = [akTop, akRight]
-      Caption = #1575#1606#1578#1602#1575#1604' '#1576#1607' word'
+      Width = 737
+      Height = 206
+      Align = alTop
       TabOrder = 2
-      OnClick = BitBtn3Click
-    end
-    object BitBtn8: TBitBtn
-      Left = 200
-      Top = 9
-      Width = 80
-      Height = 27
-      Anchors = [akTop, akRight]
-      Caption = #1578#1607#1610#1607' '#1601#1585#1605
-      TabOrder = 3
-      OnClick = BitBtn8Click
-    end
-    object BitBtn6: TBitBtn
-      Left = 282
-      Top = 9
-      Width = 80
-      Height = 27
-      Anchors = [akTop, akRight]
-      Caption = #1575#1606#1578#1582#1575#1576' '#1587#1578#1608#1606' '#1607#1575
-      TabOrder = 4
-      OnClick = BitBtn6Click
-    end
-    object BitBtn7: TBitBtn
-      Left = 119
-      Top = 9
-      Width = 80
-      Height = 27
-      Anchors = [akTop, akRight]
-      Caption = #1589#1583#1608#1585' '#1601#1585#1605
-      TabOrder = 5
-      OnClick = BitBtn7Click
+      DesignSize = (
+        737
+        206)
+      object Label1: TLabel
+        Left = 678
+        Top = 67
+        Width = 57
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1606#1575'&'#1605' '#1588#1585#1603#1578'  :'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 677
+        Top = 94
+        Width = 58
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1605#1583#1610#1585#1610#1578'       :'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label9: TLabel
+        Left = 417
+        Top = 67
+        Width = 63
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1576#1575#1586#1575#1585#1610#1575#1576'         :'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label10: TLabel
+        Left = 678
+        Top = 12
+        Width = 57
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1603#1583' '#1587#1610#1587#1578#1605':'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label11: TLabel
+        Left = 676
+        Top = 177
+        Width = 59
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1570#1583#1585#1587'          :'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 677
+        Top = 122
+        Width = 58
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1578#1604#1601#1606'           :'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label3: TLabel
+        Left = 415
+        Top = 12
+        Width = 65
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1606#1608#1593' '#1601#1593#1575#1604#1610#1578'    :'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label5: TLabel
+        Left = 679
+        Top = 149
+        Width = 56
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1588#1607#1585'          :'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 415
+        Top = 94
+        Width = 65
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1578#1608#1590#1610#1581#1575#1578'       :'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 416
+        Top = 39
+        Width = 64
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1603#1583' '#1575#1587#1578#1575#1606'      :'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label12: TLabel
+        Left = 413
+        Top = 121
+        Width = 67
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1575#1608#1604#1608#1610#1578' '#1575#1585#1587#1575#1604' :'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label13: TLabel
+        Left = 416
+        Top = 177
+        Width = 63
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1603#1583' '#1602#1576#1604#1610'       :'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label14: TLabel
+        Left = 414
+        Top = 148
+        Width = 66
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1591#1585#1601' '#1605#1603#1575#1578#1576#1607'   :'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object ahmadvand: TLabel
+        Left = 47
+        Top = 178
+        Width = 30
+        Height = 13
+        Caption = #1578#1593#1583#1575#1583' :'
+      end
+      object SBMarketerID: TSpeedButton
+        Left = 391
+        Top = 63
+        Width = 23
+        Height = 22
+        Anchors = [akTop, akRight]
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          1800000000000003000000000000000000000000000000000000FF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+          FFAB7B7B314860FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFFF00FFFF00FFB67B7B31608F0B73E05084B6FF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFB67B7B3160
+          8F1173EA38A1FF31A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFB67B7B31608F0B6AE038A1FF38A1FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFAB7B7B31608F0B73E031A1
+          FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFC08F84CAA18FB68F8498
+          6058FF00FF405058116AD431A1FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          C0988FE0D4ABFFFFCAFFFFCAFFFFCAF4E0C0A184738F7B73A1CAEA38ABFFFF00
+          FFFF00FFFF00FFFF00FFFF00FFA17373F4F4EAFFFFEAFFFFD4FFFFD3FFFFD3FF
+          FFD3FFEAB6CAA18FC0A1A1FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4CAAB
+          FFFFFFFFFFD4FFFFD4FEFED3FFFFD3FFFED3FEFED3F4D4A1B67B73FF00FFFF00
+          FFFF00FFFF00FFFF00FFB6847BF4EACAFFFFD4FEFED3FEFED3FEFED3FEFED3FF
+          FED3FEFED3FFE098D4AB8FFF00FFFF00FFFF00FFFF00FFFF00FFB69884F4F4CA
+          FFFFD4FEFED3FEFED3FEFED3FEFED3FEFED3FEFED3FFD498E0B698FF00FFFF00
+          FFFF00FFFF00FFFF00FFB68F84F4EACAFFFFD4FFFFD4FFFED3FEFED3FFFED3FE
+          FED3FEFED3FFE0A1D4AB98FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFE0D4AB
+          FFFFD3FFFED3FFFED3FEFED3FEFED3FEFED3FFEAB6FFEAB6B6847BFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFAB8473FFF4B6FFFED3FEFED3FEFED3FEFED3FF
+          F4EAFFFFFFD4B698FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          C09884F4D4A1FFE0A1FFE098FFEAB6F4EACACAABABFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4AB8FD4AB8FC09884C0
+          987BFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = SBMarketerIDClick
+      end
+      object SBCityID: TSpeedButton
+        Left = 654
+        Top = 145
+        Width = 23
+        Height = 22
+        Anchors = [akTop, akRight]
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          1800000000000003000000000000000000000000000000000000FF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+          FFAB7B7B314860FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFFF00FFFF00FFB67B7B31608F0B73E05084B6FF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFB67B7B3160
+          8F1173EA38A1FF31A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFB67B7B31608F0B6AE038A1FF38A1FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFAB7B7B31608F0B73E031A1
+          FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFC08F84CAA18FB68F8498
+          6058FF00FF405058116AD431A1FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          C0988FE0D4ABFFFFCAFFFFCAFFFFCAF4E0C0A184738F7B73A1CAEA38ABFFFF00
+          FFFF00FFFF00FFFF00FFFF00FFA17373F4F4EAFFFFEAFFFFD4FFFFD3FFFFD3FF
+          FFD3FFEAB6CAA18FC0A1A1FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4CAAB
+          FFFFFFFFFFD4FFFFD4FEFED3FFFFD3FFFED3FEFED3F4D4A1B67B73FF00FFFF00
+          FFFF00FFFF00FFFF00FFB6847BF4EACAFFFFD4FEFED3FEFED3FEFED3FEFED3FF
+          FED3FEFED3FFE098D4AB8FFF00FFFF00FFFF00FFFF00FFFF00FFB69884F4F4CA
+          FFFFD4FEFED3FEFED3FEFED3FEFED3FEFED3FEFED3FFD498E0B698FF00FFFF00
+          FFFF00FFFF00FFFF00FFB68F84F4EACAFFFFD4FFFFD4FFFED3FEFED3FFFED3FE
+          FED3FEFED3FFE0A1D4AB98FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFE0D4AB
+          FFFFD3FFFED3FFFED3FEFED3FEFED3FEFED3FFEAB6FFEAB6B6847BFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFAB8473FFF4B6FFFED3FEFED3FEFED3FEFED3FF
+          F4EAFFFFFFD4B698FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          C09884F4D4A1FFE0A1FFE098FFEAB6F4EACACAABABFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4AB8FD4AB8FC09884C0
+          987BFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = SBCityIDClick
+      end
+      object SpeedButton1: TSpeedButton
+        Left = 391
+        Top = 9
+        Width = 23
+        Height = 22
+        Anchors = [akTop, akRight]
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          1800000000000003000000000000000000000000000000000000FF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+          FFAB7B7B314860FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFFF00FFFF00FFB67B7B31608F0B73E05084B6FF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFB67B7B3160
+          8F1173EA38A1FF31A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFB67B7B31608F0B6AE038A1FF38A1FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFAB7B7B31608F0B73E031A1
+          FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFC08F84CAA18FB68F8498
+          6058FF00FF405058116AD431A1FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          C0988FE0D4ABFFFFCAFFFFCAFFFFCAF4E0C0A184738F7B73A1CAEA38ABFFFF00
+          FFFF00FFFF00FFFF00FFFF00FFA17373F4F4EAFFFFEAFFFFD4FFFFD3FFFFD3FF
+          FFD3FFEAB6CAA18FC0A1A1FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4CAAB
+          FFFFFFFFFFD4FFFFD4FEFED3FFFFD3FFFED3FEFED3F4D4A1B67B73FF00FFFF00
+          FFFF00FFFF00FFFF00FFB6847BF4EACAFFFFD4FEFED3FEFED3FEFED3FEFED3FF
+          FED3FEFED3FFE098D4AB8FFF00FFFF00FFFF00FFFF00FFFF00FFB69884F4F4CA
+          FFFFD4FEFED3FEFED3FEFED3FEFED3FEFED3FEFED3FFD498E0B698FF00FFFF00
+          FFFF00FFFF00FFFF00FFB68F84F4EACAFFFFD4FFFFD4FFFED3FEFED3FFFED3FE
+          FED3FEFED3FFE0A1D4AB98FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFE0D4AB
+          FFFFD3FFFED3FFFED3FEFED3FEFED3FEFED3FFEAB6FFEAB6B6847BFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFAB8473FFF4B6FFFED3FEFED3FEFED3FEFED3FF
+          F4EAFFFFFFD4B698FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          C09884F4D4A1FFE0A1FFE098FFEAB6F4EACACAABABFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4AB8FD4AB8FC09884C0
+          987BFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = SpeedButton1Click
+      end
+      object SpeedButton2: TSpeedButton
+        Left = 391
+        Top = 36
+        Width = 23
+        Height = 22
+        Anchors = [akTop, akRight]
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          1800000000000003000000000000000000000000000000000000FF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+          FFAB7B7B314860FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFFF00FFFF00FFB67B7B31608F0B73E05084B6FF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFB67B7B3160
+          8F1173EA38A1FF31A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFB67B7B31608F0B6AE038A1FF38A1FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFAB7B7B31608F0B73E031A1
+          FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFC08F84CAA18FB68F8498
+          6058FF00FF405058116AD431A1FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          C0988FE0D4ABFFFFCAFFFFCAFFFFCAF4E0C0A184738F7B73A1CAEA38ABFFFF00
+          FFFF00FFFF00FFFF00FFFF00FFA17373F4F4EAFFFFEAFFFFD4FFFFD3FFFFD3FF
+          FFD3FFEAB6CAA18FC0A1A1FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4CAAB
+          FFFFFFFFFFD4FFFFD4FEFED3FFFFD3FFFED3FEFED3F4D4A1B67B73FF00FFFF00
+          FFFF00FFFF00FFFF00FFB6847BF4EACAFFFFD4FEFED3FEFED3FEFED3FEFED3FF
+          FED3FEFED3FFE098D4AB8FFF00FFFF00FFFF00FFFF00FFFF00FFB69884F4F4CA
+          FFFFD4FEFED3FEFED3FEFED3FEFED3FEFED3FEFED3FFD498E0B698FF00FFFF00
+          FFFF00FFFF00FFFF00FFB68F84F4EACAFFFFD4FFFFD4FFFED3FEFED3FFFED3FE
+          FED3FEFED3FFE0A1D4AB98FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFE0D4AB
+          FFFFD3FFFED3FFFED3FEFED3FEFED3FEFED3FFEAB6FFEAB6B6847BFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFAB8473FFF4B6FFFED3FEFED3FEFED3FEFED3FF
+          F4EAFFFFFFD4B698FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          C09884F4D4A1FFE0A1FFE098FFEAB6F4EACACAABABFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4AB8FD4AB8FC09884C0
+          987BFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = SpeedButton2Click
+      end
+      object Label6: TLabel
+        Left = 680
+        Top = 39
+        Width = 55
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1603#1583' '#1605#1588#1578#1585#1610':'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object YwhereEdit0: TYWhereEdit
+        Left = 497
+        Top = 63
+        Width = 180
+        Height = 21
+        Anchors = [akTop, akRight]
+        BiDiMode = bdRightToLeft
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 2
+        isLike = True
+        isDate = False
+        EveryLike = True
+        isString = True
+        FieldName = 'CompanyName'
+        TableName = 'Customer'
+        CodeField = 'Code'
+        TitleField = 'Title'
+        Connection = Dm.YeganehConnection
+      end
+      object YWhereEdit1: TYWhereEdit
+        Left = 497
+        Top = 91
+        Width = 180
+        Height = 21
+        Anchors = [akTop, akRight]
+        BiDiMode = bdRightToLeft
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 3
+        isLike = True
+        isDate = False
+        EveryLike = True
+        isString = True
+        FieldName = 'PersonTitle'
+        TableName = 'Customer'
+        CodeField = 'Code'
+        TitleField = 'Title'
+        Connection = Dm.YeganehConnection
+      end
+      object YWhereEdit2: TYWhereEdit
+        Left = 90
+        Top = 63
+        Width = 299
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        BiDiMode = bdLeftToRight
+        Color = 16773345
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 9
+        OnKeyDown = CtrlSpace
+        isLike = False
+        isDate = False
+        EveryLike = False
+        isString = False
+        FieldName = 'MarketerID'
+        TableName = 'Customer'
+        ListTable = 'marketer'
+        CodeField = 'MarketerID'
+        TitleField = 'MarketerTitle'
+        Connection = Dm.YeganehConnection
+      end
+      object YWhereEdit3: TYWhereEdit
+        Left = 580
+        Top = 9
+        Width = 97
+        Height = 21
+        Anchors = [akTop, akRight]
+        BiDiMode = bdLeftToRight
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 0
+        isLike = False
+        isDate = False
+        EveryLike = False
+        isString = True
+        FieldName = 'CustomerNo'
+        TableName = 'Customer'
+        CodeField = 'Code'
+        TitleField = 'Title'
+        Connection = Dm.YeganehConnection
+      end
+      object YWhereEdit4: TYWhereEdit
+        Left = 90
+        Top = 91
+        Width = 324
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        BiDiMode = bdRightToLeft
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 10
+        isLike = True
+        isDate = False
+        EveryLike = True
+        isString = True
+        FieldName = 'notes'
+        TableName = 'Customer'
+        CodeField = 'Code'
+        TitleField = 'Title'
+        Connection = Dm.YeganehConnection
+      end
+      object YWhereEdit5: TYWhereEdit
+        Left = 497
+        Top = 145
+        Width = 155
+        Height = 21
+        Anchors = [akTop, akRight]
+        BiDiMode = bdLeftToRight
+        Color = 16773345
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 5
+        OnKeyDown = CtrlSpace
+        isLike = False
+        isDate = False
+        EveryLike = False
+        isString = False
+        FieldName = 'CityID'
+        TableName = 'Customer'
+        ListTable = 'vwCities'
+        CodeField = 'CityID'
+        TitleField = 'CityTitle'
+        Connection = Dm.YeganehConnection
+      end
+      object YWhereEdit6: TYWhereEdit
+        Left = 90
+        Top = 9
+        Width = 299
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        BiDiMode = bdLeftToRight
+        Color = 16773345
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 7
+        OnKeyDown = CtrlSpace
+        isLike = False
+        isDate = False
+        EveryLike = False
+        isString = False
+        FieldName = 'GroupID'
+        TableName = 'Customer'
+        ListTable = 'groups'
+        CodeField = 'GroupID'
+        TitleField = 'GroupTitle'
+        Connection = Dm.YeganehConnection
+      end
+      object YWhereEdit8: TYWhereEdit
+        Left = 497
+        Top = 118
+        Width = 180
+        Height = 21
+        Anchors = [akTop, akRight]
+        BiDiMode = bdRightToLeft
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 4
+        isLike = True
+        isDate = False
+        EveryLike = False
+        isString = True
+        FieldName = 'Phone'
+        TableName = 'Customer'
+        CodeField = 'Code'
+        TitleField = 'Title'
+        Connection = Dm.YeganehConnection
+      end
+      object YWhereEdit9: TYWhereEdit
+        Left = 497
+        Top = 173
+        Width = 180
+        Height = 21
+        Anchors = [akTop, akRight]
+        BiDiMode = bdRightToLeft
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 6
+        isLike = True
+        isDate = False
+        EveryLike = True
+        isString = True
+        FieldName = 'Address'
+        TableName = 'Customer'
+        CodeField = 'Code'
+        TitleField = 'Title'
+        Connection = Dm.YeganehConnection
+      end
+      object YWhereEdit10: TYWhereEdit
+        Left = 90
+        Top = 36
+        Width = 299
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        BiDiMode = bdLeftToRight
+        Color = 16773345
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 8
+        OnKeyDown = CtrlSpace
+        isLike = False
+        isDate = False
+        EveryLike = False
+        isString = False
+        FieldName = 'StateID'
+        TableName = 'VWCities'
+        ListTable = 'State'
+        CodeField = 'StateID'
+        TitleField = 'StateTitle'
+        Connection = Dm.YeganehConnection
+      end
+      object YWhereEdit11: TYWhereEdit
+        Left = 90
+        Top = 118
+        Width = 324
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        BiDiMode = bdLeftToRight
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 11
+        isLike = False
+        isDate = False
+        EveryLike = False
+        isString = False
+        FieldName = 'SendPriority'
+        TableName = 'Customer'
+        CodeField = 'Code'
+        TitleField = 'Title'
+        Connection = Dm.YeganehConnection
+      end
+      object YWhereEdit12: TYWhereEdit
+        Left = 90
+        Top = 173
+        Width = 324
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        BiDiMode = bdLeftToRight
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 13
+        isLike = False
+        isDate = False
+        EveryLike = False
+        isString = True
+        FieldName = 'oldCustomerNo'
+        TableName = 'Customer'
+        CodeField = 'Code'
+        TitleField = 'Title'
+        Connection = Dm.YeganehConnection
+      end
+      object YWhereEdit13: TYWhereEdit
+        Left = 90
+        Top = 145
+        Width = 324
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        BiDiMode = bdRightToLeft
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 12
+        isLike = True
+        isDate = False
+        EveryLike = False
+        isString = True
+        FieldName = 'Treater'
+        TableName = 'Customer'
+        CodeField = 'Code'
+        TitleField = 'Title'
+        Connection = Dm.YeganehConnection
+      end
+      object YWhereEdit7: TYWhereEdit
+        Left = 580
+        Top = 36
+        Width = 97
+        Height = 21
+        Anchors = [akTop, akRight]
+        BiDiMode = bdLeftToRight
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 1
+        isLike = False
+        isDate = False
+        EveryLike = False
+        isString = True
+        FieldName = 'CustomerID'
+        TableName = 'Customer'
+        CodeField = 'Code'
+        TitleField = 'Title'
+        Connection = Dm.YeganehConnection
+      end
     end
   end
   inherited DSForm: TDataSource

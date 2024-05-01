@@ -1,6 +1,6 @@
 object YInputQueryF: TYInputQueryF
-  Left = 494
-  Top = 188
+  Left = 617
+  Top = 153
   BiDiMode = bdRightToLeft
   BorderIcons = []
   BorderStyle = bsToolWindow

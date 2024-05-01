@@ -69,6 +69,8 @@ type
     dbgFollow: TYDBGrid;
     procedure BtnCancelClick(Sender: TObject);
     procedure btnShowContractWordClick(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
     FFollowupID : integer;
@@ -145,6 +147,16 @@ begin
     dbgFollow.ExportToWord
   end
   else ShowMessage('‘„« „ÃÊ“ «ÌÃ«œ Œ—ÊÃÌ «“  «ﬁœ«„«  —« ‰œ«—Ìœ');
+end;
+
+procedure TTasksTreeForm.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 623)  or (NewHeight < 489) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
 end;
 
 end.

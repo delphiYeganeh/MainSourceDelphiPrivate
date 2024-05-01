@@ -8,17 +8,21 @@ uses
 
 type
   TFcrack = class(TForm)
-    Button1: TButton;
-    Label1: TLabel;
-    Label2: TLabel;
-    Edit1: TEdit;
-    Edit2: TEdit;
     ActionList1: TActionList;
     Action1: TAction;
     ADOConnection: TADOConnection;
-    RadioButton1: TRadioButton;
+    pnlMain: TPanel;
     RadioButton2: TRadioButton;
+    RadioButton1: TRadioButton;
+    Label2: TLabel;
+    Label1: TLabel;
+    Edit2: TEdit;
+    Edit1: TEdit;
+    Button1: TButton;
     procedure Action1Execute(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,7 +34,7 @@ var
 
 implementation
 
-uses YShamsiDate;
+uses dmu,YShamsiDate;
 
 
 {$R *.dfm}
@@ -49,6 +53,19 @@ end;
 procedure TFcrack.Action1Execute(Sender: TObject);
 begin
  edit1.Text:=IntToStr(password(Edit2.Text));
+end;
+
+procedure TFcrack.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+     { TODO -oparsa : 14030203 }
+      Resize := False  ;
+      { TODO -oparsa : 14030203 }
+end;
+
+procedure TFcrack.FormShow(Sender: TObject);
+begin
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

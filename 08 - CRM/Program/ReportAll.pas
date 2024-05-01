@@ -21,9 +21,16 @@ type
     rpMarketer: TADOStoredProc;
     DrpMarketer: TDataSource;
     rpConactByDate: TADOStoredProc;
+    rpContractMarketerRate: TADOStoredProc;
+    DrpContractMarketerRate: TDataSource;
+    PopupMenu1: TPopupMenu;
+    excel1: TMenuItem;
+    Excel2: TMenuItem;
+    pnlMain: TPanel;
+    GroupBox1: TGroupBox;
+    allEdit: TEdit;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
     Panel2: TPanel;
     Panel3: TPanel;
     Label1: TLabel;
@@ -32,11 +39,23 @@ type
     Button1: TButton;
     Panel6: TPanel;
     dbgCountContactweek: TYDBGrid;
+    dbgCountContactWeekSoftware: TYDBGrid;
+    Panel5: TPanel;
+    Label3: TLabel;
+    YWhereEdit3: TYWhereEdit;
+    Button3: TButton;
+    Panel7: TPanel;
+    Label2: TLabel;
+    YWhereEdit2: TYWhereEdit;
+    Button2: TButton;
+    TabSheet2: TTabSheet;
     Panel1: TPanel;
     Panel9: TPanel;
     Label5: TLabel;
+    Label8: TLabel;
     dbgReportMarketerSales: TYDBGrid;
     Button4: TButton;
+    wredtReportMarketerSales: TYWhereEdit;
     Panel10: TPanel;
     Label6: TLabel;
     dbgMarketerTurnover: TYDBGrid;
@@ -47,29 +66,11 @@ type
     dbgMonthSoftwareSale: TYDBGrid;
     YWhereEdit5: TYWhereEdit;
     Button5: TButton;
-    dbgCountContactWeekSoftware: TYDBGrid;
     Panel4: TPanel;
     Label7: TLabel;
     dbgSaleToMonthNumber: TYDBGrid;
     YWhereEdit7: TYWhereEdit;
     Button7: TButton;
-    rpContractMarketerRate: TADOStoredProc;
-    DrpContractMarketerRate: TDataSource;
-    GroupBox1: TGroupBox;
-    allEdit: TEdit;
-    PopupMenu1: TPopupMenu;
-    excel1: TMenuItem;
-    Label8: TLabel;
-    wredtReportMarketerSales: TYWhereEdit;
-    Excel2: TMenuItem;
-    Panel5: TPanel;
-    YWhereEdit3: TYWhereEdit;
-    Button3: TButton;
-    Label3: TLabel;
-    Panel7: TPanel;
-    Label2: TLabel;
-    YWhereEdit2: TYWhereEdit;
-    Button2: TButton;
 Procedure  OpenConactByDate(FromDate:string;ToDate:string);
 Procedure  OpenConactByWeek(FromDate:string;ToDate:string);
 Procedure  OpenConactByWeekProduct(FromDate:string;ToDate:string);
@@ -90,6 +91,9 @@ Procedure  OpenMarketer(FromDate:string;ToDate:string);
       Shift: TShiftState);
     procedure excel1Click(Sender: TObject);
     procedure Excel2Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     procedure MakePrintTitle;
     procedure MakeReportTitle(Grid :TYDBGrid);
@@ -321,6 +325,26 @@ begin
     dbgCountContactweek   .PrintTitle := ' ê“«—‘  ⁄œ«œ  „«” »Â Â› Â ';
     dbgCountContactWeekSoftware.PrintTitle := 'ê“«—‘  ⁄œ«œ  „«” »Â Â› Â Ê ‰—„ «›“«— ';
 
+end;
+
+procedure TFrReportAll.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 1070)  or (NewHeight < 791) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+
+  inherited;
+
+end;
+
+procedure TFrReportAll.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

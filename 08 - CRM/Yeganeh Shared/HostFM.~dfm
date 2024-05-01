@@ -5,27 +5,28 @@ inherited FMHost: TFMHost
   BorderStyle = bsSingle
   Caption = #1601#1585#1605' '#1579#1576#1578' '#1570#1583#1585#1587#1607#1575#1610' '#1575#1610#1606#1578#1585#1606#1578#1610
   ClientHeight = 546
-  ClientWidth = 742
+  ClientWidth = 793
   KeyPreview = True
   OldCreateOrder = True
   Position = poMainFormCenter
   OnKeyDown = FormKeyDown
+  OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
     Top = 0
-    Width = 742
+    Width = 793
     Height = 38
     Align = alTop
     Ctl3D = True
     ParentCtl3D = False
     TabOrder = 0
     DesignSize = (
-      742
+      793
       38)
     object SBSearch: TSpeedButton
-      Left = 629
+      Left = 680
       Top = 3
       Width = 100
       Height = 31
@@ -156,7 +157,7 @@ inherited FMHost: TFMHost
   object Panel2: TPanel [1]
     Left = 0
     Top = 38
-    Width = 742
+    Width = 793
     Height = 130
     Align = alClient
     Ctl3D = True
@@ -165,7 +166,7 @@ inherited FMHost: TFMHost
     object DBGridHost: TYDBGrid
       Left = 1
       Top = 1
-      Width = 740
+      Width = 791
       Height = 128
       Cursor = crHandPoint
       Align = alClient
@@ -229,7 +230,7 @@ inherited FMHost: TFMHost
   object Panel4: TPanel [2]
     Left = 0
     Top = 494
-    Width = 742
+    Width = 793
     Height = 52
     Align = alBottom
     Constraints.MaxHeight = 52
@@ -238,7 +239,7 @@ inherited FMHost: TFMHost
     ParentCtl3D = False
     TabOrder = 3
     DesignSize = (
-      742
+      793
       52)
     object SpeedButton1: TSpeedButton
       Left = 16
@@ -499,7 +500,7 @@ inherited FMHost: TFMHost
       OnClick = SpeedButton1Click
     end
     object SBExportToWord: TSpeedButton
-      Left = 217
+      Left = 268
       Top = 1
       Width = 55
       Height = 50
@@ -666,7 +667,7 @@ inherited FMHost: TFMHost
       OnClick = SBExportToWordClick
     end
     object DBNavigator1: TDBNavigator
-      Left = 284
+      Left = 335
       Top = 1
       Width = 457
       Height = 50
@@ -702,17 +703,17 @@ inherited FMHost: TFMHost
   object Panel3: TPanel [3]
     Left = 0
     Top = 168
-    Width = 742
+    Width = 793
     Height = 326
     Align = alBottom
     Ctl3D = True
     ParentCtl3D = False
     TabOrder = 2
     DesignSize = (
-      742
+      793
       326)
     object Label1: TLabel
-      Left = 657
+      Left = 708
       Top = 12
       Width = 72
       Height = 13
@@ -720,7 +721,7 @@ inherited FMHost: TFMHost
       Caption = #1570#1583#1585#1587' '#1575#1610#1606#1578#1585#1606#1578#1610' :'
     end
     object Label3: TLabel
-      Left = 657
+      Left = 708
       Top = 217
       Width = 32
       Height = 13
@@ -728,7 +729,7 @@ inherited FMHost: TFMHost
       Caption = #1575#1610#1605#1610#1604' :'
     end
     object Label4: TLabel
-      Left = 657
+      Left = 708
       Top = 244
       Width = 53
       Height = 13
@@ -736,7 +737,7 @@ inherited FMHost: TFMHost
       Caption = #1606#1575#1605' '#1603#1575#1585#1576#1585#1610' :'
     end
     object Label5: TLabel
-      Left = 434
+      Left = 485
       Top = 243
       Width = 44
       Height = 13
@@ -744,7 +745,7 @@ inherited FMHost: TFMHost
       Caption = #1585#1605#1586' '#1608#1585#1608#1583' :'
     end
     object Label6: TLabel
-      Left = 657
+      Left = 708
       Top = 37
       Width = 69
       Height = 13
@@ -752,7 +753,7 @@ inherited FMHost: TFMHost
       Caption = #1605#1608#1590#1608#1593' '#1587#1575#1610#1578' :'
     end
     object Label7: TLabel
-      Left = 197
+      Left = 248
       Top = 294
       Width = 90
       Height = 13
@@ -760,7 +761,7 @@ inherited FMHost: TFMHost
       Caption = #1606#1575#1605' '#1603#1575#1585#1576#1585' '#1579#1576#1578' '#1603#1606#1606#1583#1607' :'
     end
     object Label8: TLabel
-      Left = 657
+      Left = 708
       Top = 270
       Width = 47
       Height = 13
@@ -768,7 +769,7 @@ inherited FMHost: TFMHost
       Caption = #1578#1608#1590#1610#1581#1575#1578' :'
     end
     object Label2: TLabel
-      Left = 253
+      Left = 304
       Top = 37
       Width = 43
       Height = 13
@@ -776,7 +777,7 @@ inherited FMHost: TFMHost
       Caption = #1606#1575#1605' '#1711#1585#1608#1607' :'
     end
     object Label9: TLabel
-      Left = 657
+      Left = 708
       Top = 60
       Width = 53
       Height = 13
@@ -784,7 +785,7 @@ inherited FMHost: TFMHost
       Caption = #1605#1578#1606'/'#1605#1602#1575#1604#1607' :'
     end
     object SBHostGroup: TSpeedButton
-      Left = 206
+      Left = 257
       Top = 32
       Width = 22
       Height = 22
@@ -819,7 +820,7 @@ inherited FMHost: TFMHost
       OnClick = SBHostGroupClick
     end
     object SBSimpleEditor: TSpeedButton
-      Left = 658
+      Left = 709
       Top = 82
       Width = 23
       Height = 22
@@ -876,7 +877,7 @@ inherited FMHost: TFMHost
       OnClick = SBSimpleEditorClick
     end
     object SpeedButton2: TSpeedButton
-      Left = 229
+      Left = 280
       Top = 32
       Width = 22
       Height = 22
@@ -922,7 +923,7 @@ inherited FMHost: TFMHost
       OnClick = SpeedButton2Click
     end
     object Label10: TLabel
-      Left = 659
+      Left = 710
       Top = 294
       Width = 71
       Height = 13
@@ -930,7 +931,7 @@ inherited FMHost: TFMHost
       Caption = #1608#1590#1593#1610#1578' '#1587#1575#1610#1578' :'
     end
     object Label11: TLabel
-      Left = 197
+      Left = 248
       Top = 244
       Width = 59
       Height = 13
@@ -938,7 +939,7 @@ inherited FMHost: TFMHost
       Caption = #1578#1575#1585#1610#1582' '#1588#1585#1608#1593' :'
     end
     object Label12: TLabel
-      Left = 197
+      Left = 248
       Top = 268
       Width = 57
       Height = 13
@@ -946,11 +947,11 @@ inherited FMHost: TFMHost
       Caption = #1578#1575#1585#1610#1582' '#1582#1575#1578#1605#1607' :'
     end
     object DBEAddress: TDBEdit
-      Left = 16
+      Left = 10
       Top = 8
-      Width = 638
+      Width = 695
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       Color = 13041663
       DataField = 'Address'
@@ -961,7 +962,7 @@ inherited FMHost: TFMHost
       OnExit = DBEAddressExit
     end
     object DBEEmail: TDBEdit
-      Left = 280
+      Left = 331
       Top = 213
       Width = 374
       Height = 21
@@ -975,7 +976,7 @@ inherited FMHost: TFMHost
       OnExit = DBEAddressExit
     end
     object DBEUserName: TDBEdit
-      Left = 504
+      Left = 555
       Top = 240
       Width = 150
       Height = 21
@@ -989,7 +990,7 @@ inherited FMHost: TFMHost
       OnExit = DBEAddressExit
     end
     object DBEPassword: TDBEdit
-      Left = 280
+      Left = 331
       Top = 240
       Width = 150
       Height = 21
@@ -1003,7 +1004,7 @@ inherited FMHost: TFMHost
       OnExit = DBEAddressExit
     end
     object DBESubject: TDBEdit
-      Left = 320
+      Left = 371
       Top = 33
       Width = 334
       Height = 21
@@ -1013,12 +1014,12 @@ inherited FMHost: TFMHost
       TabOrder = 1
     end
     object DBEUserNaFa: TDBEdit
-      Left = 16
+      Left = 10
       Top = 292
-      Width = 179
+      Width = 236
       Height = 19
       TabStop = False
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdRightToLeft
       Color = 16772337
       Ctl3D = False
@@ -1030,7 +1031,7 @@ inherited FMHost: TFMHost
       TabOrder = 12
     end
     object DBEComment: TDBEdit
-      Left = 280
+      Left = 331
       Top = 266
       Width = 374
       Height = 21
@@ -1040,11 +1041,11 @@ inherited FMHost: TFMHost
       TabOrder = 7
     end
     object DBLkCBHostGroup: TDBLookupComboBox
-      Left = 16
+      Left = 10
       Top = 33
-      Width = 188
+      Width = 245
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       DataField = 'ED_HostGroup_Ref'
       DataSource = DMHost.DSHost
@@ -1056,12 +1057,12 @@ inherited FMHost: TFMHost
       TabOrder = 2
     end
     object wwDBREImageData: TwwDBRichEdit
-      Left = 16
+      Left = 10
       Top = 59
-      Width = 638
+      Width = 695
       Height = 148
       ScrollBars = ssVertical
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       AutoURLDetect = False
       Ctl3D = True
       DataField = 'ImageData'
@@ -1103,7 +1104,7 @@ inherited FMHost: TFMHost
         685C667331365C7061720D0A7D0D0A00}
     end
     object DBCheckBox1: TDBCheckBox
-      Left = 144
+      Left = 195
       Top = 216
       Width = 113
       Height = 17
@@ -1116,7 +1117,7 @@ inherited FMHost: TFMHost
       ValueUnchecked = 'False'
     end
     object DBComboBox1: TDBComboBox
-      Left = 496
+      Left = 547
       Top = 292
       Width = 160
       Height = 21
@@ -1134,11 +1135,11 @@ inherited FMHost: TFMHost
       TabOrder = 8
     end
     object DBEdit1: TDBEdit
-      Left = 114
+      Left = 108
       Top = 240
-      Width = 80
+      Width = 137
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       DataField = 'PublicityStDate'
       DataSource = DMHost.DSHost
@@ -1146,16 +1147,25 @@ inherited FMHost: TFMHost
       TabOrder = 10
     end
     object DBEdit2: TDBEdit
-      Left = 114
+      Left = 108
       Top = 266
-      Width = 80
+      Width = 137
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       DataField = 'PublicityEnDate'
       DataSource = DMHost.DSHost
       ParentBiDiMode = False
       TabOrder = 11
     end
+  end
+  object ADOTable1: TADOTable
+    Left = 176
+    Top = 86
+  end
+  object DataSource1: TDataSource
+    DataSet = ADOTable1
+    Left = 176
+    Top = 136
   end
 end

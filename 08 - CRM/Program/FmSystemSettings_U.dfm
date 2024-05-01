@@ -5,24 +5,25 @@ inherited FmSystemSettings: TFmSystemSettings
   BorderStyle = bsSingle
   Caption = #1601#1585#1605' '#1579#1576#1578' '#1578#1606#1592#1610#1605#1575#1578' '#1587#1610#1587#1578#1605#1610' '#1606#1585#1605' '#1575#1601#1586#1575#1585
   ClientHeight = 358
-  ClientWidth = 647
+  ClientWidth = 645
   KeyPreview = True
   OldCreateOrder = True
   Position = poMainFormCenter
+  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
     Top = 308
-    Width = 647
+    Width = 645
     Height = 50
     Align = alBottom
     TabOrder = 0
     DesignSize = (
-      647
+      645
       50)
     object SBOtherPerson: TSpeedButton
-      Left = 572
+      Left = 570
       Top = 0
       Width = 55
       Height = 50
@@ -153,7 +154,7 @@ inherited FmSystemSettings: TFmSystemSettings
       OnClick = SBOtherPersonClick
     end
     object SpeedButton1: TSpeedButton
-      Left = 512
+      Left = 510
       Top = 0
       Width = 55
       Height = 50
@@ -230,7 +231,7 @@ inherited FmSystemSettings: TFmSystemSettings
   object Panel2: TPanel [1]
     Left = 0
     Top = 0
-    Width = 647
+    Width = 645
     Height = 308
     Align = alClient
     Caption = 'Panel2'
@@ -238,7 +239,7 @@ inherited FmSystemSettings: TFmSystemSettings
     object PageControl1: TPageControl
       Left = 1
       Top = 1
-      Width = 645
+      Width = 643
       Height = 306
       ActivePage = TabSheet1
       Align = alClient
@@ -248,10 +249,10 @@ inherited FmSystemSettings: TFmSystemSettings
       object TabSheet1: TTabSheet
         Caption = #1601#1610#1604#1583#1607#1575#1610' '#1575#1582#1578#1610#1575#1585#1610
         DesignSize = (
-          637
+          635
           266)
         object Label20: TLabel
-          Left = 524
+          Left = 522
           Top = 16
           Width = 102
           Height = 13
@@ -265,7 +266,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label1: TLabel
-          Left = 524
+          Left = 522
           Top = 43
           Width = 102
           Height = 13
@@ -279,7 +280,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label2: TLabel
-          Left = 524
+          Left = 522
           Top = 70
           Width = 102
           Height = 13
@@ -293,7 +294,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label3: TLabel
-          Left = 524
+          Left = 522
           Top = 97
           Width = 102
           Height = 13
@@ -307,7 +308,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label4: TLabel
-          Left = 524
+          Left = 522
           Top = 124
           Width = 102
           Height = 13
@@ -321,7 +322,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label5: TLabel
-          Left = 524
+          Left = 522
           Top = 151
           Width = 102
           Height = 13
@@ -335,7 +336,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label6: TLabel
-          Left = 524
+          Left = 522
           Top = 178
           Width = 102
           Height = 13
@@ -349,7 +350,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label7: TLabel
-          Left = 524
+          Left = 522
           Top = 205
           Width = 102
           Height = 13
@@ -363,7 +364,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label8: TLabel
-          Left = 524
+          Left = 522
           Top = 232
           Width = 102
           Height = 13
@@ -377,7 +378,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label9: TLabel
-          Left = 204
+          Left = 202
           Top = 16
           Width = 108
           Height = 13
@@ -391,7 +392,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label10: TLabel
-          Left = 204
+          Left = 202
           Top = 43
           Width = 108
           Height = 13
@@ -405,7 +406,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label11: TLabel
-          Left = 204
+          Left = 202
           Top = 70
           Width = 108
           Height = 13
@@ -419,7 +420,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label12: TLabel
-          Left = 204
+          Left = 202
           Top = 97
           Width = 108
           Height = 13
@@ -433,7 +434,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label13: TLabel
-          Left = 204
+          Left = 202
           Top = 124
           Width = 108
           Height = 13
@@ -447,7 +448,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label14: TLabel
-          Left = 204
+          Left = 202
           Top = 151
           Width = 108
           Height = 13
@@ -461,7 +462,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label15: TLabel
-          Left = 204
+          Left = 202
           Top = 178
           Width = 108
           Height = 13
@@ -475,7 +476,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label16: TLabel
-          Left = 204
+          Left = 202
           Top = 205
           Width = 108
           Height = 13
@@ -489,7 +490,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label17: TLabel
-          Left = 204
+          Left = 202
           Top = 232
           Width = 108
           Height = 13
@@ -503,7 +504,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object EdtFreeField01: TEdit
-          Left = 338
+          Left = 336
           Top = 12
           Width = 180
           Height = 21
@@ -511,7 +512,7 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 0
         end
         object EdtFreeField02: TEdit
-          Left = 338
+          Left = 336
           Top = 39
           Width = 180
           Height = 21
@@ -519,7 +520,7 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 1
         end
         object EdtFreeField03: TEdit
-          Left = 338
+          Left = 336
           Top = 66
           Width = 180
           Height = 21
@@ -527,7 +528,7 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 2
         end
         object EdtFreeField04: TEdit
-          Left = 338
+          Left = 336
           Top = 93
           Width = 180
           Height = 21
@@ -535,7 +536,7 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 3
         end
         object EdtFreeField05: TEdit
-          Left = 338
+          Left = 336
           Top = 120
           Width = 180
           Height = 21
@@ -543,7 +544,7 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 4
         end
         object EdtFreeField06: TEdit
-          Left = 338
+          Left = 336
           Top = 147
           Width = 180
           Height = 21
@@ -551,7 +552,7 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 5
         end
         object EdtFreeField07: TEdit
-          Left = 338
+          Left = 336
           Top = 174
           Width = 180
           Height = 21
@@ -559,7 +560,7 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 6
         end
         object EdtFreeField08: TEdit
-          Left = 338
+          Left = 336
           Top = 201
           Width = 180
           Height = 21
@@ -567,7 +568,7 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 7
         end
         object EdtFreeField09: TEdit
-          Left = 338
+          Left = 336
           Top = 228
           Width = 180
           Height = 21
@@ -575,75 +576,75 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 8
         end
         object EdtFreeField10: TEdit
-          Left = 18
+          Left = 14
           Top = 12
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 9
         end
         object EdtFreeField11: TEdit
-          Left = 18
+          Left = 14
           Top = 39
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 10
         end
         object EdtFreeField12: TEdit
-          Left = 18
+          Left = 14
           Top = 66
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 11
         end
         object EdtFreeField13: TEdit
-          Left = 18
+          Left = 14
           Top = 93
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 12
         end
         object EdtFreeField14: TEdit
-          Left = 18
+          Left = 14
           Top = 120
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 13
         end
         object EdtFreeField15: TEdit
-          Left = 18
+          Left = 14
           Top = 147
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 14
         end
         object EdtFreeField16: TEdit
-          Left = 18
+          Left = 14
           Top = 174
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 15
         end
         object EdtFreeField17: TEdit
-          Left = 18
+          Left = 14
           Top = 201
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 16
         end
         object EdtFreeField18: TEdit
-          Left = 18
+          Left = 14
           Top = 228
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 17
         end
       end
@@ -651,10 +652,10 @@ inherited FmSystemSettings: TFmSystemSettings
         Caption = #1601#1610#1604#1583#1607#1575#1610' '#1575#1582#1578#1610#1575#1585#1610' 2'
         ImageIndex = 2
         DesignSize = (
-          637
+          635
           266)
         object Label21: TLabel
-          Left = 525
+          Left = 523
           Top = 16
           Width = 101
           Height = 13
@@ -668,7 +669,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label22: TLabel
-          Left = 525
+          Left = 523
           Top = 43
           Width = 101
           Height = 13
@@ -682,7 +683,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label23: TLabel
-          Left = 525
+          Left = 523
           Top = 70
           Width = 101
           Height = 13
@@ -696,7 +697,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label24: TLabel
-          Left = 525
+          Left = 523
           Top = 97
           Width = 101
           Height = 13
@@ -710,7 +711,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label25: TLabel
-          Left = 525
+          Left = 523
           Top = 124
           Width = 101
           Height = 13
@@ -724,7 +725,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label26: TLabel
-          Left = 211
+          Left = 209
           Top = 16
           Width = 101
           Height = 13
@@ -738,7 +739,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label27: TLabel
-          Left = 211
+          Left = 209
           Top = 43
           Width = 101
           Height = 13
@@ -752,7 +753,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label28: TLabel
-          Left = 211
+          Left = 209
           Top = 70
           Width = 101
           Height = 13
@@ -766,7 +767,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label29: TLabel
-          Left = 211
+          Left = 209
           Top = 97
           Width = 101
           Height = 13
@@ -780,7 +781,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object Label30: TLabel
-          Left = 211
+          Left = 209
           Top = 124
           Width = 101
           Height = 13
@@ -794,7 +795,7 @@ inherited FmSystemSettings: TFmSystemSettings
           ParentFont = False
         end
         object EdtFreeField19: TEdit
-          Left = 338
+          Left = 336
           Top = 12
           Width = 180
           Height = 21
@@ -802,7 +803,7 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 0
         end
         object EdtFreeField20: TEdit
-          Left = 338
+          Left = 336
           Top = 39
           Width = 180
           Height = 21
@@ -810,7 +811,7 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 1
         end
         object EdtFreeField21: TEdit
-          Left = 338
+          Left = 336
           Top = 66
           Width = 180
           Height = 21
@@ -818,7 +819,7 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 2
         end
         object EdtFreeField22: TEdit
-          Left = 338
+          Left = 336
           Top = 93
           Width = 180
           Height = 21
@@ -826,7 +827,7 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 3
         end
         object EdtFreeField23: TEdit
-          Left = 338
+          Left = 336
           Top = 120
           Width = 180
           Height = 21
@@ -834,54 +835,58 @@ inherited FmSystemSettings: TFmSystemSettings
           TabOrder = 4
         end
         object EdtFreeField24: TEdit
-          Left = 18
+          Left = 14
           Top = 12
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 5
         end
         object EdtFreeField25: TEdit
-          Left = 18
+          Left = 14
           Top = 39
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 6
         end
         object EdtFreeField26: TEdit
-          Left = 18
+          Left = 14
           Top = 66
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 7
         end
         object EdtFreeField27: TEdit
-          Left = 18
+          Left = 14
           Top = 93
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 8
         end
         object EdtFreeField28: TEdit
-          Left = 18
+          Left = 14
           Top = 120
-          Width = 180
+          Width = 182
           Height = 21
-          Anchors = [akTop, akRight]
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 9
         end
       end
       object TabSheet3: TTabSheet
         Caption = #1587#1575#1610#1585
         ImageIndex = 1
+        DesignSize = (
+          635
+          266)
         object Label18: TLabel
           Left = 491
           Top = 16
           Width = 130
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1605#1583#1578' '#1586#1605#1575#1606' '#1576#1575#1586#1610#1575#1576#1610' '#1601#1610#1604#1583' '#1606#1608#1576#1578' :'
         end
         object Label19: TLabel
@@ -889,6 +894,7 @@ inherited FmSystemSettings: TFmSystemSettings
           Top = 17
           Width = 59
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1576#1607' '#1605#1610#1604#1610' '#1579#1575#1606#1610#1607
           Font.Charset = ARABIC_CHARSET
           Font.Color = clMaroon
@@ -902,6 +908,7 @@ inherited FmSystemSettings: TFmSystemSettings
           Top = 14
           Width = 80
           Height = 21
+          Anchors = [akTop, akRight]
           TabOrder = 0
         end
       end

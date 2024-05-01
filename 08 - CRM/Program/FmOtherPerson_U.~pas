@@ -9,9 +9,6 @@ uses
 
 type
   TFmOtherPerson = class(TMBaseForm)
-    Panel1: TPanel;
-    Panel2: TPanel;
-    Panel3: TPanel;
     Select_Person_By_CustomerID: TADOStoredProc;
     Select_Person_By_CustomerIDPersonID: TAutoIncField;
     Select_Person_By_CustomerIDCustomerID: TIntegerField;
@@ -25,16 +22,20 @@ type
     Select_Person_By_CustomerIDNotes: TWideStringField;
     Select_Person_By_CustomerIDJobTitle: TWideStringField;
     DSelect_Person_By_CustomerID: TDataSource;
-    YDBGrid1: TYDBGrid;
-    Label20: TLabel;
-    Label21: TLabel;
-    Label22: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
-    Label25: TLabel;
-    Label26: TLabel;
-    Label27: TLabel;
-    Label28: TLabel;
+    pnlMain: TPanel;
+    Panel3: TPanel;
+    SBClose: TSpeedButton;
+    DBNavigator1: TDBNavigator;
+    Panel2: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
     DBEFirstName: TDBEdit;
     DBELastName: TDBEdit;
     DBEEmailAddress: TDBEdit;
@@ -44,8 +45,8 @@ type
     DBEFaxNumber: TDBEdit;
     DBEJobTitle: TDBEdit;
     DBENotes: TDBEdit;
-    DBNavigator1: TDBNavigator;
-    SBClose: TSpeedButton;
+    Panel1: TPanel;
+    YDBGrid1: TYDBGrid;
     procedure Select_Person_By_CustomerIDAfterInsert(DataSet: TDataSet);
     procedure DBEEmailAddressEnter(Sender: TObject);
     procedure DBEEmailAddressExit(Sender: TObject);
@@ -86,6 +87,8 @@ end;
 procedure TFmOtherPerson.FormShow(Sender: TObject);
 begin
    inherited;
+   ShapeBase.Brush.Color := _Color1 ;
+   pnlMain.Color := _Color1 ;
    DBNav_Setup(DBNavigator1);
 end;
 

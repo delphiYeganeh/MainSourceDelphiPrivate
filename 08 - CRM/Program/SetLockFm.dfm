@@ -8,6 +8,7 @@ object FmSetLock: TFmSetLock
   ClientHeight = 493
   ClientWidth = 453
   Color = clBtnFace
+  DockSite = True
   Font.Charset = ARABIC_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
@@ -17,11 +18,12 @@ object FmSetLock: TFmSetLock
   OldCreateOrder = False
   ParentBiDiMode = False
   Position = poDesktopCenter
+  OnCanResize = FormCanResize
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 14
-  object Panel1: TPanel
+  object pnlMain: TPanel
     Left = 0
     Top = 0
     Width = 453

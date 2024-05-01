@@ -1,38 +1,39 @@
 inherited FrInputRefferenceTable: TFrInputRefferenceTable
   Left = 509
   Top = 177
-  Width = 499
-  Height = 520
+  Width = 524
+  Height = 528
   BorderIcons = []
   Caption = #1578#1593#1585#1610#1601' '#1580#1583#1575#1608#1604' '#1605#1585#1580#1593
   OldCreateOrder = True
+  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
     Top = 0
-    Width = 491
+    Width = 508
     Height = 46
     Align = alTop
     ParentColor = True
     TabOrder = 0
     DesignSize = (
-      491
+      508
       46)
     object Label1: TLabel
-      Left = 338
-      Top = 14
+      Left = 357
+      Top = 17
       Width = 136
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1580#1587#1578#1580#1608' '#1576#1585' '#1575#1587#1575#1587' '#1593#1606#1608#1575#1606' '#1580#1583#1608#1604
     end
     object SearchEdit: TEdit
-      Left = 144
-      Top = 12
-      Width = 189
+      Left = 57
+      Top = 14
+      Width = 295
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       TabOrder = 0
       OnChange = SearchEditChange
     end
@@ -40,7 +41,7 @@ inherited FrInputRefferenceTable: TFrInputRefferenceTable
   object YDBGrid1: TYDBGrid [1]
     Left = 0
     Top = 46
-    Width = 491
+    Width = 508
     Height = 400
     Cursor = crHandPoint
     Align = alTop
@@ -77,7 +78,7 @@ inherited FrInputRefferenceTable: TFrInputRefferenceTable
       end>
   end
   object xpBitBtn2: TBitBtn [2]
-    Left = 389
+    Left = 409
     Top = 455
     Width = 95
     Height = 28
@@ -139,7 +140,7 @@ inherited FrInputRefferenceTable: TFrInputRefferenceTable
       9377C67FE1F1E3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00}
   end
   object xpBitBtn1: TBitBtn [3]
-    Left = 291
+    Left = 311
     Top = 455
     Width = 95
     Height = 28
@@ -286,7 +287,7 @@ inherited FrInputRefferenceTable: TFrInputRefferenceTable
       E4B9}
   end
   object xpBitBtn4: TBitBtn [5]
-    Left = 95
+    Left = 115
     Top = 455
     Width = 95
     Height = 28
@@ -363,7 +364,7 @@ inherited FrInputRefferenceTable: TFrInputRefferenceTable
       FFFFFFFFE0E1F89A9FE09093D5D1D1EEFFFFFFFFFFFFFFFFFF00}
   end
   object xpBitBtn5: TBitBtn [6]
-    Left = 193
+    Left = 213
     Top = 455
     Width = 95
     Height = 28

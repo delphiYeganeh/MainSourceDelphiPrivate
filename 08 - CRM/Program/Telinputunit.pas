@@ -12,14 +12,18 @@ uses
 type
   TPropertiesForm = class(TMBaseForm)
     ActionManager1: TActionManager;
-    Panel1: TPanel;
+    MssCalendarPro1: TMssCalendarPro;
+    Q_UserType: TADOQuery;
+    DS_UserType: TDataSource;
+    Q_UserTypeUserTypeId: TAutoIncField;
+    Q_UserTypeUserTypeTitle: TWideStringField;
+    pnlMain: TPanel;
+    Panel4: TPanel;
+    SBSystemSettings: TSpeedButton;
+    DBNavigator1: TDBNavigator;
     Panel2: TPanel;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    SpeedButton4: TSpeedButton;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
     Label12: TLabel;
     Label11: TLabel;
     Label7: TLabel;
@@ -38,8 +42,14 @@ type
     Label18: TLabel;
     Label16: TLabel;
     Label19: TLabel;
-    Label29: TLabel;
-    Label30: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    Label4: TLabel;
+    lblBirthDate: TLabel;
+    Bevel1: TBevel;
+    BtnMessage1: TSpeedButton;
+    BtnMessage2: TSpeedButton;
+    BtnMessage3: TSpeedButton;
     DBMemo1: TDBMemo;
     DBEdit11: TDBEdit;
     DBEdit6: TDBEdit;
@@ -60,74 +70,15 @@ type
     DBLookupComboBox5: TDBLookupComboBox;
     DBECustomerID: TDBEdit;
     DBMemo2: TDBMemo;
-    DBEFreeField01: TDBEdit;
-    LabelFreeField01: TLabel;
-    DBEFreeField02: TDBEdit;
-    LabelFreeField02: TLabel;
-    DBEFreeField03: TDBEdit;
-    LabelFreeField03: TLabel;
-    DBEFreeField04: TDBEdit;
-    LabelFreeField04: TLabel;
-    DBEFreeField05: TDBEdit;
-    LabelFreeField05: TLabel;
-    DBEFreeField06: TDBEdit;
-    LabelFreeField06: TLabel;
-    DBEFreeField07: TDBEdit;
-    LabelFreeField07: TLabel;
-    DBEFreeField08: TDBEdit;
-    LabelFreeField08: TLabel;
-    DBEFreeField09: TDBEdit;
-    LabelFreeField09: TLabel;
-    DBEFreeField10: TDBEdit;
-    LabelFreeField10: TLabel;
-    DBEFreeField11: TDBEdit;
-    LabelFreeField11: TLabel;
-    DBEFreeField12: TDBEdit;
-    LabelFreeField12: TLabel;
-    DBEFreeField13: TDBEdit;
-    LabelFreeField13: TLabel;
-    DBEFreeField14: TDBEdit;
-    LabelFreeField14: TLabel;
-    DBEFreeField15: TDBEdit;
-    LabelFreeField15: TLabel;
-    DBEFreeField16: TDBEdit;
-    LabelFreeField16: TLabel;
-    SBOtherPerson: TSpeedButton;
-    DBEFreeField17: TDBEdit;
-    LabelFreeField17: TLabel;
-    DBEFreeField18: TDBEdit;
-    LabelFreeField18: TLabel;
-    TabSheet3: TTabSheet;
-    YDBGrid1: TYDBGrid;
-    Panel3: TPanel;
-    pnlSearch: TPanel;
-    BitBtn5: TBitBtn;
     GroupBox1: TGroupBox;
     dblState: TDBLookupComboBox;
     dblCity: TDBLookupComboBox;
-    Label4: TLabel;
     DBEdit3: TDBEdit;
-    Panel4: TPanel;
-    DBNavigator1: TDBNavigator;
-    SBSystemSettings: TSpeedButton;
-    BtnCancel: TBitBtn;
-    btnLetter: TSpeedButton;
-    lblBirthDate: TLabel;
     Button1: TButton;
-    MssCalendarPro1: TMssCalendarPro;
     edtBirthDate: TDBEdit;
-    TabSheet4: TTabSheet;
-    Label20: TLabel;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
-    GroupBox2: TGroupBox;
-    clbUsers: TCheckListBox;
-    Q_UserType: TADOQuery;
-    DS_UserType: TDataSource;
-    Q_UserTypeUserTypeId: TAutoIncField;
-    Q_UserTypeUserTypeTitle: TWideStringField;
-    cmbUserType: TDBLookupComboBox;
-    TabSheet5: TTabSheet;
+    DBCheckBox1: TDBCheckBox;
+    DBEdit13: TDBEdit;
+    TabSheet2: TTabSheet;
     LabelFreeField19: TLabel;
     LabelFreeField20: TLabel;
     LabelFreeField21: TLabel;
@@ -138,6 +89,11 @@ type
     LabelFreeField26: TLabel;
     LabelFreeField27: TLabel;
     LabelFreeField28: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
     DBEFreeField19: TDBEdit;
     DBEFreeField20: TDBEdit;
     DBEFreeField21: TDBEdit;
@@ -152,12 +108,74 @@ type
     DBLookupComboBox2: TDBLookupComboBox;
     DBLookupComboBox6: TDBLookupComboBox;
     DBLookupComboBox7: TDBLookupComboBox;
-    Label21: TLabel;
-    Label22: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
-    Label25: TLabel;
     DBLookupComboBox8: TDBLookupComboBox;
+    TabSheet3: TTabSheet;
+    LabelFreeField01: TLabel;
+    LabelFreeField02: TLabel;
+    LabelFreeField03: TLabel;
+    LabelFreeField04: TLabel;
+    LabelFreeField05: TLabel;
+    LabelFreeField06: TLabel;
+    LabelFreeField07: TLabel;
+    LabelFreeField08: TLabel;
+    LabelFreeField09: TLabel;
+    LabelFreeField10: TLabel;
+    LabelFreeField11: TLabel;
+    LabelFreeField12: TLabel;
+    LabelFreeField13: TLabel;
+    LabelFreeField14: TLabel;
+    LabelFreeField15: TLabel;
+    LabelFreeField16: TLabel;
+    LabelFreeField17: TLabel;
+    LabelFreeField18: TLabel;
+    DBEFreeField01: TDBEdit;
+    DBEFreeField02: TDBEdit;
+    DBEFreeField03: TDBEdit;
+    DBEFreeField04: TDBEdit;
+    DBEFreeField05: TDBEdit;
+    DBEFreeField06: TDBEdit;
+    DBEFreeField07: TDBEdit;
+    DBEFreeField08: TDBEdit;
+    DBEFreeField09: TDBEdit;
+    DBEFreeField10: TDBEdit;
+    DBEFreeField11: TDBEdit;
+    DBEFreeField12: TDBEdit;
+    DBEFreeField13: TDBEdit;
+    DBEFreeField14: TDBEdit;
+    DBEFreeField15: TDBEdit;
+    DBEFreeField16: TDBEdit;
+    DBEFreeField17: TDBEdit;
+    DBEFreeField18: TDBEdit;
+    TabSheet4: TTabSheet;
+    YDBGrid1: TYDBGrid;
+    Panel3: TPanel;
+    pnlSearch: TPanel;
+    BitBtn3: TBitBtn;
+    TabSheet5: TTabSheet;
+    Label20: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    GroupBox2: TGroupBox;
+    clbUsers: TCheckListBox;
+    cmbUserType: TDBLookupComboBox;
+    Panel1: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SBOtherPerson: TSpeedButton;
+    btnLetter: TSpeedButton;
+    BtnCancel: TBitBtn;
+    Shape1: TShape;
+    DState2: TDataSource;
+    ADOState: TADOQuery;
+    ADOStateStateID: TIntegerField;
+    ADOStateStateTitle: TStringField;
+    adoCity: TADOQuery;
+    IntegerField1: TIntegerField;
+    DSCity: TDataSource;
+    adoCityCItyId: TIntegerField;
+    adoCityCityTitle: TStringField;
+    adoCityStateNum: TStringField;
     procedure DBEdit7Enter(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -171,9 +189,9 @@ type
     procedure SBOtherPersonClick(Sender: TObject);
     procedure DBNavigator2BeforeAction(Sender: TObject;
       Button: TNavigateBtn);
+    procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
-    procedure SpeedButton4Click(Sender: TObject);
     procedure DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
     procedure SBSystemSettingsClick(Sender: TObject);
     procedure BtnCancelClick(Sender: TObject);
@@ -184,10 +202,22 @@ type
     procedure PageControl1Change(Sender: TObject);
     procedure cmbUserTypeClick(Sender: TObject);
     procedure clbUsersClickCheck(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure BtnMessage1Click(Sender: TObject);
+    procedure BtnMessage2Click(Sender: TObject);
+    procedure BtnMessage3Click(Sender: TObject);
+    procedure DBCheckBox1Click(Sender: TObject);
+    procedure dblStateKeyPress(Sender: TObject; var Key: Char);
+    procedure dblStateKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure dblStateExit(Sender: TObject);
+    procedure dblCityEnter(Sender: TObject);
   private
     CustomerID: integer;
     IsNewRecord : Boolean;
     procedure GetLabelCaption;
+    procedure ShowMessageForm(PhoneNumber : String);
   public
     Edited :Boolean;
     constructor create(AOwner :TComponent;ExCustomerID : Integer;IsItNewRecord : Boolean = false);reintroduce;virtual;
@@ -210,7 +240,8 @@ var
 implementation
 
 uses MainU, dmu, YShamsiDate, UFollowUp, UContract, UserTableContentFm,
-  BusinessLayer, FmOtherPerson_U, FmSystemSettings_U, UCustomerLetter;
+  BusinessLayer, FmOtherPerson_U, FmSystemSettings_U, UCustomerLetter,
+  USingleMessage;
 
 {$R *.dfm}
 
@@ -346,15 +377,18 @@ begin
    LabelFreeField28.Caption := GetSystemSetting('EdtFreeField28');
 end;
 
-procedure TPropertiesForm.FormShow(Sender: TObject);    
+procedure TPropertiesForm.FormShow(Sender: TObject);
 var
    q: TADOQuery;
 begin
    inherited;
-PageControl1.ActivePageIndex := 0;
-   DM.Open_Customer(CustomerID);
-   YchecklistBox1.Fill;
-   DBECustomerNo.SetFocus;
+    ShapeBase.Brush.Color := _Color1 ;
+    pnlMain.Color := _Color1 ;
+    Shape1.Visible := DBCheckBox1.Checked ;
+    PageControl1.ActivePageIndex := 0;
+    DM.Open_Customer(CustomerID);
+    YchecklistBox1.Fill;
+    DBECustomerNo.SetFocus;
 //   DBNav_Setup(DBNavigator1);
    if IsNewRecord then
       PropertiesForm.DBNavigator1.BtnClick(nbInsert);
@@ -368,7 +402,7 @@ PageControl1.ActivePageIndex := 0;
     Dm.Marketer.Open;
 
     
-
+  ADOState.Open; 
   Q_UserType.Open;
   Q_UserType.RecNo := 1;
   q:= TADOQuery.Create(nil);
@@ -417,6 +451,9 @@ PageControl1.ActivePageIndex := 0;
   // Amin 1391/10/04 End
 
   q.Free;
+  
+  adoCity.SQL.Text := ' SELECT  CItyId , CityTitle ,StateId ,StateNum  FROM [dbo].[City]  where StateId = '+ IntToStr( ADOStateStateID.Value )+' ORDER BY CityTitle ';
+  adoCity.Open;
 end;
 
 procedure TPropertiesForm.SBOtherPersonClick(Sender: TObject);
@@ -446,8 +483,12 @@ end;
 
 procedure TPropertiesForm.DBNavigator2BeforeAction(Sender: TObject;
   Button: TNavigateBtn);
+var
+   qry: TADOQuery;
 begin
+   DBNavigator1.SetFocus ;
    inherited;
+
    if Button = nbPost then
    begin
      if (dblCity.KeyValue = null)or(dblState.KeyValue = null) then
@@ -455,6 +496,38 @@ begin
           ShowMessage(' «” «‰ Ê ‘Â— „‘ —Ì —« Õ „« »«Ìœ «‰ Œ«» ﬂ‰Ìœ');
            abort;
      end;
+
+     qry:= TADOQuery.Create(nil);
+     qry.Connection:= Dm.YeganehConnection;
+
+     qry.SQL.Text:= ' select * from (  select 1 cnt from [dbo].[Customer] where 1=2 ' ;
+     if Dm.Select_Customer_By_CustomerIDPhone.AsString <> '' then
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT 1 FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDPhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' )';
+     if Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString <> '' then
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT 1 FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString )+''' )';
+     if Dm.Select_Customer_By_CustomerIDMobilePhone.AsString <> '' then
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT 1 FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' )';
+     qry.SQL.Text:= qry.SQL.Text + ' ) t ';
+     qry.Open;
+     if qry.RecordCount > 0 then
+     begin
+       ShowMessage(' ·›‰ „‘ —Ì  ò—«—Ì „Ì »«‘œ');
+       abort;
+     end;
+
+     qry.SQL.Text:= ' select * from (  select 1 cnt from [dbo].[Customer] where 1=2 '  ;
+     if  ( Dm.Select_Customer_By_CustomerIDEmailAddress.AsString <> '') then
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT 1 FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and ( ltrim(rtrim(EmailAddress)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDEmailAddress.AsString ) +''' )';
+     qry.SQL.Text:= qry.SQL.Text + ' ) t ';
+     qry.Open;
+
+
+     if qry.RecordCount > 0 then
+     begin
+       ShowMessage('«Ì„Ì· „‘ —Ì  ò—«—Ì „Ì »«‘œ');
+       abort;
+     end;
+
      if PageControl1.ActivePageIndex = 0 then
          DBECustomerNo.SetFocus
      else
@@ -475,7 +548,7 @@ begin
    end;
 end;
 
-procedure TPropertiesForm.SpeedButton2Click(Sender: TObject);
+procedure TPropertiesForm.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
    if dm.Select_Customer_By_CustomerID.State in [dsedit,dsinsert] then
@@ -491,7 +564,7 @@ begin
    FrFollowUp.ShowModal;
 end;
 
-procedure TPropertiesForm.SpeedButton3Click(Sender: TObject);
+procedure TPropertiesForm.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
    if Dm.Select_Customer_By_CustomerID.State in [dsEdit,dsInsert] then
@@ -504,7 +577,7 @@ begin
    FrContract.ShowModal;
 end;
 
-procedure TPropertiesForm.SpeedButton4Click(Sender: TObject);
+procedure TPropertiesForm.SpeedButton3Click(Sender: TObject);
 begin
    inherited;
    dm.ShowAttachments(dm.Select_Customer_By_CustomerID,True);
@@ -709,6 +782,83 @@ begin
   inherited;
    if Dm.Select_Customer_By_CustomerID.State in [dsEdit, dsInsert] then
       Dm.Select_Customer_By_CustomerIDUserAccessMode.Value := 0;
+end;
+
+procedure TPropertiesForm.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 787)  or (NewHeight < 632) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
+end;
+
+
+procedure TPropertiesForm.ShowMessageForm(PhoneNumber: String);
+begin
+   FSingleMessage := TFSingleMessage.Create(Self);
+   FSingleMessage.MobileNumber   := PhoneNumber ;
+   FSingleMessage.CustomerId     := dm.Select_Customer_By_CustomerIDCustomerID.AsString ;
+   FSingleMessage.ShowModal;
+end;
+
+procedure TPropertiesForm.BtnMessage1Click(Sender: TObject);
+begin
+  inherited;
+  ShowMessageForm(DBEdit6.text);
+end;
+
+procedure TPropertiesForm.BtnMessage2Click(Sender: TObject);
+begin
+  inherited;
+  ShowMessageForm(DBEdit7.text);
+end;
+
+procedure TPropertiesForm.BtnMessage3Click(Sender: TObject);
+begin
+  inherited;
+  ShowMessageForm(DBEdit10.text);
+end;
+
+procedure TPropertiesForm.DBCheckBox1Click(Sender: TObject);
+begin
+  inherited;
+  Shape1.Visible := DBCheckBox1.Checked ;
+end;
+
+procedure TPropertiesForm.dblStateKeyPress(Sender: TObject; var Key: Char);
+begin
+  replace1(Key,char(223),char(152));
+  inherited;
+//
+
+end;
+
+procedure TPropertiesForm.dblStateKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  dblState.SetFocus;
+  LoadKeyBoardLayout('00000429', KLF_ACTIVATE);
+  //adoCity.SQL.Text := ' SELECT  CItyId , CityTitle ,StateId ,StateNum  FROM [dbo].[City]  where StateId = '+ IntToStr( ADOStateStateID.Value )+' ORDER BY CityTitle ';
+  //adoCity.Open;
+end;
+
+procedure TPropertiesForm.dblStateExit(Sender: TObject);
+begin
+  inherited;
+  adoCity.SQL.Text := ' SELECT  CItyId , CityTitle ,StateId ,StateNum  FROM [dbo].[City]  where StateId = '+ IntToStr( ADOStateStateID.Value )+' ORDER BY CityTitle ';
+  adoCity.Open;
+end;
+
+procedure TPropertiesForm.dblCityEnter(Sender: TObject);
+begin
+  inherited;
+  adoCity.SQL.Text := ' SELECT  CItyId , CityTitle ,StateId ,StateNum  FROM [dbo].[City]  where StateId = '+ IntToStr( ADOStateStateID.Value )+' ORDER BY CityTitle ';
+  adoCity.Open;
 end;
 
 end.

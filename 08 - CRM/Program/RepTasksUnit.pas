@@ -9,22 +9,7 @@ uses
 
 type
   TFRepTasks = class(TMBaseForm)
-    Panel1: TPanel;
-    Panel2: TPanel;
-    SpeedButton1: TSpeedButton;
     MssCalendarPro1: TMssCalendarPro;
-    GroupBox1: TGroupBox;
-    SpeedButton4: TSpeedButton;
-    lblUserName: TLabel;
-    GroupBox2: TGroupBox;
-    Label1: TLabel;
-    edtFromDate: TEdit;
-    SpeedButton2: TSpeedButton;
-    Label2: TLabel;
-    edtToDate: TEdit;
-    SpeedButton3: TSpeedButton;
-    SpeedButton5: TSpeedButton;
-    YDBGrid1: TYDBGrid;
     spRepUserWork: TADOStoredProc;
     spRepUserWorkPersonTitle: TWideStringField;
     spRepUserWorkCompanyName: TWideStringField;
@@ -32,10 +17,26 @@ type
     spRepUserWorkToDoDate: TStringField;
     spRepUserWorkComment: TWideStringField;
     spRepUserWorkTitle: TWideStringField;
-    Label3: TLabel;
     spRepUserWorkCustomerID: TAutoIncField;
+    pnlMain: TPanel;
+    Panel1: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    Label3: TLabel;
+    GroupBox1: TGroupBox;
+    SpeedButton4: TSpeedButton;
+    lblUserName: TLabel;
+    GroupBox2: TGroupBox;
+    Label1: TLabel;
+    SpeedButton2: TSpeedButton;
+    Label2: TLabel;
+    SpeedButton3: TSpeedButton;
+    edtFromDate: TEdit;
+    edtToDate: TEdit;
     ActionType: TDBLookupComboBox;
     CheckBox1: TCheckBox;
+    Panel2: TPanel;
+    YDBGrid1: TYDBGrid;
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
@@ -44,6 +45,9 @@ type
     procedure YDBGrid1NeedColorCondition(Column: TColumn;
       State: TGridDrawState; var Color: TColor);
     procedure CheckBox1Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     FUserID: Integer;
     FUserName: String;
@@ -141,6 +145,24 @@ procedure TFRepTasks.CheckBox1Click(Sender: TObject);
 begin
   inherited;
 ActionType.Enabled := CheckBox1.Checked;
+end;
+
+procedure TFRepTasks.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  inherited;
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 884)  or (NewHeight < 469) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+end;
+
+procedure TFRepTasks.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

@@ -21,6 +21,8 @@ type
     procedure searchEnter(Sender: TObject);
     procedure searchExit(Sender: TObject);
     procedure searchChange(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
   public
@@ -55,6 +57,19 @@ end;
 procedure TFErrorMsg.searchChange(Sender: TObject);
 begin
   dm.ErrorMessage.Locate('ErrorMessage',search.Text,[lopartialkey]);
+end;
+
+procedure TFErrorMsg.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 637)  or (NewHeight < 430) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+
+  inherited;
+
 end;
 
 end.

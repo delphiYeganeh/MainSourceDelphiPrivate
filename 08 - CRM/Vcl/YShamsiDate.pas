@@ -124,7 +124,7 @@ Function Keyboard_TypeWithDivider(aText:String ; var aKey: Char ):String;
 Function Email_GetAddress(aText:String):String;
 
 
-Procedure DBGrid_LoadColumns(aFormName:String ; aDBGrid: TDBGrid);
+Procedure DBGrid_LoadColumns(aFormName:String ; aDBGrid: TDBGrid ; aDBGrid2: TDBGrid );
 Procedure DBGrid_SaveColumns(aFormName:String ; aDBGrid: TYDBGrid);
 procedure DBGrid_Columns_Caption(aDBGrid: TYDBGrid);
 Procedure DBGrid_SelectNextCol(aDBGrid:TDBGrid;AppendORNext:Boolean=True;DBGFirstColIndex:Integer=0;Key:Word=Vk_Return;Shift:TShiftState=[]);
@@ -2348,7 +2348,7 @@ end;
 
 {DBGrid »«—ê–«—Ì ” Ê‰Â«Ì ﬂ‰ —·
 „À«·  :  DBGrid_LoadColumns(Self.Name,lettersDbGrid); }
-Procedure DBGrid_LoadColumns(aFormName:String ; aDBGrid: TDBGrid );
+Procedure DBGrid_LoadColumns(aFormName:String ; aDBGrid: TDBGrid ; aDBGrid2: TDBGrid  );
 Var
    FileNamePath , UserFolder : String;
 begin
@@ -2359,6 +2359,11 @@ begin
    FileNamePath := UserFolder + aFormName + '_' + aDBGrid.Name + '.Cfg' ;
    if FileExists( FileNamePath ) then
       aDBGrid.Columns.loadfromFile( FileNamePath );
+                                                   
+   if FileExists( FileNamePath ) and (aDBGrid2 <> aDBGrid) then
+   begin
+     aDBGrid2.Columns.loadfromFile( FileNamePath );
+   end
 end;
 
 

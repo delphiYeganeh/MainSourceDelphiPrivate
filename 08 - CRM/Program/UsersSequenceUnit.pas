@@ -45,6 +45,8 @@ type
     procedure YDBGrid2DblClick(Sender: TObject);
     procedure QUsersSequencePostError(DataSet: TDataSet; E: EDatabaseError;
       var Action: TDataAction);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
     Function IS_User_In_List:Boolean;
@@ -173,6 +175,18 @@ begin
   Action:=daAbort;
   if (DataSet.State=dsEdit) or (DataSet.State=dsInsert) then DataSet.Cancel;
   ShowMessage(E.Message);
+end;
+
+procedure TFUsersSequence.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 706)  or (NewHeight < 512) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
 end;
 
 end.

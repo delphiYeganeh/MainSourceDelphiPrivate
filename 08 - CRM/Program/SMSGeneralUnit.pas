@@ -9,30 +9,6 @@ uses
 
 type
   TFSMSGeneral = class(TMBaseForm)
-    Panel3: TPanel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Button2: TButton;
-    edtMessage: TEdit;
-    Memo1: TMemo;
-    Panel2: TPanel;
-    Panel1: TPanel;
-    lblCount: TLabel;
-    BitBtn1: TBitBtn;
-    GroupBox1: TGroupBox;
-    Button3: TButton;
-    dblCustomerStatus: TDBLookupComboBox;
-    Label12: TLabel;
-    dblProduct: TDBLookupComboBox;
-    Label30: TLabel;
-    GroupBox2: TGroupBox;
-    Label1: TLabel;
-    edtName: TEdit;
-    Label4: TLabel;
-    edtCompany: TEdit;
-    Label5: TLabel;
-    edtMobile: TEdit;
-    Button1: TButton;
     spFillSMSTMPFromCustomer: TADOStoredProc;
     spFillSMSTMPFromCustomerID: TAutoIncField;
     spFillSMSTMPFromCustomerCustomerID: TIntegerField;
@@ -64,13 +40,38 @@ type
     QSMSTMPMobilePhone: TWideStringField;
     QSMSTMPProductTitle: TWideStringField;
     QSMSTMPCustomerStatusTitle: TWideStringField;
-    YDBGrid1: TYDBGrid;
     QTMP: TADOQuery;
-    lblCost: TLabel;
-    Label6: TLabel;
     PopupMenu1: TPopupMenu;
     N1: TMenuItem;
     N2: TMenuItem;
+    pnlMain: TPanel;
+    Panel1: TPanel;
+    lblCount: TLabel;
+    lblCost: TLabel;
+    Label6: TLabel;
+    BitBtn1: TBitBtn;
+    GroupBox1: TGroupBox;
+    Label7: TLabel;
+    Label8: TLabel;
+    Button3: TButton;
+    dblCustomerStatus: TDBLookupComboBox;
+    dblProduct: TDBLookupComboBox;
+    GroupBox2: TGroupBox;
+    Label1: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    edtName: TEdit;
+    edtCompany: TEdit;
+    edtMobile: TEdit;
+    Button1: TButton;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Button2: TButton;
+    edtMessage: TEdit;
+    Memo1: TMemo;
+    YDBGrid1: TYDBGrid;
     procedure BitBtn1Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure spFillSMSTMPFromCustomerAfterInsert(DataSet: TDataSet);
@@ -86,6 +87,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure N2Click(Sender: TObject);
     procedure N1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     procedure ShowCount;
@@ -296,7 +298,10 @@ var
   Rio:SmsCenter;
 begin
   inherited;
-  if not Dm.SmsSettingIsCorrect then
+  { TODO -oparsa : 14030204 }
+  //if not Dm.SmsSettingIsCorrect then
+  if (not Dm.SmsSettingIsCorrect) and (_SendSMSType2 or _SendSMS) then
+  { TODO -oparsa : 14030204 }
   begin
       ShowMessage('·ÿ›« «» œ« »Â ›—„  ‰ŸÌ„«  ÅÌ«„ò „—«Ã⁄Â ‰„«ÌÌœ');
       Exit;
@@ -306,36 +311,44 @@ begin
       ShowMessage('„ ‰ ÅÌ«„ Œ«·Ì «” ')
   else
   begin
-       if not QSMSTMP.IsEmpty then
+     if not QSMSTMP.IsEmpty then
+     begin
+       if _SendSMS or _SendSMSType2 then
        begin
-         if _SendSMS then
-         begin
-             try
-                 Button2.Caption:='œ— Õ«· «—”«·';
-                 Button2.Enabled:=False;
-  //               Screen.Cursor:=crHourGlass;
-                 QSMSTMP.First;
-                 while not QSMSTMP.Eof  do
-                 begin
-                     try
-                         Rio:=GetSmsCenter(True,'',nil);
-                         Rio.snedOneSms(_TerminalID,_SmsPassWord,QSMSTMPMobilePhone.AsString,edtMessage.Text);
-                     except
-                         ShowMessage('Œÿ« œ— «—”«· ÅÌ«„ò');
-                     end;
-                     InsertLog;
-
-                     QSMSTMP.Next;
+           try
+             Button2.Caption:='œ— Õ«· «—”«·';
+             Button2.Enabled:=False;
+//               Screen.Cursor:=crHourGlass;
+             QSMSTMP.First;
+             while not QSMSTMP.Eof  do
+             begin
+                 try
+                    if  _SendSMS then
+                    begin
+                      Rio:=GetSmsCenter(True,'',nil);
+                      Rio.snedOneSms(_TerminalID,_SmsPassWord,QSMSTMPMobilePhone.AsString,edtMessage.Text);
+                    { TODO -oparsa : 14030204 }
+                    end
+                    else if _SendSMSType2 then
+                      dm.SendSmsToOutBox(QSMSTMPMobilePhone.AsString,edtMessage.Text);
+                    { TODO -oparsa : 14030204 }
+                 except
+                     ShowMessage('Œÿ« œ— «—”«· ÅÌ«„ò');
                  end;
-             finally
-                 Button2.Caption:='«—”«· SMS';
-                 Button2.Enabled:=True;
-  //               Screen.Cursor:=crDefault;
+                 InsertLog;
+
+                 QSMSTMP.Next;
              end;
-          end;
-       end
-       else
-           ShowMessage('„Ê—œÌ ÊÃÊœ ‰œ«—œ');
+           finally
+             Button2.Caption:='«—”«· SMS';
+             Button2.Enabled:=True;
+//               Screen.Cursor:=crDefault;
+           end;
+        end;
+     end
+     else
+         ShowMessage('„Ê—œÌ ÊÃÊœ ‰œ«—œ');
+
   end;
 
 end;
@@ -358,6 +371,13 @@ begin
   Label6.Visible:=True;
   lblCost.Visible:=True;
   lblCost.Caption:=FloatToStr(GetCost);
+end;
+
+procedure TFSMSGeneral.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

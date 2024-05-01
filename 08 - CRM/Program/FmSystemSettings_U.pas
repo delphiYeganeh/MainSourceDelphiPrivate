@@ -80,6 +80,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
   public
@@ -188,6 +190,18 @@ begin
           PageControl1.ActivePageIndex:=0;
         end;
   end;
+
+end;
+
+procedure TFmSystemSettings.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 661)  or (NewHeight < 397) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
 
 end;
 

@@ -10,37 +10,33 @@ uses
 
 type
   TFrep2 = class(TMBaseForm)
+    Report_Customer: TADOStoredProc;
+    pnlMain: TPanel;
+    ContractGrid: TYDBGrid;
     Panel1: TPanel;
     Label9: TLabel;
     Label3: TLabel;
     Label5: TLabel;
+    Label4: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
     YWhereEdit4: TYWhereEdit;
     YWhereEdit1: TYWhereEdit;
     YWhereEdit2: TYWhereEdit;
-    Label4: TLabel;
     YWhereEdit5: TYWhereEdit;
-    Panel2: TPanel;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
-    BitBtn6: TBitBtn;
-    Report_Customer: TADOStoredProc;
-    Label1: TLabel;
     YWhereEdit3: TYWhereEdit;
-    Label2: TLabel;
     YchecklistBox1: TYchecklistBox;
-    Label6: TLabel;
-    Label7: TLabel;
     YWhereEdit6: TYWhereEdit;
-    ContractGrid: TYDBGrid;
-    Label8: TLabel;
     YWhereEdit8: TYWhereEdit;
     GroupBox1: TGroupBox;
-    YWhereEdit7: TYWhereEdit;
     YWhereEdit9: TYWhereEdit;
     YWhereEdit10: TYWhereEdit;
-    BtnCancel: TBitBtn;
-    btnShowContractWord: TBitBtn;
-    Label10: TLabel;
+    YWhereEdit7: TYWhereEdit;
     YWhereEdit11: TYWhereEdit;
     rdgSake: TRadioGroup;
     chkSake: TCheckBox;
@@ -48,14 +44,21 @@ type
     chkGoodJobPercentage: TCheckBox;
     chkTaxPercentage: TCheckBox;
     YWhereEdit12: TYWhereEdit;
-    Label11: TLabel;
+    Panel2: TPanel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    BtnCancel: TBitBtn;
+    btnShowContractWord: TBitBtn;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure BitBtn6Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure chkSakeClick(Sender: TObject);
     procedure btnShowContractWordClick(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
   public
@@ -132,7 +135,7 @@ begin
  Action:=caFree;
 end;
 
-procedure TFrep2.BitBtn6Click(Sender: TObject);
+procedure TFrep2.BitBtn3Click(Sender: TObject);
 begin
   inherited;
  ContractGrid.CustomizePrint;
@@ -156,6 +159,20 @@ begin
   inherited;
 //  if (_ExportCustomerList = true)  then
       ContractGrid.ExportToWord ;//else ShowMessage('‘„« „ÃÊ“ ê—› ‰ Œ—ÊÃÌ «“ ·Ì”  —« ‰œ«—Ìœ');
+
+end;
+
+procedure TFrep2.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 1082)  or (NewHeight < 614) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+
+  inherited;
 
 end;
 

@@ -9,27 +9,31 @@ uses
 
 type
   TFrLockSoftware = class(TmBaseForm)
-    Panel1: TPanel;
-    moKey1: TMemo;
+    pnlMain: TPanel;
     Panel2: TPanel;
     Label1: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
     ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
+    Button1: TButton;
+    moKey2: TMemo;
+    Button2: TButton;
+    Panel1: TPanel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
-    Label7: TLabel;
-    ComboBox2: TComboBox;
-    Label8: TLabel;
-    Button1: TButton;
-    moKey2: TMemo;
-    Button2: TButton;
-    Label9: TLabel;
+    moKey1: TMemo;
     procedure moKey1Change(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure moKey1Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,6 +44,8 @@ var
   FrLockSoftware: TFrLockSoftware;
 
 implementation
+
+uses dmu ;
 
 {$R *.dfm}
 
@@ -223,6 +229,21 @@ begin
   moKey1.Clear;
 
   moKey1.Text :=  Clipboard.AsText;
+end;
+
+procedure TFrLockSoftware.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  inherited;
+     { TODO -oparsa : 14030203 }
+      Resize := False  ;
+      { TODO -oparsa : 14030203 }
+end;
+
+procedure TFrLockSoftware.FormShow(Sender: TObject);
+begin
+  inherited;
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

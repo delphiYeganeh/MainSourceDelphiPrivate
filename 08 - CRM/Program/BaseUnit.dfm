@@ -19,13 +19,21 @@ object MBaseForm: TMBaseForm
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object ShapeBase: TShape
+    Left = 0
+    Top = 0
+    Width = 338
+    Height = 258
+    Align = alClient
+    Brush.Color = 12615680
+  end
   object DSForm: TDataSource
-    Left = 64
-    Top = 104
+    Left = 22
+    Top = 199
   end
   object ActionList: TActionList
-    Left = 64
-    Top = 56
+    Left = 18
+    Top = 141
     object APrint: TAction
       Caption = 'APrint'
       ShortCut = 16464

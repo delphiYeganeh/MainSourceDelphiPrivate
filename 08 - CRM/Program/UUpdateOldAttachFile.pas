@@ -9,36 +9,37 @@ uses
 
 type
   TfrUpdateOldAttachFile = class(TMBaseForm)
+    pnlMain: TPanel;
     Panel1: TPanel;
     BitBtn1: TBitBtn;
     btnCancel: TBitBtn;
+    rdgUpdateType: TRadioGroup;
+    btnShowContractWord: TBitBtn;
     Panel2: TPanel;
     Label1: TLabel;
-    rdgUpdateType: TRadioGroup;
+    Label9: TLabel;
     pgcUpdate: TxpPageControl;
     xpTabSheet1: TxpTabSheet;
-    xpTabSheet2: TxpTabSheet;
-    dbgContract: TYDBGrid;
     dbgFollowUp: TYDBGrid;
-    Panel3: TPanel;
-    edtCustomerIdContract: TEdit;
-    Label2: TLabel;
     Panel4: TPanel;
     Label3: TLabel;
-    EdtCustomerIdFollow: TEdit;
-    btnShowContractWord: TBitBtn;
     Label4: TLabel;
+    Label5: TLabel;
+    EdtCustomerIdFollow: TEdit;
     edtFollowStart: TEdit;
     edtFollowEnd: TEdit;
-    Label5: TLabel;
+    xpTabSheet2: TxpTabSheet;
+    dbgContract: TYDBGrid;
+    Panel3: TPanel;
+    Label2: TLabel;
     Label6: TLabel;
+    Label7: TLabel;
+    edtCustomerIdContract: TEdit;
     edtContractStart: TEdit;
     edtContractEnd: TEdit;
-    Label7: TLabel;
     pnlProcess: TPanel;
     Label8: TLabel;
     Bevel1: TBevel;
-    Label9: TLabel;
     procedure BitBtn1Click(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -47,6 +48,9 @@ type
     procedure edtFollowStartExit(Sender: TObject);
     procedure edtFollowEndExit(Sender: TObject);
     procedure edtContractStartExit(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     procedure UpdateContract(UpdateKind :byte);
@@ -351,6 +355,26 @@ procedure TfrUpdateOldAttachFile.edtContractStartExit(Sender: TObject);
 begin
   inherited;
 MakeFilterContract
+end;
+
+procedure TfrUpdateOldAttachFile.FormCanResize(Sender: TObject;
+  var NewWidth, NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 649)  or (NewHeight < 399) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
+end;
+
+procedure TfrUpdateOldAttachFile.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
 end;
 
 end.

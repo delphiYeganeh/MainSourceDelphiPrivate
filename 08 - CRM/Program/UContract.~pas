@@ -42,17 +42,6 @@ type
     Select_customer_By_CustomerIDCancelDate: TStringField;
     Select_customer_By_CustomerIDInsertdate: TStringField;
     Select_customer_By_CustomerIDLastUpdate: TStringField;
-    Panel2: TPanel;
-    grbCustomer: TGroupBox;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label28: TLabel;
-    dbdCustomerNo: TDBEdit;
-    dbeManager: TDBEdit;
-    dbeProducts: TDBEdit;
-    Panel3: TPanel;
-    BtnCancel: TBitBtn;
-    btnDel: TBitBtn;
     Select_customer_By_CustomerIDUserTableLinkedID: TIntegerField;
     Select_customer_By_CustomerIDFreeField01: TWideStringField;
     Select_customer_By_CustomerIDFreeField02: TWideStringField;
@@ -72,69 +61,13 @@ type
     Select_customer_By_CustomerIDFreeField16: TWideStringField;
     Select_customer_By_CustomerIDFreeField17: TWideStringField;
     Select_customer_By_CustomerIDFreeField18: TWideStringField;
-    GroupBox2: TGroupBox;
-    dbgContractsList: TYDBGrid;
-    xpPanel1: TxpPanel;
-    Label5: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    btnAdd: TBitBtn;
-    pnlViewContract: TPanel;
     PopupMenu1: TPopupMenu;
     N1: TMenuItem;
     N2: TMenuItem;
     Excel1: TMenuItem;
-    Label9: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
-    GroupBox4: TGroupBox;
-    Label13: TLabel;
-    Label17: TLabel;
-    dbeViwMarketerCNT: TDBEdit;
-    dbeViwBeginDateCNT: TDBEdit;
-    dbeViwEndDateCNT: TDBEdit;
-    dbeViwAmountCNT: TDBEdit;
-    dbeViwContractTypeTitleCNT: TDBEdit;
-    bdeViwContractTypeTitleCNT: TDBEdit;
-    dbeViwProductTitleCNT: TDBEdit;
-    dblsrchProductID: TDBLookupComboBox;
-    dblsrchMarketerID: TDBLookupComboBox;
-    dblSrchContractType: TDBLookupComboBox;
-    Label1: TLabel;
-    edtSrchStartDate: TEdit;
-    edtSrchEndDate: TEdit;
-    Label4: TLabel;
-    btnSearch: TBitBtn;
-    Label16: TLabel;
-    Label20: TLabel;
-    dbeViwTaxPercentageCNT: TDBEdit;
-    Label22: TLabel;
-    Label23: TLabel;
-    dbeViwGoodJobPercentageCNT: TDBEdit;
-    Label29: TLabel;
-    Label30: TLabel;
-    edtTax: TEdit;
-    edtGoodJob: TEdit;
-    Label31: TLabel;
-    Label32: TLabel;
-    BitBtn1: TBitBtn;
-    btnEdit: TBitBtn;
-    Label33: TLabel;
-    Label2: TLabel;
-    dbeViwInsuranceAccountCNT: TDBEdit;
-    btnShowContractWord: TBitBtn;
-    btnTaxFishImage: TBitBtn;
-    dbeViwTotalAmountCNT: TDBEdit;
-    Label21: TLabel;
-    edtAmountAlphabet: TEdit;
-    edtAmount: TEdit;
-    edtTotalAmount: TEdit;
-    Panel1: TPanel;
     Select_customer_By_CustomerIDStateID: TWordField;
     Select_customer_By_CustomerIDInnerPhone: TWideStringField;
     DelgrdRecord: TAction;
-    dbeCommentCNT: TDBMemo;
     MssMessage1: TMssMessage;
     SpDbgridContract: TADOStoredProc;
     SpDbgridContractContractID: TAutoIncField;
@@ -173,6 +106,84 @@ type
     adoCheckPayBankName: TWideStringField;
     adoCheckPayComment: TWideStringField;
     MssCalendarPro1: TMssCalendarPro;
+    adoCheckPayChequeImage: TBlobField;
+    adoCheckPayFileType: TWideStringField;
+    adoCashPayContractPayByCashID: TAutoIncField;
+    adoCashPayContractID: TIntegerField;
+    adoCashPayAmount: TFloatField;
+    adoCashPayDate: TStringField;
+    adoCashPayFishNo: TWideStringField;
+    adoCashPayAccountNo: TWideStringField;
+    adoCashPayBankName: TWideStringField;
+    adoCashPayComment: TWideStringField;
+    adoCashPayFishImage: TBlobField;
+    adoCashPayFileType: TWideStringField;
+    SpDbgridContractSignUpDate: TStringField;
+    SpDbgridContractContractExcell: TBlobField;
+    SpDbgridContractAmount: TFloatField;
+    pnlMain: TPanel;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    grbCustomer: TGroupBox;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label24: TLabel;
+    dbdCustomerNo: TDBEdit;
+    dbeManager: TDBEdit;
+    dbeProducts: TDBEdit;
+    GroupBox2: TGroupBox;
+    dbgContractsList: TYDBGrid;
+    xpPanel1: TxpPanel;
+    Label5: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label1: TLabel;
+    Label4: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    Label28: TLabel;
+    dblsrchProductID: TDBLookupComboBox;
+    dblsrchMarketerID: TDBLookupComboBox;
+    dblSrchContractType: TDBLookupComboBox;
+    edtSrchStartDate: TEdit;
+    edtSrchEndDate: TEdit;
+    btnSearch: TBitBtn;
+    edtTax: TEdit;
+    edtGoodJob: TEdit;
+    BitBtn1: TBitBtn;
+    pnlViewContract: TPanel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label17: TLabel;
+    Label16: TLabel;
+    Label20: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label29: TLabel;
+    Label2: TLabel;
+    Label21: TLabel;
+    GroupBox4: TGroupBox;
+    edtGuaranteeAmount: TLabel;
+    dbeViwContractTypeTitleCNT: TDBEdit;
+    bdeViwContractTypeTitleCNT: TDBEdit;
+    dbeViwMarketerCNT: TDBEdit;
+    dbeViwBeginDateCNT: TDBEdit;
+    dbeViwEndDateCNT: TDBEdit;
+    dbeViwAmountCNT: TDBEdit;
+    dbeViwProductTitleCNT: TDBEdit;
+    dbeViwGoodJobPercentageCNT: TDBEdit;
+    dbeViwTaxPercentageCNT: TDBEdit;
+    dbeViwInsuranceAccountCNT: TDBEdit;
+    btnTaxFishImage: TBitBtn;
+    dbeViwTotalAmountCNT: TDBEdit;
+    edtAmountAlphabet: TEdit;
+    edtAmount: TEdit;
+    edtTotalAmount: TEdit;
+    dbeCommentCNT: TDBMemo;
     pnlEdit: TxpPanel;
     GroupBox5: TGroupBox;
     dbgPayByCash: TYDBGrid;
@@ -194,6 +205,12 @@ type
     DBNCheckEdit: TDBNavigator;
     DBNCheckPost: TDBNavigator;
     DBNCheckCancel: TDBNavigator;
+    Panel3: TPanel;
+    BtnCancel: TBitBtn;
+    btnDel: TBitBtn;
+    btnAdd: TBitBtn;
+    btnEdit: TBitBtn;
+    btnShowContractWord: TBitBtn;
     pnlGuarantee: TxpPanel;
     Label3: TLabel;
     Label19: TLabel;
@@ -206,24 +223,8 @@ type
     btnAddGuaranteeImage: TBitBtn;
     btnGuaranteeImageLoad: TBitBtn;
     dblGuaranteeType: TDBLookupComboBox;
-    edtGuaranteeAmount: TKimiyaEdit;
-    adoCheckPayChequeImage: TBlobField;
-    adoCheckPayFileType: TWideStringField;
-    adoCashPayContractPayByCashID: TAutoIncField;
-    adoCashPayContractID: TIntegerField;
-    adoCashPayAmount: TFloatField;
-    adoCashPayDate: TStringField;
-    adoCashPayFishNo: TWideStringField;
-    adoCashPayAccountNo: TWideStringField;
-    adoCashPayBankName: TWideStringField;
-    adoCashPayComment: TWideStringField;
-    adoCashPayFishImage: TBlobField;
-    adoCashPayFileType: TWideStringField;
-    SpDbgridContractSignUpDate: TStringField;
-    SpDbgridContractContractExcell: TBlobField;
     BitBtn2: TBitBtn;
     BitBtn3: TBitBtn;
-    SpDbgridContractAmount: TFloatField;
     procedure BtnCancelClick(Sender: TObject);
     procedure RefreshData;
     procedure btnDelClick(Sender: TObject);
@@ -284,6 +285,8 @@ type
       var Action: TDataAction);
     procedure BitBtn2Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
 
 
   Private
@@ -296,6 +299,7 @@ type
    procedure setGuaranteeType;
    procedure loadGuarantee;
    Function  LoadImageField(Field:TField;Path:String):Boolean;
+   procedure SetColorForm;
     { Private declarations }
   Public
     { Public declarations }
@@ -578,6 +582,7 @@ end;
 procedure TFrContract.FormShow(Sender: TObject);
 begin
   inherited;
+    SetColorForm ;
   grbCustomer.Caption := ' «ÿ·«⁄«  ‘—ò  / ”«“„«‰  : '+  Select_customer_By_CustomerIDCompanyName.AsString;
     Dm.Marketer.Close;
     Dm.Marketer.SQL.Clear;
@@ -630,7 +635,7 @@ begin
 //  if frContractAdd=nil then
 //          frContractAdd:=TfrContractAdd.create(Self);
 //  frContractAdd.Show;
-  with tfrContractAdd.create(Self) do
+  with TfrContractAdd.create(Self) do
       ShowModal;
 
   if SpDbgridContract.Modified then
@@ -877,9 +882,9 @@ begin
    if not QryGuarantee.FieldByName('Amount').IsNull then
     begin
            if length(QryGuarantee.FieldByName('Amount').AsString) >3 then
-          edtGuaranteeAmount.Text := AddSeprator(QryGuarantee.FieldByName('Amount').AsString,length(QryGuarantee.FieldByName('Amount').AsString) div 3)
-          else   edtGuaranteeAmount.Text := QryGuarantee.FieldByName('Amount').AsString;
-    end else edtGuaranteeAmount.Clear;
+          edtGuaranteeAmount.Caption := AddSeprator(QryGuarantee.FieldByName('Amount').AsString,length(QryGuarantee.FieldByName('Amount').AsString) div 3)
+          else   edtGuaranteeAmount.Caption := QryGuarantee.FieldByName('Amount').AsString;
+    end else edtGuaranteeAmount.Caption:= '';
 
 end;
 
@@ -901,7 +906,7 @@ begin
   if not pnlGuarantee.Minimized  then   pnlEdit.Minimized := True;
   if SpDbgridContract.RecordCount = 0 then pnlGuarantee.Minimized  :=True;
   if (pnlGuarantee.Minimized)and (QryGuarantee.State in [dsinsert,dsEdit])
-              then if edtGuaranteeAmount.Text = '' then   QryGuarantee.Cancel else QryGuarantee.Post;
+              then if edtGuaranteeAmount.Caption = '' then   QryGuarantee.Cancel else QryGuarantee.Post;
   Panel3.Height := pnlGuarantee.Height +44;
 end;
 
@@ -970,10 +975,10 @@ begin
   inherited;
 
 
-  if (StrToIntDef(edtGuaranteeAmount.Text,0) <> 0) then
+  if (StrToIntDef(edtGuaranteeAmount.Caption,0) <> 0) then
   begin
   if not (QryGuarantee.State in [dsedit,dsinsert]) then QryGuarantee.Edit;
-     QryGuarantee.FieldByName('Amount').Value := edtGuaranteeAmount.Text
+     QryGuarantee.FieldByName('Amount').Value := edtGuaranteeAmount.Caption
   end
   //else if (edtGuaranteeAmount.Text = '0' )or(edtGuaranteeAmount.Text = '') then QryGuarantee.FieldByName('Amount').Value := 0;
 
@@ -1172,6 +1177,47 @@ begin
   end
   else
   ShowMessage('›«Ì· ÅÌÊ”  „ÊÃÊœ ‰Ì” ');
+end;
+
+procedure TFrContract.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 806)  or (NewHeight < 748) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+
+  inherited;
+
+
+end;
+
+procedure TFrContract.SetColorForm;
+begin
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
+  xpPanel1.StartColor := _Color1 ;
+  xpPanel1.EndColor   := _Color2 ;
+
+  xpPanel1.TitleStartColor :=  _Color3;
+  xpPanel1.TitleEndColor   :=  _Color4;
+
+  pnlGuarantee.StartColor := _Color1 ;
+  pnlGuarantee.EndColor   := _Color2 ;
+
+  pnlGuarantee.TitleStartColor :=  _Color3;
+  pnlGuarantee.TitleEndColor   :=  _Color4;
+
+  pnlEdit.StartColor := _Color1 ;
+  pnlEdit.EndColor   := _Color2 ;
+
+  pnlEdit.TitleStartColor :=  _Color3;
+  pnlEdit.TitleEndColor   :=  _Color4;
+
+
+
 end;
 
 end.

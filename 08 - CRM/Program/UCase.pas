@@ -10,44 +10,6 @@ uses
 
 type
   TfrCase = class(TMBaseForm)
-    xpPanel1: TxpPanel;
-    dbgCase: TYDBGrid;
-    Panel3: TPanel;
-    BitBtn2: TBitBtn;
-    btnDelBR2: TBitBtn;
-    btnAdd: TBitBtn;
-    btnEdit: TBitBtn;
-    btnAddTask: TBitBtn;
-    btnAttachment: TBitBtn;
-    grbCase: TGroupBox;
-    Label25: TLabel;
-    Label26: TLabel;
-    Label27: TLabel;
-    Label5: TLabel;
-    Label2: TLabel;
-    GroupBox2: TGroupBox;
-    Label3: TLabel;
-    Label36: TLabel;
-    dblProduct: TDBLookupComboBox;
-    DBEdit1: TDBEdit;
-    dbeCaseTitle: TDBEdit;
-    dblCaseType: TDBLookupComboBox;
-    dblPriority: TDBLookupComboBox;
-    dblCustomer: TDBLookupComboBox;
-    edtCustomer: TYWhereEdit;
-    dblCaseOriginal: TDBLookupComboBox;
-    DBMemo2: TDBMemo;
-    Label1: TLabel;
-    Label4: TLabel;
-    dblProductId: TDBLookupComboBox;
-    DBLookupComboBox4: TDBLookupComboBox;
-    edtCustomerId: TYWhereEdit;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    dblCaseTypeId: TDBLookupComboBox;
-    dblCasePriorityId: TDBLookupComboBox;
-    btnSave: TBitBtn;
     SpSelect_Cases: TADOStoredProc;
     SpSelect_CasesCaseID: TLargeintField;
     SpSelect_CasesCaseTitle: TWideStringField;
@@ -72,25 +34,64 @@ type
     SpSelect_CasesCompleted: TBooleanField;
     SpSelect_CasesCompleteDate: TWideStringField;
     SpSelect_CasesStatus: TStringField;
-    chkCompleted: TCheckBox;
-    Panel1: TPanel;
-    Label9: TLabel;
-    DBMemo1: TDBMemo;
     SpSelect_CasesCompleteComment: TWideStringField;
-    Label10: TLabel;
-    DBEdit2: TDBEdit;
     Customer: TADOTable;
     CustomerCustomerID: TAutoIncField;
     CustomerCompanyName: TWideStringField;
-    DBEdit3: TDBEdit;
-    DBEdit4: TDBEdit;
-    SBCityID: TSpeedButton;
     ADOTable1: TADOTable;
     AutoIncField1: TAutoIncField;
     WideStringField1: TWideStringField;
     CustomerCode: TStringField;
-    Edit1: TEdit;
+    pnlMain: TPanel;
+    xpPanel1: TxpPanel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    dblProductId: TDBLookupComboBox;
+    DBLookupComboBox1: TDBLookupComboBox;
+    edtCustomerId: TYWhereEdit;
+    dblCaseTypeId: TDBLookupComboBox;
+    dblCasePriorityId: TDBLookupComboBox;
+    chkCompleted: TCheckBox;
+    Panel2: TPanel;
+    BitBtn1: TBitBtn;
+    btnDelBR2: TBitBtn;
+    btnAdd: TBitBtn;
+    btnEdit: TBitBtn;
+    btnAddTask: TBitBtn;
+    btnAttachment: TBitBtn;
+    btnSave: TBitBtn;
+    Panel1: TPanel;
+    Label9: TLabel;
+    Label10: TLabel;
+    DBMemo1: TDBMemo;
+    DBEdit2: TDBEdit;
+    dbgCase: TYDBGrid;
+    grbCase: TGroupBox;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label5: TLabel;
+    Label2: TLabel;
+    Label1: TLabel;
+    SBCityID: TSpeedButton;
     Label11: TLabel;
+    GroupBox1: TGroupBox;
+    Label3: TLabel;
+    Label15: TLabel;
+    dblProduct: TDBLookupComboBox;
+    DBEdit1: TDBEdit;
+    dbeCaseTitle: TDBEdit;
+    dblCaseType: TDBLookupComboBox;
+    dblPriority: TDBLookupComboBox;
+    dblCustomer: TDBLookupComboBox;
+    edtCustomer: TYWhereEdit;
+    dblCaseOriginal: TDBLookupComboBox;
+    DBMemo2: TDBMemo;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    Edit1: TEdit;
     DBEdit5: TDBEdit;
     procedure btnDelBRClick(Sender: TObject);
     procedure dbgCaseDblClick(Sender: TObject);
@@ -100,7 +101,7 @@ type
     procedure edtCustomerChange(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
-    procedure BitBtn2Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DsSelect_CasesDataChange(Sender: TObject; Field: TField);
     procedure dblCasePriorityIdCloseUp(Sender: TObject);
@@ -116,6 +117,8 @@ type
     procedure SBCityIDClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure DataSource1DataChange(Sender: TObject; Field: TField);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
 
   private
     { Private declarations }
@@ -125,6 +128,7 @@ type
     function CheckTasksExits(CaseId : Integer): Boolean;
     Procedure MakeFilter;
     Function MakeFilterStr:String;
+    procedure SetColorForm;
   public
     { Public declarations }
     Constructor create(Aowner:TComponent;OpenType :Boolean);reintroduce;virtual;//Opentype = true : Show all ,False : Just User
@@ -262,7 +266,7 @@ begin
     
 end;
 
-procedure TfrCase.BitBtn2Click(Sender: TObject);
+procedure TfrCase.BitBtn1Click(Sender: TObject);
 begin
   inherited;
  ModalResult := mrOk;
@@ -474,6 +478,7 @@ end;
 procedure TfrCase.FormShow(Sender: TObject);
 begin
   inherited;
+  SetColorForm ;
   if _insertMode then
   begin
     btnAdd.Click;
@@ -490,6 +495,30 @@ procedure TfrCase.DataSource1DataChange(Sender: TObject; Field: TField);
 begin
   inherited;
 //    ShowMessage('HI');
+end;
+
+procedure TfrCase.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 924)  or (NewHeight < 548) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
+end;
+
+procedure TfrCase.SetColorForm;
+begin
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
+  xpPanel1.StartColor := _Color1 ;
+  xpPanel1.EndColor   := _Color2 ;
+
+  xpPanel1.TitleStartColor :=  _Color3;
+  xpPanel1.TitleEndColor   :=  _Color4;
 end;
 
 END.

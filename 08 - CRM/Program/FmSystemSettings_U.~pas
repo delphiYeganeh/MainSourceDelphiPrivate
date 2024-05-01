@@ -79,6 +79,8 @@ type
     procedure SBOtherPersonClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure PageControl1Change(Sender: TObject);
+    procedure FormResize(Sender: TObject);
   private
     { Private declarations }
   public
@@ -173,6 +175,32 @@ procedure TFmSystemSettings.SpeedButton1Click(Sender: TObject);
 begin
    inherited;
    Close;
+end;
+
+procedure TFmSystemSettings.PageControl1Change(Sender: TObject);
+begin
+  inherited;
+  with dm do
+  begin
+    if PageControl1.activePageIndex= 1 then
+      if _UserTypeID<>1 then
+        begin
+          ShowMessage('«Ì‰ ’›ÕÂ œ— œ” —”Ì ‘„« ‰Ì” ');
+          PageControl1.ActivePageIndex:=0;
+        end;
+  end;
+
+end;
+
+procedure TFmSystemSettings.FormResize(Sender: TObject);
+begin
+  inherited;
+  { TODO -oparsa : 14030203 }
+  if Self.width <= 661 then
+   Self.Width := 661 ;
+  if Self.Height <= 397 then
+   Self.Height := 397 ;
+   { TODO -oparsa : 14030203 }
 end;
 
 end.

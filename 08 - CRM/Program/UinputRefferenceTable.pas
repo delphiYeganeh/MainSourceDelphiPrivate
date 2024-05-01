@@ -31,6 +31,8 @@ type
     procedure xpBitBtn3Click(Sender: TObject);
     procedure xpBitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
   public
@@ -123,6 +125,18 @@ procedure TFrInputRefferenceTable.FormCreate(Sender: TObject);
 begin
   inherited;
 SearchEdit.OnChange(SearchEdit);
+end;
+
+procedure TFrInputRefferenceTable.FormCanResize(Sender: TObject;
+  var NewWidth, NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 524)  or (NewHeight < 528) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
 end;
 
 end.

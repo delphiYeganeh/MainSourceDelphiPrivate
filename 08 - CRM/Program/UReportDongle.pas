@@ -10,14 +10,6 @@ uses
 
 type
   TfrReportDongle = class(TMBaseForm)
-    Panel1: TPanel;
-    dbgSerial: TYDBGrid;
-    Panel2: TPanel;
-    btnSrchCustomerAdvance: TBitBtn;
-    BtnCancel: TBitBtn;
-    Label1: TLabel;
-    dblProduct: TDBLookupComboBox;
-    Label2: TLabel;
     SpDongleReport: TADOStoredProc;
     SpDongleReportCustomerID: TIntegerField;
     SpDongleReportPersonTitle: TWideStringField;
@@ -33,23 +25,32 @@ type
     SpDongleReportSerDate: TWideStringField;
     SpDongleReportSerTime: TWideStringField;
     SpDongleReportProductID: TWordField;
-    Label3: TLabel;
-    Label4: TLabel;
-    rdgNetwork: TRadioGroup;
     SpDongleReportCustomerID_1: TIntegerField;
     SpDongleReportSerDateShamsi: TStringField;
-    edtStartDate: TShamsiDateEdit;
-    edtEndDate: TShamsiDateEdit;
-    edtcustomerId: TYWhereEdit;
+    MssCalendarPro1: TMssCalendarPro;
+    QdelSerial: TADOQuery;
+    pnlMain: TPanel;
+    Panel2: TPanel;
+    lblCountOFRecord: TLabel;
+    BtnCancel: TBitBtn;
     btnDel: TBitBtn;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
     BitBtn3: TBitBtn;
-    lblCountOFRecord: TLabel;
-    MssCalendarPro1: TMssCalendarPro;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
-    QdelSerial: TADOQuery;
+    btnSrchCustomerAdvance: TBitBtn;
+    dblProduct: TDBLookupComboBox;
+    rdgNetwork: TRadioGroup;
+    edtStartDate: TShamsiDateEdit;
+    edtEndDate: TShamsiDateEdit;
+    edtcustomerId: TYWhereEdit;
+    dbgSerial: TYDBGrid;
 
     procedure FormCreate(Sender: TObject);
     procedure btnSrchCustomerAdvanceClick(Sender: TObject);
@@ -60,6 +61,9 @@ type
     procedure DSFormDataChange(Sender: TObject; Field: TField);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     Procedure RunSpDongleReport(Network :integer;StartDate :String;EndDate :String;ProductId :Integer;customerId :Integer);
     Function MakeReportTitle(DefaultReportTitle:String):String;
@@ -85,7 +89,7 @@ begin
   if dblProduct.KeyValue = null then ProductID := 0 else ProductID := dblProduct.KeyValue;
   if edtcustomerId.text =  '' then CustomerID := 0 else CustomerID :=  StrToint(edtcustomerId.text);
 
-  RunSpDongleReport(rdgNetwork.ItemIndex,edtStartDate.Text,edtEndDate.Text,ProductID,CustomerID);
+  RunSpDongleReport(rdgNetwork.ItemIndex,Trim(edtStartDate.Text),Trim(edtEndDate.Text),ProductID,CustomerID);
 end;
 Procedure TfrReportDongle.RunSpDongleReport(Network :integer;StartDate :String;EndDate :String;ProductId :Integer;customerId :Integer);
 begin
@@ -189,6 +193,26 @@ procedure TfrReportDongle.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
   edtEndDate.Text:=MssCalendarPro1.Execute('/');
+end;
+
+procedure TfrReportDongle.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 800)  or (NewHeight < 505) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+
+  inherited;
+
+end;
+
+procedure TfrReportDongle.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

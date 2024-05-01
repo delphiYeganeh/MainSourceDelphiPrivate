@@ -9,29 +9,30 @@ uses
 
 type
   TfrCustomerReport = class(TMBaseForm)
-    Panel1: TPanel;
-    Panel2: TPanel;
-    edtNumber: TEdit;
-    Label1: TLabel;
-    BitBtn1: TBitBtn;
-    BtnCancel: TBitBtn;
-    btnShowContractWord: TBitBtn;
-    BitBtn2: TBitBtn;
-    BitBtn3: TBitBtn;
     SpCustomerReport: TADOStoredProc;
     SpCustomerReportCustomerId: TIntegerField;
     SpCustomerReportNickName: TWideStringField;
     SpCustomerReportProductTitle: TWideStringField;
     SpCustomerReportproductid: TWordField;
     SpCustomerReportContractFinish: TIntegerField;
-    Label2: TLabel;
+    SpCustomerReportCustomerIdStr: TWideStringField;
+    pnlMain: TPanel;
     dbgCustomerReport: TYDBGrid;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    edtNumber: TEdit;
+    BitBtn1: TBitBtn;
+    Panel2: TPanel;
+    BtnCancel: TBitBtn;
+    btnShowContractWord: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
     xpPanel1: TxpPanel;
     Label3: TLabel;
     Label4: TLabel;
     dblProduct: TDBLookupComboBox;
     edtCustomerId: TEdit;
-    SpCustomerReportCustomerIdStr: TWideStringField;
     procedure BitBtn2Click(Sender: TObject);
     procedure btnShowContractWordClick(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
@@ -41,8 +42,12 @@ type
     procedure dblProductKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edtNumberKeyPress(Sender: TObject; var Key: Char);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
+    procedure SetColorForm;
   public
     { Public declarations }
   end;
@@ -130,6 +135,36 @@ begin
   inherited;
   if not(key in ['0'..'9',char(vk_delete),char(vk_Back)]) then
     Key :=#0;
+end;
+
+procedure TfrCustomerReport.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 668)  or (NewHeight < 385) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
+end;
+
+procedure TfrCustomerReport.SetColorForm;
+begin
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
+  xpPanel1.StartColor := _Color1 ;
+  xpPanel1.EndColor   := _Color2 ;
+
+  xpPanel1.TitleStartColor :=  _Color3;
+  xpPanel1.TitleEndColor   :=  _Color4;
+end;
+
+procedure TfrCustomerReport.FormShow(Sender: TObject);
+begin
+  inherited;
+  SetColorForm ;
 end;
 
 end.

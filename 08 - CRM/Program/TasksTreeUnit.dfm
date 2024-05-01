@@ -14,6 +14,7 @@ object TasksTreeForm: TTasksTreeForm
   Font.Style = []
   OldCreateOrder = False
   ParentBiDiMode = False
+  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox

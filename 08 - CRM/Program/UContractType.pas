@@ -9,25 +9,29 @@ uses
 
 type
   TfrmContractType = class(TMBaseForm)
-    GroupBox1: TGroupBox;
-    dbgContractType: TYDBGrid;
-    dbgSub: TYDBGrid;
-    Splitter1: TSplitter;
-    Panel1: TPanel;
-    BitBtn2: TBitBtn;
-    BitBtn1: TBitBtn;
     qryContractType: TADOQuery;
     DsContractType: TDataSource;
     qrySub: TADOQuery;
     dsSub: TDataSource;
+    pnlMain: TPanel;
+    Splitter1: TSplitter;
+    Panel1: TPanel;
+    BitBtn2: TBitBtn;
+    BitBtn1: TBitBtn;
     Button1: TButton;
+    GroupBox1: TGroupBox;
+    dbgContractType: TYDBGrid;
     Panel2: TPanel;
     Button2: TButton;
+    dbgSub: TYDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure qrySubBeforePost(DataSet: TDataSet);
     procedure qryContractTypeAfterScroll(DataSet: TDataSet);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     procedure SetdbgSub(ContractTypeId :integer);
     procedure SetdbgContractType;
@@ -111,6 +115,26 @@ begin
       end
       else
          ShowMsgString('«» œ« „Ê«—œ “Ì—ﬁ—«—œ«œ —« Õ–› ‰„«ÌÌœ');
+
+end;
+
+procedure TfrmContractType.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 385)  or (NewHeight < 529) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
+end;
+
+procedure TfrmContractType.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 
 end;
 

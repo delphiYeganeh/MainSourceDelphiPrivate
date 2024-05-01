@@ -9,19 +9,20 @@ uses
 
 type
   TFrCategoryEdit = class(TMBaseForm)
-    Panel1: TPanel;
-    Panel2: TPanel;
-    YDBGrid1: TYDBGrid;
-    YDBGrid2: TYDBGrid;
+    pnlMain: TPanel;
     Panel3: TPanel;
     SpeedButton1: TSpeedButton;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Bevel1: TBevel;
     DBNavigator1: TDBNavigator;
     DBNavigator2: TDBNavigator;
     DBEStateTitle: TDBEdit;
-    Label1: TLabel;
     DBECityTitle: TDBEdit;
-    Label2: TLabel;
-    Bevel1: TBevel;
+    Panel2: TPanel;
+    YDBGrid1: TYDBGrid;
+    YDBGrid2: TYDBGrid;
     procedure StateAfterScroll(DataSet: TDataSet);
     procedure SpeedButton5Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -32,6 +33,8 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure YDBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
   public
@@ -61,6 +64,9 @@ end;
 
 procedure TFrCategoryEdit.FormShow(Sender: TObject);
 begin
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
    DBNav_Setup(DBNavigator1);
    DBNav_Setup(DBNavigator2);
 end;
@@ -94,6 +100,18 @@ procedure TFrCategoryEdit.YDBGrid1DrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;State: TGridDrawState);
 begin
    DBGrid_SetFocusAfterExit(YDBGrid1,Rect,DataCol,Column,State,clHighlightText);
+end;
+
+procedure TFrCategoryEdit.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 543)  or (NewHeight < 537) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
 end;
 
 end.

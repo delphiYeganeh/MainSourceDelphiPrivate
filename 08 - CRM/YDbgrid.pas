@@ -181,11 +181,11 @@ end;
 
 function TYDBGrid.CustomizePrint:boolean;
 begin
-Result:=False;
- DBGCustomizeForm:=TDBGCustomizeForm.Create(Self);
- DBGCustomizeForm.YDBGrid:=Self;
+ Result:=False;
+ DBGCustomizeForm := TDBGCustomizeForm.Create(Self);
+ DBGCustomizeForm.YDBGrid := Self;
  if DBGCustomizeForm.ShowModal = mrOk then
-   result:=True;
+   result := True;
 
 end;
 

@@ -9,22 +9,6 @@ uses
 
 type
   TFSMSBirthDate = class(TMBaseForm)
-    Panel1: TPanel;
-    lblCount: TLabel;
-    BitBtn1: TBitBtn;
-    GroupBox1: TGroupBox;
-    Button1: TButton;
-    RadioGroup2: TRadioGroup;
-    Panel2: TPanel;
-    YDBGrid1: TYDBGrid;
-    Panel3: TPanel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Button2: TButton;
-    edtMessage: TEdit;
-    Memo1: TMemo;
-    Panel4: TPanel;
-    YDBGrid2: TYDBGrid;
     QTMP: TADOQuery;
     Customers: TADOQuery;
     CustomersCustomerID: TAutoIncField;
@@ -42,6 +26,23 @@ type
     pm1: TPopupMenu;
     N1: TMenuItem;
     N2: TMenuItem;
+    pnlMain: TPanel;
+    Panel1: TPanel;
+    lblCount: TLabel;
+    BitBtn1: TBitBtn;
+    GroupBox1: TGroupBox;
+    Button1: TButton;
+    RadioGroup1: TRadioGroup;
+    Panel2: TPanel;
+    YDBGrid1: TYDBGrid;
+    Panel4: TPanel;
+    YDBGrid2: TYDBGrid;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Button2: TButton;
+    edtMessage: TEdit;
+    Memo1: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -50,7 +51,10 @@ type
     procedure YDBGrid2NeedColorCondition(Column: TColumn;
       State: TGridDrawState; var Color: TColor);
     procedure BitBtn1Click(Sender: TObject);
-    procedure RadioGroup2Click(Sender: TObject);
+    procedure RadioGroup1Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     procedure OpenCustomersForSMS;
@@ -120,7 +124,7 @@ begin
   spGetCustomersBirthDateSMS.Parameters.ParamByName('@ToDay').Value:=_Today;
   spGetCustomersBirthDateSMS.Parameters.ParamByName('@SMSGroupSID').Value:=1;
   spGetCustomersBirthDateSMS.Parameters.ParamByName('@SMSSubGroupsID').Value:=3;
-  spGetCustomersBirthDateSMS.Parameters.ParamByName('@Flag').Value:=RadioGroup2.ItemIndex;
+  spGetCustomersBirthDateSMS.Parameters.ParamByName('@Flag').Value:=RadioGroup1.ItemIndex;
   spGetCustomersBirthDateSMS.Open;
 
   //ShowMessage(IntToStr(spGetCustomersBirthDateSMS.RecordCount));
@@ -143,7 +147,10 @@ var
   MessageSend:WideString;
 begin
   inherited;
-  if not Dm.SmsSettingIsCorrect then
+  { TODO -oparsa : 14030204 }
+  //if not Dm.SmsSettingIsCorrect then
+  if (not Dm.SmsSettingIsCorrect) and (_SendSMSType2 or _SendSMS) then
+  { TODO -oparsa : 14030204 }
   begin
       ShowMessage('·ÿ›« «» œ« »Â ›—„  ‰ŸÌ„«  ÅÌ«„ò „—«Ã⁄Â ‰„«ÌÌœ');
       Exit;
@@ -155,7 +162,7 @@ begin
   begin
        if not spGetCustomersBirthDateSMS.IsEmpty then
        begin
-         if _SendSMS then
+         if _SendSMS or _SendSMSType2 then
          begin
            try
 //               Button2.Caption:='œ— Õ«· «—”«·';
@@ -169,8 +176,15 @@ begin
                       begin
                           GotoBookmark(Pointer(YDBGrid1.SelectedRows.Items[i]));
                           try
+                            if  _SendSMS then
+                            begin
                               Rio:=GetSmsCenter(True,'',nil);
                               Rio.snedOneSms(_TerminalID,_SmsPassWord,spGetCustomersBirthDateSMSMobilePhone.AsString,edtMessage.Text);
+                            { TODO -oparsa : 14030204 }
+                            end
+                            else if _SendSMSType2 then
+                              dm.SendSmsToOutBox(spGetCustomersBirthDateSMSMobilePhone.AsString,edtMessage.Text);
+                            { TODO -oparsa : 14030204 }
                           except
                               ShowMessage('Œÿ« œ— «—”«· ÅÌ«„ò');
                           end;
@@ -181,8 +195,15 @@ begin
                else
                begin
                   try
+                    if  _SendSMS then
+                    begin
                       Rio:=GetSmsCenter(True,'',nil);
                       Rio.snedOneSms(_TerminalID,_SmsPassWord,spGetCustomersBirthDateSMSMobilePhone.AsString,edtMessage.Text);
+                    { TODO -oparsa : 14030204 }
+                    end
+                    else if _SendSMSType2 then
+                      dm.SendSmsToOutBox(spGetCustomersBirthDateSMSMobilePhone.AsString,edtMessage.Text);
+                    { TODO -oparsa : 14030204 }
                   except
                       ShowMessage('Œÿ« œ— «—”«· ÅÌ«„ò');
                   end;
@@ -196,7 +217,9 @@ begin
            end;
        end
        else
-           ShowMessage('„Ê—œÌ ÊÃÊœ ‰œ«—œ');
+       begin
+          ShowMessage('„Ê—œÌ ÊÃÊœ ‰œ«—œ');
+       end;
   end;
   Button1Click(Application);
 
@@ -265,10 +288,30 @@ begin
   Close;
 end;
 
-procedure TFSMSBirthDate.RadioGroup2Click(Sender: TObject);
+procedure TFSMSBirthDate.RadioGroup1Click(Sender: TObject);
 begin
   inherited;
   OpenCustomersForSMS;
+end;
+
+procedure TFSMSBirthDate.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 794)  or (NewHeight < 596) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
+end;
+
+procedure TFSMSBirthDate.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
 end;
 
 end.
