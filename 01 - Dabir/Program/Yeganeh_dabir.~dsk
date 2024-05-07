@@ -11,55 +11,35 @@ File_8=SourceModule,'D:\matin\01 - Dabir\Program\LetterFilterU.pas',0,1,131,30,1
 File_9=SourceModule,'D:\matin\01 - Dabir\Program\shared\businessLayer.pas',0,1,764,44,780,0,0
 
 [Modules]
-Module0=D:\matin\01 - Dabir\Program\Dmu.pas
-Module1=D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas
-Module2=D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas
-Module3=D:\matin\01 - Dabir\Program\UInputTemplate.pas
-Module4=D:\matin\01 - Dabir\Program\LogOn.pas
-Module5=D:\matin\01 - Dabir\Program\shared\ExportToWord.pas
-Module6=D:\matin\01 - Dabir\Program\shared\UTotalRecommite.pas
-Module7=D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas
-Module8=D:\matin\01 - Dabir\Program\UMain.pas
-Module9=D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas
-Module10=D:\99 - Shared\YShamsiDate.pas
-Module11=D:\matin\01 - Dabir\Program\shared\UBrowsArchive.pas
-Module12=D:\matin\01 - Dabir\Program\shared\FExcelAttach.pas
-Module13=D:\matin\01 - Dabir\Program\shared\UinnerLetter.pas
-Module14=c:\program files (x86)\borland\delphi7\source\vcl\DB.pas
-Module15=H:\Yeganeh\Windows\Delphi\Component\TMS Component Pack 7.5.3.1 for Delphi 5-XE8\Components\AdvAlertWindow.pas
-Module16=C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas
-Module17=C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas
-Module18=H:\Yeganeh\Windows\Delphi\Component\MssComponents\MssPackage\Source\WordXP.pas
-Module19=C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntDialogs.pas
-Module20=c:\program files (x86)\borland\delphi7\source\vcl\DBTables.pas
-Module21=H:\Yeganeh\Windows\Delphi\Component\Vcl2\UemsVCL.pas
-Module22=D:\matin\01 - Dabir\Program\shared\BaseUnit.pas
-Module23=H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas
+Module0=D:\matin\01 - Dabir\Program\shared\UTotalRecommite.pas
+Module1=D:\matin\01 - Dabir\Program\shared\ExportToWord.pas
+Module2=D:\matin\01 - Dabir\Program\LogOn.pas
+Module3=D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas
+Module4=D:\matin\01 - Dabir\Program\Dmu.pas
+Module5=D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas
+Module6=D:\99 - Shared\YShamsiDate.pas
+Module7=D:\matin\01 - Dabir\Program\shared\UBrowsArchive.pas
+Module8=D:\matin\01 - Dabir\Program\shared\FExcelAttach.pas
+Module9=D:\matin\01 - Dabir\Program\shared\UinnerLetter.pas
+Module10=c:\program files (x86)\borland\delphi7\source\vcl\DB.pas
+Module11=H:\Yeganeh\Windows\Delphi\Component\TMS Component Pack 7.5.3.1 for Delphi 5-XE8\Components\AdvAlertWindow.pas
+Module12=C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas
+Module13=C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas
+Module14=H:\Yeganeh\Windows\Delphi\Component\MssComponents\MssPackage\Source\WordXP.pas
+Module15=C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntDialogs.pas
+Module16=c:\program files (x86)\borland\delphi7\source\vcl\DBTables.pas
+Module17=H:\Yeganeh\Windows\Delphi\Component\Vcl2\UemsVCL.pas
+Module18=D:\matin\01 - Dabir\Program\UInputTemplate.pas
+Module19=D:\matin\01 - Dabir\Program\shared\BaseUnit.pas
+Module20=D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas
+Module21=D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas
+Module22=H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas
+Module23=D:\matin\01 - Dabir\Program\UMain.pas
 Module24=D:\matin\01 - Dabir\Program\Yeganeh_dabir.dpr
 Count=25
 EditWindowCount=1
 
-[D:\matin\01 - Dabir\Program\Dmu.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=1
-
-[D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=1
-
-[D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[D:\matin\01 - Dabir\Program\UInputTemplate.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[D:\matin\01 - Dabir\Program\LogOn.pas]
+[D:\matin\01 - Dabir\Program\shared\UTotalRecommite.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -69,22 +49,22 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\01 - Dabir\Program\shared\UTotalRecommite.pas]
+[D:\matin\01 - Dabir\Program\LogOn.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas]
+[D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas]
 ModuleType=SourceModule
-FormState=0
-FormOnTop=0
+FormState=1
+FormOnTop=1
 
-[D:\matin\01 - Dabir\Program\UMain.pas]
+[D:\matin\01 - Dabir\Program\Dmu.pas]
 ModuleType=SourceModule
-FormState=0
-FormOnTop=0
+FormState=1
+FormOnTop=1
 
-[D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas]
+[D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -149,12 +129,32 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
+[D:\matin\01 - Dabir\Program\UInputTemplate.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
 [D:\matin\01 - Dabir\Program\shared\BaseUnit.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
+[D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
 [H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\01 - Dabir\Program\UMain.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -170,7 +170,7 @@ FormOnTop=0
 
 [EditWindow0]
 ViewCount=25
-CurrentView=17
+CurrentView=9
 View0=0
 View1=1
 View2=2
@@ -201,21 +201,21 @@ MessageView=MessageView@EditWindow0
 Create=1
 Visible=1
 State=0
-Left=200
-Top=147
-Width=1472
+Left=193
+Top=114
+Width=1485
 Height=910
-MaxLeft=-1
-MaxTop=-1
-ClientWidth=1456
+MaxLeft=-8
+MaxTop=114
+ClientWidth=1469
 ClientHeight=871
-LeftPanelSize=140
+LeftPanelSize=0
 LeftPanelClients=CodeExplorer@EditWindow0
-LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
+LeftPanelData=00000400010000000C000000436F64654578706C6F726572000000000000000000000000000000000001000000000000000000000000FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=85
-BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=0000040000000000B005000000000000025500000000000000010000000000000000000000000100000000BD050000000000000100000000B00500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelSize=0
+BottomPanelClients=MessageView@EditWindow0,WatchWindow
+BottomPanelData=00000400020000000B0000004D657373616765566965770B000000576174636857696E646F779D0000000000000001A80400000000000001000000009D000000000000000100000002B606000000000000020000000000000000000000000200000000AD060000000000000200000000B7060000000000000200000000B7060000000000000200000000B7060000000000000200000000B706000000000000FFFFFFFF
 
 [View0]
 Module=D:\matin\01 - Dabir\Program\Yeganeh_dabir.dpr
@@ -282,8 +282,8 @@ LeftCol=1
 
 [View9]
 Module=D:\matin\01 - Dabir\Program\shared\UTotalRecommite.pas
-CursorX=72
-CursorY=10
+CursorX=69
+CursorY=13
 TopLine=1
 LeftCol=1
 
@@ -414,10 +414,10 @@ WatchShowColumnHeaders=1
 Create=1
 Visible=0
 State=0
-Left=223
-Top=964
-Width=1196
-Height=196
+Left=12
+Top=0
+Width=1180
+Height=157
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1180
@@ -492,14 +492,16 @@ Count=0
 [Main Window]
 Create=1
 Visible=1
-State=0
+State=2
 Left=0
-Top=1
+Top=0
 Width=1680
 Height=123
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1664
+MaxWidth=1696
+MaxHeight=123
+ClientWidth=1680
 ClientHeight=84
 
 [ProjectManager]
@@ -553,13 +555,13 @@ Create=1
 Visible=1
 State=0
 Left=-3
-Top=378
+Top=490
 Width=208
-Height=620
+Height=524
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=192
-ClientHeight=581
+ClientHeight=485
 TBDockHeight=556
 LRDockWidth=190
 Dockable=1
@@ -573,15 +575,15 @@ HiddenCategories=
 Create=1
 Visible=1
 State=0
-Left=-1
-Top=122
-Width=190
-Height=243
+Left=-4
+Top=116
+Width=211
+Height=386
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=174
-ClientHeight=204
-TBDockHeight=358
+ClientWidth=195
+ClientHeight=347
+TBDockHeight=370
 LRDockWidth=190
 Dockable=1
 
@@ -635,31 +637,31 @@ Dockable=1
 
 [CodeExplorer@EditWindow0]
 Create=1
-Visible=1
+Visible=0
 State=0
 Left=0
 Top=12
 Width=140
-Height=771
+Height=805
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=771
-TBDockHeight=859
+ClientHeight=805
+TBDockHeight=305
 LRDockWidth=140
 Dockable=1
 
 [MessageView@EditWindow0]
 Create=1
-Visible=1
+Visible=0
 State=0
 Left=12
 Top=0
-Width=1444
+Width=1707
 Height=85
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1444
+ClientWidth=1707
 ClientHeight=85
 TBDockHeight=85
 LRDockWidth=443
