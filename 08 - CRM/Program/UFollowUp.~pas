@@ -397,7 +397,10 @@ begin
    // Amin 1391/08/25 End
 
    treFollowUps.DataSource := nil;    // Amin 1391/08/25
-   Dm.Select_FollowUP_By_CustomerID.insert;//Append;
+   Dm.Select_FollowUP_By_CustomerID.Last ;
+
+   //Dm.Select_FollowUP_By_CustomerID.insert;//Append;
+   Dm.Select_FollowUP_By_CustomerID.Append;
    dm.Select_FollowUP_By_CustomerIDParentFollowUpID.Value := ParentID;   // Amin 1391/08/25
 //   dm.Select_FollowUP_By_CustomerIDActionTypeID.Value := 1;
 //   Dm.Select_FollowUP_By_CustomerIDCustomerID.AsInteger := CustomerID;
@@ -423,7 +426,7 @@ begin
       begin
          if (DBLkCBActionTypeTitle.KeyValue = 0) or (DBLkCBActionTypeTitle.KeyValue = Null) then
          begin
-            ShowMyMessage('ÅÌ€«„','·ÿ›« ›Ì·œ "‰Ê⁄ ÅÌêÌ—Ì" —«  ⁄ÌÌ‰ ‰„«ÌÌœ',[mbOK],mtInformation);
+            ShowMyMessage('ÅÌ€«„','·ÿ›« "‰Ê⁄ «ﬁœ«„" „‘Œ’ ‰„«ÌÌœ',[mbOK],mtInformation);
             DBLkCBActionTypeTitle.SetFocus;
             DBLkCBActionTypeTitle.DropDown;
             Abort;
@@ -593,7 +596,7 @@ procedure TFrFollowUp.edtDoneDateChange(Sender: TObject);
 begin
   inherited;
 //   DayOfWeek.Caption:= edtDoneDate.DayName;
-//  _DoneDate:= edtDoneDate.Text;   
+//  _DoneDate:= edtDoneDate.Text;
 end;
 
 procedure TFrFollowUp.FormShow(Sender: TObject);
@@ -622,7 +625,8 @@ begin
     Dm.Marketer.SQL.Add('WHERE IsActive_=1');
     Dm.Marketer.Open;
 
-  dbgFollow.DataSource.DataSet.Locate('FollowUPID',FUID,[]);
+   if dbgFollow.DataSource.DataSet.RecordCount >0  then
+     dbgFollow.DataSource.DataSet.Locate('FollowUPID',FUID,[]);
 
   { TODO -oparsa : 14030205 }
   PinValue := Qry_GetResult(' select 1 FROM dbo.usersPinFollowUP WHERE CustomerID = '+ DBEdit4.text +'  AND  UserID = '+ IntToStr(_UserId ) ,dm.YeganehConnection);
@@ -835,12 +839,17 @@ end;
 
 procedure TFrFollowUp.acDelEghdamatExecute(Sender: TObject);
 var
-  ID:Integer;      
+  ID:Integer;
 begin
   inherited;
   IF MessageDlg('¬Ì« «“ Õ–› «ÿ·«⁄«  „ÿ„∆‰ Â” Ìœø',mtConfirmation,[mbyes,mbno],0)=mryes then
   Begin
-     Qry_SetResult(' Delete From Followup Where FollowUpID = '+Dm.Select_FollowUP_By_CustomerIDFollowUPID.AsString ,Dm.YeganehConnection);
+     if  Dm.Select_FollowUP_By_CustomerIDFollowUPID.AsString <> '' then
+       Qry_SetResult(' Delete From Followup Where FollowUpID = '+Dm.Select_FollowUP_By_CustomerIDFollowUPID.AsString ,Dm.YeganehConnection)
+     else if dm.Select_FollowUP_By_CustomerID.State in [dsinsert,dsedit]  then
+     begin
+       dm.Select_FollowUP_By_CustomerID.Cancel;
+     end;
      Dm.Select_FollowUP_By_CustomerID.Prior;
      ID := Dm.Select_FollowUP_By_CustomerIDFollowUPID.Value;
      Dm.Select_FollowUP_By_CustomerID.Next;
@@ -1035,8 +1044,8 @@ begin
   xpPanel1.StartColor := _Color1 ;
   xpPanel1.EndColor   := _Color2 ;
 
-  xpPanel1.TitleStartColor :=  _Color4;
-  xpPanel1.TitleEndColor   :=  _Color3;
+  xpPanel1.TitleStartColor :=  _Color3;
+  xpPanel1.TitleEndColor   :=  _Color4;
 
 end;
 

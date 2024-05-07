@@ -45,6 +45,8 @@ type
     QGetSMSSettingsSmsPassWord: TStringField;
     QGetSMSSettingsSmsTimer: TStringField;
     QGetSMSSettingsSMSCenterNumber: TStringField;
+    Button1: TButton;
+    Memo1: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure BBOKClick(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
@@ -58,8 +60,11 @@ type
     procedure FormShow(Sender: TObject);
     procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
+    function CenterInParent(Place,NumberOfPlaces,ObjectWidth,ParentWidth,CropPercent: Integer): Integer;
+    procedure ScaleAllForms(const ScaleFactor: integer);
   public
     { Public declarations }
   end;
@@ -75,6 +80,7 @@ var correct:boolean;
 
 procedure TLoginForm.FormCreate(Sender: TObject);
 begin
+
   correct:=false;
   //.Caption:=Dm.GetSystemValue(2);
   dm.Accesses.Open;
@@ -167,6 +173,7 @@ begin
         _UserPinFollowUp := UserPinFollowUp.AsBoolean ;
         _ThemTypeColor   := UserThemTypeColor.AsInteger ;
         _UserAccAcess    := UserAccAcess.AsBoolean ;
+        _UserCallAccess  := UserCallAccess.AsBoolean ;
 
         if  _ThemTypeColor >0 then
         begin
@@ -214,6 +221,15 @@ end;
 procedure TLoginForm.FormShow(Sender: TObject);
 begin
 // StatusBar1.Panels[0].Text := _SoftVersion ;
+ //Self.ScaleBy(75,100);
+ //Self.ScaleBy(100,100);
+ //Self.ScaleBy(125,100);
+// Self.ScaleBy(175,100);
+// Self.ScaleBy(200,100);
+////  Self.ScaleBy(_PercentScale,100);
+
+  Self.ScaleBy(Screen.PixelsPerInch,96);
+
  StatusBar1.Panels[0].Text := _SoftVersion+COPY(_SoftVersionDB,1,1)+'.'+ COPY(_SoftVersionDB,2,1);
  try
    lblCompanyName.Caption := GetSystemSetting('CompanyName');
@@ -234,5 +250,104 @@ begin
 //      end;
 end;
 
+
+function TLoginForm.CenterInParent(Place, NumberOfPlaces, ObjectWidth,
+  ParentWidth, CropPercent: Integer): Integer;
+  {returns formated centered position of an object relative to parent.
+  Place          - P order number of an object beeing centered
+  NumberOfPlaces - NOP total number of places available for object beeing centered
+  ObjectWidth    - OW width of an object beeing centered
+  ParentWidth    - PW width of an parent
+  CropPercent    - CP percentage of safe margin on both sides which we want to omit from calculation
+  +-----------------------------------------------------+
+  |                                                     |
+  |        +--------+       +---+      +--------+       |
+  |        |        |       |   |      |        |       |
+  |        +--------+       +---+      +--------+       |
+  |     |              |             |            |     |
+  +-----------------------------------------------------+
+  |     |<---------------------A----------------->|     |
+  |<-C->|<------B----->|<-----B----->|<-----B---->|<-C->|
+  |                    |<-D>|
+  |<----------E------------>|
+
+  A = PW-C   B = A/NOP  C=(CP*PW)/100  D = (B-OW)/2
+  E = C+(P-1)*B+D }
+
+var
+  A, B, C, D: Integer;
+begin
+  C := Trunc((CropPercent*ParentWidth)/100);
+  A := ParentWidth - C;
+  B := Trunc(A/NumberOfPlaces);
+  D := Trunc((B-ObjectWidth)/2);
+  Result := C+(Place-1)*B+D;
+end;
+
+
+procedure TLoginForm.ScaleAllForms(const ScaleFactor: integer);
+var
+  Divisor: integer;
+  DivisorStep: integer;
+  ix: integer;
+const
+  Multiplier = 100;
+begin
+  if ScaleFactor <> 0 then
+  begin
+    if ScaleFactor > 0 then
+      DivisorStep := 20
+    else
+      DivisorStep := 10;
+
+    Divisor := Multiplier + (ScaleFactor * DivisorStep);
+
+    with Screen do
+      for ix := 0 to FormCount - 1 do
+        Forms[ix].ScaleBy(Divisor, Multiplier);
+  end;
+
+end;
+
+procedure TLoginForm.Button1Click(Sender: TObject);
+var
+  MonId: integer;
+  Mon: TMonitor;
+  AllMonitorsWidth, AllMonitorsHeight: integer;
+begin
+  Memo1.Clear;
+
+  Memo1.Lines.Append(Format('Number of monitors: %d', [Screen.MonitorCount]));
+
+  for MonId := 0 to Screen.MonitorCount - 1 do
+  begin
+    Mon := Screen.Monitors[MonId];
+
+    With Memo1.Lines do
+    begin
+      Append('');
+      Append(Format('--------  Monitor #%d  --------', [mon.MonitorNum]));
+      Append(Format('Resolution: %dpx x %dpx', [Mon.Width, Mon.Height]));
+      Append(Format('X-offset: %dpx', [Mon.Left]));
+      Append(Format('Y-offset: %dpx', [Mon.Top]));
+
+    end;
+  end;
+
+
+  AllMonitorsWidth  := GetSystemMetrics(SM_CXVIRTUALSCREEN);
+  AllMonitorsHeight := GetSystemMetrics(SM_CYVIRTUALSCREEN);
+  With Memo1.Lines do
+  begin
+    Append('');
+    Append('--------  All monitors  --------');
+    Append(Format('Resolution: %dpx x %dpx', [AllMonitorsWidth, AllMonitorsHeight]));
+    Append(Format('PPI: %d', [Screen.PixelsPerInch]));
+    Append(Format('Widh: %d', [Screen.Width]));
+    Append(Format('Hight: %d', [Screen.Height]));
+    //Append(Format('Scale: %d', [Screen.Monitors]));
+  end;
+
+end;
 
 end.

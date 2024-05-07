@@ -55,13 +55,11 @@ uses
   AddUserTableContentFm in 'AddUserTableContentFm.pas' {MBaseForm2},
   AccessInput in 'AccessInput.pas' {AccessForm},
   GroupExportToWord in 'GroupExportToWord.pas' {FrMakeGroupExport},
-
-  StoreFM          in 'ACC\StoreFM.pas' {FMStore},
-  FirstArtGroupDM  in 'ACC\FirstArtGroupDM.pas' {DMFirstArtGroup: TDataModule},
+  StoreFM in 'ACC\StoreFM.pas' {FMStore},
+  FirstArtGroupDM in 'ACC\FirstArtGroupDM.pas' {DMFirstArtGroup: TDataModule},
   SecendArtGroupFM in 'ACC\SecendArtGroupFM.pas' {FMSecendArtGroup},
   SecendArtGroupDM in 'ACC\SecendArtGroupDM.pas' {DMSecendArtGroup: TDataModule},
-  FirstArtGroupFM in 'ACC\FirstArtGroupFM.pas'{FMFirstArtGroup},
-
+  FirstArtGroupFM in 'ACC\FirstArtGroupFM.pas' {FMFirstArtGroup},
   UnitFM in 'ACC\UnitFM.pas' {FMUnit},
   UnitDM in 'ACC\UnitDM.pas' {DMUnit: TDataModule},
   ArtServiceDM in 'ACC\ArtServiceDM.pas' {DMArtService: TDataModule},
@@ -74,12 +72,11 @@ uses
   EnterDataDM in 'ACC\EnterDataDM.pas' {DMEnterData: TDataModule},
   FactorDM in 'ACC\FactorDM.pas' {DMFactor: TDataModule},
   FactorFM in 'ACC\FactorFM.pas' {FMFactor},
+  SearchFM in 'ACC\SearchFM.pas' {FMSearch},
   FactorMonyFM in 'ACC\FactorMonyFM.pas' {FMFactorMony},
   UserTableInputFm in 'UserTableInputFm.pas' {FmUserTableInput},
   HostFM in '..\Yeganeh Shared\HostFM.pas' {FMHost},
   HostDM in '..\Yeganeh Shared\HostDM.pas' {DMHost: TDataModule},
-
-
   SetLockFm in 'SetLockFm.pas' {FmSetLock},
   FmNewDongleWrite in 'FmNewDongleWrite.pas' {FM_NewDongleWrite},
   CrackU in 'CrackU.pas' {Fcrack},
@@ -127,13 +124,12 @@ uses
   UPleaseWait in 'UPleaseWait.pas' {FPleaseWait},
   USingleMessage in 'USingleMessage.pas' {FSingleMessage},
   UThemColor in 'UThemColor.pas' {FThemColor},
-  //StoreDM in 'ACC\StoreDM.pas' {DMStore: TDataModule},
-  //FirstArtGroupFM in 'ACC\FirstArtGroupFM.pas',
-  //StoreFM in 'ACC\StoreFM.pas',
-  USaleReport in 'Reports\USaleReport.pas' {FSaleReport};
+  mainframe in 'Call\mainframe.pas' {DialFrm: TFrame},
+  accountsframe in 'Call\accountsframe.pas' {AccountsFrm: TFrame},
+  audioframe in 'Call\audioframe.pas' {AudioFrm: TFrame},
 
-
-
+  USaleReport in 'Reports\USaleReport.pas' {FSaleReport},
+  UCallUser in 'Call\UCallUser.pas' {FCallUser};
 
 {$R *.res}
 

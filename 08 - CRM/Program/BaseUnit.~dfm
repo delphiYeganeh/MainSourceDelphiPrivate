@@ -1,6 +1,6 @@
 object MBaseForm: TMBaseForm
-  Left = 869
-  Top = 196
+  Left = 881
+  Top = 207
   Width = 354
   Height = 297
   BiDiMode = bdRightToLeft
@@ -26,12 +26,6 @@ object MBaseForm: TMBaseForm
     Height = 258
     Align = alClient
     Brush.Color = 12615680
-  end
-  object Shape1: TShape
-    Left = 2
-    Top = 249
-    Width = 65
-    Height = 8
   end
   object DSForm: TDataSource
     Left = 22

@@ -9,26 +9,10 @@ uses
 
 type
   TTasksTreeForm = class(TForm)
-    GroupBox1: TGroupBox;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    DBText1: TDBText;
-    DBText2: TDBText;
-    DBText3: TDBText;
-    DBText4: TDBText;
-    DBText5: TDBText;
-    DBMemo1: TDBMemo;
     DS_MainTask: TDataSource;
     Q_MainTask: TADOQuery;
-    GroupBox2: TGroupBox;
-    Panel1: TPanel;
     Q_SubTasks: TADOQuery;
     DS_SubTasks: TDataSource;
-    BtnCancel: TBitBtn;
     Q_MainTaskFollowUPID: TAutoIncField;
     Q_MainTaskActionTypeID: TIntegerField;
     Q_MainTaskActionTypeTitle: TWideStringField;
@@ -61,16 +45,35 @@ type
     Q_SubTasksParentFollowUpID: TIntegerField;
     Q_SubTasksFollowUpInsertDate: TWideStringField;
     Q_SubTasksDoneStatustitle: TWideStringField;
+    pnlMain: TPanel;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    DBText1: TDBText;
+    DBText2: TDBText;
+    DBText3: TDBText;
+    DBText4: TDBText;
+    DBText5: TDBText;
     DBText6: TDBText;
     Label7: TLabel;
     Label8: TLabel;
+    DBMemo1: TDBMemo;
     DBMemo2: TDBMemo;
-    btnShowContractWord: TBitBtn;
+    GroupBox2: TGroupBox;
     dbgFollow: TYDBGrid;
+    Panel1: TPanel;
+    BtnCancel: TBitBtn;
+    btnShowContractWord: TBitBtn;
+    Shape1: TShape;
     procedure BtnCancelClick(Sender: TObject);
     procedure btnShowContractWordClick(Sender: TObject);
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     FFollowupID : integer;
@@ -157,6 +160,12 @@ begin
     Resize := False
   else Resize := True;
    { TODO -oparsa : 14030203 }
+end;
+
+procedure TTasksTreeForm.FormShow(Sender: TObject);
+begin
+  Shape1.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

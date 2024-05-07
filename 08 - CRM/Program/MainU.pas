@@ -396,6 +396,8 @@ type
     N78: TMenuItem;
     N79: TMenuItem;
     N80: TMenuItem;
+    CallAccess: TMenuItem;
+    NCall: TMenuItem;
     procedure AinsertExecute(Sender: TObject);
     procedure Action6Execute(Sender: TObject);
     procedure ApropertyExecute(Sender: TObject);
@@ -615,6 +617,7 @@ type
     procedure btnCustomerClick(Sender: TObject);
     procedure btnDailyClick(Sender: TObject);
     procedure btntabContractClick(Sender: TObject);
+    procedure NCallClick(Sender: TObject);
 
   private
     qrydblsrchContractType :TADOQuery;
@@ -662,7 +665,7 @@ Uses Telinputunit, dmu,  about, Report, ReportPhone,
     USMSEndContract, SMSBirthDateU, SMSAutoTextU, TasksTreeUnit,
     uCategoryEdit, uLockSoftware, untCustStatusReport, StoreFM,
     SecendArtGroupFM, UnitFM, ArtServiceFM, ChequeFM, EnterDataFM, FactorFM,
-    USaleReport, UThemColor, FirstArtGroupFM;
+    USaleReport, UThemColor, FirstArtGroupFM, UCallUser;
 
 {$R *.dfm}
 
@@ -817,6 +820,7 @@ procedure TMainForm.FormShow(Sender: TObject);
 var fltr:String;
    tmpstr : string;
 begin
+
   pgcMain.ActivePage := xpTabSheet2; 
   { TODO -oparsa : 14030201 }
   oldTopRecord :=  0 ;
@@ -853,6 +857,9 @@ begin
    pgm.ActivePageIndex := 3;
    pgm.ActivePage := TabCustomer;
    NMali.Visible :=  _UserAccAcess ;// false;
+   N79.Visible :=  False;
+   N80.Visible :=  False;
+   CallAccess.Visible := _UserCallAccess ;
    With qryMyTasks do
    Begin
     Close;
@@ -1159,7 +1166,7 @@ begin
    FrFollowUp.Showmodal;
    id := Dm.Select_FollowUP_By_DateFollowUPID.Value;
 
-with    dm.Select_FollowUP_By_Date do
+    with    dm.Select_FollowUP_By_Date do
     begin
         Requery;
         Locate('FollowUPID',id,[]);
@@ -1400,7 +1407,7 @@ end;
 
 procedure TMainForm.xpBitBtn3Click(Sender: TObject);
 begin
-   RefreshContract(copy(_today,1,4)+'/01/01',copy(_today,1,4)+_today);
+   RefreshContract(copy(_today,1,4)+'/01/01',_today);
    ContractGrid.Columns[6].Visible:=false;
 end;
 
@@ -3384,6 +3391,15 @@ begin
   btnCustomer.EndColor    :=  _Color1 ;
   btnDaily.EndColor       :=  _Color1 ;
   btntabContract.EndColor :=  _Color2 ;
+end;
+
+procedure TMainForm.NCallClick(Sender: TObject);
+begin
+  inherited;
+  //Application.CreateForm(TMainForm, MainForm);
+  //MainForm.Showmodal;
+    Application.CreateForm(TFCallUser, FCallUser);
+    FCallUser.Showmodal;
 end;
 
 end.

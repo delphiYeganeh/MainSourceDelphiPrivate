@@ -1,6 +1,6 @@
 object MBaseForm: TMBaseForm
-  Left = 869
-  Top = 196
+  Left = 881
+  Top = 207
   Width = 354
   Height = 297
   BiDiMode = bdRightToLeft

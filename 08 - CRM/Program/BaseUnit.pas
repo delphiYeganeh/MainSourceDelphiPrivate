@@ -214,6 +214,9 @@ end;
 procedure TMBaseForm.FormShow(Sender: TObject);
 var i: integer;
 begin
+   //Self.ScaleBy(_PercentScale,100);
+   Self.Scaled := True ;
+   Self.ScaleBy(Screen.PixelsPerInch,96);
    ShapeBase.Brush.Color := _Color1 ;
    for i:=0 to ComponentCount-1 do
     if Components[i].InheritsFrom(TDBLookupComboBox) then
@@ -370,6 +373,7 @@ end;
 procedure TMBaseForm.FormCreate(Sender: TObject);
 begin
    GetAccess;
+
    { TODO -oparsa : 14030203 }
   // selfMinWidth := Width;
   // selfMinHight := Hight;

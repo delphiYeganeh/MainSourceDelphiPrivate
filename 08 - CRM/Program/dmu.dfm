@@ -1,10 +1,10 @@
 object Dm: TDm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 469
-  Top = 106
-  Height = 895
-  Width = 1080
+  Left = 177
+  Top = 2
+  Height = 573
+  Width = 863
   object YeganehConnection: TADOConnection
     CommandTimeout = 30000
     ConnectionTimeout = 60
@@ -5322,7 +5322,6 @@ object Dm: TDm
       ReadOnly = True
     end
     object CitysCityTitle: TWideStringField
-      Alignment = taRightJustify
       FieldName = 'CityTitle'
       Size = 50
     end
@@ -5507,6 +5506,9 @@ object Dm: TDm
     end
     object UserAccAcess: TBooleanField
       FieldName = 'AccAcess'
+    end
+    object UserCallAccess: TBooleanField
+      FieldName = 'CallAccess'
     end
   end
   object ADOCommand: TADOCommand
@@ -7109,7 +7111,6 @@ object Dm: TDm
       FieldName = 'CustomerStatusID'
     end
     object CustomerStatusCustomerStatusTitle: TWideStringField
-      Alignment = taRightJustify
       FieldName = 'CustomerStatusTitle'
       Size = 50
     end
@@ -8095,7 +8096,6 @@ object Dm: TDm
       ReadOnly = True
     end
     object ProductProductTitle: TWideStringField
-      Alignment = taRightJustify
       FieldName = 'ProductTitle'
       Size = 100
     end
@@ -8167,8 +8167,8 @@ object Dm: TDm
   object DState: TDataSource
     DataSet = State
     OnDataChange = DStateDataChange
-    Left = 84
-    Top = 110
+    Left = 76
+    Top = 111
   end
   object CitysFilterByState: TADOQuery
     Connection = YeganehConnection
@@ -8680,8 +8680,8 @@ object Dm: TDm
         Size = 10
         Value = '0'
       end>
-    Left = 512
-    Top = 296
+    Left = 495
+    Top = 286
     object Report_CanclesCustomerID: TAutoIncField
       FieldName = 'CustomerID'
       ReadOnly = True

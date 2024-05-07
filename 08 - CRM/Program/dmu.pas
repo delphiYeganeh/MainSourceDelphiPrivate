@@ -775,6 +775,7 @@ type
     DState2: TDataSource;
     UserAccAcess: TBooleanField;
     CustomerOtherPerson: TBooleanField;
+    UserCallAccess: TBooleanField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
     function GetSql(s:string):Variant;
     function GetNewCode:string;
@@ -832,6 +833,7 @@ type
     function QGetOldValue2:String;
     procedure InsertLog;
     procedure SendSMS;
+    procedure ResulutionGet ;
 
   public
     SearchResult:integer;
@@ -858,6 +860,7 @@ type
     Function GetUserWindowsUser: string;
 
     function SmsSettingIsCorrect:Boolean;
+    function DMCommaSeperated(s:string):string;
 
 
   end;
@@ -928,6 +931,8 @@ Var
   _Color4: Tcolor ;  
   _ColorThem : string ;
   _UserAccAcess : Boolean ;
+  _UserCallAccess : Boolean ;
+  _PercentScale : Integer ;
   { TODO -oparsa : 14030204 }
    //---
 //1    gContractPath :String;
@@ -959,7 +964,7 @@ procedure Tdm.DataModuleCreate(Sender: TObject);
 Var
    DongleProductCode,DongleErrorCode : Integer;
 begin
-
+   _PercentScale := 100 ;
    _EXEDIR := ExtractFilePath(Application.ExeName);
    if Trim(YeganehConnection.ConnectionString) <> '' then
       ShowMessage('·ÿ›« »—œ«‘ Â ‘Êœ : ConnectionString');
@@ -1036,6 +1041,9 @@ begin
 
 
    { TODO -oparsa : 14030126 }
+
+
+  ResulutionGet;
 
   LoginForm:=TLoginForm.Create(Self);
 
@@ -2566,6 +2574,61 @@ begin
 //  qry.Connection:=dm.YeganehConnection;
 //  qry.SQL.Text:='update OutBox set InProcess=0 , ErrorMessage='+VarToStr(res)+' where outboxid= '+vartostr(arrSmsDetails[i].id);
 //  qry.ExecSQL;
+end;
+
+function TDm.DMCommaSeperated(s: string): string;
+var     i: integer;
+begin
+   i:=length(s) mod 3;
+   if i<>0 then
+    result:=copy(s,1,i)
+   else
+    result:='';
+
+   while i<length(s) do
+    begin
+     if result<>'' then
+      result:=result+','+copy(s,i+1,3)
+     else
+      result:=copy(s,i+1,3);
+     i:=i+3
+    end;
+end;
+
+procedure TDm.ResulutionGet;
+var
+  MonId: integer;
+  Mon: TMonitor;
+  AllMonitorsWidth, AllMonitorsHeight: integer;
+begin
+(*
+  for MonId := 0 to Screen.MonitorCount - 1 do
+  begin
+    Mon := Screen.Monitors[MonId];
+
+    With Memo1.Lines do
+    begin
+
+      Append(Format('Resolution: %dpx x %dpx', [Mon.Width, Mon.Height]));
+      Append(Format('X-offset: %dpx', [Mon.Left]));
+      Append(Format('Y-offset: %dpx', [Mon.Top]));
+    end;
+  end;
+  *)
+
+  AllMonitorsWidth  := GetSystemMetrics(SM_CXVIRTUALSCREEN);
+  AllMonitorsHeight := GetSystemMetrics(SM_CYVIRTUALSCREEN);
+
+
+  if  (AllMonitorsWidth >1680) and (Screen.PixelsPerInch> 96)  then
+  begin
+    //if (Screen.Width <>  AllMonitorsWidth) and (Screen.Width  > AllMonitorsWidth) then
+       _PercentScale := 125
+  end
+  else _PercentScale := 100 ;
+
+  // _PercentScale := 100 ;
+
 end;
 
 end.

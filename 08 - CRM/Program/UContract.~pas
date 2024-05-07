@@ -184,6 +184,14 @@ type
     edtAmount: TEdit;
     edtTotalAmount: TEdit;
     dbeCommentCNT: TDBMemo;
+    Panel3: TPanel;
+    BtnCancel: TBitBtn;
+    btnDel: TBitBtn;
+    btnAdd: TBitBtn;
+    btnEdit: TBitBtn;
+    btnShowContractWord: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
     pnlEdit: TxpPanel;
     GroupBox5: TGroupBox;
     dbgPayByCash: TYDBGrid;
@@ -205,12 +213,6 @@ type
     DBNCheckEdit: TDBNavigator;
     DBNCheckPost: TDBNavigator;
     DBNCheckCancel: TDBNavigator;
-    Panel3: TPanel;
-    BtnCancel: TBitBtn;
-    btnDel: TBitBtn;
-    btnAdd: TBitBtn;
-    btnEdit: TBitBtn;
-    btnShowContractWord: TBitBtn;
     pnlGuarantee: TxpPanel;
     Label3: TLabel;
     Label19: TLabel;
@@ -223,8 +225,6 @@ type
     btnAddGuaranteeImage: TBitBtn;
     btnGuaranteeImageLoad: TBitBtn;
     dblGuaranteeType: TDBLookupComboBox;
-    BitBtn2: TBitBtn;
-    BitBtn3: TBitBtn;
     procedure BtnCancelClick(Sender: TObject);
     procedure RefreshData;
     procedure btnDelClick(Sender: TObject);
@@ -583,7 +583,7 @@ procedure TFrContract.FormShow(Sender: TObject);
 begin
   inherited;
     SetColorForm ;
-  grbCustomer.Caption := ' «ÿ·«⁄«  ‘—ò  / ”«“„«‰  : '+  Select_customer_By_CustomerIDCompanyName.AsString;
+    grbCustomer.Caption := ' «ÿ·«⁄«  ‘—ò  / ”«“„«‰  : '+  Select_customer_By_CustomerIDCompanyName.AsString;
     Dm.Marketer.Close;
     Dm.Marketer.SQL.Clear;
     Dm.Marketer.SQL.Add('SELECT * FROM marketer');
@@ -601,6 +601,12 @@ begin
     DBNCashEdit.DataSource := dbgPayByCash.DataSource;
     DBNCashPost.DataSource := dbgPayByCash.DataSource;
     DBNCashCancel.DataSource := dbgPayByCash.DataSource;
+
+    if SpDbgridContract.RecordCount = 0 then
+    begin
+      pnlEdit.Minimized  :=True;
+      pnlGuarantee.Minimized  :=True;
+    end;
 
 end;
 
@@ -705,6 +711,7 @@ begin
   inherited;
   if  not pnlEdit.Minimized then pnlGuarantee.Minimized := true;
   if SpDbgridContract.RecordCount = 0 then pnlEdit.Minimized  :=True;
+  
   if (not pnlEdit.Minimized) and (SpDbgridContract.RecordCount <> 0 ) then
     if not _EditContract then
     begin
@@ -903,11 +910,19 @@ procedure TFrContract.pnlGuaranteeAfterMinimized(Sender: TxpPanel;
   ASizeRestored: Boolean);
 begin
   inherited;
-  if not pnlGuarantee.Minimized  then   pnlEdit.Minimized := True;
-  if SpDbgridContract.RecordCount = 0 then pnlGuarantee.Minimized  :=True;
-  if (pnlGuarantee.Minimized)and (QryGuarantee.State in [dsinsert,dsEdit])
-              then if edtGuaranteeAmount.Caption = '' then   QryGuarantee.Cancel else QryGuarantee.Post;
-  Panel3.Height := pnlGuarantee.Height +44;
+  if not pnlGuarantee.Minimized   then   pnlEdit.Minimized := True;
+
+  if SpDbgridContract.RecordCount = 0 then   pnlGuarantee.Minimized  :=True;
+
+  if (pnlGuarantee.Minimized)and (QryGuarantee.State in [dsinsert,dsEdit]) then
+    if edtGuaranteeAmount.Caption = '' then
+      QryGuarantee.Cancel
+    else QryGuarantee.Post;
+
+  if SpDbgridContract.RecordCount > 0 then
+    if not pnlGuarantee.Minimized  then
+      Panel3.Height := Panel3.Height + 76
+    else Panel3.Height := Panel3.Height - 76;
 end;
 
 procedure TFrContract.btnGuaranteeImageLoadClick(Sender: TObject);
@@ -1089,7 +1104,10 @@ procedure TFrContract.pnlGuaranteeAfterMaximized(Sender: TxpPanel;
   ASizeRestored: Boolean);
 begin
   inherited;
-   Panel3.Height := pnlGuarantee.Height +44;
+  if SpDbgridContract.RecordCount > 0 then
+    if  not pnlGuarantee.Minimized  then
+      Panel3.Height := Panel3.Height + 76
+    else Panel3.Height := Panel3.Height - 76;
 end;
 
 procedure TFrContract.adoCheckPayBeforePost(DataSet: TDataSet);

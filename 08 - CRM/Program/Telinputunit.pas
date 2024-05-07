@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, DBCtrls, Mask, ExtCtrls, Buttons, ToolWin, ActnMan,
   ActnCtrls, DBActns, ActnList, ImgList,DB, Grids, DBGrids, YDbgrid,BaseUnit,
   ExtActns, CheckLst, YchecklistBox,  ADODB, ComCtrls,  Menus,
-  XPStyleActnCtrls, MssCalendarPro;
+  XPStyleActnCtrls, MssCalendarPro, dxGDIPlusClasses;
 
 type
   TPropertiesForm = class(TMBaseForm)
@@ -176,6 +176,10 @@ type
     adoCityCItyId: TIntegerField;
     adoCityCityTitle: TStringField;
     adoCityStateNum: TStringField;
+    ImageList1: TImageList;
+    Image1: TImage;
+    Image2: TImage;
+    Timer1: TTimer;
     procedure DBEdit7Enter(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -213,6 +217,7 @@ type
       Shift: TShiftState);
     procedure dblStateExit(Sender: TObject);
     procedure dblCityEnter(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
     CustomerID: integer;
     IsNewRecord : Boolean;
@@ -504,9 +509,9 @@ begin
      if Dm.Select_Customer_By_CustomerIDPhone.AsString <> '' then
        qry.SQL.Text:= qry.SQL.Text + ' union SELECT 1 FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDPhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' )';
      if Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString <> '' then
-       qry.SQL.Text:= qry.SQL.Text + ' union SELECT 1 FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString )+''' )';
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT 1 FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString )+''' )';
      if Dm.Select_Customer_By_CustomerIDMobilePhone.AsString <> '' then
-       qry.SQL.Text:= qry.SQL.Text + ' union SELECT 1 FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' )';
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT 1 FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' ) ';
      qry.SQL.Text:= qry.SQL.Text + ' ) t ';
      qry.Open;
      if qry.RecordCount > 0 then
@@ -517,7 +522,7 @@ begin
 
      qry.SQL.Text:= ' select * from (  select 1 cnt from [dbo].[Customer] where 1=2 '  ;
      if  ( Dm.Select_Customer_By_CustomerIDEmailAddress.AsString <> '') then
-       qry.SQL.Text:= qry.SQL.Text + ' union SELECT 1 FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and ( ltrim(rtrim(EmailAddress)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDEmailAddress.AsString ) +''' )';
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT 1 FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and ( ltrim(rtrim(EmailAddress)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDEmailAddress.AsString ) +''' ) ';
      qry.SQL.Text:= qry.SQL.Text + ' ) t ';
      qry.Open;
 
@@ -827,6 +832,13 @@ procedure TPropertiesForm.DBCheckBox1Click(Sender: TObject);
 begin
   inherited;
   Shape1.Visible := DBCheckBox1.Checked ;
+
+  Timer1.Interval:=1000;
+  Timer1.Enabled := Shape1.Visible ;
+
+  Image2.Visible := Shape1.Visible  ;
+  Image1.Visible := false ;
+
 end;
 
 procedure TPropertiesForm.dblStateKeyPress(Sender: TObject; var Key: Char);
@@ -841,8 +853,7 @@ procedure TPropertiesForm.dblStateKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   inherited;
-  dblState.SetFocus;
-  LoadKeyBoardLayout('00000429', KLF_ACTIVATE);
+
   //adoCity.SQL.Text := ' SELECT  CItyId , CityTitle ,StateId ,StateNum  FROM [dbo].[City]  where StateId = '+ IntToStr( ADOStateStateID.Value )+' ORDER BY CityTitle ';
   //adoCity.Open;
 end;
@@ -859,6 +870,21 @@ begin
   inherited;
   adoCity.SQL.Text := ' SELECT  CItyId , CityTitle ,StateId ,StateNum  FROM [dbo].[City]  where StateId = '+ IntToStr( ADOStateStateID.Value )+' ORDER BY CityTitle ';
   adoCity.Open;
+end;
+
+procedure TPropertiesForm.Timer1Timer(Sender: TObject);
+begin
+  inherited;
+  if Image1.Visible then
+  begin
+    Image1.Visible  := false ;
+    Image2.Visible := not Image1.Visible ;
+  end
+  else
+  begin
+    Image2.Visible  := false ;
+    Image1.Visible := not Image2.Visible ;
+  end;
 end;
 
 end.

@@ -1,6 +1,6 @@
 inherited frmCustStatusReport: TfrmCustStatusReport
-  Left = 199
-  Top = 183
+  Left = 233
+  Top = 225
   Width = 1373
   Height = 522
   Caption = #1711#1586#1575#1585#1588' '#1608#1590#1593#1610#1578' '#1605#1588#1578#1585#1610#1575#1606
@@ -317,8 +317,8 @@ inherited frmCustStatusReport: TfrmCustStatusReport
       end
       object DBLkCBGroupTitle: TDBLookupComboBox
         Left = 148
-        Top = 9
-        Width = 370
+        Top = 8
+        Width = 365
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         BiDiMode = bdLeftToRight

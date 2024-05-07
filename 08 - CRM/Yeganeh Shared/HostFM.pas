@@ -10,13 +10,14 @@ uses
 
 type
   TFMHost = class(TMBaseForm)
+    ADOTable1: TADOTable;
+    DataSource1: TDataSource;
+    pnlMain: TPanel;
     Panel1: TPanel;
-    Panel2: TPanel;
-    Panel4: TPanel;
-    SpeedButton1: TSpeedButton;
-    DBNavigator1: TDBNavigator;
     SBSearch: TSpeedButton;
     LabelDate: TLabel;
+    Panel2: TPanel;
+    DBGridHost: TYDBGrid;
     Panel3: TPanel;
     Label1: TLabel;
     Label3: TLabel;
@@ -25,6 +26,14 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
+    Label2: TLabel;
+    Label9: TLabel;
+    SBHostGroup: TSpeedButton;
+    SBSimpleEditor: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
     DBEAddress: TDBEdit;
     DBEEmail: TDBEdit;
     DBEUserName: TDBEdit;
@@ -33,23 +42,15 @@ type
     DBEUserNaFa: TDBEdit;
     DBEComment: TDBEdit;
     DBLkCBHostGroup: TDBLookupComboBox;
-    Label2: TLabel;
     wwDBREImageData: TwwDBRichEdit;
-    Label9: TLabel;
-    SBHostGroup: TSpeedButton;
-    SBSimpleEditor: TSpeedButton;
-    SBExportToWord: TSpeedButton;
     DBCheckBox1: TDBCheckBox;
-    SpeedButton2: TSpeedButton;
-    DBGridHost: TYDBGrid;
-    Label10: TLabel;
     DBComboBox1: TDBComboBox;
     DBEdit1: TDBEdit;
-    Label11: TLabel;
     DBEdit2: TDBEdit;
-    Label12: TLabel;
-    ADOTable1: TADOTable;
-    DataSource1: TDataSource;
+    Panel4: TPanel;
+    SpeedButton1: TSpeedButton;
+    SBExportToWord: TSpeedButton;
+    DBNavigator1: TDBNavigator;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word;

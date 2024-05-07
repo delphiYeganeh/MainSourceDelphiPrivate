@@ -1,13 +1,11 @@
 inherited FrViewByCalender: TFrViewByCalender
-  Left = 417
-  Top = 178
-  HorzScrollBar.Range = 0
-  VertScrollBar.Range = 0
+  Left = 506
+  Top = 113
   AutoScroll = False
   BorderIcons = [biSystemMenu]
   Caption = #1606#1605#1575#1610#1588' '#1605#1575#1607#1610#1575#1606#1607
-  ClientHeight = 586
-  ClientWidth = 997
+  ClientHeight = 618
+  ClientWidth = 1059
   Color = 16770790
   Font.Height = -16
   OldCreateOrder = True
@@ -16,18 +14,13 @@ inherited FrViewByCalender: TFrViewByCalender
   TextHeight = 19
   inherited ShapeBase: TShape
     Top = 26
-    Width = 997
-    Height = 560
+    Width = 1059
+    Height = 592
   end
-  inherited Shape1: TShape
-    Top = 26
-    Width = 997
-    Height = 560
-  end
-  object Panel2: TPanel [2]
+  object Panel2: TPanel [1]
     Left = 0
     Top = 0
-    Width = 997
+    Width = 1059
     Height = 26
     Align = alTop
     Font.Charset = ARABIC_CHARSET
@@ -38,11 +31,11 @@ inherited FrViewByCalender: TFrViewByCalender
     ParentFont = False
     TabOrder = 2
     DesignSize = (
-      997
+      1059
       26)
     object StaticText1: TStaticText
       Tag = 901
-      Left = 837
+      Left = 899
       Top = 2
       Width = 71
       Height = 20
@@ -65,7 +58,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object StaticText2: TStaticText
       Tag = 902
-      Left = 761
+      Left = 823
       Top = 2
       Width = 71
       Height = 21
@@ -88,7 +81,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object StaticText3: TStaticText
       Tag = 903
-      Left = 685
+      Left = 747
       Top = 2
       Width = 71
       Height = 21
@@ -111,7 +104,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object StaticText4: TStaticText
       Tag = 904
-      Left = 610
+      Left = 672
       Top = 2
       Width = 71
       Height = 21
@@ -134,7 +127,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object StaticText5: TStaticText
       Tag = 905
-      Left = 534
+      Left = 596
       Top = 2
       Width = 71
       Height = 20
@@ -157,7 +150,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object StaticText6: TStaticText
       Tag = 906
-      Left = 458
+      Left = 520
       Top = 2
       Width = 71
       Height = 20
@@ -180,7 +173,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object StaticText7: TStaticText
       Tag = 907
-      Left = 383
+      Left = 445
       Top = 2
       Width = 71
       Height = 20
@@ -203,7 +196,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object StaticText8: TStaticText
       Tag = 908
-      Left = 307
+      Left = 369
       Top = 2
       Width = 71
       Height = 20
@@ -226,7 +219,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object StaticText9: TStaticText
       Tag = 909
-      Left = 231
+      Left = 293
       Top = 2
       Width = 71
       Height = 21
@@ -249,7 +242,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object StaticText10: TStaticText
       Tag = 910
-      Left = 156
+      Left = 218
       Top = 2
       Width = 71
       Height = 21
@@ -272,7 +265,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object StaticText11: TStaticText
       Tag = 911
-      Left = 80
+      Left = 142
       Top = 2
       Width = 71
       Height = 21
@@ -295,7 +288,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object StaticText12: TStaticText
       Tag = 912
-      Left = 5
+      Left = 67
       Top = 3
       Width = 71
       Height = 21
@@ -317,7 +310,7 @@ inherited FrViewByCalender: TFrViewByCalender
       OnClick = StaticText1Click
     end
     object _year: TEdit
-      Left = 912
+      Left = 974
       Top = 2
       Width = 71
       Height = 21
@@ -338,11 +331,11 @@ inherited FrViewByCalender: TFrViewByCalender
       Text = '1381'
     end
   end
-  object Panel1: TPanel [3]
+  object Panel1: TPanel [2]
     Left = 0
     Top = 26
-    Width = 997
-    Height = 560
+    Width = 1059
+    Height = 592
     Align = alClient
     AutoSize = True
     BevelInner = bvRaised
@@ -350,12 +343,12 @@ inherited FrViewByCalender: TFrViewByCalender
     Color = 15455958
     TabOrder = 0
     DesignSize = (
-      997
-      560)
+      1059
+      592)
     object Label7: TLabel
-      Left = 915
+      Left = 765
       Top = 9
-      Width = 30
+      Width = 242
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1588#1606#1576#1607
@@ -367,9 +360,9 @@ inherited FrViewByCalender: TFrViewByCalender
       ParentFont = False
     end
     object Label8: TLabel
-      Left = 772
+      Left = 622
       Top = 9
-      Width = 42
+      Width = 254
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1610#1705#1588#1606#1576#1607
@@ -381,9 +374,9 @@ inherited FrViewByCalender: TFrViewByCalender
       ParentFont = False
     end
     object Label9: TLabel
-      Left = 630
+      Left = 480
       Top = 9
-      Width = 41
+      Width = 253
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1583#1608#1588#1606#1576#1607
@@ -395,9 +388,9 @@ inherited FrViewByCalender: TFrViewByCalender
       ParentFont = False
     end
     object Label10: TLabel
-      Left = 481
+      Left = 331
       Top = 9
-      Width = 54
+      Width = 266
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1587#1607' '#1588#1606#1576#1607
@@ -409,9 +402,9 @@ inherited FrViewByCalender: TFrViewByCalender
       ParentFont = False
     end
     object Label11: TLabel
-      Left = 340
+      Left = 190
       Top = 9
-      Width = 55
+      Width = 267
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1670#1607#1575#1585#1588#1606#1576#1607
@@ -423,9 +416,9 @@ inherited FrViewByCalender: TFrViewByCalender
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 199
+      Left = 49
       Top = 9
-      Width = 52
+      Width = 264
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1662#1606#1580' '#1588#1606#1576#1607
@@ -437,9 +430,9 @@ inherited FrViewByCalender: TFrViewByCalender
       ParentFont = False
     end
     object Label13: TLabel
-      Left = 61
+      Left = -89
       Top = 9
-      Width = 30
+      Width = 242
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1580#1605#1593#1607
@@ -452,7 +445,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox1: TListBox
       Tag = 1
-      Left = 863
+      Left = 925
       Top = 30
       Width = 131
       Height = 85
@@ -473,7 +466,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox2: TListBox
       Tag = 11
-      Left = 720
+      Left = 782
       Top = 30
       Width = 140
       Height = 86
@@ -494,7 +487,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox3: TListBox
       Tag = 21
-      Left = 577
+      Left = 639
       Top = 30
       Width = 140
       Height = 86
@@ -515,7 +508,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox4: TListBox
       Tag = 31
-      Left = 434
+      Left = 496
       Top = 30
       Width = 140
       Height = 86
@@ -536,7 +529,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox5: TListBox
       Tag = 41
-      Left = 291
+      Left = 353
       Top = 30
       Width = 140
       Height = 86
@@ -557,7 +550,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox6: TListBox
       Tag = 51
-      Left = 148
+      Left = 210
       Top = 30
       Width = 140
       Height = 86
@@ -578,7 +571,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox7: TListBox
       Tag = 61
-      Left = 5
+      Left = 67
       Top = 30
       Width = 140
       Height = 86
@@ -599,7 +592,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox8: TListBox
       Tag = 2
-      Left = 863
+      Left = 925
       Top = 119
       Width = 131
       Height = 85
@@ -620,7 +613,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox9: TListBox
       Tag = 12
-      Left = 720
+      Left = 782
       Top = 118
       Width = 140
       Height = 86
@@ -641,7 +634,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox10: TListBox
       Tag = 22
-      Left = 577
+      Left = 639
       Top = 119
       Width = 140
       Height = 86
@@ -662,7 +655,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox11: TListBox
       Tag = 32
-      Left = 434
+      Left = 496
       Top = 119
       Width = 140
       Height = 86
@@ -683,7 +676,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox12: TListBox
       Tag = 42
-      Left = 291
+      Left = 353
       Top = 119
       Width = 140
       Height = 86
@@ -704,7 +697,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox13: TListBox
       Tag = 52
-      Left = 148
+      Left = 210
       Top = 119
       Width = 140
       Height = 86
@@ -725,7 +718,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox14: TListBox
       Tag = 62
-      Left = 5
+      Left = 67
       Top = 119
       Width = 140
       Height = 86
@@ -746,7 +739,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox15: TListBox
       Tag = 3
-      Left = 863
+      Left = 925
       Top = 208
       Width = 131
       Height = 85
@@ -767,7 +760,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox16: TListBox
       Tag = 13
-      Left = 720
+      Left = 782
       Top = 207
       Width = 140
       Height = 86
@@ -788,7 +781,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox17: TListBox
       Tag = 23
-      Left = 577
+      Left = 639
       Top = 208
       Width = 140
       Height = 86
@@ -809,7 +802,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox18: TListBox
       Tag = 33
-      Left = 434
+      Left = 496
       Top = 208
       Width = 140
       Height = 86
@@ -830,7 +823,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox19: TListBox
       Tag = 43
-      Left = 291
+      Left = 353
       Top = 208
       Width = 140
       Height = 86
@@ -851,7 +844,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox20: TListBox
       Tag = 53
-      Left = 148
+      Left = 210
       Top = 208
       Width = 140
       Height = 86
@@ -872,7 +865,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox21: TListBox
       Tag = 63
-      Left = 5
+      Left = 67
       Top = 208
       Width = 140
       Height = 86
@@ -893,7 +886,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox22: TListBox
       Tag = 4
-      Left = 863
+      Left = 925
       Top = 297
       Width = 131
       Height = 85
@@ -914,7 +907,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox23: TListBox
       Tag = 14
-      Left = 720
+      Left = 782
       Top = 296
       Width = 140
       Height = 86
@@ -935,7 +928,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox24: TListBox
       Tag = 24
-      Left = 577
+      Left = 639
       Top = 297
       Width = 140
       Height = 86
@@ -956,7 +949,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox25: TListBox
       Tag = 34
-      Left = 434
+      Left = 496
       Top = 297
       Width = 140
       Height = 86
@@ -977,7 +970,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox26: TListBox
       Tag = 44
-      Left = 291
+      Left = 353
       Top = 297
       Width = 140
       Height = 86
@@ -998,7 +991,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox27: TListBox
       Tag = 54
-      Left = 148
+      Left = 210
       Top = 297
       Width = 140
       Height = 86
@@ -1019,7 +1012,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox28: TListBox
       Tag = 64
-      Left = 5
+      Left = 67
       Top = 297
       Width = 140
       Height = 86
@@ -1040,7 +1033,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox29: TListBox
       Tag = 5
-      Left = 863
+      Left = 925
       Top = 386
       Width = 131
       Height = 85
@@ -1061,7 +1054,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox30: TListBox
       Tag = 15
-      Left = 720
+      Left = 782
       Top = 385
       Width = 140
       Height = 86
@@ -1082,7 +1075,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox31: TListBox
       Tag = 25
-      Left = 577
+      Left = 639
       Top = 386
       Width = 140
       Height = 86
@@ -1103,7 +1096,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox32: TListBox
       Tag = 35
-      Left = 434
+      Left = 496
       Top = 386
       Width = 140
       Height = 86
@@ -1124,7 +1117,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox33: TListBox
       Tag = 45
-      Left = 291
+      Left = 353
       Top = 386
       Width = 140
       Height = 86
@@ -1145,7 +1138,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox34: TListBox
       Tag = 55
-      Left = 148
+      Left = 210
       Top = 386
       Width = 140
       Height = 86
@@ -1166,7 +1159,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox35: TListBox
       Tag = 65
-      Left = 5
+      Left = 67
       Top = 386
       Width = 140
       Height = 86
@@ -1187,7 +1180,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox36: TListBox
       Tag = 6
-      Left = 863
+      Left = 925
       Top = 475
       Width = 131
       Height = 85
@@ -1209,7 +1202,7 @@ inherited FrViewByCalender: TFrViewByCalender
     end
     object ListBox37: TListBox
       Tag = 16
-      Left = 720
+      Left = 782
       Top = 474
       Width = 140
       Height = 86
@@ -1229,8 +1222,8 @@ inherited FrViewByCalender: TFrViewByCalender
       OnDblClick = ListBoxDblClick
     end
   end
-  object Button1: TBitBtn [4]
-    Left = 14
+  object Button1: TBitBtn [3]
+    Left = 27
     Top = 529
     Width = 74
     Height = 28

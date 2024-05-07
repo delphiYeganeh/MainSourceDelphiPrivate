@@ -1,7 +1,7 @@
 object LoginForm: TLoginForm
   Tag = -10
-  Left = 618
-  Top = 222
+  Left = 623
+  Top = 230
   Hint = #1578#1575#1585#1610#1582' '#1570#1582#1585#1610#1606' '#1608#1610#1585#1575#1610#1588' 84/02/03  '#1610#1711#1575#1606#1607
   BiDiMode = bdRightToLeft
   BorderIcons = []
@@ -559,9 +559,33 @@ object LoginForm: TLoginForm
       Cancel = True
       OnClick = BitBtn2Click
     end
+    object Button1: TButton
+      Left = 268
+      Top = 90
+      Width = 19
+      Height = 25
+      Caption = 'Button1'
+      TabOrder = 4
+      Visible = False
+      OnClick = Button1Click
+    end
+    object Memo1: TMemo
+      Left = 187
+      Top = 48
+      Width = 185
+      Height = 19
+      Lines.Strings = (
+        'M'
+        'e'
+        'm'
+        'o'
+        '1')
+      TabOrder = 5
+      Visible = False
+    end
   end
   object ActionList1: TActionList
-    Left = 2
+    Left = 17
     Top = 5
     object Aclose: TAction
       Tag = 1
@@ -585,7 +609,7 @@ object LoginForm: TLoginForm
     Parameters = <>
     SQL.Strings = (
       'SELECT TOP 1 * FROM SMSSettings')
-    Left = 3
+    Left = 19
     Top = 48
     object QGetSMSSettingsID: TAutoIncField
       FieldName = 'ID'

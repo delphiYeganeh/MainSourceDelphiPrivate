@@ -67,7 +67,8 @@ type
       Button: TNavigateBtn);
     procedure DBGridHostDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure FormResize(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
   public
@@ -226,15 +227,16 @@ begin
    DBGrid_SetFocusAfterExit(DBGridHost,Rect,DataCol,Column,State,clHighlightText);//Uses Types,Graphics
 end;
 
-procedure TFMHost.FormResize(Sender: TObject);
+procedure TFMHost.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
 begin
-  inherited;
   { TODO -oparsa : 14030203 }
-  if Self.width <= 809 then
-   Self.Width := 809 ;
-  if Self.Height <= 585 then
-   Self.Height := 585 ;
+  if (NewWidth < 809)  or (NewHeight < 585) then
+    Resize := False
+  else Resize := True;
    { TODO -oparsa : 14030203 }
+  inherited;
+
 end;
 
 end.

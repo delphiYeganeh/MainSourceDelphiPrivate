@@ -9,8 +9,8 @@ inherited FMHost: TFMHost
   KeyPreview = True
   OldCreateOrder = True
   Position = poMainFormCenter
+  OnCanResize = FormCanResize
   OnKeyDown = FormKeyDown
-  OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel [0]
