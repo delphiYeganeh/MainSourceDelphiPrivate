@@ -1,22 +1,93 @@
 [Closed Files]
-File_0=SourceModule,'D:\matin\03 - Archive\Program\UFillLetterData.pas',0,1,468,62,480,0,0
-File_1=SourceModule,'c:\program files (x86)\borland\delphi7\source\rtl\Sys\sysutils.pas',0,1,5367,1,5381,0,0
-File_2=SourceModule,'D:\matin\03 - Archive\Program\FolderToLetterFm.pas',0,1,544,38,550,0,0
-File_3=SourceModule,'D:\Barzegar\03 - Archive\Program\Dmu.pas',0,1,1121,31,1133,0,0
-File_4=SourceModule,'D:\Barzegar\03 - Archive\Shared\backupF.pas',0,1,240,6,251,0,0
-File_5=SourceModule,'C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas',0,1,744,1,772,0,0
-File_6=SourceModule,'D:\matin\03 - Archive\Shared\businessLayer.pas',0,1,1,98,7,0,0
+File_0=SourceModule,'D:\matin\03 - Archive\Program\UAddDocument.dfm',0,1,1,1,1,0,0
+File_1=SourceModule,'D:\matin\03 - Archive\shared\LetterArchive.dfm',0,1,1,1,1,0,0
+File_2=SourceModule,'D:\matin\03 - Archive\Program\UEditUserExtention.pas',0,1,1,28,21,0,0
+File_3=SourceModule,'D:\matin\03 - Archive\Program\UInputTemplate.pas',0,1,24,29,36,0,0
+File_4=SourceModule,'D:\matin\03 - Archive\Program\U_ENTER_IP_ADDRESS_FRM.pas',0,1,1,20,13,0,0
+File_5=SourceModule,'D:\matin\03 - Archive\Program\LetterFilterU.pas',0,1,22,24,34,0,0
+File_6=SourceModule,'D:\matin\03 - Archive\shared\UTotalExactCopy.pas',0,1,1,33,21,0,0
 
 [Modules]
-Module0=D:\matin\03 - Archive\Program\UMain.pas
-Module1=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
-Module2=D:\matin\03 - Archive\Program\Dmu.pas
-Module3=D:\matin\03 - Archive\shared\backupF.pas
-Module4=D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr
-Count=5
+Module0=D:\matin\03 - Archive\Program\Dmu.pas
+Module1=D:\matin\03 - Archive\Program\UAddLetterDataDialog.pas
+Module2=D:\matin\03 - Archive\Program\LogOn.pas
+Module3=D:\matin\03 - Archive\Program\UaddLetterData.pas
+Module4=D:\matin\03 - Archive\Program\UAddDocument.pas
+Module5=D:\matin\03 - Archive\shared\BaseUnit.pas
+Module6=D:\matin\03 - Archive\shared\LetterArchive.pas
+Module7=D:\matin\03 - Archive\New Forms\UinputRefferenceTable.pas
+Module8=D:\matin\03 - Archive\New Forms\UInputUserTable.pas
+Module9=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
+Module10=D:\matin\03 - Archive\Program\UMain.pas
+Module11=D:\matin\03 - Archive\Program\FolderToLetterFm.pas
+Module12=D:\matin\03 - Archive\Program\UFillLetterData.pas
+Module13=D:\matin\03 - Archive\shared\backupF.pas
+Module14=H:\Yeganeh\Windows\Delphi\Component\Vcl2\UemsVCL.pas
+Module15=H:\Yeganeh\Windows\Delphi\Component\Vcl2\xp style\xpPages.pas
+Module16=H:\Yeganeh\Windows\Delphi\Component\Vcl2\xp style\xpBitBtn.pas
+Module17=H:\Yeganeh\Windows\Delphi\Component\Vcl2\YwhereEdit.pas
+Module18=D:\99 - Shared\YDbgrid.pas
+Module19=H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas
+Module20=H:\Yeganeh\Windows\Delphi\Component\MssComponents\MssPackage\Source\WordXP.pas
+Module21=H:\Yeganeh\Windows\Delphi\Component\Vcl2\xp style\xpWindow.pas
+Module22=D:\matin\03 - Archive\shared\UchangePassword.pas
+Module23=D:\matin\03 - Archive\shared\FUserShortCut.pas
+Module24=D:\matin\03 - Archive\shared\UsearchStno.pas
+Module25=D:\matin\03 - Archive\shared\USecChange.pas
+Module26=D:\matin\03 - Archive\shared\USearchTitle.pas
+Module27=D:\matin\03 - Archive\shared\ExportToWord.pas
+Module28=D:\matin\03 - Archive\shared\Settingsu.pas
+Module29=D:\matin\03 - Archive\shared\ExactCopy.pas
+Module30=D:\matin\03 - Archive\shared\FromOrgDialog.pas
+Module31=c:\program files (x86)\borland\delphi7\source\vcl\DB.pas
+Module32=D:\matin\03 - Archive\shared\Uconnect.pas
+Module33=D:\matin\03 - Archive\shared\FromOrgU.pas
+Module34=H:\Yeganeh\Windows\Delphi\Component\TMS Component Pack 7.5.3.1 for Delphi 5-XE8\Components\AdvGrid.pas
+Module35=D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr
+Count=36
 EditWindowCount=1
 
-[D:\matin\03 - Archive\Program\UMain.pas]
+[D:\matin\03 - Archive\Program\Dmu.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\Program\UAddLetterDataDialog.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\Program\LogOn.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
+
+[D:\matin\03 - Archive\Program\UaddLetterData.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\Program\UAddDocument.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\BaseUnit.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\LetterArchive.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\New Forms\UinputRefferenceTable.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\New Forms\UInputUserTable.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -26,12 +97,127 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\03 - Archive\Program\Dmu.pas]
+[D:\matin\03 - Archive\Program\UMain.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\Program\FolderToLetterFm.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\Program\UFillLetterData.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
 [D:\matin\03 - Archive\shared\backupF.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[H:\Yeganeh\Windows\Delphi\Component\Vcl2\UemsVCL.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[H:\Yeganeh\Windows\Delphi\Component\Vcl2\xp style\xpPages.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[H:\Yeganeh\Windows\Delphi\Component\Vcl2\xp style\xpBitBtn.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[H:\Yeganeh\Windows\Delphi\Component\Vcl2\YwhereEdit.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\99 - Shared\YDbgrid.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[H:\Yeganeh\Windows\Delphi\Component\MssComponents\MssPackage\Source\WordXP.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[H:\Yeganeh\Windows\Delphi\Component\Vcl2\xp style\xpWindow.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\UchangePassword.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\FUserShortCut.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\UsearchStno.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\USecChange.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\USearchTitle.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\ExportToWord.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\Settingsu.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\ExactCopy.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\FromOrgDialog.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[c:\program files (x86)\borland\delphi7\source\vcl\DB.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\Uconnect.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\FromOrgU.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[H:\Yeganeh\Windows\Delphi\Component\TMS Component Pack 7.5.3.1 for Delphi 5-XE8\Components\AdvGrid.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -45,18 +231,53 @@ FormOnTop=0
 FormState=0
 FormOnTop=0
 
-[D:\matin\03 - Archive\shared\BaseUnit.pas]
+[D:\matin\03 - Archive\Program\FolderToLetterDM.pas]
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\Program\AddDocumentDM.pas]
 FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=5
-CurrentView=2
+ViewCount=36
+CurrentView=1
 View0=0
 View1=1
 View2=2
 View3=3
 View4=4
+View5=5
+View6=6
+View7=7
+View8=8
+View9=9
+View10=10
+View11=11
+View12=12
+View13=13
+View14=14
+View15=15
+View16=16
+View17=17
+View18=18
+View19=19
+View20=20
+View21=21
+View22=22
+View23=23
+View24=24
+View25=25
+View26=26
+View27=27
+View28=28
+View29=29
+View30=30
+View31=31
+View32=32
+View33=33
+View34=34
+View35=35
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -74,39 +295,256 @@ LeftPanelSize=140
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=85
+BottomPanelSize=0
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=0000040000000000B005000000000000025500000000000000010000000000000000000000000100000000BD050000000000000100000000B00500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=00000400010000000B0000004D65737361676556696577B005000000000000025500000000000000010000000000000000000000000100000000BD050000000000000100000000B005000000000000FFFFFFFF
 
 [View0]
 Module=D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr
-CursorX=35
-CursorY=140
-TopLine=127
+CursorX=34
+CursorY=139
+TopLine=1
 LeftCol=1
 
 [View1]
 Module=D:\matin\03 - Archive\Program\Dmu.pas
-CursorX=39
-CursorY=1125
-TopLine=1109
+CursorX=48
+CursorY=752
+TopLine=746
 LeftCol=1
 
 [View2]
-Module=D:\matin\03 - Archive\Program\UMain.pas
-CursorX=84
-CursorY=1649
-TopLine=1646
+Module=D:\matin\03 - Archive\Program\LogOn.pas
+CursorX=67
+CursorY=461
+TopLine=453
 LeftCol=1
 
 [View3]
-Module=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
-CursorX=22
-CursorY=336
-TopLine=328
+Module=D:\matin\03 - Archive\Program\UFillLetterData.pas
+CursorX=54
+CursorY=345
+TopLine=329
 LeftCol=1
 
 [View4]
+Module=D:\matin\03 - Archive\Program\FolderToLetterFm.pas
+CursorX=50
+CursorY=299
+TopLine=282
+LeftCol=1
+
+[View5]
+Module=D:\matin\03 - Archive\Program\UMain.pas
+CursorX=66
+CursorY=654
+TopLine=645
+LeftCol=1
+
+[View6]
+Module=D:\matin\03 - Archive\shared\BaseUnit.pas
+CursorX=1
+CursorY=75
+TopLine=51
+LeftCol=1
+
+[View7]
+Module=H:\Yeganeh\Windows\Delphi\Component\TMS Component Pack 7.5.3.1 for Delphi 5-XE8\Components\AdvGrid.pas
+CursorX=50
+CursorY=5813
+TopLine=5801
+LeftCol=1
+
+[View8]
+Module=D:\matin\03 - Archive\shared\FromOrgU.pas
+CursorX=70
+CursorY=9
+TopLine=1
+LeftCol=1
+
+[View9]
+Module=D:\matin\03 - Archive\shared\Uconnect.pas
+CursorX=3
+CursorY=7
+TopLine=1
+LeftCol=1
+
+[View10]
+Module=D:\matin\03 - Archive\Program\UAddDocument.pas
+CursorX=1
+CursorY=1011
+TopLine=1010
+LeftCol=1
+
+[View11]
+Module=D:\matin\03 - Archive\Program\UaddLetterData.pas
+CursorX=16
+CursorY=173
+TopLine=169
+LeftCol=1
+
+[View12]
+Module=D:\matin\03 - Archive\Program\UAddLetterDataDialog.pas
+CursorX=140
+CursorY=196
+TopLine=188
+LeftCol=1
+
+[View13]
+Module=c:\program files (x86)\borland\delphi7\source\vcl\DB.pas
+CursorX=58
+CursorY=66
+TopLine=48
+LeftCol=1
+
+[View14]
+Module=D:\matin\03 - Archive\New Forms\UinputRefferenceTable.pas
+CursorX=45
+CursorY=20
+TopLine=13
+LeftCol=1
+
+[View15]
+Module=D:\matin\03 - Archive\New Forms\UInputUserTable.pas
+CursorX=46
+CursorY=18
+TopLine=12
+LeftCol=1
+
+[View16]
+Module=D:\matin\03 - Archive\shared\FromOrgDialog.pas
+CursorX=57
+CursorY=7
+TopLine=1
+LeftCol=1
+
+[View17]
+Module=D:\matin\03 - Archive\shared\ExactCopy.pas
+CursorX=30
+CursorY=67
+TopLine=49
+LeftCol=1
+
+[View18]
+Module=D:\matin\03 - Archive\shared\Settingsu.pas
+CursorX=33
+CursorY=8
+TopLine=1
+LeftCol=1
+
+[View19]
+Module=D:\matin\03 - Archive\shared\ExportToWord.pas
+CursorX=20
+CursorY=92
+TopLine=77
+LeftCol=1
+
+[View20]
+Module=D:\matin\03 - Archive\shared\USearchTitle.pas
+CursorX=13
+CursorY=7
+TopLine=1
+LeftCol=1
+
+[View21]
+Module=D:\matin\03 - Archive\shared\USecChange.pas
+CursorX=13
+CursorY=8
+TopLine=1
+LeftCol=1
+
+[View22]
+Module=D:\matin\03 - Archive\shared\UsearchStno.pas
+CursorX=23
+CursorY=7
+TopLine=1
+LeftCol=1
+
+[View23]
+Module=D:\matin\03 - Archive\shared\FUserShortCut.pas
+CursorX=13
+CursorY=8
+TopLine=1
+LeftCol=1
+
+[View24]
+Module=D:\matin\03 - Archive\shared\UchangePassword.pas
+CursorX=3
+CursorY=10
+TopLine=1
+LeftCol=1
+
+[View25]
+Module=D:\matin\03 - Archive\shared\LetterArchive.pas
+CursorX=64
+CursorY=201
+TopLine=194
+LeftCol=1
+
+[View26]
+Module=H:\Yeganeh\Windows\Delphi\Component\Vcl2\xp style\xpWindow.pas
+CursorX=1
+CursorY=105
+TopLine=88
+LeftCol=1
+
+[View27]
+Module=H:\Yeganeh\Windows\Delphi\Component\MssComponents\MssPackage\Source\WordXP.pas
+CursorX=59
+CursorY=25395
+TopLine=25388
+LeftCol=1
+
+[View28]
+Module=H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas
+CursorX=1
+CursorY=36
+TopLine=30
+LeftCol=1
+
+[View29]
+Module=D:\99 - Shared\YDbgrid.pas
+CursorX=65
+CursorY=3
+TopLine=1
+LeftCol=1
+
+[View30]
+Module=H:\Yeganeh\Windows\Delphi\Component\Vcl2\YwhereEdit.pas
+CursorX=48
+CursorY=3
+TopLine=1
+LeftCol=1
+
+[View31]
+Module=H:\Yeganeh\Windows\Delphi\Component\Vcl2\xp style\xpBitBtn.pas
+CursorX=36
+CursorY=13
+TopLine=1
+LeftCol=1
+
+[View32]
+Module=H:\Yeganeh\Windows\Delphi\Component\Vcl2\xp style\xpPages.pas
+CursorX=1
+CursorY=160
+TopLine=148
+LeftCol=1
+
+[View33]
+Module=H:\Yeganeh\Windows\Delphi\Component\Vcl2\UemsVCL.pas
+CursorX=1
+CursorY=13
+TopLine=1
+LeftCol=1
+
+[View34]
+Module=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
+CursorX=20
+CursorY=335
+TopLine=360
+LeftCol=1
+
+[View35]
 Module=D:\matin\03 - Archive\shared\backupF.pas
 CursorX=6
 CursorY=251
@@ -114,7 +552,7 @@ TopLine=237
 LeftCol=1
 
 [Watches]
-Count=11
+Count=13
 Watch0='DMScanImage.QrSelImage.RecordCount',256,0,18,1,0,'Watches'
 Watch1='DM.YeganehConnection.ConnectionString',256,0,18,1,0,'Watches'
 Watch2='InportPath+''\*.''+Extention',256,0,18,1,0,'Watches'
@@ -126,6 +564,8 @@ Watch7='Dm.ServerName',256,0,18,1,0,'Watches'
 Watch8='FileExists(ServerPath)',256,0,18,1,0,'Watches'
 Watch9='FileExists(ServerPath)',256,0,18,1,0,'Watches'
 Watch10='FileExists(ServerPath)',256,0,18,1,0,'Watches'
+Watch11='Dm.Get_LetterData_by_LetterIDLetterDataID.Asstring',256,0,18,1,0,'Watches'
+Watch12='dm.Get_LetterData_by_LetterDataID.Parameters.ParamByName(''@LetterdataID'').Value',256,0,18,1,0,'Watches'
 
 [WatchWindow]
 WatchColumnWidth=100
@@ -146,7 +586,7 @@ LRDockWidth=1180
 Dockable=1
 
 [Breakpoints]
-Count=7
+Count=14
 Breakpoint0='D:\barzegar\03 - Archive\Program\UMain.pas',1921,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint1='D:\matin\03 - Archive\Program\FolderToLetterFm.pas',545,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint2='D:\matin\03 - Archive\Program\UFillLetterData.pas',489,'',0,1,'',1,0,0,'',1,'','',''
@@ -154,6 +594,13 @@ Breakpoint3='D:\matin\03 - Archive\Program\UEditUserExtention.pas',74,'',0,1,'',
 Breakpoint4='D:\matin\03 - Archive\Program\UFillLetterData.pas',521,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint5='D:\matin\03 - Archive\Program\UFillLetterData.pas',681,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint6='D:\matin\03 - Archive\Program\UMain.pas',1649,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint7='D:\matin\03 - Archive\Program\UMain.pas',646,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint8='D:\matin\03 - Archive\Program\UAddDocument.pas',1011,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint9='D:\matin\03 - Archive\Program\UAddLetterDataDialog.pas',135,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint10='D:\matin\03 - Archive\Program\UAddLetterDataDialog.pas',88,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint11='D:\matin\03 - Archive\Program\UAddLetterDataDialog.pas',211,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint12='D:\matin\03 - Archive\Program\UFillLetterData.pas',349,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint13='D:\matin\03 - Archive\Program\Dmu.pas',769,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -234,7 +681,7 @@ LRDockWidth=190
 Dockable=1
 SplitPos=85
 ArrangeBy=Name
-SelectedItem=Name
+SelectedItem=Caption
 ExpandedItems=Title
 HiddenCategories=
 
@@ -309,18 +756,18 @@ State=0
 Left=0
 Top=12
 Width=140
-Height=771
+Height=859
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=771
-TBDockHeight=771
+ClientHeight=859
+TBDockHeight=859
 LRDockWidth=140
 Dockable=1
 
 [MessageView@EditWindow0]
 Create=1
-Visible=1
+Visible=0
 State=0
 Left=12
 Top=0

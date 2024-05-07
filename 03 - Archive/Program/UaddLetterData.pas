@@ -108,20 +108,22 @@ end;
 procedure TFraddLetterData.BtnEditClick(Sender: TObject);
 begin
   inherited;
-  with  dm,Get_LetterData_by_LetterID do
+  with  Dm,dm.Get_LetterData_by_LetterID do
   begin
     if not Get_LetterData_by_LetterID.Active then Exit;
-    VersionEditFrom:=TVersionEditFrom.Create(Application);
-    VersionEditFrom.output.Text:=Get_LetterData_by_LetterIDdescription.AsString;
-    VersionEditFrom.Edit1.Text:=Get_LetterData_by_LetterIDVersionNo.AsString;
-    VersionEditFrom.MaskEdit1.Text:=Get_LetterData_by_LetterIDVersionDate.AsString;
-    if VersionEditFrom.ShowModal=mrok then
+    VersionEditFrom               := TVersionEditFrom.Create(Application);
+    VersionEditFrom.output.Text   := Get_LetterData_by_LetterIDdescription.AsString;
+    VersionEditFrom.Edit1.Text    := Get_LetterData_by_LetterIDVersionNo.AsString;
+    VersionEditFrom.MaskEdit1.Text:= Get_LetterData_by_LetterIDVersionDate.AsString;
+    if VersionEditFrom.ShowModal = mrok then
     begin
-       Get_LetterData_by_LetterDataID.Edit;
-       Get_LetterData_by_LetterIDdescription.AsString:=VersionEditFrom.output.Text;
-       Get_LetterData_by_LetterIDVersionNo.AsString:=VersionEditFrom.Edit1.Text;
-       Get_LetterData_by_LetterIDVersionDate.AsString:=VersionEditFrom.MaskEdit1.Text;
-       Get_LetterData_by_LetterDataID.Post;
+       //Get_LetterData_by_LetterDataID.Edit;
+       Get_LetterData_by_LetterID.Edit;
+       Get_LetterData_by_LetterIDdescription.AsString := VersionEditFrom.output.Text;
+       Get_LetterData_by_LetterIDVersionNo.AsString   := VersionEditFrom.Edit1.Text;
+       Get_LetterData_by_LetterIDVersionDate.AsString := VersionEditFrom.MaskEdit1.Text;
+       Get_LetterData_by_LetterID.Post;
+       //Get_LetterData_by_LetterDataID.Post;
        Exec_insert_UserLog(BtnEdit.Name , dm.Get_All_LetterLetterID.AsInteger);
     end;
   end;

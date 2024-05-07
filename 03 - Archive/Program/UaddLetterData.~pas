@@ -108,19 +108,19 @@ end;
 procedure TFraddLetterData.BtnEditClick(Sender: TObject);
 begin
   inherited;
-  with  dm,Get_LetterData_by_LetterID do
+  with  Dm,dm.Get_LetterData_by_LetterID do
   begin
     if not Get_LetterData_by_LetterID.Active then Exit;
-    VersionEditFrom:=TVersionEditFrom.Create(Application);
-    VersionEditFrom.output.Text:=Get_LetterData_by_LetterIDdescription.AsString;
-    VersionEditFrom.Edit1.Text:=Get_LetterData_by_LetterIDVersionNo.AsString;
-    VersionEditFrom.MaskEdit1.Text:=Get_LetterData_by_LetterIDVersionDate.AsString;
-    if VersionEditFrom.ShowModal=mrok then
+    VersionEditFrom               := TVersionEditFrom.Create(Application);
+    VersionEditFrom.output.Text   := Get_LetterData_by_LetterIDdescription.AsString;
+    VersionEditFrom.Edit1.Text    := Get_LetterData_by_LetterIDVersionNo.AsString;
+    VersionEditFrom.MaskEdit1.Text:= Get_LetterData_by_LetterIDVersionDate.AsString;
+    if VersionEditFrom.ShowModal = mrok then
     begin
        Get_LetterData_by_LetterDataID.Edit;
-       Get_LetterData_by_LetterIDdescription.AsString:=VersionEditFrom.output.Text;
-       Get_LetterData_by_LetterIDVersionNo.AsString:=VersionEditFrom.Edit1.Text;
-       Get_LetterData_by_LetterIDVersionDate.AsString:=VersionEditFrom.MaskEdit1.Text;
+       Get_LetterData_by_LetterIDdescription.AsString := VersionEditFrom.output.Text;
+       Get_LetterData_by_LetterIDVersionNo.AsString   := VersionEditFrom.Edit1.Text;
+       Get_LetterData_by_LetterIDVersionDate.AsString := VersionEditFrom.MaskEdit1.Text;
        Get_LetterData_by_LetterDataID.Post;
        Exec_insert_UserLog(BtnEdit.Name , dm.Get_All_LetterLetterID.AsInteger);
     end;
@@ -174,11 +174,10 @@ begin
    dm.Get_LetterData_by_LetterID.Insert;
    dm.Get_LetterData_by_LetterIDletterid.AsInteger:=StrToIntDef(Dm.SelectLetter,0);
    FrAddLetterDataDialog:=TFrAddLetterDataDialog.Create(Application);
-   { TODO -oparsa : 14030126 }
-   dm.Get_LetterData_by_LetterID.Post;
-   { TODO -oparsa : 14030126 }
    FrAddLetterDataDialog.ShowModal;
-   dm.Get_LetterData_by_LetterID.Post;
+   { TODO -oparsa : 14030126 }
+   //dm.Get_LetterData_by_LetterID.Post;
+   { TODO -oparsa : 14030126 }
 
    Exec_insert_UserLog(BtnInsert.Name , LetterID);
    AQry := TADOQuery.Create(nil);

@@ -2832,8 +2832,8 @@ object Dm: TDm
         Precision = 10
         Value = Null
       end>
-    Left = 500
-    Top = 467
+    Left = 590
+    Top = 413
     object Get_LetterData_by_LetterDataIDLetterDataID: TAutoIncField
       FieldName = 'LetterDataID'
       ReadOnly = True

@@ -2831,10 +2831,6 @@ object Dm: TDm
         DataType = ftInteger
         Precision = 10
         Value = Null
-      end
-      item
-        Name = '@LetterID'
-        Value = Null
       end>
     Left = 500
     Top = 467
@@ -2852,9 +2848,6 @@ object Dm: TDm
       DisplayWidth = 100
       FieldName = 'Path'
       Size = 100
-    end
-    object Get_LetterData_by_LetterDataIDLetterID: TIntegerField
-      FieldName = 'LetterID'
     end
   end
   object Get_LetterData_by_LetterID: TADOStoredProc
