@@ -1873,7 +1873,7 @@ begin
   Yeganeh.Repaint;
    //Ataie
 
-
+   
   if GetSystemSetting('DongleType') = '0' then // Old Dongle
   begin
     DongleErrorCode := CheckDongle(YeganehConnection,Servername,_Today,106070,_SoftTitle,False,DongleProductCode);

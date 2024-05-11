@@ -8,23 +8,29 @@ uses
 
 type
   TfmUpdateDbScripts = class(TForm)
-    Panel1: TPanel;
-    Panel2: TPanel;
     Panel3: TPanel;
-    lblDbVer: TLabel;
-    lblDelphiVer: TLabel;
-    Label1: TLabel;
-    Label2: TLabel;
     memScripts: TMemo;
-    btnUpdate: TButton;
     qryRunScript: TADOQuery;
     cmdRunScript: TADOCommand;
     memError: TMemo;
+    Panel1: TPanel;
+    Bevel1: TBevel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    lblDbVer: TLabel;
+    lblDelphiVer: TLabel;
+    toVerNum: TLabel;
+    Panel2: TPanel;
+    InvalidScript: TLabel;
+    ValidScript: TLabel;
+    btnUpdate: TButton;
     procedure FormShow(Sender: TObject);
     procedure btnUpdateClick(Sender: TObject);
   private
     updateType : Integer;
     dbVer, delphiVer, path : String;
+    CountScriptInvalidCode : Integer ;
     function runScript(filePath : String; fileName : String):Boolean;
     function GetSqlFileAsString(const fn:String):String;
     function GetTxtFileAsString(const fn:String):String;
@@ -61,6 +67,9 @@ var
   slMain              : TStringList;
   tabs: Array [0..1] of Integer;
   fromVer, toVer, ver : Integer;
+
+  CountScriptvalidCode : Integer ;
+  slInvalid              : TStringList;
 begin
   lblDbVer.Caption := dbVer;
   lblDelphiVer.Caption := delphiVer;
@@ -71,6 +80,12 @@ begin
     fromVer := StrToInt(Copy(dbVer, LastDelimiter('.', dbVer)+  1, Length(dbVer)));
 
   toVer := StrToInt(Copy(delphiVer, LastDelimiter('.', delphiVer) + 1, Length(delphiVer)));
+  if Length(IntToStr(toVer))=1 then
+    toVerNum.Caption := ' 00'+inttostr(toVer) +' '
+  else if Length(IntToStr(toVer))=2 then
+    toVerNum.Caption := ' 0'+inttostr(toVer) +' '
+  else
+    toVerNum.Caption := ' '+inttostr(toVer)+' ' ;
 
   tabs[0] := 50 * 4;
   memScripts.Clear;
@@ -98,16 +113,44 @@ begin
             begin
               fileName := fileName + #9 + 'Detected';
               slMain.Add(fileName);
+              Inc(CountScriptvalidCode );
+            end
+            else if (ver > toVer) then
+            begin
+              Inc(CountScriptInvalidCode );
+              if CountScriptInvalidCode = 1 then
+                 slInvalid.Add('--------- Start Invalid Code ---------');
+              slInvalid.Add(fileName);
             end;
+
           end;
         until FindNext(SR) <> 0;
         FindClose(SR);
-      end
+      end ;
     finally
       slMain.Sort;
       memScripts.Lines.Assign(slMain);
       memScripts.Refresh;
       slMain.Free;
+
+      if CountScriptInvalidCode > 0 then
+      begin
+        slInvalid.Sort;
+        slInvalid.Add('--------- End Invalid Code Sum '+ IntToStr(CountScriptInvalidCode)+' ---------');
+        memError.Lines.Assign(slInvalid);
+      end;
+
+      memError.Refresh;
+      slInvalid.Free;
+
+      validScript.caption := '';
+      if CountScriptvalidCode >0 then
+        validScript.Caption :=  ' ÊÚÏÇÏ ÝÇíá ÇäÊÎÇÈí ÌåÊ ÇÌÑÇ  '+IntToStr(CountScriptvalidCode) ;
+
+      InvalidScript.caption := '';
+      if CountScriptInvalidCode >0 then
+        InvalidScript.Caption :=  'ÏÑ ÝæáÏÑ Archive_patch  ÊÚÏÇÏ '+ inttostr(CountScriptInvalidCode ) + ' ÝÇíá æÌæÏ ÏÇÑÏ ˜å Óå ÑÞã Çæá ˜Ï ÂäåÇ ÈÒÑÊÑ ÇÒ æÑŽä ÌÇÑí ÈÑäÇãå ãí ÈÇÔÏº áØÝÇ ÈÑÑÓí ˜äíÏ ' ;
+
     end;
   end;
 end;
@@ -117,7 +160,9 @@ var
   fileName : String;
   i, p : Integer;
   blnRunResult : Boolean;
+  faildFilenam : string;
 begin
+  faildFilenam := '' ;
   blnRunResult := True;
 
   btnUpdate.Enabled := False;
@@ -140,8 +185,11 @@ begin
       memScripts.Lines[i] := fileName + #9 + 'Ok'
     else
     begin
+      { TODO -oparsa : 14030219 }
       blnRunResult := False;
-      memScripts.Lines[i] := fileName + #9 + 'Failed';
+      faildFilenam := faildFilenam + fileName ;
+      { TODO -oparsa : 14030219 }
+      memScripts.Lines[i] := '       ' + fileName + #9 + 'Failed';
     end;
   end;
 
@@ -196,7 +244,8 @@ begin
         end;
       except on E:Exception do
         begin
-          memError.Lines.Add(fileName + ' --> ' + E.Message);
+          memError.Lines.Add('');
+          memError.Lines.Add(fileName + ' ------> ' + E.Message);
         end;
       end;
     end;

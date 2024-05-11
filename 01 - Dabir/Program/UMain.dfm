@@ -2090,8 +2090,8 @@ inherited MainForm: TMainForm
     Top = 245
   end
   inherited ActionList: TActionList
-    Left = 928
-    Top = 342
+    Left = 1022
+    Top = 482
     object Action12: TAction
       Caption = 'Select All'
       ShortCut = 16465
@@ -2100,8 +2100,8 @@ inherited MainForm: TMainForm
     end
   end
   inherited Grid_PopupMenu: TPopupMenu
-    Left = 728
-    Top = 300
+    Left = 1020
+    Top = 262
   end
   inherited Timer1sssss: TTimer
     Left = 144
@@ -3015,8 +3015,8 @@ inherited MainForm: TMainForm
       '8=17'
       '9=23')
     OnExecute = MainActionManagerExecute
-    Left = 719
-    Top = 201
+    Left = 1020
+    Top = 186
     StyleName = 'XP Style'
     object Ahome: TAction
       Tag = -1
@@ -3261,7 +3261,6 @@ inherited MainForm: TMainForm
       Category = #1711#1586#1575#1585#1588
       Caption = #1662#1610#1608#1587#1578' '#1607#1575#1610' '#1606#1575#1605#1607
       ImageIndex = 33
-      OnExecute = AaddLetterDataExecute
     end
     object AFulltext: TAction
       Tag = 5
@@ -3959,8 +3958,8 @@ inherited MainForm: TMainForm
     Top = 193
   end
   object ImageList: TImageList [20]
-    Left = 744
-    Top = 351
+    Left = 701
+    Top = 150
     Bitmap = {
       494C010107000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
@@ -4367,16 +4366,16 @@ inherited MainForm: TMainForm
   end
   object PopupMenu1: TPopupMenu [21]
     Images = ImageList
-    Left = 928
-    Top = 237
+    Left = 1018
+    Top = 343
     object N3: TMenuItem
       Caption = #1601#1593#1575#1604' '#1588#1583#1606' '#1606#1585#1605' '#1575#1601#1586#1575#1585
       Default = True
     end
   end
   object ImageList1: TImageList [22]
-    Left = 928
-    Top = 185
+    Left = 703
+    Top = 339
     Bitmap = {
       494C010108000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
@@ -4789,8 +4788,8 @@ inherited MainForm: TMainForm
   end
   object SaveDialog: TSaveDialog [24]
     Filter = 'Word 2003 files|*.doc|Word 2007 Files|*.docx'
-    Left = 928
-    Top = 395
+    Left = 700
+    Top = 419
   end
   object FaxRefresher: TTimer [25]
     Tag = 900000
@@ -4802,8 +4801,8 @@ inherited MainForm: TMainForm
   end
   object PopupMenu: TPopupMenu [26]
     Images = ImageList3
-    Left = 928
-    Top = 290
+    Left = 1023
+    Top = 412
     object N1: TMenuItem
       Caption = #1578#1606#1592#1610#1605' '#1587#1578#1608#1606' '#1607#1575#1610' '#1580#1583#1608#1604
       ImageIndex = 2
@@ -4986,8 +4985,8 @@ inherited MainForm: TMainForm
     end
   end
   object ImageList2: TImageList [32]
-    Left = 928
-    Top = 133
+    Left = 703
+    Top = 275
     Bitmap = {
       494C010186008B00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003002000001002000000000000030
@@ -9723,8 +9722,8 @@ inherited MainForm: TMainForm
   object MainMenu1: TMainMenu [41]
     AutoMerge = True
     OwnerDraw = True
-    Left = 714
-    Top = 133
+    Left = 1020
+    Top = 135
     object m101: TMenuItem
       Caption = #1587#1585#1608#1610#1587' '#1607#1575
       object N125: TMenuItem
@@ -10373,8 +10372,8 @@ inherited MainForm: TMainForm
     Top = 469
   end
   object ImageList3: TImageList [46]
-    Left = 722
-    Top = 429
+    Left = 705
+    Top = 213
     Bitmap = {
       494C010107000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
@@ -10804,14 +10803,14 @@ inherited MainForm: TMainForm
     ConnectKind = ckRunningOrNew
     AutoQuit = False
     OnDocumentBeforeClose = WordApplicationDocumentBeforeClose
-    Left = 1090
-    Top = 277
+    Left = 1168
+    Top = 237
   end
   object WordDocument: TWordDocument [49]
     AutoConnect = False
     ConnectKind = ckRunningOrNew
-    Left = 1082
-    Top = 349
+    Left = 1170
+    Top = 307
   end
   object tmrGetEmail: TTimer [50]
     Interval = 5000
@@ -10821,7 +10820,7 @@ inherited MainForm: TMainForm
   end
   object Timer: TTimer
     OnTimer = TimerTimer
-    Left = 539
-    Top = 555
+    Left = 838
+    Top = 573
   end
 end

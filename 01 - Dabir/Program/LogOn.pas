@@ -216,7 +216,7 @@ begin
     psw := ''
   else
     psw := Password.text;
-
+    
   if UserName.Text='' then UserName.Text:='1';
     with dm,Users do
     begin
@@ -249,6 +249,7 @@ begin
           alogin.Execute; //
        end;
     end;
+
 end;
 
 procedure TLoginForm.BitBtn1Click(Sender: TObject);

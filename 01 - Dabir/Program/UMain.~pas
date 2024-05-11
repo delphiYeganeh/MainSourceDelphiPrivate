@@ -1397,6 +1397,7 @@ begin
                if MessageShowString(Get_sysAppMessage(31)+' '+  farsiDay[dm.DayInWeek]+' '+Get_sysAppMessage(32),true) then
                   ABackup.Execute;
          Exec_update_UserLoginLogout(_UserLoginLogoutID,true,false);
+         SysUtils.FileSetReadOnly(_TempPath+'temp.tif', false);
          DeleteFile(_TempPath+'temp.tif');
          if Dm.processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
       end;

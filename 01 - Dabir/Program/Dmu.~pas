@@ -1873,7 +1873,7 @@ begin
   Yeganeh.Repaint;
    //Ataie
 
-
+               (*
   if GetSystemSetting('DongleType') = '0' then // Old Dongle
   begin
     DongleErrorCode := CheckDongle(YeganehConnection,Servername,_Today,106070,_SoftTitle,False,DongleProductCode);
@@ -1891,7 +1891,7 @@ begin
    if not IsTinyOk then
      Application.Terminate;
   end;
-
+           *)
 
   _Has_Excel_Template := (GetSystemSetting('HasExcelTemplate') <> '0');
 
@@ -3164,7 +3164,10 @@ begin
 
    { TODO -oparsa : 1402-12-19 }
   if FileExists(pchar(_TempPath+_WordFileName)) then
+  begin
+    SysUtils.FileSetReadOnly(_TempPath+_WordFileName, false);
     SysUtils.DeleteFile(_TempPath+_WordFileName);
+  end;
   { TODO -oparsa : 1402-12-19 }
    
 end;
