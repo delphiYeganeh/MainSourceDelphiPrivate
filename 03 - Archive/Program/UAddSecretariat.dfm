@@ -7,7 +7,6 @@ inherited FrAddSecretariat: TFrAddSecretariat
   Caption = #1575#1590#1575#1601#1607' '#1705#1585#1583#1606' '#1583#1601#1578#1585' '#1576#1575#1610#1711#1575#1606#1610
   ClientHeight = 143
   ClientWidth = 288
-  Color = clBtnFace
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13

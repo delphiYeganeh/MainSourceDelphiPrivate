@@ -1,27 +1,29 @@
 inherited FrArchiveCenter: TFrArchiveCenter
   Tag = 10
-  Left = 545
+  Left = 552
   Top = 115
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = ' '#1605#1585#1575#1705#1586' '#1576#1575#1610#1711#1575#1606#1610' '#1587#1606#1583
-  ClientHeight = 361
-  ClientWidth = 358
+  ClientHeight = 334
+  ClientWidth = 351
+  Constraints.MinHeight = 300
+  Constraints.MinWidth = 350
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
-    Top = 320
-    Width = 358
+    Top = 293
+    Width = 351
     Height = 41
     Align = alBottom
     TabOrder = 0
     DesignSize = (
-      358
+      351
       41)
     object Button1: TBitBtn
-      Left = 269
+      Left = 262
       Top = 7
       Width = 80
       Height = 28
@@ -83,7 +85,7 @@ inherited FrArchiveCenter: TFrArchiveCenter
         9377C67FE1F1E3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00}
     end
     object Button2: TBitBtn
-      Left = 185
+      Left = 178
       Top = 7
       Width = 80
       Height = 28
@@ -127,7 +129,7 @@ inherited FrArchiveCenter: TFrArchiveCenter
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFBFED6D7F8}
     end
     object Button3: TBitBtn
-      Left = 101
+      Left = 94
       Top = 7
       Width = 80
       Height = 28
@@ -273,16 +275,16 @@ inherited FrArchiveCenter: TFrArchiveCenter
   object Panel2: TPanel [1]
     Left = 0
     Top = 0
-    Width = 358
-    Height = 320
+    Width = 351
+    Height = 293
     Align = alClient
     Caption = 'Panel2'
     TabOrder = 1
     object DBGrid2: TYDBGrid
       Left = 1
       Top = 1
-      Width = 356
-      Height = 318
+      Width = 349
+      Height = 291
       Cursor = crHandPoint
       Align = alClient
       Color = 16053492

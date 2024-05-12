@@ -51,7 +51,7 @@ type
     DBEUserName: TDBEdit;
     ConfirmPass: TEdit;
     DBEdit3: TDBEdit;
-    DBLkCBDefaultSec: TDBLookupComboBox;
+    DBLkCBDefualtSecretariatID: TDBLookupComboBox;
     DBCheckBox1: TDBCheckBox;
     DBLkCBFromOrgTitle: TDBLookupComboBox;
     DBCheckBox2: TDBCheckBox;

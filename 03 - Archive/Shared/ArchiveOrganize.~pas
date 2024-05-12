@@ -365,7 +365,7 @@ begin
   inherited;
    {Ranjbar 89.05.27 ID=22}
   ParentID:=dsform.DataSet.fieldbyname('folderid').AsInteger;
-  if messageShowString(' ÂíÇ ÇÒ ÇäÊŞÇá ÔÇÎå '+QuotedStr(SelectedNodeTitle)+' Èå ÒíÑ ãÌãæÚå '+QuotedStr(ArchiveTree.Selected.text)+'ãØãÆä åÓÊíÏ¿ ', true) then
+  if messageShowString(' ÂíÇ ÇÒ ÇäÊŞÇá ÔÇÎå "'+SelectedNodeTitle+'" Èå ÒíÑ ãÌãæÚå "'+ArchiveTree.Selected.text+'" ãØãÆä åÓÊíÏ¿ ', true) then
   begin
     Dm.YeganehConnection.Execute('update ArchiveFolder set ParentFolderID= '+IntToStr(ParentID)+' where FolderID='+IntToStr(SelectedNodeID));
     ArchiveTree.Selected.Parent.Collapse(False);

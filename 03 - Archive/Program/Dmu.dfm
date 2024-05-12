@@ -1,8 +1,8 @@
 object Dm: TDm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 270
-  Top = 216
+  Left = 490
+  Top = 149
   Height = 689
   Width = 1024
   object Urgenceis: TADOTable
@@ -269,14 +269,8 @@ object Dm: TDm
       FieldName = 'PassWord'
       Size = 100
     end
-    object UsersAccessID: TWordField
-      FieldName = 'AccessID'
-    end
     object UsersFromOrgID: TIntegerField
       FieldName = 'FromOrgID'
-    end
-    object UsersDefualtSecretariatID: TWordField
-      FieldName = 'DefualtSecretariatID'
     end
     object UsersIsSecretariantStaffer: TBooleanField
       Alignment = taRightJustify
@@ -304,16 +298,6 @@ object Dm: TDm
       KeyFields = 'FromOrgID'
       Lookup = True
     end
-    object UsersDefaultSec: TStringField
-      Alignment = taRightJustify
-      FieldKind = fkLookup
-      FieldName = 'DefaultSec'
-      LookupDataSet = UserSecs
-      LookupKeyFields = 'SecId'
-      LookupResultField = 'SecTitle'
-      KeyFields = 'DefualtSecretariatID'
-      Lookup = True
-    end
     object UsersCanAttachColor: TBooleanField
       FieldName = 'CanAttachColor'
     end
@@ -338,6 +322,12 @@ object Dm: TDm
     end
     object UsersShowAllDoc: TBooleanField
       FieldName = 'ShowAllDoc'
+    end
+    object UsersDefualtSecretariatID: TIntegerField
+      FieldName = 'DefualtSecretariatID'
+    end
+    object UsersAccessID: TIntegerField
+      FieldName = 'AccessID'
     end
   end
   object YeganehConnection: TADOConnection

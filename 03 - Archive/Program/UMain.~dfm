@@ -2639,6 +2639,7 @@ inherited MainForm: TMainForm
       Caption = #1579#1576#1578' '#1587#1606#1583
       ImageIndex = 13
       ShortCut = 118
+      OnExecute = ReceiveInsertExecute
     end
     object Afix: TAction
       Tag = 1

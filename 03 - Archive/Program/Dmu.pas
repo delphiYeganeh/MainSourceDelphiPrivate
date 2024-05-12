@@ -76,7 +76,6 @@ type
     UserSecsSecId: TIntegerField;
     UserSecsSecTitle: TWideStringField;
     SystemSettings: TADODataSet;
-    UsersDefaultSec: TStringField;
     LetterFormats: TADOTable;
     LetterFormatsCode: TIntegerField;
     LetterFormatsTitle: TWideStringField;
@@ -276,9 +275,7 @@ type
     UsersTitle: TWideStringField;
     UsersUserName: TWideStringField;
     UsersPassWord: TWideStringField;
-    UsersAccessID: TWordField;
     UsersFromOrgID: TIntegerField;
-    UsersDefualtSecretariatID: TWordField;
     UsersIsSecretariantStaffer: TBooleanField;
     UsersKartableGridInfo: TBlobField;
     UsersDabirGridInfo: TBlobField;
@@ -378,6 +375,8 @@ type
     WordApplication: TWordApplication;
     spIns_laterdata: TADOStoredProc;
     qryAutoRunScript: TADOQuery;
+    UsersDefualtSecretariatID: TIntegerField;
+    UsersAccessID: TIntegerField;
 
     function  GetValue(variableID:word):variant;
     Procedure SetValue(VariableId:word;value:variant);
@@ -394,7 +393,7 @@ type
     function  NewToOrganization(Title,Responsible:wideString):integer;
     function  NewRenter(Title:wideString):integer;
     procedure DataModuleCreate(Sender: TObject);
-    Procedure SetSecID(value:byte);
+    Procedure SetSecID(value:Integer);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
     procedure UserSecsAfterInsert(DataSet: TDataSet);
 
@@ -427,7 +426,7 @@ type
 
   private
     { Private declarations }
-    FSecID:byte;
+    FSecID:Integer;
     function InsertToLetData(aFile, Desc: string; ext,  LetID: integer): boolean;
 
    //ARM LOCK
@@ -511,7 +510,7 @@ type
     Procedure SetSystemValue(VariableId:word;value:variant);
     Function FileName(secid:byte;myear:Integer;indicatorid:integer):string;
     function Cdate(S:string):string;
-    property SecID :byte read fSecID write SetSecID;
+    property SecID :Integer read fSecID write SetSecID;
     property CurrentMyear :Integer read  FCurrentMyear   write SetCurrentMyear;
     function  Search(Y:TYwhereEdit):integer;
     procedure SaveTemplateToFile;
@@ -1041,7 +1040,7 @@ begin
   Result:=RenterRenterID.AsInteger;
 end;
 
-procedure TDm.SetSecID (value:byte);
+procedure TDm.SetSecID (value: Integer);
 begin
   FSecID := Value;
   MainForm.RefreshQuery;
@@ -2089,7 +2088,7 @@ end;
 procedure TDm.UsersAfterInsert(DataSet: TDataSet);
 begin
   dm.UsersBeginActiveDate.AsString:=_Today;
-  dm.UsersEndActiveDate.AsString:='1401/12/30';
+  dm.UsersEndActiveDate.AsString:= Copy( _Today,1,4)+'/12/30';
 end;
 
 function TDm.PasswordPolicy(StrPass: String): Boolean;

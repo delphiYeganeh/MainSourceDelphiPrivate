@@ -51,7 +51,7 @@ type
     DBEUserName: TDBEdit;
     ConfirmPass: TEdit;
     DBEdit3: TDBEdit;
-    DBLkCBDefaultSec: TDBLookupComboBox;
+    DBLkCBDefualtSecretariatID: TDBLookupComboBox;
     DBCheckBox1: TDBCheckBox;
     DBLkCBFromOrgTitle: TDBLookupComboBox;
     DBCheckBox2: TDBCheckBox;
@@ -96,6 +96,7 @@ type
     Label16: TLabel;
     lblUserCount: TLabel;
     dbChBoxShowAllDoc: TDBCheckBox;
+    DSSecretration: TDataSource;
     procedure Action11Execute(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure DBEdit9KeyDown(Sender: TObject; var Key: Word;

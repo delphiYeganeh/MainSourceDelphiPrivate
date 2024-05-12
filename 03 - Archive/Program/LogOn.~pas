@@ -319,16 +319,16 @@ begin
       ShowMsg(57);
       exit;
     end;
-    _UserId:=UsersId.AsInteger;
-    _CanAttachColor:=UsersCanAttachColor.AsBoolean;
+    _UserId               :=UsersId.AsInteger;
+    _CanAttachColor       :=UsersCanAttachColor.AsBoolean;
     _CanViewAllAttachPages:=UsersCanViewAllAttachPages.AsBoolean;
-    _CanViewAllRecommites:=UsersCanViewAllRecommites.AsBoolean;
-    _UserName:=UsersTitle.AsString;
-    _DefaultSec:=UsersDefualtSecretariatID.AsInteger;
+    _CanViewAllRecommites :=UsersCanViewAllRecommites.AsBoolean;
+    _UserName             :=UsersTitle.AsString;
+    _DefaultSec           :=UsersDefualtSecretariatID.AsInteger;
     dm.Secretariats.Locate('SecID',_DefaultSec,[]);
-    _ArchiveCenterId:=dm.SecretariatsArchiveCenterID.AsInteger;
-    _UserFromOrgID:=UsersFromOrgID.AsInteger ;
-    _AccessToClassifieldLetter:=UsersHasSecureLetterAccess.AsBoolean;
+    _ArchiveCenterId           :=dm.SecretariatsArchiveCenterID.AsInteger;
+    _UserFromOrgID             :=UsersFromOrgID.AsInteger ;
+    _AccessToClassifieldLetter :=UsersHasSecureLetterAccess.AsBoolean;
 
     //Add Sanaye 941121
     //«ÌÃ«œ ”ÿÕ œ” —”Ì »—ÊÌ »«Ìê«‰Ì

@@ -43,7 +43,7 @@ uses  Dmu, businessLayer, UAddSecretariat, ADODB, Math;
 procedure TFrArchiveCenter.BitBtn1Click(Sender: TObject);
 begin
   inherited;
-  dm.SecID:=dm.SecID;
+  dm.SecID := dm.SecID;
 close;
 end;
 
@@ -56,7 +56,7 @@ end;
 procedure TFrArchiveCenter.FormCreate(Sender: TObject);
 begin
   inherited;
- DBGrid2.Color:=dm.GetValue(1009);
+ DBGrid2.Color := dm.GetValue(1009);
 end;
 
 procedure TFrArchiveCenter.Button1Click(Sender: TObject);
@@ -67,8 +67,8 @@ begin
       if Y_InputQuery('„—«ò“ »«Ìê«‰Ì', '„—ò“ »«Ìê«‰Ì ÃœÌœ',s) then
       begin
          Insert;
-         ArchiveCenterArchiveCenterID.AsInteger:=dm.YeganehConnection.Execute('select max(ArchiveCenterID)+1 from ArchiveCenter').Fields[0].Value;
-         ArchiveCenterArchiveCenterTitle.AsString:=s;
+         ArchiveCenterArchiveCenterID.AsInteger   := dm.YeganehConnection.Execute('select ISNULL(max(ArchiveCenterID),0)+1 from ArchiveCenter').Fields[0].Value;
+         ArchiveCenterArchiveCenterTitle.AsString := s ;
       end;
 end;
 
@@ -78,7 +78,7 @@ begin
   inherited;
   if messageShowString('¬Ì« «“ Õ–› „ÿ„∆‰ Â” Ìœ',true) then
     dm.ArchiveCenter.Delete;
-end;
+end;                                                                        
 
 procedure TFrArchiveCenter.Button3Click(Sender: TObject);
  var s: string;
@@ -88,7 +88,7 @@ begin
     if Y_InputQuery('„—«ò“ »«Ìê«‰Ì', ArchiveCenterArchiveCenterTitle.AsString,s) then
     begin
      edit;
-     ArchiveCenterArchiveCenterTitle.AsString:=s;
+     ArchiveCenterArchiveCenterTitle.AsString := s;
      Post;
    end;
 end;

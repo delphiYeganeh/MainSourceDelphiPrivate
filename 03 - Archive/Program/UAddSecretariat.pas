@@ -58,6 +58,8 @@ end;
 procedure TFrAddSecretariat.FormShow(Sender: TObject);
 begin
    inherited;
+   if  Dm.SecretariatsArchiveCenterID.AsInteger <= 0 then
+     Dm.SecretariatsArchiveCenterID.AsInteger := 0 ;
    Title.SetFocus;
 end;
 

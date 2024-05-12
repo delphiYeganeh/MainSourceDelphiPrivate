@@ -461,15 +461,18 @@ inherited UserDefineF: TUserDefineF
           OnExit = TEditExit
           OnKeyDown = DBEdit9KeyDown
         end
-        object DBLkCBDefaultSec: TDBLookupComboBox
+        object DBLkCBDefualtSecretariatID: TDBLookupComboBox
           Left = 60
           Top = 130
           Width = 316
           Height = 21
           Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight
-          DataField = 'DefaultSec'
+          DataField = 'DefualtSecretariatID'
           DataSource = DSForm
+          KeyField = 'SecID'
+          ListField = 'SecTitle'
+          ListSource = DSSecretration
           ParentBiDiMode = False
           TabOrder = 6
         end
@@ -1101,7 +1104,7 @@ inherited UserDefineF: TUserDefineF
     Top = 232
   end
   inherited ActionList: TActionList
-    Left = 128
+    Left = 176
     Top = 296
   end
   inherited xpWindow1: TxpWindow
@@ -1350,8 +1353,8 @@ inherited UserDefineF: TUserDefineF
         ActionBar = ActionToolBar1
       end>
     Images = Dm.LetterImages
-    Left = 371
-    Top = 168
+    Left = 427
+    Top = 120
     StyleName = 'XP Style'
     object DataSetInsert: TDataSetInsert
       Tag = 3
@@ -1436,7 +1439,7 @@ inherited UserDefineF: TUserDefineF
     MasterFields = 'AccessID'
     TableName = 'Accesses'
     Left = 37
-    Top = 184
+    Top = 192
     object WordField7: TWordField
       FieldName = 'ID'
     end
@@ -1503,5 +1506,12 @@ inherited UserDefineF: TUserDefineF
       FieldName = 'Title'
       Size = 50
     end
+  end
+  object DSSecretration: TDataSource
+    AutoEdit = False
+    DataSet = Dm.Secretariats
+    OnDataChange = DSFormDataChange
+    Left = 411
+    Top = 224
   end
 end
