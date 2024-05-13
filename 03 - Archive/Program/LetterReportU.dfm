@@ -687,9 +687,6 @@ inherited LetterReport: TLetterReport
     object SelectLetterMYear: TWordField
       FieldName = 'MYear'
     end
-    object SelectLetterSecretariatID: TWordField
-      FieldName = 'SecretariatID'
-    end
     object SelectLetterLetter_Type: TWordField
       FieldName = 'Letter_Type'
     end
@@ -888,6 +885,9 @@ inherited LetterReport: TLetterReport
     end
     object SelectLetterHas_Page_1: TBooleanField
       FieldName = 'Has_Page_1'
+    end
+    object SelectLetterSecretariatID: TIntegerField
+      FieldName = 'SecretariatID'
     end
   end
   object ImageList: TImageList

@@ -31,7 +31,6 @@ type
     SRCH_QRYLetterID_1: TAutoIncField;
     SRCH_QRYIndicatorID: TIntegerField;
     SRCH_QRYMYear: TWordField;
-    SRCH_QRYSecretariatID: TWordField;
     SRCH_QRYLetter_Type: TWordField;
     SRCH_QRYletterformat: TWordField;
     SRCH_QRYIncommingNO: TWideStringField;
@@ -75,6 +74,7 @@ type
     SRCH_QRYExtentionTitle: TWideStringField;
     SRCH_QRYExtention_1: TStringField;
     SRCH_QRYIsSystem: TBooleanField;
+    SRCH_QRYSecretariatID: TIntegerField;
     procedure FormShow(Sender: TObject);
 
     procedure FIRST_SET;

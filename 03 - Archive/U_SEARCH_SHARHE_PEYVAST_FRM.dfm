@@ -172,9 +172,6 @@ object SEARCH_SHARHE_PEYVAST_FRM: TSEARCH_SHARHE_PEYVAST_FRM
     object SRCH_QRYMYear: TWordField
       FieldName = 'MYear'
     end
-    object SRCH_QRYSecretariatID: TWordField
-      FieldName = 'SecretariatID'
-    end
     object SRCH_QRYLetter_Type: TWordField
       FieldName = 'Letter_Type'
     end
@@ -329,6 +326,9 @@ object SEARCH_SHARHE_PEYVAST_FRM: TSEARCH_SHARHE_PEYVAST_FRM
     end
     object SRCH_QRYIsSystem: TBooleanField
       FieldName = 'IsSystem'
+    end
+    object SRCH_QRYSecretariatID: TIntegerField
+      FieldName = 'SecretariatID'
     end
   end
 end

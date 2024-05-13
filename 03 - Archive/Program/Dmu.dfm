@@ -329,6 +329,15 @@ object Dm: TDm
     object UsersAccessID: TIntegerField
       FieldName = 'AccessID'
     end
+    object UsersDefaultSec: TStringField
+      FieldKind = fkLookup
+      FieldName = 'DefaultSec'
+      LookupDataSet = UserSecs
+      LookupKeyFields = 'SecId'
+      LookupResultField = 'SecTitle'
+      KeyFields = 'DefualtSecretariatID'
+      Lookup = True
+    end
   end
   object YeganehConnection: TADOConnection
     CommandTimeout = 3000000
@@ -2376,8 +2385,8 @@ object Dm: TDm
         Size = 4
         Value = 0
       end>
-    Left = 272
-    Top = 334
+    Left = 232
+    Top = 326
     object UserSecsUserId: TIntegerField
       FieldName = 'UserId'
     end
@@ -3164,9 +3173,6 @@ object Dm: TDm
     object Get_All_LetterMYear: TWordField
       FieldName = 'MYear'
     end
-    object Get_All_LetterSecretariatID: TWordField
-      FieldName = 'SecretariatID'
-    end
     object Get_All_LetterLetter_Type: TWordField
       FieldName = 'Letter_Type'
     end
@@ -3366,6 +3372,9 @@ object Dm: TDm
       Alignment = taRightJustify
       DisplayLabel = #1578#1575#1585#1610#1582' '#1593#1608#1583#1578
       FieldName = 'EndDate'
+    end
+    object Get_All_LetterSecretariatID: TIntegerField
+      FieldName = 'SecretariatID'
     end
   end
   object qtemp: TADOQuery

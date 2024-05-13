@@ -1,6 +1,6 @@
 inherited LetterReport: TLetterReport
-  Left = 618
-  Top = 192
+  Left = 472
+  Top = 188
   Width = 700
   Height = 600
   BorderIcons = [biSystemMenu, biMaximize]

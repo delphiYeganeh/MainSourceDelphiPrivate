@@ -138,8 +138,8 @@ end;
 procedure TLetterArchiveform.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
-  if DSForm.DataSet.state in [dsedit,dsinsert] then
-     DSForm.DataSet.Post
+  if DSForm.DataSet.state in [dsedit, dsinsert] then
+    DSForm.DataSet.Post
 end;
 
 procedure TLetterArchiveform.APostExecute(Sender: TObject);
@@ -150,11 +150,11 @@ begin
   i:=0;
   if trim(Edit1.Text)<>'' then
     if _Kartable then
-      i:=Exec_get_ArchiveFolder_byUserID_and_Place(_userid ,Edit1.Text)
+      i := Exec_get_ArchiveFolder_byUserID_and_Place(_userid ,Edit1.Text)
     else
-      i:=Exec_get_ArchiveFolder_byUserID_and_Place(0 ,Edit1.Text);
+      i := Exec_get_ArchiveFolder_byUserID_and_Place(0 ,Edit1.Text);
 
-  if i<>0 then
+  if i <> 0 then
   begin
     Exec_insert_LetterArchiveFolder(i,Letterid,_Today,1,'');
     DSForm.DataSet:= Exec_get_ArchiveFolder_byUserID_and_Letterid(LetterID,userid);
@@ -169,53 +169,54 @@ begin
   inherited;
   if dm.Select_LetterReCommiteIsInnerOrg.AsBoolean then
     Color:=$00FFE6FF
-   else
+  else
     Color:=$00FFD3A8;
-
 end;
+
 function TLetterArchiveform.NewID(i:byte):integer;
 begin
   inherited;
- Result:=Exec_NewRecommiteID(LetterID,i);
+  Result:=Exec_NewRecommiteID(LetterID,i);
 end;
 
 procedure TLetterArchiveform.ExitBtnClick(Sender: TObject);
 begin
   inherited;
-close;
+  close;
 end;
 
 procedure TLetterArchiveform.BitBtn2Click(Sender: TObject);
 begin
   inherited;
-APost.Execute
+  APost.Execute
 end;
 
 procedure TLetterArchiveform.SpeedButton4Click(Sender: TObject);
 begin
   inherited;
-add.Execute;
+  add.Execute;
 end;
 
 procedure TLetterArchiveform.SpeedButton3Click(Sender: TObject);
 begin
   inherited;
-Delete.Execute;
+  Delete.Execute;
 end;
 
 procedure TLetterArchiveform.xpBitBtn1Click(Sender: TObject);
- var s: string;
+var
+  s: string;
 begin
-   inherited;
-   with DSForm.DataSet do
-      if RecordCount>0 then
-         if dm.Y_InputQuery(' Ê÷ÌÕ« ',FieldByName('ArchiveNotes').Value,s) then
-         begin
-            edit;
-            FieldByName('ArchiveNotes').Value:=s;
-            post;
-            ExitBtn.SetFocus;
-         end;
+  inherited;
+  with DSForm.DataSet do
+    if RecordCount>0 then
+      if dm.Y_InputQuery(' Ê÷ÌÕ« ',FieldByName('ArchiveNotes').Value,s) then
+      begin
+        edit;
+        FieldByName('ArchiveNotes').Value:=s;
+        post;
+        ExitBtn.SetFocus;
+      end;
 end;
 
 end.

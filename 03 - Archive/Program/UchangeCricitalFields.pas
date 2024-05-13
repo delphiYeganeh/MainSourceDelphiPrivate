@@ -16,7 +16,6 @@ type
     select_CiticalLetterFieldsLetterID: TAutoIncField;
     select_CiticalLetterFieldsIndicatorID: TIntegerField;
     select_CiticalLetterFieldsMYear: TWordField;
-    select_CiticalLetterFieldsSecretariatID: TWordField;
     select_CiticalLetterFieldsLetter_Type: TWordField;
     select_CiticalLetterFieldsletterformat: TWordField;
     select_CiticalLetterFieldsSecTitle: TStringField;
@@ -40,6 +39,7 @@ type
     DBEdit2: TDBEdit;
     DBLookupComboBox1: TDBLookupComboBox;
     DBLookupComboBox2: TDBLookupComboBox;
+    select_CiticalLetterFieldsSecretariatID: TIntegerField;
 procedure GetLetter(LetterID: integer);
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);

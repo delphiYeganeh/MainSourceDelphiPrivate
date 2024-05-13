@@ -25,9 +25,6 @@ object DMFolderToLetter: TDMFolderToLetter
     object QrLetterMYear: TWordField
       FieldName = 'MYear'
     end
-    object QrLetterSecretariatID: TWordField
-      FieldName = 'SecretariatID'
-    end
     object QrLetterLetter_Type: TWordField
       FieldName = 'Letter_Type'
     end
@@ -176,6 +173,9 @@ object DMFolderToLetter: TDMFolderToLetter
     end
     object QrLetterHas_File: TBooleanField
       FieldName = 'Has_File'
+    end
+    object QrLetterSecretariatID: TIntegerField
+      FieldName = 'SecretariatID'
     end
   end
   object DSLetter: TDataSource

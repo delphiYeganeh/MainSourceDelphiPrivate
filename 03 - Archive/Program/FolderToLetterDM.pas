@@ -14,7 +14,6 @@ type
     QrLetterLetterID: TAutoIncField;
     QrLetterIndicatorID: TIntegerField;
     QrLetterMYear: TWordField;
-    QrLetterSecretariatID: TWordField;
     QrLetterLetter_Type: TWordField;
     QrLetterletterformat: TWordField;
     QrLetterIncommingNO: TWideStringField;
@@ -80,6 +79,7 @@ type
     QrLetterHas_Page: TBooleanField;
     QrLetterHas_WordPage: TBooleanField;
     QrLetterHas_File: TBooleanField;
+    QrLetterSecretariatID: TIntegerField;
     procedure QrLetterAfterScroll(DataSet: TDataSet);
     procedure QrLetterBeforeDelete(DataSet: TDataSet);
   private

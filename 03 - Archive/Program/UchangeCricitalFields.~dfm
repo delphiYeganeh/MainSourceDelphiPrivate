@@ -1,25 +1,27 @@
 inherited FchangeCricitalFields: TFchangeCricitalFields
-  Left = 538
+  Left = 557
   Top = 119
-  Width = 393
-  Height = 270
+  Width = 390
+  Height = 255
   BorderIcons = [biSystemMenu]
   Caption = #1578#1594#1610#1610#1585' '#1575#1591#1604#1575#1593#1575#1578' '#1575#1589#1604#1610' '#1587#1606#1583
+  Constraints.MinHeight = 255
+  Constraints.MinWidth = 390
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
-    Top = 195
-    Width = 385
+    Top = 180
+    Width = 382
     Height = 41
     Align = alBottom
     TabOrder = 0
     DesignSize = (
-      385
+      382
       41)
     object BitBtn1: TBitBtn
-      Left = 297
+      Left = 294
       Top = 7
       Width = 75
       Height = 28
@@ -63,7 +65,7 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
         8000808000FF00008080}
     end
     object BitBtn2: TBitBtn
-      Left = 217
+      Left = 214
       Top = 7
       Width = 75
       Height = 28
@@ -115,15 +117,15 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
   object Panel2: TPanel [1]
     Left = 0
     Top = 0
-    Width = 385
-    Height = 195
+    Width = 382
+    Height = 180
     Align = alClient
     TabOrder = 1
     DesignSize = (
-      385
-      195)
+      382
+      180)
     object Label1: TLabel
-      Left = 300
+      Left = 297
       Top = 13
       Width = 69
       Height = 13
@@ -132,7 +134,7 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
       FocusControl = DBEdit1
     end
     object Label2: TLabel
-      Left = 300
+      Left = 297
       Top = 46
       Width = 21
       Height = 13
@@ -141,7 +143,7 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
       FocusControl = DBEdit2
     end
     object Label3: TLabel
-      Left = 300
+      Left = 297
       Top = 82
       Width = 54
       Height = 13
@@ -150,7 +152,7 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
       FocusControl = DBLookupComboBox1
     end
     object Label4: TLabel
-      Left = 300
+      Left = 297
       Top = 120
       Width = 39
       Height = 13
@@ -160,7 +162,7 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
       Visible = False
     end
     object Label5: TLabel
-      Left = 35
+      Left = 32
       Top = 150
       Width = 255
       Height = 26
@@ -177,7 +179,7 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
       WordWrap = True
     end
     object DBEdit1: TDBEdit
-      Left = 161
+      Left = 158
       Top = 10
       Width = 134
       Height = 21
@@ -187,7 +189,7 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
       TabOrder = 0
     end
     object DBEdit2: TDBEdit
-      Left = 161
+      Left = 158
       Top = 41
       Width = 134
       Height = 21
@@ -197,7 +199,7 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
       TabOrder = 1
     end
     object DBLookupComboBox1: TDBLookupComboBox
-      Left = 21
+      Left = 18
       Top = 78
       Width = 274
       Height = 21
@@ -209,7 +211,7 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
       TabOrder = 2
     end
     object DBLookupComboBox2: TDBLookupComboBox
-      Left = 21
+      Left = 18
       Top = 116
       Width = 274
       Height = 21
@@ -236,7 +238,7 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
     Top = 67
   end
   object select_CiticalLetterFields: TADOStoredProc
-    Connection = dm.YeganehConnection
+    Connection = Dm.YeganehConnection
     CursorType = ctStatic
     ProcedureName = 'select_CiticalLetterFields'
     Parameters = <
@@ -295,13 +297,13 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
     end
   end
   object Secretariats: TADOTable
-    Connection = dm.YeganehConnection
+    Connection = Dm.YeganehConnection
     TableName = 'Secretariats'
     Left = 192
     Top = 8
   end
   object LetterTypes: TADOTable
-    Connection = dm.YeganehConnection
+    Connection = Dm.YeganehConnection
     TableName = 'LetterTypes'
     Left = 136
     Top = 8
@@ -445,7 +447,7 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
             ShortCut = 32776
           end>
       end>
-    Images = dm.LetterImages
+    Images = Dm.LetterImages
     Left = 185
     Top = 62
     StyleName = 'XP Style'

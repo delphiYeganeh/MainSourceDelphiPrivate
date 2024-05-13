@@ -12,7 +12,6 @@ type
     QrSelLetterLetterID: TIntegerField;
     QrSelLetterIndicatorID: TIntegerField;
     QrSelLetterMYear: TWordField;
-    QrSelLetterSecretariatID: TWordField;
     QrSelLetterLetter_Type: TWordField;
     QrSelLetterletterformat: TWordField;
     QrSelLetterIncommingNO: TWideStringField;
@@ -52,6 +51,7 @@ type
     QrSelLettersenderTitle: TWideStringField;
     QrSelLetterClassificationTitle: TWideStringField;
     QrSelLetterUserTableTitle: TWideStringField;
+    QrSelLetterSecretariatID: TIntegerField;
   private
     { Private declarations }
   public

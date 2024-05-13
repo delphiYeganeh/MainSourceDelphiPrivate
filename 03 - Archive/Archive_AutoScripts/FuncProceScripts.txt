@@ -1,4 +1,4 @@
-[SECTION_MAX_NO]=4
+[SECTION_MAX_NO]=6
 
 [BEGIN_S_NO]=1
 
@@ -87,6 +87,8 @@ Insert Into UserAccArchive (UserID, ArchiveCenterID, ArchiveFolderID, ISAccess, 
 
 [END_S_NO]
 
+
+
 [BEGIN_S_NO]=3
 
 alter PROCEDURE [dbo].[Sp_SetAccessToArchiveFolder] 
@@ -130,6 +132,9 @@ Insert Into UserAccArchive (UserID, ArchiveCenterID, ArchiveFolderID, ISAccess, 
 
 [BEGIN_S_NO]=4
 
+[END_S_NO]
+[BEGIN_S_NO]=5
+
 DROP INDEX [dbo].[Users].[IX_Users_AccessID] 
 
 
@@ -165,8 +170,36 @@ CREATE NONCLUSTERED INDEX [IX_Users_DefualtSecretariatID] ON [dbo].[Users]
 
 [END_S_NO]
 
+[BEGIN_S_NO]=6
+
+  DROP INDEX [dbo].[Letter].[Letter_IDX_Indicator] ;
+  DROP INDEX [dbo].[Letter].[IX_Letter_SecretariatID] ;
+  
+  ALTER TABLE [dbo].[Letter] 
+  DROP CONSTRAINT  [DF__Letter__Secretar__1DBB5747]
+  
+  ALTER TABLE [dbo].[Letter]
+    ALTER COLUMN [SecretariatID] int;
+
+  ALTER TABLE [dbo].[Letter] ADD  CONSTRAINT [DF__Letter__Secretar__1DBB5747]  DEFAULT (1) FOR [SecretariatID]
 
 
+CREATE NONCLUSTERED INDEX [Letter_IDX_Indicator] ON [dbo].[Letter]
+(
+	[IndicatorID] ASC,
+	[MYear] ASC,
+	[SecretariatID] ASC,
+	[Letter_Type] ASC,
+	[letterformat] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+
+CREATE NONCLUSTERED INDEX [IX_Letter_SecretariatID] ON [dbo].[Letter]
+(
+	[SecretariatID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+
+
+[END_S_NO]
 
 
 

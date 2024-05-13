@@ -12,13 +12,13 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
-    Top = 180
-    Width = 382
+    Top = 175
+    Width = 374
     Height = 41
     Align = alBottom
     TabOrder = 0
     DesignSize = (
-      382
+      374
       41)
     object BitBtn1: TBitBtn
       Left = 294
@@ -117,13 +117,13 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
   object Panel2: TPanel [1]
     Left = 0
     Top = 0
-    Width = 382
-    Height = 180
+    Width = 374
+    Height = 175
     Align = alClient
     TabOrder = 1
     DesignSize = (
-      382
-      180)
+      374
+      175)
     object Label1: TLabel
       Left = 297
       Top = 13
@@ -268,9 +268,6 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
     object select_CiticalLetterFieldsMYear: TWordField
       FieldName = 'MYear'
     end
-    object select_CiticalLetterFieldsSecretariatID: TWordField
-      FieldName = 'SecretariatID'
-    end
     object select_CiticalLetterFieldsLetter_Type: TWordField
       FieldName = 'Letter_Type'
     end
@@ -294,6 +291,9 @@ inherited FchangeCricitalFields: TFchangeCricitalFields
       LookupResultField = 'Title'
       KeyFields = 'Letter_Type'
       Lookup = True
+    end
+    object select_CiticalLetterFieldsSecretariatID: TIntegerField
+      FieldName = 'SecretariatID'
     end
   end
   object Secretariats: TADOTable

@@ -164,13 +164,16 @@ end;
 procedure TArchiveOrganizeForm.AInsertExecute(Sender: TObject);
 var SelectedId: integer;
     FolderID : integer;
+
 begin
    inherited;
    //‘Êœ ¬‰ê«Â ¬‰ “Ê‰ﬂ‰ »⁄‰Ê«‰ —Ì‘Â ‰‘«‰ œ«œÂ „Ì ‘Êœ SelectedId=0 œ— ’Ê— ÌﬂÂ
   SelectedId := dsform.DataSet.Fieldbyname('FolderID').AsInteger;
 
   ArchiveDialogForm := TArchiveDialogForm.Create(Application);
+  ArchiveDialogForm.SelectedId  :=   SelectedId ;
   ArchiveDialogForm.ShowModal;
+
   if ArchiveDialogForm.Done then
   begin
     FolderID := Exec_Insert_ArchiveFolder(SelectedId,ArchiveDialogForm.Title.Text,0,

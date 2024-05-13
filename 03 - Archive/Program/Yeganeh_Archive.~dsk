@@ -1,57 +1,62 @@
 [Closed Files]
-File_0=SourceModule,'D:\matin\03 - Archive\shared\ScanImageFm.pas',0,1,2746,38,2751,1,0
-File_1=SourceModule,'D:\matin\03 - Archive\shared\backupF.pas',0,1,237,6,251,0,0
-File_2=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl2\UemsVCL.pas',0,1,1,1,13,0,0
-File_3=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl2\xp style\xpPages.pas',0,1,148,1,160,0,0
-File_4=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl2\xp style\xpBitBtn.pas',0,1,1,36,13,0,0
-File_5=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl2\YwhereEdit.pas',0,1,1,48,3,0,0
-File_6=SourceModule,'D:\99 - Shared\YDbgrid.pas',0,1,1,65,3,0,0
-File_7=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\MssComponents\MssPackage\Source\WordXP.pas',0,1,25388,59,25395,0,0
+File_0=SourceModule,'D:\matin\03 - Archive\Program\FActiveUsers.pas',0,1,1,126,13,1,0
+File_1=SourceModule,'D:\matin\03 - Archive\Program\Fsecretariats.pas',0,1,62,90,69,1,0
+File_2=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas',0,1,30,47,39,0,0
+File_3=SourceModule,'C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas',0,1,6160,1,6183,0,0
+File_4=SourceModule,'D:\matin\03 - Archive\Program\SecretariatDocSearchUnit.pas',0,1,1,1,1,1,0
+File_5=SourceModule,'D:\matin\03 - Archive\shared\ScanImageFm.pas',0,1,2746,38,2751,1,0
+File_6=SourceModule,'D:\matin\03 - Archive\shared\backupF.pas',0,1,237,6,251,0,0
 
 [Modules]
-Module0=D:\matin\03 - Archive\Program\UMain.pas
-Module1=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
-Module2=D:\matin\03 - Archive\Program\SecretariatDocSearchUnit.pas
-Module3=D:\matin\03 - Archive\Program\Fsecretariats.pas
-Module4=D:\matin\03 - Archive\yeganeh shared\YInputQuery.pas
-Module5=D:\matin\03 - Archive\Program\LogOn.pas
-Module6=D:\matin\03 - Archive\Program\UArchiveCenter.pas
-Module7=D:\matin\03 - Archive\Program\UAddSecretariat.pas
-Module8=D:\matin\03 - Archive\Program\Dmu.pas
-Module9=D:\matin\03 - Archive\Source\Source\Program\uUpdateDbScripts.pas
-Module10=C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas
-Module11=H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas
-Module12=D:\matin\03 - Archive\Shared\businessLayer.pas
-Module13=D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr
-Count=14
+Module0=D:\matin\03 - Archive\Program\Dmu.pas
+Module1=D:\matin\03 - Archive\Program\UMain.pas
+Module2=D:\matin\03 - Archive\Program\LogOn.pas
+Module3=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
+Module4=D:\matin\03 - Archive\Program\userDefine.pas
+Module5=D:\matin\03 - Archive\Shared\businessLayer.pas
+Module6=D:\matin\03 - Archive\Source\Source\Program\uUpdateDbScripts.pas
+Module7=D:\matin\03 - Archive\Program\UArchiveCenter.pas
+Module8=D:\matin\03 - Archive\Program\UAddSecretariat.pas
+Module9=D:\matin\03 - Archive\shared\USecChange.pas
+Module10=D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr
+Module11=H:\Yeganeh\Windows\Delphi\Component\TMS Component Pack 7.5.3.1 for Delphi 5-XE8\Components\AdvGrid.pas
+Module12=C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas
+Module13=D:\matin\03 - Archive\shared\BaseUnit.pas
+Module14=D:\matin\03 - Archive\yeganeh shared\YInputQuery.pas
+Count=15
 EditWindowCount=1
+
+[D:\matin\03 - Archive\Program\Dmu.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
 
 [D:\matin\03 - Archive\Program\UMain.pas]
 ModuleType=SourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\Program\LogOn.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
 
 [D:\matin\03 - Archive\shared\ArchiveOrganize.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\03 - Archive\Program\SecretariatDocSearchUnit.pas]
+[D:\matin\03 - Archive\Program\userDefine.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\03 - Archive\Program\Fsecretariats.pas]
+[D:\matin\03 - Archive\Shared\businessLayer.pas]
 ModuleType=SourceModule
-FormState=1
+FormState=0
 FormOnTop=0
 
-[D:\matin\03 - Archive\yeganeh shared\YInputQuery.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\03 - Archive\Program\LogOn.pas]
+[D:\matin\03 - Archive\Source\Source\Program\uUpdateDbScripts.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -66,29 +71,9 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\03 - Archive\Program\Dmu.pas]
+[D:\matin\03 - Archive\shared\USecChange.pas]
 ModuleType=SourceModule
 FormState=1
-FormOnTop=0
-
-[D:\matin\03 - Archive\Source\Source\Program\uUpdateDbScripts.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[D:\matin\03 - Archive\Shared\businessLayer.pas]
-ModuleType=SourceModule
-FormState=0
 FormOnTop=0
 
 [D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr]
@@ -96,17 +81,33 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[C:\Program Files (x86)\Borland\Delphi7\Projects\ProjectGroup1.bpg]
+[H:\Yeganeh\Windows\Delphi\Component\TMS Component Pack 7.5.3.1 for Delphi 5-XE8\Components\AdvGrid.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas]
+ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
 [D:\matin\03 - Archive\shared\BaseUnit.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\yeganeh shared\YInputQuery.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\Program Files (x86)\Borland\Delphi7\Projects\ProjectGroup1.bpg]
 FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=14
-CurrentView=10
+ViewCount=15
+CurrentView=1
 View0=0
 View1=1
 View2=2
@@ -121,39 +122,40 @@ View10=10
 View11=11
 View12=12
 View13=13
+View14=14
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
 Visible=1
 State=0
-Left=200
+Left=181
 Top=147
-Width=1472
+Width=1491
 Height=910
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1456
+ClientWidth=1475
 ClientHeight=871
 LeftPanelSize=140
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=85
+BottomPanelSize=301
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=0000040000000000B005000000000000025500000000000000010000000000000000000000000100000000BD050000000000000100000000B00500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=0000040000000000C305000000000000022D01000000000000010000000000000000000000000100000000BD050000000000000100000000C3050000000000000100000000C3050000000000000100000000C3050000000000000100000000C30500000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr
-CursorX=8
-CursorY=32
-TopLine=1
+CursorX=1
+CursorY=148
+TopLine=124
 LeftCol=1
 
 [View1]
 Module=D:\matin\03 - Archive\Program\Dmu.pas
-CursorX=1
-CursorY=1184
-TopLine=1161
+CursorX=56
+CursorY=1030
+TopLine=1021
 LeftCol=1
 
 [View2]
@@ -165,58 +167,58 @@ LeftCol=1
 
 [View3]
 Module=D:\matin\03 - Archive\Source\Source\Program\uUpdateDbScripts.pas
-CursorX=54
-CursorY=180
-TopLine=173
+CursorX=69
+CursorY=132
+TopLine=121
 LeftCol=1
 
 [View4]
 Module=D:\matin\03 - Archive\Program\UMain.pas
-CursorX=55
-CursorY=2590
-TopLine=2583
+CursorX=1
+CursorY=1390
+TopLine=1367
 LeftCol=1
 
 [View5]
 Module=D:\matin\03 - Archive\Program\UArchiveCenter.pas
-CursorX=85
-CursorY=64
-TopLine=59
+CursorX=87
+CursorY=84
+TopLine=81
 LeftCol=1
 
 [View6]
-Module=D:\matin\03 - Archive\Program\LogOn.pas
-CursorX=69
-CursorY=338
-TopLine=327
+Module=D:\matin\03 - Archive\Program\userDefine.pas
+CursorX=1
+CursorY=264
+TopLine=241
 LeftCol=1
 
 [View7]
-Module=D:\matin\03 - Archive\Program\Fsecretariats.pas
-CursorX=90
-CursorY=69
-TopLine=62
+Module=D:\matin\03 - Archive\Program\LogOn.pas
+CursorX=1
+CursorY=411
+TopLine=388
 LeftCol=1
 
 [View8]
-Module=D:\matin\03 - Archive\Program\UAddSecretariat.pas
-CursorX=30
-CursorY=41
-TopLine=34
+Module=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
+CursorX=32
+CursorY=274
+TopLine=254
 LeftCol=1
 
 [View9]
-Module=D:\matin\03 - Archive\Program\SecretariatDocSearchUnit.pas
-CursorX=1
-CursorY=1
-TopLine=1
+Module=D:\matin\03 - Archive\shared\USecChange.pas
+CursorX=5
+CursorY=46
+TopLine=44
 LeftCol=1
 
 [View10]
-Module=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
-CursorX=34
-CursorY=156
-TopLine=147
+Module=D:\matin\03 - Archive\Program\UAddSecretariat.pas
+CursorX=61
+CursorY=59
+TopLine=42
 LeftCol=1
 
 [View11]
@@ -227,17 +229,24 @@ TopLine=1454
 LeftCol=1
 
 [View12]
-Module=H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas
-CursorX=47
-CursorY=39
-TopLine=30
+Module=D:\matin\03 - Archive\shared\BaseUnit.pas
+CursorX=1
+CursorY=75
+TopLine=51
 LeftCol=1
 
 [View13]
-Module=C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas
+Module=H:\Yeganeh\Windows\Delphi\Component\TMS Component Pack 7.5.3.1 for Delphi 5-XE8\Components\AdvGrid.pas
 CursorX=1
-CursorY=6183
-TopLine=6160
+CursorY=5833
+TopLine=5801
+LeftCol=1
+
+[View14]
+Module=C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas
+CursorX=1
+CursorY=734
+TopLine=711
 LeftCol=1
 
 [Watches]
@@ -277,7 +286,7 @@ LRDockWidth=1180
 Dockable=1
 
 [Breakpoints]
-Count=27
+Count=38
 Breakpoint0='D:\barzegar\03 - Archive\Program\UMain.pas',1921,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint1='D:\matin\03 - Archive\Program\FolderToLetterFm.pas',545,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint2='D:\matin\03 - Archive\Program\UFillLetterData.pas',489,'',0,1,'',1,0,0,'',1,'','',''
@@ -292,19 +301,30 @@ Breakpoint10='D:\matin\03 - Archive\Program\UFillLetterData.pas',349,'',0,1,'',1
 Breakpoint11='D:\matin\03 - Archive\Program\UaddLetterData.pas',111,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint12='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',364,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint13='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',342,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint14='D:\matin\03 - Archive\Program\Dmu.pas',1184,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint15='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',155,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint16='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',189,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint17='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',218,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint18='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',228,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint19='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',378,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint20='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',176,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint21='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',170,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint22='D:\matin\03 - Archive\Shared\businessLayer.pas',1477,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint23='D:\matin\03 - Archive\Program\UAddSecretariat.pas',45,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint24='D:\matin\03 - Archive\Program\UAddSecretariat.pas',59,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint25='D:\matin\03 - Archive\Source\Source\Program\uUpdateDbScripts.pas',163,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint26='D:\matin\03 - Archive\Source\Source\Program\uUpdateDbScripts.pas',196,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint14='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',155,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint15='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',189,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint16='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',218,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint17='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',228,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint18='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',378,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint19='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',176,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint20='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',170,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint21='D:\matin\03 - Archive\Shared\businessLayer.pas',1477,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint22='D:\matin\03 - Archive\Program\UAddSecretariat.pas',45,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint23='D:\matin\03 - Archive\Program\UAddSecretariat.pas',59,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint24='D:\matin\03 - Archive\Source\Source\Program\uUpdateDbScripts.pas',199,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint25='D:\matin\03 - Archive\Program\LogOn.pas',312,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint26='D:\matin\03 - Archive\Program\LogOn.pas',378,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint27='D:\matin\03 - Archive\Program\LogOn.pas',411,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint28='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',277,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint29='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',181,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint30='D:\matin\03 - Archive\Program\Dmu.pas',1044,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint31='D:\matin\03 - Archive\Program\Dmu.pas',1118,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint32='D:\matin\03 - Archive\Program\UMain.pas',1390,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint33='D:\matin\03 - Archive\Program\UArchiveCenter.pas',46,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint34='D:\matin\03 - Archive\Program\LogOn.pas',327,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint35='D:\matin\03 - Archive\Program\userDefine.pas',228,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint36='D:\matin\03 - Archive\Program\userDefine.pas',264,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint37='D:\matin\03 - Archive\Program\Dmu.pas',1286,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -374,18 +394,18 @@ Visible=1
 State=0
 Left=-3
 Top=378
-Width=208
+Width=439
 Height=620
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=192
+ClientWidth=423
 ClientHeight=581
 TBDockHeight=556
 LRDockWidth=190
 Dockable=1
 SplitPos=85
 ArrangeBy=Name
-SelectedItem=Caption
+SelectedItem=Name
 ExpandedItems=Title
 HiddenCategories=
 
@@ -395,12 +415,12 @@ Visible=1
 State=0
 Left=-1
 Top=122
-Width=190
-Height=243
+Width=392
+Height=351
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=174
-ClientHeight=204
+ClientWidth=376
+ClientHeight=312
 TBDockHeight=358
 LRDockWidth=190
 Dockable=1
@@ -460,12 +480,12 @@ State=0
 Left=0
 Top=12
 Width=140
-Height=771
+Height=555
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=771
-TBDockHeight=859
+ClientHeight=555
+TBDockHeight=555
 LRDockWidth=140
 Dockable=1
 
@@ -475,13 +495,13 @@ Visible=1
 State=0
 Left=12
 Top=0
-Width=1444
-Height=85
+Width=1463
+Height=301
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1444
-ClientHeight=85
-TBDockHeight=85
+ClientWidth=1463
+ClientHeight=301
+TBDockHeight=301
 LRDockWidth=443
 Dockable=1
 

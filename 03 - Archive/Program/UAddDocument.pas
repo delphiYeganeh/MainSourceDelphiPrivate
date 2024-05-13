@@ -63,7 +63,6 @@ type
     Select_LetterLetterID: TAutoIncField;
     Select_LetterIndicatorID: TIntegerField;
     Select_LetterMYear: TWordField;
-    Select_LetterSecretariatID: TWordField;
     Select_LetterLetter_Type: TWordField;
     Select_Letterletterformat: TWordField;
     Select_LetterIncommingNO: TWideStringField;
@@ -224,6 +223,7 @@ type
     adoAccessFroDelete: TADOQuery;
     adoAccessFroDeleteAccessID: TIntegerField;
     Button1: TButton;
+    Select_LetterSecretariatID: TIntegerField;
     procedure SpeedButton3Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -676,7 +676,6 @@ begin
     end;
 
     //FieldByName('ToOrgID').AsInteger:=dm.NewToOrganization(ToOrgTitleEdit.text,''); feri
-
     FieldByName('Memo').AsString:= DBMemo2.Text;
     FieldByName('UserMemo').AsString:=UserMemo1.Text;
     FieldByName('UserMemo1').AsString:=UserMemo2.Text;

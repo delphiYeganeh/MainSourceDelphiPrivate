@@ -27,7 +27,6 @@ type
     SelectLetterLetterID: TAutoIncField;
     SelectLetterIndicatorID: TIntegerField;
     SelectLetterMYear: TWordField;
-    SelectLetterSecretariatID: TWordField;
     SelectLetterLetter_Type: TWordField;
     SelectLetterletterformat: TWordField;
     SelectLetterIncommingNO: TWideStringField;
@@ -86,6 +85,7 @@ type
     SelectLetterHas_WordPage: TBooleanField;
     SelectLetterHas_File: TBooleanField;
     SelectLetterHas_Page_1: TBooleanField;
+    SelectLetterSecretariatID: TIntegerField;
     procedure MakeRepClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Button4Click(Sender: TObject);

@@ -5,7 +5,7 @@ object DMShowAddDoc: TDMShowAddDoc
   Height = 218
   Width = 210
   object QrSelLetter: TADOQuery
-    Connection = dm.YeganehConnection
+    Connection = Dm.YeganehConnection
     LockType = ltReadOnly
     Parameters = <
       item
@@ -38,9 +38,6 @@ object DMShowAddDoc: TDMShowAddDoc
     end
     object QrSelLetterMYear: TWordField
       FieldName = 'MYear'
-    end
-    object QrSelLetterSecretariatID: TWordField
-      FieldName = 'SecretariatID'
     end
     object QrSelLetterLetter_Type: TWordField
       FieldName = 'Letter_Type'
@@ -204,6 +201,9 @@ object DMShowAddDoc: TDMShowAddDoc
       FieldName = 'UserTableTitle'
       ReadOnly = True
       Size = 50
+    end
+    object QrSelLetterSecretariatID: TIntegerField
+      FieldName = 'SecretariatID'
     end
   end
   object DsSelLetter: TDataSource

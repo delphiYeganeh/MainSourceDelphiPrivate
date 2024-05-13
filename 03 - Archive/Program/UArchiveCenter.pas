@@ -69,6 +69,7 @@ begin
          Insert;
          ArchiveCenterArchiveCenterID.AsInteger   := dm.YeganehConnection.Execute('select ISNULL(max(ArchiveCenterID),0)+1 from ArchiveCenter').Fields[0].Value;
          ArchiveCenterArchiveCenterTitle.AsString := s ;
+         Post;
       end;
 end;
 

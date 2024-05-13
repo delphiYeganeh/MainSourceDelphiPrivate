@@ -232,7 +232,6 @@ type
     Get_All_LetterLetterID: TAutoIncField;
     Get_All_LetterIndicatorID: TIntegerField;
     Get_All_LetterMYear: TWordField;
-    Get_All_LetterSecretariatID: TWordField;
     Get_All_LetterLetter_Type: TWordField;
     Get_All_Letterletterformat: TWordField;
     Get_All_LetterIncommingNO: TWideStringField;
@@ -377,6 +376,8 @@ type
     qryAutoRunScript: TADOQuery;
     UsersDefualtSecretariatID: TIntegerField;
     UsersAccessID: TIntegerField;
+    UsersDefaultSec: TStringField;
+    Get_All_LetterSecretariatID: TIntegerField;
 
     function  GetValue(variableID:word):variant;
     Procedure SetValue(VariableId:word;value:variant);
@@ -508,7 +509,7 @@ type
     procedure RefreshTemplate;
     function GetSystemValue(I:integer):variant;
     Procedure SetSystemValue(VariableId:word;value:variant);
-    Function FileName(secid:byte;myear:Integer;indicatorid:integer):string;
+    Function FileName(secid:Integer;myear:Integer;indicatorid:integer):string;
     function Cdate(S:string):string;
     property SecID :Integer read fSecID write SetSecID;
     property CurrentMyear :Integer read  FCurrentMyear   write SetCurrentMyear;
@@ -1383,7 +1384,7 @@ begin
   end;
 end;
 
-function TDm.FileName(secid:byte;myear:Integer;indicatorid:integer):string;
+function TDm.FileName(secid:Integer;myear:Integer;indicatorid:integer):string;
 begin
   Result:=IntToStr(IndicatorID);
   case length(Result) of

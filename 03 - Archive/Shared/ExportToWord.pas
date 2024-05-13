@@ -40,7 +40,6 @@ type
     SelectInfoLetterID: TAutoIncField;
     SelectInfoIndicatorID: TIntegerField;
     SelectInfoMYear: TWordField;
-    SelectInfoSecretariatID: TWordField;
     SelectInfoLetter_Type: TWordField;
     SelectInfoletterformat: TWordField;
     SelectInfoIncommingNO: TWideStringField;
@@ -90,6 +89,7 @@ type
     SelectInfoNumber: TIntegerField;
     SelectInfoTitle: TWideStringField;
     TntOpenDialog: TTntOpenDialog;
+    SelectInfoSecretariatID: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ExpToWordClick(Sender: TObject);

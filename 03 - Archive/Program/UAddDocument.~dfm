@@ -1,7 +1,7 @@
 inherited FrAddDocument: TFrAddDocument
   Tag = 3
-  Left = 379
-  Top = 249
+  Left = 422
+  Top = 217
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsDialog
   Caption = #1601#1585#1605' '#1579#1576#1578' '#1587#1606#1583
@@ -2661,8 +2661,8 @@ inherited FrAddDocument: TFrAddDocument
   inherited DSForm: TDataSource
     AutoEdit = False
     DataSet = Select_Letter
-    Left = 129
-    Top = 296
+    Left = 537
+    Top = 232
   end
   inherited ActionList: TActionList
     Left = 161
@@ -2959,8 +2959,8 @@ inherited FrAddDocument: TFrAddDocument
         Precision = 10
         Value = 1
       end>
-    Left = 160
-    Top = 378
+    Left = 592
+    Top = 234
     object Select_LetterFromResponsibleStafferTitle: TWideStringField
       Alignment = taRightJustify
       AutoGenerateValue = arDefault
@@ -3021,10 +3021,6 @@ inherited FrAddDocument: TFrAddDocument
     object Select_LetterMYear: TWordField
       AutoGenerateValue = arDefault
       FieldName = 'MYear'
-    end
-    object Select_LetterSecretariatID: TWordField
-      AutoGenerateValue = arDefault
-      FieldName = 'SecretariatID'
     end
     object Select_LetterLetter_Type: TWordField
       AutoGenerateValue = arDefault
@@ -3258,6 +3254,9 @@ inherited FrAddDocument: TFrAddDocument
       FieldName = 'Subject'
       Size = 250
     end
+    object Select_LetterSecretariatID: TIntegerField
+      FieldName = 'SecretariatID'
+    end
   end
   object MssSearchPro3: TMssSearchPro
     Style = mssSilver
@@ -3332,8 +3331,8 @@ inherited FrAddDocument: TFrAddDocument
         Precision = 10
         Value = Null
       end>
-    Left = 128
-    Top = 377
+    Left = 32
+    Top = 457
     object sp_AutomationLetters_by_ArchiveLetterIDDocPart: TWideStringField
       FieldName = 'DocPart'
       ReadOnly = True
@@ -3538,8 +3537,8 @@ inherited FrAddDocument: TFrAddDocument
       end>
     SQL.Strings = (
       'PRCTbExcel_AccessFroDelete :@UserID')
-    Left = 412
-    Top = 336
+    Left = 276
+    Top = 256
     object adoAccessFroDeleteAccessID: TIntegerField
       FieldName = 'AccessID'
     end

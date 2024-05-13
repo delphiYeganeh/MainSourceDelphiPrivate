@@ -1,7 +1,7 @@
 object DMFolderToLetter: TDMFolderToLetter
   OldCreateOrder = False
-  Left = 842
-  Top = 522
+  Left = 884
+  Top = 458
   Height = 183
   Width = 276
   object QrLetter: TADOQuery

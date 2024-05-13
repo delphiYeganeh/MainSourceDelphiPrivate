@@ -115,7 +115,7 @@ AutoIncBuild=1
 MajorVer=1401
 MinorVer=12
 Release=22
-Build=12
+Build=16
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=1256
 [Version Info Keys]
 CompanyName=‘—ﬂ  ‰—„ «›“«—Ì Ìê«‰Â
 FileDescription=‰—„ «›“«— ¬—‘ÌÊ «”‰«œ
-FileVersion=1401.12.22.12
+FileVersion=1401.12.22.16
 InternalName=
 LegalCopyright=
 LegalTrademarks=

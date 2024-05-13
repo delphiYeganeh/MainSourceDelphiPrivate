@@ -1,6 +1,6 @@
 inherited FExportToWord: TFExportToWord
-  Left = 599
-  Top = 197
+  Left = 864
+  Top = 241
   AutoScroll = False
   Caption = #1575#1585#1587#1575#1604' '#1576#1607' WORD'
   ClientHeight = 372
@@ -362,9 +362,6 @@ inherited FExportToWord: TFExportToWord
     object SelectInfoMYear: TWordField
       FieldName = 'MYear'
     end
-    object SelectInfoSecretariatID: TWordField
-      FieldName = 'SecretariatID'
-    end
     object SelectInfoLetter_Type: TWordField
       FieldName = 'Letter_Type'
     end
@@ -539,6 +536,9 @@ inherited FExportToWord: TFExportToWord
     object SelectInfoTitle: TWideStringField
       FieldName = 'Title'
       Size = 50
+    end
+    object SelectInfoSecretariatID: TIntegerField
+      FieldName = 'SecretariatID'
     end
   end
   object Fields: TADODataSet
