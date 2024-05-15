@@ -48,6 +48,7 @@ inherited ArchiveOrganizeForm: TArchiveOrganizeForm
             Height = 357
             Align = alClient
             Indent = 15
+            ReadOnly = True
             TabOrder = 0
             OnDblClick = ArchiveTreeDblClick
             OnGetImageIndex = ArchiveTreeGetImageIndex

@@ -251,9 +251,9 @@ inherited FromOrgForm: TFromOrgForm
       352)
     object Image2: TImage
       Left = 42
-      Top = 8
+      Top = 19
       Width = 62
-      Height = 55
+      Height = 52
       Anchors = [akTop, akRight]
       Picture.Data = {
         07544269746D617076020000424D760200000000000076000000280000002000

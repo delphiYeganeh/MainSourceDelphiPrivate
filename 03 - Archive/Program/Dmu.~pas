@@ -394,7 +394,7 @@ type
     function  NewToOrganization(Title,Responsible:wideString):integer;
     function  NewRenter(Title:wideString):integer;
     procedure DataModuleCreate(Sender: TObject);
-    Procedure SetSecID(value:Byte);
+    Procedure SetSecID(value:Integer);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
     procedure UserSecsAfterInsert(DataSet: TDataSet);
 
@@ -427,7 +427,7 @@ type
 
   private
     { Private declarations }
-    FSecID:byte;
+    FSecID:Integer;
     function InsertToLetData(aFile, Desc: string; ext,  LetID: integer): boolean;
 
    //ARM LOCK
@@ -509,9 +509,9 @@ type
     procedure RefreshTemplate;
     function GetSystemValue(I:integer):variant;
     Procedure SetSystemValue(VariableId:word;value:variant);
-    Function FileName(secid:byte;myear:Integer;indicatorid:integer):string;
+    Function FileName(secid:Integer;myear:Integer;indicatorid:integer):string;
     function Cdate(S:string):string;
-    property SecID :byte read fSecID write SetSecID;
+    property SecID :Integer read fSecID write SetSecID;
     property CurrentMyear :Integer read  FCurrentMyear   write SetCurrentMyear;
     function  Search(Y:TYwhereEdit):integer;
     procedure SaveTemplateToFile;
@@ -1041,7 +1041,7 @@ begin
   Result:=RenterRenterID.AsInteger;
 end;
 
-procedure TDm.SetSecID (value: byte);
+procedure TDm.SetSecID (value: Integer);
 begin
   FSecID := Value;
   MainForm.RefreshQuery;
@@ -1384,7 +1384,7 @@ begin
   end;
 end;
 
-function TDm.FileName(secid:byte;myear:Integer;indicatorid:integer):string;
+function TDm.FileName(secid:Integer;myear:Integer;indicatorid:integer):string;
 begin
   Result:=IntToStr(IndicatorID);
   case length(Result) of

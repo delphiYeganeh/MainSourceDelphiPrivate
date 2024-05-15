@@ -470,6 +470,9 @@ inherited UserDefineF: TUserDefineF
           BiDiMode = bdLeftToRight
           DataField = 'DefualtSecretariatID'
           DataSource = DSForm
+          KeyField = 'SecID'
+          ListField = 'SecTitle'
+          ListSource = DSSecretration
           ParentBiDiMode = False
           TabOrder = 6
         end
@@ -1436,7 +1439,7 @@ inherited UserDefineF: TUserDefineF
     MasterFields = 'AccessID'
     TableName = 'Accesses'
     Left = 37
-    Top = 184
+    Top = 192
     object WordField7: TWordField
       FieldName = 'ID'
     end
@@ -1503,5 +1506,12 @@ inherited UserDefineF: TUserDefineF
       FieldName = 'Title'
       Size = 50
     end
+  end
+  object DSSecretration: TDataSource
+    AutoEdit = False
+    DataSet = Dm.Secretariats
+    OnDataChange = DSFormDataChange
+    Left = 411
+    Top = 224
   end
 end

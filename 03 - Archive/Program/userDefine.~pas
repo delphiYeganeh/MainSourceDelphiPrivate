@@ -96,6 +96,7 @@ type
     Label16: TLabel;
     lblUserCount: TLabel;
     dbChBoxShowAllDoc: TDBCheckBox;
+    DSSecretration: TDataSource;
     procedure Action11Execute(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure DBEdit9KeyDown(Sender: TObject; var Key: Word;

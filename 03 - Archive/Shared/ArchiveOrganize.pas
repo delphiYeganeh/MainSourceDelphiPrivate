@@ -126,39 +126,45 @@ end;
 procedure TArchiveOrganizeForm.ArchiveTreeDblClick(Sender: TObject);
 begin
   inherited;
-  if acEditZoonkanBaygani.Enabled then
+  if (dsform.DataSet.fieldbyname('ParentFolderId').AsInteger = 0 ) and (dsform.DataSet.fieldbyname('Title').AsString ='»«Ìê«‰Ì' ) then
+    ShowMsgString('„ÃÊ“ ÊÌ—«Ì‘ ‰œ«—Ìœ')
+  else
   begin
-    if not OrganizeMode then
+
+    if (acEditZoonkanBaygani.Enabled)  then
     begin
-      if PageControl1.ActivePageIndex=0 then
-        _ResultFolderID:=dsform.DataSet.fieldbyname('folderid').AsInteger
+      if not OrganizeMode then
+      begin
+        if PageControl1.ActivePageIndex=0 then
+          _ResultFolderID:=dsform.DataSet.fieldbyname('folderid').AsInteger
+        else
+          _ResultFolderID := Dlist.DataSet.Fieldbyname('FolderID').AsInteger;
+        close;
+        done:=true;
+      end
       else
-        _ResultFolderID := Dlist.DataSet.Fieldbyname('FolderID').AsInteger;
-      close;
-      done:=true;
+      begin
+        ArchiveDialogForm:=TArchiveDialogForm.Create(Application);
+        ArchiveDialogForm.Title.Text:=dsform.DataSet.fieldbyname('title').Asstring;
+        ArchiveDialogForm.notes.Text:=dsform.DataSet.fieldbyname('notes').AsString;
+        ArchiveDialogForm.Place.Text:=dsform.DataSet.fieldbyname('place').AsString;
+        ArchiveDialogForm.ShowModal;
+        if ArchiveDialogForm.done then
+        Begin
+          Exec_update_ArchiveFolder(dsform.DataSet.fieldbyname('FolderID').AsInteger,
+          ArchiveDialogForm.Title.Text,
+          ArchiveDialogForm.notes.text,
+          ArchiveDialogForm.Place.Text  );
+           {Ranjbar 89.06.30 ID=23}
+           //DSForm.DataSet := Get_ArchiveFolder_byArchiveCenterID(_ArchiveCenterId);
+          DSForm.DataSet := Get_ArchiveFolder_byArchiveCenterID(_ArchiveCenterId,_UserId,Dm.SecID);
+           //---
+        end
+      end;
     end
     else
-    begin
-      ArchiveDialogForm:=TArchiveDialogForm.Create(Application);
-      ArchiveDialogForm.Title.Text:=dsform.DataSet.fieldbyname('title').Asstring;
-      ArchiveDialogForm.notes.Text:=dsform.DataSet.fieldbyname('notes').AsString;
-      ArchiveDialogForm.Place.Text:=dsform.DataSet.fieldbyname('place').AsString;
-      ArchiveDialogForm.ShowModal;
-      if ArchiveDialogForm.done then
-      Begin
-        Exec_update_ArchiveFolder(dsform.DataSet.fieldbyname('FolderID').AsInteger,
-        ArchiveDialogForm.Title.Text,
-        ArchiveDialogForm.notes.text,
-        ArchiveDialogForm.Place.Text  );
-         {Ranjbar 89.06.30 ID=23}
-         //DSForm.DataSet := Get_ArchiveFolder_byArchiveCenterID(_ArchiveCenterId);
-        DSForm.DataSet := Get_ArchiveFolder_byArchiveCenterID(_ArchiveCenterId,_UserId,Dm.SecID);
-         //---
-      end
-    end;
-  end
-  else
-    ShowMsgString('„ÃÊ“ ÊÌ—«Ì‘ ‰œ«—Ìœ');
+      ShowMsgString('„ÃÊ“ ÊÌ—«Ì‘ ‰œ«—Ìœ');
+  end;
 end;
 
 procedure TArchiveOrganizeForm.AInsertExecute(Sender: TObject);
@@ -201,11 +207,12 @@ var
 begin
   inherited;
    //Hamed_Ansari_MRM_990716_S
-  if dsform.DataSet.fieldbyname('ParentFolderId').AsInteger = 0 then
+  if (dsform.DataSet.fieldbyname('ParentFolderId').AsInteger = 0 )  then
   begin
     ShowMessage('„Ã«“ »Â Õ–› ”—‘«ŒÂ ‰„Ì »«‘Ìœ');
     Exit;
-  end;
+  end ;
+
    //Hamed_Ansari_MRM_990716_E
   Selectedid:=dsform.DataSet.fieldbyname('folderid').AsInteger;
   if ArchiveTree.Selected.HasChildren then

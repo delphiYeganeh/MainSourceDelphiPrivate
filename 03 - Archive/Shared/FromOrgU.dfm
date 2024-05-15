@@ -50,6 +50,7 @@ inherited FromOrgForm: TFromOrgForm
           Align = alClient
           Images = Dm.LetterImages
           Indent = 19
+          ReadOnly = True
           TabOrder = 0
           OnChange = FromOrganizationsTreeChange
           OnDblClick = FromOrganizationsTreeDblClick
