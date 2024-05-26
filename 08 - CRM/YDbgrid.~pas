@@ -673,7 +673,7 @@ begin
 
    WordApplication:=TWordApplication.Create(self);
    WordDocument:=TWordDocument.Create(self);
-   WordApplication.Visible :=true;
+   ///WordApplication.Visible :=true;
      WordApplication.Caption :='YYY';
      HNDL :=FindWindow('OpusApp',pansichar('YYY'));
      SetForegroundWindow(HNDL);
@@ -773,6 +773,8 @@ begin
 
      if m>15 then exit;
 
+       WordApplication.Visible :=true;
+       
        WordApplication.Selection.WholeStory;
        f1:=wdSeparateByCommas;  f2:=wdAutoFitFixed;
        f5:=100;    f6:=16;
@@ -802,6 +804,7 @@ begin
         Selection.Rows.HeadingFormat := wdToggle;
      end;
      end;{with dataset}
+
 
 
     with WordApplication.Selection do

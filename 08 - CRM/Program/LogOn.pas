@@ -174,6 +174,7 @@ begin
         _ThemTypeColor   := UserThemTypeColor.AsInteger ;
         _UserAccAcess    := UserAccAcess.AsBoolean ;
         _UserCallAccess  := UserCallAccess.AsBoolean ;
+        _UserAssesstAcess:= UserAssesstAcess.AsBoolean ;
 
         if  _ThemTypeColor >0 then
         begin
@@ -345,6 +346,14 @@ begin
     Append(Format('PPI: %d', [Screen.PixelsPerInch]));
     Append(Format('Widh: %d', [Screen.Width]));
     Append(Format('Hight: %d', [Screen.Height]));
+   // Append(Format('WorkAreaRect: %d', [Screen.WorkAreaRect]));
+
+    Append(Format('WorkAreaLeft: %d', [Screen.WorkAreaLeft]));
+    Append(Format('WorkAreaTop: %d', [Screen.WorkAreaTop]));
+    Append(Format('WorkAreaWidth: %d', [Screen.WorkAreaWidth]));
+    Append(Format('WorkAreaHeight: %d', [Screen.WorkAreaHeight]));    
+
+
     //Append(Format('Scale: %d', [Screen.Monitors]));
   end;
 

@@ -33,6 +33,9 @@ type
     YDBGrid2: TYDBGrid;
     Panel3: TPanel;
     SpeedButton1: TSpeedButton;
+    CityCountyTitle: TStringField;
+    DBEdit1: TDBEdit;
+    Label3: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure StateAfterScroll(DataSet: TDataSet);
     procedure SpeedButton5Click(Sender: TObject);
@@ -123,7 +126,7 @@ procedure TFrCityEdit.FormCanResize(Sender: TObject; var NewWidth,
   NewHeight: Integer; var Resize: Boolean);
 begin
   { TODO -oparsa : 14030203 }
-  if (NewWidth < 552)  or (NewHeight < 537) then
+  if (NewWidth < 743)  or (NewHeight < 537) then
     Resize := False
   else Resize := True;
    { TODO -oparsa : 14030203 }

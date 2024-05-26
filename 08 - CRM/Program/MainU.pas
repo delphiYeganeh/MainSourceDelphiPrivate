@@ -398,6 +398,8 @@ type
     N80: TMenuItem;
     CallAccess: TMenuItem;
     NCall: TMenuItem;
+    N81: TMenuItem;
+    N82: TMenuItem;
     procedure AinsertExecute(Sender: TObject);
     procedure Action6Execute(Sender: TObject);
     procedure ApropertyExecute(Sender: TObject);
@@ -618,6 +620,7 @@ type
     procedure btnDailyClick(Sender: TObject);
     procedure btntabContractClick(Sender: TObject);
     procedure NCallClick(Sender: TObject);
+    procedure N82Click(Sender: TObject);
 
   private
     qrydblsrchContractType :TADOQuery;
@@ -665,7 +668,7 @@ Uses Telinputunit, dmu,  about, Report, ReportPhone,
     USMSEndContract, SMSBirthDateU, SMSAutoTextU, TasksTreeUnit,
     uCategoryEdit, uLockSoftware, untCustStatusReport, StoreFM,
     SecendArtGroupFM, UnitFM, ArtServiceFM, ChequeFM, EnterDataFM, FactorFM,
-    USaleReport, UThemColor, FirstArtGroupFM, UCallUser;
+    USaleReport, UThemColor, FirstArtGroupFM, UCallUser, UReportInPerson;
 
 {$R *.dfm}
 
@@ -3400,6 +3403,13 @@ begin
   //MainForm.Showmodal;
     Application.CreateForm(TFCallUser, FCallUser);
     FCallUser.Showmodal;
+end;
+
+procedure TMainForm.N82Click(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TFReportInPerson, FReportInPerson);
+  FReportInPerson.Showmodal;
 end;
 
 end.

@@ -804,6 +804,7 @@ begin
      end;{with dataset}
 
 
+
     with WordApplication.Selection do
      begin
         f3:=wdStory;

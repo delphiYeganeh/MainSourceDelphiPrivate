@@ -127,9 +127,12 @@ uses
   mainframe in 'Call\mainframe.pas' {DialFrm: TFrame},
   accountsframe in 'Call\accountsframe.pas' {AccountsFrm: TFrame},
   audioframe in 'Call\audioframe.pas' {AudioFrm: TFrame},
-
   USaleReport in 'Reports\USaleReport.pas' {FSaleReport},
-  UCallUser in 'Call\UCallUser.pas' {FCallUser};
+  UCallUser in 'Call\UCallUser.pas' {FCallUser},
+  URefrenceInPerson in 'URefrenceInPerson.pas' {FRefrenceInPerson},
+  UAssessment in 'UAssessment.pas' {FAssessment},
+  UFactorAddress in 'ACC\UFactorAddress.pas' {FFactorAddress},
+  UReportInPerson in 'Reports\UReportInPerson.pas' {FReportInPerson};
 
 {$R *.res}
 

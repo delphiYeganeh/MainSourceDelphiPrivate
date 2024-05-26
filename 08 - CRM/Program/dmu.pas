@@ -776,6 +776,8 @@ type
     UserAccAcess: TBooleanField;
     CustomerOtherPerson: TBooleanField;
     UserCallAccess: TBooleanField;
+    UserAssesstAcess: TBooleanField;
+    CitysCountyTitle: TStringField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
     function GetSql(s:string):Variant;
     function GetNewCode:string;
@@ -931,6 +933,7 @@ Var
   _Color4: Tcolor ;  
   _ColorThem : string ;
   _UserAccAcess : Boolean ;
+  _UserAssesstAcess : Boolean ;
   _UserCallAccess : Boolean ;
   _PercentScale : Integer ;
   { TODO -oparsa : 14030204 }

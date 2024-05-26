@@ -75,9 +75,9 @@ type
     DBEdit2: TDBEdit;
     DBEdit4: TDBEdit;
     DBEdit5: TDBEdit;
-    DBEdit6: TDBEdit;
+    DBECompanyName: TDBEdit;
     DBEdit8: TDBEdit;
-    DBEdit14: TDBEdit;
+    DBEProducts: TDBEdit;
     DBEdit3: TDBEdit;
     btnViwCustomer: TBitBtn;
     DBEdit1: TDBEdit;
@@ -164,6 +164,7 @@ type
     SpeedButton9: TSpeedButton;
     Splitter1: TSplitter;
     stb: TStatusBar;
+    btnRefrenceInPerson: TBitBtn;
     procedure btnWordViewClick(Sender: TObject);
     procedure btnAttachPicClick(Sender: TObject);
     procedure refreshData;
@@ -214,6 +215,7 @@ type
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
     procedure PinClick(Sender: TObject);
+    procedure btnRefrenceInPersonClick(Sender: TObject);
   private
    Function  LoadImageField(Field:TField;Path:String):Boolean;
    procedure SetColorForm ;
@@ -229,7 +231,8 @@ var
 
 implementation
 
-uses dmu, YShamsiDate, UContract, CancelCustomerU, Telinputunit, ImageUnit;
+uses dmu, YShamsiDate, UContract, CancelCustomerU, Telinputunit, ImageUnit,
+  URefrenceInPerson;
 
 {$R *.dfm}
 
@@ -633,6 +636,7 @@ begin
 
   Pin.Visible    := PinValue = '1' ;
   UnPin.Visible  := not Pin.Visible  ;
+
   { TODO -oparsa : 14030205 }
 
 end;
@@ -738,6 +742,9 @@ begin
   if not (Dm.Select_FollowUP_By_CustomerIDWordAttachment.IsNull) then
             Color:= TColor(RGB(85, 232, 105));
             //Color:=$00ffd683 ;
+
+  if not (Dm.Select_FollowUP_By_CustomerIDPdfAttachment.IsNull) then
+            Color:= clred;//TColor(RGB(85, 232, 105));
 
   if ((not Dm.Select_FollowUP_By_CustomerIDWordAttachment.IsNull) and (not Dm.Select_FollowUP_By_CustomerIDPicAttachment.IsNull) and (not Dm.Select_FollowUP_By_CustomerIDExcellAttachment.IsNull))
       or
@@ -857,8 +864,9 @@ begin
      Dm.Select_FollowUP_By_CustomerID.Locate('FollowUPID',id,[]);
      treFollowUps.Refresh;  // Amin 1391/08/25
   End;
+
 end;
-                        
+
 procedure TFrFollowUp.dbgFollowCellClick(Column: TColumn);
 begin
   inherited;
@@ -1046,6 +1054,23 @@ begin
 
   xpPanel1.TitleStartColor :=  _Color3;
   xpPanel1.TitleEndColor   :=  _Color4;
+
+end;
+
+procedure TFrFollowUp.btnRefrenceInPersonClick(Sender: TObject);
+begin
+  inherited;
+  if (dbgFollow.DataSource.DataSet.RecordCount >0 ) and (Dm.Select_FollowUP_By_CustomerIDActionTypeID.AsInteger in [ 19,20,21,22,23,26,45] ) then
+  begin
+    Application.CreateForm(TFRefrenceInPerson, FRefrenceInPerson);
+    FRefrenceInPerson.FollowUpId  := dm.Select_FollowUP_By_CustomerIDFollowUPID.Asinteger ;
+    FRefrenceInPerson.CustomerId  := dm.Select_FollowUP_By_CustomerIDCustomerID.Asinteger ;
+    FRefrenceInPerson.DBECompanyName.Text := DBECompanyName.Text;
+    FRefrenceInPerson.DBEProducts.Text    := DBEProducts.Text;
+    FRefrenceInPerson.ShowModal;
+    FRefrenceInPerson.Free;
+  end
+  else MessageDlg('«Ì‰ ›—„ ÃÂ  «ﬁœ«„«  ‰’» Ê ”—ò‘Ì „Ì »«‘œ',mtConfirmation,[mbyes],0)
 
 end;
 

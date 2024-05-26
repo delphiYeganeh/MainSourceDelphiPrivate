@@ -2360,7 +2360,7 @@ begin
    if FileExists( FileNamePath ) then
       aDBGrid.Columns.loadfromFile( FileNamePath );
                                                    
-   if FileExists( FileNamePath ) and (aDBGrid2 not null) then
+   if FileExists( FileNamePath ) and (aDBGrid2 <> aDBGrid) then
    begin
      aDBGrid2.Columns.loadfromFile( FileNamePath );
    end

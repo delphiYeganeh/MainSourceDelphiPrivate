@@ -124,12 +124,14 @@ uses
   UPleaseWait in 'UPleaseWait.pas' {FPleaseWait},
   USingleMessage in 'USingleMessage.pas' {FSingleMessage},
   UThemColor in 'UThemColor.pas' {FThemColor},
-  (*mainframe in 'Call\mainframe.pas' {DialFrm: TFrame},
+  mainframe in 'Call\mainframe.pas' {DialFrm: TFrame},
   accountsframe in 'Call\accountsframe.pas' {AccountsFrm: TFrame},
   audioframe in 'Call\audioframe.pas' {AudioFrm: TFrame},
-  *)
   USaleReport in 'Reports\USaleReport.pas' {FSaleReport},
-  UCallUser in 'Call\UCallUser.pas' {FCallUser};
+  UCallUser in 'Call\UCallUser.pas' {FCallUser},
+  URefrenceInPerson in 'URefrenceInPerson.pas' {FRefrenceInPerson},
+  UAssessment in 'UAssessment.pas' {FAssessment},
+  UFactorAddress in 'ACC\UFactorAddress.pas' {FFactorAddress};
 
 {$R *.res}
 
@@ -142,7 +144,6 @@ begin
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TfrAttachments, frAttachments);
   Application.CreateForm(TfrCustomerReport, frCustomerReport);
-
   // Application.CreateForm(TFrCancleReport, FrCancleReport);
   Application.CreateForm(TYInputQueryF, YInputQueryF);
   Application.Run;

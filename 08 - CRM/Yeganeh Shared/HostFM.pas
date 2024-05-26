@@ -14,7 +14,6 @@ type
     DataSource1: TDataSource;
     pnlMain: TPanel;
     Panel1: TPanel;
-    SBSearch: TSpeedButton;
     LabelDate: TLabel;
     Panel2: TPanel;
     DBGridHost: TYDBGrid;
@@ -51,6 +50,7 @@ type
     SpeedButton1: TSpeedButton;
     SBExportToWord: TSpeedButton;
     DBNavigator1: TDBNavigator;
+    SBSearch: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word;

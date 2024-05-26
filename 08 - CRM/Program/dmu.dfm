@@ -1,10 +1,10 @@
 object Dm: TDm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 177
-  Top = 2
-  Height = 573
-  Width = 863
+  Left = 402
+  Top = 107
+  Height = 801
+  Width = 1205
   object YeganehConnection: TADOConnection
     CommandTimeout = 30000
     ConnectionTimeout = 60
@@ -5333,6 +5333,10 @@ object Dm: TDm
       FieldName = 'StateNum'
       Size = 1
     end
+    object CitysCountyTitle: TStringField
+      FieldName = 'CountyTitle'
+      Size = 100
+    end
   end
   object DGroups: TDataSource
     DataSet = Groups
@@ -5509,6 +5513,9 @@ object Dm: TDm
     end
     object UserCallAccess: TBooleanField
       FieldName = 'CallAccess'
+    end
+    object UserAssesstAcess: TBooleanField
+      FieldName = 'AssesstAccess'
     end
   end
   object ADOCommand: TADOCommand
@@ -6766,7 +6773,7 @@ object Dm: TDm
         Value = Null
       end>
     Left = 430
-    Top = 342
+    Top = 310
     object StringField5: TStringField
       Alignment = taRightJustify
       FieldKind = fkLookup
@@ -7675,6 +7682,7 @@ object Dm: TDm
     end
     object Report_ContractAmount: TFloatField
       FieldName = 'Amount'
+      DisplayFormat = '#,###'
     end
     object Report_ContractAttachment: TWideStringField
       Alignment = taRightJustify
@@ -7694,6 +7702,7 @@ object Dm: TDm
     end
     object Report_ContractComission: TCurrencyField
       FieldName = 'Comission'
+      DisplayFormat = '#,###.00'
     end
     object Report_ContractProductTitle: TWideStringField
       FieldName = 'ProductTitle'

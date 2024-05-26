@@ -106,7 +106,7 @@ Procedure ChLB_SelectItemsFromTable(var aCheckListBox:TYchecklistBox ; aQry:TADO
 Procedure Keyboard_Farsi;
 Procedure Keyboard_English;
 
-Procedure Form_SetShortCut(AForm:TForm;ADBNavigator:TDBNavigator;SBSearch,SBReport:TSpeedButton;
+Procedure Form_SetShortCut(AForm:TForm;ADBNavigator:TDBNavigator;SBSearch: TBitBtn;SBReport:TSpeedButton;
                           Sender: TObject; var Key: Word ; Shift: TShiftState);
 Function Email_IsCorrect(aEmail: String): Boolean;
 Function IsDigit(Key : Char):Boolean;
@@ -1933,7 +1933,7 @@ end;
 //›—„Â« OnKeyDown ﬁ—«— œ«œ‰ ﬂ·Ìœ Â«Ì „Ì«‰»— Â— ›—„ œ— —ÊÌœ«œ
 //Form_SetShortCut(Self,DBNavigator1,SbSearch,SBReport,Sender,Key,Shift);
 //Form_SetShortCut(Self,Nil,Nil,Nil,Sender,Key,Shift);
-Procedure Form_SetShortCut(AForm:TForm;ADBNavigator:TDBNavigator;SBSearch,SBReport:TSpeedButton;
+Procedure Form_SetShortCut(AForm:TForm;ADBNavigator:TDBNavigator;SBSearch :TBitBtn; SBReport:TSpeedButton;
                           Sender: TObject; var Key: Word ; Shift: TShiftState);
 begin
    if Shift=[] then

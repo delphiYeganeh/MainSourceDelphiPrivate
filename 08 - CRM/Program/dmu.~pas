@@ -776,6 +776,7 @@ type
     UserAccAcess: TBooleanField;
     CustomerOtherPerson: TBooleanField;
     UserCallAccess: TBooleanField;
+    UserAssesstAcess: TBooleanField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
     function GetSql(s:string):Variant;
     function GetNewCode:string;
@@ -931,6 +932,7 @@ Var
   _Color4: Tcolor ;  
   _ColorThem : string ;
   _UserAccAcess : Boolean ;
+  _UserAssesstAcess : Boolean ;
   _UserCallAccess : Boolean ;
   _PercentScale : Integer ;
   { TODO -oparsa : 14030204 }
@@ -2620,7 +2622,7 @@ begin
   AllMonitorsHeight := GetSystemMetrics(SM_CYVIRTUALSCREEN);
 
 
-  if  AllMonitorsWidth >1680 and Screen.PixelsPerInch> 96  then
+  if  (AllMonitorsWidth >1680) and (Screen.PixelsPerInch> 96)  then
   begin
     //if (Screen.Width <>  AllMonitorsWidth) and (Screen.Width  > AllMonitorsWidth) then
        _PercentScale := 125

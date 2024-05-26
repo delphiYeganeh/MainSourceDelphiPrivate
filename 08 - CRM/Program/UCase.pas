@@ -259,11 +259,17 @@ procedure TfrCase.btnSaveClick(Sender: TObject);
 var Id:integer;
 begin
   inherited;
+   if Trim(dbeCaseTitle.Text) = ''  then
+   begin
+     ShowMyMessage('ÅÌ€«„','·ÿ›« ⁄‰Ê«‰ „Ê—œ Ê«—œ ‰„«ÌÌœ',[mbOK],mtInformation);
+     Abort;
+   end else
+   begin
     SpSelect_Cases.Post;
     Id := SpSelect_CasesCaseID.Value;
     SpSelect_Cases.Requery;
     SpSelect_Cases.Locate('CaseId',id,[]);
-    
+   end;
 end;
 
 procedure TfrCase.BitBtn1Click(Sender: TObject);

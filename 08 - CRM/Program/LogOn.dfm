@@ -570,10 +570,10 @@ object LoginForm: TLoginForm
       OnClick = Button1Click
     end
     object Memo1: TMemo
-      Left = 187
-      Top = 48
+      Left = 205
+      Top = 46
       Width = 185
-      Height = 19
+      Height = 23
       Lines.Strings = (
         'M'
         'e'

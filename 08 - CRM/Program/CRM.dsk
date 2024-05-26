@@ -1,24 +1,42 @@
 [Closed Files]
-File_0=SourceModule,'D:\matin\08 - CRM\Program\UContract.pas',0,1,1,18,2,0,0
-File_1=SourceModule,'D:\matin\08 - CRM\Program\LogOn.pas',0,1,46,53,75,1,0
-File_2=SourceModule,'D:\matin\08 - CRM\Program\Reports\untCustStatusReport.pas',0,1,259,68,274,1,0
-File_3=SourceModule,'D:\matin\08 - CRM\Program\Reports\USaleReport.pas',0,1,1,26,111,1,0
-File_4=SourceModule,'D:\matin\08 - CRM\Program\UFollowUp.pas',0,1,1,30,4,1,0
-File_5=SourceModule,'D:\matin\08 - CRM\Program\Call\UCallUser.pas',0,1,68,49,88,1,0
-File_6=SourceModule,'c:\program files (x86)\borland\delphi7\source\rtl\Sys\sysutils.pas',0,1,4593,37,4605,0,0
-File_7=SourceModule,'D:\matin\08 - CRM\YDbgrid.pas',0,1,1353,74,1365,0,0
-File_8=SourceModule,'D:\matin\08 - CRM\Program\BaseUnit.pas',0,1,194,53,202,1,0
-File_9=SourceModule,'D:\matin\08 - CRM\Program\ACC\FactorDM.pas',0,1,356,35,366,1,0
+File_0=SourceModule,'D:\matin\08 - CRM\Program\UAssessment.pas',0,1,100,86,101,0,0
+File_1=SourceModule,'D:\matin\08 - CRM\Program\ACC\EnterDataFM.pas',0,1,1,52,11,1,0
+File_2=SourceModule,'D:\matin\08 - CRM\Program\URefrenceInPerson.pas',0,1,229,1,252,1,0
+File_3=SourceModule,'D:\matin\08 - CRM\Program\AddUserTableContentFm.pas',0,1,1,1,1,1,0
+File_4=SourceModule,'D:\matin\08 - CRM\Program\Call\UCallUser.pas',0,1,1,1,1,1,0
+File_5=SourceModule,'D:\matin\08 - CRM\Program\USingleMessage.pas',0,1,1,1,1,1,0
+File_6=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl\YShamsiDate.pas',0,1,1619,1,1642,0,0
+File_7=SourceModule,'c:\program files (x86)\borland\delphi7\source\rtl\Win\Windows.pas',0,1,21277,1,21285,0,0
+File_8=SourceModule,'D:\matin\08 - CRM\Program\UCase.pas',0,1,255,38,266,1,0
+File_9=SourceModule,'D:\matin\08 - CRM\Program\TasksTreeUnit.pas',0,1,81,113,87,1,0
 
 [Modules]
-Module0=D:\matin\08 - CRM\Program\MainU.pas
-Module1=D:\matin\08 - CRM\Program\ACC\FactorFM.pas
-Module2=D:\matin\08 - CRM\Program\dmu.pas
-Module3=D:\matin\08 - CRM\Program\CRM.dpr
-Count=4
+Module0=D:\matin\08 - CRM\Program\ACC\FactorDM.pas
+Module1=D:\matin\08 - CRM\Program\ACC\UFactorAddress.pas
+Module2=D:\matin\08 - CRM\Program\ACC\FactorFM.pas
+Module3=D:\matin\08 - CRM\Vcl\YShamsiDate.pas
+Module4=D:\matin\08 - CRM\Program\MainU.pas
+Module5=H:\Yeganeh\Windows\Delphi\Component\FastReport 4.5\LibD7\frxClass.pas
+Module6=D:\matin\08 - CRM\Program\Reports\USaleReport.pas
+Module7=D:\matin\08 - CRM\Program\Reports\untCustStatusReport.pas
+Module8=D:\matin\08 - CRM\Program\ACC\ArticleFM.pas
+Module9=D:\matin\08 - CRM\Program\ACC\ChequeFM.pas
+Module10=D:\matin\08 - CRM\Program\ACC\ArticleDM.pas
+Module11=D:\matin\08 - CRM\Program\city.pas
+Module12=D:\matin\08 - CRM\Program\LogOn.pas
+Module13=D:\matin\08 - CRM\Program\dmu.pas
+Module14=D:\matin\08 - CRM\Program\Telinputunit.pas
+Module15=D:\matin\08 - CRM\Yeganeh Shared\HostFM.pas
+Module16=D:\matin\08 - CRM\Program\CRM.dpr
+Count=17
 EditWindowCount=1
 
-[D:\matin\08 - CRM\Program\MainU.pas]
+[D:\matin\08 - CRM\Program\ACC\FactorDM.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\08 - CRM\Program\ACC\UFactorAddress.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -28,7 +46,67 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
+[D:\matin\08 - CRM\Vcl\YShamsiDate.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\08 - CRM\Program\MainU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[H:\Yeganeh\Windows\Delphi\Component\FastReport 4.5\LibD7\frxClass.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\08 - CRM\Program\Reports\USaleReport.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\08 - CRM\Program\Reports\untCustStatusReport.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
+
+[D:\matin\08 - CRM\Program\ACC\ArticleFM.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\08 - CRM\Program\ACC\ChequeFM.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\08 - CRM\Program\ACC\ArticleDM.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\08 - CRM\Program\city.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
+
+[D:\matin\08 - CRM\Program\LogOn.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
 [D:\matin\08 - CRM\Program\dmu.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\08 - CRM\Program\Telinputunit.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\08 - CRM\Yeganeh Shared\HostFM.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -38,88 +116,184 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\matin\08 - CRM\Program\BaseUnit.pas]
-FormState=0
-FormOnTop=0
-
-[D:\matin\08 - CRM\Program\ACC\FactorDM.pas]
-FormState=0
-FormOnTop=0
-
 [C:\Program Files (x86)\Borland\Delphi7\Projects\ProjectGroup1.bpg]
 FormState=0
 FormOnTop=0
 
-[D:\matin\08 - CRM\Program\Call\audioframe.pas]
+[D:\matin\08 - CRM\Program\BaseUnit.pas]
 FormState=0
 FormOnTop=0
 
-[D:\matin\08 - CRM\Program\Call\accountsframe.pas]
+[D:\matin\08 - CRM\Yeganeh Shared\HostDM.pas]
 FormState=0
 FormOnTop=0
 
-[D:\matin\08 - CRM\Program\Call\mainframe.pas]
+[D:\matin\08 - CRM\Program\ACC\ChequeDM.pas]
 FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=4
-CurrentView=2
+ViewCount=17
+CurrentView=13
 View0=0
 View1=1
 View2=2
 View3=3
+View4=4
+View5=5
+View6=6
+View7=7
+View8=8
+View9=9
+View10=10
+View11=11
+View12=12
+View13=13
+View14=14
+View15=15
+View16=16
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
 Visible=1
 State=0
-Left=206
-Top=112
-Width=1433
-Height=829
+Left=193
+Top=114
+Width=1485
+Height=910
 MaxLeft=-8
-MaxTop=-8
-ClientWidth=1417
-ClientHeight=790
-LeftPanelSize=140
+MaxTop=114
+ClientWidth=1469
+ClientHeight=871
+LeftPanelSize=0
 LeftPanelClients=CodeExplorer@EditWindow0
-LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
+LeftPanelData=00000400010000000C000000436F64654578706C6F726572000000000000000000000000000000000001000000000000000000000000FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=0
-BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=00000400010000000B0000004D657373616765566965778905000000000000025500000000000000010000000000000000000000000100000000BD050000000000000100000000B00500000000000001000000008905000000000000FFFFFFFF
+BottomPanelSize=85
+BottomPanelClients=WatchWindow,MessageView@EditWindow0
+BottomPanelData=00000400010000000B000000576174636857696E646F77BD050000000000000255000000000000000100000001000000000000000002000000009D000000000000000200000002B6060000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000100000000BD050000000000000100000000BD050000000000000100000000BD050000000000000100000000BD050000000000000100000000BD050000000000000100000000BD0500000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=D:\matin\08 - CRM\Program\CRM.dpr
-CursorX=81
-CursorY=117
-TopLine=109
+CursorX=1
+CursorY=148
+TopLine=133
 LeftCol=1
 
 [View1]
 Module=D:\matin\08 - CRM\Program\dmu.pas
-CursorX=69
-CursorY=2614
-TopLine=2594
+CursorX=44
+CursorY=1901
+TopLine=1881
 LeftCol=1
 
 [View2]
 Module=D:\matin\08 - CRM\Program\MainU.pas
-CursorX=51
-CursorY=2116
-TopLine=2103
+CursorX=76
+CursorY=3199
+TopLine=3179
 LeftCol=1
 
 [View3]
+Module=D:\matin\08 - CRM\Program\city.pas
+CursorX=50
+CursorY=55
+TopLine=30
+LeftCol=1
+
+[View4]
+Module=D:\matin\08 - CRM\Program\Telinputunit.pas
+CursorX=102
+CursorY=703
+TopLine=692
+LeftCol=1
+
+[View5]
+Module=D:\matin\08 - CRM\Program\ACC\ArticleFM.pas
+CursorX=1
+CursorY=205
+TopLine=184
+LeftCol=1
+
+[View6]
+Module=D:\matin\08 - CRM\Program\ACC\ChequeFM.pas
+CursorX=31
+CursorY=110
+TopLine=110
+LeftCol=1
+
+[View7]
+Module=D:\matin\08 - CRM\Program\ACC\ArticleDM.pas
+CursorX=22
+CursorY=4
+TopLine=1
+LeftCol=1
+
+[View8]
 Module=D:\matin\08 - CRM\Program\ACC\FactorFM.pas
-CursorX=92
-CursorY=417
-TopLine=411
+CursorX=1
+CursorY=1
+TopLine=1
+LeftCol=1
+
+[View9]
+Module=H:\Yeganeh\Windows\Delphi\Component\FastReport 4.5\LibD7\frxClass.pas
+CursorX=1
+CursorY=3462
+TopLine=3439
+LeftCol=1
+
+[View10]
+Module=D:\matin\08 - CRM\Vcl\YShamsiDate.pas
+CursorX=82
+CursorY=1655
+TopLine=1631
+LeftCol=1
+
+[View11]
+Module=D:\matin\08 - CRM\Yeganeh Shared\HostFM.pas
+CursorX=47
+CursorY=108
+TopLine=87
+LeftCol=1
+
+[View12]
+Module=D:\matin\08 - CRM\Program\ACC\UFactorAddress.pas
+CursorX=94
+CursorY=115
+TopLine=114
+LeftCol=1
+
+[View13]
+Module=D:\matin\08 - CRM\Program\ACC\FactorDM.pas
+CursorX=96
+CursorY=400
+TopLine=390
+LeftCol=1
+
+[View14]
+Module=D:\matin\08 - CRM\Program\Reports\untCustStatusReport.pas
+CursorX=1
+CursorY=1
+TopLine=1
+LeftCol=1
+
+[View15]
+Module=D:\matin\08 - CRM\Program\Reports\USaleReport.pas
+CursorX=64
+CursorY=263
+TopLine=239
+LeftCol=1
+
+[View16]
+Module=D:\matin\08 - CRM\Program\LogOn.pas
+CursorX=79
+CursorY=151
+TopLine=146
 LeftCol=1
 
 [Watches]
-Count=9
+Count=10
 Watch0='FCurrMonth',256,0,18,1,0,'Watches'
 Watch1='Resize',256,0,18,1,0,'Watches'
 Watch2='NewHeight',256,0,18,1,0,'Watches'
@@ -129,6 +303,7 @@ Watch5='char(152)',256,0,18,1,0,'Watches'
 Watch6='key',256,0,18,1,0,'Watches'
 Watch7='Key',256,0,18,1,0,'Watches'
 Watch8='upperCase(Items[i])',256,0,18,1,0,'Watches'
+Watch9='dblProduct.KeyValue <> null ',256,0,18,1,0,'Watches'
 
 [WatchWindow]
 WatchColumnWidth=100
@@ -136,10 +311,10 @@ WatchShowColumnHeaders=1
 Create=1
 Visible=0
 State=0
-Left=223
-Top=964
-Width=1196
-Height=196
+Left=12
+Top=0
+Width=1180
+Height=157
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1180
@@ -149,33 +324,39 @@ LRDockWidth=1180
 Dockable=1
 
 [Breakpoints]
-Count=26
-Breakpoint0='D:\matin\08 - CRM\Program\MainU.pas',3028,'',0,1,'',1,0,0,'',1,'','',''
+Count=32
+Breakpoint0='D:\matin\08 - CRM\Program\MainU.pas',3031,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint1='H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBGridCustomizeU.pas',88,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint2='H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBGridCustomizeU.pas',99,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint3='D:\matin\08 - CRM\Program\MainU.pas',2307,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint3='D:\matin\08 - CRM\Program\MainU.pas',2310,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint4='D:\matin\08 - CRM\Program\UReportDongle.pas',88,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint5='D:\matin\08 - CRM\Program\UReportDongle.pas',96,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint6='D:\matin\08 - CRM\Program\SMSGeneralUnit.pas',299,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint7='D:\matin\08 - CRM\Program\SMSBirthDateU.pas',221,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint8='D:\matin\08 - CRM\Program\dmu.pas',2535,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint9='D:\matin\08 - CRM\Program\dmu.pas',2498,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint10='D:\matin\08 - CRM\Program\MainU.pas',1155,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint11='D:\matin\08 - CRM\Program\UFollowUp.pas',376,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint12='D:\matin\08 - CRM\Program\Telinputunit.pas',516,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint13='D:\matin\08 - CRM\Program\Telinputunit.pas',530,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint14='D:\matin\08 - CRM\Program\UFollowUp.pas',419,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint15='D:\matin\08 - CRM\Program\MainU.pas',2710,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint16='D:\matin\08 - CRM\Program\MainU.pas',1825,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint17='D:\matin\08 - CRM\Program\Reports\USaleReport.pas',263,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint18='D:\matin\08 - CRM\Program\ACC\FactorFM.pas',432,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint19='D:\matin\08 - CRM\Program\UFollowUp.pas',399,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint20='D:\matin\08 - CRM\Program\UFollowUp.pas',843,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint21='D:\matin\08 - CRM\Program\ACC\FactorFM.pas',729,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint22='D:\matin\08 - CRM\Program\ACC\FactorFM.pas',735,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint23='D:\matin\08 - CRM\Program\dmu.pas',2623,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint24='D:\matin\08 - CRM\Program\ACC\FactorFM.pas',556,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint25='D:\matin\08 - CRM\Program\Telinputunit.pas',508,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint8='D:\matin\08 - CRM\Program\dmu.pas',2537,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint9='D:\matin\08 - CRM\Program\dmu.pas',2500,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint10='D:\matin\08 - CRM\Program\MainU.pas',1158,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint11='D:\matin\08 - CRM\Program\UFollowUp.pas',379,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint12='D:\matin\08 - CRM\Program\Telinputunit.pas',517,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint13='D:\matin\08 - CRM\Program\Telinputunit.pas',534,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint14='D:\matin\08 - CRM\Program\UFollowUp.pas',422,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint15='D:\matin\08 - CRM\Program\MainU.pas',2713,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint16='D:\matin\08 - CRM\Program\MainU.pas',1828,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint17='D:\matin\08 - CRM\Program\Reports\USaleReport.pas',267,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint18='D:\matin\08 - CRM\Program\ACC\FactorFM.pas',506,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint19='D:\matin\08 - CRM\Program\UFollowUp.pas',402,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint20='D:\matin\08 - CRM\Program\UFollowUp.pas',850,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint21='D:\matin\08 - CRM\Program\Telinputunit.pas',509,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint22='D:\matin\08 - CRM\Program\UContract.pas',1110,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint23='D:\matin\08 - CRM\Program\LogOn.pas',351,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint24='D:\matin\08 - CRM\Program\URefrenceInPerson.pas',196,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint25='D:\matin\08 - CRM\Program\URefrenceInPerson.pas',232,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint26='D:\matin\08 - CRM\Program\URefrenceInPerson.pas',252,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint27='D:\matin\08 - CRM\Program\UAssessment.pas',103,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint28='D:\matin\08 - CRM\Program\Reports\UReportInPerson.pas',132,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint29='D:\matin\08 - CRM\Vcl\YShamsiDate.pas',1673,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint30='D:\matin\08 - CRM\Program\ACC\FactorFM.pas',505,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint31='D:\matin\08 - CRM\Program\ACC\FactorFM.pas',502,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -215,14 +396,14 @@ Dockable=1
 Create=1
 Visible=0
 State=0
-Left=2
-Top=2
-Width=1119
-Height=668
+Left=160
+Top=143
+Width=1240
+Height=794
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1103
-ClientHeight=629
+ClientWidth=1224
+ClientHeight=755
 DumpPane=79
 DisassemblyPane=187
 RegisterPane=231
@@ -246,19 +427,19 @@ Create=1
 Visible=1
 State=0
 Left=-3
-Top=378
-Width=208
-Height=620
+Top=490
+Width=323
+Height=524
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=192
-ClientHeight=581
+ClientWidth=307
+ClientHeight=485
 TBDockHeight=556
 LRDockWidth=190
 Dockable=1
 SplitPos=85
 ArrangeBy=Name
-SelectedItem=Caption
+SelectedItem=Name
 ExpandedItems=Title
 HiddenCategories=
 
@@ -266,15 +447,15 @@ HiddenCategories=
 Create=1
 Visible=1
 State=0
-Left=-1
-Top=122
-Width=417
-Height=311
+Left=-4
+Top=116
+Width=211
+Height=386
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=401
-ClientHeight=272
-TBDockHeight=358
+ClientWidth=195
+ClientHeight=347
+TBDockHeight=370
 LRDockWidth=190
 Dockable=1
 
@@ -328,31 +509,31 @@ Dockable=1
 
 [CodeExplorer@EditWindow0]
 Create=1
-Visible=1
+Visible=0
 State=0
 Left=0
 Top=12
 Width=140
-Height=778
+Height=805
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=778
-TBDockHeight=778
+ClientHeight=805
+TBDockHeight=305
 LRDockWidth=140
 Dockable=1
 
 [MessageView@EditWindow0]
 Create=1
-Visible=0
+Visible=1
 State=0
 Left=12
 Top=0
-Width=1405
+Width=1457
 Height=85
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1405
+ClientWidth=1457
 ClientHeight=85
 TBDockHeight=85
 LRDockWidth=443

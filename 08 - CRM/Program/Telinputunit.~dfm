@@ -1,10 +1,10 @@
 inherited PropertiesForm: TPropertiesForm
-  Left = 310
+  Left = 311
   Top = 0
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1601#1585#1605' '#1579#1576#1578' '#1608' '#1575#1589#1604#1575#1581' '#1605#1588#1582#1589#1575#1578' '#1605#1588#1578#1585#1610#1575#1606
-  ClientHeight = 535
+  ClientHeight = 593
   ClientWidth = 771
   KeyPreview = True
   OldCreateOrder = True
@@ -15,13 +15,13 @@ inherited PropertiesForm: TPropertiesForm
   TextHeight = 13
   inherited ShapeBase: TShape
     Width = 771
-    Height = 535
+    Height = 593
   end
   object pnlMain: TPanel [1]
     Left = 0
     Top = 0
     Width = 771
-    Height = 535
+    Height = 593
     Align = alClient
     Caption = ' '
     TabOrder = 0
@@ -243,14 +243,14 @@ inherited PropertiesForm: TPropertiesForm
       Left = 1
       Top = 42
       Width = 769
-      Height = 440
+      Height = 498
       Align = alClient
       TabOrder = 1
       object PageControl1: TPageControl
         Left = 1
         Top = 1
         Width = 767
-        Height = 438
+        Height = 496
         ActivePage = TabSheet1
         Align = alClient
         BiDiMode = bdRightToLeft
@@ -262,7 +262,7 @@ inherited PropertiesForm: TPropertiesForm
           Caption = #1575#1591#1604#1575#1593#1575#1578' '#1575#1589#1604#1610
           DesignSize = (
             759
-            398)
+            456)
           object Label12: TLabel
             Left = 702
             Top = 313
@@ -1043,7 +1043,7 @@ inherited PropertiesForm: TPropertiesForm
           ImageIndex = 4
           DesignSize = (
             759
-            398)
+            456)
           object LabelFreeField19: TLabel
             Left = 665
             Top = 85
@@ -1470,7 +1470,7 @@ inherited PropertiesForm: TPropertiesForm
           ImageIndex = 1
           DesignSize = (
             759
-            398)
+            456)
           object LabelFreeField01: TLabel
             Left = 672
             Top = 9
@@ -1966,7 +1966,7 @@ inherited PropertiesForm: TPropertiesForm
             Left = 0
             Top = 81
             Width = 759
-            Height = 274
+            Height = 332
             Cursor = crHandPoint
             Align = alClient
             TabOrder = 0
@@ -1990,7 +1990,7 @@ inherited PropertiesForm: TPropertiesForm
           end
           object Panel3: TPanel
             Left = 0
-            Top = 355
+            Top = 413
             Width = 759
             Height = 43
             Align = alBottom
@@ -2023,7 +2023,7 @@ inherited PropertiesForm: TPropertiesForm
           ImageIndex = 3
           DesignSize = (
             759
-            398)
+            456)
           object Label20: TLabel
             Left = 680
             Top = 21
@@ -2125,7 +2125,7 @@ inherited PropertiesForm: TPropertiesForm
     end
     object Panel1: TPanel
       Left = 1
-      Top = 482
+      Top = 540
       Width = 769
       Height = 52
       Align = alBottom
@@ -2436,8 +2436,8 @@ inherited PropertiesForm: TPropertiesForm
       '  SELECT  StateID      , StateTitle'
       '  FROM [dbo].[State]'
       '  ORDER BY [StateTitle]')
-    Left = 58
-    Top = 256
+    Left = 18
+    Top = 304
     object ADOStateStateID: TIntegerField
       FieldName = 'StateID'
     end

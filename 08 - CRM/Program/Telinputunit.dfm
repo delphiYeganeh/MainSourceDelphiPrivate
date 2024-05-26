@@ -251,7 +251,7 @@ inherited PropertiesForm: TPropertiesForm
         Top = 1
         Width = 767
         Height = 496
-        ActivePage = TabSheet1
+        ActivePage = TabSheet3
         Align = alClient
         BiDiMode = bdRightToLeft
         ParentBiDiMode = False
@@ -2436,8 +2436,8 @@ inherited PropertiesForm: TPropertiesForm
       '  SELECT  StateID      , StateTitle'
       '  FROM [dbo].[State]'
       '  ORDER BY [StateTitle]')
-    Left = 58
-    Top = 256
+    Left = 18
+    Top = 304
     object ADOStateStateID: TIntegerField
       FieldName = 'StateID'
     end

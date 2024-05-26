@@ -1,7 +1,7 @@
 inherited FrCityEdit: TFrCityEdit
-  Left = 939
+  Left = 748
   Top = 151
-  Width = 552
+  Width = 743
   Height = 537
   Caption = #1578#1593#1585#1610#1601' '#1588#1607#1585' '#1607#1575' '#1608#1575#1587#1578#1575#1606#1607#1575
   OldCreateOrder = True
@@ -9,13 +9,13 @@ inherited FrCityEdit: TFrCityEdit
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape
-    Width = 536
+    Width = 727
     Height = 498
   end
   object pnlMain: TPanel [1]
     Left = 0
     Top = 0
-    Width = 536
+    Width = 727
     Height = 498
     Align = alClient
     Caption = ' '
@@ -23,15 +23,15 @@ inherited FrCityEdit: TFrCityEdit
     object Panel1: TPanel
       Left = 1
       Top = 356
-      Width = 534
+      Width = 725
       Height = 89
       Align = alBottom
       TabOrder = 0
       DesignSize = (
-        534
+        725
         89)
       object Label1: TLabel
-        Left = 483
+        Left = 674
         Top = 10
         Width = 44
         Height = 13
@@ -39,7 +39,7 @@ inherited FrCityEdit: TFrCityEdit
         Caption = #1606#1575#1605' '#1575#1587#1578#1575#1606
       end
       object Label2: TLabel
-        Left = 190
+        Left = 381
         Top = 10
         Width = 38
         Height = 13
@@ -47,7 +47,7 @@ inherited FrCityEdit: TFrCityEdit
         Caption = #1606#1575#1605' '#1588#1607#1585
       end
       object Bevel1: TBevel
-        Left = 236
+        Left = 427
         Top = 0
         Width = 3
         Height = 98
@@ -55,8 +55,16 @@ inherited FrCityEdit: TFrCityEdit
         Shape = bsFrame
         Style = bsRaised
       end
+      object Label3: TLabel
+        Left = 159
+        Top = 11
+        Width = 63
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1606#1575#1605' '#1588#1607#1585#1587#1578#1575#1606
+      end
       object DBNavigator1: TDBNavigator
-        Left = 247
+        Left = 438
         Top = 38
         Width = 295
         Height = 50
@@ -75,7 +83,7 @@ inherited FrCityEdit: TFrCityEdit
       object DBNavigator2: TDBNavigator
         Left = 7
         Top = 38
-        Width = 220
+        Width = 410
         Height = 50
         DataSource = DltCity
         VisibleButtons = [nbInsert, nbDelete, nbEdit, nbPost, nbCancel]
@@ -88,7 +96,7 @@ inherited FrCityEdit: TFrCityEdit
         OnClick = DBNavigator2Click
       end
       object DBEStateTitle: TDBEdit
-        Left = 248
+        Left = 439
         Top = 8
         Width = 231
         Height = 21
@@ -98,27 +106,37 @@ inherited FrCityEdit: TFrCityEdit
         TabOrder = 2
       end
       object DBECityTitle: TDBEdit
-        Left = 11
+        Left = 232
         Top = 8
-        Width = 176
+        Width = 145
         Height = 21
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akTop, akRight]
         DataField = 'CityTitle'
         DataSource = DltCity
         TabOrder = 3
+      end
+      object DBEdit1: TDBEdit
+        Left = 6
+        Top = 8
+        Width = 147
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'CountyTitle'
+        DataSource = DltCity
+        TabOrder = 4
       end
     end
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 534
+      Width = 725
       Height = 355
       Align = alClient
       TabOrder = 1
       object YDBGrid1: TYDBGrid
         Left = 1
         Top = 1
-        Width = 235
+        Width = 426
         Height = 353
         Cursor = crHandPoint
         Align = alClient
@@ -153,13 +171,21 @@ inherited FrCityEdit: TFrCityEdit
             Expanded = False
             FieldName = 'CityTitle'
             Title.Alignment = taCenter
-            Title.Caption = #1593#1606#1608#1575#1606
-            Width = 215
+            Title.Caption = #1593#1606#1608#1575#1606' '#1588#1607#1585
+            Width = 200
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CountyTitle'
+            Title.Alignment = taCenter
+            Title.Caption = #1593#1606#1608#1575#1606' '#1588#1607#1585#1587#1578#1575#1606' '#1605#1585#1578#1576#1591
+            Width = 200
             Visible = True
           end>
       end
       object YDBGrid2: TYDBGrid
-        Left = 236
+        Left = 427
         Top = 1
         Width = 297
         Height = 353
@@ -204,7 +230,7 @@ inherited FrCityEdit: TFrCityEdit
     object Panel3: TPanel
       Left = 1
       Top = 445
-      Width = 534
+      Width = 725
       Height = 52
       Align = alBottom
       TabOrder = 2
@@ -535,6 +561,11 @@ inherited FrCityEdit: TFrCityEdit
       Alignment = taRightJustify
       FieldName = 'StateNum'
       Size = 1
+    end
+    object CityCountyTitle: TStringField
+      Alignment = taRightJustify
+      FieldName = 'CountyTitle'
+      Size = 200
     end
   end
 end
