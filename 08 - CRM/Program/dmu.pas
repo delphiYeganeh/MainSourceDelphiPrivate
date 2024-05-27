@@ -778,6 +778,10 @@ type
     UserCallAccess: TBooleanField;
     UserAssesstAcess: TBooleanField;
     CitysCountyTitle: TStringField;
+    Select_FollowUP_By_CustomerIDIsFactor: TBooleanField;
+    Select_FollowUP_By_CustomerIDIsPreFactor: TBooleanField;
+    Select_FollowUP_By_CustomerIDFactorId: TIntegerField;
+    UserFactorAccess: TBooleanField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
     function GetSql(s:string):Variant;
     function GetNewCode:string;
@@ -933,6 +937,7 @@ Var
   _Color4: Tcolor ;  
   _ColorThem : string ;
   _UserAccAcess : Boolean ;
+  _UserFactorAccess : Boolean ;
   _UserAssesstAcess : Boolean ;
   _UserCallAccess : Boolean ;
   _PercentScale : Integer ;

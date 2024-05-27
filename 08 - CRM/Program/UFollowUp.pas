@@ -165,6 +165,10 @@ type
     Splitter1: TSplitter;
     stb: TStatusBar;
     btnRefrenceInPerson: TBitBtn;
+    pnlFactor: TPanel;
+    btnFactor: TBitBtn;
+    chFactor: TDBCheckBox;
+    chPreFactor: TDBCheckBox;
     procedure btnWordViewClick(Sender: TObject);
     procedure btnAttachPicClick(Sender: TObject);
     procedure refreshData;
@@ -216,6 +220,7 @@ type
       NewHeight: Integer; var Resize: Boolean);
     procedure PinClick(Sender: TObject);
     procedure btnRefrenceInPersonClick(Sender: TObject);
+    procedure btnFactorClick(Sender: TObject);
   private
    Function  LoadImageField(Field:TField;Path:String):Boolean;
    procedure SetColorForm ;
@@ -232,7 +237,7 @@ var
 implementation
 
 uses dmu, YShamsiDate, UContract, CancelCustomerU, Telinputunit, ImageUnit,
-  URefrenceInPerson;
+  URefrenceInPerson, FactorFM;
 
 {$R *.dfm}
 
@@ -607,6 +612,9 @@ var
   PinValue : string;
 begin
   inherited;
+  pnlFactor.Visible := _UserFactorAccess ;
+  dbgFollow.Columns[9].Visible  := _UserFactorAccess ;
+  dbgFollow.Columns[10].Visible := _UserFactorAccess ;
   SetColorForm ;
   if UpperCase(_AreYouYeganeh) =UpperCase('True') then
   begin
@@ -1060,18 +1068,56 @@ end;
 procedure TFrFollowUp.btnRefrenceInPersonClick(Sender: TObject);
 begin
   inherited;
-  if (dbgFollow.DataSource.DataSet.RecordCount >0 ) and (Dm.Select_FollowUP_By_CustomerIDActionTypeID.AsInteger in [ 19,20,21,22,23,26,45] ) then
+  if not (dbgFollow.DataSource.DataSet.State in [dsEdit, dsInsert]) then
   begin
-    Application.CreateForm(TFRefrenceInPerson, FRefrenceInPerson);
-    FRefrenceInPerson.FollowUpId  := dm.Select_FollowUP_By_CustomerIDFollowUPID.Asinteger ;
-    FRefrenceInPerson.CustomerId  := dm.Select_FollowUP_By_CustomerIDCustomerID.Asinteger ;
-    FRefrenceInPerson.DBECompanyName.Text := DBECompanyName.Text;
-    FRefrenceInPerson.DBEProducts.Text    := DBEProducts.Text;
-    FRefrenceInPerson.ShowModal;
-    FRefrenceInPerson.Free;
+    if (dbgFollow.DataSource.DataSet.RecordCount >0 ) and (Dm.Select_FollowUP_By_CustomerIDActionTypeID.AsInteger in [ 19,20,21,22,23,26,45] ) then
+    begin
+      Application.CreateForm(TFRefrenceInPerson, FRefrenceInPerson);
+      FRefrenceInPerson.FollowUpId  := dm.Select_FollowUP_By_CustomerIDFollowUPID.Asinteger ;
+      FRefrenceInPerson.CustomerId  := dm.Select_FollowUP_By_CustomerIDCustomerID.Asinteger ;
+      FRefrenceInPerson.DBECompanyName.Text := DBECompanyName.Text;
+      FRefrenceInPerson.DBEProducts.Text    := DBEProducts.Text;
+      FRefrenceInPerson.ShowModal;
+      FRefrenceInPerson.Free;
+    end
+    else MessageDlg('«Ì‰ ›—„ ÃÂ  «ﬁœ«„«  Õ÷Ê—Ì „Ì »«‘œ',mtConfirmation,[mbyes],0)
   end
-  else MessageDlg('«Ì‰ ›—„ ÃÂ  «ﬁœ«„«  Õ÷Ê—Ì „Ì »«‘œ',mtConfirmation,[mbyes],0)
+  else MessageDlg('·ÿ›« «ﬁœ«„ „Ê—œ ‰Ÿ— À»  ò‰Ìœ ”Å” ›«ò Ê— —« œ—Ã ‰„«ÌÌœ',mtConfirmation,[mbyes],0) ;
+end;
 
+procedure TFrFollowUp.btnFactorClick(Sender: TObject);
+begin
+  inherited;
+  if(dbgFollow.DataSource.DataSet.RecordCount >0 ) and not (dbgFollow.DataSource.DataSet.State in [dsEdit, dsInsert]) then
+  begin
+    if dm.Select_FollowUP_By_CustomerIDIsFactor.AsBoolean or  dm.Select_FollowUP_By_CustomerIDIsPreFactor.AsBoolean then
+    begin
+      if dm.Select_FollowUP_By_CustomerIDIsFactor.AsBoolean and dm.Select_FollowUP_By_CustomerIDIsPreFactor.AsBoolean then
+      begin
+        MessageDlg('·ÿ›« ›ﬁÿ Ìò „Ê—œ ›«ò Ê— Ì« ÅÌ‘ ›«ò Ê— —« «‰ Œ«» ‰„«ÌÌœ',mtConfirmation,[mbyes],0);
+        exit ;
+      end;
+      
+      FMFactor := TFMFactor.Create(Application);
+
+      if  dm.Select_FollowUP_By_CustomerIDIsPreFactor.AsBoolean then
+        FMFactor.Hint := 'P'
+      else FMFactor.Hint := 'F' ;
+
+      FMFactor.FromFollowUp       := True ;
+      FMFactor.ExternalFactorId   := dm.Select_FollowUP_By_CustomerIDFactorId.Asinteger ;
+      FMFactor.ExternalCustomerId := dm.Select_FollowUP_By_CustomerIDCustomerID.Asinteger ;
+      FMFactor.ShowModal;
+      if (not (dbgFollow.DataSource.DataSet.State in [dsEdit, dsInsert])) and (FMFactor.ExternalFactorId <> FMFactor.PostFactorID ) then
+      begin
+        dbgFollow.DataSource.DataSet.Edit ;
+        dm.Select_FollowUP_By_CustomerIDFactorId.Asinteger := FMFactor.PostFactorID;
+        dbgFollow.DataSource.DataSet.post ;
+      end;
+    end
+    else MessageDlg('·ÿ›« ÌòÌ «“ ê“Ì‰Â Â«Ì ›«ò Ê—/ ÅÌ‘ ›«ò Ê— «‰ Œ«» ‰„«ÌÌœ',mtConfirmation,[mbyes],0)
+  end
+  else MessageDlg('·ÿ›« «ﬁœ«„ „Ê—œ ‰Ÿ— À»  ò‰Ìœ ”Å” ›«ò Ê— —« œ—Ã ‰„«ÌÌœ',mtConfirmation,[mbyes],0)
 end;
 
 end.

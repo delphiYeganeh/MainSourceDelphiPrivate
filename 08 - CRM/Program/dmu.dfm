@@ -5517,6 +5517,9 @@ object Dm: TDm
     object UserAssesstAcess: TBooleanField
       FieldName = 'AssesstAccess'
     end
+    object UserFactorAccess: TBooleanField
+      FieldName = 'FactorAccess'
+    end
   end
   object ADOCommand: TADOCommand
     CommandTimeout = 3000
@@ -6449,6 +6452,17 @@ object Dm: TDm
     end
     object Select_FollowUP_By_CustomerIDPdfAttachment: TBlobField
       FieldName = 'PdfAttachment'
+    end
+    object Select_FollowUP_By_CustomerIDIsFactor: TBooleanField
+      Alignment = taCenter
+      FieldName = 'IsFactor'
+    end
+    object Select_FollowUP_By_CustomerIDIsPreFactor: TBooleanField
+      Alignment = taCenter
+      FieldName = 'IsPreFactor'
+    end
+    object Select_FollowUP_By_CustomerIDFactorId: TIntegerField
+      FieldName = 'FactorId'
     end
   end
   object DSelect_FollowUP_By_CustomerID: TDataSource

@@ -5333,6 +5333,10 @@ object Dm: TDm
       FieldName = 'StateNum'
       Size = 1
     end
+    object CitysCountyTitle: TStringField
+      FieldName = 'CountyTitle'
+      Size = 100
+    end
   end
   object DGroups: TDataSource
     DataSet = Groups
@@ -6445,6 +6449,17 @@ object Dm: TDm
     end
     object Select_FollowUP_By_CustomerIDPdfAttachment: TBlobField
       FieldName = 'PdfAttachment'
+    end
+    object Select_FollowUP_By_CustomerIDIsFactor: TBooleanField
+      Alignment = taCenter
+      FieldName = 'IsFactor'
+    end
+    object Select_FollowUP_By_CustomerIDIsPreFactor: TBooleanField
+      Alignment = taCenter
+      FieldName = 'IsPreFactor'
+    end
+    object Select_FollowUP_By_CustomerIDFactorId: TIntegerField
+      FieldName = 'FactorId'
     end
   end
   object DSelect_FollowUP_By_CustomerID: TDataSource

@@ -180,6 +180,19 @@ type
     Image1: TImage;
     Image2: TImage;
     Timer1: TTimer;
+    btnFactor: TBitBtn;
+    QrSrchFactor: TADOQuery;
+    QrSrchFactorFactor_ID: TAutoIncField;
+    QrSrchFactorUsers_Ref: TIntegerField;
+    QrSrchFactorType: TWideStringField;
+    QrSrchFactorFacDate: TWideStringField;
+    QrSrchFactorRegisterDate: TWideStringField;
+    QrSrchFactorNumber: TIntegerField;
+    QrSrchFactorUserName: TWideStringField;
+    QrSrchFactorCustomer_Ref: TIntegerField;
+    QrSrchFactorRelatedNumber: TIntegerField;
+    QrSrchFactorTotalFactorPrice: TFloatField;
+    QrSrchFactorType2: TStringField;
     procedure DBEdit7Enter(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -218,6 +231,7 @@ type
     procedure dblStateExit(Sender: TObject);
     procedure dblCityEnter(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure btnFactorClick(Sender: TObject);
   private
     CustomerID: integer;
     IsNewRecord : Boolean;
@@ -246,7 +260,7 @@ implementation
 
 uses MainU, dmu, YShamsiDate, UFollowUp, UContract, UserTableContentFm,
   BusinessLayer, FmOtherPerson_U, FmSystemSettings_U, UCustomerLetter,
-  USingleMessage;
+  USingleMessage, SearchFM, FactorDM, FactorFM;
 
 {$R *.dfm}
 
@@ -394,6 +408,7 @@ begin
     DM.Open_Customer(CustomerID);
     YchecklistBox1.Fill;
     DBECustomerNo.SetFocus;
+    btnFactor.Visible := _UserFactorAccess ;
 //   DBNav_Setup(DBNavigator1);
    if IsNewRecord then
       PropertiesForm.DBNavigator1.BtnClick(nbInsert);
@@ -892,6 +907,28 @@ begin
   begin
     Image2.Visible  := false ;
     Image1.Visible := not Image2.Visible ;
+  end;
+end;
+
+procedure TPropertiesForm.btnFactorClick(Sender: TObject);
+var
+   FID : string;
+begin
+  inherited;
+  QrSrchFactor.Close;
+  QrSrchFactor.Parameters.ParamByName('Customer_Ref').Value :=  Dm.Select_Customer_By_CustomerIDCustomerID.Value;
+  QrSrchFactor.Open;
+  //FID := FmSearch.GetSearchValue(QrSrchFactor ,'Factor_ID', 'Number' , ' ' , 400 , 500 );
+
+  if FmSearch.GetSearchValue(QrSrchFactor ,'Factor_ID', 'Number' , ' ' , 400 , 500 ) <> '0'  then
+  begin
+
+    FMFactor := TFMFactor.Create(Application);
+    FMFactor.Hint := QrSrchFactorType2.AsString;
+
+    FMFactor.ShowFactor         := True ;
+    FMFactor.ExternalFactorId   := QrSrchFactorFactor_Id.Asinteger ;
+    FMFactor.ShowModal;
   end;
 end;
 

@@ -173,6 +173,7 @@ begin
         _UserPinFollowUp := UserPinFollowUp.AsBoolean ;
         _ThemTypeColor   := UserThemTypeColor.AsInteger ;
         _UserAccAcess    := UserAccAcess.AsBoolean ;
+        _UserFactorAccess:= UserFactorAccess.AsBoolean ; //or UserAccAcess.AsBoolean ;
         _UserCallAccess  := UserCallAccess.AsBoolean ;
         _UserAssesstAcess:= UserAssesstAcess.AsBoolean ;
 
