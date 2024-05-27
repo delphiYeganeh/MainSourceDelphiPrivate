@@ -6,7 +6,7 @@ object frmSmsSetting: TfrmSmsSetting
   BiDiMode = bdRightToLeft
   Caption = #1578#1606#1592#1610#1605#1575#1578' '#1662#1610#1575#1605#1705
   ClientHeight = 338
-  ClientWidth = 507
+  ClientWidth = 695
   Color = clBtnFace
   Font.Charset = ARABIC_CHARSET
   Font.Color = clWindowText
@@ -15,13 +15,14 @@ object frmSmsSetting: TfrmSmsSetting
   Font.Style = []
   OldCreateOrder = False
   ParentBiDiMode = False
+  OnCanResize = FormCanResize
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 16
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 507
+    Width = 695
     Height = 297
     ActivePage = TabSheet1
     Align = alClient
@@ -31,92 +32,114 @@ object frmSmsSetting: TfrmSmsSetting
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 499
+        Width = 687
         Height = 266
         Align = alClient
         TabOrder = 0
+        DesignSize = (
+          687
+          266)
         object lblTerminalID: TLabel
-          Left = 366
+          Left = 562
           Top = 64
-          Width = 51
+          Width = 109
           Height = 16
+          Anchors = [akTop, akRight]
           Caption = 'SmsUser'
         end
         object lblSmsPassWord: TLabel
-          Left = 366
+          Left = 562
           Top = 96
-          Width = 82
+          Width = 109
           Height = 16
+          Anchors = [akTop, akRight]
           Caption = 'SmsPassWord'
         end
         object Label1: TLabel
-          Left = 366
+          Left = 562
           Top = 180
-          Width = 89
+          Width = 109
           Height = 16
+          Anchors = [akTop, akRight]
           Caption = #1601#1593#1575#1604' '#1576#1608#1583#1606' '#1662#1610#1575#1605#1705
         end
         object Label2: TLabel
-          Left = 366
+          Left = 562
           Top = 126
-          Width = 59
+          Width = 109
           Height = 16
+          Anchors = [akTop, akRight]
           Caption = 'SmsTimer'
         end
         object Label3: TLabel
-          Left = 154
+          Left = 350
           Top = 5
           Width = 324
           Height = 16
+          Anchors = [akTop, akRight]
           Caption = #1580#1607#1578' '#1575#1587#1578#1601#1575#1583#1607' '#1575#1586' '#1587#1610#1587#1578#1605' '#1575#1585#1587#1575#1604' '#1662#1610#1575#1605#1705' '#1605#1610#1576#1575#1610#1587#1578' '#1575#1586'  '#1587#1575#1610#1578' '
         end
         object Label4: TLabel
-          Left = 99
-          Top = 24
-          Width = 378
+          Left = 110
+          Top = 6
+          Width = 229
           Height = 16
-          Caption = 'http://sms.ghasedak-ict.com/index.htm '#1662#1606#1604' '#1575#1585#1578#1576#1575#1591#1610' '#1582#1585#1610#1583#1575#1585#1610' '#1606#1605#1575#1610#1610#1583
+          Anchors = [akTop, akRight]
+          Caption = 'http://sms.ghasedak-ict.com/index.htm '
         end
         object Label5: TLabel
-          Left = 366
+          Left = 562
           Top = 206
-          Width = 58
+          Width = 109
           Height = 16
+          Anchors = [akTop, akRight]
           Caption = #1606#1575#1605' '#1589#1606#1583#1608#1602
         end
         object Label6: TLabel
-          Left = 172
+          Left = 174
           Top = 126
           Width = 58
           Height = 16
           Caption = #1605#1610#1604#1610' '#1579#1575#1606#1610#1607
         end
         object S: TLabel
-          Left = 366
+          Left = 562
           Top = 154
           Width = 109
           Height = 16
+          Anchors = [akTop, akRight]
           Caption = 'SMSCenterNumber'
+        end
+        object Label7: TLabel
+          Left = 517
+          Top = 24
+          Width = 157
+          Height = 16
+          Anchors = [akTop, akRight]
+          Caption = ' '#1662#1606#1604' '#1575#1585#1578#1576#1575#1591#1610' '#1582#1585#1610#1583#1575#1585#1610' '#1606#1605#1575#1610#1610#1583'.'
         end
         object SmsUser: TEdit
           Left = 241
           Top = 60
-          Width = 121
+          Width = 317
           Height = 24
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
         end
         object SmsPassWord: TEdit
           Left = 241
           Top = 92
-          Width = 121
+          Width = 317
           Height = 24
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 1
         end
         object EnableSms: TCheckBox
-          Left = 241
+          Left = 544
           Top = 180
-          Width = 121
+          Width = 14
           Height = 17
+          Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
           TabOrder = 2
@@ -124,22 +147,25 @@ object frmSmsSetting: TfrmSmsSetting
         object SmsTimer: TEdit
           Left = 241
           Top = 122
-          Width = 121
+          Width = 317
           Height = 24
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 3
         end
         object CashNameForSms: TEdit
           Left = 32
           Top = 202
-          Width = 330
+          Width = 526
           Height = 24
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 4
         end
         object SMSCenterNumber: TEdit
-          Left = 240
+          Left = 241
           Top = 152
-          Width = 121
+          Width = 317
           Height = 24
+          Anchors = [akLeft, akTop, akRight]
           TabOrder = 5
         end
       end
@@ -148,15 +174,15 @@ object frmSmsSetting: TfrmSmsSetting
   object Panel2: TPanel
     Left = 0
     Top = 297
-    Width = 507
+    Width = 695
     Height = 41
     Align = alBottom
     TabOrder = 1
     DesignSize = (
-      507
+      695
       41)
     object BitBtn1: TBitBtn
-      Left = 194
+      Left = 606
       Top = 5
       Width = 75
       Height = 29
@@ -198,7 +224,7 @@ object frmSmsSetting: TfrmSmsSetting
         8000808000FF00008080}
     end
     object BitBtn2: TBitBtn
-      Left = 110
+      Left = 522
       Top = 5
       Width = 75
       Height = 28

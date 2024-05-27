@@ -32,7 +32,7 @@ inherited FrMain: TFrMain
     Top = 34
     Width = 1100
     Height = 648
-    ActivePage = xpTabSheet7
+    ActivePage = xpTabSheet1
     Align = alClient
     Font.Charset = ARABIC_CHARSET
     Font.Color = clWindowText

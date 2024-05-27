@@ -253,6 +253,9 @@ begin
    DBGrid_LoadColumns(Self.Name,YDBGrid);
    QrPayType.Open;
    DBLkCBPayTypeTitle.KeyValue := QrPayTypePayTypeID.AsInteger;
+   { TODO -oparsa : 14030125 }
+   RefreshReportPayment;
+   { TODO -oparsa : 14030125 }
 end;
 
 procedure TFrReportAccountPayments.FormClose(Sender: TObject;

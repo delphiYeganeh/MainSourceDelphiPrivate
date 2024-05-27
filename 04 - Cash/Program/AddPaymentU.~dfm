@@ -1,6 +1,6 @@
 inherited FrAddPayment: TFrAddPayment
-  Left = 530
-  Top = 249
+  Left = 531
+  Top = 250
   BorderStyle = bsDialog
   Caption = ' '#1576#1585#1583#1575#1588#1578' '#1575#1586' '#1581#1587#1575#1576
   ClientHeight = 583

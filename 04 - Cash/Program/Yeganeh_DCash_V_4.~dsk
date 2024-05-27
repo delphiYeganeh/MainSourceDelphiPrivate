@@ -1,29 +1,90 @@
 [Closed Files]
-File_0=SourceModule,'D:\Tahami\04 - Cash\Program\Yeganeh_DCash_V_4.dpr',0,1,1,53,1,0,0
-File_1=SourceModule,'D:\Tahami\04 - Cash\Program\AddPaymentU.pas',0,1,76,30,99,1,0
-File_2=SourceModule,'D:\matin\04 - Cash\Program\SummeryPaymentU.pas',0,1,206,43,210,1,0
-File_3=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas',0,1,382,1,422,0,0
-File_4=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Yeganeh Shared\Spin.pas',0,1,195,1,222,0,0
-File_5=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl2\YCheckGroupBox.pas',0,1,62,1,83,0,0
-File_6=SourceModule,'D:\matin\04 - Cash\Program\YDbgrid.pas',0,1,468,58,477,0,0
-File_7=SourceModule,'D:\matin\04 - Cash\Program\YWhereEdit.pas',0,1,106,1,114,0,0
-File_8=SourceModule,'D:\matin\04 - Cash\Program\MainU.pas',0,1,3023,162,3029,1,0
+File_0=SourceModule,'D:\matin\01 - Dabir\Program\Import\UEditTables.pas',0,1,1,7,8,0,0
+File_1=SourceModule,'D:\Tahami\04 - Cash\Program\Yeganeh_DCash_V_4.dpr',0,1,1,53,1,0,0
+File_2=SourceModule,'D:\Tahami\04 - Cash\Program\AddPaymentU.pas',0,1,76,30,99,1,0
+File_3=SourceModule,'D:\matin\04 - Cash\Program\SummeryPaymentU.pas',0,1,206,43,210,1,0
+File_4=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas',0,1,382,1,422,0,0
+File_5=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Yeganeh Shared\Spin.pas',0,1,195,1,222,0,0
+File_6=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl2\YCheckGroupBox.pas',0,1,62,1,83,0,0
+File_7=SourceModule,'D:\matin\04 - Cash\Program\YDbgrid.pas',0,1,468,58,477,0,0
+File_8=SourceModule,'D:\matin\04 - Cash\Program\YWhereEdit.pas',0,1,106,1,114,0,0
 
 [Modules]
-Module0=D:\matin\04 - Cash\Program\Dmu.pas
-Module1=D:\matin\04 - Cash\Program\LoginU.pas
-Module2=D:\matin\04 - Cash\Program\YeganehDemo.pas
-Module3=D:\matin\04 - Cash\Program\uUpdateDbScripts.pas
-Module4=D:\matin\04 - Cash\Program\Yeganeh_DCash_V_4.dpr
-Count=5
+Module0=D:\matin\04 - Cash\Program\MainU.pas
+Module1=D:\matin\04 - Cash\Program\Dmu.pas
+Module2=D:\matin\04 - Cash\Program\uUpdateDbScripts.pas
+Module3=c:\program files (x86)\borland\delphi7\source\rtl\Win\Windows.pas
+Module4=D:\matin\04 - Cash\Program\DividBenefit_NewU.pas
+Module5=D:\matin\04 - Cash\Program\LoginU.pas
+Module6=D:\matin\04 - Cash\Program\UBenefitFromHazineh.pas
+Module7=D:\matin\04 - Cash\Program\ReportAccountPaymentsU.pas
+Module8=D:\matin\04 - Cash\Program\AddPaymentU.pas
+Module9=D:\matin\04 - Cash\Program\uSendSMS.pas
+Module10=D:\matin\04 - Cash\Program\uSmsSetting.pas
+Module11=D:\matin\04 - Cash\Program\YeganehDemo.pas
+Module12=D:\matin\04 - Cash\Program\BusinessLayer.pas
+Module13=D:\matin\04 - Cash\Program\YShamsiDate.pas
+Module14=c:\program files (x86)\borland\delphi7\source\vcl\DB.pas
+Module15=H:\Yeganeh\Windows\Delphi\Component\Vcl2\YLargeIntField.pas
+Module16=H:\Yeganeh\Windows\Delphi\Component\Vcl\Yeganeh_Word.pas
+Module17=D:\matin\04 - Cash\Program\SmsCenter1.pas
+Module18=c:\program files (x86)\borland\delphi7\source\rtl\common\classes.pas
+Module19=c:\program files (x86)\borland\delphi7\Source\Indy\IdHTTP.pas
+Module20=D:\matin\04 - Cash\Program\Yeganeh_DCash_V_4.dpr
+Count=21
 EditWindowCount=1
+
+[D:\matin\04 - Cash\Program\MainU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
 
 [D:\matin\04 - Cash\Program\Dmu.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
+[D:\matin\04 - Cash\Program\uUpdateDbScripts.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[c:\program files (x86)\borland\delphi7\source\rtl\Win\Windows.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\DividBenefit_NewU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
 [D:\matin\04 - Cash\Program\LoginU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
+
+[D:\matin\04 - Cash\Program\UBenefitFromHazineh.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\ReportAccountPaymentsU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\AddPaymentU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\uSendSMS.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\uSmsSetting.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -33,9 +94,44 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\matin\04 - Cash\Program\uUpdateDbScripts.pas]
+[D:\matin\04 - Cash\Program\BusinessLayer.pas]
 ModuleType=SourceModule
-FormState=1
+FormState=0
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\YShamsiDate.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[c:\program files (x86)\borland\delphi7\source\vcl\DB.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[H:\Yeganeh\Windows\Delphi\Component\Vcl2\YLargeIntField.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[H:\Yeganeh\Windows\Delphi\Component\Vcl\Yeganeh_Word.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\SmsCenter1.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[c:\program files (x86)\borland\delphi7\source\rtl\common\classes.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[c:\program files (x86)\borland\delphi7\Source\Indy\IdHTTP.pas]
+ModuleType=SourceModule
+FormState=0
 FormOnTop=0
 
 [D:\matin\04 - Cash\Program\Yeganeh_DCash_V_4.dpr]
@@ -51,14 +147,34 @@ FormOnTop=0
 FormState=0
 FormOnTop=0
 
+[D:\matin\04 - Cash\Program\BaseUnit.pas]
+FormState=0
+FormOnTop=0
+
 [EditWindow0]
-ViewCount=5
-CurrentView=1
+ViewCount=21
+CurrentView=9
 View0=0
 View1=1
 View2=2
 View3=3
 View4=4
+View5=5
+View6=6
+View7=7
+View8=8
+View9=9
+View10=10
+View11=11
+View12=12
+View13=13
+View14=14
+View15=15
+View16=16
+View17=17
+View18=18
+View19=19
+View20=20
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -76,42 +192,154 @@ LeftPanelSize=140
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=107
+BottomPanelSize=100
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=0000040000000000B005000000000000026B00000000000000010000000000000000000000000100000000BD050000000000000100000000B00500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=0000040000000000B005000000000000026400000000000000010000000000000000000000000100000000BD050000000000000100000000B00500000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=D:\matin\04 - Cash\Program\Yeganeh_DCash_V_4.dpr
-CursorX=51
-CursorY=138
-TopLine=122
+CursorX=18
+CursorY=4
+TopLine=1
 LeftCol=1
 
 [View1]
 Module=D:\matin\04 - Cash\Program\Dmu.pas
-CursorX=34
-CursorY=1455
-TopLine=1452
+CursorX=11
+CursorY=4524
+TopLine=4506
 LeftCol=1
 
 [View2]
-Module=D:\matin\04 - Cash\Program\uUpdateDbScripts.pas
-CursorX=31
-CursorY=198
-TopLine=175
+Module=c:\program files (x86)\borland\delphi7\source\rtl\Win\Windows.pas
+CursorX=1
+CursorY=28983
+TopLine=28965
 LeftCol=1
 
 [View3]
+Module=c:\program files (x86)\borland\delphi7\Source\Indy\IdHTTP.pas
+CursorX=12
+CursorY=1
+TopLine=1
+LeftCol=1
+
+[View4]
+Module=c:\program files (x86)\borland\delphi7\source\rtl\common\classes.pas
+CursorX=1
+CursorY=1069
+TopLine=1049
+LeftCol=1
+
+[View5]
+Module=D:\matin\04 - Cash\Program\SmsCenter1.pas
+CursorX=14
+CursorY=58
+TopLine=52
+LeftCol=1
+
+[View6]
+Module=H:\Yeganeh\Windows\Delphi\Component\Vcl\Yeganeh_Word.pas
+CursorX=18
+CursorY=1
+TopLine=1
+LeftCol=1
+
+[View7]
+Module=H:\Yeganeh\Windows\Delphi\Component\Vcl2\YLargeIntField.pas
+CursorX=33
+CursorY=9
+TopLine=1
+LeftCol=1
+
+[View8]
+Module=c:\program files (x86)\borland\delphi7\source\vcl\DB.pas
+CursorX=57
+CursorY=775
+TopLine=763
+LeftCol=1
+
+[View9]
+Module=D:\matin\04 - Cash\Program\MainU.pas
+CursorX=35
+CursorY=3126
+TopLine=3114
+LeftCol=1
+
+[View10]
+Module=D:\matin\04 - Cash\Program\uSmsSetting.pas
+CursorX=46
+CursorY=10
+TopLine=1
+LeftCol=1
+
+[View11]
+Module=D:\matin\04 - Cash\Program\uSendSMS.pas
+CursorX=61
+CursorY=335
+TopLine=327
+LeftCol=1
+
+[View12]
+Module=D:\matin\04 - Cash\Program\ReportAccountPaymentsU.pas
+CursorX=34
+CursorY=119
+TopLine=104
+LeftCol=1
+
+[View13]
+Module=D:\matin\04 - Cash\Program\YShamsiDate.pas
+CursorX=1
+CursorY=3267
+TopLine=3244
+LeftCol=1
+
+[View14]
+Module=D:\matin\04 - Cash\Program\AddPaymentU.pas
+CursorX=62
+CursorY=546
+TopLine=526
+LeftCol=1
+
+[View15]
+Module=D:\matin\04 - Cash\Program\DividBenefit_NewU.pas
+CursorX=31
+CursorY=278
+TopLine=272
+LeftCol=1
+
+[View16]
+Module=D:\matin\04 - Cash\Program\UBenefitFromHazineh.pas
+CursorX=1
+CursorY=1
+TopLine=1
+LeftCol=1
+
+[View17]
+Module=D:\matin\04 - Cash\Program\BusinessLayer.pas
+CursorX=1
+CursorY=454
+TopLine=431
+LeftCol=1
+
+[View18]
+Module=D:\matin\04 - Cash\Program\uUpdateDbScripts.pas
+CursorX=1
+CursorY=64
+TopLine=41
+LeftCol=1
+
+[View19]
 Module=D:\matin\04 - Cash\Program\YeganehDemo.pas
-CursorX=53
+CursorX=1
 CursorY=113
 TopLine=96
 LeftCol=1
 
-[View4]
+[View20]
 Module=D:\matin\04 - Cash\Program\LoginU.pas
-CursorX=64
-CursorY=111
+CursorX=4
+CursorY=113
 TopLine=103
 LeftCol=1
 
@@ -139,7 +367,7 @@ LRDockWidth=1180
 Dockable=1
 
 [Breakpoints]
-Count=27
+Count=39
 Breakpoint0='E:\Mahamed\Cash\Program\BusinessLayer.pas',4770,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint1='E:\Mahamed\Cash\Program\MakeMonthlyU.pas',114,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint2='E:\Mahamed\Cash\Program\FinancialNoteDetail_NewU.pas',147,'',0,1,'',1,0,0,'',1,'','',''
@@ -154,19 +382,31 @@ Breakpoint10='D:\matin\04 - Cash\Program\MainU.pas',14,'',0,1,'',1,0,0,'',1,'','
 Breakpoint11='D:\Tahami\04 - Cash\Program\MainU.pas',1542,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint12='D:\matin\04 - Cash\Program\MainU.pas',1291,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint13='D:\matin\04 - Cash\Program\MainU.pas',1880,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint14='D:\matin\04 - Cash\Program\MainU.pas',3046,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint15='D:\matin\04 - Cash\Program\SystemSettingU.pas',318,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint16='D:\matin\04 - Cash\Program\BusinessLayer.pas',454,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint17='D:\matin\04 - Cash\Program\Dmu.pas',4772,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint18='D:\matin\04 - Cash\Program\Dmu.pas',4868,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint19='D:\matin\04 - Cash\Program\Dmu.pas',2407,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint20='D:\matin\04 - Cash\Program\Dmu.pas',4901,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint21='D:\matin\04 - Cash\Program\Dmu.pas',4846,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint22='D:\matin\04 - Cash\Program\Dmu.pas',4663,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint23='D:\matin\04 - Cash\Program\Dmu.pas',4925,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint24='D:\matin\04 - Cash\Program\Dmu.pas',1897,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint25='D:\matin\04 - Cash\Program\uUpdateDbScripts.pas',64,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint26='D:\matin\04 - Cash\Program\uUpdateDbScripts.pas',121,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint14='D:\matin\04 - Cash\Program\SystemSettingU.pas',318,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint15='D:\matin\04 - Cash\Program\BusinessLayer.pas',454,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint16='D:\matin\04 - Cash\Program\Dmu.pas',4868,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint17='D:\matin\04 - Cash\Program\Dmu.pas',2407,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint18='D:\matin\04 - Cash\Program\Dmu.pas',4901,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint19='D:\matin\04 - Cash\Program\Dmu.pas',4846,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint20='D:\matin\04 - Cash\Program\uUpdateDbScripts.pas',64,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint21='D:\matin\04 - Cash\Program\uUpdateDbScripts.pas',121,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint22='D:\matin\04 - Cash\Program\MainU.pas',2904,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint23='D:\matin\04 - Cash\Program\DividBenefit_NewU.pas',185,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint24='D:\matin\04 - Cash\Program\DividBenefit_NewU.pas',286,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint25='D:\matin\04 - Cash\Program\DividBenefit_NewU.pas',292,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint26='D:\matin\04 - Cash\Program\BusinessLayer.pas',4294,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint27='D:\matin\04 - Cash\Program\MainU.pas',780,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint28='D:\matin\04 - Cash\Program\AddPaymentU.pas',333,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint29='D:\matin\04 - Cash\Program\AddPaymentU.pas',550,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint30='D:\matin\04 - Cash\Program\AddPaymentU.pas',549,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint31='D:\matin\04 - Cash\Program\MainU.pas',2024,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint32='D:\matin\04 - Cash\Program\ReportAccountPaymentsU.pas',173,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint33='D:\matin\04 - Cash\Program\ReportAccountPaymentsU.pas',133,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint34='D:\matin\04 - Cash\Program\ReportAccountPaymentsU.pas',143,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint35='D:\matin\04 - Cash\Program\uSendSMS.pas',291,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint36='D:\matin\04 - Cash\Program\Dmu.pas',1661,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint37='D:\matin\04 - Cash\Program\Dmu.pas',4514,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint38='D:\matin\04 - Cash\Program\Dmu.pas',4687,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -236,11 +476,11 @@ Visible=1
 State=0
 Left=-3
 Top=378
-Width=273
+Width=208
 Height=620
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=257
+ClientWidth=192
 ClientHeight=581
 TBDockHeight=556
 LRDockWidth=190
@@ -322,12 +562,12 @@ State=0
 Left=0
 Top=12
 Width=140
-Height=749
+Height=756
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=749
-TBDockHeight=624
+ClientHeight=756
+TBDockHeight=704
 LRDockWidth=140
 Dockable=1
 
@@ -338,12 +578,12 @@ State=0
 Left=12
 Top=0
 Width=1444
-Height=107
+Height=100
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1444
-ClientHeight=107
-TBDockHeight=107
+ClientHeight=100
+TBDockHeight=100
 LRDockWidth=443
 Dockable=1
 

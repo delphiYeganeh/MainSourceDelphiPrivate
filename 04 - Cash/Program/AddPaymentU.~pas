@@ -549,7 +549,10 @@ begin
         balance := dm.YeganehConnection.Execute('select dbo.exist('+dm.Select_PaymentDebtorAccountID.AsString+',''' + IntToStr(_Year) + '/12/29'')').Fields[0].value;
         if (balance<StrToInt64(DeleteComma(DBAmount.text)))AND(not CashIsDebtor) then
         begin
-           ShowMessage('ãæÌæÏí ÍÓÇÈ ˜ÇÝí äíÓÊ');
+           { TODO -oparsa : 14030125 }
+           //ShowMessage('ãæÌæÏí ÍÓÇÈ ˜ÇÝí äíÓÊ');
+           ShowMessage('ãæÌæÏí ÍÓÇÈ ˜ÇÝí äíÓÊ'+char(10)+ Inttostr(Abs(balance ))+' ÍÓÇÈ ãæÑÏ äÙÑ ÈÏå˜ÇÑ ãí ÈÇÔÏ ');
+           { TODO -oparsa : 14030125 }
            Abort;
         end;
 

@@ -11,20 +11,62 @@ File_8=SourceModule,'D:\matin\03 - Archive\yeganeh shared\YInputQuery.pas',0,1,2
 File_9=SourceModule,'D:\matin\03 - Archive\Source\Source\Program\uUpdateDbScripts.pas',0,1,176,35,197,1,0
 
 [Modules]
-Module0=D:\matin\03 - Archive\Program\Dmu.pas
-Module1=D:\matin\03 - Archive\Program\UMain.pas
-Module2=D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr
-Count=3
+Module0=D:\matin\03 - Archive\Program\UMain.pas
+Module1=D:\matin\03 - Archive\Program\Dmu.pas
+Module2=D:\matin\03 - Archive\Program\LogOn.pas
+Module3=D:\matin\03 - Archive\shared\FromOrgU.pas
+Module4=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
+Module5=D:\matin\03 - Archive\Program\FixedTableF.pas
+Module6=D:\matin\03 - Archive\Program\userDefine.pas
+Module7=D:\matin\03 - Archive\Shared\businessLayer.pas
+Module8=c:\program files (x86)\borland\delphi7\source\vcl\ActnList.pas
+Module9=D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr
+Count=10
 EditWindowCount=1
+
+[D:\matin\03 - Archive\Program\UMain.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
 
 [D:\matin\03 - Archive\Program\Dmu.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\03 - Archive\Program\UMain.pas]
+[D:\matin\03 - Archive\Program\LogOn.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\FromOrgU.pas]
 ModuleType=SourceModule
 FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\shared\ArchiveOrganize.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\Program\FixedTableF.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\03 - Archive\Program\userDefine.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\03 - Archive\Shared\businessLayer.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[c:\program files (x86)\borland\delphi7\source\vcl\ActnList.pas]
+ModuleType=SourceModule
+FormState=0
 FormOnTop=0
 
 [D:\matin\03 - Archive\Program\Yeganeh_Archive.dpr]
@@ -41,11 +83,18 @@ FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=3
-CurrentView=1
+ViewCount=10
+CurrentView=2
 View0=0
 View1=1
 View2=2
+View3=3
+View4=4
+View5=5
+View6=6
+View7=7
+View8=8
+View9=9
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -76,16 +125,65 @@ LeftCol=1
 
 [View1]
 Module=D:\matin\03 - Archive\Program\Dmu.pas
-CursorX=54
-CursorY=1036
+CursorX=1
+CursorY=1045
 TopLine=1022
 LeftCol=1
 
 [View2]
 Module=D:\matin\03 - Archive\Program\UMain.pas
-CursorX=23
-CursorY=821
-TopLine=810
+CursorX=59
+CursorY=844
+TopLine=838
+LeftCol=1
+
+[View3]
+Module=D:\matin\03 - Archive\Program\FixedTableF.pas
+CursorX=14
+CursorY=4
+TopLine=1
+LeftCol=1
+
+[View4]
+Module=D:\matin\03 - Archive\shared\FromOrgU.pas
+CursorX=74
+CursorY=4
+TopLine=1
+LeftCol=1
+
+[View5]
+Module=D:\matin\03 - Archive\Program\userDefine.pas
+CursorX=1
+CursorY=264
+TopLine=241
+LeftCol=1
+
+[View6]
+Module=D:\matin\03 - Archive\shared\ArchiveOrganize.pas
+CursorX=51
+CursorY=188
+TopLine=187
+LeftCol=1
+
+[View7]
+Module=c:\program files (x86)\borland\delphi7\source\vcl\ActnList.pas
+CursorX=1
+CursorY=186
+TopLine=166
+LeftCol=1
+
+[View8]
+Module=D:\matin\03 - Archive\Shared\businessLayer.pas
+CursorX=1
+CursorY=1477
+TopLine=1454
+LeftCol=1
+
+[View9]
+Module=D:\matin\03 - Archive\Program\LogOn.pas
+CursorX=1
+CursorY=327
+TopLine=304
 LeftCol=1
 
 [Watches]
@@ -116,7 +214,7 @@ LRDockWidth=1180
 Dockable=1
 
 [Breakpoints]
-Count=73
+Count=74
 Breakpoint0='D:\barzegar\03 - Archive\Program\UMain.pas',1921,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint1='D:\matin\03 - Archive\Program\FolderToLetterFm.pas',545,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint2='D:\matin\03 - Archive\Program\UFillLetterData.pas',489,'',0,1,'',1,0,0,'',1,'','',''
@@ -129,21 +227,21 @@ Breakpoint8='D:\matin\03 - Archive\Program\UAddLetterDataDialog.pas',88,'',0,1,'
 Breakpoint9='D:\matin\03 - Archive\Program\UAddLetterDataDialog.pas',211,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint10='D:\matin\03 - Archive\Program\UFillLetterData.pas',349,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint11='D:\matin\03 - Archive\Program\UaddLetterData.pas',111,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint12='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',367,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint13='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',345,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint14='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',155,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint15='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',192,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint16='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',221,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint17='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',231,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint18='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',381,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint19='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',179,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint20='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',171,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint12='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',374,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint13='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',352,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint14='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',160,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint15='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',198,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint16='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',228,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint17='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',238,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint18='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',388,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint19='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',185,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint20='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',177,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint21='D:\matin\03 - Archive\Shared\businessLayer.pas',1477,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint22='D:\matin\03 - Archive\Program\UAddSecretariat.pas',45,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint23='D:\matin\03 - Archive\Program\UAddSecretariat.pas',59,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint24='D:\matin\03 - Archive\Source\Source\Program\uUpdateDbScripts.pas',199,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint25='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',280,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint26='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',184,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint25='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',287,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint26='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',190,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint27='D:\matin\03 - Archive\Program\Dmu.pas',1045,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint28='D:\matin\03 - Archive\Program\UMain.pas',1390,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint29='D:\matin\03 - Archive\Program\UArchiveCenter.pas',46,'',0,1,'',1,0,0,'',1,'','',''
@@ -185,11 +283,12 @@ Breakpoint64='D:\matin\03 - Archive\Program\Dmu.pas',1388,'',0,1,'',1,0,0,'',1,'
 Breakpoint65='D:\matin\03 - Archive\Program\UAddDocument.pas',454,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint66='D:\matin\03 - Archive\Program\UAddDocument.pas',684,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint67='D:\matin\03 - Archive\Program\UAddDocument.pas',687,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint68='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',341,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint69='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',201,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint68='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',348,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint69='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',207,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint70='D:\matin\03 - Archive\Program\UMain.pas',2586,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint71='D:\matin\03 - Archive\Program\Dmu.pas',1594,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint72='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',177,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint72='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',183,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint73='D:\matin\03 - Archive\shared\ArchiveOrganize.pas',134,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -259,18 +358,18 @@ Visible=1
 State=0
 Left=-3
 Top=378
-Width=208
+Width=376
 Height=620
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=192
+ClientWidth=360
 ClientHeight=581
 TBDockHeight=556
 LRDockWidth=190
 Dockable=1
 SplitPos=85
 ArrangeBy=Name
-SelectedItem=Name
+SelectedItem=ReadOnly
 ExpandedItems=Title
 HiddenCategories=
 
@@ -350,7 +449,7 @@ MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
 ClientHeight=771
-TBDockHeight=859
+TBDockHeight=771
 LRDockWidth=140
 Dockable=1
 

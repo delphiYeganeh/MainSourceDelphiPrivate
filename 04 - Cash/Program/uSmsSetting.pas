@@ -30,9 +30,12 @@ type
     Label6: TLabel;
     SMSCenterNumber: TEdit;
     S: TLabel;
+    Label7: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
   public
@@ -60,6 +63,19 @@ procedure TfrmSmsSetting.FormShow(Sender: TObject);
 begin
   inherited;
   LoadSetting;
+
+end;
+
+procedure TfrmSmsSetting.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030203 }
+  if (NewWidth < 711)  or (NewHeight < 377) then
+    Resize := False
+  else Resize := True;
+   { TODO -oparsa : 14030203 }
+  inherited;
+
 end;
 
 end.

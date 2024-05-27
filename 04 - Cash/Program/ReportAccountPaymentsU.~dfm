@@ -19,7 +19,7 @@ inherited FrReportAccountPayments: TFrReportAccountPayments
   end
   object QuickRep1: TQuickRep [1]
     Left = 72
-    Top = 472
+    Top = 425
     Width = 952
     Height = 1347
     Frame.Color = clBlack
@@ -124,7 +124,7 @@ inherited FrReportAccountPayments: TFrReportAccountPayments
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          44.097222222222230000
+          44.097222222222220000
           207.256944444444400000
           110.243055555555600000
           121.267361111111100000)
@@ -137,9 +137,9 @@ inherited FrReportAccountPayments: TFrReportAccountPayments
         FontSize = 10
       end
       object QRLabel1: TQRLabel
-        Left = 152
+        Left = 154
         Top = 50
-        Width = 34
+        Width = 32
         Height = 25
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -147,10 +147,10 @@ inherited FrReportAccountPayments: TFrReportAccountPayments
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          55.121527777777790000
-          335.138888888888900000
+          55.121527777777780000
+          339.548611111111100000
           110.243055555555600000
-          74.965277777777790000)
+          70.555555555555560000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -1471,7 +1471,7 @@ inherited FrReportAccountPayments: TFrReportAccountPayments
       OnExit = TEditExit
     end
     object MakeRep: TBitBtn
-      Left = 89
+      Left = 90
       Top = 3
       Width = 87
       Height = 28

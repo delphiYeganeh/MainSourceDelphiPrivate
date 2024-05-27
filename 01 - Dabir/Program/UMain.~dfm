@@ -2090,8 +2090,8 @@ inherited MainForm: TMainForm
     Top = 245
   end
   inherited ActionList: TActionList
-    Left = 1019
-    Top = 492
+    Left = 1022
+    Top = 482
     object Action12: TAction
       Caption = 'Select All'
       ShortCut = 16465
