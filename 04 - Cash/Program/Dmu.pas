@@ -1553,7 +1553,7 @@ var
    _SMSCenterNumber : WideString;
 
 Const
-   _SoftVerLastUpdate = '1402/01/30';//'1396/07/17';
+   _SoftVerLastUpdate = '1403/03/13';//'1396/07/17';
 //   _SoftVertion       = '7.0.12.101';//'5.0.0.5';//'4.2.7.7'   ; //'3.2.0.0'
 
 Type

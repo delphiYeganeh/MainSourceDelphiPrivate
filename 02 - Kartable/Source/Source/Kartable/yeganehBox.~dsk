@@ -1,74 +1,26 @@
 [Closed Files]
-File_0=SourceModule,'c:\program files (x86)\borland\delphi7\source\vcl\DB.pas',0,1,10954,42,10998,0,0
-File_1=SourceModule,'C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas',0,1,6160,1,6183,0,0
-File_2=SourceModule,'D:\Tahami\02 - Kartable\Source\Source\shared\LetterArchive.pas',0,1,84,43,88,1,0
-File_3=SourceModule,'D:\Tahami\02 - Kartable\Source\Source\Kartable\Dmu.pas',0,1,2131,48,2148,1,0
-File_4=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\TMS Component Pack 7.5.3.1 for Delphi 5-XE8\Components\AdvGrid.pas',0,1,5801,1,5824,0,0
-File_5=SourceModule,'D:\Tahami\02 - Kartable\Source\Source\Kartable\InputPassU.pas',0,1,44,40,56,1,0
-File_6=SourceModule,'D:\Tahami\02 - Kartable\Source\Source\shared\EmailsDM.pas',0,1,1,1,1,0,0
-File_7=SourceModule,'D:\Tahami\02 - Kartable\Source\Source\Shared\uRecommiteList.pas',0,1,88,25,100,0,0
-File_8=SourceModule,'D:\99 - Shared\YDbgrid.pas',0,1,1114,1,1011,0,0
+File_0=SourceModule,'D:\matin\02 - Kartable\Source\Source\Kartable\Dmu.pas',0,1,955,77,963,0,0
+File_1=SourceModule,'D:\Tahami\02 - Kartable\Source\Source\shared\ExportToWord.pas',0,1,267,1,274,1,0
+File_2=SourceModule,'D:\Tahami\02 - Kartable\Source\Source\Kartable\UMain.pas',0,1,1607,45,1610,1,0
+File_3=SourceModule,'D:\Tahami\02 - Kartable\Source\Source\Kartable\Inbox.pas',0,1,2379,49,2384,1,0
+File_4=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\MssComponents\MssPackage\Source\WordXP.pas',0,1,8525,1,8545,0,0
+File_5=SourceModule,'D:\Tahami\02 - Kartable\Source\Source\Kartable\LetterSigners.pas',0,1,220,44,226,1,0
+File_6=SourceModule,'E:\backup14020424\Source\02 - Kartable\Source\Source\Kartable\Dmu.pas',0,1,950,34,971,0,0
+File_7=SourceModule,'E:\backup14020424\Source\02 - Kartable\Source\Source\Kartable\LetterSigners.pas',0,1,206,1,229,1,0
+File_8=SourceModule,'D:\Tahami\02 - Kartable\Source\Source\Kartable\Dmu.pas',0,1,1414,26,1432,0,0
 
 [Modules]
-Module0=D:\Tahami\02 - Kartable\Source\Source\shared\UUserTable_Input.pas
-Module1=D:\Tahami\02 - Kartable\Source\Source\Kartable\ExitedLetterInputF.pas
-Module2=D:\Tahami\02 - Kartable\Source\Source\Kartable\LetterSigners.pas
-Module3=E:\backup14020424\Source\02 - Kartable\Source\Source\Kartable\Dmu.pas
-Module4=E:\backup14020424\Source\02 - Kartable\Source\Source\Kartable\LetterSigners.pas
-Module5=D:\Tahami\02 - Kartable\Source\Source\Kartable\Dmu.pas
-Module6=D:\Tahami\02 - Kartable\Source\Source\shared\ExportToWord.pas
-Module7=D:\Tahami\02 - Kartable\Source\Source\Kartable\UMain.pas
-Module8=H:\Yeganeh\Windows\Delphi\Component\MssComponents\MssPackage\Source\WordXP.pas
-Module9=D:\Tahami\02 - Kartable\Source\Source\Kartable\Inbox.pas
-Count=10
+Module0=D:\matin\02 - Kartable\Source\Source\Kartable\yeganehBox.dpr
+Module1=D:\matin\02 - Kartable\Source\Source\Kartable\LogOn.pas
+Count=2
 EditWindowCount=1
 
-[D:\Tahami\02 - Kartable\Source\Source\shared\UUserTable_Input.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\Tahami\02 - Kartable\Source\Source\Kartable\ExitedLetterInputF.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\Tahami\02 - Kartable\Source\Source\Kartable\LetterSigners.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[E:\backup14020424\Source\02 - Kartable\Source\Source\Kartable\Dmu.pas]
+[D:\matin\02 - Kartable\Source\Source\Kartable\yeganehBox.dpr]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[E:\backup14020424\Source\02 - Kartable\Source\Source\Kartable\LetterSigners.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\Tahami\02 - Kartable\Source\Source\Kartable\Dmu.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[D:\Tahami\02 - Kartable\Source\Source\shared\ExportToWord.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\Tahami\02 - Kartable\Source\Source\Kartable\UMain.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[H:\Yeganeh\Windows\Delphi\Component\MssComponents\MssPackage\Source\WordXP.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[D:\Tahami\02 - Kartable\Source\Source\Kartable\Inbox.pas]
+[D:\matin\02 - Kartable\Source\Source\Kartable\LogOn.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -77,27 +29,15 @@ FormOnTop=0
 FormState=0
 FormOnTop=0
 
-[D:\Tahami\02 - Kartable\Source\Source\Kartable\yeganehBox.dpr]
-FormState=0
-FormOnTop=0
-
-[D:\Tahami\02 - Kartable\Source\Source\shared\BaseUnit.pas]
+[D:\matin\02 - Kartable\Source\Source\shared\BaseUnit.pas]
 FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=10
-CurrentView=9
+ViewCount=2
+CurrentView=0
 View0=0
 View1=1
-View2=2
-View3=3
-View4=4
-View5=5
-View6=6
-View7=7
-View8=8
-View9=9
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -107,86 +47,30 @@ Left=193
 Top=114
 Width=1485
 Height=910
-MaxLeft=-1
-MaxTop=-1
+MaxLeft=-8
+MaxTop=114
 ClientWidth=1469
 ClientHeight=871
-LeftPanelSize=140
+LeftPanelSize=0
 LeftPanelClients=CodeExplorer@EditWindow0
-LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
+LeftPanelData=00000400010000000C000000436F64654578706C6F726572000000000000000000000000000000000001000000000000000000000000FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=85
-BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=000004000000000000000000000000000000000000000000000100000000000000000B0000004D65737361676556696577FFFFFFFF
+BottomPanelSize=0
+BottomPanelClients=MessageView@EditWindow0,WatchWindow
+BottomPanelData=00000400020000000B0000004D657373616765566965770B000000576174636857696E646F77BD050000000000000255000000000000000100000001000000000000000002000000009D000000000000000200000002B6060000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000100000000BD05000000000000FFFFFFFF
 
 [View0]
-Module=D:\Tahami\02 - Kartable\Source\Source\Kartable\Inbox.pas
-CursorX=1
-CursorY=2402
-TopLine=2379
+Module=D:\matin\02 - Kartable\Source\Source\Kartable\yeganehBox.dpr
+CursorX=68
+CursorY=89
+TopLine=85
 LeftCol=1
 
 [View1]
-Module=D:\Tahami\02 - Kartable\Source\Source\shared\ExportToWord.pas
-CursorX=1
-CursorY=274
-TopLine=267
-LeftCol=1
-
-[View2]
-Module=D:\Tahami\02 - Kartable\Source\Source\Kartable\UMain.pas
-CursorX=2
-CursorY=1629
-TopLine=1607
-LeftCol=1
-
-[View3]
-Module=H:\Yeganeh\Windows\Delphi\Component\MssComponents\MssPackage\Source\WordXP.pas
-CursorX=1
-CursorY=8545
-TopLine=8525
-LeftCol=1
-
-[View4]
-Module=D:\Tahami\02 - Kartable\Source\Source\Kartable\LetterSigners.pas
-CursorX=44
-CursorY=226
-TopLine=220
-LeftCol=1
-
-[View5]
-Module=E:\backup14020424\Source\02 - Kartable\Source\Source\Kartable\Dmu.pas
-CursorX=48
-CursorY=2138
-TopLine=2119
-LeftCol=1
-
-[View6]
-Module=E:\backup14020424\Source\02 - Kartable\Source\Source\Kartable\LetterSigners.pas
-CursorX=1
-CursorY=229
-TopLine=206
-LeftCol=1
-
-[View7]
-Module=D:\Tahami\02 - Kartable\Source\Source\Kartable\Dmu.pas
-CursorX=1
-CursorY=2142
-TopLine=2134
-LeftCol=1
-
-[View8]
-Module=D:\Tahami\02 - Kartable\Source\Source\Kartable\ExitedLetterInputF.pas
-CursorX=7
-CursorY=833
-TopLine=818
-LeftCol=1
-
-[View9]
-Module=D:\Tahami\02 - Kartable\Source\Source\shared\UUserTable_Input.pas
-CursorX=71
-CursorY=167
-TopLine=154
+Module=D:\matin\02 - Kartable\Source\Source\Kartable\LogOn.pas
+CursorX=42
+CursorY=252
+TopLine=233
 LeftCol=1
 
 [Watches]
@@ -200,10 +84,10 @@ WatchShowColumnHeaders=1
 Create=1
 Visible=0
 State=0
-Left=201
-Top=1016
-Width=1196
-Height=196
+Left=12
+Top=0
+Width=1180
+Height=157
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1180
@@ -298,9 +182,9 @@ ClientHeight=485
 TBDockHeight=556
 LRDockWidth=190
 Dockable=1
-SplitPos=125
+SplitPos=85
 ArrangeBy=Name
-SelectedItem=Action
+SelectedItem=Caption
 ExpandedItems=Title
 HiddenCategories=
 
@@ -370,23 +254,23 @@ Dockable=1
 
 [CodeExplorer@EditWindow0]
 Create=1
-Visible=1
+Visible=0
 State=0
 Left=0
 Top=12
 Width=140
-Height=771
+Height=805
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=771
-TBDockHeight=771
+ClientHeight=805
+TBDockHeight=305
 LRDockWidth=140
 Dockable=1
 
 [MessageView@EditWindow0]
 Create=1
-Visible=1
+Visible=0
 State=0
 Left=12
 Top=0

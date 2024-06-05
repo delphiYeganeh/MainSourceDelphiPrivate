@@ -2176,6 +2176,12 @@ begin
       SumAmount:=ParamByName('@SumAmount').value;
       SumAmerce:=ParamByName('@SumAmerce').value;
       SumInterest:=ParamByName('@SumInterest').value;
+//    except on E : Exception do
+//      begin
+//        ShowMessage('Exception class name = '+E.ClassName);
+//        ShowMessage('Exception message = '+E.Message);
+//      end;
+//    end;
     except on E : Exception do
       begin
         ShowMessage('Exception class name = '+E.ClassName);

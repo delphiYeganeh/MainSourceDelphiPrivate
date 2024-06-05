@@ -237,7 +237,7 @@ begin
    //Label8.Caption := GetSystemSetting('OrgName');
   // SoftwareName.Caption:='”Ì” „ »«Ìê«‰Ì «”‰«œ '+_yeganeh;
    Caption:='‰—„ «›“«—Ì '+_yeganeh;
-   Label2.Caption :=' ‰ê«—‘ '+ '11.10.2.1';
+   Label2.Caption :=' ‰ê«—‘ '+ '12.0.0.10';
 
   Bmp := TBitmap.Create;
   try

@@ -112,9 +112,9 @@ RootDir=
 [Version Info]
 IncludeVerInfo=1
 AutoIncBuild=0
-MajorVer=1402
-MinorVer=10
-Release=7
+MajorVer=8
+MinorVer=0
+Release=0
 Build=1
 Debug=0
 PreRelease=0
@@ -126,7 +126,7 @@ CodePage=1256
 [Version Info Keys]
 CompanyName=‘—ò  ‰—„ «›“«—Ì Ìê«‰Â
 FileDescription=‰—„ «›“«— ’‰œÊﬁ ﬁ—÷ «·Õ”‰Â
-FileVersion=1402.10.7.1
+FileVersion=8.0.0.1
 InternalName=
 LegalCopyright=
 LegalTrademarks=

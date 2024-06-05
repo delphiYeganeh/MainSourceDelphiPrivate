@@ -118,6 +118,9 @@ inherited FrDatabaseMaintenance: TFrDatabaseMaintenance
   inherited Grid_PopupMenu: TPopupMenu
     Top = 4
   end
+  inherited qSetting: TADOQuery
+    CommandTimeout = 300
+  end
   object ActionManager: TActionManager
     Left = 184
     StyleName = 'XP Style'

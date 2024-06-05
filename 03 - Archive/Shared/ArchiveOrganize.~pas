@@ -126,7 +126,7 @@ end;
 procedure TArchiveOrganizeForm.ArchiveTreeDblClick(Sender: TObject);
 begin
   inherited;
-  if (dsform.DataSet.fieldbyname('ParentFolderId').AsInteger = 0 ) and (dsform.DataSet.fieldbyname('Title').Assign ='»«Ìê«‰Ì' ) then
+  if (dsform.DataSet.fieldbyname('ParentFolderId').AsInteger = 0 ) and (dsform.DataSet.fieldbyname('Title').AsString ='»«Ìê«‰Ì' ) then
     ShowMsgString('„ÃÊ“ ÊÌ—«Ì‘ ‰œ«—Ìœ')
   else
   begin

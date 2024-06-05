@@ -1477,6 +1477,7 @@ begin
   update_UserLoginLogout(_UserLoginLogoutID,true);
   ADOSP:=TADOStoredProc.create(nil);
   ADOSP.ProcedureName:='Y_Backup';
+  ADOSP.CommandTimeout := 300 ;
 
   with ADOSP.Parameters.AddParameter do
   begin

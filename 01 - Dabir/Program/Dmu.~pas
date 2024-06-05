@@ -1873,7 +1873,7 @@ begin
   Yeganeh.Repaint;
    //Ataie
 
-               (*
+   
   if GetSystemSetting('DongleType') = '0' then // Old Dongle
   begin
     DongleErrorCode := CheckDongle(YeganehConnection,Servername,_Today,106070,_SoftTitle,False,DongleProductCode);
@@ -1891,7 +1891,7 @@ begin
    if not IsTinyOk then
      Application.Terminate;
   end;
-           *)
+
 
   _Has_Excel_Template := (GetSystemSetting('HasExcelTemplate') <> '0');
 

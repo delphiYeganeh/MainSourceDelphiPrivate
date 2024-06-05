@@ -593,7 +593,7 @@ Const
   // _SoftVersion    = '7.0.0.6';
   //_SoftLastUpdate = '1396/06/29';
   //  _SoftVersion1    = '11.2.12.1';
-    _SoftLastUpdate = '1402/11/01'; //by MRM.moghadam
+    _SoftLastUpdate = '1403/03/13'; //by MRM.moghadam
 
    _Kartable = False;
    ShowLogo = True;

@@ -974,8 +974,8 @@ Var
 Const
    _Kartable = True;
    _Showlogo = True;
-   _SoftLastUpdate = '1401/11/11';//'1396/06/22';
-   _SoftVersion = '11.0.3.0';//'7.0.0.2';
+   _SoftLastUpdate = '1403/03/13';//'1396/06/22';
+   _SoftVersion = '12.0.0.1';//'7.0.0.2';
     LCID: DWORD = LOCALE_SYSTEM_DEFAULT;
 
 {$R *.dfm}

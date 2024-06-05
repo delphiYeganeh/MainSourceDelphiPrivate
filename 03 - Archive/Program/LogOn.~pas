@@ -325,6 +325,8 @@ begin
     _CanViewAllRecommites :=UsersCanViewAllRecommites.AsBoolean;
     _UserName             :=UsersTitle.AsString;
     _DefaultSec           :=UsersDefualtSecretariatID.AsInteger;
+    dm.Secretariats.close;
+    dm.Secretariats.open;
     dm.Secretariats.Locate('SecID',_DefaultSec,[]);
     _ArchiveCenterId           :=dm.SecretariatsArchiveCenterID.AsInteger;
     _UserFromOrgID             :=UsersFromOrgID.AsInteger ;
