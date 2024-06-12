@@ -1,0 +1,22 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PRCDbName_Delete]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PRCDbName_Delete]
+END
+GO
+
+CREATE  procedure [dbo].[PRCDbName_Delete]
+(
+  @ID INT
+)
+As
+DELETE FROM [dbo].[tbDbName]
+      WHERE ID = @ID
+GO
+
+COMMIT
+GO

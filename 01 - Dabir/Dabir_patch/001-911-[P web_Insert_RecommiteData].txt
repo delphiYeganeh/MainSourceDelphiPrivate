@@ -1,0 +1,48 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[web_Insert_RecommiteData]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[web_Insert_RecommiteData]
+END
+GO
+
+CREATE  procedure [dbo].[web_Insert_RecommiteData]
+	(@LetterDataID 	[int] output,
+	 @LetterID 	[int],
+	 @RecommiteID INT,
+	 @PageNumber 	[tinyint],
+	 @extention 	[tinyint],
+	 @description [nvarchar](200)='',
+	 @image [image] = null,
+	 @fileName [nvarchar](100))
+AS
+	INSERT INTO RecommitePayvast
+	(
+		LetterID,
+		RecommiteID,
+		[Image],
+		extention,
+		[Description],
+		PageNumber,
+		FileName
+	)
+	VALUES
+	(
+		@LetterID,
+		@RecommiteID,
+		@image,
+		@extention,
+		@description,
+		@PageNumber,
+		@fileName
+	)
+	
+SET @LetterDataID =SCOPE_IDENTITY()
+
+GO
+
+COMMIT
+GO

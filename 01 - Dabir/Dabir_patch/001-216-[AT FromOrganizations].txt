@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'GroupID'
+          AND Object_ID = Object_ID(N'dbo.FromOrganizations'))
+BEGIN
+	ALTER TABLE [dbo].[FromOrganizations] 
+	ADD	[GroupID] [int] NULL
+END
+GO
+
+COMMIT
+GO

@@ -1,0 +1,154 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Repo_Deadlne]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Repo_Deadlne]
+END
+GO
+
+CREATE  procedure [dbo].[Repo_Deadlne] 
+						@SecretariatID  int = 0
+					   ,@myear          int = 97
+					   ,@RecommitFlag   int = 0
+					   ,@UserID         int = 5
+					   ,@IndicatorID    int = 469
+					   ,@UserMemo       nvarchar(500) = ''
+					   ,@FromRegistrationDate nvarchar(10) = '1397/01/03'
+					   ,@toRegistrationDate   nvarchar(10) = '1397/06/29'
+					   ,@SenderTitle nvarchar(500) = ''--'جناب آقاي مهندس مقدمي '
+					   ,@Memo        nvarchar(max) = ''
+					   ,@Paraph      nvarchar(max) = ''
+					   ,@OrgId       nvarchar(100) = '0'
+					   ,@FromRecommiteDate nvarchar(10) = '1397/01/01'
+					   ,@ToRecommiteDate   nvarchar(10)   = '1397/06/29'
+					   ,@FromProceedDate   nvarchar(10)    = ''
+					   ,@ToProceedDate     nvarchar(10)    = ''
+					   ,@FromDeadLineDate  nvarchar(10) = ''
+					   ,@ToDeadLineDate    nvarchar(10) = ''
+					   ,@Proceeded         int  = -1
+					   ,@Letter_Type   nvarchar(50) = '0'
+					   ,@User_New      int = -1
+					   
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	DECLARE @FOrgID int,
+        @SecretariatID_New nvarchar(max),
+		@Today  char(10)
+
+	SELECT @today = dbo.shamsi(getdate())
+
+	SELECT @FOrgID=FromOrgID 
+		FROM Users 
+		WHERE Id=@UserID
+
+	UPDATE ReCommites
+		SET DeadLineDate = null
+		WHERE DeadLineDate =''
+ 
+	CREATE TABLE #TEMP ([ID] NVARCHAR(100))
+	
+	IF @SecretariatID > 0 
+	BEGIN
+		INSERT INTO #temp (ID) VALUES (@SecretariatID)
+	END
+	
+	IF @SecretariatID =  0 
+	BEGIN
+		DECLARE @SecId nvarchar(500)  
+   
+		DECLARE SecId_cursor CURSOR FOR
+			SELECT SecId 
+				FROM UserSecretariats 
+				WHERE userid = @UserID
+		OPEN SecId_cursor
+		FETCH NEXT FROM SecId_cursor   INTO @SecId
+		WHILE @@FETCH_STATUS = 0  
+		BEGIN 
+			INSERT INTO #temp (ID) VALUES (@SecId)
+			FETCH NEXT FROM SecId_cursor   INTO @SecId
+		END   
+		CLOSE SecId_cursor  
+		DEALLOCATE SecId_cursor  
+	END
+	
+
+
+	SELECT @today = dbo.shamsi(getdate())
+	SELECT  
+		L.LetterID, 
+		L.IndicatorID,
+		L.IncommingDate,
+		L.IncommingNo, 
+		L.Memo, 
+		L.RetroactionNo,
+		L.RegistrationDate, 
+		L.FollowLetterNo, 
+		L.ToStaffer,
+		sender.Title AS SenderTitle,
+		Deliver.Title AS DeliverTitle,
+		LetterTypes.Title LetterTypeTitle,
+		LetterRecommites, 
+		RC.Paraph,
+		RC.RecommiteDate,  
+		RC.Proceeded, 
+		RC.ProceedDate, 
+		RecommiteTypes.Title RecommitTypeTitle,
+		ISNULL(PFO.Title,SENDER.title) RecommiterTitle,
+		Fo.Title Recommited, 
+		RC.ViewDate, 
+		RC.StaffMemo,
+	/*  CASE WHEN (prc.DeadLineDate IS NOT NULL AND prc.DeadLineDate <> '') AND  Rc.Proceeddate <> '' THEN 
+        dbo.shamsidatediff(prc.DeadLineDate,ISNULL(Rc.Proceeddate,@today)) ELSE 0 END DeadlineDays,
+		dbo.shamsidatediff(rc.DeadLineDate,ISNULL(Rc.Proceeddate,@today))  DeadlineDays, */
+		dbo.shamsidatediff(rc.DeadLineDate,ISNULL(Rc.Proceeddate,@today))  DeadlineDays,
+		RC.DeadLineDate,
+		dbo.shamsidatediff(rc.Recommitedate,ISNULL(Rc.Proceeddate,@today)) ProgressDays,
+		ActionTypeTitle,
+		Secretariats.SecTitle  
+	From ReCommites RC 
+		LEFT JOIN ReCommites PRC ON RC.LetterID = PRC.LetterID AND PRC.ID = RC.ParentId  AND PRC.type = RC.type 
+		INNER JOIN Letter L ON RC.LetterID = L.LetterID
+		INNER JOIN Secretariats  ON Secretariats.Secid = L.SecretariatID
+		LEFT JOIN FromOrganizations FO ON FO.ID = RC.OrgID 
+		LEFT JOIN FromOrganizations PFO ON PFO.ID = PRC.OrgID 
+		LEFT JOIN  FromOrganizations sender ON l.ToOrgID = sender.ID
+		LEFT JOIN  FromOrganizations Deliver ON l.FromOrgID = Deliver.ID 
+		LEFT JOIN LetterTypes ON LetterTypes.ID=l.Letter_type 
+		LEFT JOIN RecommiteTypes ON RC.Type = RecommiteTypes.ID 
+		LEFT JOIN ActionType  ON ActionType.ActionTypeID = RC.ActionTypeID
+	Where (l.letter_type =  @letter_type  OR @letter_type = '0' )
+		/* AND ( RC.OrgID = @FOrgID ) */
+		AND ( RC.OrgID = @FOrgID OR @user_new = -1 ) 
+		AND ( l.LetterFormat <3 ) 
+		AND  L.myear = @myear
+		AND SecretariatID in ( SELECT 
+	                            ID 
+							FROM #temp)
+		AND ( IndicatorID = @IndicatorID OR @IndicatorID = 0 )
+		AND ( l.UserMemo = @UserMemo OR @UserMemo = 'NULL' )
+		AND ( l.RegistrationDate >= @fromRegistrationDate OR @fromRegistrationDate = 'NULL' )
+		AND ( l.RegistrationDate<= @toRegistrationDate OR  @toRegistrationDate = 'NULL')
+		AND ( Deliver.Title LIKE ''+ '%' + @SenderTitle + '%'+ '' OR @SenderTitle = 'NULL' )
+		AND ( L.Memo LIKE ''+ '%' + @Memo + '%'+ '' OR @Memo = 'NULL' )
+		AND ( RC.Paraph LIKE '' + '%' + @Paraph + '%' + '' OR @Paraph = 'NULL' )
+		AND ( RC.OrgId = @OrgId or @OrgId = '0') 
+		/* AND RC.RecommiteDate>= @FromRecommiteDate
+		AND RC.RecommiteDate<= @ToRecommiteDate */
+		AND (RC.ProceedDate>= @FromProceedDate OR @FromProceedDate = 'NULL')
+		AND (RC.ProceedDate<= @ToProceedDate OR @ToProceedDate = 'NULL' )
+		AND (@Today > rc.DeadLineDate )
+		AND (RC.DeadLineDate between  @FromRecommiteDate and @ToRecommiteDate )
+	ORDER BY 
+	       rc.recommitedate DESC,
+		   l.indicatorid    DESC
+	DROP TABLE #temp	
+END
+GO
+
+COMMIT
+GO

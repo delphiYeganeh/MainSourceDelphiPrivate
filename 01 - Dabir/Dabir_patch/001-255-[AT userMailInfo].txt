@@ -1,0 +1,12 @@
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'pop3MailServer'
+          AND Object_ID = Object_ID(N'dbo.userMailInfo'))
+BEGIN
+	ALTER TABLE [dbo].[userMailInfo] 
+	ADD	[pop3MailServer] [nvarchar](50) NULL
+END
+GO
+COMMIT
+GO

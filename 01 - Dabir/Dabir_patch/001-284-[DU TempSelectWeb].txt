@@ -1,0 +1,15 @@
+BEGIN TRANSACTION
+GO
+
+Update TempSelectWeb
+	Set MYear = 1300 + MYear
+	Where MYear < 100
+GO
+
+Update TempSelectWeb
+	Set MYear = 1300 + AnswerMYear
+	Where AnswerMYear < 100
+GO
+
+COMMIT
+GO	

@@ -1,0 +1,84 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PRC_FollowLetterNoLetterUpdate]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PRC_FollowLetterNoLetterUpdate]
+END
+GO
+
+CREATE  procedure [dbo].[PRC_FollowLetterNoLetterUpdate]
+	(
+	   @Letterid INT = 91870
+	)
+AS
+DECLARE @IndicatorID NVARCHAR(100)
+DECLARE @FollowLetterNo NVARCHAR(100)
+DECLARE @RetroactionNo NVARCHAR(100)
+DECLARE @IncommingNO NVARCHAR(100)
+
+SELECT 
+   @IndicatorID = IndicatorID,
+   @IncommingNO = IncommingNO
+FROM Letter
+WHERE letterid IN( 
+					SELECT 
+					   FR_LetterID
+					FROM Follow_Retroaction_Letter
+					Where Letterid = @Letterid
+					AND FR_ID = (
+									SELECT 
+										MAX(FR_ID)--ROW_NUMBER()OVER(ORDER BY FR_ID DESC) AS Radif
+									FROM Follow_Retroaction_Letter
+									Where Letterid = @Letterid
+                                )
+				 )
+SELECT 
+    @FollowLetterNo = FollowLetterNo ,
+	@RetroactionNo = RetroactionNo
+FROM Letter
+WHERE letterid  = @Letterid
+
+IF  (
+		SELECT 
+		    COUNT(FR_LetterID) 
+		FROM Follow_Retroaction_Letter
+		WHERE Letterid = @Letterid
+    ) > 1
+BEGIN
+  UPDATE Letter
+  Set FollowLetterNo = ISNULL(@FollowLetterNo,'') + ','+ @IndicatorID
+  ,   RetroactionNo  = ISNULL(@RetroactionNo,'') + ','+ @IncommingNO
+  WHERE Letterid = @Letterid
+END
+IF  (
+		SELECT 
+		    COUNT(FR_LetterID) 
+		FROM Follow_Retroaction_Letter
+		WHERE Letterid = @Letterid
+    ) = 1
+BEGIN
+  UPDATE Letter
+  Set FollowLetterNo = @IndicatorID
+  ,   RetroactionNo  = @IncommingNO
+  WHERE Letterid = @Letterid
+END
+
+IF  (
+		SELECT 
+		    COUNT(FR_LetterID) 
+		FROM Follow_Retroaction_Letter
+		WHERE Letterid = @Letterid
+    ) = 0
+BEGIN
+  UPDATE Letter
+  Set FollowLetterNo = ''
+  ,   RetroactionNo  = ''
+  WHERE Letterid = @Letterid
+END
+GO
+
+COMMIT
+GO

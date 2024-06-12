@@ -1,0 +1,26 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[GetUserSetting]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[GetUserSetting]
+END
+GO
+
+CREATE PROCEDURE [dbo].[GetUserSetting]
+            @UserID  int,
+            @VariableName varchar(50),
+            @Value nvarchar(255) output
+AS
+            Select @Value = [Value]
+                        From Settings with (NOLOCK)
+                        Where (UserID = @UserID) And (VariableName = @VariableName)
+
+            Set @Value=isnull(@Value,'Not Found')
+
+GO
+
+COMMIT
+GO

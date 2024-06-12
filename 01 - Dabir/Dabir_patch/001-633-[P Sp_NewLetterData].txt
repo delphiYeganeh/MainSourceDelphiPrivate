@@ -1,0 +1,31 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_NewLetterData]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_NewLetterData]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_NewLetterData](@id [int]OUTPUT,@letterId INT,@extention TINYINT,@image IMAGE)
+AS
+	INSERT INTO LetterData
+	(
+		-- LetterDataID -- this column value is auto-generated
+		LetterID,	
+		PageNumber,
+		[Image],
+		extention
+		
+	)
+	VALUES
+	(
+		@letterId,1,@image,@extention
+	)
+	SELECT @id=@@identity
+GO
+
+COMMIT
+GO

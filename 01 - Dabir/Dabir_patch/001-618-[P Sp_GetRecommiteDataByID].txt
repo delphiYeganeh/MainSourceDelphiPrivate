@@ -1,0 +1,20 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetRecommiteDataByID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetRecommiteDataByID]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetRecommiteDataByID](@ID INT)
+AS
+
+Select rv.*, e.ExtentionTitle, e.Extention
+       from RecommitePayvast rv, Extention e WHERE rv.extention = e.ExtentionID and rv.ID =@ID
+GO
+
+COMMIT
+GO

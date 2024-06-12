@@ -1,0 +1,9 @@
+BEGIN TRANSACTION
+GO
+
+If Not Exists(Select 1 From ApplicationForms Where ID = 4)
+	Insert Into ApplicationForms Values (4, 'جستجو')
+GO
+
+COMMIT
+GO	

@@ -1,0 +1,10 @@
+BEGIN TRANSACTION
+GO
+
+Update TempInbox
+	Set MYear = 1300 + MYear
+	Where MYear < 100
+GO
+
+COMMIT
+GO	

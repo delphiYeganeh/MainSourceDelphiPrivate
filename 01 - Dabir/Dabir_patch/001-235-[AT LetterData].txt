@@ -1,0 +1,12 @@
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'UI'
+          AND Object_ID = Object_ID(N'dbo.LetterData'))
+BEGIN
+	ALTER TABLE [dbo].[LetterData] 
+	ADD	[UI] [uniqueidentifier] NOT NULL ROWGUIDCOL CONSTRAINT [DF_LetterData__UI] DEFAULT (newid())
+END
+GO
+COMMIT
+GO

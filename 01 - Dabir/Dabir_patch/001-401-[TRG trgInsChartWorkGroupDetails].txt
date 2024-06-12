@@ -1,0 +1,54 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1 
+			FROM sys.objects 
+			WHERE [object_id] = OBJECT_ID(N'[dbo].[trgInsChartWorkGroupDetails]')
+               AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[trgInsChartWorkGroupDetails];
+END
+GO
+
+CREATE TRIGGER [dbo].[trgInsChartWorkGroupDetails] 
+   ON  [dbo].[ChartWorkGroup] 
+   AFTER INSERT,DELETE
+AS 
+BEGIN
+	SET NOCOUNT ON
+
+	DECLARE @GroupID INT
+	
+	IF EXISTS(SELECT * FROM INSERTED)
+	BEGIN
+		-- INSERT Operation
+		SELECT @GroupID=GroupID FROM INSERTED
+		SET @GroupID=isnull(@GroupID,0)
+
+		INSERT INTO ChartWorkGroupDetails(GroupID,OrgID,AccessForErja)		
+		SELECT @GroupID,ID,0
+  	    FROM FromOrganizations
+		where IsInnerOrg=1 and isactive=1
+		order by isactive desc		
+		
+	END
+	ELSE
+	BEGIN
+		IF EXISTS(SELECT * FROM DELETED)
+		BEGIN
+			-- Delete Operation
+			SELECT @GroupID=GroupID FROM DELETED
+			DELETE FROM ChartWorkGroupDetails WHERE GroupID=@GroupID
+
+			UPDATE FromOrganizations
+			SET GroupID = NULL
+			WHERE GroupID  = @GroupID
+						
+		END		
+	END	
+END
+GO
+
+ALTER TABLE [dbo].[ChartWorkGroup] ENABLE TRIGGER [trgInsChartWorkGroupDetails]
+GO
+COMMIT
+GO

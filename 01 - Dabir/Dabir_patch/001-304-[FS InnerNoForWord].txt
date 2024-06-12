@@ -1,0 +1,193 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[InnerNoForWord]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[InnerNoForWord]
+END
+GO
+
+CREATE FUNCTION [dbo].[InnerNoForWord] 
+( 
+	@LetterID INT 
+)
+	RETURNS NVARCHAR(200)
+BEGIN 
+        DECLARE @SecCode NVARCHAR(50) ,
+            @MYear NCHAR(4) ,
+            @IndicatorID NVARCHAR(20) ,
+            @ToOrgCode NVARCHAR(50) ,
+            @FromOrgCode NVARCHAR(50) ,
+            @LetterTypCode NVARCHAR(10) ,
+            @result NVARCHAR(4000) ,
+            @UserMemo NVARCHAR(255) ,
+            @FromPrecode NVARCHAR(50) ,
+            @CentralNoDabir NVARCHAR(50)  
+
+        DECLARE @InnerNo NVARCHAR(500) ,
+            @Delimeter CHAR(1) ,
+            @LetterFormulaPart1 VARCHAR(50) ,
+            @LetterFormulaPart2 VARCHAR(50) ,
+            @LetterFormulaPart3 VARCHAR(50) ,
+            @LetterFormulaPart4 VARCHAR(50) ,
+            @LetterFormulaPart5 VARCHAR(50) ,
+            @LetterFormulaPart6 VARCHAR(50) ,
+            @SecID INT ,
+            @Subject NVARCHAR(4000)
+                       
+        SELECT  @SecCode = LTRIM(ISNULL(Secretariats.Precode, '')) ,
+                @MYear = Letter.MYear ,
+                @IndicatorID = '((' + CAST(Letter.IndicatorID AS NVARCHAR(10))
+                + '))' ,
+                @FromOrgCode = CASE WHEN LEN(fromorg.code) > 5
+                                    THEN FromOrg.Code
+                                    ELSE LTRIM(ISNULL(fromorg.code, ''))
+                               END ,
+                @ToOrgCode = CASE WHEN LEN(Toorg.code) > 5 THEN Toorg.Code
+                                  ELSE LTRIM(ISNULL(Toorg.code, ''))
+                             END ,
+                @LetterTypCode = LTRIM(ISNULL(LetterTypes.PreCode, '')) ,
+                @UserMemo = LTRIM(ISNULL(Usermemo, '')) ,
+                @FromPrecode = LTRIM(ISNULL(fromorg.Precode, '')) ,
+                @CentralNoDabir = LTRIM(ISNULL(CenterNo, '')) ,
+                @SecID = ISNULL(letter.SecretariatID, 0) ,
+                @Subject = s.SubjectCode
+        FROM    Letter
+                INNER JOIN FromOrganizations FromOrg ON Letter.FromOrgID = FromOrg.ID
+                INNER JOIN LetterTypes ON Letter.Letter_Type = LetterTypes.ID
+                INNER JOIN Secretariats ON Letter.SecretariatID = Secretariats.SecID
+                LEFT JOIN FromOrganizations Toorg ON Letter.ToorgID = Toorg.ID
+                LEFT OUTER JOIN [Subject] s ON s.SubjectID = Letter.SubjectID
+        WHERE   ( Letter.LetterID = @LetterID )         
+
+        SELECT  @Delimeter = ISNULL(LetterFormulaSeperator, 0) ,
+                @LetterFormulaPart1 = ISNULL(LetterFormulaPart1, 0) ,
+                @LetterFormulaPart2 = ISNULL(LetterFormulaPart2, 0) ,
+                @LetterFormulaPart3 = ISNULL(LetterFormulaPart3, 0) ,
+                @LetterFormulaPart4 = ISNULL(LetterFormulaPart4, 0) ,
+                @LetterFormulaPart5 = ISNULL(LetterFormulaPart5, 0) ,
+                @LetterFormulaPart6 = ISNULL(LetterFormulaPart6, 0)
+        FROM    LetterFormula
+        WHERE   SecID = @SecID
+                AND UseForWord = 1      
+
+        SET @result = LTRIM(RTRIM(CAST(CASE @LetterFormulaPart1--dbo.GetSystemValue('LetterFormulaPart1')--35  
+                                         WHEN -1 THEN ''
+                                         WHEN 0 THEN ''
+                                         WHEN 1 THEN @SecCode + @Delimeter
+                                         WHEN 2 THEN @MYear + @Delimeter
+                                         WHEN 3 THEN @IndicatorID + @Delimeter
+                                         WHEN 4 THEN @ToOrgCode + @Delimeter
+                                         WHEN 5 THEN @FromOrgCode + @Delimeter
+                                         WHEN 6
+                                         THEN @LetterTypCode + @Delimeter
+                                         WHEN 7 THEN @UserMemo + @Delimeter
+                                         WHEN 8 THEN @FromPrecode + @Delimeter
+                                         WHEN 9
+                                         THEN @CentralNoDabir + @Delimeter
+                                         WHEN 10
+                                         THEN ISNULL(@Subject, '')
+                                              + @Delimeter
+                                       END AS VARCHAR)))
+            + LTRIM(RTRIM(CAST(CASE @LetterFormulaPart2--dbo.GetSystemValue('LetterFormulaPart2')--36  
+                                 WHEN -1 THEN ''
+                                 WHEN 0 THEN ''
+                                 WHEN 1 THEN @SecCode + @Delimeter
+                                 WHEN 2 THEN @MYear + @Delimeter
+                                 WHEN 3 THEN @IndicatorID + @Delimeter
+                                 WHEN 4 THEN @ToOrgCode + @Delimeter
+                                 WHEN 5 THEN @FromOrgCode + @Delimeter
+                                 WHEN 6 THEN @LetterTypCode + @Delimeter
+                                 WHEN 7 THEN @UserMemo + @Delimeter
+                                 WHEN 8 THEN @FromPrecode + @Delimeter
+                                 WHEN 9 THEN @CentralNoDabir + @Delimeter
+                                 WHEN 10
+                                 THEN ISNULL(@Subject, '') + @Delimeter
+                               END AS VARCHAR)))
+            + LTRIM(RTRIM(CAST(CASE @LetterFormulaPart3--dbo.GetSystemValue('LetterFormulaPart3')--37  
+                                 WHEN -1 THEN ''
+                                 WHEN 0 THEN ''
+                                 WHEN 1 THEN @SecCode + @Delimeter
+                                 WHEN 2 THEN @MYear + @Delimeter
+                                 WHEN 3 THEN @IndicatorID + @Delimeter
+                                 WHEN 4 THEN @ToOrgCode + @Delimeter
+                                 WHEN 5 THEN @FromOrgCode + @Delimeter
+                                 WHEN 6 THEN @LetterTypCode + @Delimeter
+                                 WHEN 7 THEN @UserMemo + @Delimeter
+                                 WHEN 8 THEN @FromPrecode + @Delimeter
+                                 WHEN 9 THEN @CentralNoDabir + @Delimeter
+                                 WHEN 10
+                                 THEN ISNULL(@Subject, '') + @Delimeter
+                               END AS VARCHAR)))
+            + LTRIM(RTRIM(CAST(CASE @LetterFormulaPart4--dbo.GetSystemValue('LetterFormulaPart4')--38  
+                                 WHEN -1 THEN ''
+                                 WHEN 0 THEN ''
+                                 WHEN 1 THEN @SecCode + @Delimeter
+                                 WHEN 2 THEN @MYear + @Delimeter
+                                 WHEN 3 THEN @IndicatorID + @Delimeter
+                                 WHEN 4 THEN @ToOrgCode + @Delimeter
+                                 WHEN 5 THEN @FromOrgCode + @Delimeter
+                                 WHEN 6 THEN @LetterTypCode + @Delimeter
+                                 WHEN 7 THEN @UserMemo + @Delimeter
+                                 WHEN 8 THEN @FromPrecode + @Delimeter
+                                 WHEN 9 THEN @CentralNoDabir + @Delimeter
+                                 WHEN 10
+                                 THEN ISNULL(@Subject, '') + @Delimeter
+                               END AS VARCHAR)))
+            + LTRIM(RTRIM(CAST(CASE @LetterFormulaPart5--dbo.GetSystemValue('LetterFormulaPart5')--39  
+                                 WHEN -1 THEN ''
+                                 WHEN 0 THEN ''
+                                 WHEN 1 THEN @SecCode + @Delimeter
+                                 WHEN 2 THEN @MYear + @Delimeter
+                                 WHEN 3 THEN @IndicatorID + @Delimeter
+                                 WHEN 4 THEN @ToOrgCode + @Delimeter
+                                 WHEN 5 THEN @FromOrgCode + @Delimeter
+                                 WHEN 6 THEN @LetterTypCode + @Delimeter
+                                 WHEN 7 THEN @UserMemo + @Delimeter
+                                 WHEN 8 THEN @FromPrecode + @Delimeter
+                                 WHEN 9 THEN @CentralNoDabir + @Delimeter
+                                 WHEN 10
+                                 THEN ISNULL(@Subject, '') + @Delimeter
+                               END AS VARCHAR)))
+            + LTRIM(RTRIM(CAST(CASE @LetterFormulaPart6--dbo.GetSystemValue('LetterFormulaPart6')--40  
+                                 WHEN -1 THEN ''
+                                 WHEN 0 THEN ''
+                                 WHEN 1 THEN @SecCode + @Delimeter
+                                 WHEN 2 THEN @MYear + @Delimeter
+                                 WHEN 3 THEN @IndicatorID + @Delimeter
+                                 WHEN 4 THEN @ToOrgCode + @Delimeter
+                                 WHEN 5 THEN @FromOrgCode + @Delimeter
+                                 WHEN 6 THEN @LetterTypCode + @Delimeter
+                                 WHEN 7 THEN @UserMemo + @Delimeter
+                                 WHEN 8 THEN @FromPrecode + @Delimeter
+                                 WHEN 9 THEN @CentralNoDabir + @Delimeter
+                                 WHEN 10
+                                 THEN ISNULL(@Subject, '') + @Delimeter
+                               END AS VARCHAR))) 
+      
+        WHILE CHARINDEX('  ', @result) <> 0
+            BEGIN  
+                SET @result = REPLACE(@result, '  ', ' ')  
+                SET @result = REPLACE(@result, '/ ', '/')  
+                SET @result = REPLACE(@result, ' /', '/')  
+            END   
+      
+        SET @result = REPLACE(LTRIM(RTRIM(@result)), @Delimeter + @Delimeter,
+                              @Delimeter)  
+        SET @result = REPLACE(@result, @Delimeter + @Delimeter, @Delimeter)  
+      
+      
+        IF SUBSTRING(@result, LEN(@result), 1) = @Delimeter
+            SET @result = SUBSTRING(@result, 1, LEN(@result) - 1)  
+      
+        IF SUBSTRING(@result, 1, 1) = @Delimeter
+            SET @result = SUBSTRING(@result, 2, LEN(@result) - 1)  
+      
+        RETURN(@result)  
+END
+GO
+
+COMMIT
+GO

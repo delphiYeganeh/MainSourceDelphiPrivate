@@ -1,0 +1,22 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_SetUserAlternative]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_SetUserAlternative]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_SetUserAlternative](@UserID INT,@AlternateUserID INT,@StartDate CHAR(10),@EndDate CHAR(10))
+AS
+	UPDATE Users
+	SET
+		AlternativeUserID=@AlternateUserID,AlternativebeginDate = @StartDate,
+		AlternativeEndDate = @EndDate
+	WHERE Id=@UserID
+GO
+
+COMMIT
+GO

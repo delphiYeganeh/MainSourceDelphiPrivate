@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'EmailNuFromDate'
+          AND Object_ID = Object_ID(N'dbo.DeletedLetters'))
+BEGIN
+	ALTER TABLE [dbo].[DeletedLetters] 
+	ADD	[EmailNuFromDate] [nvarchar] (20) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL
+END
+GO
+
+COMMIT
+GO

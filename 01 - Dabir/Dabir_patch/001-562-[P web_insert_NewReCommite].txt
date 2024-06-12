@@ -1,0 +1,71 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[web_insert_NewReCommite]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[web_insert_NewReCommite]
+END
+GO
+
+CREATE  procedure [dbo].[web_insert_NewReCommite]
+	(@LetterID 	[int],
+	 @Type 	[tinyint],
+	 @ParentId 	[smallint],
+	 @OrgID 	[int],
+	 @Paraph 	[nvarchar](500),
+	 @RecommiteDate 	[varchar](10),
+	 @UserID 	[tinyint],
+	 @IsCopy 	[bit],
+	 @Proceeded 	[bit],
+	 @isSecure [bit],
+	 @RecommiteId [int] output)
+AS
+declare @OrgStaff nvarchar(50),@NewID int
+
+select top 1 @OrgStaff=ResponsibleStaffer       
+
+from dbo.FromOrganizations 
+
+WHERE             id         = @OrgID
+SELECT     @NewID=ISNULL(MAX(ID), 0) + 1   FROM ReCommites WHERE LetterID=@letterID and type=@type
+INSERT INTO [dbo].[ReCommites] 
+             (
+             [LetterID],
+             [ID],
+             [Type],
+             [ParentId],
+             [OrgID],
+             [Paraph],
+             [RecommiteDate],
+             [UserID],
+             [IsCopy],
+             [Proceeded],
+			 OrgStaff) 
+VALUES
+            ( 
+             @LetterID,
+             @NewID,
+             @Type,
+             @ParentId,
+             @OrgID,
+             @Paraph,
+             @RecommiteDate,
+             @UserID,
+             @IsCopy,
+             @Proceeded,
+			 @OrgStaff )
+
+
+SET @RecommiteId =SCOPE_IDENTITY()
+
+IF(@isSecure=1)
+  UPDATE ReCommites
+  SET 	IsSecure = 1 WHERE RecommiteID=@RecommiteId
+  
+select @RecommiteId
+GO
+
+COMMIT
+GO

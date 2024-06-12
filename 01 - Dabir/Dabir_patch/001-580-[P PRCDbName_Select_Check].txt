@@ -1,0 +1,45 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PRCDbName_Select_Check]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PRCDbName_Select_Check]
+END
+GO
+
+CREATE  procedure [dbo].[PRCDbName_Select_Check]
+	(
+		 @DbName_New nvarchar(max) = 'ydabirtakhsistest'
+	)
+AS
+	DECLARE @sqlSelect nvarchar(MAX)
+	DECLARE @sqlDrop   nvarchar(MAX)
+
+	SET @sqlDrop = '
+	USE  '+ @DbName_New +'
+	IF EXISTS
+	(
+	SELECT * 
+	FROM sys.objects
+	WHERE name =  ''PRCDbName_Select''
+	)
+	BEGIN
+	  DROP PROC PRCDbName_Select
+	END'
+	SET @sqlSelect = '
+						CREATE PROC [PRCDbName_Select]
+						AS
+						SELECT [ID]
+							  ,[Name]
+							  ,[ServerName]
+							  ,[DBName]
+						  FROM [dbo].[tbDbName]
+	'
+	EXEC sp_executesql @sqlDrop
+	EXEC sp_executesql @sqlSelect
+GO
+
+COMMIT
+GO

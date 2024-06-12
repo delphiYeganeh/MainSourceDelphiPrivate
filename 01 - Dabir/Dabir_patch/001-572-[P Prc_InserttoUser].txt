@@ -1,0 +1,98 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Prc_InserttoUser]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Prc_InserttoUser]
+END
+GO
+
+CREATE  procedure [dbo].[Prc_InserttoUser]
+( @DbName_Old nvarchar(50) = 'ydabir9803'
+ ,@DbName_New nvarchar(50) = 'ydabir1117'
+ ,@UserID nvarchar(50) = '174'
+ )
+AS
+DECLARE @sql nvarchar(max)
+SET @sql = 
+'IF NOT EXISTS 
+(
+	SELECT 
+	    * 
+	FROM ' + @DbName_New + '.[dbo].[Users]
+	WHERE UserName = (
+						SELECT 
+						   UserName
+						FROM ' + @DbName_Old + '.[dbo].[Users]
+						WHERE ID = '+ @UserID + '
+	                 )
+)
+BEGIN
+INSERT INTO ' + @DbName_New + '.dbo.Users
+           (Title,UserName,
+		    PassWord,
+		    AccessID,
+			FromOrgID,
+			DefualtSecretariatID,
+			IsSecretariantStaffer,
+			KartableGridInfo,
+			DabirGridInfo,
+			EndActiveDate,
+			BeginActiveDate,
+			AlternativeUserID,
+			AlternativeEndDate,
+			AlternativebeginDate,
+			HasSecureLetterAccess,
+			SecondOrgID,
+			eCartableGridInfo,
+			eCartableTheme,
+			Email,Active,
+			CanViewSecureRecommite,
+			GroupID,
+			CanRecommiteWithOtherOrg,
+			canViewClassifiedArchiveDocs,
+			archiveUserID,
+			iscartableuser,
+			TreeOrgID,
+			FourOrgID,
+			FiveOrgID)
+SELECT 
+     Title ,
+	 UserName,
+	 PassWord,
+	 AccessID,
+	 FromOrgID,
+	 DefualtSecretariatID,
+	 IsSecretariantStaffer,
+	 KartableGridInfo,
+	 DabirGridInfo,
+	 EndActiveDate,
+	 BeginActiveDate,
+	 AlternativeUserID,
+	 AlternativeEndDate,
+	 AlternativebeginDate,
+	 HasSecureLetterAccess,
+	 SecondOrgID,
+	 eCartableGridInfo,
+	 eCartableTheme,
+	 Email,
+	 Active,
+	 CanViewSecureRecommite,
+	 GroupID,
+	 CanRecommiteWithOtherOrg,
+	 canViewClassifiedArchiveDocs,
+	 archiveUserID,
+	 iscartableuser,
+	 TreeOrgID,
+	 FourOrgID,
+	 FiveOrgID
+FROM ' + @DbName_Old+ '.[dbo].[Users]'+
+'Where ID = ' + @UserID +
+' END' 
+EXEC sp_executesql @sql
+GO
+
+COMMIT
+GO

@@ -1,0 +1,108 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[web_insert_sentLetter2]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[web_insert_sentLetter2]
+END
+GO
+
+CREATE  procedure [dbo].[web_insert_sentLetter2]
+	(@Indicator 	[int] output,
+	 @LetterID 	[int] output,
+	 @RecommiteId int output,
+	 @ToOrgTitle 	nvarchar(100),
+	 @Signerid 	[nvarchar](50),
+	 @ClassificationID 	[tinyint],
+	 @UrgencyID 	[smallint],
+	 @Memo 	[nvarchar](500),
+	 @UserID 	[int],
+	 @RetroactionNo 	[nvarchar](50),
+	 @UserMemo 	[nvarchar](255),
+	 @FollowLetterNo 	[nvarchar](50),
+	 @ToStaffer 	[nvarchar](50),
+	 @fromstaffer 	[nvarchar](50),
+	 @FromOrgID 	[int],
+	 @NumberOfPage 	[tinyint],
+	 @ReceiveTypeID 	[tinyint],
+	@SubjectID INT,
+	@SecretariatID int)
+AS 
+	declare @ToOrgID int,@IndicatorID int ,@UserFromOrgID 	int,  @MYear int ,
+			@RegistrationDate 	[char](10),	@RegistrationTime 	[varchar](5),@responsible NVARCHAR(50),@title NVARCHAR(100)
+			select  @ToOrgID=convert(int,@toorgtitle)
+	SET @fromstaffer=REPLACE(LEFT(@fromstaffer,CHARINDEX('-',@fromstaffer)),'-','')
+	SET @title=@toorgtitle
+	set @toorgtitle=REPLACE(LEFT(@title,CHARINDEX('-',@title)),'-','')
+
+	if not exists (select * from fromorganizations where replace(title,' ','')=replace(@toorgtitle,' ',''))
+	BEGIN
+		SET @responsible=REPLACE(RIGHT(@title,LEN(@title)-CHARINDEX('-',@title)),'-','')
+		IF(@toorgtitle=@responsible)
+			set @responsible=''
+		insert into Fromorganizations(Title,ResponsibleStaffer,parentid,isinnerorg) values(@toorgtitle,@responsible,3,0)
+	END
+	 
+
+	select @RegistrationTime=case when datepart(hour,getdate())<10 then '0'+convert(char(1),datepart(hour,getdate()))
+	   else convert(char(2),datepart(hour,getdate())) end +':' + convert(char(2),datepart(minute,getdate()))
+
+	set @RegistrationDate=dbo.shamsi(getdate())
+
+	set @myear=cast (substring(@RegistrationDate,1,4) as int)
+
+	SELECT     @UserFromOrgID=FromOrgID
+	FROM         Users
+	where id=@userid
+
+	if(@SecretariatID=0)
+	begin
+		SELECT     @SecretariatID=DefualtSecretariatID 
+		FROM         Users
+		where id=@userid
+	end
+
+	set @IndicatorID=dbo.newIndicatorid(2,1,@myear,@SecretariatID)
+
+	INSERT INTO [Letter] 
+		 ( [IndicatorID],	 [MYear],	 [SecretariatID],	 [Letter_Type],	 [letterformat],	 [FromOrgID],	 [ToOrgID],
+		 [Signerid],	 [ClassificationID],	 [UrgencyID],	 [Memo],	 [UserID],	 [RetroactionNo],	 [UserMemo],
+		 [RegistrationDate],	 [RegistrationTime],	 [FollowLetterNo],	 [ToStaffer],	 [fromstaffer],	 [Finalized],
+		 NumberOfPage ,ReceiveTypeID, SubjectID)
+	 
+	VALUES 
+		( 
+		 @IndicatorID,	 @MYear,	 @SecretariatID,
+		 2,
+		 1,
+		 @FromOrgID,
+		 @ToOrgID,
+		 @Signerid,
+		 @ClassificationID,
+		 @UrgencyID,
+		 @Memo,
+		 @UserID,
+		 @RetroactionNo,
+		 @UserMemo,
+		 @RegistrationDate,
+		 @RegistrationTime,
+		 @FollowLetterNo,
+		 @ToStaffer,
+		 @fromstaffer,
+		 1,
+		 @NumberOfPage,
+		 @ReceiveTypeID, 
+		 @SubjectID)
+
+	select @letterid=SCOPE_IDENTITY()
+	exec web_insert_NewReCommite @LetterID,3,0,@FromOrgID,'ثبت نامه',@registrationdate,@UserID,0,0,0,@RecommiteId output
+
+	select @Indicator = @IndicatorID
+
+	select @RecommiteId
+GO
+
+COMMIT
+GO

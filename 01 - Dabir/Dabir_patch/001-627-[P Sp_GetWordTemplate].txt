@@ -1,0 +1,20 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetWordTemplate]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetWordTemplate]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetWordTemplate](@templateId INT)
+AS
+	SELECT lt.[Document] 
+		FROM LetterTemplate lt
+		WHERE lt.ID=@templateId
+GO
+
+COMMIT
+GO

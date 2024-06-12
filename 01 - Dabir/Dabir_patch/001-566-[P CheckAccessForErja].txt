@@ -1,0 +1,88 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[CheckAccessForErja]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[CheckAccessForErja]
+END
+GO
+
+CREATE  procedure [dbo].[CheckAccessForErja]
+   (
+      @FromOrgID int = 3441 ,
+	  @ToOrgID   int = 3444
+   )
+AS
+DECLARE @Parent int 
+
+IF NOT  EXISTS(
+                SELECT * FROM FromOrganizations
+				WHERE ParentID = 4
+				AND ID = @FromOrgID
+)
+and @FromOrgID <> 0
+BEGIN
+
+	IF EXISTS
+			(
+				SELECT 
+					  *
+				FROM ChartWorkGroupDetails A
+				INNER JOIN FromOrganizations B
+				  ON A.ORGID = b.id
+				WHERE ORGID  = @ToOrgID--3445--گیرنده
+				AND AccessForErja = 1
+				AND a.groupid IN(
+									SELECT A.groupid  -- قرستنده
+									FROM ChartWorkGroupDetails A
+									INNER JOIN FromOrganizations B
+									  ON A.ORGID = b.id
+									WHERE ORGID  = @FromOrgID--3441
+									AND AccessForErja = 1
+								)
+			)  
+
+	SELECT  1 AS Result
+	ELSE 
+	SELECT  0 AS Result
+END
+ELSE
+  SELECT 1 AS Result
+
+/*SET @Parent = 4 
+
+IF EXISTS
+		(
+			SELECT 
+				  *
+			FROM ChartWorkGroupDetails A
+			INNER JOIN FromOrganizations B
+			  ON A.ORGID = b.id
+			WHERE ORGID  = @ToOrgID--3445--گیرنده
+			AND AccessForErja = 1
+			AND a.groupid IN(
+								SELECT A.groupid  -- قرستنده
+								FROM ChartWorkGroupDetails A
+								INNER JOIN FromOrganizations B
+								  ON A.ORGID = b.id
+								WHERE ORGID  = @FromOrgID--3441
+								AND AccessForErja = 1
+		                    )
+        )  
+--OR @Parent = 4
+OR not  EXISTS
+(
+Select * from FromOrganizations
+Where ParentID = 4
+)
+SELECT  1 AS Result
+ELSE 
+SELECT  0 AS Result
+*/
+
+GO
+
+COMMIT
+GO

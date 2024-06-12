@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_FollowUp_ByStart]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_FollowUp_ByStart]
+END
+GO
+
+CREATE  procedure [dbo].[Select_FollowUp_ByStart]
+(
+	@StartFollowUpID int
+)
+AS
+select *
+from followup
+
+GO
+
+COMMIT
+GO

@@ -1,0 +1,80 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[SendLetter_To_Other_sec]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[SendLetter_To_Other_sec]
+END
+GO
+
+CREATE  procedure [dbo].[SendLetter_To_Other_sec]
+ @NewSecID int ,@letterid int, @withoutChange int
+as
+
+declare @newLetterId int
+
+ALTER TABLE Letter DISABLE TRIGGER ALL
+
+insert into letter(
+				   IndicatorID,MYear,SecretariatID,Letter_Type,letterformat,IncommingNO,Incommingdate,FromOrgID,ToOrgID,
+				   Signerid,ClassificationID,UrgencyID,Memo,AttachTitle,NumberOfAttachPages,NumberOfPage,ReceiveTypeID,UserID,
+				   RetroactionNo,UserMemo,RegistrationDate,RegistrationTime,FollowLetterNo,ToStaffer,SentLetterID,TemplateID,HeaderID,
+				   LetterRecommites,FromStaffer,Finalized,SendStatusid,OldSecretariatID,LetterIDUP,CenterNo,CenterDate,InnerNO
+				  )
+select Case When @withoutChange = 1 then dbo.newIndicatorid(Letter_Type,letterformat,myear,@NewSecID) Else dbo.newIndicatorid(1,2,myear,@NewSecID) End As IndicatorID, 
+			MYear,
+			@NewSecID SecretariatID,
+			Case When @withoutChange = 1 then Letter_Type Else 1 End As Letter_Type,
+			Case When @withoutChange = 1 then letterformat Else 2 End As letterformat,
+	   --cast(indicatorid as varchar(5))+isnull('/'+Secretariats.PreCode,'') IncommingNO,Commented By Saeedi on 1390/05/11
+	   IncommingNO,
+	   registrationdate Incommingdate,FromOrgID,
+	   ToOrgID,Signerid,ClassificationID,UrgencyID,Memo,AttachTitle,NumberOfAttachPages,NumberOfPage,ReceiveTypeID,UserID,RetroactionNo,
+	   UserMemo,RegistrationDate,RegistrationTime,FollowLetterNo,ToStaffer,SentLetterID,TemplateID,HeaderID,LetterRecommites,FromStaffer,
+	   Finalized,2,letter.SecretariatID,@letterid,CenterNo,CenterDate,InnerNO
+from letter
+inner join Secretariats on Secretariats.secid=letter.SecretariatID
+where letterid =@letterid --and sendstatusid=1
+
+set @newLetterId=@@identity
+
+ALTER TABLE Letter ENABLE TRIGGER ALL
+
+insert into letterdata(LetterID,PageNumber,Image,extention,Description )
+select @newLetterId,PageNumber,Image,extention,Description
+from letterdata
+where letterid=@letterid
+
+insert into recommites(LetterID,ID,Type,ParentId,OrgID,Paraph,RecommiteDate,UserID,IsCopy,Proceeded,ProceedDate,
+staffmemo,viewdate,OrgStaff,DeadLineDate)
+select @newLetterId,ID,Type,ParentId,OrgID,Paraph,RecommiteDate,UserID,IsCopy,Proceeded,ProceedDate,staffmemo,viewdate,OrgStaff,DeadLineDate
+from recommites
+where letterid=@letterid
+
+                       
+insert into LetterText(LetterID, TypeText, LetterFormat)
+SELECT   @newLetterId  , TypeText, LetterFormat
+FROM         LetterText
+where LetterID=@LetterID
+
+
+
+declare @mainLetterid int,@newOrd tinyint
+if exists (select * from LetterRelation where subletterid =@letterid)
+  begin
+    select @newOrd=max(ord)+1 from  LetterRelation where subletterid =@letterid
+    select @mainLetterid=mainLetterid from LetterRelation where subletterid =@letterid
+    INSERT INTO LetterRelation(MainLetterID,SubLetterID,Ord) values (@mainLetterid,@newLetterId,@newOrd)
+  end
+else
+  begin
+    select @mainLetterid=@letterid
+    INSERT INTO LetterRelation(MainLetterID,SubLetterID,Ord) values (@mainLetterid,@letterid,1)
+    INSERT INTO LetterRelation(MainLetterID,SubLetterID,Ord) values (@mainLetterid,@newLetterId,2)
+  end
+GO
+
+COMMIT
+GO

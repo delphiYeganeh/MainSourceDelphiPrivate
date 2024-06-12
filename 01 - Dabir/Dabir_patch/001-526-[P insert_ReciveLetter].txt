@@ -1,0 +1,44 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[insert_ReciveLetter]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[insert_ReciveLetter]
+END
+GO
+
+CREATE  procedure [dbo].[insert_ReciveLetter]  
+ (@letterID integer output,  
+  @IndicatorID  int,  
+  @MYear  int,  
+  @SecretariatID  tinyint,  
+  @Letter_Type  tinyint,  
+  @letterformat  tinyint,  
+  @Memo  nvarchar(500),  
+  @UserID  int,  
+  @RegistrationDate  char(10),  
+  @RegistrationTime  varchar(5),  
+  @OrgID int)  
+AS  
+  
+	declare @OrgStaff nvarchar(50)  
+
+	Select @OrgStaff=ResponsibleStaffer  
+		From dbo.FromOrganizations  
+		Where id=@orgid  
+
+	INSERT INTO dbo.Letter   
+		(IndicatorID,  MYear,  SecretariatID,  Letter_Type,  letterformat,  Memo,  UserID,  RegistrationDate,  RegistrationTime,  FromOrgID,ReceiveTypeID )   
+	VALUES   
+		(@IndicatorID,  @MYear,  @SecretariatID,  @Letter_Type,  @letterformat,  @Memo,  @UserID,  @RegistrationDate,  @RegistrationTime,  @OrgID,2)  
+  
+	SET @LetterID=IDENT_CURRENT('Letter')--@@Identity  
+  
+	INSERT INTO dbo.ReCommites   (LetterID, ID, Type,  ParentId,  OrgID,  Paraph,  RecommiteDate,  UserID,  IsCopy,  Proceeded,OrgStaff)   
+		values(@letterid,1,3,0,@orgid,'',@registrationdate,@userid,0,0,@OrgStaff)
+GO
+
+COMMIT
+GO

@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[get_userTable_by_UserID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[get_userTable_by_UserID]
+END
+GO
+
+CREATE  procedure [dbo].[get_userTable_by_UserID]
+	@userID INT=0,
+	@like  nvarchar(100)=''
+AS
+	SELECT Tables.*,UserTable.hasAccess,UserTable.HasDelete
+		FROM Tables 
+			LEFT JOIN UserTable ON Tables.TableId = UserTable.tableID
+		WHERE (TableType = 3) AND (hasAccess=1) AND (UserTable.userID=@userID) and description like '%'+@like+'%'
+GO
+
+COMMIT
+GO

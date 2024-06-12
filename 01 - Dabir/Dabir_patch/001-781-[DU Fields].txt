@@ -1,0 +1,10 @@
+BEGIN TRANSACTION
+GO
+
+	Update Fields 
+		Set Description = 'شماره ترکيبي ورد'
+		Where FieldName = 'innernoForWord1'
+GO	
+	
+COMMIT
+GO	

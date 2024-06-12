@@ -1,0 +1,13 @@
+BEGIN TRANSACTION
+GO
+
+IF EXISTS (SELECT 1 
+			FROM sys.foreign_keys 
+			WHERE object_id = OBJECT_ID(N'FK_WorkGroupOrg_WorkGroup')
+				AND parent_object_id = OBJECT_ID(N'dbo.WorkGroupOrg'))
+
+	ALTER TABLE [dbo].[WorkGroupOrg] DROP CONSTRAINT [FK_WorkGroupOrg_WorkGroup]
+GO
+
+COMMIT
+GO

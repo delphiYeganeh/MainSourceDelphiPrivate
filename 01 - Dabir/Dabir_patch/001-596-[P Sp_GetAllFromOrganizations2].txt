@@ -1,0 +1,34 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetAllFromOrganizations2]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetAllFromOrganizations2]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetAllFromOrganizations2](@isInnerOrg BIT,@groupId INT)
+AS
+
+--IF(@groupId=0)
+--   SELECT distinct  fo.ID, ISNULL(fo.Title,'') AS Title,ISNULL(fo.ResponsibleStaffer,'') staffer, fo.ParentID, fo.Phone, fo.Fax, fo.Email, 
+--                    fo.ResponsibleStaffer,fo.IsActive, fo.PreCode, fo.IsInnerOrg, fo.Code, fo.UniqueID 
+--   FROM FromOrganizations fo INNER JOIN ChartWorkGroupDetails cwgd
+--   ON fo.ID=cwgd.OrgID
+--   WHERE fo.IsInnerOrg=@isInnerOrg AND cwgd.AccessForErja=1 
+--ELSE
+	SELECT  fo.ID, ISNULL(fo.Title,'')+'-'+ResponsibleStaffer AS Title,ISNULL(fo.ResponsibleStaffer,'') staffer, fo.ParentID, fo.Phone, fo.Fax, fo.Email,  
+	        fo.ResponsibleStaffer,fo.IsActive, fo.PreCode, fo.IsInnerOrg, fo.Code, fo.UniqueID 
+	FROM FromOrganizations fo INNER JOIN ChartWorkGroupDetails cwgd
+    ON fo.ID=cwgd.OrgID
+    WHERE fo.IsInnerOrg=@isInnerOrg AND cwgd.GroupID in 
+	(select t1.GroupID from ChartWorkGroupDetails t1
+inner join Users t2 on (t1.OrgID=t2.FromOrgID or t1.OrgID=t2.FiveOrgID or t1.OrgID=t2.FourOrgID or t1.OrgID=t2.TreeOrgID or t1.OrgID=t2.SecondOrgID) and t1.AccessForErja=1 and t2.id=@groupId
+inner join ChartWorkGroup t3 on t1.GroupID=t3.GroupID
+)
+GO
+
+COMMIT
+GO

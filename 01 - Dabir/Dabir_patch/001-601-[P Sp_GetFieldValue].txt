@@ -1,0 +1,20 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetFieldValue]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetFieldValue]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetFieldValue](@LetterID INT,@FieldID INT,@FormOrder INT)
+AS
+
+SELECT FieldValue FROM LetterFieldValue 
+where LetterID =@LetterID AND FieldID =@FieldID AND FormOrder=@FormOrder
+GO
+
+COMMIT
+GO

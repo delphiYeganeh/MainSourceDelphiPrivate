@@ -1,0 +1,25 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[get_OrgTitleByID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[get_OrgTitleByID]
+END
+GO
+
+CREATE  procedure [dbo].[get_OrgTitleByID]
+(
+	@ID		Int,
+	@title	Nvarchar(250) output
+)
+
+As
+	Select @title=title
+		From FromOrganizations
+		Where [ID]=@ID
+GO
+
+COMMIT
+GO

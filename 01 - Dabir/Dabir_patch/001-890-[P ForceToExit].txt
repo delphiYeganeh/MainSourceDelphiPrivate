@@ -1,0 +1,26 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[ForceToExit]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[ForceToExit]
+END
+GO
+
+CREATE PROCEDURE [dbo].[ForceToExit] 
+	@UserLoginLogoutID Int, 
+	@res Bit Output 
+AS
+Begin
+	Set @res = 0
+
+	Select @res = IsNull(forceToExit, 0) 
+		From UserLoginLogout
+		Where UserLoginLogoutID = @UserLoginLogoutID
+End
+GO
+
+COMMIT
+GO

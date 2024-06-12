@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_LetterAttachment]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_LetterAttachment]
+END
+GO
+
+CREATE  procedure [dbo].[Get_LetterAttachment]
+@letterID int 
+as
+
+	SELECT     LetterData.*, Extention.ExtentionTitle, Extention.Extention
+		FROM       LetterData 
+			INNER JOIN  Extention ON LetterData.extention = Extention.ExtentionID
+		WHERE LetterID=@LetterID
+GO
+
+COMMIT
+GO

@@ -1,0 +1,52 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[UPDATE_Acction_Access]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[UPDATE_Acction_Access]
+END
+GO
+
+CREATE  procedure [dbo].[UPDATE_Acction_Access]
+	@NewAccess bit,
+	@AccessID int,
+	@ActionID nvarchar(50),
+	@FormTag int
+as
+begin
+	--	last modifier xax 1398/03/03
+
+	if not exists (select top 1 1 from ActionsAccess where AccessID = @AccessID and ActionID = @ActionID and FormTag = @FormTag)
+	begin
+		insert into ActionsAccess 
+		(
+			AccessID,
+			ActionID,
+			FormTag,
+			HasAccess
+		)
+		values
+		(
+			@AccessID,
+			@ActionID,
+			@FormTag,
+			@NewAccess 
+		)
+	end
+	else
+	begin
+		update ActionsAccess
+		set 
+			HasAccess = @NewAccess 
+		where
+			AccessID = @AccessID and
+			ActionID = @ActionID and
+			FormTag = @FormTag
+	end
+end
+GO
+
+COMMIT
+GO

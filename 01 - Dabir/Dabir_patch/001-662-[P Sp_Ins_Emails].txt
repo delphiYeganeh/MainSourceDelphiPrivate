@@ -1,0 +1,40 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_Ins_Emails]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_Ins_Emails]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_Ins_Emails] 
+	@Code Int, 
+	@Subject Nvarchar(200), 
+	@SendAddress Nvarchar(100), 
+	@ReciveAddress Nvarchar(100), 
+	@Memo Image, 
+	@AttachFile Image, 
+	@AttachFileName Nvarchar(50), 
+	@Status SmallInt, 
+	@DateEmail Nvarchar(10), 
+	@TimeEmail Nvarchar(10), 
+	@IsAnswer bit, 
+	@IsReciveEmail bit, 
+	@UsersID Int, 
+	@IsRead bit, 
+	@IsPersonal bit, 
+	@IsImportant bit, 
+	@IsSecret bit, 
+	@EmailNuFromDate Nvarchar(20)
+As  
+Begin
+	Insert Into Emails (Code, [Subject], SendAddress, ReciveAddress, Memo, AttachFile, AttachFileName, [Status], DateEmail, TimeEmail, IsAnswer, IsReciveEmail, UsersID, IsRead, IsPersonal, IsImportant, IsSecret, EmailNuFromDate)
+		Values(@Code, @Subject, @SendAddress, @ReciveAddress, @Memo, @AttachFile, @AttachFileName, @Status, @DateEmail, @TimeEmail, @IsAnswer, @IsReciveEmail, @UsersID, @IsRead, @IsPersonal, @IsImportant, @IsSecret, @EmailNuFromDate)
+End 
+
+GO
+
+COMMIT
+GO

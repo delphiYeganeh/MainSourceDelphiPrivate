@@ -1,0 +1,53 @@
+BEGIN TRANSACTION
+GO
+
+IF EXISTS(SELECT 1 FROM sys.indexes WHERE name='Letter_IDX_Indicator' AND object_id = OBJECT_ID('dbo.Letter'))
+BEGIN
+	DROP INDEX [Letter_IDX_Indicator] ON [dbo].[Letter]
+END
+GO
+
+IF EXISTS(SELECT 1 FROM sys.indexes WHERE name='IX_Letter_MYear' AND object_id = OBJECT_ID('dbo.Letter'))
+BEGIN
+	DROP INDEX [IX_Letter_MYear] ON [dbo].[Letter]
+END
+GO
+
+IF EXISTS(SELECT 1 FROM sys.indexes WHERE name='letter_idx' AND object_id = OBJECT_ID('dbo.Letter'))
+BEGIN
+	DROP INDEX [letter_idx] ON [dbo].[Letter]
+END
+GO
+
+IF EXISTS(SELECT 1 
+		FROM INFORMATION_SCHEMA.COLUMNS
+		WHERE TABLE_NAME = 'Letter' 
+			AND COLUMN_NAME = 'MYear' 
+			AND DATA_TYPE = 'tinyint')
+BEGIN
+	ALTER TABLE [dbo].[Letter] 
+	ALTER COLUMN	[MYear] [int] NOT NULL
+END
+GO
+
+
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE name='IX_Letter_MYear' AND object_id = OBJECT_ID('dbo.Letter'))
+BEGIN
+	CREATE NONCLUSTERED INDEX [IX_Letter_MYear] ON [dbo].[Letter]
+	(
+		[MYear] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+END
+GO
+
+IF EXISTS(SELECT 1 FROM sys.indexes WHERE name='Letter_IDX_Indicator' AND object_id = OBJECT_ID('dbo.Letter'))
+BEGIN
+	CREATE NONCLUSTERED INDEX [Letter_IDX_Indicator] ON [dbo].[Letter]
+	(
+		[IndicatorID] ASC, [MYear] ASC, [SecretariatID] ASC, [Letter_Type] ASC, [letterformat] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+END
+GO
+
+COMMIT
+GO

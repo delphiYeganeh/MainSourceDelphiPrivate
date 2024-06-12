@@ -1,0 +1,51 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[SelectInfo]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[SelectInfo]
+END
+GO
+
+CREATE  procedure [dbo].[SelectInfo]
+	@where nvarchar(1900)
+as 
+declare @mainTable varchar(50), @PrimaryCode varchar(50)
+
+	select @mainTable=value
+	from settings
+	where userid=-1 and variableid=24
+	SET @mainTable=ISNULL(@mainTable,'Added')
+
+	select @PrimaryCode=value
+	from settings
+	where userid=-1 and variableid=26
+	SET @PrimaryCode=ISNULL(@PrimaryCode,'number')
+
+	declare @sqlCommand nvarchar(4000)
+	set @sqlcommand='select l.*,dbo.innerno(l.LetterID,l.Letter_Type) inerno,dbo.innernoForWord(l.LetterID) innernoForWord1,
+	ReceiveTypes.Title AS ReciveTitle,Classifications.Title AS ClassificatioTitle,Urgenceis.Title AS UrgencyTitle,Users.Title AS UserTitle,
+	LetterFormats.Title AS FormatTitle,ToOrganizations.Title AS ToOrgTitle,LetterTemplate.Title AS TemplateTitle, 
+	FromOrganizations.Title AS FromTitle,f.title SignerTitle,dbo.ArchivePlaces(l.letterID,0) ArchivePlaces,FromOrganizations.PreCode, isnull
+	(FromOrganizations.PreCode,FromOrganizations.Code) Org_PreCode,  
+	cast(Year(dbo.ShamsiToMiladi(l.incommingdate)) as varchar)+''/''+cast(month(dbo.ShamsiToMiladi(l.incommingdate)) as varchar)+''/''+cast(Day(dbo.ShamsiToMiladi(l.incommingdate)) as varchar) as ChristIncomDate, 
+	ai.*
+	FROM  Letter l
+	LEFT JOIN '+@mainTable+'  AI  on l.UserMemo=cast (ltrim(ai.'+@PrimaryCode+' ) as nvarchar(255) )
+	LEFT JOIN fromorganizations f on f.id=l.signerid
+	LEFT JOIN ReceiveTypes ReceiveTypes ON ReceiveTypes.ID = L.ReceiveTypeID
+	LEFT JOIN Classifications Classifications ON L.ClassificationID = Classifications.ID 
+	LEFT JOIN Urgenceis Urgenceis ON L.UrgencyID = Urgenceis.ID
+	LEFT JOIN Users Users ON L.UserID = Users.Id
+	LEFT JOIN FromOrganizations FromOrganizations ON L.FromOrgID = FromOrganizations.ID 
+	LEFT JOIN fromorganizations ToOrganizations  ON L.ToOrgID = ToOrganizations.ID 
+	LEFT JOIN LetterFormats LetterFormats ON L.letterformat = LetterFormats.Code
+	LEFT JOIN LetterTemplate LetterTemplate ON l.TemplateID = LetterTemplate.ID '
+	if @where<>'' set @sqlCommand=@sqlCommand+' where '+@where
+	exec sp_executesql @sqlCommand
+GO
+
+COMMIT
+GO

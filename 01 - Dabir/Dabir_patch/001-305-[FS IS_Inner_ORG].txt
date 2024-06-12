@@ -1,0 +1,34 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[IS_Inner_ORG]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[IS_Inner_ORG]
+END
+GO
+
+CREATE FUNCTION [dbo].[IS_Inner_ORG]
+(
+	@pid INT
+)
+	RETURNS BIT
+AS
+BEGIN
+	WHILE (@pid>4)
+	BEGIN
+		SELECT @pid = parentID FROM FromOrganizations WHERE ID = @pid
+	END
+	DECLARE @ret BIT
+	SET @ret = 3
+	--SET @ret = 1
+	--IF @pid > 2
+    IF @pid = 2 
+	    SET @ret = 1
+	RETURN @ret
+END
+GO
+
+COMMIT
+GO

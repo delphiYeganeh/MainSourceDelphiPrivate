@@ -1,0 +1,37 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Check_Word_is_Open]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Check_Word_is_Open]
+END
+GO
+
+CREATE  procedure [dbo].[Check_Word_is_Open] 
+@LetterID INT, @userID INT OUTPUT 
+AS
+BEGIN
+	SELECT     UserID,MAX(UserLoginLogoutID) ID, isCartable into #LastLogout
+	FROM         UserLoginLogout 
+	where  dbo.Shamsi(LoginTime)=dbo.Shamsi(getdate()) 
+	group by Userid,isCartable
+
+	SELECT @userID = OpenWords.UserID 
+	FROM OpenWords 
+		INNER JOIN #LastLogout ON #LastLogout.UserID = OpenWords.UserID
+		inner join  UserLoginLogout  on UserLoginLogout.UserLoginLogoutID=#LastLogout.ID
+		INNER JOIN   Users ON #LastLogout.UserID = Users.Id
+	where  datediff(ss,LogoutTime,getdate())<90  
+		AND (isSafeLogout=0) 
+		AND OpenWords.LetterID = @LetterID
+		AND OpenWords.UserID <> @userID
+
+	IF  (@userID IS NULL)OR (@userID = 0) 
+		SET @userID = -1
+END
+GO
+
+COMMIT
+GO

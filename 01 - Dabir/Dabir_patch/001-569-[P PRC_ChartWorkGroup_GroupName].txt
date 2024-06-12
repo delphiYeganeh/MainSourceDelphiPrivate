@@ -1,0 +1,70 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PRC_ChartWorkGroup_GroupName]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PRC_ChartWorkGroup_GroupName]
+END
+GO
+
+CREATE  procedure [dbo].[PRC_ChartWorkGroup_GroupName]
+			(
+			   @UserID INT = 1
+			)
+AS
+	SELECT *
+	INTO #temp 
+	FROM dbo.FromOrganizations WITH (NOLOCK)
+
+	SELECT * 
+	INTO #temp2
+	FROM ChartWorkGroup
+
+	SELECT 
+		a.Id,
+		a.FromOrgID,
+		c.GroupName AS GroupName1 ,
+		a.SecondOrgID,
+		f.GroupName AS GroupName2 ,
+		a.TreeOrgID,
+		h.GroupName AS GroupName3 ,
+		a.FourOrgID,
+		j.GroupName AS GroupName4 ,
+		a.FiveOrgID,
+		l.GroupName AS GroupName5 
+
+	FROM dbo.Users a WITH (NOLOCK)
+	LEFT JOIN #temp b WITH(NOLOCK)
+	  ON ISNULL(a.FromOrgID,0) = b.ID
+	LEFT JOIN #temp2 c WITH(NOLOCK)
+	  ON ISNULL(b.Groupid,0) = c.GroupID
+
+	LEFT JOIN #temp e WITH(NOLOCK)
+	  ON a.SecondOrgID = e.ID
+	LEFT JOIN #temp2 f WITH(NOLOCK)
+	  ON e.Groupid = f.GroupID
+
+
+	LEFT JOIN #temp g WITH(NOLOCK)
+	  ON a.TreeOrgID = g.ID
+	LEFT JOIN #temp2 h WITH(NOLOCK)
+	  ON g.Groupid = h.GroupID
+
+	LEFT JOIN #temp i WITH(NOLOCK)
+	  ON a.FourOrgID = i.ID
+	LEFT JOIN #temp2 j WITH(NOLOCK)
+	  ON i.Groupid = j.GroupID
+
+	LEFT JOIN #temp k WITH(NOLOCK)
+	  ON a.FiveOrgID = k.ID
+	LEFT JOIN #temp2 l WITH(NOLOCK)
+	  ON k.Groupid = l.GroupID
+	WHERE a.id = @UserID
+	DROP TABLE #temp
+	DROP TABLE #temp2
+GO
+
+COMMIT
+GO

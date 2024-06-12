@@ -1,0 +1,99 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_Webrecommite_report]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_Webrecommite_report]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_Webrecommite_report]
+@SecretariatID int,@myear int,@where nvarchar(1000),@RecommitFlag INT = 0,@UserID INT = 0
+AS
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[TempSelect3]') )
+drop table [dbo].[TempSelect3]
+
+create TABLE [dbo].[TempSelect3] (
+	LetterID INT,
+	IndicatorID INT,
+	IncommingDate NVARCHAR(10),
+	IncommingNo NVARCHAR(50),
+	Memo nvarchar(2000),
+	RetroactionNo NVARCHAR(50),
+	RegistrationDate CHAR(10),
+	FollowLetterNo NVARCHAR(50),
+	ToStaffer NVARCHAR(50),
+	SenderTitle NVARCHAR(100),
+	DeliverTitle NVARCHAR(100),
+	LetterTypeTitle NVARCHAR(50),
+	LetterRecommites NVARCHAR(500),
+	Paraph NVARCHAR(3000),
+	RecommiteDate VARCHAR(10),
+	Proceeded BIT,
+	ProceedDate VARCHAR(10),
+	RecommitTypeTitle NVARCHAR(50),
+	RecommiterTitle NVARCHAR(100),
+	Recommited NVARCHAR(100),
+	ViewDate CHAR(10),
+	StaffMemo NVARCHAR(255),
+	DeadlineDays INT,
+	ProgressDays INT,
+	DeadLineDate CHAR(10),
+	ActionTypeTitle NVARCHAR(50),
+	SecTitle NVARCHAR(50)
+)
+
+declare @sql nvarchar (4000),@rw nvarchar(2000),@Today char(10),@FOrgID INT
+
+SELECT @FOrgID=FromOrgID FROM Users WHERE Id=@UserID
+select @today=dbo.shamsi(getdate())
+
+IF @RecommitFlag=0
+BEGIN
+	SET @rw=' WHERE not(l.letter_type=2 and l.letterformat=1 ) and (RC.OrgID='''+cast(@FOrgID as varchar(100))+''') and (l.LetterFormat <3) AND  L.myear='+cast(@myear as varchar(10))
+	if @SecretariatID>0 SET @rw=@rw+' AND (SecretariatID = '+cast(@SecretariatID as varchar(10))+')'	
+END
+IF @RecommitFlag=1
+BEGIN
+	SET @rw=' WHERE (RC.UserID='+CAST(@UserID AS VARCHAR)+') AND L.myear='+cast(@myear as varchar(10))+' and (RC.Type=3 AND l.letterformat=1)'
+	if @SecretariatID>0 SET @rw=@rw+' AND (SecretariatID = '+cast(@SecretariatID as varchar(10))+')'	
+END
+
+set @sql=' SELECT  L.LetterID, L.IndicatorID,L.IncommingDate,L.IncommingNo, L.Memo, L.RetroactionNo,
+L.RegistrationDate, L.FollowLetterNo, L.ToStaffer,sender.Title AS SenderTitle,
+Deliver.Title AS DeliverTitle,LetterTypes.Title LetterTypeTitle,LetterRecommites, RC.Paraph,
+RC.RecommiteDate,  RC.Proceeded, RC.ProceedDate, RecommiteTypes.Title RecommitTypeTitle,
+isnull(PFO.Title,SENDER.title) RecommiterTitle,Fo.Title Recommited, RC.ViewDate, RC.StaffMemo,
+dbo.shamsidatediff(prc.DeadLineDate,isnull(Rc.Proceeddate,'''+@today+''')) DeadlineDays,
+dbo.shamsidatediff(rc.Recommitedate,isnull(Rc.Proceeddate,'''+@today+''')) ProgressDays,
+RC.DeadLineDate,ActionTypeTitle,Secretariats.SecTitle 
+FROM ReCommites RC 
+left JOIN ReCommites PRC ON RC.LetterID = PRC.LetterID AND PRC.ID = RC.ParentId  AND PRC.type = RC.type 
+INNER JOIN Letter L ON RC.LetterID = L.LetterID
+INNER JOIN Secretariats  ON Secretariats.Secid = L.SecretariatID
+left JOIN FromOrganizations FO ON FO.ID = RC.OrgID 
+left JOIN FromOrganizations PFO ON PFO.ID = PRC.OrgID 
+left JOIN  FromOrganizations sender ON l.ToOrgID = sender.ID
+left JOIN  FromOrganizations Deliver ON l.FromOrgID = Deliver.ID 
+Left join LetterTypes on LetterTypes.ID=l.Letter_type 
+left JOIN RecommiteTypes ON RC.Type = RecommiteTypes.ID 
+left JOIN ActionType  ON ActionType.ActionTypeID = RC.ActionTypeID'
+
+SET @sql=@sql+@rW
+
+SET @where=isnull(ltrim(rtrim(@where)),'')
+IF (@where<>'') SELECT @sql=@sql+' and '+@where
+
+SET @sql=@sql+' order by rc.recommitedate desc,l.indicatorid desc'
+
+INSERT INTO [dbo].[TempSelect3]
+EXEC sp_executesql  @sql
+
+SELECT * FROM [dbo].[TempSelect3]
+GO
+
+COMMIT
+GO

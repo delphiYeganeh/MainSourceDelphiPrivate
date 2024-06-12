@@ -1,0 +1,85 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetAllFromOrganizations]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetAllFromOrganizations]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetAllFromOrganizations](@isInnerOrg BIT,@groupId INT)
+AS
+
+--IF(@groupId=0)
+--   SELECT distinct  fo.ID, ISNULL(fo.Title,'') Title, fo.ParentID, fo.Phone, fo.Fax, fo.Email, 
+--                    fo.ResponsibleStaffer,fo.IsActive, fo.PreCode, fo.IsInnerOrg, fo.Code, fo.UniqueID 
+--   FROM FromOrganizations fo INNER JOIN ChartWorkGroupDetails cwgd
+--   ON fo.ID=cwgd.OrgID
+--   WHERE fo.IsInnerOrg=@isInnerOrg AND cwgd.AccessForErja=1
+
+---- small RESULT
+	--SELECT  distinct  fo.ID, ISNULL(fo.Title,'') Title, fo.ParentID, fo.Phone, fo.Fax, fo.Email, 
+ --                   fo.ResponsibleStaffer,fo.IsActive, fo.PreCode, fo.IsInnerOrg, fo.Code, fo.UniqueID 
+	--FROM FromOrganizations fo INNER JOIN ChartWorkGroupDetails t1
+ --   ON fo.ID=t1.OrgID
+ --    inner join users t2 on t2.id=@groupId and (t1.OrgID=t2.FromOrgID or t1.OrgID=t2.FiveOrgID or t1.OrgID=t2.FourOrgID or t1.OrgID=t2.TreeOrgID or t1.OrgID=t2.SecondOrgID)
+	--WHERE fo.IsInnerOrg=1 AND t1.AccessForErja=1
+SELECT  distinct  
+	fo.ID, 
+	ISNULL(fo.Title,'')+'-'+ResponsibleStaffer Title, 
+	fo.ParentID, 
+	fo.Phone, 
+	fo.Fax, 
+	fo.Email, 
+    fo.ResponsibleStaffer,
+	fo.IsActive, 
+	fo.PreCode, 
+	fo.IsInnerOrg, 
+	fo.Code, 
+	fo.UniqueID 
+from FromOrganizations fo 
+inner join ChartWorkGroupDetails t1 
+on t1.OrgID=fo.id 
+and AccessForErja=1 
+and t1.GroupID in (
+					SELECT  distinct  t1.GroupID
+					FROM FromOrganizations fo 
+					INNER JOIN ChartWorkGroupDetails t1
+					ON fo.GroupID=t1.GroupID
+					 inner join users t2 
+					 on t2.id=@groupId  
+					 and (   fo.id=t2.FromOrgID 
+					      or fo.id=t2.FiveOrgID 
+						  or fo.id=t2.FourOrgID 
+						  or fo.id=t2.TreeOrgID 
+						  or fo.id=t2.SecondOrgID
+						 )	 
+                   )
+WHERE fo.IsInnerOrg=1 
+AND t1.AccessForErja=1
+union 
+SELECT  distinct  
+	fo.ID, 
+	ISNULL(fo.Title,'')+'-'+ResponsibleStaffer Title, 
+	fo.ParentID, 
+	fo.Phone, 
+	fo.Fax, 
+	fo.Email, 
+	fo.ResponsibleStaffer,
+	fo.IsActive, 
+	fo.PreCode, 
+	fo.IsInnerOrg, 
+	fo.Code, 
+	fo.UniqueID 
+from FromOrganizations fo 
+where fo.Title=N'دبیرخانه های دیگر'
+or fo.ParentID  = (select top 1 id 
+                   from FromOrganizations 
+                     where Title=N'دبیرخانه های دیگر'
+			       )
+GO
+
+COMMIT
+GO

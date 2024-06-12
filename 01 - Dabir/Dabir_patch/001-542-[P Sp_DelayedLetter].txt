@@ -1,0 +1,59 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_DelayedLetter]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_DelayedLetter]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_DelayedLetter]
+@SecretariatID int,@myear int,@DeadLine int, @userID int , @Tag Tinyint
+as  
+  
+declare  
+@sql nvarchar (4000),  
+@rw nvarchar(500),  
+@Today char(10),  
+@deadlineDate char(10),  
+@OrgID int,  
+@todayToint varchar(10)  
+  
+select @today=dbo.shamsi(getdate())  
+set @todayToint=cast(dbo.ShamsiToInt(@today) as varchar(10))  
+  
+SELECT     @OrgID=FromOrgID  
+FROM         Users  
+WHERE     Id = @userID  
+  
+set @RW='WHERE ((Rc.deadlinedate is not null or ChildRecommite.Deadlinedate is not null) and (L.sentLetterID is null)) and ( L.myear='+cast(@myear as varchar(10))+
+') AND (Rc.OrgID = '+ cast(@OrgID as varchar(10))+') '  
+    
+if @SecretariatID>0  
+set @rw=@rw+' AND (SecretariatID = '+cast(@SecretariatID as varchar(10))+')'  
+else  
+set @rw=@rw+' AND (SecretariatID in (SELECT SecId FROM UserSecretariats WHERE UserId = '+cast(@userid as varchar(5))+'))'  
+  
+
+if @Tag = 1
+   set @rw=@rw+' AND (case when Rc.Proceeded=0  then RC.DeadLineToint else  '''+@todayToint+''' end )< '+cast(@DeadLine as 
+varchar(5)) 
+if @Tag = 2
+   set @rw=@rw+' AND (case when Rc.Proceeded=1 and ChildRecommite.Proceeded=0 then ChildRecommite.DeadLineToint  
+       else  '''+@todayToint+''' end )< '+cast(@DeadLine as varchar(5))  
+  
+set @sql=' SELECT count( *)  
+FROM ReCommites RC  
+INNER JOIN Letter L ON RC.LetterID = L.LetterID  
+left JOIN ReCommites ChildRecommite ON RC.LetterID = ChildRecommite.LetterID AND  
+RC.ID = ChildRecommite.ParentId  AND ChildRecommite.type = RC.type '  
+  
+set @sql=@sql+@rW  
+
+exec sp_executesql  @sql
+GO
+
+COMMIT
+GO

@@ -1,0 +1,54 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[AnswerLetter]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[AnswerLetter]
+END
+GO
+
+CREATE  procedure [dbo].[AnswerLetter]
+    (
+      @LetterID INT ,
+      @AnswerLetterID INT ,
+      @Today CHAR(10)
+    )
+AS
+    BEGIN
+        INSERT  INTO dbo.Follow_Retroaction_Letter
+                (LetterID, FR_LetterID, FR_Kind)
+        VALUES  (@AnswerLetterID, @LetterID, 1)
+
+        UPDATE  Letter
+        SET     SentLetterID = @AnswerLetterID
+        WHERE   LetterID = @LetterID  
+
+        DECLARE @Letterformat INT   
+        SELECT  @letterFormat = letterFormat
+        FROM    letter
+        WHERE   LetterID = @LetterID  
+    
+        IF @letterFormat = 1  
+            BEGIN  
+                UPDATE  ReCommites
+                SET     Proceeded = 1 ,
+                        ProceedDate = @today ,
+                        IsAnswer = 1 --Ranjbar ID=258 
+                WHERE   (Proceeded = 0)
+                        AND (LetterID = @LetterID)  
+  
+                UPDATE  ReCommites
+                SET     ActionTypeID = 5
+                WHERE   (LetterID = @LetterID)  
+
+                UPDATE  letter
+                SET     LatestActionTypeID = 5
+                WHERE   letterid = @letterid  
+            END 
+    END
+GO
+
+COMMIT
+GO

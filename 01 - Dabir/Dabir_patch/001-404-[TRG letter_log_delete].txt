@@ -1,0 +1,252 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1 FROM sys.objects WHERE [object_id] = OBJECT_ID(N'[dbo].[letter_log_delete]')
+               AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[letter_log_delete];
+END
+GO
+
+CREATE TRIGGER [dbo].[letter_log_delete] ON [dbo].[Letter]
+    AFTER DELETE
+AS 
+BEGIN
+DECLARE 
+		   @IndicatorID        int,
+           @MYear               int,
+           @SecretariatID		int,
+           @Letter_Type			int,
+           @letterformat int,
+           @IncommingNO nvarchar(50),
+           @Incommingdate nvarchar(10),
+           @CenterNo nvarchar(50),
+           @CenterDate char(10),
+           @FromOrgID int,
+           @ToOrgID int,
+           @Signerid nvarchar(50),
+           @ClassificationID int,
+           @UrgencyID int,
+           @Memo nvarchar(2000),
+           @AttachTitle nvarchar(255),
+           @NumberOfAttachPages smallint,
+           @NumberOfPage tinyint,
+           @ReceiveTypeID int,
+           @UserID int,
+           @RetroactionNo nvarchar(50),
+           @UserMemo nvarchar(255),
+           @RegistrationDate char(10),
+           @RegistrationTime varchar(5),
+           @FollowLetterNo nvarchar(50),
+           @ToStaffer nvarchar(50),
+           @SentLetterID int,
+           @TemplateID int,
+           @HeaderID int,
+           @LetterRecommites nvarchar(500),
+           @PreCode nvarchar(50),
+           @fromstaffer nvarchar(50),
+           @Finalized bit,
+           @SendStatusID int,
+           @LastUpdate datetime,
+           @UserTableID int,
+           @UniqueID bigint,
+           @Archived bit,
+           @SubjectDescription nvarchar(255),
+           @SubjectID int,
+           @LatestActionTypeID int,
+           @LatestActionReason nvarchar(255),
+           @DeadLineDate char(10),
+           @ActionTypeID int,
+           @UserTableID2 int,
+           @EmailNuFromDate nvarchar(20),
+           @OldSecretariatID int,
+           @CustomerID int,
+           @InnerNO varchar(50),
+           @ECEAnswer bit,
+           @RetroactionYear int,
+           @FollowLetterYear int,
+           @InnerNoForWord varchar(50),
+           @anjam_shod int
+
+SELECT 
+		   @IndicatorID				  =IndicatorID  
+           ,@MYear				      =MYear
+           ,@SecretariatID	          =SecretariatID
+           ,@Letter_Type		      =Letter_Type
+           ,@letterformat             =letterformat
+           ,@IncommingNO              =IncommingNO
+           ,@Incommingdate            =Incommingdate
+           ,@CenterNo                 =CenterNo
+           ,@CenterDate               =CenterDate
+           ,@FromOrgID                =FromOrgID
+           ,@ToOrgID                  =ToOrgID
+           ,@Signerid                 =Signerid
+           ,@ClassificationID         =ClassificationID
+           ,@UrgencyID                =UrgencyID
+           ,@Memo                     =Memo
+           ,@AttachTitle              =AttachTitle
+           ,@NumberOfAttachPages      =NumberOfAttachPages
+           ,@NumberOfPage             =NumberOfPage
+           ,@ReceiveTypeID            =ReceiveTypeID
+           ,@UserID                   =UserID
+           ,@RetroactionNo            =RetroactionNo
+           ,@UserMemo                 =UserMemo
+           ,@RegistrationDate         =RegistrationDate
+           ,@RegistrationTime         =RegistrationTime
+           ,@FollowLetterNo           =FollowLetterNo
+           ,@ToStaffer                =ToStaffer
+           ,@SentLetterID             =SentLetterID
+           ,@TemplateID               =TemplateID
+           ,@HeaderID                 =HeaderID
+           ,@LetterRecommites         =LetterRecommites
+           ,@PreCode                  =PreCode
+          , @fromstaffer              =fromstaffer
+           ,@Finalized                =Finalized
+           ,@SendStatusID             =SendStatusID
+           ,@LastUpdate               =LastUpdate
+           ,@UserTableID              =UserTableID
+           ,@UniqueID                 =UniqueID
+           ,@Archived                 =Archived
+           ,@SubjectDescription       =SubjectDescription
+           ,@SubjectID                =SubjectID
+           ,@LatestActionTypeID       =LatestActionTypeID
+           ,@LatestActionReason       =LatestActionReason
+           ,@DeadLineDate             =DeadLineDate
+           ,@ActionTypeID             =ActionTypeID
+           ,@UserTableID2             =UserTableID2
+           ,@EmailNuFromDate          =EmailNuFromDate
+           ,@OldSecretariatID         =OldSecretariatID
+           ,@CustomerID               =CustomerID
+           ,@InnerNO                  =InnerNO
+           ,@ECEAnswer                =ECEAnswer
+           ,@RetroactionYear          =RetroactionYear
+           ,@FollowLetterYear         =FollowLetterYear
+           ,@InnerNoForWord           =InnerNoForWord
+           ,@anjam_shod               =anjam_shod
+FROM DELETED
+
+INSERT INTO [dbo].[Letter_Log]
+           (
+		   		    [IndicatorID]
+           ,[MYear]
+           ,[SecretariatID]
+           ,[Letter_Type]
+           ,[letterformat]
+           ,[IncommingNO]
+           ,[Incommingdate]
+           ,[CenterNo]
+           ,[CenterDate]
+           ,[FromOrgID]
+           ,[ToOrgID]
+           ,[Signerid]
+           ,[ClassificationID]
+           ,[UrgencyID]
+           ,[Memo]
+           ,[AttachTitle]
+           ,[NumberOfAttachPages]
+           ,[NumberOfPage]
+           ,[ReceiveTypeID]
+           ,[UserID]
+           ,[RetroactionNo]
+           ,[UserMemo]
+           ,[RegistrationDate]
+           ,[RegistrationTime]
+           ,[FollowLetterNo]
+           ,[ToStaffer]
+           ,[SentLetterID]
+           ,[TemplateID]
+           ,[HeaderID]
+           ,[LetterRecommites]
+           ,[PreCode]
+           ,[fromstaffer]
+           ,[Finalized]
+           ,[SendStatusID]
+           ,[LastUpdate]
+           ,[UserTableID]
+           ,[UniqueID]
+           ,[Archived]
+           ,[SubjectDescription]
+           ,[SubjectID]
+           ,[LatestActionTypeID]
+           ,[LatestActionReason]
+           ,[DeadLineDate]
+           ,[ActionTypeID]
+           ,[UserTableID2]
+           ,[EmailNuFromDate]
+           ,[OldSecretariatID]
+           ,[CustomerID]
+           ,[InnerNO]
+           ,[ECEAnswer]
+           ,[RetroactionYear]
+           ,[FollowLetterYear]
+           ,[InnerNoForWord]
+           ,[anjam_shod]
+		   ,[UserName]           --hostrname
+           ,[DateAction]         --getdate
+           ,[TypeAction]         --insert delet
+		   )
+     VALUES
+           ( @IndicatorID				 
+           ,@MYear				    
+           ,@SecretariatID	       
+           ,@Letter_Type		        
+           ,@letterformat           
+           ,@IncommingNO           
+           ,@Incommingdate            
+           ,@CenterNo              
+           ,@CenterDate              
+           ,@FromOrgID               
+           ,@ToOrgID                
+           ,@Signerid                 
+           ,@ClassificationID      
+           ,@UrgencyID              
+           ,@Memo                  
+           ,@AttachTitle           
+           ,@NumberOfAttachPages    
+           ,@NumberOfPage            
+           ,@ReceiveTypeID          
+           ,@UserID              
+           ,@RetroactionNo         
+           ,@UserMemo                
+           ,@RegistrationDate        
+           ,@RegistrationTime      
+           ,@FollowLetterNo         
+           ,@ToStaffer             
+           ,@SentLetterID          
+           ,@TemplateID       
+           ,@HeaderID             
+           ,@LetterRecommites         
+           ,@PreCode                  
+           ,@fromstaffer           
+           ,@Finalized                
+           ,@SendStatusID          
+           ,@LastUpdate        
+           ,@UserTableID          
+           ,@UniqueID               
+           ,@Archived               
+           ,@SubjectDescription     
+           ,@SubjectID              
+           ,@LatestActionTypeID       
+           ,@LatestActionReason    
+           ,@DeadLineDate          
+           ,@ActionTypeID             
+           ,@UserTableID2            
+           ,@EmailNuFromDate         
+           ,@OldSecretariatID         
+           ,@CustomerID              
+           ,@InnerNO                  
+           ,@ECEAnswer               
+           ,@RetroactionYear          
+           ,@FollowLetterYear         
+           ,@InnerNoForWord           
+           ,@anjam_shod
+           ,HOST_NAME()
+           ,GETDATE()
+           ,'DELETE'
+		   )
+END
+GO
+
+ALTER TABLE [dbo].[Letter] ENABLE TRIGGER [letter_log_delete]
+GO
+COMMIT
+GO

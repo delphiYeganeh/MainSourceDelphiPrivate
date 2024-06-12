@@ -1,0 +1,27 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_DraftReceivedLetter_count]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_DraftReceivedLetter_count]
+END
+GO
+
+CREATE  procedure [dbo].[Get_DraftReceivedLetter_count]
+@Myear int,@secretariatid int ,@count int output
+
+AS
+	select @count=count(*)
+		from letter
+		where Myear=@Myear 
+			and letter_type=1 
+			and letterformat=2 
+			and secretariatid=@secretariatid
+
+	set @count=isnull(@Count,0)
+GO
+
+COMMIT
+GO

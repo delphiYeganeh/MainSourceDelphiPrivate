@@ -1,0 +1,136 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT *
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[FromOrganizations_fn]') 
+                   and OBJECTPROPERTY(id, N'IsTableFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[FromOrganizations_fn]
+END
+GO
+
+CREATE FUNCTION [dbo].[FromOrganizations_fn]
+(
+  @OrgID int
+)
+returns table
+as
+return 
+(
+	SELECT 
+	   ID,
+	   code, 
+	   Title,
+	   ResponsibleStaffer,
+	   ParentID,
+	   GroupID,
+	   IsActive,
+	   IsInnerOrg,
+	   Phone,
+	   Fax,
+       Email,
+       PreCode,
+       UniqueID
+	FROM FromOrganizations 
+	WHERE isactive=1 
+	AND (Title LIKE '%' + '' + '%' OR ResponsibleStaffer LIKE '%' + '' + '%' OR code LIKE '%' + '' +'%')
+	AND ID IN(
+				SELECT 
+				    DISTINCT OrgID
+				FROM ChartWorkGroupDetails
+				WHERE GroupID in(
+									SELECT 
+									  GroupID 
+									FROM ChartWorkGroupDetails
+									WHERE OrgID = @OrgID
+									AND AccessForErja = 1)
+				AND AccessForErja = 1
+             )
+AND GroupID IS NOT NULL
+)
+UNION 
+(
+	SELECT 
+	   ID,
+	   code, 
+	   Title,
+	   ResponsibleStaffer,
+	   ParentID,
+	   GroupID,
+	   IsActive,
+	   IsInnerOrg,
+	   Phone,
+	   Fax,
+       Email,
+       PreCode,
+       UniqueID  
+	FROM FromOrganizations 
+	WHERE isactive=1 
+	AND (Title LIKE '%' + '' + '%' OR ResponsibleStaffer LIKE '%' + '' + '%' OR code LIKE '%' + '' +'%')
+	AND IsInnerOrg = 0
+)
+/*
+UNION 
+(
+	SELECT 
+	   ID,
+	   code, 
+	   Title,
+	   ResponsibleStaffer,
+	   ParentID,
+	   GroupID,
+	   IsActive,
+	   IsInnerOrg,
+	   Phone,
+	   Fax,
+       Email,
+       PreCode,
+       UniqueID  
+	FROM FromOrganizations 
+	WHERE isactive=1 
+	--AND ID In( 3,1)
+)
+*/
+/*UNION 
+(
+	SELECT 
+	   ID,
+	   code, 
+	   Title,
+	   ResponsibleStaffer,
+	   ParentID,
+	   GroupID,
+	   IsActive,
+	   IsInnerOrg,
+	   Phone,
+	   Fax,
+       Email,
+       PreCode,
+       UniqueID  
+	FROM FromOrganizations 
+	WHERE isactive=1 
+	AND ID in (
+				SELECT 
+				   ParentID
+				FROM FromOrganizations 
+				WHERE isactive=1 
+				AND (Title LIKE '%' + '' + '%' OR ResponsibleStaffer LIKE '%' + '' + '%' OR code LIKE '%' + '' +'%')
+				AND ID IN(
+							SELECT 
+								DISTINCT OrgID
+							FROM ChartWorkGroupDetails
+							WHERE GroupID in(
+												SELECT 
+												  GroupID 
+												FROM ChartWorkGroupDetails
+												WHERE OrgID = @OrgID
+												AND AccessForErja = 1)
+							AND AccessForErja = 1
+						 )
+	         )
+)
+*/
+GO
+
+COMMIT
+GO

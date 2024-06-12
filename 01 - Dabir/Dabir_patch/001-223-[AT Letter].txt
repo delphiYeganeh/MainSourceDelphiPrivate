@@ -1,0 +1,12 @@
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'Has_Page'
+          AND Object_ID = Object_ID(N'dbo.Letter'))
+BEGIN
+	ALTER TABLE [dbo].[Letter] 
+	ADD	[Has_Page] [bit] NULL
+END
+GO
+COMMIT
+GO

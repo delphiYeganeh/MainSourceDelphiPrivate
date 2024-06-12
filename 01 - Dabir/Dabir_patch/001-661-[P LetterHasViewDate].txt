@@ -1,0 +1,24 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[LetterHasViewDate]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[LetterHasViewDate]
+END
+GO
+
+CREATE  procedure [dbo].[LetterHasViewDate] 
+	@LetterId Int, 
+	@res TinyInt Output
+AS
+BEGIN
+	Set @res = 0
+	If Exists(Select 1 From ReCommites Where LetterID = @LetterId	And ISNULL(viewdate, '') <> '')
+	  Set @res = 1
+END
+GO
+
+COMMIT
+GO

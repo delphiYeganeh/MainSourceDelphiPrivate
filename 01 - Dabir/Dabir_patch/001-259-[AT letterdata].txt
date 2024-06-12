@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'IsTemplate'
+          AND Object_ID = Object_ID(N'dbo.letterdata'))
+begin 
+ALTER TABLE dbo.LetterData ADD
+	IsTemplate bit NULL
+end
+GO
+ALTER TABLE dbo.LetterData SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+GO

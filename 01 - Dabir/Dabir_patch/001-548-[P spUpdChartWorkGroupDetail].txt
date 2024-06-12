@@ -1,0 +1,134 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[spUpdChartWorkGroupDetail]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[spUpdChartWorkGroupDetail]
+END
+GO
+
+CREATE  procedure [dbo].[spUpdChartWorkGroupDetail]
+	@Type int, 
+	@GroupID int,
+	@ID	INT,
+	@SubTree INT
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	IF @Type=1 -- عضویت
+	BEGIN
+		IF ISNULL(@SubTree,0)=0		
+		BEGIN
+			UPDATE ChartWorkGroupDetails
+			SET	AccessForErja = 1
+			WHERE GroupID=@GroupID AND OrgID IN (SELECT TOP 1 ID FROM dbo.fn_GetNode_TOLeaf(@ID))
+--*************************************  شروع بروزرسانی انتصاب  گروه های به سمت ****************************************
+		   UPDATE FromOrganizations
+		   SET GROUPID = @GroupID
+		   WHERE ID IN (SELECT TOP 1 ID FROM dbo.fn_GetNode_TOLeaf(@ID))
+--*************************************  پایان بروزرسانی انتصاب  گروه های به سمت ****************************************
+        END
+		ELSE 
+		IF ISNULL(@SubTree,0)=1 
+		BEGIN
+			UPDATE ChartWorkGroupDetails
+			SET	AccessForErja = 1
+			WHERE GroupID=@GroupID AND OrgID IN (SELECT ID FROM dbo.fn_GetNode_TOLeaf(@ID))						
+--*************************************  شروع بروزرسانی انتصاب  گروه های به سمت با زیر شاخه ها ****************************************
+			DECLARE @ID_NEW int 
+
+					DECLARE cur1 CURSOR FOR
+
+					SELECT id FROM FromOrganizations
+					WHERE ID IN
+										(
+											SELECT 
+												ID 
+											FROM FromOrganizations
+											WHERE  ID IN  (SELECT ID FROM dbo.fn_GetNode_TOLeaf(@ID))						
+
+										)
+
+					OPEN cur1
+					FETCH NEXT FROM cur1   
+					INTO @ID_NEW
+					WHILE @@FETCH_STATUS = 0  
+					BEGIN 
+  
+					  UPDATE FromOrganizations
+					   SET GROUPID = @GroupID
+					  WHERE ID = @ID_NEW
+
+
+					 FETCH NEXT FROM cur1   
+					 INTO @ID_NEW  
+					END   
+					CLOSE cur1  
+					DEALLOCATE cur1
+--*************************************  پایان بروزرسانی انتصاب  گروه های به سمت با زیر شاخه ها ****************************************
+      END  
+
+	END
+	IF @Type=0  -- عدم عضویت
+	BEGIN
+		IF ISNULL(@SubTree,0)=0	
+		BEGIN	
+			UPDATE ChartWorkGroupDetails
+			SET	AccessForErja = 0
+			WHERE GroupID=@GroupID AND OrgID IN (SELECT TOP 1 ID FROM dbo.fn_GetNode_TOLeaf(@ID))
+
+--*************************************  شروع بروزرسانی عدم انتصاب  گروه های به سمت ****************************************
+		   UPDATE FromOrganizations
+		   SET GROUPID = 0
+		   WHERE ID IN (SELECT TOP 1 ID FROM dbo.fn_GetNode_TOLeaf(@ID))
+--*************************************  پایان بروزرسانی عدم انتصاب  گروه های به سمت ***********
+        END 
+		ELSE 
+		IF ISNULL(@SubTree,0)=1
+		BEGIN
+			UPDATE ChartWorkGroupDetails
+			SET	AccessForErja = 0
+			WHERE GroupID=@GroupID AND OrgID IN (SELECT ID FROM dbo.fn_GetNode_TOLeaf(@ID))			
+--*************************************  شروع بروزرسانی عدم انتصاب  گروه های به سمت با زیر شاخه ها ****************************************
+			DECLARE @ID_NEW2 int 
+
+					DECLARE cur2 CURSOR FOR
+
+					SELECT id FROM FromOrganizations
+					WHERE ID IN
+										(
+											SELECT 
+												ID 
+											FROM FromOrganizations
+											WHERE  ID IN  (SELECT ID FROM dbo.fn_GetNode_TOLeaf(@ID))						
+
+										)
+
+					OPEN cur2
+					FETCH NEXT FROM cur2   
+					INTO @ID_NEW2
+					WHILE @@FETCH_STATUS = 0  
+					BEGIN 
+  
+					  UPDATE FromOrganizations
+					   SET GROUPID = 0
+					  WHERE ID = @ID_NEW2
+
+
+					 FETCH NEXT FROM cur2   
+					 INTO @ID_NEW2  
+					END   
+					CLOSE cur2  
+					DEALLOCATE cur2
+--*************************************  پایان بروزرسانی  عدم انتصاب  گروه های به سمت با زیر شاخه ها ****************************************
+
+        END
+	END
+END
+GO
+
+COMMIT
+GO

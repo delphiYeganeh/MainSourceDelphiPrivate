@@ -1,0 +1,26 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetUserSecondSign]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetUserSecondSign]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetUserSecondSign]
+	@UserId int
+as
+begin
+	--	last modifier xax 1398/03/03
+	select
+		top 1
+		UserSign
+	from UserSign
+	where UserID = @UserId
+end
+GO
+
+COMMIT
+GO

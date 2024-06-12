@@ -1,0 +1,27 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[get_LetterID_ByIndicatorid]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[get_LetterID_ByIndicatorid]
+END
+GO
+
+CREATE  procedure [dbo].[get_LetterID_ByIndicatorid]
+	(@indicatrid int,@Myear int,@LetterFormat tinyint,@letter_type tinyint,@SecretariatID smallint,@LetterID  int output)
+AS 
+	Set @letterID=0
+	SELECT    top 1 @LetterID=LetterID
+	FROM letter
+	WHERE (indicatorid=@indicatrid  or @indicatrid=0) 
+		and (LetterFormat=@LetterFormat or @letterFormat=0)  
+		and (letter_type=@letter_type  or @letter_type=0) 
+		and (SecretariatID=@SecretariatID or @secretariatid=0)
+		and (Myear=@Myear or @myear=0)
+	ORDER BY Myear DESC
+GO
+
+COMMIT
+GO

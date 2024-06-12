@@ -1,0 +1,22 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PRCDbName_Select]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PRCDbName_Select]
+END
+GO
+
+CREATE  procedure [dbo].[PRCDbName_Select]
+AS
+	SELECT [ID]
+			,[Name]
+			,[ServerName]
+			,[DBName]
+	FROM [dbo].[tbDbName]
+GO
+
+COMMIT
+GO

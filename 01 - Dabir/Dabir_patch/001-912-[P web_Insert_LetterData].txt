@@ -1,0 +1,42 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[web_Insert_LetterData]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[web_Insert_LetterData]
+END
+GO
+
+CREATE  procedure [dbo].[web_Insert_LetterData]
+	(@LetterDataID 	[int] output,
+	 @LetterID 	[int],
+	 @PageNumber 	[tinyint],
+	 @extention 	[tinyint],
+	 @description [nvarchar](200)='',
+	 @image [image] = null,
+	 @FileName [nvarchar](100))
+
+AS INSERT INTO [dbo].[LetterData] 
+	 (  [LetterID],
+	 [PageNumber],
+	 [extention],
+	 [image],
+	 [description],
+	 [FileName]) 
+ 
+VALUES 
+	( @LetterID,
+	 @PageNumber,
+	 @extention,
+	 @image,
+	 @description,
+	 @FileName)
+
+set  @LetterDataID=SCOPE_IDENTITY()
+
+GO
+
+COMMIT
+GO

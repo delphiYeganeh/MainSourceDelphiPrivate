@@ -1,0 +1,129 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[InnerNoFormat]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[InnerNoFormat]
+END
+GO
+
+CREATE FUNCTION [dbo].[InnerNoFormat]
+(
+	@SenderTableName varchar(100),@ReceiverTableName varchar(100),@SecID INT
+)
+	Returns varchar(1000)
+as
+Begin
+	DECLARE @InnerNo NVARCHAR(500), @Delimeter char(1) , 
+			@LetterFormulaPart1 VARCHAR(50)
+			, @LetterFormulaPart2 VARCHAR(50)
+			, @LetterFormulaPart3 VARCHAR(50)
+			, @LetterFormulaPart4 VARCHAR(50)
+			, @LetterFormulaPart5 VARCHAR(50)
+			, @LetterFormulaPart6 VARCHAR(50)         
+
+	SELECT @Delimeter=ISNULL(LetterFormulaSeperator,0)
+			,@LetterFormulaPart1=ISNULL(LetterFormulaPart1,0)
+			,@LetterFormulaPart2=ISNULL(LetterFormulaPart2,0)
+			,@LetterFormulaPart3=ISNULL(LetterFormulaPart3,0)
+			,@LetterFormulaPart4=ISNULL(LetterFormulaPart4,0)
+			,@LetterFormulaPart5=ISNULL(LetterFormulaPart5,0)
+			,@LetterFormulaPart6=ISNULL(LetterFormulaPart6,0)  
+	FROM LetterFormula WHERE SecID=@SecID 
+
+	--set @Delimeter=dbo.GetSystemValue('LetterFormulaSeperator')--44        
+	set @InnerNo=case  @LetterFormulaPart1--dbo.GetSystemValue('LetterFormulaPart1') --35       
+					   when 0 then ''        
+					   when 1 then 'isnull(Secretariats.Precode,'''')+'''+@Delimeter+'''+'        
+					   when 2 then 'cast(Myear as char(4))+'''+@Delimeter+'''+'        
+					   when 3 then 'cast(indicatorid as nvarchar(10))+'''+@Delimeter+'''+'        
+					   when 4 then 'case when len('+@SenderTableName+'.Code)>5 then '+@SenderTableName+'.PreCode else '+@SenderTableName+'.Code end +'''+@Delimeter+'''+'        
+					   when 5 then 'case when len('+@ReceiverTableName+'.Code)>5 then '+@ReceiverTableName+'.PreCode else '+@ReceiverTableName+'.Code end +'''+@Delimeter+'''+'        
+					   when 6 then 'isnull(LetterTypes.PreCode,'''')+'''+@Delimeter+'''+'        
+					   when 7 then 'isnull(UserMemo,'''')+'''+@Delimeter+'''+'        
+					   when 8 then 'isnull('+@ReceiverTableName+'.Precode,'''')+'''+@Delimeter+'''+'  
+					   when 9 then 'isnull(CenterNo,'''')+'''+@Delimeter+'''+' 
+			   WHEN 10 THEN 'isnull((Select SubjectCode from Subject where SubjectID = Letter.SubjectID), '''')+'''+@Delimeter+'''+' end+        
+        
+				 case  @LetterFormulaPart2--dbo.GetSystemValue('LetterFormulaPart2')--36        
+					   when 0 then ''        
+					   when 1 then 'isnull(Secretariats.Precode,'''')+'''+@Delimeter+'''+'        
+					   when 2 then 'cast(Myear as char(4))+'''+@Delimeter+'''+'        
+					   when 3 then 'cast(indicatorid as nvarchar(10))+'''+@Delimeter+'''+'        
+					   when 4 then 'case when len('+@SenderTableName+'.Code)>5 then '+@SenderTableName+'.PreCode else '+@SenderTableName+'.Code end +'''+@Delimeter+'''+'        
+					   when 5 then 'case when len('+@ReceiverTableName+'.Code)>5 then '+@ReceiverTableName+'.PreCode else '+@ReceiverTableName+'.Code end +'''+@Delimeter+'''+'        
+					   when 6 then 'isnull(LetterTypes.PreCode,'''')+'''+@Delimeter+'''+'        
+					   when 7 then 'isnull(UserMemo,'''')+'''+@Delimeter+'''+'        
+					   when 8 then 'isnull('+@ReceiverTableName+'.Precode,'''')+'''+@Delimeter+'''+'
+					   when 9 then 'isnull(CenterNo,'''')+'''+@Delimeter+'''+' 
+			   WHEN 10 THEN 'isnull((Select SubjectCode from Subject where SubjectID = Letter.SubjectID), '''')+'''+@Delimeter+'''+' end+                           
+        
+				 case  @LetterFormulaPart3--dbo.GetSystemValue('LetterFormulaPart3')--37  
+					   when 0 then ''        
+					   when 1 then 'isnull(Secretariats.Precode,'''')+'''+@Delimeter+'''+'        
+					   when 2 then 'cast(Myear as char(4))+'''+@Delimeter+'''+'        
+					   when 3 then 'cast(indicatorid as nvarchar(10))+'''+@Delimeter+'''+'        
+					   when 4 then 'case when len('+@SenderTableName+'.Code)>5 then '+@SenderTableName+'.PreCode else '+@SenderTableName+'.Code end +'''+@Delimeter+'''+'        
+					   when 5 then 'case when len('+@ReceiverTableName+'.Code)>5 then '+@ReceiverTableName+'.PreCode else '+@ReceiverTableName+'.Code end +'''+@Delimeter+'''+'        
+					   when 6 then 'isnull(LetterTypes.PreCode,'''')+'''+@Delimeter+'''+'        
+					   when 7 then 'isnull(UserMemo,'''')+'''+@Delimeter+'''+'        
+					   when 8 then 'isnull('+@ReceiverTableName+'.Precode,'''')+'''+@Delimeter+'''+'
+					   when 9 then 'isnull(CenterNo,'''')+'''+@Delimeter+'''+' 
+			   WHEN 10 THEN 'isnull((Select SubjectCode from Subject where SubjectID = Letter.SubjectID), '''')+'''+@Delimeter+'''+' end+                   
+        
+				 case  @LetterFormulaPart4--dbo.GetSystemValue('LetterFormulaPart4')--38        
+					   when 0 then ''        
+					   when 1 then 'isnull(Secretariats.Precode,'''')+'''+@Delimeter+'''+'        
+					   when 2 then 'cast(Myear as char(4))+'''+@Delimeter+'''+'        
+					   when 3 then 'cast(indicatorid as nvarchar(10))+'''+@Delimeter+'''+'        
+					   when 4 then 'case when len('+@SenderTableName+'.Code)>5 then '+@SenderTableName+'.PreCode else '+@SenderTableName+'.Code end +'''+@Delimeter+'''+'        
+					   when 5 then 'case when len('+@ReceiverTableName+'.Code)>5 then '+@ReceiverTableName+'.PreCode else '+@ReceiverTableName+'.Code end +'''+@Delimeter+'''+'        
+					   when 6 then 'isnull(LetterTypes.PreCode,'''')+'''+@Delimeter+'''+'        
+					   when 7 then 'isnull(UserMemo,'''')+'''+@Delimeter+'''+'        
+					   when 8 then 'isnull('+@ReceiverTableName+'.Precode,'''')+'''+@Delimeter+'''+'
+					   when 9 then 'isnull(CenterNo,'''')+'''+@Delimeter+'''+' 
+			   WHEN 10 THEN 'isnull((Select SubjectCode from Subject where SubjectID = Letter.SubjectID), '''')+'''+@Delimeter+'''+' end+
+        
+				 case  @LetterFormulaPart5--dbo.GetSystemValue('LetterFormulaPart5')--39        
+					   when 0 then ''        
+					   when 1 then 'isnull(Secretariats.Precode,'''')+'''+@Delimeter+'''+'                         
+					   when 2 then 'cast(Myear as char(4))+'''+@Delimeter+'''+'        
+					   when 3 then 'cast(indicatorid as nvarchar(10))+'''+@Delimeter+'''+'        
+					   when 4 then 'case when len('+@SenderTableName+'.Code)>5 then '+@SenderTableName+'.PreCode else '+@SenderTableName+'.Code end +'''+@Delimeter+'''+'        
+					   when 5 then 'case when len('+@ReceiverTableName+'.Code)>5 then '+@ReceiverTableName+'.PreCode else '+@ReceiverTableName+'.Code end +'''+@Delimeter+'''+'        
+					   when 6 then 'isnull(LetterTypes.PreCode,'''')+'''+@Delimeter+'''+'        
+					   when 7 then 'isnull(UserMemo,'''')+'''+@Delimeter+'''+'        
+					   when 8 then 'isnull('+@ReceiverTableName+'.Precode,'''')+'''+@Delimeter+'''+'
+					   when 9 then 'isnull(CenterNo,'''')+'''+@Delimeter+'''+' 
+			   WHEN 10 THEN 'isnull((Select SubjectCode from Subject where SubjectID = Letter.SubjectID), '''')+'''+@Delimeter+'''+' end+                   
+        
+				 case  @LetterFormulaPart6--dbo.GetSystemValue('LetterFormulaPart6')--40        
+					   when 0 then ''        
+					   when 1 then 'isnull(Secretariats.Precode,'''')+'''+@Delimeter+'''+'        
+					   when 2 then 'cast(Myear as char(4))+'''+@Delimeter+'''+'        
+					   when 3 then 'cast(indicatorid as nvarchar(10))+'''+@Delimeter+'''+'        
+					   when 4 then 'case when len('+@SenderTableName+'.Code)>5 then '+@SenderTableName+'.PreCode else '+@SenderTableName+'.Code end +'''+@Delimeter+'''+'        
+					   when 5 then 'case when len('+@ReceiverTableName+'.Code)>5 then '+@ReceiverTableName+'.PreCode else '+@ReceiverTableName+'.Code end +'''+@Delimeter+'''+'        
+					   when 6 then 'isnull(LetterTypes.PreCode,'''')+'''+@Delimeter+'''+'        
+					   when 7 then 'isnull(UserMemo,'''')+'''+@Delimeter+'''+'        
+					   when 8 then 'isnull('+@ReceiverTableName+'.Precode,'''')+'''+@Delimeter+'''+'
+					   when 9 then 'isnull(CenterNo,'''')+'''+@Delimeter+'''+'  
+			   WHEN 10 THEN 'isnull((Select SubjectCode from Subject where SubjectID = Letter.SubjectID), '''')+'''+@Delimeter+'''+'                     
+				 end        
+        
+	IF len(@InnerNo)>5        
+	if substring(@InnerNo,len(@InnerNo)-4,5)='+'''+@Delimeter+'''+'        
+	   set @InnerNo=substring(@InnerNo,1,len(@InnerNo)-5)        
+        
+	if @innerno<>''        
+	set @InnerNo='replace(replace(ltrim(rtrim('+@InnerNo+')),'''+@Delimeter+@Delimeter+''','''+@Delimeter+'''),'''+@Delimeter+@Delimeter+''','''+@Delimeter+''')'        
+	else        
+	set @innerno='cast(indicatorid as nvarchar(500))'  
+	return LTRIM(rtrim(@InnerNo))
+END
+GO
+
+COMMIT
+GO

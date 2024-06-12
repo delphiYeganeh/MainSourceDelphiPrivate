@@ -1,0 +1,68 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[insert_Letter_all]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[insert_Letter_all]
+END
+GO
+
+CREATE  procedure [dbo].[insert_Letter_all]
+	(@IndicatorID 	[int],	 @MYear 	[int],	 @SecretariatID 	[tinyint],
+	 @Letter_Type 	[tinyint],	 @letterformat 	[tinyint],	 @IncommingNO 	[nvarchar](50),
+	 @Incommingdate 	[nvarchar](10),	 @CenterNo 	[nvarchar](50),	 @CenterDate 	[char](10),
+	 @FromOrgID 	[int],	 @ToOrgID 	[int],	 @Signerid 	[nvarchar](50),
+	 @ClassificationID 	[tinyint],	 @UrgencyID 	[smallint],	 @Memo 	[nvarchar](500),
+	 @AttachTitle 	[nvarchar](50),	 @NumberOfAttachPages 	[smallint],	 @NumberOfPage 	[tinyint],
+	 @ReceiveTypeID 	[tinyint],	 @UserID 	[int],	 @RetroactionNo 	[nvarchar](50),
+	 @UserMemo 	[nvarchar](255),	 @RegistrationDate 	[char](10), @RegistrationTime 	[varchar](5),
+	 @FollowLetterNo 	[nvarchar](50),	 @ToStaffer 	[nvarchar](50),	 @SentLetterID 	[int],
+	 @TemplateID 	[int],	 @HeaderID 	[int],	 @LetterRecommites 	[nvarchar](500),
+	 @FromStaffer 	[nvarchar](50),	 @Finalized 	[bit],	 @SendStatusID 	[tinyint],
+@Exists bit output,
+@LetterID int output)
+
+
+AS 
+	If Exists (Select 1
+				From letter 
+				Where [IndicatorID] = @IndicatorID 
+					AND [MYear] = @MYear 
+					AND [SecretariatID] = @SecretariatID 
+					AND [Letter_Type] = @Letter_Type 
+					AND [letterformat] = @letterformat)
+		Set @Exists=1
+	Else
+		Set @Exists=0
+
+
+	If @Exists=0 
+		INSERT INTO .[dbo].[Letter] 
+			([IndicatorID],	 [MYear],	         [SecretariatID],[Letter_Type],	 [letterformat],
+ 			 [IncommingNO],	 [Incommingdate],	 [CenterNo],	 [CenterDate],	 [FromOrgID],	 [ToOrgID],
+			 [Signerid],	 [ClassificationID],	 [UrgencyID],	 [Memo],	 [AttachTitle],	 [NumberOfAttachPages],
+			 [NumberOfPage], [ReceiveTypeID],	 [UserID],	 [RetroactionNo],[UserMemo],
+			 [RegistrationDate],[RegistrationTime],	 [FollowLetterNo],[ToStaffer],	 [SentLetterID],
+			 [TemplateID],	 [HeaderID],	 [LetterRecommites],	 [FromStaffer],	 [Finalized],	 [SendStatusID])
+ 
+		VALUES 
+			(@IndicatorID,	 @MYear,	         @SecretariatID, @Letter_Type,	 @letterformat,
+			 @IncommingNO,	 @Incommingdate,	 @CenterNo,	 @CenterDate,	 @FromOrgID,	 @ToOrgID,
+			 @Signerid,	 @ClassificationID,	 @UrgencyID,	 @Memo,	 @AttachTitle,	 @NumberOfAttachPages,
+			 @NumberOfPage,	 @ReceiveTypeID,	 @UserID,	 @RetroactionNo,	 @UserMemo,
+			 @RegistrationDate,	 @RegistrationTime,	 @FollowLetterNo,	 @ToStaffer,	 @SentLetterID,
+			 @TemplateID,	 @HeaderID,	 @LetterRecommites,	 @FromStaffer,	 @Finalized,	 @SendStatusID)
+
+	select @LetterID=Letterid 
+	from letter WHERE 
+		[IndicatorID]	 = @IndicatorID AND
+		 [MYear]	 = @MYear AND
+		 [SecretariatID] = @SecretariatID AND
+		 [Letter_Type]	 = @Letter_Type AND
+		 [letterformat]	 = @letterformat
+GO
+
+COMMIT
+GO

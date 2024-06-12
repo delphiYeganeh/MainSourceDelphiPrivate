@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'HasDelete'
+          AND Object_ID = Object_ID(N'dbo.UserTable'))
+BEGIN
+	ALTER TABLE [dbo].[UserTable] 
+	ADD	[HasDelete] [bit] NULL
+END
+GO
+
+COMMIT
+GO

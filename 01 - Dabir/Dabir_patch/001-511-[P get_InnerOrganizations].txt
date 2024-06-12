@@ -1,0 +1,64 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[get_InnerOrganizations]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[get_InnerOrganizations]
+END
+GO
+
+CREATE  procedure [dbo].[get_InnerOrganizations]
+ @FromOrgID int = NULL
+as
+
+	DECLARE @AccessID int
+
+	SELECT @AccessID = AccessID 
+		FROM users
+		WHERE (ISNULL(FromOrgID,0) in (SELECT ID 
+							FROM dbo.FromOrganizations
+							WHERE id = @FromOrgID
+						 )
+			   OR 
+				ISNULL(SecondOrgID,0) in (SELECT ID 
+									FROM dbo.FromOrganizations
+									WHERE id = @FromOrgID
+								 )
+			   OR 
+				ISNULL(TreeOrgID,0) in (SELECT ID 
+									FROM dbo.FromOrganizations
+									WHERE id = @FromOrgID
+								 )
+			   OR 
+				ISNULL(FourOrgID,0) in (SELECT ID 
+									FROM dbo.FromOrganizations
+									WHERE id = @FromOrgID
+								 )
+			   OR 
+				ISNULL(FiveOrgID,0) in (SELECT ID 
+									FROM dbo.FromOrganizations
+									WHERE id = @FromOrgID
+								 )
+			  )
+		AND Active = 1
+
+
+	IF @AccessID = 1 
+	  SET @FromOrgID = NULL
+
+	IF @FromOrgID IS NULL
+		SELECT *,Title+'-'+ResponsibleStaffer AS Name_Semat 
+			FROM dbo.FromOrganizations
+			where IsInnerOrg=1 and isactive=1
+			order by isactive desc
+	ELSE
+		SELECT *,Title+'-'+ResponsibleStaffer AS Name_Semat 
+			FROM dbo.FromOrganizations_fn(@FromOrgID)
+			where IsInnerOrg=1 and isactive=1
+			order by isactive desc
+GO
+
+COMMIT
+GO

@@ -1,0 +1,21 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetFromOrganizationsById]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetFromOrganizationsById]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetFromOrganizationsById](@id INT)
+AS
+
+SELECT   *
+FROM    FromOrganizations  
+WHERE ID=@id
+GO
+
+COMMIT
+GO

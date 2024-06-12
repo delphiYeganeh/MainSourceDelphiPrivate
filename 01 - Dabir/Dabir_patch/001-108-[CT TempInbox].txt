@@ -1,0 +1,106 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'TempInbox')
+BEGIN
+	CREATE TABLE [dbo].[TempInbox](
+		[MyTmp_ID] [int] IDENTITY(1,1) NOT NULL,
+		[LetterID] [int] NULL,
+		[SignerID] [nvarchar](1000) NULL,
+		[IndicatorID] [int] NULL,
+		[MYear] [int] NULL,
+		[subjectid] [int] NULL,
+		[SecretariatID] [int] NULL,
+		[Letter_Type] [int] NULL,
+		[letterformat] [int] NULL,
+		[IncommingNO] [nvarchar](1000) NULL,
+		[Incommingdate] [nvarchar](100) NULL,
+		[ClassificationID] [int] NULL,
+		[UrgencyID] [int] NULL,
+		[Memo] [nvarchar](4000) NULL,
+		[Tostaffer] [nvarchar](4000) NULL,
+		[SentLetterID] [int] NULL,
+		[AttachTitle] [nvarchar](1000) NULL,
+		[NumberOfAttachPages] [int] NULL,
+		[NumberOfPage] [int] NULL,
+		[ReceiveTypeID] [int] NULL,
+		[UserID] [int] NULL,
+		[RetroactionNo] [nvarchar](100) NULL,
+		[UserMemo] [nvarchar](1000) NULL,
+		[RegistrationDate] [char](100) NULL,
+		[toorgid] [int] NULL,
+		[fromorgid] [int] NULL,
+		[FollowLetterNo] [nvarchar](1000) NULL,
+		[LetterRecommites] [nvarchar](1000) NULL,
+		[finalized] [bit] NULL,
+		[CenterNo] [nvarchar](100) NULL,
+		[CenterDate] [char](100) NULL,
+		[templateID] [int] NULL,
+		[headerID] [int] NULL,
+		[registrationTime] [varchar](100) NULL,
+		[fromstaffer] [nvarchar](4000) NULL,
+		[sendStatusID] [int] NULL,
+		[LastUpdate] [datetime] NULL,
+		[UserTableID] [int] NULL,
+		[InnerNo] [nvarchar](1000) NULL,
+		[OrgID] [int] NULL,
+		[ParentId] [smallint] NULL,
+		[Paraph] [nvarchar](4000) NULL,
+		[RecommiteDate] [varchar](100) NULL,
+		[Proceeded] [bit] NULL,
+		[ProceedDate] [varchar](100) NULL,
+		[ReType] [smallint] NULL,
+		[RecommitTypeTitle] [nvarchar](1000) NULL,
+		[IsInner] [int] NULL,
+		[RecommiterTitle] [nvarchar](1000) NULL,
+		[sendertitle] [nvarchar](1000) NULL,
+		[recommiteid] [int] NULL,
+		[id] [smallint] NULL,
+		[isSecure] [bit] NULL,
+		[StaffMemo] [nvarchar](4000) NULL,
+		[Yincommingno] [nvarchar](1000) NULL,
+		[PreCode] [nvarchar](100) NULL,
+		[IsCopy] [bit] NULL,
+		[IsCopy_In_Dabir] [bit] NULL,
+		[SentToDabir] [bit] NULL,
+		[has_Page] [bit] NULL,
+		[has_WordPage] [bit] NULL,
+		[has_UncheckedFollowUp] [bit] NULL,
+		[has_ExpiredFollowUp] [bit] NULL,
+		[LetterDataId] [int] NULL,
+		[has_file] [bit] NULL,
+		[DeadLineDays] [int] NULL,
+		[ViewDate] [char](100) NULL,
+		[DeadLineDate] [char](100) NULL,
+		[ChildParaph] [varchar](3000) NULL,
+		[ChildOrg] [varchar](1000) NULL,
+		[ActionTypeID] [int] NULL,
+		[UserRecomCount] [int] NULL,
+		[IsAnswer] [bit] NULL,
+		[ISFollowup] [bit] NULL,
+		[Erja_Or_Answer_Date] [char](10) NULL,
+		[ColorFlag] [varchar](50) NULL,
+		[MemoAndRecomUserCount] [varchar](4000) NULL,
+		[has_Sign] [bit] NULL
+	) ON [PRIMARY]
+END
+ELSE
+BEGIN
+	IF EXISTS(SELECT 1 
+			FROM INFORMATION_SCHEMA.COLUMNS
+			WHERE TABLE_NAME = 'TempInbox' 
+				AND COLUMN_NAME = 'MYear' 
+				AND DATA_TYPE = 'tinyint')
+	BEGIN
+		ALTER TABLE [dbo].[TempInbox] 
+		ALTER COLUMN	[MYear] [int] NOT NULL
+	END
+END
+
+GO
+
+COMMIT
+GO

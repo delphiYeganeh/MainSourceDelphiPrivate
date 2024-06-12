@@ -1,0 +1,16 @@
+BEGIN TRANSACTION
+GO
+
+ALTER TABLE Letter DISABLE TRIGGER trgHasUserGroupID
+GO
+
+Update Letter
+	Set MYear = 1300 + MYear
+	Where MYear < 100
+GO
+
+ALTER TABLE Letter ENABLE TRIGGER trgHasUserGroupID
+GO
+
+COMMIT
+GO

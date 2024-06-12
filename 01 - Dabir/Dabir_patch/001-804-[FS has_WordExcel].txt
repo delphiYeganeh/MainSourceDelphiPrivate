@@ -1,0 +1,34 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[has_WordExcel]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[has_WordExcel]
+END
+GO
+
+CREATE FUNCTION [dbo].[has_WordExcel]
+(
+	@LetterID int
+)
+
+RETURNS Int AS  
+BEGIN 
+	declare @res Int
+	Set @res=0
+
+	Select @res = extention	
+		From LetterData
+		Where LetterID=@LetterID 
+			And (extention=3 Or extention=dbo.GetExcelId())
+	
+Return(@res)
+
+END
+
+GO
+
+COMMIT
+GO

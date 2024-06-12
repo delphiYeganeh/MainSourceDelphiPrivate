@@ -1,0 +1,41 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetLetterDeadLines]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetLetterDeadLines]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetLetterDeadLines](@OrgID INT,@Operand INT,@Date NVARCHAR)
+AS
+	IF(@Operand=0)
+	SELECT L.LetterID,L.IndicatorID, L.MYear, l.Letter_Type,L.IncommingNO,
+		   L.Incommingdate, L.FromOrgID,L.ToOrgID, L.LetterRecommites,rc.Paraph,
+		   rc.DeadLineDate,rc.viewdate,L.Memo,s.SecTitle 
+		   FROM Letter L INNER JOIN ReCommites rc ON rc.LetterID = L.LetterID 
+		   LEFT JOIN Secretariats s ON s.SecID = L.SecretariatID 
+		   WHERE ((rc.DeadLineDate IS NOT NULL) AND (l.sentletterid IS NULL)) 
+			and (L.FromOrgID= @OrgID) AND((rc.DeadLineDate <=@Date ))
+	ELSE IF(@Operand=1)
+	SELECT L.LetterID,L.IndicatorID, L.MYear, l.Letter_Type,L.IncommingNO,
+		   L.Incommingdate, L.FromOrgID,L.ToOrgID, L.LetterRecommites,rc.Paraph,
+		   rc.DeadLineDate,rc.viewdate,L.Memo,s.SecTitle 
+		   FROM Letter L INNER JOIN ReCommites rc ON rc.LetterID = L.LetterID 
+		   LEFT JOIN Secretariats s ON s.SecID = L.SecretariatID 
+		   WHERE ((rc.DeadLineDate IS NOT NULL) AND (l.sentletterid IS NULL)) 
+			and (L.FromOrgID= @OrgID) AND((rc.DeadLineDate =@Date ))  
+	ELSE IF(@Operand=2)
+	SELECT L.LetterID,L.IndicatorID, L.MYear, l.Letter_Type,L.IncommingNO,
+		   L.Incommingdate, L.FromOrgID,L.ToOrgID, L.LetterRecommites,rc.Paraph,
+		   rc.DeadLineDate,rc.viewdate,L.Memo,s.SecTitle 
+		   FROM Letter L INNER JOIN ReCommites rc ON rc.LetterID = L.LetterID 
+		   LEFT JOIN Secretariats s ON s.SecID = L.SecretariatID 
+		   WHERE ((rc.DeadLineDate IS NOT NULL) AND (l.sentletterid IS NULL)) 
+			and (L.FromOrgID= @OrgID) AND((rc.DeadLineDate >=@Date ))
+GO
+
+COMMIT
+GO

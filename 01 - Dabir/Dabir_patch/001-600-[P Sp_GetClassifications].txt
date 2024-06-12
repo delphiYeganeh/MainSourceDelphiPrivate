@@ -1,0 +1,20 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetClassifications]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetClassifications]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetClassifications]
+AS
+	SELECT   *
+	FROM Classifications c
+	ORDER BY c.ID
+GO
+
+COMMIT
+GO

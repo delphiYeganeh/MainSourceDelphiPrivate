@@ -1,0 +1,44 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[sp_Letter_Numbers]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[sp_Letter_Numbers]
+END
+GO
+
+CREATE PROCEDURE [dbo].[sp_Letter_Numbers]
+@bdate char(10),@edate Char(10),
+@receivedNum int output,
+@SentNum int output,
+@recommitesNum int output,
+@SecID int
+as
+set @receivedNum=0
+set @SentNum=0
+set @recommitesNum=0
+
+select @receivedNum = count(1) 
+	from Letter WITH (NOLOCK)
+	where registrationdate between @bdate and @edate 
+		and (secretariatid=@SecID or @SecID=0) 
+		and Letter_type=1
+
+
+select @SentNum = count(1)
+	from Letter WITH (NOLOCK)
+	where registrationdate between @bdate and @edate 
+		and (secretariatid=@SecID or @SecID=0) 
+		and Letter_type=2
+
+select @recommitesNum = count(1) - @SentNum - @receivedNum 
+	from ReCommites WITH (NOLOCK)
+		inner join letter WITH (NOLOCK) on letter.letterid=ReCommites.LetterId 
+	where ReCommitedate between @bdate and @edate 
+		and (secretariatid=@SecID or @SecID=0)
+GO
+
+COMMIT
+GO

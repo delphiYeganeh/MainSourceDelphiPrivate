@@ -1,0 +1,92 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Report_UserTable]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Report_UserTable]
+END
+GO
+
+CREATE  procedure [dbo].[Report_UserTable]
+@tableID int,@LetterWhere nvarchar(2000),@UserTableWhere nvarchar(2000)
+as
+
+	Declare @sql Nvarchar(4000)
+
+	IF OBJECT_ID('tempdb..##Uletters') IS NOT NULL 
+		DROP TABLE ##Uletters
+	
+	Set @sql= 'Select LetterID Into ##Uletters From Letter '
+
+	If @UserTableWhere<>'' 
+		set @sql=@sql+' where  '+@UserTableWhere
+
+	Exec(@SQL)
+
+	If OBJECT_ID('tempdb..##r') IS NOT NULL 
+		DROP TABLE ##r
+	
+	set @sql='Select lf.LetterID LetterID,lf.ID formorder into ##r from LetterForms lf inner join ##Uletters on ##Uletters.LetterID=lf.LetterID'
+
+	exec(@Sql)
+
+	IF OBJECT_ID('tempdb..##m') IS NOT NULL 
+		DROP TABLE ##m
+	 
+	set @sql= 'create  table ##m (LetterID int '
+
+	SELECT     top 60 identity(int,1,1) id , Fields.Description,cast (fields.id as int ) fieldid,ReferenceTableID into #Fields
+	FROM      Fields
+	WHERE     (tableid = @tableID)
+	order by [order]
+
+	SELECT     @sql=@sql+' ,['+isnull(Description,'')+'] nvarchar(2000)'
+	FROM      #Fields 
+	set @sql= @sql+')'
+
+	exec(@sql)
+	declare @insert  varchar(max)
+
+	set @insert= 'insert into ##m select LetterID'
+
+	SELECT    @insert=@insert+
+	case when ReferenceTableID is null then 
+	',(select FieldValue from LetterFieldValue where FieldId='+cast(fieldid as varchar(10))+' and letterid=r.LetterID and LetterFieldValue.formorder=r.formorder) 
+	'
+	else
+	',(select DataTitle From ReferenceTableData where tableid='+cast(ReferenceTableID as varchar(8))+'
+	 and DataID=(select FieldValue from LetterFieldValue where FieldId='+cast(fieldid as varchar(10))+' and letterid=r.LetterID and 
+	LetterFieldValue.formorder=r.formorder)) '
+	end
+	FROM      #Fields
+
+	set @insert= @insert+' from ##r r '
+	exec(@insert)
+
+	declare @slct  varchar(max)
+
+	set @slct='SELECT DISTINCT ##m.*,IndicatorID,IncommingNO,IncommingDate,CenterNo,CenterDate '+
+			  ',Memo,RetroactionNo,UserMemo,RegistrationDate,FollowLetterNo,LetterRecommites   '+
+			  ',sender.Title AS SenderTitle ,Deliver.Title AS DeliverTitle,LetterTypes.Title LetterTypeTitle,ActionTypeTitle '+
+			  'FROM  ##m                                                                                                     '+
+			  'inner join Letter on ##m.Letterid=Letter.Letterid                                                             '+
+			  'left  JOIN FromOrganizations sender ON Letter.ToOrgID = sender.ID                                             '+ 
+			  'left JOIN  FromOrganizations Deliver ON Letter.FromOrgID = Deliver.ID                                         '+
+			  'Left join LetterTypes on LetterTypes.ID=Letter.Letter_type                                                    '+
+			  'left join Secretariats on Secretariats.Secid=Letter.SecretariatID                                             '+
+			  'left JOIN ActionType  ON ActionType.ActionTypeID = Letter.LatestActionTypeID                                  '
+			  IF RTRIM(LTRIM(@LetterWhere))  <> '' SET @slct=@slct+ ' where ' + @LetterWhere
+
+	exec(@slct)
+
+
+	drop table ##m  
+	drop table ##Uletters
+	drop table ##r
+
+GO
+
+COMMIT
+GO

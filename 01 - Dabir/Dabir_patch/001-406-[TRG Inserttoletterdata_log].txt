@@ -1,0 +1,85 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1 FROM sys.objects WHERE [object_id] = OBJECT_ID(N'[dbo].[Inserttoletterdata_log]')
+               AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[Inserttoletterdata_log];
+END
+GO
+
+CREATE TRIGGER [dbo].[Inserttoletterdata_log] ON [dbo].[LetterData]
+    AFTER INSERT
+AS 
+BEGIN
+DECLARE 
+       @LetterDataID int
+      ,@LetterID	 int
+      ,@PageNumber   int
+      ,@extention    tinyint
+      ,@Description  nvarchar(200)
+      ,@LastUpdate   datetime
+      ,@UniqueID     bigint
+      ,@ListItemsID  int
+      ,@VersionNo    varchar(10)
+      ,@VersionDate  varchar(10)
+      ,@archiveID    int
+      ,@isDocument   bit
+      ,@IsCorrectedImage bit
+
+SELECT 
+       @LetterDataID = LetterDataID
+      ,@LetterID     = LetterID	 
+      ,@PageNumber   = PageNumber    
+      ,@extention    = extention
+      ,@Description  = Description
+      ,@LastUpdate   = LastUpdate 
+      ,@UniqueID     = UniqueID   
+      ,@ListItemsID  = ListItemsID
+      ,@VersionNo    = VersionNo  
+      ,@VersionDate  = VersionDate
+      ,@archiveID    = archiveID 
+      ,@isDocument   = isDocument 
+      ,@IsCorrectedImage = IsCorrectedImage
+FROM INSERTED
+
+INSERT INTO [dbo].[LetterData_Log]
+           ([LetterDataID]
+           ,[LetterID]
+           ,[PageNumber]
+           ,[extention]
+           ,[Description]
+           ,[LastUpdate]
+           ,[UniqueID]
+           ,[ListItemsID]
+           ,[IsCorrectedImage]
+           ,[VersionNo]
+           ,[VersionDate]
+           ,[archiveID]
+           ,[isDocument]
+           ,[UserName]
+           ,[DateAction]
+           ,[TypeAction])
+     VALUES
+           (@LetterDataID
+           ,@LetterID
+           ,@PageNumber
+           ,@extention
+           ,@Description
+           ,@LastUpdate
+           ,@UniqueID
+           ,@ListItemsID
+           ,@IsCorrectedImage
+           ,@VersionNo
+           ,@VersionDate
+           ,@archiveID
+           ,@isDocument
+           ,HOST_NAME()
+           ,GETDATE()
+           ,'INSERT')
+END
+GO
+
+ALTER TABLE [dbo].[LetterData] ENABLE TRIGGER [Inserttoletterdata_log]
+GO
+COMMIT
+GO

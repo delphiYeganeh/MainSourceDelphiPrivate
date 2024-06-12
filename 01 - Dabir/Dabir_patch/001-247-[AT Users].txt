@@ -1,0 +1,12 @@
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'FiveOrgID'
+          AND Object_ID = Object_ID(N'dbo.Users'))
+BEGIN
+	ALTER TABLE [dbo].[Users] 
+	ADD	[FiveOrgID] [INT] NULL
+END
+GO
+COMMIT
+GO

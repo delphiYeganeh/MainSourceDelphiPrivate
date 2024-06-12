@@ -1,0 +1,19 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetAllActiveUsers]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetAllActiveUsers]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetAllActiveUsers]
+    
+AS
+    SELECT * FROM dbo.Users WHERE ISNULL(Active,0) = 1
+GO
+
+COMMIT
+GO

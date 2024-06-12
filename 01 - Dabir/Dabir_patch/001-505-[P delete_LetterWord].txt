@@ -1,0 +1,27 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[delete_LetterWord]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[delete_LetterWord]
+END
+GO
+
+CREATE  procedure [dbo].[delete_LetterWord]
+(@LetterID 	[int])
+
+AS 
+	DELETE [dbo].[LetterData] 
+		WHERE ([LetterID] = @LetterID AND [extention] = 3)
+
+	DELETE [dbo].[LetterText]
+		WHERE LetterID=@LetterID
+	 
+	DELETE [dbo].[LetterSign]
+		WHERE LetterID=@LetterID
+GO
+
+COMMIT
+GO

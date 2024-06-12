@@ -1,0 +1,233 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT *
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[FromOrganizations_fnforDabir]') 
+                   and OBJECTPROPERTY(id, N'IsTableFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[FromOrganizations_fnforDabir]
+END
+GO
+
+CREATE FUNCTION [dbo].[FromOrganizations_fnforDabir]
+(
+  @UserID int
+)
+returns table
+as
+return 
+
+(
+	SELECT 
+	   ID,
+	   code, 
+	   Title,
+	   ResponsibleStaffer,
+	   ParentID,
+	   GroupID,
+	   IsActive,
+	   IsInnerOrg,
+	   Phone,
+	   Fax,
+       Email,
+       PreCode,
+       UniqueID--,
+	   --AccessForErja
+	FROM FromOrganizations 
+	WHERE isactive=1 
+	AND (Title LIKE '%' + '' + '%' OR ResponsibleStaffer LIKE '%' + '' + '%' OR code LIKE '%' + '' +'%')
+	AND ID IN(
+				SELECT 
+				    DISTINCT OrgID
+				FROM ChartWorkGroupDetails
+				WHERE GroupID in(
+									Select GroupID from FromOrganizations
+									Where id in 
+									(
+											Select 
+											   OrgID 
+											from 
+											(
+											Select id,FromOrgID OrgID,Title from Users
+											union  
+											Select id,SecondOrgID,Title from Users
+											union
+											Select id,TreeOrgID,Title from Users
+											union
+											Select id,FourOrgID,Title from Users
+											union
+											Select id,FiveOrgID,Title from Users
+											)a
+											WHERE OrgID is not null
+											AND id = @UserID
+									)
+                               )
+				AND AccessForErja = 1
+             )
+AND GroupID IS NOT NULL
+)
+UNION 
+(
+	SELECT 
+	   ID,
+	   code, 
+	   Title,
+	   ResponsibleStaffer,
+	   ParentID,
+	   GroupID,
+	   IsActive,
+	   IsInnerOrg,
+	   Phone,
+	   Fax,
+       Email,
+       PreCode,
+       UniqueID  
+	FROM FromOrganizations 
+	WHERE isactive=1 
+	AND (Title LIKE '%' + '' + '%' OR ResponsibleStaffer LIKE '%' + '' + '%' OR code LIKE '%' + '' +'%')
+	AND IsInnerOrg = 0
+)
+UNION 
+(
+	SELECT 
+	   ID,
+	   code, 
+	   Title,
+	   ResponsibleStaffer,
+	   ParentID,
+	   GroupID,
+	   IsActive,
+	   IsInnerOrg,
+	   Phone,
+	   Fax,
+       Email,
+       PreCode,
+       UniqueID  
+	FROM FromOrganizations 
+	WHERE isactive=1 
+	AND ID In( 3,1,2243)
+)
+
+
+
+-------------------------------------------------------
+/*Select distinct Sub1.ID,
+	   Sub1.code, 
+	   Sub1.Title,
+	   Sub1.ResponsibleStaffer,
+	   Sub1.ParentID,
+	   Sub1.GroupID,
+	   Sub1.IsActive,
+	   Sub1.IsInnerOrg,
+	   Sub1.Phone,
+	   Sub1.Fax,
+       Sub1.Email,
+       Sub1.PreCode,
+       Sub1.UniqueID
+from (
+(
+	SELECT 
+	   ID,
+	   code, 
+	   Title,
+	   ResponsibleStaffer,
+	   ParentID,
+	   GroupID,
+	   IsActive,
+	   IsInnerOrg,
+	   Phone,
+	   Fax,
+       Email,
+       PreCode,
+       UniqueID
+	FROM FromOrganizations 
+	WHERE isactive=1 
+	AND (Title LIKE '%' + '' + '%' OR ResponsibleStaffer LIKE '%' + '' + '%' OR code LIKE '%' + '' +'%')
+	AND ID IN(
+				SELECT 
+				    DISTINCT OrgID
+				FROM ChartWorkGroupDetails
+				WHERE GroupID in(
+									SELECT 
+									  GroupID 
+									FROM ChartWorkGroupDetails
+									WHERE OrgID = @OrgID
+									AND AccessForErja = 1)
+				AND AccessForErja = 1
+             )
+AND GroupID IS NOT NULL
+)
+UNION all
+(
+	SELECT 
+	   ID,
+	   code, 
+	   Title,
+	   ResponsibleStaffer,
+	   ParentID,
+	   GroupID,
+	   IsActive,
+	   IsInnerOrg,
+	   Phone,
+	   Fax,
+       Email,
+       PreCode,
+       UniqueID  
+	FROM FromOrganizations 
+	WHERE isactive=1 
+	AND (Title LIKE '%' + '' + '%' OR ResponsibleStaffer LIKE '%' + '' + '%' OR code LIKE '%' + '' +'%')
+	AND IsInnerOrg = 0
+)
+/*UNION all
+(
+	SELECT 
+	   ID,
+	   code, 
+	   Title,
+	   ResponsibleStaffer,
+	   ParentID,
+	   GroupID,
+	   IsActive,
+	   IsInnerOrg,
+	   Phone,
+	   Fax,
+       Email,
+       PreCode,
+       UniqueID  
+	FROM FromOrganizations 
+	WHERE isactive=1 
+	AND ID In( 3,1)
+)*/
+)Sub1
+inner JOIN ChartWorkGroupDetails b
+  ON sub1.id = b.OrgID
+WHERE 1=1
+AND AccessForErja= 1
+
+
+UNION all
+(
+	SELECT 
+	   ID,
+	   code, 
+	   Title,
+	   ResponsibleStaffer,
+	   ParentID,
+	   GroupID,
+	   IsActive,
+	   IsInnerOrg,
+	   Phone,
+	   Fax,
+       Email,
+       PreCode,
+       UniqueID  
+	FROM FromOrganizations 
+	WHERE isactive=1 
+	AND ID In( 3,1,2,4)
+)
+*/
+------------------------------------
+GO
+
+COMMIT
+GO

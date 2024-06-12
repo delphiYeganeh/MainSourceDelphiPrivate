@@ -1,0 +1,62 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[web_insert_innerLetter]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[web_insert_innerLetter]
+END
+GO
+
+CREATE  procedure [dbo].[web_insert_innerLetter]	(@LetterID 	[int] output,@Memo 	ntext, @UserID 	[int],@FromOrgID 	int,@UserMemo [nvarchar](255),
+	@html NTEXT,@RetroActionNo NVARCHAR(50),@FollowActionNo NVARCHAR(50),@SubjectID INT=NULL,@ToOrgTitle 	nvarchar(100),@ToStaffer [nvarchar](50))
+AS
+BEGIN 
+	declare @ToOrgID int,@IndicatorID int ,  @MYear int,@SecretariatID tinyint,@RegistrationDate [char](10),	@RegistrationTime 	[varchar](5)
+	select  @ToOrgID=convert(int,@toorgtitle)
+	
+	select @RegistrationTime=case when datepart(hour,getdate())<10 then '0'+convert(char(1),datepart(hour,getdate()))
+	   else convert(char(2),datepart(hour,getdate())) end +':' + convert(char(2),datepart(minute,getdate()))
+	set @RegistrationDate=dbo.shamsi(getdate())
+	set @myear=cast (substring(@RegistrationDate,1,4) as int)
+	if(@FromOrgID='')
+	begin
+		SELECT      @FromOrgID=FromOrgID
+		FROM         Users
+		where id=@userid
+	end
+
+	SELECT     @SecretariatID=DefualtSecretariatID 
+	FROM         Users
+	where id=@userid
+
+	set @IndicatorID=dbo.newIndicatorid(3,1,@myear,@SecretariatID)
+
+	INSERT INTO [Letter] ( [IndicatorID], [MYear], [SecretariatID], [Letter_Type], [letterformat], [FromOrgID], [Memo], [UserID],
+		 [UserMemo], [RegistrationDate], [RegistrationTime], [Finalized], RetroactionNo, FollowLetterNo, SubjectID, ToOrgID, ToStaffer, Signerid) 
+	VALUES	( @IndicatorID,@MYear,@SecretariatID,3, 1, @FromOrgID, @Memo, @UserID, @UserMemo, @RegistrationDate,
+		 @RegistrationTime, 0, @RetroActionNo, @FollowActionNo, @SubjectID ,@ToOrgID, @ToStaffer, @FromOrgID)
+	select @LetterID= SCOPE_IDENTITY()--max(letterid) from letter
+	print @LetterID
+	declare @recommiteId INT
+
+	DECLARE @proced BIT
+	IF(ISNULL(@ToOrgID,0)<>0)
+	  set @proced=1;
+	ELSE
+	  set @proced=0  ;
+ 
+	exec web_insert_NewReCommite @LetterID,3,0,@FromOrgID,'ايجاد نامه داخلي',@registrationdate,@UserID,0,@proced,0,@recommiteId OUTPUT
+	IF(@ToOrgID<>0)
+	  exec web_insert_NewReCommite @LetterID,3,1,@ToOrgID,'نامه داخلي',@registrationdate,@UserID,0,0,0,@recommiteId OUTPUT
+  
+	insert into Lettertext values(@letterid,1,'',@html);
+
+ 
+	RETURN @IndicatorID
+END
+GO
+
+COMMIT
+GO

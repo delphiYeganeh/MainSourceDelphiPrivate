@@ -1,0 +1,10 @@
+BEGIN TRANSACTION
+GO
+
+If Not Exists(Select 1 From Actions Where FormTag = 8 And ID = 'AOrg')
+	Insert Into Actions
+		values(8, 'AOrg', 'دسته بندی نامه ها بر اساس فرستنده و گیرنده', 1, null)
+GO
+
+COMMIT
+GO

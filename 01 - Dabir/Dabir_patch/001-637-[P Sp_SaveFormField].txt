@@ -1,0 +1,21 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_SaveFormField]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_SaveFormField]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_SaveFormField](@LetterID INT,@FieldID INT,@FieldValue NVARCHAR(2000),@FormOrder INT)
+AS
+
+	update LetterFieldValue set FieldValue =@FieldValue
+	WHERE LetterID=@LetterID AND FieldID=@FieldID AND FormOrder=@FormOrder
+
+GO
+
+COMMIT
+GO
