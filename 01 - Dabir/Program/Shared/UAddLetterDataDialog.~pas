@@ -635,6 +635,7 @@ begin
                                  if  length(fileString)>0 then
                                     Exec_Insert_LetterDataText(LetterDataID,fileString, dm.ArchiveConnection);
                                  //  Load String to DB    //
+                                 SysUtils.FileSetReadOnly(textFilePathName, false);
                                  DeleteFile(textFilePathName);
                                  //  Delete The File      //
                                  ////////////////////////////////////////////////////////////////

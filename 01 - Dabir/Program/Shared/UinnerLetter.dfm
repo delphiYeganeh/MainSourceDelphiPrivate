@@ -2510,8 +2510,8 @@ inherited FinnerLetter: TFinnerLetter
         Precision = 10
         Value = Null
       end>
-    Left = 125
-    Top = 221
+    Left = 149
+    Top = 269
     object Select_LetterChristRegDate: TStringField
       FieldKind = fkCalculated
       FieldName = 'ChristRegDate'
@@ -2782,6 +2782,9 @@ inherited FinnerLetter: TFinnerLetter
       FieldName = 'IndicatorInnerNo'
       ReadOnly = True
       Size = 200
+    end
+    object Select_LetterIsNetWork: TBooleanField
+      FieldName = 'IsNetWork'
     end
   end
   object Recivers: TADOStoredProc

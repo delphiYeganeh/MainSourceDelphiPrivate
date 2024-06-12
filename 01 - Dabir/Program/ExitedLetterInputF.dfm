@@ -16,7 +16,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
     Top = 0
     Width = 824
     Height = 635
-    ActivePage = xpForms
+    ActivePage = xpTabSheet1
     Align = alClient
     ParentShowHint = False
     ShowHint = True
@@ -180,7 +180,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           Left = 310
           Top = 3
           Width = 39
-          Height = 19
+          Height = 20
           TabStop = False
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
@@ -202,7 +202,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           Left = 91
           Top = 3
           Width = 96
-          Height = 19
+          Height = 20
           TabStop = False
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
@@ -3257,7 +3257,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Left = 24
             Top = 11
             Width = 94
-            Height = 19
+            Height = 20
             TabStop = False
             Anchors = [akTop, akRight]
             BevelInner = bvLowered
@@ -4304,6 +4304,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
     object Select_LetterParentFollowLetter: TIntegerField
       FieldName = 'ParentFollowLetter'
       ReadOnly = True
+    end
+    object Select_LetterIsNetWork: TBooleanField
+      FieldName = 'IsNetWork'
     end
   end
   object QrEmailAttachFile: TADOQuery

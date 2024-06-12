@@ -240,6 +240,7 @@ type
     Bevel1: TBevel;
     Select_LetterIndicatorInnerNo: TWideStringField;
     sbSubjectDel: TSpeedButton;
+    Select_LetterIsNetWork: TBooleanField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormActivate(Sender: TObject);
     procedure SpeedButton7Click(Sender: TObject);
@@ -366,6 +367,8 @@ begin
 
     if IsFrom then
       FromOrgForm.outerOrg.Checked:=false;
+
+    FromOrgForm.InnerMode := IsFrom ;
 
     FromOrgForm.OrganizeMode:=false;
     FromOrgForm.ShowModal;
@@ -655,6 +658,7 @@ begin
 
   dm.FromOrganizations.Locate('Code',DBEdit9.Text,[]);
   select_LetterFromOrgID.AsInteger:=dm.FromOrganizationsid.AsInteger;
+  Select_LetterIsNetWork.AsBoolean := True;  
 
   {Ranjbar 89.09.17 ID=243}
   if DBLkCBSignerID.KeyValue <> Null then

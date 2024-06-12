@@ -6839,6 +6839,9 @@ object Dm: TDm
       FieldName = 'EmailSubject'
       Size = 2000
     end
+    object Get_All_LetterIsNetWork: TBooleanField
+      FieldName = 'IsNetWork'
+    end
   end
   object qry_FromOrganizations: TADOQuery
     Connection = YeganehConnection

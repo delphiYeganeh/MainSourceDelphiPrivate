@@ -193,6 +193,7 @@ type
     DBShamsiDateEdit1: TDBShamsiDateEdit;
     Label8: TLabel;
     N3: TMenuItem;
+    Select_LetterIsNetWork: TBooleanField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormActivate(Sender: TObject);
     function GetLetter(LetterID:integer):boolean;
@@ -487,6 +488,7 @@ begin
 
    Dm.FromOrganizations.Locate('Code',SenderCode.Text,[]);
    Select_LetterFromOrgID.AsInteger := dm.FromOrganizationsid.AsInteger;
+   Select_LetterIsNetWork.AsBoolean := True;
 
    if DBLKCBToOrgTitle.KeyValue<>0 then
    begin
@@ -935,6 +937,9 @@ begin
    FromOrgForm := TFromOrgForm.Create(Application);
    if IsFrom then
       FromOrgForm.outerOrg.Checked:=false;
+
+   FromOrgForm.InnerMode := IsFrom ;
+
    FromOrgForm.OrganizeMode:=false;
    FromOrgForm.ShowModal;
    if FromOrgForm.done then

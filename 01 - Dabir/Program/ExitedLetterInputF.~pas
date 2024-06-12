@@ -240,6 +240,7 @@ type
     Bevel1: TBevel;
     Select_LetterIndicatorInnerNo: TWideStringField;
     sbSubjectDel: TSpeedButton;
+    Select_LetterIsNetWork: TBooleanField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormActivate(Sender: TObject);
     procedure SpeedButton7Click(Sender: TObject);
@@ -655,6 +656,7 @@ begin
 
   dm.FromOrganizations.Locate('Code',DBEdit9.Text,[]);
   select_LetterFromOrgID.AsInteger:=dm.FromOrganizationsid.AsInteger;
+  Select_LetterIsNetWork.AsBoolean := True;  
 
   {Ranjbar 89.09.17 ID=243}
   if DBLkCBSignerID.KeyValue <> Null then
@@ -2272,7 +2274,10 @@ begin
     //else
         inputFile := ExtractFilePath(Application.ExeName)+XMLFileName+'.XML';
     if FileExists(inputFile) then
+    begin
+     SysUtils.FileSetReadOnly(PChar(inputFile), false);
      DeleteFile(PChar(inputFile));
+    end;
     XMLText.SaveToFile(inputFile);
   finally
     XMLText.Free;

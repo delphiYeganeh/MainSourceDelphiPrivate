@@ -122,10 +122,12 @@ type
     FOrganizeMode : Boolean;
     _FirstTree:Boolean;
 
+
   public
     Done:boolean;
     Rootid:integer;
     SelectedId_new :Integer;
+    InnerMode : Boolean;
     Property OrganizeMode:boolean read FOrganizeMode write SetOrganizeMode;
   end;
 
@@ -432,7 +434,10 @@ begin
     EditBtn.Visible := false;
     deleteBtn.Visible := false;
 
-    RBInnerOrg.Checked:= True;
+    if  InnerMode then
+      RBInnerOrg.Checked:= True
+    else  RBOuterOrg.Checked:= True;
+
     //RBAllOrg.Checked:= True;
   except on e:Exception do
     ShowMessage('AB::' + e.Message);

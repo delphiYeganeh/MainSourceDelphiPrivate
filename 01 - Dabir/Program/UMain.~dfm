@@ -3261,6 +3261,7 @@ inherited MainForm: TMainForm
       Category = #1711#1586#1575#1585#1588
       Caption = #1662#1610#1608#1587#1578' '#1607#1575#1610' '#1606#1575#1605#1607
       ImageIndex = 33
+      OnExecute = AaddLetterDataExecute
     end
     object AFulltext: TAction
       Tag = 5

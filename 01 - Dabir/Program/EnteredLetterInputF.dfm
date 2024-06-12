@@ -17,7 +17,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
     Top = 0
     Width = 839
     Height = 690
-    ActivePage = xpForms
+    ActivePage = xpTabSheet1
     Align = alClient
     ParentShowHint = False
     ShowHint = True
@@ -4168,6 +4168,9 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
     object Select_LetterParentFollowLetter: TIntegerField
       FieldName = 'ParentFollowLetter'
       ReadOnly = True
+    end
+    object Select_LetterIsNetWork: TBooleanField
+      FieldName = 'IsNetWork'
     end
   end
   object ActionManager: TActionManager [6]

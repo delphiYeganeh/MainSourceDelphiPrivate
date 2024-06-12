@@ -3814,8 +3814,8 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
     AutoEdit = False
     DataSet = Select_Letter
     OnDataChange = DSFormDataChange
-    Left = 66
-    Top = 205
+    Left = 81
+    Top = 155
   end
   inherited ActionList: TActionList
     Left = 16
@@ -4168,6 +4168,9 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
     object Select_LetterParentFollowLetter: TIntegerField
       FieldName = 'ParentFollowLetter'
       ReadOnly = True
+    end
+    object Select_LetterIsNetWork: TBooleanField
+      FieldName = 'IsNetWork'
     end
   end
   object ActionManager: TActionManager [6]
@@ -4794,8 +4797,8 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
       
         'SELECT LetterDataID, LetterID, PageNumber, Image, extention, Des' +
         'cription FROM LetterData')
-    Left = 24
-    Top = 208
+    Left = 29
+    Top = 172
     object QAddPayvastFromECELetterDataID: TAutoIncField
       FieldName = 'LetterDataID'
       ReadOnly = True
