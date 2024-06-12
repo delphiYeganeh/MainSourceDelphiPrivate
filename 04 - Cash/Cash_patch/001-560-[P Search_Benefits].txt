@@ -1,0 +1,39 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Search_Benefits]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Search_Benefits]
+END
+GO
+
+CREATE  procedure [dbo].[Search_Benefits]
+@AccountNo	varchar(20),
+@FamilyID	INT,
+@Year		INT,
+@Month		TINYINT,
+@WithLoan	BIT,
+@doForSetteld BIT
+
+AS
+BEGIN
+	Set @AccountNo = LTRIM(RTrim(@AccountNo))
+
+	SELECT a.AccountID, a.AccountNo,a.AccountTitle,
+			b.YEAR,b.DocumentNo,b.InsertedBenefitPrice,
+			b.AnnualAvragePrice,b.InsertedDate,b.BenefitPercent,isnull(b.MONTH,13) Month
+	FROM Account a 
+		left join Benefit b on (b.YEAR = @Year and a.AccountID = b.ACCOUNTID and (@Month = 0 or (b.Month = @Month  or b.Month = 0 or b.Month is null)))
+		Inner Join Contact c On c.ContactID = a.ContactID
+	WHERE (@AccountNo = '' OR @AccountNo = LTRIM(RTRIM(a.AccountNo)))
+		And ((@FamilyID = 0) OR (@FamilyID is null) OR (@FamilyID = a.Familyid))
+		And (@doForSetteld = 1 OR a.IsActive = 1)
+		And a.AccountTypeID = 1
+		And c.HAVEINTEREST = 1		
+END
+GO
+
+COMMIT
+GO

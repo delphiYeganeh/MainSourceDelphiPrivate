@@ -1,0 +1,73 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Calculate_Benefit]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[Calculate_Benefit]
+END
+GO
+
+CREATE FUNCTION [dbo].[Calculate_Benefit]
+(
+	@AccountID INT, 
+	@Year CHAR(4)
+)
+RETURNS BIGINT
+AS
+BEGIN
+	DECLARE @BenefitCalcType BIT
+	select @BenefitCalcType = VALUE FROM Setting s WHERE s.VariableName = 'BenefitCalcType'
+	SET @BenefitCalcType = ISNULL(@BenefitCalcType, 0)
+	
+	DECLARE mycur CURSOR FOR
+	Select * From
+		(SELECT @Year+'/01/01' AS [Date], case when @BenefitCalcType=1 then dbo.TotalExist(@AccountID, CAST(CAST(@Year AS CHAR(4))-1 as CHAR(4))+'/12/29', 0)
+												ELSE dbo.Exist(@AccountID, CAST(CAST(@Year AS CHAR(4))-1 as CHAR(4))+'/12/29') end AS Amount
+		UNION 
+		SELECT p.[Date], p.amount*(CASE WHEN p.CreditorAccountID= @AccountID THEN 1 ELSE -1 END) AS Amount
+		FROM Payment p 
+		WHERE p.CreditorAccountID= @AccountID OR p.DebtorAccountID= @AccountID
+		GROUP BY p.[Date], p.Amount, p.CreditorAccountID, p.DebtorAccountID
+		HAVING 
+		dbo.ShamsiToInt(p.Date) >= dbo.ShamsiToInt(@Year+'/01/01') AND 
+		dbo.ShamsiToInt(p.Date) <= dbo.ShamsiToInt(@Year+'/12/29')) A
+		--ORDER BY p.[Date]
+		Order By A.[Date]
+		
+	DECLARE @Date VARCHAR(10), @Amount FLOAT
+	OPEN mycur
+
+	DECLARE @FinalResult real
+	SET @FinalResult= 0
+
+	FETCH NEXT FROM mycur INTO @DATE, @Amount
+	WHILE @@FETCH_STATUS=0
+	BEGIN	
+		DECLARE @tmpDate VARCHAR(10), @tmpAmount FLOAT
+		FETCH NEXT FROM mycur INTO @tmpDate, @tmpAmount
+		IF @@FETCH_STATUS=0
+		BEGIN
+			SET @FinalResult= @FinalResult+ ((case when @BenefitCalcType = 1 THEN dbo.TotalExist(@AccountID, @Date, 0)ELSE dbo.Exist(@AccountID, @Date) END)* dbo.ShamsiDateDiff(@DATE, @tmpDate)/365)
+			SET @Amount= @tmpAmount;
+			SET @DATE= @tmpDate;
+		END
+		ELSE
+		BEGIN
+			SET @FinalResult= @FinalResult+((case when @BenefitCalcType = 1 THEN dbo.TotalExist(@AccountID, @Date, 0) ELSE dbo.Exist(@AccountID, @Date) end)*dbo.ShamsiDateDiff(@DATE, @Year+'/12/29')/365)
+		END
+		
+		
+		IF @FinalResult<0
+		   set @FinalResult= 0;
+	END
+	CLOSE mycur
+	DEALLOCATE mycur
+	
+	RETURN @FinalResult;	
+END
+GO
+
+COMMIT
+GO

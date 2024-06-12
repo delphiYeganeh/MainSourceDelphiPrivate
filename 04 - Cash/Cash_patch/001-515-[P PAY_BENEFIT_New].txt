@@ -1,0 +1,228 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PAY_BENEFIT_New]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PAY_BENEFIT_New]
+END
+GO
+
+CREATE  procedure [dbo].[PAY_BENEFIT_New]                    
+	@Year char(4),
+	@AccountID INT,
+	@BENEFITPERCENT FLOAT,
+	@InsertUserId INT,
+	@InsertedMode INT
+AS
+	DECLARE @TedadRooz INTEGER                
+					
+	If exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[#P]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)        
+		DROP TABLE #P
+			
+	If exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[#_FirstPrice]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)        
+		DROP TABLE #_FirstPrice        
+			
+	If exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[#P2]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)        
+		DROP TABLE #P2        
+			
+	DECLARE @ToDate varchar(10) ,@FromDate varchar(10)        
+			
+	Set @FromDate =@Year+'/01/01'        
+	Set @ToDate =(Select DBO.ShamsiIncDate(@Year+'/01/01' ,1 ,0,0) )        
+			
+	Select  CreditorAccountId   AccountId,          
+			Amount,          
+			Cast(1 as smallint) status,          
+			Date,            
+			Cast(0 as float) TotalPrice         
+	INTO #P            
+	From Payment  Inner Join           
+		 Account ac1 on creditorAccountId=ac1.AccountId            
+	WHERE ACCOUNTTypeId=1 AND (@AccountID  =0 OR ac1.AccountID=@AccountID ) AND ac1.ContactID IN(Select ContactID From Contact Where HAVEINTEREST =1)  
+		AND ac1.IsActive = 1         
+
+	INSERT INTO #P             
+	Select  DebtorAccountId,          
+			Amount,          
+			-1 status,          
+			Date    ,        
+			0           
+	From Payment Inner Join         
+		 Account AC2 on DebtorAccountId=ac2.AccountId            
+	WHERE ACCOUNTTypeId=1 AND (@AccountID  =0 OR AC2.AccountID=@AccountID ) AND ac2.ContactID IN(Select ContactID From Contact Where HAVEINTEREST =1)  
+		AND ac2.IsActive = 1            
+			
+	SELECT  CAST(0 AS integer) AccountId,
+			Cast(0 as float) as MojoodiEbtedayeDore,
+			Cast(0 as float) mojoodiRooz,
+			Cast(0 as float) MojRoozJamShodehBaRozGhabl,
+			Cast(0 as int) TedadRooz,
+			Cast('0000/00/00' as varchar(10)) _DATE,
+			Cast(0 as float) TotalPrice
+		INTO #p2
+			
+	SELECT DISTINCT AccountId,SUM(AMOUNT*STATUS) FirstPrice 
+		INTO #_FirstPrice
+		FROM #P
+		WHERE date<@FromDate AND  (@AccountID  =0 OR AccountID=@AccountID)
+		GROUP BY AccountId
+
+    DECLARE @_AccountId INT ,@Price  float ,@BeforPrice float ,@DATE VARCHAR(10)  ,@BeforAccountId int,@BeforPrice_TMP float        
+    SET @BeforPrice =0        
+    SET @BeforAccountId =0        
+
+    SELECT  AccountId,SUM(AMOUNT*STATUS) PRICE , DATE  INTO #A      
+        FROM #P
+        WHERE DATE BETWEEN @FromDate AND @ToDate        GROUP BY AccountId,DATE
+    UNION
+    SELECT  distinct AccountId, 
+			dbo.Exist(AccountID,CAST(@Year-1 AS VARCHAR) + '/12/29') PRICE ,
+			CAST(@Year-1 AS VARCHAR) + '/12/29'        
+        FROM #P         
+        WHERE DATE < @FromDate       GROUP BY AccountId,DATE        order by AccountId,DATE
+                
+    DECLARE Payment_Cursor CURSOR FOR        
+		SELECT  AccountId,sum(PRICE) AS price , DATE        
+			FROM #A         
+			WHERE (@AccountID  =0 OR AccountID=@AccountID )        
+			GROUP BY AccountId,DATE         
+			order by AccountId,DATE
+        
+		OPEN Payment_Cursor         
+        
+		FETCH NEXT FROM Payment_Cursor INTO @_AccountId,@Price,@DATE        
+		WHILE @@FETCH_STATUS = 0        
+		BEGIN        
+			SET @BeforPrice_TMP=0        
+			IF (@BeforAccountId<>@AccountId)        
+			BEGIN        
+				SET @BeforPrice =ISNULL((SELECT    FirstPrice   FROM #_FirstPrice  WHERE ACCOUNTID=@_Accountid  ),0)         
+				SET @BeforPrice_TMP=@BeforPrice        
+			END        
+        
+			Set @BeforPrice=@BeforPrice+@Price        
+                   
+			insert into #p2        
+			Select @_AccountId  ,        
+                  @BeforPrice_TMP   ,        
+                  @Price  ,        
+                  @BeforPrice   ,        
+                  dbo.ShamsiDateDiff(@DATE, @ToDate) as Total_Price ,        
+                  @DATE AS _date ,        
+                  @Price*dbo.ShamsiDateDiff(@DATE,@ToDate) as TotalPrice                     
+			Set @BeforAccountId=@_AccountId         
+			
+			FETCH NEXT FROM Payment_Cursor INTO @_AccountId,@price,@DATE        
+		END        
+		CLOSE Payment_Cursor        
+		DEALLOCATE Payment_Cursor          
+
+	DECLARE @BENEFITACCOUNTID INT,@TIME VARCHAR(8),@Y_Tmp tinyint,@NewDocumentNo VARCHAR(10)                
+                 
+	SET  @Y_Tmp=(SELECT SUBSTRING(@Year,3,2))                
+	EXEC GET_SYSTEMSETTING 'BENEFITACCOUNTID',@BENEFITACCOUNTID OUTPUT                 
+	EXEC [GET_TIME] @TIME  OUTPUT                     
+	EXEC [GET_NEWDOCUMNETNO] @Y_Tmp,@NewDocumentNo  OUTPUT        
+
+	SELECT  #P2.ACCOUNTID                                                     ,                
+         ACCOUNT.AccountNO,                
+         ACCOUNT.AccountTitle,                
+         @BENEFITACCOUNTID                             AS BENEFITACCOUNTID,                
+         DBO.SHAMSI( GETDATE())                        AS [date],                
+         CAST(@TIME AS VARCHAR(5))                     AS [time],                
+         FLOOR((@BENEFITPERCENT * dbo.Calculate_Benefit(#p2.AccountID, @Year))/100) AS InsertedBenefitPrice  ,               
+         CONVERT(Float, dbo.Calculate_Benefit(#p2.AccountID, @Year)) AS AnnualAvragePrice                
+	FROM  #P2 INNER JOIN ACCOUNT ON #P2.ACCOUNTID=ACCOUNT.ACCOUNTID                 
+	WHERE #P2.ACCOUNTID NOT IN (SELECT ACCOUNTID FROM Benefit WHERE [YEAR]=@YEAR)                  
+	GROUP BY #P2.ACCOUNTID,ACCOUNT.AccountTitle, ACCOUNT.AccountNO          
+	HAVING (SUM(TotalPrice)<>0)        
+	ORDER BY #P2.ACCOUNTID
+ 
+	IF @InsertedMode=1                
+	BEGIN   
+		BEGIN TRAN T1    
+  
+		SELECT      ACCOUNTID,
+					[YEAR] = @Year ,
+					DocumentNo = @NewDocumentNo,     
+                    InsertedBenefitPrice = FLOOR((@BENEFITPERCENT * dbo.Calculate_Benefit(#P2.AccountID, @Year))/100),  
+                    AnnualAvragePrice = FLOOR(@BENEFITPERCENT * dbo.Calculate_Benefit(#P2.AccountID, @Year)),       
+                    InsertedDate = DBO.SHAMSI(GETDATE()),
+                    InsertedUserId = @InsertUserId ,
+                    BenefitPercent = @BENEFITPERCENT                                                           
+			INTO #B                           
+			FROM  #P2                 
+			WHERE ACCOUNTID NOT IN (SELECT ACCOUNTID FROM Benefit WHERE [YEAR]=@YEAR)                  
+			GROUP BY ACCOUNTID
+			HAVING (SUM(TotalPrice)<>0)        
+			ORDER BY #P2.ACCOUNTID                  
+		
+		SELECT #P2.ACCOUNTID,                
+				ACCOUNT.AccountNO,                
+				ACCOUNT.AccountTitle,                
+				@BENEFITACCOUNTID             AS BENEFITACCOUNTID,                
+				DBO.SHAMSI(GETDATE())         AS [Date],                
+				CAST(@TIME AS VARCHAR(5))     AS [Time],                               
+				FLOOR((@BENEFITPERCENT * dbo.Calculate_Benefit(#P2.AccountID, @Year))/100) AS InsertedBenefitPrice  ,                
+				FLOOR(@BENEFITPERCENT * dbo.Calculate_Benefit(#P2.AccountID, @Year)) AS AnnualAvragePrice      
+			FROM  #P2 INNER JOIN ACCOUNT ON #P2.ACCOUNTID=ACCOUNT.ACCOUNTID                 
+			WHERE #P2.ACCOUNTID NOT IN (SELECT ACCOUNTID FROM Benefit WHERE [YEAR]=@YEAR) AND #P2.accountID > 0                 
+			GROUP BY #P2.ACCOUNTID,ACCOUNT.AccountTitle, ACCOUNT.AccountNO                
+			HAVING (SUM(TotalPrice)<>0)        
+			ORDER BY #P2.ACCOUNTID 
+
+		INSERT INTO DBO.PAYMENT                    
+				(CREDITORACCOUNTID,                
+				 DEBTORACCOUNTID  ,                
+				 DATE             ,                
+				 TIME             ,                
+				 AMOUNT           ,                
+				 COMMENT          ,                
+				 FINANCIALNOTEID  ,              
+				 FinancialNote_DetailID,                
+				 INSERTUSERID     ,                
+				 INSERTDATE       ,                 
+				 PAYTYPEID        ,                
+				 DOCUMENTNO       )
+									 
+			SELECT  ACCOUNTID                                                     ,                
+				 @BENEFITACCOUNTID									    	   ,                
+				 DBO.SHAMSI(GETDATE())    as [date]                            ,                
+				 CAST(@TIME AS VARCHAR(5))as [time]                            ,                  
+				 FLOOR((@BENEFITPERCENT * dbo.Calculate_Benefit(AccountID, @Year))/100)  BENEFITPERCENT ,    
+				 'سود سپرده گذاري در تاريخ "'+DBO.SHAMSI( GETDATE()) +'"'      ,                
+				 0                                                             ,                
+				 0                                                             ,                
+				 @INSERTUSERID   as  INSERTUSERID                              ,                
+				 DBO.SHAMSI(GETDATE()) as date                                 ,                
+				 1 AS PAYTYPEID                                                ,                
+				 @NewDocumentNo  as NewDocumentNo                    
+			FROM  #P2               
+			WHERE ACCOUNTID NOT IN (SELECT ACCOUNTID FROM Benefit WHERE [YEAR]=@YEAR)  AND #P2.accountID > 0                  
+			GROUP BY ACCOUNTID                
+			HAVING ( SUM(TotalPrice)<>0 )        
+			ORDER BY #P2.ACCOUNTID 
+
+		IF (@@ERROR=0)  
+		BEGIN  
+			Insert Into Benefit(ACCOUNTID,[YEAR],DocumentNo,InsertedBenefitPrice                                                          
+						 ,AnnualAvragePrice,InsertedDate,InsertedUserId,BenefitPercent)                
+			SELECT   * FROM #B
+		END  
+		ELSE  
+			ROLLBACK  TRAN T1  
+
+		COMMIT TRAN T1   
+		 
+	END                
+      
+	DROP TABLE #_FirstPrice                
+	DROP TABLE #p                
+	DROP TABLE #p2
+	DROP TABLE #A
+GO
+
+COMMIT
+GO

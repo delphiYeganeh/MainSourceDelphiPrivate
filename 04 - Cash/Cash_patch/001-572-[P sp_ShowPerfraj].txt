@@ -1,0 +1,181 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[sp_ShowPerfraj]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[sp_ShowPerfraj]
+END
+GO
+
+CREATE  procedure [dbo].[sp_ShowPerfraj]   
+  @Line INT,  
+  
+  @ChBoDocNo_1       VARCHAR(6),  
+  @ChBoAccountNo_1    VARCHAR(20),  
+  @ChBoAccountTitle_1 VARCHAR(100),  
+  @ChBoDate_1    VARCHAR(10),  
+  @ChBoDesc_1    VARCHAR(100),  
+  @ChBoCredit_1    VARCHAR(30),  
+  @ChBoCredit_H_1    VARCHAR(100),  
+  @ChBoDebit_1    VARCHAR(30),  
+  @ChBoDebit_H_1    VARCHAR(100),  
+  @ChBoDebCrd_1    VARCHAR(30),  
+  @ChBoDebCrd_H_1    VARCHAR(100),  
+  @ChBoRemain_1    VARCHAR(30),  
+  @ChBoRemain_H_1    VARCHAR(100),  
+  @ChBoBenefit_1    VARCHAR(30),  
+  @ChBoBenefit_H_1   VARCHAR(100),  
+  @ChBoSumBenefitPrice_1  VARCHAR(30),  
+  @ChBoSumBenefitPrice_H_1 VARCHAR(100),  
+  
+  @ChBoDocNo_2        VARCHAR(6),  
+  @ChBoAccountNo_2    VARCHAR(20),  
+  @ChBoAccountTitle_2 VARCHAR(100),  
+  @ChBoDate_2     VARCHAR(10),  
+  @ChBoDesc_2     VARCHAR(100),  
+  @ChBoCredit_2     VARCHAR(30),  
+  @ChBoCredit_H_2     VARCHAR(100),  
+  @ChBoDebit_2     VARCHAR(30),  
+  @ChBoDebit_H_2     VARCHAR(100),  
+  @ChBoDebCrd_2     VARCHAR(30),  
+  @ChBoDebCrd_H_2     VARCHAR(100),  
+  @ChBoRemain_2     VARCHAR(30),  
+  @ChBoRemain_H_2     VARCHAR(100),  
+  @ChBoBenefit_2     VARCHAR(30),  
+  @ChBoBenefit_H_2    VARCHAR(100),  
+  @ChBoSumBenefitPrice_2  VARCHAR(30),  
+  @ChBoSumBenefitPrice_H_2 VARCHAR(100)  
+      
+  
+       
+  
+AS  
+  
+DECLARE @TEMPTbl table(  
+  
+ChBoDocNo_1          VARCHAR(6),  
+ChBoAccountNo_1    VARCHAR(20),  
+ChBoAccountTitle_1 VARCHAR(100),  
+ChBoDate_1    VARCHAR(10),  
+ChBoDesc_1    VARCHAR(100),  
+ChBoCredit_1    VARCHAR(30),  
+ChBoCredit_H_1    VARCHAR(100),  
+ChBoDebit_1    VARCHAR(30),  
+ChBoDebit_H_1    VARCHAR(100),  
+ChBoDebCrd_1    VARCHAR(30),  
+ChBoDebCrd_H_1    VARCHAR(100),  
+ChBoRemain_1    VARCHAR(30),  
+ChBoRemain_H_1    VARCHAR(100),  
+ChBoBenefit_1    VARCHAR(30),  
+ChBoBenefit_H_1   VARCHAR(100),  
+ChBoSumBenefitPrice_1  VARCHAR(30),  
+ChBoSumBenefitPrice_H_1 VARCHAR(100),  
+ChBoDocNo_2          VARCHAR(6),  
+ChBoAccountNo_2    VARCHAR(20),  
+ChBoAccountTitle_2 VARCHAR(100),  
+ChBoDate_2    VARCHAR(10),  
+ChBoDesc_2    VARCHAR(100),  
+ChBoCredit_2    VARCHAR(30),  
+ChBoCredit_H_2    VARCHAR(100),  
+ChBoDebit_2    VARCHAR(30),  
+ChBoDebit_H_2    VARCHAR(100),  
+ChBoDebCrd_2    VARCHAR(30),  
+ChBoDebCrd_H_2    VARCHAR(100),  
+ChBoRemain_2    VARCHAR(30),  
+ChBoRemain_H_2    VARCHAR(100),  
+ChBoBenefit_2     VARCHAR(30),  
+ChBoBenefit_H_2    VARCHAR(100),  
+ChBoSumBenefitPrice_2  VARCHAR(30),  
+ChBoSumBenefitPrice_H_2 VARCHAR(100)  
+  
+    )  
+delete @TEMPTbl   
+DECLARE @I INT  
+SET @I=1  
+  
+WHILE @i < @line  
+BEGIN  
+  INSERT INTO @TEMPTbl   
+  SELECT '','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''  
+  set @i=@i+1  
+end  
+  INSERT INTO @TEMPTbl(ChBoDocNo_1  ,  
+                ChBoAccountNo_1 ,  
+                              ChBoAccountTitle_1 ,  
+                ChBoDate_1    ,  
+                ChBoDesc_1    ,  
+                ChBoCredit_1    ,  
+                ChBoCredit_H_1    ,  
+                ChBoDebit_1    ,  
+                ChBoDebit_H_1    ,  
+                ChBoDebCrd_1    ,  
+                ChBoDebCrd_H_1    ,  
+                ChBoRemain_1    ,  
+                ChBoRemain_H_1    ,  
+                ChBoBenefit_1    ,  
+                ChBoBenefit_H_1   ,  
+                ChBoSumBenefitPrice_1,  
+                ChBoSumBenefitPrice_H_1,  
+  
+                ChBoDocNo_2        ,  
+                ChBoAccountNo_2    ,  
+                ChBoAccountTitle_2 ,  
+                ChBoDate_2     ,  
+                ChBoDesc_2     ,  
+                ChBoCredit_2     ,  
+                ChBoCredit_H_2     ,  
+                ChBoDebit_2     ,  
+                ChBoDebit_H_2     ,  
+                ChBoDebCrd_2     ,  
+                ChBoDebCrd_H_2     ,  
+                ChBoRemain_2     ,  
+                ChBoRemain_H_2     ,   
+                ChBoBenefit_2    ,  
+                ChBoBenefit_H_2   ,  
+                ChBoSumBenefitPrice_2,  
+                ChBoSumBenefitPrice_H_2  
+  
+)   
+  SELECT  @ChBoDocNo_1  ,  
+  @ChBoAccountNo_1 ,  
+  @ChBoAccountTitle_1 ,  
+  @ChBoDate_1    ,  
+  @ChBoDesc_1    ,  
+  @ChBoCredit_1    ,  
+  @ChBoCredit_H_1    ,  
+  @ChBoDebit_1    ,  
+  @ChBoDebit_H_1    ,  
+  @ChBoDebCrd_1    ,  
+  @ChBoDebCrd_H_1    ,  
+  @ChBoRemain_1    ,  
+  @ChBoRemain_H_1    ,  
+  @ChBoBenefit_1    ,  
+  @ChBoBenefit_H_1   ,  
+  @ChBoSumBenefitPrice_1,  
+  @ChBoSumBenefitPrice_H_1,  
+  
+  @ChBoDocNo_2        ,  
+  @ChBoAccountNo_2    ,  
+  @ChBoAccountTitle_2 ,  
+  @ChBoDate_2     ,  
+  @ChBoDesc_2     ,  
+  @ChBoCredit_2     ,  
+  @ChBoCredit_H_2     ,  
+  @ChBoDebit_2     ,  
+  @ChBoDebit_H_2     ,  
+  @ChBoDebCrd_2     ,  
+  @ChBoDebCrd_H_2     ,  
+  @ChBoRemain_2     ,  
+  @ChBoRemain_H_2     ,   
+  @ChBoBenefit_2    ,  
+  @ChBoBenefit_H_2   ,  
+  @ChBoSumBenefitPrice_2,  
+  @ChBoSumBenefitPrice_H_2  
+  
+select * from @TEMPTbl  
+GO
+
+COMMIT
+GO

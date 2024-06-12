@@ -1,0 +1,47 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Delete_benefits]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Delete_benefits]
+END
+GO
+
+CREATE  procedure [dbo].[Delete_benefits]
+@AccountNo	varchar(20),
+@FamilyID	INT,
+@Year		INT,
+@Month		TINYINT,
+@WithLoan	BIT,
+@doForSetteld BIT
+
+AS
+BEGIN
+	Set @AccountNo = LTRIM(RTrim(@AccountNo))
+
+	delete from payment 
+	where paymentid in
+		(SELECT b.paymentID
+			FROM Account a left join Benefit b on (b.YEAR = @Year and a.AccountID = b.ACCOUNTID and (@Month = 0 or (b.Month = @Month  or b.Month = 0 )))
+			WHERE (@AccountNo = '' OR @AccountNo = LTRIM(RTRIM(a.AccountNo)))
+				AND ((@FamilyID = 0) OR (@FamilyID is null) OR (@FamilyID = a.Familyid))
+				AND (@doForSetteld = 1 OR a.IsActive = 1)
+				and a.AccountTypeID = 1
+				and b.paymentID is not null)
+	
+	delete from Benefit 
+	where paymentid in
+		(SELECT b.paymentID
+		FROM Account a left join Benefit b on (b.YEAR = @Year and a.AccountID = b.ACCOUNTID and (@Month = 0 or (b.Month = @Month  or b.Month = 0 )))
+		WHERE (@AccountNo = '' OR @AccountNo = LTRIM(RTRIM(a.AccountNo)))
+			AND ((@FamilyID = 0) OR (@FamilyID is null) OR (@FamilyID = a.Familyid))
+			AND (@doForSetteld = 1 OR a.IsActive = 1)
+			and a.AccountTypeID = 1
+			and b.paymentID is not null) 
+END
+GO
+
+COMMIT
+GO

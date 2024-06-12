@@ -1,0 +1,57 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[REPORT_SUMMERYPAYMENT2]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[REPORT_SUMMERYPAYMENT2]
+END
+GO
+
+CREATE  procedure [dbo].[REPORT_SUMMERYPAYMENT2]        
+	@DATEFROM CHAR(10),
+	@DATETO CHAR(10)        
+AS
+SELECT  PAYTYPEID,PAYTYPETITLE,ISNULL(SUM(DBO.BALANCE_BYPAYTYPEID2(ACCOUNT.ACCOUNTID,PAYTYPEID,@DATETO,@DATEFROM)),0) BALANCE        
+INTO #M        
+FROM         ACCOUNT        
+CROSS JOIN PAYTYPE        
+WHERE ACCOUNTTYPEID=1        
+GROUP BY PAYTYPEID,PAYTYPETITLE         
+ 
+IF EXISTS(SELECT * FROM ACCOUNT WHERE ACCOUNTNO='9001' AND ACCOUNTTypeId=9) 
+BEGIN
+	update #M    
+	set BALANCE=ISNULL((select   sum(Amount)   from payment where paytypeid=5 and Date <= @DateTo AND Date>=@DATEFROM ),0)    
+	where paytypeid=5    
+END
+    
+update #M    
+set BALANCE=ISNULL((select   sum(Case When 3=DebtorAccountID   Then -Amount Else +Amount End)   from payment where  3 IN (DebtorAccountID,cREDITORAccountID)AND Date <= @DateTo AND Date>=@DATEFROM ),0)  
+where paytypeid=6 
+
+update #M    
+set BALANCE=DBO.F_Soodvam(@DATEFROM,@DATETO)  
+where paytypeid=7    
+        
+SELECT PAYTYPEID,PAYTYPETITLE,        
+ CASE WHEN BALANCE<=0 THEN ABS(BALANCE) ELSE 0 END DEBIT,        
+CASE WHEN BALANCE>=0 THEN  BALANCE ELSE 0 END CREDIT,CAST(0 AS BIGINT) [SUM]        
+INTO #N        
+FROM #M         
+    
+    
+        
+INSERT INTO #N        
+SELECT 10,'جمع',ISNULL(SUM(DEBIT),0),ISNULL(SUM(CREDIT),0),ISNULL(SUM(CREDIT),0) -ISNULL(SUM(DEBIT),0)        
+FROM #N        
+        
+    
+SELECT *        
+FROM #N        
+ORDER BY 1
+GO
+
+COMMIT
+GO

@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[SetUserSetting]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[SetUserSetting]
+END
+GO
+
+CREATE  procedure [dbo].[SetUserSetting]
+@UserID  int ,@VariableName varchar(50),@Value nvarchar(255)
+AS
+DELETE FROM Setting WHERE  (UserID = @UserID) AND (VariableName = LTRIM(RTRIM(@VariableName)))
+insert into Setting(UserID,VariableName,Value) values(@UserID,@VariableName,@Value)
+Update Setting 
+set Value=@Value
+WHERE     (UserID = @UserID) AND (VariableName = @VariableName)
+GO
+
+COMMIT
+GO

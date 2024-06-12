@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'SexId'
+          AND Object_ID = Object_ID(N'dbo.Contact'))
+BEGIN
+	ALTER TABLE [dbo].[Contact] 
+	ADD	[SexId] [int] NOT NULL DEFAULT (0) 
+END
+GO
+
+COMMIT
+GO

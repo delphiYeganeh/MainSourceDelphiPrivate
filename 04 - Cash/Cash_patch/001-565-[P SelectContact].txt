@@ -1,0 +1,43 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[SelectContact]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[SelectContact]
+END
+GO
+
+CREATE  procedure [dbo].[SelectContact] (@FirstName varchar(100),@LastName varchar(100),@BirthDate varchar(10),@SexId int)
+	AS
+	BEGIN
+		SET @FirstName=ISNULL(@FirstName,'')
+		SET @FirstName=LTRIM(RTRIM(@FirstName))
+		SET @LastName=ISNULL(@LastName,'')
+		SET @LastName=LTRIM(RTRIM(@LastName))
+		SET @BirthDate=ISNULL(@BirthDate,'')
+		SET @BirthDate=LTRIM(RTRIM(SUBSTRING(@BirthDate,6,LEN(@BirthDate))))
+		SET @SexId=ISNULL(@SexId,-1)
+		
+		DECLARE @sql VARCHAR(max)
+		SET @sql= ' Select * from Contact where phones is not null'
+		
+		IF @FirstName<>''
+		SET @sql=@sql+ ' and FirstName like ''%'+@FirstName+'%'''
+		IF @LastName<>''
+		SET @sql=@sql+ ' and LastName like ''%'+@LastName+'%'''
+		IF @BirthDate<>''
+		SET @sql=@sql+ ' and  SUBSTRING(BirthDate,6,LEN(BirthDate)) ='''+@BirthDate+''''
+
+		IF @SexId<>-1
+		SET @sql=@sql+ ' and  SexId ='+STR(@SexId)
+		
+		PRINT @sql
+		EXEC (@sql)
+		
+	END
+GO
+
+COMMIT
+GO

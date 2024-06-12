@@ -1,0 +1,287 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[BALANCE_SHEET]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[BALANCE_SHEET]
+END
+GO
+
+CREATE  procedure [dbo].[BALANCE_SHEET]
+	@DateFrom char(10), 
+	@DateTo char(10),
+	@ParentID int,
+	@sumAmount Bigint output 
+	
+AS               
+Declare  @C_Between bigint ,@C_After bigint 
+
+Select             
+        CreditorAccountId   AccountId,                
+        Amount,                
+        Cast(1 as smallint) status,                
+        Date ,      
+        PayTypeID MainPayType,      
+        AccountTypeId MainAccountType                 
+Into #P                  
+From Payment  Inner Join                 
+     Account ac1 on creditorAccountId=ac1.AccountId                  
+Where AccountTypeId>1
+                  
+Insert InTo #P                  
+Select  DebtorAccountId,                
+        Amount,                
+        -1 status,                
+        Date ,      
+        PayTypeID   ,      
+        AccountTypeId      
+                
+From Payment  Inner Join               
+     Account AC2 on DebtorAccountId=ac2.AccountId                  
+Where AccountTypeId>1 
+          
+Insert Into #P                  
+Select  -PayTypeID ,                
+        Amount,                
+        Cast(1 AS SmallInt) Status,                
+        Date              ,      
+        PayTypeID,      
+        AC1.AccountTypeId        
+From Payment  Inner Join                 
+     Account AC1 ON CreditorAccountId=AC1.AccountId                  
+Where AC1.AccountTypeId=1
+                  
+Insert Into #P                  
+Select  -PayTypeID ,                
+         Amount,                
+         -1 status,                
+         Date ,      
+        PayTypeID,      
+        Ac2.AccountTypeId                   
+From Payment  Inner Join                 
+     Account ac2 ON DebtorAccountId=Ac2.AccountId                  
+Where Ac2.AccountTypeId=1
+
+Select AccountId,      
+       MainPayType,      
+       MainAccountType,                
+       Sum(Case When status=-1 Then amount Else 0      End)C3,                
+       Sum(Case When status=-1 Then 0      Else Amount End)C4                 
+Into #P1                  
+From #P            
+Where Date<@DateTo OR  Date=@DateTo           
+Group by AccountId,MainPayType ,MainAccountType                 
+     
+Select AccountId,      
+       MainPayType,      
+       MainAccountType,      
+       Sum(Case When Status=-1 Then amount Else 0      End) C1,                
+       Sum(Case When Status=-1 Then 0      Else Amount End) C2                  
+Into #P2                  
+From #P                  
+Where Date Between @DateFrom and @DateTo                  
+Group by AccountId,MainPayType,MainAccountType                  
+Drop Table #P       
+      
+DECLARE  @PpT table(AccountId   int,MainPayType int ,MainAccountType int,C1 BIGINT,C2 BIGINT,C3 BIGINT,C4 BIGINT)       
+INSERT INTO @PpT
+SELECT     AccountId, MainPayType, MainAccountType, 0,0,C3, C4      
+FROM         #P1      
+union       
+SELECT     AccountId, MainPayType, MainAccountType, c1,c2,0, 0      
+FROM         #P2      
+      
+select PpT.AccountId,      
+       PpT.MainPayType,      
+       PpT.MainAccountType,      
+      Case when   PpT.AccountId<0 Then (Select PayTypeTitle From PayType Where PayTypeID=-PpT.AccountId)   Else Accounttitle End AccountTitle,      
+      sum(C1)C1 ,sum(C2)C2  ,sum(C3) C3 ,sum(C4)C4      
+INTO #PP_31              
+from @PpT PpT left outer join Account ON PpT.AccountID=AccounT.AccountID      
+group by PpT.AccountId,PpT.MainPayType,PpT.MainAccountType,ACCOUNT.AccountTitle       
+      
+Select Identity(int,1,1) ID ,                
+       Isnull(MainAccountType,1) MainAccountType,          
+       AccountId ,      
+       MainPayType,                 
+       AccountTitle  ,                
+       Isnull(c1,0) C1,                
+       Isnull(c2,0) C2,                
+       C3,                
+       C4,                  
+       Case When C4>C3 Then 0     Else C3-C4 End C5,                  
+       Case When C4>C3 Then C4-C3 Else 0     End C6       
+Into #P3                  
+From #PP_31                  
+Order by AccountId      
+     
+SELECT               
+       MainAccountType,          
+       AccountId ,      
+       MainPayType,                 
+       AccountTitle  ,           
+       sum(c1)c1,    
+       sum(c2)c2,    
+       sum(c3)c3,    
+       sum(c4)c4,    
+       SUM(Case When C4>C3 Then 0     Else C3-C4 End) C5,                  
+       SUM(Case When C4>C3 Then C4-C3 Else 0     End) C6       
+    
+into #P_Final1      
+FROM #P3        
+GROUP BY accountid ,AccountTitle  ,MainAccountType,MainPayType,AccountTitle        
+ORDER BY accountid     
+    
+SELECT *    
+INTO  #P_Final_Reserve    
+FROM #P_Final1    
+    
+If @parentId<>0                 
+Delete #P_Final1  Where  dbo.Is_ParentId(MainAccountType,@parentId)=0      
+     
+SELECT       
+       Accountid               
+      ,[AccountTitle]    
+      ,SUM([c1]) C1    
+      ,SUM([c2]) C2    
+      ,SUM([c3]) C3    
+      ,SUM([c4]) C4    
+      ,SUM(Case When C4>C3 Then 0     Else C3-C4 End) C5,                  
+       SUM(Case When C4>C3 Then C4-C3 Else 0     End) C6    
+  INTO #P_Final2    
+  FROM #P_Final1    
+  group by Accountid,[AccountTitle]    
+ order by accountid    
+     
+     
+ SELECT        Accountid      
+     
+      ,[AccountTitle]    
+      ,C1    
+      ,C2    
+      ,C3    
+      ,C4    
+      ,Case When C4>C3 Then 0     Else C3-C4 End  C5,                  
+       Case When C4>C3 Then C4-C3 Else 0     End  C6    
+  INTO #P_Final3    
+  FROM #P_Final2    
+  order by accountid    
+    
+IF EXISTS(SELECT  ACCOUNTID  FROM #P_Final3  Where  ACCOUNTID=4  )             
+BEGIN        
+ Update     #P_Final3        
+  Set       
+   c1=ISNULL((select SUM(c1) from  #P_Final_Reserve WHERE (MainPayType IN(7,-7) OR 4 =AccountId )),0),        
+   c2=ISNULL((select SUM(c2) from  #P_Final_Reserve WHERE (MainPayType IN(7,-7) OR 4 =AccountId )),0),        
+   c3=ISNULL((select SUM(c3) from  #P_Final_Reserve WHERE (MainPayType IN(7,-7) OR 4 =AccountId )),0),        
+   c4=ISNULL((select SUM(c4) from  #P_Final_Reserve WHERE (MainPayType IN(7,-7) OR 4 =AccountId )),0),        
+   c5=ISNULL((select SUM(c5) from  #P_Final_Reserve WHERE (MainPayType IN(7,-7) OR 4 =AccountId )),0),        
+   c6=ISNULL((select SUM(c6) from  #P_Final_Reserve WHERE (MainPayType IN(7,-7) OR 4 =AccountId )),0)         
+  Where  ACCOUNTID=4        
+END          
+ELSE        
+BEGIN     
+  IF @parentId<>8        
+  BEGIN    
+   INSERT INTO  #P_Final3(AccountId ,AccountTitle,C1,C2,C3,C4,C5,C6)                  
+   Select                
+       4,      
+       'سود وام'  ,                
+       ISNULL((select SUM(c1) from  #P_Final_Reserve WHERE MainAccountType>1 and (MainPayType IN(7,-7)OR 4 =AccountId)),0),
+       ISNULL((select SUM(c2) from  #P_Final_Reserve WHERE MainAccountType>1 and (MainPayType IN(7,-7)OR 4 =AccountId)),0),
+       ISNULL((select SUM(c3) from  #P_Final_Reserve WHERE MainAccountType>1 and (MainPayType IN(7,-7)OR 4 =AccountId)),0),
+       ISNULL((select SUM(c4) from  #P_Final_Reserve WHERE MainAccountType>1 and (MainPayType IN(7,-7)OR 4 =AccountId)),0),
+       ISNULL((select SUM(c5) from  #P_Final_Reserve WHERE MainAccountType>1 and (MainPayType IN(7,-7)OR 4 =AccountId)),0),
+       ISNULL((select SUM(c6) from  #P_Final_Reserve WHERE MainAccountType>1 and (MainPayType IN(7,-7)OR 4 =AccountId)),0)
+  END       
+END        
+   
+set @C_Between=(
+select isnull((select sum(amount) from payment where creditoraccountid=4 and date between @DATEFROM and @DATETO),0)
+     + isnull((Select SUM(AMOUNT) From Payment  Inner Join Account ac1 on creditoraccountid=ac1.AccountId Where AccountTypeId=1   AND PAYTYPEID=7 and date between @DATEFROM and @DATETO),0)
+-(
+isnull( (select sum(amount) from payment where paytypeid=7 and debtoraccountid=4 and date between @DATEFROM and @DATETO ),0)+
+isnull( (Select SUM(AMOUNT) From Payment  Inner Join Account ac1 on debtoraccountid=ac1.AccountId Where AccountTypeId=1   AND PAYTYPEID=7 and date between @DATEFROM and @DATETO),0)+
+isnull((select sum(amount) from payment where paytypeid<>7 and debtoraccountid=4 and date between @DATEFROM and @DATETO ),0)))
+
+set @C_after=(
+select isnull((select sum(amount) from payment where creditoraccountid=4 and date<= @DATETO),0)
+     + isnull((Select SUM(AMOUNT) From Payment  Inner Join Account ac1 on creditoraccountid=ac1.AccountId Where AccountTypeId=1   AND PAYTYPEID=7 and date<= @DATETO),0)
+-(
+isnull( (select sum(amount) from payment where paytypeid=7 and debtoraccountid=4 and date<= @DATETO ),0)+
+isnull( (Select SUM(AMOUNT) From Payment  Inner Join Account ac1 on debtoraccountid=ac1.AccountId Where AccountTypeId=1   AND PAYTYPEID=7 and date<= @DATETO),0)+
+isnull((select sum(amount) from payment where paytypeid<>7 and debtoraccountid=4 and date<= @DATETO),0)))
+
+IF @C_Between>0 
+BEGIN
+  UPDATE  #P_Final3
+  SET C2=ABS(@C_Between),C1=0
+  WHERE ACCOUNTID=4
+
+END
+IF @C_Between<0 
+BEGIN
+  UPDATE  #P_Final3
+  SET C1=ABS(@C_Between),C2=0
+  WHERE ACCOUNTID=4
+
+END
+IF @C_after>0 
+BEGIN
+  UPDATE  #P_Final3
+  SET C4=ABS(@C_after),C3=0
+  WHERE ACCOUNTID=4
+
+END
+IF @C_after<0 
+BEGIN
+  UPDATE  #P_Final3
+  SET C3=ABS(@C_after),C4=0
+  WHERE ACCOUNTID=4
+
+END
+     
+Select AccountId ,      
+       AccountTitle  ,           
+       c1,    
+       c2,    
+       c3,    
+       c4,    
+       Case When C4>C3 Then 0     Else C3-C4 End C5,                  
+       Case When C4>C3 Then C4-C3 Else 0     End C6                     
+INTO #P_Final4    
+From #P_Final3      
+    
+DELETE FROM #P_Final4   WHERE ACCOUNTID=-7    
+DELETE FROM #P_Final4   WHERE ACCOUNTID=-6    
+       
+Select 1 ID,*    
+From #P_Final4      
+Union                  
+Select 9999 id ,0,'جمع',ISNULL(sum(c1),0),ISNULL(sum(c2),0),ISNULL(sum(c3),0),ISNULL(sum(c4),0),ISNULL(sum(c5),0),ISNULL(sum(c6),0)                  
+From #P_Final4                  
+Union                  
+Select 0 id ,0,'اعضا',null,null,null,null,null,null                  
+From #P_Final4                  
+Order by ID                  
+                  
+Select @sumAmount=ISNULL(Sum(Cast(c6 as bigint))-sum(cast(c5 as bigint))     ,0 )            
+From #P_Final4                  
+                  
+Drop table #P1      
+Drop table #P2      
+Drop table #P3      
+    
+Drop table #P_Final1    
+Drop table #P_Final_reserve    
+Drop table #P_Final2    
+Drop table #P_Final3    
+Drop table #P_Final4    
+Drop table #PP_31
+
+GO
+
+COMMIT
+GO

@@ -1,0 +1,18 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[CountOfLoanForEachGaurantor]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[CountOfLoanForEachGaurantor]
+END
+GO
+
+CREATE  procedure [dbo].[CountOfLoanForEachGaurantor] @GaurantorContactID as int,  @Result int OUTPUT
+AS
+SET @Result=ISNULL((SELECT  COUNT( LoanID) FROM LoanGaurantor WHERE GaurantorContactID=@GaurantorContactID),0)
+GO
+
+COMMIT
+GO

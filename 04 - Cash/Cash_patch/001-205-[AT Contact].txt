@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'SendSms'
+          AND Object_ID = Object_ID(N'dbo.Contact'))
+BEGIN
+	ALTER TABLE [dbo].[Contact] 
+	ADD	[SendSms] [bit] NOT NULL DEFAULT (1) 
+END
+GO
+
+COMMIT
+GO

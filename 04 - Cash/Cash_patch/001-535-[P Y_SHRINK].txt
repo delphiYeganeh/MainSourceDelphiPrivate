@@ -1,0 +1,32 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Y_SHRINK]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Y_SHRINK]
+END
+GO
+
+CREATE  procedure [dbo].[Y_SHRINK]
+(
+	@DBNAME NVARCHAR(50)
+)
+AS
+	DECLARE @I TINYINT
+	SET @I=1
+	WHILE @I<=5
+	BEGIN
+		EXEC('Alter DataBase '+ @DBNAME + ' Set Recovery Simple')
+
+		DBCC SHRINKFILE(1,1)
+		DBCC SHRINKFILE(2,1)
+		SET @I=@I+1
+
+		EXEC('Alter DataBase '+ @DBNAME + ' Set Recovery Full')
+	END
+GO
+
+COMMIT
+GO

@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Y_BACKUP]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Y_BACKUP]
+END
+GO
+
+CREATE  procedure [dbo].[Y_BACKUP]
+(
+	@DBNAME NVARCHAR(50),
+	@PATH NVARCHAR(255)
+)
+AS
+	EXEC('BACKUP DATABASE ['+@DBNAME+'] TO DISK='''+@PATH+'''')
+
+GO
+
+COMMIT
+GO

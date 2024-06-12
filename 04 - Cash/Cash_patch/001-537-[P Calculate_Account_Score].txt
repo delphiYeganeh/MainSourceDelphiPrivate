@@ -1,0 +1,73 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Calculate_Account_Score]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Calculate_Account_Score]
+END
+GO
+
+CREATE  procedure [dbo].[Calculate_Account_Score]
+@AccountID INT,
+@StartDate VARCHAR(10),
+@EndDate VARCHAR(10),
+@WithLoan BIT = 0,
+@score BIGINT OUTPUT
+
+AS
+BEGIN
+	DECLARE @InitialBalance BIGINT
+	EXEC Calculate_Initial_Balance
+    @AccountID, @StartDate, @WithLoan, @InitialBalance OUTPUT
+    
+    IF @InitialBalance IS NULL
+		SET @InitialBalance = 0
+    DECLARE @mony BIGINT
+    DECLARE @Start VARCHAR(10)
+    DECLARE @amount BIGINT
+    DECLARE @date VARCHAR(10)
+    DECLARE @days INT
+    
+    SET @mony = @InitialBalance
+    SET @score = 0
+    SET @Start = @StartDate
+    
+    
+    DECLARE crsr CURSOR FOR
+    SELECT CASE WHEN  CreditorAccountID = @AccountID THEN Amount ELSE -Amount END AS [Ammount], [Date]
+    FROM Payment 
+    WHERE (DebtorAccountID = @AccountID OR CreditorAccountID = @AccountID)
+    AND(@WithLoan =1  OR PayTypeID NOT IN (3,4,5,6,7)) 
+    AND date BETWEEN @StartDate AND @EndDate
+    ORDER BY date
+	
+	OPEN crsr
+
+	FETCH NEXT FROM crsr	INTO @amount, @date
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		If @Start = @date
+			SET @days = 0
+		Else
+			SET @days = dbo.ShamsiDateDiff(@Start,@date) /*+ 1*/
+		SET @score = @score + (@days * @mony)/365	
+		SET @mony = @mony + @amount
+		SET @Start = @date
+		FETCH NEXT FROM crsr	INTO @amount, @date
+	END
+	CLOSE crsr
+	DEALLOCATE crsr
+
+	If @Start = @EndDate
+		SET @days = 0
+	Else
+		SET @days = dbo.ShamsiDateDiff(@Start,@EndDate) /*+ 1*/
+	SET @score = @score + (@days * @mony)/365
+	RETURN
+END
+GO
+
+COMMIT
+GO

@@ -1,0 +1,20 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[SELECT_ALL_ACCOUNT_WithoutDELAcc]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[SELECT_ALL_ACCOUNT_WithoutDELAcc]
+END
+GO
+
+CREATE  procedure [dbo].[SELECT_ALL_ACCOUNT_WithoutDELAcc] 
+AS  
+  
+
+SELECT *   FROM [ACCOUNT]  WHERE  ACCOUNTTYPEID=1  and isactive=1
+GO
+
+COMMIT
+GO

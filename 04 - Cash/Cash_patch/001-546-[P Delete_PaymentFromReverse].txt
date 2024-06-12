@@ -1,0 +1,40 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Delete_PaymentFromReverse]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Delete_PaymentFromReverse]
+END
+GO
+
+CREATE  procedure [dbo].[Delete_PaymentFromReverse]   @PaymentID integer
+AS
+Declare @RefPaymentId INT
+BEGIN TRAN T1
+
+		SELECT @RefPaymentId=RefrencePaymentId 
+		FROM PAYMENT 
+		WHERE PaymentID=@PaymentID  AND 
+			  PayTypeSecondId =8    AND
+			  ISNULL(RefrencePaymentId,0)>0
+		                           
+		Delete From [dbo].[Payment]
+		Where  PaymentID=@RefPaymentId 
+
+		Delete From [dbo].[Payment]
+		Where  PayTypeSecondId =8             AND
+			   ISNULL(RefrencePaymentId,0)>0  AND
+			   PaymentID=@PaymentID
+
+		UPDATE FORCEPAYMENT              
+		SET PAID =0 ,PAYMENTID=NULL              
+		WHERE FORCEPAYMENTID IN( SELECT   DISTINCT RELATEDID              
+								 FROM              PAYMENT               
+								 WHERE   PAYMENTID=@RefPaymentId)
+COMMIT TRAN T1
+GO
+
+COMMIT
+GO

@@ -1,0 +1,39 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Calc_MonthlyAmerce]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[Calc_MonthlyAmerce]
+END
+GO
+
+CREATE FUNCTION [dbo].[Calc_MonthlyAmerce]
+(
+	@Maturedate Char(10), 
+	@Amount int, 
+	@Today char(10)
+)  
+Returns int  
+Begin  
+	  
+	declare @MonthlyTolerance int , @MonthlyFromFirst bit , @MonthlyAmerce float(8) , @IsMonthlyAmercePercent Bit , @MonthlyAmercePercent float(8)  
+
+	Select @MonthlyTolerance = Value from Setting where userid=-1 and variablename='MonthlyTolerance'    /*تعداد روز*/  
+	Select @IsMonthlyAmercePercent = value from Setting where userid=-1 and variablename='IsMonthlyAmercePercent'   /*جريمه به درصد يا مبلغ*/  
+	Select @MonthlyAmerce = Value from Setting where userid=-1 and variablename='MonthlyAmerce'  /*مبلغ جريمه*/  
+	Select @MonthlyAmercePercent = Value from Setting where userid=-1 and variablename='MonthlyAmercePercent'  /*درصد جريمه*/  
+	Select @MonthlyFromFirst = Case value when 0 then 0 else 1 end  from Setting where userid=-1 and variablename='MonthlyFromFirst'   /*محاسبه جريمه از ابتدا*/  
+	  
+	if @IsMonthlyAmercePercent = 1 /*محاسبه جريمه براساس درصد*/  
+	   Set @MonthlyAmerce = (@MonthlyAmercePercent / 100.0) * @Amount   
+	  
+	return @MonthlyAmerce * (Case when dbo.shamsidatediff(@Maturedate,@Today) > @MonthlyTolerance then    
+							 Case when @MonthlyFromFirst=1 then dbo.shamsidatediff(@Maturedate,@today)    
+							 else dbo.shamsidatediff(@Maturedate,@today) - @MonthlyTolerance end else 0 end)     
+End
+GO
+
+COMMIT
+GO

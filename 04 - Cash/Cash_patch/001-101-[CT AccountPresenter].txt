@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'AccountPresenter')
+BEGIN
+	CREATE TABLE [dbo].[AccountPresenter](
+		[AccountPresenterId] [int] IDENTITY(1,1) NOT NULL,
+		[AccountId] [int] NOT NULL,
+		[ContactId] [int] NOT NULL,
+	 CONSTRAINT [PK_AccountPresentation] PRIMARY KEY CLUSTERED 
+	(
+		[AccountId] ASC,
+		[ContactId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+END
+GO
+
+COMMIT
+GO

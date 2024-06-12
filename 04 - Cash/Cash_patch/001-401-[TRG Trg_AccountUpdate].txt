@@ -1,0 +1,32 @@
+BEGIN TRANSACTION
+GO
+
+IF EXISTS (SELECT 1 
+			FROM sys.objects 
+			WHERE [object_id] = OBJECT_ID(N'[dbo].[Trg_AccountUpdate]')
+               AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[Trg_AccountUpdate];
+END
+GO
+
+CREATE TRIGGER [dbo].[Trg_AccountUpdate] 
+	ON [dbo].[Account] 
+	After  UPDATE
+AS
+	IF UPDATE(BlockedPrice)
+		IF ISNULL((SELECT TOP 1  BlockedPrice FROM INSERTED ),0)<>0   
+			UPDATE    Account  
+			SET       IsBlocked =1  
+	                WHERE     AccountID IN (SELECT AccountID FROM INSERTED)
+		ELSE  
+			UPDATE    Account  
+			SET       IsBlocked =0  
+	                WHERE     AccountID IN (SELECT AccountID FROM INSERTED)
+GO
+
+ALTER TABLE [dbo].[Account] ENABLE TRIGGER [Trg_AccountUpdate]
+GO
+
+COMMIT
+GO

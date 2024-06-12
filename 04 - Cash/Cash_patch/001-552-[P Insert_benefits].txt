@@ -1,0 +1,154 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Insert_benefits]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Insert_benefits]
+END
+GO
+
+CREATE  procedure [dbo].[Insert_benefits]
+@AccountNo	varchar(20),
+@FamilyID	INT,
+@Year		INT,
+@Month		TINYINT,
+@WithLoan	BIT,
+@doForSetteld BIT,
+@percent float,
+@INSERTUSERID int
+AS
+BEGIN
+	Select a.AccountID,a.AccountNo,@Year as Year,@Month as Month,a.AccountTitle, CONVERT(bigint,0) AnnualAvragePrice  ,CONVERT(bigint,0) as InsertedBenefitPrice,CONVERT(int,0) as PaymentID 
+	Into #tblTemp
+	From Account a  
+		Inner Join Contact c On c.ContactID = a.ContactID
+	WHERE (@AccountNo = '' OR @AccountNo = LTRIM(RTRIM(a.AccountNo))) 
+		And c.HAVEINTEREST = 1
+		And a.AccountID not in (Select b.ACCOUNTID
+									From  Benefit b 
+									Where (b.YEAR = @Year and (@Month = 0 or (b.Month = @Month  or b.Month = 0 )))
+										And ((@FamilyID = 0) OR (@FamilyID is null))
+										And b.paymentID Is Not null)
+	
+	Declare @AccID int
+	Declare @Score BIGINT
+	Declare @StartDate varchar(10)
+	Declare @EndDate varchar(10)
+	
+	if @Month = 0
+		set @StartDate = CONVERT(varchar(4),@Year)+'/01/01'
+	else if @Month <10
+		set @StartDate = CONVERT(varchar(4),@Year)+'/0'+CONVERT(varchar(1),@Month)+'/01'
+	else
+		set @StartDate = CONVERT(varchar(4),@Year)+'/'+CONVERT(varchar(2),@Month)+'/01'
+	
+	if @Month = 0
+		set @EndDate = CONVERT(varchar(4),@Year)+'/12/30'
+	else if @Month <10
+		set @EndDate = CONVERT(varchar(4),@Year)+'/0'+CONVERT(varchar(1),@Month)+'/31'
+	else
+		set @EndDate = CONVERT(varchar(4),@Year)+'/'+CONVERT(varchar(2),@Month)+'/31'	
+	
+	Declare MAIN_CURSOR CURSOR FOR    
+           SELECT AccountID FROM #tblTemp    
+	OPEN  MAIN_CURSOR    
+	FETCH NEXT FROM MAIN_CURSOR INTO @AccID    
+    
+	WHILE @@FETCH_STATUS=0    
+	BEGIN    
+		EXEC Calculate_Account_Score
+			@AccID, @StartDate, @EndDate, @WithLoan, @Score OUTPUT
+    
+		IF @Score IS NULL
+			SET @Score = 0
+		    
+		update #tblTemp 
+		set AnnualAvragePrice = @Score, InsertedBenefitPrice = convert(bigint,@Score *@percent/100)
+		where AccountID=@AccID
+		    
+		FETCH NEXT FROM MAIN_CURSOR INTO @AccID    
+	END    
+    
+	CLOSE MAIN_CURSOR    
+	DEALLOCATE MAIN_CURSOR  
+	
+	Declare @Y_Tmp varchar(2)
+	Declare @NewDocumentNo int
+	Declare @BENEFITACCOUNTID int
+	Declare @TIME varchar(8)
+	
+	SET  @Y_Tmp=(SELECT SUBSTRING(convert(varchar(4),@Year),3,2))                
+	EXEC [GET_NEWDOCUMNETNO] @Y_Tmp,@NewDocumentNo  OUTPUT
+	EXEC GET_SYSTEMSETTING 'BENEFITACCOUNTID',@BENEFITACCOUNTID OUTPUT 
+	EXEC [GET_TIME] @TIME  OUTPUT
+	
+	Delete From #tblTemp Where InsertedBenefitPrice<=0
+	
+	Insert Into DBO.PAYMENT                    
+        (CREDITORACCOUNTID,                
+         DEBTORACCOUNTID  ,                
+         DATE             ,                
+         TIME             ,                
+         AMOUNT           ,                
+         COMMENT          ,                
+         FINANCIALNOTEID  ,              
+         FinancialNote_DetailID,                
+         INSERTUSERID     ,                
+         INSERTDATE       ,                 
+         PAYTYPEID        ,                
+         DOCUMENTNO       )
+	Select 
+		t.AccountID,
+		@BENEFITACCOUNTID,
+		DBO.SHAMSI(GETDATE())as [date],                
+        CAST(@TIME AS VARCHAR(5))as [time], 
+        FLOOR(t.InsertedBenefitPrice) as bigint,
+        'سود سپرده گذاري در تاريخ "'+DBO.SHAMSI( GETDATE()) +'"',
+        0,                
+        0,                
+        @INSERTUSERID as INSERTUSERID,   
+        DBO.SHAMSI(GETDATE()) as date,                
+        1 AS PAYTYPEID,                
+        @NewDocumentNo  as NewDocumentNo 
+	From #tblTemp t WHERE InsertedBenefitPrice<>0
+   
+	Update #tblTemp 
+		Set PaymentID = p.paymentid 
+		From Payment p 
+		Where p.documentno = @NewDocumentNo 
+			And p.DebtorAccountID = @BENEFITACCOUNTID
+			And p.Comment like '%سود سپرده گذاري در تاريخ%'
+			And p.CreditorAccountID = #tblTemp.AccountID 
+			And p.Amount = FLOOR(#tblTemp.InsertedBenefitPrice)
+	   
+	Insert Into Benefit
+		(ACCOUNTID,
+		[YEAR],
+		DocumentNo,
+		InsertedBenefitPrice,
+		AnnualAvragePrice ,
+		InsertedDate,
+		InsertedUserId, 
+		BenefitPercent,
+		Month,
+		PaymentID)                
+	Select   
+		t.AccountID,
+		t.Year,
+		@NewDocumentNo,
+		t.InsertedBenefitPrice,
+		t.AnnualAvragePrice,
+		DBO.SHAMSI(GETDATE()),
+		@INSERTUSERID,
+		@percent,
+		@Month,
+		t.PaymentID
+	From #tblTemp t 
+	Where InsertedBenefitPrice<>0
+END
+GO
+
+COMMIT
+GO

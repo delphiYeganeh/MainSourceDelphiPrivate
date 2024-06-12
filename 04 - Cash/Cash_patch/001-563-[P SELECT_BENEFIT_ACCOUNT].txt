@@ -1,0 +1,18 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[SELECT_BENEFIT_ACCOUNT]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[SELECT_BENEFIT_ACCOUNT]
+END
+GO
+
+CREATE  procedure [dbo].[SELECT_BENEFIT_ACCOUNT] @Type INT
+AS
+	SELECT * FROM Account WHERE isactive =1 and AccountTypeID=@Type
+GO
+
+COMMIT
+GO

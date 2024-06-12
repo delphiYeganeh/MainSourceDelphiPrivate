@@ -1,0 +1,32 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[FnYSrtToInt]')
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[FnYSrtToInt]
+END
+GO
+
+CREATE FUNCTION [dbo].[FnYSrtToInt]
+(
+	@AccountNo NVARCHAR(100)
+)    
+RETURNS BIGINT    
+AS    
+BEGIN    
+	DECLARE @ResultString NVARCHAR(100)
+	SET @ResultString = '' 
+	WHILE (LEN(@AccountNo) <> 0)  
+	BEGIN
+		IF SUBSTRING(@AccountNo,1,1)IN ('0','1','2','3','4','5','6','7','8','9')
+			SET @ResultString = @ResultString + SUBSTRING(@AccountNo,1,1)
+		SET @AccountNo = SUBSTRING(@AccountNo,2,LEN(@AccountNo)-1) 
+	END
+	RETURN CONVERT(BIGINT,@ResultString)
+END
+GO
+
+COMMIT
+GO

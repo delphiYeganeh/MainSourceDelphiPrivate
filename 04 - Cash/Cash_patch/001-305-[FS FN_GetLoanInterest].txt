@@ -1,0 +1,33 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[FN_GetLoanInterest]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[FN_GetLoanInterest]
+END
+GO
+
+CREATE FUNCTION [dbo].[FN_GetLoanInterest]
+(
+	@PaymentID INT
+) 
+RETURNS FLOAT
+AS
+BEGIN
+	DECLARE @LoanID INT
+	DECLARE @Result FLOAT
+
+	SELECT @LoanID = LoanID FROM Loan l WHERE l.PaymentID = @PaymentID
+
+	SELECT @Result = SUM(InterestAmount) 
+	FROM ForcePayment fp 
+	WHERE fp.Paid = 0 and fp.ParentID = @LoanID AND InterestAmount<>0
+
+	RETURN (ISNULL(@Result , 0))	
+END
+GO
+
+COMMIT
+GO

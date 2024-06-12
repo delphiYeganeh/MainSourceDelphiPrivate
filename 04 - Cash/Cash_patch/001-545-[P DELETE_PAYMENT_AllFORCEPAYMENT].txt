@@ -1,0 +1,101 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[DELETE_PAYMENT_AllFORCEPAYMENT]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[DELETE_PAYMENT_AllFORCEPAYMENT]
+END
+GO
+
+CREATE  procedure [dbo].[DELETE_PAYMENT_AllFORCEPAYMENT]    @PaymentId Int, @DelDATE  char(10),@USERID INT     
+AS    
+        DECLARE @_PaymentID INT
+        DECLARE Payment_Cursor CURSOR FOR    
+		Select PaymentID 
+		From   Payment
+		Where  DOCumentNO =( Select  DocumentNO 
+							 From    dbo.Payment  
+							 Where   Paymentid=@PaymentId ) AND  
+									 DATE   BETWEEN  SUBSTRING(@DelDATE,1,4) +'/01/01' AND SUBSTRING(@DelDATE,1,4)+'/12/30' 
+        OPEN Payment_Cursor     
+ 
+ FETCH NEXT FROM Payment_Cursor INTO @_PaymentID 
+ WHILE @@FETCH_STATUS = 0    
+ BEGIN    
+		DECLARE @DOCNO CHAR(10),  @PayTypeId INT , @Date char(10) /*تاريخ کورد حذف شده*/    
+		SELECT  @DOCNO= DOCumentNO   ,  
+		        @PayTypeId=PayTypeId ,
+		        @Date=[Date]     
+		From payment     
+		Where paymentid=@_PaymentID    
+		    
+		Declare  @CANDELETE BIT             
+		Exec CANDELETE_PAYMENT  @_PaymentID ,@CANDELETE   OUTPUT
+		    
+		IF(@CANDELETE=1)     
+		BEGIN              
+		  BEGIN TRAN T1              
+		  SET @DOCNO=LTRIM(RTRIM(@DOCNO))          
+		          
+		  DECLARE @TIME CHAR(5) ,  @SameDate char(10) ,@SameInsertDate char(10),@TypeId SMALLINT           
+		          
+		  SET @SameDate       =@Date           
+		  SET @SameInsertDate =@DelDATE           
+		  SET @TypeId         =@PayTypeId     
+		              
+		  EXEC GET_TIME  @TIME OUTPUT               
+		                 
+		  INSERT INTO PAYMENT(DEBTORACCOUNTID             
+							 ,CREDITORACCOUNTID          
+							 ,DATE           
+							 ,TIME          
+							 ,InsertDate           
+							 ,AMOUNT                         
+							 ,COMMENT                
+							 ,INSERTUSERID              
+							 ,PAYTYPEID              
+							 ,DOCUMENTNO      
+							 ,PayTypeSecondId    
+							 ,RefrencePaymentId)              
+		  SELECT              CREDITORACCOUNTID, DEBTORACCOUNTID,
+							  @SameDate ,    
+							  @TIME,    
+							  @SameInsertDate,SUM(AMOUNT)AMOUNT              
+							 , ' سند معکوس '+(SELECT PAYTYPETITLE               
+											  FROM PAYTYPE               
+											  WHERE PAYTYPEID=M.PAYTYPEID) +  ' شماره ' +LTRIM(RTRIM(CAST(@_PaymentId AS VARCHAR(10))))COMMENT  
+							 ,@USERID              
+							 ,@TypeId /* 8 */
+							 ,@DOCNO      
+							 ,8    
+							 ,@_PaymentId              
+		                
+		  FROM PAYMENT  M              
+		  WHERE PaymentId=@_PaymentID   AND      
+				DocumentNo=@DocNo       And             
+			   [DATE]=@Date    
+		  GROUP BY CREDITORACCOUNTID,DEBTORACCOUNTID,PAYTYPEID              
+
+		  UPDATE FORCEPAYMENT              
+		  SET PAID =0 ,PAYMENTID=NULL              
+		  WHERE FORCEPAYMENTID IN( SELECT   DISTINCT RELATEDID              
+														   FROM              PAYMENT               
+														   WHERE   DOCUMENTNO=@DOCNO AND               
+																   RELATEDID IS NOT NULL AND               
+																   DATE BETWEEN  SUBSTRING(@DATE,1,4) +'/01/01' AND SUBSTRING(@DATE,1,4)+'/12/30' )  OR            
+								  PAYMENTID IN( SELECT   DISTINCT PAYMENTID              
+														   FROM    PAYMENT               
+														   WHERE   DOCUMENTNO=@DOCNO AND               
+																   DATE BETWEEN  SUBSTRING(@DATE,1,4) +'/01/01' AND SUBSTRING(@DATE,1,4)+'/12/30' )             
+		COMMIT TRAN T1               
+		END /* NOT EXISTS */
+    FETCH NEXT FROM Payment_Cursor INTO @_PaymentID  
+ END    
+ CLOSE Payment_Cursor    
+ DEALLOCATE Payment_Cursor
+GO
+
+COMMIT
+GO

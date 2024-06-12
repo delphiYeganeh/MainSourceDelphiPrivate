@@ -1,0 +1,30 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[ShamsiToInt]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[ShamsiToInt]
+END
+GO
+
+CREATE FUNCTION [dbo].[ShamsiToInt]
+(
+	@date char(10)
+) 
+RETURNS int
+AS BEGIN
+	declare @d1 int ,@d2 int ,@Y int ,@m int ,@d int ,@dif int ,@i int
+	SET @y=dbo.shamsiYearof(@date)
+	SET @m=dbo.shamsimonthof(@date)
+	SET @d=dbo.shamsidayof(@date)
+	SET @dif=case when @m<7 then  (@m-1)*31+@d else 186+(@m-7)*30+@d end;
+	SET @dif= @dif+ (FLOOR((((@y- 1301)/4)*366)+ (((@y- 1300)- ((@y- 1301)/4))*365)))
+
+  RETURN(@dif)
+END
+GO
+
+COMMIT
+GO

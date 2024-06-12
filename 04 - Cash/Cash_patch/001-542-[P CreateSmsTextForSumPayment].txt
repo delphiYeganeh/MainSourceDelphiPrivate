@@ -1,0 +1,41 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[CreateSmsTextForSumPayment]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[CreateSmsTextForSumPayment]
+END
+GO
+
+CREATE  procedure [dbo].[CreateSmsTextForSumPayment] ( @ForcePaymentIds VARCHAR(MAX) )
+AS
+BEGIN
+      DECLARE @sql VARCHAR(MAX)
+      SET @sql = '  SELECT  s.* , ac.accountTitle , c.Phones , DBO.EXIST(ac.ACCOUNTID , ''9'') exist
+                    FROM    ( SELECT    ParentID , ForceTypeID , MIN(MatureDate) _date , SUM(Amount + InterestAmount) _sum , dbo.GetListOrderNo(Parentid , ForceTypeID , ''' 
+					+ @ForcePaymentIds + ''') OrderNos , ( SELECT ISNULL(SUM(Amount + InterestAmount) , 0) FROM   dbo.ForcePayment fp WHERE  fp.ParentID = ff.ParentID AND fp.paid = 0 ) BM
+                              FROM      dbo.ForcePayment ff
+                              WHERE     ForcePaymentID IN (' + SUBSTRING(@ForcePaymentIds , 1 , LEN(@ForcePaymentIds) - 1) + ')
+                              GROUP BY  ParentID , ForceTypeID ) s
+                            INNER JOIN Loan l ON l.LoanId = s.parentid AND s.ForceTypeID = 1
+                            INNER JOIN account ac ON ac.accountid = l.AccountId
+                            INNER JOIN dbo.Contact c ON c.ContactID = ac.ContactID
+                            
+                    UNION ALL
+
+                    SELECT  s.* , ac.accountTitle , c.Phones , DBO.EXIST(ac.ACCOUNTID , ''9'') EXIST
+                    FROM    ( SELECT    ParentID , ForceTypeID , MIN(MatureDate) _date , SUM(Amount + InterestAmount) _sum , dbo.GetListOrderNo(Parentid , ForceTypeID , ''' 
+					+ @ForcePaymentIds + ''') OrderNos , ( SELECT ISNULL(SUM(Amount + InterestAmount) , 0) FROM   dbo.ForcePayment fp WHERE  fp.ParentID = ff.ParentID AND fp.paid = 0 ) BM
+                              FROM      dbo.ForcePayment ff
+                              WHERE     ForcePaymentID IN (' + SUBSTRING(@ForcePaymentIds , 1 , LEN(@ForcePaymentIds) - 1) + ')
+                              GROUP BY  ParentID , ForceTypeID ) s
+                            INNER JOIN account ac ON ac.accountid = s.ParentID AND s.ForceTypeID = 2
+                            INNER JOIN dbo.Contact c ON c.ContactID = ac.ContactID '      
+      EXEC(@sql)    
+END
+GO
+
+COMMIT
+GO

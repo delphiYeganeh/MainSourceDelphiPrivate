@@ -1,0 +1,82 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[GROUP_FORCEPAYMENT]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[GROUP_FORCEPAYMENT]
+END
+GO
+
+CREATE  procedure [dbo].[GROUP_FORCEPAYMENT]        
+                           @FORCEPAYMENTID INT ,  
+                           @DEBTORACCOUNTID INT ,  
+                           @DATE CHAR(10),  
+                           @COMMENT NVARCHAR(100),  
+                           @FINANCIALNOTEID INT ,  
+                           @USERID INT,  
+                           @DOCUMENTNO VARCHAR(10),  
+                           @FINANCIALNOTE_DETAILID INT =0  ,  
+                           @Crtr_DetAccountID INT=0,  
+                           @_AmerceAmount INT=0      
+AS        
+
+DECLARE @PAYMENTID         INT,
+        @INTERESTAMOUNT    INT,
+        @PARENTID          INT,
+        @CREDITORACCOUNTID INT,
+        @TIME              CHAR(5),
+        @AMOUNT            INT,
+        @PAYTYPEID         TINYINT,
+        @FORCETYPEID       TINYINT ,
+        @LOANNO            VARCHAR(50),
+        @MATUREDATE        CHAR(10)        
+        
+
+
+	SELECT @PARENTID=PARENTID ,  
+		   @FORCETYPEID=FORCETYPEID ,  
+		   @AMOUNT=AMOUNT,  
+		   @INTERESTAMOUNT=INTERESTAMOUNT,        
+		   @MATUREDATE=MATUREDATE        
+		FROM FORCEPAYMENT        
+		WHERE FORCEPAYMENTID=@FORCEPAYMENTID  
+
+	IF @FORCETYPEID=1        
+	BEGIN        
+	  SET @PAYTYPEID=3        
+	  SELECT @CREDITORACCOUNTID=ACCOUNTID, @LOANNO=LOANNO FROM LOAN WHERE LOANID=@PARENTID        
+	END        
+	ELSE        
+	BEGIN        
+	  SET @PAYTYPEID=2        
+	  SET @CREDITORACCOUNTID=@PARENTID        
+	END        
+			
+	EXEC GET_TIME  @TIME OUTPUT   
+
+	INSERT INTO PAYMENT        
+		   (CREDITORACCOUNTID  ,DEBTORACCOUNTID  ,DATE  ,TIME  ,AMOUNT  ,COMMENT  ,FINANCIALNOTEID ,INSERTUSERID ,PAYTYPEID,DOCUMENTNO,FINANCIALNOTE_DETAILID,Crtr_DetAccountID )        
+	VALUES(@CREDITORACCOUNTID ,@DEBTORACCOUNTID ,@DATE ,@TIME ,@AMOUNT ,@COMMENT ,@FINANCIALNOTEID ,@USERID    ,@PAYTYPEID,@DOCUMENTNO,@FINANCIALNOTE_DETAILID,@Crtr_DetAccountID ) 
+
+	SELECT @PAYMENTID=@@IDENTITY        
+			
+	IF @FORCETYPEID=1 AND @INTERESTAMOUNT>0        
+	INSERT INTO PAYMENT (CREDITORACCOUNTID      , DEBTORACCOUNTID  , DATE , TIME ,         AMOUNT ,COMMENT                                           ,FINANCIALNOTEID  , INSERTUSERID,PAYTYPEID,DOCUMENTNO,RELATEDID,FINANCIALNOTE_DETAILID,Crtr_DetAccountID )        
+				  VALUES(/*4*/@CREDITORACCOUNTID,@DEBTORACCOUNTID  ,@DATE ,@TIME ,@INTERESTAMOUNT ,'سود قسط تاريخ '+@MATUREDATE+' وام شماره'+ @LOANNO ,@FINANCIALNOTEID ,@USERID      ,7        ,@DOCUMENTNO,@FORCEPAYMENTID,@FINANCIALNOTE_DETAILID,@Crtr_DetAccountID)        
+        
+	  
+	IF @FORCETYPEID=1 AND @_AmerceAmount>0  
+	INSERT INTO PAYMENT(CREDITORACCOUNTID  , DEBTORACCOUNTID   , DATE, TIME ,  AMOUNT         ,COMMENT                                           , FINANCIALNOTEID  , INSERTUSERID,PAYTYPEID,DOCUMENTNO ,RELATEDID      ,FINANCIALNOTE_DETAILID ,Crtr_DetAccountID )        
+				 VALUES(2                  ,@DEBTORACCOUNTID  ,@DATE ,@TIME ,@_AmerceAmount   ,'جريمه قسط تاريخ '+@MATUREDATE+' وام شماره'+@LOANNO ,@FINANCIALNOTEID ,@USERID      ,5        ,@DOCUMENTNO,@FORCEPAYMENTID,@FINANCIALNOTE_DETAILID,@Crtr_DetAccountID)        
+  
+	UPDATE  FORCEPAYMENT        
+	   SET  PAYMENTID     =@PAYMENTID ,
+			PAID          = 1,
+			GroupPayed	  = 1	     
+	 WHERE  FORCEPAYMENTID=@FORCEPAYMENTID
+GO
+
+COMMIT
+GO

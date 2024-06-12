@@ -1,0 +1,32 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[LoanDelay_ByAccountId]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[LoanDelay_ByAccountId]
+END
+GO
+
+CREATE FUNCTION [dbo].[LoanDelay_ByAccountId]
+(
+	@AccountID int,
+	@today char(10)
+)  
+returns int  
+begin  
+	declare @Delay int  
+	SELECT  @Delay=sum(dbo.shamsidatediff(Maturedate,isnull(Payment.date,@today)))  
+		FROM  ForcePayment  
+			left join Payment on ForcePayment.Paymentid=Payment.Paymentid  
+		where ForceTypeID=1
+			and (ParentID IN (SELECT LoanID FROM DBO.Loan WHERE AccountID=@AccountID))   
+	  
+	set @Delay =isnull(@Delay,0)  
+	return @Delay  
+end
+GO
+
+COMMIT
+GO

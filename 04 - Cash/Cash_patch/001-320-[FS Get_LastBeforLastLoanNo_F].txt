@@ -1,0 +1,54 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_LastBeforLastLoanNo_F]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[Get_LastBeforLastLoanNo_F]
+END
+GO
+
+CREATE FUNCTION [dbo].[Get_LastBeforLastLoanNo_F]
+(
+	@AccountID int
+)  
+Returns INT    
+BEGIN    
+	DECLARE @BeforLastLoanNotPaiedAmount BIGINT  ,@BeforLastLoanNotPaiedLoanNo INT    
+	DECLARE @LatestLoan TABLE(LoanID INT,LoanNO VARCHAR(10),AMOUNT BIGINT)    
+         
+	INSERT INTO @LatestLoan     
+		SELECT DISTINCT TOP 2 Loan.LoanID, Loan.LoanNO,Loan.Amount    
+			FROM Loan
+				INNER JOIN ForcePayment ON Loan.LoanID = ForcePayment.ParentID    
+			WHERE (Loan.AccountID = @AccountID ) 
+				AND (ForcePayment.ForceTypeID = 1) 
+				AND (ForcePayment.Paid = 0)    
+			ORDER BY   Loan.LoanID      
+
+	DECLARE  @BeforLastLoanID INT    
+	SET @BeforLastLoanID = (SELECT  TOP 1    LoanID      
+							 FROM     @LatestLoan    
+							 ORDER BY LoanID)                                          
+		
+	DECLARE  @LastLoanID INT    
+	SET @LastLoanID = (SELECT TOP 1  LoanID      
+							 FROM     @LatestLoan    
+							 ORDER BY LoanID DESC)      
+
+	IF @LastLoanID<> @BeforLastLoanID    
+	BEGIN    
+		SET @BeforLastLoanNotPaiedLoanNo=(SELECT LOANNO FROM LOAN WHERE LOANID=@BeforLastLoanID)                                          
+	END    
+	ELSE    
+	BEGIN    
+	   SET      @BeforLastLoanNotPaiedLoanNo=0                            
+	END    
+		
+	Return  @BeforLastLoanNotPaiedLoanNo    
+END
+GO
+
+COMMIT
+GO

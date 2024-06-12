@@ -1,0 +1,84 @@
+BEGIN TRANSACTION
+GO
+
+IF EXISTS (SELECT 1 
+			FROM sys.objects 
+			WHERE [object_id] = OBJECT_ID(N'[dbo].[trForcePaymentdelete]')
+               AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[trForcePaymentdelete];
+END
+GO
+
+CREATE TRIGGER [dbo].[trForcePaymentdelete]   
+	ON   [dbo].[ForcePayment]   
+	INSTEAD OF  DELETE 
+AS  
+begin
+	DECLARE       @LoanID INT,
+				  @ForceTypeID INT,
+				  @Amount INT,
+				  @Paid bit 
+
+	SELECT
+				  @LoanID=ParentID, 
+				  @ForceTypeID=ForceTypeID, 
+				  @Amount=Amount, 
+				  @Paid=Paid
+	FROM         Deleted     
+
+	IF ISNULL(@Paid,0)=0 AND (@FORCETYPEID=1)
+		 BEGIN 
+			DECLARE  @_PercentoFGauranty INT,@_GaurantorContactID INT        
+			DECLARE CR_LoanGaurantor  CURSOR FOR
+			SELECT  PercentofGauranty, GaurantorContactID    	
+			FROM    LoanGaurantor	
+			WHERE   LOANID=@LOANID  
+			OPEN    CR_LoanGaurantor
+			
+			FETCH NEXT FROM CR_LoanGaurantor INTO  @_PercentoFGauranty,@_GaurantorContactID 
+			WHILE @@FETCH_STATUS = 0
+			BEGIN		
+				 UPDATE Account  
+				 SET    BlockedPrice =IsNull(BlockedPrice,0)-((@AMOUNT * @_PercentoFGauranty )/100  )
+				 Where  ContactID =(@_GaurantorContactID)
+			
+		
+			   FETCH NEXT FROM CR_LoanGaurantor  INTO  @_PercentoFGauranty,@_GaurantorContactID 
+			END
+			CLOSE      CR_LoanGaurantor
+			DEALLOCATE CR_LoanGaurantor
+		 END 
+
+
+	INSERT INTO  DEL_ForcePayment(ForcePaymentID, ParentID, ForceTypeID, Amount, MatureDate, PaymentID, Comment, Paid, OrderNo, InterestAmount,DeletedDate)
+	SELECT                        ForcePaymentID, ParentID, ForceTypeID, Amount, MatureDate, PaymentID, Comment, Paid, OrderNo, InterestAmount, DBO.Shamsi(GETDATE())
+	FROM             deleted     
+
+
+	Declare @PaymentID  Int,@ForcePaymentID  INT,@Parentid INT,@ForGivenLoan BIT,@LoanTypeID SMALLINT
+	Select Top 1 @paymentID=paymentid,@Parentid=Parentid,@ForceTypeID=ForceTypeID,@ForcePaymentID=ForcePaymentID  From Deleted
+	SELECT @LoanTypeID=LoanTypeID FROM dbo.Loan WHERE LoanID=@Parentid
+	SELECT @ForGivenLoan=ForGivenLoan FROM dbo.LoanType WHERE LoanTypeID=@LoanTypeID
+	
+	IF @ForGivenLoan<>1
+	BEGIN 
+	  if @ForcePaymentID is not null
+	  begin
+		if isnull(@paymentID,0)>0 
+		   RAISERROR ('نمي توان قسط پرداخت شده را حذف کرد', 16,  1 )
+		else
+		   delete ForcePayment where ForcePaymentID=@ForcePaymentID
+	  end 
+	END       
+	else delete ForcePayment where ForcePaymentID=@ForcePaymentID
+
+	set nocount on
+end
+GO
+
+ALTER TABLE [dbo].[ForcePayment] ENABLE TRIGGER [trForcePaymentdelete]
+GO
+
+COMMIT
+GO

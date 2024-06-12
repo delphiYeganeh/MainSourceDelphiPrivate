@@ -1,0 +1,30 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Delete_PayedBenefit]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Delete_PayedBenefit]
+END
+GO
+
+CREATE  procedure [dbo].[Delete_PayedBenefit](@YEAR char(4),@ACCOUNTID int)
+AS
+ 
+declare @insertionDate varchar(10)
+select @insertionDate = InsertedDate from Benefit where [YEAR]=@YEAR AND (ACCOUNTID=@ACCOUNTID OR @ACCOUNTID=0)
+
+Select * into #b From  Benefit    WHERE [YEAR]=@YEAR AND (ACCOUNTID=@ACCOUNTID OR @ACCOUNTID=0)
+
+DELETE FROM PAYMENT 
+WHERE CreditorAccountId IN(SELECT ACCOUNTID  FROM #b WHERE [YEAR]=@YEAR) AND 
+      DOCUMENTNO        IN(SELECT DOCUMENTNO FROM #b WHERE [YEAR]=@YEAR) AND
+      date = @insertionDate
+
+
+DELETE FROM Benefit  WHERE [YEAR]=@YEAR AND DOCUMENTNO IN (SELECT DOCUMENTNO  FROM #b    WHERE [YEAR]=@YEAR) AND (ACCOUNTID=@ACCOUNTID OR @ACCOUNTID=0)
+GO
+
+COMMIT
+GO

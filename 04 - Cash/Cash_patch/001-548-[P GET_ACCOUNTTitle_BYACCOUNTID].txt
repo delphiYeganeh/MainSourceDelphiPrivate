@@ -1,0 +1,29 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[GET_ACCOUNTTitle_BYACCOUNTID]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[GET_ACCOUNTTitle_BYACCOUNTID]
+END
+GO
+
+CREATE  procedure [dbo].[GET_ACCOUNTTitle_BYACCOUNTID]  
+	@ACCOUNTID INT,
+	@AccountTitle VARCHAR(50) OUTPUT  
+AS  
+DECLARE @ISACTIVE BIT 
+ 
+SELECT @AccountTitle= AccountTitle,@ISACTIVE=ISACTIVE  
+	FROM ACCOUNT  
+	WHERE ACCOUNTID=@ACCOUNTID  
+  
+SET @AccountTitle=ISNULL(@AccountTitle,'')  
+SET @ISACTIVE=ISNULL(@ISACTIVE,1)  
+IF  @ISACTIVE=0 
+	SET @AccountTitle=''
+GO
+
+COMMIT
+GO

@@ -1,0 +1,117 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[REPORT_TOTALPAYMENT]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[REPORT_TOTALPAYMENT]
+END
+GO
+
+CREATE  PROCEDURE [dbo].[REPORT_TOTALPAYMENT] 
+	@DOCUMENTNO VARCHAR(10),
+	@TODAY VARCHAR(10)        
+AS   
+
+Declare @EndDate Nchar(10) = Left(dbo.Shamsi(GETDATE()), 4) + '/12/29'
+
+DECLARE @A TABLE(ACCOUNTTITLE VARCHAR(50),
+                FATHERNAME  VARCHAR(20),
+                MATUREDATE  VARCHAR(10),
+                ACCOUNTNO  VARCHAR(20),
+                GHESTAMOUNT INT,
+                MOUNTLYAMOUNT INT,
+                MOUNTLY_GHESTAMOUNT BIGINT,
+                REMAINOFLOAN INT,
+                TOTALLOANAMOUNT INT,
+                [DELAY] INT,
+                MONTHLYBALANCE BIGINT,
+                PARTSBEGINDATE  VARCHAR(10),         
+                LOANTYPEID INT,
+                GHESTPERIOD  VARCHAR(10),
+                GHESTCOUNT   INT)
+INSERT INTO @A    
+SELECT          ACCOUNT.ACCOUNTTITLE,
+                CONTACT.FATHERNAME,
+                FORCEPAYMENT.MATUREDATE,
+                ACCOUNT.ACCOUNTNO,
+                ISNULL((SELECT F.AMOUNT FROM FORCEPAYMENT F WHERE F.FORCETYPEID = 1     AND F.FORCEPAYMENTID = FORCEPAYMENT.FORCEPAYMENTID),0) AS GHESTAMOUNT,
+                ISNULL((SELECT F.AMOUNT FROM FORCEPAYMENT F WHERE F.FORCETYPEID = 2     AND F.FORCEPAYMENTID = FORCEPAYMENT.FORCEPAYMENTID),0) AS MOUNTLYAMOUNT,
+                ISNULL((select sum(amount) from Payment where DOCUMENTNO=@DOCUMENTNO AND SUBSTRING(PAYMENT.DATE,3,2 )=SUBSTRING(@TODAY,3,2)),0) AS MOUNTLY_GHESTAMOUNT,
+                ISNULL((SELECT SUM(AMOUNT)FROM   FORCEPAYMENT WHERE  FORCETYPEID = 1 AND PARENTID = LOAN.LOANID AND PAID = 0), 0) AS REMAINOFLOAN,
+                LOAN.AMOUNT AS TOTALLOANAMOUNT,
+                DBO.SHAMSIDATEDIFF(FORCEPAYMENT.MATUREDATE,ISNULL(PAYMENT.DATE,@TODAY))  AS [DELAY],
+                dbo.Exist(Account.AccountID, @EndDate) AS MONTHLYBALANCE,
+                LOAN.PARTSBEGINDATE,
+                LOAN.LOANTYPEID,
+                LOANTYPE.PERIOD AS GHESTPERIOD,
+                (SELECT COUNT(1) FROM FORCEPAYMENT WHERE  PARENTID=LOAN.LOANID AND FORCETYPEID=1) AS GHESTCOUNT
+FROM         Loan INNER JOIN
+                      LoanType ON Loan.LoanTypeID = LoanType.LoanTypeID INNER JOIN
+                      ForcePayment INNER JOIN  
+                      Contact INNER JOIN  
+                      Account ON Contact.ContactID = Account.ContactID INNER JOIN  
+                      Payment ON Account.AccountID = Payment.CreditorAccountID ON ForcePayment.PaymentID = Payment.PaymentID ON   
+                      Loan.LoanID = ForcePayment.ParentID  
+WHERE      PAYMENT.DOCUMENTNO=@DOCUMENTNO AND
+           SUBSTRING(PAYMENT.DATE,3,2 )=SUBSTRING(@TODAY,3,2) AND
+          (ForcePayment.ForceTypeID = 1)  
+  
+
+INSERT INTO @A    
+  
+SELECT          ACCOUNT.ACCOUNTTITLE,     
+                CONTACT.FATHERNAME,     
+                FORCEPAYMENT.MATUREDATE,     
+                ACCOUNT.ACCOUNTNO,        
+                0 AS GHESTAMOUNT,        
+                FORCEPAYMENT.AMOUNT  AS MOUNTLYAMOUNT,    
+                ISNULL((select sum(amount) from Payment where DOCUMENTNO=@DOCUMENTNO AND SUBSTRING(PAYMENT.DATE,3,2 )=SUBSTRING(@TODAY,3,2)),0) AS MOUNTLY_GHESTAMOUNT,    
+                       
+                0 AS REMAINOFLOAN,     
+                0 AS TOTALLOANAMOUNT,         
+                DBO.SHAMSIDATEDIFF(FORCEPAYMENT.MATUREDATE,  
+                ISNULL(PAYMENT.DATE,@TODAY))  AS [DELAY],         
+                dbo.Exist(Account.AccountID, @EndDate) AS MONTHLYBALANCE,    
+                '',         
+                0,         
+                '' AS GHESTPERIOD,         
+                0 AS GHESTCOUNT        
+FROM         ForcePayment INNER JOIN  
+                      Contact INNER JOIN  
+                      Account ON Contact.ContactID = Account.ContactID INNER JOIN  
+                      Payment ON Account.AccountID = Payment.CreditorAccountID ON ForcePayment.PaymentID = Payment.PaymentID  
+WHERE      PAYMENT.DOCUMENTNO=@DOCUMENTNO AND    
+           SUBSTRING(PAYMENT.DATE,3,2 )=SUBSTRING(@TODAY,3,2) AND  (ForcePayment.ForceTypeID = 2)  
+ORDER BY Account.AccountTitle  
+      
+select   ACCOUNTTITLE ,     
+                FATHERNAME   ,     
+                MATUREDATE  ,     
+                ACCOUNTNO  ,        
+                sum(GHESTAMOUNT)GHESTAMOUNT  ,        
+                sum(MOUNTLYAMOUNT) MOUNTLYAMOUNT,    
+                MOUNTLY_GHESTAMOUNT  ,      
+                sum(REMAINOFLOAN) REMAINOFLOAN ,
+                sum(TOTALLOANAMOUNT) TOTALLOANAMOUNT,         
+                [DELAY],         
+                MONTHLYBALANCE   ,      
+                --PARTSBEGINDATE  ,         
+              (select Top 1  a_t.PARTSBEGINDATE  from @a a_t where a_t.MATUREDATE =m_a.MATUREDATE and  a_t.ACCOUNTNO=m_a.ACCOUNTNO  )PARTSBEGINDATE,
+              (select Top 1  a_t.LOANTYPEID  from @a a_t where a_t.MATUREDATE =m_a.MATUREDATE and  a_t.ACCOUNTNO=m_a.ACCOUNTNO and isnull(LOANTYPEID,0)<>0)LOANTYPEID,
+              (select Top 1  a_t.GHESTPERIOD from @a a_t where a_t.MATUREDATE =m_a.MATUREDATE and  a_t.ACCOUNTNO=m_a.ACCOUNTNO and isnull(GHESTPERIOD,'')<>'')GHESTPERIOD,
+              (select Top 1  a_t.GHESTCOUNT  from @a a_t where a_t.MATUREDATE =m_a.MATUREDATE and  a_t.ACCOUNTNO=m_a.ACCOUNTNO and isnull(GHESTCOUNT,0)<>0)GHESTCOUNT 
+
+From @a m_a
+Group by ACCOUNTTITLE ,     
+         FATHERNAME   ,     
+         MATUREDATE   ,     
+         ACCOUNTNO    ,
+         MOUNTLY_GHESTAMOUNT,      
+         [DELAY]      ,         
+         MONTHLYBALANCE
+GO
+
+COMMIT
+GO

@@ -1,0 +1,29 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[TotalPriceOfLoanForEachGaurantor]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[TotalPriceOfLoanForEachGaurantor]
+END
+GO
+
+CREATE  procedure [dbo].[TotalPriceOfLoanForEachGaurantor] @GaurantorContactID as INT,@Result FLOAT OUTPUT
+AS
+
+set @Result=ISNULL((
+			SELECT     SUM(Amount) AS Expr1
+			FROM         Loan
+			WHERE     (LoanID IN
+			                    (SELECT LoanID
+			                     FROM   LoanGaurantor
+			                     WHERE (GaurantorContactID = 3)
+                                             )
+                                   )
+                    )
+               ,0)
+GO
+
+COMMIT
+GO

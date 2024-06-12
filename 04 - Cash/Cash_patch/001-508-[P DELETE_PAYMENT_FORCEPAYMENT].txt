@@ -1,0 +1,86 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[DELETE_PAYMENT_FORCEPAYMENT]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[DELETE_PAYMENT_FORCEPAYMENT]
+END
+GO
+
+CREATE  procedure [dbo].[DELETE_PAYMENT_FORCEPAYMENT]
+	@PaymentId Int, 
+	@DelDATE char(10),
+	@USERID INT    
+AS    
+DECLARE @DOCNO CHAR(10),  @PayTypeId int, @Date char(10)
+    
+SELECT  @DOCNO= DOCumentNO ,  @PayTypeId=PayTypeId ,@Date=[Date]     
+	From payment     
+	where paymentid=@PaymentId    
+    
+declare  @CANDELETE bit             
+exec CANDELETE_PAYMENT  @PaymentId ,@CANDELETE   OUTput               
+    
+IF(@CANDELETE=1)     
+BEGIN              
+  BEGIN TRAN T1              
+  SET @DOCNO=LTRIM(RTRIM(@DOCNO))          
+          
+  DECLARE @TIME CHAR(5) ,  @SameDate char(10) ,@SameInsertDate char(10),@TypeId SMALLINT           
+          
+  SET @SameDate       =@Date           
+  SET @SameInsertDate =@DelDATE           
+  SET @TypeId         =@PayTypeId     
+              
+  EXEC GET_TIME  @TIME OUTPUT               
+                 
+  INSERT INTO PAYMENT(DEBTORACCOUNTID             
+                     ,CREDITORACCOUNTID          
+                     ,DATE           
+                     ,TIME          
+                     ,InsertDate           
+                     ,AMOUNT                         
+                     ,COMMENT                
+                     ,INSERTUSERID              
+                     ,PAYTYPEID              
+                     ,DOCUMENTNO      
+                     ,PayTypeSecondId    
+                     ,RefrencePaymentId)              
+  SELECT              CREDITORACCOUNTID ,DEBTORACCOUNTID  ,--@DATE    
+                      @SameDate ,    
+                      @TIME,    
+                      @SameInsertDate,SUM(AMOUNT)AMOUNT              
+                     , ' سند معکوس '+(SELECT PAYTYPETITLE               
+                                      FROM PAYTYPE               
+                                      WHERE PAYTYPEID=M.PAYTYPEID) +  'شماره ' +LTRIM(RTRIM(CAST(@PaymentId AS VARCHAR(10))))COMMENT  
+                     ,@USERID              
+                     ,@TypeId --  8                                           
+                     ,@DOCNO      
+                     ,8    
+                     ,@PaymentId              
+                
+  FROM PAYMENT  M              
+  WHERE PaymentId=@PaymentId   AND      
+        DocumentNo=@DocNo And             
+        [DATE]=@Date    
+  GROUP BY CREDITORACCOUNTID,DEBTORACCOUNTID,PAYTYPEID              
+               
+                
+            
+                
+                
+                
+  UPDATE FORCEPAYMENT              
+  SET PAID =0 ,PAYMENTID=NULL              
+  WHERE PAYMENTID=@PaymentId 
+              
+COMMIT TRAN T1               
+              
+SELECT * FROM FORCEPAYMENT              
+END
+GO
+
+COMMIT
+GO

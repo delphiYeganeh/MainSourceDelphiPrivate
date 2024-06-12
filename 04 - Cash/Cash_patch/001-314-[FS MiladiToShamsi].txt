@@ -1,0 +1,61 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[MiladiToShamsi]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[MiladiToShamsi]
+END
+GO
+
+CREATE FUNCTION [dbo].[MiladiToShamsi]
+(
+	@MiladiSTR VARCHAR(10)
+)
+RETURNS VARCHAR(10)
+AS
+BEGIN
+	DECLARE @MY INT, @MM INT, @MD INT, @MI INT, @SY INT, @SM INT, @SD INT, @SI INT, @DIF INT, @RES NVARCHAR(10) 
+	SET @MI = 0;
+	SET @MY = CAST(SUBSTRING(@MiladiSTR,1,4) AS INT)
+	SET @MM = CAST(SUBSTRING(@MiladiSTR,6,2) AS INT)
+	SET @MD = CAST(SUBSTRING(@MiladiSTR,9,2) AS INT)
+	
+	SET @MM = @MM-1
+	WHILE(@MM>0)
+	BEGIN
+		SET @MI = @MI + dbo.MDayPerMonth(@MY,@MM)
+		SET @MM = @MM -1
+	END 
+	SET @MI = @MI+@MD
+	
+	SET @SY = @MY - 622
+	SET @DIF = 79 - dbo.ShamsiLeapYear(@SY)
+	IF (@MI>@DIF) 
+    BEGIN 
+		SET @SI = @MI - @DIF - dbo.ShamsiLeapYear(@SY)
+		SET @SY = @SY+1
+    END 
+    ELSE 
+		SET @SI = @MI - @DIF+365
+
+    IF (@SI<187)
+    BEGIN
+		SET @SM = ((@SI - 1) / 31)+1
+		SET @SD = ((@SI - 1) % 31)+1
+    END 
+    ELSE 
+    BEGIN 
+		SET @SM = 7+((@SI-187) / 30)
+		SET @SD = ((@SI-187) % 30)+1
+	END 
+	SET @RES = CAST(@SY AS NVARCHAR)
+	SET @RES = @RES +'/'+ RIGHT('00' + CAST(@SM AS NVARCHAR), 2)
+	SET @RES = @RES +'/'+ RIGHT('00' + CAST(@SD AS NVARCHAR), 2)
+   RETURN @RES	
+END
+GO
+
+COMMIT
+GO
