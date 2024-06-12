@@ -1,0 +1,27 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[SampleImage]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[SampleImage]
+END
+GO
+
+CREATE PROCEDURE [dbo].[SampleImage] 
+	-- Add the parameters for the stored procedure here
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+select (select Value from Keyvalue where [key]='HttpUrl')+'/'+replace(Path,'\','/')pp,* from LetterData where LetterID = '5151' and extention=1
+END
+GO
+
+COMMIT
+GO

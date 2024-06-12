@@ -1,0 +1,12 @@
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'FileType'
+          AND Object_ID = Object_ID(N'dbo.LetterData'))
+BEGIN
+	ALTER TABLE [dbo].[LetterData] 
+	ADD	[FileType] [nvarchar] (50) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL
+END
+GO
+COMMIT
+GO

@@ -1,0 +1,34 @@
+BEGIN TRANSACTION
+GO
+
+If Not Exists (Select 1 From Extention Where Upper(Extention) = Upper('JPG'))
+	Insert Into Extention(ExtentionTitle,Extention,IsSystem) Values ('Jpeg File','JPG',0)
+GO
+
+If Not Exists (Select 1 From Extention Where Upper(Extention) = Upper('TIF'))
+	Insert Into Extention(ExtentionTitle,Extention,IsSystem) Values ('Tagged Image File Format','TIF',0)
+GO
+
+If Not Exists (Select 1 From Extention Where Upper(Extention) = Upper('PDF'))
+	Insert Into Extention(ExtentionTitle,Extention,IsSystem) Values ('Portable Document File','PDF',0)
+GO
+
+If Not Exists (Select 1 From Extention Where Upper(Extention) = Upper('DOC'))
+	Insert Into Extention(ExtentionTitle,Extention,IsSystem) Values ('Word Document 2000','DOC',0)
+GO
+
+If Not Exists (Select 1 From Extention Where Upper(Extention) = Upper('DOCX'))
+	Insert Into Extention(ExtentionTitle,Extention,IsSystem) Values ('Word Document 2003','DOCX',0)
+GO
+
+If Not Exists (Select 1 From Extention Where Upper(Extention) = Upper('XLS'))
+	Insert Into Extention(ExtentionTitle,Extention,IsSystem) Values ('Excle Document 2000','XLS',0)
+GO
+
+If Not Exists (Select 1 From Extention Where Upper(Extention) = Upper('XLSX'))
+	Insert Into Extention(ExtentionTitle,Extention,IsSystem) Values ('Excel Document 2003','XLSX',0)
+GO
+
+
+COMMIT
+GO	

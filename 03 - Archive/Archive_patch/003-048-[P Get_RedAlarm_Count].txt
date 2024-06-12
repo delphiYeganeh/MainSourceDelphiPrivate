@@ -1,0 +1,77 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_RedAlarm_Count]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_RedAlarm_Count]
+END
+GO
+
+CREATE PROCEDURE [dbo].[Get_RedAlarm_Count]              
+@Secretariatid int,@myear int,@Letter_Type int,@LetterFormat int, @where nvarchar(2000),@top smallint ,@archiveFolderID int ,
+@UsersID INT
+as               
+declare @today char(10)
+set @today=dbo.Shamsi(getdate())              
+              
+declare @sqlCommand nvarchar(4000)
+
+set @sqlCommand='
+Select dbo.Fu_LetterAlarm(Letter.LetterID, GetDate(),'+ Cast(@UsersID as Nvarchar(10))+')  as HasLetterAlerm 
+FROM Letter left  JOIN              
+FromOrganizations sender ON Letter.ToOrgID = sender.ID left JOIN              
+FromOrganizations Deliver ON Letter.FromOrgID = Deliver.ID               
+Left join LetterTypes on LetterTypes.ID=Letter.Letter_type               
+inner join sendstatus on sendstatus.sendstatusID=Letter.sendstatusID '
+              
+if @archiveFolderID>0                
+set @sqlCommand=@sqlCommand+' Left join LetterArchiveFolder on LetterArchiveFolder.Letterid=Letter.LetterID '              
+
+set @sqlCommand=@sqlCommand+' where letter.Finalized=1 '              
+            
+set @where=isnull(ltrim(rtrim(@where)),'')              
+if @where <>'' set @where =' and '+ @where               
+              
+if @Letter_Type<>0               
+  set @where=@where+' And (Letter_Type = '+Cast(@Letter_Type as varchar(5))+')'              
+              
+if @Secretariatid<>0               
+  set @where=@where+' And (Secretariatid = '+Cast(@Secretariatid as varchar(5))+')'              
+              
+if @Myear<>0               
+  set @where=@where+' And (myear = '+Cast(@myear as varchar(10))+')'              
+              
+if @LetterFormat<>0               
+  set @where=@where+' And (LetterFormat = '+Cast(@LetterFormat as varchar(5))+')'              
+              
+if @archiveFolderID>0                
+ set @where=@where+' And (archiveFolderID = '+Cast(@archiveFolderID as varchar(5))+')'              
+              
+if @archiveFolderID=0                
+   set @where=@where+' And (dbo.Letter_Archived(Letter.LetterID)=0)'              
+
+if (@archiveFolderID = -1)or(@MYear=0)
+   set @where=@where+' And  Letter.LetterID not in ( 
+                       Select L.LetterID 
+                       From Letter L ,LetterArchiveFolder LAF , ArchiveFolder AF,UserAccArchive UAA 
+                       Where(L.LetterID = LAF.LetterID) 
+                       And(UAA.ISAccess = 0 ) --دسترسي ندارد
+                       And(UAA.UserID = ' + Cast(@UsersID as nvarchar(10)) + ' )
+                       And((UAA.ArchiveCenterID = (Select ArchiveCenterID From Secretariats Where SecID = ' + 
+                                                  Cast(@Secretariatid as nvarchar(10)) + '))or(' + Cast(@Secretariatid as nvarchar(10))+'=0))
+                       And(L.Finalized=1)
+                       And(L.MYear = ' + Cast(@myear as nvarchar(10)) +' or ' + Cast(@myear as nvarchar(10)) +' = 0 )   
+                       And(LAF.ArchiveFolderID = AF.FolderID)
+                       And(Af.FolderID = UAA.ArchiveFolderID) )'
+                                                                                       
+set @sqlCommand=@sqlCommand+@where
+
+set @sqlCommand='SELECT COUNT(HasLetterAlerm) as RedAlarmCount FROM ( '+ @sqlCommand + ') AS list1 WHERE list1.HasLetterAlerm=2'                      
+--Print @sqlCommand
+Exec sp_executesql @sqlCommand
+GO
+
+COMMIT
+GO

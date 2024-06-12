@@ -1,0 +1,21 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[get_indicatorID_ByLetterID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[get_indicatorID_ByLetterID]
+END
+GO
+
+Create Procedure [dbo].[get_indicatorID_ByLetterID](@LetterID int,@indicatorID int output)
+as
+Select Top 1 @indicatorID=indicatorID 
+	From Letter 
+	Where LetterID =@LetterID
+	Set @indicatorID = Isnull(@indicatorID, -1)
+GO
+
+COMMIT
+GO

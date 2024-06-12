@@ -1,0 +1,97 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[sp_inbox]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[sp_inbox]
+END
+GO
+
+CREATE PROCEDURE [dbo].[sp_inbox] 
+@SecretariatID int, @LetterFormat tinyint,@OrgID int,
+@Proceeded bit,@Type tinyint,@myear int,@date int,@ArchiveFolderID int ,@where nvarchar(1000), 
+@userID int,@Letter_Type int,@DeadLine int 
+as
+
+declare 
+@sql nvarchar (4000),
+@rw nvarchar(2000),
+@Today char(10),
+@deadlineDate char(10)
+
+select @today=dbo.shamsi(getdate())
+
+if @DeadLine between -1 and 30 
+  set @deadlineDate=dbo.ShamsiIncDate(@today,0,0,@DeadLine)
+
+
+
+set @RW='WHERE   (l.LetterFormat ='+cast( @LetterFormat as varchar(2))+') AND (Rc.OrgID = '+
+cast(@OrgID as varchar(10))+') AND (Rc.Proceeded = '+cast(@Proceeded as varchar(2))+')
+  and  L.myear='+cast(@myear as varchar(10))
+
+
+if @letter_Type>0 
+set @rw=@rw+' AND (l.letter_Type = '+cast(@Letter_Type as varchar(2))+')'
+
+if @type>0 
+set @rw=@rw+' AND (Rc.Type = '+cast(@Type as varchar(2))+')'
+
+if @ArchiveFolderID>0 
+set @rw=@rw+' AND (ArchiveFolderID = '+cast(@ArchiveFolderID as varchar(10))+')'
+
+if @date<>0
+begin
+ declare @dw tinyint,@bdate char(10),@edate char(10)
+ set @dw=datepart(dw,getdate())
+ select @bdate=begindate,@edate=Enddate from HistoryDateList(@today ,@dw) where id=@date
+ set @rw=@rw+' AND (RC.RecommiteDate between '''+@bdate+''' and '''+@edate+''')'
+end
+
+if @SecretariatID>0 
+set @rw=@rw+' AND (SecretariatID = '+cast(@SecretariatID as varchar(10))+')'
+else 
+set @rw=@rw+' AND (SecretariatID in (SELECT SecId FROM UserSecretariats WHERE UserId = '+cast(@userid as varchar(5))+'))'
+
+if @DeadLine between -1 and 30 
+ set @rw=@rw+' AND (ltrim(isnull(rc.DeadLineDate,''''))<>'''' and  ltrim(isnull(rc.DeadLineDate,''''))<= '''+@deadlineDate+''')' 
+
+
+
+set @sql=' SELECT top 100 l.*,DBO.INNERNO(L.Letterid)  InnerNo, PRC.OrgID,  RC.ParentId,  RC.Paraph, RC.RecommiteDate,  RC.Proceeded,
+ RC.ProceedDate, RecommiteTypes.id ReType,RecommiteTypes.Title RecommitTypeTitle,
+case when fo.title is null then 0 else 1 end IsInner, isnull(FO.Title,TTO.title) RecommiterTitle,tto.title sendertitle,rc.recommiteid,
+ rc.id, RC.ViewDate, RC.StaffMemo,
+dbo.Recommite_FirstView( Rc.RecommiteID) FirstView,
+isnull(incommingno,indicatorid)  Yincommingno,Secretariats.PreCode,RC.IsCopy
+,dbo.has_Page(l.letterid) has_Page,
+dbo.has_WordPage(l.letterid) has_WordPage,
+dbo.has_file(l.letterid) has_file
+FROM ReCommites RC 
+INNER JOIN Letter L ON RC.LetterID = L.LetterID
+INNER JOIN Secretariats  ON Secretariats.Secid = L.SecretariatID
+left JOIN ReCommites PRC ON RC.LetterID = PRC.LetterID AND PRC.ID = RC.ParentId  AND PRC.type = RC.type 
+left JOIN FromOrganizations FO ON FO.ID = PRC.OrgID 
+left JOIN FromOrganizations TTO ON TTO.ID = L.ToOrgID 
+INNER JOIN RecommiteTypes ON RC.Type = RecommiteTypes.ID '
+
+if @archiveFolderID<>0  
+set @sql=@sql+' 
+Left join LetterArchiveFolder on LetterArchiveFolder.Letterid=l.LetterID '
+
+set @sql=@sql+@rW
+
+
+set @where=isnull(ltrim(rtrim(@where)),'')
+if (@where<>'') 
+select @sql=@sql+' and '+@where
+
+set @sql=@sql+' order by rc.recommitedate desc,l.indicatorid desc'
+exec sp_executesql  @sql
+
+GO
+
+COMMIT
+GO

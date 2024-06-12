@@ -1,0 +1,29 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[LetterFolders]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1 )
+BEGIN
+    DROP FUNCTION [dbo].[LetterFolders]
+END
+GO
+
+CREATE FUNCTION [dbo].[LetterFolders] (@LetterId int)  
+RETURNS nvarchar(2000) AS  
+BEGIN 
+	Declare @Desc Nvarchar(2000)
+	Set @Desc = '' 
+
+	Select @Desc = @Desc + ' # ' + AF.Title 
+		From LetterArchiveFolder LAF
+		Left Outer Join ArchiveFolder AF On LAF.ArchiveFolderID = AF.FolderID
+		Where LetterID = @LetterId
+
+	--Select @Desc
+	return(Substring(@Desc, 4, Len(@Desc)))
+END
+GO
+
+COMMIT
+GO

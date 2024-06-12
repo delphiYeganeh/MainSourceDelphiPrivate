@@ -1,0 +1,25 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[HasReferenceTableData]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[HasReferenceTableData]
+END
+GO
+
+CREATE PROCEDURE [dbo].[HasReferenceTableData] 
+	@TableId Int,
+	@Has Int OUTPUT
+As
+	Set @Has = 0
+	If Exists(Select 1 From ReferenceTableData Where TableId = @TableId)
+	BEGIN
+		Set @Has = 1
+	END
+
+GO
+
+COMMIT
+GO

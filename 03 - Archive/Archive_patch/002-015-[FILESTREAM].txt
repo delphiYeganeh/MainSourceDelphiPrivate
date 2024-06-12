@@ -1,0 +1,12 @@
+IF NOT EXISTS (SELECT 1 FROM sys.database_files WHERE type_desc = 'FILESTREAM')
+BEGIN        
+	DECLARE @DB_Name NVARCHAR(100)
+	SELECT @DB_Name = DB_NAME()
+	DECLARE @Loc VARCHAR(1000)
+	DECLARE @Stsm NVARCHAR(2000)
+	SELECT TOP 1 @Loc =  (LEFT(FileName,(LEN(FileName)) -  CHARINDEX('\', REVERSE(FileName))+1) + 'FS') FROM sys.sysfiles ORDER BY fileid
+	SET @Stsm = N'ALTER DATABASE [' + @DB_Name + N'] ADD FILE ( NAME = N''' + @DB_Name + N'Files'', FILENAME = N''' + @Loc + N''' ) TO FILEGROUP FILESTREAM_grp'
+    
+	EXECUTE sp_executesql @Stsm
+END
+GO

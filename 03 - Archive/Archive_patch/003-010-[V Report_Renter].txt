@@ -1,0 +1,30 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Report_Renter]') 
+                   and OBJECTPROPERTY(id, N'IsView') = 1 )
+BEGIN
+    DROP VIEW [dbo].[Report_Renter]
+END
+GO
+
+CREATE VIEW [dbo].[Report_Renter]
+AS 
+SELECT Top 1
+  b.LetterID,	
+  b.RentID,	
+  a.RenterID,	
+  a.RenterTitle,   /* نام امانت گیرنده	*/
+  a.RenterComment, /* توضیحات */
+  b.BeginDate,	   /* تاریخ امانت */
+  b.EndDate,	   /* تاریخ عودت */
+  b.MatureDate,	   /* موعد تحویل */
+  b.Comment,	
+  b.UserId
+FROM Renter a
+	LEFT JOIN Rent b ON a.RenterID = b.RenterID
+GO
+
+COMMIT
+GO

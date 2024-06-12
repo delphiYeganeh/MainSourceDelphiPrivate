@@ -1,0 +1,16 @@
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'File_Address')
+BEGIN
+	CREATE TABLE [dbo].[File_Address]
+	(
+	[ID] [int] NOT NULL IDENTITY(1, 1),
+	[Address] [nvarchar] (100) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL
+	)
+END
+GO
+COMMIT
+GO

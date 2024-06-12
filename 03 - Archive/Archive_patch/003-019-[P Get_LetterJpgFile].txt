@@ -1,0 +1,49 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_LetterJpgFile]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_LetterJpgFile]
+END
+GO
+
+CREATE procedure [dbo].[Get_LetterJpgFile]
+(
+	@LetterID int,
+	@ColorId int
+
+)  
+as 
+
+If (@ColorId = -2)
+Begin
+	Select *
+	From letterdata  
+	Where LetterID = @LetterID 
+		And Extention in (1,2)
+		And ((ColorID IS NULL) OR (ColorID = 0)  OR (ColorID = -2))
+	Order By PageNumber 
+End
+Else If (@ColorId > 0)
+Begin
+	Select *
+	From letterdata  
+	Where LetterID = @LetterID 
+		And Extention in (1,2)
+		And ColorID = @ColorId
+	Order By PageNumber 
+End
+Else
+Begin
+	Select *
+	From letterdata  
+	Where LetterID = @LetterID 
+		And Extention in (1,2)
+	Order By PageNumber 
+End
+GO
+
+COMMIT
+GO

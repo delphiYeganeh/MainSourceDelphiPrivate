@@ -1,0 +1,84 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Prc_latererdata_OLD 13980130]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Prc_latererdata_OLD 13980130]
+END
+GO
+
+Create PROC [dbo].[Prc_latererdata_OLD 13980130]
+(
+  @LetterDataID  INT   
+)
+AS
+
+CREATE TABLE #temp (Letterdataid int ,Pic varbinary(MAX))
+DECLARE @tab AS TABLE (tabPic varbinary(MAX) ) 
+
+DECLARE @Path  nvarchar(50)
+DECLARE @command nvarchar(max)
+
+DECLARE vendor_cursor CURSOR FOR  
+	SELECT 
+	  LetterDataID,
+	  Path 
+	FROM LetterData
+	Where LetterDataID = @LetterDataID
+
+OPEN vendor_cursor
+FETCH NEXT FROM vendor_cursor   
+INTO @LetterDataID, @Path
+WHILE @@FETCH_STATUS = 0  
+BEGIN  
+	 SELECT   @command = N'DECLARE @Img AS VARBINARY(MAX)
+					       SELECT @Img = CAST(bulkcolumn AS varbinary(MAX))
+					       FROM OPENROWSET(BULK ''' +@Path+ ''',
+					       SINGLE_BLOB) ROW_SET 
+						   SELECT @img ' 
+
+	 INSERT into @tab EXEC sp_executesql @command
+	 INSERT INTO #temp
+	 (
+	    Letterdataid,
+    	Pic
+	 )
+	 SELECT DISTINCT
+		 @LetterDataID
+		,tabPic
+	 FROM @tab 
+
+	 DELETE FROM @tab
+ FETCH NEXT FROM vendor_cursor   
+  INTO @LetterDataID, @Path 
+END   
+CLOSE vendor_cursor;  
+DEALLOCATE vendor_cursor;    
+
+SELECT
+	b.LetterDataID,	
+	b.LetterID,	
+	b.PageNumber,	
+	a.Pic AS Image,	
+	b.extention,	
+	b.Description,	
+	b.LastUpdate,	
+	b.ListItemsID,	
+	b.IsCorrectedImage,
+	b.ColorID,	
+	b.VersionNo,	
+	b.VersionDate,	
+	b.UI,	
+	b.BLOBData,
+	b.Path	
+FROM #temp  a
+INNER JOIN LetterData b
+  ON a.Letterdataid = b.LetterDataID
+
+DROP TABLE #temp 
+GO
+
+COMMIT
+GO

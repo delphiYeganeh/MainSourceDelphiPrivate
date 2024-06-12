@@ -1,0 +1,24 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[get_LetterID_ByRetroActionNo]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[get_LetterID_ByRetroActionNo]
+END
+GO
+
+CREATE PROCEDURE [dbo].[get_LetterID_ByRetroActionNo]
+	(@RetroActionNo nvarchar(50),@Myear int,@LetterFormat tinyint,@SecretariatID smallint,@LetterID  int output)
+AS 
+set @letterid=0
+SELECT     top 1 @LetterID=LetterID
+FROM         Letter
+WHERE     (RetroActionNo =@RetroActionNo)
+ and myear=@Myear  and LetterFormat=@LetterFormat  and 
+( SecretariatID=@SecretariatID or @SecretariatID=0)
+GO
+
+COMMIT
+GO

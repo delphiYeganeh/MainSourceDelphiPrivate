@@ -1,0 +1,41 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[insert_LetterArchiveFolder]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[insert_LetterArchiveFolder]
+END
+GO
+
+CREATE PROCEDURE [dbo].[insert_LetterArchiveFolder]
+	(@LetterArchiveID 	[int] output,
+	 @ArchiveFolderID 	[int],
+	 @LetterID 	[int],
+	 @ArchiveDate 	[char](10),
+	 @Page 	[int],
+	 @ArchiveNotes 	[nvarchar](50))
+
+AS 
+IF NOT EXISTS(SELECT 1 FROM LetterArchiveFolder WHERE ArchiveFolderID = @ArchiveFolderID AND LetterId = @LetterID)
+INSERT INTO [dbo].[LetterArchiveFolder] 
+	 ( 
+	 [ArchiveFolderID],
+	 [LetterID],
+	 [ArchiveDate],
+	 [Page],
+	 [ArchiveNotes]) 
+
+VALUES 
+	( 
+	 @ArchiveFolderID,
+	 @LetterID,
+	 @ArchiveDate,
+	 @Page,
+	 @ArchiveNotes)
+set @LetterArchiveID=@@identity
+GO
+
+COMMIT
+GO

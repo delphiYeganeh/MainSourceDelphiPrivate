@@ -1,0 +1,27 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Insert_UserLoginLogout]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Insert_UserLoginLogout]
+END
+GO
+
+CREATE PROCEDURE [dbo].[Insert_UserLoginLogout]  
+( 
+	@UserID  int, 
+	@IPAddress char(15), 
+	@ComputerName char(30), 
+	@UserLoginLogoutID int output)    
+AS    
+INSERT INTO [dbo].[UserLoginLogout] ([UserID], [IPAddress], [ComputerName])      
+	VALUES (@UserID, @IPAddress, @ComputerName) 
+	
+set @UserLoginLogoutID = SCOPE_IDENTITY()
+
+GO
+
+COMMIT
+GO

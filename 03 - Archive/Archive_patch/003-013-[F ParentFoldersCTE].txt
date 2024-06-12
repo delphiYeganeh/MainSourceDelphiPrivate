@@ -1,0 +1,68 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[ParentFoldersCTE]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1 )
+BEGIN
+    DROP FUNCTION [dbo].[ParentFoldersCTE]
+END
+GO
+
+CREATE Function [dbo].[ParentFoldersCTE] (@FolderID int)  
+Returns nvarchar(2000) 
+As  
+Begin 
+	Declare @Res Nvarchar(2000)
+	Set @Res = ''
+
+	;With Tree 
+	As
+	(
+		Select FolderID, ParentFolderId, Title, Place, 1 As Depth 
+			From ArchiveFolder
+			Where FolderID = @FolderID
+
+		Union All
+
+		Select T.FolderID, T.ParentFolderId, T.Title, T.Place, Tree.Depth + 1
+			From ArchiveFolder T  
+			Inner Join Tree On T.FolderID = Tree.ParentFolderId
+	)
+
+	Select @Res = @Res + ' --> ' + Title /*+ Ltrim(Rtrim(Cast(Isnull('['+ Place + ']','') as Nvarchar(10))))*/
+		From Tree 
+		Order By Depth desc
+
+	return(SubString(@Res, 5, Len(@Res)))
+
+End
+
+ /*
+ declare @i int,@PI int ,@res nvarchar(500),@CurID int,@Parents nvarchar(500)
+ set @i=0 
+set @CurID=@FolderID
+
+select @PI=ParentFolderID,@res=Title+cast(isnull('['+Place+']','') as varchar(10)) from ArchiveFolder where FolderID=@FolderID
+if @PI=0 return(@res)   else set @CurID=@PI
+
+set @Parents=''
+
+ while @i<5 and @PI>0
+   begin
+    select @PI=ParentFolderID,@Parents=@Parents+','+Title from ArchiveFolder where FolderID=@CurID
+    set @CurID=@PI
+    set @i=@i+1
+   end
+if @Parents<>''
+ begin
+  set @Parents=case when substring(@Parents,1,1)=',' then substring(@Parents,2,500) end
+  set @Parents='('+@Parents+')'
+  set @res=@res+@Parents
+end
+return(@res)
+*/
+GO
+
+COMMIT
+GO

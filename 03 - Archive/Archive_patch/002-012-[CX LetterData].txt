@@ -1,0 +1,19 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'extention'
+          AND Object_ID = Object_ID(N'dbo.LetterData'))
+BEGIN
+	ALTER TABLE [dbo].[LetterData] DROP CONSTRAINT [DF_letterdata_extention]
+END
+GO
+
+IF EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'extention'
+          AND Object_ID = Object_ID(N'dbo.LetterData'))
+BEGIN
+	ALTER TABLE [dbo].[LetterData] ADD CONSTRAINT [DF_letterdata_extention]  DEFAULT ((1)) FOR [extention]
+END
+GO
+COMMIT
+GO

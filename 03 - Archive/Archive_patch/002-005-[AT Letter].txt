@@ -1,0 +1,12 @@
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'Has_WordPage'
+          AND Object_ID = Object_ID(N'dbo.Letter'))
+BEGIN
+	ALTER TABLE [dbo].[Letter] 
+	ADD	[Has_WordPage] [bit] NULL CONSTRAINT [DF_Letter_Has_WordPage] DEFAULT ((0))
+END
+GO
+COMMIT
+GO

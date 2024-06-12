@@ -1,0 +1,16 @@
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'Keyvalue')
+BEGIN
+	CREATE TABLE [dbo].[Keyvalue]
+	(
+	[KEY] [nvarchar] (50) COLLATE SQL_Latin1_General_CP1256_CI_AS NOT NULL,
+	[Value] [nvarchar] (50) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL
+	)
+END
+GO
+COMMIT
+GO

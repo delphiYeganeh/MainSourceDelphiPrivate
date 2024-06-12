@@ -1,0 +1,35 @@
+BEGIN TRANSACTION
+GO
+
+CREATE TRIGGER [dbo].[user_ins] ON [dbo].[Users] 
+FOR INSERT
+AS
+set nocount on
+Declare  @ui tinyint , @DefSec int 
+select @ui = ID,@DefSec= DefualtSecretariatID from inserted
+
+Delete from settings
+where userid=@ui
+
+insert into settings(UserID,VariableId,Value,Description)
+SELECT @ui, VariableId, Value, Description 
+FROM Settings
+where userid=0
+
+Delete FROM UserTemplateGroup
+where userid=@ui
+insert into UserTemplateGroup
+select @ui,TemplateGroupID
+from TemplateGroup
+
+delete FROM UserSecretariats
+where userid=@ui
+insert into UserSecretariats(UserId	,SecId)
+values(@ui,@defSec)
+
+delete FROM UserExtention
+where userid=@ui
+GO
+
+COMMIT
+GO
