@@ -1,0 +1,242 @@
+unit ChequeFM;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons,
+  ComCtrls, Menus, BaseUnit, ExtActns, ActnList, DB;
+
+type
+  TFMCheque = class(TMBaseForm)
+    PopEmkanat: TPopupMenu;
+    RepPopMnu: TPopupMenu;
+    NShow: TMenuItem;
+    NPrint: TMenuItem;
+    NDesign: TMenuItem;
+    MenuItem1: TMenuItem;
+    d1: TMenuItem;
+    N1: TMenuItem;
+    pnlMain: TPanel;
+    Panel1: TPanel;
+    LabelDate: TLabel;
+    LblType: TLabel;
+    Label15: TLabel;
+    DBLkCBFilter: TDBLookupComboBox;
+    Panel2: TPanel;
+    DBGrid1: TDBGrid;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    LblEndorse: TLabel;
+    Label14: TLabel;
+    DBTPriceBeHorof: TDBText;
+    LabelTypeName: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    SpeedButton2: TSpeedButton;
+    DBENumber: TDBEdit;
+    DBEExportDate: TDBEdit;
+    DBEDueDate: TDBEdit;
+    DBLkCBoED_Bank_Ref: TDBLookupComboBox;
+    DBEBranchName: TDBEdit;
+    DBEAcountNumber: TDBEdit;
+    DBEPrice: TDBEdit;
+    DBEBearer: TDBEdit;
+    DBEEndorse: TDBEdit;
+    DBETozihat: TDBEdit;
+    DBEReceiver: TDBEdit;
+    DBLkCBoStatus: TDBLookupComboBox;
+    DBEAcountName: TDBEdit;
+    DBETypeName: TDBEdit;
+    DBEPersNaFa: TDBEdit;
+    Panel4: TPanel;
+    SpeedButton1: TSpeedButton;
+    SBReport: TSpeedButton;
+    DBNavigator1: TDBNavigator;
+    Panel5: TPanel;
+    LabHelp: TLabel;
+    SBSearch: TBitBtn;
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SBSearchClick(Sender: TObject);
+    procedure DBLkCBFilterClick(Sender: TObject);
+    procedure DBEPriceKeyPress(Sender: TObject; var Key: Char);
+    procedure DBNavigator1BeforeAction(Sender: TObject;
+      Button: TNavigateBtn);
+    procedure SpeedButton2Click(Sender: TObject);
+  private
+    
+  public
+    FChequeType : Integer;
+    FChequeSumPrice : Double;
+    FFactor_ID : Integer;
+  Published
+    Property ChequeType : Integer Read FChequeType Write FChequeType; //ÃÂ   ⁄ÌÌ‰ ‰Ê⁄ çò
+    //1 = 'œ—Ì«› Ì'
+    //2 = 'Å—œ«Œ Ì'
+    Property ChequeSumPrice : Double Read FChequeSumPrice Write FChequeSumPrice;//Ã„⁄ „»«·€ çò »—«Ì ›—„ ›«ò Ê—
+    Property Factor_ID : Integer Read FFactor_ID Write FFactor_ID; //ÃÂ  çòÂ«Ì ›«ò Ê—
+  end;
+
+var
+  FMCheque: TFMCheque;
+
+implementation
+
+Uses ChequeDM , DMu , YShamsiDate {, SearchFM}, SearchFM, MainU;
+
+{$R *.dfm}
+
+procedure TFMCheque.FormCreate(Sender: TObject);
+begin
+   DMCheque := TDMCheque.Create(Self);
+   DBNav_Setup(DBNavigator1);
+
+   ChequeType := 0;
+   Factor_ID := 0;
+end;
+
+procedure TFMCheque.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   With DMCheque do
+   begin
+      ChequeSumPrice := 0;
+      QrCheque.First;
+      While Not QrCheque.Eof do
+      begin
+         ChequeSumPrice := ChequeSumPrice + QrChequePrice.AsFloat;
+         QrCheque.Next;
+      end;
+   end;
+   Qry_CloseAllQry(DMCheque);
+   FreeAndNil(DMCheque);
+end;
+
+procedure TFMCheque.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   Form_SetShortCut(Self,DBNavigator1,SBSearch,SBReport,Sender,Key,Shift);
+
+   if (Key = VK_Return)And(Shift=[]) then
+      SelectNext(TWinControl(ActiveControl),True,True);
+   if (Key = VK_Return)And(ssShift in Shift) then
+      SelectNext(TWinControl(ActiveControl),False,True);
+end;
+
+procedure TFMCheque.FormShow(Sender: TObject);
+begin
+    ShapeBase.Brush.Color := _Color1 ;
+    pnlMain.Color := _Color1 ;
+   With DMCheque do
+   begin
+      ChequeType2 := Self.ChequeType;
+      Factor_ID2 := Self.Factor_ID;
+      QrBank.Open;
+      QrStatus.Open;
+      QrFilter.Open;
+      DBLkCBFilter.KeyValue := QrFilterStatus_ID.AsInteger; //„ﬁœ«— ’›—
+      Status_ := DBLkCBFilter.KeyValue;
+      QrCheque.Open;
+   end;
+
+   LabelDate.Caption := _Today;
+   Case ChequeType of
+      1: begin
+            LblType.Caption := 'çòÂ«Ì œ—Ì«› Ì';
+            DBGrid1.Color := $00FFECED;
+            LabelTypeName.Caption := '‰«„ êÌ—‰œÂ çò Œ—Ã ‘œÂ :';
+         end;
+      2: begin
+            LblType.Caption := 'çòÂ«Ì Å—œ«Œ Ì';
+            DBGrid1.Color := $00ECECFF;
+            DBEEndorse.Visible := False; //›ﬁÿ »—«Ì çòÂ«Ì œ—Ì«› Ì Å‘  ‰„—Â ‰Ì«“ «” 
+            LblEndorse.Visible := False;
+            LabelTypeName.Caption := '‰«„ êÌ—‰œÂ çò :';
+         end;
+      else
+         LblType.Caption := 'À»  çò';
+   end;
+   //Form_Animate(Self,100);
+end;
+
+procedure TFMCheque.SpeedButton1Click(Sender: TObject);
+begin
+   Close;
+end;
+
+procedure TFMCheque.SBSearchClick(Sender: TObject);
+begin
+   With DMCheque do
+   begin
+      QrSrchCheque.Close;
+      QrSrchCheque.Parameters.ParamByName('Type').Value := ChequeType2;
+      QrSrchCheque.Parameters.ParamByName('Factor_ID1').Value := Factor_ID2;
+      QrSrchCheque.Parameters.ParamByName('Factor_ID2').Value := Factor_ID2;
+
+      if FmSearch.GetSearchValue(QrSrchCheque ,'Cheque_ID', 'Number' , ' ' , 400 , 500 ) <> '0' then
+      begin
+         if DBLkCBFilter.KeyValue <> 0 then
+         begin
+            DBLkCBFilter.KeyValue := 0;
+            DBLkCBFilterClick(Sender);
+         end;
+         QrCheque.Locate('Cheque_ID',QrSrchChequeCheque_ID.AsInteger,[]);
+      end;
+   end;
+end;
+
+procedure TFMCheque.DBLkCBFilterClick(Sender: TObject);
+begin
+   With DMCheque do
+   begin
+      Status_ := DBLkCBFilter.KeyValue;
+      QrCheque.Close;
+      QrCheque.Open;
+      QrChequeAfterScroll(QrCheque);
+   end;
+end;
+
+procedure TFMCheque.DBEPriceKeyPress(Sender: TObject; var Key: Char);
+begin
+   //»«‘œ Ì⁄‰Ì «Ì‰ ›—„ «“ ÿ—ﬁ ›—„ ›«ò Ê— »«“ ‘œÂ «”  Factor_ID2 > 0 «ê— „ﬁœ«—
+   if (DMCheque.QrChequeFactor_Ref.AsInteger > 0)And(DMCheque.Factor_ID2 <=0) then
+   begin
+      ShowMyMessage('ÅÌ€«„','»Â ⁄·  «” ›«œÂ «Ì‰ çò œ— ›«ò Ê— „—»ÊÿÂ ° «„ò«‰ «’·«Õ „»·€ çò ÊÃÊœ ‰œ«—œ'+
+             #13 + 'ÃÂ  «’·«Õ „»·€ »«Ìœ «“ ›«ò Ê— „—»ÊÿÂ «” ›«œÂ ‰„«ÌÌœ' ,[mbOK],mtInformation);
+      Key := #0;
+   end;
+end;
+
+procedure TFMCheque.DBNavigator1BeforeAction(Sender: TObject;
+  Button: TNavigateBtn);
+begin
+   inherited;
+   DBGrid1.SetFocus;
+   DBEAcountNumber.SetFocus;
+end;
+
+procedure TFMCheque.SpeedButton2Click(Sender: TObject);
+begin
+   inherited;
+   MainForm.EnterData_CallForm( 30 , ' ⁄—Ì› »«‰ò' , 'ﬂœ' , '‰«„ »«‰ò' , ' Ê÷ÌÕ« ' ,0); //›—„  ⁄—Ì› »«‰ò
+   DMCheque.QrBank.Close;
+   DMCheque.QrBank.Open;
+end;
+
+Initialization
+   RegisterClass(TFMCheque);
+
+end.

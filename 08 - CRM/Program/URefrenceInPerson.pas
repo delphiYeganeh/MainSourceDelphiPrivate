@@ -1,0 +1,316 @@
+unit URefrenceInPerson;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, BaseUnit, ExtActns, ActnList, DB, ExtCtrls, Buttons, StdCtrls, shellApi,
+  DBCtrls, Mask, ADODB, MssCalendarPro;
+
+type
+  TFRefrenceInPerson = class(TMBaseForm)
+    pnlMain: TPanel;
+    GroupBox1: TGroupBox;
+    Panel2: TPanel;
+    GroupBox2: TGroupBox;
+    GroupBox3: TGroupBox;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Panel3: TPanel;
+    Label10: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
+    DBExpert: TDBLookupComboBox;
+    Button1: TButton;
+    edtDateInPerson: TDBEdit;
+    DBEPeriodTimeInperson: TDBEdit;
+    DBETimeInperson: TDBEdit;
+    DBEdit5: TDBEdit;
+    Panel4: TPanel;
+    BitBtn2: TBitBtn;
+    btnDelEghdamat: TBitBtn;
+    BitBtn3: TBitBtn;
+    Label1: TLabel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    BtnCancel: TBitBtn;
+    Select_FollowUpInPerson: TADOStoredProc;
+    DBMemo1: TDBMemo;
+    DBMemo2: TDBMemo;
+    Select_FollowUpInPersonCustomerId: TIntegerField;
+    Select_FollowUpInPersonFollowUpId: TIntegerField;
+    Select_FollowUpInPersonLocationInperson: TStringField;
+    Select_FollowUpInPersonExpertId: TIntegerField;
+    Select_FollowUpInPersonDescriptionService: TStringField;
+    Select_FollowUpInPersonDescriptionPersionInMetting: TStringField;
+    Select_FollowUpInPersonValuatorUserID: TIntegerField;
+    Select_FollowUpInPersonPdfAttachment: TBlobField;
+    Select_FollowUpInPersonMarketerTilte: TStringField;
+    Select_FollowUpInPersonMarketerTilte2: TStringField;
+    Select_FollowUpInPersonTimeInperson: TStringField;
+    Select_FollowUpInPersonPeriodTimeInperson: TStringField;
+    btnAssessment: TBitBtn;
+    MssCalendarPro1: TMssCalendarPro;
+    Select_FollowUpInPersonDateInPerson: TStringField;
+    Select_FollowUpInPersonid: TIntegerField;
+    Select_FollowUpInPersonLogDate: TDateField;
+    MaskEPeriodTimeInperson: TMaskEdit;
+    MaskETimeInperson: TMaskEdit;
+    DBECompanyName: TEdit;
+    DBEProducts: TEdit;
+    DBECustomerNo: TEdit;
+    Label11: TLabel;
+    DBCheckBox1: TDBCheckBox;
+    Label12: TLabel;
+    DBEdit1: TDBEdit;
+    Select_FollowUpInPersonFollowUpNeed: TBooleanField;
+    Select_FollowUpInPersonFollowUpDescription: TStringField;
+    Select_FollowUpInPersonUserId: TIntegerField;
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth, NewHeight: Integer; var Resize: Boolean);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BtnCancelClick(Sender: TObject);
+    procedure btnDelEghdamatClick(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+  private
+   Function  LoadImageField(Field:TField;Path:String):Boolean;
+  public
+    { Public declarations }
+    FollowUpId : Integer ;
+    CustomerId : Integer ;
+  end;
+
+var
+  FRefrenceInPerson: TFRefrenceInPerson;
+
+implementation
+
+uses UAssessment, dmu, YShamsiDate;
+
+{$R *.dfm}
+
+procedure TFRefrenceInPerson.SpeedButton2Click(Sender: TObject);
+var
+ Path : String;
+begin
+  inherited;
+
+  Path := Directory+'RefrenceInPerson'+Select_FollowUpInPersonID.AsString + Replace(Select_FollowUpInPersonDateInPerson.AsString,'/','-')+'.pdf';
+  if LoadImageField(Select_FollowUpInPersonPdfAttachment,path) then
+  begin
+    ShellExecute(Handle, nil, PChar(Path), nil,  nil, SW_SHOWNORMAL);
+  end;
+
+end;
+
+procedure TFRefrenceInPerson.SpeedButton3Click(Sender: TObject);
+begin
+  inherited;
+  if not (Select_FollowUpInPersonPdfAttachment.IsNull) then
+  begin
+  if messagedlg('»—«Ì Õ–› ›«Ì· „ÿ„∆‰ Â” Ìœ ø',mtWarning,[mbYes,mbCancel], 0) = 6 then
+  begin
+    Select_FollowUpInPerson.Edit;
+    Select_FollowUpInPersonPdfAttachment.Clear;
+    Select_FollowUpInPerson.Post;
+  end;
+  end
+  else
+  ShowMessage('ÅÌÊ”  «“ ‰Ê⁄ ›«Ì· ÅÌ œÌ «› ‰Ì” ');
+
+end;
+
+procedure TFRefrenceInPerson.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+  if not (Select_FollowUpInPersonPdfAttachment.IsNull) then
+  begin
+    if messagedlg('›«Ì· ÅÌÊ”  ÊÃÊœ œ«—œ ¬Ì« „Ì ŒÊ«Ìœ ›«Ì· ÃœÌœ Ã«Ìê“Ì‰ ‘Êœø',mtWarning,[mbYes,mbCancel], 0) = 6 then
+    begin
+      Select_FollowUpInPerson.Edit;
+      AddImageField(Select_FollowUpInPersonPdfAttachment,'Pdf Files|*.pdf');
+      Select_FollowUpInPersonFollowUpId.Value := FollowUpId;
+      Select_FollowUpInPersonCustomerId.Value := CustomerId;
+      Select_FollowUpInPersonLogDate.Value    := Dm.GetServerDate ;
+      //Select_FollowUpInPerson.Post;
+      BitBtn3Click(SELF);
+    end;
+  end
+  else
+  begin
+    Select_FollowUpInPerson.Edit;
+    AddImageField(Select_FollowUpInPersonPdfAttachment,'Pdf Files|*.pdf');
+    Select_FollowUpInPersonFollowUpId.Value := FollowUpId;
+    Select_FollowUpInPersonCustomerId.Value := CustomerId;
+    Select_FollowUpInPersonLogDate.Value    := Dm.GetServerDate ;
+    //Select_FollowUpInPerson.Post;
+    BitBtn3Click(SELF);
+  end;
+
+end;
+
+procedure TFRefrenceInPerson.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  inherited;
+  Resize := False;
+end;
+
+procedure TFRefrenceInPerson.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TFAssessment, FAssessment);
+  FAssessment.FollowUpId     := FollowUpId ;
+  FAssessment.CustomerId     := CustomerId ;
+  FAssessment.FollowUpInPerson := Select_FollowUpInPerson.FieldByName('Id').AsInteger ;
+  FAssessment.ValuatorUserID := Select_FollowUpInPerson.FieldByName('ValuatorUserID').AsInteger  ;
+  FAssessment.ExpertUserID   := Select_FollowUpInPerson.FieldByName('ExpertId').AsInteger  ;
+  FAssessment.ShowModal;
+  FAssessment.Free;
+end;
+
+procedure TFRefrenceInPerson.Button1Click(Sender: TObject);
+begin
+  inherited;
+  if (Select_FollowUpInPerson.State = dsInsert) or (Select_FollowUpInPerson.State = dsEdit) then
+    Select_FollowUpInPersonDateInPerson.AsString:= MssCalendarPro1.Execute('/')
+  else
+      ShowMessage('»«Ìœ œ— Õ«·  ÊÌ—«Ì‘ Ì« œ—Ã «ÿ·«⁄«  »«‘Ìœ');
+
+end;
+
+procedure TFRefrenceInPerson.FormShow(Sender: TObject);
+begin
+  inherited;
+  Select_FollowUpInPerson.Close;
+  Select_FollowUpInPerson.parameters.ParamByName('@followupid').value := FollowUpId ;
+  Select_FollowUpInPerson.Open;
+
+  if Select_FollowUpInPerson.FieldByName('ID').AsInteger = 0 then
+  begin
+    Select_FollowUpInPerson.Append;
+    Select_FollowUpInPersonFollowUpId.Value := FollowUpId;
+    Select_FollowUpInPersonCustomerId.Value := CustomerId;
+    Select_FollowUpInPersonLogDate.Value    := Dm.GetServerDate ;
+   end ;
+
+  DBECustomerNo.Text    := IntToStr(CustomerId);
+  btnAssessment.Enabled := Select_FollowUpInPerson.FieldByName('ValuatorUserID').AsInteger >0   ;
+
+  MaskEPeriodTimeInperson.Text := DBEPeriodTimeInperson.Text ;
+  MaskETimeInperson.Text := DBETimeInperson.Text        ;
+
+  btnAssessment.Visible := _UserAssesstAcess ;
+
+end;
+
+procedure TFRefrenceInPerson.BitBtn2Click(Sender: TObject);
+begin
+  inherited;
+  Select_FollowUpInPerson.Edit ;
+end;
+
+procedure TFRefrenceInPerson.BtnCancelClick(Sender: TObject);
+begin
+  inherited;
+  Select_FollowUpInPerson.Cancel;
+  close;
+
+end;
+
+procedure TFRefrenceInPerson.btnDelEghdamatClick(Sender: TObject);
+begin
+  inherited;
+  IF MessageDlg('¬Ì« «“ Õ–› «ÿ·«⁄«  „ÿ„∆‰ Â” Ìœø',mtConfirmation,[mbyes,mbno],0)=mryes then
+  Begin
+    if  Select_FollowUpInPersonid.AsString <> '' then
+      Qry_SetResult(' Delete From dbo.FollowUpInPerson Where ID = '+Select_FollowUpInPersonid.AsString ,Dm.YeganehConnection)
+    else if Select_FollowUpInPerson.State in [dsinsert,dsedit]  then
+    begin
+      Select_FollowUpInPerson.Cancel;
+    end;
+  End;
+  Select_FollowUpInPerson.Close;
+  Select_FollowUpInPerson.parameters.ParamByName('@followupid').value := FollowUpId ;
+  Select_FollowUpInPerson.Open;
+  btnAssessment.Enabled :=  Select_FollowUpInPerson.FieldByName('ValuatorUserID').AsInteger >0   ;
+  MaskEPeriodTimeInperson.Text := DBEPeriodTimeInperson.Text ;
+  MaskETimeInperson.Text := DBETimeInperson.Text        ;
+end;
+
+procedure TFRefrenceInPerson.BitBtn3Click(Sender: TObject);
+begin
+  inherited;
+  if Trim(MaskEPeriodTimeInperson.Text) = ':' then
+   MaskEPeriodTimeInperson.Text := '00:00'  ;
+
+  if Trim(MaskETimeInperson.Text) = ':' then
+   MaskETimeInperson.Text := '00:00' ;
+
+  DBEPeriodTimeInperson.Text := MaskEPeriodTimeInperson.Text;
+  DBETimeInperson.Text       := MaskETimeInperson.Text ;
+  if (DBExpert.KeyValue = 0) or (DBExpert.KeyValue = Null) then
+  begin
+    ShowMyMessage('ÅÌ€«„','·ÿ›« ò«—‘‰«” „‘Œ’ ‰„«ÌÌœ',[mbOK],mtInformation);
+    DBExpert.SetFocus;
+    DBExpert.DropDown;
+    Abort;
+  end;
+
+  if (MaskETimeInperson.Text>'23:59' ) then
+  begin
+    ShowMyMessage('ÅÌ€«„','·ÿ›« ”«⁄  „—«Ã⁄Â —« «’·«Õ ‰„«ÌÌœ',[mbOK],mtInformation);
+    MaskETimeInperson.SetFocus;
+
+    Abort;
+  end;
+
+  With Select_FollowUpInPerson do
+  begin
+    if not (State in [dsEdit,dsInsert]) then
+      EDIT;
+
+    if edtDateInPerson.Text = '' then
+      edtDateInPerson.Text := _Today;
+    Select_FollowUpInPersonFollowUpId.Value := FollowUpId;
+    Select_FollowUpInPersonCustomerId.Value := CustomerId;
+    Select_FollowUpInPersonLogDate.Value    := Dm.GetServerDate ;
+    Select_FollowUpInPersonUserId.Value     := _UserID ;
+
+    Post;
+
+    Close;
+    Select_FollowUpInPerson.parameters.ParamByName('@followupid').value := FollowUpId ;
+    Open;
+  end;
+  btnAssessment.Enabled :=  Select_FollowUpInPerson.FieldByName('ValuatorUserID').AsInteger >0   ;
+
+end;
+
+function TFRefrenceInPerson.LoadImageField(Field: TField;
+  Path: String): Boolean;
+begin
+  if not Field.IsNull then
+  begin
+    TBlobField(Field).SaveToFile(path);
+    Result := True;
+  end
+  else
+  begin
+    ShowMessage('ÅÌÊ”  „ÊÃÊœ ‰Ì” ');
+    Result := False
+  end;
+end;
+
+end.

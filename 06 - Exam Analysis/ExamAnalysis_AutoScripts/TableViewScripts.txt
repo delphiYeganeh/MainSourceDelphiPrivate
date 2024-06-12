@@ -1,0 +1,23 @@
+[SECTION_MAX_NO]=1
+
+[BEGIN_S_NO]=1
+
+IF NOT EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N'[DBO].[TBLAPPSETTING]') AND TYPE IN (N'U'))
+BEGIN 
+CREATE TABLE [dbo].[TBLAPPSETTING](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descript] [nvarchar](2000) NULL,
+	[Max_TableScriptNumber] [int] NULL,
+	[Max_ViewScriptNumber] [int] NULL,
+	[Last_TableScriptNumber] [int] NULL,
+	[Last_ViewScriptNumber] [int] NULL,
+	[Error_RunTableScriptNumber] [int] NULL,
+	[Error_RunViewScriptNumber] [int] NULL,
+        [Date] datetime null,
+        [AppVersion] nvarchar(100)
+) ON [PRIMARY]
+
+END 
+
+[END_S_NO]
+
