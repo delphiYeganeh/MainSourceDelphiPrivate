@@ -45,6 +45,7 @@ procedure TAboutBox.FormCreate(Sender: TObject);
 begin
   inherited;
   lblVersion.Caption := ' ‰ê«—‘ ' + _SoftVersion ;
+  Label11.Caption  := _SoftLastUpdate ;
   Caption :=   '‰—„ «›“«— œ»Ì—Œ«‰Â '+ _yeganeh;
 end;
 

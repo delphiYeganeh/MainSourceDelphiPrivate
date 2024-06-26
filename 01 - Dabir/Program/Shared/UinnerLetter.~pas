@@ -937,6 +937,9 @@ begin
    FromOrgForm := TFromOrgForm.Create(Application);
    if IsFrom then
       FromOrgForm.outerOrg.Checked:=false;
+
+   FromOrgForm.InnerMode := IsFrom ;
+
    FromOrgForm.OrganizeMode:=false;
    FromOrgForm.ShowModal;
    if FromOrgForm.done then

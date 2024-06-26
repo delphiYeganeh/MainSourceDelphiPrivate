@@ -1104,7 +1104,7 @@ Const
    _ShowLogo = True;
 // _Yeganeh='םַהו';
 // _EYeganeh='yeganeh';
-   _SoftLastUpdate = '1403/03/22';//'1396/02/16';
+   _SoftLastUpdate = '1403/04/06';//'1396/02/16';
    //_SoftVersion    = '11.0.0.0';//'6.5.0.0';
     LCID: DWORD = LOCALE_SYSTEM_DEFAULT;
 
@@ -3697,6 +3697,8 @@ var
   LengthMax :Integer;
   PosF , PosS , PosE , PosFirstSec , PosFirstLen  , PosLastSec , PosLastLen : Integer ;
   FistScript : Integer;
+  SR  : TSearchRec;
+  FileAttrs: Integer;
   //qryAutoRunScript :TADOQuery;
 
   function GetTxtFileAsString(const fn:String):WideString;

@@ -3015,7 +3015,7 @@ inherited MainForm: TMainForm
       '8=17'
       '9=23')
     OnExecute = MainActionManagerExecute
-    Left = 1020
+    Left = 1024
     Top = 186
     StyleName = 'XP Style'
     object Ahome: TAction

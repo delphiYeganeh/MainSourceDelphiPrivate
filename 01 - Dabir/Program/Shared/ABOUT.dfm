@@ -44,17 +44,17 @@ inherited AboutBox: TAboutBox
       IsControl = True
     end
     object lblVersion: TLabel
-      Left = 141
+      Left = 30
       Top = 35
-      Width = 42
+      Width = 138
       Height = 13
       Caption = ' 9.0.0.0 '
       IsControl = True
     end
     object Label1: TLabel
-      Left = 233
+      Left = 175
       Top = 34
-      Width = 47
+      Width = 107
       Height = 16
       Caption = #1606#1587#1582#1607' :'
       Font.Charset = ARABIC_CHARSET
@@ -66,9 +66,9 @@ inherited AboutBox: TAboutBox
       IsControl = True
     end
     object Label2: TLabel
-      Left = 211
+      Left = 175
       Top = 73
-      Width = 70
+      Width = 107
       Height = 16
       Caption = #1662#1588#1578#1610#1576#1575#1606#1610' : '
       Font.Charset = ARABIC_CHARSET
@@ -80,9 +80,9 @@ inherited AboutBox: TAboutBox
       IsControl = True
     end
     object Label3: TLabel
-      Left = 139
+      Left = 30
       Top = 73
-      Width = 64
+      Width = 138
       Height = 13
       Caption = '88948911-14'
       Font.Charset = ARABIC_CHARSET
@@ -94,9 +94,9 @@ inherited AboutBox: TAboutBox
       IsControl = True
     end
     object Label4: TLabel
-      Left = 139
+      Left = 30
       Top = 91
-      Width = 56
+      Width = 138
       Height = 16
       Caption = '22466748'
       Font.Charset = ARABIC_CHARSET
@@ -108,9 +108,9 @@ inherited AboutBox: TAboutBox
       IsControl = True
     end
     object Label5: TLabel
-      Left = 230
+      Left = 175
       Top = 92
-      Width = 52
+      Width = 107
       Height = 16
       Caption = #1601#1585#1608#1588' : '
       Font.Charset = ARABIC_CHARSET
@@ -122,9 +122,9 @@ inherited AboutBox: TAboutBox
       IsControl = True
     end
     object Label6: TLabel
-      Left = 138
+      Left = 30
       Top = 109
-      Width = 56
+      Width = 138
       Height = 16
       Caption = '77532286'
       Font.Charset = ARABIC_CHARSET
@@ -136,9 +136,9 @@ inherited AboutBox: TAboutBox
       IsControl = True
     end
     object Label7: TLabel
-      Left = 214
+      Left = 175
       Top = 110
-      Width = 69
+      Width = 107
       Height = 16
       Caption = #1602#1585#1575#1585#1583#1575#1583#1607#1575' : '
       Font.Charset = ARABIC_CHARSET
@@ -150,9 +150,9 @@ inherited AboutBox: TAboutBox
       IsControl = True
     end
     object Label8: TLabel
-      Left = 211
+      Left = 175
       Top = 127
-      Width = 71
+      Width = 107
       Height = 16
       Caption = #1608#1576' '#1587#1575#1610#1578' : '
       Font.Charset = ARABIC_CHARSET
@@ -164,9 +164,9 @@ inherited AboutBox: TAboutBox
       IsControl = True
     end
     object Label9: TLabel
-      Left = 120
+      Left = 30
       Top = 126
-      Width = 82
+      Width = 138
       Height = 16
       Caption = 'Yeganehsoft.ir'
       Font.Charset = ARABIC_CHARSET
@@ -178,9 +178,9 @@ inherited AboutBox: TAboutBox
       IsControl = True
     end
     object Label10: TLabel
-      Left = 239
+      Left = 175
       Top = 56
-      Width = 41
+      Width = 107
       Height = 16
       Caption = #1578#1575#1585#1610#1582' : '
       Font.Charset = ARABIC_CHARSET
@@ -192,9 +192,9 @@ inherited AboutBox: TAboutBox
       IsControl = True
     end
     object Label11: TLabel
-      Left = 137
+      Left = 30
       Top = 52
-      Width = 66
+      Width = 138
       Height = 16
       Caption = '1397/09/26'
       Font.Charset = ARABIC_CHARSET
@@ -206,7 +206,7 @@ inherited AboutBox: TAboutBox
       IsControl = True
     end
     object Label12: TLabel
-      Left = 36
+      Left = 30
       Top = 148
       Width = 138
       Height = 16
@@ -220,11 +220,11 @@ inherited AboutBox: TAboutBox
       IsControl = True
     end
     object Label13: TLabel
-      Left = 175
+      Left = 166
       Top = 148
-      Width = 107
+      Width = 116
       Height = 16
-      Caption = #1662#1587' '#1575#1604#1705#1578#1585#1608#1606#1610#1705#1610' : '
+      Caption = #1662#1587#1578' '#1575#1604#1705#1578#1585#1608#1606#1610#1705#1610' : '
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -13

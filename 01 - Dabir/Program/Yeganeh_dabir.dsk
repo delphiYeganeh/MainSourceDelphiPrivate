@@ -1,55 +1,54 @@
 [Closed Files]
-File_0=SourceModule,'D:\matin\01 - Dabir\Program\LogOn.pas',0,1,546,1,546,1,0
-File_1=SourceModule,'C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas',0,1,6160,1,6183,0,0
-File_2=SourceModule,'D:\99 - Shared\YShamsiDate.pas',0,1,343,94,354,0,0
-File_3=SourceModule,'D:\matin\01 - Dabir\Program\shared\businessLayer.pas',0,1,5816,57,5834,0,0
-File_4=SourceModule,'D:\matin\01 - Dabir\Program\shared\BaseUnit.pas',0,1,1,1,1,0,0
-File_5=SourceModule,'D:\matin\01 - Dabir\Program\UMain.pas',0,1,1339,43,1365,0,0
-File_6=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas',0,1,22,47,26,0,0
+File_0=SourceModule,'D:\matin\01 - Dabir\Program\Dmu.pas',0,1,1403,60,1415,1,0
+File_1=SourceModule,'c:\program files (x86)\borland\delphi7\source\rtl\Sys\sysutils.pas',0,1,4946,42,4961,0,0
+File_2=SourceModule,'D:\matin\01 - Dabir\Program\shared\businessLayer.pas',0,1,2016,48,2036,0,0
+File_3=SourceModule,'D:\matin\01 - Dabir\Program\shared\UinnerLetter.pas',0,1,985,120,992,0,0
+File_4=SourceModule,'D:\matin\01 - Dabir\Program\LogOn.pas',0,1,546,1,546,1,0
+File_5=SourceModule,'C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas',0,1,6160,1,6183,0,0
+File_6=SourceModule,'D:\99 - Shared\YShamsiDate.pas',0,1,343,94,354,0,0
+File_7=SourceModule,'D:\matin\01 - Dabir\Program\shared\BaseUnit.pas',0,1,1,1,1,0,0
+File_8=SourceModule,'D:\matin\01 - Dabir\Program\UMain.pas',0,1,1339,43,1365,0,0
+File_9=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl2\DBTreeView.pas',0,1,22,47,26,0,0
 
 [Modules]
-Module0=D:\matin\01 - Dabir\Program\Dmu.pas
-Module1=D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas
-Module2=D:\matin\01 - Dabir\Program\UMain.pas
-Module3=D:\matin\01 - Dabir\Program\shared\FromOrgU.pas
-Module4=D:\matin\01 - Dabir\Program\shared\UinnerLetter.pas
-Module5=D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas
-Module6=D:\matin\01 - Dabir\Program\shared\ExportToWord.pas
-Module7=D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas
-Module8=D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas
-Module9=D:\matin\01 - Dabir\Program\Shared\LetterEmails.pas
-Module10=D:\matin\01 - Dabir\Program\UInputTemplate.pas
-Module11=D:\matin\01 - Dabir\Program\uUpdateDbScripts.pas
-Module12=D:\matin\01 - Dabir\Program\Yeganeh_dabir.dpr
-Count=13
+Module0=D:\matin\01 - Dabir\Program\UMain.pas
+Module1=D:\matin\01 - Dabir\Program\Dmu.pas
+Module2=D:\matin\01 - Dabir\Program\uUpdateDbScripts.pas
+Module3=D:\matin\01 - Dabir\Program\shared\ABOUT.PAS
+Module4=D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas
+Module5=D:\matin\01 - Dabir\Program\shared\ExportToWord.pas
+Module6=D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas
+Module7=D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas
+Module8=D:\matin\01 - Dabir\Program\shared\FromOrgU.pas
+Module9=D:\matin\01 - Dabir\Program\userDefine.pas
+Module10=D:\matin\01 - Dabir\Program\Yeganeh_dabir.dpr
+Module11=D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas
+Module12=D:\matin\01 - Dabir\Program\Shared\LetterEmails.pas
+Module13=D:\matin\01 - Dabir\Program\UInputTemplate.pas
+Count=14
 EditWindowCount=1
-
-[D:\matin\01 - Dabir\Program\Dmu.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
 
 [D:\matin\01 - Dabir\Program\UMain.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\01 - Dabir\Program\shared\FromOrgU.pas]
+[D:\matin\01 - Dabir\Program\Dmu.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\01 - Dabir\Program\shared\UinnerLetter.pas]
+[D:\matin\01 - Dabir\Program\uUpdateDbScripts.pas]
 ModuleType=SourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
-[D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas]
+[D:\matin\01 - Dabir\Program\shared\ABOUT.PAS]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -59,12 +58,32 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas]
+[D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas]
+[D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\01 - Dabir\Program\shared\FromOrgU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\01 - Dabir\Program\userDefine.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\01 - Dabir\Program\Yeganeh_dabir.dpr]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -77,16 +96,6 @@ FormOnTop=0
 [D:\matin\01 - Dabir\Program\UInputTemplate.pas]
 ModuleType=SourceModule
 FormState=1
-FormOnTop=1
-
-[D:\matin\01 - Dabir\Program\uUpdateDbScripts.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\01 - Dabir\Program\Yeganeh_dabir.dpr]
-ModuleType=SourceModule
-FormState=0
 FormOnTop=0
 
 [C:\Program Files (x86)\Borland\Delphi7\Projects\ProjectGroup1.bpg]
@@ -97,8 +106,12 @@ FormOnTop=0
 FormState=0
 FormOnTop=0
 
+[D:\matin\01 - Dabir\Program\UserDefineDM.pas]
+FormState=0
+FormOnTop=0
+
 [EditWindow0]
-ViewCount=13
+ViewCount=14
 CurrentView=1
 View0=0
 View1=1
@@ -113,6 +126,7 @@ View9=9
 View10=10
 View11=11
 View12=12
+View13=13
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -132,7 +146,7 @@ LeftPanelData=00000400010000000C000000436F64654578706C6F726572000000000000000000
 RightPanelSize=0
 BottomPanelSize=85
 BottomPanelClients=WatchWindow,MessageView@EditWindow0
-BottomPanelData=00000400010000000B000000576174636857696E646F77BD050000000000000255000000000000000100000001000000000000000002000000009D000000000000000200000002B6060000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000100000000BD0500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=00000400010000000B000000576174636857696E646F77BD050000000000000255000000000000000100000001000000000000000002000000009D000000000000000200000002B6060000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000100000000BD050000000000000100000000BD050000000000000100000000BD0500000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=D:\matin\01 - Dabir\Program\Yeganeh_dabir.dpr
@@ -142,52 +156,52 @@ TopLine=214
 LeftCol=1
 
 [View1]
-Module=D:\matin\01 - Dabir\Program\Dmu.pas
-CursorX=74
-CursorY=1077
-TopLine=1074
-LeftCol=1
-
-[View2]
 Module=D:\matin\01 - Dabir\Program\UMain.pas
-CursorX=67
-CursorY=1346
+CursorX=42
+CursorY=1350
 TopLine=1339
 LeftCol=1
 
+[View2]
+Module=D:\matin\01 - Dabir\Program\shared\ABOUT.PAS
+CursorX=43
+CursorY=46
+TopLine=16
+LeftCol=1
+
 [View3]
-Module=D:\matin\01 - Dabir\Program\shared\UinnerLetter.pas
-CursorX=31
-CursorY=941
-TopLine=929
+Module=D:\matin\01 - Dabir\Program\userDefine.pas
+CursorX=49
+CursorY=984
+TopLine=978
 LeftCol=1
 
 [View4]
 Module=D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas
-CursorX=50
-CursorY=887
-TopLine=883
+CursorX=13
+CursorY=766
+TopLine=761
 LeftCol=1
 
 [View5]
 Module=D:\matin\01 - Dabir\Program\shared\FromOrgU.pas
-CursorX=1
-CursorY=929
-TopLine=929
+CursorX=14
+CursorY=130
+TopLine=112
 LeftCol=1
 
 [View6]
 Module=D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas
-CursorX=75
-CursorY=364
+CursorX=17
+CursorY=358
 TopLine=356
 LeftCol=1
 
 [View7]
 Module=D:\matin\01 - Dabir\Program\shared\ExportToWord.pas
-CursorX=59
-CursorY=675
-TopLine=663
+CursorX=1
+CursorY=557
+TopLine=534
 LeftCol=1
 
 [View8]
@@ -199,9 +213,9 @@ LeftCol=1
 
 [View9]
 Module=D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas
-CursorX=15
-CursorY=589
-TopLine=560
+CursorX=1
+CursorY=417
+TopLine=394
 LeftCol=1
 
 [View10]
@@ -213,12 +227,19 @@ LeftCol=1
 
 [View11]
 Module=D:\matin\01 - Dabir\Program\uUpdateDbScripts.pas
-CursorX=12
-CursorY=375
-TopLine=375
+CursorX=1
+CursorY=97
+TopLine=74
 LeftCol=1
 
 [View12]
+Module=D:\matin\01 - Dabir\Program\Dmu.pas
+CursorX=1
+CursorY=1426
+TopLine=1403
+LeftCol=1
+
+[View13]
 Module=D:\matin\01 - Dabir\Program\UInputTemplate.pas
 CursorX=12
 CursorY=104
@@ -260,7 +281,7 @@ LRDockWidth=1180
 Dockable=1
 
 [Breakpoints]
-Count=59
+Count=62
 Breakpoint0='H:\Yeganeh\Windows\Delphi\Source\01 - Dabir\Source\Source\Program\UInputUserTable.pas',238,'',0,0,'',1,0,0,'',1,'','',''
 Breakpoint1='H:\Yeganeh\Windows\Delphi\Source\01 - Dabir\Source\Source\Program\UInputUserTable.pas',304,'',0,0,'',1,0,0,'',1,'','',''
 Breakpoint2='D:\01 - Dabir\Program\EnteredLetterInputF.pas',980,'',0,1,'',1,0,0,'',1,'','',''
@@ -320,6 +341,9 @@ Breakpoint55='D:\matin\01 - Dabir\Program\Dmu.pas',2380,'',0,1,'',1,0,0,'',1,'',
 Breakpoint56='D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',784,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint57='D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',909,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint58='D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',906,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint59='D:\matin\01 - Dabir\Program\Dmu.pas',3746,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint60='D:\matin\01 - Dabir\Program\uUpdateDbScripts.pas',97,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint61='D:\matin\01 - Dabir\Program\uUpdateDbScripts.pas',217,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -391,18 +415,18 @@ Visible=1
 State=0
 Left=-3
 Top=490
-Width=434
+Width=287
 Height=524
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=418
+ClientWidth=271
 ClientHeight=485
 TBDockHeight=556
 LRDockWidth=190
 Dockable=1
-SplitPos=115
+SplitPos=85
 ArrangeBy=Name
-SelectedItem=Name
+SelectedItem=Left
 ExpandedItems=Title
 HiddenCategories=
 

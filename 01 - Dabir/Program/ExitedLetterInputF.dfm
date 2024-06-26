@@ -309,7 +309,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           object Label10: TLabel
             Left = 752
             Top = 48
-            Width = 28
+            Width = 40
             Height = 13
             Anchors = [akTop, akRight]
             Caption = '&'#1711#1610#1585#1606#1583#1607
@@ -2401,9 +2401,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             812
             90)
           object Label4: TLabel
-            Left = 732
+            Left = 738
             Top = 21
-            Width = 49
+            Width = 54
             Height = 13
             Anchors = [akTop, akRight]
             Caption = '&'#1591#1576#1602#1607' '#1576#1606#1583#1610
@@ -2416,9 +2416,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             ParentFont = False
           end
           object Label7: TLabel
-            Left = 736
+            Left = 738
             Top = 47
-            Width = 48
+            Width = 54
             Height = 13
             Anchors = [akTop, akRight]
             Caption = #1601#1608#1585#1610'&'#1578' '#1606#1575#1605#1607
@@ -2433,7 +2433,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           object Label9: TLabel
             Left = 487
             Top = 21
-            Width = 46
+            Width = 51
             Height = 13
             Anchors = [akTop, akRight]
             Caption = #1606#1608#1593' '#1575#1585#1587#1575#1604
@@ -2462,7 +2462,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             ParentFont = False
           end
           object Label17: TLabel
-            Left = 736
+            Left = 738
             Top = 69
             Width = 54
             Height = 13
@@ -2622,9 +2622,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             OnExit = TEditExit
           end
           object DBLookupComboBox1: TDBLookupComboBox
-            Left = 563
+            Left = 552
             Top = 17
-            Width = 143
+            Width = 154
             Height = 21
             Anchors = [akTop, akRight]
             BevelOuter = bvNone
@@ -2641,9 +2641,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             TabOrder = 1
           end
           object DBLookupComboBox3: TDBLookupComboBox
-            Left = 563
+            Left = 552
             Top = 42
-            Width = 145
+            Width = 156
             Height = 21
             Anchors = [akTop, akRight]
             BiDiMode = bdLeftToRight
@@ -2713,9 +2713,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             OnKeyPress = EdtSignerCodeKeyPress
           end
           object DBEdit17: TDBEdit
-            Left = 667
+            Left = 552
             Top = 65
-            Width = 63
+            Width = 180
             Height = 21
             Anchors = [akTop, akRight]
             DataField = 'NumberOfPage'
@@ -2782,7 +2782,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             ParentFont = False
           end
           object Label20: TLabel
-            Left = 223
+            Left = 199
             Top = 17
             Width = 54
             Height = 13
@@ -2797,7 +2797,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             ParentFont = False
           end
           object Label11: TLabel
-            Left = 727
+            Left = 730
             Top = 48
             Width = 65
             Height = 13
@@ -2812,7 +2812,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Visible = False
           end
           object Label16: TLabel
-            Left = 473
+            Left = 474
             Top = 47
             Width = 62
             Height = 13
@@ -2827,9 +2827,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Visible = False
           end
           object DBEdit10: TDBEdit
-            Left = 291
+            Left = 264
             Top = 15
-            Width = 433
+            Width = 460
             Height = 21
             Anchors = [akTop, akRight]
             Color = clWhite
@@ -2846,7 +2846,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             OnExit = TEditExit
           end
           object DBEdit11: TDBEdit
-            Left = 197
+            Left = 173
             Top = 14
             Width = 23
             Height = 21
@@ -2879,9 +2879,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Visible = False
           end
           object DBLookupComboBox8: TDBLookupComboBox
-            Left = 291
+            Left = 264
             Top = 44
-            Width = 177
+            Width = 204
             Height = 21
             Anchors = [akTop, akRight]
             BiDiMode = bdLeftToRight
@@ -2931,7 +2931,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             ParentFont = False
           end
           object Label22: TLabel
-            Left = 264
+            Left = 224
             Top = 15
             Width = 26
             Height = 13
@@ -2947,9 +2947,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Visible = False
           end
           object DBEdit12: TDBEdit
-            Left = 295
+            Left = 265
             Top = 14
-            Width = 397
+            Width = 427
             Height = 21
             Anchors = [akTop, akRight]
             Color = clWhite
@@ -2966,7 +2966,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             OnExit = TEditExit
           end
           object xpBitBtn1: TBitBtn
-            Left = 146
+            Left = 10
             Top = 14
             Width = 111
             Height = 21
@@ -3214,9 +3214,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             OnExit = TEditExit
           end
           object DBShamsiDateEdit2: TDBShamsiDateEdit
-            Left = 439
+            Left = 264
             Top = 15
-            Width = 73
+            Width = 216
             Height = 21
             Anchors = [akTop, akRight]
             BiDiMode = bdLeftToRight
@@ -4605,8 +4605,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
   end
   object IdEncoderMIME1: TIdEncoderMIME
     FillChar = '='
-    Left = 84
-    Top = 545
+    Left = 36
+    Top = 449
   end
   object QGetEmail: TADOQuery
     Connection = Dm.YeganehConnection

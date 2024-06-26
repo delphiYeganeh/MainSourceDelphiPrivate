@@ -402,12 +402,16 @@ begin
    Indicator.SetFocus;
    Initialize;
    Label5.Caption := Dm.UserMemoDisplay;
-   AdvancedSearch.Height := 200;
+   AdvancedSearch.Height := 208;
    AdvancedSearch.Width := 206;
-   SubjectPanel.Height := 36;
+   SubjectPanel.Height := 48;
    SubjectPanel.Width := 206;
    Panel2.Height := 20;
    Panel2.Width := 206;
+   Panel3.Height := 41;
+   Panel3.Width := 206;
+   Panel1.Height := 35;
+   Panel1.Width := 206;
 end;
 
 procedure TQuickSearchF.SpeedButton1Click(Sender: TObject);

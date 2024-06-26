@@ -1,7 +1,7 @@
 inherited MainForm: TMainForm
   Tag = 1
-  Left = 235
-  Top = 151
+  Left = 230
+  Top = 117
   Caption = #1606#1585#1605' '#1575#1601#1586#1575#1585' '#1583#1576#1610#1585#1582#1575#1606#1607' '#1588#1585#1705#1578' '#1601#1606#1575#1608#1585#1575#1606' '#1575#1591#1604#1575#1593#1575#1578' '#1610#1711#1575#1606#1607
   ClientHeight = 748
   ClientWidth = 1283
@@ -69,7 +69,7 @@ inherited MainForm: TMainForm
       Left = 2
       Top = 2
       Width = 1279
-      Height = 23
+      Height = 26
       ActionManager = MainActionManager
       Caption = 'ActionToolBar1'
       ColorMap.HighlightColor = clWhite
@@ -2090,7 +2090,7 @@ inherited MainForm: TMainForm
     Top = 245
   end
   inherited ActionList: TActionList
-    Left = 1022
+    Left = 998
     Top = 482
     object Action12: TAction
       Caption = 'Select All'
@@ -2100,7 +2100,7 @@ inherited MainForm: TMainForm
     end
   end
   inherited Grid_PopupMenu: TPopupMenu
-    Left = 1020
+    Left = 1004
     Top = 262
   end
   inherited Timer1sssss: TTimer
@@ -3015,8 +3015,8 @@ inherited MainForm: TMainForm
       '8=17'
       '9=23')
     OnExecute = MainActionManagerExecute
-    Left = 1024
-    Top = 186
+    Left = 1000
+    Top = 210
     StyleName = 'XP Style'
     object Ahome: TAction
       Tag = -1
@@ -4367,7 +4367,7 @@ inherited MainForm: TMainForm
   end
   object PopupMenu1: TPopupMenu [21]
     Images = ImageList
-    Left = 1018
+    Left = 994
     Top = 343
     object N3: TMenuItem
       Caption = #1601#1593#1575#1604' '#1588#1583#1606' '#1606#1585#1605' '#1575#1601#1586#1575#1585
@@ -4802,7 +4802,7 @@ inherited MainForm: TMainForm
   end
   object PopupMenu: TPopupMenu [26]
     Images = ImageList3
-    Left = 1023
+    Left = 1007
     Top = 412
     object N1: TMenuItem
       Caption = #1578#1606#1592#1610#1605' '#1587#1578#1608#1606' '#1607#1575#1610' '#1580#1583#1608#1604
@@ -9723,8 +9723,8 @@ inherited MainForm: TMainForm
   object MainMenu1: TMainMenu [41]
     AutoMerge = True
     OwnerDraw = True
-    Left = 1020
-    Top = 135
+    Left = 996
+    Top = 151
     object m101: TMenuItem
       Caption = #1587#1585#1608#1610#1587' '#1607#1575
       object N125: TMenuItem

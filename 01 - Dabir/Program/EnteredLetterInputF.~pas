@@ -868,7 +868,7 @@ begin
 
   Dm.FromOrganizations.Locate('Code', edit_FromOrgID.Text, []);
   Select_LetterFromOrgID.AsInteger := Dm.FromOrganizationsid.AsInteger;
-  //Select_LetterIsNetWork.AsBoolean := True;
+  Select_LetterIsNetWork.AsBoolean := True;
 
   IsInsert := False;
   with DSForm.DataSet do

@@ -1,4 +1,4 @@
-[SECTION_MAX_NO]=5
+[SECTION_MAX_NO]=7
 
 [BEGIN_S_NO]=1
 
@@ -1304,6 +1304,366 @@ ALTER PROCEDURE [dbo].[Get_All_Letter]
     ORDER BY RegistrationDate DESC,letterid desc
 
 
+
+[END_S_NO]
+
+[BEGIN_S_NO]=6
+
+alter  PROCEDURE [dbo].[Sp_WebInbox]
+	@SecretariatID int,  
+	@LetterFormat tinyint,  
+	@OrgID int,  
+	@Proceeded bit,  
+	@Type tinyint,
+	@myear int,
+	@date tinyint,
+	@ArchiveFolderID int ,
+	@where nvarchar(1000),  
+	@userID int,
+	@Letter_Type int,
+	@DeadLine int,
+	@orderClause varchar(50)=' rc.lastupdate desc,l.indicatorid desc',  
+	@top int=100,
+	@DayOfNow CHAR(10),
+	@WebOrWin VARCHAR(50)=null  
+AS  
+BEGIN
+	--	last modifier xax 1398/03/09
+
+	declare        
+		@sql nvarchar (4000),        
+		@rw nvarchar(2000),        
+		@Today char(10),        
+		@Proceed bit, -- @Proceed  
+		@todayToint varchar(10),    
+		@Mytoday Nvarchar(10)  
+
+SET @WebOrWin=UPPER(LTRIM(RTRIM(ISNULL(@WebOrWin,'Web'))))
+				   
+	IF @Mytoday='WEB' SELECT @Mytoday=dbo.Shamsi(getdate())
+
+	if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[TempInbox]') )
+	drop table [dbo].[TempInbox]
+
+	CREATE TABLE [dbo].[TempInbox]
+	( 
+	MyTmp_ID INT IDENTITY(1,1) NOT NULL,	
+	LetterID INT,
+	SignerID NVARCHAR(1000), 
+	IndicatorID INT, 
+	MYear int,
+	subjectid INT, 
+	SecretariatID INT, 
+	Letter_Type INT,   
+	letterformat INT, 
+	IncommingNO NVARCHAR(1000), 
+	Incommingdate NVARCHAR(100),   
+	ClassificationID INT,        
+	UrgencyID INT, 
+	Memo NVARCHAR(4000), 
+	Tostaffer NVARCHAR(4000),
+	SentLetterID INT,
+	AttachTitle NVARCHAR(1000), 
+	NumberOfAttachPages INT, 
+	NumberOfPage INT, 
+	ReceiveTypeID INT, 
+	UserID INT, 
+	RetroactionNo NVARCHAR(100),   
+	UserMemo NVARCHAR(1000), 
+	RegistrationDate CHAR(100),        
+	toorgid INT,
+	fromorgid INT,
+	FollowLetterNo NVARCHAR(1000), 
+	LetterRecommites NVARCHAR(1000),
+	finalized BIT,
+	CenterNo NVARCHAR(100),
+	CenterDate CHAR(100),
+	templateID INT,
+	headerID INT,        
+	registrationTime VARCHAR(100),
+	fromstaffer NVARCHAR(4000),
+	sendStatusID INT,
+	LastUpdate DATETIME,
+	UserTableID INT,        
+	InnerNo NVARCHAR(1000), 
+	OrgID INT,  
+	ParentId smallINT,
+	Paraph NVARCHAR(4000), 
+	RecommiteDate VARCHAR(100),  
+	Proceeded BIT,        
+	ProceedDate VARCHAR(100), 
+	ReType smallINT,
+	RecommitTypeTitle NVARCHAR(1000),        
+	IsInner INT,
+	RecommiterTitle NVARCHAR(1000),
+	sendertitle NVARCHAR(1000),
+	recommiteid INT,        
+	id smallINT, 
+	isSecure BIT,   
+	StaffMemo NVARCHAR(4000), 
+	Yincommingno NVARCHAR(1000),
+	PreCode NVARCHAR(100),
+	IsCopy BIT,
+	IsCopy_In_Dabir BIT,
+	SentToDabir BIT,
+	has_Page BIT,        
+	has_WordPage BIT,
+	has_UncheckedFollowUp BIT,
+	has_ExpiredFollowUp BIT,
+	LetterDataId INT,
+	has_file BIT,
+	DeadLineDays INT,
+	ViewDate CHAR(100),
+	DeadLineDate CHAR(100),
+	ChildParaph VARCHAR(3000),
+	ChildOrg VARCHAR(1000),  
+	ActionTypeID INT, 
+	UserRecomCount INT, 
+	IsAnswer BIT, 
+	ISFollowup BIT,
+	Erja_Or_Answer_Date CHAR(10),
+	ColorFlag VARCHAR(50),
+	MemoAndRecomUserCount VARCHAR(4000),
+	has_Sign BIT,
+	row_num int
+	)
+	-------------------++++++++++++++++++++++++++++-------------------------------------
+	-------------------+++++++++++++++++++++++++-------------------------------------      
+	select @today=dbo.shamsi(getdate())        
+        
+	set @Proceed=@Proceeded  
+	DECLARE @InnerNo NVARCHAR(500);  
+	IF @WebOrWin=UPPER('WIN')  
+		set @InnerNo=dbo.InnerNoFormat('TTO','Receiver',@SecretariatID)
+	ELSE	   
+		set @InnerNo=dbo.InnerNoFormat('TTO','Receiver',-1)
+	
+	--xax.98.03.06
+	--set @RW='WHERE   (RC.Finallized=1) and (Rc.OrgID = '+cast(@OrgID as varchar(10))+')'
+	set @RW='WHERE   (RC.Finallized=1) and (Rc.OrgID = '+cast(@OrgID as varchar(10))+' or rc.UserID='+cast(@userid as varchar(10))+')'
+	--xax.98.03.06
+	
+	--set @RW='WHERE   (RC.Finallized=1) '
+
+	SET @InnerNo = REPLACE(@InnerNo, 'Letter.SubjectID', 'l.SubjectID')
+
+	IF  @ArchiveFolderID = 0
+		SET @rw = @RW + ' AND (Rc.Proceeded = '+cast(@Proceeded as varchar(2))+')'  
+
+			  
+	if @myear>0  set @rw=@rw+'  and  L.myear='+cast(@myear as varchar(10))        
+  
+					
+	if @LetterFormat>0 set @rw=@rw+' and (l.LetterFormat ='+cast( @LetterFormat as varchar(2))+')'        
+	  
+	--else set @rw=@rw+' and (l.LetterFormat in (0,1,2))'        
+        
+	if @letter_Type>0        
+	set @rw=@rw+' AND (l.letter_Type = '+cast(@Letter_Type as varchar(3))+')'        
+        
+	if @type>0        
+		  set @rw=@rw+' AND (Rc.Type = '+cast(@Type as varchar(2))+')'        
+      
+	if @ArchiveFolderID>0
+	begin
+		if exists (select * from ArchiveFolder where UserID=@userID and FolderID=@ArchiveFolderID and ParentFolderID =0)
+			begin
+			set @rw=@rw+' AND (ParentFolderID = '+cast(@ArchiveFolderID as varchar(10))+')'        
+			end
+		else
+			begin
+			set @rw=@rw+' AND (ArchiveFolderID = '+cast(@ArchiveFolderID as varchar(10))+')'        
+			end
+	end
+
+	if @date<>0        
+	begin        
+	 declare @dw tinyint,@bdate char(10),@edate char(10)        
+	  set @dw=datepart(dw,Getdate())    
+	--Ranjbar    
+	  ---select @bdate=begindate,@edate=Enddate from HistoryDateList(@today ,@dw) where id=@date     
+	 -- Set @Mytoday = Cast(1300+@myear as nvarchar)+ Substring(@Today,5,6)    
+	  Set @Mytoday = Cast(@myear as nvarchar)+ Substring(@Today,5,6)  	  
+	  select @bdate=begindate,@edate=Enddate from HistoryDateList(@Mytoday ,@dw) where id=@date     
+	--//    
+        
+	 set @rw=@rw+' AND (RC.RecommiteDate between '''+@bdate+''' and '''+@edate+''')'        
+	end        
+        
+	if @SecretariatID>0        
+	set @rw=@rw+' AND (SecretariatID = '+cast(@SecretariatID as varchar(10))+')'        
+	else        
+	set @rw=@rw+' AND (SecretariatID in (SELECT SecId FROM UserSecretariats WHERE UserId = '+cast(@userid as varchar(5))+'))'        
+        
+	set @todayToint=cast(dbo.ShamsiToInt(@today) as varchar(10))        
+        
+	--if @DeadLine between -1 and 30        
+	-- set @rw=@rw+' AND ('+        
+	--case when @Proceed=1 then 'case when RC.Proceeded=0 then ISNULL(ChildRecommite.DeadLineToint,'+@todayToint+') else    
+	--'''+@todayToint+''' end '        
+		 
+	--else  'ISNULL(RC.DeadLineToint ,'+@todayToint+') ' end+' -'+@todayToint+' )<= '+cast(@DeadLine as varchar(5))        
+        
+	set @sql='SELECT top '+cast(@top as varchar(5))+' L.LetterID,L.SignerID, L.IndicatorID, L.MYear,l.subjectid, L.SecretariatID, L.Letter_Type,   
+	L.letterformat, L.IncommingNO, L.Incommingdate,   
+	L.ClassificationID,        
+	L.UrgencyID, L.Memo, L.Tostaffer,l.SentLetterID,L.AttachTitle, L.NumberOfAttachPages, L.NumberOfPage, L.ReceiveTypeID, L.UserID, L.RetroactionNo,   
+	L.UserMemo, L.RegistrationDate,        
+	l.toorgid,l.fromorgid,L.FollowLetterNo, L.LetterRecommites,l.finalized,l.CenterNo,l.CenterDate,l.templateID,l.headerID,        
+	l.registrationTime,l.fromstaffer,l.sendStatusID,L.LastUpdate,L.UserTableID,        
+	'+@InnerNo+' InnerNo, PRC.OrgID,  RC.ParentId,  RC.Paraph, RC.RecommiteDate,  RC.Proceeded,        
+	 RC.ProceedDate, RecommiteTypes.id ReType,RecommiteTypes.Title RecommitTypeTitle,        
+	case when fo.title is null then 0 else 1 end IsInner, isnull(isnull(FO.Title,foo.title),TTO.title) RecommiterTitle,tto.title sendertitle,rc.recommiteid,        
+	 rc.id,  rc.IsSecure,  
+	RC.StaffMemo,  
+	isnull(incommingno,indicatorid)  Yincommingno,Secretariats.PreCode,RC.IsCopy,RC.IsCopy_In_Dabir,RC.SentToDabir      
+	,dbo.has_Page(l.letterid) has_Page,        
+	dbo.has_WordPage(l.letterid) has_WordPage,
+	dbo.has_UncheckedFollowUp(l.letterid)  has_UncheckedFollowUp,
+	dbo.has_ExpiredFollowUp(l.letterid) has_ExpiredFollowUp,
+	(select LetterDataID from LetterData where LetterData.LetterID=l.letterid and LetterData.extention IN(3)) as LetterDataId,       
+	dbo.has_file(l.letterid) has_file, '+        
+	'isnull('+        
+	case when @Proceed=1 then 'RC.DeadLineToint' else 'RC.DeadLineToint' end+'-'+@todayToint+',0) DeadLineDays,'+  
+	case when @Proceed=1 then 'ChildRecommite.ViewDate' else 'RC.ViewDate' end+','+    
+	case when @Proceed=1 then 'RC.DeadLineDate ' else  'RC.Deadlinedate  ' end+' DeadLineDate ,'+  
+	case when @Proceed=1 then 'ISNULL(ChildRecommite.Paraph,RC.Paraph) '   else ''' ''' end +' ChildParaph ,'+  
+	case when @Proceed=1 then 'isnull(RecommitedOrg.Title,isnull(isnull(FO.Title,foo.title),TTO.title)) '   else ' isnull(isnull(FO.Title,foo.title),TTO.title) ' end +' ChildOrg , '+        
+	case when @Proceed=1 then ' case when rc.ActionTypeID=5 then 5 else ChildRecommite.ActionTypeID end '  else  ' RC.ActionTypeID'   end +' ActionTypeID   
+	'+       
+      
+	', (dbo.FN_GetUserRecomCount('+CAST(@OrgID as varchar)+', l.LetterID)) as UserRecomCount  ' +      
+	' , RC.IsAnswer , RC.ISFollowup , RC.Erja_Or_Answer_Date, ''White'' ColorFlag ' + 
+	', (Case when dbo.FN_GetUserRecomCount('+CAST(@OrgID as varchar)+', l.LetterID) > 1 then L.Memo + cast(dbo.FN_GetUserRecomCount('+CAST(@OrgID as varchar)+', l.LetterID) as varchar) else L.Memo end) as MemoAndRecomUserCount 
+	, dbo.Has_Sign(l.letterid) AS Has_Sign
+	, ROW_NUMBER() OVER (
+      PARTITION BY l.LetterID, l.Letter_Type 
+      ORDER BY l.LetterID, l.Letter_Type, PRC.OrgID Desc 
+   ) row_num '  + 
+	' FROM ReCommites RC        
+	INNER JOIN Letter L ON RC.LetterID = L.LetterID        
+	left JOIN Secretariats  ON Secretariats.Secid = L.SecretariatID
+	LEFT JOIN LetterTypes ON L.Letter_Type=LetterTypes.ID        
+	left JOIN ReCommites PRC ON RC.LetterID = PRC.LetterID AND PRC.ID = RC.ParentId  AND PRC.type = RC.type
+	left join ReCommites rRC ON RrC.LetterID = l.LetterID AND rRC.Id=1 AND rrc.type<>1
+	left JOIN FromOrganizations FoO ON FoO.ID = rRC.OrgID and rrc.orgid <> '+CAST(@OrgID as varchar)+'      
+	left JOIN FromOrganizations FO ON FO.ID = PRC.OrgID        
+	left JOIN FromOrganizations TTO ON TTO.ID = L.ToOrgID         
+	left JOIN FromOrganizations Receiver ON Receiver.ID = L.FromOrgID         
+	INNER JOIN RecommiteTypes ON RC.Type = RecommiteTypes.ID '+        
+	case when @Proceed=1 then '        
+	left JOIN ReCommites ChildRecommite ON RC.LetterID = ChildRecommite.LetterID AND RC.ID = ChildRecommite.ParentId  AND ChildRecommite.type =   
+	RC.type         
+	left JOIN FromOrganizations RecommitedOrg ON RecommitedOrg.ID = ChildRecommite.OrgID '        
+	else '' end        
+        
+			
+	if @archiveFolderID<>0          
+	set @sql=@sql+'         
+	Left join LetterArchiveFolder on LetterArchiveFolder.Letterid=Rc.RecommiteID 
+	Left join ArchiveFolder a on a.FolderID=ArchiveFolderID '        
+    
+	if @DeadLine=1--تا فردا          
+	set @rw=@rw+'  AND RC.DeadLineDate is not null AND dbo.ShamsiToInt(RC.DeadLineDate)-'+str(@todayToint) +'=1'
+	if @DeadLine=0--تا امروز
+	set @rw=@rw+' AND RC.DeadLineDate is not null AND dbo.ShamsiToInt(RC.DeadLineDate)-'+str(@todayToint) +'=0'
+	if @DeadLine=-1
+	set @rw=@rw+' AND RC.DeadLineDate is not null AND dbo.ShamsiToInt(RC.DeadLineDate)-'+str(@todayToint)+'<0 '      
+	 if @DeadLine>1--تا آخر هفته
+	 set @rw=@rw+' AND RC.DeadLineDate is not null AND dbo.ShamsiToInt(RC.DeadLineDate)-'+str(@todayToint) +' >1'
+
+	set @sql=@sql+@rW        
+        
+	set @where=isnull(ltrim(rtrim(@where)),'')        
+	if (@where<>'')         
+	select @sql=@sql+' and '+@where ;       
+        
+
+	if isnull(ltrim(@orderClause),'')=''         
+	 set @orderClause=' rc.lastupdate desc,l.indicatorid desc'        
+
+										
+
+	set @sql=@sql+' order by  '+@orderClause
+	
+	--SELECT LEN(@sql)
+	PRINT @sql
+	truncate table [dbo].[TempInbox]
+	INSERT INTO [dbo].[TempInbox]
+	EXEC(@sql)
+
+	UPDATE [dbo].[TempInbox] 
+	SET ColorFlag = 'GREEN'
+	WHERE (LEN(LTRIM(RTRIM(DeadLineDate)))>0) AND
+		  (
+	  		((Erja_Or_Answer_Date IS NOT NULL) AND (Erja_Or_Answer_Date<=DeadLineDate)) 
+	  			OR
+	  		((Erja_Or_Answer_Date IS NULL ) AND (@DayOfNow<=DeadLineDate)) 
+		  ) 		  
+
+	UPDATE [dbo].[TempInbox]
+	SET ColorFlag = 'RED'
+	WHERE (LEN(LTRIM(RTRIM(DeadLineDate)))>0) AND
+		  ( 	 
+			((Erja_Or_Answer_Date IS NOT NULL) AND (Erja_Or_Answer_Date>DeadLineDate))
+		  ) 	
+
+	UPDATE [dbo].[TempInbox]
+	SET ColorFlag = 'RED'
+	WHERE (LEN(LTRIM(RTRIM(DeadLineDate)))>0) AND
+		  (
+			((Erja_Or_Answer_Date IS NULL) AND (@DayOfNow>DeadLineDate))
+		  )	
+
+	IF @ArchiveFolderID>0
+	BEGIN
+	delete from [TempInbox] where MyTmp_ID not in 
+					   ( select min(MyTmp_ID) 
+						 from [TempInbox] group by LetterID,IndicatorID,MYear)
+	END	
+
+	Delete [dbo].[TempInbox] Where row_num > 1
+
+	SELECT * FROM [dbo].[TempInbox]
+
+	
+END
+
+
+[END_S_NO]
+
+[BEGIN_S_NO]=7
+
+
+ALTER  procedure [dbo].[web_Insert_LetterData]
+	(@LetterDataID 	[int] output,
+	 @LetterID 	[int],
+	 @PageNumber 	[tinyint],
+	 @extention 	[tinyint],
+	 @description [nvarchar](200)='',
+	 @image [image] = null,
+	 @FileName [nvarchar](100),
+	 @IsTemplate [bit])
+
+AS INSERT INTO [dbo].[LetterData] 
+	 (  [LetterID],
+	 [PageNumber],
+	 [extention],
+	 [image],
+	 [description],
+	 [FileName],
+	 [IsTemplate]) 
+ 
+VALUES 
+	( @LetterID,
+	 @PageNumber,
+	 @extention,
+	 @image,
+	 @description,
+	 @FileName,
+	 @IsTemplate)
+
+set  @LetterDataID=SCOPE_IDENTITY()
 
 [END_S_NO]
 

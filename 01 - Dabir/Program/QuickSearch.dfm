@@ -1,7 +1,7 @@
 inherited QuickSearchF: TQuickSearchF
   Tag = 4
-  Left = 1318
-  Top = 207
+  Left = 646
+  Top = 157
   HorzScrollBar.Smooth = True
   HorzScrollBar.Size = 10
   HorzScrollBar.Style = ssFlat
@@ -20,13 +20,13 @@ inherited QuickSearchF: TQuickSearchF
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
-    Top = 533
+    Top = 551
     Width = 206
     Height = 35
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
-    TabOrder = 0
+    TabOrder = 5
     DesignSize = (
       206
       35)
@@ -193,16 +193,17 @@ inherited QuickSearchF: TQuickSearchF
     Left = 0
     Top = 0
     Width = 206
-    Height = 233
+    Height = 234
     Align = alTop
+    BevelOuter = bvNone
     ParentColor = True
-    TabOrder = 1
+    TabOrder = 0
     DesignSize = (
       206
-      233)
+      234)
     object Label1: TLabel
       Left = 142
-      Top = 57
+      Top = 58
       Width = 51
       Height = 13
       Anchors = [akTop, akRight]
@@ -218,7 +219,7 @@ inherited QuickSearchF: TQuickSearchF
     end
     object SenderTitle: TLabel
       Left = 103
-      Top = 129
+      Top = 130
       Width = 90
       Height = 13
       Anchors = [akTop, akRight]
@@ -234,7 +235,7 @@ inherited QuickSearchF: TQuickSearchF
     end
     object Label5: TLabel
       Left = 111
-      Top = 194
+      Top = 195
       Width = 82
       Height = 13
       Anchors = [akTop, akRight]
@@ -285,7 +286,7 @@ inherited QuickSearchF: TQuickSearchF
       Visible = False
     end
     object Image1: TImage
-      Left = 3
+      Left = 13
       Top = 23
       Width = 32
       Height = 34
@@ -362,7 +363,7 @@ inherited QuickSearchF: TQuickSearchF
     end
     object Label14: TLabel
       Left = 186
-      Top = 112
+      Top = 113
       Width = 7
       Height = 13
       Anchors = [akTop, akRight]
@@ -370,16 +371,16 @@ inherited QuickSearchF: TQuickSearchF
     end
     object Label15: TLabel
       Left = 95
-      Top = 112
+      Top = 113
       Width = 6
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1578#1575
     end
     object Indicator: TEdit
-      Left = 103
+      Left = 104
       Top = 38
-      Width = 90
+      Width = 89
       Height = 21
       Anchors = [akTop, akRight]
       TabOrder = 0
@@ -388,27 +389,7 @@ inherited QuickSearchF: TQuickSearchF
     end
     object Memo: TEdit
       Left = 13
-      Top = 176
-      Width = 180
-      Height = 21
-      Anchors = [akTop, akRight]
-      TabOrder = 5
-      OnEnter = TEditEnter
-      OnExit = TEditExit
-    end
-    object ToStaffer: TEdit
-      Left = 13
-      Top = 143
-      Width = 180
-      Height = 21
-      Anchors = [akTop, akRight]
-      TabOrder = 4
-      OnEnter = TEditEnter
-      OnExit = TEditExit
-    end
-    object UserMemo: TEdit
-      Left = 13
-      Top = 209
+      Top = 177
       Width = 180
       Height = 21
       Anchors = [akTop, akRight]
@@ -416,25 +397,46 @@ inherited QuickSearchF: TQuickSearchF
       OnEnter = TEditEnter
       OnExit = TEditExit
     end
+    object ToStaffer: TEdit
+      Left = 13
+      Top = 144
+      Width = 180
+      Height = 21
+      Anchors = [akTop, akRight]
+      TabOrder = 5
+      OnEnter = TEditEnter
+      OnExit = TEditExit
+    end
+    object UserMemo: TEdit
+      Left = 13
+      Top = 210
+      Width = 180
+      Height = 21
+      Anchors = [akTop, akRight]
+      TabOrder = 7
+      OnEnter = TEditEnter
+      OnExit = TEditExit
+    end
     object EdtIncommingNO: TEdit
       Left = 13
-      Top = 72
+      Top = 73
       Width = 180
       Height = 21
       Anchors = [akTop, akRight]
       BiDiMode = bdRightToLeft
       ParentBiDiMode = False
-      TabOrder = 1
+      TabOrder = 2
       OnEnter = TEditEnter
       OnExit = EdtIncommingNOExit
       OnKeyDown = EdtIncommingNOKeyDown
       OnKeyPress = RetroactionNo1KeyPress
     end
     object ChBoIncommingNO: TCheckBox
-      Left = 13
-      Top = 57
+      Left = 16
+      Top = 59
       Width = 75
-      Height = 15
+      Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1576#1583#1608#1606' '#1601#1585#1605#1608#1604
       Font.Charset = ARABIC_CHARSET
       Font.Color = clBlack
@@ -442,30 +444,12 @@ inherited QuickSearchF: TQuickSearchF
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 1
       OnClick = ChBoIncommingNOClick
     end
     object MERegFromDate: TMaskEdit
       Left = 104
-      Top = 110
-      Width = 80
-      Height = 21
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      BiDiMode = bdLeftToRight
-      EditMask = '!9999/99/99;1; '
-      MaxLength = 10
-      ParentBiDiMode = False
-      TabOrder = 2
-      Text = '    /  /  '
-      OnDblClick = MERegFromDateDblClick
-      OnEnter = MERegFromDateEnter
-      OnExit = TEditExit
-      OnMouseDown = MERegFromDateMouseDown
-    end
-    object MERegToDate: TMaskEdit
-      Left = 13
-      Top = 110
+      Top = 111
       Width = 80
       Height = 21
       Anchors = [akTop, akRight]
@@ -476,6 +460,24 @@ inherited QuickSearchF: TQuickSearchF
       ParentBiDiMode = False
       TabOrder = 3
       Text = '    /  /  '
+      OnDblClick = MERegFromDateDblClick
+      OnEnter = MERegFromDateEnter
+      OnExit = TEditExit
+      OnMouseDown = MERegFromDateMouseDown
+    end
+    object MERegToDate: TMaskEdit
+      Left = 13
+      Top = 111
+      Width = 80
+      Height = 21
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      BiDiMode = bdLeftToRight
+      EditMask = '!9999/99/99;1; '
+      MaxLength = 10
+      ParentBiDiMode = False
+      TabOrder = 4
+      Text = '    /  /  '
       OnDblClick = MERegToDateDblClick
       OnEnter = MERegToDateEnter
       OnExit = TEditExit
@@ -483,7 +485,7 @@ inherited QuickSearchF: TQuickSearchF
     end
     object RBRegistrationdate: TRadioButton
       Left = 103
-      Top = 94
+      Top = 95
       Width = 89
       Height = 16
       Anchors = [akTop, akRight]
@@ -494,7 +496,7 @@ inherited QuickSearchF: TQuickSearchF
     end
     object RBIncommingDate: TRadioButton
       Left = 9
-      Top = 94
+      Top = 95
       Width = 90
       Height = 15
       Anchors = [akTop, akRight]
@@ -504,22 +506,23 @@ inherited QuickSearchF: TQuickSearchF
   end
   object SubjectPanel: TYCheckGroupBox [2]
     Left = 0
-    Top = 436
+    Top = 442
     Width = 206
-    Height = 36
+    Height = 48
     Align = alTop
+    Anchors = [akTop, akRight]
     Caption = '   '#1605#1608#1590#1608#1593'     '
-    TabOrder = 3
+    TabOrder = 2
     MinHeight = 15
     MaxHeight = 49
     DesignSize = (
       206
-      36)
+      48)
     object SpeedButton4: TSpeedButton
-      Left = 155
-      Top = 14
+      Left = 182
+      Top = 16
       Width = 20
-      Height = 18
+      Height = 21
       Cursor = crHandPoint
       Anchors = [akTop, akRight]
       Caption = '...'
@@ -527,8 +530,8 @@ inherited QuickSearchF: TQuickSearchF
     end
     object EdSubject: TEdit
       Left = 19
-      Top = 12
-      Width = 132
+      Top = 16
+      Width = 162
       Height = 21
       Anchors = [akTop, akRight]
       Color = 16053492
@@ -539,56 +542,63 @@ inherited QuickSearchF: TQuickSearchF
   end
   object Panel2: TPanel [3]
     Left = 0
-    Top = 472
+    Top = 490
     Width = 206
     Height = 20
     Align = alTop
+    BevelOuter = bvNone
     Color = clWindow
-    TabOrder = 4
+    TabOrder = 3
+    DesignSize = (
+      206
+      20)
     object lblRunevesht: TLabel
-      Left = 119
+      Left = 126
       Top = 2
       Width = 58
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1585#1608#1606#1608#1588#1578' '#1583#1575#1585#1583
       Enabled = False
       OnClick = lblRuneveshtClick
     end
     object chkRunevesht: TCheckBox
-      Left = 176
+      Left = 183
       Top = 1
       Width = 17
       Height = 17
+      Anchors = [akTop, akRight]
       TabOrder = 0
       OnClick = chkRuneveshtClick
     end
     object CheckBox1: TCheckBox
-      Left = 4
+      Left = 14
       Top = 1
       Width = 97
       Height = 17
+      Anchors = [akTop, akRight]
       Caption = #1575#1606#1578#1582#1575#1576' '#1607#1605#1607
       TabOrder = 1
     end
   end
   object AdvancedSearch: TYCheckGroupBox [4]
     Left = 0
-    Top = 233
+    Top = 234
     Width = 206
-    Height = 203
+    Height = 208
     Align = alTop
     Anchors = [akTop, akRight]
     BiDiMode = bdRightToLeft
     Caption = '         '#1662#1610#1588#1585#1601#1578#1607'   '
     ParentBiDiMode = False
-    TabOrder = 2
+    TabOrder = 1
     MinHeight = 15
     MaxHeight = 240
     DesignSize = (
       206
-      203)
+      208)
     object LabelSendRecive: TLabel
-      Left = 59
+      Left = 66
       Top = 14
       Width = 134
       Height = 13
@@ -602,18 +612,18 @@ inherited QuickSearchF: TQuickSearchF
       ParentFont = False
     end
     object SpeedButton2: TSpeedButton
-      Left = 173
+      Left = 182
       Top = 45
       Width = 20
-      Height = 18
+      Height = 21
       Cursor = crHandPoint
       Anchors = [akTop, akRight]
       Caption = '...'
       OnClick = SpeedButton2Click
     end
     object Label8: TLabel
-      Left = 133
-      Top = 64
+      Left = 140
+      Top = 66
       Width = 60
       Height = 13
       Anchors = [akTop, akRight]
@@ -626,17 +636,17 @@ inherited QuickSearchF: TQuickSearchF
       ParentFont = False
     end
     object SpeedButton3: TSpeedButton
-      Left = 172
-      Top = 81
+      Left = 182
+      Top = 83
       Width = 20
-      Height = 18
+      Height = 21
       Cursor = crHandPoint
       Anchors = [akTop, akRight]
       Caption = '...'
       OnClick = SpeedButton3Click
     end
     object Label11: TLabel
-      Left = 7
+      Left = 21
       Top = 28
       Width = 64
       Height = 13
@@ -644,26 +654,26 @@ inherited QuickSearchF: TQuickSearchF
       Caption = #1586#1610#1585#1605#1580#1605#1608#1593#1607' '#1607#1575
     end
     object Label12: TLabel
-      Left = 7
-      Top = 64
+      Left = 21
+      Top = 66
       Width = 64
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1586#1610#1585#1605#1580#1605#1608#1593#1607' '#1607#1575
     end
     object OrgEdit: TEdit
-      Left = 26
+      Left = 19
       Top = 45
-      Width = 144
+      Width = 162
       Height = 21
       Anchors = [akTop, akRight]
       Color = 16053492
       ReadOnly = True
-      TabOrder = 1
+      TabOrder = 2
       OnChange = OrgEditChange
     end
     object SubItems: TCheckBox
-      Left = 71
+      Left = 87
       Top = 30
       Width = 16
       Height = 13
@@ -671,64 +681,65 @@ inherited QuickSearchF: TQuickSearchF
       Anchors = [akTop, akRight]
       Checked = True
       State = cbChecked
-      TabOrder = 2
+      TabOrder = 1
     end
     object RecommiteOrgEdt: TEdit
-      Left = 26
-      Top = 81
-      Width = 144
+      Left = 19
+      Top = 83
+      Width = 162
       Height = 21
       Anchors = [akTop, akRight]
       Color = 16053492
       ReadOnly = True
-      TabOrder = 3
+      TabOrder = 4
       OnChange = OrgEditChange
     end
     object SubRec: TCheckBox
-      Left = 74
-      Top = 65
+      Left = 90
+      Top = 67
       Width = 13
       Height = 14
       Cursor = crHandPoint
       Anchors = [akTop, akRight]
       Checked = True
       State = cbChecked
-      TabOrder = 4
+      TabOrder = 3
     end
     object cmbSearch_In_All_Secs: TCheckBox
       Tag = 10
-      Left = 3
-      Top = 181
+      Left = 10
+      Top = 185
       Width = 107
       Height = 16
       Cursor = crHandPoint
       Anchors = [akTop, akRight]
-      Caption = #1583#1585' '#1578#1605#1575#1605' '#1583#1576#1610#1585#1582#1575#1606#1607' '#1607#1575
-      TabOrder = 5
+      Caption = #1578#1605#1575#1605' '#1583#1576#1610#1585#1582#1575#1606#1607' '#1607#1575
+      TabOrder = 7
     end
     object cmbSearch_In_All_Years: TCheckBox
       Tag = 10
-      Left = 118
-      Top = 181
-      Width = 82
+      Left = 124
+      Top = 185
+      Width = 78
       Height = 16
       Cursor = crHandPoint
       Anchors = [akTop, akRight]
-      Caption = #1583#1585' '#1578#1605#1575#1605' '#1587#1575#1604#1607#1575' '
+      Caption = #1578#1605#1575#1605' '#1587#1575#1604#1607#1575' '
       TabOrder = 6
     end
     object GroupBox1: TGroupBox
-      Left = 10
-      Top = 100
-      Width = 185
+      Left = 16
+      Top = 104
+      Width = 187
       Height = 80
+      Anchors = [akTop, akRight]
       Caption = '   '#1580#1587#1578#1580#1608#1610' '#1593#1591#1601' / '#1662#1610#1585#1608'   '
-      TabOrder = 7
+      TabOrder = 5
       DesignSize = (
-        185
+        187
         80)
       object Label2: TLabel
-        Left = 152
+        Left = 154
         Top = 19
         Width = 25
         Height = 13
@@ -736,7 +747,7 @@ inherited QuickSearchF: TQuickSearchF
         Caption = #1593#1591#1601
       end
       object Label3: TLabel
-        Left = 160
+        Left = 162
         Top = 42
         Width = 17
         Height = 13
@@ -746,9 +757,9 @@ inherited QuickSearchF: TQuickSearchF
       object RetroactionNo: TEdit
         Left = 10
         Top = 17
-        Width = 134
+        Width = 136
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         TabOrder = 0
         OnEnter = TEditEnter
         OnExit = TEditExit
@@ -757,56 +768,59 @@ inherited QuickSearchF: TQuickSearchF
       object FollowEdit: TEdit
         Left = 10
         Top = 39
-        Width = 134
+        Width = 136
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         TabOrder = 1
         OnEnter = TEditEnter
         OnExit = TEditExit
         OnKeyPress = RetroactionNo1KeyPress
       end
       object rdLetterNo: TRadioButton
-        Left = 11
+        Left = 13
         Top = 60
         Width = 71
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1588#1605#1575#1585#1607' '#1606#1575#1605#1607' '
-        TabOrder = 2
+        TabOrder = 3
       end
       object rdAnidicatorNo: TRadioButton
-        Left = 83
+        Left = 85
         Top = 60
         Width = 94
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1588#1605#1575#1585#1607' '#1575#1606#1583#1610#1705#1575#1578#1608#1585
         Checked = True
-        TabOrder = 3
+        TabOrder = 2
         TabStop = True
       end
     end
   end
   object Panel3: TPanel [5]
     Left = 0
-    Top = 492
+    Top = 510
     Width = 206
     Height = 41
     Align = alTop
     BevelOuter = bvNone
-    TabOrder = 5
+    ParentColor = True
+    TabOrder = 4
     DesignSize = (
       206
       41)
     object Label9: TLabel
-      Left = 99
-      Top = 0
+      Left = 89
+      Top = 1
       Width = 103
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1588#1605#1575#1585#1607' '#1583#1576#1610#1585#1582#1575#1606#1607' '#1605#1585#1705#1586#1610
     end
     object CenterNo: TEdit
-      Left = 23
-      Top = 14
+      Left = 13
+      Top = 16
       Width = 180
       Height = 21
       Anchors = [akTop, akRight]
@@ -830,6 +844,10 @@ inherited QuickSearchF: TQuickSearchF
   inherited Timer1sssss: TTimer
     Left = 40
     Top = 570
+  end
+  inherited ApplicationEvents1: TApplicationEvents
+    Left = 64
+    Top = 65529
   end
   object ActionList1: TActionList
     Left = 73
