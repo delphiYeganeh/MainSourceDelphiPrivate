@@ -122,8 +122,6 @@ type
     xpBitBtn3: TxpBitBtn;
     xpBitBtn4: TxpBitBtn;
     dblkcbbCourseCode: TDBLookupComboBox;
-    Label28: TLabel;
-    Label33: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure GetExam_BYExamID(ExamID: integer);
     procedure xpBitBtn1Click(Sender: TObject);
@@ -240,20 +238,6 @@ begin
   inherited;
    if DBLookupComboBox5.KeyValue = Null then
      DBLookupComboBox5.KeyValue:=1;
-
-   if Select_Exam_ByExamID.FieldByName('ExamTitle').IsNull then
-   begin
-     MessageDlg('Ê—Êœ ⁄‰Ê«‰ ¬“„Ê‰ «·“«„Ì „Ì»«‘œ',mtError,[mbOK],0);
-     DBEdit1.SetFocus;
-     Abort;
-   end;
-
-   if Select_Exam_ByExamID.FieldByName('TextFormatTite').IsNull then
-   begin
-     MessageDlg('›—„  ›«Ì· „ ‰Ì „‘Œ’ ‰‘œÂ «” ',mtError,[mbOK],0);
-     DBLookupComboBox4.SetFocus;
-     Abort;
-   end;
 end;
 
 procedure TFInputExam.FormCreate(Sender: TObject);

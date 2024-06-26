@@ -393,8 +393,8 @@ type
     procedure SaveQuestionBodyTemplateToFile;
     procedure SaveTemplateToFile;
     function Search(Y:TYwhereEdit):string;
-procedure EnterToProgramExecute;
-procedure EnabledButtonExecute;
+    procedure EnterToProgramExecute;
+    procedure EnabledButtonExecute;
     procedure FacultyAfterScroll(DataSet: TDataSet);
     procedure Select_EducationGroup_by_FacultyIDAfterScroll(
       DataSet: TDataSet);
@@ -411,21 +411,21 @@ procedure EnabledButtonExecute;
 
 var
   Dm: TDm;
-_ResultID:integer;
-          _UserCode:integer;
-          _Username:string;
-          _Today:string;
-          _AccessID:integer;
-          _TempPath,
-_ApplicentEntityCaption : string;
-_ApplicentEntityPlural : string;
-_ApplicentCodeEntityCaption : string;          
-DataBaseName:string;
+  _ResultID:integer;
+  _UserCode:integer;
+  _Username:string;
+  _Today:string;
+  _AccessID:integer;
+  _TempPath,
+  _ApplicentEntityCaption : string;
+  _ApplicentEntityPlural : string;
+  _ApplicentCodeEntityCaption : string;          
+  DataBaseName:string;
 
-_EXEDIR : string;
+  _EXEDIR : string;
 const
-   _App_Version = '8.0.0.2';
-   _Last_Update = '1402/11/26';
+   _App_Version = '10.0.0.1';
+   _Last_Update = '1403/04/02';
 
 implementation
 
@@ -435,63 +435,63 @@ uses YeganehDemo, Uconnect, BusinessLayer, YInputQuery, USearchTitle,
 {$R *.dfm}
 procedure Tdm.EnterToProgramExecute;
 begin
- if sys_User.locate('UserName',trim(Frlogin.UserEdit.Text),[]) then
+  if sys_User.locate('UserName',trim(Frlogin.UserEdit.Text),[]) then
+  begin
+    if sys_User.fieldValues['PassWord']=upperCase(trim(FrLogin.PassEdit.text)) then
     begin
-     if sys_User.fieldValues['PassWord']=upperCase(trim(FrLogin.PassEdit.text)) then
-        begin
-          _UserCode:=sys_UserUserId.AsInteger;
-          _Username:=sys_UserTitle.AsString;
-          _AccessID:=sys_UserAccessID.AsInteger;
-          FrLogin.Hide;
-          MainForm.StatusBar.Panels[0].Text:=FrLogin.StatusBar1.Panels[0].Text;
-          MainForm.StatusBar.Panels[1].Text:=FrLogin.StatusBar1.Panels[1].Text;
-          MainForm.StatusBar.Panels[2].Text:=FrLogin.StatusBar1.Panels[2].Text;
-          MainForm.StatusBar.Panels[4].Text:='ò«—»— : '+FrLogin.UserEdit.Text;
-          MainForm.ShowModal;
+      _UserCode:=sys_UserUserId.AsInteger;
+      _Username:=sys_UserTitle.AsString;
+      _AccessID:=sys_UserAccessID.AsInteger;
+      FrLogin.Hide;
+      MainForm.StatusBar.Panels[0].Text:=FrLogin.StatusBar1.Panels[0].Text;
+      MainForm.StatusBar.Panels[1].Text:=FrLogin.StatusBar1.Panels[1].Text;
+      MainForm.StatusBar.Panels[2].Text:=FrLogin.StatusBar1.Panels[2].Text;
+      MainForm.StatusBar.Panels[4].Text:='ò«—»— : '+FrLogin.UserEdit.Text;
+      MainForm.ShowModal;
 
-       end// if 3
-        else
-        begin
-          ShowMessage('ò·„Â ⁄»Ê— —« «‘ »«Â Ê«—œ ò—œÂ «Ìœ');
-        end;//else 3
-    end //if 1
+    end// if 3
     else
     begin
-          ShowMessage('‰«„ ò«—»— —« «‘ »«Â Ê«—œ ò—œÂ «Ìœ');
-      FrLogin.UserEdit.SetFocus;
-    end; 
+      ShowMessage('ò·„Â ⁄»Ê— —« «‘ »«Â Ê«—œ ò—œÂ «Ìœ');
+    end;//else 3
+  end //if 1
+  else
+  begin
+    ShowMessage('‰«„ ò«—»— —« «‘ »«Â Ê«—œ ò—œÂ «Ìœ');
+    FrLogin.UserEdit.SetFocus;
+  end;
 end;
 
 procedure Tdm.EnabledButtonExecute;
 var i :integer;
 begin
-with Select_ActionAccess_By_AccessID do
- begin
-  close;
-  Parameters.ParamByName('@AccessID').Value:=_AccessID;
-  Open;
- end;
-  for i:=0 to MainForm.ComponentCount-1 do
-   if MainForm.Components[i].ClassNameIs('TxpBitBtn') then
-       begin
-       if Select_ActionAccess_By_AccessID.Locate('ActionName', MainForm.Components[i].Name ,[]) then
-         if not Select_ActionAccess_By_AccessIDHasAccess.AsBoolean then
-           begin
-            TxpBitBtn(MainForm.Components[i]).Enabled:=false;
-            TxpBitBtn(MainForm.Components[i]).startColor:=clBlack;
-           end;
-       end;
+  with Select_ActionAccess_By_AccessID do
+   begin
+    close;
+    Parameters.ParamByName('@AccessID').Value:=_AccessID;
+    Open;
+   end;
+    for i:=0 to MainForm.ComponentCount-1 do
+     if MainForm.Components[i].ClassNameIs('TxpBitBtn') then
+         begin
+         if Select_ActionAccess_By_AccessID.Locate('ActionName', MainForm.Components[i].Name ,[]) then
+           if not Select_ActionAccess_By_AccessIDHasAccess.AsBoolean then
+             begin
+              TxpBitBtn(MainForm.Components[i]).Enabled:=false;
+              TxpBitBtn(MainForm.Components[i]).startColor:=clBlack;
+             end;
+         end;
 end;
 
 
 function tdm.Y_InputQuery (const ACaption, Adefault: string; var Value: string): Boolean;
 begin
-YInputQueryF:=TYInputQueryF.Create(Application);
-YInputQueryF.Label1.Caption:=ACaption;
-YInputQueryF.output.Text:=Adefault;
-YInputQueryF.ShowModal;
-Result:=YInputQueryF.done;
-Value:=YInputQueryF.output.Text;
+  YInputQueryF:=TYInputQueryF.Create(Application);
+  YInputQueryF.Label1.Caption:=ACaption;
+  YInputQueryF.output.Text:=Adefault;
+  YInputQueryF.ShowModal;
+  Result:=YInputQueryF.done;
+  Value:=YInputQueryF.output.Text;
 
 end;
 
@@ -499,33 +499,34 @@ end;
 procedure TDm.DataModuleCreate(Sender: TObject);
 var d : TDateTime;
 begin
-_Today:=ShamsiString(Now);
-_TempPath:=GetTempDirectory;
- yeganeh:=TYeganeh.Create(Self);
-_EXEDIR := ExtractFileDir(Application.ExeName)+'\';
- Yeganeh.Show;
- d:=now;
- Fconnect:=TFconnect.Create(Self);
- while milliSecondsBetween(d,now)<1000 do
+  _Today:=ShamsiString(Now);
+  _TempPath:=GetTempDirectory;
+  yeganeh:=TYeganeh.Create(Self);
+  _EXEDIR := ExtractFileDir(Application.ExeName)+'\';
+  Yeganeh.Show;
+  d:=now;
+  Fconnect:=TFconnect.Create(Self);
+
+  while milliSecondsBetween(d,now)<1000 do
    begin
-    d:=d;
-    Application.ProcessMessages;
+     d:=d;
+     Application.ProcessMessages;
    end;
 
-   Yeganeh.Close;
- sys_User.Open;
- ActivateKeyboardLayout(HKL_NEXT, KLF_REORDER);
- Faculty.Open;
+  Yeganeh.Close;
+  sys_User.Open;
+  ActivateKeyboardLayout(HKL_NEXT, KLF_REORDER);
+  Faculty.Open;
   TextFormat.Open;
- vw_Teacher.Open;
+  vw_Teacher.Open;
   _ApplicentEntityCaption:=Get_SystemSetting('AplicantCaption');
- _ApplicentEntityPlural:=Get_SystemSetting('AplicantPluralCaption');
- _ApplicentCodeEntityCaption:=Get_SystemSetting('AplicantCodeCaption');
- if trim(_ApplicentEntityCaption) = '' then
+  _ApplicentEntityPlural:=Get_SystemSetting('AplicantPluralCaption');
+  _ApplicentCodeEntityCaption:=Get_SystemSetting('AplicantCodeCaption');
+  if trim(_ApplicentEntityCaption) = '' then
    _ApplicentEntityCaption := 'œ«‰‘ÃÊ';
- if trim(_ApplicentEntityPlural) = '' then
+  if trim(_ApplicentEntityPlural) = '' then
    _ApplicentEntityPlural := 'œ«‰‘ÃÊÌ«‰';
- if trim(_ApplicentCodeEntityCaption) = '' then
+  if trim(_ApplicentCodeEntityCaption) = '' then
    _ApplicentCodeEntityCaption := '‘„«—Â œ«‰‘ÃÊÌÌ';
 
 
@@ -545,23 +546,23 @@ end;
 procedure tdm.SaveTemplateToFile;
 begin
   inherited;
-     with LetterTemplateDoc,Parameters do
-       begin
-         Close;
-         ParamByName('id').Value:=LetterTemplateID.AsInteger;
-         Open;
-         LetterTemplateDocDocument.SaveToFile(_EXEDIR+'Yeganeh_Template_File.doc');
-      end;
+  with LetterTemplateDoc,Parameters do
+  begin
+     Close;
+     ParamByName('id').Value:=LetterTemplateID.AsInteger;
+     Open;
+     LetterTemplateDocDocument.SaveToFile(_EXEDIR+'Yeganeh_Template_File.doc');
+  end;
 end;
 
 procedure tdm.SaveQuestionBodyTemplateToFile;
 begin
   inherited;
-     with Select_QuestionBodyTemplate do
-       begin
-         if not active then  Open;
-         Select_QuestionBodyTemplateWordBody.SaveToFile(_EXEDIR+'Yeganeh_Template_File.doc');
-      end;
+   with Select_QuestionBodyTemplate do
+     begin
+       if not active then  Open;
+       Select_QuestionBodyTemplateWordBody.SaveToFile(_EXEDIR+'Yeganeh_Template_File.doc');
+    end;
 end;
 
 function Tdm.Search(Y:TYwhereEdit):string;
@@ -569,13 +570,13 @@ begin
   SearchAdoDataSet:=TSearchAdoDataSet.Create(self);
   with SearchAdoDataSet do
    begin
-    SearchDataSet:=false;
-    TableName:=Y.ListTable;
-    CodeField:=y.CodeField;
-    TitleField:=y.TitleField;
-    SearchF.Connection:=y.Connection;
-    ShowModal;
-    Result:=SearchResult;
+      SearchDataSet:=false;
+      TableName:=Y.ListTable;
+      CodeField:=y.CodeField;
+      TitleField:=y.TitleField;
+      SearchF.Connection:=y.Connection;
+      ShowModal;
+      Result:=SearchResult;
    end;
 end;
 

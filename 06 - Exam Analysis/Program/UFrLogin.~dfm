@@ -1,6 +1,6 @@
 object FrLogin: TFrLogin
-  Left = 537
-  Top = 277
+  Left = 611
+  Top = 283
   BiDiMode = bdRightToLeft
   BorderIcons = []
   BorderStyle = bsSingle
@@ -137,7 +137,7 @@ object FrLogin: TFrLogin
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ImageList = Dm.LetterImages
-    ImageIndex = 73
+    ImageIndex = 72
     Gradient = True
     TabOrder = 2
     TabStop = True
@@ -175,15 +175,15 @@ object FrLogin: TFrLogin
     ParentColor = False
     TabOrder = 4
     object Label6: TLabel
-      Left = 86
-      Top = 1
-      Width = 281
-      Height = 100
-      Caption = #1587#1610#1587#1578#1605' '#1570#1606#1575#1604#1610#1586
+      Left = 121
+      Top = -1
+      Width = 197
+      Height = 75
+      Caption = #1570#1610#1578#1605' '#1570#1606#1575#1604#1610#1586
       Font.Charset = ARABIC_CHARSET
       Font.Color = clMaroon
       Font.Height = -64
-      Font.Name = 'B Titr'
+      Font.Name = 'Zar'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = True
@@ -198,15 +198,15 @@ object FrLogin: TFrLogin
       Pen.Style = psClear
     end
     object Label3: TLabel
-      Left = 84
-      Top = -1
-      Width = 281
-      Height = 105
-      Caption = #1587#1610#1587#1578#1605' '#1570#1606#1575#1604#1610#1586
+      Left = 120
+      Top = -2
+      Width = 197
+      Height = 75
+      Caption = #1570#1610#1578#1605' '#1570#1606#1575#1604#1610#1586
       Font.Charset = ARABIC_CHARSET
       Font.Color = 33023
       Font.Height = -64
-      Font.Name = 'B Titr'
+      Font.Name = 'Zar'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = True

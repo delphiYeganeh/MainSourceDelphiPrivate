@@ -14,7 +14,7 @@ inherited MainForm: TMainForm
     Top = 0
     Width = 1008
     Height = 517
-    ActivePage = xpTabSheet7
+    ActivePage = xpTabSheet3
     Align = alClient
     Anchors = [akTop, akRight, akBottom]
     Font.Charset = ARABIC_CHARSET
@@ -1214,16 +1214,17 @@ inherited MainForm: TMainForm
           Left = 0
           Top = 0
           Width = 191
-          Height = 25
+          Height = 33
           Align = alTop
+          Alignment = taLeftJustify
           BevelOuter = bvNone
           Caption = #1580#1587#1578#1580#1608
-          Color = 15461355
           Font.Charset = ARABIC_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
+          Font.Style = []
+          ParentColor = True
           ParentFont = False
           TabOrder = 0
         end
@@ -1235,7 +1236,6 @@ inherited MainForm: TMainForm
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
           TabOrder = 1
-          OnKeyDown = YWhereEdit13KeyDown
           isLike = False
           isDate = False
           EveryLike = True
@@ -1253,7 +1253,6 @@ inherited MainForm: TMainForm
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
           TabOrder = 2
-          OnKeyDown = YWhereEdit13KeyDown
           isLike = False
           isDate = False
           EveryLike = True
@@ -1271,7 +1270,6 @@ inherited MainForm: TMainForm
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
           TabOrder = 3
-          OnKeyDown = YWhereEdit13KeyDown
           isLike = False
           isDate = False
           EveryLike = True
@@ -1289,7 +1287,6 @@ inherited MainForm: TMainForm
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
           TabOrder = 4
-          OnKeyDown = YWhereEdit13KeyDown
           isLike = False
           isDate = False
           EveryLike = False
@@ -1402,21 +1399,20 @@ inherited MainForm: TMainForm
           OnClick = xpBitBtn21Click
         end
         object cb_ApplicantCurrentExam: TCheckBox
-          Left = 6
-          Top = 236
+          Left = 4
+          Top = 248
           Width = 180
-          Height = 38
-          Caption = ' '#1601#1602#1591' '#1583#1575#1606#1588#1580#1608#1610#1575#1606' '#1570#1586#1605#1608#1606' / '#1583#1585#1587' '#1580#1600#1600#1600#1600#1600#1600#1600#1600#1600#1575#1585#1610' '
+          Height = 17
+          Caption = #1601#1602#1591' '#1583#1575#1606#1588#1580#1608#1610#1575#1606'  '#1570#1586#1605#1608#1606'/'#1583#1585#1587' '#1580#1575#1585#1610
           Checked = True
           Font.Charset = ARABIC_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
+          Font.Style = []
           ParentFont = False
           State = cbChecked
           TabOrder = 7
-          WordWrap = True
         end
       end
       object ApplicantGrid: TYDBGrid
@@ -1714,7 +1710,6 @@ inherited MainForm: TMainForm
         Top = 90
         Width = 809
         Height = 392
-        Cursor = crHandPoint
         Align = alClient
         Color = 16770790
         DataSource = Dm.Dselect_teacher_by_where
@@ -1875,13 +1870,14 @@ inherited MainForm: TMainForm
           Width = 191
           Height = 33
           Align = alTop
+          Alignment = taLeftJustify
           BevelOuter = bvNone
           Caption = #1580#1587#1578#1580#1608
           Font.Charset = ARABIC_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
+          Font.Style = []
           ParentColor = True
           ParentFont = False
           TabOrder = 0
@@ -1892,7 +1888,6 @@ inherited MainForm: TMainForm
           Width = 178
           Height = 21
           TabOrder = 1
-          OnKeyDown = YWhereEdit14KeyDown
           isLike = True
           isDate = False
           EveryLike = True
@@ -1908,7 +1903,6 @@ inherited MainForm: TMainForm
           Width = 178
           Height = 21
           TabOrder = 2
-          OnKeyDown = YWhereEdit14KeyDown
           isLike = True
           isDate = False
           EveryLike = False
@@ -1919,8 +1913,8 @@ inherited MainForm: TMainForm
           TitleField = 'Title'
         end
         object btnTeacherSearch: TxpBitBtn
-          Left = 102
-          Top = 149
+          Left = 106
+          Top = 248
           Width = 84
           Height = 31
           startColor = 16645629
@@ -1972,8 +1966,8 @@ inherited MainForm: TMainForm
           OnClick = btnTeacherSearchClick
         end
         object xpBitBtn27: TxpBitBtn
-          Left = 9
-          Top = 149
+          Left = 13
+          Top = 248
           Width = 84
           Height = 31
           startColor = 16645629
@@ -2109,13 +2103,14 @@ inherited MainForm: TMainForm
           Width = 191
           Height = 33
           Align = alTop
+          Alignment = taLeftJustify
           BevelOuter = bvNone
           Caption = #1580#1587#1578#1580#1608
           Font.Charset = ARABIC_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
+          Font.Style = []
           ParentColor = True
           ParentFont = False
           TabOrder = 0
@@ -2238,7 +2233,6 @@ inherited MainForm: TMainForm
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
           TabOrder = 4
-          OnKeyDown = YWhereEdit18KeyDown
           isLike = False
           isDate = False
           EveryLike = True
@@ -2256,7 +2250,6 @@ inherited MainForm: TMainForm
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
           TabOrder = 5
-          OnKeyDown = YWhereEdit18KeyDown
           isLike = False
           isDate = False
           EveryLike = False
@@ -2275,16 +2268,16 @@ inherited MainForm: TMainForm
           Color = 15918847
           ParentBiDiMode = False
           TabOrder = 6
-          OnKeyDown = YWhereEdit18KeyDown
-          isLike = True
+          OnKeyDown = CtrlSpace
+          isLike = False
           isDate = False
           EveryLike = True
           isString = True
-          FieldName = 'CourseTitle'
-          TableName = 'Course'
+          FieldName = 'CourseID'
+          TableName = 'TrainingCourse'
           ListTable = 'Course'
-          CodeField = 'Code'
-          TitleField = 'CourseTitle'
+          CodeField = 'CourseID'
+          TitleField = 'courseTitle'
         end
         object YWhereEdit21: TYWhereEdit
           Left = 8
@@ -2294,7 +2287,6 @@ inherited MainForm: TMainForm
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
           TabOrder = 7
-          OnKeyDown = YWhereEdit18KeyDown
           isLike = False
           isDate = False
           EveryLike = True
@@ -2313,7 +2305,7 @@ inherited MainForm: TMainForm
           Color = 15918847
           ParentBiDiMode = False
           TabOrder = 8
-          OnKeyDown = YWhereEdit18KeyDown
+          OnKeyDown = CtrlSpace
           isLike = False
           isDate = False
           EveryLike = True
@@ -2628,7 +2620,6 @@ inherited MainForm: TMainForm
     end
     object xpTabSheet6: TxpTabSheet
       Caption = #1587#1574#1608#1575#1604#1575#1578
-      OnShow = xpTabSheet6Show
       Color = 16772055
       BGStyle = bgsNone
       GradientStartColor = clWhite
@@ -2767,13 +2758,14 @@ inherited MainForm: TMainForm
           Width = 191
           Height = 33
           Align = alTop
+          Alignment = taLeftJustify
           BevelOuter = bvNone
           Caption = #1580#1587#1578#1580#1608
           Font.Charset = ARABIC_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
+          Font.Style = []
           ParentColor = True
           ParentFont = False
           TabOrder = 0
@@ -2786,11 +2778,10 @@ inherited MainForm: TMainForm
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
           TabOrder = 1
-          OnKeyDown = YWhereEdit9KeyDown
           isLike = False
           isDate = False
           EveryLike = False
-          isString = False
+          isString = True
           FieldName = 'Number'
           TableName = 'Question'
           CodeField = 'Code'
@@ -2804,7 +2795,6 @@ inherited MainForm: TMainForm
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
           TabOrder = 2
-          OnKeyDown = YWhereEdit9KeyDown
           isLike = False
           isDate = False
           EveryLike = False
@@ -2823,7 +2813,6 @@ inherited MainForm: TMainForm
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
           TabOrder = 3
-          OnKeyDown = YWhereEdit9KeyDown
           isLike = False
           isDate = False
           EveryLike = False
@@ -2834,8 +2823,8 @@ inherited MainForm: TMainForm
           TitleField = 'Title'
         end
         object btnSearchQuestion: TxpBitBtn
-          Left = 104
-          Top = 197
+          Left = 106
+          Top = 248
           Width = 84
           Height = 31
           startColor = 16645629
@@ -2887,8 +2876,8 @@ inherited MainForm: TMainForm
           OnClick = btnSearchQuestionClick
         end
         object xpBitBtn32: TxpBitBtn
-          Left = 11
-          Top = 197
+          Left = 13
+          Top = 248
           Width = 84
           Height = 31
           startColor = 16645629
@@ -3875,13 +3864,14 @@ inherited MainForm: TMainForm
             Width = 191
             Height = 33
             Align = alTop
+            Alignment = taLeftJustify
             BevelOuter = bvNone
             Caption = #1580#1587#1578#1580#1608
             Font.Charset = ARABIC_CHARSET
             Font.Color = clWindowText
             Font.Height = -13
             Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
+            Font.Style = []
             ParentColor = True
             ParentFont = False
             TabOrder = 0
@@ -4305,7 +4295,7 @@ inherited MainForm: TMainForm
       OnClick = SpeedButton4Click
     end
     object Label9: TLabel
-      Left = 912
+      Left = 963
       Top = 6
       Width = 52
       Height = 13
@@ -4313,9 +4303,9 @@ inherited MainForm: TMainForm
       Caption = #1570#1586#1605#1608#1606' '#1580#1575#1585#1610
     end
     object DBText1: TDBText
-      Left = 291
+      Left = 416
       Top = 6
-      Width = 608
+      Width = 532
       Height = 16
       Anchors = [akTop, akRight]
       DataField = 'ExamTitle'

@@ -137,7 +137,7 @@ object FrLogin: TFrLogin
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ImageList = Dm.LetterImages
-    ImageIndex = 73
+    ImageIndex = 72
     Gradient = True
     TabOrder = 2
     TabStop = True
@@ -175,15 +175,15 @@ object FrLogin: TFrLogin
     ParentColor = False
     TabOrder = 4
     object Label6: TLabel
-      Left = 23
-      Top = 5
-      Width = 406
-      Height = 90
-      Caption = #1606#1585#1605' '#1575#1601#1586#1575#1585' '#1570#1606#1575#1604#1610#1586' '#1570#1586#1605#1608#1606
+      Left = 121
+      Top = -1
+      Width = 197
+      Height = 75
+      Caption = #1570#1610#1578#1605' '#1570#1606#1575#1604#1610#1586
       Font.Charset = ARABIC_CHARSET
       Font.Color = clMaroon
-      Font.Height = -51
-      Font.Name = 'B Titr'
+      Font.Height = -64
+      Font.Name = 'Zar'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = True
@@ -198,15 +198,15 @@ object FrLogin: TFrLogin
       Pen.Style = psClear
     end
     object Label3: TLabel
-      Left = 25
-      Top = 6
-      Width = 406
-      Height = 90
-      Caption = #1606#1585#1605' '#1575#1601#1586#1575#1585' '#1570#1606#1575#1604#1610#1586' '#1570#1586#1605#1608#1606
+      Left = 120
+      Top = -2
+      Width = 197
+      Height = 75
+      Caption = #1570#1610#1578#1605' '#1570#1606#1575#1604#1610#1586
       Font.Charset = ARABIC_CHARSET
       Font.Color = 33023
-      Font.Height = -51
-      Font.Name = 'B Titr'
+      Font.Height = -64
+      Font.Name = 'Zar'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = True

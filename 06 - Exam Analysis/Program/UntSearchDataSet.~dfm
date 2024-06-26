@@ -1,6 +1,6 @@
 object FrmSearchDataSet: TFrmSearchDataSet
-  Left = 468
-  Top = 401
+  Left = 533
+  Top = 410
   BiDiMode = bdRightToLeft
   BorderIcons = []
   BorderStyle = bsSingle

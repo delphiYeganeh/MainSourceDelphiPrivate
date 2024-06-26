@@ -1553,7 +1553,7 @@ var
    _SMSCenterNumber : WideString;
 
 Const
-   _SoftVerLastUpdate = '1403/03/13';//'1396/07/17';
+   _SoftVerLastUpdate = '1403/03/26';//'1396/07/17';
 //   _SoftVertion       = '7.0.12.101';//'5.0.0.5';//'4.2.7.7'   ; //'3.2.0.0'
 
 Type
@@ -4724,6 +4724,8 @@ var
   PosF , PosS , PosE , PosFirstSec , PosFirstLen  , PosLastSec , PosLastLen : Integer ;
   FistScript : Integer;
   //qryAutoRunScript :TADOQuery;
+  qry :TADOQuery;
+
 
   function GetTxtFileAsString(const fn:String):WideString;
   var
@@ -4770,6 +4772,14 @@ var
     Result := strResult;
   end;
 begin
+  // jHAT PAK KARDAN PACH GHADIMI
+  qry := TADOQuery.Create(self);
+  qry.Connection := YeganehConnection;
+  qry.SQL.Text   := '  UPDATE [dbo].[TBLAPPSETTING] SET Max_TableScriptNumber = 1 ,Last_TableScriptNumber = 1,Max_ViewScriptNumber = 1 ,Last_ViewScriptNumber = 1  '+
+                                  ' WHERE (SELECT TOP 1  SUM(1) FROM dbo.TBLAPPSETTING WHERE DATE<'+'''2024-06-02'''+' ) >0 AND ISNULL((SELECT TOP 1  SUM(1) FROM dbo.TBLAPPSETTING WHERE   DATE>'+'''2024-06-14'''+' ),0) =0   '  ;
+
+  qry.ExecSQL;
+  qry.Free;
 
   qryAutoRunScript.Close;
   qryAutoRunScript.Open;

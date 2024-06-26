@@ -86,7 +86,7 @@ inherited FrCalcExam: TFrCalcExam
     TabOrder = 1
   end
   object BitBtn2: TxpBitBtn [3]
-    Left = 87
+    Left = 88
     Top = 8
     Width = 271
     Height = 41

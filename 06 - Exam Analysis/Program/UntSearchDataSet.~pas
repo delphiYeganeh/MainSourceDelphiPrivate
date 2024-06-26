@@ -89,8 +89,6 @@ end;
 
 procedure TFrmSearchDataSet.SearchQuery;
 begin
-  if (PrivateIdFieldName <> '') and (PrivateCodeFieldName <> '') and (PrivateTitleFieldName <> '') then
-  begin
     With QSearch do
     begin
       Close;
@@ -104,7 +102,6 @@ begin
       Open;
       StatusBar1.Panels[0].Text := 'ÊÚÏÇÏ Ñ˜æÑÏ : ' + IntToStr(RecordCount);
     end;
-  end;
 end;
 
 procedure TFrmSearchDataSet.btnSearchClick(Sender: TObject);
