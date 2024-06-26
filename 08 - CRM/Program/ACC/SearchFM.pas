@@ -9,7 +9,7 @@ uses
   Grids, DBGrids, ADODB, BaseUnit, Menus, ExtActns, ActnList, YDbgrid;
 
 type
-  TFmSearch = class(TMbaseForm)
+  TFmSearch = class(TMBaseForm)
     DSSearch: TDataSource;
     XPManifest1: TXPManifest;
     pnlMain: TPanel;

@@ -6,53 +6,55 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, BaseUnit, Grids, DBGrids, YDbgrid, StdCtrls, Mask, DBCtrls,
   Buttons, ExtActns, ActnList, DB,adodb,Yshamsidate, YDBEDit, UemsVCL,
-  ExtCtrls, Menus, YAmountEdit, KimiyaEdit;
+  ExtCtrls, Menus,  KimiyaEdit;
 
 type
   TfrContractAdd = class(TMBaseForm)
-    Label3: TLabel;
-    Label6: TLabel;
-    Label18: TLabel;
-    Label19: TLabel;
-    Label21: TLabel;
-    Label2: TLabel;
-    btnAddContractWord: TBitBtn;
-    GroupBox3: TGroupBox;
-    dblContractTypeCNT: TDBLookupComboBox;
-    dblContractSubTypeCNT: TDBLookupComboBox;
-    dblProductsCNT: TDBLookupComboBox;
-    dbeCommentCNT: TDBMemo;
-    dblMarketerCNT: TDBLookupComboBox;
-    dbViwAmountCNT1: TDBEdit;
     OpenDialog: TOpenDialog;
-    BitBtn1: TBitBtn;
-    btnCancel: TBitBtn;
-    Label24: TLabel;
-    Label25: TLabel;
-    Label26: TLabel;
-    GoodJobPercentageCNT: TDBEdit;
-    dbeTaxPercentageCNT: TDBEdit;
-    dbeInsuranceAccountCNT: TDBEdit;
-    Label27: TLabel;
-    Label34: TLabel;
     ppmContractDate: TPopupMenu;
     N1: TMenuItem;
     N2: TMenuItem;
-    btnContractDate: TBitBtn;
-    btnAddFish: TBitBtn;
-    dbeBeginDateCNT: TDBShamsiDateEdit;
-    dbeEndDateCNT: TDBShamsiDateEdit;
-    Label1: TLabel;
-    edtAmount: TKimiyaEdit;
+   //edtAmount : TKimiyaEdit;
     QProducts: TADOQuery;
     QProductsProductID: TWordField;
     QProductsProducttitle: TWideStringField;
     DsQProducts: TDataSource;
+    pnlMain: TPanel;
+    Label5: TLabel;
     Label4: TLabel;
+    Label6: TLabel;
+    Label3: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label2: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label1: TLabel;
+    GroupBox1: TGroupBox;
+    dblContractTypeCNT: TDBLookupComboBox;
+    dblContractSubTypeCNT: TDBLookupComboBox;
+    GoodJobPercentageCNT: TDBEdit;
+    edtAmount: TEdit;
+    dbViwAmountCNT1: TDBEdit;
+    dblProductsCNT: TDBLookupComboBox;
+    dblMarketerCNT: TDBLookupComboBox;
+    dbeTaxPercentageCNT: TDBEdit;
+    dbeInsuranceAccountCNT: TDBEdit;
     dbeSignUpDateCNT: TDBShamsiDateEdit;
-    BitBtn2: TBitBtn;
-    BitBtn3: TBitBtn;
+    dbeEndDateCNT: TDBShamsiDateEdit;
+    dbeCommentCNT: TDBMemo;
+    dbeBeginDateCNT: TDBShamsiDateEdit;
+    btnContractDate: TBitBtn;
+    btnCancel: TBitBtn;
+    btnAddFish: TBitBtn;
+    btnAddContractWord: TBitBtn;
     BitBtn4: TBitBtn;
+    BitBtn3: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn1: TBitBtn;
     procedure btnAddContractWordClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
@@ -282,20 +284,66 @@ begin
 end;
 
 procedure TfrContractAdd.edtAmountChange(Sender: TObject);
-begin
+(*begin
   inherited;
   if StrToIntDef(edtAmount.Text,0) <> 0 then
       FrContract.SpDbgridContract.FieldByName('Amount').AsString := edtAmount.Text
   else if (edtAmount.Text = '0' )or(edtAmount.Text = '') then FrContract.SpDbgridContract.FieldByName('Amount').AsString := '0';
+      *)
+var
+   AmountSTR : string;
+begin
+  inherited;
+  AmountSTR := StringReplace(edtAmount.Text,'°','',[rfReplaceAll]);
+  if StrToIntDef(AmountSTR,0) <> 0 then
+      FrContract.SpDbgridContract.FieldByName('Amount').AsString := AmountSTR //edtAmount.Text
+  else
+  if (edtAmount.Text = '0' )or(edtAmount.Text = '') then
+    FrContract.SpDbgridContract.FieldByName('Amount').AsString := '0';
+
+  if Length(AmountSTR)>3 then
+    edtAmount.Text := AddSeprator(AmountSTR,length(AmountSTR) div 3)
+  else  edtAmount.Text :=  AmountSTR ;
+  edtAmount.SelStart := Length(edtAmount.Text);
+
 end;
 
 procedure TfrContractAdd.edtAmountKeyPress(Sender: TObject; var Key: Char);
+var Len,i,Fnd,Ps :integer;
+    tx :String;
+    FKimiyaSpecialChar : String;
+    FKimiyaIsPrice : Boolean ;
+  function RemoveSeparetor(text :String):String ;
+  var tx : String;
+  begin
+     while pos('°',text) <> 0 do
+     begin
+         tx := Text;
+         delete(tx, Pos('°',text),1);
+         text:= tx;
+     end;
+     Result := text;
+  end;
+
 begin
   inherited;
- if (_EditContract = false)and(FrContract.SpDbgridContract.State in [dsedit]) then
- begin
-  ShowMessage('‘„« œ” —”Ì »—«Ì ÊÌ—«Ì‘ «Ì‰ ›Ì·œ —«‰œ«—Ìœ');
-  key :=#0;
+  FKimiyaIsPrice := True;
+
+  if (_EditContract = false)and(FrContract.SpDbgridContract.State in [dsedit]) then
+  begin
+    ShowMessage('‘„« œ” —”Ì »—«Ì ÊÌ—«Ì‘ «Ì‰ ›Ì·œ —«‰œ«—Ìœ');
+    key :=#0;
+  end;
+
+  if (FKimiyaIsPrice )then
+  Begin
+    tx := RemoveSeparetor(edtAmount.text+key);
+    Len := length(tx);
+    i:= Len div 3 ;
+    if not (key  in ['0'..'9',#8] ) then
+    begin
+      key := #0;
+    end;
   end;
 
 end;

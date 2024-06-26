@@ -5520,6 +5520,9 @@ object Dm: TDm
     object UserFactorAccess: TBooleanField
       FieldName = 'FactorAccess'
     end
+    object UserEditVersion: TBooleanField
+      FieldName = 'EditVersion'
+    end
   end
   object ADOCommand: TADOCommand
     CommandTimeout = 3000
@@ -6561,6 +6564,17 @@ object Dm: TDm
         Name = '@GroupID'
         DataType = ftInteger
         Value = Null
+      end
+      item
+        Name = '@CustomerId'
+        DataType = ftInteger
+        Value = Null
+      end
+      item
+        Name = '@CustomerName'
+        DataType = ftWideString
+        Size = -1
+        Value = Null
       end>
     Left = 578
     Top = 402
@@ -6751,12 +6765,15 @@ object Dm: TDm
       FieldName = 'groupTitle'
       Size = 100
     end
+    object Select_FollowUP_By_DateWorkPhoneOther: TStringField
+      FieldName = 'WorkPhoneOther'
+    end
   end
   object DSelect_FollowUP_By_Date: TDataSource
     AutoEdit = False
     DataSet = Select_FollowUP_By_Date
-    Left = 617
-    Top = 432
+    Left = 593
+    Top = 448
   end
   object Select_Contract_By_CustomerID: TADOStoredProc
     Connection = YeganehConnection
@@ -8550,15 +8567,15 @@ object Dm: TDm
   end
   object DsTaskStatus: TDataSource
     DataSet = tblTaskStatus
-    Left = 920
-    Top = 336
+    Left = 1032
+    Top = 328
   end
   object tblTaskStatus: TADOTable
     Connection = YeganehConnection
     CursorType = ctStatic
     TableName = 'TaskStatus'
-    Left = 912
-    Top = 320
+    Left = 992
+    Top = 328
     object tblTaskStatusTaskStatusID: TWordField
       FieldName = 'TaskStatusID'
       ReadOnly = True
@@ -8571,8 +8588,8 @@ object Dm: TDm
   end
   object dsUserByCaseFilter: TDataSource
     DataSet = UserByCaseFilter
-    Left = 54
-    Top = 207
+    Left = 30
+    Top = 223
   end
   object UserByCaseFilter: TADOQuery
     Connection = YeganehConnection
@@ -8597,6 +8614,7 @@ object Dm: TDm
         Value = Null
       end>
     SQL.Strings = (
+      '/*'
       'Select * from Users'
       'WHERE Id IN'
       
@@ -8604,8 +8622,12 @@ object Dm: TDm
         ' :CaseTypeId1 )'
       
         'OR (SELECT count(ct.ManagerUserID) FROM CaseType ct WHERE ct.Man' +
-        'agerUserID = :UserId AND ct.CaseTypeID = :CaseTypeId2) > 0')
-    Left = 40
+        'agerUserID = :UserId AND ct.CaseTypeID = :CaseTypeId2) > 0'
+      '*/'
+      ''
+      'Select * from Users'
+      'where isactive = 1')
+    Left = 32
     Top = 176
     object UserByCaseFilterId: TAutoIncField
       FieldName = 'Id'

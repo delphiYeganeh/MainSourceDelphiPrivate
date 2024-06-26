@@ -9,21 +9,26 @@ uses
 
 type
   TfrAttachments = class(TMBaseForm)
+    pnlMain: TPanel;
     Panel1: TPanel;
-    dbgFiles: TYDBGrid;
-    BitBtn2: TBitBtn;
+    BitBtn1: TBitBtn;
     btnAttachment: TBitBtn;
     btnDel: TBitBtn;
     btnAdd: TBitBtn;
-    procedure BitBtn2Click(Sender: TObject);
+    dbgFiles: TYDBGrid;
+    procedure BitBtn1Click(Sender: TObject);
     procedure btnAttachmentClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
     procedure btnDelClick(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     IdName :String;
     Function LoadImageField(Field:TField; Path: String):Boolean;
+    procedure SetColorForm;    
   public
     { Public declarations }
     qry :TADOQuery;
@@ -42,19 +47,19 @@ uses dmu;
 {$R *.dfm}
 Function TfrAttachments.LoadImageField(Field:TField; Path: String):Boolean;
 begin
-   if not Field.IsNull then
-    begin
-           TBlobField(Field).SaveToFile(path);
-           Result := True;
-    end else
-    begin
-      ShowMessage('›«Ì·Ì ÊÃÊœ  ‰œ«—œ');
-      Result := False
-    end;
+  if not Field.IsNull then
+  begin
+         TBlobField(Field).SaveToFile(path);
+         Result := True;
+  end else
+  begin
+    ShowMessage('›«Ì·Ì ÊÃÊœ  ‰œ«—œ');
+    Result := False
+  end;
 end;
 
 
-procedure TfrAttachments.BitBtn2Click(Sender: TObject);
+procedure TfrAttachments.BitBtn1Click(Sender: TObject);
 begin
   inherited;
 Close;
@@ -127,9 +132,29 @@ end;
 procedure TfrAttachments.btnDelClick(Sender: TObject);
 begin
   inherited;
-if qry.RecordCount > 0 then
-  if messageShowString('¬Ì« «“ Õ–› „ÿ„∆‰ Â” Ìœ',True) then
-    qry.Delete;
+  if qry.RecordCount > 0 then
+    if messageShowString('¬Ì« «“ Õ–› „ÿ„∆‰ Â” Ìœ',True) then
+      qry.Delete;
+end;
+
+procedure TfrAttachments.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  inherited;
+  Resize := False;
+end;
+
+procedure TfrAttachments.FormShow(Sender: TObject);
+begin
+  inherited;
+  SetColorForm ;
+end;
+
+procedure TfrAttachments.SetColorForm;
+begin
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
 end;
 
 end.

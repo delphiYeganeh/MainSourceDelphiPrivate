@@ -76,6 +76,14 @@ type
     btnSave: TBitBtn;
     btnAdd: TBitBtn;
     dbgUserList: TYDBGrid;
+    DBCheckBox10: TDBCheckBox;
+    DBCheckBox11: TDBCheckBox;
+    DBCheckBox12: TDBCheckBox;
+    DBCheckBox13: TDBCheckBox;
+    UserAccAcess: TBooleanField;
+    UserCallAccess: TBooleanField;
+    UserAssesstAccess: TBooleanField;
+    UserFactorAccess: TBooleanField;
     procedure Action11Execute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -326,7 +334,7 @@ procedure TUserDefineF.FormCanResize(Sender: TObject; var NewWidth,
   NewHeight: Integer; var Resize: Boolean);
 begin
   { TODO -oparsa : 14030203 }
-  if (NewWidth < 568)  or (NewHeight < 552) then
+  if (NewWidth < 568)  or (NewHeight < 612) then
     Resize := False
   else Resize := True;
    { TODO -oparsa : 14030203 }

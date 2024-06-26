@@ -497,14 +497,14 @@ inherited FrCityEdit: TFrCityEdit
   object DltCity: TDataSource
     AutoEdit = False
     DataSet = City
-    Left = 104
+    Left = 152
     Top = 128
   end
   object DltState: TDataSource
     AutoEdit = False
     DataSet = State
-    Left = 31
-    Top = 128
+    Left = 95
+    Top = 184
   end
   object State: TADOQuery
     Connection = Dm.YeganehConnection
@@ -514,8 +514,8 @@ inherited FrCityEdit: TFrCityEdit
       'Select *'
       'From State'
       'Order By StateTitle')
-    Left = 32
-    Top = 72
+    Left = 80
+    Top = 88
     object StateStateID: TWordField
       FieldName = 'StateID'
       ReadOnly = True
@@ -543,8 +543,8 @@ inherited FrCityEdit: TFrCityEdit
       'From City'
       'Where StateID = :StateID'
       'Order By CityTitle')
-    Left = 104
-    Top = 72
+    Left = 160
+    Top = 80
     object CityCityID: TAutoIncField
       FieldName = 'CityID'
       ReadOnly = True

@@ -1,11 +1,11 @@
 inherited UserDefineF: TUserDefineF
   Tag = 2
-  Left = 611
-  Top = 149
+  Left = 571
+  Top = 180
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = #1705#1575#1585#1576#1585#1575#1606
-  ClientHeight = 531
+  ClientHeight = 573
   ClientWidth = 552
   KeyPreview = True
   OldCreateOrder = True
@@ -14,13 +14,13 @@ inherited UserDefineF: TUserDefineF
   TextHeight = 13
   inherited ShapeBase: TShape
     Width = 552
-    Height = 531
+    Height = 573
   end
   object pnlMain: TPanel [1]
     Left = 0
     Top = 0
     Width = 552
-    Height = 531
+    Height = 573
     Align = alClient
     Caption = ' '
     TabOrder = 0
@@ -158,15 +158,15 @@ inherited UserDefineF: TUserDefineF
     end
     object Panel2: TPanel
       Left = 1
-      Top = 299
+      Top = 304
       Width = 550
-      Height = 191
+      Height = 228
       Align = alBottom
       Color = 16244694
       TabOrder = 1
       DesignSize = (
         550
-        191)
+        228)
       object Label4: TLabel
         Left = 489
         Top = 41
@@ -455,10 +455,58 @@ inherited UserDefineF: TUserDefineF
         ValueChecked = 'True'
         ValueUnchecked = 'False'
       end
+      object DBCheckBox10: TDBCheckBox
+        Left = 394
+        Top = 186
+        Width = 150
+        Height = 17
+        Caption = #1583#1587#1578#1585#1587#1610' '#1605#1606#1608' '#1605#1575#1604#1610
+        DataField = 'AccAcess'
+        DataSource = DSForm
+        TabOrder = 19
+        ValueChecked = 'True'
+        ValueUnchecked = 'False'
+      end
+      object DBCheckBox11: TDBCheckBox
+        Left = 169
+        Top = 186
+        Width = 184
+        Height = 17
+        Caption = #1583#1587#1578#1585#1587#1610' '#1575#1585#1586#1610#1575#1576#1610
+        DataField = 'AssesstAccess'
+        DataSource = DSForm
+        TabOrder = 20
+        ValueChecked = 'True'
+        ValueUnchecked = 'False'
+      end
+      object DBCheckBox12: TDBCheckBox
+        Left = 39
+        Top = 187
+        Width = 128
+        Height = 17
+        Caption = #1583#1587#1578#1585#1587#1610' '#1601#1575#1705#1578#1608#1585
+        DataField = 'FactorAccess'
+        DataSource = DSForm
+        TabOrder = 21
+        ValueChecked = 'True'
+        ValueUnchecked = 'False'
+      end
+      object DBCheckBox13: TDBCheckBox
+        Left = 394
+        Top = 204
+        Width = 150
+        Height = 17
+        Caption = #1583#1587#1578#1585#1587#1610' '#1578#1605#1575#1587
+        DataField = 'CallAccess'
+        DataSource = DSForm
+        TabOrder = 22
+        ValueChecked = 'True'
+        ValueUnchecked = 'False'
+      end
     end
     object Panel1: TPanel
       Left = 1
-      Top = 490
+      Top = 532
       Width = 550
       Height = 40
       Align = alBottom
@@ -599,9 +647,9 @@ inherited UserDefineF: TUserDefineF
       Left = 1
       Top = 89
       Width = 550
-      Height = 270
+      Height = 215
       Cursor = crHandPoint
-      Align = alTop
+      Align = alClient
       DataSource = DSForm
       Options = [dgAlwaysShowEditor, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 3
@@ -746,6 +794,18 @@ inherited UserDefineF: TUserDefineF
     end
     object UserISWinServer: TBooleanField
       FieldName = 'ISWinServer'
+    end
+    object UserAccAcess: TBooleanField
+      FieldName = 'AccAcess'
+    end
+    object UserCallAccess: TBooleanField
+      FieldName = 'CallAccess'
+    end
+    object UserAssesstAccess: TBooleanField
+      FieldName = 'AssesstAccess'
+    end
+    object UserFactorAccess: TBooleanField
+      FieldName = 'FactorAccess'
     end
   end
 end

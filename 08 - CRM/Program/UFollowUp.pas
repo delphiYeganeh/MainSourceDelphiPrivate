@@ -169,6 +169,31 @@ type
     btnFactor: TBitBtn;
     chFactor: TDBCheckBox;
     chPreFactor: TDBCheckBox;
+    SpSelect_Cases: TADOStoredProc;
+    SpSelect_CasesCaseID: TLargeintField;
+    SpSelect_CasesCaseTitle: TWideStringField;
+    SpSelect_CasesComment: TWideStringField;
+    SpSelect_CasesProductId: TIntegerField;
+    SpSelect_CasesProductVersion: TIntegerField;
+    SpSelect_CasesCaseTypeID: TWordField;
+    SpSelect_CasesCasePriorityId: TWordField;
+    SpSelect_CasesCustomerID: TIntegerField;
+    SpSelect_CasesCaseOrigiranlId: TWordField;
+    SpSelect_CasesRegisterDate: TWideStringField;
+    SpSelect_CasesRegisterUserID: TIntegerField;
+    SpSelect_CasesProductTitle: TWideStringField;
+    SpSelect_CasesCaseTypeTitle: TWideStringField;
+    SpSelect_CasesCasePriorityTitle: TWideStringField;
+    SpSelect_CasesCompanyName: TWideStringField;
+    SpSelect_CasesUserName: TWideStringField;
+    SpSelect_CasesCompleted: TBooleanField;
+    SpSelect_CasesCompleteDate: TWideStringField;
+    SpSelect_CasesStatus: TStringField;
+    SpSelect_CasesCompleteComment: TWideStringField;
+    Select_customer_By_CustomerIDProductsIdSTR: TStringField;
+    SpSelect_CasesCheckUserID: TIntegerField;
+    SpSelect_CasesIsBug: TBooleanField;
+    SpSelect_CasesFollowUpID: TIntegerField;
     procedure btnWordViewClick(Sender: TObject);
     procedure btnAttachPicClick(Sender: TObject);
     procedure refreshData;
@@ -424,6 +449,7 @@ procedure TFrFollowUp.BitBtn1Click(Sender: TObject);
 var
    IsInEditMode :boolean; // Amin 1391/12/26
    IndicatorID : integer; // Amin 1391/12/26
+   CaseAccept : string;
 begin
   inherited;
    With Dm.Select_FollowUP_By_CustomerID do
@@ -443,11 +469,14 @@ begin
          if State = dsInsert then
          begin
             if DBLkCBActionTypeTitle.KeyValue > 0 then
+            begin
                Dm.Select_FollowUP_By_CustomerIDActionTypeID.AsInteger := DBLkCBActionTypeTitle.KeyValue;
+            end;
 
             Dm.Select_FollowUP_By_CustomerIDFollowUpInsertDate.Value := ShamsiString(Now);
 
             IsInEditMode := false; // Amin 1391/12/26
+
          end
          else
          begin
@@ -481,7 +510,43 @@ begin
                Dm.Select_FollowUP_By_CustomerID.Last;
             // Amin 1391/12/26 End
          end;
+         
+         (*
+        if DBLkCBActionTypeTitle.KeyValue > 0 then
+        begin
+
+          if (DBLkCBActionTypeTitle.KeyValue >14) and (DBLkCBActionTypeTitle.KeyValue <19) then //in (15,16,17,18)) then
+          begin
+            SpSelect_Cases.Close;
+            SpSelect_Cases.Open;
+            SpSelect_Cases.Append;
+            // „œÌ— Å‘ Ì»«‰Ì
+            CaseAccept :=  Qry_GetResult(' select top 1 id  FROM dbo.users where AccessID = 9 order by id desc' ,dm.YeganehConnection) ;
+            SpSelect_CasesCheckUserID.Value    := StrToInt( CaseAccept );
+
+            CaseAccept :=  Qry_GetResult(' select top 1 id  FROM dbo.users where IsSystemUser = 1 ' ,dm.YeganehConnection) ;
+            SpSelect_CasesRegisterUserID.Value := StrToInt( CaseAccept ); // 75;//_UserID;
+            SpSelect_CasesFollowUpID.Value:=  dm.Select_FollowUP_By_CustomerIDFollowUPID.Value ;
+
+            SpSelect_CasesRegisterDate.Value   := _Today;
+            SpSelect_CasesCaseOrigiranlId.Value:= 8; // «ﬁœ«„
+            SpSelect_CasesCasePriorityId.Value := 1; // «Ê·ÊÌ 
+            SpSelect_CasesCaseTypeID .Value := 3; // ‰Ê⁄ Œÿ«
+            SpSelect_CasesCustomerID .Value := Select_customer_By_CustomerIDCustomerID.Value ; // ‘„«—Â „‘ —Ì
+            if ((Pos('|',Select_customer_By_CustomerIDProductsIdSTR.AsString)=0) AND (Select_customer_By_CustomerIDProductsIdSTR.AsString <>'')) then
+              SpSelect_CasesProductId.Value := Select_customer_By_CustomerIDProductsIdSTR.AsInteger ;
+            SpSelect_CasesCaseTitle.Value := 'Œÿ«_' + DBLkCBActionTypeTitle.Text +'_'+ ' „— »ÿ »« «ﬁœ«„';
+            SpSelect_CasesComment.Value := DBMemoComment.Text ;
+
+            SpSelect_Cases.Post;
+             //////
+
+          end;
+
+        end;  *)
+
       end;
+
       ShowMessage(' À»  «‰Ã«„ ‘œ ');
 
       if not (UpperCase(_AreYouYeganeh) =UpperCase('True')) then
@@ -770,8 +835,8 @@ end;
 procedure TFrFollowUp.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-  if (Dm.Select_FollowUP_By_CustomerID.State=dsInsert) or (Dm.Select_FollowUP_By_CustomerID.State=dsEdit) then
-      Dm.Select_FollowUP_By_CustomerIDToDoDate.AsString:=MssCalendarPro1.Execute('/')
+  if (Dm.Select_FollowUP_By_CustomerID.State = dsInsert) or (Dm.Select_FollowUP_By_CustomerID.State = dsEdit) then
+      Dm.Select_FollowUP_By_CustomerIDToDoDate.AsString:= MssCalendarPro1.Execute('/')
   else
       ShowMessage('»«Ìœ œ— Õ«·  ÊÌ—«Ì‘ Ì« œ—Ã «ÿ·«⁄«  »«‘Ìœ');
 end;
@@ -779,8 +844,8 @@ end;
 procedure TFrFollowUp.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
-  if (Dm.Select_FollowUP_By_CustomerID.State=dsInsert) or (Dm.Select_FollowUP_By_CustomerID.State=dsEdit) then
-      Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString:=MssCalendarPro1.Execute('/')
+  if (Dm.Select_FollowUP_By_CustomerID.State = dsInsert) or (Dm.Select_FollowUP_By_CustomerID.State = dsEdit) then
+      Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString:= MssCalendarPro1.Execute('/')
   else
       ShowMessage('»«Ìœ œ— Õ«·  ÊÌ—«Ì‘ Ì« œ—Ã «ÿ·«⁄«  »«‘Ìœ');
 end;
@@ -857,6 +922,7 @@ var
   ID:Integer;
 begin
   inherited;
+
   IF MessageDlg('¬Ì« «“ Õ–› «ÿ·«⁄«  „ÿ„∆‰ Â” Ìœø',mtConfirmation,[mbyes,mbno],0)=mryes then
   Begin
      if  Dm.Select_FollowUP_By_CustomerIDFollowUPID.AsString <> '' then
@@ -944,9 +1010,9 @@ begin
   begin
   if messagedlg('»—«Ì Õ–› ›«Ì· „ÿ„∆‰ Â” Ìœ ø',mtWarning,[mbYes,mbAll,mbCancel], 0) = 6 then
   begin
-  dm.Select_FollowUP_By_CustomerID.Edit;
-  dm.Select_FollowUP_By_CustomerIDExcellAttachment.Clear;
-  dm.Select_FollowUP_By_CustomerID.Post;
+    dm.Select_FollowUP_By_CustomerID.Edit;
+    dm.Select_FollowUP_By_CustomerIDExcellAttachment.Clear;
+    dm.Select_FollowUP_By_CustomerID.Post;
   end;
   end
   else
@@ -966,9 +1032,9 @@ begin
   begin
   if messagedlg('»—«Ì Õ–› ›«Ì· „ÿ„∆‰ Â” Ìœ ø',mtWarning,[mbYes,mbAll,mbCancel], 0) = 6 then
   begin
-  dm.Select_FollowUP_By_CustomerID.Edit;
-  dm.Select_FollowUP_By_CustomerIDPdfAttachment.Clear;
-  dm.Select_FollowUP_By_CustomerID.Post;
+    dm.Select_FollowUP_By_CustomerID.Edit;
+    dm.Select_FollowUP_By_CustomerIDPdfAttachment.Clear;
+    dm.Select_FollowUP_By_CustomerID.Post;
   end;
   end
   else
@@ -1075,6 +1141,7 @@ begin
       Application.CreateForm(TFRefrenceInPerson, FRefrenceInPerson);
       FRefrenceInPerson.FollowUpId  := dm.Select_FollowUP_By_CustomerIDFollowUPID.Asinteger ;
       FRefrenceInPerson.CustomerId  := dm.Select_FollowUP_By_CustomerIDCustomerID.Asinteger ;
+      FRefrenceInPerson.ProductsIdSTR  := Select_customer_By_CustomerIDProductsIdSTR.AsString ;
       FRefrenceInPerson.DBECompanyName.Text := DBECompanyName.Text;
       FRefrenceInPerson.DBEProducts.Text    := DBEProducts.Text;
       FRefrenceInPerson.ShowModal;

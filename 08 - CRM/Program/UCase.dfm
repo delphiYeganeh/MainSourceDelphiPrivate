@@ -1,9 +1,9 @@
 inherited frCase: TfrCase
-  Left = 353
-  Top = 163
+  Left = 392
+  Top = 130
   Width = 924
-  Height = 548
-  Caption = ' '
+  Height = 695
+  Caption = #1605#1608#1575#1585#1583'/'#1576#1575#1711' '#1607#1575
   Color = 16244694
   OldCreateOrder = True
   OnCanResize = FormCanResize
@@ -12,13 +12,13 @@ inherited frCase: TfrCase
   TextHeight = 13
   inherited ShapeBase: TShape
     Width = 908
-    Height = 509
+    Height = 656
   end
   object pnlMain: TPanel [1]
     Left = 0
     Top = 0
     Width = 908
-    Height = 509
+    Height = 656
     Align = alClient
     Caption = ' '
     TabOrder = 0
@@ -26,7 +26,7 @@ inherited frCase: TfrCase
       Left = 1
       Top = 157
       Width = 906
-      Height = 87
+      Height = 124
       StartColor = 16511469
       EndColor = 16244694
       FillDirection = fdLeftToRight
@@ -51,46 +51,46 @@ inherited frCase: TfrCase
       TabOrder = 0
       DesignSize = (
         904
-        55)
+        92)
       object Label4: TLabel
-        Left = 554
-        Top = 11
+        Left = 509
+        Top = 43
         Width = 57
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1606#1575#1605' '#1605#1581#1589#1608#1604' :'
         Transparent = True
       end
-      object Label6: TLabel
-        Left = 855
-        Top = 11
-        Width = 44
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1605#1588#1578#1585#1610' :'
-        Transparent = True
-      end
       object Label7: TLabel
-        Left = 856
-        Top = 35
-        Width = 43
+        Left = 511
+        Top = 15
+        Width = 55
         Height = 13
         Anchors = [akTop, akRight]
-        Caption = #1606#1608#1593'        :'
+        Caption = #1606#1608#1593'            :'
         Transparent = True
       end
       object Label8: TLabel
-        Left = 557
-        Top = 35
+        Left = 512
+        Top = 69
         Width = 54
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1575#1608#1604#1608#1610#1578'       :'
         Transparent = True
       end
+      object Label16: TLabel
+        Left = 839
+        Top = 69
+        Width = 58
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1705#1583' '#1605#1608#1585#1583'/'#1576#1575#1711':'
+        Transparent = True
+      end
       object dblProductId: TDBLookupComboBox
-        Left = 349
-        Top = 7
+        Left = 304
+        Top = 39
         Width = 204
         Height = 21
         Anchors = [akLeft, akTop, akRight]
@@ -106,8 +106,8 @@ inherited frCase: TfrCase
         OnKeyUp = dblCaseTypeIdKeyUp
       end
       object DBLookupComboBox1: TDBLookupComboBox
-        Left = 624
-        Top = 7
+        Left = 51
+        Top = 71
         Width = 176
         Height = 21
         Anchors = [akTop, akRight]
@@ -116,18 +116,104 @@ inherited frCase: TfrCase
         ListSource = Dm.DCustomer
         ParentBiDiMode = False
         TabOrder = 1
+        Visible = False
         OnCloseUp = dblCustomerCloseUp
       end
-      object edtCustomerId: TYWhereEdit
-        Left = 804
-        Top = 7
-        Width = 49
+      object dblCaseTypeId: TDBLookupComboBox
+        Left = 304
+        Top = 11
+        Width = 204
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        BiDiMode = bdLeftToRight
+        KeyField = 'CaseTypeID'
+        ListField = 'CaseTypeTitle'
+        ListSource = Dm.DsCaseType
+        ParentBiDiMode = False
+        TabOrder = 2
+        OnCloseUp = dblCaseTypeIdCloseUp
+        OnKeyDown = DBLookUpKeyDown
+        OnKeyUp = dblCaseTypeIdKeyUp
+      end
+      object dblCasePriorityId: TDBLookupComboBox
+        Left = 304
+        Top = 65
+        Width = 204
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        BiDiMode = bdLeftToRight
+        KeyField = 'CasePriorityID'
+        ListField = 'CasePriorityTitle'
+        ListSource = Dm.dsCasePriority
+        ParentBiDiMode = False
+        TabOrder = 3
+        OnCloseUp = dblCaseTypeIdCloseUp
+        OnKeyDown = DBLookUpKeyDown
+        OnKeyUp = dblCaseTypeIdKeyUp
+      end
+      object edtBugId: TYWhereEdit
+        Left = 604
+        Top = 65
+        Width = 228
         Height = 21
         Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
         ParentBiDiMode = False
-        TabOrder = 2
+        TabOrder = 4
+        OnChange = edtBugIdChange
+        isLike = False
+        isDate = False
+        EveryLike = False
+        isString = True
+        FieldName = 'CaseID'
+        TableName = 'Customer'
+        ListTable = 'Customer'
+        CodeField = 'CustomerID'
+        TitleField = 'CompanyName'
+      end
+      object RGCompleted: TRadioGroup
+        Left = 603
+        Top = 4
+        Width = 297
+        Height = 33
+        Anchors = [akTop, akRight]
+        Caption = #1608#1590#1593#1610#1578
+        Columns = 3
+        ItemIndex = 0
+        Items.Strings = (
+          #1607#1605#1607
+          #1578#1705#1605#1610#1604' '#1606#1588#1583#1607
+          #1578#1705#1605#1610#1604' '#1588#1583#1607)
+        TabOrder = 5
+        OnClick = RGCompletedClick
+      end
+      object DBLookupComboBox2: TDBLookupComboBox
+        Left = 158
+        Top = 47
+        Width = 67
+        Height = 21
+        Anchors = [akTop, akRight]
+        BiDiMode = bdLeftToRight
+        DataField = 'CustomerID'
+        DataSource = DsSelect_Cases
+        ParentBiDiMode = False
+        TabOrder = 6
+        Visible = False
+        OnCloseUp = dblCustomerCloseUp
+      end
+      object YWhereEdit1: TYWhereEdit
+        Left = 150
+        Top = 47
+        Width = 75
+        Height = 21
+        Anchors = [akTop, akRight]
+        BiDiMode = bdLeftToRight
+        ParentBiDiMode = False
+        TabOrder = 7
+        Visible = False
         OnChange = edtCustomerChange
+        OnExit = edtCustomerExit
+        OnKeyDown = CtrlSpace
         isLike = False
         isDate = False
         EveryLike = False
@@ -138,53 +224,112 @@ inherited frCase: TfrCase
         CodeField = 'CustomerID'
         TitleField = 'CompanyName'
       end
-      object dblCaseTypeId: TDBLookupComboBox
-        Left = 624
-        Top = 31
-        Width = 231
+      object DBLookupComboBox3: TDBLookupComboBox
+        Left = 158
+        Top = 23
+        Width = 67
         Height = 21
         Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
-        KeyField = 'CaseTypeID'
-        ListField = 'CaseTypeTitle'
-        ListSource = Dm.DsCaseType
+        DataField = 'CustomerID'
+        DataSource = DsSelect_Cases
         ParentBiDiMode = False
-        TabOrder = 3
-        OnCloseUp = dblCaseTypeIdCloseUp
-        OnKeyDown = DBLookUpKeyDown
-        OnKeyUp = dblCaseTypeIdKeyUp
+        TabOrder = 8
+        Visible = False
+        OnCloseUp = dblCustomerCloseUp
       end
-      object dblCasePriorityId: TDBLookupComboBox
-        Left = 349
-        Top = 31
-        Width = 204
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        BiDiMode = bdLeftToRight
-        KeyField = 'CasePriorityID'
-        ListField = 'CasePriorityTitle'
-        ListSource = Dm.dsCasePriority
-        ParentBiDiMode = False
-        TabOrder = 4
-        OnCloseUp = dblCaseTypeIdCloseUp
-        OnKeyDown = DBLookUpKeyDown
-        OnKeyUp = dblCaseTypeIdKeyUp
-      end
-      object chkCompleted: TCheckBox
-        Left = 224
-        Top = 32
-        Width = 97
-        Height = 17
-        Caption = #1578#1603#1605#1610#1604' '#1588#1583#1607' '#1607#1575
-        Color = 16244694
-        ParentColor = False
-        TabOrder = 5
-        OnClick = dblCaseTypeIdCloseUp
+      object pnlCustomer: TPanel
+        Left = 574
+        Top = 39
+        Width = 329
+        Height = 25
+        Anchors = [akTop, akRight]
+        BevelOuter = bvNone
+        ParentBackground = True
+        TabOrder = 9
+        DesignSize = (
+          329
+          25)
+        object Label6: TLabel
+          Left = 263
+          Top = 7
+          Width = 62
+          Height = 13
+          Anchors = [akTop, akRight]
+          Caption = #1605#1588#1578#1585#1610'       :'
+          Transparent = True
+        end
+        object SpeedButton1: TSpeedButton
+          Left = 4
+          Top = 1
+          Width = 23
+          Height = 22
+          Anchors = [akTop, akRight]
+          Glyph.Data = {
+            36030000424D3603000000000000360000002800000010000000100000000100
+            1800000000000003000000000000000000000000000000000000FF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFAB7B7B314860FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FFB67B7B31608F0B73E05084B6FF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFB67B7B3160
+            8F1173EA38A1FF31A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFB67B7B31608F0B6AE038A1FF38A1FFFF00FFFF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFAB7B7B31608F0B73E031A1
+            FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFC08F84CAA18FB68F8498
+            6058FF00FF405058116AD431A1FF38A1FFFF00FFFF00FFFF00FFFF00FFFF00FF
+            C0988FE0D4ABFFFFCAFFFFCAFFFFCAF4E0C0A184738F7B73A1CAEA38ABFFFF00
+            FFFF00FFFF00FFFF00FFFF00FFA17373F4F4EAFFFFEAFFFFD4FFFFD3FFFFD3FF
+            FFD3FFEAB6CAA18FC0A1A1FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4CAAB
+            FFFFFFFFFFD4FFFFD4FEFED3FFFFD3FFFED3FEFED3F4D4A1B67B73FF00FFFF00
+            FFFF00FFFF00FFFF00FFB6847BF4EACAFFFFD4FEFED3FEFED3FEFED3FEFED3FF
+            FED3FEFED3FFE098D4AB8FFF00FFFF00FFFF00FFFF00FFFF00FFB69884F4F4CA
+            FFFFD4FEFED3FEFED3FEFED3FEFED3FEFED3FEFED3FFD498E0B698FF00FFFF00
+            FFFF00FFFF00FFFF00FFB68F84F4EACAFFFFD4FFFFD4FFFED3FEFED3FFFED3FE
+            FED3FEFED3FFE0A1D4AB98FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFE0D4AB
+            FFFFD3FFFED3FFFED3FEFED3FEFED3FEFED3FFEAB6FFEAB6B6847BFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFAB8473FFF4B6FFFED3FEFED3FEFED3FEFED3FF
+            F4EAFFFFFFD4B698FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+            C09884F4D4A1FFE0A1FFE098FFEAB6F4EACACAABABFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD4AB8FD4AB8FC09884C0
+            987BFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+          ParentShowHint = False
+          ShowHint = True
+          OnClick = SpeedButton1Click
+        end
+        object edtCustomerId: TYWhereEdit
+          Left = 209
+          Top = 2
+          Width = 49
+          Height = 21
+          Anchors = [akTop, akRight]
+          BiDiMode = bdLeftToRight
+          ParentBiDiMode = False
+          TabOrder = 0
+          OnChange = edtCustomerIdChange
+          isLike = False
+          isDate = False
+          EveryLike = False
+          isString = True
+          FieldName = 'CustomerID'
+          TableName = 'Customer'
+          ListTable = 'Customer'
+          CodeField = 'CustomerID'
+          TitleField = 'CompanyName'
+        end
+        object Edit2: TEdit
+          Left = 30
+          Top = 2
+          Width = 177
+          Height = 21
+          Anchors = [akTop, akRight]
+          TabOrder = 1
+          OnChange = Edit2Change
+        end
       end
     end
     object Panel2: TPanel
       Left = 1
-      Top = 464
+      Top = 611
       Width = 906
       Height = 44
       Align = alBottom
@@ -222,7 +367,7 @@ inherited frCase: TfrCase
         NumGlyphs = 2
       end
       object btnDelBR2: TBitBtn
-        Left = 511
+        Left = 500
         Top = 6
         Width = 98
         Height = 32
@@ -244,7 +389,7 @@ inherited frCase: TfrCase
           9BED9B9BED9B9BEE9C9CEF9C9CEF9F9FEEA1A1EACCCCF1000000}
       end
       object btnAdd: TBitBtn
-        Left = 813
+        Left = 802
         Top = 6
         Width = 98
         Height = 32
@@ -311,7 +456,7 @@ inherited frCase: TfrCase
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       end
       object btnEdit: TBitBtn
-        Left = 713
+        Left = 702
         Top = 6
         Width = 98
         Height = 32
@@ -348,7 +493,7 @@ inherited frCase: TfrCase
         NumGlyphs = 2
       end
       object btnAttachment: TBitBtn
-        Left = 409
+        Left = 398
         Top = 6
         Width = 98
         Height = 32
@@ -358,7 +503,7 @@ inherited frCase: TfrCase
         OnClick = btnAttachmentClick
       end
       object btnSave: TBitBtn
-        Left = 612
+        Left = 601
         Top = 6
         Width = 98
         Height = 32
@@ -389,7 +534,7 @@ inherited frCase: TfrCase
     end
     object Panel1: TPanel
       Left = 1
-      Top = 360
+      Top = 507
       Width = 906
       Height = 104
       Align = alBottom
@@ -443,9 +588,9 @@ inherited frCase: TfrCase
     end
     object dbgCase: TYDBGrid
       Left = 1
-      Top = 244
+      Top = 281
       Width = 906
-      Height = 116
+      Height = 226
       Cursor = crHandPoint
       Align = alClient
       DataSource = DsSelect_Cases
@@ -469,12 +614,22 @@ inherited frCase: TfrCase
       InvertFarsiDate = True
       TitleSort = True
       AutoInsert = False
+      OnNeedColorCondition = dbgCaseNeedColorCondition
       FooterFields = 'Count'
       Columns = <
         item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'IsBug'
+          Title.Alignment = taCenter
+          Title.Caption = #1576#1575#1711
+          Width = 47
+          Visible = True
+        end
+        item
           Expanded = False
           FieldName = 'CaseID'
-          Title.Caption = #1705#1583' '#1605#1608#1585#1583
+          Title.Caption = #1705#1583' '#1605#1608#1585#1583'/'#1576#1575#1711
           Visible = True
         end
         item
@@ -495,6 +650,20 @@ inherited frCase: TfrCase
         end
         item
           Expanded = False
+          FieldName = 'CustomerID'
+          Title.Caption = #1705#1583' '#1605#1588#1578#1585#1610
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CompanyName'
+          Title.Alignment = taCenter
+          Title.Caption = #1605#1588#1578#1585#1610
+          Width = 141
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'CaseTypeTitle'
           Title.Alignment = taCenter
           Title.Caption = #1606#1608#1593' '
@@ -507,14 +676,6 @@ inherited frCase: TfrCase
           Title.Alignment = taCenter
           Title.Caption = #1575#1608#1604#1608#1610#1578
           Width = 72
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'CompanyName'
-          Title.Alignment = taCenter
-          Title.Caption = #1605#1588#1578#1585#1610
-          Width = 141
           Visible = True
         end
         item
@@ -537,7 +698,7 @@ inherited frCase: TfrCase
           FieldName = 'UserName'
           Title.Alignment = taCenter
           Title.Caption = #1579#1576#1578' '#1603#1606#1606#1583#1607
-          Width = 90
+          Width = 100
           Visible = True
         end
         item
@@ -552,6 +713,22 @@ inherited frCase: TfrCase
           Title.Alignment = taCenter
           Title.Caption = #1578#1575#1585#1610#1582' '#1578#1603#1605#1610#1604
           Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'CheckUserName'
+          Title.Alignment = taCenter
+          Title.Caption = #1578#1575#1610#1610#1583' '#1705#1606#1606#1583#1607
+          Width = 150
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CurentUserName'
+          Title.Alignment = taCenter
+          Title.Caption = #1583#1585' '#1705#1575#1585#1578#1575#1576#1604
+          Width = 150
+          Visible = True
         end>
     end
     object grbCase: TGroupBox
@@ -762,29 +939,94 @@ inherited frCase: TfrCase
         ParentBiDiMode = False
         TabOrder = 3
       end
-      object dblCustomer: TDBLookupComboBox
-        Left = 478
-        Top = 143
+      object dblCaseOriginal: TDBLookupComboBox
+        Left = 479
+        Top = 118
         Width = 376
         Height = 21
         Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
-        DataField = 'CustomerID'
+        DataField = 'CaseOrigiranlId'
         DataSource = DsSelect_Cases
+        KeyField = 'CaseOriginalId'
+        ListField = 'CaseOriginalTitle'
+        ListSource = Dm.DsCaseOriginal
         ParentBiDiMode = False
         TabOrder = 4
+      end
+      object DBMemo2: TDBMemo
+        Left = 24
+        Top = 60
+        Width = 395
+        Height = 91
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'Comment'
+        DataSource = DsSelect_Cases
+        ScrollBars = ssVertical
+        TabOrder = 5
+      end
+      object DBEdit3: TDBEdit
+        Left = 477
+        Top = 90
+        Width = 333
+        Height = 21
+        Anchors = [akTop, akRight]
+        DataSource = DsSelect_Cases
+        ReadOnly = True
+        TabOrder = 6
         Visible = False
-        OnCloseUp = dblCustomerCloseUp
+      end
+      object DBEdit4: TDBEdit
+        Left = 812
+        Top = 90
+        Width = 42
+        Height = 21
+        Anchors = [akTop, akRight]
+        DataField = 'CustomerID'
+        DataSource = DsSelect_Cases
+        TabOrder = 7
+      end
+      object Edit1: TEdit
+        Left = 477
+        Top = 90
+        Width = 333
+        Height = 21
+        Anchors = [akTop, akRight]
+        TabOrder = 8
+      end
+      object DBEdit5: TDBEdit
+        Left = 732
+        Top = 16
+        Width = 121
+        Height = 21
+        Anchors = [akTop, akRight]
+        DataField = 'CaseID'
+        DataSource = DsSelect_Cases
+        Enabled = False
+        TabOrder = 9
+      end
+      object DBchIsBug: TDBCheckBox
+        Left = 480
+        Top = 16
+        Width = 153
+        Height = 17
+        Anchors = [akTop, akRight]
+        Caption = #1575#1610#1606' '#1605#1608#1585#1583' '#1576#1575#1711' '#1605#1610' '#1576#1575#1588#1583
+        DataField = 'IsBug'
+        DataSource = DsSelect_Cases
+        TabOrder = 10
+        ValueChecked = 'True'
+        ValueUnchecked = 'False'
       end
       object edtCustomer: TYWhereEdit
-        Left = 478
-        Top = 143
-        Width = 376
+        Left = 374
+        Top = 104
+        Width = 75
         Height = 21
         Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
         ParentBiDiMode = False
-        TabOrder = 5
+        TabOrder = 11
         Visible = False
         OnChange = edtCustomerChange
         OnExit = edtCustomerExit
@@ -799,71 +1041,19 @@ inherited frCase: TfrCase
         CodeField = 'CustomerID'
         TitleField = 'CompanyName'
       end
-      object dblCaseOriginal: TDBLookupComboBox
-        Left = 479
-        Top = 118
-        Width = 376
+      object dblCustomer: TDBLookupComboBox
+        Left = 382
+        Top = 87
+        Width = 67
         Height = 21
         Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
-        DataField = 'CaseOrigiranlId'
-        DataSource = DsSelect_Cases
-        KeyField = 'CaseOriginalId'
-        ListField = 'CaseOriginalTitle'
-        ListSource = Dm.DsCaseOriginal
-        ParentBiDiMode = False
-        TabOrder = 6
-      end
-      object DBMemo2: TDBMemo
-        Left = 24
-        Top = 60
-        Width = 395
-        Height = 91
-        Anchors = [akLeft, akTop, akRight]
-        DataField = 'Comment'
-        DataSource = DsSelect_Cases
-        ScrollBars = ssVertical
-        TabOrder = 7
-      end
-      object DBEdit3: TDBEdit
-        Left = 477
-        Top = 90
-        Width = 333
-        Height = 21
-        Anchors = [akTop, akRight]
-        DataSource = DsSelect_Cases
-        ReadOnly = True
-        TabOrder = 8
-        Visible = False
-      end
-      object DBEdit4: TDBEdit
-        Left = 812
-        Top = 90
-        Width = 42
-        Height = 21
-        Anchors = [akTop, akRight]
         DataField = 'CustomerID'
         DataSource = DsSelect_Cases
-        TabOrder = 9
-      end
-      object Edit1: TEdit
-        Left = 477
-        Top = 90
-        Width = 333
-        Height = 21
-        Anchors = [akTop, akRight]
-        TabOrder = 10
-      end
-      object DBEdit5: TDBEdit
-        Left = 732
-        Top = 16
-        Width = 121
-        Height = 21
-        Anchors = [akTop, akRight]
-        DataField = 'CaseID'
-        DataSource = DsSelect_Cases
-        Enabled = False
-        TabOrder = 11
+        ParentBiDiMode = False
+        TabOrder = 12
+        Visible = False
+        OnCloseUp = dblCustomerCloseUp
       end
     end
   end
@@ -878,6 +1068,7 @@ inherited frCase: TfrCase
   object SpSelect_Cases: TADOStoredProc
     Connection = Dm.YeganehConnection
     CursorType = ctStatic
+    BeforePost = SpSelect_CasesBeforePost
     AfterPost = SpSelect_CasesAfterPost
     OnCalcFields = SpSelect_CasesCalcFields
     ProcedureName = 'Select_Case;1'
@@ -888,9 +1079,15 @@ inherited frCase: TfrCase
         DataType = ftInteger
         Precision = 10
         Value = Null
+      end
+      item
+        Name = '@TypeReport'
+        Attributes = [paNullable]
+        Size = -1
+        Value = Null
       end>
-    Left = 568
-    Top = 249
+    Left = 264
+    Top = 169
     object SpSelect_CasesCaseID: TLargeintField
       FieldName = 'CaseID'
       ReadOnly = True
@@ -968,6 +1165,23 @@ inherited frCase: TfrCase
       FieldName = 'CompleteComment'
       Size = 300
     end
+    object SpSelect_CasesIsBug: TBooleanField
+      FieldName = 'IsBug'
+    end
+    object SpSelect_CasesCheckUserID: TIntegerField
+      FieldName = 'CheckUserID'
+    end
+    object SpSelect_CasesCheckUserName: TStringField
+      FieldName = 'CheckUserName'
+      Size = 300
+    end
+    object SpSelect_CasesFollowUpID: TIntegerField
+      FieldName = 'FollowUpID'
+    end
+    object SpSelect_CasesCurentUserName: TStringField
+      FieldName = 'CurentUserName'
+      Size = 300
+    end
   end
   object DsSelect_Cases: TDataSource
     DataSet = SpSelect_Cases
@@ -976,8 +1190,8 @@ inherited frCase: TfrCase
     Top = 291
   end
   object PopupMenu1: TPopupMenu
-    Left = 587
-    Top = 157
+    Left = 475
+    Top = 149
     object N1: TMenuItem
       Caption = #1575#1578#1582#1575#1576' '#1587#1578#1608#1606
       OnClick = N1Click
@@ -991,8 +1205,8 @@ inherited frCase: TfrCase
     Connection = Dm.YeganehConnection
     CursorType = ctStatic
     TableName = 'Customer'
-    Left = 456
-    Top = 224
+    Left = 152
+    Top = 168
     object CustomerCustomerID: TAutoIncField
       FieldName = 'CustomerID'
       ReadOnly = True

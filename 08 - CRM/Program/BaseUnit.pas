@@ -354,8 +354,8 @@ begin
          TMenuItem(Components[i]).Visible:= Dm.UserIsAdmin.AsBoolean   // Amin 1391/09/18
       else                                                             // Amin 1391/09/18
       begin
-         TMenuItem(Components[i]).Visible:=GetActionAccess(_accessID,TAction(Components[i]).name,self.tag);
-         TMenuItem(Components[i]).Enabled:=TMenuItem(Components[i]).Visible;
+         TMenuItem(Components[i]).Visible:= GetActionAccess(_accessID,TAction(Components[i]).name,self.tag);
+         TMenuItem(Components[i]).Enabled:= TMenuItem(Components[i]).Visible;
       end
     end;
 
@@ -363,8 +363,14 @@ begin
     begin
      if TBitBtn(Components[i]).Name='btnDelEghdamat' then
      begin
-        TBitBtn(Components[i]).Visible:=GetActionAccess(_accessID,'acDelEghdamat',TBitBtn(Components[i]).tag);
-        TBitBtn(Components[i]).Enabled:=TAction(Components[i]).Visible;
+        TBitBtn(Components[i]).Visible:= GetActionAccess(_accessID,'acDelEghdamat',TBitBtn(Components[i]).tag);
+        TBitBtn(Components[i]).Enabled:= TAction(Components[i]).Visible;
+     end
+     else
+     // if TBitBtn(Components[i]).Name='btnCasesAll' then
+     begin
+        TBitBtn(Components[i]).Visible:= GetActionAccess(_accessID,TAction(Components[i]).name,TBitBtn(Components[i]).tag);
+        TBitBtn(Components[i]).Enabled:= TAction(Components[i]).Visible;
      end;
     end;
   end;

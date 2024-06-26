@@ -176,6 +176,7 @@ begin
         _UserFactorAccess:= UserFactorAccess.AsBoolean or UserAccAcess.AsBoolean ;
         _UserCallAccess  := UserCallAccess.AsBoolean ;
         _UserAssesstAcess:= UserAssesstAcess.AsBoolean ;
+        _UserEditVersion := UserEditVersion.AsBoolean ;
 
         if  _ThemTypeColor >0 then
         begin

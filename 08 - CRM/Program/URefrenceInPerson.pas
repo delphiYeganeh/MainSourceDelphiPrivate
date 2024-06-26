@@ -72,6 +72,30 @@ type
     Select_FollowUpInPersonFollowUpNeed: TBooleanField;
     Select_FollowUpInPersonFollowUpDescription: TStringField;
     Select_FollowUpInPersonUserId: TIntegerField;
+    SpSelect_Cases: TADOStoredProc;
+    SpSelect_CasesCaseID: TLargeintField;
+    SpSelect_CasesCaseTitle: TWideStringField;
+    SpSelect_CasesComment: TWideStringField;
+    SpSelect_CasesProductId: TIntegerField;
+    SpSelect_CasesProductVersion: TIntegerField;
+    SpSelect_CasesCaseTypeID: TWordField;
+    SpSelect_CasesCasePriorityId: TWordField;
+    SpSelect_CasesCustomerID: TIntegerField;
+    SpSelect_CasesCaseOrigiranlId: TWordField;
+    SpSelect_CasesRegisterDate: TWideStringField;
+    SpSelect_CasesRegisterUserID: TIntegerField;
+    SpSelect_CasesProductTitle: TWideStringField;
+    SpSelect_CasesCaseTypeTitle: TWideStringField;
+    SpSelect_CasesCasePriorityTitle: TWideStringField;
+    SpSelect_CasesCompanyName: TWideStringField;
+    SpSelect_CasesUserName: TWideStringField;
+    SpSelect_CasesCompleted: TBooleanField;
+    SpSelect_CasesCompleteDate: TWideStringField;
+    SpSelect_CasesStatus: TStringField;
+    SpSelect_CasesCompleteComment: TWideStringField;
+    SpSelect_CasesCheckUserID: TIntegerField;
+    SpSelect_CasesIsBug: TBooleanField;
+    SpSelect_CasesFollowUpID: TIntegerField;
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
@@ -89,6 +113,7 @@ type
     { Public declarations }
     FollowUpId : Integer ;
     CustomerId : Integer ;
+    ProductsIdSTR : string ;
   end;
 
 var
@@ -240,7 +265,7 @@ begin
     begin
       Select_FollowUpInPerson.Cancel;
     end;
-  End;
+  End;                   
   Select_FollowUpInPerson.Close;
   Select_FollowUpInPerson.parameters.ParamByName('@followupid').value := FollowUpId ;
   Select_FollowUpInPerson.Open;
@@ -250,6 +275,8 @@ begin
 end;
 
 procedure TFRefrenceInPerson.BitBtn3Click(Sender: TObject);
+var
+  CaseAccept : string;
 begin
   inherited;
   if Trim(MaskEPeriodTimeInperson.Text) = ':' then
@@ -288,11 +315,52 @@ begin
     Select_FollowUpInPersonLogDate.Value    := Dm.GetServerDate ;
     Select_FollowUpInPersonUserId.Value     := _UserID ;
 
+    ////////
+    if (State in [dsInsert]) then
+    begin
+      SpSelect_Cases.Close;
+      SpSelect_Cases.Open;
+      SpSelect_Cases.Append;
+      // „œÌ— Å‘ Ì»«‰Ì
+      CaseAccept :=  Qry_GetResult(' select top 1 id  FROM dbo.users where AccessID = 9 order by id desc' ,dm.YeganehConnection) ;
+      SpSelect_CasesCheckUserID.Value    := StrToInt( CaseAccept );
+
+      CaseAccept :=  Qry_GetResult(' select top 1 id  FROM dbo.users where IsSystemUser = 1 ' ,dm.YeganehConnection) ;
+      SpSelect_CasesRegisterUserID.Value := StrToInt( CaseAccept ); // 75;//_UserID;
+      SpSelect_CasesFollowUpID.Value:=  dm.Select_FollowUP_By_CustomerIDFollowUPID.Value ;
+
+      SpSelect_CasesRegisterDate.Value   := _Today;
+      SpSelect_CasesCaseOrigiranlId.Value:= 8; // «ﬁœ«„
+      SpSelect_CasesCasePriorityId.Value := 1; // «Ê·ÊÌ 
+      SpSelect_CasesCaseTypeID .Value := 9; // «—“Ì«»Ì
+      SpSelect_CasesIsBug .Value := False ;
+      SpSelect_CasesCustomerID .Value := CustomerId ; // ‘„«—Â „‘ —Ì
+      if ((Pos('|',ProductsIdSTR)=0) AND (ProductsIdSTR <>'')) then
+        SpSelect_CasesProductId.Value := StrToInt(ProductsIdSTR) ;
+      SpSelect_CasesCaseTitle.Value := '«—“Ì«»Ì_' +  ' „— »ÿ »« «ﬁœ«„';
+      SpSelect_CasesComment.Value := '„—«Ã⁄Â Õ÷Ê—Ì' ;
+
+      SpSelect_Cases.Post;
+
+      // „œÌ— Å‘ Ì»«‰Ì
+      CaseAccept :=  Qry_GetResult(' select top 1 id  FROM dbo.users where AccessID = 9 order by id desc' ,dm.YeganehConnection) ;
+      with TADOQuery.Create(nil) do
+      begin
+         Connection := Dm.YeganehConnection;
+         SQL.Text := 'insert into Tasks (CaseId,Comment,StatusId,AssignedUserId,AssignedDate)values('+IntToStr(SpSelect_CasesCaseID.AsInteger)+','''+'«—“Ì«»Ì'+''',10,'
+                                                            +CaseAccept+','''+_Today+'''' +')';
+
+        ExecSQL;
+      end;
+    end;
+
     Post;
+    //////
 
     Close;
     Select_FollowUpInPerson.parameters.ParamByName('@followupid').value := FollowUpId ;
     Open;
+
   end;
   btnAssessment.Enabled :=  Select_FollowUpInPerson.FieldByName('ValuatorUserID').AsInteger >0   ;
 

@@ -782,6 +782,8 @@ type
     Select_FollowUP_By_CustomerIDIsPreFactor: TBooleanField;
     Select_FollowUP_By_CustomerIDFactorId: TIntegerField;
     UserFactorAccess: TBooleanField;
+    UserEditVersion: TBooleanField;
+    Select_FollowUP_By_DateWorkPhoneOther: TStringField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
     function GetSql(s:string):Variant;
     function GetNewCode:string;
@@ -851,7 +853,7 @@ type
     procedure SaveTemplateToFile;
     procedure RefreshTemplate;
     procedure Replace(var main:widestring;old,new:widestring);
-    procedure RefreshFollowUP(Bdate,Edate:String;Ds:integer; ActionTypeID,BSuccess,ESuccess:byte;Comment_like,DoneComment_like: string;MarketerID:integer; CommentTypeOr: boolean; GroupID: integer = 0); // Amin 1391/08/25
+    procedure RefreshFollowUP(Bdate,Edate:String;Ds:integer; ActionTypeID,BSuccess,ESuccess:byte;Comment_like,DoneComment_like: string;MarketerID:integer; CommentTypeOr: boolean; GroupID: integer = 0;CustomerName:String='';CustomerID:String = '0'); // Amin 1391/08/25
     //Edited
     procedure RefreshFollowUP_bydate(Bdate,Edate:String;Ds:integer;MarketerID:integer);
     procedure GetOneDayFollowUP(date:String);
@@ -940,14 +942,15 @@ Var
   _UserFactorAccess : Boolean ;
   _UserAssesstAcess : Boolean ;
   _UserCallAccess : Boolean ;
+  _UserEditVersion : Boolean ;
   _PercentScale : Integer ;
   { TODO -oparsa : 14030204 }
    //---
 //1    gContractPath :String;
 Const
      ProductID = 'Y_Crm';
-     _SoftVersion = '2.5.' ;//'2.4.';
-     _LastUpdate = '1403/02/10'; //'1393/08/20';
+     _SoftVersion = '3.0.' ;//'2.4.';
+     _LastUpdate = '1403/03/13'; //'1393/08/20';
     procedure SetQueryDataSet(var DataSourceQry :TDataSource;var ReturnQry :TADOQuery;SQLText :String;QryConnection:TADOConnection;Field0Alignment :Boolean = False);
     Function AddImageField(Field:TField;Dlgfilter:String):String;
 
@@ -1397,7 +1400,7 @@ end;
 
 
 procedure Tdm.RefreshFollowUP(Bdate,Edate:String;Ds:integer;
-              ActionTypeID,BSuccess,ESuccess:byte;Comment_like,DoneComment_like: string;MarketerID:integer; CommentTypeOr: boolean; GroupID: integer = 0); // Amin 1391/08/25 Edited
+              ActionTypeID,BSuccess,ESuccess:byte;Comment_like,DoneComment_like: string;MarketerID:integer; CommentTypeOr: boolean; GroupID: integer = 0;CustomerName:String='';CustomerID:String = '0'); // Amin 1391/08/25 Edited
 begin
   with Select_FollowUP_By_Date do
    begin
@@ -1414,6 +1417,8 @@ begin
      Parameters.ParamByName('@CommentTypeOr').Value:= CommentTypeOr;
      Parameters.ParamByName('@UserID').Value:= _UserID;
      Parameters.ParamByName('@GroupID').Value:= GroupID;
+     Parameters.ParamByName('@CustomerID').Value:= StrToInt(CustomerID);
+     Parameters.ParamByName('@CustomerName').Value:= CustomerName;
      Open;
 //     try FrViewByCalender.calender; except end;
 //     MainForm.StatusBar1.Panels[2].Text:='йзого : '+IntToStr(RecordCount)
@@ -1836,6 +1841,7 @@ YInputQueryF:=TYInputQueryF.Create(self);
      Label1.Caption:=ACaption;
      output.Text:=Adefault;
      Caption:='';
+     Color := _Color1 ;
      ShowModal;
      Result:=done;
      Value:=output.Text;

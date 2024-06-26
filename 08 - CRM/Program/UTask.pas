@@ -32,9 +32,10 @@ type
   private
     { Private declarations }
     gCaseId :Integer;
+    gCustomerId : Integer ;
   public
     { Public declarations }
-    constructor Create (Aowner:TComponent;CaseId :Integer;CaseType :Integer);reintroduce;virtual;
+    constructor Create (Aowner:TComponent;CaseId :Integer;CaseType :Integer;CustomerId : Integer  = 0 );reintroduce;virtual;
   end;
 
 var
@@ -56,16 +57,21 @@ begin
                                                         +IntToStr(dblUserRefrence.KeyValue)+','''+_Today+''''
                                         +')';
 
-    ExecSQL;                                        
+     SQL.Text := SQL.Text + ' insert into dbo.FollowUp (TaskID,CustomerID,ActionTypeID,DoneStatusID,MarketerID,Comment,ToDoDate,insertdate,Lastupdate,FollowUpInsertDate)'+
+                    ' values(@@IDENTITY,'+IntToStr(gCustomerId)+',47,3,'+IntToStr(_MarketerID)+','''+' »«ê ' + IntToStr(gCaseId) +'_'+' Ê÷⁄Ì  '+dblStatusId.Text+'_'+ mmoDescription.text+''','''+_Today+''',getdate(),GetDate()'+','''+_Today+'''' +') ';
+
+
+    ExecSQL;
   end;
   ShowMessage('ﬂ«— À»  ‘œÂ');
   ModalResult := mrok;
 end;
 
-constructor TfrTask.Create(Aowner: TComponent; CaseId: Integer;CaseType :Integer);
+constructor TfrTask.Create(Aowner: TComponent; CaseId: Integer;CaseType :Integer;CustomerId : Integer  = 0);
 begin
  inherited create(AOwner);
  gCaseId := CaseId;
+ gCustomerId := CustomerId ;
   with dm.UserByCaseFilter do
   begin
     Close;

@@ -116,7 +116,8 @@ begin
 
             QrSearch.Locate(KeyField,Result,[]);
 
-         end;
+         end
+         else Result := '0';
       end
          else
          begin

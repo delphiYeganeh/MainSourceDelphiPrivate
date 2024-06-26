@@ -100,6 +100,7 @@ uses
   UCustomerReport in 'UCustomerReport.pas' {frCustomerReport},
   CancleReportU in 'CancleReportU.pas' {FrCancleReport},
   YShamsiDate in '..\Vcl\YShamsiDate.pas',
+  KimiyaEdit in '..\Vcl\Kimiya\KimiyaEdit.pas',
   YInputQuery in '..\Yeganeh Shared\YInputQuery.pas' {YInputQueryF},
   ImageUnit in 'ImageUnit.pas' {ImageForm},
   UsersSequenceUnit in 'UsersSequenceUnit.pas' {FUsersSequence},
@@ -132,7 +133,12 @@ uses
   URefrenceInPerson in 'URefrenceInPerson.pas' {FRefrenceInPerson},
   UAssessment in 'UAssessment.pas' {FAssessment},
   UFactorAddress in 'ACC\UFactorAddress.pas' {FFactorAddress},
-  UReportInPerson in 'Reports\UReportInPerson.pas' {FReportInPerson};
+  UReportInPerson in 'Reports\UReportInPerson.pas' {FReportInPerson},
+  UVersionProduct in 'UVersionProduct.pas' {FVersionProduct},
+  UToRefer in 'UToRefer.pas' {FToRefer},
+  UUpdateJobStatus in 'UUpdateJobStatus.pas' {FUpdateJobStatus};
+
+// ReCommiteDialog in 'ReCommitedialog.pas' {RecommiteSave};
 
 {$R *.res}
 
@@ -146,6 +152,7 @@ begin
   Application.CreateForm(TfrAttachments, frAttachments);
   Application.CreateForm(TfrCustomerReport, frCustomerReport);
 
+  // Application.CreateForm(TRecommiteSave, RecommiteSave);
   // Application.CreateForm(TFrCancleReport, FrCancleReport);
   Application.CreateForm(TYInputQueryF, YInputQueryF);
   Application.Run;

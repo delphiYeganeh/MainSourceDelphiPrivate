@@ -205,10 +205,9 @@ type
     grbReference: TGroupBox;
     dblUserRefrence: TDBLookupComboBox;
     btnRefer: TBitBtn;
-    GroupBox1: TGroupBox;
+    GroupBoxEdit: TGroupBox;
     Label38: TLabel;
     Label36: TLabel;
-    BitBtn4: TBitBtn;
     DBShamsiDateEdit1: TDBShamsiDateEdit;
     dblCaseStatus: TDBLookupComboBox;
     btnFinishCase: TBitBtn;
@@ -219,11 +218,6 @@ type
     Panel8: TPanel;
     btnSaveReference: TBitBtn;
     btnRefrenceCancel: TBitBtn;
-    grbCaseFinish: TGroupBox;
-    mmoCompleteComment: TMemo;
-    Panel4: TPanel;
-    btnSaveCaseFinish: TBitBtn;
-    btnCaseFinishCancel: TBitBtn;
     ContractTabSheet: TxpTabSheet;
     Panel6: TPanel;
     xpBitBtn7: TBitBtn;
@@ -293,19 +287,13 @@ type
     BitBtn9: TBitBtn;
     PinFollowGrid: TYDBGrid;
     pnlSearchFollow: TxpPanel;
-    Label6: TLabel;
-    Label7: TLabel;
     Label5: TLabel;
     Label8: TLabel;
     Label10: TLabel;
     Label11: TLabel;
     Label9: TLabel;
     Label40: TLabel;
-    SpeedButton5: TSpeedButton;
-    SpeedButton6: TSpeedButton;
     Label41: TLabel;
-    BDate: TShamsiDateEdit;
-    Edate: TShamsiDateEdit;
     DonStatus: TComboBox;
     Comment: TEdit;
     Bsuccess: TEdit;
@@ -324,7 +312,7 @@ type
     BitBtn5: TBitBtn;
     btnContract: TBitBtn;
     btnCustomerReportX: TBitBtn;
-    BitBtn8: TBitBtn;
+    BitBtnCase: TBitBtn;
     Panel1: TPanel;
     Splitter1: TSplitter;
     SplitterCity: TSplitter;
@@ -400,6 +388,38 @@ type
     NCall: TMenuItem;
     N81: TMenuItem;
     N82: TMenuItem;
+    TabCartabl: TTabSheet;
+    N83: TMenuItem;
+    N84: TMenuItem;
+    btnCartabl: TxpBitBtn;
+    RGTypeReport: TRadioGroup;
+    Label43: TLabel;
+    edtCustomerNo: TEdit;
+    Label44: TLabel;
+    edtCustomerName: TEdit;
+    pnlTime: TPanel;
+    Label6: TLabel;
+    BDate: TShamsiDateEdit;
+    SpeedButton5: TSpeedButton;
+    Label7: TLabel;
+    Edate: TShamsiDateEdit;
+    SpeedButton6: TSpeedButton;
+    grbCaseFinish: TGroupBox;
+    mmoCompleteComment: TMemo;
+    Panel4: TPanel;
+    btnSaveCaseFinish: TBitBtn;
+    btnCaseFinishCancel: TBitBtn;
+    qryMyTasksCustomerID: TIntegerField;
+    qryMyTasksFollowUpID: TIntegerField;
+    qryMyTasksIsBug: TBooleanField;
+    qryMyTasksCompanyName: TStringField;
+    BitBtn8: TBitBtn;
+    SpeedButton13: TSpeedButton;
+    btnReferEdit: TBitBtn;
+    qryMyTasksAssignedComment: TStringField;
+    qryMyTasksTaskComment: TStringField;
+    RGCartablType: TRadioGroup;
+    qryMyTasksAssignUserTitle: TStringField;
     procedure AinsertExecute(Sender: TObject);
     procedure Action6Execute(Sender: TObject);
     procedure ApropertyExecute(Sender: TObject);
@@ -555,7 +575,6 @@ type
       State: TGridDrawState; var F: TFont);
     procedure BitBtn6Click(Sender: TObject);
     procedure N59Click(Sender: TObject);
-    procedure BitBtn4Click(Sender: TObject);
     procedure btnRefrenceCancelClick(Sender: TObject);
     procedure btnReferClick(Sender: TObject);
     procedure dbgMyTasksCellClick(Column: TColumn);
@@ -574,7 +593,7 @@ type
     procedure BtnAllActClick(Sender: TObject);
     procedure N60Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
-    procedure BitBtn8Click(Sender: TObject);
+    procedure BitBtnCaseClick(Sender: TObject);
     procedure dblStateKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -621,6 +640,18 @@ type
     procedure btntabContractClick(Sender: TObject);
     procedure NCallClick(Sender: TObject);
     procedure N82Click(Sender: TObject);
+    procedure N84Click(Sender: TObject);
+    procedure TabCartablShow(Sender: TObject);
+    procedure btnCartablClick(Sender: TObject);
+    procedure RGTypeReportClick(Sender: TObject);
+    procedure BitBtn8Click(Sender: TObject);
+    procedure SpeedButton13Click(Sender: TObject);
+    procedure btnReferEditClick(Sender: TObject);
+    procedure dbgMyTasksNeedFontCondition(Column: TColumn;
+      State: TGridDrawState; var F: TFont);
+    procedure RGCartablTypeClick(Sender: TObject);
+    procedure dbgMyTasksNeedColorCondition(Column: TColumn;
+      State: TGridDrawState; var Color: TColor);
 
   private
     qrydblsrchContractType :TADOQuery;
@@ -631,10 +662,11 @@ type
     { TODO -oparsa : 14030126 }
     procedure SetdblContractType;
     Function  LoadImageField(Field:TField;Path:String):Boolean;
-    Function MakeStrSearch(s:string):string;
+    Function  MakeStrSearch(s:string):string;
     Procedure CalcRecourdCount;
-    Function MakeFilterString :WideString;
+    Function  MakeFilterString :WideString;
     procedure SetColorForm ;
+    procedure RunTaskQuery (TypeR : Integer=1);
   public
     GroupId: integer;
     CityId: integer;
@@ -668,7 +700,8 @@ Uses Telinputunit, dmu,  about, Report, ReportPhone,
     USMSEndContract, SMSBirthDateU, SMSAutoTextU, TasksTreeUnit,
     uCategoryEdit, uLockSoftware, untCustStatusReport, StoreFM,
     SecendArtGroupFM, UnitFM, ArtServiceFM, ChequeFM, EnterDataFM, FactorFM,
-    USaleReport, UThemColor, FirstArtGroupFM, UCallUser, UReportInPerson;
+    USaleReport, UThemColor, FirstArtGroupFM, UCallUser, UReportInPerson,
+  UVersionProduct, URefrenceInPerson, UToRefer, UUpdateJobStatus;
 
 {$R *.dfm}
 
@@ -757,22 +790,26 @@ begin
   Yeganehmenu.Visible:=False;
   NHost.Visible := false;       // Amin 1391/10/04
   NHostGroup.Visible := false;  // Amin 1391/10/04
-  BitBtn8.Visible := false;  // Amin 1391/10/04
+  //BitBtnCase.Visible := false;  // Amin 1391/10/04
   N37.Visible:=False;
   N67.Visible:=True;
   N67.Enabled:=True;
   NHost.Visible:=False;
   NHostGroup.Visible:=False;
-  TabSheet1.Visible:=False;
+  //TabSheet1.Visible:=False;
   if UpperCase(_AreYouYeganeh) =UpperCase('True') Then
   begin
     Yeganehmenu.Visible:=TRUE;
     NHost.Visible := true;       // Amin 1391/10/04
     NHostGroup.Visible := true;  // Amin 1391/10/04
-    BitBtn8.Visible := true;  // Amin 1391/10/04
+    //BitBtnCase.Visible := true;  // Amin 1391/10/04
     TabSheet1.Visible:=True;
     NHost.Visible:=True;
     NHostGroup.Visible:=True;
+  end
+  else
+  begin
+    BitBtnCase.Visible := false; 
   end;
   N57.Visible:=False;
 {   if HasAccessToAllFollow then
@@ -822,9 +859,10 @@ end;
 procedure TMainForm.FormShow(Sender: TObject);
 var fltr:String;
    tmpstr : string;
+   STR1,STR2 :string;
 begin
 
-  pgcMain.ActivePage := xpTabSheet2; 
+  pgcMain.ActivePage := xpTabSheet2;
   { TODO -oparsa : 14030201 }
   oldTopRecord :=  0 ;
   { TODO -oparsa : 14030201 }
@@ -863,27 +901,38 @@ begin
    N79.Visible :=  False;
    N80.Visible :=  False;
    CallAccess.Visible := _UserCallAccess ;
+
+   RunTaskQuery(1) ;
+      (*
+   STR1 := ' Ê÷ÌÕ«  «—Ã«⁄ œÂ‰œÂ : '+ #13;
+   STR2 := #13#13  +' Ê÷ÌÕ«  «‰Ã«„ œÂ‰œÂ : ' +#13;
+
    With qryMyTasks do
    Begin
-    Close;
-    SQL.Text:=' Select t.*,CaseTitle,ct.CaseTypeTitle,cp.CasePriorityTitle,ts.TaskStatusTitle,p.ProductTitle,ct.CaseTypeId ,p.ProductId,cases.registerUserId,cases.Completed,Cases.Comment AS CasesComment,cp.CasePriorityID '
-            + ' From Tasks t Left Join Cases on Cases.Caseid = T.CaseId '
-            + ' LEFT JOIN TaskStatus ts ON ts.TaskStatusID = T.StatusId  '
-            + ' LEFT JOIN CasePriority cp ON cp.CasePriorityID = Cases.CasePriorityId '
-            + ' LEFT JOIN CaseType ct ON ct.CaseTypeID = Cases.CaseTypeID '
-            + ' LEFT JOIN Product p ON p.ProductID = Cases.ProductId '
-            + ' Where AssignedUserId = '+IntToStr(_UserID)+' and (IsNull(LTrim(RTrim(ToDoDate)),'''') = '''') and Completed = 0 ';
-    Open;
-    First;
-    With dm.UserByCaseFilter do
-    Begin
       Close;
-        Parameters.ParamByName('CaseTypeId1').Value := qryMyTasksCaseTypeId.Value;
-        Parameters.ParamByName('CaseTypeId2').Value := qryMyTasksCaseTypeId.Value;
-        Parameters.ParamByName('UserId').Value := _UserID;
+      SQL.Text:=' Select t.*,CaseTitle,ct.CaseTypeTitle,cp.CasePriorityTitle,ts.TaskStatusTitle,p.ProductTitle,ct.CaseTypeId ,p.ProductId,cases.registerUserId,'
+              + ' cases.Completed,Cases.Comment AS CasesComment,cp.CasePriorityID ,Cases.CustomerID,Cases.FollowUpID,Cases.IsBug,c.CompanyName,t.AssignedComment, '
+              + ' ''' +STR1+''' '+'+ ISNULL(t.Comment,'''') +'+ ' ''' +STR2+ ''' '+'+ ISNULL(t.AssignedComment,'''') as TaskComment '
+              + ' From Tasks t Left Join Cases on Cases.Caseid = T.CaseId '
+              + ' LEFT JOIN TaskStatus ts ON ts.TaskStatusID = T.StatusId  '
+              + ' LEFT JOIN CasePriority cp ON cp.CasePriorityID = Cases.CasePriorityId '
+              + ' LEFT JOIN CaseType ct ON ct.CaseTypeID = Cases.CaseTypeID '
+              + ' LEFT JOIN Product p ON p.ProductID = Cases.ProductId '
+              + ' LEFT OUTER JOIN  Customer AS c ON c.CustomerID = Cases.CustomerID '
+              + ' Where AssignedUserId = '+IntToStr(_UserID)+' and (IsNull(LTrim(RTrim(ToDoDate)),'''') = '''') and Completed = 0 '
+              + ' ORDER BY CP.CasePriorityId,t.EstimatedDate,  t.AssignedDate ';
       Open;
-    End;
+      First;
+      With dm.UserByCaseFilter do
+      Begin
+        Close;
+          Parameters.ParamByName('CaseTypeId1').Value := qryMyTasksCaseTypeId.Value;
+          Parameters.ParamByName('CaseTypeId2').Value := qryMyTasksCaseTypeId.Value;
+          Parameters.ParamByName('UserId').Value := _UserID;
+        Open;
+      End;
    End;
+    *)
    SetMarketerRate;
    StatusBar1.Panels[4].Text:='ò«—»— :'+_UserName;
    StatusBar1.Panels[0].Text :='‰”ŒÂ :'+ _SoftVersion+COPY(_SoftVersionDB,1,1)+'.'+ COPY(_SoftVersionDB,2,1);
@@ -997,6 +1046,13 @@ begin
      end;
    end;
    { TODO -oparsa : 14030204 }
+   Dm.tblTaskStatus.Close;;
+   Dm.tblTaskStatus.Open;
+
+   btnImageBR.Visible := False ;
+   btnFinishCase.Visible := False ;
+   //btnReferInsert .Enabled := False ;
+
 End;
 
 Function TMainForm.MakeStrSearch(s:string):string;
@@ -1275,9 +1331,9 @@ begin
       DonStatus.ItemIndex:=0;
    FollowGrid.Columns[7].Visible:=DonStatus.ItemIndex=0;
    if ShowAction.Checked then
-      Dm.RefreshFollowUP(BDate.Text,Edate.Text,DonStatus.ItemIndex,ActionType.KeyValue,StrToInt( Bsuccess.Text),StrToInt(Esuccess.Text),Comment.Text,DonComment.Text,_CurrentMarketerID, chkCommentType.Checked,groupID) // Amin 1391/08/25
+      Dm.RefreshFollowUP(BDate.Text,Edate.Text,DonStatus.ItemIndex,ActionType.KeyValue,StrToInt( Bsuccess.Text),StrToInt(Esuccess.Text),Comment.Text,DonComment.Text,_CurrentMarketerID, chkCommentType.Checked,groupID,trim(edtCustomerName.Text),ifthen((trim(edtCustomerNo.Text) <> ''),trim(edtCustomerNo.Text) ,'0') ) // Amin 1391/08/25
    else
-      Dm.RefreshFollowUP(BDate.Text,Edate.Text,DonStatus.ItemIndex,0 ,StrToInt( Bsuccess.Text),StrToInt(Esuccess.Text),Comment.Text,DonComment.Text,_CurrentMarketerID, chkCommentType.Checked,groupID); // Amin 1391/08/25
+      Dm.RefreshFollowUP(BDate.Text,Edate.Text,DonStatus.ItemIndex,0 ,StrToInt( Bsuccess.Text),StrToInt(Esuccess.Text),Comment.Text,DonComment.Text,_CurrentMarketerID, chkCommentType.Checked,groupID,trim(edtCustomerName.Text),ifthen((trim(edtCustomerNo.Text) <> ''),trim(edtCustomerNo.Text) ,'0') ); // Amin 1391/08/25
 if Dm.Select_FollowUP_By_Date.RecordCount > 0 then
       StatusBar1.Panels[2].Text := '  ⁄œ«œ ' + IntToStr(Dm.Select_FollowUP_By_Date.RecordCount)
 else
@@ -2551,16 +2607,6 @@ begin
       ShowModal;
 end;
 
-procedure TMainForm.BitBtn4Click(Sender: TObject);
-begin
-  inherited;
-  if qryMyTasks.state in [dsedit,dsinsert] then
-  begin
-    qryMyTasks.Post;
-    qryMyTasks.Requery;
-  end;
-end;
-
 procedure TMainForm.btnRefrenceCancelClick(Sender: TObject);
 begin
   inherited;
@@ -2582,7 +2628,7 @@ end;
 procedure TMainForm.dbgMyTasksCellClick(Column: TColumn);
 begin
   inherited;
-grbReferenceComment.Visible :=False;
+  grbReferenceComment.Visible :=False;
 
 end;
 
@@ -2602,10 +2648,22 @@ begin
      ParamByName('@UserRefrence') .Value := dblUserRefrence.KeyValue;
      ExecProc;
      NewTaskId := ParamValues['@RETURN_VALUE'];
+
+     with TADOQuery.Create(nil) do
+     begin
+        Connection := Dm.YeganehConnection;
+      // if DBchIsBug.Checked then
+         SQL.Text := ' insert into dbo.FollowUp (TaskID,CustomerID,ActionTypeID,DoneStatusID,MarketerID,Comment,ToDoDate,insertdate,Lastupdate,FollowUpInsertDate)'+
+                     ' values('+IntToStr(NewTaskId)+',(SELECT top 1 CustomerID FROM [dbo].[Cases] WHERE CaseID = '+qryMyTasksCaseId.AsString+'),48,3,'+IntToStr(_MarketerID)+','''+' »«ê ' + qryMyTasksCaseId.AsString +'‹ «—”«· »Â ò«— «»·  '+dblUserRefrence.Text+' ‹ '+ mmoDescription.text+''','''+_Today+''',getdate(),GetDate()'+','''+_Today+'''' +') ';
+
+       ExecSQL;
+     end;
+
   end;
+  
   if messageShowString('ﬂ«— À»  ê—œÌœ °¬Ì« ÅÌÊ” Ì »—«Ì «Ì‰ﬂ«— „ÌŒÊ«ÂÌœ «÷«›Â ﬂ‰Ìœø',True) then
      with TfrAttachments.create(Application,1,NewTaskId,false) do
-             ShowModal;
+         ShowModal;
 
   grbReferenceComment.Visible :=false;
   qryMyTasks.Requery;
@@ -2627,8 +2685,27 @@ end;
 procedure TMainForm.dbgMyTasksDblClick(Sender: TObject);
 begin
   inherited;
-if qryMyTasks.RecordCount > 0 then
-  with  TfrCaseAdd.Create(Self,qryMyTasksCaseId.Value,qryMyTasksCaseTitle.Text,qryMyTasksProductId.Value,qryMyTasksCaseTypeId.Value,qryMyTasksregisterUserId.value,qryMyTasksCompleted.value,qryMyTasksComment.Text,qryMyTasksCasePriorityID.AsInteger) do
+  (*
+  if qryMyTasksAssignedUserId.AsInteger <> _UserID then
+  begin
+    ShowMessage(' ”ò „Ê—œ ‰Ÿ— „—»Êÿ »Â ò«—»— Ã«—Ì ‰„Ì »«‘œ ');
+    Exit;
+  end;
+        *)
+  if dblCaseStatus.KeyValue = 10 then
+  begin
+    Application.CreateForm(TFRefrenceInPerson, FRefrenceInPerson);
+    FRefrenceInPerson.FollowUpId          := qryMyTasksFollowUpID.Asinteger ;
+    FRefrenceInPerson.CustomerId          := qryMyTasksCustomerID.Asinteger ;
+    FRefrenceInPerson.ProductsIdSTR       := qryMyTasksProductId.AsString ;
+    FRefrenceInPerson.DBECompanyName.Text := qryMyTasksCompanyName.AsString;
+    FRefrenceInPerson.DBEProducts.Text    := qryMyTasksProductTitle.AsString ;
+    FRefrenceInPerson.ShowModal;
+    FRefrenceInPerson.Free;
+  end
+  else
+  if qryMyTasks.RecordCount > 0 then
+    with  TfrCaseAdd.Create(Self,qryMyTasksCaseId.Value,qryMyTasksCaseTitle.Text,qryMyTasksProductId.Value,qryMyTasksCaseTypeId.Value,qryMyTasksregisterUserId.value,qryMyTasksCompleted.value,qryMyTasksCasesComment.Text,qryMyTasksCasePriorityID.AsInteger) do
             ShowModal;
 
 end;
@@ -2636,6 +2713,7 @@ end;
 procedure TMainForm.btnCasesAllClick(Sender: TObject);
 begin
   inherited;
+  
   with TfrCase.Create(Application,true) do
       ShowModal;
 
@@ -2651,6 +2729,7 @@ begin
       grbCaseFinish.Visible :=True;
   end;
 end;
+
 procedure TMainForm.btnSaveCaseFinishClick(Sender: TObject);
 begin
   inherited;
@@ -2662,8 +2741,14 @@ begin
   begin
      Connection := Dm.YeganehConnection;
      SQL.Text :='Update Cases set Completed = 1,CompleteDate = '''+_Today+''',CompleteComment= '''+mmoCompleteComment.Text+''' where caseId = '+qryMyTasksCaseId.AsString;
+
+     SQL.Text := SQL.Text + ' insert into dbo.FollowUp (TaskID,CustomerID,ActionTypeID,DoneStatusID,MarketerID,Comment,ToDoDate,insertdate,Lastupdate,FollowUpInsertDate)'+
+              ' values(0,(SELECT top 1 CustomerID FROM [dbo].[Cases] WHERE CaseID = '+qryMyTasksCaseId.AsString+'),49,2,'+IntToStr(_MarketerID)+','''+' »«ê ' + qryMyTasksCaseId.AsString +' ‹ « „«„ ‹ '+ mmoCompleteComment.text+''','''+_Today+''',getdate(),GetDate()'+','''+_Today+'''' +') ';
+
+
     ExecSQL;
   end;
+
   qryMyTasks.Requery;
   grbCaseFinish.Visible :=false;
 end;
@@ -2779,10 +2864,10 @@ begin
 //  SetMarketerRate;
 end;
 
-procedure TMainForm.BitBtn8Click(Sender: TObject);
+procedure TMainForm.BitBtnCaseClick(Sender: TObject);
 begin
   inherited;
-   with TfrCase.Create(Application,false) do
+   with TfrCase.Create(Application,false,True) do
    begin
       _insertMode:=true;
       ShowModal;
@@ -3347,9 +3432,23 @@ begin
   pnlSearchContract.TitleStartColor :=  _Color3;
   pnlSearchContract.TitleEndColor   :=  _Color4;
 
+  xpPanel1.StartColor := _Color1 ;
+  xpPanel1.EndColor   := _Color2 ;
+
+  xpPanel1.TitleStartColor :=  _Color3;
+  xpPanel1.TitleEndColor   :=  _Color4;
+
+  pnlDescTask.StartColor := _Color1 ;
+  pnlDescTask.EndColor   := _Color2 ;
+
+  pnlDescTask.TitleStartColor :=  _Color3;
+  pnlDescTask.TitleEndColor   :=  _Color4;
+
+
   btnCustomer.EndColor    :=  _Color1 ;
   btnDaily.EndColor       :=  _Color1 ;
   btntabContract.EndColor :=  _Color1 ;
+  btnCartabl.EndColor     :=  _Color1 ;
 
   if (pgcMain.ActivePage.PageIndex  =  3)  then
       btnCustomer.EndColor :=  _Color2
@@ -3375,6 +3474,7 @@ begin
   btnCustomer.EndColor    :=  _Color2 ;
   btnDaily.EndColor       :=  _Color1 ;
   btntabContract.EndColor :=  _Color1 ;
+  btnCartabl.EndColor     :=  _Color1 ;  
 
 end;
 
@@ -3385,6 +3485,7 @@ begin
   btnCustomer.EndColor    :=  _Color1 ;
   btnDaily.EndColor       :=  _Color2 ;
   btntabContract.EndColor :=  _Color1 ;
+  btnCartabl.EndColor     :=  _Color1 ;  
 end;
 
 procedure TMainForm.btntabContractClick(Sender: TObject);
@@ -3393,6 +3494,7 @@ begin
   pgcMain.ActivePage      := ContractTabSheet;
   btnCustomer.EndColor    :=  _Color1 ;
   btnDaily.EndColor       :=  _Color1 ;
+  btnCartabl.EndColor     :=  _Color1 ;  
   btntabContract.EndColor :=  _Color2 ;
 end;
 
@@ -3410,6 +3512,214 @@ begin
   inherited;
   Application.CreateForm(TFReportInPerson, FReportInPerson);
   FReportInPerson.Showmodal;
+end;
+
+procedure TMainForm.N84Click(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TFVersionProduct, FVersionProduct);
+  FVersionProduct.Showmodal;
+end;
+
+procedure TMainForm.TabCartablShow(Sender: TObject);
+begin
+  inherited;
+   pgcMain.ActivePage := TabSheet1;
+end;
+
+procedure TMainForm.btnCartablClick(Sender: TObject);
+begin
+  inherited;
+  pgcMain.ActivePage := TabSheet1;
+  btnCustomer.EndColor    :=  _Color1 ;
+  btnDaily.EndColor       :=  _Color1 ;
+  btntabContract.EndColor :=  _Color1 ;
+  btnCartabl.EndColor     :=  _Color2 ;
+  qryMyTasks.Requery;
+end;
+
+procedure TMainForm.RGTypeReportClick(Sender: TObject);
+begin
+  inherited;
+  case  RGTypeReport.ItemIndex of
+  0:begin
+    BDate.Text :=copy(_today,1,8)+'01';
+    eDate.Text :=copy(_today,1,8)+'29' ;
+  end;
+  1:begin
+    BDate.Text := ShamsiIncDate(_today,0,0,-1);
+    Edate.Text := ShamsiIncDate(_today,0,0,-1);
+  end ;
+  2:begin
+    BDate.Text := '1300/01/01';
+    Edate.Text := _today;
+  end  ;
+  3: begin
+    BDate.Text := _today;
+    Edate.Text := _today;
+  end     ;
+  4: begin
+    BDate.Text := ShamsiIncDate(_today,0,0,1);
+    Edate.Text := ShamsiIncDate(_today,0,0,1);
+  end      ;
+  5:begin
+    BDate.Text := ShamsiIncDate(_today,0,0,-ShamsidayInWeek(_today));
+    Edate.Text := ShamsiIncDate(_today,0,0,7-ShamsidayInWeek(_today));
+  end    ;
+  end;  
+  pnlTime.Enabled :=  RGTypeReport.ItemIndex = 0 ;
+
+//
+end;
+
+procedure TMainForm.BitBtn8Click(Sender: TObject);
+begin
+  inherited;
+//
+  if qryMyTasksAssignedUserId.AsInteger <> _UserID then
+  begin
+    ShowMessage(' ”ò „Ê—œ ‰Ÿ— „—»Êÿ »Â ò«—»— Ã«—Ì ‰„Ì »«‘œ ');
+    Exit;
+  end;
+
+  if qryMyTasks.RecordCount = 0 then Exit ;
+
+  if (dblCaseStatus.KeyValue = 10) and (qryMyTasksCaseTypeId.AsInteger = 9 ) then
+  begin
+    Application.CreateForm(TFRefrenceInPerson, FRefrenceInPerson);
+    FRefrenceInPerson.FollowUpId          := qryMyTasksFollowUpID.Asinteger ;
+    FRefrenceInPerson.CustomerId          := qryMyTasksCustomerID.Asinteger ;
+    FRefrenceInPerson.ProductsIdSTR       := qryMyTasksProductId.AsString ;
+    FRefrenceInPerson.DBECompanyName.Text := qryMyTasksCompanyName.AsString;
+    FRefrenceInPerson.DBEProducts.Text    := qryMyTasksProductTitle.AsString ;
+    FRefrenceInPerson.ShowModal;
+    FRefrenceInPerson.Free;
+  end
+  else
+  begin
+
+    Application.CreateForm(TFToRefer, FToRefer);
+    FToRefer.CaseStatusItem := 0 ;
+    FToRefer.ShamsiDate := '' ;
+    FToRefer.TaskId  := qryMyTasksTaskID.AsInteger ;
+    FToRefer.ShowModal;
+    FToRefer.Free;
+  end  ;
+
+  qryMyTasks.Requery;
+end;
+
+procedure TMainForm.SpeedButton13Click(Sender: TObject);
+begin
+  inherited;
+   DBShamsiDateEdit1.Text := MssCalendarPro1.Execute('/');
+   DBShamsiDateEdit1.SetFocus;
+end;
+
+procedure TMainForm.btnReferEditClick(Sender: TObject);
+ var TaskId : Integer;
+begin
+  inherited;
+
+
+  if qryMyTasksAssignedUserId.AsInteger <> _UserID then
+  begin
+    ShowMessage(' ”ò „Ê—œ ‰Ÿ— „—»Êÿ »Â ò«—»— Ã«—Ì ‰„Ì »«‘œ ');
+    Exit;
+  end;
+
+  Application.CreateForm(TFUpdateJobStatus, FUpdateJobStatus);
+
+  FUpdateJobStatus.CaseStatusItem := qryMyTasksStatusId.AsInteger ;
+  FUpdateJobStatus.ShamsiDate := qryMyTasksEstimatedDate.AsString ;
+  FUpdateJobStatus.TaskId  := qryMyTasksTaskID.AsInteger ;
+  FUpdateJobStatus.ShowModal;
+  FUpdateJobStatus.Free;
+
+  TaskId := qryMyTasksTaskID.AsInteger ;
+  qryMyTasks.Requery;
+  qryMyTasks.Locate('TaskID',TaskId,[])
+
+end;
+
+procedure TMainForm.dbgMyTasksNeedFontCondition(Column: TColumn;
+  State: TGridDrawState; var F: TFont);
+begin
+  inherited;
+   f.Color:=clBlack;
+   try
+     if (qryMyTasksCompleted.AsBoolean = False ) and (Trim(qryMyTasksEstimatedDate.AsString) <> '')  and (Trim(qryMyTasksEstimatedDate.AsString) < _Today) THEN
+         f.Color:=clred
+   except
+   end;
+end;
+
+procedure TMainForm.RGCartablTypeClick(Sender: TObject);
+begin
+  inherited;
+//
+  RunTaskQuery(RGCartablType.ItemIndex+1);
+end;
+
+procedure TMainForm.RunTaskQuery(TypeR : Integer=1);
+var
+   STR1,STR2,FilterStr :string;
+begin
+   STR1 := ' Ê÷ÌÕ«  «—Ã«⁄ œÂ‰œÂ : '+ #13;
+   STR2 := #13#13  +' Ê÷ÌÕ«  «‰Ã«„ œÂ‰œÂ : ' +#13;
+
+   if TypeR = 1 then
+     FilterStr :=  ' Where (IsNull(LTrim(RTrim(ToDoDate)),'''') = '''')  and AssignedUserId = '+IntToStr(_UserID) +' and Completed = 0  '
+   else
+   if TypeR = 2 then
+     FilterStr :=  ' where  AssignedUserId = '+IntToStr(_UserID)  +  ' '
+   else
+   if TypeR = 3 then
+     FilterStr :=  ' Where (IsNull(LTrim(RTrim(ToDoDate)),'''') = '''')  and Completed = 0 '
+   else
+   if TypeR = 4 then
+     FilterStr :=  ' '    ;
+
+   With qryMyTasks do
+   Begin
+      Close;
+      SQL.Text:=' Select t.*,CaseTitle,ct.CaseTypeTitle,cp.CasePriorityTitle,ts.TaskStatusTitle,p.ProductTitle,ct.CaseTypeId ,p.ProductId,cases.registerUserId,'
+              + ' cases.Completed,Cases.Comment AS CasesComment,cp.CasePriorityID ,Cases.CustomerID,Cases.FollowUpID,Cases.IsBug,c.CompanyName,t.AssignedComment, '
+              + ' ''' +STR1+''' '+'+ ISNULL(t.Comment,'''') +'+ ' ''' +STR2+ ''' '+'+ ISNULL(t.AssignedComment,'''') as TaskComment  ,u.Title AssignUserTitle '
+              + ' From Tasks t Left Join Cases on Cases.Caseid = T.CaseId '
+              + ' LEFT JOIN TaskStatus ts ON ts.TaskStatusID = T.StatusId  '
+              + ' LEFT JOIN CasePriority cp ON cp.CasePriorityID = Cases.CasePriorityId '
+              + ' LEFT JOIN CaseType ct ON ct.CaseTypeID = Cases.CaseTypeID '
+              + ' LEFT JOIN Product p ON p.ProductID = Cases.ProductId '
+              + ' LEFT OUTER JOIN  Customer AS c ON c.CustomerID = Cases.CustomerID '
+              + ' LEFT JOIN  Users      u        ON u.Id = AssignedUserId  '
+              +  FilterStr
+              + ' ORDER BY CP.CasePriorityId,t.EstimatedDate,  t.AssignedDate ';
+      Open;
+      First;
+      With dm.UserByCaseFilter do
+      Begin
+        Close;
+          Parameters.ParamByName('CaseTypeId1').Value := qryMyTasksCaseTypeId.Value;
+          Parameters.ParamByName('CaseTypeId2').Value := qryMyTasksCaseTypeId.Value;
+          Parameters.ParamByName('UserId').Value := _UserID;
+        Open;
+      End;
+   End;
+   qryMyTasks.Requery;
+end;
+
+procedure TMainForm.dbgMyTasksNeedColorCondition(Column: TColumn;
+  State: TGridDrawState; var Color: TColor);
+begin
+  inherited;
+   Color:=clWindow;
+   try
+     if (qryMyTasksCompleted.AsBoolean) THEN
+         Color:=clMoneyGreen
+   except
+   end;
+
 end;
 
 end.

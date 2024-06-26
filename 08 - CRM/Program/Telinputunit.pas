@@ -521,27 +521,27 @@ begin
      qry:= TADOQuery.Create(nil);
      qry.Connection:= Dm.YeganehConnection;
 
-     qry.SQL.Text:= ' select * from (  select companyname cnt from [dbo].[Customer] where 1=2 ' ;
+     qry.SQL.Text:= ' select * from (  select companyname cnt,CustomerID from [dbo].[Customer] where 1=2 ' ;
      if Dm.Select_Customer_By_CustomerIDPhone.AsString <> '' then
-       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDPhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' )';
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDPhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' )';
      if Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString <> '' then
-       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString )+''' )';
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString )+''' )';
      if Dm.Select_Customer_By_CustomerIDMobilePhone.AsString <> '' then
-       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' ) ';
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' ) ';
      qry.SQL.Text:= qry.SQL.Text + ' ) t ';
      qry.Open;
      if qry.RecordCount > 0 then
      begin
        tempStr := '' ;
-       tempStr :=  qry.Fields[0].Value ;
+       tempStr :=  qry.Fields[0].AsString + '('+qry.Fields[1].AsString +')';
        tempStr :=  '  ·›‰ „‘ —Ì  ò—«—Ì '  +'"'+tempStr+'"'+  ' „Ì »«‘œ ° ¬Ì« „«Ì· »Â –ŒÌ—Â «ÿ·«⁄«  Â” Ìœø' ;
        if ShowMyMessage('ÅÌ€«„',tempStr,mbOKCancel,mtWarning) = mrCancel then
          abort;
      end;
 
-     qry.SQL.Text:= ' select * from (  select companyname cnt from [dbo].[Customer] where 1=2 '  ;
+     qry.SQL.Text:= ' select * from (  select companyname cnt,CustomerID  from [dbo].[Customer] where 1=2 '  ;
      if  ( Dm.Select_Customer_By_CustomerIDEmailAddress.AsString <> '') then
-       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and ( ltrim(rtrim(EmailAddress)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDEmailAddress.AsString ) +''' ) ';
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and ( ltrim(rtrim(EmailAddress)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDEmailAddress.AsString ) +''' ) ';
      qry.SQL.Text:= qry.SQL.Text + ' ) t ';
      qry.Open;
 
@@ -550,7 +550,7 @@ begin
      begin
        tempStr :=  qry.Fields[0].Value ;
        tempStr := '' ;
-       tempStr :=  qry.Fields[0].Value ;
+       tempStr :=  qry.Fields[0].AsString + '('+qry.Fields[1].AsString +')';
        tempStr :=  ' «Ì„Ì· „‘ —Ì  ò—«—Ì ' +'"'+tempStr+'"'+ '„Ì »«‘œ ° ¬Ì« „«Ì· »Â –ŒÌ—Â «ÿ·«⁄«  Â” Ìœø' ;
        if ShowMyMessage('ÅÌ€«„',tempStr,mbOKCancel,mtWarning) = mrCancel then
          abort;

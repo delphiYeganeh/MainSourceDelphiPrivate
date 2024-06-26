@@ -76,6 +76,14 @@ type
     btnSave: TBitBtn;
     btnAdd: TBitBtn;
     dbgUserList: TYDBGrid;
+    DBCheckBox10: TDBCheckBox;
+    DBCheckBox11: TDBCheckBox;
+    DBCheckBox12: TDBCheckBox;
+    DBCheckBox13: TDBCheckBox;
+    UserAccAcess: TBooleanField;
+    UserCallAccess: TBooleanField;
+    UserAssesstAccess: TBooleanField;
+    UserFactorAccess: TBooleanField;
     procedure Action11Execute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -96,6 +104,7 @@ type
       Shift: TShiftState);
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
 
     { Private declarations }
@@ -325,11 +334,25 @@ procedure TUserDefineF.FormCanResize(Sender: TObject; var NewWidth,
   NewHeight: Integer; var Resize: Boolean);
 begin
   { TODO -oparsa : 14030203 }
-  if (NewWidth < 568)  or (NewHeight < 552) then
+  if (NewWidth < 568)  or (NewHeight < 612) then
     Resize := False
   else Resize := True;
    { TODO -oparsa : 14030203 }
   inherited;
+
+end;
+
+procedure TUserDefineF.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
+
+  xpPanel1.StartColor := _Color1 ;
+  xpPanel1.EndColor   := _Color2 ;
+
+  xpPanel1.TitleStartColor :=  _Color3;
+  xpPanel1.TitleEndColor   :=  _Color4;
 
 end;
 

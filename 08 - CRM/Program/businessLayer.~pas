@@ -662,25 +662,26 @@ begin
    Begin
      TxtF := copy(textStr,1,pos('¡',TextStr)-1);
      TxtE := copy(textStr,pos('¡',TextStr),Length(TextStr)-length(TxtF)+1);
-  end else TxtF :=  textStr;
+   end
+   else TxtF :=  textStr;
    Txt:= copy(TxtF,1,(length(TxtF) mod 3))+'¡'+copy(TxtF,(length(TxtF) mod 3)+1,3 ) ;
    Result :=  Txt+TxtE;
-   end  else Result:=  textStr;
+   end
+   else Result:=  textStr;
  end
  else
-   if (copy(textStr,((iDiv - 1)*3)+(length(textStr) mod 3)+1,1) <> '¡') then
-   begin
-   if pos('¡',TextStr) <> 0 then
-   Begin
-     TxtF := copy(textStr,1,pos('¡',TextStr)-1);
-     TxtE := copy(textStr,pos('¡',TextStr),Length(TextStr)-length(TxtF)+1);
-   end else TxtF :=  textStr;
-   PriceText:= copy(TxtF,1,((iDiv - 1)*3)+(length(TxtF) mod 3) )+'¡'+copy(TxtF, ((iDiv - 1)*3)+(length(TxtF) mod 3)+1 ,( length(TxtF)-((iDiv - 1)*3)+(length(TxtF) mod 3) )) ;
-   Result := AddSeprator(PriceText+TxtE,iDiv-1)
-   end ;
+ if (copy(textStr,((iDiv - 1)*3)+(length(textStr) mod 3)+1,1) <> '¡') then
+ begin
+ if pos('¡',TextStr) <> 0 then
+ Begin
+   TxtF := copy(textStr,1,pos('¡',TextStr)-1);
+   TxtE := copy(textStr,pos('¡',TextStr),Length(TextStr)-length(TxtF)+1);
+ end
+ else TxtF :=  textStr;
+ PriceText:= copy(TxtF,1,((iDiv - 1)*3)+(length(TxtF) mod 3) )+'¡'+copy(TxtF, ((iDiv - 1)*3)+(length(TxtF) mod 3)+1 ,( length(TxtF)-((iDiv - 1)*3)+(length(TxtF) mod 3) )) ;
+ Result := AddSeprator(PriceText+TxtE,iDiv-1)
+ end ;
 end;
-
-
 
 Procedure OpenReportCancle(CancelReasonId,MarketerID,ProductID:INTEGER; InsertDateFrom, InsertDateTo,CancelDateFrom,CancelDateTo:String );
 Begin

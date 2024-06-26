@@ -176,7 +176,6 @@ inherited FrCityEdit: TFrCityEdit
             Visible = True
           end
           item
-            Alignment = taRightJustify
             Expanded = False
             FieldName = 'CountyTitle'
             Title.Alignment = taCenter
@@ -564,6 +563,7 @@ inherited FrCityEdit: TFrCityEdit
       Size = 1
     end
     object CityCountyTitle: TStringField
+      Alignment = taRightJustify
       FieldName = 'CountyTitle'
       Size = 200
     end

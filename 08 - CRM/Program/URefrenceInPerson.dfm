@@ -764,4 +764,105 @@ inherited FRefrenceInPerson: TFRefrenceInPerson
     Left = 588
     Top = 153
   end
+  object SpSelect_Cases: TADOStoredProc
+    Connection = Dm.YeganehConnection
+    CursorType = ctStatic
+    ProcedureName = 'Select_Case;1'
+    Parameters = <
+      item
+        Name = '@RegisterUserID'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end>
+    Left = 32
+    Top = 249
+    object SpSelect_CasesCaseID: TLargeintField
+      FieldName = 'CaseID'
+      ReadOnly = True
+    end
+    object SpSelect_CasesCaseTitle: TWideStringField
+      Alignment = taRightJustify
+      FieldName = 'CaseTitle'
+      Size = 50
+    end
+    object SpSelect_CasesComment: TWideStringField
+      FieldName = 'Comment'
+      Size = 250
+    end
+    object SpSelect_CasesProductId: TIntegerField
+      FieldName = 'ProductId'
+    end
+    object SpSelect_CasesProductVersion: TIntegerField
+      FieldName = 'ProductVersion'
+    end
+    object SpSelect_CasesCaseTypeID: TWordField
+      FieldName = 'CaseTypeID'
+    end
+    object SpSelect_CasesCasePriorityId: TWordField
+      FieldName = 'CasePriorityId'
+    end
+    object SpSelect_CasesCustomerID: TIntegerField
+      FieldName = 'CustomerID'
+    end
+    object SpSelect_CasesCaseOrigiranlId: TWordField
+      FieldName = 'CaseOrigiranlId'
+    end
+    object SpSelect_CasesRegisterDate: TWideStringField
+      FieldName = 'RegisterDate'
+      FixedChar = True
+      Size = 10
+    end
+    object SpSelect_CasesRegisterUserID: TIntegerField
+      FieldName = 'RegisterUserID'
+    end
+    object SpSelect_CasesProductTitle: TWideStringField
+      FieldName = 'ProductTitle'
+      Size = 100
+    end
+    object SpSelect_CasesCaseTypeTitle: TWideStringField
+      FieldName = 'CaseTypeTitle'
+      Size = 50
+    end
+    object SpSelect_CasesCasePriorityTitle: TWideStringField
+      FieldName = 'CasePriorityTitle'
+      Size = 50
+    end
+    object SpSelect_CasesCompanyName: TWideStringField
+      FieldName = 'CompanyName'
+      Size = 100
+    end
+    object SpSelect_CasesUserName: TWideStringField
+      FieldName = 'UserName'
+      Size = 50
+    end
+    object SpSelect_CasesCompleted: TBooleanField
+      FieldName = 'Completed'
+    end
+    object SpSelect_CasesCompleteDate: TWideStringField
+      FieldName = 'CompleteDate'
+      FixedChar = True
+      Size = 10
+    end
+    object SpSelect_CasesStatus: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Status'
+      Size = 50
+      Calculated = True
+    end
+    object SpSelect_CasesCompleteComment: TWideStringField
+      FieldName = 'CompleteComment'
+      Size = 300
+    end
+    object SpSelect_CasesCheckUserID: TIntegerField
+      FieldName = 'CheckUserID'
+    end
+    object SpSelect_CasesIsBug: TBooleanField
+      FieldName = 'IsBug'
+    end
+    object SpSelect_CasesFollowUpID: TIntegerField
+      FieldName = 'FollowUpID'
+    end
+  end
 end
