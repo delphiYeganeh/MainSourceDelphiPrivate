@@ -151,7 +151,7 @@ begin
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TfrAttachments, frAttachments);
   Application.CreateForm(TfrCustomerReport, frCustomerReport);
-  Application.CreateForm(TFUpdateJobStatus, FUpdateJobStatus);
+
   // Application.CreateForm(TRecommiteSave, RecommiteSave);
   // Application.CreateForm(TFrCancleReport, FrCancleReport);
   Application.CreateForm(TYInputQueryF, YInputQueryF);

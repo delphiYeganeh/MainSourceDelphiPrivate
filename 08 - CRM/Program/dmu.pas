@@ -949,8 +949,8 @@ Var
 //1    gContractPath :String;
 Const
      ProductID = 'Y_Crm';
-     _SoftVersion = '3.0.' ;//'2.4.';
-     _LastUpdate = '1403/03/13'; //'1393/08/20';
+     _SoftVersion = '4.0.0.0' ;//'2.4.';
+     _LastUpdate = '1403/04/06'; //'1393/08/20';
     procedure SetQueryDataSet(var DataSourceQry :TDataSource;var ReturnQry :TADOQuery;SQLText :String;QryConnection:TADOConnection;Field0Alignment :Boolean = False);
     Function AddImageField(Field:TField;Dlgfilter:String):String;
 

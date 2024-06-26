@@ -112,7 +112,7 @@ RootDir=
 [Version Info]
 IncludeVerInfo=1
 AutoIncBuild=0
-MajorVer=3
+MajorVer=4
 MinorVer=0
 Release=0
 Build=0
@@ -126,13 +126,13 @@ CodePage=1256
 [Version Info Keys]
 CompanyName=‘—ò  Ìê«‰Â
 FileDescription=CRM
-FileVersion=3.0.0.0
+FileVersion=4.0.0.0
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=CRM
 ProductName=
-ProductVersion=1.8.3.0
+ProductVersion=4.0.0.0
 Comments=
 [Excluded Packages]
 c:\program files (x86)\borland\delphi7\Projects\Bpl\dclfrxe7.bpl=FastReport 4.0 Exports

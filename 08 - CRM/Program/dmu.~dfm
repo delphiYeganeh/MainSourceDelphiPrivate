@@ -6765,12 +6765,15 @@ object Dm: TDm
       FieldName = 'groupTitle'
       Size = 100
     end
+    object Select_FollowUP_By_DateWorkPhoneOther: TStringField
+      FieldName = 'WorkPhoneOther'
+    end
   end
   object DSelect_FollowUP_By_Date: TDataSource
     AutoEdit = False
     DataSet = Select_FollowUP_By_Date
-    Left = 617
-    Top = 432
+    Left = 593
+    Top = 448
   end
   object Select_Contract_By_CustomerID: TADOStoredProc
     Connection = YeganehConnection
@@ -8868,7 +8871,7 @@ object Dm: TDm
     Parameters = <>
     SQL.Strings = (
       'SELECT * FROM marketer'
-      'WHERE IsActive_=1')
+      '')
     Left = 256
     Top = 176
     object MarketerMarketerID: TAutoIncField

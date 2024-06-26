@@ -246,6 +246,8 @@ type
     procedure PinClick(Sender: TObject);
     procedure btnRefrenceInPersonClick(Sender: TObject);
     procedure btnFactorClick(Sender: TObject);
+    procedure DBLookupComboBox1Enter(Sender: TObject);
+    procedure DBLookupComboBox1Exit(Sender: TObject);
   private
    Function  LoadImageField(Field:TField;Path:String):Boolean;
    procedure SetColorForm ;
@@ -382,6 +384,9 @@ end;
 procedure TFrFollowUp.BtnCancelClick(Sender: TObject);
 begin
   inherited;
+  Dm.Marketer.Filtered := False;
+  Dm.Marketer.Filter := '' ;
+  Dm.Marketer.Filtered := True;   
   close
 end;
 
@@ -443,6 +448,7 @@ begin
      //   treFollowUps.DataSource:= Dm.DSelect_FollowUP_By_CustomerID;
        // treFollowUps.Refresh;
      end;
+
 end;
 
 procedure TFrFollowUp.BitBtn1Click(Sender: TObject);
@@ -698,7 +704,7 @@ begin
     Dm.Marketer.Close;
     Dm.Marketer.SQL.Clear;
     Dm.Marketer.SQL.Add('SELECT * FROM marketer');
-    Dm.Marketer.SQL.Add('WHERE IsActive_=1');
+    //////Dm.Marketer.SQL.Add('WHERE IsActive_=1');
     Dm.Marketer.Open;
 
    if dbgFollow.DataSource.DataSet.RecordCount >0  then
@@ -1185,6 +1191,22 @@ begin
     else MessageDlg('áØİÇ í˜í ÇÒ Òíäå åÇí İÇ˜ÊæÑ/ íÔ İÇ˜ÊæÑ ÇäÊÎÇÈ äãÇííÏ',mtConfirmation,[mbyes],0)
   end
   else MessageDlg('áØİÇ ÇŞÏÇã ãæÑÏ äÙÑ ËÈÊ ˜äíÏ ÓÓ İÇ˜ÊæÑ ÑÇ ÏÑÌ äãÇííÏ',mtConfirmation,[mbyes],0)
+end;
+
+procedure TFrFollowUp.DBLookupComboBox1Enter(Sender: TObject);
+begin
+  inherited;
+  Dm.Marketer.Filtered := False;
+  Dm.Marketer.Filter := ' IsActive_=1 ' ;
+  Dm.Marketer.Filtered := True;
+end;
+
+procedure TFrFollowUp.DBLookupComboBox1Exit(Sender: TObject);
+begin
+  inherited;
+  Dm.Marketer.Filtered := False;
+  Dm.Marketer.Filter := '' ;
+  Dm.Marketer.Filtered := True; 
 end;
 
 end.

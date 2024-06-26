@@ -8871,7 +8871,7 @@ object Dm: TDm
     Parameters = <>
     SQL.Strings = (
       'SELECT * FROM marketer'
-      'WHERE IsActive_=1')
+      '')
     Left = 256
     Top = 176
     object MarketerMarketerID: TAutoIncField

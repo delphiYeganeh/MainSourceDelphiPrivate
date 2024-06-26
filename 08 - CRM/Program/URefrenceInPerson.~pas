@@ -107,6 +107,7 @@ type
     procedure BtnCancelClick(Sender: TObject);
     procedure btnDelEghdamatClick(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
    Function  LoadImageField(Field:TField;Path:String):Boolean;
   public
@@ -238,6 +239,10 @@ begin
 
   btnAssessment.Visible := _UserAssesstAcess ;
 
+  Dm.Marketer.Filtered := False;
+  Dm.Marketer.Filter := ' IsActive_=1 ' ;
+  Dm.Marketer.Filtered := True;  
+
 end;
 
 procedure TFRefrenceInPerson.BitBtn2Click(Sender: TObject);
@@ -315,8 +320,6 @@ begin
     Select_FollowUpInPersonLogDate.Value    := Dm.GetServerDate ;
     Select_FollowUpInPersonUserId.Value     := _UserID ;
 
-    Post;
-
     ////////
     if (State in [dsInsert]) then
     begin
@@ -355,6 +358,8 @@ begin
         ExecSQL;
       end;
     end;
+
+    Post;
     //////
 
     Close;
@@ -379,6 +384,15 @@ begin
     ShowMessage('ÅÌÊ”  „ÊÃÊœ ‰Ì” ');
     Result := False
   end;
+end;
+
+procedure TFRefrenceInPerson.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+  Dm.Marketer.Filtered := False;
+  Dm.Marketer.Filter := '' ;
+  Dm.Marketer.Filtered := True;
 end;
 
 end.

@@ -246,6 +246,8 @@ type
     procedure PinClick(Sender: TObject);
     procedure btnRefrenceInPersonClick(Sender: TObject);
     procedure btnFactorClick(Sender: TObject);
+    procedure DBLookupComboBox1Enter(Sender: TObject);
+    procedure DBLookupComboBox1Exit(Sender: TObject);
   private
    Function  LoadImageField(Field:TField;Path:String):Boolean;
    procedure SetColorForm ;
@@ -382,6 +384,9 @@ end;
 procedure TFrFollowUp.BtnCancelClick(Sender: TObject);
 begin
   inherited;
+  Dm.Marketer.Filtered := False;
+  Dm.Marketer.Filter := '' ;
+  Dm.Marketer.Filtered := True;   
   close
 end;
 
@@ -443,6 +448,7 @@ begin
      //   treFollowUps.DataSource:= Dm.DSelect_FollowUP_By_CustomerID;
        // treFollowUps.Refresh;
      end;
+
 end;
 
 procedure TFrFollowUp.BitBtn1Click(Sender: TObject);
@@ -557,6 +563,9 @@ begin
 
     //  treFollowUps.Refresh;  // Amin 1391/08/25
       {// Amin 1391/12/23 treFollowUps.DataSource:= Dm.DSelect_FollowUP_By_CustomerID;  // Amin 1391/08/25 }
+  Dm.Marketer.Filtered := False;
+  Dm.Marketer.Filter := '' ;
+  Dm.Marketer.Filtered := True;      
 end;
 
 procedure TFrFollowUp.AexitExecute(Sender: TObject);
@@ -698,7 +707,7 @@ begin
     Dm.Marketer.Close;
     Dm.Marketer.SQL.Clear;
     Dm.Marketer.SQL.Add('SELECT * FROM marketer');
-    Dm.Marketer.SQL.Add('WHERE IsActive_=1');
+    //////Dm.Marketer.SQL.Add('WHERE IsActive_=1');
     Dm.Marketer.Open;
 
    if dbgFollow.DataSource.DataSet.RecordCount >0  then
@@ -1010,9 +1019,9 @@ begin
   begin
   if messagedlg('»—«Ì Õ–› ›«Ì· „ÿ„∆‰ Â” Ìœ ø',mtWarning,[mbYes,mbAll,mbCancel], 0) = 6 then
   begin
-  dm.Select_FollowUP_By_CustomerID.Edit;
-  dm.Select_FollowUP_By_CustomerIDExcellAttachment.Clear;
-  dm.Select_FollowUP_By_CustomerID.Post;
+    dm.Select_FollowUP_By_CustomerID.Edit;
+    dm.Select_FollowUP_By_CustomerIDExcellAttachment.Clear;
+    dm.Select_FollowUP_By_CustomerID.Post;
   end;
   end
   else
@@ -1032,9 +1041,9 @@ begin
   begin
   if messagedlg('»—«Ì Õ–› ›«Ì· „ÿ„∆‰ Â” Ìœ ø',mtWarning,[mbYes,mbAll,mbCancel], 0) = 6 then
   begin
-  dm.Select_FollowUP_By_CustomerID.Edit;
-  dm.Select_FollowUP_By_CustomerIDPdfAttachment.Clear;
-  dm.Select_FollowUP_By_CustomerID.Post;
+    dm.Select_FollowUP_By_CustomerID.Edit;
+    dm.Select_FollowUP_By_CustomerIDPdfAttachment.Clear;
+    dm.Select_FollowUP_By_CustomerID.Post;
   end;
   end
   else
@@ -1185,6 +1194,22 @@ begin
     else MessageDlg('·ÿ›« ÌòÌ «“ ê“Ì‰Â Â«Ì ›«ò Ê—/ ÅÌ‘ ›«ò Ê— «‰ Œ«» ‰„«ÌÌœ',mtConfirmation,[mbyes],0)
   end
   else MessageDlg('·ÿ›« «ﬁœ«„ „Ê—œ ‰Ÿ— À»  ò‰Ìœ ”Å” ›«ò Ê— —« œ—Ã ‰„«ÌÌœ',mtConfirmation,[mbyes],0)
+end;
+
+procedure TFrFollowUp.DBLookupComboBox1Enter(Sender: TObject);
+begin
+  inherited;
+  Dm.Marketer.Filtered := False;
+  Dm.Marketer.Filter := ' IsActive_=1 ' ;
+  Dm.Marketer.Filtered := True;
+end;
+
+procedure TFrFollowUp.DBLookupComboBox1Exit(Sender: TObject);
+begin
+  inherited;
+  Dm.Marketer.Filtered := False;
+  Dm.Marketer.Filter := '' ;
+  Dm.Marketer.Filtered := True; 
 end;
 
 end.

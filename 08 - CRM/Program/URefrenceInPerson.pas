@@ -107,6 +107,7 @@ type
     procedure BtnCancelClick(Sender: TObject);
     procedure btnDelEghdamatClick(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
    Function  LoadImageField(Field:TField;Path:String):Boolean;
   public
@@ -237,6 +238,10 @@ begin
   MaskETimeInperson.Text := DBETimeInperson.Text        ;
 
   btnAssessment.Visible := _UserAssesstAcess ;
+
+  Dm.Marketer.Filtered := False;
+  Dm.Marketer.Filter := ' IsActive_=1 ' ;
+  Dm.Marketer.Filtered := True;  
 
 end;
 
@@ -379,6 +384,15 @@ begin
     ShowMessage('ÅÌÊ”  „ÊÃÊœ ‰Ì” ');
     Result := False
   end;
+end;
+
+procedure TFRefrenceInPerson.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+  Dm.Marketer.Filtered := False;
+  Dm.Marketer.Filter := '' ;
+  Dm.Marketer.Filtered := True;
 end;
 
 end.

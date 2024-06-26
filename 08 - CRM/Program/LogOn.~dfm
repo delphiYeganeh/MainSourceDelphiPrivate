@@ -2,7 +2,7 @@ object LoginForm: TLoginForm
   Tag = -10
   Left = 623
   Top = 230
-  Hint = #1578#1575#1585#1610#1582' '#1570#1582#1585#1610#1606' '#1608#1610#1585#1575#1610#1588' 84/02/03  '#1610#1711#1575#1606#1607
+  Hint = ' «—ÌŒ ¬Œ—Ì‰ ÊÌ—«Ì‘ 84/02/03  Ìê«‰Â'
   BiDiMode = bdRightToLeft
   BorderIcons = []
   BorderStyle = bsDialog
@@ -153,7 +153,7 @@ object LoginForm: TLoginForm
   KeyPreview = True
   OldCreateOrder = False
   ParentBiDiMode = False
-  Position = poDesktopCenter
+  Position = poScreenCenter
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
@@ -177,7 +177,7 @@ object LoginForm: TLoginForm
       Top = 4
       Width = 89
       Height = 19
-      Caption = #1606#1585#1605' '#1575#1601#1586#1575#1585' '#1605#1583#1610#1585#1610#1578
+      Caption = '‰—„ «›“«— „œÌ—Ì '
       Font.Charset = ARABIC_CHARSET
       Font.Color = 9711714
       Font.Height = -16
@@ -347,7 +347,7 @@ object LoginForm: TLoginForm
       Top = 4
       Width = 72
       Height = 19
-      Caption = #1585#1608#1575#1576#1591' '#1605#1588#1578#1585#1610
+      Caption = '—Ê«»ÿ „‘ —Ì'
       Font.Charset = ARABIC_CHARSET
       Font.Color = 9711714
       Font.Height = -16
@@ -361,7 +361,7 @@ object LoginForm: TLoginForm
       Top = 31
       Width = 127
       Height = 19
-      Caption = #1588#1585#1705#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585#1610' '#1610#1711#1575#1606#1607
+      Caption = '‘—ò  ‰—„ «›“«—Ì Ìê«‰Â'
       Font.Charset = ARABIC_CHARSET
       Font.Color = 3722147
       Font.Height = -16
@@ -415,12 +415,12 @@ object LoginForm: TLoginForm
       end
       item
         Alignment = taCenter
-        Text = #1606#1587#1582#1607
+        Text = '‰”ŒÂ'
         Width = 50
       end
       item
         Alignment = taCenter
-        Text = #1578#1575#1585#1610#1582'  '#1570#1582#1585#1610#1606' '#1608#1610#1585#1575#1610#1588' : 1391/10/11'
+        Text = ' «—ÌŒ  ¬Œ—Ì‰ ÊÌ—«Ì‘ : 1391/10/11'
         Width = 50
       end>
     ParentShowHint = False
@@ -440,7 +440,7 @@ object LoginForm: TLoginForm
       Width = 57
       Height = 13
       Alignment = taCenter
-      Caption = #1606#1575#1605' '#1705#1575#1585#1576#1585#1610' '
+      Caption = '‰«„ ò«—»—Ì '
       Font.Charset = ARABIC_CHARSET
       Font.Color = 12369084
       Font.Height = -11
@@ -454,7 +454,7 @@ object LoginForm: TLoginForm
       Width = 55
       Height = 13
       Alignment = taCenter
-      Caption = #1705#1604#1605#1607' '#1593#1576#1608#1585'  '
+      Caption = 'ò·„Â ⁄»Ê—  '
       Font.Charset = ARABIC_CHARSET
       Font.Color = 12369084
       Font.Height = -11
@@ -525,7 +525,7 @@ object LoginForm: TLoginForm
       Height = 31
       startColor = 16645629
       EndColor = 9692109
-      Caption = #1578#1575#1610#1610#1583
+      Caption = ' «ÌÌœ'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
       Font.Height = -11
@@ -545,7 +545,7 @@ object LoginForm: TLoginForm
       Height = 31
       startColor = 16645629
       EndColor = 14588091
-      Caption = #1575#1606#1589#1585#1575#1601
+      Caption = '«‰’—«›'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
       Font.Height = -11
@@ -595,7 +595,7 @@ object LoginForm: TLoginForm
     end
     object Alogin: TAction
       Tag = 2
-      Caption = #1608#1585#1608#1583
+      Caption = 'Ê—Êœ'
       OnExecute = AloginExecute
     end
     object PrivateLogin: TAction

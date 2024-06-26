@@ -233,7 +233,7 @@ begin
 
   Self.ScaleBy(Screen.PixelsPerInch,96);
 
- StatusBar1.Panels[0].Text := _SoftVersion+COPY(_SoftVersionDB,1,1)+'.'+ COPY(_SoftVersionDB,2,1);
+ StatusBar1.Panels[0].Text := _SoftVersion;//+COPY(_SoftVersionDB,1,1)+'.'+ COPY(_SoftVersionDB,2,1);
  try
    lblCompanyName.Caption := GetSystemSetting('CompanyName');
    Label3    .Caption := GetSystemSetting('CompanyName');
