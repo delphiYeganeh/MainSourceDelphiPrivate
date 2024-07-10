@@ -1469,7 +1469,7 @@ inherited FrAddContact: TFrAddContact
           Top = 7
           Width = 36
           Height = 28
-          Hint = #1662#1585#1601#1585#1575#1688' '#1583#1601#1578#1585#1670#1607' '#1581#1587#1575#1576' A'
+          Hint = #1662#1585#1601#1585#1575#1688' '#1583#1601#1578#1585#1670#1607' '#1581#1587#1575#1576' A('#1602#1583#1610#1605')'
           Anchors = [akTop, akRight]
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -1692,8 +1692,8 @@ inherited FrAddContact: TFrAddContact
   object RepPopMnu: TPopupMenu
     MenuAnimation = [maRightToLeft, maTopToBottom]
     TrackButton = tbLeftButton
-    Left = 24
-    Top = 60
+    Left = 200
+    Top = 516
     object NShow1: TMenuItem
       AutoHotkeys = maAutomatic
       Caption = #1662#1610#1588' '#1606#1605#1575#1610#1588' '#1608' '#1670#1575#1662' '#1711#1586#1575#1585#1588' 1'

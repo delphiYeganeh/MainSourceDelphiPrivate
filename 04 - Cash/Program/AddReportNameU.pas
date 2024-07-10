@@ -99,13 +99,13 @@ begin
       TdbEdit(Sender).Color := clWhite;
       TdbEdit(Sender).Font.Style:=[];
       {Ranjbar}
-      if TDBEdit(Sender).DataSource.DataSet.FieldByName(TDBEdit(Sender).DataField).EditMask = '˛!1399/99/99;1;_' then
+      if TDBEdit(Sender).DataSource.DataSet.FieldByName(TDBEdit(Sender).DataField).EditMask = '˛!1499/99/99;1;_' then
       begin
          D := TDBEdit(Sender).Text;
          if (Txt_Del254(d)<>'13  /  /  ') and not isValidDate(D) then
          begin
             ShowMyMessage('ÅÌ€«„',' «—ÌŒ Ê«—œ ‘œÂ  «‘ »«Â „Ì»«‘œ . ·ÿ›«  ’ÕÌÕ ‰„«ÌÌœ',[mbOK],mtInformation);
-            TDBEdit(Sender).Text := #254+'13 /  /  ';
+            TDBEdit(Sender).Text := #254+'14 /  /  ';
             TDBEdit(Sender).SetFocus;
          end;
       end;
@@ -114,13 +114,13 @@ begin
    {Ranjbar}
    if Sender.ClassNameIs('TMaskEdit') then
    begin
-      if TMaskEdit(Sender).EditMask = '˛!1399/99/99;1;_' then
+      if TMaskEdit(Sender).EditMask = '˛!1499/99/99;1;_' then
       begin
          D := TMaskEdit(Sender).Text;
          if (Txt_Del254(d)<>'13  /  /  ') and not isValidDate(D) then
          begin
             ShowMyMessage('ÅÌ€«„',' «—ÌŒ Ê«—œ ‘œÂ  «‘ »«Â „Ì»«‘œ . ·ÿ›«  ’ÕÌÕ ‰„«ÌÌœ',[mbOK],mtInformation);
-            TMaskEdit(Sender).Text := #254+'13 /  /  ';
+            TMaskEdit(Sender).Text := #254+'14 /  /  ';
             TDBEdit(Sender).SetFocus;
 
          end;
@@ -229,38 +229,38 @@ end;
 procedure TFrAddReportName.TEditEnter(Sender: TObject);
 begin
 
- if Sender.ClassNameIs('TEdit') then
+  if Sender.ClassNameIs('TEdit') then
   begin
     TEdit(Sender).Color := _FocusedColor;
     TEdit(sender).Font.Style:=[fsBold];
   end else
- if Sender.ClassNameIs('TdbEdit') then
+  if Sender.ClassNameIs('TdbEdit') then
   begin
      TdbEdit(Sender).Color := _FocusedColor;;
      TdbEdit(Sender).font.Style:=[fsBold];
      {Ranjbar}
-     if TDBEdit(Sender).DataSource.DataSet.FieldByName(TDBEdit(Sender).DataField).EditMask = '˛!1399/99/99;1;_' then
+     if TDBEdit(Sender).DataSource.DataSet.FieldByName(TDBEdit(Sender).DataField).EditMask = '˛!1499/99/99;1;_' then
         TDBEdit(Sender).SelStart := 3;
        //---
   end else
   {Ranjbar}
   if Sender.ClassNameIs('TMaskEdit') then
   begin
-     if TMaskEdit(Sender).EditMask = '˛!1399/99/99;1;_' then
+     if TMaskEdit(Sender).EditMask = '˛!1499/99/99;1;_' then
         TMaskEdit(Sender).SelStart := 3;
   end else
   //---
- if Sender.ClassNameIs('TComboBox') then
+  if Sender.ClassNameIs('TComboBox') then
   begin
     TComboBox(Sender).Color := _FocusedColor;;
     TComboBox(Sender).font.Style:=[fsBold];
   end else
- if Sender.ClassNameIs('TDBShamsiDateEdit') then
+  if Sender.ClassNameIs('TDBShamsiDateEdit') then
   begin
     TDBShamsiDateEdit(Sender).Color := _FocusedColor;;
     TDBShamsiDateEdit(Sender).Font.Style:=[fsBold];
   end else
- if Sender.ClassNameIs('TDBMemo') then
+  if Sender.ClassNameIs('TDBMemo') then
   begin
     TDBMemo(Sender).Color := _FocusedColor;;
     TDBMemo(Sender).Font.Style:=[fsBold];
@@ -270,10 +270,12 @@ end;
 procedure TFrAddReportName.FormShow(Sender: TObject);
 var i: integer;
 begin
-   ModalResult:=mrCancel;
+   ModalResult:= mrCancel;
 
+   dm.ReportsName.Close;
    dm.ReportsName.Open;
-   CurrentColor:=clWindow;
+
+   CurrentColor:= clWindow;
    for i:=0 to ComponentCount-1 do
      if Components[i].InheritsFrom(TDBLookupComboBox) then
          TDBLookupComboBox(Components[i]).OnKeyDown:=GotoNext
@@ -454,7 +456,7 @@ end;
 
 procedure TFrAddReportName.DBGrid1DblClick(Sender: TObject);
 begin
-  ModalResult:=mrOk;
+  ModalResult:= mrOk;
 end;
 
 procedure TFrAddReportName.Button5Click(Sender: TObject);

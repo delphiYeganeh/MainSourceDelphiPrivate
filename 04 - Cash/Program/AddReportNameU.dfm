@@ -171,8 +171,8 @@ object FrAddReportName: TFrAddReportName
     end
   end
   object ahmadvand: TActionList
-    Left = 65533
-    Top = 27
+    Left = 157
+    Top = 35
     object AExit: TAction
       Caption = #1582#1585#1608#1580
       ImageIndex = 75
@@ -195,8 +195,8 @@ object FrAddReportName: TFrAddReportName
   end
   object Grid_PopupMenu: TPopupMenu
     Tag = 11
-    Left = 65535
-    Top = 76
+    Left = 159
+    Top = 68
     object wordMenuItem: TMenuItem
       Caption = ' '#1575#1585#1587#1575#1604' '#1576#1607' Word'
       OnClick = wordMenuItemClick
@@ -220,7 +220,7 @@ object FrAddReportName: TFrAddReportName
   end
   object OpenDialog: TOpenDialog
     Filter = 'Reports(*.fr3)|*.fr3'
-    Left = 400
-    Top = 232
+    Left = 368
+    Top = 72
   end
 end

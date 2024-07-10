@@ -1,4 +1,4 @@
-[SECTION_MAX_NO]=16
+[SECTION_MAX_NO]=17
 
 [BEGIN_S_NO]=1
 
@@ -1159,5 +1159,100 @@ Begin
 	SET @SUMDEBIT=ISNULL(@SUMDEBIT,0)
 	SET @SUMCREDIT=ISNULL(@SUMCREDIT,0)
 END
+
+[END_S_NO]
+
+[BEGIN_S_NO]=17
+
+  INSERT INTO [dbo].[Account] ([AccountTitle]
+      ,[AccountNo]
+      ,[ContactID]
+      ,[AccountDate]
+      ,[IsActive]
+      ,[MonthlyTypeID]
+      ,[AccountTypeID])
+SELECT 'صندوق' ,'2001',0,'1387/01/01',1,0,2 FROM [dbo].[Account] WHERE ( SELECT COUNT(accountid) FROM [dbo].[Account] WHERE [AccountNo] = '2001' ) = 0
+
+  INSERT INTO [dbo].[Account] ([AccountTitle]
+      ,[AccountNo]
+      ,[ContactID]
+      ,[AccountDate]
+      ,[IsActive]
+      ,[MonthlyTypeID]
+      ,[AccountTypeID])
+SELECT 'جریمه ها' ,'9001',0,'1387/01/01',1,0,9 FROM [dbo].[Account] WHERE ( SELECT COUNT(accountid) FROM [dbo].[Account] WHERE [AccountNo] = '9001' ) = 0
+
+  INSERT INTO [dbo].[Account] ([AccountTitle]
+      ,[AccountNo]
+      ,[ContactID]
+      ,[AccountDate]
+      ,[IsActive]
+      ,[MonthlyTypeID]
+      ,[AccountTypeID])
+SELECT 'کارمزد' ,'9002',0,'1387/01/01',1,0,9 FROM [dbo].[Account] WHERE ( SELECT COUNT(accountid) FROM [dbo].[Account] WHERE [AccountNo] = '9002' ) = 0
+
+  INSERT INTO [dbo].[Account] ([AccountTitle]
+      ,[AccountNo]
+      ,[ContactID]
+      ,[AccountDate]
+      ,[IsActive]
+      ,[MonthlyTypeID]
+      ,[AccountTypeID])
+SELECT 'سود وام ها' ,'9003',0,'1387/01/01',1,0,9 FROM [dbo].[Account] WHERE ( SELECT COUNT(accountid) FROM [dbo].[Account] WHERE [AccountNo] = '9003' ) = 0
+
+  INSERT INTO [dbo].[Account] ([AccountTitle]
+      ,[AccountNo]
+      ,[ContactID]
+      ,[AccountDate]
+      ,[IsActive]
+      ,[MonthlyTypeID]
+      ,[AccountTypeID])
+SELECT 'هزینه های صندوق' ,'8001',0,'1387/01/01',1,0,8 FROM [dbo].[Account] WHERE ( SELECT COUNT(accountid) FROM [dbo].[Account] WHERE [AccountNo] = '8001' ) = 0
+
+  INSERT INTO [dbo].[Account] ([AccountTitle]
+      ,[AccountNo]
+      ,[ContactID]
+      ,[AccountDate]
+      ,[IsActive]
+      ,[MonthlyTypeID]
+      ,[AccountTypeID])
+SELECT 'سود سپرده گذاري' ,'9004',0,'1387/01/01',1,1,9 FROM [dbo].[Account] WHERE ( SELECT COUNT(accountid) FROM [dbo].[Account] WHERE [AccountNo] = '9004' ) = 0
+
+  INSERT INTO [dbo].[Account] ([AccountTitle]
+      ,[AccountNo]
+      ,[ContactID]
+      ,[AccountDate]
+      ,[IsActive]
+      ,[MonthlyTypeID]
+      ,[AccountTypeID])
+SELECT 'اسناد دريافتني' ,'2001001',0,'1390/06/07',1,0,2 FROM [dbo].[Account] WHERE ( SELECT COUNT(accountid) FROM [dbo].[Account] WHERE [AccountNo] = '2001001' ) = 0
+
+  INSERT INTO [dbo].[Account] ([AccountTitle]
+      ,[AccountNo]
+      ,[ContactID]
+      ,[AccountDate]
+      ,[IsActive]
+      ,[MonthlyTypeID]
+      ,[AccountTypeID])
+SELECT 'اسناد پرداختني' ,'2001002',0,'1390/06/07',1,0,2 FROM [dbo].[Account] WHERE ( SELECT COUNT(accountid) FROM [dbo].[Account] WHERE [AccountNo] = '2001002' ) = 0
+
+  INSERT INTO [dbo].[Account] ([AccountTitle]
+      ,[AccountNo]
+      ,[ContactID]
+      ,[AccountDate]
+      ,[IsActive]
+      ,[MonthlyTypeID]
+      ,[AccountTypeID])
+SELECT 'اسناد در جريان وصول' ,'2001003',0,'1390/06/07',1,0,2 FROM [dbo].[Account] WHERE ( SELECT COUNT(accountid) FROM [dbo].[Account] WHERE [AccountNo] = '2001003' ) = 0
+
+
+  INSERT INTO [dbo].[Account] ([AccountTitle]
+      ,[AccountNo]
+      ,[ContactID]
+      ,[AccountDate]
+      ,[IsActive]
+      ,[MonthlyTypeID]
+      ,[AccountTypeID])
+SELECT 'وام بلاعوض' ,'2001004',0,'1390/06/07',1,0,2 FROM [dbo].[Account] WHERE ( SELECT COUNT(accountid) FROM [dbo].[Account] WHERE [AccountNo] = '2001004' ) = 0
 
 [END_S_NO]

@@ -1,9 +1,8 @@
 inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
   Left = 737
   Top = 429
-  Width = 617
-  Height = 160
-  VertScrollBar.Position = 4
+  Width = 624
+  Height = 167
   Caption = 'FrFinancialNoteDetail_New'
   Color = clBtnFace
   OldCreateOrder = True
@@ -11,8 +10,8 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
   TextHeight = 13
   object FrFinancialNoteDetail: TGroupBox [0]
     Left = 0
-    Top = -4
-    Width = 584
+    Top = 0
+    Width = 608
     Height = 126
     Align = alTop
     Caption = #1575#1591#1604#1575#1593#1575#1578' '#1670#1705' '#1548' '#1587#1601#1578#1607' '#1610#1575' '#1581#1608#1575#1604#1607
@@ -20,10 +19,10 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
     ParentColor = False
     TabOrder = 0
     DesignSize = (
-      584
+      608
       126)
     object Label3: TLabel
-      Left = 237
+      Left = 261
       Top = 20
       Width = 44
       Height = 13
@@ -31,7 +30,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       Caption = #1579#1576#1578' '#1705#1606#1606#1583#1607
     end
     object Label4: TLabel
-      Left = 401
+      Left = 425
       Top = 20
       Width = 20
       Height = 13
@@ -39,7 +38,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       Caption = #1605#1576#1604#1594
     end
     object Label9: TLabel
-      Left = 530
+      Left = 554
       Top = 20
       Width = 39
       Height = 13
@@ -47,7 +46,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       Caption = #1606#1608#1593' '#1587#1606#1583
     end
     object SpeedButton1: TSpeedButton
-      Left = 21
+      Left = 45
       Top = 11
       Width = 59
       Height = 22
@@ -56,7 +55,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       OnClick = SpeedButton1Click
     end
     object Label1: TLabel
-      Left = 529
+      Left = 553
       Top = 45
       Width = 53
       Height = 13
@@ -64,7 +63,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       Caption = #1605#1608#1590#1608#1593' '#1670#1705
     end
     object NoteType: TDBEdit
-      Left = 424
+      Left = 448
       Top = 16
       Width = 102
       Height = 21
@@ -76,7 +75,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       TabOrder = 0
     end
     object DBEdit4: TDBEdit
-      Left = 284
+      Left = 308
       Top = 16
       Width = 98
       Height = 21
@@ -88,7 +87,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       TabOrder = 2
     end
     object DBEMatureDate: TDBEdit
-      Left = 153
+      Left = 177
       Top = 16
       Width = 80
       Height = 21
@@ -108,7 +107,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       TabOrder = 1
     end
     object DBEdit1: TDBEdit
-      Left = 81
+      Left = 105
       Top = 42
       Width = 446
       Height = 21
@@ -122,7 +121,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
     object DBGrid1: TDBGrid
       Left = 2
       Top = 66
-      Width = 580
+      Width = 604
       Height = 58
       Align = alBottom
       Color = 15985624

@@ -1448,6 +1448,7 @@ type
     function IsTinyOk:Boolean;
     function GetLockIP:string;
     procedure Report_AccountAfterOpen(DataSet: TDataSet);
+    procedure ReportsNameBeforePost(DataSet: TDataSet);
   public
     SMS_ACT_LIST : String;
     FormName : string;
@@ -2467,12 +2468,12 @@ begin
   with FrQrPayment do
   begin
     qrPaydate.Enabled := False;
-    qrdesc.Enabled := False;
-    qrcredit.Enabled := False;
-    qrdebtor.Enabled := False;
-    Qrremain.Enabled := False;
-    QrTitle.Enabled := True;
-    QrTitle.Caption := Title;
+    qrdesc.Enabled    := False;
+    qrcredit.Enabled  := False;
+    qrdebtor.Enabled  := False;
+    Qrremain.Enabled  := False;
+    QrTitle.Enabled   := True;
+    QrTitle.Caption   := Title;
     QuickRep2.Prepare;
     QuickRep2.Preview;
 //MarinaDidarians
@@ -4775,7 +4776,8 @@ begin
   // jHAT PAK KARDAN PACH GHADIMI
   qry := TADOQuery.Create(self);
   qry.Connection := YeganehConnection;
-  qry.SQL.Text   := '  UPDATE [dbo].[TBLAPPSETTING] SET Max_TableScriptNumber = 1 ,Last_TableScriptNumber = 1,Max_ViewScriptNumber = 1 ,Last_ViewScriptNumber = 1  '+
+  qry.SQL.Text   := ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U'')) '+
+                    ' UPDATE [dbo].[TBLAPPSETTING] SET Max_TableScriptNumber = 1 ,Last_TableScriptNumber = 1,Max_ViewScriptNumber = 1 ,Last_ViewScriptNumber = 1  '+
                                   ' WHERE (SELECT TOP 1  SUM(1) FROM dbo.TBLAPPSETTING WHERE DATE<'+'''2024-06-02'''+' ) >0 AND ISNULL((SELECT TOP 1  SUM(1) FROM dbo.TBLAPPSETTING WHERE   DATE>'+'''2024-06-14'''+' ),0) =0   '  ;
 
   qry.ExecSQL;
@@ -4946,6 +4948,17 @@ begin
 
 end;
 { TODO -oparsa : 14030108 }
+
+procedure Tdm.ReportsNameBeforePost(DataSet: TDataSet);
+begin
+  
+  if (Dm.ReportsNameReportName.IsNull)  or (Dm.ReportsNameReportName.asstring = '') then
+  begin
+    ShowMessage('‰«„ ê“«—‘ »«Ìœ „ﬁœ«— œ«‘ Â »«‘œ');
+    Abort;
+  end;
+
+end;
 
 end.
 

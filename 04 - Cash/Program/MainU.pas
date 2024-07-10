@@ -612,8 +612,8 @@ begin
   FrAddContact := TFrAddContact.Create(Application);
   with FrAddContact do
   begin
-    ContactTypeID:=_ContactTypeID;
-    ContactID:=0;
+    ContactTypeID :=_ContactTypeID ;
+    ContactID     :=0 ;
     InsBtn.OnClick(InsBtn);
     ShowModal;
   end;

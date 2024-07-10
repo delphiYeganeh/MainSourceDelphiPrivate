@@ -133,32 +133,32 @@ end;
 procedure TFrFinancialNoteDetail_New.FormShow(Sender: TObject);
 begin
   inherited;
-try
-  if (_FinancialNoteid = -1 ) then
-  begin
-    DM.FinancialNote_Detail.Close;
-    DM.FinancialNote_Master.Close;
-  end;
+  try
+    if (_FinancialNoteid = -1 ) then
+    begin
+      DM.FinancialNote_Detail.Close;
+      DM.FinancialNote_Master.Close;
+    end;
 
-  if not FinancialNoteid > 0 then
-  begin
-    DM.FinancialNote_Detail.Close;
-    DM.FinancialNote_Master.Close;
-  end;
+    if not FinancialNoteid > 0 then
+    begin
+      DM.FinancialNote_Detail.Close;
+      DM.FinancialNote_Master.Close;
+    end;
 
-  if (_FinancialNoteid > 0) then
-    if (FrEditPayment <> nil) then
-      if (FrEditPayment.Active) then
-  begin
-    FinancialNoteid := _FinancialNoteid;
-    Dm.FinancialNote_Master.Open;
-    Dm.FinancialNote_Detail.Open;
-    dm.FinancialNote_Detail.Locate('FinancialNote_DetailID',_FinancialNoteid,[loCaseInsensitive]);
-    dm.FinancialNote_Master.Locate('FinancialNote_MasterID',_FinancialNote_MasterID,[loCaseInsensitive]);
+    if (_FinancialNoteid > 0) then
+      if (FrEditPayment <> nil) then
+        if (FrEditPayment.Active) then
+    begin
+      FinancialNoteid := _FinancialNoteid;
+      Dm.FinancialNote_Master.Open;
+      Dm.FinancialNote_Detail.Open;
+      dm.FinancialNote_Detail.Locate('FinancialNote_DetailID',_FinancialNoteid,[loCaseInsensitive]);
+      dm.FinancialNote_Master.Locate('FinancialNote_MasterID',_FinancialNote_MasterID,[loCaseInsensitive]);
+    end;
+  except On E:Exception do
+    ShowMessage('Error TFrFinancialNoteDetail_New.FormShow :: ' + E.Message);
   end;
-except On E:Exception do
-  ShowMessage('Error TFrFinancialNoteDetail_New.FormShow :: ' + E.Message);
-end;
 end;
 
 end.
