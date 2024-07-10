@@ -206,10 +206,10 @@ uses
   uUpdateDbScripts in 'uUpdateDbScripts.pas' {fmUpdateDbScripts},
   LetterEmails in 'Shared\LetterEmails.pas' {frmLetterEmails},
   untScript in 'untScript.pas' {frmScript},
-  YDbgrid in '..\..\..\..\99 - Shared\YDbgrid.pas',
-  YInputQuery in '..\..\..\..\99 - Shared\YInputQuery.pas' {YInputQueryF},
-  ShowmessageU in '..\..\..\..\99 - Shared\ShowmessageU.pas' {ShowMessageF},
-  YShamsiDate in '..\..\..\..\99 - Shared\YShamsiDate.pas';
+  YDbgrid in '..\..\..\99 - Shared\YDbgrid.pas',
+  YInputQuery in '..\..\..\99 - Shared\YInputQuery.pas' {YInputQueryF},
+  ShowmessageU in '..\..\..\99 - Shared\ShowmessageU.pas' {ShowMessageF},
+  YShamsiDate in '..\..\..\99 - Shared\YShamsiDate.pas';
 
 {$R *.res}
 {$R Manifest.RES}
@@ -222,7 +222,7 @@ begin
   {$ENDIF}
   Application.CreateForm(TDm, Dm);
   Application.CreateForm(TMainForm, MainForm);
-//  Application.CreateForm(TfrmScript, frmScript);
+  //  Application.CreateForm(TfrmScript, frmScript);
 //  Application.CreateForm(TYInputQueryF, YInputQueryF);
 //  Application.CreateForm(TShowMessageF, ShowMessageF);
   //Application.CreateForm(TfDbName, fDbName);

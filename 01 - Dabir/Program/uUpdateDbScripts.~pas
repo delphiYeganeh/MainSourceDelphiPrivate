@@ -137,8 +137,9 @@ begin
       begin
         slInvalid.Sort;
         slInvalid.Add('--------- End Invalid Code Sum '+ IntToStr(CountScriptInvalidCode)+' ---------');
+        memError.Lines.Assign(slInvalid);
       end;
-      memError.Lines.Assign(slInvalid);
+
       memError.Refresh;
       slInvalid.Free;
 

@@ -452,6 +452,7 @@ begin
   begin
     FromOrgForm := TFromOrgForm.Create(Application);
     MainForm.TypeNoa:= 1;
+    FromOrgForm.InnerMode  := True;
     FromOrgForm.ShowModal;
     if FromOrgForm.Done then
       Dm.UsersFromOrgID.AsInteger := _ResultOrgID;
@@ -540,7 +541,7 @@ if dm.Users.State in [dsedit,dsInsert] then
 begin
    FromOrgForm:=TFromOrgForm.Create(Application);
    MainForm.TypeNoa:= 1;
-
+   FromOrgForm.InnerMode  := True;
    FromOrgForm.ShowModal;
    if FromOrgForm.done then
       dm.UsersSecondOrgID.AsInteger:=_ResultOrgID;
@@ -966,6 +967,7 @@ begin
   begin
     FromOrgForm := TFromOrgForm.Create(Application);
     MainForm.TypeNoa:= 1;
+    FromOrgForm.InnerMode  := True;
     FromOrgForm.ShowModal;
     if FromOrgForm.Done then
       Dm.UsersTreeOrgID.AsInteger := _ResultOrgID;
@@ -980,6 +982,7 @@ begin
   begin
     FromOrgForm := TFromOrgForm.Create(Application);
     MainForm.TypeNoa:= 1;
+    FromOrgForm.InnerMode  := True;
     FromOrgForm.ShowModal;
     if FromOrgForm.Done then
       Dm.UsersFourOrgID.AsInteger := _ResultOrgID;
@@ -994,6 +997,7 @@ begin
   begin
     FromOrgForm := TFromOrgForm.Create(Application);
     MainForm.TypeNoa:= 1;
+    FromOrgForm.InnerMode  := True;
     FromOrgForm.ShowModal;
     if FromOrgForm.Done then
       Dm.UsersFiveOrgID.AsInteger := _ResultOrgID;

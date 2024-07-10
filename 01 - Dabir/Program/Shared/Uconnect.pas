@@ -61,6 +61,7 @@ procedure TFconnect.Connect;
 var
   R,R2,Q,RegArch: TRegistry;
   Items:TStrings;
+  passwordSTR : String ;
 begin
   Items:=TStringList.Create;
   tmpYear:=0;
@@ -165,6 +166,7 @@ begin
   end;
 
   try
+    passwordSTR := IntToY(66) ;
     dm.YeganehConnection.Open(_eyeganeh+'Corporate_Dabir', IntToY(66));
     //dm.YeganehConnection.Open('sa', '123');
     dm.YeganehConnection.Connected:=true;

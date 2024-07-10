@@ -495,7 +495,7 @@ inherited FromOrgForm: TFromOrgForm
       Width = 392
       Height = 435
       Cursor = crHandPoint
-      ActivePage = TabSheet1
+      ActivePage = TabSheet2
       Align = alClient
       BiDiMode = bdRightToLeft
       ParentBiDiMode = False

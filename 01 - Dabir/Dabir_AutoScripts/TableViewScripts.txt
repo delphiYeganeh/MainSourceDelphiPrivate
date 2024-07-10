@@ -1,4 +1,4 @@
-[SECTION_MAX_NO]=3
+[SECTION_MAX_NO]=4
 
 [BEGIN_S_NO]=1
 
@@ -32,5 +32,13 @@ END
 
    IF COL_LENGTH('dbo.LetterData', 'IsTemplate') IS  NULL  
     ALTER TABLE dbo.LetterData   ADD IsTemplate bit NULL ;    
+
+[END_S_NO]
+
+
+[BEGIN_S_NO]=4
+
+  INSERT INTO [dbo].[Fields] (FieldName,Description)
+  SELECT 'Sign','امضا' WHERE (SELECT COUNT(id) FROM dbo.Fields AS F WHERE fieldname='Sign') = 0 
 
 [END_S_NO]

@@ -1131,6 +1131,16 @@ begin
       exit;
     end;
 
+   inherited;
+   { TODO -oparsa : 14030411 }
+    Dm.qtemp.Close;
+    Dm.qtemp.SQL.Clear;
+    Dm.qtemp.SQL.Add('SELECT IsCopy FROM ReCommites WHERE LetterID='+IntToStr(dm.Get_All_LetterLetterID.AsInteger));
+    Dm.qtemp.Open;
+    if Dm.qtemp.FieldByName('IsCopy').AsString <> '' then
+      _AllowToEditWordFiles:= not Dm.qtemp.FieldByName('IsCopy').AsBoolean;
+   { TODO -oparsa : 14030411 }
+
   with select_Letter do
     if not dm.ExecGet_LetterWordFile(FieldByName('Letterid').AsInteger,not _AllowToEditWordFiles,
                                       True, Exec_has_WordExcel(FieldByName('Letterid').AsInteger)) then

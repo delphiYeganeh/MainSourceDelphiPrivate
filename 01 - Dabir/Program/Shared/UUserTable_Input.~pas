@@ -169,12 +169,13 @@ begin
 //         Labels[k].Parent:=Control;
 
          EditLabels[k]:=TEdit.Create(self);
-         EditLabels[k].Text:=FieldValuesDescription.AsString;
-         EditLabels[k].Parent:=Control;
-         EditLabels[k].ParentColor:=True;
-         EditLabels[k].BorderStyle:=bsNone;
-         EditLabels[k].TabStop:=False;
-         EditLabels[k].BiDiMode := bdRightToLeftNoAlign;
+         EditLabels[k].Text        := FieldValuesDescription.AsString;
+         EditLabels[k].Parent      := Control;
+         EditLabels[k].ParentColor := True;
+         EditLabels[k].BorderStyle := bsNone;
+         EditLabels[k].TabStop     := False;
+         EditLabels[k].BiDiMode    := bdRightToLeftNoAlign;
+         EditLabels[k].ReadOnly    := True;
 
          if  EditLeft<HorSpaces then
             begin
@@ -508,9 +509,13 @@ begin
 
    tempPDF := _ApplicationPath+'tmp.pdf';
    if FileExists(tempPDF)then
-      DeleteFile(pchar(tempPDF));
+   begin
+     SysUtils.FileSetReadOnly(pchar(tempPDF), false);
+     DeleteFile(pchar(tempPDF));
+   end;
    if WordToPDF(tempDOC,tempPDF) then
    begin
+      SysUtils.FileSetReadOnly(pchar(tempDOC), false);
       DeleteFile(pchar(tempDOC));
       ShellExecute(handle, 'open', pchar(tempPDF), nil, nil, SW_SHOWNORMAL);
    end;

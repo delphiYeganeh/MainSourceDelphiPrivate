@@ -5,7 +5,7 @@ interface
 uses
    Variants, BaseUnit, DB, ADODB, Grids, DBGrids, YDbgrid, ComCtrls,
   StdCtrls, Controls, ExtCtrls, Classes, ActnList,sysutils, Buttons,
-  ExtActns,dialogs,  xpBitBtn, Menus;
+  ExtActns,dialogs,  xpBitBtn, Menus, AppEvnts;
 
 type
   TTextSearchF = class(TMBaseForm)
@@ -144,6 +144,16 @@ end;
 procedure TTextSearchF.AviewLetterExecute(Sender: TObject);
 begin
   inherited;
+   inherited;
+   { TODO -oparsa : 14030411 }
+    Dm.qtemp.Close;
+    Dm.qtemp.SQL.Clear;
+    Dm.qtemp.SQL.Add('SELECT IsCopy FROM ReCommites WHERE LetterID='+IntToStr(dm.Get_All_LetterLetterID.AsInteger));
+    Dm.qtemp.Open;
+    if Dm.qtemp.FieldByName('IsCopy').AsString <> '' then
+      _AllowToEditWordFiles:= not Dm.qtemp.FieldByName('IsCopy').AsBoolean;
+   { TODO -oparsa : 14030411 }
+
    with letterContainText do
 if not dm.ExecGet_LetterWordFile(FieldByName('LetterID').AsInteger,not _AllowToEditWordFiles) then
         ShowMsg(53);

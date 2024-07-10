@@ -17,7 +17,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
     Top = 0
     Width = 839
     Height = 690
-    ActivePage = xpTabSheet1
+    ActivePage = xpForms
     Align = alClient
     ParentShowHint = False
     ShowHint = True
@@ -192,7 +192,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
           Left = 181
           Top = 1
           Width = 48
-          Height = 20
+          Height = 19
           TabStop = False
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
@@ -214,7 +214,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
           Left = 11
           Top = 1
           Width = 118
-          Height = 20
+          Height = 19
           TabStop = False
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
@@ -282,9 +282,9 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
             827
             129)
           object Label8: TLabel
-            Left = 762
+            Left = 773
             Top = 80
-            Width = 51
+            Width = 40
             Height = 13
             Anchors = [akTop, akRight]
             Caption = '&'#1601#1585#1587#1578#1606#1583#1607
@@ -299,9 +299,9 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
             Transparent = True
           end
           object Label10: TLabel
-            Left = 762
+            Left = 785
             Top = 56
-            Width = 51
+            Width = 28
             Height = 13
             Anchors = [akTop, akRight]
             Caption = '&'#1711#1610#1585#1606#1583#1607
@@ -2643,9 +2643,9 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
             827
             89)
           object Label2: TLabel
-            Left = 755
+            Left = 760
             Top = 22
-            Width = 54
+            Width = 49
             Height = 13
             Anchors = [akTop, akRight]
             Caption = '&'#1591#1576#1602#1607' '#1576#1606#1583#1610
@@ -2658,9 +2658,9 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
             ParentFont = False
           end
           object Label7: TLabel
-            Left = 755
+            Left = 761
             Top = 47
-            Width = 54
+            Width = 48
             Height = 13
             Anchors = [akTop, akRight]
             Caption = #1601#1608#1585#1610#1578' &'#1606#1575#1605#1607
@@ -2673,9 +2673,9 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
             ParentFont = False
           end
           object Label9: TLabel
-            Left = 500
+            Left = 506
             Top = 22
-            Width = 54
+            Width = 48
             Height = 13
             Anchors = [akTop, akRight]
             Caption = '&'#1606#1608#1593' '#1583#1585#1610#1575#1601#1578

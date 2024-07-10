@@ -564,12 +564,22 @@ end;
 procedure TFromOrgForm.PasteClick(Sender: TObject);
 var
   ParentID : integer;
+  IsInnerOrg : Boolean;
 begin
   inherited;
+
   ParentID := qryTree.FieldByName('ID').AsInteger;
+  with TADOQuery.Create(nil) do
+  begin
+    Connection := Dm.YeganehConnection;
+    SQL.Text := 'Select dbo.IS_Inner_ORG('+IntToStr(ParentID)+')';
+    open;
+    IsInnerOrg := Fields[0].AsBoolean;
+  end;
+
   if messageShowString(' ¬Ì« «“ «‰ ﬁ«· ‘«ŒÂ '+DQuotedStr(SelectedNodeTitle)+' »Â “Ì— „Ã„Ê⁄Â '+DQuotedStr(qryTree.FieldByName('D').AsString)+'„ÿ„∆‰ Â” Ìœø ', true) then
   begin
-    dm.YeganehConnection.Execute('update Fromorganizations set ParentId= '+IntToStr(ParentID)+' where id='+IntToStr(SelectedNodeID));
+    dm.YeganehConnection.Execute('update Fromorganizations set ParentId= '+IntToStr(ParentID)+' ,IsInnerOrg  = '+IntToStr(ifthen(IsInnerOrg,1,0))+' where id='+IntToStr(SelectedNodeID));
     LoadTree(2, ParentID);
     SelectedNodeID:=0;
     Paste.Hide;

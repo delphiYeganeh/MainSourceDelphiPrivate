@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, BaseUnit, Grids, DBGrids, YDbgrid, ExtCtrls, ActnList, DB,
-  StdCtrls, ADODB, ExtActns, ComCtrls, Buttons,  Menus;
+  StdCtrls, ADODB, ExtActns, ComCtrls, Buttons,  Menus, AppEvnts;
 
 type
   TFdailyrep = class(TMBaseForm)
@@ -78,20 +78,20 @@ procedure TFdailyrep.makeRepClick(Sender: TObject);
  var receivedNum,SentNum,recommitesNum:integer;
 begin
   inherited;
-with sp_dailyRep,Parameters do
- begin
-  Close;
-   case ComboBox1.ItemIndex of
-    0:ParamByName('@where').Value:='LetterFormat=1 and SecretariatID='+IntToStr(Dm.SecId);
-    1:ParamByName('@where').Value:='LetterFormat=1 and SecretariatID='+IntToStr(Dm.SecId)+' and Letter_Type=1';
-    2:ParamByName('@where').Value:='LetterFormat=1 and SecretariatID='+IntToStr(Dm.SecId)+' and Letter_Type=2';
-   end;
-     ParamByName('@bdate').Value:=Edit1.Text;
-     ParamByName('@edate').Value:=Edit2.Text;
-     ParamByName('@Myear').Value:=dm.CurrentMyear;
+   with sp_dailyRep,Parameters do
+   begin
+    Close;
+     case ComboBox1.ItemIndex of
+      0:ParamByName('@where').Value:='LetterFormat=1 and SecretariatID='+IntToStr(Dm.SecId);
+      1:ParamByName('@where').Value:='LetterFormat=1 and SecretariatID='+IntToStr(Dm.SecId)+' and Letter_Type=1';
+      2:ParamByName('@where').Value:='LetterFormat=1 and SecretariatID='+IntToStr(Dm.SecId)+' and Letter_Type=2';
+     end;
+       ParamByName('@bdate').Value:=Edit1.Text;
+       ParamByName('@edate').Value:=Edit2.Text;
+       ParamByName('@Myear').Value:=dm.CurrentMyear;
 
-  Open;
- end;
+    Open;
+   end;
    Exec_sp_Letter_Numbers(Edit1.Text,Edit2.Text,dm.secid,receivedNum,SentNum,recommitesNum);
      Panel1.Caption :=' ⁄œ«œ ‰«„Â Ê«—œÂ ='+IntToStr(receivedNum)+'   '+
                      ' ⁄œ«œ ‰«„Â ’«œ—Â ='+IntToStr(SentNum)+'   '+

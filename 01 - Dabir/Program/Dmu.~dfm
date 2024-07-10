@@ -154,8 +154,7 @@ object Dm: TDm
     end
   end
   object YeganehConnection: TADOConnection
-    CommandTimeout = 15
-    ConnectionTimeout = 30
+    ConnectionTimeout = 60
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     BeforeDisconnect = YeganehConnectionBeforeDisconnect
@@ -2579,8 +2578,8 @@ object Dm: TDm
         DataType = ftInteger
         Value = Null
       end>
-    Left = 379
-    Top = 370
+    Left = 419
+    Top = 346
     object FromOrganizationsTitle: TWideStringField
       Alignment = taRightJustify
       FieldName = 'Title'
@@ -6435,8 +6434,8 @@ object Dm: TDm
     ConnectionTimeout = 200
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
-    Left = 121
-    Top = 6
+    Left = 153
+    Top = 22
   end
   object qryArchiveAttachment: TADOQuery
     Connection = ArchiveConnection

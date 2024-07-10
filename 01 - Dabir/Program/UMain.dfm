@@ -69,7 +69,7 @@ inherited MainForm: TMainForm
       Left = 2
       Top = 2
       Width = 1279
-      Height = 26
+      Height = 23
       ActionManager = MainActionManager
       Caption = 'ActionToolBar1'
       ColorMap.HighlightColor = clWhite

@@ -1960,6 +1960,15 @@ end;
 procedure TMainForm.AWordMainExecute(Sender: TObject);
 begin
    inherited;
+   { TODO -oparsa : 14030411 }
+    Dm.qtemp.Close;
+    Dm.qtemp.SQL.Clear;
+    Dm.qtemp.SQL.Add('SELECT IsCopy FROM ReCommites WHERE LetterID='+IntToStr(dm.Get_All_LetterLetterID.AsInteger));
+    Dm.qtemp.Open;
+    if Dm.qtemp.FieldByName('IsCopy').AsString <> '' then
+      _AllowToEditWordFiles:= not Dm.qtemp.FieldByName('IsCopy').AsBoolean;
+   { TODO -oparsa : 14030411 }
+
    With Dm.Get_All_Letter do
     if not Dm.ExecGet_LetterWordFile(FieldByName('LetterID').AsInteger,not _AllowToEditWordFiles) then
      ShowMsg(53);
@@ -2017,6 +2026,9 @@ Var
 begin
   inherited;
   blnDisableRefresh := True;
+  { TODO -oparsa : 14030411 }
+  _Dont_save_Word := False;
+  { TODO -oparsa : 14030411 }
 
   if not DataSetPost then
   begin
@@ -3314,7 +3326,10 @@ begin
    }
    aPt := lettersDbGrid.ScreenToClient(Mouse.CursorPos);
    Coord := lettersDbGrid.MouseCoord(aPt.X, aPt.Y);
-   afieldname := lettersDbGrid.Columns[(Coord.X)-1].FieldName;
+   { TODO -oparsa : 14030413 }
+   if (Coord.X) > 0 then
+   { TODO -oparsa : 14030413 }
+     afieldname := lettersDbGrid.Columns[(Coord.X)-1].FieldName;
    {
    if (afieldname ='has_Page') or
      (afieldname ='has_WordPage' ) or
@@ -3818,10 +3833,15 @@ begin
       ActionMainMenuBar1.Font.Charset := 178;
    try
      Exec_update_UserLoginLogout(_UserLoginLogoutID, False, False);
+     { TODO -oparsa : 14030413 }
+     AppTerminate.Enabled := False;
+     { TODO -oparsa : 14030413 }
      if ForceToClose then
          AppTerminate.Enabled := true;
    except on e:exception do
-    ShowMessage('YEGANEH ERROR 2: ' + e.Message);
+     { TODO -oparsa : 14030413 }
+    // ShowMessage('YEGANEH ERROR 2: ' + e.Message);
+     { TODO -oparsa : 14030413 }
    end;
 end;
 
@@ -4090,6 +4110,7 @@ end;
 //---
 
 procedure TMainForm.SBFollowLetterClick(Sender: TObject);
+
 begin
   inherited;
 

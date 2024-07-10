@@ -5378,7 +5378,7 @@ begin
     Parameters.ParamByName('@LetterdataID').Value:=Get_LetterData_by_LetterIDLetterDataID.Value;
     Open;
     f:=_TempPath + 'temp'+Get_LetterData_by_LetterDataIDLetterDataID.AsString+'.'+Get_LetterData_by_LetterIDExt.AsString;
-    SysUtils.FileSetReadOnly(pchar(f)), false);
+    SysUtils.FileSetReadOnly(pchar(f), false);
     DeleteFile(pchar(f));
     Get_LetterData_by_LetterDataIDImage.SaveToFile(f);
     res := pchar(f);

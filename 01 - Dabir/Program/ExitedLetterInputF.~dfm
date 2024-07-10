@@ -2782,7 +2782,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             ParentFont = False
           end
           object Label20: TLabel
-            Left = 223
+            Left = 199
             Top = 17
             Width = 54
             Height = 13
@@ -2827,9 +2827,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Visible = False
           end
           object DBEdit10: TDBEdit
-            Left = 291
+            Left = 264
             Top = 15
-            Width = 433
+            Width = 460
             Height = 21
             Anchors = [akTop, akRight]
             Color = clWhite
@@ -2846,7 +2846,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             OnExit = TEditExit
           end
           object DBEdit11: TDBEdit
-            Left = 197
+            Left = 173
             Top = 14
             Width = 23
             Height = 21
@@ -2879,9 +2879,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Visible = False
           end
           object DBLookupComboBox8: TDBLookupComboBox
-            Left = 291
+            Left = 264
             Top = 44
-            Width = 177
+            Width = 204
             Height = 21
             Anchors = [akTop, akRight]
             BiDiMode = bdLeftToRight
@@ -3214,9 +3214,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             OnExit = TEditExit
           end
           object DBShamsiDateEdit2: TDBShamsiDateEdit
-            Left = 288
+            Left = 264
             Top = 15
-            Width = 192
+            Width = 216
             Height = 21
             Anchors = [akTop, akRight]
             BiDiMode = bdLeftToRight

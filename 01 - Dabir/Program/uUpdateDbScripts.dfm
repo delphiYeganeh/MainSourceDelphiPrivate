@@ -13,7 +13,7 @@ object fmUpdateDbScripts: TfmUpdateDbScripts
   Font.Style = []
   OldCreateOrder = False
   ParentBiDiMode = False
-  Position = poDesktopCenter
+  Position = poScreenCenter
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13

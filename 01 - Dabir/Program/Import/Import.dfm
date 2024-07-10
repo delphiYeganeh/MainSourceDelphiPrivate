@@ -456,8 +456,8 @@ inherited FrImport: TFrImport
     LoginPrompt = False
     Mode = cmShareDenyNone
     Provider = 'Microsoft.Jet.OLEDB.4.0'
-    Left = 40
-    Top = 152
+    Left = 24
+    Top = 120
   end
   object AccessOpenDialog: TOpenDialog
     Filter = 'Access File|*.mdb'
@@ -588,8 +588,8 @@ inherited FrImport: TFrImport
         Size = 1
         Value = 2
       end>
-    Left = 344
-    Top = 192
+    Left = 392
+    Top = 184
   end
   object FoxOpenDialog: TTntOpenDialog
     Filter = 'Fox|*.DBF'

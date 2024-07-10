@@ -1943,8 +1943,8 @@ inherited UserDefineF: TUserDefineF
   inherited DSForm: TDataSource
     AutoEdit = False
     DataSet = Dm.Users
-    Left = 85
-    Top = 387
+    Left = 117
+    Top = 403
   end
   inherited ActionList: TActionList
     Left = 174
@@ -2336,8 +2336,8 @@ inherited UserDefineF: TUserDefineF
   end
   object DataSource1: TDataSource
     DataSet = Dm.qry_FromOrganizations
-    Left = 43
-    Top = 386
+    Left = 19
+    Top = 402
   end
   object ADOQuery1: TADOQuery
     Connection = Dm.YeganehConnection

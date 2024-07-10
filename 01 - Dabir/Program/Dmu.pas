@@ -1104,7 +1104,7 @@ Const
    _ShowLogo = True;
 // _Yeganeh='Ìê«‰Â';
 // _EYeganeh='yeganeh';
-   _SoftLastUpdate = '1403/04/06';//'1396/02/16';
+   _SoftLastUpdate = '1403/04/20';//'1396/02/16';
    //_SoftVersion    = '11.0.0.0';//'6.5.0.0';
     LCID: DWORD = LOCALE_SYSTEM_DEFAULT;
 
@@ -2196,6 +2196,22 @@ procedure TDm.ApplicationEventsException(Sender: TObject; E: Exception);
 var
  AList : TStringList;
  //I : Integer;
+
+  function IntToY(l:byte):string ;
+  var i,j,k,n:integer;
+  begin
+     Result:='';
+     i:=60+3+1+1;
+     j:=2*60+2*3+1;
+     k:=15*11+3+1;
+     for n:=1 to l do
+     begin
+        if (i>=28+1-1) and (i<=128+1-1) then
+           Result:=Result+char(i);
+        i := k*i mod j;
+     end;
+  end;
+
 begin
   AList := TStringList.Create;
   try
@@ -2210,12 +2226,25 @@ begin
   //with ErrorMessage do
   //begin
     if (pos('Connection failure',e.Message)<>0 ) or (pos('General network error',e.Message)<>0) then
+    begin
       if MessageDlg(' œ— «— »«ÿ »« ”—Ê— „‘ò· ÊÃÊœ œ«—œ ¬Ì« „«Ì·Ìœ œÊ »«—Â ‰—„ «›“«— —« «Ã—« ‰„«ÌÌœ.',mtConfirmation,[mbyes,mbno],0)=mryes then
       begin
         //WinExec('Yeganeh_Dabir.exe',0);
         WinExec(pchar(ExtractFilePath(Application.ExeName) + ExtractFileName(Application.ExeName)),0);
         Application.Terminate;
+      end
+      { TODO -oparsa : 14030413 }
+      else
+      begin
+        try
+          dm.YeganehConnection.Open(_eyeganeh+'Corporate_Dabir', IntToY(66));
+          dm.YeganehConnection.Connected := True;
+        except
+
+        end;
       end;
+      { TODO -oparsa : 14030413 }
+    end;
     (*
     Close;
     Parameters.ParamByName('@like').Value:=e.Message;
@@ -3899,8 +3928,10 @@ begin
   end;
   finally
     qryAutoRunScript.SQL.Text := 'IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U''))'+
+                                    ' Begin   UPDATE [dbo].[TBLAPPSETTING] SET [Max_TableScriptNumber] = [Last_TableScriptNumber] WHERE ISNULL(Max_TableScriptNumber,0) < isnull([Last_TableScriptNumber],0)  '+
+                                    ' UPDATE [dbo].[TBLAPPSETTING] SET [Max_ViewScriptNumber] = [Last_ViewScriptNumber] WHERE ISNULL([Max_ViewScriptNumber],0) < isnull([Last_ViewScriptNumber],0) '  +
                                     ' SELECT TOP 1 (ISNULL(Max_TableScriptNumber,0)-ISNULL(Last_TableScriptNumber,0)) + ( ISNULL(Max_ViewScriptNumber,0) - ISNULL(Last_ViewScriptNumber ,0)) CountError   '+
-                                    ' FROM [dbo].[TBLAPPSETTING] ORDER BY id DESC '+
+                                    ' FROM [dbo].[TBLAPPSETTING] ORDER BY id DESC  end '+
                                     ' ELSE SELECT 0 CountError' ;
 
     qryAutoRunScript.Close;

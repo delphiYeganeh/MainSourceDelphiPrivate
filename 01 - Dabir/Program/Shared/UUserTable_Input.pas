@@ -169,12 +169,13 @@ begin
 //         Labels[k].Parent:=Control;
 
          EditLabels[k]:=TEdit.Create(self);
-         EditLabels[k].Text:=FieldValuesDescription.AsString;
-         EditLabels[k].Parent:=Control;
-         EditLabels[k].ParentColor:=True;
-         EditLabels[k].BorderStyle:=bsNone;
-         EditLabels[k].TabStop:=False;
-         EditLabels[k].BiDiMode := bdRightToLeftNoAlign;
+         EditLabels[k].Text        := FieldValuesDescription.AsString;
+         EditLabels[k].Parent      := Control;
+         EditLabels[k].ParentColor := True;
+         EditLabels[k].BorderStyle := bsNone;
+         EditLabels[k].TabStop     := False;
+         EditLabels[k].BiDiMode    := bdRightToLeftNoAlign;
+         EditLabels[k].ReadOnly    := True;
 
          if  EditLeft<HorSpaces then
             begin

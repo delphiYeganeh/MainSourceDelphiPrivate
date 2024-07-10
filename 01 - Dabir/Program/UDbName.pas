@@ -85,7 +85,7 @@ uses
   Dmu, SelectDBFm, businessLayer, YShamsiDate, UMain;
 
 {$R *.dfm}
-  function IntToY(l:byte):string ;
+function IntToY(l:byte):string ;
 var i,j,k,n:integer;
 begin
    Result:='';
