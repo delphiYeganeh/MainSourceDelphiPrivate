@@ -67,7 +67,7 @@ var
 
 implementation
 
-uses dmu;
+uses dmu,YShamsiDate;
 
 {$R *.dfm}
 

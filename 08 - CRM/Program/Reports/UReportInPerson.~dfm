@@ -78,7 +78,7 @@ inherited FReportInPerson: TFReportInPerson
         end
         item
           Expanded = False
-          FieldName = 'CustomerId'
+          FieldName = 'DateInPerson'
           Title.Caption = #1578#1575#1585#1610#1582' '#1605#1585#1575#1580#1593#1607
           Width = 93
           Visible = True

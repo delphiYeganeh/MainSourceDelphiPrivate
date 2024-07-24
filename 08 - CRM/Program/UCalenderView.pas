@@ -77,8 +77,8 @@ type
     StaticText11: TStaticText;
     StaticText12: TStaticText;
     _year: TEdit;
-function day(y,m,d:word):word;
-Function ShamsiLeapYear(y: word):byte;
+    function day(y,m,d:word):word;
+    Function ShamsiLeapYear(y: word):byte;
     procedure FormCreate(Sender: TObject);
     procedure StaticText1Click(Sender: TObject);
     procedure Action1Execute(Sender: TObject);
@@ -132,27 +132,28 @@ end;
 
 procedure TFrViewByCalender.calender;
 var startday,dayinweek,_m:byte;
-j:integer;c:tcomponent;
-dayinweeksearch :string;
-L:TListBox;//GiveHave:string;
-S:TStaticText;
-Tedad:Integer;
+    j:integer;c:tcomponent;
+    dayinweeksearch :string;
+    L:TListBox;//GiveHave:string;
+    S:TStaticText;
+    Tedad:Integer;
+    IsHoliday : Integer;
 begin
-startday :=day(strtoint(_Year.text),_month,1);
+  startday :=day(strtoint(_Year.text),_month,1);
   for j:=1 to ComponentCount-1 do
     begin
     c:=Components[j];
     if c.ClassType=TListBox then
       begin
-      L:=TListBox(c);
-      L.Enabled:=true;
-      L.Color:=clMoneyGreen;
-      L.Items.Clear
+        L:=TListBox(c);
+        L.Enabled:=true;
+        L.Color:=clMoneyGreen;
+        L.Items.Clear
       end
     else if c.ClassType=TStaticText then
       begin
-      s:=TStaticText(c);
-      s.Color:=$00C08000
+        s:=TStaticText(c);
+        s.Color:=$00C08000
       end
     end;
 
@@ -176,36 +177,48 @@ startday :=day(strtoint(_Year.text),_month,1);
            L.items.Add(inttostr(dayinweek));
            dayinweeksearch := inttostr(dayinweek);
            if dayinweek<10 then dayinweeksearch := '0'+inttostr(dayinweek);
-           if ((l.Tag div 10)=6) or Hollydate.Locate('date',_year.Text+'/'+DStr(_month)+'/'+dayinweeksearch,[]) then
-              begin
+             if ((l.Tag div 10)=6) or Hollydate.Locate('date',_year.Text+'/'+DStr(_month)+'/'+dayinweeksearch,[]) then
+             begin
                 l.Font.Color:=clRed;
                 l.Font.Style:=l.Font.Style+[fsbold];
                 l.Color:=clGray;
-              end
-            else
+             end
+             else
              begin
               l.Font.Color:=clBlack;
               l.Font.Style:=l.Font.Style-[fsbold];
              end;
 
             with dm.Select_FollowUP_By_Date do
-             begin
+            begin
               filter:='Tododate='''+_year.Text+'/'+DStr(_month)+'/'+dayinweeksearch+'''';
               Filtered:=true;
               Tedad:=dm.Select_FollowUP_By_Date.RecordCount;
               L.items.Add('йзого:'+IntToStr(Tedad));
+              IsHoliday := Dm.Select_FollowUP_By_DateIsHoliday.Asinteger;
               while not eof do
               begin
                  L.items.Add(dm.Select_FollowUP_By_DateCompanyName.AsString);
                  L.Color:=clSkyBlue;
                  next;
-              end
-             end 
+              end ;
+
+            end   ;
+
+            with dm.Select_Holiday_date do
+            begin
+              filter:='HolidayDate='''+_year.Text+'/'+DStr(_month)+'/'+dayinweeksearch+'''';
+              Filtered:=true;
+
+              if RecordCount >0 then
+                l.Color:=$00BB86FB;
+
+            end
          end
       else
         begin
-        L.Enabled:=false;
-        L.Color:=clBtnFace//$CCCCCCFF
+          L.Enabled:=false;
+          L.Color:=clBtnFace//$CCCCCCFF
         end
       end;
     end;
@@ -214,57 +227,58 @@ end;
 procedure TFrViewByCalender.FormCreate(Sender: TObject);
 begin
 
-_month:=StrToInt(copy(_today,6,2));
-_year.Text:=copy(_today,1,4);
-Hollydate.Open;
-calender
+  _month:=StrToInt(copy(_today,6,2));
+  _year.Text:=copy(_today,1,4);
+  Dm.RefreshHoliday(copy(_today,1,4));
+  Hollydate.Open;
+  calender
 end;
 
 procedure TFrViewByCalender.StaticText1Click(Sender: TObject);
 begin
-_month:=(Sender as TStaticText).Tag mod 100;
-MainForm.BDate.Text:=_year.Text+'/'+DStr(_month)+'/01';
-MainForm.Edate.Text:=_year.Text+'/'+DStr(_month)+'/30';
-//MainForm.Button24Click(nil);
-calender
+  _month:=(Sender as TStaticText).Tag mod 100;
+  MainForm.BDate.Text:=_year.Text+'/'+DStr(_month)+'/01';
+  MainForm.Edate.Text:=_year.Text+'/'+DStr(_month)+'/30';
+  //MainForm.Button24Click(nil);
+  calender
 end;
 
 
 procedure TFrViewByCalender.Action1Execute(Sender: TObject);
 begin
-_year.Text:=inttostr(strtoint(_year.Text)+(Sender as TAction).Tag);
-calender
+  _year.Text:=inttostr(strtoint(_year.Text)+(Sender as TAction).Tag);
+  calender
 end;
 
 procedure TFrViewByCalender.Action4Execute(Sender: TObject);
 begin
-if _month=12 then
-  begin
-  _year.Text:=inttostr(strtoint(_year.Text)+1);
-  _month:=1
-  end
-else
-  _month:=_month+1;
-calender
+  if _month=12 then
+    begin
+    _year.Text:=inttostr(strtoint(_year.Text)+1);
+    _month:=1
+    end
+  else
+    _month:=_month+1;
+  calender
 end;
 
 procedure TFrViewByCalender.Action2Execute(Sender: TObject);
 begin
- if _month=1 then
-  begin
-  _year.Text:=inttostr(strtoint(_year.Text)-1);
-  _month:=12
-  end
-else
-  _month:=_month-1;
-calender
+  if _month=1 then
+    begin
+      _year.Text:=inttostr(strtoint(_year.Text)-1);
+      _month:=12
+    end
+  else
+    _month:=_month-1;
+  calender
 end;
 
 
 procedure TFrViewByCalender.JournalSmallSearchExecute(Sender: TObject);
 begin
   inherited;
-calender;
+  calender;
 end;
 
 procedure TFrViewByCalender.RadioGroup1Click(Sender: TObject);
@@ -284,17 +298,17 @@ end;
 procedure TFrViewByCalender.ListBoxDblClick(Sender: TObject);
 begin
   if TListBox(sender).Height<300 then
-   begin
-     TListBox(sender).Top:=30;
-     TListBox(sender).Height:=600;
-     TListBox(Sender).BringToFront;
-    end
-   else
-    begin
-     TListBox(sender).Top:=30+89*((TListBox(sender).Tag mod 10)-1);
-     TListBox(sender).Height:=86;
-     TListBox(Sender).BringToFront;
-    end;
+  begin
+   TListBox(sender).Top:=30;
+   TListBox(sender).Height:=600;
+   TListBox(Sender).BringToFront;
+  end
+  else
+  begin
+   TListBox(sender).Top:=30+89*((TListBox(sender).Tag mod 10)-1);
+   TListBox(sender).Height:=86;
+   TListBox(Sender).BringToFront;
+  end;
 
 end;
 

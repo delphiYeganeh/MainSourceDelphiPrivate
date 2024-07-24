@@ -47,6 +47,7 @@ type
     procedure CheckBox1Click(Sender: TObject);
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     FUserID: Integer;
     FUserName: String;
@@ -155,6 +156,13 @@ begin
     Resize := False
   else Resize := True;
    { TODO -oparsa : 14030203 }
+end;
+
+procedure TFRepTasks.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

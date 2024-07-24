@@ -74,6 +74,7 @@ inherited frTask: TfrTask
       Top = 48
       Width = 457
       Height = 121
+      ScrollBars = ssVertical
       TabOrder = 2
     end
   end

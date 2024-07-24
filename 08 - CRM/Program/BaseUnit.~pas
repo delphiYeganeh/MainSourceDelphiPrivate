@@ -367,7 +367,7 @@ begin
         TBitBtn(Components[i]).Enabled:= TAction(Components[i]).Visible;
      end
      else
-      if TBitBtn(Components[i]).Name='btnCasesAll' then
+     // if TBitBtn(Components[i]).Name='btnCasesAll' then
      begin
         TBitBtn(Components[i]).Visible:= GetActionAccess(_accessID,TAction(Components[i]).name,TBitBtn(Components[i]).tag);
         TBitBtn(Components[i]).Enabled:= TAction(Components[i]).Visible;

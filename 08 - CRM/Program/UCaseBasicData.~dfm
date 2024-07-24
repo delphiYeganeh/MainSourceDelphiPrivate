@@ -498,4 +498,8 @@ inherited frCaseBasicData: TfrCaseBasicData
       end
     end
   end
+  inherited DSForm: TDataSource
+    Left = 70
+    Top = 111
+  end
 end

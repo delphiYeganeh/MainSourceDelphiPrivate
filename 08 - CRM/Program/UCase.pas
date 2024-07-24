@@ -83,7 +83,7 @@ type
     dblCaseType: TDBLookupComboBox;
     dblPriority: TDBLookupComboBox;
     dblCaseOriginal: TDBLookupComboBox;
-    DBMemo2: TDBMemo;
+    DBMemComment: TDBMemo;
     DBEdit3: TDBEdit;
     DBEdit4: TDBEdit;
     Edit1: TEdit;
@@ -107,6 +107,11 @@ type
     edtCustomerId: TYWhereEdit;
     Edit2: TEdit;
     SpeedButton1: TSpeedButton;
+    SpSelect_CasesCaseEstimatedDate: TStringField;
+    Date2: TLabel;
+    Date1: TLabel;
+    DBText1: TDBText;
+    DBText2: TDBText;
     procedure btnDelBRClick(Sender: TObject);
     procedure dbgCaseDblClick(Sender: TObject);
     procedure btnAddTaskClick(Sender: TObject);
@@ -200,7 +205,7 @@ procedure TfrCase.dbgCaseDblClick(Sender: TObject);
 begin
   inherited;
   with  TfrCaseAdd.Create(Self,SpSelect_CasesCaseID.Value,SpSelect_CasesCaseTitle.Text,SpSelect_CasesProductId.Value,SpSelect_CasesCaseTypeID.Value
-                              ,  SpSelect_CasesRegisterUserID.value,SpSelect_CasesCompleted.value,SpSelect_CasesComment.Text,SpSelect_CasesCasePriorityId.AsInteger,_insertMode,SpSelect_CasesCustomerID.Asinteger) do
+                              ,  SpSelect_CasesRegisterUserID.value,SpSelect_CasesCompleted.value,SpSelect_CasesComment.Text,SpSelect_CasesCasePriorityId.AsInteger,_insertMode,SpSelect_CasesRegisterDate.AsString,SpSelect_CasesCaseEstimatedDate.AsString, SpSelect_CasesCustomerID.Asinteger) do
    ShowModal;
 end;
 
@@ -220,7 +225,7 @@ begin
   end
   else
   with  TfrCaseAdd.Create(Self,SpSelect_CasesCaseID.Value,SpSelect_CasesCaseTitle.Text,SpSelect_CasesProductId.Value,SpSelect_CasesCaseTypeID.Value
-                                ,SpSelect_CasesRegisterUserID.value,SpSelect_CasesCompleted.value,SpSelect_CasesComment.Text,SpSelect_CasesCasePriorityId.AsInteger,_insertMode,SpSelect_CasesCustomerID.Asinteger) do
+                                ,SpSelect_CasesRegisterUserID.value,SpSelect_CasesCompleted.value,SpSelect_CasesComment.Text,SpSelect_CasesCasePriorityId.AsInteger,_insertMode,SpSelect_CasesRegisterDate.AsString,SpSelect_CasesCaseEstimatedDate.AsString,SpSelect_CasesCustomerID.Asinteger) do
     ShowModal;
 
 end;
@@ -239,6 +244,7 @@ begin
     btnDelBR2     .Enabled := false;
     btnAddTask    .Enabled := false;
     btnAttachment .Enabled := False;
+    DBMemComment.Enabled   := True;
     dbeCaseTitle  .SetFocus;
   end
   else ShowMessage('„Ê—œÌ ﬂÂ œ«—«Ì ﬂ«— „Ì»«‘œ ﬁ«»· ÊÌ—«Ì‘ ‰Ì” ');
@@ -332,8 +338,54 @@ var Id:integer;
    BugStatusID : Integer ;
    ModeInsert : Boolean;
    ModeBug : Boolean;
+   CommentStrMain: string;
+   UserName : string ;
 begin
   inherited;
+
+  if SpSelect_CasesCaseTypeID.Value = 9 then
+  begin
+    ShowMyMessage('ÅÌ€«„','«„ò«‰ À»  «—“Ì«»Ì «“ «Ì‰ ›—„ ÊÃÊœ ‰œ«—œ «Ì‰ „Ê—œ »Â ’Ê—  « Ê„« Ìò „— »ÿ »« «ﬁœ«„ À»  „Ì ‘Êœ',[mbOK],mtInformation);
+    Abort;
+  end;
+
+  if DBchIsBug.Checked then
+  begin
+
+    CaseAccept  :=  Qry_GetResult(' select top 1 UserID  FROM dbo.TaskReferral where UserTypeID = '+ IntToStr(_UserTypeID) +
+                                  ' AND CaseTypeID = '+ IntToStr(dblCaseType.KeyValue) +' AND ProductID = '+IntToStr(dblProduct.KeyValue) +'  order by id desc' ,dm.YeganehConnection) ;
+    if CaseAccept = '' then
+    begin
+      // „œÌ— Å‘ Ì»«‰Ì
+      if _UserTypeID = 2 then
+        CaseAccept  :=  Qry_GetResult(' select top 1 id  FROM dbo.users where isnull(ManagerSupport,0) = 1 order by id desc' ,dm.YeganehConnection)
+      else if _UserTypeID = 7 then  //    „œÌ—  Ê·Ìœ
+         CaseAccept  :=  Qry_GetResult(' select top 1 id  FROM dbo.users where isnull(ManagerProduction,0) = 1 order by id desc' ,dm.YeganehConnection)
+      else if _UserTypeID = 1 then  //    „œÌ— ›—Ê‘
+         CaseAccept  :=  Qry_GetResult(' select top 1 id  FROM dbo.users where isnull(ManagerSale,0) = 1 order by id desc' ,dm.YeganehConnection) ;
+    end;
+
+    if CaseAccept = '' then
+      CaseAccept  := IntToStr(_UserID)  ;
+
+    CommentStr  := '·ÿ›« ÃÂ   «ÌÌœ »——”Ì Ê ÃÂ  «‰Ã«„  ⁄ÌÌ‰ Ê÷⁄Ì  ‘Êœ';
+    BugStatusID := 8 ;
+    ModeBug := True;
+  end
+  else
+  begin
+    //ò«—»— Ã«—Ì
+    CaseAccept  := IntToStr(_UserID)  ;
+    CommentStr  := '„Ê—œ À»  ‘œ';
+    BugStatusID := 2 ;
+    ModeBug := False;
+  end;
+
+  UserName  :=  Qry_GetResult(' select top 1 Title FROM dbo.users where id = '+CaseAccept ,dm.YeganehConnection) ;
+
+  if  ShowMyMessage('ÅÌ€«„',' »—«Ì „Ê—œ Ê „Õ’Ê· «‰ Œ«»Ì ‰Ê⁄ ò«—»—Ì ‘„« «—Ã«⁄ ‘Ê‰œÂ ' +'" '+UserName+' "'+ '„Ì »«‘œ ¬Ì««“ «—Ã«⁄ ò«— »Â ‘Œ’ «‰ Œ«» ‘œÂ „ÿ„⁄‰ „Ì »«‘Ìœø',mbOKCancel,mtInformation) = mrCancel then
+    Abort;
+
   if Trim(dbeCaseTitle.Text) = ''  then
   begin
     ShowMyMessage('ÅÌ€«„','·ÿ›« ⁄‰Ê«‰ „Ê—œ Ê«—œ ‰„«ÌÌœ',[mbOK],mtInformation);
@@ -341,48 +393,56 @@ begin
   end
   else
   begin
-    if DBchIsBug.Checked then
-    begin
-      // „œÌ— Å‘ Ì»«‰Ì
-      CaseAccept  :=  Qry_GetResult(' select top 1 id  FROM dbo.users where AccessID = 9 order by id desc' ,dm.YeganehConnection) ;
-      CommentStr  := '·ÿ›« »«ê ÃÂ   «ÌÌœ »——”Ì Ê ÃÂ  «‰Ã«„  ⁄ÌÌ‰ Ê÷⁄Ì  ‘Êœ';
-      BugStatusID := 8 ;
-      ModeBug := True;
-    end
-    else
-    begin
-      //ò«—»— Ã«—Ì
-      CaseAccept  := IntToStr(_UserID)  ;
-      CommentStr  := '„Ê—œ À»  ‘œ';
-      BugStatusID := 2 ;
-      ModeBug := False;
-    end;
+    try
 
-    ModeInsert := False ;
-    if SpSelect_Cases.State = dsInsert then
-      ModeInsert := True ;
-
-    SpSelect_Cases.Post;
-    Id := SpSelect_CasesCaseID.Value;
-
-    if ModeInsert then
-    begin
-      with TADOQuery.Create(nil) do
+      ModeInsert := False ;
+      if SpSelect_Cases.State = dsInsert then
       begin
-         Connection := Dm.YeganehConnection;
-         SQL.Text := ' insert into dbo.Tasks (CaseId,Comment,StatusId,AssignedUserId,AssignedDate)values('+IntToStr(Id)+','''+CommentStr+''','+IntToStr(BugStatusID)+','
-                                                            +CaseAccept+','''+_Today+'''' +') ';
-
-        if ModeBug then
-          SQL.Text := SQL.Text + ' insert into dbo.FollowUp (TaskID,CustomerID,ActionTypeID,DoneStatusID,DoneComment,MarketerID,Comment,ToDoDate,insertdate,Lastupdate,FollowUpInsertDate)'+
-                    ' values(@@IDENTITY,'+DBEdit4.Text+',47,2'+','''+' «—”«· »Â ò«— «»· „œÌ— Å‘ Ì»«‰Ì '+''','+IntToStr(_MarketerID)+','''+' »«ê ' + IntToStr(Id) +' ‹ '+ DBMemo2.text+''','''+_Today+''',getdate(),GetDate()'+','''+_Today+'''' +') ';
-
-        ExecSQL;
+        ModeInsert := True ;
+        if dblCaseType.KeyValue = 3 then
+        begin
+          if dblPriority.KeyValue = 1 then
+            SpSelect_CasesCaseEstimatedDate.AsString := ShamsiString(Dm.GetServerDate+7)
+          else if dblPriority.KeyValue = 2 then
+            SpSelect_CasesCaseEstimatedDate.AsString := ShamsiString(Dm.GetServerDate+3)
+          else if dblPriority.KeyValue = 3 then
+            SpSelect_CasesCaseEstimatedDate.AsString := ShamsiString(Dm.GetServerDate+2)
+          else if dblPriority.KeyValue = 4 then
+            SpSelect_CasesCaseEstimatedDate.AsString := ShamsiString(Dm.GetServerDate+1) 
+          else
+          begin
+            SpSelect_CasesCaseEstimatedDate.AsString := ShamsiString(Dm.GetServerDate+7);
+            SpSelect_CasesCasePriorityId.AsInteger := 1 ;
+          end;
+        end
+        else SpSelect_CasesCasePriorityId.AsInteger := 6 ;
       end;
 
-    end;
-    SpSelect_Cases.Requery;
-    SpSelect_Cases.Locate('CaseId',id,[]);
+      SpSelect_Cases.Post;
+      Id := SpSelect_CasesCaseID.Value;
+
+      if ModeInsert then
+      begin
+        with TADOQuery.Create(nil) do
+        begin
+           Connection := Dm.YeganehConnection;
+           SQL.Text := ' insert into dbo.Tasks (CaseId,Comment,StatusId,AssignedUserId,AssignedDate)values('+IntToStr(Id)+','''+CommentStr+''','+IntToStr(BugStatusID)+','
+                                                              +CaseAccept+','''+_Today+'''' +') ';
+
+          CommentStrMain := StringReplace(DBMemComment.text, '''', '''''',[rfReplaceAll, rfIgnoreCase]) ;
+          if ModeBug then
+            SQL.Text := SQL.Text + ' insert into dbo.FollowUp (IsAuto,TaskID,CustomerID,ActionTypeID,DoneStatusID,DoneComment,MarketerID,Comment,ToDoDate,insertdate,Lastupdate,FollowUpInsertDate)'+
+                      ' values(1,@@IDENTITY,'+DBEdit4.Text+',47,2'+','''+' «—”«· »Â ò«— «»· „œÌ— Å‘ Ì»«‰Ì '+''','+IntToStr(_MarketerID)+','''+' »«ê ' + IntToStr(Id) +' ‹ '+ Copy(CommentStrMain,1,500)+''','''+_Today+''',getdate(),GetDate()'+','''+_Today+'''' +') ';
+
+          ExecSQL;
+        end;
+
+      end;
+      SpSelect_Cases.Requery;
+      SpSelect_Cases.Locate('CaseId',id,[]);
+    except
+      ShowMyMessage('ÅÌ€«„','⁄„·Ì«  À»  „Ê—œ/»«ê »« Œÿ« „Ê«ÃÂ ‘œ ·ÿ›« œÊ»«—Â «ﬁœ«„ ‰„«ÌÌœ',[mbOK],mtInformation);
+    end ;
   end;
 end;
 
@@ -406,6 +466,7 @@ begin
     btnDelBR2 .Enabled    := True;
     btnAddTask.Enabled    := True;
     btnAttachment.Enabled := True;
+    DBMemComment.Enabled  := True;
   end;
 
 end;
@@ -534,6 +595,7 @@ begin
   btnAddTask.Enabled    := True;
   btnAttachment.Enabled := True;
   grbCase.Enabled       := false;
+  DBMemComment.Enabled  := True;
 end;
 
 procedure TfrCase.N1Click(Sender: TObject);
@@ -671,7 +733,7 @@ procedure TfrCase.FormCanResize(Sender: TObject; var NewWidth,
   NewHeight: Integer; var Resize: Boolean);
 begin
   { TODO -oparsa : 14030203 }
-  if (NewWidth < 924)  or (NewHeight < 548) then
+  if (NewWidth < 924)  or (NewHeight < 691) then
     Resize := False
   else Resize := True;
    { TODO -oparsa : 14030203 }

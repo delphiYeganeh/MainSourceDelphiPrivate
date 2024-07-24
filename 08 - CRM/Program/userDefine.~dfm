@@ -1,7 +1,7 @@
 inherited UserDefineF: TUserDefineF
   Tag = 2
-  Left = 571
-  Top = 180
+  Left = 751
+  Top = 165
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = #1705#1575#1585#1576#1585#1575#1606
@@ -229,7 +229,7 @@ inherited UserDefineF: TUserDefineF
         Width = 135
         Height = 21
         Anchors = [akTop, akRight]
-        DataField = 'PassWord'
+        DataField = 'NewPassWord'
         DataSource = DSForm
         PasswordChar = '*'
         TabOrder = 2
@@ -308,6 +308,7 @@ inherited UserDefineF: TUserDefineF
         Top = 153
         Width = 160
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1575#1610#1580#1575#1583' '#1582#1585#1608#1580#1610' '#1604#1610#1587#1578' '#1605#1588#1578#1585#1610#1575#1606
         DataField = 'ExportCustomerList'
         DataSource = DSForm
@@ -320,6 +321,7 @@ inherited UserDefineF: TUserDefineF
         Top = 135
         Width = 128
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1576#1578#1608#1575#1606#1583' '#1602#1585#1575#1585#1583#1575#1583#1607#1575' '#1585#1575' '#1576#1576#1610#1606#1583
         DataField = 'ShowContract'
         DataSource = DSForm
@@ -332,6 +334,7 @@ inherited UserDefineF: TUserDefineF
         Top = 153
         Width = 168
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1576#1578#1608#1575#1606#1583' '#1602#1585#1575#1585#1583#1575#1583' '#1608#1610#1585#1575#1610#1588'/'#1581#1584#1601' '#1705#1606#1583
         DataField = 'EditContract'
         DataSource = DSForm
@@ -344,6 +347,7 @@ inherited UserDefineF: TUserDefineF
         Top = 153
         Width = 150
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1605#1588#1575#1607#1583#1607' '#1578#1605#1575#1605' '#1605#1588#1578#1585#1610#1575#1606
         DataField = 'ShowAllCustomer'
         DataSource = DSForm
@@ -356,6 +360,7 @@ inherited UserDefineF: TUserDefineF
         Top = 135
         Width = 128
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1575#1610#1580#1575#1583' '#1582#1585#1608#1580#1610' '#1575#1602#1583#1575#1605#1575#1578
         DataField = 'ExportFollow'
         DataSource = DSForm
@@ -368,6 +373,7 @@ inherited UserDefineF: TUserDefineF
         Top = 137
         Width = 150
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1605#1588#1575#1607#1583#1607' '#1603#1575#1585#1607#1575#1610' '#1605#1606
         DataField = 'ShowMyAction'
         DataSource = DSForm
@@ -380,6 +386,7 @@ inherited UserDefineF: TUserDefineF
         Top = 169
         Width = 150
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1578#1605#1575#1605#1610' '#1575#1602#1583#1575#1605#1575#1578
         DataField = 'BtnAllAct'
         DataSource = DSForm
@@ -392,6 +399,7 @@ inherited UserDefineF: TUserDefineF
         Top = 169
         Width = 184
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1578#1605#1575#1605#1610' '#1602#1585#1575#1585#1583#1575#1583' '#1607#1575#1610' '#1578#1605#1575#1605#1610' '#1603#1575#1585#1576#1585#1575#1606
         DataField = 'BtnAllContract'
         DataSource = DSForm
@@ -436,6 +444,7 @@ inherited UserDefineF: TUserDefineF
         Top = 170
         Width = 128
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1583#1575#1585#1575#1610' '#1608#1610#1606#1583#1608#1586' '#1587#1585#1608#1585
         DataField = 'ISWinServer'
         DataSource = DSForm
@@ -460,6 +469,7 @@ inherited UserDefineF: TUserDefineF
         Top = 186
         Width = 150
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1583#1587#1578#1585#1587#1610' '#1605#1606#1608' '#1605#1575#1604#1610
         DataField = 'AccAcess'
         DataSource = DSForm
@@ -472,6 +482,7 @@ inherited UserDefineF: TUserDefineF
         Top = 186
         Width = 184
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1583#1587#1578#1585#1587#1610' '#1575#1585#1586#1610#1575#1576#1610
         DataField = 'AssesstAccess'
         DataSource = DSForm
@@ -484,6 +495,7 @@ inherited UserDefineF: TUserDefineF
         Top = 187
         Width = 128
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1583#1587#1578#1585#1587#1610' '#1601#1575#1705#1578#1608#1585
         DataField = 'FactorAccess'
         DataSource = DSForm
@@ -496,10 +508,87 @@ inherited UserDefineF: TUserDefineF
         Top = 204
         Width = 150
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1583#1587#1578#1585#1587#1610' '#1578#1605#1575#1587
         DataField = 'CallAccess'
         DataSource = DSForm
         TabOrder = 22
+        ValueChecked = 'True'
+        ValueUnchecked = 'False'
+      end
+      object DBCheckBox14: TDBCheckBox
+        Left = 18
+        Top = 65
+        Width = 150
+        Height = 17
+        Anchors = [akTop, akRight]
+        Caption = #1605#1583#1610#1585' '#1601#1585#1608#1588
+        DataField = 'ManagerSale'
+        DataSource = DSForm
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 23
+        ValueChecked = 'True'
+        ValueUnchecked = 'False'
+      end
+      object DBCheckBox15: TDBCheckBox
+        Left = 18
+        Top = 81
+        Width = 150
+        Height = 17
+        Anchors = [akTop, akRight]
+        Caption = #1605#1583#1610#1585' '#1578#1608#1604#1610#1583
+        DataField = 'ManagerProduction'
+        DataSource = DSForm
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 24
+        ValueChecked = 'True'
+        ValueUnchecked = 'False'
+      end
+      object DBCheckBox16: TDBCheckBox
+        Left = 18
+        Top = 96
+        Width = 150
+        Height = 17
+        Anchors = [akTop, akRight]
+        Caption = #1605#1583#1610#1585' '#1662#1588#1578#1610#1576#1575#1606#1610
+        DataField = 'ManagerSupport'
+        DataSource = DSForm
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 25
+        ValueChecked = 'True'
+        ValueUnchecked = 'False'
+      end
+      object DBCheckBox17: TDBCheckBox
+        Left = 18
+        Top = 111
+        Width = 150
+        Height = 17
+        Anchors = [akTop, akRight]
+        Caption = #1605#1583#1610#1585' '#1575#1583#1575#1585#1610
+        DataField = 'ManagerOfficial'
+        DataSource = DSForm
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 26
         ValueChecked = 'True'
         ValueUnchecked = 'False'
       end
@@ -648,7 +737,6 @@ inherited UserDefineF: TUserDefineF
       Top = 89
       Width = 550
       Height = 215
-      Cursor = crHandPoint
       Align = alClient
       DataSource = DSForm
       Options = [dgAlwaysShowEditor, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -702,8 +790,8 @@ inherited UserDefineF: TUserDefineF
     Top = 184
   end
   inherited ActionList: TActionList
-    Left = 88
-    Top = 176
+    Left = 136
+    Top = 184
   end
   object User: TADOTable
     Connection = Dm.YeganehConnection
@@ -806,6 +894,25 @@ inherited UserDefineF: TUserDefineF
     end
     object UserFactorAccess: TBooleanField
       FieldName = 'FactorAccess'
+    end
+    object UserManagerSale: TBooleanField
+      FieldName = 'ManagerSale'
+    end
+    object UserManagerProduction: TBooleanField
+      FieldName = 'ManagerProduction'
+    end
+    object UserManagerSupport: TBooleanField
+      FieldName = 'ManagerSupport'
+    end
+    object UserManagerOfficial: TBooleanField
+      FieldName = 'ManagerOfficial'
+    end
+    object UserIsSystemUser: TBooleanField
+      FieldName = 'IsSystemUser'
+    end
+    object UserNewPassWord: TStringField
+      FieldName = 'NewPassWord'
+      Size = 50
     end
   end
 end

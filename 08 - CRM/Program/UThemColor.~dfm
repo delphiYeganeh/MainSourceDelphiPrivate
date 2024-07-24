@@ -3,7 +3,7 @@ inherited FThemColor: TFThemColor
   Top = 299
   Width = 549
   Height = 436
-  Caption = 'FThemColor'
+  Caption = #1578#1606#1592#1610#1605#1575#1578' '#1585#1606#1711
   OldCreateOrder = True
   OnCanResize = FormCanResize
   PixelsPerInch = 96
@@ -58,9 +58,9 @@ inherited FThemColor: TFThemColor
       Height = 65
     end
     object Label7: TLabel
-      Left = 450
+      Left = 449
       Top = 199
-      Width = 5
+      Width = 6
       Height = 13
       Caption = '1'
     end
@@ -291,6 +291,20 @@ inherited FThemColor: TFThemColor
       Caption = #1575#1606#1589#1585#1575#1601
       ModalResult = 2
       TabOrder = 5
+    end
+    object Button1: TButton
+      Left = 144
+      Top = 0
+      Width = 75
+      Height = 25
+      Caption = 'Button1'
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = 12616065
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
     end
   end
 end

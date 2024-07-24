@@ -346,9 +346,9 @@ inherited FrViewByCalender: TFrViewByCalender
       1059
       592)
     object Label7: TLabel
-      Left = 765
+      Left = 977
       Top = 9
-      Width = 242
+      Width = 30
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1588#1606#1576#1607
@@ -360,9 +360,9 @@ inherited FrViewByCalender: TFrViewByCalender
       ParentFont = False
     end
     object Label8: TLabel
-      Left = 622
+      Left = 834
       Top = 9
-      Width = 254
+      Width = 42
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1610#1705#1588#1606#1576#1607
@@ -374,9 +374,9 @@ inherited FrViewByCalender: TFrViewByCalender
       ParentFont = False
     end
     object Label9: TLabel
-      Left = 480
+      Left = 692
       Top = 9
-      Width = 253
+      Width = 41
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1583#1608#1588#1606#1576#1607
@@ -388,9 +388,9 @@ inherited FrViewByCalender: TFrViewByCalender
       ParentFont = False
     end
     object Label10: TLabel
-      Left = 331
+      Left = 543
       Top = 9
-      Width = 266
+      Width = 54
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1587#1607' '#1588#1606#1576#1607
@@ -402,9 +402,9 @@ inherited FrViewByCalender: TFrViewByCalender
       ParentFont = False
     end
     object Label11: TLabel
-      Left = 190
+      Left = 402
       Top = 9
-      Width = 267
+      Width = 55
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1670#1607#1575#1585#1588#1606#1576#1607
@@ -416,9 +416,9 @@ inherited FrViewByCalender: TFrViewByCalender
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 49
+      Left = 261
       Top = 9
-      Width = 264
+      Width = 52
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1662#1606#1580' '#1588#1606#1576#1607
@@ -430,9 +430,9 @@ inherited FrViewByCalender: TFrViewByCalender
       ParentFont = False
     end
     object Label13: TLabel
-      Left = -89
+      Left = 123
       Top = 9
-      Width = 242
+      Width = 30
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       Caption = #1580#1605#1593#1607

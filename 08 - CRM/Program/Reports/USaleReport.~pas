@@ -258,8 +258,9 @@ begin
                                                   dblState.KeyValue,
                                                   dblCity.KeyValue);   *)
 
-  TNumericField(DSCustGrid.DataSet.fields[0]).DisplayFormat := '#,###.00' ;
-  TNumericField(DSCustGrid.DataSet.fields[1]).DisplayFormat := '#,###.00' ;
+                                                  //'#,###.00'
+  TNumericField(DSCustGrid.DataSet.fields[1]).DisplayFormat := '#,###' ;
+  TNumericField(DSCustGrid.DataSet.fields[2]).DisplayFormat := '#,###' ;
   CustGrid.DataSource := DSCustGrid;
 
 

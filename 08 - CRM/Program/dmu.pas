@@ -6,7 +6,7 @@ uses
   SysUtils, Classes, DB,ShellAPI, ADODB, ImgList, Controls,Registry,windows,word2000,Graphics,YwhereEdit,
   OleServer, AppEvnts,Dialogs, WordXP, YINtegerField,DBGrids,Forms,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP,
-  Yeganeh_Word, ComObj, ActiveX;
+  Yeganeh_Word, ComObj, ActiveX, TntDialogs, MssCalendarPro;
 
 type
   TDm = class(TDataModule)
@@ -784,6 +784,53 @@ type
     UserFactorAccess: TBooleanField;
     UserEditVersion: TBooleanField;
     Select_FollowUP_By_DateWorkPhoneOther: TStringField;
+    OpenDialogFile: TTntOpenDialog;
+    Select_FollowUP_By_CustomerIDPicAttachmentType: TStringField;
+    Select_FollowUP_By_DateIsHoliday: TIntegerField;
+    DSelect_Holiday_date: TDataSource;
+    Select_Holiday_date: TADOStoredProc;
+    Select_Holiday_dateYear: TStringField;
+    Select_Holiday_dateDate: TStringField;
+    Select_Holiday_dateMounth: TStringField;
+    Select_Holiday_dateHolidayDate: TStringField;
+    Select_Holiday_dateDescription: TStringField;
+    UserManagerSale: TBooleanField;
+    UserManagerProduction: TBooleanField;
+    UserManagerSupport: TBooleanField;
+    UserManagerOfficial: TBooleanField;
+    tblTaskReferral: TADOTable;
+    DSTaskReferral: TDataSource;
+    tblTaskReferralUserTypeId: TIntegerField;
+    tblTaskReferralCaseTypeID: TIntegerField;
+    tblTaskReferralProductID: TIntegerField;
+    tblTaskReferralUserID: TIntegerField;
+    tblTaskReferralUserTypeTitle: TStringField;
+    tblTaskReferralcaseTypeTitle: TStringField;
+    tblTaskReferralProductTitle: TStringField;
+    tblTaskReferralUserTitle: TStringField;
+    DSUserType: TDataSource;
+    tblUserType: TADOTable;
+    tblUserTypeUserTypeId: TIntegerField;
+    tblUserTypeUserTypeTitle: TStringField;
+    MssCalendarPro1: TMssCalendarPro;
+    tblMessages: TADOTable;
+    DSMessages: TDataSource;
+    tblMessagesUserID: TIntegerField;
+    tblMessagesMessageType: TIntegerField;
+    tblMessagesDescription: TStringField;
+    tblMessagesIsRead: TBooleanField;
+    tblMessagesCurrentDate: TDateField;
+    tblMessagesInserteadUserId: TIntegerField;
+    tblMessagesIsActive: TBooleanField;
+    tblMessagesExpireDateShow: TStringField;
+    tblMessagesReadDate: TDateField;
+    tblMessagesSubject: TStringField;
+    tblMessagesicon: TStringField;
+    tblMessagesID: TIntegerField;
+    tblMessagesShamsidate: TStringField;
+    Select_FollowUP_By_CustomerIDIsAuto: TBooleanField;
+    UserLastVertionLogin: TStringField;
+    UserNewPassWord: TStringField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
     function GetSql(s:string):Variant;
     function GetNewCode:string;
@@ -828,6 +875,7 @@ type
     { TODO -oparsa : 14030204 }
     procedure SendSmsToOutBox (	SmsNumber,SmsText :String);
     function  Post(param1:string): string;
+    procedure tblMessagesCalcFields(DataSet: TDataSet);
     { TODO -oparsa : 14030204 }
 
   private
@@ -847,7 +895,8 @@ type
     SearchResult:integer;
     FocusedColor:Tcolor;
     CanDataChange : boolean; // Amin 1391/10/18
-
+    HolidayArray : array[1..12, 1..31] of integer;
+    HolidayStr : string;
     function  Search(Y:TYwhereEdit):integer;
 
     procedure SaveTemplateToFile;
@@ -869,6 +918,11 @@ type
 
     function SmsSettingIsCorrect:Boolean;
     function DMCommaSeperated(s:string):string;
+    function replacePWC(input: Pwidechar): Pwidechar;
+    function StringToPWide(  sStr: string;  var iNewSize: integer): PWideChar;
+  //  function ReadTiffIntoBitmap(const Filename: string): TBitmap;
+    procedure RefreshHoliday(Bdate:String ='1403');
+    function getDelphiVer:String;
 
 
   end;
@@ -944,13 +998,21 @@ Var
   _UserCallAccess : Boolean ;
   _UserEditVersion : Boolean ;
   _PercentScale : Integer ;
+  _ManagerSale : Boolean ;
+  _ManagerProduction : Boolean ;
+  _ManagerSupport : Boolean ;
+  _ManagerOfficial : Boolean ;
+  _IsSystemUserID : Integer;
+  _SoftVersion : string;
+
   { TODO -oparsa : 14030204 }
    //---
 //1    gContractPath :String;
 Const
      ProductID = 'Y_Crm';
-     _SoftVersion = '4.0.0.0' ;//'2.4.';
-     _LastUpdate = '1403/04/06'; //'1393/08/20';
+    // _SoftVersion = '4.0.0.0' ;//'2.4.';
+    _LastUpdate = '1403/05/02'; //'1393/08/20';
+    CrmRegistryKey = 'Software\Yeganeh\CRM' ; 
     procedure SetQueryDataSet(var DataSourceQry :TDataSource;var ReturnQry :TADOQuery;SQLText :String;QryConnection:TADOConnection;Field0Alignment :Boolean = False);
     Function AddImageField(Field:TField;Dlgfilter:String):String;
 
@@ -975,6 +1037,8 @@ procedure Tdm.DataModuleCreate(Sender: TObject);
 Var
    DongleProductCode,DongleErrorCode : Integer;
 begin
+
+   _SoftVersion := getDelphiVer;
    _PercentScale := 100 ;
    _EXEDIR := ExtractFilePath(Application.ExeName);
    if Trim(YeganehConnection.ConnectionString) <> '' then
@@ -1021,7 +1085,7 @@ begin
 
 
     
- DM.Scripts_Run(Dm.YeganehConnection,'ScriptsNumber',ServerName); // «»⁄ «Ì‰ ÌÊ‰Ì 
+   DM.Scripts_Run(Dm.YeganehConnection,'ScriptsNumber',ServerName); // «»⁄ «Ì‰ ÌÊ‰Ì 
 
 
    SystemSettings.Open;
@@ -1029,7 +1093,7 @@ begin
    ActivateKeyboardLayout(HKL_NEXT, KLF_REORDER);
    TRY
      _SoftVersionDB :='00';
-     _SoftVersionDB :=Qry_GetResult(' SELECT Value FROM Settings WHERE VariableName =''ScriptsNumber'' AND UserID=-1',dm.YeganehConnection);
+     _SoftVersionDB := Qry_GetResult(' SELECT Value FROM Settings WHERE VariableName =''ScriptsNumber'' AND UserID=-1',dm.YeganehConnection);
    EXCEPT
    END;
 
@@ -1054,9 +1118,9 @@ begin
    { TODO -oparsa : 14030126 }
 
 
-  ResulutionGet;
+   ResulutionGet;
 
-  LoginForm:=TLoginForm.Create(Self);
+   LoginForm := TLoginForm.Create(Self);
 
    LoginForm.ShowModal;
 
@@ -1930,26 +1994,59 @@ if (Field0Alignment =true)and (RecordCount > 0) then
 end;
 
 Function AddImageField(Field:TField;Dlgfilter:String):String;
+var
+   i : integer;
+   PathText : string;
 begin
+
+ // with TOpenDialog.Create(nil) do
   with TOpenDialog.Create(nil) do
   begin
-      Filter:=Dlgfilter;
+      Filter:= Dlgfilter;
       if Execute then
       begin
-        if not(Field.DataSet.State in [dsinsert,dsedit]) then
-              Field.DataSet.Edit;
+          if not(Field.DataSet.State in [dsinsert,dsedit]) then
+                Field.DataSet.Edit;
         try
-            //ShowMessage('before copy');
-            //CopyFile(PAnsiChar(AnsiString(FileName)),PAnsiChar(AnsiString('D:\YeganehContractTemp'+ExtractFileExt(FileName))),false);
-            //ShowMessage('after copy');
-            TBlobField(Field).LoadFromFile(FileName);
-            //ShowMessage('after load');
-            //ShowMessage('before delete');
-            //DeleteFile(PAnsiChar(AnsiString('D:\YeganehContractTemp'+ExtractFileExt(FileName))));
-            //ShowMessage('after delete');
-            Result := ExtractFileExt(FileName);
-        except on e:exception do
-            ShowMessage(e.Message);
+          try
+
+             if FileExists(_ApplicationPath+'tmpAttachCRMFile'+ExtractFileExt(filename))then
+             begin
+               SysUtils.FileSetReadOnly(pchar(_ApplicationPath+'tmpAttachCRMFile'+ExtractFileExt(filename)), false);
+               DeleteFile(pchar(_ApplicationPath+'tmpAttachCRMFile'+ExtractFileExt(filename)));
+             end;
+
+             if CopyFileW(dm.replacePWC(dm.StringToPWide(filename,i)), dm.StringToPWide(_ApplicationPath+'tmpAttachCRMFile'+ExtractFileExt(filename),i), False) then
+                PathText :=_ApplicationPath+'tmpAttachCRMFile'+ExtractFileExt(filename)
+             else
+             if CopyFileW(dm.StringToPWide(filename,i), dm.StringToPWide(_ApplicationPath+'tmpAttachCRMFile'+ExtractFileExt(filename),i), False) then
+                PathText := _ApplicationPath+'tmpAttachCRMFile'+ExtractFileExt(filename)
+             else
+                ShowMessage('Œÿ« œ— ŒÊ«‰œ‰ ›«Ì· „»œ«');
+                             (*
+              //ShowMessage('before copy');
+              //CopyFile(PAnsiChar(AnsiString(FileName)),PAnsiChar(AnsiString('D:\YeganehContractTemp'+ExtractFileExt(FileName))),false);
+              //ShowMessage('after copy');
+              TBlobField(Field).LoadFromFile(FileName);
+              //ShowMessage('after load');
+              //ShowMessage('before delete');
+              //DeleteFile(PAnsiChar(AnsiString('D:\YeganehContractTemp'+ExtractFileExt(FileName))));
+              //ShowMessage('after delete');
+              Result := ExtractFileExt(FileName);
+                         *)
+              TBlobField(Field).LoadFromFile(PathText);
+              Result := ExtractFileExt(PathText);
+
+          except on e:exception do
+              //ShowMessage(e.Message);
+              ShowMessage('Œÿ« œ— ŒÊ«‰œ‰ ›«Ì· „»œ«');
+          end;
+        finally
+         if FileExists(_ApplicationPath+'tmpAttachCRMFile'+ExtractFileExt(filename))then
+         begin
+           SysUtils.FileSetReadOnly(pchar(_ApplicationPath+'tmpAttachCRMFile'+ExtractFileExt(filename)), false);
+           DeleteFile(pchar(_ApplicationPath+'tmpAttachCRMFile'+ExtractFileExt(filename)));
+         end;
         end;
       end;
   end;
@@ -2642,6 +2739,168 @@ begin
   else _PercentScale := 100 ;
 
   // _PercentScale := 100 ;
+
+end;
+
+function TDm.replacePWC(input: Pwidechar): Pwidechar;
+var
+   ch : WideChar;
+   i: integer;
+   w : word;
+begin
+  for i:=0 to length(input) do
+  begin
+    ch :=   input[i];
+    w := word(ch);
+    if ch = #1610 then
+      input[i] := #1740;
+  end;
+  result := input;
+end;
+
+function TDm.StringToPWide(sStr: string; var iNewSize: integer): PWideChar;
+var
+  pw : PWideChar;
+  iSize : integer;
+begin
+  iSize := Length(sStr) + 1;
+  iNewSize := iSize * 2;
+  pw := AllocMem(iNewSize);
+  MultiByteToWideChar(CP_ACP, 0, PChar(sStr), iSize, pw, iNewSize);
+  Result := pw;
+end;
+
+function ReadTiffIntoBitmap(const Filename: string): TBitmap;
+var
+ // OpenTiff: PTIFF;
+  FirstPageWidth, FirstPageHeight: Cardinal;
+begin
+  (*
+  Result:= nil;  //in case you want to tweak code to not raise exceptions.
+  OpenTiff:= TIFFOpen(Filename,'r');
+  if OpenTiff = nil then raise Exception.Create(
+           'Unable to open file '''+Filename+'''');
+  try 
+    TIFFGetField(OpenTiff, TIFFTAG_IMAGEWIDTH, @FirstPageWidth);
+    TIFFGetField(OpenTiff, TIFFTAG_IMAGELENGTH, @FirstPageHeight);
+    Result:= TBitmap.Create;
+    try 
+      Result.PixelFormat:= pf32bit;
+      Result.Width:= FirstPageWidth;
+      Result.Height:= FirstPageHeight;
+    except
+      FreeAndNil(Result);
+      raise Exception.Create('Unable to create TBitmap buffer');
+    end;
+    TIFFReadRGBAImage(OpenTiff, FirstPageWidth, FirstPageHeight,
+                 Result.Scanline[FirstPageHeight-1],0);
+    TIFFReadRGBAImageSwapRB(FirstPageWidth, FirstPageheight,
+                 Result.Scanline[FirstPageHeight-1]);
+  finally
+    TIFFClose(OpenTiff);
+  end;
+  *)
+end;
+
+procedure TDm.RefreshHoliday(Bdate: String);
+var i, j : integer;
+   strM ,strD: string ;
+begin
+  with Select_Holiday_date do
+   begin
+     Close;
+     Parameters.ParamByName('@Year').Value:=BDate;
+     Open;
+   end;
+
+  for i := 1 to 12 do
+    for j := 1 to 31 do
+    begin
+      if  i < 10 then
+        strM := '0'+inttostr(i)
+      else strM := inttostr(i);
+      
+      if j < 10 then
+        strD :=  '0'+inttostr(j)
+      else strD := inttostr(j);
+
+      Select_Holiday_date.Filtered := False;
+      Select_Holiday_date.filter   :='HolidayDate='''+BDate+'/'+strM+'/'+strD+'''';
+      Select_Holiday_date.Filtered := True;
+
+      if Select_Holiday_date.Recordcount>0 then
+      begin
+        HolidayArray[i, j] := 1  ;
+
+        if (i>6) and (j=31) then
+          HolidayStr := HolidayStr
+        else
+        HolidayStr := HolidayStr + '1';
+      end
+      else
+      begin
+        HolidayArray[i, j] := 0 ;
+        if (i>6) and (j=31) then
+          HolidayStr := HolidayStr
+        else
+        HolidayStr := HolidayStr + '0';
+      end
+    end;
+
+  Select_Holiday_date.Filtered := False;
+  Select_Holiday_date.filter   := '';
+  Select_Holiday_date.Filtered := True;
+end;
+
+procedure TDm.tblMessagesCalcFields(DataSet: TDataSet);
+begin
+  tblMessagesShamsidate.AsString :=  ShamsiString(tblMessagesCurrentDate.AsDateTime);
+end;
+
+function TDm.getDelphiVer: String;
+var
+  AppVersionString : String;
+  verblock : PVSFIXEDFILEINFO;
+  versionMS,versionLS : cardinal;
+  verlen : cardinal;
+  rs : TResourceStream;
+  m : TMemoryStream;
+  p : pointer;
+  s : cardinal;
+begin
+  AppVersionString := '';
+
+  m := TMemoryStream.Create;
+  try
+    rs := TResourceStream.CreateFromID(HInstance,1,RT_VERSION);
+    try
+      m.CopyFrom(rs,rs.Size);
+    finally
+      rs.Free;
+    end;
+
+    m.Position := 0;
+    if VerQueryValue(m.Memory,'\',pointer(verblock),verlen) then
+    begin
+      VersionMS := verblock.dwFileVersionMS;
+      VersionLS := verblock.dwFileVersionLS;
+      AppVersionString:=//Application.Title+' '+
+          IntToStr(versionMS shr 16)+'.'+
+          IntToStr(versionMS and $FFFF)+'.'+
+          IntToStr(VersionLS shr 16)+'.'+
+          IntToStr(VersionLS and $FFFF);
+    end;
+
+    if VerQueryValue(m.Memory,PChar('\\StringFileInfo\\'+
+      IntToHex(GetThreadLocale,4)+IntToHex(GetACP,4)+'\\FileDescription'),p,s) or
+        VerQueryValue(m.Memory,'\\StringFileInfo\\040904E4\\FileDescription',p,s) then //en-us
+          AppVersionString:=AppVersionString;
+          //AppVersionString:=PChar(p)+' '+AppVersionString;
+  finally
+    m.Free;
+  end;
+
+  Result := AppVersionString;
 
 end;
 

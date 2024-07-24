@@ -7,13 +7,25 @@ inherited ImageForm: TImageForm
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
-  object Image1: TImage [0]
+  inherited ShapeBase: TShape
+    Width = 874
+    Height = 570
+  end
+  object pnlMain: TPanel [1]
     Left = 0
     Top = 0
-    Width = 882
-    Height = 575
+    Width = 874
+    Height = 570
     Align = alClient
-    Proportional = True
-    Stretch = True
+    TabOrder = 0
+    object Image1: TImage
+      Left = 1
+      Top = 1
+      Width = 872
+      Height = 568
+      Align = alClient
+      Proportional = True
+      Stretch = True
+    end
   end
 end

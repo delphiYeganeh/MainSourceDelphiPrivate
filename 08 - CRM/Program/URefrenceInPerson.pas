@@ -243,6 +243,8 @@ begin
   Dm.Marketer.Filter := ' IsActive_=1 ' ;
   Dm.Marketer.Filtered := True;  
 
+  Dm.RefreshHoliday(copy(_today,1,4));
+  MssCalendarPro1.HolidayStr := dm.HolidayStr;  
 end;
 
 procedure TFRefrenceInPerson.BitBtn2Click(Sender: TObject);
@@ -336,7 +338,7 @@ begin
 
       SpSelect_CasesRegisterDate.Value   := _Today;
       SpSelect_CasesCaseOrigiranlId.Value:= 8; // «ﬁœ«„
-      SpSelect_CasesCasePriorityId.Value := 1; // «Ê·ÊÌ 
+      SpSelect_CasesCasePriorityId.Value := 7; // «Ê·ÊÌ 
       SpSelect_CasesCaseTypeID .Value := 9; // «—“Ì«»Ì
       SpSelect_CasesIsBug .Value := False ;
       SpSelect_CasesCustomerID .Value := CustomerId ; // ‘„«—Â „‘ —Ì

@@ -57,8 +57,8 @@ begin
                                                         +IntToStr(dblUserRefrence.KeyValue)+','''+_Today+''''
                                         +')';
 
-     SQL.Text := SQL.Text + ' insert into dbo.FollowUp (TaskID,CustomerID,ActionTypeID,DoneStatusID,MarketerID,Comment,ToDoDate,insertdate,Lastupdate,FollowUpInsertDate)'+
-                    ' values(@@IDENTITY,'+IntToStr(gCustomerId)+',47,3,'+IntToStr(_MarketerID)+','''+' »«ê ' + IntToStr(gCaseId) +'_'+' Ê÷⁄Ì  '+dblStatusId.Text+'_'+ mmoDescription.text+''','''+_Today+''',getdate(),GetDate()'+','''+_Today+'''' +') ';
+     SQL.Text := SQL.Text + ' insert into dbo.FollowUp (IsAuto,TaskID,CustomerID,ActionTypeID,DoneStatusID,MarketerID,Comment,ToDoDate,insertdate,Lastupdate,FollowUpInsertDate)'+
+                    ' values(1,@@IDENTITY,'+IntToStr(gCustomerId)+',47,3,'+IntToStr(_MarketerID)+','''+' »«ê ' + IntToStr(gCaseId) +'_'+' Ê÷⁄Ì  '+dblStatusId.Text+'_'+ mmoDescription.text+''','''+_Today+''',getdate(),GetDate()'+','''+_Today+'''' +') ';
 
 
     ExecSQL;
@@ -75,9 +75,10 @@ begin
   with dm.UserByCaseFilter do
   begin
     Close;
-    Parameters.ParamByName('CaseTypeId1').Value :=  CaseType;
-    Parameters.ParamByName('CaseTypeId2').Value := CaseType;
-    Parameters.ParamByName('UserId').Value := _UserID;
+    SQL.Text := ' Select * from Users where isactive = 1 AND (ID = '+inttostr(_UserID)+' or  id IN (SELECT Childid FROM [dbo].[ReferralUser] where parentId = '+inttostr(_UserID)+ ' )) '  ;
+  //  Parameters.ParamByName('CaseTypeId1').Value :=  CaseType;
+   // Parameters.ParamByName('CaseTypeId2').Value := CaseType;
+   // Parameters.ParamByName('UserId').Value := _UserID;
     Open;
   end;
 

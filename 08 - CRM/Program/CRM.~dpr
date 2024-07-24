@@ -136,7 +136,11 @@ uses
   UReportInPerson in 'Reports\UReportInPerson.pas' {FReportInPerson},
   UVersionProduct in 'UVersionProduct.pas' {FVersionProduct},
   UToRefer in 'UToRefer.pas' {FToRefer},
-  UUpdateJobStatus in 'UUpdateJobStatus.pas' {FUpdateJobStatus};
+  UUpdateJobStatus in 'UUpdateJobStatus.pas' {FUpdateJobStatus},
+  UTaskReport in 'Reports\UTaskReport.pas' {FTaskReport},
+  UBaseRefere in 'UBaseRefere.pas' {FBaseRefere},
+  UfollowUpReport in 'Reports\UfollowUpReport.pas' {FfollowUpReport},
+  UFMessageAlarm in 'Reports\UFMessageAlarm.pas' {FMessageAlarm};
 
 // ReCommiteDialog in 'ReCommitedialog.pas' {RecommiteSave};
 

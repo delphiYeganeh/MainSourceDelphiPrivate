@@ -225,6 +225,7 @@ type
     btnAddGuaranteeImage: TBitBtn;
     btnGuaranteeImageLoad: TBitBtn;
     dblGuaranteeType: TDBLookupComboBox;
+    Button1: TButton;
     procedure BtnCancelClick(Sender: TObject);
     procedure RefreshData;
     procedure btnDelClick(Sender: TObject);
@@ -287,6 +288,7 @@ type
     procedure BitBtn3Click(Sender: TObject);
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
+    procedure Button1Click(Sender: TObject);
 
 
   Private
@@ -582,32 +584,33 @@ end;
 procedure TFrContract.FormShow(Sender: TObject);
 begin
   inherited;
-    SetColorForm ;
-    grbCustomer.Caption := ' «ÿ·«⁄«  ‘—ò  / ”«“„«‰  : '+  Select_customer_By_CustomerIDCompanyName.AsString;
-    Dm.Marketer.Close;
-    Dm.Marketer.SQL.Clear;
-    Dm.Marketer.SQL.Add('SELECT * FROM marketer');
-    Dm.Marketer.SQL.Add('WHERE IsActive_=1');
-    Dm.Marketer.Open;
+  SetColorForm ;
+  grbCustomer.Caption := ' «ÿ·«⁄«  ‘—ò  / ”«“„«‰  : '+  Select_customer_By_CustomerIDCompanyName.AsString;
+  Dm.Marketer.Close;
+  Dm.Marketer.SQL.Clear;
+  Dm.Marketer.SQL.Add('SELECT * FROM marketer');
+  Dm.Marketer.SQL.Add('WHERE IsActive_=1');
+  Dm.Marketer.Open;
 
-    DBNCheckInsert.DataSource := dbgChequePay.DataSource;
-    DBNCheckDelete.DataSource := dbgChequePay.DataSource;
-    DBNCheckEdit.DataSource := dbgChequePay.DataSource;
-    DBNCheckPost.DataSource := dbgChequePay.DataSource;
-    DBNCheckCancel.DataSource := dbgChequePay.DataSource;
-          
-    DBNCashInsert.DataSource := dbgPayByCash.DataSource;
-    DBNCashDelete.DataSource := dbgPayByCash.DataSource;
-    DBNCashEdit.DataSource := dbgPayByCash.DataSource;
-    DBNCashPost.DataSource := dbgPayByCash.DataSource;
-    DBNCashCancel.DataSource := dbgPayByCash.DataSource;
+  DBNCheckInsert.DataSource := dbgChequePay.DataSource;
+  DBNCheckDelete.DataSource := dbgChequePay.DataSource;
+  DBNCheckEdit.DataSource := dbgChequePay.DataSource;
+  DBNCheckPost.DataSource := dbgChequePay.DataSource;
+  DBNCheckCancel.DataSource := dbgChequePay.DataSource;
 
-    if SpDbgridContract.RecordCount = 0 then
-    begin
-      pnlEdit.Minimized  :=True;
-      pnlGuarantee.Minimized  :=True;
-    end;
+  DBNCashInsert.DataSource := dbgPayByCash.DataSource;
+  DBNCashDelete.DataSource := dbgPayByCash.DataSource;
+  DBNCashEdit.DataSource := dbgPayByCash.DataSource;
+  DBNCashPost.DataSource := dbgPayByCash.DataSource;
+  DBNCashCancel.DataSource := dbgPayByCash.DataSource;
 
+  if SpDbgridContract.RecordCount = 0 then
+  begin
+    pnlEdit.Minimized  :=True;
+    pnlGuarantee.Minimized  :=True;
+  end;
+  Dm.RefreshHoliday(copy(_today,1,4));
+  MssCalendarPro1.HolidayStr := dm.HolidayStr;
 end;
 
 procedure TFrContract.dbgContractsListDblClick(Sender: TObject);
@@ -637,6 +640,11 @@ end;
 
 procedure TFrContract.OpenEditAddForm;
 var CustomerID:Integer;
+    CommentStr: string;
+    TitleStr: string;
+    CaseAccept : string;
+    SystemUser : string;
+    BugStatusID : Integer ;
 begin
 //  if frContractAdd=nil then
 //          frContractAdd:=TfrContractAdd.create(Self);
@@ -653,25 +661,59 @@ begin
          Post;
          gId := fieldByName('ContractID').Value;
       end;
-        Search_contract;
-        dbgContractsList.SetFocus;
-        if SpDbgridContract.RecordCount = 1 then
-          begin
-            Select_customer_By_CustomerID.Edit;
-            Select_customer_By_CustomerIDCustomerStatusID.Value :=    2;
-            Select_customer_By_CustomerID.Post;
-            if dm.Select_Customer_By_CustomerID.Active then
-                  dm.Select_Customer_By_CustomerID.Requery;
-            if Dm.Customer.Active then
-                  begin
-                    CustomerID := Dm.CustomerCustomerID.Value;
-                    Dm.Customer.Close;
-                    Dm.Customer.Open;
-                    Dm.Customer.Locate('CustomerId',CustomerID,[]);
-                  end;
+      Search_contract;
+      dbgContractsList.SetFocus;
+      
+      if SpDbgridContract.RecordCount = 1 then
+      begin
+        Select_customer_By_CustomerID.Edit;
+        Select_customer_By_CustomerIDCustomerStatusID.Value :=    2;
+        Select_customer_By_CustomerID.Post;
+        if dm.Select_Customer_By_CustomerID.Active then
+          dm.Select_Customer_By_CustomerID.Requery;
+        if Dm.Customer.Active then
+        begin
+          CustomerID := Dm.CustomerCustomerID.Value;
+          Dm.Customer.Close;
+          Dm.Customer.Open;
+          Dm.Customer.Locate('CustomerId',CustomerID,[]);
+        end;
 
-          end;
-        ShowMessage('«ÿ·«⁄«  À»  ‘œ');
+        { TODO -oparsa : 14030427 }
+        with TADOQuery.Create(nil) do
+        begin
+           Connection := Dm.YeganehConnection;
+           // „œÌ— Å‘ Ì»«‰Ì
+           CaseAccept  :=  Qry_GetResult(' select top 1 id  FROM dbo.users where isnull(ManagerSupport,0) = 1 order by id desc' ,dm.YeganehConnection) ;
+           SystemUser  :=  IntToStr(_IsSystemUserID) ;
+           BugStatusID := 8 ;
+
+           CommentStr  := ' „‘ —Ì œ—  «—ÌŒ '+_Today+ ' »Â „‘ —Ì ﬁÿ⁄Ì  »œÌ· ‘œÂ «”  ·ÿ›« ÃÂ  —«Ì  ”Ì œÌ «ﬁœ«„«  ·«“„ «‰Ã«„ ‘Êœ ' ;
+           TitleStr    := '—«Ì  ÅòÌÃ ÃÂ  „‘ —Ì ÃœÌœ' ; 
+           SQL.Text := ' insert into dbo.Cases (CheckUserID,RegisterUserID,RegisterDate,CaseEstimatedDate,CaseOrigiranlId,CasePriorityId,CaseTypeID,CustomerID,ProductId,CaseTitle,Comment)'+
+                       ' values('+CaseAccept+','+SystemUser+','''+_Today+'''' +','''+ShamsiString(Dm.GetServerDate+2)+'''' +',7,3,10,'+IntToStr(CustomerID)+','+IntToStr(SpDbgridContractProductID.asInteger)+','''+TitleStr+''','''+CommentStr+''' '+ ') ';
+
+           CommentStr  := '·ÿ›« ÃÂ  —«Ì  ÅòÌÃ «ﬁœ«„ ‘Êœ';
+
+           SQL.Text := SQL.Text + ' insert into dbo.Tasks (CaseId,Comment,StatusId,AssignedUserId,AssignedDate)'+
+                                  ' values(@@IDENTITY,'''+CommentStr+''','+IntToStr(BugStatusID)+','+CaseAccept+','''+_Today+'''' +') ';
+
+
+           SQL.Text := SQL.Text + ' insert into dbo.FollowUp (IsAuto,TaskID,CustomerID,ActionTypeID,DoneStatusID,DoneComment,MarketerID,Comment,ToDoDate,insertdate,Lastupdate,FollowUpInsertDate)'+
+                                  ' values(1,@@IDENTITY,'+IntToStr(CustomerID)+',56,2'+','''+' «—”«· »Â ò«— «»· „œÌ— Å‘ Ì»«‰Ì '+''',12,'''+' ”ò „—»Êÿ »Â —«Ì  ÅòÌÃ «ÌÃ«œ ‘œ Ê ÅÌ€«„ ÃÂ  «ÿ·«⁄ —”«‰Ì »Â „œÌ— Å‘ Ì»«‰Ì «—”«· ‘œ '+''','''+_Today+''',getdate(),GetDate()'+','''+_Today+'''' +') ';
+
+           ExecSQL;
+
+           SQL.Text :=  ' Insert dbo.Messages (InserteadUserId, CurrentDate,MessageType,Subject,Description,UserID,CustomerId,LevelMessageId,MaxLevelMessageId,IsAuto,FollowUpId)'+
+                        ' select '+SystemUser+',getdate(),1,'+''''+'—«Ì  ÅòÌÃ'+''''+','+''''+' „‘ —Ì »« òœ '+ IntToStr(CustomerID) +' »Â Ê÷⁄Ì  „‘ —Ì ﬁÿ⁄Ì  €ÌÌ— Ì«›  ·ÿ›« «ﬁœ«„«  ·«“„ ÃÂ  —«Ì  ÅòÌÃ «‰Ã«„ ‘Êœ '+''''+', '+CaseAccept+','+IntToStr(CustomerID) +',1,0,1,(select top 1 FollowUpId from dbo.FollowUp where customerid = '+IntToStr(CustomerID)+' and IsAuto = 1 and ActionTypeID = 56  )' ;
+
+          ExecSQL;
+        end;
+        { TODO -oparsa : 14030427 }
+
+      end;
+      ShowMessage('«ÿ·«⁄«  À»  ‘œ');
+
 
 //     except
 //     ShowMessage('Œÿ« œ— À»  «ÿ·«⁄« ');
@@ -1236,6 +1278,49 @@ begin
 
 
 
+end;
+
+procedure TFrContract.Button1Click(Sender: TObject);
+var CustomerID:Integer;
+    CommentStr: string;
+    TitleStr: string;
+    CaseAccept : string;
+    SystemUser : string;
+    BugStatusID : Integer ;
+begin
+  inherited;
+        { TODO -oparsa : 14030427 }
+        CustomerID := Dm.CustomerCustomerID.Value;
+        with TADOQuery.Create(nil) do
+        begin
+           Connection := Dm.YeganehConnection;
+           // „œÌ— Å‘ Ì»«‰Ì
+           CaseAccept  :=  Qry_GetResult(' select top 1 id  FROM dbo.users where isnull(ManagerSupport,0) = 1 order by id desc' ,dm.YeganehConnection) ;
+           SystemUser  :=  IntToStr(_IsSystemUserID) ;
+           BugStatusID := 8 ;
+
+           CommentStr  := ' „‘ —Ì œ—  «—ÌŒ '+_Today+ ' »Â „‘ —Ì ﬁÿ⁄Ì  »œÌ· ‘œÂ «”  ·ÿ›« ÃÂ  —«Ì  ”Ì œÌ «ﬁœ«„«  ·«“„ «‰Ã«„ ‘Êœ ' ;
+           TitleStr    := '—«Ì  ÅòÌÃ ÃÂ  „‘ —Ì ÃœÌœ' ; 
+           SQL.Text := ' insert into dbo.Cases (CheckUserID,RegisterUserID,RegisterDate,CaseEstimatedDate,CaseOrigiranlId,CasePriorityId,CaseTypeID,CustomerID,ProductId,CaseTitle,Comment)'+
+                       ' values('+CaseAccept+','+SystemUser+','''+_Today+'''' +','''+ShamsiString(Dm.GetServerDate+2)+'''' +',7,3,10,'+IntToStr(CustomerID)+','+IntToStr(SpDbgridContractProductID.asInteger)+','''+TitleStr+''','''+CommentStr+''' '+ ') ';
+
+           CommentStr  := '·ÿ›« ÃÂ  —«Ì  ÅòÌÃ «ﬁœ«„ ‘Êœ';
+
+           SQL.Text := SQL.Text + ' insert into dbo.Tasks (CaseId,Comment,StatusId,AssignedUserId,AssignedDate)'+
+                                  ' values(@@IDENTITY,'''+CommentStr+''','+IntToStr(BugStatusID)+','+CaseAccept+','''+_Today+'''' +') ';
+
+
+           SQL.Text := SQL.Text + ' insert into dbo.FollowUp (IsAuto,TaskID,CustomerID,ActionTypeID,DoneStatusID,DoneComment,MarketerID,Comment,ToDoDate,insertdate,Lastupdate,FollowUpInsertDate)'+
+                                  ' values(1,@@IDENTITY,'+IntToStr(CustomerID)+',56,2'+','''+' «—”«· »Â ò«— «»· „œÌ— Å‘ Ì»«‰Ì '+''',12,'''+' ”ò „—»Êÿ »Â —«Ì  ÅòÌÃ «ÌÃ«œ ‘œ Ê ÅÌ€«„ ÃÂ  «ÿ·«⁄ —”«‰Ì »Â „œÌ— Å‘ Ì»«‰Ì «—”«· ‘œ '+''','''+_Today+''',getdate(),GetDate()'+','''+_Today+'''' +') ';
+
+           ExecSQL;
+
+           SQL.Text :=  ' Insert dbo.Messages (InserteadUserId, CurrentDate,MessageType,Subject,Description,UserID,CustomerId,LevelMessageId,MaxLevelMessageId,IsAuto,FollowUpId)'+
+                        ' select '+SystemUser+',getdate(),1,'+''''+'—«Ì  ÅòÌÃ'+''''+','+''''+' „‘ —Ì »« òœ '+ IntToStr(CustomerID) +' »Â Ê÷⁄Ì  „‘ —Ì ﬁÿ⁄Ì  €ÌÌ— Ì«›  ·ÿ›« «ﬁœ«„«  ·«“„ ÃÂ  —«Ì  ÅòÌÃ «‰Ã«„ ‘Êœ '+''''+', '+CaseAccept+','+IntToStr(CustomerID) +',1,0,1,(select top 1 FollowUpId from dbo.FollowUp where customerid = '+IntToStr(CustomerID)+' and IsAuto = 1 and ActionTypeID = 56  )' ;
+
+          ExecSQL;
+        end;
+        { TODO -oparsa : 14030427 }
 end;
 
 end.

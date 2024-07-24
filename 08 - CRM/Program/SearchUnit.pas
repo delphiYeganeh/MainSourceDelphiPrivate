@@ -4,24 +4,27 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Grids, DBGrids, YDbgrid, DB, ADODB;
+  Dialogs, StdCtrls, Grids, DBGrids, YDbgrid, DB, ADODB, ExtCtrls;
 
 type
   TSearchForm = class(TForm)
-    GroupBox1: TGroupBox;
-    Label2: TLabel;
-    edtName: TEdit;
-    YDBGrid1: TYDBGrid;
     QUsers: TADOQuery;
     QUsersId: TAutoIncField;
     QUsersTitle: TWideStringField;
     DataSource1: TDataSource;
+    ShapeBase: TShape;
+    pnlMain: TPanel;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    edtName: TEdit;
+    YDBGrid1: TYDBGrid;
     procedure edtNameChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure YDBGrid1NeedColorCondition(Column: TColumn;
       State: TGridDrawState; var Color: TColor);
     procedure YDBGrid1DblClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -95,6 +98,12 @@ begin
       FRepTasks.UserName:='';
       Close;
   end;
+end;
+
+procedure TSearchForm.FormShow(Sender: TObject);
+begin
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

@@ -474,6 +474,10 @@ begin
   
   adoCity.SQL.Text := ' SELECT  CItyId , CityTitle ,StateId ,StateNum  FROM [dbo].[City]  where StateId = '+ IntToStr( ADOStateStateID.Value )+' ORDER BY CityTitle ';
   adoCity.Open;
+
+  Dm.RefreshHoliday(copy(_today,1,4));
+  MssCalendarPro1.HolidayStr := dm.HolidayStr;
+    
 end;
 
 procedure TPropertiesForm.SBOtherPersonClick(Sender: TObject);
@@ -550,7 +554,6 @@ begin
        qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and ( ltrim(rtrim(EmailAddress)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDEmailAddress.AsString ) +''' ) ';
      qry.SQL.Text:= qry.SQL.Text + ' ) t ';
      qry.Open;
-
 
      if qry.RecordCount > 0 then
      begin

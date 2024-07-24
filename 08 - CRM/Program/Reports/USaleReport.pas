@@ -465,7 +465,9 @@ begin
   inherited;
   adoStateRep.Close;
   adoStateRep.Open;
-
+  
+  Dm.RefreshHoliday(copy(_today,1,4));
+  MssCalendarPro1.HolidayStr := dm.HolidayStr;
 end;
 
 end.

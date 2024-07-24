@@ -1,26 +1,26 @@
 inherited frCaseAdd: TfrCaseAdd
-  Left = 403
-  Top = 108
+  Left = 596
+  Top = 237
   Width = 910
-  Height = 555
+  Height = 597
   Caption = #1705#1575#1585#1607#1575
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape
     Width = 894
-    Height = 516
+    Height = 558
   end
   object pnlMain: TPanel [1]
     Left = 0
     Top = 0
     Width = 894
-    Height = 516
+    Height = 558
     Align = alClient
     TabOrder = 0
     object xpPanel1: TxpPanel
       Left = 1
-      Top = 121
+      Top = 161
       Width = 892
       Height = 31
       StartColor = 16511469
@@ -49,7 +49,7 @@ inherited frCaseAdd: TfrCaseAdd
     end
     object pnlbtn: TPanel
       Left = 1
-      Top = 365
+      Top = 407
       Width = 892
       Height = 150
       Align = alBottom
@@ -118,14 +118,18 @@ inherited frCaseAdd: TfrCaseAdd
         Width = 589
         Height = 148
         Align = alRight
+        Anchors = [akLeft, akTop, akRight, akBottom]
         Caption = '   '#1608#1610#1585#1575#1610#1588' '
-        Enabled = False
         TabOrder = 3
+        DesignSize = (
+          589
+          148)
         object Label6: TLabel
           Left = 537
           Top = 18
           Width = 34
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1608#1590#1593#1610#1578
           Transparent = True
         end
@@ -134,6 +138,7 @@ inherited frCaseAdd: TfrCaseAdd
           Top = 42
           Width = 23
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1588#1585#1581
         end
         object dblCaseStatus: TDBLookupComboBox
@@ -141,9 +146,11 @@ inherited frCaseAdd: TfrCaseAdd
           Top = 14
           Width = 128
           Height = 21
+          Anchors = [akLeft, akTop, akRight]
           BiDiMode = bdLeftToRight
           DataField = 'StatusID'
           DataSource = DSForm
+          Enabled = False
           KeyField = 'TaskStatusID'
           ListField = 'TaskStatusTitle'
           ListSource = Dm.DsTaskStatus
@@ -155,9 +162,12 @@ inherited frCaseAdd: TfrCaseAdd
           Top = 40
           Width = 520
           Height = 105
+          Anchors = [akLeft, akTop, akRight]
           Color = clWhite
           DataField = 'Comment'
           DataSource = DSForm
+          ReadOnly = True
+          ScrollBars = ssVertical
           TabOrder = 1
         end
       end
@@ -192,9 +202,9 @@ inherited frCaseAdd: TfrCaseAdd
     end
     object grbTasks: TGroupBox
       Left = 1
-      Top = 152
+      Top = 192
       Width = 892
-      Height = 213
+      Height = 215
       Align = alClient
       Caption = '  '#1604#1610#1587#1578' '#1603#1575#1585#1607#1575'   '
       TabOrder = 2
@@ -202,7 +212,7 @@ inherited frCaseAdd: TfrCaseAdd
         Left = 2
         Top = 15
         Width = 888
-        Height = 196
+        Height = 198
         Cursor = crHandPoint
         Align = alClient
         DataSource = DSForm
@@ -284,61 +294,101 @@ inherited frCaseAdd: TfrCaseAdd
       Left = 1
       Top = 1
       Width = 892
-      Height = 120
+      Height = 160
       Align = alTop
       Caption = '  '#1605#1608#1585#1583'   '
       TabOrder = 3
+      DesignSize = (
+        892
+        160)
       object Label7: TLabel
-        Left = 584
-        Top = 20
+        Left = 822
+        Top = 39
         Width = 53
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1593#1606#1608#1575#1606' '#1605#1608#1585#1583':'
         Transparent = True
       end
       object Label1: TLabel
-        Left = 188
-        Top = 20
+        Left = 190
+        Top = 42
         Width = 34
         Height = 13
         Caption = #1605#1581#1589#1608#1604
         Transparent = True
       end
       object Label2: TLabel
-        Left = 191
-        Top = 47
-        Width = 15
+        Left = 190
+        Top = 69
+        Width = 34
         Height = 13
         Caption = #1606#1608#1593
         Transparent = True
       end
       object Label8: TLabel
-        Left = 187
-        Top = 73
-        Width = 32
+        Left = 190
+        Top = 95
+        Width = 34
         Height = 13
         Caption = #1575#1608#1604#1608#1610#1578' '
         Transparent = True
       end
       object Label3: TLabel
-        Left = 842
-        Top = 44
-        Width = 27
+        Left = 822
+        Top = 57
+        Width = 53
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1588#1585#1581':'
         Transparent = True
       end
       object Label4: TLabel
-        Left = 842
-        Top = 20
-        Width = 38
+        Left = 822
+        Top = 15
+        Width = 53
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1705#1583' '#1605#1608#1585#1583':'
+        Transparent = True
+      end
+      object Label9: TLabel
+        Left = 563
+        Top = 13
+        Width = 48
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1578#1575#1585#1610#1582' '#1579#1576#1578' :'
+        Transparent = True
+      end
+      object Label10: TLabel
+        Left = 335
+        Top = 13
+        Width = 93
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1578#1575#1585#1610#1582' '#1578#1582#1605#1610#1606#1610' '#1575#1606#1580#1575#1605' :'
+        Transparent = True
+      end
+      object LabelDate11: TLabel
+        Left = 544
+        Top = 14
+        Width = 3
+        Height = 13
+        Anchors = [akTop, akRight]
+        Transparent = True
+      end
+      object LabelDate12: TLabel
+        Left = 318
+        Top = 13
+        Width = 3
+        Height = 13
+        Anchors = [akTop, akRight]
         Transparent = True
       end
       object dblProduct: TDBLookupComboBox
         Left = 6
-        Top = 16
+        Top = 35
         Width = 183
         Height = 21
         BiDiMode = bdLeftToRight
@@ -352,10 +402,11 @@ inherited frCaseAdd: TfrCaseAdd
         TabOrder = 0
       end
       object edtCaseTitle: TEdit
-        Left = 229
-        Top = 16
-        Width = 353
+        Left = 232
+        Top = 35
+        Width = 588
         Height = 21
+        Anchors = [akLeft, akTop, akRight]
         Color = clCream
         ReadOnly = True
         TabOrder = 1
@@ -363,7 +414,7 @@ inherited frCaseAdd: TfrCaseAdd
       end
       object dblCaseType: TDBLookupComboBox
         Left = 7
-        Top = 43
+        Top = 62
         Width = 182
         Height = 21
         BiDiMode = bdLeftToRight
@@ -377,7 +428,7 @@ inherited frCaseAdd: TfrCaseAdd
       end
       object dblPriority: TDBLookupComboBox
         Left = 7
-        Top = 69
+        Top = 88
         Width = 182
         Height = 21
         BiDiMode = bdLeftToRight
@@ -391,10 +442,11 @@ inherited frCaseAdd: TfrCaseAdd
         TabOrder = 3
       end
       object edtCaseID: TEdit
-        Left = 688
-        Top = 16
+        Left = 667
+        Top = 11
         Width = 153
         Height = 21
+        Anchors = [akTop, akRight]
         Color = clCream
         ReadOnly = True
         TabOrder = 4
@@ -402,13 +454,23 @@ inherited frCaseAdd: TfrCaseAdd
       end
       object CaseCommentM: TMemo
         Left = 230
-        Top = 40
-        Width = 612
+        Top = 76
+        Width = 651
         Height = 73
+        Anchors = [akLeft, akTop, akRight]
         Color = clCream
         ReadOnly = True
         ScrollBars = ssVertical
         TabOrder = 5
+      end
+      object btnAttachment: TBitBtn
+        Left = 6
+        Top = 114
+        Width = 98
+        Height = 22
+        Caption = #1662#1610#1608#1587#1578' '#1607#1575#1610' '#1605#1608#1585#1583
+        TabOrder = 6
+        OnClick = btnAttachmentClick
       end
     end
   end

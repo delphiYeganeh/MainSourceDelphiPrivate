@@ -194,6 +194,7 @@ type
     SpSelect_CasesCheckUserID: TIntegerField;
     SpSelect_CasesIsBug: TBooleanField;
     SpSelect_CasesFollowUpID: TIntegerField;
+    followUpItem: TRadioGroup;
     procedure btnWordViewClick(Sender: TObject);
     procedure btnAttachPicClick(Sender: TObject);
     procedure refreshData;
@@ -295,9 +296,20 @@ begin
 end;
 
 procedure TFrFollowUp.btnAttachPicClick(Sender: TObject);
+var
+  tempReslt : string ;
 begin
   inherited;
-  AddImageField(dm.Select_FollowUP_By_CustomerIDPicAttachment,'Picture Files|*.jpg');
+  tempReslt :=  AddImageField(dm.Select_FollowUP_By_CustomerIDPicAttachment,'Picture Files|*.jpg;*.jpeg');   //;*.tif
+
+  if trim(tempReslt) <> '' then
+  begin
+    if not(dm.Select_FollowUP_By_CustomerID.State in [dsinsert,dsedit]) then
+      dm.Select_FollowUP_By_CustomerID.Edit;
+
+    dm.Select_FollowUP_By_CustomerIDPicAttachmentType.AsString := tempReslt ;
+    dm.Select_FollowUP_By_CustomerID.Post;
+  end;
   {
 OpenDialog.Filter:='Jpeg Files|*.jpg';
  if OpenDialog.Execute then
@@ -311,7 +323,7 @@ begin
    with Select_customer_By_CustomerID do
    begin
       Close;
-      Parameters.ParamByName('@customerid').Value:=CustomerID;
+      Parameters.ParamByName('@customerid').Value:= CustomerID;
       Open;
       _gCustomerID :=  Select_customer_By_CustomerIDCustomerID.Value;      
    end;
@@ -319,17 +331,25 @@ begin
    with dm.Select_FollowUP_By_CustomerID do
    begin
       Close;
-      Parameters.ParamByName('@customerid').Value:=CustomerID;
-      Parameters.ParamByName('@orgID').Value:=_orgID;
+      Parameters.ParamByName('@customerid').Value:= CustomerID;
+
+      if  followUpItem.ItemIndex = -1 then
+        Parameters.ParamByName('@orgID').Value:=_orgID
+      else
+      Parameters.ParamByName('@orgID').Value:= followUpItem.ItemIndex ;
+      //Parameters.ParamByName('@orgID').Value:=_orgID;
 
       Parameters.ParamByName('@DoneDate').Value:=Trim(BDate.Text);
       Parameters.ParamByName('@TodODate').Value:=Trim(EDate.Text);
-if dblMarketer.KeyValue <> null then
-      Parameters.ParamByName('@MarketerID').Value:= dblMarketer.KeyValue
-      else       Parameters.ParamByName('@MarketerID').Value:= 0;
-if dblDoneStatusID.KeyValue <> null then
-      Parameters.ParamByName('@DoneStatusID').Value:= dblDoneStatusID.KeyValue
-      else       Parameters.ParamByName('@DoneStatusID').Value:= 0;
+
+      if dblMarketer.KeyValue <> null then
+        Parameters.ParamByName('@MarketerID').Value:= dblMarketer.KeyValue
+      else   Parameters.ParamByName('@MarketerID').Value:= 0;
+
+      if dblDoneStatusID.KeyValue <> null then
+        Parameters.ParamByName('@DoneStatusID').Value:= dblDoneStatusID.KeyValue
+      else   Parameters.ParamByName('@DoneStatusID').Value:= 0;
+
       Open;
       stb.Panels[1].Text:=' ⁄œ«œ:' +IntToStr(RecordCount);
       //Last;
@@ -339,6 +359,12 @@ end;
 procedure TFrFollowUp.BitBtn2Click(Sender: TObject);
 begin
   inherited;
+
+  if Dm.Select_FollowUP_By_CustomerIDIsAuto.AsBoolean then
+  begin
+    ShowMessage('«„ò«‰ ÊÌ—«Ì‘ Ê Õ–› —òÊ—œÂ«Ì À»  ‘œÂ  Ê”ÿ ”Ì” „ ÊÃÊœ ‰œ«—œ');
+    Exit;
+  end;
 
   treFollowUps.DataSource:= nil;  // Amin 1391/08/25
    dm.Select_FollowUP_By_CustomerID.Edit;
@@ -563,9 +589,6 @@ begin
 
     //  treFollowUps.Refresh;  // Amin 1391/08/25
       {// Amin 1391/12/23 treFollowUps.DataSource:= Dm.DSelect_FollowUP_By_CustomerID;  // Amin 1391/08/25 }
-  Dm.Marketer.Filtered := False;
-  Dm.Marketer.Filter := '' ;
-  Dm.Marketer.Filtered := True;      
 end;
 
 procedure TFrFollowUp.AexitExecute(Sender: TObject);
@@ -614,23 +637,40 @@ end;
 
 procedure TFrFollowUp.btnJpegViewClick(Sender: TObject);
 var Path :String;
+   MyBitmap: TBitmap;
 begin
   inherited;
-  Path := Directory+'FollowUp'+dm.Select_FollowUP_By_CustomerIDFollowUPID.AsString+Replace(dm.Select_FollowUP_By_CustomerIDToDoDate.AsString,'/','-')+'.jpg';
+  if Trim(dm.Select_FollowUP_By_CustomerIDPicAttachmentType.AsString) = '' then
+    Path := Directory+'FollowUp'+dm.Select_FollowUP_By_CustomerIDFollowUPID.AsString+Replace(dm.Select_FollowUP_By_CustomerIDToDoDate.AsString,'/','-')+'.jpg'
+  else
+  begin
+    Path := Directory+'FollowUp'+dm.Select_FollowUP_By_CustomerIDFollowUPID.AsString+Replace(dm.Select_FollowUP_By_CustomerIDToDoDate.AsString,'/','-')+ Trim(dm.Select_FollowUP_By_CustomerIDPicAttachmentType.AsString);
+  end;
+
   if LoadImageField(dm.Select_FollowUP_By_CustomerIDPicAttachment,path) then
   begin
      if _IsWinServer then
      begin
-          try
+        try
 //              if ImageForm=nil then ImageForm:=TImageForm.Create(Application);
-              ImageForm:=TImageForm.Create(Application);
-              ImageForm.Image1.Picture.LoadFromFile(path);
-              ImageForm.ShowModal;
+          ImageForm:=TImageForm.Create(Application);
+          if Trim(dm.Select_FollowUP_By_CustomerIDPicAttachmentType.AsString) = '.tif' then
+          begin
+            try
+             // MyBitmap:= Dm.ReadTiffIntoBitmap(Path);
+              ImageForm.Image1.Picture.Assign(MyBitmap);
+            finally
+              MyBitmap.Free;
+            end;
+          end
+          else  ImageForm.Image1.Picture.LoadFromFile(path);
+
+          ImageForm.ShowModal;
 //              ImageForm.Free;
 //              ImageForm:=nil;
-          except on e:exception do
-              ShowMessage(e.Message);
-          end;
+        except on e:exception do
+            ShowMessage(e.Message);
+        end;
      end
      else
         ShellExecute(0,'open',pchar(Trim(path) ),'',nil,SW_HIDE);
@@ -686,6 +726,7 @@ var
   PinValue : string;
 begin
   inherited;
+  followUpItem.ItemIndex := _orgID ;
   pnlFactor.Visible := _UserFactorAccess ;
   dbgFollow.Columns[9].Visible  := _UserFactorAccess ;
   dbgFollow.Columns[10].Visible := _UserFactorAccess ;
@@ -720,6 +761,8 @@ begin
   UnPin.Visible  := not Pin.Visible  ;
 
   { TODO -oparsa : 14030205 }
+  Dm.RefreshHoliday(copy(_today,1,4));
+  MssCalendarPro1.HolidayStr := dm.HolidayStr;
 
 end;
 
@@ -774,7 +817,7 @@ end;
 procedure TFrFollowUp.btnSrchFollowClick(Sender: TObject);
 begin
   inherited;
-refreshData
+  refreshData ;
 end;
 
 procedure TFrFollowUp.btnJpegClearClick(Sender: TObject);
@@ -931,6 +974,11 @@ var
   ID:Integer;
 begin
   inherited;
+  if Dm.Select_FollowUP_By_CustomerIDIsAuto.AsBoolean then
+  begin
+    ShowMessage('«„ò«‰ ÊÌ—«Ì‘ Ê Õ–› —òÊ—œÂ«Ì À»  ‘œÂ  Ê”ÿ ”Ì” „ ÊÃÊœ ‰œ«—œ');
+    Exit;
+  end;  
 
   IF MessageDlg('¬Ì« «“ Õ–› «ÿ·«⁄«  „ÿ„∆‰ Â” Ìœø',mtConfirmation,[mbyes,mbno],0)=mryes then
   Begin

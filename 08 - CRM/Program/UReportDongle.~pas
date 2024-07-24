@@ -63,6 +63,7 @@ type
     procedure SpeedButton2Click(Sender: TObject);
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     Procedure RunSpDongleReport(Network :integer;StartDate :String;EndDate :String;ProductId :Integer;customerId :Integer);
     Function MakeReportTitle(DefaultReportTitle:String):String;
@@ -205,6 +206,13 @@ begin
 
   inherited;
 
+end;
+
+procedure TfrReportDongle.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

@@ -521,7 +521,7 @@ begin
      qry:= TADOQuery.Create(nil);
      qry.Connection:= Dm.YeganehConnection;
 
-     qry.SQL.Text:= ' select * from (  select companyname cnt,CustomerID, ph  from [dbo].[Customer] where 1=2 ' ;
+     qry.SQL.Text:= ' select * from (  select companyname cnt,CustomerID,0 ph  from [dbo].[Customer] where 1=2 ' ;
      if Dm.Select_Customer_By_CustomerIDPhone.AsString <> '' then
        qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID,1 ph FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDPhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' )';
      if Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString <> '' then
@@ -550,7 +550,6 @@ begin
        qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and ( ltrim(rtrim(EmailAddress)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDEmailAddress.AsString ) +''' ) ';
      qry.SQL.Text:= qry.SQL.Text + ' ) t ';
      qry.Open;
-
 
      if qry.RecordCount > 0 then
      begin

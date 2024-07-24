@@ -79,10 +79,10 @@ begin
   end
   else if RadioGroup1.ItemIndex = 1 then
   begin
-     Shape1.Brush.Color := clTeal ;
-     Shape2.Brush.Color := clScrollBar;
-     Shape3.Brush.Color := clHighlight;
-     Shape4.Brush.Color := clScrollBar;
+     Shape1.Brush.Color := $00C08181  ;//clScrollBar; //$00C65204 ;//$00B7B700 ;//clTeal ;
+     Shape2.Brush.Color := $00FCC49E ;//clScrollBar;
+     Shape3.Brush.Color := $00E08407 ;//clHighlight;
+     Shape4.Brush.Color := $00FDE3C4 ;//clScrollBar;
   end
   else if RadioGroup1.ItemIndex = 2  then
   begin

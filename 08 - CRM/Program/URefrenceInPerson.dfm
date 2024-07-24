@@ -271,6 +271,7 @@ inherited FRefrenceInPerson: TFRefrenceInPerson
           Align = alClient
           DataField = 'DescriptionService'
           DataSource = DSForm
+          ScrollBars = ssVertical
           TabOrder = 0
         end
       end
@@ -290,6 +291,7 @@ inherited FRefrenceInPerson: TFRefrenceInPerson
           Align = alClient
           DataField = 'DescriptionPersionInMetting'
           DataSource = DSForm
+          ScrollBars = ssVertical
           TabOrder = 0
         end
       end

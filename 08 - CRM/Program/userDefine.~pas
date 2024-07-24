@@ -84,6 +84,16 @@ type
     UserCallAccess: TBooleanField;
     UserAssesstAccess: TBooleanField;
     UserFactorAccess: TBooleanField;
+    DBCheckBox14: TDBCheckBox;
+    DBCheckBox15: TDBCheckBox;
+    DBCheckBox16: TDBCheckBox;
+    DBCheckBox17: TDBCheckBox;
+    UserManagerSale: TBooleanField;
+    UserManagerProduction: TBooleanField;
+    UserManagerSupport: TBooleanField;
+    UserManagerOfficial: TBooleanField;
+    UserIsSystemUser: TBooleanField;
+    UserNewPassWord: TStringField;
     procedure Action11Execute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -134,11 +144,13 @@ with  User do
  begin
    close;
    Open;
-   ConfirmPass.Text:=UserPassWord.AsString;
+   //ConfirmPass.Text:=UserPassWord.AsString;
+   ConfirmPass.Text:= UserNewPassWord.AsString;
 
  end;
   setDblDate();
-
+  Dm.Marketer.Close;
+  Dm.Marketer.Open;
 end;
 
 procedure TUserDefineF.FormClose(Sender: TObject;
@@ -157,7 +169,8 @@ end;
 procedure TUserDefineF.DataSetPostExecute(Sender: TObject);
 begin
   inherited;
- if UserPassWord.AsString<>ConfirmPass.Text then
+ //if UserPassWord.AsString<>ConfirmPass.Text then
+ if UserNewPassWord.AsString <> ConfirmPass.Text then
   Begin
     ShowMessage(' ò—«— ò·„Â ⁄»Ê— »« ò·„Â ⁄»Ê— ÌòÌ ‰Ì” ');
     pass.SetFocus;
@@ -172,20 +185,28 @@ procedure TUserDefineF.DataSetPrior1Execute(Sender: TObject);
 begin
   inherited;
   User.Prior;
-  ConfirmPass.Text:=UserPassWord.AsString;
+  //ConfirmPass.Text:= UserPassWord.AsString;
+  ConfirmPass.Text:= UserNewPassWord.AsString;
 end;
 
 procedure TUserDefineF.DataSetNext1Execute(Sender: TObject);
 begin
   inherited;
   User.Next;
-  ConfirmPass.Text:=UserPassWord.AsString;
+  //ConfirmPass.Text:= UserPassWord.AsString;
+  ConfirmPass.Text:= UserNewPassWord.AsString;
 
 end;
 
 procedure TUserDefineF.btnSaveClick(Sender: TObject);
 begin
   inherited;
+  if UserIsSystemUser.AsBoolean then
+  begin
+     ShowMessage('ò«—»— ”Ì „Ì —« ‰„Ì  Ê«‰Ìœ ÊÌ—«Ì‘ Ê Ì« Õ–› ò‰Ìœ ! ');
+     exit;
+  end;
+    
   if  (user.State in [dsedit,dsinsert] ) then
   begin
   if (UserTitle.IsNull) or (trim(UserTitle.AsString)='') then
@@ -200,7 +221,8 @@ begin
   begin
      ShowMessage('”ÿÕ œ” —”Ì —« „‘Œ’ ò‰Ìœ');
   end;
-  if UserPassWord.AsString<>ConfirmPass.Text then
+  //if UserPassWord.AsString<>ConfirmPass.Text then
+  if UserNewPassWord.AsString <> ConfirmPass.Text then
   Begin
 
     ShowMessage(' ò—«— ò·„Â ⁄»Ê— »« ò·„Â ⁄»Ê— ÌòÌ ‰Ì” ');
@@ -234,6 +256,12 @@ end;
 
 procedure TUserDefineF.btnDelClick(Sender: TObject);
 begin
+  if UserIsSystemUser.AsBoolean then
+  begin
+     ShowMessage('ò«—»— ”Ì „Ì —« ‰„Ì  Ê«‰Ìœ ÊÌ—«Ì‘ Ê Ì« Õ–› ò‰Ìœ ! ');
+     exit;
+  end;
+
   if _UserID = UserId.Value then
   begin
      ShowMessage('ò«—»— ŒÊœ —« ‰„Ì Ê«‰Ìœ Õ–› ò‰Ìœ !');
@@ -345,6 +373,9 @@ end;
 procedure TUserDefineF.FormShow(Sender: TObject);
 begin
   inherited;
+  Dm.Marketer.Close;
+  Dm.Marketer.Open;
+
   ShapeBase.Brush.Color := _Color1 ;
   pnlMain.Color := _Color1 ;
 

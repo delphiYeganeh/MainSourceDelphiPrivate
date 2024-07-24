@@ -1,16 +1,107 @@
 inherited frDefineHoliday: TfrDefineHoliday
-  Left = 580
-  Top = 195
+  Left = 826
+  Top = 257
   Width = 499
   Height = 404
   Caption = ''
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel [0]
+  inherited ShapeBase: TShape
+    Width = 483
+    Height = 324
+  end
+  object Label1: TLabel [1]
+    Left = 211
+    Top = 299
+    Width = 40
+    Height = 13
+    Caption = #1578#1608#1590#1610#1581#1575#1578
+  end
+  object xlpCalendar: TXCalPlannerCalendar [2]
     Left = 0
-    Top = 329
-    Width = 491
+    Top = 0
+    Width = 483
+    Height = 324
+    EventDayColor = clRed
+    EventMarkerColor = clYellow
+    EventMarkerShape = evsRectangle
+    Align = alClient
+    AllDaySelect = True
+    BackgroundPosition = bpTiled
+    BevelOuter = bvNone
+    BorderWidth = 1
+    Color = 16703190
+    InActiveDays.Fri = True
+    Look = look3D
+    DateDownColor = clMoneyGreen
+    DateHoverColor = clMoneyGreen
+    DateSelectColor = clTeal
+    MultiSelect = True
+    MultiSelectCtrlKey = True
+    DayFont.Charset = DEFAULT_CHARSET
+    DayFont.Color = clWindowText
+    DayFont.Height = -11
+    DayFont.Name = 'Tahoma'
+    DayFont.Style = [fsBold]
+    WeekFont.Charset = DEFAULT_CHARSET
+    WeekFont.Color = clWindowText
+    WeekFont.Height = -11
+    WeekFont.Name = 'Tahoma'
+    WeekFont.Style = [fsBold]
+    WeekName = 'Wk'
+    TextColor = clBlack
+    SelectColor = clTeal
+    SelectFontColor = clWhite
+    InActiveColor = clRed
+    HeaderColor = clNone
+    FocusColor = clHighlight
+    InversColor = clTeal
+    WeekendColor = clRed
+    ShowGotoToday = True
+    ShowWeeks = True
+    StartDay = 7
+    TodayFormat = '"'#1575#1605#1585#1608#1586': " dddd ddddd'
+    TodayStyle = tsRaised
+    Day = 1
+    Month = 6
+    Year = 1403
+    ShowHint = True
+    ParentShowHint = False
+    TabOrder = 1
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    EventHints = True
+    CaptionColor = 15910570
+    CaptionTextColor = clBlack
+    OnDaySelect = xlpCalendarDaySelect
+    LineColor = clGray
+    Line3D = True
+    GradientStartColor = clWhite
+    GradientEndColor = clBtnFace
+    GradientDirection = gdHorizontal
+    MonthGradientStartColor = clScrollBar
+    MonthGradientEndColor = clNone
+    MonthGradientDirection = gdVertical
+    HintPrevYear = #1587#1575#1604' '#1602#1576#1604
+    HintPrevMonth = #1605#1575#1607' '#1602#1576#1604
+    HintNextMonth = #1605#1575#1607' '#1576#1593#1583
+    HintNextYear = #1587#1575#1604' '#1576#1593#1583
+    Version = '1.7.4.0'
+    BiDiMode = bdRightToLeft
+    ParentBiDiMode = False
+    ParentFont = False
+    BrowserHoverColor = clMoneyGreen
+    XCalendar = PersianCalendar
+    XCalendarEvents = IranEventsPersian
+  end
+  object Panel1: TPanel [3]
+    Left = 0
+    Top = 324
+    Width = 483
     Height = 41
     Align = alBottom
     TabOrder = 0
@@ -79,119 +170,45 @@ inherited frDefineHoliday: TfrDefineHoliday
         A421FEA421FEA421FEA421FEA421FEA421FEA621FE9E10FFD08A}
     end
   end
-  object xlpCalendar: TXCalPlannerCalendar [1]
-    Left = 0
-    Top = 0
-    Width = 491
-    Height = 329
-    EventDayColor = clRed
-    EventMarkerColor = clYellow
-    EventMarkerShape = evsRectangle
-    Align = alClient
-    AllDaySelect = True
-    BackgroundPosition = bpTiled
-    BevelOuter = bvNone
-    BorderWidth = 1
-    Color = 16703190
-    InActiveDays.Fri = True
-    Look = look3D
-    DateDownColor = clMoneyGreen
-    DateHoverColor = clMoneyGreen
-    DateSelectColor = clTeal
-    MultiSelect = True
-    MultiSelectCtrlKey = True
-    DayFont.Charset = DEFAULT_CHARSET
-    DayFont.Color = clWindowText
-    DayFont.Height = -11
-    DayFont.Name = 'Tahoma'
-    DayFont.Style = [fsBold]
-    WeekFont.Charset = DEFAULT_CHARSET
-    WeekFont.Color = clWindowText
-    WeekFont.Height = -11
-    WeekFont.Name = 'Tahoma'
-    WeekFont.Style = [fsBold]
-    WeekName = 'Wk'
-    TextColor = clBlack
-    SelectColor = clTeal
-    SelectFontColor = clWhite
-    InActiveColor = clRed
-    HeaderColor = clNone
-    FocusColor = clHighlight
-    InversColor = clTeal
-    WeekendColor = clRed
-    ShowGotoToday = True
-    ShowWeeks = True
-    StartDay = 7
-    TodayFormat = '"'#1575#1605#1585#1608#1586': " dddd ddddd'
-    TodayStyle = tsRaised
-    Day = 1
-    Month = 6
-    Year = 1390
-    ShowHint = True
-    ParentShowHint = False
-    TabOrder = 1
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    EventHints = True
-    CaptionColor = 15910570
-    CaptionTextColor = clBlack
-    OnDaySelect = xlpCalendarDaySelect
-    LineColor = clGray
-    Line3D = True
-    GradientStartColor = clWhite
-    GradientEndColor = clBtnFace
-    GradientDirection = gdHorizontal
-    MonthGradientStartColor = clScrollBar
-    MonthGradientEndColor = clNone
-    MonthGradientDirection = gdVertical
-    HintPrevYear = #1587#1575#1604' '#1602#1576#1604
-    HintPrevMonth = #1605#1575#1607' '#1602#1576#1604
-    HintNextMonth = #1605#1575#1607' '#1576#1593#1583
-    HintNextYear = #1587#1575#1604' '#1576#1593#1583
-    Version = '1.7.4.0'
-    BiDiMode = bdRightToLeft
-    ParentBiDiMode = False
-    ParentFont = False
-    BrowserHoverColor = clMoneyGreen
-    XCalendar = PersianCalendar
-    XCalendarEvents = IranEventsPersian
+  object Edit1: TEdit [4]
+    Left = 16
+    Top = 296
+    Width = 193
+    Height = 21
+    TabOrder = 2
   end
   inherited DSForm: TDataSource
-    Left = 256
-    Top = 224
+    Left = 232
+    Top = 272
   end
   inherited ActionList: TActionList
-    Left = 272
-    Top = 224
+    Left = 120
+    Top = 272
   end
   object PersianCalendar: TPersianCalendar
     Left = 64
-    Top = 128
   end
   object IranEventsPersian: TXCalendarEvents
     Events = <>
-    Left = 48
-    Top = 176
+    Left = 64
+    Top = 272
   end
   object IranAggregateEvents: TXCalendarAggregateEvents
     Objects = <
       item
         XCalendarEvents = IranEventsPersian
       end>
-    Left = 120
-    Top = 176
+    Left = 296
+    Top = 264
   end
   object XMLDocument1: TXMLDocument
     FileName = 'F:\CRM\IranEventsPersian.xml'
-    Left = 232
-    Top = 192
+    Left = 184
+    Top = 272
     DOMVendorDesc = 'MSXML'
   end
   object DataSource1: TDataSource
-    Left = 264
-    Top = 200
+    Left = 376
+    Top = 272
   end
 end

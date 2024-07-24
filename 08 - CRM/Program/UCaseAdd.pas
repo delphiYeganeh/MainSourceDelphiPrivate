@@ -48,6 +48,11 @@ type
     dblPriority: TDBLookupComboBox;
     edtCaseID: TEdit;
     CaseCommentM: TMemo;
+    btnAttachment: TBitBtn;
+    Label9: TLabel;
+    Label10: TLabel;
+    LabelDate11: TLabel;
+    LabelDate12: TLabel;
     procedure btnDelBR2Click(Sender: TObject);
     procedure DBEdit1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -56,6 +61,7 @@ type
     procedure Spselect_TasksBeforeRefresh(DataSet: TDataSet);
     procedure btnAddAttachmentClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnAttachmentClick(Sender: TObject);
   private
     gCaseId :Integer;
     gCustomerId : Integer ;
@@ -66,7 +72,7 @@ type
   public
     { Public declarations }
 //    constructor Create (AOwner : TComponent;CaseId :Integer;CaseTitle : String;ProductID :Integer;CaseTypeId:Integer;CaseRegisterUserId :Integer;CaseStatus :Boolean);reintroduce;virtual;
-    constructor Create(AOwner: TComponent; CaseId: Integer;CaseTitle : String;ProductID :Integer;CaseTypeId:Integer;CaseRegisterUserId :Integer;CaseStatus :Boolean;CaseComment:WideString;CasePriorityId:Integer ;AddJobMod : Boolean = False ; CustomerId : Integer  = 0 );
+    constructor Create(AOwner: TComponent; CaseId: Integer;CaseTitle : String;ProductID :Integer;CaseTypeId:Integer;CaseRegisterUserId :Integer;CaseStatus :Boolean;CaseComment:WideString;CasePriorityId:Integer ;AddJobMod : Boolean = False ; Date1 : string = ''; Date2 : string = ''; CustomerId : Integer  = 0 );
   end;
 
 var
@@ -80,7 +86,7 @@ uses dmu, BusinessLayer, UTask, Uattachments;
 
 { TfrCaseAdd }
 
-constructor TfrCaseAdd.Create(AOwner: TComponent; CaseId: Integer;CaseTitle : String;ProductID :Integer;CaseTypeId:Integer;CaseRegisterUserId :Integer;CaseStatus :Boolean;CaseComment:WideString;CasePriorityId:Integer;AddJobMod : Boolean = false ; CustomerId : Integer  = 0 );
+constructor TfrCaseAdd.Create(AOwner: TComponent; CaseId: Integer;CaseTitle : String;ProductID :Integer;CaseTypeId:Integer;CaseRegisterUserId :Integer;CaseStatus :Boolean;CaseComment:WideString;CasePriorityId:Integer;AddJobMod : Boolean = false  ; Date1 : string = ''; Date2 : string = ''; CustomerId : Integer  = 0);
 begin
   inherited create(AOwner);
 
@@ -94,6 +100,8 @@ begin
   dblProduct   .KeyValue := ProductID;
   dblCaseType  .KeyValue := CaseTypeId;
   dblPriority  .KeyValue   :=CasePriorityId;
+  LabelDate11 .Caption := Date1;
+  LabelDate12 .Caption := Date2;
   edtCaseID.Text:=IntToStr(CaseId);
   CaseCommentM.Lines.Add(CaseComment);
 
@@ -242,6 +250,13 @@ procedure TfrCaseAdd.FormShow(Sender: TObject);
 begin
   inherited;
   SetColorForm ;
+end;
+
+procedure TfrCaseAdd.btnAttachmentClick(Sender: TObject);
+begin
+  inherited;
+  with TfrAttachments.create(Application,2,Spselect_TasksCaseId.Value,True) do
+    ShowModal;
 end;
 
 end.

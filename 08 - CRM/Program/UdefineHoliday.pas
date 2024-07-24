@@ -20,6 +20,8 @@ type
     IranAggregateEvents: TXCalendarAggregateEvents;
     XMLDocument1: TXMLDocument;
     DataSource1: TDataSource;
+    Edit1: TEdit;
+    Label1: TLabel;
     procedure FormShow(Sender: TObject);
     procedure xlpCalendarDaySelect(Sender: TObject;
       SelDate: TDateTime);
@@ -53,7 +55,7 @@ begin
     Open;
     DSForm.DataSet := qryHoliday;
   end;
-  IranEventsPersian.LoadFromFile(Path + 'IranEventsPersian.xml');
+ // IranEventsPersian.LoadFromFile(Path + 'IranEventsPersian.xml');
   xlpCalendar.SetDate(StrToInt(Copy(_Today,9,2)),StrToInt(Copy(_Today,6,2)),StrToInt(Copy(_Today,1,4)));
 end;
 
@@ -63,17 +65,22 @@ procedure TfrDefineHoliday.xlpCalendarDaySelect(Sender: TObject;
 begin
   inherited;
 
-if not      qryHoliday.Locate('HolidayDate',xlpCalendar.DatesAsText,[]) then
-begin
-  with qryHoliday do
+  if not  qryHoliday.Locate('HolidayDate',xlpCalendar.DatesAsText,[]) then
   begin
-    Insert;
-    FieldByName('HolidayDate').Value := xlpCalendar.DatesAsText;
-    Post;
-  end;
-end else
-      if  qryHoliday.Locate('HolidayDate',xlpCalendar.DatesAsText,[]) then
-        qryHoliday.Delete;
+    with qryHoliday do
+    begin
+      Insert;
+      FieldByName('HolidayDate').Value := xlpCalendar.DatesAsText;
+      FieldByName('Year').Value        := Copy(xlpCalendar.DatesAsText,1,4);
+      FieldByName('Mounth').Value      := Copy(xlpCalendar.DatesAsText,6,2);
+      FieldByName('Day').Value         := Copy(xlpCalendar.DatesAsText,9,2);
+      Post;
+    end;
+  end
+  else
+  if qryHoliday.Locate('HolidayDate',xlpCalendar.DatesAsText,[]) and
+          (  MessageDlg('¬Ì« »—«Ì Õ–› «Ì‰  «—ÌŒ „ÿ„⁄‰ Â” Ìœø',mtConfirmation,[mbyes,mbno],0)= mryes )  then
+       qryHoliday.Delete;
 
 end;
 

@@ -5523,6 +5523,26 @@ object Dm: TDm
     object UserEditVersion: TBooleanField
       FieldName = 'EditVersion'
     end
+    object UserManagerSale: TBooleanField
+      FieldName = 'ManagerSale'
+    end
+    object UserManagerProduction: TBooleanField
+      FieldName = 'ManagerProduction'
+    end
+    object UserManagerSupport: TBooleanField
+      FieldName = 'ManagerSupport'
+    end
+    object UserManagerOfficial: TBooleanField
+      FieldName = 'ManagerOfficial'
+    end
+    object UserLastVertionLogin: TStringField
+      FieldName = 'LastVertionLogin'
+      Size = 10
+    end
+    object UserNewPassWord: TStringField
+      FieldName = 'NewPassWord'
+      Size = 50
+    end
   end
   object ADOCommand: TADOCommand
     CommandTimeout = 3000
@@ -6467,6 +6487,13 @@ object Dm: TDm
     object Select_FollowUP_By_CustomerIDFactorId: TIntegerField
       FieldName = 'FactorId'
     end
+    object Select_FollowUP_By_CustomerIDPicAttachmentType: TStringField
+      FieldName = 'PicAttachmentType'
+      Size = 5
+    end
+    object Select_FollowUP_By_CustomerIDIsAuto: TBooleanField
+      FieldName = 'IsAuto'
+    end
   end
   object DSelect_FollowUP_By_CustomerID: TDataSource
     AutoEdit = False
@@ -6767,6 +6794,9 @@ object Dm: TDm
     end
     object Select_FollowUP_By_DateWorkPhoneOther: TStringField
       FieldName = 'WorkPhoneOther'
+    end
+    object Select_FollowUP_By_DateIsHoliday: TIntegerField
+      FieldName = 'IsHoliday'
     end
   end
   object DSelect_FollowUP_By_Date: TDataSource
@@ -8488,7 +8518,7 @@ object Dm: TDm
   object DsCaseType: TDataSource
     DataSet = tblCaseType
     Left = 872
-    Top = 384
+    Top = 416
   end
   object tblCasePriority: TADOTable
     Connection = YeganehConnection
@@ -8567,7 +8597,7 @@ object Dm: TDm
   end
   object DsTaskStatus: TDataSource
     DataSet = tblTaskStatus
-    Left = 1032
+    Left = 1072
     Top = 328
   end
   object tblTaskStatus: TADOTable
@@ -9783,5 +9813,192 @@ object Dm: TDm
     OnDataChange = DStateDataChange
     Left = 22
     Top = 114
+  end
+  object OpenDialogFile: TTntOpenDialog
+    Filter = #1607#1605#1607' '#1601#1575#1740#1604'  '#1607#1575'|*.*'
+    Left = 1112
+    Top = 624
+  end
+  object DSelect_Holiday_date: TDataSource
+    AutoEdit = False
+    DataSet = Select_Holiday_date
+    Left = 1081
+    Top = 512
+  end
+  object Select_Holiday_date: TADOStoredProc
+    Connection = YeganehConnection
+    CursorType = ctStatic
+    ProcedureName = 'Select_Holiday_date;1'
+    Parameters = <
+      item
+        Name = '@Year'
+        DataType = ftString
+        Size = -1
+        Value = Null
+      end>
+    Left = 1090
+    Top = 450
+    object Select_Holiday_dateYear: TStringField
+      FieldName = 'Year'
+      Size = 4
+    end
+    object Select_Holiday_dateDate: TStringField
+      FieldName = 'Day'
+      Size = 2
+    end
+    object Select_Holiday_dateMounth: TStringField
+      FieldName = 'Mounth'
+      Size = 2
+    end
+    object Select_Holiday_dateHolidayDate: TStringField
+      FieldName = 'HolidayDate'
+      Size = 10
+    end
+    object Select_Holiday_dateDescription: TStringField
+      FieldName = 'Description'
+      Size = 500
+    end
+  end
+  object tblTaskReferral: TADOTable
+    Connection = YeganehConnection
+    CursorType = ctStatic
+    TableName = 'TaskReferral'
+    Left = 1032
+    Top = 272
+    object tblTaskReferralUserTypeId: TIntegerField
+      FieldName = 'UserTypeId'
+    end
+    object tblTaskReferralCaseTypeID: TIntegerField
+      FieldName = 'CaseTypeID'
+    end
+    object tblTaskReferralProductID: TIntegerField
+      FieldName = 'ProductID'
+    end
+    object tblTaskReferralUserID: TIntegerField
+      FieldName = 'UserID'
+    end
+    object tblTaskReferralUserTypeTitle: TStringField
+      FieldKind = fkLookup
+      FieldName = 'UserTypeTitle'
+      LookupDataSet = tblUserType
+      LookupKeyFields = 'UserTypeId'
+      LookupResultField = 'UserTypeTitle'
+      KeyFields = 'UserTypeId'
+      Lookup = True
+    end
+    object tblTaskReferralcaseTypeTitle: TStringField
+      FieldKind = fkLookup
+      FieldName = 'caseTypeTitle'
+      LookupDataSet = tblCaseType
+      LookupKeyFields = 'CaseTypeID'
+      LookupResultField = 'CaseTypeTitle'
+      KeyFields = 'CaseTypeID'
+      Lookup = True
+    end
+    object tblTaskReferralProductTitle: TStringField
+      FieldKind = fkLookup
+      FieldName = 'ProductTitle'
+      LookupDataSet = Product
+      LookupKeyFields = 'ProductID'
+      LookupResultField = 'ProductTitle'
+      KeyFields = 'ProductID'
+      Lookup = True
+    end
+    object tblTaskReferralUserTitle: TStringField
+      FieldKind = fkLookup
+      FieldName = 'UserTitle'
+      LookupDataSet = User
+      LookupKeyFields = 'Id'
+      LookupResultField = 'Title'
+      KeyFields = 'UserID'
+      Lookup = True
+    end
+  end
+  object DSTaskReferral: TDataSource
+    DataSet = tblTaskReferral
+    Left = 1072
+    Top = 272
+  end
+  object DSUserType: TDataSource
+    DataSet = tblUserType
+    Left = 1072
+    Top = 224
+  end
+  object tblUserType: TADOTable
+    Connection = YeganehConnection
+    CursorType = ctStatic
+    TableName = 'UserType'
+    Left = 1032
+    Top = 224
+    object tblUserTypeUserTypeId: TIntegerField
+      FieldName = 'UserTypeId'
+    end
+    object tblUserTypeUserTypeTitle: TStringField
+      FieldName = 'UserTypeTitle'
+    end
+  end
+  object MssCalendarPro1: TMssCalendarPro
+    Style = mssGold
+    Left = 292
+    Top = 673
+  end
+  object tblMessages: TADOTable
+    Connection = YeganehConnection
+    CursorType = ctStatic
+    OnCalcFields = tblMessagesCalcFields
+    TableName = 'Messages'
+    Left = 1032
+    Top = 176
+    object tblMessagesUserID: TIntegerField
+      FieldName = 'UserID'
+    end
+    object tblMessagesMessageType: TIntegerField
+      FieldName = 'MessageType'
+    end
+    object tblMessagesSubject: TStringField
+      FieldName = 'Subject'
+      Size = 1000
+    end
+    object tblMessagesDescription: TStringField
+      FieldName = 'Description'
+      Size = 4000
+    end
+    object tblMessagesIsRead: TBooleanField
+      FieldName = 'IsRead'
+    end
+    object tblMessagesCurrentDate: TDateField
+      FieldName = 'CurrentDate'
+    end
+    object tblMessagesInserteadUserId: TIntegerField
+      FieldName = 'InserteadUserId'
+    end
+    object tblMessagesIsActive: TBooleanField
+      FieldName = 'IsActive'
+    end
+    object tblMessagesExpireDateShow: TStringField
+      FieldName = 'ExpireDateShow'
+      Size = 10
+    end
+    object tblMessagesReadDate: TDateField
+      FieldName = 'ReadDate'
+    end
+    object tblMessagesicon: TStringField
+      FieldName = 'icon'
+      Size = 10
+    end
+    object tblMessagesID: TIntegerField
+      FieldName = 'ID'
+    end
+    object tblMessagesShamsidate: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Shamsidate'
+      Size = 10
+      Calculated = True
+    end
+  end
+  object DSMessages: TDataSource
+    DataSet = tblMessages
+    Left = 1072
+    Top = 176
   end
 end

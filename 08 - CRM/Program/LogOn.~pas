@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Buttons, DB, ADODB, Grids, DBGrids, ActnList,
+  Dialogs, StdCtrls, ExtCtrls, Buttons, DB, ADODB, Grids, DBGrids, ActnList,Registry,
   jpeg, {WinSkinData,} ComCtrls, xpBitBtn, dxGDIPlusClasses;
 
 type
@@ -61,6 +61,7 @@ type
     procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure Button1Click(Sender: TObject);
+    procedure SaveUserInRegistry;
   private
     { Private declarations }
     function CenterInParent(Place,NumberOfPlaces,ObjectWidth,ParentWidth,CropPercent: Integer): Integer;
@@ -91,26 +92,55 @@ begin
 end;
 
 procedure TLoginForm.BBOKClick(Sender: TObject);
+var
+  StrVerLast : string ;
+  textPassWord : string;
 begin
-with dm.User do
+  textPassWord := '' ;
+  textPassWord := Password.text ;
+
+  
+  with dm.User do
   begin
-  if (not Locate('userName',UserName.Text,[])) or
-   (Password.text<>dm.UserPassWord.AsString) then
+    //StrVer     := dm.UserLastVertionLogin.AsString ;// Qry_GetResult(' Select Isnull((SELECT LastVertionLogin FROM dbo.Users WHERE ID = '+Dm.UserId.AsString+' ),'''') ',dm.YeganehConnection);
+    StrVerLast := Qry_GetResult(' Select Isnull((SELECT Value FROM dbo.SystemSettings WHERE VariableId = 3 ),'''') ',dm.YeganehConnection);
+
+
+    if ( Locate('userName',UserName.Text,[])) and
+       (((dm.UserLastVertionLogin.AsString = '') and (Trim(dm.UserNewPassWord.AsString) = Trim(Password.text))))  then
+    begin
+      //textPassWord := '5005';
+      StrVerLast   := _SoftVersion ;
+    end;
+
+    if (not Locate('userName',UserName.Text,[])) or
+     //(textPassWord <> Trim(dm.UserPassWord.AsString)) then
+     (textPassWord <> Trim(dm.UserNewPassWord.AsString)) then
     begin
       ShowMessage('‰«„ ò«—»— Ì« ò·„Â ⁄»Ê— «‘ »«Â „Ì »«‘œ');
       Password.SetFocus;
     end
-   else
-   begin
+    else
+    begin
+
+      if _SoftVersion <> StrVerLast then
+      begin
+        ShowMessage(' ·ÿ›« «“ ¬Œ—Ì‰ ‰”ŒÂ ‰—„ «›“«— «” ›«œÂ ‰„«ÌÌœ ' + StrVerLast );
+      end
+      else
       if not dm.UserIsActive.AsBoolean then
       begin
          ShowMessage('ò«—»— €Ì— ›⁄«· „Ì »«‘œ.');
       end
       else
+      begin
+        Qry_SetResult('UPDATE dbo.Users SET PassWord = ltrim(rtrim(NewPassWord)) WHERE isnull(LastVertionLogin,'''')= '''' and ID = '+Dm.UserId.AsString ,dm.YeganehConnection);
+        Qry_SetResult('UPDATE dbo.Users SET LastVertionLogin = '''+_SoftVersion+''' WHERE ID = '+Dm.UserId.AsString ,dm.YeganehConnection);
         alogin.Execute
-   end;
+      end;
+    end;
 
- end;
+  end;
 end;
 
 procedure TLoginForm.BitBtn2Click(Sender: TObject);
@@ -142,68 +172,76 @@ begin
       _SmsTimer         := QGetSMSSettingsSmsTimer.AsString;
       _SMSCenterNumber  := QGetSMSSettingsSMSCenterNumber.AsString;
     end;
-     with dm do
+
+    with dm do
+    begin
+      _Userid             :=   UserId.AsInteger;
+      _MarketerID         :=   UserMarketerID        .AsInteger;
+      _UserTypeID         :=   UserUserTypeId       .AsInteger;
+      _ShowContract       :=   UserShowContract     .Value;
+      _IsWinServer        :=   UserISWinServer.Value;
+      _ShowMyAction       :=   UserShowMyAction.Value;
+      _BtnAllContract     :=   UserBtnAllContract.Value;
+      _BtnAllAct          :=   UserBtnAllAct.Value;
+      _ExportCustomerList :=   UserExportCustomerList.Value;
+      _EditContract       :=   UserEditContract      .Value;
+      _ShowAllCustomer    :=   UserShowAllCustomer   .Value;
+      _ExportFollow       :=   UserExportFollow   .Value;
+      _isAdmin            :=   UserIsAdmin.Value;
+
+      _WorkSationName      := Dm.GetComputerNetName;
+      _WinOrDomainUserName := Dm.GetUserWindowsUser;
+
+
+      Marketer.Open;
+     // Marketer.Filter := 'MarketerTitle <> ''''';
+      //Marketer.Filtered:=true;
+      Marketer.Locate('MarketerID',_MarketerID,[]) ;
+      _orgID           := Dm.MarketerOrgID.AsInteger ;
+      _UserName        := UserTitle.AsString;
+      _ProductID       := UserDefaultProductID.AsInteger;
+      _accessID        := UserAccessID.AsInteger;
+      _UserPinFollowUp := UserPinFollowUp.AsBoolean ;
+      _ThemTypeColor   := UserThemTypeColor.AsInteger ;
+      _UserAccAcess    := UserAccAcess.AsBoolean ;
+      _UserFactorAccess:= UserFactorAccess.AsBoolean or UserAccAcess.AsBoolean ;
+      _UserCallAccess  := UserCallAccess.AsBoolean ;
+      _UserAssesstAcess:= UserAssesstAcess.AsBoolean ;
+      _UserEditVersion := UserEditVersion.AsBoolean ;
+      _ManagerSale       := UserManagerSale.AsBoolean ;
+      _ManagerProduction := UserManagerProduction.AsBoolean ;
+      _ManagerSupport    := UserManagerSupport.AsBoolean ;
+      _ManagerOfficial   := UserManagerOfficial.AsBoolean ;
+
+      if  _ThemTypeColor >0 then
       begin
-        _Userid:=UserId.AsInteger;
-        _MarketerID         :=   UserMarketerID        .AsInteger;
-        _UserTypeID         :=   UserUserTypeId       .AsInteger;
-        _ShowContract       :=   UserShowContract     .Value;
-        _IsWinServer        :=   UserISWinServer.Value;
-        _ShowMyAction       :=   UserShowMyAction.Value;
-        _BtnAllContract     :=   UserBtnAllContract.Value;
-        _BtnAllAct          :=   UserBtnAllAct.Value;
-        _ExportCustomerList :=   UserExportCustomerList.Value;
-        _EditContract       :=   UserEditContract      .Value;
-        _ShowAllCustomer    :=   UserShowAllCustomer   .Value;
-        _ExportFollow       :=   UserExportFollow   .Value;
-        _isAdmin            :=   UserIsAdmin.Value;
-
-        _WorkSationName := Dm.GetComputerNetName;
-        _WinOrDomainUserName := Dm.GetUserWindowsUser;
-
-
-        Marketer.Open;
-       // Marketer.Filter := 'MarketerTitle <> ''''';
-        //Marketer.Filtered:=true;
-        Marketer.Locate('MarketerID',_MarketerID,[]) ;
-         _orgID:=Dm.MarketerOrgID.AsInteger ;
-        _UserName:=UserTitle.AsString;
-        _ProductID:=UserDefaultProductID.AsInteger;
-        _accessID:=UserAccessID.AsInteger;
-        _UserPinFollowUp := UserPinFollowUp.AsBoolean ;
-        _ThemTypeColor   := UserThemTypeColor.AsInteger ;
-        _UserAccAcess    := UserAccAcess.AsBoolean ;
-        _UserFactorAccess:= UserFactorAccess.AsBoolean or UserAccAcess.AsBoolean ;
-        _UserCallAccess  := UserCallAccess.AsBoolean ;
-        _UserAssesstAcess:= UserAssesstAcess.AsBoolean ;
-        _UserEditVersion := UserEditVersion.AsBoolean ;
-
-        if  _ThemTypeColor >0 then
-        begin
-          _Color1 := StringToColor( UserColor1.AsString );
-          _Color2 := StringToColor( UserColor2.AsString );
-          _Color3 := StringToColor( UserColor3.AsString );
-          _Color4 := StringToColor( UserColor4.AsString );
-        end
-        else  if _ThemTypeColor = 0 then
-        begin
-          _Color1:=  $00DAF3EC ;
-          _Color2:=  $00FDD0E7 ;
-          _Color3:=  $00E4AFCA ;
-          _Color4:=  $00F9ECF2 ;
-        end;
+        _Color1 := StringToColor( UserColor1.AsString );
+        _Color2 := StringToColor( UserColor2.AsString );
+        _Color3 := StringToColor( UserColor3.AsString );
+        _Color4 := StringToColor( UserColor4.AsString );
+      end
+      else  if _ThemTypeColor = 0 then
+      begin
+        _Color1:=  $00DAF3EC ;
+        _Color2:=  $00FDD0E7 ;
+        _Color3:=  $00E4AFCA ;
+        _Color4:=  $00F9ECF2 ;
       end;
-     close;
+    end;
+
+   SaveUserInRegistry;
+   close;
+
 end;
 
 procedure TLoginForm.PrivateLoginExecute(Sender: TObject);
 begin
-       if  dm.User.Locate('id',19,[]) then
-        begin
-          _Userid:=dm.UserId.AsInteger;
-          _UserTypeID := dm.UserUserTypeId.AsInteger;
-          Alogin.Execute;
-        end else exit;
+   if  dm.User.Locate('id',19,[]) then
+   begin
+      _Userid:=dm.UserId.AsInteger;
+      _UserTypeID := dm.UserUserTypeId.AsInteger;
+      Alogin.Execute;
+   end else exit;
 
 end;
 
@@ -222,7 +260,21 @@ begin
 end;
 
 procedure TLoginForm.FormShow(Sender: TObject);
+var
+  R: TRegistry;
+  un:string;
 begin
+
+  r := TRegistry.Create;
+  R.RootKey := HKEY_CURRENT_USER;
+  R.OpenKey(CrmRegistryKey, True);
+  un := R.ReadString('UserName');
+  if un <> '' then
+  begin
+    UserName.Text := un;
+    Password.SetFocus;
+  end;
+
 // StatusBar1.Panels[0].Text := _SoftVersion ;
  //Self.ScaleBy(75,100);
  //Self.ScaleBy(100,100);
@@ -233,13 +285,16 @@ begin
 
   Self.ScaleBy(Screen.PixelsPerInch,96);
 
- StatusBar1.Panels[0].Text := _SoftVersion+COPY(_SoftVersionDB,1,1)+'.'+ COPY(_SoftVersionDB,2,1);
- try
-   lblCompanyName.Caption := GetSystemSetting('CompanyName');
-   Label3    .Caption := GetSystemSetting('CompanyName');
- except
-   lblCompanyName.Caption :='';
- end;
+  StatusBar1.Panels[0].Text := _SoftVersion;//+COPY(_SoftVersionDB,1,1)+'.'+ COPY(_SoftVersionDB,2,1);
+  try
+    lblCompanyName.Caption := GetSystemSetting('CompanyName');
+    Label3    .Caption     := GetSystemSetting('CompanyName');
+  except
+    lblCompanyName.Caption :='';
+  end;
+ 
+
+  _IsSystemUserID := StrToInt(Qry_GetResult(' select top 1 id  FROM dbo.users where IsSystemUser = 1 ' ,dm.YeganehConnection)) ;
 end;
 
 procedure TLoginForm.Image1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -361,4 +416,23 @@ begin
 
 end;
 
+procedure TLoginForm.SaveUserInRegistry;
+var
+  R: TRegistry;
+  un:string;
+begin
+  r:=TRegistry.Create;
+  with r do
+  begin
+    RootKey:= HKEY_CURRENT_USER;
+    OpenKey(CrmRegistryKey, True);
+    un := ReadString('UserName');
+    if UserName.Text <> UN then
+      if MessageDlg('¬Ì« ‰«„ ò«—»—Ì ‘„« œ— «Ì‰ ò«„ÅÌÊ — –ŒÌ—Â ‘Êœø',mtInformation,[mbyes,mbno],0)=mryes  then
+        WriteString('UserName', UserName.Text);
+
+  end;
+
+end;
+  
 end.

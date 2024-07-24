@@ -85,6 +85,9 @@ begin
   edtDateInPersonFrom.Text := _Today ;
   edtDateInPersonTo  .Text := _Today ;
 
+  Dm.RefreshHoliday(copy(_today,1,4));
+  MssCalendarPro1.HolidayStr := dm.HolidayStr;
+    
 end;
 
 procedure TFReportInPerson.Button1Click(Sender: TObject);
