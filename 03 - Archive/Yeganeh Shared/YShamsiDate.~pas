@@ -3113,7 +3113,7 @@ end;
 Function DongleErrorMessage(Errorcode:byte):string;
 begin
    Case ErrorCode of
-      1: Result := 'ﬁ'+'›· '+'”'+'Œ '+' «›“«—Ì '+'Ì«'+'› '+' ‰‘œ';
+      1: Result := 'ﬁ'+'›· '+'”'+'Œ '+' «›“«—Ì '+'Ì«'+'› '+' ‰‘œ'+'-ﬁœÌ„-';
       2: Result := 'ﬁ›'+'· '+'„ '+'’·'+' »'+'Â'+' ”'+'—Ê—'+' ﬁ'+'›· '+'‘»'+'òÂ '+'‰Ì'+'” ';
       3: Result := '„œ  «⁄ »'+'«'+'— '+'ﬁ›'+'·'+' Å«'+'Ì«‰ '+'Ì«›'+' Â '+'«” ';
       4: Result := 'ﬁ'+'›·'+' „ ⁄·ﬁ »Â'+' «'+'Ì‰ ‰—„ «›“'+'«— ‰„'+'Ì »'+'«‘œ';
@@ -3427,7 +3427,7 @@ begin
   else
   begin
     case WSAGetLastError of
-      WSANOTINITIALISED:WSAErr:='WSANotInitialised';
+      WSANOTINITIALISED:WSAErr:='WSANotInitialized';
       WSAENETDOWN      :WSAErr:='WSAENetDown';
       WSAEINPROGRESS   :WSAErr:='WSAEInProgress';
     end;

@@ -6,7 +6,7 @@ inherited Settings: TSettings
   Caption = #1578#1606#1592#1610#1605#1575#1578' '#1705#1575#1585#1576#1585#1610
   ClientHeight = 326
   ClientWidth = 449
-  Constraints.MaxHeight = 364
+  Constraints.MaxHeight = 365
   Constraints.MinHeight = 360
   Constraints.MinWidth = 457
   OldCreateOrder = True

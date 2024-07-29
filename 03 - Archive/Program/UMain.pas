@@ -1794,6 +1794,7 @@ begin
       AQry := TADOQuery.Create(nil);
       try
        AQry.Connection := Dm.YeganehConnection;
+       AQry.CommandTimeout := 300 ;
        AQry.Close;
        AQry.SQL.Text := ' update letter set Has_Page = dbo.has_Page(letterid), ' +
                         ' Has_WordPage = dbo.has_WordPage(letterid), ' +
@@ -2179,6 +2180,7 @@ begin
       with TADOQuery.Create(nil) do
       begin
         Connection := Dm.YeganehConnection;
+        CommandTimeout := 300 ;
         SQL.Text := 'SELECT IsNull(ColorID,-1) FROM LetterColor WHERE LetterID='+Dm.Get_All_LetterLetterID.AsString +' AND USERID='+IntToStr(_UserId);
         open;
         if not isempty then

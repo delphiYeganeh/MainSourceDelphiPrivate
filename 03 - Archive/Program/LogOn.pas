@@ -227,7 +227,7 @@ begin
    UserName.Font.Color := labelActiveColor;
  //  Password.Font.Color := labelActiveColor;     
    correct:=false;
-   isLock:=false;
+   isLock :=false;
    dm.Users.Open;
 
    //Label1.Caption:=dm.GetSystemValue(16);
@@ -237,7 +237,7 @@ begin
    //Label8.Caption := GetSystemSetting('OrgName');
   // SoftwareName.Caption:='”Ì” „ »«Ìê«‰Ì «”‰«œ '+_yeganeh;
    Caption:='‰—„ «›“«—Ì '+_yeganeh;
-   Label2.Caption :=' ‰ê«—‘ '+ '12.0.0.10';
+   Label2.Caption :=' ‰ê«—‘ '+ _SoftVersion;//'12.0.0.13';
 
   Bmp := TBitmap.Create;
   try

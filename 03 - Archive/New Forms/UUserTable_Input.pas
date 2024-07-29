@@ -120,12 +120,13 @@ begin
     while not eof do
     begin
       Labels[k]:=TEdit.Create(self);
-      Labels[k].Text:=FieldValuesDescription.AsString;
-      Labels[k].Parent:=Control;
-      Labels[k].ParentColor:=True;
-      Labels[k].BorderStyle:=bsNone;
-      Labels[k].TabStop:=False;
-      Labels[k].BiDiMode:=bdLeftToRight;
+      Labels[k].Text        := FieldValuesDescription.AsString;
+      Labels[k].Parent      := Control;
+      Labels[k].ParentColor := True;
+      Labels[k].BorderStyle := bsNone;
+      Labels[k].TabStop     := False;
+      Labels[k].BiDiMode    := bdLeftToRight;
+      Labels[k].ReadOnly    := True;
 
       if EditLeft<HorSpaces then
       begin

@@ -168,7 +168,7 @@ end;
 procedure TSettings.BitBtn1Click(Sender: TObject);
 begin
   inherited;
-SaveKeyvalue;
+   SaveKeyvalue;
    SetFromDm;
    dm.GetValues;
    MBaseForm.messageShowString('áØİÇ ÌåÊ ÇÚãÇá ÊÛííÑÇÊ ¡ ÇÒ äÑã ÇİÒÇÑ ÎÇÑÌ æ ÏæÈÇÑå æÇÑÏ ÔæíÏ', False);

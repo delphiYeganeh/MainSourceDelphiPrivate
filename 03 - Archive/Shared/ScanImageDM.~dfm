@@ -1,8 +1,8 @@
 object DMScanImage: TDMScanImage
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 832
-  Top = 317
+  Left = 833
+  Top = 318
   Height = 337
   Width = 481
   object QrLetterData: TADOQuery

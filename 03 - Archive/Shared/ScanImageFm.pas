@@ -2162,7 +2162,7 @@ procedure TFmScanImage.Timer1Timer(Sender: TObject);
 begin
   inherited;
   //ImageEnDBVect1.FitToWidth;
-  ImageEnDBView1.FitToWidth;
+  /////ImageEnDBView1.FitToWidth;
   Timer1.Enabled := False;
 end;
 

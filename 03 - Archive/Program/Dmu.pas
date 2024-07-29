@@ -593,7 +593,7 @@ Const
   // _SoftVersion    = '7.0.0.6';
   //_SoftLastUpdate = '1396/06/29';
   //  _SoftVersion1    = '11.2.12.1';
-    _SoftLastUpdate = '1403/03/13'; //by MRM.moghadam
+    _SoftLastUpdate = '1403/04/31'; //by MRM.moghadam
 
    _Kartable = False;
    ShowLogo = True;
@@ -1234,7 +1234,7 @@ begin
 
     if (DongleErrorCode > 0) then
     begin
-      ShowMessage(DongleErrorMessage(dongleErrorCode));
+      ShowMessage(DongleErrorMessage(dongleErrorCode)+'(ÞÝá ÞÏíãí)');
       ExitProcess(0);
       Application.Terminate;
       Halt;
@@ -2147,7 +2147,7 @@ begin
     Tiny1 := TTiny.Create(Self);
     Tiny1.ServerIP := GetLockIP;
     Tiny1.NetWorkINIT := True;
-    i:=Tiny1.TinyErrCode;
+    i := Tiny1.TinyErrCode;
     if i>0 then
     begin
       Result:=False;
@@ -2168,7 +2168,7 @@ begin
     begin
       Tiny1.UserPassWord := '44F43C10BF4C384BB4A4A8497FB728';
       Tiny1.ShowTinyInfo := True;
-      i:=Tiny1.TinyErrCode;
+      i:= Tiny1.TinyErrCode;
       if i>0 then
       begin
         Result:=False;

@@ -4048,7 +4048,7 @@ begin
       frmUpd_latererdata.Free;
       DMScanImage.DSLetterData.DataSet.Prior;
       DMScanImage.DSLetterData.DataSet.Next;
-      PageControl2.ActivePageIndex:=1;
+      PageControl2Change(nil);
       PageControl2.ActivePageIndex:=0;
     end else
     begin

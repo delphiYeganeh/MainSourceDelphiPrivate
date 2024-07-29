@@ -50,7 +50,7 @@ inherited MainForm: TMainForm
       Left = 2
       Top = 2
       Width = 1258
-      Height = 26
+      Height = 23
       ActionManager = MainActionManager
       Caption = 'ActionToolBar1'
       ColorMap.HighlightColor = clWhite
@@ -1549,6 +1549,7 @@ inherited MainForm: TMainForm
             Expanded = False
             FieldName = 'AttachTitle'
             Title.Caption = #1588#1585#1581
+            Width = 64
             Visible = True
             BandIndex = 2
             FilterList.Strings = (
@@ -1996,6 +1997,7 @@ inherited MainForm: TMainForm
             FieldName = 'RenterTitle'
             Title.Alignment = taCenter
             Title.Color = 15400959
+            Width = 64
             Visible = True
           end
           item
@@ -2003,6 +2005,7 @@ inherited MainForm: TMainForm
             FieldName = 'BeginDate'
             Title.Alignment = taCenter
             Title.Color = 15400959
+            Width = 64
             Visible = True
           end
           item
@@ -2010,6 +2013,7 @@ inherited MainForm: TMainForm
             FieldName = 'EndDate'
             Title.Alignment = taCenter
             Title.Color = 15400959
+            Width = 64
             Visible = True
           end>
       end
@@ -3089,19 +3093,20 @@ inherited MainForm: TMainForm
     Tag = 120000
     Interval = 120000
     OnTimer = QueryRefresherTimer
-    Left = 592
+    Left = 632
     Top = 122
   end
   object userTimer: TTimer
     Tag = 60000
     Interval = 60000
     OnTimer = userTimerTimer
-    Left = 656
-    Top = 120
+    Left = 632
+    Top = 184
   end
   object GetList3: TADOStoredProc
     Connection = Dm.YeganehConnection
     CursorType = ctStatic
+    CommandTimeout = 300
     ProcedureName = 'GetList;1'
     Parameters = <
       item
@@ -3124,6 +3129,7 @@ inherited MainForm: TMainForm
   object GetList4: TADOStoredProc
     Connection = Dm.YeganehConnection
     CursorType = ctStatic
+    CommandTimeout = 300
     ProcedureName = 'GetList;1'
     Parameters = <
       item
@@ -4055,6 +4061,7 @@ inherited MainForm: TMainForm
   end
   object QrSrchArchiveFolder: TADOQuery
     Connection = Dm.YeganehConnection
+    CommandTimeout = 300
     Parameters = <
       item
         Name = 'UserID'
@@ -4112,6 +4119,7 @@ inherited MainForm: TMainForm
   end
   object GetArchiveFolder: TADOStoredProc
     Connection = Dm.YeganehConnection
+    CommandTimeout = 300
     ProcedureName = 'Get_ArchiveFolder_ByArchiveCenterID;1'
     Parameters = <
       item
@@ -4145,12 +4153,14 @@ inherited MainForm: TMainForm
   end
   object QTemp: TADOQuery
     Connection = Dm.YeganehConnection
+    CommandTimeout = 300
     Parameters = <>
     Left = 298
     Top = 162
   end
   object QAllPayvast: TADOQuery
     Connection = Dm.YeganehConnection
+    CommandTimeout = 300
     Parameters = <
       item
         Name = 'LetterID'
@@ -4444,6 +4454,7 @@ inherited MainForm: TMainForm
   end
   object qryKeyWords: TADOQuery
     Connection = Dm.YeganehConnection
+    CommandTimeout = 300
     Parameters = <>
     SQL.Strings = (
       'select distinct(word) from keywords')
@@ -4471,6 +4482,7 @@ inherited MainForm: TMainForm
   end
   object QRY_: TADOQuery
     Connection = Dm.YeganehConnection
+    CommandTimeout = 300
     Parameters = <>
     SQL.Strings = (
       
@@ -4698,7 +4710,7 @@ inherited MainForm: TMainForm
     FadeStep = 2
     WindowPosition = wpRightBottom
     Version = '1.9.0.7'
-    Left = 296
-    Top = 200
+    Left = 224
+    Top = 240
   end
 end
