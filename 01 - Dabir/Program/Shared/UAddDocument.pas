@@ -563,14 +563,29 @@ begin
          ShowMsg(67);
          Exit;
       end;
+
+      { TODO -oparsa : 14030427 }
+      if (DSForm.DataSet.State in [dsInsert]) and (select_LetterLetterID.AsInteger=0) then
+      begin
+         ShowMsg(67);
+         Exit;
+      end;
+
+      if select_LetterLetterID.AsInteger>0 then
+      begin
+      { TODO -oparsa : 14030427 }
+
       FraddLetterData := TFraddLetterData.Create(Application);
       FraddLetterData.LetterID:=select_LetterLetterID.AsInteger;
 
-   FrAddLetterData.Letter_Or_Erja:='Letter';
-   FrAddLetterData.DSForm.DataSet:=Dm.Get_LetterData_by_LetterID;
-   FrAddLetterData.RecommitID:=0;
+       FrAddLetterData.Letter_Or_Erja:='Letter';
+       FrAddLetterData.DSForm.DataSet:=Dm.Get_LetterData_by_LetterID;
+       FrAddLetterData.RecommitID:=0;
 
-      FraddLetterData.ShowModal;
+       FraddLetterData.ShowModal;
+     { TODO -oparsa : 14030427 }
+     end;
+     { TODO -oparsa : 14030427 }
    end;
 end;
 

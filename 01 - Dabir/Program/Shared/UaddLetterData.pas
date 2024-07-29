@@ -242,9 +242,10 @@ begin
   CHK_USER_ACCESS_QRY.SQL.Add(') bb                                                                                        ');
   CHK_USER_ACCESS_QRY.SQL.Add('ON bb.AccessID = u.AccessID                                                                 ');
   CHK_USER_ACCESS_QRY.SQL.Add('where                                                                                       ');
-  //CHK_USER_ACCESS_QRY.SQL.Add('u.Id = '+Dm.UsersId.AsString+'                                                              ');
+  //CHK_USER_ACCESS_QRY.SQL.Add('u.Id = '+Dm.UsersId.AsString+'
   CHK_USER_ACCESS_QRY.SQL.Add('u.Id = '+IntToStr(_UserID)+'                                                              ');
   //CHK_USER_ACCESS_QRY.SQL.SaveToFile('c:\enabble.sql');
+  CHK_USER_ACCESS_QRY.Connection := Dm.YeganehConnection ;
   CHK_USER_ACCESS_QRY.Open;
   if CHK_USER_ACCESS_QRY.FieldByName('hh').AsBoolean = True then
     ADeleteAttachments.Enabled := True
@@ -298,7 +299,7 @@ procedure TFrAddLetterData.AddBtnClick(Sender: TObject);
       try
         with DM.ArchiveConnection do
         begin
-          Connected:=false;
+          Connected := false;
           ConnectionString:='Provider=SQLOLEDB.1;Password=12;User ID=SABZ;Initial Catalog='+ArchiveDBName+';Data Source='+ ArchiveServerName;
           ConnectionTimeout:=3;
         end;
@@ -554,6 +555,7 @@ begin
   if Letter_Or_Erja = 'Letter' then
   begin
     dm.Get_LetterData_by_LetterID.Insert;
+    Dm.Get_LetterData_by_LetterIDIsTemplate.AsBoolean  := True;
     dm.Get_LetterData_by_LetterIDletterid.AsInteger := LetterID;
     dm.Get_LetterData_by_LetterIDVersionDate.Value := _Today; // Amin 1391/12/15
   end;

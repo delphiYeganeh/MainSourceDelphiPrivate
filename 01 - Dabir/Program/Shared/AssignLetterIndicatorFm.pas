@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, BaseUnit, StdCtrls, Buttons, Menus, ExtActns, ActnList, DB,
-  ADODB, ExtCtrls;
+  ADODB, ExtCtrls, AppEvnts;
 
 type
   TfmAssignLetterIndicator = class(TMBaseForm)

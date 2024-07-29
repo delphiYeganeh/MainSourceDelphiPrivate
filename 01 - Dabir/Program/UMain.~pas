@@ -4110,29 +4110,9 @@ end;
 //---
 
 procedure TMainForm.SBFollowLetterClick(Sender: TObject);
-  function IntToY(l:byte):string ;
-  var i,j,k,n:integer;
-  begin
-     Result:='';
-     i:=60+3+1+1;
-     j:=2*60+2*3+1;
-     k:=15*11+3+1;
-     for n:=1 to l do
-     begin
-        if (i>=28+1-1) and (i<=128+1-1) then
-           Result:=Result+char(i);
-        i := k*i mod j;
-     end;
-  end;
+
 begin
   inherited;
-
-        try
-          dm.YeganehConnection.Open(_eyeganeh+'Corporate_Dabir', IntToY(66));
-          dm.YeganehConnection.Connected := True;
-        except
-
-        end;
 
   With Dm do
   begin

@@ -816,6 +816,9 @@ type
     Get_LetterWordFileFileType: TStringField;
     qryAutoRunScript: TADOQuery;
     Get_All_LetterIsNetWork: TBooleanField;
+    Get_LetterData_by_LetterDataIDIsTemplate: TBooleanField;
+    Get_LetterData_by_LetterIDIsTemplate: TBooleanField;
+    Get_All_LetterDataIsTemplate: TBooleanField;
 
     function  GetActionAccess(ActionTag:String;FormTag:word):boolean;
 
@@ -1104,7 +1107,7 @@ Const
    _ShowLogo = True;
 // _Yeganeh='Ìê«‰Â';
 // _EYeganeh='yeganeh';
-   _SoftLastUpdate = '1403/04/13';//'1396/02/16';
+   _SoftLastUpdate = '1403/04/31';//'1396/02/16';
    //_SoftVersion    = '11.0.0.0';//'6.5.0.0';
     LCID: DWORD = LOCALE_SYSTEM_DEFAULT;
 
@@ -1880,7 +1883,7 @@ begin
     DongleErrorCode := CheckDongle(YeganehConnection,Servername,_Today,106070,_SoftTitle,False,DongleProductCode);
     if (DongleErrorCode > 0) then
     begin
-      ShowMessage(DongleErrorMessage(dongleErrorCode));
+      ShowMessage(DongleErrorMessage(dongleErrorCode)+'(ﬁ›· ﬁœÌ„Ì)');
       ExitProcess(0);
       Application.Terminate;
       Halt;
@@ -2357,7 +2360,17 @@ begin
   if Word_Must_Readonly=0 then
     OReadOnly :=True;
 
+   { TODO -oparsa : 14030501 }
   WordApplication.connect;
+  (*
+  try
+     WordApplication.connect;
+    except  on e:exception do
+     begin
+       ShowMessage('WORD ERROR  '+Char(10) + e.Message);
+     end
+  end;       *)
+  { TODO -oparsa : 14030501 }
 
   with WordApplication do
   begin
@@ -2437,9 +2450,17 @@ begin
           SetWordOpen(LetterID, _UserID);
         try
           OpenWordFile(_TempPath + _WordFileName, readonly);
-         except
+          { TODO -oparsa : 14030501 }
+          except
             OpenWordFile(_TempPath + _WordFileName, readonly);
-         end;
+          end;
+          (*
+         except  on e:exception do
+
+            //OpenWordFile(_TempPath + _WordFileName, readonly);
+            MBaseForm.MessageShowString('»«“ ‘œ‰ ›«Ì· Ê—œ »« Œÿ« „Ê«ÃÂ ‘œ' +Char(10) + e.Message ,False);
+         end;    *)
+         { TODO -oparsa : 14030501 }
       end;
     end
     else if ext = Exec_GetExcelId() then

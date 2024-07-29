@@ -155,6 +155,7 @@ begin
       FromOrgForm.OrganizeMode:=false;
       _ResultOrgID := -1;
       _ResultOrgCode := '-1';
+      FromOrgForm.InnerMode := True;
       FromOrgForm.ShowModal;
     except on e:exception do
       ShowMsgString(e.Message);

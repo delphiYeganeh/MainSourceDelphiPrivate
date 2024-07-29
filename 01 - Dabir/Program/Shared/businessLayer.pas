@@ -2796,8 +2796,9 @@ function Exec_insert_LetterData(LetterID:integer;PageNumber:integer;extention:in
       Value :=extention;
 
     end;
-    ADOSP.Connection:=dm.YeganehConnection; 
-    ADOSP.ExecProc;    
+
+   ADOSP.Connection:=dm.YeganehConnection;
+   ADOSP.ExecProc;
    Result:=ADOSP.Parameters.ParamByname('@LetterDataID').value;
 end;
 

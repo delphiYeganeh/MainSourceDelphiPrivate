@@ -1,4 +1,4 @@
-[SECTION_MAX_NO]=4
+[SECTION_MAX_NO]=5
 
 [BEGIN_S_NO]=1
 
@@ -40,5 +40,15 @@ END
 
   INSERT INTO [dbo].[Fields] (FieldName,Description)
   SELECT 'Sign','امضا' WHERE (SELECT COUNT(id) FROM dbo.Fields AS F WHERE fieldname='Sign') = 0 
+
+[END_S_NO]
+
+[BEGIN_S_NO]=5
+
+  IF ( SELECT COUNT(UserId) FROM dbo.settings WHERE userid =-1 AND VariableName ='DongleType' )=0
+  begin
+    INSERT INTO [dbo].[Settings] ([UserID],[Value],[VariableName])
+    SELECT -1,0,'DongleType'
+  end
 
 [END_S_NO]

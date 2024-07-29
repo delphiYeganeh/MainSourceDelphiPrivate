@@ -2812,8 +2812,8 @@ object Dm: TDm
         Precision = 10
         Value = Null
       end>
-    Left = 352
-    Top = 595
+    Left = 328
+    Top = 611
     object Get_LetterData_by_LetterDataIDLetterDataID: TAutoIncField
       FieldName = 'LetterDataID'
       ReadOnly = True
@@ -2829,6 +2829,9 @@ object Dm: TDm
     object Get_LetterData_by_LetterDataIDVersionDate: TStringField
       FieldName = 'VersionDate'
       Size = 10
+    end
+    object Get_LetterData_by_LetterDataIDIsTemplate: TBooleanField
+      FieldName = 'IsTemplate'
     end
   end
   object Get_LetterData_by_LetterID: TADOStoredProc
@@ -2906,6 +2909,9 @@ object Dm: TDm
       FieldKind = fkCalculated
       FieldName = 'isECE'
       Calculated = True
+    end
+    object Get_LetterData_by_LetterIDIsTemplate: TBooleanField
+      FieldName = 'IsTemplate'
     end
   end
   object UserSecretariat: TADODataSet
@@ -6520,6 +6526,9 @@ object Dm: TDm
     end
     object Get_All_LetterDataImage: TBlobField
       FieldName = 'Image'
+    end
+    object Get_All_LetterDataIsTemplate: TBooleanField
+      FieldName = 'IsTemplate'
     end
   end
   object adoFollow_Retroaction_Letter: TADODataSet

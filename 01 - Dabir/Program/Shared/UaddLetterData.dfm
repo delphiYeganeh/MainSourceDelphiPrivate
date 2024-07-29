@@ -401,7 +401,6 @@ inherited FrAddLetterData: TFrAddLetterData
     Top = 23
     Width = 585
     Height = 261
-    Cursor = crHandPoint
     Align = alClient
     DataSource = DSForm
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -494,7 +493,7 @@ inherited FrAddLetterData: TFrAddLetterData
     Top = 228
   end
   object ActionManager: TActionManager
-    Images = Dm.LetterImages
+    Images = DataModuleForm.Dm
     Left = 320
     Top = 32
     StyleName = 'XP Style'

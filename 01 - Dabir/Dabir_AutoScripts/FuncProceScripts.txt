@@ -1,4 +1,4 @@
-[SECTION_MAX_NO]=10
+[SECTION_MAX_NO]=14
 
 [BEGIN_S_NO]=1
 
@@ -2533,3 +2533,63 @@ BEGIN
 END
 
 [END_S_NO]
+
+[BEGIN_S_NO]=11
+
+ALTER proc [dbo].[Get_LetterData_by_LetterDataID](@LetterDataID int )
+as
+SELECT   LetterDataID, Image, LetterData.VersionNo, LetterData.VersionDate,IsTemplate
+FROM   dbo.LetterData
+WHERE   (LetterDataID = @LetterDataID)
+
+[END_S_NO]
+
+[BEGIN_S_NO]=12
+
+ALTER proc [dbo].[Get_LetterData_by_LetterID](@LetterID int)
+as
+SELECT   letterid,LetterDataID, LetterData.Extention, DESCRIPTION, LetterData.VersionNo, LetterData.VersionDate,          LetterData.archiveID, isDocument,IsTemplate
+FROM  dbo.LetterData 
+left JOIN  dbo.Extention ON LetterData.extention = Extention.ExtentionID
+WHERE     (Extention.IsSystem = 0) AND (LetterData.LetterID = @LetterID)
+
+[END_S_NO]
+
+[BEGIN_S_NO]=13
+
+ALTER PROCEDURE [dbo].[Get_All_LetterData_by_LetterID](@LetterID int)
+AS
+	SELECT   letterid,LetterDataID, Ex.Extention, DESCRIPTION,IMAGE,IsTemplate
+	FROM dbo.LetterData LD 
+        inner join Extention Ex on LD.extention = Ex.ExtentionID
+	WHERE  (LetterID = @LetterID)
+
+
+
+[END_S_NO]
+
+[BEGIN_S_NO]=14
+
+ALTER PROCEDURE [dbo].[insert_LetterData]
+	(@LetterDataID 	[int] output,
+	 @LetterID 	[int],
+	 @PageNumber 	[tinyint],
+	 @extention 	[tinyint])
+
+AS INSERT INTO [dbo].[LetterData] 
+	 (  [LetterID],
+	 [PageNumber],
+	 [extention],
+         IsTemplate ) 
+ 
+VALUES 
+	( @LetterID,
+	 @PageNumber,
+	 @extention,
+         1)
+
+set  @LetterDataID=@@identity
+
+[END_S_NO]
+
+

@@ -1074,8 +1074,8 @@ inherited FrAddDocument: TFrAddDocument
     AutoEdit = False
     DataSet = Select_Letter
     OnDataChange = DSFormDataChange
-    Left = 179
-    Top = 139
+    Left = 187
+    Top = 107
   end
   inherited ActionList: TActionList
     Left = 96
@@ -1367,8 +1367,8 @@ inherited FrAddDocument: TFrAddDocument
         Precision = 10
         Value = 0
       end>
-    Left = 141
-    Top = 141
+    Left = 149
+    Top = 109
     object Select_LetterUserTableTitle: TStringField
       Alignment = taRightJustify
       FieldKind = fkLookup

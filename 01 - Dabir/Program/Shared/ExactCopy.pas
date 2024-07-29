@@ -5,7 +5,8 @@ interface
 uses
    Graphics,Forms,  Dialogs, BaseUnit, DB, ActnList, ActnMan, ADODB,
   Controls, Grids, DBGrids, YDbgrid, Buttons, StdCtrls, Classes,sysutils,
-  ExtActns, XPStyleActnCtrls, Menus, ExtCtrls, TntStdCtrls, TntDBCtrls;
+  ExtActns, XPStyleActnCtrls, Menus, ExtCtrls, TntStdCtrls, TntDBCtrls,
+  AppEvnts;
 
 type
   TExactCopyF = class(TMBaseForm)
