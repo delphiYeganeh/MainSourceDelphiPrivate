@@ -2472,6 +2472,17 @@ inherited FmScanImage: TFmScanImage
     object QrSelImageIsCorrectedImage: TBooleanField
       FieldName = 'IsCorrectedImage'
     end
+    object QrSelImageFileName: TStringField
+      FieldName = 'FileName'
+      Size = 100
+    end
+    object QrSelImageFileType: TStringField
+      FieldName = 'FileType'
+      Size = 50
+    end
+    object QrSelImageIsTemplate: TBooleanField
+      FieldName = 'IsTemplate'
+    end
   end
   object DSSelImage: TDataSource
     AutoEdit = False

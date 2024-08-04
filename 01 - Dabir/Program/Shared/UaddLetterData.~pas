@@ -555,7 +555,7 @@ begin
   if Letter_Or_Erja = 'Letter' then
   begin
     dm.Get_LetterData_by_LetterID.Insert;
-    //Dm.Get_LetterData_by_LetterIDIsTemplate.AsBoolean  := True;
+    Dm.Get_LetterData_by_LetterIDIsTemplate.AsBoolean  := True;
     dm.Get_LetterData_by_LetterIDletterid.AsInteger := LetterID;
     dm.Get_LetterData_by_LetterIDVersionDate.Value := _Today; // Amin 1391/12/15
   end;
@@ -563,6 +563,7 @@ begin
   if Letter_Or_Erja = 'Erja' then
   begin
     dm.Get_RecommitePayvast_by_RecommiteID.Insert;
+    Dm.Get_LetterData_by_LetterIDIsTemplate.AsBoolean  := True;
     dm.Get_RecommitePayvast_by_RecommiteIDRecommiteID.AsInteger := RecommitID;
     dm.Get_RecommitePayvast_by_RecommiteIDLetterID.AsInteger := LetterID;
     Dm.Get_RecommitePayvast_by_RecommiteIDVersionDate.Value := _Today; // Amin 1391/12/15

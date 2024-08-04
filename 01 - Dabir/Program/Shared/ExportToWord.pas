@@ -574,6 +574,9 @@ begin
       Get_LetterWordFileextention.AsInteger:=3;
       Get_LetterWordFileImage.LoadFromFile(_TempPath+_WordFileName);
       Get_LetterWordFileIsTemplate.AsBoolean := True;
+      { TODO -oparsa : 14030514 }
+      Get_LetterWordFileFILENAME.AsString := _WordFileName ;
+      { TODO -oparsa : 14030514 }
       post;
       _Word_Is_Opened :=false;
       TimerWord.Enabled:=false
@@ -659,6 +662,7 @@ begin
           Get_LetterWordFileImage.LoadFromFile(strTempFileName) ;
           Get_LetterWordFileFileType.AsString := StringReplace(ExtractFileExt(OpenDialog.FileName), '.', '', [rfReplaceAll, rfIgnoreCase]) ;
           Get_LetterWordFileFILENAME.AsString := ExtractFilename(OpenDialog.FileName);
+          Get_LetterWordFileIsTemplate.AsBoolean := True;
 
         end
         { TODO -oparsa : 14030105 }
@@ -669,6 +673,7 @@ begin
           Get_LetterWordFileImage.LoadFromFile(strTempFileName) ;
           Get_LetterWordFileFileType.AsString := StringReplace(ExtractFileExt(OpenDialog.FileName), '.', '', [rfReplaceAll, rfIgnoreCase]) ;
           Get_LetterWordFileFILENAME.AsString := ExtractFilename(OpenDialog.FileName);
+          Get_LetterWordFileIsTemplate.AsBoolean := True;
 
         end
         else

@@ -517,4 +517,10 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
     Left = 56
     Top = 120
   end
+  object ADOQuery1: TADOQuery
+    Connection = Dm.YeganehConnection
+    Parameters = <>
+    Left = 336
+    Top = 104
+  end
 end

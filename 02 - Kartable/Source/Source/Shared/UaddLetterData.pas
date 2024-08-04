@@ -533,6 +533,7 @@ begin
    if Letter_Or_Erja='Letter' then
    begin
      dm.Get_LetterData_by_LetterID.Insert;
+     Dm.Get_LetterData_by_LetterIDIsTemplate.AsBoolean := True ;
      dm.Get_LetterData_by_LetterIDletterid.AsInteger:=LetterID;
      dm.Get_LetterData_by_LetterIDVersionDate.Value:=_Today; // Amin 1391/12/15
    end;

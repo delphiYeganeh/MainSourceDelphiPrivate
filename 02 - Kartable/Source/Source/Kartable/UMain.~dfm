@@ -977,8 +977,8 @@ object MainForm: TMainForm
       '8=17'
       '9=23')
     OnExecute = MainActionManagerExecute
-    Left = 42
-    Top = 88
+    Left = 1002
+    Top = 104
     StyleName = 'XP Style'
     object Arecommite: TAction
       Tag = 3

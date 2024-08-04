@@ -574,6 +574,9 @@ begin
       Get_LetterWordFileextention.AsInteger:=3;
       Get_LetterWordFileImage.LoadFromFile(_TempPath+_WordFileName);
       Get_LetterWordFileIsTemplate.AsBoolean := True;
+      { TODO -oparsa : 14030514 }
+      Get_LetterWordFileFILENAME.AsString := _WordFileName ;
+      { TODO -oparsa : 14030514 }
       post;
       _Word_Is_Opened :=false;
       TimerWord.Enabled:=false
@@ -699,8 +702,10 @@ begin
   end;
 
    if FileExists(pchar(_TempPath+_WordFileName)) then
+   begin
+     SysUtils.FileSetReadOnly(pchar(_TempPath+_WordFileName), false);
      DeleteFile(pchar(_TempPath+_WordFileName));
-
+   end;
   Close;
 end;
 

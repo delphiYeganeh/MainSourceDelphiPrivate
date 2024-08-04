@@ -1477,8 +1477,6 @@ var
   otherUserID : integer;
 begin
   inherited;
-  if Dm.processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
-
   if Not DataSetPost then
     Exit;
 

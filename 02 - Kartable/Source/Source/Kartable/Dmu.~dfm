@@ -1,7 +1,8 @@
 object Dm: TDm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 149
+  Left = 359
+  Top = 88
   Height = 738
   Width = 1260
   object DRFromOrganizations: TDataSource
@@ -1344,6 +1345,17 @@ object Dm: TDm
     end
     object Get_LetterWordFileLastUpdate: TTntDateTimeField
       FieldName = 'LastUpdate'
+    end
+    object Get_LetterWordFileFileName: TStringField
+      FieldName = 'FileName'
+      Size = 100
+    end
+    object Get_LetterWordFileIsTemplate: TBooleanField
+      FieldName = 'IsTemplate'
+    end
+    object Get_LetterWordFileFileType: TStringField
+      FieldName = 'FileType'
+      Size = 50
     end
   end
   object UserShortCut: TADODataSet
@@ -3046,7 +3058,7 @@ object Dm: TDm
         Value = Null
       end>
     Left = 960
-    Top = 75
+    Top = 83
     object Get_LetterData_by_LetterDataIDLetterDataID: TAutoIncField
       FieldName = 'LetterDataID'
       ReadOnly = True
@@ -3061,6 +3073,9 @@ object Dm: TDm
     object Get_LetterData_by_LetterDataIDVersionNo: TStringField
       FieldName = 'VersionNo'
       Size = 10
+    end
+    object Get_LetterData_by_LetterDataIDIsTemplate: TBooleanField
+      FieldName = 'IsTemplate'
     end
   end
   object Get_LetterData_by_LetterID: TADOStoredProc
@@ -3129,6 +3144,9 @@ object Dm: TDm
     end
     object Get_LetterData_by_LetterIDisDocument: TBooleanField
       FieldName = 'isDocument'
+    end
+    object Get_LetterData_by_LetterIDIsTemplate: TBooleanField
+      FieldName = 'IsTemplate'
     end
   end
   object Extention: TADOTable
@@ -3494,8 +3512,8 @@ object Dm: TDm
         Precision = 10
         Value = Null
       end>
-    Left = 106
-    Top = 91
+    Left = 130
+    Top = 80
     object Select_FieldAccess_by_TableIDFieldAccessID: TAutoIncField
       FieldName = 'FieldAccessID'
       ReadOnly = True
@@ -5316,8 +5334,8 @@ object Dm: TDm
         'D'
       'WHERE LD.LetterID=:LetterID'
       'GROUP BY LD.ColorID')
-    Left = 1040
-    Top = 72
+    Left = 1064
+    Top = 64
     object qSelectedColorColorID: TIntegerField
       FieldName = 'ColorID'
       ReadOnly = True
@@ -5789,7 +5807,7 @@ object Dm: TDm
         DataType = ftInteger
         Value = Null
       end>
-    Left = 75
+    Left = 99
     Top = 506
     object FromOrganizationsTitle: TWideStringField
       Alignment = taRightJustify

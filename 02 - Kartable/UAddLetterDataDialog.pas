@@ -45,6 +45,7 @@ type
     qryUpdateImageVersionNo: TStringField;
     qryUpdateImageVersionDate: TStringField;
     OpenDialog: TTntOpenDialog;
+    ADOQuery1: TADOQuery;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -185,6 +186,7 @@ begin
          CopyFile(pchar(path.Text),pchar(path.Text+'tmp'),false);
          qryUpdateImageImage.LoadFromFile(Path.Text+'tmp');
          qryUpdateImage.Post;
+         SysUtils.FileSetReadOnly(pchar(path.Text+'tmp'), false);
          DeleteFile(pchar(path.Text+'tmp'));
          with TADOQuery.Create(nil)do
          begin
@@ -199,7 +201,7 @@ begin
          ShowMessage('œ” —”Ì »Â Å«Ìê«Â œ«œÂ »«Ìê«‰Ì „ﬁœÊ— ‰Ì” ');
       end;
       /////////////////
-try
+   try
       sp_INSERT_LetterData_Extended.Close;
       sp_INSERT_LetterData_Extended.Parameters.ParamByName('@LetterID').Value := Dm.Get_LetterData_by_LetterIDletterid.AsInteger;
       sp_INSERT_LetterData_Extended.Parameters.ParamByName('@PageNumber').Value := 1;
@@ -224,8 +226,25 @@ try
    end
    else
    begin
-   IsInEditMode := DSForm.DataSet.State in [dsEdit]; // Amin 1391/12/15
-   if Letter_Or_Erja='Letter' then Dm.Get_LetterData_by_LetterID.Post;
+    IsInEditMode := DSForm.DataSet.State in [dsEdit]; // Amin 1391/12/15
+   { TODO -oparsa : 14030508 }
+   //if Letter_Or_Erja='Letter' then Dm.Get_LetterData_by_LetterID.Post;
+
+    if Letter_Or_Erja='Letter' then
+    Begin
+       Dm.Get_LetterData_by_LetterID.Post;
+       with ADOQuery1 do
+       begin
+        Connection := dm.YeganehConnection;
+        SQL.Text := 'SELECT filename FROM LetterData WHERE LetterDataID='+dm.Get_LetterData_by_LetterIDLetterDataID.AsString;
+        Open;
+        edit;
+        fieldbyname('filename').AsString:=ExtractFileName(OpenDialog.FileName);
+        post;
+       End;
+    End;
+   { TODO -oparsa : 14030508 }
+
    if Letter_Or_Erja='Erja'   then Dm.Get_RecommitePayvast_by_RecommiteID.Post;
 
 
@@ -256,6 +275,7 @@ try
                 Post;
                 //DeleteFile(pchar(path.Text+'tmp'+ExtractFileExt(Path.Text)));
                 AddTxtToDB(Dm.Get_LetterData_by_LetterDataIDLetterDataID.AsInteger,DBLookupComboBox1.KeyValue);
+                SysUtils.FileSetReadOnly(Path.Text, false);
                 DeleteFile(Path.Text);
                 //Hamed_Ansari_990716_E
              end
@@ -293,6 +313,7 @@ try
                     Post;
                     AddTxtToDB(Dm.Get_RecommitePayvast_by_RecommitePayvastIDID.AsInteger,DBLookupComboBox1.KeyValue);
                     //DeleteFile(path.Text+'tmp');
+                    SysUtils.FileSetReadOnly(Path.Text, false);
                     DeleteFile(Path.Text);
                     //Hamed_Ansari_990716_E
                  end

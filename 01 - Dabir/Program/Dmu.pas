@@ -1107,7 +1107,7 @@ Const
    _ShowLogo = True;
 // _Yeganeh='םַהו';
 // _EYeganeh='yeganeh';
-   _SoftLastUpdate = '1403/05/08';//'1396/02/16';
+   _SoftLastUpdate = '1403/05/14';//'1396/02/16';
    //_SoftVersion    = '11.0.0.0';//'6.5.0.0';
     LCID: DWORD = LOCALE_SYSTEM_DEFAULT;
 

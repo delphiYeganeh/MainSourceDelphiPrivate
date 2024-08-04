@@ -523,6 +523,10 @@ begin
         Get_LetterWordFilePageNumber.AsInteger:=1;
         Get_LetterWordFileextention.AsInteger:=3;
         Get_LetterWordFileImage.LoadFromFile(_TempPath+_WordFileName);
+        { TODO -oparsa : 14030514 }
+        Get_LetterWordFileIsTemplate.AsBoolean := True;
+        Get_LetterWordFileFILENAME.AsString    := _WordFileName ;
+        { TODO -oparsa : 14030514 }
         post;
         _Word_Is_Opened :=false;
         TimerWord.Enabled:=false
@@ -532,6 +536,7 @@ begin
       dm.Get_LetterWordFile.Cancel
     end;
   end;
+  
 procedure TFExportToWord.ExecGetLetterTemplate_HeaderID;
 begin
   with GetLetterTemplate_HeaderID,parameters do
@@ -588,9 +593,16 @@ begin
       else
         strTempFileName := _TempPath + _ExcelFileName;
 
-      if FileExists(strTempFileName)then
-        DeleteFile(pchar(strTempFileName));
+      if FileExists(strTempFileName) then
+      begin
+        { TODO -oparsa : 14030119 }
+        //DeleteFile(pchar(strTempFileName));
+        SysUtils.FileSetReadOnly(strTempFileName, false);
+        SysUtils.DeleteFile(strTempFileName);
+        { TODO -oparsa : 14030119 }
+      end;
 
+      
       if CopyFileW( replacePWC(StringToPWide(OpenDialog.filename,i)), StringToPWide(strTempFileName,i), False) then
         fn := strTempFileName {Get_LetterWordFileImage.LoadFromFile(_ApplicationPath+'tmpFile.docx')}
       else if CopyFileW( StringToPWide(OpenDialog.filename,i), StringToPWide(strTempFileName,i), False) then
@@ -604,7 +616,11 @@ begin
       if trim(fn)<>'' then
       begin
         Get_LetterWordFileImage.LoadFromFile(fn);
+        Get_LetterWordFileFileType.AsString := StringReplace(ExtractFileExt(OpenDialog.FileName), '.', '', [rfReplaceAll, rfIgnoreCase]) ;
+        Get_LetterWordFileFILENAME.AsString := ExtractFilename(OpenDialog.FileName);
+        Get_LetterWordFileIsTemplate.AsBoolean := True;
       end;
+
       Post;
     end;
 

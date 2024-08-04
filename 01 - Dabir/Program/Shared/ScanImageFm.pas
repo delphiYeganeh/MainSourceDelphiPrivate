@@ -219,6 +219,8 @@ type
     ImgScan1: TImgScan;
     ADOQuery1: TADOQuery;
     quImageFILENAME: TWideStringField;
+    QrSelImageFileName: TStringField;
+    QrSelImageIsTemplate: TBooleanField;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBN1Click(Sender: TObject; Button: TNavigateBtn);
@@ -595,6 +597,10 @@ begin
                ' from LetterData Where Extention <3 And LetterID = '+QrSelImageLetterID.AsString).Fields[0].value;
     {Ranjbar 90.03.18 ID=378} //And ID=105
     QrSelImageIsCorrectedImage.AsBoolean := True;
+    { TODO -oparsa : 14030514 }
+    QrSelImageFileName.AsString := ExtractFilename(OpenPictureDialog.FileName);
+    QrSelImageIsTemplate.AsBoolean := True;
+    { TODO -oparsa : 14030514 }
     //Hamed_Ansari_MRM_990701_S
     if FileExists(aFileName) then
     begin
@@ -916,6 +922,9 @@ begin
                   begin
                      QrSelImage.Edit;
                      QrSelImageIsCorrectedImage.AsBoolean := true;
+                     { TODO -oparsa : 14030514 }
+                     QrSelImageIsTemplate.AsBoolean := True;
+                     { TODO -oparsa : 14030514 }
                      QrSelImageLastUpdate.AsDateTime:= Now;
                       if Get_File_Size1(tiffName,true)>Get_File_Size1(jpgName,true) then
                       begin
@@ -996,6 +1005,9 @@ begin
                   begin
                      QrSelImage.Edit;
                      QrSelImageIsCorrectedImage.AsBoolean := true;
+                     { TODO -oparsa : 14030514 }
+                     QrSelImageIsTemplate.AsBoolean := True;
+                     { TODO -oparsa : 14030514 }
                      QrSelImageLastUpdate.AsDateTime:= Now;
                       if Get_File_Size1(_TempPath+'\output'+IntToStr(i+1)+'.tif',true)>Get_File_Size1(_TempPath+'\output'+IntToStr(i+1)+'.jpg',true) then
                       begin
@@ -1258,6 +1270,9 @@ begin
               DeleteFile(FilePathName);
               if QrSelImageIsCorrectedImage.AsBoolean = False then
                  QrSelImageIsCorrectedImage.AsBoolean := True;
+             { TODO -oparsa : 14030514 }
+             QrSelImageIsTemplate.AsBoolean := True;
+             { TODO -oparsa : 14030514 }
            end;
            //---
 
@@ -2928,6 +2943,9 @@ begin
       QrSelImageLastUpdate.AsDateTime := Now;
       QrSelImageLetterID.AsInteger := fmScanImage.LetterID;
       QrSelImageIsCorrectedImage.AsBoolean := True;
+     { TODO -oparsa : 14030514 }
+     QrSelImageIsTemplate.AsBoolean := True;
+     { TODO -oparsa : 14030514 }
       QrSelImage.Post;
       QrLetterData.Cancel;
    end
@@ -2942,6 +2960,9 @@ begin
       QrSelImageLastUpdate.AsDateTime := Now;
       QrSelImageLetterID.AsInteger := fmScanImage.LetterID;
       QrSelImageIsCorrectedImage.AsBoolean := True;
+      { TODO -oparsa : 14030514 }
+      QrSelImageIsTemplate.AsBoolean := True;
+      { TODO -oparsa : 14030514 }
       QrSelImagePageNumber.AsInteger := dm.YeganehConnection.execute('select isnull(max(pagenumber),0)+1 from letterdata where letterid = '+IntToStr(fmScanImage.LetterID)).fields[0].Value;
       if QrSelImagePageNumber.AsInteger =0 then
       QrSelImagePageNumber.AsInteger:=1;

@@ -718,6 +718,11 @@ type
     ExcelWorksheet: TExcelWorksheet;
     Timer_SaveExcel: TTimer;
     Timer1: TTimer;
+    Get_LetterData_by_LetterDataIDIsTemplate: TBooleanField;
+    Get_LetterData_by_LetterIDIsTemplate: TBooleanField;
+    Get_LetterWordFileFileName: TStringField;
+    Get_LetterWordFileIsTemplate: TBooleanField;
+    Get_LetterWordFileFileType: TStringField;
 
     function  GetActionAccess(ActionTag : String;FormTag:word):boolean;
     procedure GetUserSettings;
@@ -974,8 +979,8 @@ Var
 Const
    _Kartable = True;
    _Showlogo = True;
-   _SoftLastUpdate = '1401/11/11';//'1396/06/22';
-   _SoftVersion = '11.0.3.0';//'7.0.0.2';
+   _SoftLastUpdate = '1403/05/08';//'1396/06/22';
+   _SoftVersion = '12.0.0.2';//'7.0.0.2';
     LCID: DWORD = LOCALE_SYSTEM_DEFAULT;
 
 {$R *.dfm}
