@@ -127,13 +127,25 @@ function GetSystemSetting(VariableName:string):Variant;
 Procedure SetSystemSetting(VariableName:string;_Value:Variant);
 procedure LoadFromFileToMem(const filename:string; memStream:TMemoryStream);
 procedure Exec_Script(Sql : String);
-
+function get_UserName(UserID: integer) : string;
 
 
 implementation
 
 uses Dmu, SysUtils, YShamsiDate , BaseUnit, DBGrids;
 
+{ TODO -oparsa : 14030524-bug340 }
+function get_UserName(UserID: integer) : string;
+begin
+   with TADOQuery.Create(nil) do
+   begin
+      Connection := dm.YeganehConnection;
+      SQL.Text := 'SELECT Title FROM Users WHERE id ='+IntToStr(UserID);
+      open;
+      Result := Fields[0].AsString;
+   end;
+end;
+{ TODO -oparsa : 14030524-bug340 }
 
 procedure Exec_Script(Sql : String);
 var

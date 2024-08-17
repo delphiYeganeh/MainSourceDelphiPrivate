@@ -140,6 +140,7 @@ uses
 
 {$R DBNavBitmap.res}
 
+
 begin
   Application.Initialize;
   Application.Title := '‘—ﬂ  ‰—„ «›“«—Ì Ìê«‰Â';

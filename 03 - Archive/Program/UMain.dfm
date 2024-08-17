@@ -50,7 +50,7 @@ inherited MainForm: TMainForm
       Left = 2
       Top = 2
       Width = 1258
-      Height = 23
+      Height = 26
       ActionManager = MainActionManager
       Caption = 'ActionToolBar1'
       ColorMap.HighlightColor = clWhite
@@ -1549,7 +1549,6 @@ inherited MainForm: TMainForm
             Expanded = False
             FieldName = 'AttachTitle'
             Title.Caption = #1588#1585#1581
-            Width = 64
             Visible = True
             BandIndex = 2
             FilterList.Strings = (
@@ -1997,7 +1996,6 @@ inherited MainForm: TMainForm
             FieldName = 'RenterTitle'
             Title.Alignment = taCenter
             Title.Color = 15400959
-            Width = 64
             Visible = True
           end
           item
@@ -2005,7 +2003,6 @@ inherited MainForm: TMainForm
             FieldName = 'BeginDate'
             Title.Alignment = taCenter
             Title.Color = 15400959
-            Width = 64
             Visible = True
           end
           item
@@ -2013,7 +2010,6 @@ inherited MainForm: TMainForm
             FieldName = 'EndDate'
             Title.Alignment = taCenter
             Title.Color = 15400959
-            Width = 64
             Visible = True
           end>
       end
@@ -4150,6 +4146,30 @@ inherited MainForm: TMainForm
       end>
     Left = 200
     Top = 112
+    object GetArchiveFolderFolderId: TIntegerField
+      FieldName = 'FolderId'
+    end
+    object GetArchiveFolderParentFolderId: TIntegerField
+      FieldName = 'ParentFolderId'
+    end
+    object GetArchiveFolderTitle: TStringField
+      FieldName = 'Title'
+      Size = 100
+    end
+    object GetArchiveFolderUserId: TIntegerField
+      FieldName = 'UserId'
+    end
+    object GetArchiveFolderNotes: TStringField
+      FieldName = 'Notes'
+      Size = 500
+    end
+    object GetArchiveFolderPlace: TStringField
+      FieldName = 'Place'
+      Size = 100
+    end
+    object GetArchiveFolderArchiveCenterId: TIntegerField
+      FieldName = 'ArchiveCenterId'
+    end
   end
   object QTemp: TADOQuery
     Connection = Dm.YeganehConnection

@@ -3038,7 +3038,6 @@ end;
 Procedure  Exec_Insert_UserLog(ActionName:String;LetterID:integer);
  var ADOSP:TADOStoredProc;
 begin
-  Exec_Script('Alter Table UserLog Alter Column UserID int');
   if not dm.Insert_Log then
      Exit;
   Try

@@ -541,6 +541,11 @@ type
     { TODO -oparsa : 14030108 }
     procedure AutoUpdateDatabase;
     { TODO -oparsa : 14030108 }
+    { TODO -oparsa : 14030524-bug340 }
+    procedure SetWordOpen(LetterID ,UserID:integer);
+    function OpendByAnotherUser(LetterID:integer):integer;
+    procedure SetWordClosed(LetterID, UserID: integer);
+    { TODO -oparsa : 14030524-bug340 }
   end;
 
 Var
@@ -583,6 +588,10 @@ Var
    _SoftVersion, _DbVersion : String;
    _SoftVersion1      :string;
    _CountError : Integer;
+   { TODO -oparsa : 14030524-bug340 }
+   _AllowToEditWordFiles:boolean;
+   _Dont_save_Word  :boolean;
+   { TODO -oparsa : 14030524-bug340 }
    //ARM LOCK
    // ﬁ›· ”Œ  «›“«—Ì ÃœÌœ
 //   _ARM_CoName, _ARM_IPServer, _ARM_AUSKey, _ARM_ReadKey, _ARM_WriteKey, _ARM_SafeKey1, _ARM_SafeKey2 : String;
@@ -593,7 +602,7 @@ Const
   // _SoftVersion    = '7.0.0.6';
   //_SoftLastUpdate = '1396/06/29';
   //  _SoftVersion1    = '11.2.12.1';
-    _SoftLastUpdate = '1403/04/09'; //by MRM.moghadam
+    _SoftLastUpdate = '1403/05/10'; //by MRM.moghadam
 
    _Kartable = False;
    ShowLogo = True;
@@ -1207,6 +1216,7 @@ begin
   AutoUpdateDatabase;
   { TODO -oparsa : 14030108 }
 
+
   LoginForm := TLoginForm.Create(Application);
   LoginForm.Label1.Caption:= GetSystemSetting('OrgName');
 
@@ -1462,17 +1472,31 @@ begin
   f1:=Filename;
   oleBool := ReadOnly;
 
+  { TODO -oparsa : 14030524-bug340 }
+  WordApplication.connect;
+  { TODO -oparsa : 14030524-bug340 }
+
   with WordApplication,Selection do
   begin
 
     WordApplication.Disconnect;
-    
+
     //---
     ChangeFileOpenDirectory(ExtractFilePath(Filename));
     f:=ExtractFileName(Filename);
     _Word_Is_Opened:=true;
     _ReadOnly := ReadOnly;
-    Documents.Open(f,fals,oleBool,fals,emp,emp,fals,emp,emp,olv,emp,tru,tru,tru,tru);
+    { TODO -oparsa : 14030524-bug340 }
+    //Documents.Open(f,fals,oleBool,fals,emp,emp,fals,emp,emp,olv,emp,tru,tru,tru,tru);
+    try
+      Documents.Open(f,fals,oleBool,fals,emp,emp,fals,emp,emp,olv,emp,tru,tru,tru,tru);
+      //Documents.Open(f,EmptyParam,oleBool,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam);
+    except  on e:exception do
+       begin
+         ShowMessage('WORD ERROR  '+Char(10) + e.Message);
+       end
+    end;
+    { TODO -oparsa : 14030524-bug340 }
     if ActiveWindow.View.SplitSpecial <> wdPaneNone Then
       ActiveWindow.Panes.Item(2).Close;
 
@@ -1516,7 +1540,15 @@ begin
     Get_LetterWordFileImage.SaveToFile(_TempPath+_WordFileName);
     _LetterID := LetterID;
     //»«“ ﬂ—œ‰ ›«Ì· Ê—œ
-     OpenWordFile(_TempPath + _WordFileName,ReadOnly);
+    { TODO -oparsa : 14030524-bug340 }
+     //OpenWordFile(_TempPath + _WordFileName,ReadOnly);
+    try
+      OpenWordFile(_TempPath + _WordFileName, readonly);
+      { TODO -oparsa : 14030501 }
+    except
+        OpenWordFile(_TempPath + _WordFileName, readonly);
+    end;
+    { TODO -oparsa : 14030524-bug340 }
 //     OpenWordFile_2(_TempPath + _WordFileName,ReadOnly);
 
   end;
@@ -2553,7 +2585,7 @@ begin
   end;
   finally
     qryAutoRunScript.SQL.Text := 'IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U''))'+
-                                    ' SELECT TOP 1 (ISNULL(Max_TableScriptNumber,0)-ISNULL(Last_TableScriptNumber,0)) + ( ISNULL(Max_ViewScriptNumber,0) - ISNULL(Last_ViewScriptNumber ,0)) CountError   '+
+                                    ' SELECT TOP 1 (ISNULL(Max_TableScriptNumber,Last_TableScriptNumber)-ISNULL(Last_TableScriptNumber,0)) + ( ISNULL(Max_ViewScriptNumber,Last_ViewScriptNumber) - ISNULL(Last_ViewScriptNumber ,0)) CountError   '+
                                     ' FROM [dbo].[TBLAPPSETTING] ORDER BY id DESC '+
                                     ' ELSE SELECT 0 CountError' ;
 
@@ -2566,6 +2598,100 @@ begin
 
 end;
 { TODO -oparsa : 14030108 }
+
+{ TODO -oparsa : 14030524-bug340 }
+function TDm.OpendByAnotherUser(LetterID: integer): integer;
+var
+  ADOSP:TADOStoredProc;
+begin
+  //Check_Word_is_Open
+  ADOSP:=TADOStoredProc.create(nil);
+  ADOSP.ProcedureName:='Check_Word_is_Open';
+
+  with ADOSP.Parameters.AddParameter do
+  begin
+    DataType := ftinteger;
+    Direction := pdInput;
+    Name:='@LetterID';
+    Value :=LetterID;
+  end;
+
+  with ADOSP.Parameters.AddParameter do
+  begin
+    DataType := ftinteger;
+    Direction := pdOutput;
+    Name:='@UserID';
+  end;
+
+  ADOSP.Connection:=dm.YeganehConnection;
+  ADOSP.ExecProc;
+  Result := ADOSP.Parameters.ParamByname('@UserID').value;
+end;
+
+procedure TDm.SetWordClosed(LetterID, UserID: integer);
+Var
+   ADOSP:TADOStoredProc;
+begin
+
+  ADOSP:=TADOStoredProc.create(nil);
+  ADOSP.ProcedureName:='Set_Word_Closed';
+
+  with ADOSP.Parameters.AddParameter do
+  begin
+    DataType := ftinteger;
+    Direction := pdInput;
+    Name:='@LetterID';
+    Value :=LetterID;
+  end;
+
+  with ADOSP.Parameters.AddParameter do
+  begin
+    DataType := ftinteger;
+    Direction := pdInput;
+    Name:='@UserID';
+    Value :=UserID;
+  end;
+
+  ADOSP.Connection:=dm.YeganehConnection;
+  ADOSP.ExecProc;
+
+   { TODO -oparsa : 1402-12-19 }
+  if FileExists(pchar(_TempPath+_WordFileName)) then
+  begin
+    SysUtils.FileSetReadOnly(_TempPath+_WordFileName, false);
+    SysUtils.DeleteFile(_TempPath+_WordFileName);
+  end;
+  { TODO -oparsa : 1402-12-19 }
+
+end;
+
+procedure TDm.SetWordOpen(LetterID, UserID: integer);
+var
+  ADOSP:TADOStoredProc;
+begin
+  ADOSP:=TADOStoredProc.create(nil);
+  ADOSP.ProcedureName:='Set_Word_Open';
+
+  with ADOSP.Parameters.AddParameter do
+  begin
+    DataType := ftinteger;
+    Direction := pdInput;
+    Name:= '@LetterID';
+    Value := LetterID;
+  end;
+
+  with ADOSP.Parameters.AddParameter do
+  begin
+    DataType := ftinteger;
+    Direction := pdInput;
+    Name:= '@UserID';
+    Value := UserID;
+  end;
+
+  ADOSP.Connection := dm.YeganehConnection;
+  ADOSP.ExecProc;
+end;
+{ TODO -oparsa : 14030524-bug340 }
 
 end.
 

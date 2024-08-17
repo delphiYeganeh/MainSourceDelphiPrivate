@@ -286,6 +286,7 @@ type
     procedure AddNodeINTvColorView(LDestNode: TTreeNode;_ID:String);
     function  FindID(_Name:String):String;
     procedure findNodeInColorView(findNode: TTreeNode;var Id : Integer; var Color : string);
+    procedure NavigatorHandel;
   public
     _SaveFileType:String;
     _IMGDPI:String;
@@ -714,6 +715,8 @@ begin
 //        end;
 //      except
 //      end;
+
+  NavigatorHandel;
 end;
 
 Procedure TFmScanImage.FillData(aFileName:String);
@@ -1109,6 +1112,8 @@ begin
 //                if _BaseSQLConnection.GetKeyvalue('SaveFileType')= '1' then
   end;
 
+  { TODO -oparsa : 14030510 - bug 318 }
+  {
   if not Edit then
     if DMScanImage.QrLetterData.RecordCount = 1 then
       DBN1.VisibleButtons := [nbInsert,nbDelete,nbPost,nbEdit,nbCancel]
@@ -1116,6 +1121,9 @@ begin
       DBN1.VisibleButtons := [nbPrior,nbFirst,nbLast,nbNext,nbInsert,nbDelete,nbPost,nbEdit,nbCancel]
   else
     DBN1.VisibleButtons := [nbPrior,nbFirst,nbLast,nbNext];
+                    }
+  NavigatorHandel;
+  { TODO -oparsa : 14030510 - bug 318 }
 
   try
     if (_MyPuletColors <> '') and (_MyPuletColors <> '›«ﬁœ —‰ê') and (_MyPuletColors <> ' „«„ „Ê«—œ') then
@@ -1595,6 +1603,8 @@ begin
     DMScanImage._IsScan:=False;
   end;
 
+  { TODO -oparsa : 14030510 - bug 318 }
+  {
   if not Edit then
     if DMScanImage.QrLetterData.RecordCount = 1 then
       DBN1.VisibleButtons := [nbInsert,nbDelete,nbPost,nbEdit,nbCancel]
@@ -1602,6 +1612,9 @@ begin
       DBN1.VisibleButtons := [nbPrior,nbFirst,nbLast,nbNext,nbInsert,nbDelete,nbPost,nbEdit,nbCancel]
   else
     DBN1.VisibleButtons := [nbPrior,nbFirst,nbLast,nbNext];
+       }
+  NavigatorHandel;
+  { TODO -oparsa : 14030510 - bug 318 }
 end;
 
 procedure TFmScanImage.BrushColorClick(Sender: TObject);
@@ -2162,7 +2175,7 @@ procedure TFmScanImage.Timer1Timer(Sender: TObject);
 begin
   inherited;
   //ImageEnDBVect1.FitToWidth;
-  ImageEnDBView1.FitToWidth;
+  /////ImageEnDBView1.FitToWidth;
   Timer1.Enabled := False;
 end;
 
@@ -2485,6 +2498,8 @@ begin
       DMScanImage.QrLetterData.Open;
     end;
 
+    { TODO -oparsa : 14030510 - bug 318 }
+    {
     if not Edit then
       if DMScanImage.QrLetterData.RecordCount = 1 then
         DBN1.VisibleButtons := [nbInsert,nbDelete,nbPost,nbEdit,nbCancel]
@@ -2492,6 +2507,9 @@ begin
         DBN1.VisibleButtons := [nbPrior,nbFirst,nbLast,nbNext,nbInsert,nbDelete,nbPost,nbEdit,nbCancel]
     else
       DBN1.VisibleButtons := [nbPrior,nbFirst,nbLast,nbNext];
+                     }
+    NavigatorHandel ;
+    { TODO -oparsa : 14030510 - bug 318 }
 {     DMScanImage.QrSelImage.Close;
     DMScanImage.QrSelImage.SQL.Clear;
     DMScanImage.QrSelImage.SQL.Add('Select  *  From LetterData');
@@ -2518,6 +2536,8 @@ begin
                                          'Order By PageNumber ';
     DMScanImage.QrLetterData.Open;
 
+    { TODO -oparsa : 14030510 - bug 318 }
+    {
     if not Edit then
       if DMScanImage.QrLetterData.RecordCount = 1 then
         DBN1.VisibleButtons := [nbInsert,nbDelete,nbPost,nbEdit,nbCancel]
@@ -2525,7 +2545,9 @@ begin
         DBN1.VisibleButtons := [nbPrior,nbFirst,nbLast,nbNext,nbInsert,nbDelete,nbPost,nbEdit,nbCancel]
     else
       DBN1.VisibleButtons := [nbPrior,nbFirst,nbLast,nbNext];
-
+                    }
+    NavigatorHandel;
+    { TODO -oparsa : 14030510 - bug 318 }
     ShowPageFromAll;
 
     Close_Open_QrLetterData;
@@ -2542,6 +2564,8 @@ begin
                                                 'From LetterData  Where( LetterID = :Pa_LetterID )  And( Extention in (1,2) )  '+
                                                 'And( (ColorID IS NULL) OR (ColorID=0) OR (ColorID=-2) ) Order By PageNumber ';
   DMScanImage.QrLetterData.Open;
+  { TODO -oparsa : 14030510 - bug 318 }
+  {
   if not Edit then
     if DMScanImage.QrLetterData.RecordCount = 1 then
       DBN1.VisibleButtons := [nbInsert,nbDelete,nbPost,nbEdit,nbCancel]
@@ -2549,6 +2573,9 @@ begin
       DBN1.VisibleButtons := [nbPrior,nbFirst,nbLast,nbNext,nbInsert,nbDelete,nbPost,nbEdit,nbCancel]
   else
       DBN1.VisibleButtons := [nbPrior,nbFirst,nbLast,nbNext];
+                  }
+  NavigatorHandel;
+  { TODO -oparsa : 14030510 - bug 318 }
   ShowNotPageFromAll;
   ValueColorID:=-1;
 end;
@@ -2913,8 +2940,7 @@ begin
   LabelZoom .Caption :='»“—ê‰„«ÌÌ  :    '+ FloatToStr( Round(ImageEnVectMain.Zoom) )+'%';
 end;
 
-procedure TFmScanImage.ImageEnDBView1ViewChange(Sender: TObject;
-  Change: Integer);
+procedure TFmScanImage.ImageEnDBView1ViewChange(Sender: TObject; Change: Integer);
 begin
   inherited;
   LabelZoom .Caption :='»“—ê‰„«ÌÌ  :    '+ FloatToStr( Round(ImageEnDBView1.Zoom) )+'%';
@@ -4061,6 +4087,63 @@ begin
     Exit;
   end;
 end;
+
+procedure TFmScanImage.NavigatorHandel;
+var
+  UserIdCreator : Integer;
+  AQry : TADOQuery;
+begin
+  inherited;
+  AQry := TADOQuery.Create(Self);
+  try
+    AQry.Connection := Dm.YeganehConnection;
+    AQry.Close;
+    AQry.SQL.Text := 'Select UserID From Letter Where LetterId = ' + Dm.SelectLetter;
+    AQry.Open;
+    UserIdCreator := AQry.FieldByName('UserId').AsInteger;
+  finally
+    FreeAndNil(AQry);
+  end;
+
+  if not Dm.UsersShowAllDoc.AsBoolean then
+    if Dm.UsersId.AsInteger <> UserIdCreator then
+    begin
+      DBN1.VisibleButtons := [nbPrior, nbFirst, nbLast, nbNext];
+      SBDelAllData.Enabled := False;
+      Edit := True;
+    end;
+
+  try
+    if not dm.GetActionAccess(ADelete.Name,self.Tag) then
+    begin
+      SBDelAllData.Hide;
+      dbn1.VisibleButtons:=DBN1.VisibleButtons-[nbDelete];
+    end;
+
+    if not dm.GetActionAccess(Action1.Name,self.Tag) then
+    begin
+      dbn1.VisibleButtons:=DBN1.VisibleButtons-[nbEdit,nbPost,nbInsert];
+    end;
+
+  except
+   on E : Exception do
+    begin
+     DMScanImage.WriteExceptionToFile(E.ClassName,E.Message);
+    end;
+  end;
+
+  DBNav_Setup(DBN1);
+
+  if not Edit then
+    if DMScanImage.QrLetterData.RecordCount = 1 then
+      DBN1.VisibleButtons := [nbInsert,nbDelete,nbPost,nbEdit,nbCancel]
+    else
+      DBN1.VisibleButtons := [nbPrior,nbFirst,nbLast,nbNext,nbInsert,nbDelete,nbPost,nbEdit,nbCancel]
+  else
+    DBN1.VisibleButtons := [nbPrior,nbFirst,nbLast,nbNext];
+  
+end;
+
 end.
 
 

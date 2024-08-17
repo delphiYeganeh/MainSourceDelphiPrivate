@@ -4150,6 +4150,30 @@ inherited MainForm: TMainForm
       end>
     Left = 200
     Top = 112
+    object GetArchiveFolderFolderId: TIntegerField
+      FieldName = 'FolderId'
+    end
+    object GetArchiveFolderParentFolderId: TIntegerField
+      FieldName = 'ParentFolderId'
+    end
+    object GetArchiveFolderTitle: TStringField
+      FieldName = 'Title'
+      Size = 100
+    end
+    object GetArchiveFolderUserId: TIntegerField
+      FieldName = 'UserId'
+    end
+    object GetArchiveFolderNotes: TStringField
+      FieldName = 'Notes'
+      Size = 500
+    end
+    object GetArchiveFolderPlace: TStringField
+      FieldName = 'Place'
+      Size = 100
+    end
+    object GetArchiveFolderArchiveCenterId: TIntegerField
+      FieldName = 'ArchiveCenterId'
+    end
   end
   object QTemp: TADOQuery
     Connection = Dm.YeganehConnection

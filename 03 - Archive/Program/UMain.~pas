@@ -326,6 +326,13 @@ Type
     AUpdateSoftware: TAction;
     IdFTP1: TIdFTP;
     advAlert: TAdvAlertWindow;
+    GetArchiveFolderFolderId: TIntegerField;
+    GetArchiveFolderParentFolderId: TIntegerField;
+    GetArchiveFolderTitle: TStringField;
+    GetArchiveFolderUserId: TIntegerField;
+    GetArchiveFolderNotes: TStringField;
+    GetArchiveFolderPlace: TStringField;
+    GetArchiveFolderArchiveCenterId: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure ReceiveInsertExecute(Sender: TObject);
     procedure AcloseExecute(Sender: TObject);
@@ -623,6 +630,7 @@ begin
    {Ranjbar Ver5}
   PageControl1.TabHeight := 1;
   PageControl1.TabWidth := 1;
+  PageControl1.ActivePage := TShAHome ;
   BidiModeToRight(ArchiveTree);
   DelDBGridSettings := False;
   blnChangeDbgrid := False;
@@ -689,17 +697,17 @@ begin
   w := FWhere;
   if not _AccessToClassifieldLetter then
     if w <> '' then
-      w := w +' And  (letter.ClassificationID=1)'
+      w := w +' And  (letter.ClassificationID = 1)'
     else
-      w := ' (letter.ClassificationID=1) ' ;
+      w := ' (letter.ClassificationID = 1) ' ;
 
   srt := dm.Get_All_Letter.Sort;
   if searchAll.Checked then
   begin
     if w <> '' then
-      w := w +' and  letter.SecretariatID in (select distinct Cast(SecId as varchar(5)) from dbo.UserSecretariats where UserId='+IntToStr(_UserId)+') '
+      w := w +' and  letter.SecretariatID in (select distinct Cast(SecId as varchar(5)) from dbo.UserSecretariats where UserId ='+IntToStr(_UserId)+') '
     else
-      w := ' letter.SecretariatID in (select distinct Cast(SecId as varchar(5)) from dbo.UserSecretariats where UserId='+IntToStr(_UserId)+') ' ;
+      w := ' letter.SecretariatID in (select distinct Cast(SecId as varchar(5)) from dbo.UserSecretariats where UserId ='+IntToStr(_UserId)+') ' ;
   end;
 
 //     if is_zonkan_is_active then
@@ -1115,19 +1123,56 @@ begin
 end;
 
 procedure TMainForm.AExpotToWordExecute(Sender: TObject);
+var
+  otherUserID : Integer;
 begin
    inherited;
 
    if Not DataSetPost then
       Exit;
-      
-   if _Word_Is_Opened then
+
+  { TODO -oparsa : 14030524-bug340 }
+  //if _Word_Is_Opened then
+  if _Word_Is_Opened and Application_Is_Run('winword.exe') then
+  { TODO -oparsa : 14030524-bug340 }
    begin
       MessageShow(86,False);
       Exit;
    end;
 
+    { TODO -oparsa : 14030524-bug340 }
+    _AllowToEditWordFiles := True;
+    Dm.qtemp.Close;
+    Dm.qtemp.SQL.Clear;
+    Dm.qtemp.SQL.Add('SELECT IsCopy FROM ReCommites WHERE LetterID='+IntToStr(dm.Get_All_LetterLetterID.AsInteger));
+    Dm.qtemp.Open;
+    if Dm.qtemp.FieldByName('IsCopy').AsString <> '' then
+      _AllowToEditWordFiles:= not Dm.qtemp.FieldByName('IsCopy').AsBoolean;
+
+    { TODO -oparsa : 14030524-bug340 }
+
    with Dm.Get_All_Letter do
+   begin
+      { TODO -oparsa : 14030524-bug340 }
+      (*
+      otherUserID := dm.OpendByAnotherUser(FieldByName('Letterid').AsInteger);
+      if otherUserID > 0 then
+      begin
+        MessageShowString('«Ì‰ ‰«„Â  Ê”ÿ '+''''+ get_UserName(otherUserID) +''''+' œ— Õ«· ÊÌ—«Ì‘ «” °  €ÌÌ—«  ‘„« «⁄„«· ‰ŒÊ«Âœ ‘œ.',False);
+        _Dont_save_Word := True;
+      end
+      else
+        _Dont_save_Word := False;
+
+      if not _AllowToEditWordFiles then
+      begin
+        MessageShowString('«Ì‰ ‰«„Â ›ﬁÿ ŒÊ«‰œ‰Ì «”  Ê  €ÌÌ—«  œ— ¬‰ «⁄„«· ‰ŒÊ«Âœ ‘œ',False);
+        _Dont_save_Word := True;
+      end
+      else
+        _Dont_save_Word := False;  *)
+      { TODO -oparsa : 14030524-bug340 }
+
       if not Dm.ExecGet_LetterWordFile(FieldByName('Letterid').AsInteger,false) then
       begin
          FExportToWord := TFExportToWord.Create(Application);
@@ -1144,6 +1189,7 @@ begin
                   ShowModal;
          end;{with}
       end;
+   end;
     RefreshQuery;
 end;
 
@@ -1794,6 +1840,7 @@ begin
       AQry := TADOQuery.Create(nil);
       try
        AQry.Connection := Dm.YeganehConnection;
+       AQry.CommandTimeout := 300 ;
        AQry.Close;
        AQry.SQL.Text := ' update letter set Has_Page = dbo.has_Page(letterid), ' +
                         ' Has_WordPage = dbo.has_WordPage(letterid), ' +
@@ -2179,6 +2226,7 @@ begin
       with TADOQuery.Create(nil) do
       begin
         Connection := Dm.YeganehConnection;
+        CommandTimeout := 300 ;
         SQL.Text := 'SELECT IsNull(ColorID,-1) FROM LetterColor WHERE LetterID='+Dm.Get_All_LetterLetterID.AsString +' AND USERID='+IntToStr(_UserId);
         open;
         if not isempty then
