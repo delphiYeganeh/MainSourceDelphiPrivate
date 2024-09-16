@@ -71,7 +71,7 @@ type
     function  processExists(exeFileName: string): Boolean;
   private
     //LCID: Cardinal;
-    procedure OpenFileWord(ReadOnly:boolean);
+    procedure OpenFileWord(ReadOnly:boolean;OD:boolean = false);
     procedure OpenFileExcel(ReadOnly:boolean);
     procedure openFileWordOD(ReadOnly:boolean);
     procedure NewFile;
@@ -137,7 +137,7 @@ begin
   dm.RefreshTemplate;
 end;
 
-procedure TEditTemplates.openFileWord(ReadOnly:boolean);
+procedure TEditTemplates.openFileWord(ReadOnly:boolean;OD:boolean = false);
 var
   RO,ItemIndex,olv,emp,f,fals,tru:OleVariant;
   Word : TWordApplication;
@@ -160,6 +160,8 @@ begin
           IsError := True;
         end;
 
+        { TODO -oparsa : 14030505-bug349 }
+        (*
         if IsError= False then
         begin
           Visible := True;
@@ -202,6 +204,43 @@ begin
           ItemIndex := 1;
           WordDocument.ConnectTo(WordApplication.Documents.Item(itemindex));
         end;
+        *)
+        if IsError  then
+          Caption := 'Yeganeh';
+
+        try
+        
+          WordApplication.Visible := True;
+          ChangeFileOpenDirectory(_TempPath);
+          if OD then
+            f :=_WordFileName +'.docx'
+          else f :=_WordFileName;
+
+          Ro := ReadOnly;
+
+          Handle := FindWindow('OpusApp',PAnsiChar('Yeganeh'));
+          SetForegroundWindow(Handle);
+
+          Documents.Open(f,EmptyParam,Ro,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam);
+
+          if ActiveWindow.View.SplitSpecial <> wdPaneNone then
+            ActiveWindow.Panes.Item(2).Close;
+
+          if ActiveWindow.ActivePane.View.Type_ in[ wdNormalView ,wdOutlineView] then
+            ActiveWindow.ActivePane.View.Type_:= wdPrintView;
+
+          ItemIndex := 1;
+          WordDocument.ConnectTo(WordApplication.Documents.Item(itemindex));
+
+        except  on e:exception do
+         begin
+           WordApplication.Visible := False;
+           MBaseForm.MessageShowString('›—„  ›«Ì· «‰ Œ«»Ì ÃÂ  »«“ ‘œ‰ „‰«”» ‰„Ì »«‘œ' +Char(10) + e.Message ,False);
+           EnableDsiable(True);
+         end  
+        end;
+
+        { TODO -oparsa : 14030505-bug349 }
     end;{with wordapplication}
   except on e:exception do
     begin
@@ -214,15 +253,28 @@ procedure TEditTemplates.openFileWordOD(ReadOnly:boolean);
 var
   RO,ItemIndex,olv,emp,f,fals,tru:OleVariant;
    Handle :THandle;
+   IsError : Boolean;
 begin
   emp:='';
   fals:=false;
   tru:=true;
   olv:=wdOpenFormatAuto;
-  WordApplication.Caption := 'Yeganeh';
+  { TODO -oparsa : 14030505-bug349 }
+  //WordApplication.Caption := 'Yeganeh';
+  try
+    WordApplication.Caption := 'Yeganeh';
+  except
+    IsError := True;
+  end;
+
+  if  IsError then
+    WordApplication.Caption := 'Yeganeh';
+  { TODO -oparsa : 14030505-bug349 }
+
   with WordApplication do
   begin
-    Visible:=true;
+    Visible := True;
+
     ChangeFileOpenDirectory(_TempPath);
     f:=_WordFileName+'.docx';
     Ro := False;
@@ -261,14 +313,21 @@ begin
     DM.SaveTemplateToFile(strType);
     Sleep(1000);
 
+    { TODO -oparsa : 14030505-bug349 }
+    EnableDsiable(False);
+    { TODO -oparsa : 14030505-bug349 }
+
     if strType = 'w' then
       OpenFileWord(False) //»«“ ﬂ—œ‰ ›«Ì· Ê—œ ÃÂ  ÊÌ—«Ì‘
     else
       OpenFileExcel(False); //»«“ ﬂ—œ‰ ›«Ì· «ò”· ÃÂ  ÊÌ—«Ì‘\
 
     IsReadOnly := False;
-    EnableDsiable(False);
-    ButtonEdit.Click;
+    { TODO -oparsa : 14030505-bug349 }
+    //EnableDsiable(False);
+    // ButtonEdit.Click;
+    { TODO -oparsa : 14030505-bug349 }
+
   end;
 end;
 
@@ -287,7 +346,11 @@ begin
   end
   else EnableDsiable(True);
   WordApplication.Disconnect;
+  { TODO -oparsa : 14030531 }
   if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
+
+  WordDocument.Disconnect;
+ { TODO -oparsa : 14030531 }
 end;
 
 procedure TEditTemplates.ButtonViewClick(Sender: TObject);
@@ -308,13 +371,18 @@ begin
     Sleep(500);
     DM.SaveTemplateToFile(strType);
     Sleep(500);
+    { TODO -oparsa : 14030505-bug349 }
+    EnableDsiable(False);
+    { TODO -oparsa : 14030505-bug349 }
     if strType = 'w' then
       OpenFileWord(True) //»«“ ﬂ—œ‰ ›«Ì· Ê—œ ÃÂ  ÊÌ—«Ì‘
     else
       OpenFileExcel(True); //»«“ ﬂ—œ‰ ›«Ì· Ê—œ ÃÂ  ÊÌ—«Ì‘\
 
     IsReadOnly := True;
-    EnableDsiable(False);
+    { TODO -oparsa : 14030505-bug349 }
+    //EnableDsiable(False);
+    { TODO -oparsa : 14030505-bug349 }
   end;
 end;
 
@@ -369,12 +437,15 @@ begin
   Template := EmptyParam;
   NewTemplate := False;
   ItemIndex := 1;
+
   try
     ver := StrToint(copy(WordApplication.Version,0,length(WordApplication.Version)-2));
   except
     IsError := True;
   end;
 
+  { TODO -oparsa : 14030505-bug349 }
+  (*
   if IsError = False then
   begin
     if ver < 12 then
@@ -402,6 +473,23 @@ begin
      WordApplication.Documents.Add(Template, NewTemplate,Template,Template);
     WordDocument.ConnectTo(WordApplication.Documents.Item(ItemIndex));
   end;
+  *)
+  if not (IsError) and (ver < 12) then
+  begin
+    ShowMessage('»—«Ì «›“Êœ‰ ﬁ«·» «“ ¬›Ì” 2007 »Â »«·« «” ›«œÂ ò‰Ìœ');
+    Exit;
+  end;
+
+  WordApplication.Visible := True;
+  WordApplication.Caption := 'Yeganeh';
+
+  {Create new document}
+  Template := EmptyParam;
+  NewTemplate := False;
+  WordApplication.Documents.Add(Template, NewTemplate,Template,Template);
+  WordDocument.ConnectTo(WordApplication.Documents.Item(ItemIndex));
+
+  { TODO -oparsa : 14030505-bug349 }
 end;
 
 procedure TEditTemplates.TimerWordTimer(Sender: TObject);
@@ -494,6 +582,14 @@ begin
      DeleteFile(pchar(_TempPath+_WordFileName));
    end;
    { TODO -oparsa : 1402-12-19 }
+   { TODO -oparsa : 14030505-bug349 }
+   if FileExists(pchar(_TempPath+_WordFileName+ '.docx')) then
+   begin
+     SysUtils.FileSetReadOnly(pchar(_TempPath + _WordFileName+ '.docx'), false);
+     DeleteFile(pchar(_TempPath+_WordFileName+ '.docx'));
+   end;
+   { TODO -oparsa : 14030505-bug349 }
+
 end;
 
 procedure TEditTemplates.BitBtnReadClick(Sender: TObject);
@@ -523,10 +619,12 @@ begin
     With Dm,LetterTemplate do
     begin
       Insert;
-      LetterTemplateTemplateGroupID.Value:=dm.TemplateGroupTemplateGroupID.AsInteger;
+      LetterTemplateTemplateGroupID.Value:= dm.TemplateGroupTemplateGroupID.AsInteger;
       FEditLetterGroup := TFEditLetterGroup.Create(Application);
+      
       if FEditLetterGroup.ShowModal = mrCancel then
         Exit;
+        
       with Dm,LetterTemplateDoc do
       begin
         Close;
@@ -545,6 +643,17 @@ begin
           SysUtils.FileSetReadOnly(pchar(_ApplicationPath + 'tmpFile'), false);
           DeleteFile(pchar(_ApplicationPath + 'tmpFile'));
         end;
+
+        { TODO -oparsa : 14030505-bug349 }
+        if FileExists(strTempFileName )then
+        begin
+          SysUtils.FileSetReadOnly(pchar(strTempFileName ), false);
+          DeleteFile(pchar(strTempFileName ));
+        end;
+        Sleep(1000);
+        { TODO -oparsa : 14030505-bug349 }
+
+
         if CopyFileW(replacePWC(StringToPWide(OpenDialog.filename,i)), StringToPWide(strTempFileName, i), False) then
           fn := strTempFileName
         else if CopyFilew(StringToPWide(OpenDialog.filename, i), StringToPWide(strTempFileName, i), False) then
@@ -554,6 +663,7 @@ begin
           fn := '';
           ShowMessage('Œÿ« œ— ŒÊ«‰œ‰ ›«Ì· „»œ«');
         end;
+
         if trim(fn)<>'' then
         begin
           LetterTemplateDocDocument.LoadFromFile(fn);
@@ -564,9 +674,15 @@ begin
       if strType = 'w' then
       begin
         try
-          OpenFileWordOD(false);
+          { TODO -oparsa : 14030505-bug349 }
+          //OpenFileWordOD(false);
+          OpenFileWord(False,True);
+          { TODO -oparsa : 14030505-bug349 }
         except
-           OpenFileWordOD(false);
+          { TODO -oparsa : 14030505-bug349 }
+          //OpenFileWordOD(false);
+          OpenFileWord(False,True);
+          { TODO -oparsa : 14030505-bug349 }
         end;
 
         en := WordApplication.Selection.End_ - 1;
@@ -653,7 +769,10 @@ begin
   strFileName := _TempPath + _ExcelFileName;
 
   if FileExists(strFileName)then
+  begin
+    SysUtils.FileSetReadOnly(pchar(strFileName), false);
     DeleteFile(pchar(strFileName));
+  end;
 
   OpenANewExcelFileAndSave(strFileName);
 

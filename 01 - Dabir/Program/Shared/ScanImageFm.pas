@@ -598,7 +598,7 @@ begin
     {Ranjbar 90.03.18 ID=378} //And ID=105
     QrSelImageIsCorrectedImage.AsBoolean := True;
     { TODO -oparsa : 14030514 }
-    QrSelImageFileName.AsString := ExtractFilename(OpenPictureDialog.FileName);
+    QrSelImageFileName.AsString := StringReplace( ExtractFilename(OpenPictureDialog.FileName),'.DOCX','.doc',[rfReplaceAll, rfIgnoreCase]);
     QrSelImageIsTemplate.AsBoolean := True;
     { TODO -oparsa : 14030514 }
     //Hamed_Ansari_MRM_990701_S

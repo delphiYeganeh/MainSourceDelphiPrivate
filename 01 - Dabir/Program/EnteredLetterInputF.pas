@@ -914,6 +914,7 @@ begin
       if not Dm.ExecGet_LetterWordFile(dm.Get_All_LetterLetterID.AsInteger,false,True) then
         Exit;
 
+
       FExportToWord:= TFExportToWord.Create(self);
       with dm.WordApplication do
       begin
@@ -924,6 +925,10 @@ begin
       MainForm.ReplaceInWord(FExportToWord.WordApplication,'(('+OldIndicatorId+'))','(('+trim(DBEIndicatorID.Text)+'))' );
       FExportToWord.Close;
       OldIndicatorId:=Trim(DBEIndicatorID.Text);
+      { TODO -oparsa : 14030605-bug349 }
+      if Assigned(FExportToWord) then
+        FreeAndNil(FExportToWord);
+     { TODO -oparsa : 14030605-bug349 }
     end;
   end;
 
@@ -1215,7 +1220,7 @@ begin
    { TODO -oparsa : 14030411 }
     Dm.qtemp.Close;
     Dm.qtemp.SQL.Clear;
-    Dm.qtemp.SQL.Add('SELECT IsCopy FROM ReCommites WHERE LetterID='+IntToStr(dm.Get_All_LetterLetterID.AsInteger));
+    Dm.qtemp.SQL.Add('SELECT IsCopy FROM dbo.ReCommites with(nolock) WHERE LetterID = '+IntToStr(dm.Get_All_LetterLetterID.AsInteger));
     Dm.qtemp.Open;
     if Dm.qtemp.FieldByName('IsCopy').AsString <> '' then
       _AllowToEditWordFiles:= not Dm.qtemp.FieldByName('IsCopy').AsBoolean;
@@ -1225,6 +1230,7 @@ begin
     if not dm.ExecGet_LetterWordFile(FieldByName('Letterid').AsInteger,not _AllowToEditWordFiles,
                                     True, Exec_has_WordExcel(FieldByName('Letterid').AsInteger)) then
     begin
+
       FExportToWord:=TFExportToWord.Create(Application);
       with FExportToWord do
       begin
@@ -1238,6 +1244,10 @@ begin
         else
           ShowModal;
       end;
+      { TODO -oparsa : 14030605-bug349 }
+      if  Assigned(FExportToWord) then
+       FreeAndNil(FExportToWord);
+     { TODO -oparsa : 14030605-bug349 }
     end;
 
   Exec_insert_UserLog(Self.Tag,'AExpotToWord',select_LetterLetterID.AsInteger);

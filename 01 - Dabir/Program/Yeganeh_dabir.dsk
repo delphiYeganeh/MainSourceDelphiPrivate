@@ -1,41 +1,36 @@
 [Closed Files]
-File_0=SourceModule,'D:\MainSourceDelphi - Copy\01 - Dabir\Program\Shared\UaddLetterData.pas',0,1,210,22,225,0,0
-File_1=SourceModule,'D:\matin\01 - Dabir\Program\Dmu.pas',0,1,3506,61,3532,1,0
-File_2=SourceModule,'c:\program files (x86)\borland\delphi7\source\vcl\ActnList.pas',0,1,930,1,953,0,0
-File_3=SourceModule,'c:\program files (x86)\borland\delphi7\source\rtl\common\Registry.pas',0,1,1,9,9,0,0
-File_4=SourceModule,'D:\matin\01 - Dabir\Program\LogOn.pas',0,1,414,40,437,1,0
-File_5=SourceModule,'D:\matin\01 - Dabir\Program\uUpdateDbScripts.pas',0,1,179,67,188,1,0
-File_6=SourceModule,'D:\matin\01 - Dabir\Program\shared\FromOrgU.pas',0,1,406,18,437,1,0
-File_7=SourceModule,'D:\99 - Shared\YDbgrid.pas',0,1,1220,58,1214,0,0
-File_8=SourceModule,'D:\matin\01 - Dabir\Program\shared\Uconnect.pas',0,1,39,1,65,1,0
+File_0=SourceModule,'D:\matin\01 - Dabir\Program\shared\EmailsFm.pas',0,1,225,3,236,1,0
+File_1=SourceModule,'D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',0,1,2355,106,2363,1,0
+File_2=SourceModule,'D:\matin\01 - Dabir\Program\LogOn.pas',0,1,217,1,232,1,0
+File_3=SourceModule,'D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',0,1,568,70,575,1,0
+File_4=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\Vcl2\UemsVCL.pas',0,1,292,1,316,0,0
+File_5=SourceModule,'D:\matin\01 - Dabir\Program\mapimail.pas',0,1,121,88,127,0,0
+File_6=SourceModule,'D:\matin\01 - Dabir\Program\ContractsUnit.pas',0,1,83,189,92,1,0
+File_7=SourceModule,'D:\matin\01 - Dabir\Program\RepMohlateEghdamUnit.pas',0,1,166,41,175,1,0
 
 [Modules]
-Module0=D:\matin\01 - Dabir\Program\shared\ScanImageFm.pas
-Module1=D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas
-Module2=D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas
-Module3=D:\matin\01 - Dabir\Program\Dmu.pas
-Module4=D:\matin\01 - Dabir\Program\UMain.pas
-Module5=D:\matin\01 - Dabir\Program\shared\ExportToWord.pas
+Module0=D:\matin\01 - Dabir\Program\UMain.pas
+Module1=D:\matin\01 - Dabir\Program\Dmu.pas
+Module2=D:\matin\01 - Dabir\Program\shared\ExportToWord.pas
+Module3=D:\99 - Shared\YShamsiDate.pas
+Module4=D:\99 - Shared\YDbgrid.pas
+Module5=C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas
 Module6=C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas
-Module7=D:\matin\01 - Dabir\Program\shared\ReCommiteU.pas
-Module8=D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas
-Module9=D:\matin\01 - Dabir\Program\shared\UinnerLetter.pas
-Module10=D:\matin\01 - Dabir\Program\shared\UAddDocument.pas
-Module11=D:\matin\01 - Dabir\Program\Yeganeh_dabir.dpr
-Count=12
+Module7=H:\Yeganeh\Windows\Delphi\Component\ImageEn_6\EnImage_Needed\Source\ImageEnView.pas
+Module8=D:\matin\01 - Dabir\Program\shared\UAddDocument.pas
+Module9=c:\program files (x86)\borland\delphi7\source\vcl\DB.pas
+Module10=D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas
+Module11=D:\matin\01 - Dabir\Program\QuickSearch.pas
+Module12=D:\matin\01 - Dabir\Program\shared\UinnerLetter.pas
+Module13=D:\matin\01 - Dabir\Program\shared\UBrowsArchive.pas
+Module14=D:\matin\01 - Dabir\Program\userDefine.pas
+Module15=D:\matin\01 - Dabir\Program\uSecoundSign.pas
+Module16=D:\matin\01 - Dabir\Program\shared\BaseUnit.pas
+Module17=D:\matin\01 - Dabir\Program\Yeganeh_dabir.dpr
+Count=18
 EditWindowCount=1
 
-[D:\matin\01 - Dabir\Program\shared\ScanImageFm.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas]
+[D:\matin\01 - Dabir\Program\UMain.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -45,14 +40,24 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\01 - Dabir\Program\UMain.pas]
+[D:\matin\01 - Dabir\Program\shared\ExportToWord.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\01 - Dabir\Program\shared\ExportToWord.pas]
+[D:\99 - Shared\YShamsiDate.pas]
 ModuleType=SourceModule
-FormState=1
+FormState=0
+FormOnTop=0
+
+[D:\99 - Shared\YDbgrid.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas]
+ModuleType=SourceModule
+FormState=0
 FormOnTop=0
 
 [C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas]
@@ -60,12 +65,27 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\matin\01 - Dabir\Program\shared\ReCommiteU.pas]
+[H:\Yeganeh\Windows\Delphi\Component\ImageEn_6\EnImage_Needed\Source\ImageEnView.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\01 - Dabir\Program\shared\UAddDocument.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas]
+[c:\program files (x86)\borland\delphi7\source\vcl\DB.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\01 - Dabir\Program\QuickSearch.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -75,9 +95,24 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\01 - Dabir\Program\shared\UAddDocument.pas]
+[D:\matin\01 - Dabir\Program\shared\UBrowsArchive.pas]
 ModuleType=SourceModule
 FormState=1
+FormOnTop=0
+
+[D:\matin\01 - Dabir\Program\userDefine.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\01 - Dabir\Program\uSecoundSign.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
+
+[D:\matin\01 - Dabir\Program\shared\BaseUnit.pas]
+ModuleType=SourceModule
+FormState=0
 FormOnTop=0
 
 [D:\matin\01 - Dabir\Program\Yeganeh_dabir.dpr]
@@ -89,13 +124,17 @@ FormOnTop=0
 FormState=0
 FormOnTop=0
 
-[D:\matin\01 - Dabir\Program\shared\BaseUnit.pas]
+[D:\matin\01 - Dabir\Program\UserDefineDM.pas]
+FormState=0
+FormOnTop=0
+
+[D:\matin\01 - Dabir\Program\shared\EmailsDM.pas]
 FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=12
-CurrentView=4
+ViewCount=18
+CurrentView=1
 View0=0
 View1=1
 View2=2
@@ -108,6 +147,12 @@ View8=8
 View9=9
 View10=10
 View11=11
+View12=12
+View13=13
+View14=14
+View15=15
+View16=16
+View17=17
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -125,92 +170,134 @@ LeftPanelSize=0
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=00000400010000000C000000436F64654578706C6F726572000000000000000000000000000000000001000000000000000000000000FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=103
+BottomPanelSize=223
 BottomPanelClients=WatchWindow,MessageView@EditWindow0
-BottomPanelData=00000400010000000B000000576174636857696E646F77BD050000000000000267000000000000000100000001000000000000000002000000009D000000000000000200000002B6060000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000100000000BD0500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=00000400010000000B000000576174636857696E646F77BD0500000000000002DF000000000000000100000001000000000000000002000000009D000000000000000200000002B6060000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000100000000BD0500000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=D:\matin\01 - Dabir\Program\Yeganeh_dabir.dpr
-CursorX=9
-CursorY=68
-TopLine=48
+CursorX=59
+CursorY=214
+TopLine=194
 LeftCol=1
 
 [View1]
 Module=D:\matin\01 - Dabir\Program\UMain.pas
-CursorX=1
-CursorY=1909
-TopLine=1886
+CursorX=74
+CursorY=2186
+TopLine=2174
 LeftCol=1
 
 [View2]
 Module=D:\matin\01 - Dabir\Program\shared\ExportToWord.pas
-CursorX=1
-CursorY=557
-TopLine=534
+CursorX=43
+CursorY=64
+TopLine=45
 LeftCol=1
 
 [View3]
-Module=C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas
-CursorX=1
-CursorY=6183
-TopLine=6160
+Module=D:\matin\01 - Dabir\Program\Dmu.pas
+CursorX=31
+CursorY=2373
+TopLine=2357
 LeftCol=1
 
 [View4]
-Module=D:\matin\01 - Dabir\Program\shared\ScanImageFm.pas
-CursorX=63
-CursorY=684
-TopLine=672
-LeftCol=1
-
-[View5]
-Module=D:\matin\01 - Dabir\Program\shared\ReCommiteU.pas
+Module=D:\99 - Shared\YShamsiDate.pas
 CursorX=1
-CursorY=13
+CursorY=1
 TopLine=1
 LeftCol=1
 
-[View6]
-Module=D:\matin\01 - Dabir\Program\Dmu.pas
+[View5]
+Module=C:\Users\Hojjat\Documents\DevExpress VCL\ExpressLibrary\Sources\cxContainer.pas
 CursorX=1
-CursorY=2353
-TopLine=2330
+CursorY=6194
+TopLine=6160
+LeftCol=1
+
+[View6]
+Module=C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas
+CursorX=1
+CursorY=778
+TopLine=744
 LeftCol=1
 
 [View7]
-Module=D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas
+Module=H:\Yeganeh\Windows\Delphi\Component\ImageEn_6\EnImage_Needed\Source\ImageEnView.pas
 CursorX=1
-CursorY=592
-TopLine=568
+CursorY=14211
+TopLine=14187
 LeftCol=1
 
 [View8]
-Module=D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas
-CursorX=5
-CursorY=216
-TopLine=208
+Module=c:\program files (x86)\borland\delphi7\source\vcl\DB.pas
+CursorX=1
+CursorY=6085
+TopLine=6067
 LeftCol=1
 
 [View9]
+Module=D:\matin\01 - Dabir\Program\QuickSearch.pas
+CursorX=100
+CursorY=630
+TopLine=619
+LeftCol=1
+
+[View10]
 Module=D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas
 CursorX=1
 CursorY=274
 TopLine=251
 LeftCol=1
 
-[View10]
-Module=D:\matin\01 - Dabir\Program\shared\UinnerLetter.pas
-CursorX=39
-CursorY=868
-TopLine=860
+[View11]
+Module=D:\matin\01 - Dabir\Program\uSecoundSign.pas
+CursorX=50
+CursorY=80
+TopLine=69
 LeftCol=1
 
-[View11]
+[View12]
+Module=D:\matin\01 - Dabir\Program\userDefine.pas
+CursorX=13
+CursorY=688
+TopLine=685
+LeftCol=1
+
+[View13]
+Module=D:\matin\01 - Dabir\Program\shared\BaseUnit.pas
+CursorX=1
+CursorY=92
+TopLine=68
+LeftCol=1
+
+[View14]
+Module=D:\matin\01 - Dabir\Program\shared\UinnerLetter.pas
+CursorX=51
+CursorY=810
+TopLine=801
+LeftCol=1
+
+[View15]
+Module=D:\matin\01 - Dabir\Program\shared\UBrowsArchive.pas
+CursorX=47
+CursorY=228
+TopLine=227
+LeftCol=1
+
+[View16]
 Module=D:\matin\01 - Dabir\Program\shared\UAddDocument.pas
-CursorX=83
-CursorY=590
-TopLine=574
+CursorX=63
+CursorY=1125
+TopLine=1108
+LeftCol=1
+
+[View17]
+Module=D:\99 - Shared\YDbgrid.pas
+CursorX=1
+CursorY=461
+TopLine=435
 LeftCol=1
 
 [Watches]
@@ -252,19 +339,19 @@ LRDockWidth=1180
 Dockable=1
 
 [Breakpoints]
-Count=87
+Count=168
 Breakpoint0='H:\Yeganeh\Windows\Delphi\Source\01 - Dabir\Source\Source\Program\UInputUserTable.pas',238,'',0,0,'',1,0,0,'',1,'','',''
 Breakpoint1='H:\Yeganeh\Windows\Delphi\Source\01 - Dabir\Source\Source\Program\UInputUserTable.pas',304,'',0,0,'',1,0,0,'',1,'','',''
-Breakpoint2='D:\01 - Dabir\Program\EnteredLetterInputF.pas',980,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint2='D:\01 - Dabir\Program\EnteredLetterInputF.pas',985,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint3='D:\01 - Dabir dvelop khanome omade bod\Program\Shared\ExportToWord.pas',315,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint4='D:\Tahami\01 - Dabir\Program\shared\ExportToWord.pas',298,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint5='D:\Tahami\01 - Dabir\Program\shared\ExportToWord.pas',402,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint6='D:\matin\01 - Dabir\Backup\Source\Source\Shared\ExportToWord.pas',472,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint7='D:\matin\01 - Dabir\Backup\Source\Source\Shared\FExcelAttach.pas',161,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint8='D:\matin\01 - Dabir\Program\UMain.pas',5131,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint9='D:\matin\01 - Dabir\Program\UMain.pas',1947,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint10='D:\matin\01 - Dabir\Program\UMain.pas',5020,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint11='D:\matin\01 - Dabir\Program\UMain.pas',3536,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint8='D:\matin\01 - Dabir\Program\UMain.pas',5178,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint9='D:\matin\01 - Dabir\Program\UMain.pas',1960,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint10='D:\matin\01 - Dabir\Program\UMain.pas',5059,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint11='D:\matin\01 - Dabir\Program\UMain.pas',3575,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint12='D:\matin\01 - Dabir\Backup\Source\Source\Program\UMain.pas',2017,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint13='D:\matin\01 - Dabir\Backup\Source\Source\Kartable\Dmu.pas',1704,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint14='D:\matin\01 - Dabir\Backup\Source\Source\Kartable\Dmu.pas',1426,'',0,1,'',1,0,0,'',1,'','',''
@@ -272,74 +359,155 @@ Breakpoint15='D:\matin\01 - Dabir\Backup\Source\Others\khooneh\Dmu.pas',1085,'',
 Breakpoint16='D:\matin\01 - Dabir\Backup\Source\Others\khooneh\Dmu.pas',1139,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint17='D:\matin\01 - Dabir\Backup\Source\Others\khooneh\Dmu.pas',1187,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint18='D:\matin\01 - Dabir\Backup\Source\Source\Program\Dmu.pas',2471,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint19='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',557,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint20='D:\matin\01 - Dabir\Backup\Source\Source\Shared\ExportToWord.pas',481,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint21='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',335,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint22='D:\matin\01 - Dabir\Backup\Source\Source\Shared\ExportToWord.pas',692,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint23='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',150,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint24='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',199,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint25='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',315,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint26='D:\matin\01 - Dabir\Backup\Source\Source\Program\Dmu.pas',2345,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint27='D:\matin\01 - Dabir\Backup\Source\Source\Program\Dmu.pas',3529,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint28='D:\matin\01 - Dabir\Program\UMain.pas',2033,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint29='D:\matin\01 - Dabir\Program\shared\UinnerLetter.pas',789,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint30='D:\matin\01 - Dabir\Program\shared\UBrowsArchive.pas',237,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint31='D:\matin\01 - Dabir\Program\UMain.pas',2018,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint32='D:\matin\01 - Dabir\Program\UMain.pas',1905,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint33='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',421,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint34='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',289,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint35='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',555,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint36='D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas',99,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint37='D:\matin\01 - Dabir\Program\Dmu.pas',2320,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint38='D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas',231,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint39='D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas',274,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint40='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',591,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint41='D:\matin\01 - Dabir\Program\UMain.pas',1895,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint42='D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',784,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint43='D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',909,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint44='D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',906,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint45='D:\matin\01 - Dabir\Program\uUpdateDbScripts.pas',97,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint46='D:\matin\01 - Dabir\Program\Dmu.pas',2135,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint47='D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas',499,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint48='D:\matin\01 - Dabir\Program\UMain.pas',4708,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint49='D:\matin\01 - Dabir\Program\UMain.pas',4755,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint50='D:\matin\01 - Dabir\Program\UMain.pas',2231,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint51='D:\matin\01 - Dabir\Program\UMain.pas',2053,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint52='D:\matin\01 - Dabir\Program\UMain.pas',1909,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint53='D:\matin\01 - Dabir\Program\Shared\TextSearch.pas',149,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint54='D:\matin\01 - Dabir\Program\UMain.pas',1965,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint55='D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',1216,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint56='D:\matin\01 - Dabir\Program\FullTextSearch.pas',189,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint57='D:\matin\01 - Dabir\Program\UMain.pas',1927,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint58='D:\matin\01 - Dabir\Program\Dmu.pas',3637,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint59='D:\matin\01 - Dabir\Program\Dmu.pas',2218,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint60='D:\matin\01 - Dabir\Program\UMain.pas',3138,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint61='D:\matin\01 - Dabir\Program\UMain.pas',3173,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint62='D:\matin\01 - Dabir\Program\UMain.pas',3209,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint63='D:\matin\01 - Dabir\Program\UMain.pas',3260,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint64='D:\matin\01 - Dabir\Program\UMain.pas',3405,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint65='D:\matin\01 - Dabir\Program\UMain.pas',4087,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint66='D:\matin\01 - Dabir\Program\UMain.pas',4316,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint67='D:\matin\01 - Dabir\Program\UMain.pas',4404,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint68='D:\matin\01 - Dabir\Program\UMain.pas',4770,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint69='D:\matin\01 - Dabir\Program\UMain.pas',4875,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint70='D:\matin\01 - Dabir\Program\Dmu.pas',2236,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint71='D:\matin\01 - Dabir\Program\Dmu.pas',2243,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint72='D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',637,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint73='D:\matin\01 - Dabir\Program\userDefine.pas',457,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint74='D:\matin\01 - Dabir\Program\shared\FromOrgU.pas',568,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint75='D:\matin\01 - Dabir\Program\shared\FromOrgU.pas',235,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint76='D:\matin\01 - Dabir\Program\shared\UAddDocument.pas',561,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint77='D:\matin\01 - Dabir\Program\UMain.pas',1892,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint78='D:\matin\01 - Dabir\Program\shared\businessLayer.pas',437,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint79='D:\matin\01 - Dabir\Program\shared\ExactCopy.pas',154,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint80='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',456,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint81='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',419,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint82='D:\matin\01 - Dabir\Program\Dmu.pas',2421,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint83='D:\matin\01 - Dabir\Program\Dmu.pas',2353,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint84='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',187,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint85='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',592,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint86='D:\matin\01 - Dabir\Program\shared\ScanImageFm.pas',695,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint19='D:\matin\01 - Dabir\Backup\Source\Source\Shared\ExportToWord.pas',481,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint20='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',341,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint21='D:\matin\01 - Dabir\Backup\Source\Source\Shared\ExportToWord.pas',692,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint22='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',153,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint23='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',202,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint24='D:\matin\01 - Dabir\Backup\Source\Source\Program\Dmu.pas',2345,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint25='D:\matin\01 - Dabir\Backup\Source\Source\Program\Dmu.pas',3529,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint26='D:\matin\01 - Dabir\Program\UMain.pas',2051,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint27='D:\matin\01 - Dabir\Program\shared\UinnerLetter.pas',789,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint28='D:\matin\01 - Dabir\Program\shared\UBrowsArchive.pas',237,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint29='D:\matin\01 - Dabir\Program\UMain.pas',2036,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint30='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',428,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint31='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',289,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint32='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',555,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint33='D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas',99,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint34='D:\matin\01 - Dabir\Program\Dmu.pas',2330,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint35='D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas',231,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint36='D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas',274,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint37='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',591,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint38='D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',784,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint39='D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',909,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint40='D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',906,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint41='D:\matin\01 - Dabir\Program\uUpdateDbScripts.pas',97,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint42='D:\matin\01 - Dabir\Program\Dmu.pas',2139,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint43='D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas',499,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint44='D:\matin\01 - Dabir\Program\UMain.pas',4747,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint45='D:\matin\01 - Dabir\Program\UMain.pas',4794,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint46='D:\matin\01 - Dabir\Program\UMain.pas',2270,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint47='D:\matin\01 - Dabir\Program\UMain.pas',2071,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint48='D:\matin\01 - Dabir\Program\Shared\TextSearch.pas',149,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint49='D:\matin\01 - Dabir\Program\UMain.pas',1982,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint50='D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',1221,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint51='D:\matin\01 - Dabir\Program\FullTextSearch.pas',189,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint52='D:\matin\01 - Dabir\Program\Dmu.pas',3672,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint53='D:\matin\01 - Dabir\Program\Dmu.pas',2222,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint54='D:\matin\01 - Dabir\Program\UMain.pas',3177,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint55='D:\matin\01 - Dabir\Program\UMain.pas',3212,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint56='D:\matin\01 - Dabir\Program\UMain.pas',3248,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint57='D:\matin\01 - Dabir\Program\UMain.pas',3299,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint58='D:\matin\01 - Dabir\Program\UMain.pas',3444,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint59='D:\matin\01 - Dabir\Program\UMain.pas',4126,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint60='D:\matin\01 - Dabir\Program\UMain.pas',4355,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint61='D:\matin\01 - Dabir\Program\UMain.pas',4443,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint62='D:\matin\01 - Dabir\Program\UMain.pas',4809,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint63='D:\matin\01 - Dabir\Program\UMain.pas',4914,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint64='D:\matin\01 - Dabir\Program\Dmu.pas',2240,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint65='D:\matin\01 - Dabir\Program\Dmu.pas',2247,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint66='D:\matin\01 - Dabir\Program\EnteredLetterInputF.pas',637,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint67='D:\matin\01 - Dabir\Program\userDefine.pas',457,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint68='D:\matin\01 - Dabir\Program\shared\FromOrgU.pas',568,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint69='D:\matin\01 - Dabir\Program\shared\FromOrgU.pas',235,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint70='D:\matin\01 - Dabir\Program\shared\UAddDocument.pas',561,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint71='D:\matin\01 - Dabir\Program\shared\businessLayer.pas',437,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint72='D:\matin\01 - Dabir\Program\shared\ExactCopy.pas',154,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint73='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',456,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint74='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',419,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint75='D:\matin\01 - Dabir\Program\Dmu.pas',2438,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint76='D:\matin\01 - Dabir\Program\Dmu.pas',2363,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint77='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',187,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint78='D:\matin\01 - Dabir\Program\shared\UaddLetterData.pas',592,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint79='D:\matin\01 - Dabir\Program\shared\ScanImageFm.pas',695,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint80='D:\matin\01 - Dabir\Program\Dmu.pas',2518,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint81='D:\matin\01 - Dabir\Program\Dmu.pas',2786,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint82='D:\matin\01 - Dabir\Program\UMain.pas',1912,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint83='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',584,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint84='D:\matin\01 - Dabir\Program\Dmu.pas',2577,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint85='D:\matin\01 - Dabir\Program\UMain.pas',1401,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint86='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',317,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint87='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',575,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint88='D:\matin\01 - Dabir\Program\Dmu.pas',2574,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint89='D:\matin\01 - Dabir\Program\UInputTemplate.pas',348,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint90='D:\matin\01 - Dabir\Program\Dmu.pas',2570,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint91='D:\matin\01 - Dabir\Program\UMain.pas',1902,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint92='D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas',1121,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint93='D:\matin\01 - Dabir\Program\shared\UAddLetterDataDialog.pas',509,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint94='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',99,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint95='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',143,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint96='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',129,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint97='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',256,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint98='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',283,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint99='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',511,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint100='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',555,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint101='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',590,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint102='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',595,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint103='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',649,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint104='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',662,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint105='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',773,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint106='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',787,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint107='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',799,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint108='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',916,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint109='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',954,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint110='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',990,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint111='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',607,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint112='D:\matin\01 - Dabir\Program\UMain.pas',1966,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint113='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',641,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint114='D:\matin\01 - Dabir\Program\shared\ExportToWord.pas',482,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint115='D:\matin\01 - Dabir\Program\UInputTemplate.pas',148,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint116='D:\matin\01 - Dabir\Program\UInputTemplate.pas',301,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint117='D:\matin\01 - Dabir\Program\UInputTemplate.pas',257,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint118='D:\matin\01 - Dabir\Program\UInputTemplate.pas',125,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint119='D:\matin\01 - Dabir\Program\UInputTemplate.pas',131,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint120='D:\matin\01 - Dabir\Program\UInputTemplate.pas',137,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint121='D:\matin\01 - Dabir\Program\UInputTemplate.pas',102,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint122='D:\matin\01 - Dabir\Program\UInputTemplate.pas',358,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint123='D:\matin\01 - Dabir\Program\UInputTemplate.pas',389,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint124='D:\matin\01 - Dabir\Program\UInputTemplate.pas',434,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint125='D:\matin\01 - Dabir\Program\UInputTemplate.pas',495,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint126='D:\matin\01 - Dabir\Program\UInputTemplate.pas',518,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint127='D:\matin\01 - Dabir\Program\UInputTemplate.pas',524,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint128='D:\matin\01 - Dabir\Program\UInputTemplate.pas',535,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint129='D:\matin\01 - Dabir\Program\UInputTemplate.pas',540,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint130='D:\matin\01 - Dabir\Program\UInputTemplate.pas',568,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint131='D:\matin\01 - Dabir\Program\UInputTemplate.pas',598,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint132='D:\matin\01 - Dabir\Program\UInputTemplate.pas',705,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint133='D:\matin\01 - Dabir\Program\UInputTemplate.pas',719,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint134='D:\matin\01 - Dabir\Program\UInputTemplate.pas',730,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint135='D:\matin\01 - Dabir\Program\UInputTemplate.pas',740,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint136='D:\matin\01 - Dabir\Program\UInputTemplate.pas',767,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint137='D:\matin\01 - Dabir\Program\UInputTemplate.pas',806,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint138='D:\matin\01 - Dabir\Program\UInputTemplate.pas',860,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint139='D:\matin\01 - Dabir\Program\UInputTemplate.pas',885,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint140='D:\matin\01 - Dabir\Program\UInputTemplate.pas',936,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint141='D:\matin\01 - Dabir\Program\UInputTemplate.pas',952,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint142='D:\matin\01 - Dabir\Program\UMain.pas',1895,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint143='D:\matin\01 - Dabir\Program\UInputTemplate.pas',338,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint144='D:\matin\01 - Dabir\Program\UInputTemplate.pas',165,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint145='D:\matin\01 - Dabir\Program\UInputTemplate.pas',211,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint146='D:\matin\01 - Dabir\Program\UInputTemplate.pas',826,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint147='D:\matin\01 - Dabir\Program\UInputTemplate.pas',383,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint148='D:\matin\01 - Dabir\Program\UInputTemplate.pas',325,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint149='D:\matin\01 - Dabir\Program\UInputTemplate.pas',381,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint150='D:\matin\01 - Dabir\Program\UInputTemplate.pas',633,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint151='D:\matin\01 - Dabir\Program\UInputTemplate.pas',279,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint152='D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas',623,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint153='D:\matin\01 - Dabir\Program\Dmu.pas',1726,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint154='D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas',664,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint155='D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas',670,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint156='D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas',715,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint157='D:\matin\01 - Dabir\Program\ExitedLetterInputF.pas',723,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint158='D:\matin\01 - Dabir\Program\ULetterNoSetting.pas',263,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint159='D:\matin\01 - Dabir\Program\Dmu.pas',2577,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint160='D:\matin\01 - Dabir\Program\Dmu.pas',3217,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint161='D:\matin\01 - Dabir\Program\Dmu.pas',3249,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint162='D:\matin\01 - Dabir\Program\UMain.pas',2186,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint163='D:\matin\01 - Dabir\Program\UMain.pas',2183,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint164='D:\matin\01 - Dabir\Program\UMain.pas',2281,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint165='D:\matin\01 - Dabir\Program\UMain.pas',2112,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint166='D:\matin\01 - Dabir\Program\UMain.pas',2136,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint167='D:\matin\01 - Dabir\Program\UMain.pas',5070,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -411,18 +579,18 @@ Visible=1
 State=0
 Left=-3
 Top=490
-Width=421
+Width=208
 Height=524
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=405
+ClientWidth=192
 ClientHeight=485
 TBDockHeight=556
 LRDockWidth=190
 Dockable=1
 SplitPos=85
 ArrangeBy=Name
-SelectedItem=Name
+SelectedItem=Caption
 ExpandedItems=Title
 HiddenCategories=
 
@@ -513,12 +681,12 @@ State=0
 Left=12
 Top=0
 Width=1457
-Height=103
+Height=223
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1457
-ClientHeight=103
-TBDockHeight=103
+ClientHeight=223
+TBDockHeight=223
 LRDockWidth=443
 Dockable=1
 

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, BaseUnit, Menus, ExtActns, ActnList, DB, ExtCtrls, StdCtrls,YShamsiDate,
-  Buttons, DBCtrls, Grids, DBGrids, YDbgrid, ComCtrls;
+  Buttons, DBCtrls, Grids, DBGrids, YDbgrid, ComCtrls, AppEvnts;
 
 type
   TfrmContracts = class(TMBaseForm)

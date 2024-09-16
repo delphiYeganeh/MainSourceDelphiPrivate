@@ -307,9 +307,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             ParentFont = False
           end
           object Label10: TLabel
-            Left = 752
+            Left = 764
             Top = 48
-            Width = 40
+            Width = 28
             Height = 13
             Anchors = [akTop, akRight]
             Caption = '&'#1711#1610#1585#1606#1583#1607
@@ -2401,9 +2401,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             812
             90)
           object Label4: TLabel
-            Left = 738
+            Left = 743
             Top = 21
-            Width = 54
+            Width = 49
             Height = 13
             Anchors = [akTop, akRight]
             Caption = '&'#1591#1576#1602#1607' '#1576#1606#1583#1610
@@ -2416,9 +2416,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             ParentFont = False
           end
           object Label7: TLabel
-            Left = 738
+            Left = 744
             Top = 47
-            Width = 54
+            Width = 48
             Height = 13
             Anchors = [akTop, akRight]
             Caption = #1601#1608#1585#1610'&'#1578' '#1606#1575#1605#1607
@@ -2431,9 +2431,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             ParentFont = False
           end
           object Label9: TLabel
-            Left = 487
+            Left = 492
             Top = 21
-            Width = 51
+            Width = 46
             Height = 13
             Anchors = [akTop, akRight]
             Caption = #1606#1608#1593' '#1575#1585#1587#1575#1604
@@ -3753,20 +3753,23 @@ inherited SentLetterInputForm: TSentLetterInputForm
     AutoEdit = False
     DataSet = Select_Letter
     OnDataChange = DSFormDataChange
-    Left = 51
+    Left = 35
     Top = 259
   end
   inherited ActionList: TActionList
-    Left = 472
-    Top = 189
+    Left = 280
+    Top = 213
   end
   inherited Grid_PopupMenu: TPopupMenu
-    Left = 471
-    Top = 237
+    Left = 279
+    Top = 269
   end
   inherited Timer1sssss: TTimer
-    Left = 272
-    Top = 8
+    Left = 528
+    Top = 0
+  end
+  inherited ApplicationEvents1: TApplicationEvents
+    Left = 56
   end
   object ActionManager: TActionManager
     ActionBars.SessionCount = 262
@@ -3934,8 +3937,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
       end>
     Images = Dm.LetterImages
     OnExecute = ActionManagerExecute
-    Left = 608
-    Top = 181
+    Left = 432
+    Top = 205
     StyleName = 'XP Style'
     object DataSetInsert: TDataSetInsert
       Tag = 1
@@ -4021,8 +4024,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
         Precision = 10
         Value = 1
       end>
-    Left = 77
-    Top = 133
+    Left = 533
+    Top = 261
     object Select_LetterChristRegDate: TStringField
       FieldKind = fkCalculated
       FieldName = 'ChristRegDate'
@@ -4329,8 +4332,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
       ''
       ''
       '')
-    Left = 236
-    Top = 93
+    Left = 644
+    Top = 205
     object QrEmailAttachFileLetterDataID: TAutoIncField
       FieldName = 'LetterDataID'
       ReadOnly = True
@@ -4364,8 +4367,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
   end
   object PopMnuOther: TPopupMenu
     Images = Dm.LetterImages
-    Left = 140
-    Top = 64
+    Left = 532
+    Top = 200
     object N5: TMenuItem
       Caption = #1575#1585#1580#1575#1593' '#1606#1575#1605#1607
       OnClick = N5Click
@@ -4398,8 +4401,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
     end
   end
   object PopupMenu2: TPopupMenu
-    Left = 328
-    Top = 198
+    Left = 184
+    Top = 214
     object N7: TMenuItem
       Caption = #1601#1585#1605' '#1607#1575#1610' '#1662#1610#1608#1587#1578' '#1588#1583#1607
       ImageIndex = 1
@@ -4431,8 +4434,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
       'INNER JOIN Tables T ON LF.FormID=T.TableId'
       'WHERE letterID=:letterID'
       'ORDER BY ID')
-    Left = 740
-    Top = 253
+    Left = 444
+    Top = 277
     object QAddedFormsLetterFormsID: TAutoIncField
       FieldName = 'LetterFormsID'
       ReadOnly = True
@@ -4465,8 +4468,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
   end
   object dsQAddedForms: TDataSource
     DataSet = QAddedForms
-    Left = 616
-    Top = 272
+    Left = 360
+    Top = 280
   end
   object QDelForms: TADOQuery
     Connection = Dm.YeganehConnection
@@ -4481,8 +4484,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
       end>
     SQL.Strings = (
       'DELETE FROM LetterForms WHERE ID=:IDForm')
-    Left = 516
-    Top = 261
+    Left = 356
+    Top = 213
   end
   object QHasForms: TADOQuery
     Connection = Dm.YeganehConnection
@@ -4497,16 +4500,16 @@ inherited SentLetterInputForm: TSentLetterInputForm
       end>
     SQL.Strings = (
       'SELECT TOP 1 ID FROM LetterForms WHERE LetterID=:LetterID')
-    Left = 196
-    Top = 406
+    Left = 116
+    Top = 414
     object QHasFormsID: TAutoIncField
       FieldName = 'ID'
       ReadOnly = True
     end
   end
   object XMLDoc: TXMLDocument
-    Left = 264
-    Top = 240
+    Left = 96
+    Top = 256
     DOMVendorDesc = 'MSXML'
   end
   object QTemp_ECE: TADOQuery
@@ -4515,7 +4518,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
     SQL.Strings = (
       'SELECT OrgID,OrgStaff FROM ReCommites')
     Left = 108
-    Top = 365
+    Top = 341
     object QTemp_ECEOrgID: TIntegerField
       FieldName = 'OrgID'
     end
@@ -4527,8 +4530,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
   object QTemp_ECE2: TADOQuery
     Connection = Dm.YeganehConnection
     Parameters = <>
-    Left = 108
-    Top = 424
+    Left = 36
+    Top = 416
     object QTemp_ECE2peiro: TWideStringField
       FieldName = 'peiro'
       Size = 50
@@ -4541,8 +4544,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
   object QTemp_ECE3: TADOQuery
     Connection = Dm.YeganehConnection
     Parameters = <>
-    Left = 108
-    Top = 481
+    Left = 204
+    Top = 417
     object QTemp_ECE3IndicatorID: TIntegerField
       FieldName = 'IndicatorID'
     end
@@ -4574,8 +4577,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
         Precision = 10
         Value = 0
       end>
-    Left = 140
-    Top = 249
+    Left = 180
+    Top = 289
     object Get_LetterData_by_LetterID_ECEletterid: TIntegerField
       FieldName = 'letterid'
     end
@@ -4596,8 +4599,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
     Parameters = <>
     SQL.Strings = (
       'SELECT Extention FROM Extention')
-    Left = 244
-    Top = 605
+    Left = 164
+    Top = 565
     object QGetExtensionExtention: TStringField
       FieldName = 'Extention'
       Size = 5
@@ -4605,16 +4608,16 @@ inherited SentLetterInputForm: TSentLetterInputForm
   end
   object IdEncoderMIME1: TIdEncoderMIME
     FillChar = '='
-    Left = 36
-    Top = 449
+    Left = 44
+    Top = 505
   end
   object QGetEmail: TADOQuery
     Connection = Dm.YeganehConnection
     Parameters = <>
     SQL.Strings = (
       'SELECT Email FROM Users')
-    Left = 156
-    Top = 313
+    Left = 36
+    Top = 337
     object QGetEmailEmail: TWideStringField
       FieldName = 'Email'
       Size = 100
@@ -4639,8 +4642,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
       'FROM UserTable'
       'WHERE userid =:userid'
       'AND tableID =:tableid')
-    Left = 348
-    Top = 421
+    Left = 156
+    Top = 501
     object qry_AccessDeleteHasDelete: TBooleanField
       FieldName = 'HasDelete'
     end

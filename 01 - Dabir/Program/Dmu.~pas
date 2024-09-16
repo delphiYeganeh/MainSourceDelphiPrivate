@@ -6,7 +6,7 @@ interface
 uses
    Forms,DB, AppEvnts, ADODB, ImgList, Controls, Classes,ComCtrls,SysUtils,Graphics,DBCtrls,YwhereEdit,
    variants,dialogs,dateutils,windows,Word2000, OleServer, ExtCtrls, WordXP,ActnList,YdbGrid, officeXP,
-   uCiaTrayIcon, Math, TINYLib_TLB, uUpdateDbScripts, ShellApi, ExcelXP,TlHelp32;
+   uCiaTrayIcon, Math, TINYLib_TLB, uUpdateDbScripts, ShellApi, ExcelXP,TlHelp32,ComObj,ActiveX;
    //U_LOCK_ERROR_FRM,U_ENTER_IP_ADDRESS_FRM,
    //ARM LOCK
    //----------------------------------------------
@@ -1020,6 +1020,10 @@ type
     { TODO -oparsa : 14030108 }
     procedure Ins_Email(Subject, SendAddress, ReciveAddress, Memo, AttachFile, AttachFileName:String;
                       Status:Smallint; DateEmail, TimeEmail:String; IsAnswer, IsReciveEmail:Byte; UsersID:Integer; IsRead, IsPersonal, IsImportant, IsSecret:Byte; EmailNuFromDate:String);
+    { TODO -oparsa : 14030626 }
+    procedure ActiveWord;
+    function IsWordRunning: Boolean;
+    { TODO -oparsa : 14030626 }
   end;
 
 Var
@@ -1107,7 +1111,7 @@ Const
    _ShowLogo = True;
 // _Yeganeh='Ìê«‰Â';
 // _EYeganeh='yeganeh';
-   _SoftLastUpdate = '1403/05/08';//'1396/02/16';
+   _SoftLastUpdate = '1403/06/26';//'1396/02/16';
    //_SoftVersion    = '11.0.0.0';//'6.5.0.0';
     LCID: DWORD = LOCALE_SYSTEM_DEFAULT;
 
@@ -2247,7 +2251,13 @@ begin
         end;
       end;
       { TODO -oparsa : 14030413 }
+    end
+    (*
+    else
+    begin
+       ShowMessage(e.Message);
     end;
+    *)
     (*
     Close;
     Parameters.ParamByName('@like').Value:=e.Message;
@@ -2359,6 +2369,13 @@ begin
   OReadOnly := ReadOnly;
   if Word_Must_Readonly=0 then
     OReadOnly :=True;
+
+  { TODO -oparsa : 14030626 } // for error prc   The RPC server is unavailable
+  if not IsWordRunning then
+  begin
+    ActiveWord ;
+  end;
+  { TODO -oparsa : 14030626 }
 
    { TODO -oparsa : 14030501 }
   WordApplication.connect;
@@ -2499,7 +2516,12 @@ var
    ver : Integer;
    SaveChanges : OleVariant;
 begin
+  { TODO -oparsa : 14030605-bug349 }
+  //Cancel := True;
+  inherited;
+  { TODO -oparsa : 14030605-bug349 }
    SaveChanges := True;
+   
    if TWordApplication(ASender).ActiveDocument.ReadOnly then
    begin
       _Word_Is_Opened := False;
@@ -2548,9 +2570,12 @@ begin
    WordApplication.Disconnect;
    WordApplication.ActiveDocument.Close(SaveChanges,EmptyParam,EmptyParam);
    WordApplication.Quit;
-   Timer_SaveWord.Enabled:=true; //–ŒÌ—Â ›«Ì· Ê—œ œ— »«‰ﬂ «ÿ·«⁄« 
 
-   if processExists('WINWORD.EXE') then KillTask('WINWORD.EXE');
+   Timer_SaveWord.Enabled := True; //–ŒÌ—Â ›«Ì· Ê—œ œ— »«‰ﬂ «ÿ·«⁄« 
+
+   { TODO -oparsa : 14030605-bug349 }
+   ////if processExists('WINWORD.EXE') then  KillTask('WINWORD.EXE');
+   { TODO -oparsa : 14030605-bug349 }
   // Timer_SaveWordTimer(self);
 
 end;
@@ -3220,7 +3245,17 @@ begin
     SysUtils.DeleteFile(_TempPath+_WordFileName);
   end;
   { TODO -oparsa : 1402-12-19 }
-   
+  { TODO -oparsa : 14030605-bug349 }  //«ê— »Â œ·Ì· »«“ »Êœ‰ ›«Ì· ‰ Ê«‰”Â »«‘Â »»‰œ ‘
+  if FileExists(pchar(_TempPath+_WordFileName)) then
+    if processExists('WINWORD.EXE') then  KillTask('WINWORD.EXE');
+
+  if FileExists(pchar(_TempPath+_WordFileName)) then
+  begin
+    SysUtils.FileSetReadOnly(_TempPath+_WordFileName, false);
+    SysUtils.DeleteFile(_TempPath+_WordFileName);
+  end;
+  { TODO -oparsa : 14030605-bug349 }
+
 end;
 
 
@@ -3951,7 +3986,7 @@ begin
     qryAutoRunScript.SQL.Text := 'IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U''))'+
                                     ' Begin   UPDATE [dbo].[TBLAPPSETTING] SET [Max_TableScriptNumber] = [Last_TableScriptNumber] WHERE ISNULL(Max_TableScriptNumber,0) < isnull([Last_TableScriptNumber],0)  '+
                                     ' UPDATE [dbo].[TBLAPPSETTING] SET [Max_ViewScriptNumber] = [Last_ViewScriptNumber] WHERE ISNULL([Max_ViewScriptNumber],0) < isnull([Last_ViewScriptNumber],0) '  +
-                                    ' SELECT TOP 1 (ISNULL(Max_TableScriptNumber,0)-ISNULL(Last_TableScriptNumber,0)) + ( ISNULL(Max_ViewScriptNumber,0) - ISNULL(Last_ViewScriptNumber ,0)) CountError   '+
+                                    ' SELECT TOP 1 (ISNULL(Max_TableScriptNumber,Last_TableScriptNumber)-ISNULL(Last_TableScriptNumber,0)) + ( ISNULL(Max_ViewScriptNumber,Last_ViewScriptNumber) - ISNULL(Last_ViewScriptNumber ,0)) CountError   '+
                                     ' FROM [dbo].[TBLAPPSETTING] ORDER BY id DESC  end '+
                                     ' ELSE SELECT 0 CountError' ;
 
@@ -3964,6 +3999,29 @@ begin
 
 end;
 { TODO -oparsa : 14030108 }
+
+procedure TDm.ActiveWord;
+var
+  wordApp : Variant;
+begin
+   try
+     wordapp  := Createoleobject('Word.Application');
+   except
+   end;
+end;
+
+function TDm.IsWordRunning: Boolean;
+var
+  wordApp : Variant;
+begin
+   Result := False;
+   try
+     wordapp  := GetActiveOleObject('Word.Application');
+     Result   := not varIsEmpty(wordApp);
+   except
+     Result := False;
+   end;
+end;
 
 end.
 

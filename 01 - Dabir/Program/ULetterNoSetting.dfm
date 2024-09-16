@@ -309,7 +309,8 @@ inherited FrLetterNoSetting: TFrLetterNoSetting
       Anchors = [akTop, akRight]
       MaxLength = 1
       TabOrder = 6
-      Text = '/'
+      Text = '|'
+      OnKeyPress = MaskEdit1KeyPress
     end
     object DBLookupComboBox1: TDBLookupComboBox
       Left = 23
@@ -449,7 +450,7 @@ inherited FrLetterNoSetting: TFrLetterNoSetting
       'FROM LetterFormula'
       'WHERE SecID=:SecID'
       'AND letterTypeID=:letterTypeID')
-    Left = 144
+    Left = 200
     Top = 264
     object ado_CountCnt: TIntegerField
       FieldName = 'Cnt'
@@ -518,8 +519,8 @@ inherited FrLetterNoSetting: TFrLetterNoSetting
         DataType = ftInteger
         Value = Null
       end>
-    Left = 192
-    Top = 264
+    Left = 200
+    Top = 232
     object LetterFormula_inserID: TIntegerField
       FieldName = 'ID'
     end

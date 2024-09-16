@@ -906,6 +906,7 @@ inherited MainForm: TMainForm
             Visible = True
           end
           item
+            Alignment = taCenter
             Expanded = False
             FieldName = 'RegistrationDate'
             Font.Charset = ARABIC_CHARSET
@@ -10807,13 +10808,7 @@ inherited MainForm: TMainForm
     Left = 1168
     Top = 237
   end
-  object WordDocument: TWordDocument [49]
-    AutoConnect = False
-    ConnectKind = ckRunningOrNew
-    Left = 1170
-    Top = 307
-  end
-  object tmrGetEmail: TTimer [50]
+  object tmrGetEmail: TTimer [49]
     Interval = 5000
     OnTimer = tmrGetEmailTimer
     Left = 834

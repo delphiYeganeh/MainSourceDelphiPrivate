@@ -10,7 +10,7 @@ inherited frmContracts: TfrmContracts
   object dbgContractsList: TYDBGrid [0]
     Left = 0
     Top = 65
-    Width = 778
+    Width = 588
     Height = 334
     Cursor = crHandPoint
     TabStop = False
@@ -164,7 +164,7 @@ inherited frmContracts: TfrmContracts
   object Panel1: TPanel [1]
     Left = 0
     Top = 0
-    Width = 778
+    Width = 588
     Height = 65
     Align = alTop
     TabOrder = 1
@@ -194,7 +194,7 @@ inherited frmContracts: TfrmContracts
   object StatusBar1: TStatusBar [2]
     Left = 0
     Top = 399
-    Width = 778
+    Width = 588
     Height = 19
     Panels = <
       item

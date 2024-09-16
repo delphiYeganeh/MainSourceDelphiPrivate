@@ -17,7 +17,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
     Top = 0
     Width = 839
     Height = 690
-    ActivePage = xpForms
+    ActivePage = xpTabSheet1
     Align = alClient
     ParentShowHint = False
     ShowHint = True
@@ -192,7 +192,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
           Left = 181
           Top = 1
           Width = 48
-          Height = 19
+          Height = 20
           TabStop = False
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
@@ -214,7 +214,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
           Left = 11
           Top = 1
           Width = 118
-          Height = 19
+          Height = 20
           TabStop = False
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft

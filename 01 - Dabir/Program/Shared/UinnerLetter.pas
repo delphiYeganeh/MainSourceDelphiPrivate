@@ -796,6 +796,7 @@ begin
    if not Dm.ExecGet_LetterWordFile(select_LetterLetterID.AsInteger,Read_Only,
                                   True, Exec_has_WordExcel(select_LetterLetterID.AsInteger)) then
    begin
+
      FExportToWord:=TFExportToWord.Create(Application);
      with FExportToWord do
      begin
@@ -809,6 +810,10 @@ begin
        else
          ShowModal;
      end;
+      { TODO -oparsa : 14030605-bug349 }
+      if Assigned(FExportToWord) then
+        FreeAndNil(FExportToWord);
+     { TODO -oparsa : 14030605-bug349 }
    end;
 end;
 

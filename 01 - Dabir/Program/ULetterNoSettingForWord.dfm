@@ -309,7 +309,7 @@ inherited FrLetterNoSettingForWord: TFrLetterNoSettingForWord
       Anchors = [akTop, akRight]
       MaxLength = 1
       TabOrder = 6
-      Text = '/'
+      Text = '|'
     end
     object DBLookupComboBox1: TDBLookupComboBox
       Left = 23

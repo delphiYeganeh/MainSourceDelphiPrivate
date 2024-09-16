@@ -252,6 +252,9 @@ procedure TStatisticForm.WordApplicationDocumentBeforeClose(
 begin
   inherited;
  WordApplication.Disconnect;
+ { TODO -oparsa : 14030505-bug349 }
+ WordDocument.Disconnect;
+ { TODO -oparsa : 14030505-bug349 }
 end;
 
 procedure TStatisticForm.BitBtn6Click(Sender: TObject);

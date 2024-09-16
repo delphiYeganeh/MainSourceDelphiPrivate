@@ -403,8 +403,8 @@ inherited FExportToWord: TFExportToWord
   end
   inherited DSForm: TDataSource
     DataSet = GetLetterTemplate_HeaderID
-    Left = 202
-    Top = 192
+    Left = 106
+    Top = 176
   end
   inherited ActionList: TActionList
     Left = 316
@@ -414,13 +414,18 @@ inherited FExportToWord: TFExportToWord
     Left = 255
     Top = 57
   end
+  inherited ApplicationEvents1: TApplicationEvents
+    Left = 96
+    Top = 224
+  end
   object WordApplication: TWordApplication
     AutoConnect = False
     ConnectKind = ckRunningOrNew
     AutoQuit = True
+    OnDocumentOpen = WordApplicationDocumentOpen
     OnDocumentBeforeClose = WordApplicationDocumentBeforeClose
-    Left = 120
-    Top = 171
+    Left = 264
+    Top = 219
   end
   object WordDocument: TWordDocument
     AutoConnect = False

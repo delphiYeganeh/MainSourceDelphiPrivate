@@ -232,16 +232,16 @@ begin
 
      if Letter_Or_Erja='Letter' then
      Begin
-       Dm.Get_LetterData_by_LetterID.Post;
-      with ADOQuery1 do
-      begin
-        Connection := dm.YeganehConnection;
-        SQL.Text := 'SELECT filename FROM LetterData WHERE LetterDataID='+dm.Get_LetterData_by_LetterIDLetterDataID.AsString;
-        Open;
-        edit;
-        fieldbyname('filename').AsString:=ExtractFileName(OpenDialog.FileName);
-        post;
-      End;
+        Dm.Get_LetterData_by_LetterID.Post;
+        with ADOQuery1 do
+        begin
+          Connection := dm.YeganehConnection;
+          SQL.Text := 'SELECT filename FROM LetterData WHERE LetterDataID='+dm.Get_LetterData_by_LetterIDLetterDataID.AsString;
+          Open;
+          edit;
+          fieldbyname('filename').AsString:= ExtractFileName(OpenDialog.FileName);
+          post;
+        End;
      End;
 
      if Letter_Or_Erja='Erja'   then Dm.Get_RecommitePayvast_by_RecommiteID.Post;
@@ -255,91 +255,91 @@ begin
    // Amin 1391/12/15 if Path.Text <> '' then
      if (Path.Text <> '') and (not IsInEditMode) then  // Amin 1391/12/15
      begin
-      if Letter_Or_Erja='Letter' then
-      begin
-          with dm.Get_LetterData_by_LetterDataID do
-          begin
-             Close;
-             Connection := dm.YeganehConnection;
-             Parameters.ParamByName('@LetterdataID').Value := Dm.Get_LetterData_by_LetterIDLetterDataID.Value;
-             Open;
-             Edit;
-             {Ranjbar 89.08.01 ID=153}//«„ﬂ«‰ Ê«—œ ﬂ—œ‰ ÅÌÊ” Â«Ì ›«—”Ì
-             if FileExists(Path.Text) then
-             begin
-                //Hamed_Ansari_990701_S
-                //CopyFile(pchar(path.Text),pchar(path.Text+'tmp'+ExtractFileExt(Path.Text)),false);Commented By Hamed_Ansari
-                //Dm.Get_LetterData_by_LetterDataIDImage.LoadFromFile(Path.Text+'tmp'+ExtractFileExt(Path.Text));Commented By Hamed_Ansari
-                Dm.Get_LetterData_by_LetterDataIDImage.LoadFromFile(Path.Text);
-                Post;
-                //DeleteFile(pchar(path.Text+'tmp'+ExtractFileExt(Path.Text)));
-                AddTxtToDB(Dm.Get_LetterData_by_LetterDataIDLetterDataID.AsInteger,DBLookupComboBox1.KeyValue);
-                SysUtils.FileSetReadOnly(Path.Text, false);
-                DeleteFile(Path.Text);
-                //Hamed_Ansari_990701_E
-             end
-             else
-             begin
-                ShowMyMessage('ÅÌ€«„','ﬂ«—»— ê—«„Ì ›«Ì·Ì »« «Ì‰ ‰«„ Ì«›  ‰‘œ'+#13+
-                          '·ÿ›« œ— ’Ê— ÌﬂÂ ‰«„ ›«Ì· œ«—«Ì Õ—Ê› ›«—”Ì «”  ¬‰ —« »Â «‰ê·Ì”Ì  €ÌÌ— œÂÌœ',[mbOK],mtInformation);
-                Exit;
-             end;
-          end;// end of with dm.Get_LetterData_by_LetterDataID do
-      end;
-      if Letter_Or_Erja='Erja' then
-      begin
-          //Hamed_Ansari_990701_S
-          //CopyFile(pchar(path.Text),pchar(path.Text+'tmp'),false);Commented By Hamed_Ansari
-          //FileSize:=Round(StrToInt64(GetFileSize(Path.Text+'tmp',True))/1024);
-          FileSize := Round(StrToInt64(GetFileSize(Path.Text,True))/1024);
-          //DeleteFile(pchar(path.Text+'tmp'));
-          //Hamed_Ansari_990701_E
-          if FileSize<= StrToInt64(GetFileSizeFromDB) then
-              with dm.Get_RecommitePayvast_by_RecommitePayvastID do
-              begin
-                 Close;
-                 Parameters.ParamByName('@RecommitePayvastID').Value := Dm.Get_RecommitePayvast_by_RecommiteIDID.Value;
-                 Open;
-                 Edit;
-                 {Ranjbar 89.08.01 ID=153}//«„ﬂ«‰ Ê«—œ ﬂ—œ‰ ÅÌÊ” Â«Ì ›«—”Ì
-                 if FileExists(Path.Text) then
-                 begin
-                    //Hamed_Ansari_990701_S
-                    //CopyFile(pchar(path.Text),pchar(path.Text+'tmp'),false);Commented By Hamed_Ansari
-                    //Dm.Get_RecommitePayvast_by_RecommitePayvastIDImage.LoadFromFile(Path.Text+'tmp');Commented By Hamed_Ansari
-                    Dm.Get_RecommitePayvast_by_RecommitePayvastIDImage.LoadFromFile(Path.Text);
-                    Post;
-                    AddTxtToDB(Dm.Get_RecommitePayvast_by_RecommitePayvastIDID.AsInteger,DBLookupComboBox1.KeyValue);
-                    //DeleteFile(path.Text+'tmp');
-                    SysUtils.FileSetReadOnly(Path.Text, false);
-                    DeleteFile(Path.Text);
-                    //Hamed_Ansari_990701_E
-                 end
-                 else
-                 begin
-                    ShowMyMessage('ÅÌ€«„','ﬂ«—»— ê—«„Ì ›«Ì·Ì »« «Ì‰ ‰«„ Ì«›  ‰‘œ'+#13+
-                              '·ÿ›« œ— ’Ê— ÌﬂÂ ‰«„ ›«Ì· œ«—«Ì Õ—Ê› ›«—”Ì «”  ¬‰ —« »Â «‰ê·Ì”Ì  €ÌÌ— œÂÌœ',[mbOK],mtInformation);
-                    Exit;
-                 end;
+        if Letter_Or_Erja='Letter' then
+        begin
+            with dm.Get_LetterData_by_LetterDataID do
+            begin
+               Close;
+               Connection := dm.YeganehConnection;
+               Parameters.ParamByName('@LetterdataID').Value := Dm.Get_LetterData_by_LetterIDLetterDataID.Value;
+               Open;
+               Edit;
+               {Ranjbar 89.08.01 ID=153}//«„ﬂ«‰ Ê«—œ ﬂ—œ‰ ÅÌÊ” Â«Ì ›«—”Ì
+               if FileExists(Path.Text) then
+               begin
+                  //Hamed_Ansari_990701_S
+                  //CopyFile(pchar(path.Text),pchar(path.Text+'tmp'+ExtractFileExt(Path.Text)),false);Commented By Hamed_Ansari
+                  //Dm.Get_LetterData_by_LetterDataIDImage.LoadFromFile(Path.Text+'tmp'+ExtractFileExt(Path.Text));Commented By Hamed_Ansari
+                  Dm.Get_LetterData_by_LetterDataIDImage.LoadFromFile(Path.Text);
+                  Post;
+                  //DeleteFile(pchar(path.Text+'tmp'+ExtractFileExt(Path.Text)));
+                  AddTxtToDB(Dm.Get_LetterData_by_LetterDataIDLetterDataID.AsInteger,DBLookupComboBox1.KeyValue);
+                  SysUtils.FileSetReadOnly(Path.Text, false);
+                  DeleteFile(Path.Text);
+                  //Hamed_Ansari_990701_E
+               end
+               else
+               begin
+                  ShowMyMessage('ÅÌ€«„','ﬂ«—»— ê—«„Ì ›«Ì·Ì »« «Ì‰ ‰«„ Ì«›  ‰‘œ'+#13+
+                            '·ÿ›« œ— ’Ê— ÌﬂÂ ‰«„ ›«Ì· œ«—«Ì Õ—Ê› ›«—”Ì «”  ¬‰ —« »Â «‰ê·Ì”Ì  €ÌÌ— œÂÌœ',[mbOK],mtInformation);
+                  Exit;
+               end;
+            end;// end of with dm.Get_LetterData_by_LetterDataID do
+        end;
+        if Letter_Or_Erja='Erja' then
+        begin
+            //Hamed_Ansari_990701_S
+            //CopyFile(pchar(path.Text),pchar(path.Text+'tmp'),false);Commented By Hamed_Ansari
+            //FileSize:=Round(StrToInt64(GetFileSize(Path.Text+'tmp',True))/1024);
+            FileSize := Round(StrToInt64(GetFileSize(Path.Text,True))/1024);
+            //DeleteFile(pchar(path.Text+'tmp'));
+            //Hamed_Ansari_990701_E
+            if FileSize<= StrToInt64(GetFileSizeFromDB) then
+                with dm.Get_RecommitePayvast_by_RecommitePayvastID do
+                begin
+                   Close;
+                   Parameters.ParamByName('@RecommitePayvastID').Value := Dm.Get_RecommitePayvast_by_RecommiteIDID.Value;
+                   Open;
+                   Edit;
+                   {Ranjbar 89.08.01 ID=153}//«„ﬂ«‰ Ê«—œ ﬂ—œ‰ ÅÌÊ” Â«Ì ›«—”Ì
+                   if FileExists(Path.Text) then
+                   begin
+                      //Hamed_Ansari_990701_S
+                      //CopyFile(pchar(path.Text),pchar(path.Text+'tmp'),false);Commented By Hamed_Ansari
+                      //Dm.Get_RecommitePayvast_by_RecommitePayvastIDImage.LoadFromFile(Path.Text+'tmp');Commented By Hamed_Ansari
+                      Dm.Get_RecommitePayvast_by_RecommitePayvastIDImage.LoadFromFile(Path.Text);
+                      Post;
+                      AddTxtToDB(Dm.Get_RecommitePayvast_by_RecommitePayvastIDID.AsInteger,DBLookupComboBox1.KeyValue);
+                      //DeleteFile(path.Text+'tmp');
+                      SysUtils.FileSetReadOnly(Path.Text, false);
+                      DeleteFile(Path.Text);
+                      //Hamed_Ansari_990701_E
+                   end
+                   else
+                   begin
+                      ShowMyMessage('ÅÌ€«„','ﬂ«—»— ê—«„Ì ›«Ì·Ì »« «Ì‰ ‰«„ Ì«›  ‰‘œ'+#13+
+                                '·ÿ›« œ— ’Ê— ÌﬂÂ ‰«„ ›«Ì· œ«—«Ì Õ—Ê› ›«—”Ì «”  ¬‰ —« »Â «‰ê·Ì”Ì  €ÌÌ— œÂÌœ',[mbOK],mtInformation);
+                      Exit;
+                   end;
 
-                 UpdateImageForGroup;
+                   UpdateImageForGroup;
 
-              end// end of with dm.Get_LetterData_by_LetterDataID do
-          else
-          begin
-              with dm.Get_RecommitePayvast_by_RecommitePayvastID do
-              begin
-                 Close;
-                 Parameters.ParamByName('@RecommitePayvastID').Value := Dm.Get_RecommitePayvast_by_RecommiteIDID.Value;
-                 Open;
-                 Last;
-                 Delete;
-                 FrAddLetterDataDialog.DSForm.DataSet.Close;
-                 FrAddLetterDataDialog.DSForm.DataSet.Open;
-              end;
-              ShowMsgString('«‰œ«“Â ›«Ì· ÅÌÊ”  »“—ê — «“ «‰œ«“Â  ⁄—Ì› ‘œÂ  Ê”ÿ „œÌ— ”Ì” „ „Ì »«‘œ');
-          end;
-      end;
+                end// end of with dm.Get_LetterData_by_LetterDataID do
+            else
+            begin
+                with dm.Get_RecommitePayvast_by_RecommitePayvastID do
+                begin
+                   Close;
+                   Parameters.ParamByName('@RecommitePayvastID').Value := Dm.Get_RecommitePayvast_by_RecommiteIDID.Value;
+                   Open;
+                   Last;
+                   Delete;
+                   FrAddLetterDataDialog.DSForm.DataSet.Close;
+                   FrAddLetterDataDialog.DSForm.DataSet.Open;
+                end;
+                ShowMsgString('«‰œ«“Â ›«Ì· ÅÌÊ”  »“—ê — «“ «‰œ«“Â  ⁄—Ì› ‘œÂ  Ê”ÿ „œÌ— ”Ì” „ „Ì »«‘œ');
+            end;
+        end;
      end;// end of if Path.Text <> '' then
    end;
    Close;

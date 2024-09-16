@@ -61,6 +61,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure dUserSecsDataChange(Sender: TObject; Field: TField);
     procedure RadioGroup1Click(Sender: TObject);
+    procedure MaskEdit1KeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     function CheckSeperator:Boolean;
@@ -85,7 +86,7 @@ begin
 end;
 
 procedure TFrLetterNoSetting.BitBtn1Click(Sender: TObject);
-var i: byte;
+//var i: byte;
 begin
   inherited;
   if CheckSeperator then
@@ -168,6 +169,9 @@ begin
       add('‘„«—Â œ»Ì—Œ«‰Â „—ò“Ì');
       add('„Ê÷Ê⁄ ‰«„Â'); // Amin 1391/12/13
    end;
+   { TODO -oparsa : 14030505-bug349 }
+   RadioGroup1.ItemIndex := 0 ;
+   { TODO -oparsa : 14030505-bug349 }
    SetAllComboBox;
 end;
 
@@ -183,8 +187,8 @@ begin
    if (Dm.UserSecs.Active) and (VarToStr(DBLookupComboBox1.KeyValue)<>'') then
    begin
        QReadLetterFormula.Close;
-       QReadLetterFormula.Parameters.ParamByName('SecID').Value:=DBLookupComboBox1.KeyValue;
-       QReadLetterFormula.Parameters.ParamByName('letterTypeID').Value:=RadioGroup1.ItemIndex;
+       QReadLetterFormula.Parameters.ParamByName('SecID').Value := DBLookupComboBox1.KeyValue;
+       QReadLetterFormula.Parameters.ParamByName('letterTypeID').Value:= RadioGroup1.ItemIndex;
        QReadLetterFormula.Open;
        if not QReadLetterFormula.IsEmpty then
        begin
@@ -218,10 +222,13 @@ begin
            else
                Indicator6.ItemIndex:=0;
 
-           if QReadLetterFormulaLetterFormulaSeperator.AsString='' then
+           { TODO -oparsa : 14030610 }
+           if (QReadLetterFormulaLetterFormulaSeperator.AsString='') then
+           //if (QReadLetterFormulaLetterFormulaSeperator.AsString='') or (QReadLetterFormulaLetterFormulaSeperator.AsString='/') then
+           { TODO -oparsa : 14030610 }
               MaskEdit1.Text:='/'
            else
-              MaskEdit1.Text:=QReadLetterFormulaLetterFormulaSeperator.AsString;
+              MaskEdit1.Text:= QReadLetterFormulaLetterFormulaSeperator.AsString;
        end
        else
        begin
@@ -247,6 +254,14 @@ procedure TFrLetterNoSetting.RadioGroup1Click(Sender: TObject);
 begin
   inherited;
   SetAllComboBox;
+end;
+
+procedure TFrLetterNoSetting.MaskEdit1KeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  inherited;
+  // if Key in ['/'] then
+  //  Key := #0
 end;
 
 end.

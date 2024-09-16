@@ -2494,15 +2494,15 @@ object Dm: TDm
     AutoQuit = False
     OnDocumentOpen = WordApplicationDocumentOpen
     OnDocumentBeforeClose = WordApplicationDocumentBeforeClose
-    Left = 909
-    Top = 414
+    Left = 917
+    Top = 742
   end
   object Timer_SaveWord: TTimer
     Enabled = False
     Interval = 1
     OnTimer = Timer_SaveWordTimer
-    Left = 908
-    Top = 464
+    Left = 1140
+    Top = 104
   end
   object Toorganizations: TADODataSet
     Connection = YeganehConnection
@@ -3895,8 +3895,8 @@ object Dm: TDm
     Enabled = False
     Interval = 1500
     OnTimer = Timer_WordMessageTimer
-    Left = 488
-    Top = 384
+    Left = 1136
+    Top = 8
   end
   object Users: TADOQuery
     Connection = YeganehConnection
@@ -6407,8 +6407,8 @@ object Dm: TDm
     ConnectKind = ckRunningOrNew
     AutoQuit = False
     OnDocumentOpen = WordApplication2DocumentOpen
-    Left = 701
-    Top = 404
+    Left = 997
+    Top = 772
   end
   object qLetterSign: TADOQuery
     Connection = YeganehConnection
@@ -6477,8 +6477,8 @@ object Dm: TDm
   object WordDocument: TWordDocument
     AutoConnect = False
     ConnectKind = ckRunningOrNew
-    Left = 264
-    Top = 246
+    Left = 1000
+    Top = 710
   end
   object sp_inbox: TADOStoredProc
     Parameters = <>
@@ -7226,21 +7226,21 @@ object Dm: TDm
     ConnectKind = ckRunningOrNew
     AutoQuit = True
     OnWorkbookBeforeClose = ExcelApplicationWorkbookBeforeClose
-    Left = 1024
-    Top = 696
+    Left = 1096
+    Top = 712
   end
   object ExcelWorksheet: TExcelWorksheet
     AutoConnect = False
     ConnectKind = ckRunningOrNew
-    Left = 1024
-    Top = 736
+    Left = 1104
+    Top = 776
   end
   object Timer_SaveExcel: TTimer
     Enabled = False
     Interval = 2000
     OnTimer = Timer_SaveExcelTimer
-    Left = 923
-    Top = 726
+    Left = 1139
+    Top = 54
   end
   object qryGetUserSettings: TADOQuery
     Connection = YeganehConnection
@@ -7271,8 +7271,8 @@ object Dm: TDm
   object Timer1: TTimer
     Interval = 3600000
     OnTimer = Timer1Timer
-    Left = 1192
-    Top = 568
+    Left = 1144
+    Top = 160
   end
   object qryAutoRunScript: TADOQuery
     Connection = YeganehConnection

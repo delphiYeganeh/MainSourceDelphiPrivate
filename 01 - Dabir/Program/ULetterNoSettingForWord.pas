@@ -192,7 +192,10 @@ begin
            else
                Indicator6.ItemIndex:=0;
 
+           { TODO -oparsa : 14030610 }
            if QReadLetterFormulaLetterFormulaSeperator.AsString='' then
+           //if (QReadLetterFormulaLetterFormulaSeperator.AsString='') or (QReadLetterFormulaLetterFormulaSeperator.AsString='/') then
+           { TODO -oparsa : 14030610 }
               MaskEdit1.Text:='/'
            else
               MaskEdit1.Text:=QReadLetterFormulaLetterFormulaSeperator.AsString;

@@ -4,7 +4,8 @@ interface
 
 uses
  DB, BaseUnit, ExtActns, ActnMan, Buttons, StdCtrls, Mask, DBCtrls,
-  Controls, Classes, Windows,ActnList, XPStyleActnCtrls,  xpBitBtn, ADODB, Menus;
+  Controls, Classes, Windows,ActnList, XPStyleActnCtrls,  xpBitBtn, ADODB, Menus,
+  AppEvnts, ExtCtrls;
 
 type
   TFrAddExtentionDialog = class(TMBaseForm)

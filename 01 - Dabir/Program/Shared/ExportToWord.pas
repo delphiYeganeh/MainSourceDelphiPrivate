@@ -61,13 +61,16 @@ type
     procedure TimerExcelTimer(Sender: TObject);
     procedure ExcelApplicationWorkbookBeforeClose(ASender: TObject;
       const Wb: _Workbook; var Cancel: WordBool);
+    procedure WordApplicationDocumentOpen(ASender: TObject;
+      const Doc: _Document);
   private
-    { Private declarations }
+    WordApplicationversion : String;
   public
     { Public declarations }
     LetterID:integer;
     LetterFormat: byte;
     ReadOnly: boolean;
+
     procedure ReplaceAll(replaceType:TReplaceWordTypes);
     procedure SaveAs;
     function Exacts:string;
@@ -281,6 +284,7 @@ begin
   inherited;
   fileName := _TempPath + _WordFileName;
   WordDocument.SaveAs(filename);
+
 end;
 
 
@@ -312,7 +316,9 @@ Var
    end;
 begin
  // DisableEnableForm(False);
-  if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
+ { TODO -oparsa : 14030605-bug349 }
+ ////////////////////////// if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
+ { TODO -oparsa : 14030605-bug349 }
 
   if dm.LetterTemplate.RecordCount = 0 then
   begin
@@ -403,6 +409,7 @@ end;
 
 procedure TFExportToWord.MakePage;
 var
+  OReadOnly,
   itemindex,olv,emp,f,fals,tru:OleVariant;
   HNDL : THandle;
   isError : Boolean;
@@ -419,10 +426,10 @@ var
      btnClose.Enabled := flg;
    end;
 begin
-  emp:='';
-  fals:=false;
-  tru:=true;
-  olv:=wdOpenFormatAuto;
+  emp := '';
+  fals:= False;
+  tru := True;
+  olv := wdOpenFormatAuto;
 
   With WordApplication do
   begin
@@ -431,7 +438,8 @@ begin
     except
       isError := True;
     end;
-
+    { TODO -oparsa : 14030605-bug349 }
+    (*
     if isError = False then
     begin
      DM.SaveTemplateToFile;
@@ -466,6 +474,34 @@ begin
      ItemIndex := 1;
      WordDocument.ConnectTo(WordApplication.Documents.Item(itemindex));
     end;
+    *)
+     if isError then
+       Caption := 'Yeganeh';
+
+     DM.SaveTemplateToFile;
+     ChangeFileOpenDirectory(_TempPath);
+     f:=_WordFileName;
+     _Word_Is_Opened := True;
+     HNDL := FindWindow('OpusApp',PAnsiChar('Yeganeh'));
+     SetForegroundWindow(HNDL);
+     { TODO -oparsa : 14030605-bug349 }
+     //Documents.Open(f,fals,fals,fals,emp,emp,fals,emp,emp,olv,emp,tru,tru,tru,tru);
+
+     OReadOnly := False;
+
+     try
+       Documents.Open(f,EmptyParam,OReadOnly,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam);
+     except  on e:exception do
+       MBaseForm.MessageShowString('›—„  ›«Ì· «‰ Œ«»Ì ÃÂ  »«“ ‘œ‰ „‰«”» ‰„Ì »«‘œ' +Char(10) + e.Message ,False);
+     end;
+     { TODO -oparsa : 14030605-bug349 }
+     If ActiveWindow.View.SplitSpecial <> wdPaneNone Then
+        ActiveWindow.Panes.Item(2).Close;
+     If ActiveWindow.ActivePane.View.Type_ in[ wdNormalView ,wdOutlineView] Then
+        ActiveWindow.ActivePane.View.Type_:= wdPrintView;
+     ItemIndex := 1;
+     WordDocument.ConnectTo(WordApplication.Documents.Item(itemindex));
+     { TODO -oparsa : 14030605-bug349 }
   end;{with wordapplication}
 end;
 
@@ -515,8 +551,14 @@ end;
 
 procedure TFExportToWord.WordApplicationDocumentBeforeClose(ASender: TObject;
   const Doc: _Document; var Cancel: WordBool);
+
 begin
+  { TODO -oparsa : 14030605-bug349 }
+  //Cancel := True;
   inherited;
+  { TODO -oparsa : 14030605-bug349 }
+
+
   if  (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName) and
       (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'X')    AND
       (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'.DOCX')    AND
@@ -527,9 +569,19 @@ begin
     SaveAs;
      if dm.FullTextSearch then
        dm.InsertTextIntoLetter(WordApplication,Letterid);
-    TimerWord.Enabled:=true;
+
+    WordApplicationversion := WordApplication.version;
+    TimerWord.Enabled:= True;
+
+    { TODO -oparsa : 14030605-bug349 }
+    //WordApplication.Disconnect;
+   //  if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
+
     WordApplication.Disconnect;
-    if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
+    WordDocument. Disconnect;
+
+    { TODO -oparsa : 14030605-bug349 }
+
 end;
 
 procedure TFExportToWord.btnCloseClick(Sender: TObject);
@@ -555,13 +607,16 @@ var
 begin
   inherited;
   try
-    ver := StrToint(copy(WordApplication.Version,0,length(WordApplication.Version)-2));
-    if ver<12 then
+    if Assigned(WordApplication) then
     begin
-      _Word_Is_Opened :=false;
-      TimerWord.Enabled:=false;
-      Close;
-      Exit;
+      ver := StrToint(copy(WordApplicationVersion,0,length(WordApplicationVersion)-2));
+      if ver<12 then
+      begin
+        _Word_Is_Opened :=false;
+        TimerWord.Enabled:=false;
+        Close;
+        Exit;
+      end;
     end;
 
     with dm,Get_LetterWordFile do
@@ -575,7 +630,7 @@ begin
       Get_LetterWordFileImage.LoadFromFile(_TempPath+_WordFileName);
       Get_LetterWordFileIsTemplate.AsBoolean := True;
       { TODO -oparsa : 14030514 }
-      Get_LetterWordFileFILENAME.AsString := _WordFileName ;
+      Get_LetterWordFileFILENAME.AsString := StringReplace(_WordFileName,'.DOCX','.doc',[rfReplaceAll, rfIgnoreCase]);
       { TODO -oparsa : 14030514 }
       post;
       _Word_Is_Opened :=false;
@@ -584,6 +639,9 @@ begin
   Close;
   except
     dm.Get_LetterWordFile.Cancel;
+    { TODO -oparsa : 14030605-bug349 }
+    TimerWord.Enabled:= false ;
+    { TODO -oparsa : 14030605-bug349 }
   end;
 end;
 
@@ -660,8 +718,8 @@ begin
           //Get_LetterWordFileImage.LoadFromFile(strTempFileName)
         begin
           Get_LetterWordFileImage.LoadFromFile(strTempFileName) ;
-          Get_LetterWordFileFileType.AsString := StringReplace(ExtractFileExt(OpenDialog.FileName), '.', '', [rfReplaceAll, rfIgnoreCase]) ;
-          Get_LetterWordFileFILENAME.AsString := ExtractFilename(OpenDialog.FileName);
+          Get_LetterWordFileFileType.AsString := StringReplace(StringReplace(ExtractFileExt(OpenDialog.FileName), '.', '', [rfReplaceAll, rfIgnoreCase]),'docx','doc',[rfReplaceAll, rfIgnoreCase]) ;
+          Get_LetterWordFileFILENAME.AsString := StringReplace(ExtractFilename(OpenDialog.FileName),'.docx','.doc',[rfReplaceAll, rfIgnoreCase]);
           Get_LetterWordFileIsTemplate.AsBoolean := True;
 
         end
@@ -671,8 +729,8 @@ begin
           //Get_LetterWordFileImage.LoadFromFile(strTempFileName)
         begin
           Get_LetterWordFileImage.LoadFromFile(strTempFileName) ;
-          Get_LetterWordFileFileType.AsString := StringReplace(ExtractFileExt(OpenDialog.FileName), '.', '', [rfReplaceAll, rfIgnoreCase]) ;
-          Get_LetterWordFileFILENAME.AsString := ExtractFilename(OpenDialog.FileName);
+          Get_LetterWordFileFileType.AsString := StringReplace(StringReplace(ExtractFileExt(OpenDialog.FileName), '.', '', [rfReplaceAll, rfIgnoreCase]),'docx','doc',[rfReplaceAll, rfIgnoreCase]) ;
+          Get_LetterWordFileFILENAME.AsString := StringReplace(ExtractFilename(OpenDialog.FileName),'.docx','.doc',[rfReplaceAll, rfIgnoreCase]);
           Get_LetterWordFileIsTemplate.AsBoolean := True;
 
         end
@@ -938,6 +996,21 @@ begin
   ExcelApplication.Connect;
   ExcelApplication.Visible[LCID] := True;
   ExcelApplication.Workbooks.Add(strFileName, LCID);
+end;
+
+procedure TFExportToWord.WordApplicationDocumentOpen(ASender: TObject;
+  const Doc: _Document);
+var
+  ver : integer;
+begin
+  { TODO -oparsa : 14030605-bug349 }
+  ver := StrToint(copy(WordApplication.Version,0,length(TWordApplication(ASender).Version)-2));
+  if ver<12 then
+  begin
+    ShowMessage('·ÿ›« «“ ¬›Ì” 2007 »Â »«·« «” ›«œÂ ò‰Ìœ');
+    Exit;
+  end;
+  { TODO -oparsa : 14030605-bug349 }
 end;
 
 end.

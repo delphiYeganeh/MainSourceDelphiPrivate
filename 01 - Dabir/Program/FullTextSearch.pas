@@ -188,8 +188,9 @@ begin
    { TODO -oparsa : 14030411 }
     Dm.qtemp.Close;
     Dm.qtemp.SQL.Clear;
-    Dm.qtemp.SQL.Add('SELECT IsCopy FROM ReCommites WHERE LetterID='+IntToStr(dm.Get_All_LetterLetterID.AsInteger));
+    Dm.qtemp.SQL.Add('SELECT IsCopy FROM dbo.ReCommites with(nolock) WHERE LetterID='+IntToStr(dm.Get_All_LetterLetterID.AsInteger));
     Dm.qtemp.Open;
+    Dm.qtemp.Last;
     if Dm.qtemp.FieldByName('IsCopy').AsString <> '' then
       _AllowToEditWordFiles:= not Dm.qtemp.FieldByName('IsCopy').AsBoolean;
    { TODO -oparsa : 14030411 }

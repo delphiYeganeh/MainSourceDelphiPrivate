@@ -457,7 +457,6 @@ Type
     GetList3Title_1: TWideStringField;
     GetList3Notes_1: TWideStringField;
     WordApplication: TWordApplication;
-    WordDocument: TWordDocument;
     ImageEnDBView1: TImageEnDBView;
     Action12: TAction;
     tmrGetEmail: TTimer;
@@ -714,6 +713,7 @@ Type
     FSecondOrgID: Integer;
     DBG_Sorted : boolean;
     isRunQuery : Boolean;
+    MainWordApplicationConnect :  Boolean;
 
     //---
     {Ranjbar 87.12.10}
@@ -1399,7 +1399,15 @@ begin
          Exec_update_UserLoginLogout(_UserLoginLogoutID,true,false);
          SysUtils.FileSetReadOnly(_TempPath+'temp.tif', false);
          DeleteFile(_TempPath+'temp.tif');
+         { TODO -oparsa : 14030605-bug349 }
+         ///if Dm.processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
+         if FileExists(pchar(_TempPath+_WordFileName)) then
+         begin
+           SysUtils.FileSetReadOnly(pchar(_TempPath+_WordFileName), false);
+           DeleteFile(pchar(_TempPath+_WordFileName));
+         end;
          if Dm.processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
+         { TODO -oparsa : 14030605-bug349 }
       end;
    except
    end;
@@ -1883,6 +1891,9 @@ begin
   inherited;
   EditTemplates := TEditTemplates.Create(Application);
   EditTemplates.ShowModal;
+  { TODO -oparsa : 14030505-bug349 }
+  freeandnil(EditTemplates);
+  { TODO -oparsa : 14030505-bug349 }
 end;
 
 procedure TMainForm.AExpotToWordExecute(Sender: TObject);
@@ -1907,8 +1918,9 @@ begin
 
   Dm.qtemp.Close;
   Dm.qtemp.SQL.Clear;
-  Dm.qtemp.SQL.Add('SELECT IsCopy FROM ReCommites WHERE LetterID='+IntToStr(dm.Get_All_LetterLetterID.AsInteger));
+  Dm.qtemp.SQL.Add('  SELECT IsCopy FROM dbo.ReCommites with(nolock) WHERE LetterID='+IntToStr(dm.Get_All_LetterLetterID.AsInteger));
   Dm.qtemp.Open;
+  Dm.qtemp.Last ;
   if Dm.qtemp.FieldByName('IsCopy').AsString <> '' then
     _AllowToEditWordFiles:= not Dm.qtemp.FieldByName('IsCopy').AsBoolean;
 
@@ -1936,6 +1948,7 @@ begin
                             True, Exec_has_WordExcel(FieldByName('Letterid').AsInteger)) then
     begin
       //«ê— ›«Ì· Ê—œÌ «Œ ’«’ œ«œÂ ‰‘œÂ »Êœ
+
       FExportToWord := TFExportToWord.Create(Application);
       with FExportToWord do
       begin
@@ -1949,6 +1962,10 @@ begin
         else
           ShowModal;
       end;
+      { TODO -oparsa : 14030605-bug349 }
+      if Assigned(FExportToWord) then
+        FreeAndNil(FExportToWord);
+     { TODO -oparsa : 14030605-bug349 }
     end;
   end;
   // Amin 1391/10/24 RefreshQuery;
@@ -1963,8 +1980,9 @@ begin
    { TODO -oparsa : 14030411 }
     Dm.qtemp.Close;
     Dm.qtemp.SQL.Clear;
-    Dm.qtemp.SQL.Add('SELECT IsCopy FROM ReCommites WHERE LetterID='+IntToStr(dm.Get_All_LetterLetterID.AsInteger));
+    Dm.qtemp.SQL.Add('SELECT IsCopy FROM dbo.ReCommites with(nolock) WHERE LetterID='+IntToStr(dm.Get_All_LetterLetterID.AsInteger));
     Dm.qtemp.Open;
+    Dm.qtemp.Last ;
     if Dm.qtemp.FieldByName('IsCopy').AsString <> '' then
       _AllowToEditWordFiles:= not Dm.qtemp.FieldByName('IsCopy').AsBoolean;
    { TODO -oparsa : 14030411 }
@@ -2156,8 +2174,29 @@ begin
     tru := true;
     olv := wdOpenFormatAuto;
     OReadOnly := False;
+    { TODO -oparsa : 14030626 }
+    {
     WordApplication.Connect;
     WordApplication.Disconnect;
+    }
+
+    if  MainWordApplicationConnect then
+    begin
+      // Disconnect from Word
+      WordApplication.Disconnect;
+      MainWordApplicationConnect := False;
+    end;
+
+    if not Dm.IsWordRunning then   // for error RPC   The RPC server is unavailable   Remote Procedure Call
+    begin
+      Dm.ActiveWord ;
+    end;
+
+    // Connect to Word
+    WordApplication.Connect;
+    MainWordApplicationConnect := True ;
+
+    { TODO -oparsa : 14030626 }
     { TODO -oparsa : 14030107 }
     //WordApplication.Visible := True;
     { TODO -oparsa : 14030107 }
@@ -5038,6 +5077,9 @@ begin
 
       _Word_Is_Opened := False;
       WordApplication.disconnect;
+      { TODO -oparsa : 14030626 }
+      MainWordApplicationConnect := False;
+      { TODO -oparsa : 14030626 }
       Exit;
     end;
 
@@ -5055,8 +5097,13 @@ begin
       Dm.InsertTextIntoLetter(TWordApplication(ASender),dm.Get_All_Letterletterid.AsInteger);
     _Word_Is_Opened := False;
     //WordApplication.disconnect;
+
+    // close one word                   or special one document close
     WordApplication.ActiveDocument.Close(SaveChanges,EmptyParam,EmptyParam);
+
+    // close all word application        or close word
     WordApplication.Quit;
+
     //_Dont_save_Word := not SaveChanges;
     dm.Timer_SaveWord.Enabled:=True; //–ŒÌ—Â ›«Ì· Ê—œ œ— »«‰ﬂ «ÿ·«⁄« 
     // Timer_SaveWordTimer(self);
