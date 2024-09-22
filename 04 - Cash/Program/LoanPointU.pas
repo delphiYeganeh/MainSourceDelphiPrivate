@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, BaseUnit, StdCtrls, Spin, ActnList, Mask, Buttons,
-  Menus, ExtCtrls;
+  Menus, ExtCtrls, DB, ADODB;
 
 type
   TFrLoanPoint = class(TYBaseForm)

@@ -1,4 +1,4 @@
-[SECTION_MAX_NO]=15
+[SECTION_MAX_NO]=16
 
 [BEGIN_S_NO]=1
 
@@ -2527,8 +2527,13 @@ BEGIN
 	
 	--SET @ret = 1
 	--IF @pid > 2
-    IF @pid = 2 
+        IF @pid = 2 --چارت سازمانی
 	    SET @ret = 1
+	--parsa    
+	ELSE IF @pid IN (3,4)--سازمان های برونی
+	   SET @ret = 0    
+	--parsa
+
 	RETURN @ret
 END
 
@@ -2761,4 +2766,43 @@ begin
 	  
 	return(@result)  
 end
+[END_S_NO]
+
+
+[BEGIN_S_NO]=16
+
+alter FUNCTION [dbo].[IS_Inner_ORG]
+(
+	@pid INT
+)
+	RETURNS BIT
+AS
+BEGIN
+	WHILE (@pid>4)
+	BEGIN
+		SELECT @pid = parentID FROM FromOrganizations WHERE ID = @pid
+	END
+	
+	DECLARE @ret BIT
+	
+	--parsa
+       --	SET @ret = 3
+        --پیش فرض همه سازمان درونی هستند
+	SET @ret = 1
+	--parsa
+	
+	--SET @ret = 1
+	--IF @pid > 2
+	--parsa 
+       -- IF @pid = 2 --چارت سازمانی
+       --	 SET @ret = 1
+   
+
+	IF @pid IN (3,4)--سازمان های برونی
+	   SET @ret = 0    
+	--parsa
+	    
+	RETURN @ret
+END
+
 [END_S_NO]

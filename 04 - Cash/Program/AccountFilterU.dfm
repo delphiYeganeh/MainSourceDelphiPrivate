@@ -11,8 +11,9 @@ inherited FrAccountFilter: TFrAccountFilter
   object Label8: TLabel [0]
     Left = 451
     Top = 196
-    Width = 25
+    Width = 84
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1570#1583#1585#1587
@@ -27,8 +28,9 @@ inherited FrAccountFilter: TFrAccountFilter
   object Label3: TLabel [1]
     Left = 451
     Top = 62
-    Width = 13
+    Width = 84
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1606#1575#1605
@@ -43,8 +45,9 @@ inherited FrAccountFilter: TFrAccountFilter
   object label1: TLabel [2]
     Left = 451
     Top = 10
-    Width = 64
+    Width = 84
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1588#1605#1575#1585#1607' '#1581#1587#1575#1576
@@ -59,8 +62,9 @@ inherited FrAccountFilter: TFrAccountFilter
   object Label2: TLabel [3]
     Left = 451
     Top = 87
-    Width = 61
+    Width = 84
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610' '
@@ -75,8 +79,9 @@ inherited FrAccountFilter: TFrAccountFilter
   object Label9: TLabel [4]
     Left = 188
     Top = 115
-    Width = 58
+    Width = 89
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = ':'#1588#1605#1575#1585#1607' '#1578#1604#1601#1606
@@ -91,8 +96,9 @@ inherited FrAccountFilter: TFrAccountFilter
   object Label4: TLabel [5]
     Left = 451
     Top = 114
-    Width = 32
+    Width = 84
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1606#1575#1605' '#1662#1583#1585' '
@@ -107,8 +113,9 @@ inherited FrAccountFilter: TFrAccountFilter
   object Label5: TLabel [6]
     Left = 451
     Top = 141
-    Width = 81
+    Width = 84
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1588#1605#1575#1585#1607' '#1588#1606#1575#1587#1606#1575#1605#1607
@@ -125,6 +132,7 @@ inherited FrAccountFilter: TFrAccountFilter
     Top = 222
     Width = 84
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1578#1575#1585#1610#1582' '#1575#1601#1578#1578#1575#1581' '#1581#1587#1575#1576
@@ -139,8 +147,9 @@ inherited FrAccountFilter: TFrAccountFilter
   object Label7: TLabel [8]
     Left = 188
     Top = 88
-    Width = 41
+    Width = 89
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1605#1581#1604' '#1578#1608#1604#1583
@@ -155,8 +164,9 @@ inherited FrAccountFilter: TFrAccountFilter
   object Label10: TLabel [9]
     Left = 451
     Top = 169
-    Width = 41
+    Width = 84
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1578#1575#1585#1610#1582' '#1578#1608#1604#1583
@@ -173,6 +183,7 @@ inherited FrAccountFilter: TFrAccountFilter
     Top = 10
     Width = 89
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1578#1575#1585#1610#1582' '#1588#1585#1608#1593' '#1593#1590#1608#1610#1578
@@ -187,8 +198,9 @@ inherited FrAccountFilter: TFrAccountFilter
   object Label13: TLabel [11]
     Left = 188
     Top = 141
-    Width = 52
+    Width = 89
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1606#1608#1593' '#1593#1590#1608#1610#1578
@@ -203,8 +215,9 @@ inherited FrAccountFilter: TFrAccountFilter
   object LblPersonal: TLabel [12]
     Left = 451
     Top = 36
-    Width = 71
+    Width = 84
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1588#1605#1575#1585#1607' '#1603#1575#1585#1605#1606#1583#1610
@@ -219,7 +232,7 @@ inherited FrAccountFilter: TFrAccountFilter
   object Label15: TLabel [13]
     Left = 188
     Top = 62
-    Width = 40
+    Width = 89
     Height = 13
     Anchors = [akTop, akRight]
     Caption = #1578#1608#1590#1610#1581#1575#1578
@@ -233,7 +246,7 @@ inherited FrAccountFilter: TFrAccountFilter
   object LblFamily: TLabel [14]
     Left = 188
     Top = 36
-    Width = 31
+    Width = 89
     Height = 13
     Anchors = [akTop, akRight]
     Caption = #1582#1575#1606#1608#1575#1583#1607
@@ -248,9 +261,10 @@ inherited FrAccountFilter: TFrAccountFilter
   object userField1: TLabel [15]
     Left = 188
     Top = 169
-    Width = 42
+    Width = 89
     Height = 13
     Hint = #1593#1606#1608#1575#1606' '#1575#1610#1606' '#1601#1610#1604#1583' '#1585#1575' '#1605#1610' '#1578#1608#1575#1606#1610#1583' '#1583#1585' '#1575#1591#1604#1575#1593#1575#1578' '#1579#1575#1576#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1578#1594#1610#1610#1585' '#1583#1607#1610#1583
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1601#1610#1604#1583' '#1705#1575#1585#1576#1585
@@ -265,9 +279,10 @@ inherited FrAccountFilter: TFrAccountFilter
   object userField2: TLabel [16]
     Left = 188
     Top = 196
-    Width = 42
+    Width = 89
     Height = 13
     Hint = #1593#1606#1608#1575#1606' '#1575#1610#1606' '#1601#1610#1604#1583' '#1585#1575' '#1605#1610' '#1578#1608#1575#1606#1610#1583' '#1583#1585' '#1575#1591#1604#1575#1593#1575#1578' '#1579#1575#1576#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1578#1594#1610#1610#1585' '#1583#1607#1610#1583
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1601#1610#1604#1583' '#1705#1575#1585#1576#1585
@@ -282,8 +297,9 @@ inherited FrAccountFilter: TFrAccountFilter
   object Label11: TLabel [17]
     Left = 188
     Top = 222
-    Width = 38
+    Width = 89
     Height = 13
+    Alignment = taRightJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
     Caption = #1605#1608#1580#1608#1583#1610
@@ -300,7 +316,6 @@ inherited FrAccountFilter: TFrAccountFilter
     Top = 31
     Width = 23
     Height = 22
-    Anchors = [akTop, akRight]
     OnClick = SpeedButton1Click
   end
   object SpeedButton2: TSpeedButton [19]
@@ -308,13 +323,12 @@ inherited FrAccountFilter: TFrAccountFilter
     Top = 139
     Width = 23
     Height = 22
-    Anchors = [akTop, akRight]
     OnClick = SpeedButton2Click
   end
   object YWhereEdit1: TYWhereEdit [20]
-    Left = 365
+    Left = 295
     Top = 4
-    Width = 80
+    Width = 150
     Height = 24
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
@@ -391,7 +405,7 @@ inherited FrAccountFilter: TFrAccountFilter
     Top = 110
     Width = 150
     Height = 24
-    Anchors = [akTop, akRight]
+    Anchors = [akLeft, akTop, akRight]
     BiDiMode = bdRightToLeft
     Color = clWhite
     Font.Charset = ARABIC_CHARSET
@@ -462,9 +476,9 @@ inherited FrAccountFilter: TFrAccountFilter
     TitleField = 'Title'
   end
   object YWhereEdit6: TYWhereEdit [26]
-    Left = 365
+    Left = 295
     Top = 137
-    Width = 80
+    Width = 150
     Height = 24
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
@@ -491,7 +505,7 @@ inherited FrAccountFilter: TFrAccountFilter
     Top = 83
     Width = 150
     Height = 24
-    Anchors = [akTop, akRight]
+    Anchors = [akLeft, akTop, akRight]
     BiDiMode = bdLeftToRight
     Color = clWhite
     Font.Charset = ARABIC_CHARSET
@@ -516,7 +530,7 @@ inherited FrAccountFilter: TFrAccountFilter
     Top = 137
     Width = 150
     Height = 24
-    Anchors = [akTop, akRight]
+    Anchors = [akLeft, akTop, akRight]
     BiDiMode = bdLeftToRight
     Color = 15395583
     Font.Charset = ARABIC_CHARSET
@@ -540,9 +554,9 @@ inherited FrAccountFilter: TFrAccountFilter
     Connection = dm.YeganehConnection
   end
   object YWhereEdit2: TYWhereEdit [29]
-    Left = 365
+    Left = 295
     Top = 30
-    Width = 80
+    Width = 150
     Height = 24
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
@@ -569,7 +583,7 @@ inherited FrAccountFilter: TFrAccountFilter
     Top = 56
     Width = 150
     Height = 24
-    Anchors = [akTop, akRight]
+    Anchors = [akLeft, akTop, akRight]
     BiDiMode = bdLeftToRight
     Font.Charset = ARABIC_CHARSET
     Font.Color = clBlack
@@ -593,7 +607,7 @@ inherited FrAccountFilter: TFrAccountFilter
     Top = 32
     Width = 150
     Height = 21
-    Anchors = [akTop, akRight]
+    Anchors = [akLeft, akTop, akRight]
     BiDiMode = bdLeftToRight
     Color = 15395583
     Font.Charset = ARABIC_CHARSET
@@ -622,7 +636,7 @@ inherited FrAccountFilter: TFrAccountFilter
     Width = 150
     Height = 24
     Hint = #1593#1606#1608#1575#1606' '#1575#1610#1606' '#1601#1610#1604#1583' '#1585#1575' '#1605#1610' '#1578#1608#1575#1606#1610#1583' '#1583#1585' '#1575#1591#1604#1575#1593#1575#1578' '#1579#1575#1576#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1578#1594#1610#1610#1585' '#1583#1607#1610#1583
-    Anchors = [akTop, akRight]
+    Anchors = [akLeft, akTop, akRight]
     BiDiMode = bdLeftToRight
     Color = clWhite
     Font.Charset = ARABIC_CHARSET
@@ -648,7 +662,7 @@ inherited FrAccountFilter: TFrAccountFilter
     Width = 150
     Height = 24
     Hint = #1593#1606#1608#1575#1606' '#1575#1610#1606' '#1601#1610#1604#1583' '#1585#1575' '#1605#1610' '#1578#1608#1575#1606#1610#1583' '#1583#1585' '#1575#1591#1604#1575#1593#1575#1578' '#1579#1575#1576#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1578#1594#1610#1610#1585' '#1583#1607#1610#1583
-    Anchors = [akTop, akRight]
+    Anchors = [akLeft, akTop, akRight]
     BiDiMode = bdLeftToRight
     Color = clWhite
     Font.Charset = ARABIC_CHARSET
@@ -673,7 +687,7 @@ inherited FrAccountFilter: TFrAccountFilter
     Top = 218
     Width = 150
     Height = 24
-    Anchors = [akTop, akRight]
+    Anchors = [akLeft, akTop, akRight]
     BiDiMode = bdLeftToRight
     Color = clWhite
     Font.Charset = ARABIC_CHARSET
@@ -693,9 +707,9 @@ inherited FrAccountFilter: TFrAccountFilter
     TitleField = 'Title'
   end
   object MEBirthDate: TSolarDatePicker [35]
-    Left = 353
+    Left = 295
     Top = 165
-    Width = 92
+    Width = 150
     Height = 21
     Anchors = [akTop, akRight]
     About = 'Created by : Mohamad Khorsandi'
@@ -729,9 +743,9 @@ inherited FrAccountFilter: TFrAccountFilter
     DataFieldAutoSaveModified = False
   end
   object MEAccountDate: TSolarDatePicker [36]
-    Left = 354
+    Left = 295
     Top = 218
-    Width = 92
+    Width = 150
     Height = 21
     Anchors = [akTop, akRight]
     About = 'Created by : Mohamad Khorsandi'
@@ -765,11 +779,11 @@ inherited FrAccountFilter: TFrAccountFilter
     DataFieldAutoSaveModified = False
   end
   object MEMonthlyBeginDate: TSolarDatePicker [37]
-    Left = 88
+    Left = 30
     Top = 6
-    Width = 92
+    Width = 150
     Height = 21
-    Anchors = [akTop, akRight]
+    Anchors = [akLeft, akTop, akRight]
     About = 'Created by : Mohamad Khorsandi'
     BiDiMode = bdLeftToRight
     TabOrder = 9
@@ -816,15 +830,15 @@ inherited FrAccountFilter: TFrAccountFilter
     Top = 248
     Width = 164
     Height = 17
-    Anchors = [akTop, akRight]
+    Anchors = [akLeft, akTop, akRight]
     Caption = #1606#1605#1575#1610#1588' '#1608#1575#1605#1607#1575#1610' '#1578#1587#1608#1610#1607' '#1606#1588#1583#1607
     Checked = True
     State = cbChecked
     TabOrder = 19
   end
   inherited ahmadvand: TActionList
-    Left = 247
-    Top = 28
+    Left = 287
+    Top = 228
   end
   inherited Grid_PopupMenu: TPopupMenu
     Left = 63

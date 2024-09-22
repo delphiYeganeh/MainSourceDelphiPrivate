@@ -551,7 +551,7 @@ begin
         begin
            { TODO -oparsa : 14030125 }
            //ShowMessage('ãæÌæÏí ÍÓÇÈ ˜Çİí äíÓÊ');
-           ShowMessage('ãæÌæÏí ÍÓÇÈ ˜Çİí äíÓÊ'+char(10)+ Inttostr(Abs(balance ))+' ÍÓÇÈ ãæÑÏ äÙÑ ÈÏå˜ÇÑ ãí ÈÇÔÏ ');
+           ShowMessage('ãæÌæÏí ÍÓÇÈ ˜Çİí äíÓÊ'+char(10)+ ' ãÈáÛ ' +Inttostr(Abs(balance ))+' ÈÏå˜ÇÑ ãí ÈÇÔÏ ');
            { TODO -oparsa : 14030125 }
            Abort;
         end;

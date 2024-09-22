@@ -433,11 +433,15 @@ inherited FrReport_loanPoint: TFrReport_loanPoint
     Align = alClient
     Caption = 'Panel3'
     TabOrder = 2
+    DesignSize = (
+      774
+      437)
     object Label1: TLabel
       Left = 699
       Top = 16
       Width = 68
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1588#1605#1575#1585#1607' '#1581#1587#1575#1576':'
     end
     object YDBGrid: TYDBGrid
@@ -576,6 +580,7 @@ inherited FrReport_loanPoint: TFrReport_loanPoint
       Top = 11
       Width = 121
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       TabOrder = 1
     end
   end

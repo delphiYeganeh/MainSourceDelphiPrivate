@@ -204,6 +204,7 @@ type
     QRDBText26: TQRDBText;
     QRDBText27: TQRDBText;
     QRLabel30: TQRLabel;
+    PAccountDetailTmp: TPanel;
     procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -305,7 +306,10 @@ procedure TFrPrintMonthly.FormCreate(Sender: TObject);
 begin
   inherited;
   FrAccountDetails:=TFrAccountDetails.Create(Application);
-  FrAccountDetails.ShowInPanel(PAccountDetail);
+  { TODO -oparsa : 14030701 }
+  //FrAccountDetails.ShowInPanel(PAccountDetail);
+  FrAccountDetails.ShowInPanel(PAccountDetailTmp);
+  { TODO -oparsa : 14030701 }
   //message.Text:=_PriodTitle;
   Cashtitle1.Caption:=trim(_SoftTitle);
   Cashtitle2.Caption:=trim(_SoftTitle);

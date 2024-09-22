@@ -1,8 +1,8 @@
 object FrAddReportName: TFrAddReportName
   Left = 336
   Top = 309
-  Width = 674
-  Height = 338
+  Width = 693
+  Height = 343
   BiDiMode = bdRightToLeft
   BorderIcons = [biSystemMenu]
   Caption = #1604#1610#1587#1578' '#1711#1586#1575#1585#1588#1575#1578
@@ -16,6 +16,7 @@ object FrAddReportName: TFrAddReportName
   ParentBiDiMode = False
   Position = poScreenCenter
   Scaled = False
+  OnCanResize = FormCanResize
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -24,31 +25,36 @@ object FrAddReportName: TFrAddReportName
   object Panel1: TPanel
     Left = 0
     Top = 208
-    Width = 641
+    Width = 677
     Height = 49
     Align = alBottom
     TabOrder = 0
+    DesignSize = (
+      677
+      49)
     object DBNavigator1: TDBNavigator
       Left = 96
       Top = 8
       Width = 410
       Height = 33
       DataSource = dm.DReportsName
+      Anchors = [akTop, akRight]
       TabOrder = 0
     end
   end
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 641
+    Width = 677
     Height = 208
     Align = alTop
     TabOrder = 1
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
-      Width = 637
-      Height = 200
+      Width = 675
+      Height = 206
+      Align = alClient
       DataSource = dm.DReportsName
       TabOrder = 0
       TitleFont.Charset = ARABIC_CHARSET
@@ -98,13 +104,13 @@ object FrAddReportName: TFrAddReportName
   object Panel3: TPanel
     Left = 0
     Top = 257
-    Width = 641
+    Width = 677
     Height = 47
     Align = alBottom
     TabOrder = 2
     object Button5: TBitBtn
       Left = 5
-      Top = 5
+      Top = 3
       Width = 68
       Height = 38
       Cancel = True

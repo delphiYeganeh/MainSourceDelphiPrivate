@@ -1,8 +1,8 @@
 inherited FrAddLoanType: TFrAddLoanType
   Left = 806
   Top = 344
-  Width = 406
-  Height = 352
+  Width = 402
+  Height = 361
   Caption = #1575#1606#1608#1575#1593' '#1608#1575#1605' '
   Color = clBtnFace
   OldCreateOrder = True
@@ -10,16 +10,16 @@ inherited FrAddLoanType: TFrAddLoanType
   TextHeight = 13
   object Panel2: TPanel [0]
     Left = 0
-    Top = 240
-    Width = 390
+    Top = 249
+    Width = 386
     Height = 73
     Align = alBottom
     TabOrder = 0
     DesignSize = (
-      390
+      386
       73)
     object xpBitBtn1: TBitBtn
-      Left = 82
+      Left = 74
       Top = 6
       Width = 164
       Height = 25
@@ -35,7 +35,7 @@ inherited FrAddLoanType: TFrAddLoanType
       OnClick = xpBitBtn1Click
     end
     object BitBtn4: TBitBtn
-      Left = 268
+      Left = 260
       Top = 6
       Width = 60
       Height = 25
@@ -86,7 +86,7 @@ inherited FrAddLoanType: TFrAddLoanType
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
     end
     object BitBtn2: TBitBtn
-      Left = 330
+      Left = 322
       Top = 6
       Width = 60
       Height = 25
@@ -137,7 +137,7 @@ inherited FrAddLoanType: TFrAddLoanType
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
     end
     object BitBtn8: TBitBtn
-      Left = 7
+      Left = 3
       Top = 38
       Width = 60
       Height = 25
@@ -187,7 +187,7 @@ inherited FrAddLoanType: TFrAddLoanType
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
     end
     object BitBtn7: TBitBtn
-      Left = 82
+      Left = 74
       Top = 38
       Width = 60
       Height = 25
@@ -238,7 +238,7 @@ inherited FrAddLoanType: TFrAddLoanType
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
     end
     object BitBtn6: TBitBtn
-      Left = 144
+      Left = 136
       Top = 38
       Width = 60
       Height = 25
@@ -289,7 +289,7 @@ inherited FrAddLoanType: TFrAddLoanType
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
     end
     object BitBtn5: TBitBtn
-      Left = 206
+      Left = 198
       Top = 38
       Width = 60
       Height = 25
@@ -340,7 +340,7 @@ inherited FrAddLoanType: TFrAddLoanType
         FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00}
     end
     object BitBtn3: TBitBtn
-      Left = 268
+      Left = 260
       Top = 38
       Width = 60
       Height = 25
@@ -391,7 +391,7 @@ inherited FrAddLoanType: TFrAddLoanType
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
     end
     object BitBtn1: TBitBtn
-      Left = 330
+      Left = 322
       Top = 38
       Width = 60
       Height = 25
@@ -445,17 +445,17 @@ inherited FrAddLoanType: TFrAddLoanType
   object Panel11: TPanel [1]
     Left = 0
     Top = 0
-    Width = 390
-    Height = 240
+    Width = 386
+    Height = 249
     Align = alClient
     TabOrder = 1
     DesignSize = (
-      390
-      240)
+      386
+      249)
     object Label2: TLabel
-      Left = 330
+      Left = 315
       Top = 11
-      Width = 26
+      Width = 60
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1593#1606#1608#1575#1606
@@ -468,9 +468,9 @@ inherited FrAddLoanType: TFrAddLoanType
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 330
+      Left = 315
       Top = 36
-      Width = 56
+      Width = 60
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1578#1593#1583#1575#1583' '#1575#1602#1587#1575#1591
@@ -483,9 +483,9 @@ inherited FrAddLoanType: TFrAddLoanType
       ParentFont = False
     end
     object Label6: TLabel
-      Left = 122
+      Left = 110
       Top = 86
-      Width = 21
+      Width = 58
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1587#1608#1583
@@ -498,7 +498,7 @@ inherited FrAddLoanType: TFrAddLoanType
       ParentFont = False
     end
     object Label7: TLabel
-      Left = 122
+      Left = 110
       Top = 36
       Width = 58
       Height = 13
@@ -513,9 +513,9 @@ inherited FrAddLoanType: TFrAddLoanType
       ParentFont = False
     end
     object Label8: TLabel
-      Left = 122
+      Left = 110
       Top = 61
-      Width = 50
+      Width = 58
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1705#1575#1585#1605#1586#1583' '#1579#1575#1576#1578
@@ -528,9 +528,9 @@ inherited FrAddLoanType: TFrAddLoanType
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 330
+      Left = 315
       Top = 87
-      Width = 45
+      Width = 60
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1587#1602#1601' '#1608#1575#1605
@@ -543,7 +543,7 @@ inherited FrAddLoanType: TFrAddLoanType
       ParentFont = False
     end
     object Label9: TLabel
-      Left = 196
+      Left = 184
       Top = 86
       Width = 60
       Height = 13
@@ -557,7 +557,7 @@ inherited FrAddLoanType: TFrAddLoanType
       ParentFont = False
     end
     object Label10: TLabel
-      Left = 224
+      Left = 220
       Top = 110
       Width = 149
       Height = 13
@@ -571,7 +571,7 @@ inherited FrAddLoanType: TFrAddLoanType
       ParentFont = False
     end
     object Label11: TLabel
-      Left = 330
+      Left = 315
       Top = 61
       Width = 60
       Height = 13
@@ -586,11 +586,10 @@ inherited FrAddLoanType: TFrAddLoanType
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 26
+      Left = 14
       Top = 87
       Width = 24
       Height = 13
-      Anchors = [akTop, akRight]
       Caption = #1583#1585#1589#1583
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -600,18 +599,19 @@ inherited FrAddLoanType: TFrAddLoanType
       ParentFont = False
     end
     object Label13: TLabel
-      Left = 122
+      Left = 114
       Top = 139
       Width = 95
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1711#1585#1608#1607' '#1605#1576#1575#1604#1594' '#1662#1610#1588' '#1601#1585#1590
     end
     object DBEdit2: TDBEdit
-      Left = 53
+      Left = 41
       Top = 7
       Width = 273
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       DataField = 'LoanTypeTitle'
       DataSource = dm.DLoanType
       Font.Charset = ARABIC_CHARSET
@@ -625,7 +625,7 @@ inherited FrAddLoanType: TFrAddLoanType
       OnExit = TEditExit
     end
     object DBEdit3: TDBEdit
-      Left = 261
+      Left = 249
       Top = 32
       Width = 65
       Height = 21
@@ -643,11 +643,11 @@ inherited FrAddLoanType: TFrAddLoanType
       OnExit = TEditExit
     end
     object DBEdit6: TDBEdit
-      Left = 53
+      Left = 41
       Top = 83
       Width = 65
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       DataField = 'InterestPercent'
       DataSource = dm.DLoanType
       Font.Charset = ARABIC_CHARSET
@@ -661,11 +661,11 @@ inherited FrAddLoanType: TFrAddLoanType
       OnExit = TEditExit
     end
     object DBEdit7: TDBEdit
-      Left = 53
+      Left = 41
       Top = 32
       Width = 65
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       DataField = 'WagePercent'
       DataSource = dm.DLoanType
       Font.Charset = ARABIC_CHARSET
@@ -679,11 +679,11 @@ inherited FrAddLoanType: TFrAddLoanType
       OnExit = TEditExit
     end
     object DBEdit8: TDBEdit
-      Left = 53
+      Left = 41
       Top = 57
       Width = 65
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       DataField = 'FixWage'
       DataSource = dm.DLoanType
       Font.Charset = ARABIC_CHARSET
@@ -697,7 +697,7 @@ inherited FrAddLoanType: TFrAddLoanType
       OnExit = TEditExit
     end
     object DBCheckBox1: TDBCheckBox
-      Left = 289
+      Left = 285
       Top = 144
       Width = 80
       Height = 17
@@ -717,7 +717,7 @@ inherited FrAddLoanType: TFrAddLoanType
       OnClick = DBCheckBox1Click
     end
     object DBEdit1: TDBEdit
-      Left = 261
+      Left = 249
       Top = 83
       Width = 65
       Height = 21
@@ -733,7 +733,7 @@ inherited FrAddLoanType: TFrAddLoanType
       TabOrder = 4
     end
     object DBEdit9: TDBEdit
-      Left = 261
+      Left = 249
       Top = 57
       Width = 65
       Height = 21
@@ -749,11 +749,11 @@ inherited FrAddLoanType: TFrAddLoanType
       TabOrder = 2
     end
     object Panel1: TPanel
-      Left = 53
+      Left = 40
       Top = 179
-      Width = 320
+      Width = 329
       Height = 65
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       BevelInner = bvLowered
       BorderStyle = bsSingle
       Font.Charset = ARABIC_CHARSET
@@ -765,10 +765,10 @@ inherited FrAddLoanType: TFrAddLoanType
       ParentFont = False
       TabOrder = 9
       DesignSize = (
-        316
+        325
         61)
       object Label4: TLabel
-        Left = 152
+        Left = 161
         Top = 8
         Width = 157
         Height = 13
@@ -777,7 +777,7 @@ inherited FrAddLoanType: TFrAddLoanType
         FocusControl = DBEdit4
       end
       object Label5: TLabel
-        Left = 97
+        Left = 106
         Top = 35
         Width = 212
         Height = 13
@@ -786,31 +786,32 @@ inherited FrAddLoanType: TFrAddLoanType
         FocusControl = DBEdit5
       end
       object DBEdit4: TDBEdit
-        Left = 65
+        Left = 18
         Top = 7
         Width = 80
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         DataField = 'MinAcountExist'
         DataSource = dm.DLoanType
         TabOrder = 0
       end
       object DBEdit5: TDBEdit
-        Left = 11
+        Left = 18
         Top = 34
         Width = 80
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         DataField = 'MinLastPartPercent'
         DataSource = dm.DLoanType
         TabOrder = 1
       end
     end
     object DBLkCBPeriod: TDBLookupComboBox
-      Left = 200
+      Left = 192
       Top = 57
       Width = 57
       Height = 21
+      Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
       DataField = 'Period'
       DataSource = dm.DLoanType
@@ -821,11 +822,11 @@ inherited FrAddLoanType: TFrAddLoanType
       TabOrder = 3
     end
     object DBEdit10: TDBEdit
-      Left = 53
+      Left = 41
       Top = 136
       Width = 65
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       DataField = 'LoanAmounGroup'
       DataSource = dm.DLoanType
       Font.Charset = ARABIC_CHARSET
@@ -837,7 +838,7 @@ inherited FrAddLoanType: TFrAddLoanType
       TabOrder = 10
     end
     object DBCheckBox2: TDBCheckBox
-      Left = 240
+      Left = 236
       Top = 162
       Width = 129
       Height = 17
@@ -857,8 +858,8 @@ inherited FrAddLoanType: TFrAddLoanType
     end
   end
   inherited ahmadvand: TActionList
-    Left = 28
-    Top = 235
+    Left = 108
+    Top = 91
   end
   inherited Grid_PopupMenu: TPopupMenu
     Left = 23
@@ -896,8 +897,8 @@ inherited FrAddLoanType: TFrAddLoanType
           end>
         AutoSize = False
       end>
-    Left = 29
-    Top = 197
+    Left = 13
+    Top = 125
     StyleName = 'XP Style'
     object DataSetInsert1: TDataSetInsert
       Category = 'Dataset'

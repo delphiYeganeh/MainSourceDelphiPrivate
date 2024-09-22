@@ -329,7 +329,7 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
     object Label1: TLabel
       Left = 355
       Top = 11
-      Width = 11
+      Width = 26
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1705#1583
@@ -359,7 +359,7 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
     object Label3: TLabel
       Left = 355
       Top = 62
-      Width = 20
+      Width = 26
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1605#1576#1604#1594
@@ -377,7 +377,7 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
       Top = 7
       Width = 132
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       DataField = 'MonthlyTypeID'
       DataSource = dm.DMonthlyType
       Font.Charset = ARABIC_CHARSET
@@ -395,7 +395,7 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
       Top = 32
       Width = 294
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       DataField = 'MonthlyTypeTitle'
       DataSource = dm.DMonthlyType
       Font.Charset = ARABIC_CHARSET
@@ -413,7 +413,7 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
       Top = 58
       Width = 132
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       DataField = 'Amount'
       DataSource = dm.DMonthlyType
       Font.Charset = ARABIC_CHARSET

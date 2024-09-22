@@ -18,9 +18,9 @@ inherited FrEditMonthly: TFrEditMonthly
       504
       84)
     object Label2: TLabel
-      Left = 433
+      Left = 434
       Top = 35
-      Width = 60
+      Width = 64
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1575#1601#1578#1578#1575#1581' '#1581#1587#1575#1576
@@ -29,7 +29,7 @@ inherited FrEditMonthly: TFrEditMonthly
     object Label3: TLabel
       Left = 434
       Top = 58
-      Width = 38
+      Width = 64
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1605#1608#1580#1608#1583#1610
@@ -45,9 +45,9 @@ inherited FrEditMonthly: TFrEditMonthly
       FocusControl = DBEdit6
     end
     object Label4: TLabel
-      Left = 230
+      Left = 231
       Top = 35
-      Width = 34
+      Width = 60
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1608#1590#1593#1610#1578
@@ -63,9 +63,9 @@ inherited FrEditMonthly: TFrEditMonthly
       FocusControl = DBEdit5
     end
     object DBEdit2: TDBEdit
-      Left = 350
+      Left = 320
       Top = 32
-      Width = 80
+      Width = 110
       Height = 21
       Anchors = [akTop, akRight]
       BevelOuter = bvNone

@@ -30,11 +30,10 @@ inherited FrAccountDetails: TFrAccountDetails
       Pen.Style = psInsideFrame
     end
     object Label1: TLabel
-      Left = 589
+      Left = 588
       Top = 15
-      Width = 64
+      Width = 75
       Height = 13
-      Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = #1588#1605#1575#1585#1607' '#1581#1587#1575#1576
       FocusControl = DBEdit1
@@ -50,21 +49,19 @@ inherited FrAccountDetails: TFrAccountDetails
       FocusControl = DBEdit4
     end
     object Label10: TLabel
-      Left = 590
+      Left = 588
       Top = 63
-      Width = 26
+      Width = 75
       Height = 13
-      Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = #1593#1606#1608#1575#1606
       FocusControl = DBEdit8
     end
     object Label3: TLabel
-      Left = 589
+      Left = 588
       Top = 130
-      Width = 38
+      Width = 75
       Height = 13
-      Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = #1605#1608#1580#1608#1583#1610
       FocusControl = DBEdit2
@@ -89,19 +86,17 @@ inherited FrAccountDetails: TFrAccountDetails
     object PersonalNo: TLabel
       Left = 588
       Top = 39
-      Width = 71
+      Width = 75
       Height = 13
-      Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = #1588#1605#1575#1585#1607' '#1705#1575#1585#1605#1606#1583#1610
       FocusControl = DBEdit5
     end
     object Label2: TLabel
-      Left = 589
+      Left = 588
       Top = 102
-      Width = 74
+      Width = 75
       Height = 13
-      Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = #1605#1608#1580#1608#1583#1610' '#1605#1575#1607#1610#1575#1606#1607
       FocusControl = DBEdit6
@@ -113,11 +108,10 @@ inherited FrAccountDetails: TFrAccountDetails
       ParentFont = False
     end
     object Label6: TLabel
-      Left = 375
+      Left = 367
       Top = 102
       Width = 74
       Height = 13
-      Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = #1583#1585#1610#1575#1601#1578' '#1608' '#1662#1585#1583#1575#1582#1578
       FocusControl = DBEdit7
@@ -129,11 +123,10 @@ inherited FrAccountDetails: TFrAccountDetails
       ParentFont = False
     end
     object Label7: TLabel
-      Left = 375
+      Left = 367
       Top = 130
-      Width = 54
+      Width = 74
       Height = 13
-      Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = #1605#1608#1580#1608#1583#1610' '#1705#1604
       FocusControl = DBEdit9
@@ -187,8 +180,8 @@ inherited FrAccountDetails: TFrAccountDetails
     end
     object DBText3: TDBText
       Left = 449
-      Top = 126
-      Width = 44
+      Top = 128
+      Width = 46
       Height = 17
       Anchors = [akTop, akRight]
       Color = clBtnFace
@@ -197,7 +190,7 @@ inherited FrAccountDetails: TFrAccountDetails
       ParentColor = False
     end
     object DBText4: TDBText
-      Left = 242
+      Left = 227
       Top = 100
       Width = 43
       Height = 17
@@ -208,9 +201,9 @@ inherited FrAccountDetails: TFrAccountDetails
       ParentColor = False
     end
     object DBText5: TDBText
-      Left = 239
-      Top = 126
-      Width = 45
+      Left = 227
+      Top = 128
+      Width = 43
       Height = 17
       Anchors = [akTop, akRight]
       Color = clBtnFace
@@ -265,7 +258,7 @@ inherited FrAccountDetails: TFrAccountDetails
       TabOrder = 3
     end
     object DBEdit3: TDBEdit
-      Left = 245
+      Left = 244
       Top = 10
       Width = 127
       Height = 21
@@ -299,7 +292,7 @@ inherited FrAccountDetails: TFrAccountDetails
       TabOrder = 6
     end
     object DBEdit7: TDBEdit
-      Left = 285
+      Left = 272
       Top = 98
       Width = 91
       Height = 21
@@ -310,7 +303,7 @@ inherited FrAccountDetails: TFrAccountDetails
       TabOrder = 7
     end
     object Panel2: TPanel
-      Left = 22
+      Left = 8
       Top = 1
       Width = 215
       Height = 172
@@ -351,7 +344,7 @@ inherited FrAccountDetails: TFrAccountDetails
       end
     end
     object DBEdit9: TDBEdit
-      Left = 285
+      Left = 272
       Top = 126
       Width = 91
       Height = 21

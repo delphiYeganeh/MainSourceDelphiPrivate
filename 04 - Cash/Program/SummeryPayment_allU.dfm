@@ -2442,7 +2442,6 @@ inherited FrSummeryPayment_all: TFrSummeryPayment_all
       Top = 2
       Width = 87
       Height = 30
-      Anchors = [akTop, akRight]
       Caption = #1606#1605#1575#1610#1588
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -2602,11 +2601,15 @@ inherited FrSummeryPayment_all: TFrSummeryPayment_all
     Height = 41
     Align = alTop
     TabOrder = 1
+    DesignSize = (
+      762
+      41)
     object Label2: TLabel
       Left = 704
       Top = 12
       Width = 48
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1581#1587#1575#1576'  '#1607#1575
     end
     object Label5: TLabel
@@ -2614,6 +2617,7 @@ inherited FrSummeryPayment_all: TFrSummeryPayment_all
       Top = 21
       Width = 30
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1576#1583#1607#1705#1575#1585
     end
     object Label6: TLabel
@@ -2621,6 +2625,7 @@ inherited FrSummeryPayment_all: TFrSummeryPayment_all
       Top = 21
       Width = 38
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1576#1587#1578#1575#1606#1705#1575#1585
     end
     object Label7: TLabel
@@ -2628,6 +2633,7 @@ inherited FrSummeryPayment_all: TFrSummeryPayment_all
       Top = 21
       Width = 30
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1576#1583#1607#1705#1575#1585
     end
     object Label8: TLabel
@@ -2635,6 +2641,7 @@ inherited FrSummeryPayment_all: TFrSummeryPayment_all
       Top = 21
       Width = 38
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1576#1587#1578#1575#1606#1705#1575#1585
     end
     object Label9: TLabel
@@ -2642,6 +2649,7 @@ inherited FrSummeryPayment_all: TFrSummeryPayment_all
       Top = 21
       Width = 30
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1576#1583#1607#1705#1575#1585
     end
     object Label10: TLabel
@@ -2649,6 +2657,7 @@ inherited FrSummeryPayment_all: TFrSummeryPayment_all
       Top = 21
       Width = 38
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1576#1587#1578#1575#1606#1705#1575#1585
     end
     object Colheader1: TLabel
@@ -2656,6 +2665,7 @@ inherited FrSummeryPayment_all: TFrSummeryPayment_all
       Top = 0
       Width = 160
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = '----------------------------------------'
     end
     object ColHeader2: TLabel
@@ -2663,6 +2673,7 @@ inherited FrSummeryPayment_all: TFrSummeryPayment_all
       Top = 0
       Width = 160
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = '----------------------------------------'
     end
     object ColHeader3: TLabel
@@ -2670,6 +2681,7 @@ inherited FrSummeryPayment_all: TFrSummeryPayment_all
       Top = 0
       Width = 160
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = '----------------------------------------'
     end
     object Shape1: TShape
@@ -2677,18 +2689,21 @@ inherited FrSummeryPayment_all: TFrSummeryPayment_all
       Top = -8
       Width = 1
       Height = 65
+      Anchors = [akTop, akRight]
     end
     object Shape2: TShape
       Left = 271
       Top = -31
       Width = 1
       Height = 65
+      Anchors = [akTop, akRight]
     end
     object Shape3: TShape
       Left = 690
       Top = -31
       Width = 1
       Height = 65
+      Anchors = [akTop, akRight]
     end
   end
   object Panel3: TPanel [5]
@@ -3155,6 +3170,7 @@ inherited FrSummeryPayment_all: TFrSummeryPayment_all
     Top = 78
     Width = 762
     Height = 333
+    Align = alClient
     TabOrder = 6
     object YDBGrid: TYDBGrid
       Left = 1

@@ -1,5 +1,4 @@
 inherited FrAddAccount: TFrAddAccount
-  Left = 380
   Top = 271
   Width = 389
   Height = 234
@@ -18,9 +17,9 @@ inherited FrAddAccount: TFrAddAccount
       373
       154)
     object Label2: TLabel
-      Left = 297
+      Left = 298
       Top = 68
-      Width = 26
+      Width = 64
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1593#1606#1608#1575#1606
@@ -46,9 +45,9 @@ inherited FrAddAccount: TFrAddAccount
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 297
+      Left = 298
       Top = 96
-      Width = 50
+      Width = 64
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1578#1575#1585#1610#1582' '#1575#1601#1578#1578#1575#1581
@@ -60,9 +59,9 @@ inherited FrAddAccount: TFrAddAccount
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 299
+      Left = 298
       Top = 12
-      Width = 49
+      Width = 64
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1606#1608#1593' '#1581#1587#1575#1576
@@ -94,9 +93,9 @@ inherited FrAddAccount: TFrAddAccount
       OnExit = TEditExit
     end
     object DBEdit1: TDBEdit
-      Left = 168
+      Left = 15
       Top = 35
-      Width = 121
+      Width = 274
       Height = 21
       Anchors = [akTop, akRight]
       DataField = 'AccountNo'
@@ -112,9 +111,9 @@ inherited FrAddAccount: TFrAddAccount
       TabOrder = 1
     end
     object BankPanel: TPanel
-      Left = 71
+      Left = 8
       Top = 117
-      Width = 265
+      Width = 361
       Height = 33
       Anchors = [akTop, akRight]
       BevelOuter = bvNone
@@ -127,20 +126,20 @@ inherited FrAddAccount: TFrAddAccount
       ParentFont = False
       TabOrder = 2
       DesignSize = (
-        265
+        361
         33)
       object Label4: TLabel
-        Left = 225
+        Left = 290
         Top = 5
-        Width = 20
+        Width = 64
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1576#1575#1606#1705
       end
       object DBLookupComboBox1: TDBLookupComboBox
-        Left = 0
+        Left = 8
         Top = 2
-        Width = 218
+        Width = 273
         Height = 21
         Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
@@ -152,9 +151,9 @@ inherited FrAddAccount: TFrAddAccount
       end
     end
     object DBLookupComboBox2: TDBLookupComboBox
-      Left = 40
+      Left = 15
       Top = 8
-      Width = 249
+      Width = 274
       Height = 21
       Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
@@ -171,9 +170,9 @@ inherited FrAddAccount: TFrAddAccount
       OnClick = DBLookupComboBox2Click
     end
     object DBEdit3: TSolarDatePicker
-      Left = 199
+      Left = 15
       Top = 91
-      Width = 90
+      Width = 274
       Height = 21
       Anchors = [akTop, akRight]
       About = 'Created by : Mohamad Khorsandi'
@@ -483,12 +482,12 @@ inherited FrAddAccount: TFrAddAccount
     end
   end
   inherited ahmadvand: TActionList
-    Left = 44
-    Top = 92
+    Left = 36
+    Top = 76
   end
   inherited Grid_PopupMenu: TPopupMenu
-    Left = 103
-    Top = 84
+    Left = 127
+    Top = 76
     inherited wordMenuItem: TMenuItem
       OnClick = nil
     end

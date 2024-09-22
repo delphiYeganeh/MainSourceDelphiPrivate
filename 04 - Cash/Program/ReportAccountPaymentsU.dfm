@@ -1453,6 +1453,7 @@ inherited FrReportAccountPayments: TFrReportAccountPayments
       Top = 39
       Width = 99
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1605#1585#1578#1576' '#1587#1575#1586#1610' '#1576#1607' '#1578#1585#1578#1610#1576':'
     end
     object SearchEdit: TEdit
@@ -1644,6 +1645,7 @@ inherited FrReportAccountPayments: TFrReportAccountPayments
       Top = 37
       Width = 99
       Height = 17
+      Anchors = [akTop, akRight]
       Caption = #1578#1575#1585#1610#1582
       Checked = True
       TabOrder = 5
@@ -1655,6 +1657,7 @@ inherited FrReportAccountPayments: TFrReportAccountPayments
       Top = 37
       Width = 99
       Height = 17
+      Anchors = [akTop, akRight]
       Caption = #1588'.'#1587#1606#1583
       TabOrder = 6
       OnClick = rbDocNoClick

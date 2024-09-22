@@ -1,26 +1,27 @@
 inherited FrSumPayment: TFrSumPayment
   Left = 630
   Top = 308
-  Width = 628
-  Height = 405
+  Width = 640
+  Height = 389
   Caption = #1608#1575#1585#1610#1586' '#1580#1605#1593#1610
   Color = clBtnFace
+  DockSite = True
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
     Top = 0
-    Width = 612
+    Width = 624
     Height = 84
     Align = alTop
     ParentColor = True
     TabOrder = 0
     DesignSize = (
-      612
+      624
       84)
-    object Label5: TLabel
-      Left = 292
+    object LblPrice: TLabel
+      Left = 304
       Top = 11
       Width = 20
       Height = 13
@@ -34,7 +35,7 @@ inherited FrSumPayment: TFrSumPayment
       ParentFont = False
     end
     object StatusLabel: TLabel
-      Left = 534
+      Left = 546
       Top = 12
       Width = 66
       Height = 13
@@ -49,7 +50,7 @@ inherited FrSumPayment: TFrSumPayment
       ParentFont = False
     end
     object Label7: TLabel
-      Left = 536
+      Left = 591
       Top = 35
       Width = 21
       Height = 13
@@ -63,8 +64,8 @@ inherited FrSumPayment: TFrSumPayment
       ParentFont = False
     end
     object Label10: TLabel
-      Left = 535
-      Top = 58
+      Left = 583
+      Top = 59
       Width = 29
       Height = 13
       Anchors = [akTop, akRight]
@@ -76,9 +77,9 @@ inherited FrSumPayment: TFrSumPayment
       Font.Style = []
       ParentFont = False
     end
-    object Label12: TLabel
-      Left = 277
-      Top = 8
+    object LblPriceDesc: TLabel
+      Left = 289
+      Top = 11
       Width = 6
       Height = 13
       Anchors = [akTop, akRight]
@@ -91,8 +92,8 @@ inherited FrSumPayment: TFrSumPayment
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 364
-      Top = 35
+      Left = 376
+      Top = 34
       Width = 59
       Height = 13
       Anchors = [akTop, akRight]
@@ -105,8 +106,8 @@ inherited FrSumPayment: TFrSumPayment
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 214
-      Top = 35
+      Left = 226
+      Top = 34
       Width = 21
       Height = 13
       Anchors = [akTop, akRight]
@@ -119,8 +120,8 @@ inherited FrSumPayment: TFrSumPayment
       ParentFont = False
     end
     object EComment: TEdit
-      Left = 142
-      Top = 55
+      Left = 154
+      Top = 56
       Width = 388
       Height = 21
       Anchors = [akTop, akRight]
@@ -138,7 +139,7 @@ inherited FrSumPayment: TFrSumPayment
       OnExit = TEditExit
     end
     object MajorAccount: TDBLookupComboBox
-      Left = 333
+      Left = 345
       Top = 8
       Width = 197
       Height = 21
@@ -157,8 +158,8 @@ inherited FrSumPayment: TFrSumPayment
       TabOrder = 0
     end
     object interest: TYAmountEdit
-      Left = 142
-      Top = 31
+      Left = 154
+      Top = 32
       Width = 66
       Height = 21
       Anchors = [akTop, akRight]
@@ -176,8 +177,8 @@ inherited FrSumPayment: TFrSumPayment
       OnExit = TEditExit
     end
     object Eamerce: TYAmountEdit
-      Left = 266
-      Top = 31
+      Left = 278
+      Top = 32
       Width = 93
       Height = 21
       Anchors = [akTop, akRight]
@@ -196,8 +197,8 @@ inherited FrSumPayment: TFrSumPayment
       OnExit = TEditExit
     end
     object MEEDate: TSolarDatePicker
-      Left = 439
-      Top = 31
+      Left = 452
+      Top = 32
       Width = 90
       Height = 21
       Anchors = [akTop, akRight]
@@ -236,25 +237,25 @@ inherited FrSumPayment: TFrSumPayment
   object FinancialNotePanel: TPanel [1]
     Left = 0
     Top = 84
-    Width = 612
-    Height = 145
-    Align = alTop
+    Width = 624
+    Height = 128
+    Align = alClient
     Constraints.MinHeight = 68
     ParentColor = True
     TabOrder = 1
   end
   object Panel2: TPanel [2]
     Left = 0
-    Top = 314
-    Width = 612
+    Top = 298
+    Width = 624
     Height = 52
     Align = alBottom
     TabOrder = 3
     DesignSize = (
-      612
+      624
       52)
     object SBReport: TSpeedButton
-      Left = 480
+      Left = 492
       Top = 1
       Width = 55
       Height = 48
@@ -541,7 +542,7 @@ inherited FrSumPayment: TFrSumPayment
       Caption = #1601#1585#1605#1578'2:'
     end
     object DoBtn: TBitBtn
-      Left = 542
+      Left = 554
       Top = 2
       Width = 63
       Height = 48
@@ -671,17 +672,17 @@ inherited FrSumPayment: TFrSumPayment
   end
   object Panel3: TPanel [3]
     Left = 0
-    Top = 229
-    Width = 612
-    Height = 85
-    Align = alClient
+    Top = 212
+    Width = 624
+    Height = 86
+    Align = alBottom
     TabOrder = 2
     object GrpSelection: TRadioGroup
       Left = 1
-      Top = 1
-      Width = 610
+      Top = 5
+      Width = 622
       Height = 40
-      Align = alTop
+      Align = alBottom
       Caption = #1605#1581#1583#1608#1583' '#1587#1575#1586#1610' '#1711#1586#1575#1585#1588
       Columns = 3
       Font.Charset = ARABIC_CHARSET
@@ -700,8 +701,8 @@ inherited FrSumPayment: TFrSumPayment
     end
     object RgReport: TRadioGroup
       Left = 1
-      Top = 44
-      Width = 610
+      Top = 45
+      Width = 622
       Height = 40
       Align = alBottom
       Caption = #1711#1586#1575#1585#1588
@@ -721,18 +722,22 @@ inherited FrSumPayment: TFrSumPayment
     end
   end
   inherited ahmadvand: TActionList
-    Left = 99
-    Top = 96
+    Left = 67
+    Top = 104
   end
   inherited Grid_PopupMenu: TPopupMenu
-    Left = 183
-    Top = 96
+    Left = 71
+    Top = 160
+  end
+  inherited qSetting: TADOQuery
+    Left = 64
+    Top = 48
   end
   object RepPopMnu: TPopupMenu
     MenuAnimation = [maRightToLeft, maTopToBottom]
     TrackButton = tbLeftButton
-    Left = 8
-    Top = 20
+    Left = 56
+    Top = 4
     object NShow: TMenuItem
       AutoHotkeys = maAutomatic
       Caption = #1662#1610#1588' '#1606#1605#1575#1610#1588' '#1608' '#1670#1575#1662'   F9'
@@ -778,8 +783,8 @@ inherited FrSumPayment: TFrSumPayment
         Size = 2147483647
         Value = '1,2,'
       end>
-    Left = 304
-    Top = 184
+    Left = 240
+    Top = 160
     object spCreateSmsTextForSumPaymentParentID: TIntegerField
       FieldName = 'ParentID'
     end

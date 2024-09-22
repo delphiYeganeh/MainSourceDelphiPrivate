@@ -217,10 +217,14 @@ begin
   if Panel2.Enabled then
     if SearchEdit.Enabled then
       SearchEdit.SetFocus;
+  { TODO -oparsa : 14030701 }
+  {
   FrAccountDetails:=TFrAccountDetails.Create(Application);
   FrAccountDetails.ShowInPanel(PAccountDeatil);
   FrFinancialNoteDetail_New:=TFrFinancialNoteDetail_New.Create(Application);
   FrFinancialNoteDetail_New.ShowInPanel(FinancialNotePanel);
+  }
+  { TODO -oparsa : 14030701 }
   {Ranjbar Ver3}
   DBGrid_LoadColumns(Self.Name,YDBGrid3);
   DBGrid_LoadColumns(Self.Name,YDBGrid1);
@@ -960,6 +964,12 @@ begin
   PageControl.TabHeight := 1;
   PageControl.TabWidth := 1;
   //---
+  { TODO -oparsa : 14030701 }
+  FrAccountDetails:=TFrAccountDetails.Create(Application);
+  FrAccountDetails.ShowInPanel(PAccountDeatil);
+  FrFinancialNoteDetail_New:=TFrFinancialNoteDetail_New.Create(Application);
+  FrFinancialNoteDetail_New.ShowInPanel(FinancialNotePanel);
+  { TODO -oparsa : 14030701 }
 end;
 
 procedure TFrAddLoan.LoanGrtLimite; //«⁄„«· „ÕœÊœÌ  œ— ÷«„‰ ‘œ‰ ⁄÷ÊÂ«

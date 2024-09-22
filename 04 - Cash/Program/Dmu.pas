@@ -1554,7 +1554,7 @@ var
    _SMSCenterNumber : WideString;
 
 Const
-   _SoftVerLastUpdate = '1403/03/26';//'1396/07/17';
+   _SoftVerLastUpdate = '1403/07/01';//'1396/07/17';
 //   _SoftVertion       = '7.0.12.101';//'5.0.0.5';//'4.2.7.7'   ; //'3.2.0.0'
 
 Type
@@ -4935,7 +4935,7 @@ begin
   end;
   finally
     qryAutoRunScript.SQL.Text := 'IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U''))'+
-                                    ' SELECT TOP 1 (ISNULL(Max_TableScriptNumber,0)-ISNULL(Last_TableScriptNumber,0)) + ( ISNULL(Max_ViewScriptNumber,0) - ISNULL(Last_ViewScriptNumber ,0)) CountError   '+
+                                    ' SELECT TOP 1 (ISNULL(Max_TableScriptNumber,Last_TableScriptNumber)-ISNULL(Last_TableScriptNumber,0)) + ( ISNULL(Max_ViewScriptNumber,Last_ViewScriptNumber) - ISNULL(Last_ViewScriptNumber ,0)) CountError   '+
                                     ' FROM [dbo].[TBLAPPSETTING] ORDER BY id DESC '+
                                     ' ELSE SELECT 0 CountError' ;
 

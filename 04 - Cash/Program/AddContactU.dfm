@@ -312,10 +312,11 @@ inherited FrAddContact: TFrAddContact
           615
           257)
         object Label4: TLabel
-          Left = 502
+          Left = 551
           Top = 72
           Width = 32
           Height = 13
+          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight
           Caption = #1606#1575#1605' '#1662#1583#1585' '
@@ -328,10 +329,11 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label3: TLabel
-          Left = 502
+          Left = 564
           Top = 17
           Width = 19
           Height = 13
+          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight
           Caption = #1606#1575#1605'  '
@@ -344,10 +346,11 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label10: TLabel
-          Left = 502
+          Left = 542
           Top = 151
           Width = 41
           Height = 13
+          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight
           Caption = #1578#1575#1585#1610#1582' '#1578#1608#1604#1583
@@ -364,6 +367,7 @@ inherited FrAddContact: TFrAddContact
           Top = 100
           Width = 81
           Height = 13
+          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight
           Caption = #1588#1605#1575#1585#1607' '#1588#1606#1575#1587#1606#1575#1605#1607
@@ -376,10 +380,11 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label2: TLabel
-          Left = 502
+          Left = 525
           Top = 44
           Width = 58
           Height = 13
+          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight
           Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610
@@ -392,10 +397,11 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label7: TLabel
-          Left = 502
+          Left = 542
           Top = 179
           Width = 41
           Height = 13
+          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight
           Caption = #1605#1581#1604' '#1578#1608#1604#1583
@@ -408,14 +414,13 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object PersonalNo: TLabel
-          Left = 499
+          Left = 512
           Top = 207
           Width = 71
           Height = 13
-          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
-          Caption = #1588#1605#1575#1585#1607' '#1603#1575#1585#1605#1606#1583#1610
+          Caption = #1588#1605#1575#1585#1607' '#1705#1575#1585#1605#1606#1583#1610
           Font.Charset = ARABIC_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -425,10 +430,11 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label16: TLabel
-          Left = 502
+          Left = 546
           Top = 125
           Width = 37
           Height = 13
+          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight
           Caption = #1580#1606#1587#1610#1578
@@ -441,11 +447,10 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label17: TLabel
-          Left = 499
+          Left = 525
           Top = 231
           Width = 58
           Height = 13
-          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
           Caption = #1575#1585#1587#1575#1604' '#1662#1610#1575#1605#1705
@@ -736,7 +741,7 @@ inherited FrAddContact: TFrAddContact
           TabOrder = 4
         end
         object DBCheckBox1: TDBCheckBox
-          Left = 336
+          Left = 335
           Top = 232
           Width = 17
           Height = 17
@@ -851,10 +856,11 @@ inherited FrAddContact: TFrAddContact
           615
           178)
         object Label8: TLabel
-          Left = 541
+          Left = 578
           Top = 44
           Width = 25
           Height = 13
+          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight
           Caption = #1570#1583#1585#1587
@@ -867,10 +873,11 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label9: TLabel
-          Left = 541
+          Left = 549
           Top = 22
           Width = 54
           Height = 13
+          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight
           Caption = #1588#1605#1575#1585#1607' '#1578#1604#1601#1606
@@ -883,11 +890,10 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label15: TLabel
-          Left = 541
+          Left = 563
           Top = 65
           Width = 40
           Height = 13
-          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           Caption = #1578#1608#1590#1610#1581#1575#1578
           Font.Charset = ARABIC_CHARSET
@@ -898,11 +904,12 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object userField1: TLabel
-          Left = 541
+          Left = 561
           Top = 110
           Width = 42
           Height = 13
           Hint = #1593#1606#1608#1575#1606' '#1575#1610#1606' '#1601#1610#1604#1583' '#1585#1575' '#1605#1610' '#1578#1608#1575#1606#1610#1583' '#1583#1585' '#1575#1591#1604#1575#1593#1575#1578' '#1579#1575#1576#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1578#1594#1610#1610#1585' '#1583#1607#1610#1583
+          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight
           Caption = #1601#1610#1604#1583' '#1705#1575#1585#1576#1585
@@ -915,11 +922,12 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object userField2: TLabel
-          Left = 541
+          Left = 561
           Top = 134
           Width = 42
           Height = 13
           Hint = #1593#1606#1608#1575#1606' '#1575#1610#1606' '#1601#1610#1604#1583' '#1585#1575' '#1605#1610' '#1578#1608#1575#1606#1610#1583' '#1583#1585' '#1575#1591#1604#1575#1593#1575#1578' '#1579#1575#1576#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1578#1594#1610#1610#1585' '#1583#1607#1610#1583
+          Alignment = taRightJustify
           Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight
           Caption = #1601#1610#1604#1583' '#1705#1575#1585#1576#1585
@@ -946,7 +954,7 @@ inherited FrAddContact: TFrAddContact
           Caption = #1662#1585#1601#1585#1575#1688' B '#1711#1586#1575#1585#1588' 2 : PerfrajBRep2.fr3'
         end
         object DBEdit4: TDBEdit
-          Left = 27
+          Left = 19
           Top = 41
           Width = 510
           Height = 21
@@ -967,7 +975,7 @@ inherited FrAddContact: TFrAddContact
           OnExit = TEditExit
         end
         object DBEdit7: TDBEdit
-          Left = 272
+          Left = 264
           Top = 18
           Width = 265
           Height = 21
@@ -988,7 +996,7 @@ inherited FrAddContact: TFrAddContact
           OnExit = TEditExit
         end
         object DBMemo1: TDBMemo
-          Left = 27
+          Left = 19
           Top = 63
           Width = 510
           Height = 40
@@ -1004,7 +1012,7 @@ inherited FrAddContact: TFrAddContact
           TabOrder = 2
         end
         object DBEdit12: TDBEdit
-          Left = 241
+          Left = 233
           Top = 106
           Width = 296
           Height = 21
@@ -1026,7 +1034,7 @@ inherited FrAddContact: TFrAddContact
           OnExit = TEditExit
         end
         object DBEdit13: TDBEdit
-          Left = 241
+          Left = 233
           Top = 130
           Width = 296
           Height = 21
@@ -1088,7 +1096,7 @@ inherited FrAddContact: TFrAddContact
           64)
         object Label12: TLabel
           Left = 490
-          Top = 10
+          Top = 12
           Width = 89
           Height = 13
           Anchors = [akTop, akRight]
@@ -1103,7 +1111,7 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label13: TLabel
-          Left = 272
+          Left = 275
           Top = 11
           Width = 52
           Height = 13

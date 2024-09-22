@@ -16,6 +16,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
   ParentBiDiMode = False
   Position = poScreenCenter
   Scaled = False
+  OnCanResize = FormCanResize
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
@@ -32,7 +33,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
     Top = 0
     Width = 1007
     Height = 442
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Align = alClient
     Font.Charset = ARABIC_CHARSET
     Font.Color = clWindowText
@@ -377,7 +378,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
           999
           37)
         object Label10: TLabel
-          Left = 963
+          Left = 959
           Top = 12
           Width = 35
           Height = 13
@@ -385,7 +386,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
           Caption = #1580#1587#1578#1580#1608
         end
         object btnSearch: TSpeedButton
-          Left = 192
+          Left = 188
           Top = 8
           Width = 123
           Height = 22
@@ -433,7 +434,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
           OnClick = btnSearchClick
         end
         object SpeedButton6: TSpeedButton
-          Left = 320
+          Left = 316
           Top = 8
           Width = 123
           Height = 22
@@ -477,7 +478,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
           OnClick = SpeedButton6Click
         end
         object SearchEdit: TEdit
-          Left = 777
+          Left = 773
           Top = 9
           Width = 177
           Height = 21
@@ -485,7 +486,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
           TabOrder = 0
         end
         object FinancialNoteStatuse: TDBLookupComboBox
-          Left = 521
+          Left = 517
           Top = 9
           Width = 140
           Height = 21
@@ -499,7 +500,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
           OnCloseUp = FinancialNoteStatuseCloseUp
         end
         object CbFinancialType: TCheckBox
-          Left = 665
+          Left = 661
           Top = 10
           Width = 94
           Height = 17
@@ -666,18 +667,22 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
         Caption = #1578#1575#1585#1610#1582' '#1579#1576#1578
       end
       object Label9: TLabel
-        Left = 766
+        Left = 910
         Top = 14
-        Width = 39
+        Width = 78
         Height = 13
         Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        BiDiMode = bdLeftToRight
         Caption = #1606#1608#1593' '#1587#1606#1583
+        ParentBiDiMode = False
       end
       object amount: TLabel
-        Left = 72
+        Left = 213
         Top = 87
         Width = 538
         Height = 38
+        Anchors = [akTop, akRight]
         AutoSize = False
         Caption = '-------------'
         WordWrap = True
@@ -690,36 +695,48 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
         Caption = #1579#1576#1578' '#1705#1606#1606#1583#1607
       end
       object LBSbj: TLabel
-        Left = 766
+        Left = 910
         Top = 38
-        Width = 53
+        Width = 78
         Height = 13
         Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        BiDiMode = bdLeftToRight
         Caption = #1605#1608#1590#1608#1593' '#1670#1705
+        ParentBiDiMode = False
       end
       object LbPrice: TLabel
-        Left = 766
+        Left = 910
         Top = 88
-        Width = 57
+        Width = 78
         Height = 13
         Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        BiDiMode = bdLeftToRight
         Caption = #1605#1576#1604#1594' '#1705#1604' '#1670#1705
+        ParentBiDiMode = False
       end
       object LbResiver: TLabel
-        Left = 766
+        Left = 910
         Top = 113
         Width = 78
         Height = 13
         Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        BiDiMode = bdLeftToRight
         Caption = #1583#1585#1610#1575#1601#1578' '#1705#1606#1606#1583#1607' '#1670#1705
+        ParentBiDiMode = False
       end
       object LbNo: TLabel
-        Left = 766
+        Left = 910
         Top = 63
-        Width = 44
+        Width = 78
         Height = 13
         Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        BiDiMode = bdLeftToRight
         Caption = #1578#1593#1583#1575#1583' '#1670#1705
+        ParentBiDiMode = False
       end
       object DBText1: TDBText
         Left = 4
@@ -738,10 +755,11 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
         DataSource = dm.DFinancialNote_Master
       end
       object DBLookupComboBox1: TDBLookupComboBox
-        Left = 523
+        Left = 664
         Top = 11
         Width = 240
         Height = 21
+        Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
         DataField = 'FinancialNoteTypeID'
         DataSource = dm.DFinancialNote_Master
@@ -1011,10 +1029,11 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
       end
       object DBEdit6: TDBEdit
-        Left = 523
+        Left = 664
         Top = 35
         Width = 240
         Height = 21
+        Anchors = [akTop, akRight]
         DataField = 'NoteSubject'
         DataSource = dm.DFinancialNote_Master
         TabOrder = 2
@@ -1053,7 +1072,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
           Caption = '-'
         end
         object BitBtn7: TBitBtn
-          Left = 860
+          Left = 852
           Top = 192
           Width = 70
           Height = 25
@@ -1105,7 +1124,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
             FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00}
         end
         object BitBtn8: TBitBtn
-          Left = 930
+          Left = 922
           Top = 192
           Width = 70
           Height = 25
@@ -1157,7 +1176,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
         end
         object BitBtn9: TBitBtn
-          Left = 790
+          Left = 782
           Top = 192
           Width = 70
           Height = 25
@@ -1208,7 +1227,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
         end
         object BitBtn10: TBitBtn
-          Left = 720
+          Left = 712
           Top = 192
           Width = 70
           Height = 25
@@ -1260,7 +1279,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
         end
         object BitBtn11: TBitBtn
-          Left = 650
+          Left = 642
           Top = 192
           Width = 70
           Height = 25
@@ -1409,29 +1428,32 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
         end
       end
       object YDBEdit1: TYDBEdit
-        Left = 612
+        Left = 753
         Top = 59
         Width = 153
         Height = 21
+        Anchors = [akTop, akRight]
         DataField = 'NoteCount'
         DataSource = dm.DFinancialNote_Master
         TabOrder = 3
       end
       object YDBEdit2: TYDBEdit
-        Left = 612
+        Left = 753
         Top = 84
         Width = 153
         Height = 21
+        Anchors = [akTop, akRight]
         DataField = 'Amount'
         DataSource = dm.DFinancialNote_Master
         TabOrder = 4
         OnChange = YDBEdit2Change
       end
       object YDBEdit3: TYDBEdit
-        Left = 612
+        Left = 753
         Top = 109
         Width = 153
         Height = 21
+        Anchors = [akTop, akRight]
         DataField = 'Reciver'
         DataSource = dm.DFinancialNote_Master
         TabOrder = 5
@@ -1447,11 +1469,11 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
         Visible = False
       end
       object BitBtn12: TBitBtn
-        Left = 596
+        Left = 544
         Top = 138
-        Width = 65
+        Width = 117
         Height = 25
-        Caption = 'BitBtn12'
+        Caption = #1576#1585#1585#1587#1610' '#1605#1576#1604#1594'/'#1578#1593#1583#1575#1583' '#1670#1705
         TabOrder = 12
         OnClick = BitBtn12Click
       end

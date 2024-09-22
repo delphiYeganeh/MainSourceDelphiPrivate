@@ -1,6 +1,6 @@
 inherited FrEditPart: TFrEditPart
-  Left = 565
-  Top = 200
+  Left = 646
+  Top = 206
   Width = 600
   Height = 518
   Caption = #1608#1610#1585#1575#1610#1588' '#1575#1602#1587#1575#1591

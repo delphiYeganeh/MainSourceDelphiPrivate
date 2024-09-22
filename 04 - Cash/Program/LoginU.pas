@@ -75,10 +75,10 @@ end;
 
 Procedure TFrLogin.Login;
 begin
-  _Userid:=dm.UsersUserId.AsInteger;
-  _AccMngtAccess:=dm.UsersAccMngtAccess.AsBoolean;
-  _Username:=Dm.UsersUserName.AsString;
-  _AccessID:=dm.UsersAccessID.AsInteger;
+  _Userid        := dm.UsersUserId.AsInteger;
+  _AccMngtAccess := dm.UsersAccMngtAccess.AsBoolean;
+  _Username      := Dm.UsersUserName.AsString;
+  _AccessID      := dm.UsersAccessID.AsInteger;
   Get_UserLogoutStatus(logout,isSafeLogout);
 
   if not logout then

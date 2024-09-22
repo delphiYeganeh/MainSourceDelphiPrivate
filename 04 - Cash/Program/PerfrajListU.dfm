@@ -102,7 +102,7 @@ inherited FrPerfrajList: TFrPerfrajList
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      Text = '1400/03/01'
+      Text = '1403/07/01'
       Enabled = True
       DateKind = dkSolar
       CheckInputOnExit = False
@@ -144,7 +144,7 @@ inherited FrPerfrajList: TFrPerfrajList
       Font.Style = []
       ParentFont = False
       TabOrder = 2
-      Text = '1400/03/02'
+      Text = '1403/07/01'
       Enabled = True
       DateKind = dkSolar
       CheckInputOnExit = False
@@ -176,6 +176,7 @@ inherited FrPerfrajList: TFrPerfrajList
       Top = 15
       Width = 133
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       DropDownRows = 10
       KeyField = 'PayTypeID'
@@ -189,7 +190,6 @@ inherited FrPerfrajList: TFrPerfrajList
       Top = 11
       Width = 87
       Height = 28
-      Anchors = [akTop, akRight]
       Caption = #1606#1605#1575#1610#1588
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText

@@ -1,6 +1,6 @@
 object frmSendSMS: TfrmSendSMS
-  Left = 314
-  Top = 219
+  Left = 359
+  Top = 225
   AutoScroll = False
   BiDiMode = bdRightToLeft
   ClientHeight = 606
@@ -309,7 +309,6 @@ object frmSendSMS: TfrmSendSMS
           Top = 2
           Width = 100
           Height = 36
-          Anchors = [akTop, akRight]
           Caption = #1578#1607#1610#1607' '#1604#1610#1587#1578
           TabOrder = 0
           OnClick = Button3Click
@@ -335,7 +334,7 @@ object frmSendSMS: TfrmSendSMS
           About = 'Created by : Mohamad Khorsandi'
           BiDiMode = bdLeftToRight
           TabOrder = 2
-          Text = '1400/08/29'
+          Text = '1403/07/01'
           Enabled = True
           DateKind = dkSolar
           CheckInputOnExit = False
@@ -569,6 +568,7 @@ object frmSendSMS: TfrmSendSMS
           Top = 15
           Width = 75
           Height = 16
+          Anchors = [akTop, akRight]
           Caption = #1608#1590#1593#1610#1578' '#1662#1610#1575#1605#1705
         end
         object Button2: TButton
@@ -576,7 +576,6 @@ object frmSendSMS: TfrmSendSMS
           Top = 2
           Width = 100
           Height = 36
-          Anchors = [akTop, akRight]
           Caption = #1578#1607#1610#1607' '#1604#1610#1587#1578
           TabOrder = 0
           OnClick = Button2Click
@@ -586,6 +585,7 @@ object frmSendSMS: TfrmSendSMS
           Top = 16
           Width = 113
           Height = 17
+          Anchors = [akTop, akRight]
           Caption = #1607#1605#1607
           TabOrder = 1
           OnClick = Button2Click
@@ -595,6 +595,7 @@ object frmSendSMS: TfrmSendSMS
           Top = 16
           Width = 113
           Height = 17
+          Anchors = [akTop, akRight]
           Caption = #1575#1585#1587#1575#1604' '#1606#1588#1583#1607
           Checked = True
           TabOrder = 2
@@ -606,6 +607,7 @@ object frmSendSMS: TfrmSendSMS
           Top = 16
           Width = 113
           Height = 17
+          Anchors = [akTop, akRight]
           Caption = #1575#1585#1587#1575#1604' '#1588#1583#1607
           TabOrder = 3
           OnClick = Button2Click
@@ -658,7 +660,7 @@ object frmSendSMS: TfrmSendSMS
       Top = 45
       Width = 902
       Height = 24
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       TabOrder = 0
     end
     object rgSendSms: TRadioGroup

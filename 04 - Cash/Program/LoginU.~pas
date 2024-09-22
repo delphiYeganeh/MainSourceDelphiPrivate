@@ -120,7 +120,7 @@ begin
   SoftVerLastUpdate.Caption := 'สวัํฮ ยฮัํไ ๆํัวํิ ' + _SoftVerLastUpdate;
   CashLbl.Caption:=_SoftTitle;
   { TODO -oparsa : 14030108 }
-  ScriptUpdate.Visible := _CountError = 0;
+  ScriptUpdate.Visible := _CountError <> 0;
   { TODO -oparsa : 14030108 }
 end;
 

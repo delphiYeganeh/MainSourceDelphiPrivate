@@ -357,11 +357,15 @@ inherited FrAddAccess: TFrAddAccess
       BevelInner = bvLowered
       Caption = ' '
       TabOrder = 3
+      DesignSize = (
+        625
+        32)
       object DBCheckBox1: TDBCheckBox
         Left = 384
         Top = 8
         Width = 225
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = #1583#1587#1578#1585#1587#1610' '#1576#1607' '#1589#1601#1581#1607' '#1605#1583#1610#1585#1610#1578' '#1581#1587#1575#1576#1607#1575
         TabOrder = 0
         ValueChecked = 'True'

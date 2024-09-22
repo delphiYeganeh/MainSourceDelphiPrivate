@@ -14,11 +14,15 @@ inherited FrAccDailyReport: TFrAccDailyReport
     Height = 41
     Align = alTop
     TabOrder = 0
+    DesignSize = (
+      690
+      41)
     object Label1: TLabel
-      Left = 657
+      Left = 649
       Top = 12
       Width = 30
       Height = 14
+      Anchors = [akTop, akRight]
       Caption = #1578#1575#1585#1610#1582' :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -28,10 +32,11 @@ inherited FrAccDailyReport: TFrAccDailyReport
       ParentFont = False
     end
     object SBSearch: TSpeedButton
-      Left = 470
+      Left = 462
       Top = 8
       Width = 84
       Height = 24
+      Anchors = [akTop, akRight]
       Caption = #1580#1587#1578#1580#1608
       Flat = True
       Glyph.Data = {
@@ -72,10 +77,11 @@ inherited FrAccDailyReport: TFrAccDailyReport
       OnClick = SBSearchClick
     end
     object MEdtDate: TSolarDatePicker
-      Left = 560
+      Left = 552
       Top = 9
       Width = 93
       Height = 22
+      Anchors = [akTop, akRight]
       About = 'Created by : Mohamad Khorsandi'
       BiDiMode = bdLeftToRight
       Font.Charset = ARABIC_CHARSET
@@ -122,6 +128,9 @@ inherited FrAccDailyReport: TFrAccDailyReport
     Height = 41
     Align = alBottom
     TabOrder = 1
+    DesignSize = (
+      690
+      41)
     object BitBtn1: TBitBtn
       Left = 7
       Top = 6
@@ -193,6 +202,7 @@ inherited FrAccDailyReport: TFrAccDailyReport
       Top = 6
       Width = 112
       Height = 32
+      Anchors = [akTop, akRight]
       Caption = #1575#1585#1587#1575#1604' '#1576#1607' Excel'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy

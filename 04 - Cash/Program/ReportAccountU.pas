@@ -26,6 +26,7 @@ type
     procedure Button4Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -53,8 +54,13 @@ procedure TFrReportAccount.FormShow(Sender: TObject);
  var i: integer;
 begin
    inherited;
+   { TODO -oparsa : 14030701 }
+   {
    FrAccountFilter:=TFrAccountFilter.Create(self);
+   FrAccountFilter.Align := alTop ;
    FrAccountFilter.ShowInPanel(FilterPanel);
+   }
+   { TODO -oparsa : 14030701 }
    dm.ContactType.Locate('ContactTypeID',1,[]);
    with dm,YDBGrid1,Columns do
       for i:=0 to Count-1 do
@@ -96,6 +102,16 @@ procedure TFrReportAccount.Button5Click(Sender: TObject);
 begin
   inherited;
   close;
+end;
+
+procedure TFrReportAccount.FormCreate(Sender: TObject);
+begin
+  inherited;
+   { TODO -oparsa : 14030701 }
+   FrAccountFilter:=TFrAccountFilter.Create(self);
+   FrAccountFilter.Align := alTop ;
+   FrAccountFilter.ShowInPanel(FilterPanel);
+   { TODO -oparsa : 14030701 }
 end;
 
 end.

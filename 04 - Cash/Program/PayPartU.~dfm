@@ -1,7 +1,7 @@
 inherited FrPayPart: TFrPayPart
-  Left = 702
-  Top = 370
-  Width = 744
+  Left = 491
+  Top = 179
+  Width = 733
   Height = 529
   Caption = #1662#1585#1583#1575#1582#1578' '#1575#1602#1587#1575#1591
   Color = clBtnFace
@@ -18,7 +18,7 @@ inherited FrPayPart: TFrPayPart
   object Panel2: TPanel [1]
     Left = 0
     Top = 0
-    Width = 728
+    Width = 717
     Height = 34
     Align = alTop
     Font.Charset = ARABIC_CHARSET
@@ -30,10 +30,10 @@ inherited FrPayPart: TFrPayPart
     ParentFont = False
     TabOrder = 0
     DesignSize = (
-      728
+      717
       34)
     object Label1: TLabel
-      Left = 675
+      Left = 664
       Top = 10
       Width = 48
       Height = 13
@@ -41,7 +41,7 @@ inherited FrPayPart: TFrPayPart
       Caption = #1588#1605#1575#1585#1607' '#1608#1575#1605
     end
     object SearchEdit: TEdit
-      Left = 458
+      Left = 447
       Top = 6
       Width = 211
       Height = 21
@@ -54,7 +54,7 @@ inherited FrPayPart: TFrPayPart
   object Panel1: TPanel [2]
     Left = 0
     Top = 353
-    Width = 728
+    Width = 717
     Height = 96
     Align = alClient
     BevelOuter = bvNone
@@ -70,7 +70,7 @@ inherited FrPayPart: TFrPayPart
     TabOrder = 1
     OnResize = Panel1Resize
     DesignSize = (
-      728
+      717
       96)
     object Label5: TLabel
       Left = 346
@@ -80,7 +80,7 @@ inherited FrPayPart: TFrPayPart
       Caption = #1605#1576#1604#1594
     end
     object StatusLabel: TLabel
-      Left = 648
+      Left = 637
       Top = 10
       Width = 66
       Height = 13
@@ -89,7 +89,7 @@ inherited FrPayPart: TFrPayPart
       Caption = #1608#1575#1585#1610#1586' '#1576#1607' '#1581#1587#1575#1576
     end
     object Label7: TLabel
-      Left = 648
+      Left = 637
       Top = 39
       Width = 21
       Height = 13
@@ -118,7 +118,7 @@ inherited FrPayPart: TFrPayPart
       WordWrap = True
     end
     object Label15: TLabel
-      Left = 648
+      Left = 637
       Top = 62
       Width = 29
       Height = 13
@@ -194,7 +194,7 @@ inherited FrPayPart: TFrPayPart
     object MajorAccount: TDBLookupComboBox
       Left = 391
       Top = 8
-      Width = 253
+      Width = 242
       Height = 21
       Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
@@ -209,7 +209,7 @@ inherited FrPayPart: TFrPayPart
     object DBEdit12: TDBEdit
       Left = 224
       Top = 62
-      Width = 420
+      Width = 409
       Height = 21
       Anchors = [akLeft, akTop, akRight]
       DataField = 'Comment'
@@ -261,7 +261,7 @@ inherited FrPayPart: TFrPayPart
       OnChange = EAmerceChange
     end
     object MonthlyBeginDate: TSolarDatePicker
-      Left = 554
+      Left = 543
       Top = 35
       Width = 90
       Height = 21
@@ -310,7 +310,7 @@ inherited FrPayPart: TFrPayPart
   object FinancialNotePanel: TYCheckGroupBox [3]
     Left = 0
     Top = 338
-    Width = 728
+    Width = 717
     Height = 15
     Align = alTop
     Caption = '  '#1575#1591#1604#1575#1593#1575#1578' '#1670#1705' '#1610#1575' '#1581#1608#1575#1604#1607
@@ -327,7 +327,7 @@ inherited FrPayPart: TFrPayPart
   object Panel3: TGroupBox [4]
     Left = 0
     Top = 234
-    Width = 728
+    Width = 717
     Height = 104
     Cursor = crHandPoint
     Align = alTop
@@ -343,10 +343,10 @@ inherited FrPayPart: TFrPayPart
     ParentFont = False
     TabOrder = 3
     DesignSize = (
-      728
+      717
       104)
     object Label4: TLabel
-      Left = 650
+      Left = 639
       Top = 26
       Width = 48
       Height = 13
@@ -361,7 +361,7 @@ inherited FrPayPart: TFrPayPart
       ParentFont = False
     end
     object Label6: TLabel
-      Left = 172
+      Left = 161
       Top = 52
       Width = 33
       Height = 13
@@ -376,7 +376,7 @@ inherited FrPayPart: TFrPayPart
       ParentFont = False
     end
     object Label9: TLabel
-      Left = 468
+      Left = 457
       Top = 26
       Width = 39
       Height = 13
@@ -391,7 +391,7 @@ inherited FrPayPart: TFrPayPart
       ParentFont = False
     end
     object Label10: TLabel
-      Left = 650
+      Left = 639
       Top = 52
       Width = 73
       Height = 13
@@ -406,7 +406,7 @@ inherited FrPayPart: TFrPayPart
       ParentFont = False
     end
     object Label11: TLabel
-      Left = 319
+      Left = 308
       Top = 26
       Width = 38
       Height = 13
@@ -421,7 +421,7 @@ inherited FrPayPart: TFrPayPart
       ParentFont = False
     end
     object Label13: TLabel
-      Left = 319
+      Left = 308
       Top = 52
       Width = 22
       Height = 13
@@ -436,7 +436,7 @@ inherited FrPayPart: TFrPayPart
       ParentFont = False
     end
     object Label14: TLabel
-      Left = 468
+      Left = 457
       Top = 77
       Width = 65
       Height = 13
@@ -451,7 +451,7 @@ inherited FrPayPart: TFrPayPart
       ParentFont = False
     end
     object Label16: TLabel
-      Left = 650
+      Left = 639
       Top = 77
       Width = 58
       Height = 13
@@ -466,7 +466,7 @@ inherited FrPayPart: TFrPayPart
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 319
+      Left = 308
       Top = 77
       Width = 48
       Height = 13
@@ -481,7 +481,7 @@ inherited FrPayPart: TFrPayPart
       ParentFont = False
     end
     object Label20: TLabel
-      Left = 468
+      Left = 457
       Top = 51
       Width = 90
       Height = 13
@@ -496,7 +496,7 @@ inherited FrPayPart: TFrPayPart
       ParentFont = False
     end
     object Label21: TLabel
-      Left = 170
+      Left = 159
       Top = 77
       Width = 51
       Height = 13
@@ -511,7 +511,7 @@ inherited FrPayPart: TFrPayPart
       ParentFont = False
     end
     object DBEdit3: TDBEdit
-      Left = 567
+      Left = 556
       Top = 22
       Width = 80
       Height = 21
@@ -527,7 +527,7 @@ inherited FrPayPart: TFrPayPart
       TabOrder = 0
     end
     object DBEdit6: TDBEdit
-      Left = 28
+      Left = 17
       Top = 47
       Width = 140
       Height = 21
@@ -543,7 +543,7 @@ inherited FrPayPart: TFrPayPart
       TabOrder = 1
     end
     object DBEdit7: TDBEdit
-      Left = 384
+      Left = 373
       Top = 22
       Width = 80
       Height = 21
@@ -561,7 +561,7 @@ inherited FrPayPart: TFrPayPart
       TabOrder = 2
     end
     object DBEdit8: TDBEdit
-      Left = 567
+      Left = 556
       Top = 47
       Width = 80
       Height = 21
@@ -579,7 +579,7 @@ inherited FrPayPart: TFrPayPart
       TabOrder = 3
     end
     object DBEdit9: TDBEdit
-      Left = 235
+      Left = 224
       Top = 22
       Width = 80
       Height = 21
@@ -595,7 +595,7 @@ inherited FrPayPart: TFrPayPart
       TabOrder = 4
     end
     object DBEdit10: TDBEdit
-      Left = 235
+      Left = 224
       Top = 47
       Width = 80
       Height = 21
@@ -611,7 +611,7 @@ inherited FrPayPart: TFrPayPart
       TabOrder = 5
     end
     object DBEdit11: TDBEdit
-      Left = 384
+      Left = 373
       Top = 73
       Width = 80
       Height = 21
@@ -629,7 +629,7 @@ inherited FrPayPart: TFrPayPart
       TabOrder = 6
     end
     object DBEdit13: TDBEdit
-      Left = 567
+      Left = 556
       Top = 73
       Width = 80
       Height = 21
@@ -645,7 +645,7 @@ inherited FrPayPart: TFrPayPart
       TabOrder = 7
     end
     object DBEdit2: TDBEdit
-      Left = 235
+      Left = 224
       Top = 73
       Width = 80
       Height = 21
@@ -661,7 +661,7 @@ inherited FrPayPart: TFrPayPart
       TabOrder = 8
     end
     object DBEdit4: TDBEdit
-      Left = 384
+      Left = 373
       Top = 47
       Width = 80
       Height = 21
@@ -677,7 +677,7 @@ inherited FrPayPart: TFrPayPart
       TabOrder = 9
     end
     object DBEdit16: TDBEdit
-      Left = 87
+      Left = 76
       Top = 73
       Width = 80
       Height = 21
@@ -696,7 +696,7 @@ inherited FrPayPart: TFrPayPart
   object PAccountDeatil: TPanel [5]
     Left = 0
     Top = 34
-    Width = 728
+    Width = 717
     Height = 200
     Align = alTop
     BevelOuter = bvNone
@@ -712,12 +712,12 @@ inherited FrPayPart: TFrPayPart
   object Panel4: TPanel [6]
     Left = 0
     Top = 449
-    Width = 728
+    Width = 717
     Height = 41
     Align = alBottom
     TabOrder = 5
     DesignSize = (
-      728
+      717
       41)
     object Label22: TLabel
       Left = 119
@@ -752,7 +752,7 @@ inherited FrPayPart: TFrPayPart
       Caption = #1670#1575#1662' '#1602#1576#1590':'
     end
     object DoBtn: TBitBtn
-      Left = 648
+      Left = 637
       Top = 6
       Width = 75
       Height = 28
@@ -769,7 +769,7 @@ inherited FrPayPart: TFrPayPart
       OnClick = DoBtnClick
     end
     object PrintBtn: TBitBtn
-      Left = 414
+      Left = 403
       Top = 6
       Width = 75
       Height = 28
@@ -786,7 +786,7 @@ inherited FrPayPart: TFrPayPart
       OnClick = PrintBtnClick
     end
     object PerferazeBtn: TBitBtn
-      Left = 570
+      Left = 559
       Top = 6
       Width = 75
       Height = 28
@@ -803,7 +803,7 @@ inherited FrPayPart: TFrPayPart
       OnClick = PerferazeBtnClick
     end
     object DocPrintBtn: TBitBtn
-      Left = 492
+      Left = 481
       Top = 6
       Width = 75
       Height = 28

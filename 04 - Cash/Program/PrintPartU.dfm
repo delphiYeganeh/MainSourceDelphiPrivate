@@ -1,6 +1,6 @@
 inherited PrintParts: TPrintParts
-  Left = 1004
-  Top = 332
+  Left = 543
+  Top = 338
   AutoScroll = False
   BorderIcons = [biMinimize]
   Caption = #1670#1575#1662' '#1575#1602#1587#1575#1591
@@ -3741,23 +3741,23 @@ inherited PrintParts: TPrintParts
     end
     object Label4: TLabel
       Left = 294
-      Top = 45
-      Width = 88
+      Top = 43
+      Width = 101
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1662#1610#1575#1605' '#1605#1582#1589#1608#1589' '#1593#1590#1608':'
     end
     object Label1: TLabel
-      Left = 291
+      Left = 294
       Top = 15
-      Width = 99
+      Width = 101
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1578#1575#1585#1610#1582' '#1587#1585#1585#1587#1610#1583' '#1575#1586' '#1578#1575#1585#1610#1582
     end
     object Label5: TLabel
       Left = 294
-      Top = 69
+      Top = 68
       Width = 101
       Height = 13
       Anchors = [akTop, akRight]

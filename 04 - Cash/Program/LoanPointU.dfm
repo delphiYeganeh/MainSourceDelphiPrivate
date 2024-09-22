@@ -9,13 +9,13 @@ inherited FrLoanPoint: TFrLoanPoint
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
-    Top = 192
-    Width = 348
+    Top = 185
+    Width = 340
     Height = 41
     Align = alBottom
     TabOrder = 0
     DesignSize = (
-      348
+      340
       41)
     object BitBtn1: TBitBtn
       Left = 254
@@ -55,17 +55,17 @@ inherited FrLoanPoint: TFrLoanPoint
   object Panel2: TPanel [1]
     Left = 0
     Top = 0
-    Width = 348
-    Height = 192
+    Width = 340
+    Height = 185
     Align = alClient
     TabOrder = 1
     DesignSize = (
-      348
-      192)
+      340
+      185)
     object Label25: TLabel
-      Left = 128
+      Left = 130
       Top = 41
-      Width = 132
+      Width = 203
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1575#1605#1578#1610#1575#1586' '#1605#1579#1576#1578' '#1575#1586' '#1578#1575#1585#1610#1582' '#1570#1582#1585#1610#1606' '#1608#1575#1605
@@ -77,9 +77,9 @@ inherited FrLoanPoint: TFrLoanPoint
       ParentFont = False
     end
     object Label27: TLabel
-      Left = 128
+      Left = 130
       Top = 99
-      Width = 197
+      Width = 203
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1575#1605#1578#1610#1575#1586' '#1605#1606#1601#1610' '#1576#1585#1575#1610' '#1607#1585' '#1585#1608#1586' '#1578#1575#1582#1610#1585' '#1583#1585' '#1605#1575#1607#1610#1575#1606#1607' '#1607#1575
@@ -91,9 +91,9 @@ inherited FrLoanPoint: TFrLoanPoint
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 128
+      Left = 130
       Top = 70
-      Width = 180
+      Width = 203
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1575#1605#1578#1610#1575#1586' '#1605#1606#1601#1610' '#1576#1585#1575#1610' '#1607#1585' '#1585#1608#1586' '#1578#1575#1582#1610#1585' '#1583#1585' '#1575#1602#1587#1575#1591
@@ -105,9 +105,9 @@ inherited FrLoanPoint: TFrLoanPoint
       ParentFont = False
     end
     object Label26: TLabel
-      Left = 128
+      Left = 130
       Top = 12
-      Width = 151
+      Width = 203
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1575#1605#1578#1610#1575#1586' '#1605#1579#1576#1578' '#1575#1586' '#1578#1575#1585#1610#1582' '#1583#1585#1582#1608#1575#1587#1578' '#1608#1575#1605
@@ -119,9 +119,9 @@ inherited FrLoanPoint: TFrLoanPoint
       ParentFont = False
     end
     object Label2: TLabel
-      Left = 128
+      Left = 130
       Top = 129
-      Width = 205
+      Width = 203
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1575#1605#1578#1610#1575#1586' '#1605#1579#1576#1578' '#1576#1585#1575#1610' '#1587#1662#1585#1583#1607' '#1548' '#1607#1585'  '#1607#1586#1575#1585' '#1585#1610#1575#1604' '#1583#1585' '#1585#1608#1586
@@ -133,9 +133,9 @@ inherited FrLoanPoint: TFrLoanPoint
       ParentFont = False
     end
     object lbl1: TLabel
-      Left = 128
+      Left = 130
       Top = 159
-      Width = 148
+      Width = 203
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1575#1605#1578#1610#1575#1586' '#1605#1579#1576#1578' '#1576#1585#1575#1610' '#1662#1585#1583#1575#1582#1578' '#1711#1585#1608#1607#1610
@@ -152,7 +152,7 @@ inherited FrLoanPoint: TFrLoanPoint
       Top = 38
       Width = 104
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -169,7 +169,7 @@ inherited FrLoanPoint: TFrLoanPoint
       Top = 98
       Width = 104
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -186,7 +186,7 @@ inherited FrLoanPoint: TFrLoanPoint
       Top = 68
       Width = 104
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -203,7 +203,7 @@ inherited FrLoanPoint: TFrLoanPoint
       Top = 9
       Width = 104
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -220,7 +220,7 @@ inherited FrLoanPoint: TFrLoanPoint
       Top = 128
       Width = 104
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -237,7 +237,7 @@ inherited FrLoanPoint: TFrLoanPoint
       Top = 158
       Width = 104
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
       Font.Height = -11

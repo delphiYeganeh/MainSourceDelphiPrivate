@@ -105,16 +105,16 @@ inherited FrEditPart: TFrEditPart
     object Label2: TLabel
       Left = 529
       Top = 35
-      Width = 39
+      Width = 48
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1578#1575#1585#1610#1582' '#1608#1575#1605
       FocusControl = DBEdit2
     end
     object Label3: TLabel
-      Left = 528
+      Left = 529
       Top = 58
-      Width = 38
+      Width = 48
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1605#1576#1604#1594' '#1608#1575#1605
@@ -123,7 +123,7 @@ inherited FrEditPart: TFrEditPart
     object Label4: TLabel
       Left = 297
       Top = 11
-      Width = 33
+      Width = 64
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1606#1608#1593' '#1608#1575#1605
@@ -141,7 +141,7 @@ inherited FrEditPart: TFrEditPart
     object Label6: TLabel
       Left = 297
       Top = 58
-      Width = 60
+      Width = 64
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1593#1606#1608#1575#1606' '#1581#1587#1575#1576

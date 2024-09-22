@@ -242,9 +242,9 @@ inherited FrPayMonthly: TFrPayMonthly
       718
       87)
     object Label5: TLabel
-      Left = 335
+      Left = 345
       Top = 12
-      Width = 20
+      Width = 28
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1605#1576#1604#1594
@@ -256,7 +256,7 @@ inherited FrPayMonthly: TFrPayMonthly
       ParentFont = False
     end
     object StatusLabel: TLabel
-      Left = 619
+      Left = 629
       Top = 10
       Width = 66
       Height = 13
@@ -271,9 +271,9 @@ inherited FrPayMonthly: TFrPayMonthly
       ParentFont = False
     end
     object Label7: TLabel
-      Left = 619
+      Left = 629
       Top = 38
-      Width = 21
+      Width = 66
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1578#1575#1585#1610#1582
@@ -285,7 +285,7 @@ inherited FrPayMonthly: TFrPayMonthly
       ParentFont = False
     end
     object Label8: TLabel
-      Left = 440
+      Left = 450
       Top = 40
       Width = 31
       Height = 13
@@ -299,7 +299,7 @@ inherited FrPayMonthly: TFrPayMonthly
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 0
+      Left = 10
       Top = 5
       Width = 225
       Height = 28
@@ -315,9 +315,9 @@ inherited FrPayMonthly: TFrPayMonthly
       WordWrap = True
     end
     object Label15: TLabel
-      Left = 619
+      Left = 629
       Top = 64
-      Width = 29
+      Width = 66
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1578#1608#1590#1610#1581
@@ -329,7 +329,7 @@ inherited FrPayMonthly: TFrPayMonthly
       ParentFont = False
     end
     object Label17: TLabel
-      Left = 335
+      Left = 345
       Top = 38
       Width = 28
       Height = 13
@@ -343,7 +343,7 @@ inherited FrPayMonthly: TFrPayMonthly
       ParentFont = False
     end
     object Label4: TLabel
-      Left = 186
+      Left = 196
       Top = 64
       Width = 37
       Height = 13
@@ -357,9 +357,9 @@ inherited FrPayMonthly: TFrPayMonthly
       ParentFont = False
     end
     object Label9: TLabel
-      Left = 188
+      Left = 196
       Top = 40
-      Width = 35
+      Width = 37
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1588'.'#1670#1705
@@ -371,7 +371,7 @@ inherited FrPayMonthly: TFrPayMonthly
       ParentFont = False
     end
     object DBEdit1: TDBEdit
-      Left = 232
+      Left = 242
       Top = 8
       Width = 98
       Height = 21
@@ -392,7 +392,7 @@ inherited FrPayMonthly: TFrPayMonthly
       OnExit = DBEdit1Exit
     end
     object DBEdit5: TDBEdit
-      Left = 380
+      Left = 390
       Top = 35
       Width = 57
       Height = 21
@@ -411,7 +411,7 @@ inherited FrPayMonthly: TFrPayMonthly
       OnExit = TEditExit
     end
     object MajorAccount: TDBLookupComboBox
-      Left = 380
+      Left = 390
       Top = 8
       Width = 235
       Height = 21
@@ -432,7 +432,7 @@ inherited FrPayMonthly: TFrPayMonthly
       TabOrder = 2
     end
     object DBEdit12: TDBEdit
-      Left = 232
+      Left = 242
       Top = 62
       Width = 383
       Height = 21
@@ -448,7 +448,7 @@ inherited FrPayMonthly: TFrPayMonthly
       TabOrder = 3
     end
     object EAmerce: TYAmountEdit
-      Left = 232
+      Left = 242
       Top = 35
       Width = 98
       Height = 21
@@ -462,7 +462,7 @@ inherited FrPayMonthly: TFrPayMonthly
       TabOrder = 4
     end
     object DBEdit3: TDBEdit
-      Left = 72
+      Left = 82
       Top = 62
       Width = 112
       Height = 21
@@ -483,7 +483,7 @@ inherited FrPayMonthly: TFrPayMonthly
       OnExit = TEditExit
     end
     object Date: TSolarDatePicker
-      Left = 524
+      Left = 534
       Top = 34
       Width = 90
       Height = 21
@@ -528,7 +528,7 @@ inherited FrPayMonthly: TFrPayMonthly
       DataFieldAutoSaveModified = False
     end
     object DBEdit4: TDBEdit
-      Left = 72
+      Left = 82
       Top = 34
       Width = 112
       Height = 21
@@ -568,9 +568,9 @@ inherited FrPayMonthly: TFrPayMonthly
       718
       83)
     object Label6: TLabel
-      Left = 464
-      Top = 28
-      Width = 51
+      Left = 462
+      Top = 27
+      Width = 65
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1606#1608#1593' '#1605#1575#1607#1610#1575#1606#1607
@@ -584,7 +584,7 @@ inherited FrPayMonthly: TFrPayMonthly
     end
     object Label10: TLabel
       Left = 630
-      Top = 30
+      Top = 27
       Width = 76
       Height = 13
       Anchors = [akTop, akRight]
@@ -629,8 +629,8 @@ inherited FrPayMonthly: TFrPayMonthly
     end
     object Label16: TLabel
       Left = 630
-      Top = 53
-      Width = 66
+      Top = 52
+      Width = 76
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1588#1605#1575#1585#1607' '#1605#1575#1607#1576#1575#1606#1607
@@ -644,8 +644,8 @@ inherited FrPayMonthly: TFrPayMonthly
     end
     object Label3: TLabel
       Left = 248
-      Top = 28
-      Width = 22
+      Top = 27
+      Width = 59
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1578#1575#1582#1610#1585
@@ -674,9 +674,9 @@ inherited FrPayMonthly: TFrPayMonthly
       TabOrder = 0
     end
     object DBEdit8: TDBEdit
-      Left = 543
+      Left = 544
       Top = 23
-      Width = 72
+      Width = 80
       Height = 21
       Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
@@ -708,9 +708,9 @@ inherited FrPayMonthly: TFrPayMonthly
       TabOrder = 2
     end
     object DBEdit11: TDBEdit
-      Left = 378
+      Left = 318
       Top = 49
-      Width = 80
+      Width = 140
       Height = 21
       Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight

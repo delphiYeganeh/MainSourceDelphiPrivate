@@ -47,6 +47,7 @@ type
     procedure RefreshData;
     procedure AExitExecute(Sender: TObject);
     procedure Button5Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
 
   private
     { Private declarations }
@@ -104,8 +105,12 @@ procedure TFrAddRemainLoan.FormShow(Sender: TObject);
 begin
   inherited;
    SearchEdit.SetFocus;
+   { TODO -oparsa : 14030701 }
+   {
    FrAccountDetails:=TFrAccountDetails.Create(Application);
    FrAccountDetails.ShowInPanel(PAccountDeatil);
+   }
+   { TODO -oparsa : 14030701 }
 
 end;
 
@@ -255,6 +260,15 @@ procedure TFrAddRemainLoan.Button5Click(Sender: TObject);
 begin
   inherited;
     Close;
+end;
+
+procedure TFrAddRemainLoan.FormCreate(Sender: TObject);
+begin
+  inherited;
+   { TODO -oparsa : 14030701 }
+   FrAccountDetails:=TFrAccountDetails.Create(Application);
+   FrAccountDetails.ShowInPanel(PAccountDeatil);
+   { TODO -oparsa : 14030701 }
 end;
 
 end.

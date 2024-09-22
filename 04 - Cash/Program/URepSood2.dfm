@@ -14,11 +14,15 @@ inherited FmRepSood2: TFmRepSood2
     Height = 64
     Align = alBottom
     TabOrder = 0
+    DesignSize = (
+      758
+      64)
     object Label4: TLabel
       Left = 503
       Top = 16
       Width = 171
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1605#1580#1605#1608#1593' '#1587#1608#1583' '#1662#1585#1583#1575#1582#1578' '#1588#1583#1607' '#1583#1585' '#1575#1610#1606' '#1576#1575#1586#1607' :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clGreen
@@ -28,11 +32,12 @@ inherited FmRepSood2: TFmRepSood2
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 503
+      Left = 504
       Top = 40
-      Width = 140
+      Width = 170
       Height = 13
-      Caption = #1605#1580#1605#1608#1593' '#1705#1604' '#1587#1608#1583' '#1662#1585#1583#1575#1582#1578' '#1588#1583#1607' :'
+      Anchors = [akTop, akRight]
+      Caption = #1605#1580#1605#1608#1593' '#1705#1604' '#1587#1608#1583' '#1662#1585#1583#1575#1582#1578' '#1588#1583#1607'           :'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clBlue
       Font.Height = -11
@@ -45,6 +50,7 @@ inherited FmRepSood2: TFmRepSood2
       Top = 16
       Width = 6
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = '0'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clGreen
@@ -58,6 +64,7 @@ inherited FmRepSood2: TFmRepSood2
       Top = 40
       Width = 6
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = '0'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clBlue

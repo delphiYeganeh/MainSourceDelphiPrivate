@@ -32,7 +32,7 @@ inherited FrMain: TFrMain
     Top = 34
     Width = 1100
     Height = 648
-    ActivePage = xpTabSheet1
+    ActivePage = xpTabSheet4
     Align = alClient
     Font.Charset = ARABIC_CHARSET
     Font.Color = clWindowText
@@ -5217,6 +5217,7 @@ inherited FrMain: TFrMain
         Top = 92
         Width = 894
         Height = 516
+        Cursor = crHandPoint
         Align = alClient
         DataSource = dm.DReport_Contact
         Font.Charset = ARABIC_CHARSET
@@ -9920,12 +9921,13 @@ inherited FrMain: TFrMain
       Top = 1
       Width = 808
       Height = 32
-      ActivePage = TabSheet3
+      ActivePage = TabSheet2
       Align = alRight
       TabHeight = 30
       TabOrder = 0
       TabWidth = 134
       OnChange = PageControl1Change
+      OnChanging = PageControl1Changing
       object TabSheet1: TTabSheet
         Caption = #1575#1605#1705#1575#1606#1575#1578
       end

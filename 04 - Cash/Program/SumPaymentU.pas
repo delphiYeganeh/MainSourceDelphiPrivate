@@ -11,11 +11,11 @@ uses
 type
   TFrSumPayment = class(TYBaseForm)
     Panel1: TPanel;
-    Label5: TLabel;
+    LblPrice: TLabel;
     StatusLabel: TLabel;
     Label7: TLabel;
     Label10: TLabel;
-    Label12: TLabel;
+    LblPriceDesc: TLabel;
     EComment: TEdit;
     MajorAccount: TDBLookupComboBox;
     FinancialNotePanel: TPanel;
@@ -80,8 +80,15 @@ uses dmu, FinancialNoteDetailU, YShamsiDate, MainU,BusinessLayer,
 procedure TFrSumPayment.FormShow(Sender: TObject);
 begin
    inherited;
+   { TODO -oparsa : 14030701 }
+   (*
    FrFinancialNoteDetail_New:=TFrFinancialNoteDetail_New.Create(Application);
+   { TODO -oparsa : 14030628- bug369 }
+   FrFinancialNoteDetail_New.Align := alClient ;
+   { TODO -oparsa : 14030628- bug369 }
    FrFinancialNoteDetail_New.ShowInPanel(FinancialNotePanel);
+   *)
+   { TODO -oparsa : 14030701 }
    _FinancialNoteid:=-1;
    FrFinancialNoteDetail_New.FinancialNoteid:=0;
    FrFinancialNoteDetail_New.DefaultAmount:=Amount;
@@ -90,7 +97,8 @@ begin
    MEEDate.Text := _Today;
    //---
 //   Label12.Caption:=Bill(Amount)+' —Ì«·';
-   Label12.Caption:=Bill(Amount)+' ' +Get_SystemSetting('EdtMoneyUnit')+' ';
+   LblPriceDesc.Caption:=Bill(Amount)+' ' +Get_SystemSetting('EdtMoneyUnit')+' ';
+   LblPriceDesc.Top := LblPrice.Top ;
    MajorAccount.SetFocus;
 
 
@@ -125,6 +133,14 @@ Var
 begin
   inherited;
   ForcePaymentIds:='';
+
+  { TODO -oparsa : 14030628- bug369 }
+  if MajorAccount.KeyValue = null   then
+  begin
+    ShowMessage('·ÿ›« Õ”«» «‰ Œ«» ‰„«ÌÌœ');
+    Exit;
+  end;
+  { TODO -oparsa : 14030628- bug369 }
 
   if not ISSelectedDbtOrCrtCorrect(MajorAccount.KeyValue,0) then
   begin
@@ -182,6 +198,10 @@ begin
 
   FrMain._SelectedForcePaymentID := FrMain._SelectedForcePaymentID+',';// »⁄·   ‘ŒÌ’ ‰«œ—”  œ— ç—ŒÂ “Ì—
 
+  { TODO -oparsa : 14030628- bug369 }
+  if not Dm.Report_ForcePayment.Active then
+    Exit;
+  { TODO -oparsa : 14030628- bug369 }
   with Dm,Report_ForcePayment do
   begin
     _DoesInserted:=false;
@@ -220,6 +240,10 @@ begin
   end;
 
   spCreateSmsTextForSumPayment.Close;
+  { TODO -oparsa : 14030628- bug369 }
+  if ForcePaymentIds = '' then
+    ForcePaymentIds := '0,' ;
+  { TODO -oparsa : 14030628- bug369 }
   spCreateSmsTextForSumPayment.Parameters.ParamByName('@ForcePaymentIds').Value := ForcePaymentIds;
   spCreateSmsTextForSumPayment.Open;
   spCreateSmsTextForSumPayment.First;
@@ -289,6 +313,11 @@ begin
   {Ranjbar 88.07.15}
   DMSumPayment := TDMSumPayment.Create(nil);
   DocumnetNo := '';
+  { TODO -oparsa : 14030701 }
+   FrFinancialNoteDetail_New := TFrFinancialNoteDetail_New.Create(Application);
+   FrFinancialNoteDetail_New.Align := alClient ;
+   FrFinancialNoteDetail_New.ShowInPanel(FinancialNotePanel);
+  { TODO -oparsa : 14030701 }
   //---
 end;
 
@@ -375,7 +404,7 @@ begin
     2:Amount := FRMAIN.Sum_ForcePayment_Amount-FrFinancialNoteDetail_New.DefaultAmount
   END;
 
-  Label12.Caption:=Bill(Amount)+' '+Get_SystemSetting('EdtMoneyUnit')+' ';
+  LblPriceDesc.Caption:= Bill(Amount)+' '+Get_SystemSetting('EdtMoneyUnit')+' ';
 end;
 
 end.

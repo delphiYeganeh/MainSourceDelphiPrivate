@@ -49,12 +49,15 @@ type
     procedure DBGrid1EditButtonClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure Button5Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
 
 
   private
     { Private declarations }
   public
-    { Public declarations }
+    BaseNewWidth : Integer;
+    BaseNewHeight: Integer;
   end;
 
 var
@@ -333,6 +336,10 @@ begin
      {Ranjbar 88.05.21}
      Form_Animate(Self,100);
      //---
+     { TODO -oparsa : 14030628- bug369 }
+     BaseNewWidth := Self.Width;
+     BaseNewHeight:= Self.Height;
+     { TODO -oparsa : 14030628- bug369 }
 end;
 
 
@@ -462,6 +469,18 @@ end;
 procedure TFrAddReportName.Button5Click(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TFrAddReportName.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030628- bug369 }
+
+  if (NewWidth < BaseNewWidth)  or (NewHeight < BaseNewHeight) then
+    Resize := False
+  else Resize := True;
+
+  { TODO -oparsa : 14030628- bug369 }
 end;
 
 end.

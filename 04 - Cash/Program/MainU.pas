@@ -467,6 +467,7 @@ type
     procedure EdtLoanLastNoEnter(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure AccountGridCellClick(Column: TColumn);
+    procedure TabSheet2Show(Sender: TObject);
 
   private
     { Private declarations }
@@ -506,7 +507,7 @@ uses dmu,    BusinessLayer,  AddUserU, LoginU,
   AccDailyReportU, DividBenefit_NewU, AddReportNameU, ForTest,
   ListofContactsU, AddPresentationDetU, PrintDeletedPayment_ByDocumentNoU,
   DocPrintU, URepSoodSepordeh, URepSood2, UBenefitFromHazineh, uSendSMS,
-  uSmsSetting, U_ENTER_ADMIN_PASS_FRM, ConvUtils;
+  uSmsSetting, U_ENTER_ADMIN_PASS_FRM, ConvUtils, AddAccessU;
 
 
  var
@@ -1109,8 +1110,8 @@ end;
 procedure TFrMain.xpBitBtn51Click(Sender: TObject);
 begin
   inherited;
-//  FrAddAccess := TFrAddAccess.Create(Application);
-//  FrAddAccess.ShowModal;
+  FrAddAccess := TFrAddAccess.Create(Application);
+  FrAddAccess.ShowModal;
 end;
 
 procedure TFrMain.SpeedButton37Click(Sender: TObject);
@@ -2138,7 +2139,7 @@ end;
 procedure TFrMain.xpTabSheet4Show(Sender: TObject);
 begin
   inherited;
-  Refresh_CashAccount;
+//  Refresh_CashAccount;
 end;
 
 procedure TFrMain.UserTitmerTimer(Sender: TObject);
@@ -3048,9 +3049,10 @@ begin
   MainPageControl.ActivePageIndex := PageControl1.ActivePageIndex;
   //Hamed_Ansari_990519_S
   //if PageControl1.TabIndex=3 then
-  if PageControl1.TabIndex = 3 then
+ ///// if PageControl1.TabIndex = 3 then
    // btnSearch3.Click;
   //Hamed_Ansari_990519_E
+
 end;
 
 procedure TFrMain.btnSoodSepordeClick(Sender: TObject);
@@ -3186,6 +3188,15 @@ begin
   inherited;
   if not dm.blnDataIsReady then
     Exit;
+end;
+
+procedure TFrMain.TabSheet2Show(Sender: TObject);
+begin
+  inherited;
+  { TODO -oparsa : 14030701 }
+  if PageControl1.TabIndex=1 then
+    Refresh_CashAccount;
+  { TODO -oparsa : 14030701 }
 end;
 
 end.

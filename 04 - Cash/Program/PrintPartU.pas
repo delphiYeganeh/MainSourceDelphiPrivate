@@ -185,6 +185,8 @@ type
     procedure SBChNone1Click(Sender: TObject);
     procedure SBChRev1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
   public
@@ -370,6 +372,15 @@ begin
      //SBChSrch1Click(Self);
 //   end
    //---
+end;
+
+procedure TPrintParts.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  inherited;
+  { TODO -oparsa : 14030628- bug369 }
+  Resize := False;
+  { TODO -oparsa : 14030628- bug369 }
 end;
 
 end.

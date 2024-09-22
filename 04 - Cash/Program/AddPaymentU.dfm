@@ -44,7 +44,7 @@ inherited FrAddPayment: TFrAddPayment
       Top = 5
       Width = 163
       Height = 19
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       TabOrder = 0
       OnExit = TEditExit
       OnKeyDown = SearchEditKeyDown
@@ -201,7 +201,7 @@ inherited FrAddPayment: TFrAddPayment
     object Label5: TLabel
       Left = 350
       Top = 10
-      Width = 20
+      Width = 34
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1605#1576#1604#1594
@@ -230,7 +230,7 @@ inherited FrAddPayment: TFrAddPayment
     object Label7: TLabel
       Left = 598
       Top = 37
-      Width = 21
+      Width = 31
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1578#1575#1585#1610#1582
@@ -258,7 +258,7 @@ inherited FrAddPayment: TFrAddPayment
     object Label10: TLabel
       Left = 598
       Top = 63
-      Width = 29
+      Width = 31
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1578#1608#1590#1610#1581
@@ -398,7 +398,7 @@ inherited FrAddPayment: TFrAddPayment
       Top = 59
       Width = 132
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       Ctl3D = True
       DataField = 'DocumentNo'
       DataSource = dm.DSelect_Payment
@@ -461,7 +461,7 @@ inherited FrAddPayment: TFrAddPayment
       DataFieldAutoSaveModified = False
     end
     object DBEdit1: TDBEdit
-      Left = 215
+      Left = 214
       Top = 33
       Width = 132
       Height = 21

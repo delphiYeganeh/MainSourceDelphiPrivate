@@ -4776,7 +4776,8 @@ begin
   // jHAT PAK KARDAN PACH GHADIMI
   qry := TADOQuery.Create(self);
   qry.Connection := YeganehConnection;
-  qry.SQL.Text   := '  UPDATE [dbo].[TBLAPPSETTING] SET Max_TableScriptNumber = 1 ,Last_TableScriptNumber = 1,Max_ViewScriptNumber = 1 ,Last_ViewScriptNumber = 1  '+
+  qry.SQL.Text   := ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U'')) '+
+                    ' UPDATE [dbo].[TBLAPPSETTING] SET Max_TableScriptNumber = 1 ,Last_TableScriptNumber = 1,Max_ViewScriptNumber = 1 ,Last_ViewScriptNumber = 1  '+
                                   ' WHERE (SELECT TOP 1  SUM(1) FROM dbo.TBLAPPSETTING WHERE DATE<'+'''2024-06-02'''+' ) >0 AND ISNULL((SELECT TOP 1  SUM(1) FROM dbo.TBLAPPSETTING WHERE   DATE>'+'''2024-06-14'''+' ),0) =0   '  ;
 
   qry.ExecSQL;
@@ -4934,7 +4935,7 @@ begin
   end;
   finally
     qryAutoRunScript.SQL.Text := 'IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U''))'+
-                                    ' SELECT TOP 1 (ISNULL(Max_TableScriptNumber,0)-ISNULL(Last_TableScriptNumber,0)) + ( ISNULL(Max_ViewScriptNumber,0) - ISNULL(Last_ViewScriptNumber ,0)) CountError   '+
+                                    ' SELECT TOP 1 (ISNULL(Max_TableScriptNumber,Last_TableScriptNumber)-ISNULL(Last_TableScriptNumber,0)) + ( ISNULL(Max_ViewScriptNumber,Last_ViewScriptNumber) - ISNULL(Last_ViewScriptNumber ,0)) CountError   '+
                                     ' FROM [dbo].[TBLAPPSETTING] ORDER BY id DESC '+
                                     ' ELSE SELECT 0 CountError' ;
 

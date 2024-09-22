@@ -4,22 +4,22 @@ inherited FrMakeMonthly: TFrMakeMonthly
   BorderStyle = bsDialog
   Caption = #1578#1606#1592#1610#1605' '#1605#1575#1607#1610#1575#1606#1607' '#1576#1585#1575#1610' '#1581#1587#1575#1576' '#1607#1575
   ClientHeight = 432
-  ClientWidth = 494
+  ClientWidth = 496
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
     Top = 391
-    Width = 494
+    Width = 496
     Height = 41
     Align = alBottom
     TabOrder = 0
     DesignSize = (
-      494
+      496
       41)
     object BitBtn1: TBitBtn
-      Left = 400
+      Left = 402
       Top = 8
       Width = 75
       Height = 25
@@ -36,7 +36,7 @@ inherited FrMakeMonthly: TFrMakeMonthly
       Kind = bkOK
     end
     object BitBtn2: TBitBtn
-      Left = 320
+      Left = 322
       Top = 8
       Width = 75
       Height = 25
@@ -55,15 +55,15 @@ inherited FrMakeMonthly: TFrMakeMonthly
   object Panel2: TPanel [1]
     Left = 0
     Top = 0
-    Width = 494
+    Width = 496
     Height = 391
     Align = alClient
     TabOrder = 1
     DesignSize = (
-      494
+      496
       391)
     object Label2: TLabel
-      Left = 384
+      Left = 386
       Top = 316
       Width = 34
       Height = 13
@@ -77,7 +77,7 @@ inherited FrMakeMonthly: TFrMakeMonthly
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 250
+      Left = 252
       Top = 316
       Width = 30
       Height = 13
@@ -91,11 +91,11 @@ inherited FrMakeMonthly: TFrMakeMonthly
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 212
+      Left = 209
       Top = 8
-      Width = 84
+      Width = 89
       Height = 13
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       Caption = #1578#1606#1592#1610#1605' '#1581#1602' '#1593#1590#1608#1610#1578
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -105,11 +105,11 @@ inherited FrMakeMonthly: TFrMakeMonthly
       ParentFont = False
     end
     object Label4: TLabel
-      Left = 53
+      Left = 50
       Top = 368
-      Width = 371
+      Width = 376
       Height = 13
-      Anchors = [akRight, akBottom]
+      Anchors = [akLeft, akRight, akBottom]
       Caption = 
         #1576#1585#1575#1610' '#1578#1606#1592#1610#1605' '#1578#1575#1585#1582' '#1587#1585#1585#1587#1610#1583' '#1608' '#1605#1576#1604#1594' '#1605#1575#1607#1610#1575#1606#1607' '#1607#1575' '#1576#1607' '#1575#1591#1604#1575#1593#1575#1578' '#1581#1587#1575#1576' '#1575#1601#1585#1575#1583' '#1605 +
         #1585#1575#1580#1593#1607' '#1606#1605#1575#1610#1610#1583
@@ -137,15 +137,15 @@ inherited FrMakeMonthly: TFrMakeMonthly
       Enabled = False
     end
     object ProgressBar: TProgressBar
-      Left = 16
+      Left = 13
       Top = 345
-      Width = 457
+      Width = 462
       Height = 17
-      Anchors = [akRight, akBottom]
+      Anchors = [akLeft, akRight, akBottom]
       TabOrder = 5
     end
     object AllAcount: TRadioButton
-      Left = 376
+      Left = 378
       Top = 25
       Width = 97
       Height = 17
@@ -161,7 +161,7 @@ inherited FrMakeMonthly: TFrMakeMonthly
       OnClick = SelectionAccountsClick
     end
     object oneAccount: TRadioButton
-      Left = 376
+      Left = 378
       Top = 51
       Width = 97
       Height = 17
@@ -179,7 +179,7 @@ inherited FrMakeMonthly: TFrMakeMonthly
       OnClick = SelectionAccountsClick
     end
     object SearchEdit: TEdit
-      Left = 147
+      Left = 149
       Top = 49
       Width = 201
       Height = 21
@@ -193,7 +193,7 @@ inherited FrMakeMonthly: TFrMakeMonthly
       TabOrder = 2
     end
     object datefrom: TSolarDatePicker
-      Left = 294
+      Left = 296
       Top = 313
       Width = 90
       Height = 21
@@ -229,7 +229,7 @@ inherited FrMakeMonthly: TFrMakeMonthly
       DataFieldAutoSaveModified = False
     end
     object dateTo: TSolarDatePicker
-      Left = 156
+      Left = 158
       Top = 313
       Width = 90
       Height = 21
@@ -265,10 +265,11 @@ inherited FrMakeMonthly: TFrMakeMonthly
       DataFieldAutoSaveModified = False
     end
     object SelectionAccounts: TRadioButton
-      Left = 360
+      Left = 363
       Top = 80
       Width = 113
       Height = 17
+      Anchors = [akTop, akRight]
       Caption = #1581#1587#1575#1576' '#1607#1575#1610' '#1605#1606#1578#1582#1576
       TabOrder = 6
       OnClick = SelectionAccountsClick
@@ -276,9 +277,9 @@ inherited FrMakeMonthly: TFrMakeMonthly
     object AllAccounts: TListBox
       Left = 264
       Top = 120
-      Width = 185
+      Width = 190
       Height = 149
-      Anchors = [akLeft, akTop, akBottom]
+      Anchors = [akLeft, akTop, akRight, akBottom]
       Enabled = False
       ItemHeight = 13
       MultiSelect = True
@@ -322,9 +323,9 @@ inherited FrMakeMonthly: TFrMakeMonthly
     object AllAccountsSearch: TEdit
       Left = 264
       Top = 276
-      Width = 185
+      Width = 190
       Height = 21
-      Anchors = [akLeft, akBottom]
+      Anchors = [akLeft, akRight, akBottom]
       Enabled = False
       TabOrder = 11
       OnChange = AllAccountsSearchChange

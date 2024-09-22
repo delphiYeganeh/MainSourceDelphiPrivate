@@ -16,6 +16,7 @@ object YBaseForm: TYBaseForm
   ParentBiDiMode = False
   Position = poScreenCenter
   Scaled = False
+  OnCanResize = FormCanResize
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

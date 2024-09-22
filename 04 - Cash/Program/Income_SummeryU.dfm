@@ -1071,11 +1071,15 @@ inherited FrIncome_Summery: TFrIncome_Summery
         Height = 37
         Align = alTop
         TabOrder = 1
+        DesignSize = (
+          758
+          37)
         object Label2: TLabel
           Left = 704
           Top = 12
           Width = 48
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1581#1587#1575#1576'  '#1607#1575
         end
         object Label5: TLabel
@@ -1083,6 +1087,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 21
           Width = 30
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1576#1583#1607#1705#1575#1585
         end
         object Label6: TLabel
@@ -1090,6 +1095,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 21
           Width = 38
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1576#1587#1578#1575#1606#1705#1575#1585
         end
         object Label7: TLabel
@@ -1097,6 +1103,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 21
           Width = 30
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1576#1583#1607#1705#1575#1585
         end
         object Label8: TLabel
@@ -1104,6 +1111,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 21
           Width = 38
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1576#1587#1578#1575#1606#1705#1575#1585
         end
         object Label9: TLabel
@@ -1111,6 +1119,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 21
           Width = 30
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1576#1583#1607#1705#1575#1585
         end
         object Label10: TLabel
@@ -1118,6 +1127,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 21
           Width = 38
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1576#1587#1578#1575#1606#1705#1575#1585
         end
         object Colheader1: TLabel
@@ -1125,6 +1135,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 0
           Width = 160
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = '----------------------------------------'
         end
         object ColHeader2: TLabel
@@ -1132,6 +1143,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 0
           Width = 160
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = '----------------------------------------'
         end
         object ColHeader3: TLabel
@@ -1139,6 +1151,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 0
           Width = 160
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = '----------------------------------------'
         end
         object Shape1: TShape
@@ -1146,18 +1159,21 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = -8
           Width = 1
           Height = 65
+          Anchors = [akTop, akRight]
         end
         object Shape2: TShape
           Left = 255
           Top = -23
           Width = 1
           Height = 65
+          Anchors = [akTop, akRight]
         end
         object Shape3: TShape
           Left = 674
           Top = -28
           Width = 1
           Height = 65
+          Anchors = [akTop, akRight]
         end
       end
     end
@@ -1170,11 +1186,15 @@ inherited FrIncome_Summery: TFrIncome_Summery
         Height = 34
         Align = alTop
         TabOrder = 0
+        DesignSize = (
+          758
+          34)
         object Label1: TLabel
           Left = 704
           Top = 12
           Width = 48
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1581#1587#1575#1576'  '#1607#1575
         end
         object Label11: TLabel
@@ -1182,6 +1202,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 19
           Width = 30
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1576#1583#1607#1705#1575#1585
         end
         object Label12: TLabel
@@ -1189,6 +1210,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 19
           Width = 38
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1576#1587#1578#1575#1606#1705#1575#1585
         end
         object Label13: TLabel
@@ -1196,6 +1218,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 19
           Width = 30
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1576#1583#1607#1705#1575#1585
         end
         object Label14: TLabel
@@ -1203,6 +1226,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 19
           Width = 38
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1576#1587#1578#1575#1606#1705#1575#1585
         end
         object Label15: TLabel
@@ -1210,6 +1234,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 19
           Width = 30
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1576#1583#1607#1705#1575#1585
         end
         object Label16: TLabel
@@ -1217,6 +1242,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 19
           Width = 38
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = #1576#1587#1578#1575#1606#1705#1575#1585
         end
         object ColHeader12: TLabel
@@ -1224,6 +1250,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 0
           Width = 160
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = '----------------------------------------'
         end
         object ColHeader22: TLabel
@@ -1231,6 +1258,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 0
           Width = 160
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = '----------------------------------------'
         end
         object ColHeader32: TLabel
@@ -1238,6 +1266,7 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = 0
           Width = 160
           Height = 13
+          Anchors = [akTop, akRight]
           Caption = '----------------------------------------'
         end
         object Shape4: TShape
@@ -1245,18 +1274,21 @@ inherited FrIncome_Summery: TFrIncome_Summery
           Top = -8
           Width = 1
           Height = 65
+          Anchors = [akTop, akRight]
         end
         object Shape5: TShape
           Left = 247
           Top = -23
           Width = 1
           Height = 65
+          Anchors = [akTop, akRight]
         end
         object Shape6: TShape
           Left = 666
           Top = -31
           Width = 1
           Height = 65
+          Anchors = [akTop, akRight]
         end
       end
       object YDBGrid1: TYDBGrid
@@ -1378,7 +1410,6 @@ inherited FrIncome_Summery: TFrIncome_Summery
       Top = 4
       Width = 75
       Height = 28
-      Anchors = [akTop, akRight]
       Caption = #1606#1605#1575#1610#1588
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText

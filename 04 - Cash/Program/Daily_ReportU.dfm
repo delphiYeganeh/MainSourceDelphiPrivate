@@ -1096,9 +1096,6 @@ inherited FrDaily_Report: TFrDaily_Report
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    DesignSize = (
-      572
-      37)
     object Panel1: TPanel
       Left = 333
       Top = 1
@@ -1266,7 +1263,6 @@ inherited FrDaily_Report: TFrDaily_Report
       Top = 5
       Width = 75
       Height = 28
-      Anchors = [akTop, akRight]
       Caption = #1606#1605#1575#1610#1588
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -1338,15 +1334,17 @@ inherited FrDaily_Report: TFrDaily_Report
   object Panel4: TPanel [2]
     Left = 0
     Top = 37
-    Width = 571
-    Height = 254
+    Width = 572
+    Height = 255
+    Align = alClient
     TabOrder = 3
     object YDBGrid: TYDBGrid
       Left = 1
       Top = 1
-      Width = 569
-      Height = 252
+      Width = 570
+      Height = 253
       Cursor = crHandPoint
+      Align = alClient
       DataSource = dm.DReport_Daily_Payment
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText

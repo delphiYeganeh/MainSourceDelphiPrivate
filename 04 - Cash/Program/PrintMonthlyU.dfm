@@ -2,7 +2,7 @@ inherited FrPrintMonthly: TFrPrintMonthly
   Left = 347
   Top = 229
   AutoScroll = False
-  Caption = '\'
+  Caption = #1583#1601#1578#1585#1670#1607' '#1593#1590#1608#1610#1578
   ClientHeight = 458
   ClientWidth = 704
   OldCreateOrder = True
@@ -3764,6 +3764,14 @@ inherited FrPrintMonthly: TFrPrintMonthly
       OnClick = btnPrintProfileClick
     end
   end
+  object PAccountDetailTmp: TPanel [5]
+    Left = 0
+    Top = 0
+    Width = 704
+    Height = 217
+    Align = alClient
+    TabOrder = 5
+  end
   inherited ahmadvand: TActionList
     Left = 401
     Top = 12
@@ -4013,7 +4021,8 @@ inherited FrPrintMonthly: TFrPrintMonthly
         Attributes = [paNullable]
         DataType = ftString
         Precision = 10
-        Value = 0
+        Size = 16
+        Value = '0'
       end
       item
         Name = '@Year'

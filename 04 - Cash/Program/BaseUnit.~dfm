@@ -1,6 +1,6 @@
 object YBaseForm: TYBaseForm
-  Left = 379
-  Top = 102
+  Left = 380
+  Top = 103
   Width = 318
   Height = 168
   BiDiMode = bdRightToLeft
@@ -16,6 +16,7 @@ object YBaseForm: TYBaseForm
   ParentBiDiMode = False
   Position = poScreenCenter
   Scaled = False
+  OnCanResize = FormCanResize
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

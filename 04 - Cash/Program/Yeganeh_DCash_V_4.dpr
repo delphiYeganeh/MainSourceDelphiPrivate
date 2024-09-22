@@ -130,8 +130,8 @@ uses
   YDbgrid in 'YDbgrid.pas',
   Upreview in 'Upreview.pas' {Fpreview},
   YAmountEdit in 'YAmountEdit.pas',
-  YWhereEdit in 'YWhereEdit.pas';
-
+  YWhereEdit in 'YWhereEdit.pas',
+  AddAccessU in 'AddAccessU.pas' {FrAddAccess};
 
 {$R *.res}
 
@@ -143,5 +143,6 @@ begin
   Application.HelpFile := '';
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TFrMain, FrMain);
+  //Application.CreateForm(TFrAddAccess, FrAddAccess);
   Application.Run;
 end.

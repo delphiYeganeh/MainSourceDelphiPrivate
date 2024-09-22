@@ -47,7 +47,6 @@ type
     Label9: TLabel;
     RbPerson: TRadioButton;
     FinancialNotePanel: TPanel;
-    BitBtn2: TBitBtn;
     Label1: TLabel;
     FinancialNotePanelHesab: TPanel;
     RbHesab: TRadioButton;
@@ -59,7 +58,10 @@ type
     edit1: TEdit;
     Label3: TLabel;
     Edit2: TEdit;
+    Panel4: TPanel;
     BitBtn4: TBitBtn;
+    Panel5: TPanel;
+    BitBtn2: TBitBtn;
     procedure FormShow(Sender: TObject);
     procedure xpBitBtn3Click(Sender: TObject);
     procedure xpBitBtn4Click(Sender: TObject);
@@ -80,6 +82,7 @@ type
     procedure BitBtn4Click(Sender: TObject);
     procedure PageControlChange(Sender: TObject);
     procedure BitBtn5Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -141,15 +144,19 @@ begin
   Edit2.Text:=Qry_GetResult(sqlText,Dm.YeganehConnection);
   if (Edit2.Text='') or (Edit2.Text='0') then
   begin
+    { TODO -oparsa : 14030701 }
+    {
     FrFinancialNoteDetail_New:=TFrFinancialNoteDetail_New.Create(Application);
     FrFinancialNoteDetail_New.ShowInPanel(FinancialNotePanelHesab);
-    Label1.Visible:=True;
-    RbHesab.Visible:=True;
+    }
+    { TODO -oparsa : 14030701 }
+    Label1.Visible := True;
+    RbHesab.Visible:= True;
   end
   else
   begin
-    Label1.Visible:=False;
-    RbHesab.Visible:=False;
+    Label1.Visible := False;
+    RbHesab.Visible:= False;
   end;
 end;
 
@@ -661,8 +668,12 @@ begin
                            '        FinancialNote_Detail ON ForcePayment.ForcePaymentID = FinancialNote_Detail.ForcePaymentID '+
                            ' WHERE (1 = 1) AND (ForcePayment.ParentID = '+Dm.Select_Loan_PartsParentID.AsString +')) ';
 
+    { TODO -oparsa : 14030701 }
+    {
     FrFinancialNoteDetail_New:=TFrFinancialNoteDetail_New.Create(Application);
     FrFinancialNoteDetail_New.ShowInPanel(FinancialNotePanel);
+    }
+    { TODO -oparsa : 14030701 }
   end;
 
   if UpperCase(PageControl.ActivePage.Name) = UpperCase('TabSheet3') then
@@ -678,8 +689,25 @@ end;
 procedure TFrEditLoan.BitBtn5Click(Sender: TObject);
 begin
   inherited;
+  { TODO -oparsa : 14030701 }
+  {
   FrFinancialNoteDetail_New:=TFrFinancialNoteDetail_New.Create(Application);
   FrFinancialNoteDetail_New.ShowInPanel(FinancialNotePanel);
+  }
+  { TODO -oparsa : 14030701 }
+end;
+
+procedure TFrEditLoan.FormCreate(Sender: TObject);
+begin
+  inherited;
+  { TODO -oparsa : 14030701 }
+  FrFinancialNoteDetail_New:=TFrFinancialNoteDetail_New.Create(Application);
+  FrFinancialNoteDetail_New.ShowInPanel(FinancialNotePanelHesab);
+
+  FrFinancialNoteDetail_New:=TFrFinancialNoteDetail_New.Create(Application);
+  FrFinancialNoteDetail_New.ShowInPanel(FinancialNotePanel);
+
+  { TODO -oparsa : 14030701 }
 end;
 
 end.

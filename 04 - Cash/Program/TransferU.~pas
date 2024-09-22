@@ -231,7 +231,7 @@ if dm.Select_Payment.State=dsinsert then
 dm.Select_Payment.Post;
 PrintBtn.show;
 DoBtn.Enabled:=false;
-ShowMessage('«‰ ﬁ«· ÊÃÂ »« „Ê›ﬁÌ  «‰Ã«„ ‘œ.'););
+ShowMessage('«‰ ﬁ«· ÊÃÂ »« „Ê›ﬁÌ  «‰Ã«„ ‘œ.');
 end;
 
 procedure TFrTransfer.xpBitBtn1Click(Sender: TObject);

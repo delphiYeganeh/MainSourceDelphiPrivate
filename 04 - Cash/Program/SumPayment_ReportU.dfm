@@ -15,13 +15,17 @@ inherited FrSumPayment_Report: TFrSumPayment_Report
     Height = 52
     Align = alBottom
     TabOrder = 1
+    DesignSize = (
+      318
+      52)
     object SBReport: TSpeedButton
-      Left = 275
+      Left = 267
       Top = 3
       Width = 48
       Height = 47
       Cursor = crHandPoint
       Hint = #1670#1575#1662
+      Anchors = [akTop, akRight]
       Glyph.Data = {
         E61D0000424DE61D000000000000360000002800000032000000320000000100
         180000000000B01D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -274,6 +278,7 @@ inherited FrSumPayment_Report: TFrSumPayment_Report
       Top = 8
       Width = 146
       Height = 11
+      Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
       Caption = '...\Cash\Reports\SumPayment1.fr3'
       Font.Charset = ARABIC_CHARSET
@@ -289,6 +294,7 @@ inherited FrSumPayment_Report: TFrSumPayment_Report
       Top = 24
       Width = 143
       Height = 11
+      Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
       Caption = '...\Cash\Reports\TotalPayment.fr3'
       Font.Charset = ARABIC_CHARSET
@@ -304,6 +310,7 @@ inherited FrSumPayment_Report: TFrSumPayment_Report
       Top = 8
       Width = 29
       Height = 11
+      Anchors = [akTop, akRight]
       Caption = #1601#1585#1605#1578'1:'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -317,6 +324,7 @@ inherited FrSumPayment_Report: TFrSumPayment_Report
       Top = 25
       Width = 29
       Height = 11
+      Anchors = [akTop, akRight]
       Caption = #1601#1585#1605#1578'2:'
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -433,15 +441,15 @@ inherited FrSumPayment_Report: TFrSumPayment_Report
         316
         66)
       object Label1: TLabel
-        Left = 185
+        Left = 182
         Top = 11
-        Width = 58
+        Width = 61
         Height = 13
         Anchors = [akTop, akRight]
-        Caption = #1588#1605#1575#1585#1607' '#1587#1606#1583':'
+        Caption = #1588#1605#1575#1585#1607' '#1587#1606#1583' :'
       end
       object SpeedButton1: TSpeedButton
-        Left = 102
+        Left = 90
         Top = 6
         Width = 23
         Height = 22
@@ -449,19 +457,19 @@ inherited FrSumPayment_Report: TFrSumPayment_Report
         OnClick = SpeedButton1Click
       end
       object Label3: TLabel
-        Left = 185
-        Top = 41
-        Width = 25
+        Left = 182
+        Top = 37
+        Width = 61
         Height = 13
         Anchors = [akTop, akRight]
-        Caption = #1578#1575#1585#1610#1582':'
+        Caption = #1578#1575#1585#1610#1582'            :'
       end
       object EdtDocumentNo: TEdit
-        Left = 125
+        Left = 112
         Top = 7
-        Width = 54
+        Width = 67
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         TabOrder = 0
       end
       object MEDate: TSolarDatePicker
@@ -469,6 +477,7 @@ inherited FrSumPayment_Report: TFrSumPayment_Report
         Top = 32
         Width = 92
         Height = 22
+        Anchors = [akLeft, akTop, akRight]
         About = 'Created by : Mohamad Khorsandi'
         BiDiMode = bdLeftToRight
         Font.Charset = ARABIC_CHARSET

@@ -1218,34 +1218,39 @@ inherited FrReport_Payment: TFrReport_Payment
       Top = 10
       Width = 57
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1578#1575#1585#1610#1582' '#1662#1585#1583#1575#1582#1578
     end
     object Label2: TLabel
       Left = 624
       Top = 35
-      Width = 56
+      Width = 57
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1586#1605#1575#1606' '#1662#1585#1583#1575#1582#1578
     end
     object Label3: TLabel
       Left = 624
       Top = 61
-      Width = 20
+      Width = 57
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1605#1576#1604#1594
     end
     object Label4: TLabel
       Left = 624
       Top = 87
-      Width = 29
+      Width = 57
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1578#1608#1590#1610#1581
     end
     object Label5: TLabel
       Left = 287
       Top = 10
-      Width = 67
+      Width = 87
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1705#1575#1585#1576#1585' '#1579#1576#1578' '#1705#1606#1606#1583#1607
     end
     object Label6: TLabel
@@ -1253,34 +1258,39 @@ inherited FrReport_Payment: TFrReport_Payment
       Top = 35
       Width = 87
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1588#1605#1575#1585#1607' '#1670#1705' '#1610#1575' '#1581#1608#1575#1604#1607
     end
     object Label7: TLabel
       Left = 287
       Top = 61
-      Width = 51
+      Width = 87
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1606#1608#1593' '#1662#1585#1583#1575#1582#1578
     end
     object Label8: TLabel
       Left = 287
       Top = 87
-      Width = 41
+      Width = 87
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1578#1575#1585#1610#1582' '#1579#1576#1578
     end
     object Label9: TLabel
       Left = 624
       Top = 113
-      Width = 54
+      Width = 57
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1588#1605#1575#1585#1607' '#1587#1606#1583
     end
     object Label10: TLabel
       Left = 287
       Top = 113
-      Width = 36
+      Width = 87
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1705#1583' '#1585#1575#1610#1575#1606#1607
     end
     object SpeedButton1: TSpeedButton
@@ -1302,6 +1312,7 @@ inherited FrReport_Payment: TFrReport_Payment
       Top = 6
       Width = 196
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       Color = 16121568
       ParentBiDiMode = False
@@ -1319,10 +1330,11 @@ inherited FrReport_Payment: TFrReport_Payment
       Connection = dm.YeganehConnection
     end
     object YWhereEdit6: TYWhereEdit
-      Left = 198
+      Left = 87
       Top = 31
-      Width = 85
+      Width = 196
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       Color = clWhite
       ParentBiDiMode = False
@@ -1342,6 +1354,7 @@ inherited FrReport_Payment: TFrReport_Payment
       Top = 57
       Width = 196
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       Color = 16121568
       ParentBiDiMode = False
@@ -1363,6 +1376,7 @@ inherited FrReport_Payment: TFrReport_Payment
       Top = 83
       Width = 212
       Height = 21
+      Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
       ParentBiDiMode = False
       TabOrder = 3
@@ -1381,6 +1395,7 @@ inherited FrReport_Payment: TFrReport_Payment
       Top = 57
       Width = 85
       Height = 21
+      Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
       ParentBiDiMode = False
       TabOrder = 2
@@ -1399,6 +1414,7 @@ inherited FrReport_Payment: TFrReport_Payment
       Top = 31
       Width = 85
       Height = 21
+      Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
       ParentBiDiMode = False
       TabOrder = 1
@@ -1413,10 +1429,11 @@ inherited FrReport_Payment: TFrReport_Payment
       Connection = dm.YeganehConnection
     end
     object YWhereEdit9: TYWhereEdit
-      Left = 198
+      Left = 87
       Top = 109
-      Width = 85
+      Width = 196
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       Color = clWhite
       ParentBiDiMode = False
@@ -1437,6 +1454,7 @@ inherited FrReport_Payment: TFrReport_Payment
       Top = 109
       Width = 85
       Height = 21
+      Anchors = [akTop, akRight]
       BiDiMode = bdLeftToRight
       ParentBiDiMode = False
       TabOrder = 4
@@ -1486,11 +1504,11 @@ inherited FrReport_Payment: TFrReport_Payment
       DataFieldAutoSaveModified = False
     end
     object MEInsertDate: TSolarDatePicker
-      Left = 198
+      Left = 87
       Top = 83
-      Width = 85
+      Width = 196
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       About = 'Created by : Mohamad Khorsandi'
       BiDiMode = bdRightToLeft
       TabOrder = 8

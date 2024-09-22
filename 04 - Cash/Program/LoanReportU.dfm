@@ -352,16 +352,16 @@ inherited FrLoanReport: TFrLoanReport
       object Panel7: TPanel
         Left = 0
         Top = 0
-        Width = 696
+        Width = 686
         Height = 415
-        Align = alLeft
+        Align = alClient
         Ctl3D = False
         ParentCtl3D = False
         TabOrder = 0
         object Panel6: TPanel
           Left = 1
           Top = 1
-          Width = 694
+          Width = 684
           Height = 228
           Align = alClient
           BevelInner = bvLowered
@@ -369,7 +369,7 @@ inherited FrLoanReport: TFrLoanReport
           object YDBGrid1: TYDBGrid
             Left = 2
             Top = 2
-            Width = 690
+            Width = 680
             Height = 224
             Cursor = crHandPoint
             Align = alClient
@@ -443,7 +443,7 @@ inherited FrLoanReport: TFrLoanReport
         object Panel5: TPanel
           Left = 1
           Top = 229
-          Width = 694
+          Width = 684
           Height = 144
           Align = alBottom
           BevelInner = bvRaised
@@ -538,8 +538,9 @@ inherited FrLoanReport: TFrLoanReport
           object YDBGrid2: TYDBGrid
             Left = 2
             Top = 20
-            Width = 690
+            Width = 680
             Height = 122
+            Cursor = crHandPoint
             Align = alBottom
             Color = 15597310
             DataSource = DReport_DelayedLoanPayment_DETAIL
@@ -616,7 +617,7 @@ inherited FrLoanReport: TFrLoanReport
         object Panel2: TPanel
           Left = 1
           Top = 373
-          Width = 694
+          Width = 684
           Height = 41
           Align = alBottom
           BevelInner = bvRaised
@@ -849,8 +850,8 @@ inherited FrLoanReport: TFrLoanReport
       218
       444)
     object Label5: TLabel
-      Left = 138
-      Top = 69
+      Left = 136
+      Top = 11
       Width = 76
       Height = 14
       Caption = #1588#1605#1575#1585#1607' '#1581#1587#1575#1576':'
@@ -900,36 +901,36 @@ inherited FrLoanReport: TFrLoanReport
       OnClick = SpeedButton6Click
     end
     object Label15: TLabel
-      Left = 141
-      Top = 115
-      Width = 38
+      Left = 136
+      Top = 59
+      Width = 76
       Height = 14
       Caption = #1606#1608#1593' '#1608#1575#1605':'
     end
     object Label8: TLabel
-      Left = 139
-      Top = 91
+      Left = 156
+      Top = 35
       Width = 56
       Height = 14
       Caption = #1588#1605#1575#1585#1607' '#1608#1575#1605':'
     end
     object Label3: TLabel
-      Left = 111
-      Top = 143
-      Width = 95
+      Left = 108
+      Top = 87
+      Width = 99
       Height = 14
       Caption = #1578#1575#1585#1610#1582' '#1578#1575#1582#1610#1585'  '#1578#1575' '#1578#1575#1585#1610#1582':'
     end
     object EdtAccountNo: TEdit
-      Left = 13
-      Top = 66
+      Left = 9
+      Top = 8
       Width = 124
       Height = 22
       TabOrder = 0
     end
     object edLoanType: TYWhereEdit
-      Left = 36
-      Top = 112
+      Left = 32
+      Top = 56
       Width = 99
       Height = 22
       BiDiMode = bdLeftToRight
@@ -948,8 +949,8 @@ inherited FrLoanReport: TFrLoanReport
       Connection = dm.YeganehConnection
     end
     object SpeedButton5: TButton
-      Left = 13
-      Top = 111
+      Left = 9
+      Top = 55
       Width = 23
       Height = 23
       Anchors = [akTop, akRight]
@@ -958,38 +959,37 @@ inherited FrLoanReport: TFrLoanReport
       OnClick = SpeedButton5Click
     end
     object edLoanNo: TEdit
-      Left = 13
-      Top = 88
+      Left = 9
+      Top = 32
       Width = 124
       Height = 22
       TabOrder = 3
     end
     object PanelGroup: TPanel
       Left = 2
-      Top = 2
+      Top = 106
       Width = 214
       Height = 56
-      Align = alTop
       BevelOuter = bvNone
       Ctl3D = True
       ParentCtl3D = False
       TabOrder = 4
       object Rb: TLabel
         Left = 98
-        Top = 7
+        Top = 3
         Width = 108
         Height = 14
         Caption = #1711#1585#1608#1607' '#1576#1606#1583#1610' '#1576#1585' '#1575#1587#1575#1587' :'
       end
       object RB_sh: TBevel
-        Left = 14
-        Top = 27
-        Width = 194
+        Left = 8
+        Top = 22
+        Width = 200
         Height = 27
       end
       object RBLoanNo: TRadioButton
         Left = 121
-        Top = 30
+        Top = 28
         Width = 74
         Height = 17
         Caption = #1588#1605#1575#1585#1607' '#1608#1575#1605
@@ -999,7 +999,7 @@ inherited FrLoanReport: TFrLoanReport
       end
       object RbAccountNo: TRadioButton
         Left = 17
-        Top = 30
+        Top = 28
         Width = 94
         Height = 17
         Caption = #1588#1605#1575#1585#1607' '#1581#1587#1575#1576
@@ -1021,14 +1021,14 @@ inherited FrLoanReport: TFrLoanReport
         Caption = #1578#1593#1583#1575#1583' '#1575#1602#1587#1575#1591' '#1605#1593#1608#1602#1607':'
       end
       object edPaymentDelay: TEdit
-        Left = 6
+        Left = 1
         Top = 3
-        Width = 87
+        Width = 98
         Height = 22
         TabOrder = 0
       end
       object RBRemainOfLoan_0: TRadioButton
-        Left = 12
+        Left = 8
         Top = 45
         Width = 193
         Height = 25
@@ -1036,7 +1036,7 @@ inherited FrLoanReport: TFrLoanReport
         TabOrder = 1
       end
       object RBRemainOfLoan_Not0: TRadioButton
-        Left = 12
+        Left = 8
         Top = 64
         Width = 193
         Height = 25
@@ -1044,7 +1044,7 @@ inherited FrLoanReport: TFrLoanReport
         TabOrder = 2
       end
       object RBAllLoan: TRadioButton
-        Left = 12
+        Left = 8
         Top = 87
         Width = 193
         Height = 18
@@ -1054,7 +1054,7 @@ inherited FrLoanReport: TFrLoanReport
         TabStop = True
       end
       object RBPaymentNotPayed: TRadioButton
-        Left = 12
+        Left = 8
         Top = 137
         Width = 193
         Height = 26
@@ -1069,7 +1069,7 @@ inherited FrLoanReport: TFrLoanReport
         WordWrap = True
       end
       object RBPaymentPayed: TRadioButton
-        Left = 12
+        Left = 8
         Top = 164
         Width = 193
         Height = 29
@@ -1084,7 +1084,7 @@ inherited FrLoanReport: TFrLoanReport
         WordWrap = True
       end
       object RbAllPayment: TRadioButton
-        Left = 12
+        Left = 8
         Top = 192
         Width = 193
         Height = 22
@@ -1100,8 +1100,8 @@ inherited FrLoanReport: TFrLoanReport
       end
     end
     object mEdtDate: TSolarDatePicker
-      Left = 8
-      Top = 139
+      Left = 9
+      Top = 83
       Width = 98
       Height = 22
       About = 'Created by : Mohamad Khorsandi'

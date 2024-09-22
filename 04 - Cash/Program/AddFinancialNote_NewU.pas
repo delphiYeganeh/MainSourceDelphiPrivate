@@ -118,11 +118,14 @@ type
     procedure SpeedButton6Click(Sender: TObject);
     procedure BitBtn12Click(Sender: TObject);
     procedure BitBtn13Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
 
   private
     { Private declarations }
   public
-    { Public declarations }
+    BaseNewWidth : Integer;
+    BaseNewHeight: Integer;
   end;
 
 var
@@ -295,6 +298,10 @@ begin
     amount.Caption := Bill(StrToInt64(DeleteComma(TDBEdit(sender).Text))) + ' ' + Get_SystemSetting('EdtMoneyUnit') + ' ';
   except
   end;
+ { TODO -oparsa : 14030628- bug369 }
+ BaseNewWidth := Self.Width;
+ BaseNewHeight:= Self.Height;
+ { TODO -oparsa : 14030628- bug369 }
   btnSearch.Click;
 end;
 
@@ -698,7 +705,10 @@ begin
 end;
 
 procedure TFrAddFinancialNote_New.BitBtn12Click(Sender: TObject);
+var strmessage : string;
 begin
+  { TODO -oparsa : 14030701 }
+  (*
   if SumAmountFinancialNote(Dm.FinancialNote_MasterFinancialNote_MasterID.AsInteger) <> Dm.FinancialNote_MasterAmount.AsInteger then
   begin
     DBNavigator1.Enabled:=False;
@@ -710,11 +720,48 @@ begin
     DBNavigator1.Enabled := False;
     ShowMessage( ' ⁄œ«œ ' + Dm.SetDocTitle + ' ‰«œ—”  «”  ');
   end;
+  *)
+  strmessage := '' ;
+  if (SumAmountFinancialNote(Dm.FinancialNote_MasterFinancialNote_MasterID.AsInteger) <> Dm.FinancialNote_MasterAmount.AsInteger )   or
+     (Dm.FinancialNote_MasterNoteCount.AsInteger <> Dm.FinancialNote_Detail.RecordCount) then
+  begin
+    DBNavigator1.Enabled:=False;
+
+    if SumAmountFinancialNote(Dm.FinancialNote_MasterFinancialNote_MasterID.AsInteger) <> Dm.FinancialNote_MasterAmount.AsInteger then
+    begin
+      strmessage :=  'Ã„⁄ „»·€ ' + Dm.SetDocTitle + ' ‰«œ—”  «” . ' ;
+    end;
+
+    if Dm.FinancialNote_MasterNoteCount.AsInteger <> Dm.FinancialNote_Detail.RecordCount then
+    begin
+
+      strmessage :=  strmessage + char(10)+ ' ⁄œ«œ ' + Dm.SetDocTitle + ' ‰«œ—”  «”  ' ;
+    end;
+
+  end;
+
+  if  strmessage <> '' then
+   ShowMessage(strmessage)
+  else ShowMessage('„»·€/ ⁄œ«œ çò ’ÕÌÕ „Ì »«‘œ') ;
+  { TODO -oparsa : 14030701 }
+
 end;
 
 procedure TFrAddFinancialNote_New.BitBtn13Click(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TFrAddFinancialNote_New.FormCanResize(Sender: TObject;
+  var NewWidth, NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030628- bug369 }
+
+  if (NewWidth < BaseNewWidth)  or (NewHeight < BaseNewHeight) then
+    Resize := False
+  else Resize := True;
+
+  { TODO -oparsa : 14030628- bug369 }
 end;
 
 end.

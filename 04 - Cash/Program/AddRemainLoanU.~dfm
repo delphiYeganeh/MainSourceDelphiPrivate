@@ -1,7 +1,7 @@
 inherited FrAddRemainLoan: TFrAddRemainLoan
-  Left = 357
-  Top = 193
-  Width = 812
+  Left = 358
+  Top = 194
+  Width = 829
   Height = 554
   Caption = #1602#1587#1591' '#1576#1606#1583#1610' '#1605#1580#1583#1583' '
   OldCreateOrder = True
@@ -10,15 +10,15 @@ inherited FrAddRemainLoan: TFrAddRemainLoan
   object Panel1: TPanel [0]
     Left = 0
     Top = 0
-    Width = 796
+    Width = 813
     Height = 57
     Align = alTop
     TabOrder = 0
     DesignSize = (
-      796
+      813
       57)
     object Label1: TLabel
-      Left = 727
+      Left = 741
       Top = 13
       Width = 64
       Height = 13
@@ -97,10 +97,11 @@ inherited FrAddRemainLoan: TFrAddRemainLoan
       OnClick = SpeedButton1Click
     end
     object Label22: TLabel
-      Left = 724
-      Top = 37
+      Left = 739
+      Top = 36
       Width = 68
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1578#1575#1585#1610#1582' '#1587#1585#1585#1587#1610#1583' '
     end
     object FamilyLabel1: TLabel
@@ -167,19 +168,20 @@ inherited FrAddRemainLoan: TFrAddRemainLoan
       Caption = #1578#1575#1582#1610#1585' '#1576#1610#1588' '#1575#1586'                         '#1585#1608#1586
     end
     object SearchEdit: TEdit
-      Left = 556
+      Left = 552
       Top = 9
-      Width = 168
+      Width = 186
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       TabOrder = 0
       OnKeyDown = SearchEditKeyDown
     end
     object FMatureDate: TYWhereEdit
-      Left = 556
+      Left = 552
       Top = 33
-      Width = 168
+      Width = 186
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       ParentBiDiMode = False
       TabOrder = 1
@@ -258,21 +260,21 @@ inherited FrAddRemainLoan: TFrAddRemainLoan
   object Panel2: TPanel [1]
     Left = 0
     Top = 57
-    Width = 796
+    Width = 813
     Height = 419
     Align = alClient
     TabOrder = 1
     object Panel4: TPanel
       Left = 1
       Top = 1
-      Width = 794
+      Width = 811
       Height = 204
       Align = alTop
       TabOrder = 0
       object PAccountDeatil: TPanel
         Left = 1
         Top = 1
-        Width = 792
+        Width = 809
         Height = 200
         Align = alTop
         BevelOuter = bvNone
@@ -282,7 +284,7 @@ inherited FrAddRemainLoan: TFrAddRemainLoan
     object Panel5: TPanel
       Left = 1
       Top = 205
-      Width = 794
+      Width = 811
       Height = 213
       Align = alClient
       TabOrder = 1
@@ -316,7 +318,7 @@ inherited FrAddRemainLoan: TFrAddRemainLoan
       object ForcePaYGrid: TYDBGrid
         Left = 1
         Top = 1
-        Width = 792
+        Width = 809
         Height = 211
         Cursor = crHandPoint
         Align = alClient
@@ -428,15 +430,19 @@ inherited FrAddRemainLoan: TFrAddRemainLoan
   object Panel3: TPanel [2]
     Left = 0
     Top = 476
-    Width = 796
+    Width = 813
     Height = 39
     Align = alBottom
     TabOrder = 2
+    DesignSize = (
+      813
+      39)
     object SpeedButton2: TSpeedButton
-      Left = 667
+      Left = 674
       Top = 5
       Width = 129
       Height = 29
+      Anchors = [akTop, akRight]
       Caption = #1602#1587#1591' '#1576#1606#1583#1610' '#1605#1580#1583#1583
       Glyph.Data = {
         AA040000424DAA04000000000000360000002800000013000000130000000100

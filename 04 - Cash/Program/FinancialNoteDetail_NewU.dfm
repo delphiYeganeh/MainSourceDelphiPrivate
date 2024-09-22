@@ -22,7 +22,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       608
       126)
     object Label3: TLabel
-      Left = 261
+      Left = 247
       Top = 20
       Width = 44
       Height = 13
@@ -30,7 +30,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       Caption = #1579#1576#1578' '#1705#1606#1606#1583#1607
     end
     object Label4: TLabel
-      Left = 425
+      Left = 403
       Top = 20
       Width = 20
       Height = 13
@@ -38,7 +38,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       Caption = #1605#1576#1604#1594
     end
     object Label9: TLabel
-      Left = 554
+      Left = 557
       Top = 20
       Width = 39
       Height = 13
@@ -46,8 +46,8 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       Caption = #1606#1608#1593' '#1587#1606#1583
     end
     object SpeedButton1: TSpeedButton
-      Left = 45
-      Top = 11
+      Left = 65
+      Top = 14
       Width = 59
       Height = 22
       Anchors = [akTop, akRight]
@@ -55,7 +55,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       OnClick = SpeedButton1Click
     end
     object Label1: TLabel
-      Left = 553
+      Left = 543
       Top = 45
       Width = 53
       Height = 13
@@ -63,7 +63,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       Caption = #1605#1608#1590#1608#1593' '#1670#1705
     end
     object NoteType: TDBEdit
-      Left = 448
+      Left = 438
       Top = 16
       Width = 102
       Height = 21
@@ -75,7 +75,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       TabOrder = 0
     end
     object DBEdit4: TDBEdit
-      Left = 308
+      Left = 298
       Top = 16
       Width = 98
       Height = 21
@@ -87,7 +87,7 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       TabOrder = 2
     end
     object DBEMatureDate: TDBEdit
-      Left = 177
+      Left = 163
       Top = 16
       Width = 80
       Height = 21
@@ -107,9 +107,9 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
       TabOrder = 1
     end
     object DBEdit1: TDBEdit
-      Left = 105
+      Left = 63
       Top = 42
-      Width = 446
+      Width = 477
       Height = 21
       Anchors = [akTop, akRight]
       DataField = 'NoteSubject'
@@ -177,5 +177,8 @@ inherited FrFinancialNoteDetail_New: TFrFinancialNoteDetail_New
   inherited Grid_PopupMenu: TPopupMenu
     Left = 151
     Top = 244
+  end
+  inherited qSetting: TADOQuery
+    Top = 88
   end
 end
