@@ -53,6 +53,7 @@ begin
   with TADOQuery.Create(nil) do
   begin
      Connection := Dm.YeganehConnection;
+     CommandTimeout := 1200;
      SQL.Text := 'insert into Tasks (CaseId,Comment,StatusId,AssignedUserId,AssignedDate)values('+IntToStr(gCaseId)+','''+mmoDescription.Text+''','+IntToStr(dblStatusId.KeyValue)+','
                                                         +IntToStr(dblUserRefrence.KeyValue)+','''+_Today+''''
                                         +')';

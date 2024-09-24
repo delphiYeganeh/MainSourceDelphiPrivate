@@ -9,7 +9,7 @@ uses
   DBActns, YDbgrid, DBTreeView, XPStyleActnCtrls, xpPages, UemsVCL,
   xpBitBtn, ActnColorMaps, xpPanel, Spin,dateutils, BaseUnit, ExtActns,
   YWhereEdit, YAmountEdit, KimiyaEdit,shellAPI, MssCalendarPro,
-  acArcControls, TntDB ;
+  acArcControls, TntDB, wwdbdatetimepicker ;
 
 type
   TMainForm = class(TMBaseForm)
@@ -443,6 +443,24 @@ type
     TimerMessage: TTimer;
     qryMyTasksRegisterDate: TStringField;
     qryMyTasksCaseEstimatedDate: TStringField;
+    N89: TMenuItem;
+    N90: TMenuItem;
+    h1: TMenuItem;
+    gbTaskTime: TGroupBox;
+    btnStop: TBitBtn;
+    btnstart: TBitBtn;
+    edtTimeFromStart: TEdit;
+    TimerTaskLog: TTimer;
+    LblTaskNo: TLabel;
+    btnCustomerView: TBitBtn;
+    N91: TMenuItem;
+    n92: TMenuItem;
+    qryMyTasksTaskCommentGrid: TStringField;
+    btnMaps: TBitBtn;
+    btnMapBug: TBitBtn;
+    N93: TMenuItem;
+    Label47: TLabel;
+    dblActionType_Level: TDBLookupComboBox;
     procedure AinsertExecute(Sender: TObject);
     procedure Action6Execute(Sender: TObject);
     procedure ApropertyExecute(Sender: TObject);
@@ -683,6 +701,19 @@ type
       var ImageIndex: Integer);
     procedure TimerMessageTimer(Sender: TObject);
     procedure MessageAlarmClick(Sender: TObject);
+    procedure N89Click(Sender: TObject);
+    procedure h1Click(Sender: TObject);
+    procedure btnstartClick(Sender: TObject);
+    procedure TimerTaskLogTimer(Sender: TObject);
+    procedure btnStopClick(Sender: TObject);
+    procedure N80Click(Sender: TObject);
+    procedure btnCustomerViewClick(Sender: TObject);
+    procedure n92Click(Sender: TObject);
+    procedure btnMapsClick(Sender: TObject);
+    procedure btnMapBugClick(Sender: TObject);
+    procedure N93Click(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
 
   private
     qrydblsrchContractType :TADOQuery;
@@ -690,6 +721,8 @@ type
     dblProductoldKeyValue : Integer;
     ChangeProduct :Boolean;
     oldTopRecord : Integer;
+    StartTimeTaskLog : TDateTime;
+    MainTaskLogId : Integer ;
     { TODO -oparsa : 14030126 }
     procedure SetdblContractType;
     Function  LoadImageField(Field:TField;Path:String):Boolean;
@@ -734,7 +767,9 @@ Uses Telinputunit, dmu,  about, Report, ReportPhone,
     SecendArtGroupFM, UnitFM, ArtServiceFM, ChequeFM, EnterDataFM, FactorFM,
     USaleReport, UThemColor, FirstArtGroupFM, UCallUser, UReportInPerson,
   UVersionProduct, URefrenceInPerson, UToRefer, UUpdateJobStatus,
-  UTaskReport, UBaseRefere, UfollowUpReport, UFMessageAlarm;
+  UTaskReport, UBaseRefere, UfollowUpReport, UFMessageAlarm, UReferralUser,
+  USendInnerMessage, USalesFunnel, UActionTypeLevel, UCustomerMap,UMapBug,
+  UCompare_Report;
 
 {$R *.dfm}
 
@@ -755,11 +790,13 @@ begin
    //PropertiesForm.DataSetInsert1.Execute;
    //PropertiesForm.DBNavigator1.BtnClick(nbInsert);
    PropertiesForm.ShowModal;
-if PropertiesForm.Edited = true then
+  if PropertiesForm.Edited = true then
   begin
    RefreshCustomer;
    dm.Customer.Locate('CustomerId',dm.Select_Customer_By_CustomerIDCustomerID.Value,[])
   end;
+  if Assigned(PropertiesForm) then
+    FreeAndNil(PropertiesForm);
 end;
 
 procedure TMainForm.Action6Execute(Sender: TObject);
@@ -776,17 +813,21 @@ begin
    Id := dm.CustomerCustomerID.AsInteger;
    propertiesForm := TPropertiesForm.Create(Application,dm.CustomerCustomerID.AsInteger) ;
    PropertiesForm.Showmodal;
-if PropertiesForm.Edited = true then
+   if PropertiesForm.Edited = true then
    begin
      RefreshCustomer;
      dm.Customer.Locate('CustomerId',Id,[])
-    end
+    end;
+  if Assigned(PropertiesForm) then
+    FreeAndNil(PropertiesForm);
 end;
 
 procedure TMainForm.AreportExecute(Sender: TObject);
 begin
    Frep := TFrep.Create(Self);
    Frep.ShowModal;
+   if Assigned(Frep) then
+     FreeAndNil(Frep);
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
@@ -882,6 +923,8 @@ begin
    //  AboutBox.ShowModal;
    FrAddTimeSheet:=TFrAddTimeSheet.Create(Application);
    FrAddTimeSheet.ShowModal;
+   if Assigned(FrAddTimeSheet) then
+     FreeAndNil(FrAddTimeSheet);
 end;
 
 procedure TMainForm.RefreshCustomer;
@@ -900,6 +943,11 @@ begin
   oldTopRecord :=  0 ;
   { TODO -oparsa : 14030201 }
   SetColorForm ;
+
+  btnstart.Enabled:= True;
+  btnStop.Enabled := False;
+  
+  //btnMaps.Enabled := False;
 
    DBGrid_Columns_Caption(PhoneGrid);
    DBGrid_LoadColumns(Self.Name,PhoneGrid,PhoneGrid);
@@ -932,7 +980,8 @@ begin
    pgm.ActivePage := TabCustomer;
    NMali.Visible :=  _UserAccAcess ;// false;
    N79.Visible :=  False;
-   N80.Visible :=  False;
+ //  N80.Visible :=  False;
+   
    CallAccess.Visible := _UserCallAccess ;
 
    RunTaskQuery(1) ;
@@ -1088,6 +1137,9 @@ begin
    Dm.tblUserType.Close;
    Dm.tblUserType.Open;
 
+   Dm.qryActionType_Level.Close;
+   Dm.qryActionType_Level.Open;
+
    btnImageBR.Visible := False ;
    btnFinishCase.Visible := False ;
    //btnReferInsert .Enabled := False ;
@@ -1097,6 +1149,7 @@ begin
 
   RefreshAlarmMessage ;
   TimerMessage.Enabled := True;
+
 End;
 
 Function TMainForm.MakeStrSearch(s:string):string;
@@ -1170,6 +1223,8 @@ procedure TMainForm.AGroupsExecute(Sender: TObject);
 begin
    GroupInp := TGroupInp.Create(Application);
    GroupInp.ShowModal;
+   if Assigned(GroupInp) then
+     FreeAndNil(GroupInp);
 end;
 
 
@@ -1182,6 +1237,8 @@ procedure TMainForm.AcityExecute(Sender: TObject);
 begin
    FrCityEdit := TFrCityEdit.create(Application);
    FrCityEdit.ShowModal;
+   if Assigned(FrCityEdit) then
+     FreeAndNil(FrCityEdit);
    {Ranjbar}
    Citys.Close;
    Citys.Open;
@@ -1192,43 +1249,57 @@ procedure TMainForm.N17Click(Sender: TObject);
 begin
    marketerInp := TMarketerInp.create(Application);
    marketerInp.ShowModal;
+   if Assigned(marketerInp) then
+     FreeAndNil(marketerInp);
 end;
 
 procedure TMainForm.emplates1Click(Sender: TObject);
 begin
    EditTemplates:=TEditTemplates.Create(Application);
    EditTemplates.ShowModal;
+   if Assigned(EditTemplates) then
+     FreeAndNil(EditTemplates);
 end;
 
 procedure TMainForm.N18Click(Sender: TObject);
 begin
    FErrorMsg := TFErrorMsg.Create(Application);
    FErrorMsg.ShowModal;
+   if Assigned(FErrorMsg) then
+     FreeAndNil(FErrorMsg);
 end;
 
 procedure TMainForm.N20Click(Sender: TObject);
 begin
    UserDefineF := TUserDefineF.Create(Application);
    UserDefineF.ShowModal;
+   if Assigned(UserDefineF) then
+     FreeAndNil(UserDefineF);
 end;
 
 procedure TMainForm.N21Click(Sender: TObject);
 begin
    BackupRestore := TBackupRestore.Create(Application);
    BackupRestore.Mode := backup;
-   BackupRestore.ShowModal
+   BackupRestore.ShowModal  ;
+   if Assigned(BackupRestore) then
+     FreeAndNil(BackupRestore);
 end;
 
 procedure TMainForm.AProductExecute(Sender: TObject);
 begin
    FinputProducts := TFinputProducts.Create(Application);
    FinputProducts.ShowModal;
+   if Assigned(FinputProducts) then
+     FreeAndNil(FinputProducts);
 end;
 
 procedure TMainForm.APublishExecute(Sender: TObject);
 begin
    FPublish := TFPublish.Create(Application);
    FPublish.ShowModal;
+   if Assigned(FPublish) then
+     FreeAndNil(FPublish);
 end;
 
 procedure TMainForm.AChangeProductExecute(Sender: TObject);
@@ -1244,6 +1315,8 @@ procedure TMainForm.AAddProductExecute(Sender: TObject);
 begin
    ProductADD := TProductADD.create(Application);
    ProductADD.ShowModal;
+   if Assigned(ProductADD) then
+     FreeAndNil(ProductADD);
 end;
 
 procedure TMainForm.ACustomerFollowUpExecute(Sender: TObject);
@@ -1252,6 +1325,8 @@ begin
    FrFollowUp.CustomerID := Dm.CustomerCustomerID.AsInteger;
    FrFollowUp.refreshData;
    FrFollowUp.ShowModal;
+   if Assigned(FrFollowUp) then
+     FreeAndNil(FrFollowUp);
 end;
 
 procedure TMainForm.FollowGridDblClick(Sender: TObject);
@@ -1267,9 +1342,11 @@ begin
 {  if Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString = '' then
       Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString := _Today; }
    FrFollowUp.Showmodal;
+   if Assigned(FrFollowUp) then
+     FreeAndNil(FrFollowUp);
    id := Dm.Select_FollowUP_By_DateFollowUPID.Value;
 
-    with    dm.Select_FollowUP_By_Date do
+    with dm.Select_FollowUP_By_Date do
     begin
         Requery;
         Locate('FollowUPID',id,[]);
@@ -1404,6 +1481,8 @@ procedure TMainForm.AContractExecute(Sender: TObject);
 begin
    FrContract := TFrContract.Create(Application,Dm.CustomerCustomerID.AsInteger);
    FrContract.ShowModal;
+   if Assigned(FrContract) then
+     FreeAndNil(FrContract);
 end;
 
 procedure TMainForm.ShowActionClick(Sender: TObject);
@@ -1454,6 +1533,8 @@ begin
    begin
       propertiesForm :=TPropertiesForm.Create(Application,dm.Select_FollowUP_By_DateCustomerID.AsInteger) ;
       PropertiesForm.showmodal;
+      if Assigned(PropertiesForm) then
+        FreeAndNil(PropertiesForm);
    end
       else
          ShowMyMessage('ÅÌ€«„','ÂÌç «ÿ·«⁄« Ì Ì«›  ‰‘œ',[mbOK],mtInformation);
@@ -1465,6 +1546,8 @@ begin
    begin
       propertiesForm :=TPropertiesForm.Create(Application,dm.Select_Contract_By_DateCustomerID.AsInteger) ;
       PropertiesForm.showmodal;
+      if Assigned(PropertiesForm) then
+        FreeAndNil(PropertiesForm);
    end;
 end;
 
@@ -1678,6 +1761,8 @@ procedure TMainForm.N5Click(Sender: TObject);
 begin
    Frep2 := TFrep2.Create(Application);
    Frep2.ShowModal;
+   if Assigned(Frep2) then
+     FreeAndNil(Frep2);
 end;
 
 procedure TMainForm.N11Click(Sender: TObject);
@@ -1696,6 +1781,8 @@ begin
    // ⁄—Ì› ”«Ì Â«Ì «Ì‰ —‰ Ì
    FMHost := TFMHost.Create(Application);
    FMHost.ShowModal;
+   if Assigned(FMHost) then
+     FreeAndNil(FMHost);
 
 end;
 
@@ -1732,36 +1819,48 @@ procedure TMainForm.N30Click(Sender: TObject);
 begin
    Frep3 := TFrep3.Create(Application);
    Frep3.ShowModal;
+   if Assigned(Frep3) then
+     FreeAndNil(Frep3);
 end;
 
 procedure TMainForm.Action5Execute(Sender: TObject);
 begin
    FmReportSalary := TFmReportSalary.Create(Application);
    FmReportSalary.ShowModal;
+   if Assigned(FmReportSalary) then
+     FreeAndNil(FmReportSalary);
 end;
 
 procedure TMainForm.N34Click(Sender: TObject);
 begin
    FrReportAll := TFrReportAll.Create(Application);
    FrReportAll.ShowModal;
+   if Assigned(FrReportAll) then
+     FreeAndNil(FrReportAll);
 end;
 
 procedure TMainForm.Action7Execute(Sender: TObject);
 begin
    FrInputUserTable := TFrInputUserTable.Create(Application);
    FrInputUserTable.showmodal;
+   if Assigned(FrInputUserTable) then
+     FreeAndNil(FrInputUserTable);
 end;
 
 procedure TMainForm.AreportFormExecute(Sender: TObject);
 begin
    FrMakeUserTableRep := TFrMakeUserTableRep.Create(Application);
    FrMakeUserTableRep.ShowModal;
+   if Assigned(FrMakeUserTableRep) then
+     FreeAndNil(FrMakeUserTableRep);
 end;
 
 procedure TMainForm.AAddRefrenceTableExecute(Sender: TObject);
 begin
    FrInputRefferenceTable := TFrInputRefferenceTable.Create(Application);
    FrInputRefferenceTable.ShowModal;
+   if Assigned(FrInputRefferenceTable) then
+     FreeAndNil(FrInputRefferenceTable);
 end;
 
 procedure TMainForm.AAtachmentsExecute(Sender: TObject);
@@ -1774,6 +1873,8 @@ begin
    inherited;
    AccessForm:=TAccessForm.Create(Application);
    AccessForm.ShowModal;
+   if Assigned(AccessForm) then
+     FreeAndNil(AccessForm);
 end;
 
 procedure TMainForm.Edit2Change(Sender: TObject);
@@ -1787,6 +1888,8 @@ begin
    inherited;
    FMStore := TFMStore.Create(Application);
    FMStore.ShowModal;
+   if Assigned(FMStore) then
+     FreeAndNil(FMStore);
 end;
 
 procedure TMainForm.NFirstArtGroupClick(Sender: TObject);
@@ -1794,6 +1897,8 @@ begin
    inherited;
    FMFirstArtGroup := TFMFirstArtGroup.Create(Application);
    FMFirstArtGroup.ShowModal;
+   if Assigned(FMFirstArtGroup) then
+     FreeAndNil(FMFirstArtGroup);
 end;
 
 procedure TMainForm.NSecendArtGroupClick(Sender: TObject);
@@ -1801,6 +1906,8 @@ begin
    inherited;
    FMSecendArtGroup := TFMSecendArtGroup.Create(Application);
    FMSecendArtGroup.ShowModal;
+   if Assigned(FMSecendArtGroup) then
+     FreeAndNil(FMSecendArtGroup);
 end;
 
 procedure TMainForm.NUnitClick(Sender: TObject);
@@ -1808,6 +1915,8 @@ begin
    inherited;
    FMUnit := TFMUnit.Create(Application);
    FMUnit.ShowModal;
+   if Assigned(FMUnit) then
+     FreeAndNil(FMUnit);
 end;
 
 procedure TMainForm.NArtServiceClick(Sender: TObject);
@@ -1815,6 +1924,8 @@ begin
    inherited;
    FMArtService := TFMArtService.Create(Application);
    FMArtService.ShowModal;
+   if Assigned(FMArtService) then
+     FreeAndNil(FMArtService);
 end;
 
 procedure TMainForm.NArticleClick(Sender: TObject);
@@ -1822,6 +1933,8 @@ begin
    inherited;
    FMArticle := TFMArticle.Create(Application);
    FMArticle.ShowModal;
+   if Assigned(FMArticle) then
+     FreeAndNil(FMArticle);
 end;
 
 procedure TMainForm.NCheque1Click(Sender: TObject);
@@ -1837,6 +1950,8 @@ begin
    else
       FMCheque.ChequeType := 2; //çﬂÂ«Ì Å—œ«Œ Ì
    FMCheque.ShowModal;
+   if Assigned(FMCheque) then
+     FreeAndNil(FMCheque);
 end;
 
 procedure TMainForm.NCheque2Click(Sender: TObject);
@@ -1859,6 +1974,8 @@ begin
       Users_ID := aUsers_ID;
       ShowModal;
    end;
+   if Assigned(FMEnterData) then
+     FreeAndNil(FMEnterData);
 end;
 
 procedure TMainForm.N31Click(Sender: TObject);
@@ -1867,6 +1984,8 @@ begin
    FMFactor := TFMFactor.Create(Application);
    FMFactor.Hint := 'F'; // ›—„ ›«ò Ê— ›—Ê‘
    FMFactor.ShowModal;
+   if Assigned(FMFactor) then
+     FreeAndNil(FMFactor);
 end;
 
 procedure TMainForm.N39Click(Sender: TObject);
@@ -1875,6 +1994,8 @@ begin
    FMFactor := TFMFactor.Create(Application);
    FMFactor.Hint := 'KH'; // ›—„ ›«ò Ê— Œ—Ìœ
    FMFactor.ShowModal;
+   if Assigned(FMFactor) then
+     FreeAndNil(FMFactor);
 end;
 
 procedure TMainForm.N40Click(Sender: TObject);
@@ -1883,6 +2004,8 @@ begin
    FMFactor := TFMFactor.Create(Application);
    FMFactor.Hint := 'P'; // ›—„ ÅÌ‘ ›«ò Ê—
    FMFactor.ShowModal;
+   if Assigned(FMFactor) then
+     FreeAndNil(FMFactor);
 end;
 
 procedure TMainForm.N41Click(Sender: TObject);
@@ -1891,6 +2014,8 @@ begin
    FMFactor := TFMFactor.Create(Application);
    FMFactor.Hint := 'BF'; // ›—„ ›«ò Ê— »—ê‘  «“ ›—Ê‘
    FMFactor.ShowModal;
+   if Assigned(FMFactor) then
+     FreeAndNil(FMFactor);
 end;
 
 procedure TMainForm.N42Click(Sender: TObject);
@@ -1899,6 +2024,8 @@ begin
    FMFactor := TFMFactor.Create(Application);
    FMFactor.Hint := 'BKH'; // ›—„ ›«ò Ê— »—ê‘  «“ Œ—Ìœ
    FMFactor.ShowModal;
+   if Assigned(FMFactor) then
+     FreeAndNil(FMFactor);
 end;
 
 procedure TMainForm.N43Click(Sender: TObject);
@@ -1907,6 +2034,8 @@ begin
    FMFactor := TFMFactor.Create(Application);
    FMFactor.Hint := 'A'; // ›—„ ›«ò Ê— «„«‰Ì
    FMFactor.ShowModal;
+   if Assigned(FMFactor) then
+     FreeAndNil(FMFactor);
 end;
 
 procedure TMainForm.N44Click(Sender: TObject);
@@ -1915,6 +2044,8 @@ begin
    FMFactor := TFMFactor.Create(Application);
    FMFactor.Hint := 'E'; // ›—„ ›«ò Ê— «” Â·«ﬂ
    FMFactor.ShowModal;
+   if Assigned(FMFactor) then
+     FreeAndNil(FMFactor);
 end;
 
 procedure TMainForm.GroupsAfterScroll(DataSet: TDataSet);
@@ -2028,9 +2159,12 @@ begin
 {      if Dm.CustomerCustomerID.AsInteger=20974 then
          FM_NewDongleWrite.CompanyName:=Dm.CustomerCompanyName.AsString+'mm'+'(„‰ °  Ê ° «Ê ...„« «Ì—«‰Ì«‰)';}
       FM_NewDongleWrite.ShowModal;
+      if Assigned(FM_NewDongleWrite) then
+        FreeAndNil(FM_NewDongleWrite);
    end
       else
          ShowMessage('·ÿ›« Ìﬂ „‘ —Ì ﬁÿ⁄Ì Ì« œ«—«Ì ⁄ﬁœ ﬁ—«—œ«œ —« «‰ Œ«» ‰„«ÌÌœ');
+
 end;
 
 procedure TMainForm.N25Click(Sender: TObject);
@@ -2038,6 +2172,8 @@ begin
    inherited;
    Fcrack := TFcrack.Create(Application);
    Fcrack.ShowModal;
+   if Assigned(Fcrack) then
+     FreeAndNil(Fcrack);
 end;
 
 procedure TMainForm.BitBtn1Click(Sender: TObject);
@@ -2058,6 +2194,8 @@ begin
    inherited;
    FmSystemSettings := TFmSystemSettings.Create(nil);
    FmSystemSettings.ShowModal;
+   if Assigned(FmSystemSettings) then
+     FreeAndNil(FmSystemSettings);
 end;
 
 procedure TMainForm.N6Click(Sender: TObject);
@@ -2209,6 +2347,8 @@ begin
   inherited;
    FrContract := TFrContract.Create(Application,Dm.CustomerCustomerID.AsInteger);
    FrContract.ShowModal;
+   if Assigned(FrContract) then
+     FreeAndNil(FrContract);
 end;
 
 procedure TMainForm.edtContactNumberChange(Sender: TObject);
@@ -2293,7 +2433,7 @@ begin
     dsdblsrchContractType            := TDataSource.Create(Self);
 
     SetQueryDataSet(dsdblsrchContractType,qrydblsrchContractType
-                                          ,'select  ContractTypetitle, ContractTypeID,ContractTypeCode from ContractType where ContractTypeID in (select ContractTypeId from UserTypeContractType where UserTypeID =  '+IntToStr(_UserTypeID)+') or '+IntToStr(_UserTypeID)+' = 0'
+                                          ,'select  ContractTypetitle, ContractTypeID,ContractTypeCode from dbo.ContractType  WITH(NOLOCK)  where ContractTypeID in (select ContractTypeId from dbo.UserTypeContractType  WITH(NOLOCK)  where UserTypeID =  '+IntToStr(_UserTypeID)+') or '+IntToStr(_UserTypeID)+' = 0'
                                                                       ,Dm.YeganehConnection);
 
      if qrydblsrchContractType.RecordCount >0 then
@@ -2440,9 +2580,13 @@ end;
 procedure TMainForm.btnViwCustomerClick(Sender: TObject);
 var Id :Integer;
 Begin
-if dm.Select_FollowUP_By_Date.RecordCount = 0 then exit;
+   if dm.Select_FollowUP_By_Date.RecordCount = 0 then exit;
+
    propertiesForm := TPropertiesForm.Create(Application,dm.Select_FollowUP_By_DateCustomerID.AsInteger) ;
    PropertiesForm.Showmodal;
+   if Assigned(PropertiesForm) then
+     FreeAndNil(PropertiesForm);
+     
    id := Dm.Select_FollowUP_By_DateFollowUPID.Value;
    Dm.Select_FollowUP_By_Date.Requery;
    Dm.Select_FollowUP_By_Date.Locate('FollowUPID',id,[]);
@@ -2459,6 +2603,8 @@ begin
       FmSetLock.Caption:='  ‰ŸÌ„ ﬁ›· »—«Ì '+dm.Customernickname.AsString;
       FmSetLock.CompanyName:=Dm.CustomerCompanyName.AsString;
       FmSetLock.ShowModal;
+      if Assigned(FmSetLock) then
+        FreeAndNil(FmSetLock);
    end
       else
          ShowMessage('·ÿ›« Ìﬂ „‘ —Ì ﬁÿ⁄Ì Ì« œ«—«Ì ⁄ﬁœ ﬁ—«—œ«œ —« «‰ Œ«» ‰„«ÌÌœ');
@@ -2697,6 +2843,7 @@ begin
      with TADOQuery.Create(nil) do
      begin
         Connection := Dm.YeganehConnection;
+        CommandTimeout := 1200;
       // if DBchIsBug.Checked then
          SQL.Text := ' insert into dbo.FollowUp (TaskID,CustomerID,ActionTypeID,DoneStatusID,MarketerID,Comment,ToDoDate,insertdate,Lastupdate,FollowUpInsertDate)'+
                      ' values('+IntToStr(NewTaskId)+',(SELECT top 1 CustomerID FROM [dbo].[Cases] WHERE CaseID = '+qryMyTasksCaseId.AsString+'),48,3,'+IntToStr(_MarketerID)+','''+' »«ê ' + qryMyTasksCaseId.AsString +'‹ «—”«· »Â ò«— «»·  '+dblUserRefrence.Text+' ‹ '+ mmoDescription.text+''','''+_Today+''',getdate(),GetDate()'+','''+_Today+'''' +') ';
@@ -2720,7 +2867,7 @@ begin
   with dm.UserByCaseFilter do
   begin
     Close;
-    SQL.Text := ' Select * from Users where isactive = 1 AND (ID = '+inttostr(_UserID)+' or  id IN (SELECT Childid FROM [dbo].[ReferralUser] where parentId = '+inttostr(_UserID)+ ' )) '  ;
+    SQL.Text := ' Select * from dbo.Users  WITH(NOLOCK)  where isactive = 1 AND (ID = '+inttostr(_UserID)+' or  id IN (SELECT Childid FROM [dbo].[ReferralUser]  WITH(NOLOCK)  where parentId = '+inttostr(_UserID)+ ' )) '  ;
     //Parameters.ParamByName('CaseTypeId1').Value := qryMyTasksCaseTypeId.Value;
    // Parameters.ParamByName('CaseTypeId2').Value := qryMyTasksCaseTypeId.Value;
    // Parameters.ParamByName('UserId').Value := _UserID;
@@ -2747,7 +2894,8 @@ begin
     FRefrenceInPerson.DBECompanyName.Text := qryMyTasksCompanyName.AsString;
     FRefrenceInPerson.DBEProducts.Text    := qryMyTasksProductTitle.AsString ;
     FRefrenceInPerson.ShowModal;
-    FRefrenceInPerson.Free;
+    if Assigned(FRefrenceInPerson) then
+      FreeAndNil(FRefrenceInPerson);
   end
   else
   if qryMyTasks.RecordCount > 0 then
@@ -2786,6 +2934,7 @@ begin
   with TADOQuery.Create(nil) do
   begin
      Connection := Dm.YeganehConnection;
+     CommandTimeout := 1200;
      SQL.Text :='Update Cases set Completed = 1,CompleteDate = '''+_Today+''',CompleteComment= '''+mmoCompleteComment.Text+''' where caseId = '+qryMyTasksCaseId.AsString;
 
      SQL.Text := SQL.Text + ' insert into dbo.FollowUp (TaskID,CustomerID,ActionTypeID,DoneStatusID,MarketerID,Comment,ToDoDate,insertdate,Lastupdate,FollowUpInsertDate)'+
@@ -2820,6 +2969,8 @@ begin
   inherited;
    FrContract := TFrContract.Create(Application,ContractGrid.DataSource.DataSet.FieldByName('CustomerId').Value);
    FrContract.ShowModal;
+   if Assigned(FrContract) then
+     FreeAndNil(FrContract);
 end;
 
 procedure TMainForm.btnImageBRClick(Sender: TObject);
@@ -2886,7 +3037,8 @@ begin
   inherited;
    FrCancleReport := TFrCancleReport.Create(Self);
    FrCancleReport.ShowModal;
-
+   if Assigned(FrCancleReport) then
+     FreeAndNil(FrCancleReport);
 end;
 
 PROCEDURE TMainForm.SetMarketerRate;
@@ -2935,6 +3087,10 @@ end;
 procedure TMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
+   if btnStop.Enabled then
+   begin
+     btnStopClick(self);
+   end;
    DBGrid_SaveColumns(Self.Name,PhoneGrid);
    DBGrid_SaveColumns(Self.Name,FollowGrid);
    DBGrid_SaveColumns(Self.Name,ContractGrid);
@@ -2948,6 +3104,8 @@ begin
 //  if FUsersSequence=nil then
   FUsersSequence:=TFUsersSequence.Create(Application);
   FUsersSequence.ShowModal;
+  if Assigned(FUsersSequence) then
+    FreeAndNil(FUsersSequence);
 end;
 
 procedure TMainForm.SetActiveUserOnStatusBar;
@@ -2968,6 +3126,8 @@ begin
   inherited;
    FPoorsantList:=TFPoorsantList.Create(Self);
    FPoorsantList.ShowModal;
+   if Assigned(FPoorsantList) then
+     FreeAndNil(FPoorsantList);
 end;
 
 procedure TMainForm.acShowRepTasksExecute(Sender: TObject);
@@ -2975,6 +3135,8 @@ begin
   inherited;
    FRepTasks:=TFRepTasks.Create(Self);
    FRepTasks.ShowModal;
+   if Assigned(FRepTasks) then
+     FreeAndNil(FRepTasks);
 end;
 
 procedure TMainForm.acSendSMSForCustomerLockExecute(Sender: TObject);
@@ -2982,6 +3144,8 @@ begin
   inherited;
    FSendSMSForCustomerLock:=TFSendSMSForCustomerLock.Create(Self);
    FSendSMSForCustomerLock.ShowModal;
+   if Assigned(FSendSMSForCustomerLock) then
+     FreeAndNil(FSendSMSForCustomerLock);
 end;
 
 procedure TMainForm.acSMSSettingsExecute(Sender: TObject);
@@ -2996,6 +3160,8 @@ begin
   inherited;
    FSMSGeneral:=TFSMSGeneral.Create(Self);
    FSMSGeneral.ShowModal;
+   if Assigned(FSMSGeneral) then
+     FreeAndNil(FSMSGeneral);
 end;
 
 procedure TMainForm.acShowSMSEndContractExecute(Sender: TObject);
@@ -3003,6 +3169,8 @@ begin
   inherited;
    FSMSEndContract:=TFSMSEndContract.Create(Self);
    FSMSEndContract.ShowModal;
+   if Assigned(FSMSEndContract) then
+     FreeAndNil(FSMSEndContract);
 end;
 
 procedure TMainForm.acSMSBirthDateExecute(Sender: TObject);
@@ -3010,6 +3178,8 @@ begin
   inherited;
   FSMSBirthDate:=TFSMSBirthDate.Create(Self);
   FSMSBirthDate.ShowModal;
+  if Assigned(FSMSBirthDate) then
+    FreeAndNil(FSMSBirthDate);
 end;
 
 procedure TMainForm.acShowAutoSMSTextExecute(Sender: TObject);
@@ -3017,6 +3187,8 @@ begin
   inherited;
   FSMSAutoText:=TFSMSAutoText.Create(Self);
   FSMSAutoText.ShowModal;
+  if Assigned(FSMSAutoText) then
+    FreeAndNil(FSMSAutoText);
 end;
 
 procedure TMainForm.SpeedButton6Click(Sender: TObject);
@@ -3041,6 +3213,8 @@ begin
    TasksTreeForm := TTasksTreeForm.Create(Application);
    TasksTreeForm.FollowupID := Dm.Select_FollowUP_By_DateFollowUPID.AsInteger;
    TasksTreeForm.ShowModal;
+   if Assigned(TasksTreeForm) then
+     FreeAndNil(TasksTreeForm);
 end;
 
 procedure TMainForm.chkDoneStatusClick(Sender: TObject);
@@ -3096,7 +3270,7 @@ begin
       else
       begin
          // Amin 1391/10/04 Start
-         tmpstr:= '(EXISTS(SELECT 1 FROM Users us WITH(NOLOCK)  WHERE us.isadmin = 1 AND us.Id = '+IntToStr(_UserID)+') OR EXISTS(select 1 from UsersCustomerAccess uca WITH(NOLOCK)  where uca.HasAccess = 1 and  uca.CustomerID = Customer.CustomerID and uca.UserID = '+IntToStr(_UserID)+' ))';
+         tmpstr:= '(EXISTS(SELECT 1 FROM dbo.Users us WITH(NOLOCK)  WHERE us.isadmin = 1 AND us.Id = '+IntToStr(_UserID)+') OR EXISTS(select 1 from UsersCustomerAccess uca WITH(NOLOCK)  where uca.HasAccess = 1 and  uca.CustomerID = Customer.CustomerID and uca.UserID = '+IntToStr(_UserID)+' ))';
           if where = '' then
             where:= tmpstr
           else
@@ -3250,6 +3424,8 @@ begin
   inherited;
   FrCategoryEdit :=TFrCategoryEdit.Create(Self);
   FrCategoryEdit.ShowModal;
+  if Assigned(FrCategoryEdit) then
+    FreeAndNil(FrCategoryEdit);
 end;
 
 procedure TMainForm.N74Click(Sender: TObject);
@@ -3257,6 +3433,8 @@ begin
   inherited;
   FrLockSoftware :=TFrLockSoftware.Create(Self);
   FrLockSoftware.ShowModal;
+  if Assigned(FrLockSoftware) then
+    FreeAndNil(FrLockSoftware);
 end;
 
 procedure TMainForm.bbbClick(Sender: TObject);
@@ -3314,7 +3492,8 @@ begin
   inherited;
   Application.CreateForm(TfrmCustStatusReport,frmCustStatusReport);
   frmCustStatusReport.ShowModal;
-  frmCustStatusReport.Free;
+  if Assigned(frmCustStatusReport) then
+    FreeAndNil(frmCustStatusReport);
 end;
 
 procedure TMainForm.edRecCountKeyPress(Sender: TObject; var Key: Char);
@@ -3341,11 +3520,13 @@ begin
 
       qry:=TADOQuery.Create(self);
       qry.Connection:=dm.YeganehConnection;
+      qry.CommandTimeout := 1200;
 
       qryUpdate:=TADOQuery.Create(self);
       qryUpdate.Connection:=dm.YeganehConnection;
+      qryUpdate.CommandTimeout := 1200;
 
-      qry.SQL.Text := 'Select * From OutBox Where  SmsStatus Is null And InProcess=0 And issend=0';
+      qry.SQL.Text := 'Select * From dbo.OutBox  WITH(NOLOCK)  Where  SmsStatus Is null And InProcess=0 And issend=0';
       qry.Open;
 
       if qry.RecordCount=0 then
@@ -3389,20 +3570,21 @@ var
   qry: TADOQuery;
 begin
   inherited;
-  if BBPin.ImageIndex=35 then
+  if BBPin.ImageIndex=38 then
   begin
-    BBPin.ImageIndex := 36 ;
+    BBPin.ImageIndex := 37 ;
     PinFollowGrid.Visible := True ;
   end
   else
   begin
-    BBPin.ImageIndex := 35 ;
+    BBPin.ImageIndex := 38 ;
     PinFollowGrid.Visible := False ;
   end;
   _UserPinFollowUp :=  PinFollowGrid.Visible ;
 
   qry := TADOQuery.Create(self);
   qry.Connection := dm.YeganehConnection;
+  qry.CommandTimeout := 1200;
   qry.SQL.Text   := 'update dbo.Users set PinFollowUp = '+ BoolToStr(_UserPinFollowUp ) +' where  Id ='+ IntToStr(_UserId );
   qry.ExecSQL;
   qry.Free;
@@ -3426,6 +3608,8 @@ begin
    FrFollowUp.refreshData;
    FrFollowUp.FUID :=  dm.Select_FollowUP_By_DateFollowUPID.AsInteger;
    FrFollowUp.Showmodal;
+   if Assigned(FrFollowUp) then
+     FreeAndNil(FrFollowUp);
 end;
 
 procedure TMainForm.PinFollowGridCellClick(Column: TColumn);
@@ -3440,7 +3624,8 @@ begin
   inherited;
   Application.CreateForm(TFSaleReport, FSaleReport);
   FSaleReport.ShowModal;
-  FSaleReport.Free;
+  if Assigned(FSaleReport) then
+    FreeAndNil(FSaleReport);
 end;
 
 procedure TMainForm.SpeedButton11Click(Sender: TObject);
@@ -3511,6 +3696,8 @@ begin
   inherited;
   Application.CreateForm(TFThemColor, FThemColor);
   FThemColor.Showmodal;
+  if Assigned(FThemColor) then
+    FreeAndNil(FThemColor);
   SetColorForm ;
 end;
 
@@ -3552,6 +3739,8 @@ begin
   //MainForm.Showmodal;
     Application.CreateForm(TFCallUser, FCallUser);
     FCallUser.Showmodal;
+    if Assigned(FCallUser) then
+      FreeAndNil(FCallUser);
 end;
 
 procedure TMainForm.N82Click(Sender: TObject);
@@ -3559,6 +3748,8 @@ begin
   inherited;
   Application.CreateForm(TFReportInPerson, FReportInPerson);
   FReportInPerson.Showmodal;
+  if Assigned(FReportInPerson) then
+    FreeAndNil(FReportInPerson);
 end;
 
 procedure TMainForm.N84Click(Sender: TObject);
@@ -3566,6 +3757,8 @@ begin
   inherited;
   Application.CreateForm(TFVersionProduct, FVersionProduct);
   FVersionProduct.Showmodal;
+  if Assigned(FVersionProduct) then
+    FreeAndNil(FVersionProduct);
 end;
 
 procedure TMainForm.TabCartablShow(Sender: TObject);
@@ -3640,7 +3833,8 @@ begin
     FRefrenceInPerson.DBECompanyName.Text := qryMyTasksCompanyName.AsString;
     FRefrenceInPerson.DBEProducts.Text    := qryMyTasksProductTitle.AsString ;
     FRefrenceInPerson.ShowModal;
-    FRefrenceInPerson.Free;
+    if Assigned(FRefrenceInPerson) then
+      FreeAndNil(FRefrenceInPerson);
   end
   else
   begin
@@ -3649,8 +3843,14 @@ begin
     FToRefer.CaseStatusItem := 0 ;
     FToRefer.ShamsiDate := '' ;
     FToRefer.TaskId  := qryMyTasksTaskID.AsInteger ;
+    
+    if qryMyTasksCaseTypeID.AsInteger <> 3 then
+      FToRefer.IsTask := True
+    else  FToRefer.IsTask := False;
+    
     FToRefer.ShowModal;
-    FToRefer.Free;
+    if Assigned(FToRefer) then
+      FreeAndNil(FToRefer);
   end  ;
 
   qryMyTasks.Requery;
@@ -3681,7 +3881,8 @@ begin
   FUpdateJobStatus.ShamsiDate     := qryMyTasksEstimatedDate.AsString ;
   FUpdateJobStatus.TaskId  := qryMyTasksTaskID.AsInteger ;
   FUpdateJobStatus.ShowModal;
-  FUpdateJobStatus.Free;
+  if Assigned(FUpdateJobStatus) then
+    FreeAndNil(FUpdateJobStatus);
 
   TaskId := qryMyTasksTaskID.AsInteger ;
   qryMyTasks.Requery;
@@ -3715,16 +3916,25 @@ begin
    STR1 := ' Ê÷ÌÕ«  «—Ã«⁄ œÂ‰œÂ : '+ #13;
    STR2 := #13#13  +' Ê÷ÌÕ«  «‰Ã«„ œÂ‰œÂ : ' +#13;
 
-   if TypeR = 1 then
+   if TypeR = 1 then  //„Ê«—œ œ—Ì«› Ì
      FilterStr :=  ' Where Cases.IsActive = 1 and  (IsNull(LTrim(RTrim(ToDoDate)),'''') = '''')  and AssignedUserId = '+IntToStr(_UserID) +' and Completed = 0  '
    else
-   if TypeR = 2 then
+   if TypeR = 2 then // „Ê«—œ «—”«·Ì
+   begin
+     FilterStr :=  ' where Cases.IsActive = 1 and  AssignedUserId = '+IntToStr(_UserID)  +  ' and  (IsNull(LTrim(RTrim(ToDoDate)),'''') <> '''')  ' +
+         ' and taskid in ( SELECT MAX(taskid) FROM dbo.tasks where  AssignedUserId = '+IntToStr(_UserID)  +  ' GROUP BY CaseId  ) '
+   end
+   else
+   if TypeR = 3 then // Ê—ÊœÌ Œ—ÊÃÌ
      FilterStr :=  ' where Cases.IsActive = 1 and  AssignedUserId = '+IntToStr(_UserID)  +  ' '
    else
-   if TypeR = 3 then
+   if TypeR = 4 then   // „«„ ò«—Â«Ì »«“
      FilterStr :=  ' Where Cases.IsActive = 1 and (IsNull(LTrim(RTrim(ToDoDate)),'''') = '''')  and Completed = 0 '
    else
-   if TypeR = 4 then
+   if TypeR = 5 then   //¬Œ—Ì‰ Ê÷⁄Ì  ò«—Â«
+     FilterStr :=  ' Where Cases.IsActive = 1  and taskid in ( SELECT MAX(taskid) FROM dbo.tasks  GROUP BY CaseId ) '
+   else
+   if TypeR = 6 then  //  „«„ ò«—Â«
      FilterStr :=  ' Where Cases.IsActive = 1  '    ;
 
    if edtCustomerSrch.Text <> '' then
@@ -3746,25 +3956,28 @@ begin
       SQL.Text:=' Select t.*,CaseTitle,ct.CaseTypeTitle,cp.CasePriorityTitle,ts.TaskStatusTitle,p.ProductTitle,ct.CaseTypeId ,p.ProductId,cases.registerUserId,'
               + ' cases.Completed,Cases.Comment AS CasesComment,cp.CasePriorityID ,Cases.CustomerID,Cases.FollowUpID,Cases.IsBug,c.CompanyName,t.AssignedComment, '
               + ' ''' +STR1+''' '+'+ ISNULL(t.Comment,'''') +'+ ' ''' +STR2+ ''' '+'+ ISNULL(t.AssignedComment,'''') as TaskComment  ,u.Title AssignUserTitle '
+              + ' ,ISNULL(t.Comment,'''')  TaskCommentGrid '
               + ' ,Cases.RegisterDate,Cases.CaseEstimatedDate '
               + ',u2.UserName , 0 TaskCurentState,ts.TaskStatusID  '
-              + ' From Tasks t  '
-              + ' Left Join Cases on Cases.Caseid = T.CaseId '
-              + ' LEFT JOIN TaskStatus ts ON ts.TaskStatusID = T.StatusId  '
-              + ' LEFT JOIN CasePriority cp ON cp.CasePriorityID = Cases.CasePriorityId '
-              + ' LEFT JOIN CaseType ct ON ct.CaseTypeID = Cases.CaseTypeID '
-              + ' LEFT JOIN Product p ON p.ProductID = Cases.ProductId '
-              + ' LEFT OUTER JOIN  Customer AS c ON c.CustomerID = Cases.CustomerID '
-              + ' LEFT JOIN  Users u   ON u.Id = AssignedUserId  '
-              + ' LEFT JOIN Users u2	 ON u2.Id = Cases.RegisterUserID  '
-              +  FilterStr
-              + ' ORDER BY CP.CasePriorityId,t.CaseId,t.taskid,t.EstimatedDate,  t.AssignedDate ';
+              + ' From dbo.Tasks t  WITH(NOLOCK)  '
+              + ' Left Join dbo.Cases  WITH(NOLOCK) on Cases.Caseid = T.CaseId '
+              + ' LEFT JOIN dbo.TaskStatus ts  WITH(NOLOCK)  ON ts.TaskStatusID = T.StatusId  '
+              + ' LEFT JOIN dbo.CasePriority cp  WITH(NOLOCK) ON cp.CasePriorityID = Cases.CasePriorityId '
+              + ' LEFT JOIN dbo.CaseType ct  WITH(NOLOCK) ON ct.CaseTypeID = Cases.CaseTypeID '
+              + ' LEFT JOIN dbo.Product p  WITH(NOLOCK) ON p.ProductID = Cases.ProductId '
+              + ' LEFT OUTER JOIN  dbo.Customer AS c  WITH(NOLOCK)  ON c.CustomerID = Cases.CustomerID '
+              + ' LEFT JOIN  dbo.Users u  WITH(NOLOCK)   ON u.Id = AssignedUserId  '
+              + ' LEFT JOIN dbo.Users u2	 WITH(NOLOCK)  ON u2.Id = Cases.RegisterUserID  '
+              +  FilterStr ;
+              if TypeR = 6 then  //  „«„ ò«—Â«
+                SQL.Text:= SQL.Text + ' ORDER BY t.CaseId desc ,t.taskid,t.EstimatedDate,  t.AssignedDate '
+              else  SQL.Text:= SQL.Text + ' ORDER BY CP.CasePriorityId,t.CaseId,t.taskid,t.EstimatedDate,  t.AssignedDate '  ;
       Open;
       First;
       With dm.UserByCaseFilter do
       Begin
         Close;
-          SQL.Text := ' Select * from Users where isactive = 1 AND (ID = '+inttostr(_UserID)+' or  id IN (SELECT Childid FROM [dbo].[ReferralUser] where parentId = '+inttostr(_UserID)+ ' )) '  ;
+          SQL.Text := ' Select * from dbo.Users  WITH(NOLOCK)  where isactive = 1 AND (ID = '+inttostr(_UserID)+' or  id IN (SELECT Childid FROM [dbo].[ReferralUser]  WITH(NOLOCK)  where parentId = '+inttostr(_UserID)+ ' )) '  ;
           //Parameters.ParamByName('CaseTypeId1').Value := qryMyTasksCaseTypeId.Value;
          //Parameters.ParamByName('CaseTypeId2').Value := qryMyTasksCaseTypeId.Value;
          // Parameters.ParamByName('UserId').Value := _UserID;
@@ -3797,6 +4010,8 @@ begin
   inherited;
   Application.CreateForm(TFTaskReport, FTaskReport);
   FTaskReport.Showmodal;
+  if Assigned(FTaskReport) then
+    freeandnil(FTaskReport)
 end;
 
 procedure TMainForm.btnRefreshClick(Sender: TObject);
@@ -3814,6 +4029,8 @@ begin
   inherited;
   Application.CreateForm(TFBaseRefere, FBaseRefere);
   FBaseRefere.Showmodal;
+  if Assigned(FBaseRefere) then
+    FreeAndNil(FBaseRefere);
 end;
 
 procedure TMainForm.N88Click(Sender: TObject);
@@ -3821,6 +4038,8 @@ begin
   inherited;
   Application.CreateForm(TFfollowUpReport, FfollowUpReport);
   FfollowUpReport.Showmodal;
+  if Assigned(FfollowUpReport) then
+    FreeAndNil(FfollowUpReport);
 end;
 
 procedure TMainForm.dbgMyTasksNeedImageIndex(Column: TColumn;
@@ -3894,8 +4113,8 @@ begin
 
    qry := TADOQuery.Create(self);
    qry.Connection:= dm.YeganehConnection;
-
-   qry.SQL.Text := 'Select id From dbo.Messages Where  IsActive = 1 and IsRead = 0 and UserID ='+inttostr(_Userid);
+   qry.CommandTimeout := 1200;
+   qry.SQL.Text := 'Select id From dbo.Messages  WITH(NOLOCK)  Where  IsActive = 1 and IsRead = 0 and UserID ='+inttostr(_Userid);
    qry.Open;
 
    if qry.RecordCount=0 then
@@ -3922,8 +4141,174 @@ begin
   inherited;
   Application.CreateForm(TFMessageAlarm, FMessageAlarm);
   FMessageAlarm.Showmodal;
-  RefreshAlarmMessage ;  
+  if Assigned(FMessageAlarm) then
+   FreeAndNil(FMessageAlarm);
+  RefreshAlarmMessage ;
 
+end;
+
+procedure TMainForm.N89Click(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TFReferralUser, FReferralUser);
+  FReferralUser.Showmodal;
+  if Assigned(FReferralUser) then
+    FreeAndNil(FReferralUser);
+end;
+
+procedure TMainForm.h1Click(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TFSendInnerMessage, FSendInnerMessage);
+  FSendInnerMessage.Showmodal;
+  if Assigned(FSendInnerMessage) then
+    FreeAndNil(FSendInnerMessage);
+end;
+
+procedure TMainForm.btnstartClick(Sender: TObject);
+var
+  tempTime : TTime;
+begin
+  inherited;
+  if (RGCartablType.ItemIndex = 0) or (RGCartablType.ItemIndex = 1) or (RGCartablType.ItemIndex = 2)  then
+  begin
+    dm.tblTaskLog.Close;
+    dm.tblTaskLog.open;
+    StartTimeTaskLog:= Now;
+    TimerTaskLog.Enabled:=True;
+    btnstart.Enabled:= False;
+    btnStop.Enabled := True;
+    dm.tblTaskLog.Append;
+    dm.tblTaskLogUserId.AsInteger := _UserId ;
+    dm.tblTaskLogTaskId.AsInteger := qryMyTasksTaskId.AsInteger ;
+    dm.tblTaskLogCaseId.AsInteger := qryMyTasksCaseId.AsInteger ;
+    dm.tblTaskLogStartTime.AsDateTime := now ;//Time_GetTime(Dm.YeganehConnection,False);
+    dm.tblTaskLog.post;
+    MainTaskLogId := dm.tblTaskLogId.AsInteger ;
+    LblTaskNo.Caption := '  ”ò '+ qryMyTasksCaseId.AsString ;//qryMyTasksTaskID.AsString ;
+    tempTime :=  Timeof(Now-StartTimeTaskLog) ;
+    edtTimeFromStart.Text := inttostr(strtoint(Copy(TimeToStr(tempTime),1,2))-12) + Copy(TimeToStr(tempTime),3,6);
+  end
+  else
+  begin
+    ShowMessage('›ﬁÿ “„«‰ÌòÂ ‰Ê⁄ ‰„«Ì‘ ò«—Â« »— —ÊÌ  ò«— «»· ò«—»— ÊÌ«  „«„ ò«—Â«Ì ò«—»— »«‘œ «Ì‰ œò„Â ò«— „Ì ò‰œ ');
+  end;
+
+end;
+
+procedure TMainForm.TimerTaskLogTimer(Sender: TObject);
+var
+  tempTime : TTime;
+begin
+  inherited;
+  //edtTimeFromStart.Text := TimeToStr(Timeof(Now-StartTimeTaskLog));
+  tempTime :=  Timeof(Now-StartTimeTaskLog) ;
+  edtTimeFromStart.Text := TimeToStr(tempTime);
+  edtTimeFromStart.Text := inttostr(strtoint(Copy(TimeToStr(tempTime),1,2))-12) +  Copy(TimeToStr(tempTime),3,6);;
+ // TimeToStr(Now-StartTimeTaskLog);
+end;
+
+procedure TMainForm.btnStopClick(Sender: TObject);
+begin
+  inherited;
+  TimerTaskLog.Enabled:= False ;
+  dm.tblTaskLog.Close;
+  dm.tblTaskLog.Open;
+  if ( dm.tblTaskLog.Locate('ID',MainTaskLogId,[])) then
+  begin
+    dm.tblTaskLog.Edit;
+    dm.tblTaskLogEndTime.AsDateTime := now ;//Time_GetTime(Dm.YeganehConnection,False);
+    if Length(Trim(edtTimeFromStart.Text))= 7 then
+      Dm.tblTaskLogLongTime.AsString  := '0'+Trim(edtTimeFromStart.Text)
+    else  Dm.tblTaskLogLongTime.AsString  := Trim(edtTimeFromStart.Text) ;
+
+    dm.tblTaskLog.post;
+    MainTaskLogId := 0 ;
+    edtTimeFromStart.Text := '0' ;
+    LblTaskNo.Caption := '  ”ò ' ;
+  end ;
+
+  btnstart.Enabled:= True;
+  btnStop.Enabled := False;
+end;
+
+procedure TMainForm.N80Click(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TFSalesFunnel, FSalesFunnel);
+  FSalesFunnel.Showmodal;
+  if Assigned(FSalesFunnel) then
+    FreeAndNil(FSalesFunnel);
+
+end;
+
+procedure TMainForm.btnCustomerViewClick(Sender: TObject);
+begin
+  inherited;
+   propertiesForm := TPropertiesForm.Create(Application,qryMyTasksCustomerID.Asinteger ) ;
+   PropertiesForm.Showmodal;
+   if Assigned(PropertiesForm) then
+     FreeAndNil(PropertiesForm);
+end;
+
+procedure TMainForm.n92Click(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TFActionTypeLevel, FActionTypeLevel);
+  FActionTypeLevel.Showmodal;
+  if Assigned(FActionTypeLevel) then
+    FreeAndNil(FActionTypeLevel);
+end;
+
+procedure TMainForm.btnMapsClick(Sender: TObject);
+begin
+  inherited;
+  FCustomerMap := TFCustomerMap.Create(Application,dm.CustomerCustomerID.AsInteger) ;
+  //Application.CreateForm(TFCustomerMap, FCustomerMap);
+  FCustomerMap.Showmodal;
+  if Assigned(FCustomerMap) then
+    FreeAndNil(FCustomerMap);
+end;
+
+procedure TMainForm.btnMapBugClick(Sender: TObject);
+begin
+  inherited;
+  //Application.CreateForm(TFMapBug, FMapBug);
+  FMapBug := TFMapBug.Create(Application,qryMyTasksCaseId.AsInteger) ;
+  FMapBug.Showmodal;
+  if Assigned(FMapBug) then
+    FreeAndNil(FMapBug);
+end;
+
+procedure TMainForm.N93Click(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TFCompare_Report, FCompare_Report);
+  FCompare_Report.Showmodal;
+  if Assigned(FCompare_Report) then
+    FreeAndNil(FCompare_Report);
+end;
+
+procedure TMainForm.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if  pgcMain.ActivePage = xpTabSheet2 then
+  begin
+    If (Shift = [ssctrl]) and (inttostr(key) = '113') then   //f2
+    begin
+
+    end;
+    If (Shift = [ssctrl]) and (inttostr(key) = '116') then  //f5
+    begin
+
+    end;
+    If (Shift = [ssctrl]) and (inttostr(key) = '78') then //n
+    begin
+      if BitBtn1.Visible and BitBtn1.Enabled then
+        BitBtn1Click(self);
+    end;
+  end;
 end;
 
 end.

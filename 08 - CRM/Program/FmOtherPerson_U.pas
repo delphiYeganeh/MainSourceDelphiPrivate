@@ -47,6 +47,18 @@ type
     DBENotes: TDBEdit;
     Panel1: TPanel;
     YDBGrid1: TYDBGrid;
+    pnlSearch: TPanel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    pnlFilter: TPanel;
+    SBRefresh: TSpeedButton;
+    btnHome: TSpeedButton;
+    edtName: TEdit;
+    edtLastName: TEdit;
+    edtTel: TEdit;
+    edtMobile: TEdit;
     procedure Select_Person_By_CustomerIDAfterInsert(DataSet: TDataSet);
     procedure DBEEmailAddressEnter(Sender: TObject);
     procedure DBEEmailAddressExit(Sender: TObject);
@@ -55,6 +67,8 @@ type
     procedure DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
+    procedure btnHomeClick(Sender: TObject);
+    procedure SBRefreshClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -103,6 +117,7 @@ end;
 procedure TFmOtherPerson.DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
 begin
    inherited;
+
    if Button = nbInsert then
    begin
       DBEFirstName.SetFocus;
@@ -118,6 +133,62 @@ begin
     Resize := False
   else Resize := True;
    { TODO -oparsa : 14030203 }
+end;
+
+procedure TFmOtherPerson.btnHomeClick(Sender: TObject);
+begin
+  inherited;
+  edtName.Text     := '';
+  edtLastName.Text := '';
+  edtTel.Text      := '';
+  edtMobile.Text   := '';
+  DSelect_Person_By_CustomerID.DataSet.Filtered := False ;
+  DSelect_Person_By_CustomerID.DataSet.Filter := '' ;
+  DSelect_Person_By_CustomerID.DataSet.Filtered := True ;
+  DBNavigator1.Enabled := true;
+end;
+
+procedure TFmOtherPerson.SBRefreshClick(Sender: TObject);
+begin
+  inherited;
+
+  if not (DSelect_Person_By_CustomerID.DataSet.State in [dsEdit,dsInsert]) then
+  begin
+    DSelect_Person_By_CustomerID.DataSet.Filtered := False ;
+    DSelect_Person_By_CustomerID.DataSet.Filter := '' ;
+    
+    if Trim(edtName.Text)<>'' then
+      DSelect_Person_By_CustomerID.DataSet.Filter := ' FirstName like ''%'+Trim(edtName.Text)+'%''' ;
+
+    if Trim(edtLastName.Text)<>'' then
+    begin
+      if  DSelect_Person_By_CustomerID.DataSet.Filter  <> '' then
+        DSelect_Person_By_CustomerID.DataSet.Filter := DSelect_Person_By_CustomerID.DataSet.Filter +' and LastName like  ''%'+Trim(edtLastName.Text) +'%'''
+      else
+        DSelect_Person_By_CustomerID.DataSet.Filter := DSelect_Person_By_CustomerID.DataSet.Filter +' LastName like ''%'+Trim(edtLastName.Text)+'%''';
+    end;
+
+    if Trim(edtTel.Text)<>'' then
+    begin
+      if  DSelect_Person_By_CustomerID.DataSet.Filter  <> '' then
+        DSelect_Person_By_CustomerID.DataSet.Filter := DSelect_Person_By_CustomerID.DataSet.Filter +' and WorkPhone like ''%'+Trim(edtTel.Text) +'%'''
+      else  DSelect_Person_By_CustomerID.DataSet.Filter := ' WorkPhone like ''%'+Trim(edtTel.Text)+'%''' ;
+    end;
+    if Trim(edtMobile.Text)<>'' then
+    begin
+      if  DSelect_Person_By_CustomerID.DataSet.Filter  <> '' then
+        DSelect_Person_By_CustomerID.DataSet.Filter := DSelect_Person_By_CustomerID.DataSet.Filter +' and MobilePhone like ''%'+Trim(edtMobile.Text) +'%'''
+      else   DSelect_Person_By_CustomerID.DataSet.Filter := ' MobilePhone like ''%'+Trim(edtMobile.Text)+'%''' ;
+    end;
+
+    if DSelect_Person_By_CustomerID.DataSet.Filter  <> '' then
+      DBNavigator1.Enabled := False;
+
+    DSelect_Person_By_CustomerID.DataSet.Filtered := True ;
+  end;
+
+
+
 end;
 
 end.

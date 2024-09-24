@@ -864,7 +864,7 @@ begin
   FFactorAddress.CustomerId := DMFactor.QrFactorCustomer_Ref.AsInteger ;
   FFactorAddress.Factor_ID  := DMFactor.QrFactorFactor_ID.AsInteger ;
   FFactorAddress.ShowModal;
-  FFactorAddress.Free;
+  FreeAndNil(FFactorAddress);
 end;
 
 procedure TFMFactor.frxReport2GetValue(const VarName: String;
@@ -922,6 +922,7 @@ begin
   ReturnQry       := TADOQuery.Create(nil);
   with ReturnQry do
   begin
+     CommandTimeout := 1200;
      Close;
      Connection := dm.YeganehConnection;
      SQL.Text   := ' select TOP 1 fa.*, s.StateTitle, c.CityTitle,c.CountyTitle, c2.CompanyName   from [dbo].[FactorAddress] fa    '+

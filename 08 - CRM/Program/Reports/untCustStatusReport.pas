@@ -110,6 +110,7 @@ procedure TfrmCustStatusReport.BitBtn1Click(Sender: TObject);
     12 : Date := Year + '/' + IntToStr(Month);
    end;
    TempQuery := TADOQuery.Create(Nil);
+   TempQuery.CommandTimeout := 1200;
    try
     WhereClause := '';
     if DBLookupComboBox1.KeyValue <> Null then
@@ -161,6 +162,7 @@ begin
   MainQuery := TADOQuery.Create(Nil);
   try
    MainQuery.Connection := Dm.YeganehConnection;
+   MainQuery.CommandTimeout := 1200;
    MainQuery.Close;
    MainQuery.SQL.Text := 'Truncate Table CustomerStatusReport';
    MainQuery.ExecSQL;
@@ -172,12 +174,14 @@ begin
      RowQuery := TADOQuery.Create(Nil);
      try
       RowQuery.Connection := Dm.YeganehConnection;
+      RowQuery.CommandTimeout := 1200;
       RowQuery.Close;
       RowQuery.SQL.Text := 'Insert Into CustomerStatusReport(CustomerStatusID, CustomerStatusTitle) Values(' + MainQuery.Fields[0].AsString + ',' + QuotedStr(MainQuery.Fields[1].AsString) + ')';
       RowQuery.ExecSQL;
       ColQuery := TADOQuery.Create(Self);
       try
       ColQuery.Connection := Dm.YeganehConnection;
+      ColQuery.CommandTimeout := 1200;
       ColQuery.Close;
       ColQuery.SQL.Text := 'Update CustomerStatusReport Set One = ' + IntToStr(GetCount(ComboBox1.Text,1,MainQuery.Fields[0].AsInteger)) +
                            ',Two = ' + IntToStr(GetCount(ComboBox1.Text,2,MainQuery.Fields[0].AsInteger)) +

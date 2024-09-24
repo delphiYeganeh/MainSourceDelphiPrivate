@@ -75,6 +75,8 @@ type
     { Private declarations }
   public
     FollowUpId : Integer ;
+    CaseId : Integer ;
+    TaskId : Integer ;
     FollowUpInPerson : Integer;
     CustomerId : Integer ;
     ValuatorUserID : Integer ;
@@ -149,6 +151,8 @@ begin
   inherited;
    With Select_Assessment do
    begin
+
+    try
       if not (State in [dsEdit,dsInsert]) then
          EDIT;
 
@@ -163,6 +167,35 @@ begin
                                                  Select_AssessmentAssessmenScore4.Asinteger + Select_AssessmentAssessmenScore5.Asinteger  + Select_AssessmentAssessmenScore6.Asinteger  +
                                                  Select_AssessmentAssessmenScore7.Asinteger + Select_AssessmentAssessmenScore8.Asinteger  ;
       Post;
+
+      with TADOQuery.Create(nil) do
+      begin
+       Connection := Dm.YeganehConnection;
+       CommandTimeout := 1200;
+
+       SQL.Text := ' Update dbo.Tasks set TodoDate = '''+_Today+''' where TaskId = '+ IntToStr(TaskId);
+       ExecSQL;
+
+       SQL.Text := ' Update dbo.Cases set Completed = 1,CompleteDate = '''+_Today+''',CompleteComment= '''+'«—“Ì«»Ì «‰Ã«„ ‘œ'+''' where caseId = '+ IntToStr(CaseId);
+       ExecSQL;
+
+       SQL.Text := ' Update dbo.Tasks set StatusId = 4  where caseId = '+ IntToStr(CaseId) ;
+       ExecSQL;
+
+       SQL.Text := ' Update dbo.Tasks set StatusId = 11  where caseId = '+ IntToStr(CaseId) + ' and TaskID in (select max(taskid) from dbo.tasks where caseId = '+IntToStr(CaseId) + ' ) ';
+       ExecSQL;
+
+      end;
+    except
+      with TADOQuery.Create(nil) do
+      begin
+       Connection := Dm.YeganehConnection;
+       CommandTimeout := 1200;
+       SQL.Text :=  '  Insert into [dbo].[Log_Processes] ([Message] ,[Type])  values ('+IntToStr(CaseId)+',5)' ;
+       ExecSQL;
+      end;
+      ShowMyMessage('ÅÌ€«„','⁄„·Ì«  À»  «—“Ì«»Ì »« Œÿ« „Ê«ÃÂ ‘œ ·ÿ›« œÊ»«—Â  ·«‘ ‰„«ÌÌœ',[mbOK],mtInformation);
+    end;
 
       Close;
 

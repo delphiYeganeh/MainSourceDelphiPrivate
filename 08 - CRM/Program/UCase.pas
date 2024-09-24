@@ -112,6 +112,7 @@ type
     Date1: TLabel;
     DBText1: TDBText;
     DBText2: TDBText;
+    btnMapBug: TBitBtn;
     procedure btnDelBRClick(Sender: TObject);
     procedure dbgCaseDblClick(Sender: TObject);
     procedure btnAddTaskClick(Sender: TObject);
@@ -143,6 +144,7 @@ type
     procedure SpeedButton1Click(Sender: TObject);
     procedure Edit2Change(Sender: TObject);
     procedure edtCustomerIdChange(Sender: TObject);
+    procedure btnMapBugClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -163,7 +165,8 @@ var
 
 implementation
 
-uses dmu, BusinessLayer, UCaseAdd, UTask, Uattachments, URefrenceInPerson;
+uses dmu, BusinessLayer, UCaseAdd, UTask, Uattachments, URefrenceInPerson,
+  UMapBug;
 
 {$R *.dfm}
 
@@ -221,7 +224,8 @@ begin
     FRefrenceInPerson.DBECompanyName.Text := SpSelect_CasesCompanyName.AsString;
     FRefrenceInPerson.DBEProducts.Text    := SpSelect_CasesProductTitle.AsString ;
     FRefrenceInPerson.ShowModal;
-    FRefrenceInPerson.Free;
+    if Assigned(FRefrenceInPerson) then
+      FreeAndNil(FRefrenceInPerson);
   end
   else
   with  TfrCaseAdd.Create(Self,SpSelect_CasesCaseID.Value,SpSelect_CasesCaseTitle.Text,SpSelect_CasesProductId.Value,SpSelect_CasesCaseTypeID.Value
@@ -256,6 +260,7 @@ var dsdblCustomer :TDataSource;
 begin
   dsdblCustomer := TDataSource.Create(Self);
   qrydblCustomer := TADOQuery.Create(nil);
+  qrydblCustomer.CommandTimeout := 1200;
 
   SetQueryDataSet(dsdblCustomer,qrydblCustomer,'Select CustomerId,Companyname+'' - ''+PersonTitle as ListName from Customer',Dm.YeganehConnection);
   qrydblCustomer.Fields[1].Alignment := taRightJustify;
@@ -426,6 +431,7 @@ begin
         with TADOQuery.Create(nil) do
         begin
            Connection := Dm.YeganehConnection;
+           CommandTimeout := 1200;
            SQL.Text := ' insert into dbo.Tasks (CaseId,Comment,StatusId,AssignedUserId,AssignedDate)values('+IntToStr(Id)+','''+CommentStr+''','+IntToStr(BugStatusID)+','
                                                               +CaseAccept+','''+_Today+'''' +') ';
 
@@ -477,6 +483,7 @@ begin
   with TADOQuery.Create(nil) do
   begin
     Connection  := Dm.YeganehConnection;
+    CommandTimeout := 1200;
     SQL.Text    := 'Select CaseId from Tasks where CaseId = '+IntToStr(CaseId);
     Open;
     Result := RecordCount > 0
@@ -811,6 +818,15 @@ procedure TfrCase.edtCustomerIdChange(Sender: TObject);
 begin
   inherited;
    MakeFilter;
+end;
+
+procedure TfrCase.btnMapBugClick(Sender: TObject);
+begin
+  inherited;
+  FMapBug := TFMapBug.Create(Application,SpSelect_CasesCaseID.AsInteger) ;
+  FMapBug.Showmodal;
+  if Assigned(FMapBug) then
+    FreeAndNil(FMapBug);
 end;
 
 END.

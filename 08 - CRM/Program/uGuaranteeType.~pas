@@ -19,6 +19,7 @@ type
     procedure btnSaveClick(Sender: TObject);
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -80,6 +81,13 @@ begin
    { TODO -oparsa : 14030203 }
   inherited;
 
+end;
+
+procedure TfrGuaranteeType.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

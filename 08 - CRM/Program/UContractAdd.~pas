@@ -189,6 +189,9 @@ begin
     qrydblContractType   := TADOQuery.Create(nil);
     qrydblContractSubType:= TADOQuery.Create(nil);
     qrydblProduct        := TADOQuery.Create(nil);
+    qrydblContractType.CommandTimeout := 1200;
+    qrydblContractSubType.CommandTimeout := 1200;
+    qrydblProduct.CommandTimeout := 1200;
 
     FrContract.SetComponentsDataSource;
     SetdblContractType;
@@ -381,12 +384,14 @@ begin
     AQry := TADOQuery.Create(Self);
      try
       AQry.Connection := Dm.YeganehConnection;
+      AQry.CommandTimeout := 1200;
       AQry.Close;
       AQry.SQL.Text := 'Update Contract Set ContractExcell = Null Where ContractId = ' + FrContract.SpDbgridContract.FieldByName('ContractId').AsString ;
       AQry.ExecSQL;
       ShowMessage('›«Ì· «ò”· »« „Ê›ﬁÌ  Õ–› ê—œÌœ');
      finally
-      FreeAndNil(AQry);
+      if Assigned(AQry) then
+        FreeAndNil(AQry);
      end;
    end;
 //Hamed_Ansari_S_13990418
@@ -403,6 +408,7 @@ begin
     AQry := TADOQuery.Create(Self);
      try
       AQry.Connection := Dm.YeganehConnection;
+      AQry.CommandTimeout := 1200;
       AQry.Close;
       AQry.SQL.Text := 'Update Contract Set ContractText = Null Where ContractId = ' + FrContract.SpDbgridContract.FieldByName('ContractId').AsString ;
       AQry.ExecSQL;

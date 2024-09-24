@@ -10,20 +10,25 @@ uses
 type
   TFSingleMessage = class(TMBaseForm)
     pnlMain: TPanel;
-    Label1: TLabel;
-    edtMessage: TEdit;
-    RadioGroup1: TRadioGroup;
+    RGMediaType: TRadioGroup;
     btnMessage: TSpeedButton;
     phonenumber: TLabel;
     Label2: TLabel;
+    GroupBox1: TGroupBox;
+    edtMessage: TMemo;
+    GroupBox2: TGroupBox;
     Etebar: TLabel;
+    Edit1: TEdit;
     procedure pnlMainCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
     procedure btnMessageClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
-    procedure InsertLog;
+    procedure InsertLog(Comment : String);
+    procedure onlyNumberMobile(mobileStr : String);
   public
     { Public declarations }
     MobileNumber : string ;
@@ -52,43 +57,100 @@ end;
 procedure TFSingleMessage.btnMessageClick(Sender: TObject);
 var
   Rio:SmsCenter;
-
+  Str:String ;
 begin
   inherited;
-  if not Dm.SmsSettingIsCorrect then
+  if (RGMediaType.ItemIndex = 0) and (not Dm.SmsSettingIsCorrect) then
   begin
       ShowMessage('·ÿ›« «» œ« »Â ›—„  ‰ŸÌ„«  ÅÌ«„ò „—«Ã⁄Â ‰„«ÌÌœ');
       Exit;
   end;
+  
   if Trim(edtMessage.Text)='' then
-      ShowMessage('„ ‰ ÅÌ«„ Œ«·Ì «” ')
+  begin
+      ShowMessage('„ ‰ ÅÌ«„ Œ«·Ì «” ');
+       Exit;
+  end
   else
   begin
-     if _SendSMS then
+     if RGMediaType.ItemIndex = 0 then
+     begin
+       if _SendSMS or _SendSMSType2 then
+       begin
+         try
+           btnMessage.Enabled:=False;
+              try
+                 if  _SendSMS then
+                 begin
+                   Rio:= GetSmsCenter(True,'',nil);
+                   Rio.snedOneSms(_TerminalID,_SmsPassWord,MobileNumber,edtMessage.Text);
+                  end
+                  else if _SendSMSType2 then
+                 begin
+                    dm.SendSmsToOutBox(MobileNumber,edtMessage.Text);
+                 end;
+                 Str :=  '«—”«· „Ê›ﬁ'
+                 //ShowMessage(Str);
+              except
+                 Str := 'Œÿ« œ— «—”«· ÅÌ«„ò' ;
+                // ShowMessage(Str);
+              end;
+              ShowMessage(Str);
+              InsertLog(STR);
+         finally
+            // btnMessage.Caption:='«—”«· ÅÌ«„';
+             btnMessage.Enabled:=True;
+         end;
+       end;
+     end
+     else
      begin
        try
-         btnMessage.Enabled:=False;
+          btnMessage.Enabled := False;
+          with Dm do
+          begin
             try
-                Rio:=GetSmsCenter(True,'',nil);
-                Rio.snedOneSms(_TerminalID,_SmsPassWord,MobileNumber,edtMessage.Text);
-            except
-                ShowMessage('Œÿ« œ— «—”«· ÅÌ«„ò');
-            end;
-            InsertLog;
+              Select_MediaMessage.Append;
+              Select_MediaMessageSenderUserId.Value := _UserID;
+              Select_MediaMessageCustomerId.AsInteger   := StrToInt(CustomerId);
+              Select_MediaMessageMessage.Value := Trim(edtMessage.text) ;
+              if RGMediaType.ItemIndex  = 0 then
+                Select_MediaMessageMedia.Value := 'SMS'
+              else
+              if RGMediaType.ItemIndex  = 1 then
+                Select_MediaMessageMedia.Value := 'Telegram'
+              else
+              if RGMediaType.ItemIndex  = 2 then
+                Select_MediaMessageMedia.Value := 'WhatsApp'
+              else
+              if RGMediaType.ItemIndex  = 3 then
+                Select_MediaMessageMedia.Value := 'Ita'  ;
+
+              Select_MediaMessagePhoneNumber.Value := MobileNumber;
+              Select_MediaMessageDescription.Value := '«—”«· ÅÌ«„ «“ ›—„ „‘ —Ì';
+              Select_MediaMessageType.AsInteger:=  1;
+              Select_MediaMessage.Post;
+              except
+                  ShowMessage('Œÿ« œ— «—”«· ÅÌ«„ò');
+              end;
+          end;
        finally
-          // btnMessage.Caption:='«—”«· ÅÌ«„';
-           btnMessage.Enabled:=True;
+         btnMessage.Enabled := True;
        end;
+     
      end;
   end;
+  Close;
 end;
 
-procedure TFSingleMessage.InsertLog;
+procedure TFSingleMessage.InsertLog(Comment : String);
 var
   QTMP: TADOQuery;
 begin
+  Comment :=  '«—”«· œ” Ì «“ ›—„ „‘ —Ì' +'-'+Comment ;
   QTMP := TADOQuery.Create(self);
   QTMP.Connection := dm.YeganehConnection;
+  QTMP.CommandTimeout := 1200;
 
   QTMP.Close;
   QTMP.SQL.Clear;
@@ -109,6 +171,7 @@ begin
   QTMP.SQL.Add(','+QuotedStr(_WorkSationName));
   QTMP.SQL.Add(','+QuotedStr(_WinOrDomainUserName));
   QTMP.SQL.Add(','+MobileNumber);
+  QTMP.SQL.Add(','+QuotedStr( Comment));
 
   QTMP.SQL.Add(')');
 
@@ -122,8 +185,11 @@ var
 begin
   inherited;
   ShapeBase.Brush.Color := _Color1 ;
-  pnlMain.Color := _Color1 ;  
+  pnlMain.Color := _Color1 ;
+  onlyNumberMobile(MobileNumber) ;
   phonenumber.Caption :=  MobileNumber ;
+
+
 
   try
     url := 'http://parsasms.com/tools/urlservice/credit/?username='+  dmu._SmsUser+'&password='+dmu._SmsPassWordType2;
@@ -132,6 +198,37 @@ begin
     Etebar.Caption:='Œÿ« œ— »—ﬁ—«—Ì «— »«ÿ';
   end;
 
+  with Dm.Select_MediaMessage do
+  begin
+    Close;
+    Parameters.ParamByName('@CustomerID').Value := CustomerId  ;
+    Open;
+
+  end;
+
+end;
+
+procedure TFSingleMessage.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  inherited;
+  Resize :=  False;
+end;
+
+
+
+procedure TFSingleMessage.onlyNumberMobile(mobileStr: String);
+var indx : Integer;
+  ResultText : string;
+begin
+  ResultText := '';
+  for indx := 1 to length(mobileStr) do
+  begin
+    if mobileStr[indx] in ['0'..'9'] then
+      ResultText := ResultText + mobileStr[indx] ;
+  end;
+  mobileStr := ResultText ;
+  MobileNumber :=  ResultText ;
 end;
 
 end.

@@ -37,7 +37,6 @@ type
     Label8: TLabel;
     Label9: TLabel;
     Label10: TLabel;
-    Button1: TButton;
     procedure RadioGroup1Click(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure ColorBox1Change(Sender: TObject);

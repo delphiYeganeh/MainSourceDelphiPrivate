@@ -111,6 +111,7 @@ end;
 procedure TFReportInPerson.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
+  if SpExpertUserReport.Active then
   if SpExpertUserReport.RecordCount >0 then
     dbgExpertUser.ExportToWord;
 end;
@@ -118,6 +119,7 @@ end;
 procedure TFReportInPerson.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
+  if SpExpertUserReport.Active then
   if SpExpertUserReport.RecordCount >0 then
     dbgExpertUser.Print;
 end;
@@ -125,6 +127,7 @@ end;
 procedure TFReportInPerson.SpeedButton3Click(Sender: TObject);
 begin
   inherited;
+  if SpExpertUserReport.Active then
   if SpExpertUserReport.RecordCount >0 then
     dbgExpertUser.ExportToExcel;
 end;

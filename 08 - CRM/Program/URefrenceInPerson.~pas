@@ -194,16 +194,25 @@ begin
 end;
 
 procedure TFRefrenceInPerson.BitBtn1Click(Sender: TObject);
+var
+  Caseid : string;
+  TaskId : string;
 begin
   inherited;
   Application.CreateForm(TFAssessment, FAssessment);
   FAssessment.FollowUpId     := FollowUpId ;
+  Caseid                     := Qry_GetResult(' select top 1 CaseID  FROM dbo.Cases where FollowUpID = '+inttostr(FollowUpId)+' order by CaseID desc' ,dm.YeganehConnection) ;
+  FAssessment.CaseId         := Caseid  ;
+  TaskId                     := Qry_GetResult(' select top 1 TaskID  FROM dbo.Tasks where CaseID = '+inttostr(TaskId)+' order by TaskID desc' ,dm.YeganehConnection)  ;
+  FAssessment.TaskId         := TaskId ;
   FAssessment.CustomerId     := CustomerId ;
   FAssessment.FollowUpInPerson := Select_FollowUpInPerson.FieldByName('Id').AsInteger ;
   FAssessment.ValuatorUserID := Select_FollowUpInPerson.FieldByName('ValuatorUserID').AsInteger  ;
   FAssessment.ExpertUserID   := Select_FollowUpInPerson.FieldByName('ExpertId').AsInteger  ;
   FAssessment.ShowModal;
-  FAssessment.Free;
+  if Assigned(FAssessment) then
+    FreeAndNil(FAssessment);
+
 end;
 
 procedure TFRefrenceInPerson.Button1Click(Sender: TObject);
@@ -338,7 +347,7 @@ begin
 
       SpSelect_CasesRegisterDate.Value   := _Today;
       SpSelect_CasesCaseOrigiranlId.Value:= 8; // «ﬁœ«„
-      SpSelect_CasesCasePriorityId.Value := 1; // «Ê·ÊÌ 
+      SpSelect_CasesCasePriorityId.Value := 6; // «Ê·ÊÌ 
       SpSelect_CasesCaseTypeID .Value := 9; // «—“Ì«»Ì
       SpSelect_CasesIsBug .Value := False ;
       SpSelect_CasesCustomerID .Value := CustomerId ; // ‘„«—Â „‘ —Ì
@@ -354,6 +363,7 @@ begin
       with TADOQuery.Create(nil) do
       begin
          Connection := Dm.YeganehConnection;
+         CommandTimeout := 1200;
          SQL.Text := 'insert into Tasks (CaseId,Comment,StatusId,AssignedUserId,AssignedDate)values('+IntToStr(SpSelect_CasesCaseID.AsInteger)+','''+'«—“Ì«»Ì'+''',10,'
                                                             +CaseAccept+','''+_Today+'''' +')';
 

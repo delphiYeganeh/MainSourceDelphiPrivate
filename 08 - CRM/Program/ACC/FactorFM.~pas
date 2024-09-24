@@ -864,7 +864,7 @@ begin
   FFactorAddress.CustomerId := DMFactor.QrFactorCustomer_Ref.AsInteger ;
   FFactorAddress.Factor_ID  := DMFactor.QrFactorFactor_ID.AsInteger ;
   FFactorAddress.ShowModal;
-  FFactorAddress.Free;
+  FreeAndNil(FFactorAddress);
 end;
 
 procedure TFMFactor.frxReport2GetValue(const VarName: String;

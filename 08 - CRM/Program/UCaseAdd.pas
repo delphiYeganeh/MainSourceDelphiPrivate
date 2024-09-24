@@ -53,6 +53,7 @@ type
     Label10: TLabel;
     LabelDate11: TLabel;
     LabelDate12: TLabel;
+    btnMapBug: TBitBtn;
     procedure btnDelBR2Click(Sender: TObject);
     procedure DBEdit1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -62,6 +63,7 @@ type
     procedure btnAddAttachmentClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnAttachmentClick(Sender: TObject);
+    procedure btnMapBugClick(Sender: TObject);
   private
     gCaseId :Integer;
     gCustomerId : Integer ;
@@ -80,7 +82,7 @@ var
 
 implementation
 
-uses dmu, BusinessLayer, UTask, Uattachments;
+uses dmu, BusinessLayer, UTask, Uattachments, UMapBug;
 
 {$R *.dfm}
 
@@ -257,6 +259,15 @@ begin
   inherited;
   with TfrAttachments.create(Application,2,Spselect_TasksCaseId.Value,True) do
     ShowModal;
+end;
+
+procedure TfrCaseAdd.btnMapBugClick(Sender: TObject);
+begin
+  inherited;
+  FMapBug := TFMapBug.Create(Application,gCaseId) ;
+  FMapBug.Showmodal;
+  if Assigned(FMapBug) then
+    FreeAndNil(FMapBug);
 end;
 
 end.

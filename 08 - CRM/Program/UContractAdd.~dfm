@@ -69,9 +69,9 @@ inherited frContractAdd: TfrContractAdd
       Caption = '%'
     end
     object Label9: TLabel
-      Left = 389
+      Left = 447
       Top = 276
-      Width = 86
+      Width = 28
       Height = 13
       Caption = #1605#1575#1604#1610#1575#1578
       Transparent = True
@@ -85,9 +85,9 @@ inherited frContractAdd: TfrContractAdd
       Transparent = True
     end
     object Label11: TLabel
-      Left = 390
+      Left = 408
       Top = 253
-      Width = 86
+      Width = 68
       Height = 13
       Caption = #1581#1587#1606' '#1575#1606#1580#1575#1605' '#1705#1575#1585
       Transparent = True
@@ -181,6 +181,7 @@ inherited frContractAdd: TfrContractAdd
       Width = 169
       Height = 21
       Ctl3D = True
+      MaxLength = 20
       ParentCtl3D = False
       TabOrder = 2
       OnChange = edtAmountChange

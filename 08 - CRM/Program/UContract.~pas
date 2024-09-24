@@ -226,6 +226,7 @@ type
     btnGuaranteeImageLoad: TBitBtn;
     dblGuaranteeType: TDBLookupComboBox;
     Button1: TButton;
+    Select_customer_By_CustomerIDProductsIdSTR: TStringField;
     procedure BtnCancelClick(Sender: TObject);
     procedure RefreshData;
     procedure btnDelClick(Sender: TObject);
@@ -348,6 +349,9 @@ begin
     qrydblsrchContractType    := TADOQuery.Create(nil);
     qrydblContractSubType     := TADOQuery.Create(nil);
     qrydblsrchProduct         := TADOQuery.Create(nil);
+    qrydblsrchProduct.CommandTimeout := 1200;
+    qrydblsrchContractType.CommandTimeout := 1200;
+    qrydblContractSubType.CommandTimeout := 1200;
     refreshData;
     Search_contract;
     SetdblContractType;
@@ -645,6 +649,7 @@ var CustomerID:Integer;
     CaseAccept : string;
     SystemUser : string;
     BugStatusID : Integer ;
+    OldStatusId : Integer ;
 begin
 //  if frContractAdd=nil then
 //          frContractAdd:=TfrContractAdd.create(Self);
@@ -666,7 +671,9 @@ begin
       
       if SpDbgridContract.RecordCount = 1 then
       begin
+        OldStatusId := 0 ;
         Select_customer_By_CustomerID.Edit;
+        OldStatusId := Select_customer_By_CustomerIDCustomerStatusID.Value ;
         Select_customer_By_CustomerIDCustomerStatusID.Value :=    2;
         Select_customer_By_CustomerID.Post;
         if dm.Select_Customer_By_CustomerID.Active then
@@ -680,34 +687,51 @@ begin
         end;
 
         { TODO -oparsa : 14030427 }
-        with TADOQuery.Create(nil) do
+        if (OldStatusId <> 2)  // „‘ —Ì ﬁÿ⁄Ì ‘œÂ »«‘œ
+           and
+           (Trim(Select_customer_By_CustomerIDProductsIdSTR.AsString) <> '30')  // Œœ„«  «”ò‰ ‰»«‘œ
+            then
         begin
-           Connection := Dm.YeganehConnection;
-           // „œÌ— Å‘ Ì»«‰Ì
-           CaseAccept  :=  Qry_GetResult(' select top 1 id  FROM dbo.users where isnull(ManagerSupport,0) = 1 order by id desc' ,dm.YeganehConnection) ;
-           SystemUser  :=  IntToStr(_IsSystemUserID) ;
-           BugStatusID := 8 ;
+          with TADOQuery.Create(nil) do
+          begin
+             Connection := Dm.YeganehConnection;
+             CommandTimeout := 1200;
+             // „œÌ— Å‘ Ì»«‰Ì
+             CaseAccept  :=  Qry_GetResult(' select top 1 id  FROM dbo.users where isnull(ManagerSupport,0) = 1 order by id desc' ,dm.YeganehConnection) ;
+             SystemUser  :=  IntToStr(_IsSystemUserID) ;
+             BugStatusID := 8 ;
 
-           CommentStr  := ' „‘ —Ì œ—  «—ÌŒ '+_Today+ ' »Â „‘ —Ì ﬁÿ⁄Ì  »œÌ· ‘œÂ «”  ·ÿ›« ÃÂ  —«Ì  ”Ì œÌ «ﬁœ«„«  ·«“„ «‰Ã«„ ‘Êœ ' ;
-           TitleStr    := '—«Ì  ÅòÌÃ ÃÂ  „‘ —Ì ÃœÌœ' ; 
-           SQL.Text := ' insert into dbo.Cases (CheckUserID,RegisterUserID,RegisterDate,CaseEstimatedDate,CaseOrigiranlId,CasePriorityId,CaseTypeID,CustomerID,ProductId,CaseTitle,Comment)'+
-                       ' values('+CaseAccept+','+SystemUser+','''+_Today+'''' +','''+ShamsiString(Dm.GetServerDate+2)+'''' +',7,3,10,'+IntToStr(CustomerID)+','+IntToStr(SpDbgridContractProductID.asInteger)+','''+TitleStr+''','''+CommentStr+''' '+ ') ';
+             CustomerID := Select_customer_By_CustomerIDCustomerID.AsInteger ;
 
-           CommentStr  := '·ÿ›« ÃÂ  —«Ì  ÅòÌÃ «ﬁœ«„ ‘Êœ';
+             CommentStr  := ' „‘ —Ì œ—  «—ÌŒ '+_Today+ ' »Â „‘ —Ì ﬁÿ⁄Ì  »œÌ· ‘œÂ «”  ·ÿ›« ÃÂ  —«Ì  ”Ì œÌ «ﬁœ«„«  ·«“„ «‰Ã«„ ‘Êœ ' ;
+             TitleStr    := '—«Ì  ÅòÌÃ ÃÂ  „‘ —Ì ÃœÌœ' ;
+             SQL.Text := ' insert into dbo.Cases (CheckUserID,RegisterUserID,RegisterDate,CaseEstimatedDate,CaseOrigiranlId,CasePriorityId,CaseTypeID,CustomerID,ProductId,CaseTitle,Comment)'+
+                         ' values('+CaseAccept+','+SystemUser+','''+_Today+'''' +','''+ShamsiString(Dm.GetServerDate+2)+'''' +',7,3,10,'+IntToStr(CustomerID)+','+IntToStr(SpDbgridContractProductID.asInteger)+','''+TitleStr+''','''+CommentStr+''' '+ ') ';
 
-           SQL.Text := SQL.Text + ' insert into dbo.Tasks (CaseId,Comment,StatusId,AssignedUserId,AssignedDate)'+
-                                  ' values(@@IDENTITY,'''+CommentStr+''','+IntToStr(BugStatusID)+','+CaseAccept+','''+_Today+'''' +') ';
+             CommentStr  := '·ÿ›« ÃÂ  —«Ì  ÅòÌÃ «ﬁœ«„ ‘Êœ';
+
+             SQL.Text := SQL.Text + ' insert into dbo.Tasks (CaseId,Comment,StatusId,AssignedUserId,AssignedDate)'+
+                                    ' values(@@IDENTITY,'''+CommentStr+''','+IntToStr(BugStatusID)+','+CaseAccept+','''+_Today+'''' +') ';
 
 
-           SQL.Text := SQL.Text + ' insert into dbo.FollowUp (IsAuto,TaskID,CustomerID,ActionTypeID,DoneStatusID,DoneComment,MarketerID,Comment,ToDoDate,insertdate,Lastupdate,FollowUpInsertDate)'+
-                                  ' values(1,@@IDENTITY,'+IntToStr(CustomerID)+',56,2'+','''+' «—”«· »Â ò«— «»· „œÌ— Å‘ Ì»«‰Ì '+''',12,'''+' ”ò „—»Êÿ »Â —«Ì  ÅòÌÃ «ÌÃ«œ ‘œ Ê ÅÌ€«„ ÃÂ  «ÿ·«⁄ —”«‰Ì »Â „œÌ— Å‘ Ì»«‰Ì «—”«· ‘œ '+''','''+_Today+''',getdate(),GetDate()'+','''+_Today+'''' +') ';
+             SQL.Text := SQL.Text + ' insert into dbo.FollowUp (IsAuto,TaskID,CustomerID,ActionTypeID,DoneStatusID,DoneComment,MarketerID,Comment,ToDoDate,insertdate,Lastupdate,FollowUpInsertDate)'+
+                                    ' values(1,@@IDENTITY,'+IntToStr(CustomerID)+',56,2'+','''+' «—”«· »Â ò«— «»· „œÌ— Å‘ Ì»«‰Ì '+''',12,'''+' ”ò „—»Êÿ »Â —«Ì  ÅòÌÃ «ÌÃ«œ ‘œ Ê ÅÌ€«„ ÃÂ  «ÿ·«⁄ —”«‰Ì »Â „œÌ— Å‘ Ì»«‰Ì «—”«· ‘œ '+''','''+_Today+''',getdate(),GetDate()'+','''+_Today+'''' +') ';
 
-           ExecSQL;
+             ExecSQL;
 
-           SQL.Text :=  ' Insert dbo.Messages (InserteadUserId, CurrentDate,MessageType,Subject,Description,UserID,CustomerId,LevelMessageId,MaxLevelMessageId,IsAuto,FollowUpId)'+
-                        ' select '+SystemUser+',getdate(),1,'+''''+'—«Ì  ÅòÌÃ'+''''+','+''''+' „‘ —Ì »« òœ '+ IntToStr(CustomerID) +' »Â Ê÷⁄Ì  „‘ —Ì ﬁÿ⁄Ì  €ÌÌ— Ì«›  ·ÿ›« «ﬁœ«„«  ·«“„ ÃÂ  —«Ì  ÅòÌÃ «‰Ã«„ ‘Êœ '+''''+', '+CaseAccept+','+IntToStr(CustomerID) +',1,0,1,(select top 1 FollowUpId from dbo.FollowUp where customerid = '+IntToStr(CustomerID)+' and IsAuto = 1 and ActionTypeID = 56  )' ;
+             SQL.Text :=  ' Insert dbo.Messages (InserteadUserId, CurrentDate,MessageType,Subject,Description,UserID,CustomerId,LevelMessageId,MaxLevelMessageId,IsAuto,FollowUpId)'+
+                          ' select '+SystemUser+',getdate(),1,'+''''+'—«Ì  ÅòÌÃ'+''''+','+''''+' „‘ —Ì »« òœ '+ IntToStr(CustomerID) +' »Â Ê÷⁄Ì  „‘ —Ì ﬁÿ⁄Ì  €ÌÌ— Ì«›  ·ÿ›« «ﬁœ«„«  ·«“„ ÃÂ  —«Ì  ÅòÌÃ «‰Ã«„ ‘Êœ '+''''+', '+CaseAccept+','+IntToStr(CustomerID) +',1,0,1,(select top 1 FollowUpId from dbo.FollowUp where customerid = '+IntToStr(CustomerID)+' and IsAuto = 1 and ActionTypeID = 56  )' ;
 
-          ExecSQL;
+            ExecSQL;
+
+            with TADOQuery.Create(nil) do
+            begin
+             Connection := Dm.YeganehConnection;
+             CommandTimeout := 1200;
+             SQL.Text :=  '  Insert into [dbo].[Log_Processes] ([Message] ,[Type])  values ('''+'FormContract_CustomerNO_'+IntToStr(CustomerID)+'_UserID_'+IntToStr(_UserID)+ ''',3)' ;
+             ExecSQL;
+            end;
+          end;
         end;
         { TODO -oparsa : 14030427 }
 
@@ -1290,10 +1314,11 @@ var CustomerID:Integer;
 begin
   inherited;
         { TODO -oparsa : 14030427 }
-        CustomerID := Dm.CustomerCustomerID.Value;
+        CustomerID := Select_customer_By_CustomerIDCustomerID.AsInteger ;//Dm.CustomerCustomerID.Value;
         with TADOQuery.Create(nil) do
         begin
            Connection := Dm.YeganehConnection;
+           CommandTimeout := 1200;
            // „œÌ— Å‘ Ì»«‰Ì
            CaseAccept  :=  Qry_GetResult(' select top 1 id  FROM dbo.users where isnull(ManagerSupport,0) = 1 order by id desc' ,dm.YeganehConnection) ;
            SystemUser  :=  IntToStr(_IsSystemUserID) ;
@@ -1319,6 +1344,13 @@ begin
                         ' select '+SystemUser+',getdate(),1,'+''''+'—«Ì  ÅòÌÃ'+''''+','+''''+' „‘ —Ì »« òœ '+ IntToStr(CustomerID) +' »Â Ê÷⁄Ì  „‘ —Ì ﬁÿ⁄Ì  €ÌÌ— Ì«›  ·ÿ›« «ﬁœ«„«  ·«“„ ÃÂ  —«Ì  ÅòÌÃ «‰Ã«„ ‘Êœ '+''''+', '+CaseAccept+','+IntToStr(CustomerID) +',1,0,1,(select top 1 FollowUpId from dbo.FollowUp where customerid = '+IntToStr(CustomerID)+' and IsAuto = 1 and ActionTypeID = 56  )' ;
 
           ExecSQL;
+          with TADOQuery.Create(nil) do
+          begin
+           Connection := Dm.YeganehConnection;
+           CommandTimeout := 1200;
+           SQL.Text :=  '  Insert into [dbo].[Log_Processes] ([Message] ,[Type])  values ('''+'FormContract_CustomerNO_'+IntToStr(CustomerID)+'_UserID_'+IntToStr(_UserID)+ ''',3)' ;
+           ExecSQL;
+          end;
         end;
         { TODO -oparsa : 14030427 }
 end;

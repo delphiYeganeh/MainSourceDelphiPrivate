@@ -104,6 +104,7 @@ begin
     with qryUserType do
     begin
       Connection := Dm.YeganehConnection;
+      CommandTimeout := 1200;
       Close;
       SQL.Text := 'Select * from UserType';
       Open;

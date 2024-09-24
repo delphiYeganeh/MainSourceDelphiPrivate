@@ -1,38 +1,31 @@
 inherited FSingleMessage: TFSingleMessage
-  Left = 516
-  Top = 499
+  Left = 729
+  Top = 453
   Width = 546
-  Height = 219
-  Caption = 'FSingleMessage'
+  Height = 262
+  Caption = #1575#1585#1587#1575#1604' '#1662#1610#1575#1605' '
   OldCreateOrder = True
+  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape
     Width = 530
-    Height = 180
+    Height = 223
   end
   object pnlMain: TPanel [1]
     Left = 0
     Top = 0
     Width = 530
-    Height = 180
+    Height = 223
     Align = alClient
     TabOrder = 0
     OnCanResize = pnlMainCanResize
     DesignSize = (
       530
-      180)
-    object Label1: TLabel
-      Left = 469
-      Top = 16
-      Width = 38
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = #1605#1578#1606' '#1662#1610#1575#1605
-    end
+      223)
     object btnMessage: TSpeedButton
       Left = 11
-      Top = 130
+      Top = 127
       Width = 92
       Height = 36
       Caption = #1575#1585#1587#1575#1604' '#1662#1610#1575#1605
@@ -93,7 +86,7 @@ inherited FSingleMessage: TFSingleMessage
       ParentFont = False
     end
     object Label2: TLabel
-      Left = 226
+      Left = 426
       Top = 14
       Width = 94
       Height = 14
@@ -106,39 +99,73 @@ inherited FSingleMessage: TFSingleMessage
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Etebar: TLabel
-      Left = 388
-      Top = 102
-      Width = 4
-      Height = 14
-      Anchors = [akTop, akRight]
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = clHotLight
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object edtMessage: TEdit
-      Left = 10
-      Top = 35
-      Width = 500
-      Height = 21
-      Anchors = [akLeft, akTop, akRight]
-      TabOrder = 0
-    end
-    object RadioGroup1: TRadioGroup
-      Left = 113
-      Top = 125
-      Width = 398
-      Height = 41
+    object RGMediaType: TRadioGroup
+      Left = 112
+      Top = 122
+      Width = 408
+      Height = 43
       Anchors = [akLeft, akTop, akRight]
       Caption = #1606#1608#1593' '#1662#1610#1575#1605' '#1575#1585#1587#1575#1604#1610
-      Columns = 3
+      Columns = 4
+      Enabled = False
       ItemIndex = 0
       Items.Strings = (
-        #1662#1610#1575#1605#1705)
+        #1662#1610#1575#1605#1705
+        #1578#1604#1711#1585#1575#1605
+        #1608#1575#1578#1587' '#1570#1662
+        #1575#1610#1578#1575)
+      TabOrder = 0
+    end
+    object GroupBox1: TGroupBox
+      Left = 8
+      Top = 32
+      Width = 513
+      Height = 89
+      Caption = #1605#1578#1606' '#1662#1610#1575#1605
       TabOrder = 1
+      DesignSize = (
+        513
+        89)
+      object edtMessage: TMemo
+        Left = 2
+        Top = 15
+        Width = 509
+        Height = 72
+        Align = alClient
+        MaxLength = 120
+        TabOrder = 0
+      end
+      object Edit1: TEdit
+        Left = -283
+        Top = 12
+        Width = 372
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        TabOrder = 1
+      end
+    end
+    object GroupBox2: TGroupBox
+      Left = 20
+      Top = 167
+      Width = 489
+      Height = 49
+      TabOrder = 2
+      DesignSize = (
+        489
+        49)
+      object Etebar: TLabel
+        Left = 24
+        Top = 19
+        Width = 449
+        Height = 14
+        Anchors = [akTop, akRight]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clHotLight
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
     end
   end
 end

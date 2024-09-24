@@ -50,6 +50,7 @@ type
     procedure edtContractStartExit(Sender: TObject);
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     procedure UpdateContract(UpdateKind :byte);
@@ -365,6 +366,14 @@ begin
   else Resize := True;
    { TODO -oparsa : 14030203 }
   inherited;
+
+end;
+
+procedure TfrUpdateOldAttachFile.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 
 end;
 

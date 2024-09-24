@@ -1806,6 +1806,7 @@ Var
 begin
    QrResult := TAdoQuery.Create(Nil);
    QrResult.Connection := aADOConnection;
+   QrResult.CommandTimeout := 1200;
    QrResult.SQL.Text := aQueryText;
    QrResult.Open;
    Result := Trim(QrResult.Fields[0].AsString);
@@ -3206,6 +3207,7 @@ begin
       Result := False;
       QrResult := TAdoQuery.Create(Nil);
       QrResult.Connection := aADOConnection;
+      QrResult.CommandTimeout := 1200;
       QrResult.SQL.Text := aQueryText;
       QrResult.ExecSQL;
       Result := True;
@@ -3363,15 +3365,18 @@ Var
 begin
    Qrprocesses := TAdoQuery.Create(Nil);
    QrKillProc := TAdoQuery.Create(Nil);
+
    Try
       Try
          Qrprocesses.Connection := aAdoConnection;
+         Qrprocesses.CommandTimeout := 1200;
          Qrprocesses.Close;
          Qrprocesses.sql.Text := 'Select SpID from Master..Sysprocesses Where dbid=DB_ID( '+ QuotedStr(aDBName) + ' )';
          Qrprocesses.Open;
          Qrprocesses.First;
 
          QrKillProc.Connection := aAdoConnection;
+         QrKillProc.CommandTimeout := 1200;
 
          While Not Qrprocesses.Eof do
          begin

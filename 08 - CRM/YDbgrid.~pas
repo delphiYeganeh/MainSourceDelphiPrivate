@@ -5,6 +5,9 @@ interface
 uses
   Windows,Excel2000, Messages, SysUtils, Classes, Controls, Grids, DBGrids,
   Graphics,db,ADODB ,ComCtrls,QRCtrls, QuickRpt,Math,dialogs,QRExport,Printers,DBCtrls,
+    ComObj,
+  ActiveX,
+  ShellApi, OleServer,
   OleCtrls,word2000,StdCtrls;
 
 type
@@ -664,6 +667,7 @@ var
    Data : String;
    DataSetRecorIndicator : integer;  // Amin 1391/10/13
    //---
+   MSWord: Variant;
 begin
    if VisibleColumnCount>15 then
    begin
@@ -671,12 +675,25 @@ begin
       exit;
    end;
 
-   WordApplication:=TWordApplication.Create(self);
-   WordDocument:=TWordDocument.Create(self);
-   ///WordApplication.Visible :=true;
-     WordApplication.Caption :='YYY';
-     HNDL :=FindWindow('OpusApp',pansichar('YYY'));
-     SetForegroundWindow(HNDL);
+    if not IsWordRunning then   // for error RPC   The RPC server is unavailable   Remote Procedure Call
+    begin
+      ActiveWord ;
+    end;
+
+
+   WordApplication := TWordApplication.Create(self);
+   (*
+   WordApplication.ConnectKind := ckNewInstance ;//ckNewInstance;
+   WordApplication.Disconnect;
+   WordApplication.Connect;
+   *)
+
+   WordDocument    := TWordDocument.Create(self);
+
+   WordApplication.Visible := True;
+   WordApplication.Caption :='YYY';
+   HNDL := FindWindow('OpusApp',pansichar('YYY'));
+   SetForegroundWindow(HNDL);
 
    PageBreak:=wdPageBreak;
 
@@ -773,8 +790,6 @@ begin
 
      if m>15 then exit;
 
-       WordApplication.Visible :=true;
-       
        WordApplication.Selection.WholeStory;
        f1:=wdSeparateByCommas;  f2:=wdAutoFitFixed;
        f5:=100;    f6:=16;

@@ -45,6 +45,7 @@ type
       var Action: TDataAction);
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     qryUserType : TADOQuery;
     procedure  SetdbgUserType     ;
@@ -195,6 +196,14 @@ begin
   else Resize := True;
    { TODO -oparsa : 14030203 }
   inherited;
+
+end;
+
+procedure TfrUserType.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShapeBase.Brush.Color := _Color1 ;
+  pnlMain.Color := _Color1 ;
 
 end;
 

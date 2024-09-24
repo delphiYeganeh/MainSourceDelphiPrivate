@@ -79,7 +79,6 @@ type
     DBEdit8: TDBEdit;
     DBEProducts: TDBEdit;
     DBEdit3: TDBEdit;
-    btnViwCustomer: TBitBtn;
     DBEdit1: TDBEdit;
     DBEdit7: TDBEdit;
     chkShowAllFollowUps: TCheckBox;
@@ -195,6 +194,25 @@ type
     SpSelect_CasesIsBug: TBooleanField;
     SpSelect_CasesFollowUpID: TIntegerField;
     followUpItem: TRadioGroup;
+    Label32: TLabel;
+    DBLkCBActionTypeTitleSearch: TDBLookupComboBox;
+    BitBtn5: TBitBtn;
+    BitBtn6: TBitBtn;
+    BitBtn7: TBitBtn;
+    btnViwCustomer: TBitBtn;
+    Label33: TLabel;
+    DBEdit6: TDBEdit;
+    Label34: TLabel;
+    DBEdit14: TDBEdit;
+    Label35: TLabel;
+    DBEdit15: TDBEdit;
+    Select_customer_By_CustomerIDCountMeet: TIntegerField;
+    Select_customer_By_CustomerIDCountCancelMeet: TIntegerField;
+    Select_customer_By_CustomerIDCountHumanInterface: TIntegerField;
+    DBCheckBox1: TDBCheckBox;
+    Label36: TLabel;
+    DBEdit16: TDBEdit;
+    Select_customer_By_CustomerIDCustomerSuccessChance: TSmallintField;
     procedure btnWordViewClick(Sender: TObject);
     procedure btnAttachPicClick(Sender: TObject);
     procedure refreshData;
@@ -208,7 +226,6 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure AexitExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure btnViwCustomerClick(Sender: TObject);
     procedure btnJpegViewClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnShowContractWordClick(Sender: TObject);
@@ -249,6 +266,12 @@ type
     procedure btnFactorClick(Sender: TObject);
     procedure DBLookupComboBox1Enter(Sender: TObject);
     procedure DBLookupComboBox1Exit(Sender: TObject);
+    procedure BitBtn5Click(Sender: TObject);
+    procedure BitBtn6Click(Sender: TObject);
+    procedure BitBtn7Click(Sender: TObject);
+    procedure btnViwCustomerClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
    Function  LoadImageField(Field:TField;Path:String):Boolean;
    procedure SetColorForm ;
@@ -327,7 +350,7 @@ begin
       Open;
       _gCustomerID :=  Select_customer_By_CustomerIDCustomerID.Value;      
    end;
-   
+
    with dm.Select_FollowUP_By_CustomerID do
    begin
       Close;
@@ -350,6 +373,10 @@ begin
         Parameters.ParamByName('@DoneStatusID').Value:= dblDoneStatusID.KeyValue
       else   Parameters.ParamByName('@DoneStatusID').Value:= 0;
 
+      if DBLkCBActionTypeTitleSearch.KeyValue <> null then
+        Parameters.ParamByName('@ActionTypeID').Value:= DBLkCBActionTypeTitleSearch.KeyValue
+      else   Parameters.ParamByName('@ActionTypeID').Value:= 0;
+
       Open;
       stb.Panels[1].Text:=' ⁄œ«œ:' +IntToStr(RecordCount);
       //Last;
@@ -363,6 +390,12 @@ begin
   if Dm.Select_FollowUP_By_CustomerIDIsAuto.AsBoolean then
   begin
     ShowMessage('«„ò«‰ ÊÌ—«Ì‘ Ê Õ–› —òÊ—œÂ«Ì À»  ‘œÂ  Ê”ÿ ”Ì” „ ÊÃÊœ ‰œ«—œ');
+    Exit;
+  end;
+
+  if (Dm.Select_FollowUP_By_CustomerIDMarketerID.AsInteger <> _MarketerID) then
+  begin
+    ShowMessage('«„ò«‰ Õ–› Ê ÊÌ—«Ì‘ «ﬁœ«„«  „—»Êÿ »Â ò«—»—«‰ œÌê— ÊÃÊœ ‰œ«—œ');
     Exit;
   end;
 
@@ -579,9 +612,18 @@ begin
 
       end;
 
+      if (dm.Select_FollowUP_By_CustomerIDActionTypeID.Value in [75,76] ) and
+        ((Dm.Select_FollowUP_By_CustomerIDExcellAttachment.IsNull) and
+        (Dm.Select_FollowUP_By_CustomerIDPicAttachment.IsNull) and
+        (Dm.Select_FollowUP_By_CustomerIDWordAttachment.IsNull) and
+        (Dm.Select_FollowUP_By_CustomerIDPdfAttachment.IsNull)) then
+      begin
+        ShowMessage('À»  «‰Ã«„ ‘œ («Ì‰ ‰Ê⁄ «ﬁœ«„ ‰Ì«“ »Â ÅÌÊ”  œ«—œ) ');
+      end
+      else
       ShowMessage(' À»  «‰Ã«„ ‘œ ');
 
-      if not (UpperCase(_AreYouYeganeh) =UpperCase('True')) then
+      if not (UpperCase(_AreYouYeganeh) = UpperCase('True')) then
      begin
         treFollowUps.DataSource:= Dm.DSelect_FollowUP_By_CustomerID;
         treFollowUps.Refresh;
@@ -613,13 +655,6 @@ begin
         canclose :=false;
       end;
 
-end;
-
-procedure TFrFollowUp.btnViwCustomerClick(Sender: TObject);
-begin
-  inherited;
-   propertiesForm := TPropertiesForm.Create(Application,Select_customer_By_CustomerIDCustomerID.AsInteger) ;
-   PropertiesForm.Showmodal;
 end;
 
 function TFrFollowUp.LoadImageField(Field: TField; Path: String): Boolean;
@@ -680,10 +715,10 @@ end;
 procedure TFrFollowUp.FormCreate(Sender: TObject);
 begin
   inherited;
-With dm.ActionTypeByUserType do
+ With dm.ActionTypeByUserType do
  begin
    Close;
-   SQL.Text := ' Select * from ActionType Where UserTypeId = '+IntToStr(_UserTypeID)+' or (UserTypeId is null) or '+IntToStr(_UserTypeID)+'= 0 ' ;
+   SQL.Text := ' Select * from dbo.ActionType  WITH(NOLOCK)  Where UserTypeId = '+IntToStr(_UserTypeID)+' or (UserTypeId is null) or '+IntToStr(_UserTypeID)+'= 0 ' ;
    Open;
  end;
 
@@ -727,10 +762,15 @@ var
 begin
   inherited;
   followUpItem.ItemIndex := _orgID ;
+  //Å‘ Ì»«‰Ì ‰ Ê«‰œ «ﬁœ«„«  »ﬁÌÂ Ê«Õœ Â« —« »»Ì‰œ
+  followUpItem.Visible   :=  _orgID <> 2 ;
+  xpPanel1.Minimized := True;
+
   pnlFactor.Visible := _UserFactorAccess ;
   dbgFollow.Columns[9].Visible  := _UserFactorAccess ;
   dbgFollow.Columns[10].Visible := _UserFactorAccess ;
   SetColorForm ;
+
   if UpperCase(_AreYouYeganeh) =UpperCase('True') then
   begin
    treFollowUps.DataSource:= nil;
@@ -747,7 +787,7 @@ begin
 
     Dm.Marketer.Close;
     Dm.Marketer.SQL.Clear;
-    Dm.Marketer.SQL.Add('SELECT * FROM marketer');
+    Dm.Marketer.SQL.Add('SELECT * FROM dbo.marketer  WITH(NOLOCK) ');
     //////Dm.Marketer.SQL.Add('WHERE IsActive_=1');
     Dm.Marketer.Open;
 
@@ -974,11 +1014,18 @@ var
   ID:Integer;
 begin
   inherited;
+
   if Dm.Select_FollowUP_By_CustomerIDIsAuto.AsBoolean then
   begin
     ShowMessage('«„ò«‰ ÊÌ—«Ì‘ Ê Õ–› —òÊ—œÂ«Ì À»  ‘œÂ  Ê”ÿ ”Ì” „ ÊÃÊœ ‰œ«—œ');
     Exit;
-  end;  
+  end;
+
+  if (Dm.Select_FollowUP_By_CustomerIDMarketerID.AsInteger <> _MarketerID) then
+  begin
+    ShowMessage('«„ò«‰ Õ–› Ê ÊÌ—«Ì‘ «ﬁœ«„«  „—»Êÿ »Â ò«—»—«‰ œÌê— ÊÃÊœ ‰œ«—œ');
+    Exit;
+  end;    
 
   IF MessageDlg('¬Ì« «“ Õ–› «ÿ·«⁄«  „ÿ„∆‰ Â” Ìœø',mtConfirmation,[mbyes,mbno],0)=mryes then
   Begin
@@ -1133,17 +1180,18 @@ begin
 
   qry := TADOQuery.Create(self);
   qry.Connection := dm.YeganehConnection;
-
+  qry.CommandTimeout := 1200;
+  
   if UnPin.Visible then
   begin
 
-    qry.SQL.Text   := ' IF EXISTS ( SELECT 1 FROM dbo.usersPinFollowUP WHERE CustomerID = '+ DBEdit4.text +' AND  UserID = '+IntToStr(_UserId )+') ' +
+    qry.SQL.Text   := ' IF EXISTS ( SELECT 1 FROM dbo.usersPinFollowUP  WITH(NOLOCK)  WHERE CustomerID = '+ DBEdit4.text +' AND  UserID = '+IntToStr(_UserId )+') ' +
                       '   DELETE FROM dbo.usersPinFollowUP WHERE CustomerID = '+ DBEdit4.text +'  AND  UserID = '+ IntToStr(_UserId );
 
   end
   else
   begin
-    pinfollow :=   Qry_GetResult(' select count(customerid) FROM dbo.usersPinFollowUP WHERE  UserID = '+ IntToStr(_UserId )  ,dm.YeganehConnection) ;
+    pinfollow :=   Qry_GetResult(' select count(customerid) FROM dbo.usersPinFollowUP  WITH(NOLOCK)  WHERE  UserID = '+ IntToStr(_UserId )  ,dm.YeganehConnection) ;
     if pinfollow <> '5' then
     begin
       qry.SQL.Text   := '   INSERT INTO dbo.usersPinFollowUP (CustomerID,UserID) values('+ DBEdit4.text +' , '+ IntToStr(_UserId )+')';
@@ -1202,7 +1250,8 @@ begin
       FRefrenceInPerson.DBECompanyName.Text := DBECompanyName.Text;
       FRefrenceInPerson.DBEProducts.Text    := DBEProducts.Text;
       FRefrenceInPerson.ShowModal;
-      FRefrenceInPerson.Free;
+      if Assigned(FRefrenceInPerson) then
+      FreeAndNil(FRefrenceInPerson);
     end
     else MessageDlg('«Ì‰ ›—„ ÃÂ  «ﬁœ«„«  Õ÷Ê—Ì „Ì »«‘œ',mtConfirmation,[mbyes],0)
   end
@@ -1258,6 +1307,60 @@ begin
   Dm.Marketer.Filtered := False;
   Dm.Marketer.Filter := '' ;
   Dm.Marketer.Filtered := True; 
+end;
+
+procedure TFrFollowUp.BitBtn5Click(Sender: TObject);
+begin
+  inherited;
+  dblMarketer.KeyValue := null;
+end;
+
+procedure TFrFollowUp.BitBtn6Click(Sender: TObject);
+begin
+  inherited;
+  dblDoneStatusID.KeyValue := null
+end;
+
+procedure TFrFollowUp.BitBtn7Click(Sender: TObject);
+begin
+  inherited;
+  DBLkCBActionTypeTitleSearch.KeyValue := null;
+end;
+
+procedure TFrFollowUp.btnViwCustomerClick(Sender: TObject);
+begin
+  inherited;
+  propertiesForm := TPropertiesForm.Create(Application,Select_customer_By_CustomerIDCustomerID.AsInteger) ;
+  PropertiesForm.Showmodal;
+  if Assigned(PropertiesForm) then
+    FreeAndNil(PropertiesForm);
+end;
+
+procedure TFrFollowUp.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+    If (Shift = [ssctrl]) and (inttostr(key) = '113') then   //f2
+    begin     //edit
+      if  dbgFollow.DataSource.DataSet.State  in [dsBrowse] then
+        BitBtn2Click(BitBtn2);
+
+    end
+    else
+    If (Shift = [ssctrl]) and (inttostr(key) = '116') then  //f5
+    begin    //post
+      if  dbgFollow.DataSource.DataSet.State in [dsEdit, dsInsert] then
+       BitBtn1Click(BitBtn1);
+
+    end
+    else
+    If (Shift = [ssctrl]) and (inttostr(key) = '78') then //n
+    begin
+           //new
+      if  dbgFollow.DataSource.DataSet.State  in [dsBrowse] then
+        btnAddClick(btnAdd);
+
+    end;
 end;
 
 end.

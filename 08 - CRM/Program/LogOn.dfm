@@ -2,7 +2,7 @@ object LoginForm: TLoginForm
   Tag = -10
   Left = 623
   Top = 230
-  Hint = #1578#1575#1585#1610#1582' '#1570#1582#1585#1610#1606' '#1608#1610#1585#1575#1610#1588' 84/02/03  '#1610#1711#1575#1606#1607
+  Hint = #1578#1575#1585#1610#1582' '#1570#1582#1585#1610#1606' '#1608#1610#1585#1575#1610#1588' 1403/05/16  '#1610#1711#1575#1606#1607
   BiDiMode = bdRightToLeft
   BorderIcons = []
   BorderStyle = bsDialog
@@ -609,8 +609,8 @@ object LoginForm: TLoginForm
     Parameters = <>
     SQL.Strings = (
       'SELECT TOP 1 * FROM SMSSettings')
-    Left = 19
-    Top = 48
+    Left = 27
+    Top = 40
     object QGetSMSSettingsID: TAutoIncField
       FieldName = 'ID'
       ReadOnly = True

@@ -144,6 +144,7 @@ procedure TfrCaseBasicData.BitBtn4Click(Sender: TObject);
 begin
   inherited;
   dm.CustomerStatus.Append;
+ // dm.CustomerStatusCustomerStatusID := ();
 end;
 
 procedure TfrCaseBasicData.Button1Click(Sender: TObject);

@@ -21,6 +21,7 @@ type
     procedure btnCancelClick(Sender: TObject);
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -85,6 +86,12 @@ begin
    { TODO -oparsa : 14030203 }
   inherited;
 
+end;
+
+procedure TFrTaxPerYear.FormShow(Sender: TObject);
+begin
+  inherited;
+  pnlMain.Color := _Color1 ;
 end;
 
 end.

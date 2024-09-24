@@ -4,7 +4,10 @@ interface
 
 uses
   Windows,Excel2000, Messages, SysUtils, Classes, Controls, Grids, DBGrids,
-  Graphics,db,ADODB ,ComCtrls,QRCtrls, QuickRpt,Math,dialogs,QRExport,Printers,DBCtrls,
+  Graphics,db,ADODB ,ComCtrls,QRCtrls, QuickRpt,Math,dialogs,QRExport,Printers,DBCtrls, Variants,
+    ComObj,
+  ActiveX,
+  ShellApi, OleServer,
   OleCtrls,word2000,StdCtrls;
 
 type
@@ -73,23 +76,25 @@ type
 
     { Protected declarations }
   public
-  SortedFieldName:string;
-  SortDESC : boolean;
- constructor create(aowner:tcomponent);override;
-function NearColor(c:Tcolor;Distance:Word):Tcolor;
-function VisibleColumnCount:byte;
-Procedure Print;
-Procedure ExportToText;
-procedure ExportToWord(fileName:string=''); overload;
-procedure ExportToWord(fileName:string; quit : boolean);  overload;
-procedure ExportToExcel;
-procedure ExportToAccess;
+    SortedFieldName:string;
+    SortDESC : boolean;
+    constructor create(aowner:tcomponent);override;
+    function NearColor(c:Tcolor;Distance:Word):Tcolor;
+    function VisibleColumnCount:byte;
+    Procedure Print;
+    Procedure ExportToText;
+    procedure ExportToWord(fileName:string=''); overload;
+    procedure ExportToWord(fileName:string; quit : boolean);  overload;
+    procedure ExportToExcel;
+    procedure ExportToAccess;
 
-Procedure UpdateFooter;
-procedure HiddenFooter;
-function CustomizePrint:boolean;
-Procedure CreateWord;
-Procedure AutoFit;
+    Procedure UpdateFooter;
+    procedure HiddenFooter;
+    function CustomizePrint:boolean;
+    Procedure CreateWord;
+    Procedure AutoFit;
+    procedure ActiveWord;
+    function IsWordRunning: Boolean;
 
     { Public declarations }
   published
@@ -664,6 +669,7 @@ var
    Data : String;
    DataSetRecorIndicator : integer;  // Amin 1391/10/13
    //---
+   MSWord: Variant;
 begin
    if VisibleColumnCount>15 then
    begin
@@ -671,12 +677,25 @@ begin
       exit;
    end;
 
-   WordApplication:=TWordApplication.Create(self);
-   WordDocument:=TWordDocument.Create(self);
-   WordApplication.Visible :=true;
-     WordApplication.Caption :='YYY';
-     HNDL :=FindWindow('OpusApp',pansichar('YYY'));
-     SetForegroundWindow(HNDL);
+    if not IsWordRunning then   // for error RPC   The RPC server is unavailable   Remote Procedure Call
+    begin
+      ActiveWord ;
+    end;
+
+
+   WordApplication := TWordApplication.Create(self);
+   (*
+   WordApplication.ConnectKind := ckNewInstance ;//ckNewInstance;
+   WordApplication.Disconnect;
+   WordApplication.Connect;
+   *)
+
+   WordDocument    := TWordDocument.Create(self);
+
+   WordApplication.Visible := True;
+   WordApplication.Caption :='YYY';
+   HNDL := FindWindow('OpusApp',pansichar('YYY'));
+   SetForegroundWindow(HNDL);
 
    PageBreak:=wdPageBreak;
 
@@ -1468,6 +1487,29 @@ begin
    if Assigned(FStatusBar) then
    begin
     FStatusBar.Visible:=False;
+   end;
+end;
+
+procedure TYDBGrid.ActiveWord;
+var
+  wordApp : Variant;
+begin
+   try
+     wordapp  := Createoleobject('Word.Application');
+   except
+   end;
+end;
+
+function TYDBGrid.IsWordRunning: Boolean;
+var
+  wordApp : Variant;
+begin
+   Result := False;
+   try
+     wordapp  := GetActiveOleObject('Word.Application');
+     Result   := not varIsEmpty(wordApp);
+   except
+     Result := False;
    end;
 end;
 

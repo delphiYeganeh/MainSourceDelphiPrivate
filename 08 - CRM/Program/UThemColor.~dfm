@@ -292,19 +292,5 @@ inherited FThemColor: TFThemColor
       ModalResult = 2
       TabOrder = 5
     end
-    object Button1: TButton
-      Left = 144
-      Top = 0
-      Width = 75
-      Height = 25
-      Caption = 'Button1'
-      Font.Charset = ARABIC_CHARSET
-      Font.Color = 12616065
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 6
-    end
   end
 end

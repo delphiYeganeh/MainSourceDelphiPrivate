@@ -335,8 +335,8 @@ inherited frUpdateOldAttachFile: TfrUpdateOldAttachFile
         object dbgContract: TYDBGrid
           Left = 0
           Top = 41
-          Width = 625
-          Height = 203
+          Width = 623
+          Height = 201
           Align = alClient
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
@@ -388,7 +388,7 @@ inherited frUpdateOldAttachFile: TfrUpdateOldAttachFile
         object Panel3: TPanel
           Left = 0
           Top = 0
-          Width = 625
+          Width = 623
           Height = 41
           Align = alTop
           TabOrder = 1

@@ -41,6 +41,8 @@ type
     procedure RefreshActionExecute(Sender: TObject);
     procedure CtrlSpace(Sender: TObject; var key: Word; Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
 
    private
     { Private declarations }
@@ -346,9 +348,13 @@ procedure TMBaseForm.GetAccess;
 var
   i: word;
 begin
+
+ KeyPreview  := True;
+
  for i:=0 to ComponentCount-1 do
   begin
-   if Components[i].InheritsFrom(TMenuItem) then
+
+    if Components[i].InheritsFrom(TMenuItem) then
     begin
       if TMenuItem(Components[i]).Name = 'N65' then                    // Amin 1391/09/18
          TMenuItem(Components[i]).Visible:= Dm.UserIsAdmin.AsBoolean   // Amin 1391/09/18
@@ -359,7 +365,7 @@ begin
       end
     end;
 
-   if Components[i].InheritsFrom(TBitBtn) then
+    if Components[i].InheritsFrom(TBitBtn) then
     begin
      if TBitBtn(Components[i]).Name='btnDelEghdamat' then
      begin
@@ -373,10 +379,21 @@ begin
         TBitBtn(Components[i]).Enabled:= TAction(Components[i]).Visible;
      end;
     end;
+
+    if Components[i].InheritsFrom(TGroupBox) then
+    begin
+     if TGroupBox(Components[i]).Name='gbTaskTime' then
+     begin
+        TGroupBox(Components[i]).Visible:= GetActionAccess(_accessID,'acgbTaskTime',TGroupBox(Components[i]).tag);
+        TGroupBox(Components[i]).Enabled:= TAction(Components[i]).Visible;
+     end;
+    end;
+
   end;
 
 end;
 procedure TMBaseForm.FormCreate(Sender: TObject);
+
 begin
    GetAccess;
 
@@ -392,6 +409,12 @@ procedure TMBaseForm.DBLookUpKeyDown(Sender: TObject; var Key: Word;
 begin
   if key = vk_delete then
       TDBLookupListBox(Sender).KeyValue:=null;
+end;
+
+procedure TMBaseForm.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+ //
 end;
 
 end.

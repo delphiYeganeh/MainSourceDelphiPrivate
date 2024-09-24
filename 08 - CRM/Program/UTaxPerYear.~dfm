@@ -15,6 +15,7 @@ object FrTaxPerYear: TFrTaxPerYear
   ParentBiDiMode = False
   OnCanResize = FormCanResize
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel

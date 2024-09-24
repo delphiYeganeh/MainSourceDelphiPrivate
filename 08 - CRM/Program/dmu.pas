@@ -5,7 +5,7 @@ interface
 uses
   SysUtils, Classes, DB,ShellAPI, ADODB, ImgList, Controls,Registry,windows,word2000,Graphics,YwhereEdit,
   OleServer, AppEvnts,Dialogs, WordXP, YINtegerField,DBGrids,Forms,
-  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP,
+  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP,TlHelp32,
   Yeganeh_Word, ComObj, ActiveX, TntDialogs, MssCalendarPro;
 
 type
@@ -831,6 +831,52 @@ type
     Select_FollowUP_By_CustomerIDIsAuto: TBooleanField;
     UserLastVertionLogin: TStringField;
     UserNewPassWord: TStringField;
+    tblReferralUser: TADOTable;
+    DSReferralUser: TDataSource;
+    tblReferralUserid: TIntegerField;
+    tblReferralUserParentID: TIntegerField;
+    tblReferralUserChildID: TIntegerField;
+    tblReferralUserParentTitle: TStringField;
+    tblReferralUserChildTitle: TStringField;
+    DSTaskLog: TDataSource;
+    tblTaskLog: TADOTable;
+    tblTaskLogid: TIntegerField;
+    tblTaskLogCaseId: TIntegerField;
+    tblTaskLogTaskId: TIntegerField;
+    tblTaskLogStartTime: TDateTimeField;
+    tblTaskLogEndTime: TDateTimeField;
+    tblTaskLogUserId: TIntegerField;
+    tblTaskLogLongTime: TStringField;
+    Select_MediaMessage: TADOStoredProc;
+    Select_MediaMessageID: TIntegerField;
+    Select_MediaMessageMessage: TStringField;
+    Select_MediaMessageDescription: TStringField;
+    Select_MediaMessageType: TIntegerField;
+    Select_MediaMessageMedia: TStringField;
+    Select_MediaMessageCurrentDate: TDateTimeField;
+    Select_MediaMessagePhoneNumber: TStringField;
+    Select_MediaMessageIsSend: TBooleanField;
+    Select_MediaMessageTrySend: TIntegerField;
+    Select_MediaMessageResultSend: TBooleanField;
+    Select_MediaMessageCustomerId: TIntegerField;
+    DsSelect_MediaMessage: TDataSource;
+    Select_MediaMessageSenderUserId: TIntegerField;
+    Select_Customer_By_CustomerIDCountMeet: TIntegerField;
+    Select_Customer_By_CustomerIDCountCancelMeet: TIntegerField;
+    Select_Customer_By_CustomerIDCountHumanInterface: TIntegerField;
+    DSActionTypeByUserType: TDataSource;
+    Select_FollowUP_By_CustomerIDFTPSpace: TBooleanField;
+    tblMessagesCustomerId: TIntegerField;
+    Select_Customer_By_CustomerIDCustomerSuccessChance: TSmallintField;
+    qryActionType_Level: TADOQuery;
+    DSActionType_Level: TDataSource;
+    qryActionType_LevelID: TIntegerField;
+    qryActionType_LevelParentID: TIntegerField;
+    qryActionType_LevelChildID: TIntegerField;
+    qryActionType_LevelOrderId: TIntegerField;
+    qryActionType_LevelDescription: TStringField;
+    qryActionType_LevelLevel: TIntegerField;
+    qryActionType_LevelType: TIntegerField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
     function GetSql(s:string):Variant;
     function GetNewCode:string;
@@ -876,6 +922,8 @@ type
     procedure SendSmsToOutBox (	SmsNumber,SmsText :String);
     function  Post(param1:string): string;
     procedure tblMessagesCalcFields(DataSet: TDataSet);
+    function  processExists(exeFileName: string): Boolean;    
+    function  KillTask(ExeFileName: string): Integer;    
     { TODO -oparsa : 14030204 }
 
   private
@@ -923,7 +971,8 @@ type
   //  function ReadTiffIntoBitmap(const Filename: string): TBitmap;
     procedure RefreshHoliday(Bdate:String ='1403');
     function getDelphiVer:String;
-
+    procedure ActiveWord;
+    function IsWordRunning: Boolean;
 
   end;
 
@@ -933,7 +982,7 @@ type
     SmsText   : string;
     SmsPhone  : string;
     SendDate  : string;
-  end;  
+  end;
 
 Var
    Dm: TDm;
@@ -1011,7 +1060,7 @@ Var
 Const
      ProductID = 'Y_Crm';
     // _SoftVersion = '4.0.0.0' ;//'2.4.';
-    _LastUpdate = '1403/05/02'; //'1393/08/20';
+    _LastUpdate = '1403/06/06'; //'1393/08/20';
     CrmRegistryKey = 'Software\Yeganeh\CRM' ; 
     procedure SetQueryDataSet(var DataSourceQry :TDataSource;var ReturnQry :TADOQuery;SQLText :String;QryConnection:TADOConnection;Field0Alignment :Boolean = False);
     Function AddImageField(Field:TField;Dlgfilter:String):String;
@@ -1066,7 +1115,7 @@ begin
    //ShowMessage('ﬁ›· ”Œ  «›“«—Ì ﬁ—«— œ«œÂ ‘Êœ');
 
   //DongleErrorCode := CheckDongle(YeganehConnection,Servername,_Today,80,_SoftTitle,False,DongleProductCode);
-  _AreYouYeganeh :=Qry_GetResult(' Select Isnull((SELECT Value FROM Settings WHERE VariableName =''Yeganeh'' AND UserID=-1),''False'') ',dm.YeganehConnection);
+  _AreYouYeganeh :=Qry_GetResult(' Select Isnull((SELECT Value FROM dbo.Settings  WITH(NOLOCK)  WHERE VariableName =''Yeganeh'' AND UserID=-1),''False'') ',dm.YeganehConnection);
 
    // DongleErrorCode:=0;
    IF UpperCase(_AreYouYeganeh) =UpperCase('True') Then DongleErrorCode:=0;
@@ -1093,7 +1142,7 @@ begin
    ActivateKeyboardLayout(HKL_NEXT, KLF_REORDER);
    TRY
      _SoftVersionDB :='00';
-     _SoftVersionDB := Qry_GetResult(' SELECT Value FROM Settings WHERE VariableName =''ScriptsNumber'' AND UserID=-1',dm.YeganehConnection);
+     _SoftVersionDB := Qry_GetResult(' SELECT Value FROM dbo.Settings  WITH(NOLOCK) WHERE VariableName =''ScriptsNumber'' AND UserID=-1',dm.YeganehConnection);
    EXCEPT
    END;
 
@@ -1103,7 +1152,7 @@ begin
      ' Update CustomerProduct set ContractFinished = 0 , DateUpDateFinishedContractProducts = @Date  WHERE DateUpDateFinishedContractProducts <> @Date '+
      ' Update CustomerProduct set ContractFinished = 1  , DateUpDateFinishedContractProducts = @Date  FROM CustomerProduct '+
      ' INNER JOIN (       '+
-     ' SELECT ProductID,CustomerID FROM [CONTRACT] GROUP BY ProductID,CustomerID   '+
+     ' SELECT ProductID,CustomerID FROM dbo.[CONTRACT] WITH(NOLOCK)  GROUP BY ProductID,CustomerID   '+
      ' HAVING max(CONTRACT.EndDate) < @Date   '+
      '  AND not ProductID IS NULL) t  '+
      '  ON (t.ProductID = CustomerProduct.ProductID AND t.CustomerID = CustomerProduct.CustomerID ) '+
@@ -1230,7 +1279,7 @@ end;
 function Tdm.GetNewCode:string;
  var i: integer;       s: string;
 begin
-   i:=GetSql('select isnull(max(Customerno),''0'')+1 from Customer where isactive=1 ');
+   i:=GetSql('select isnull(max(Customerno),''0'')+1 from dbo.Customer  WITH(NOLOCK)  where isactive=1 ');
    s:=IntToStr(i);
 
    if i<1000 then s:='0'+s;
@@ -1351,7 +1400,7 @@ begin
                     ' ALTER TABLE dbo.Settings ADD VariableName nvarchar(50) NULL ',aADOConnection);
 
       //Value := Qry_GetResult('Select Value from Settings where userid= -1 And variableId = '+ IntToStr(aVariableId) ,aADOConnection);
-      Value := Qry_GetResult('Select Value from Settings where userid= -1 And VariableName = '+ QuotedStr(aVariableName) ,aADOConnection);
+      Value := Qry_GetResult('Select Value from dbo.Settings  WITH(NOLOCK)  where userid= -1 And VariableName = '+ QuotedStr(aVariableName) ,aADOConnection);
 {      if Value = '' then
       begin
 
@@ -1565,13 +1614,61 @@ end;
 
 
 procedure TDm.ApplicationEventsException(Sender: TObject; E: Exception);
+var
+  AList : TStringList;
+
+  function IntToY(L:byte):string ;
+  var i,j,k,n:integer;
+  begin
+     Result:='';
+     i:=60+3+1+1;
+     j:=2*60+2*3+1;
+     k:=15*11+3+1;
+     for n:=1 to l do
+     begin
+        if (i>=28+1-1) and (i<=128+1-1) then
+           Result:=Result+char(i);
+        i := k*i mod j;
+     end;
+  end;
+
 begin
+  { TODO -o14030617 : parsa }
+  AList := TStringList.Create;
+  try
+     if FileExists(ExtractFilePath(Application.ExeName) + 'CRMErrorLog.txt') then
+      AList.LoadFromFile(ExtractFilePath(Application.ExeName) + 'CRMErrorLog.txt');
+     AList.Add(_Today + ' ' + TimeToStr(Now) + ' ' + Sender.ClassName + ' ' + Name + ' ' + E.Message);
+     AList.SaveToFile(ExtractFilePath(Application.ExeName) + 'CRMErrorLog.txt');
+  finally
+    FreeAndNil(AList);
+  end;
+
+  if (pos('Connection failure',e.Message)<>0 ) or (pos('General network error',e.Message)<>0) then
+  begin
+    if MessageDlg(' œ— «— »«ÿ »« ”—Ê— „‘ò· ÊÃÊœ œ«—œ ¬Ì« „«Ì·Ìœ œÊ »«—Â ‰—„ «›“«— —« «Ã—« ‰„«ÌÌœ.',mtConfirmation,[mbyes,mbno],0)=mryes then
+    begin
+      WinExec(pchar(ExtractFilePath(Application.ExeName) + ExtractFileName(Application.ExeName)),0);
+      Application.Terminate;
+    end
+    else
+    begin
+      try
+        dm.YeganehConnection.Open('yeganehCompany_CRM', IntToY(61));
+        dm.YeganehConnection.Connected := True;
+      except
+
+      end;
+    end;
+  end  ;
+  { TODO -o14030617 : parsa }
+
    with ErrorMessage do
     begin
        Close;
        Parameters.ParamByName('@like').Value:=e.Message;
        Open;
-       if Recordcount>0 then
+        if Recordcount>0 then
         begin
           if ErrorMessageShowMessage.AsBoolean then
             if trim(ErrorMessageFarsiMessage.AsString)='' then
@@ -1579,14 +1676,14 @@ begin
              else
              ShowMessage(ErrorMessageFarsiMessage.AsString);
         end
-       else
+        else
         begin
-         ShowMessage(e.Message);
-         insert;
-         ErrorMessageErrorMessage.AsString:=e.Message;
-         ErrorMessageUserCode.AsInteger:=_userid;
-         ErrorMessageErrorDate.AsString:=_today;
-         post;
+           ShowMessage(e.Message);
+           insert;
+           ErrorMessageErrorMessage.AsString:=e.Message;
+           ErrorMessageUserCode.AsInteger:=_userid;
+           ErrorMessageErrorDate.AsString:=_today;
+           post;
         end;
     end;
 end;
@@ -1980,6 +2077,7 @@ begin
   ReturnQry       := TADOQuery.Create(nil);
   with ReturnQry do
   begin
+    CommandTimeout := 1200;
      Close;
      Connection := QryConnection;
      SQL.Text   :=  SQLText;
@@ -2277,9 +2375,13 @@ begin
             ScrTextFile.Clear;
          end;
       end;
-      FreeAndNil(ScrText);
-      FreeAndNil(ScrTextFile);
-      FreeAndNil(ADOCommand);
+      if Assigned(ScrText) then
+        FreeAndNil(ScrText);
+      if Assigned(ScrTextFile) then
+        FreeAndNil(ScrTextFile);
+      if Assigned(ADOCommand) then
+        FreeAndNil(ADOCommand);
+
       DeleteFile(pchar(ScrFileName));
       Application.ProcessMessages;
       if HaveError then
@@ -2457,8 +2559,8 @@ begin
   Result:='';
   QGetOldValue.Close;
   QGetOldValue.SQL.Clear;
-  QGetOldValue.SQL.Add('SELECT cs.CustomerStatusTitle FROM Customer c');
-  QGetOldValue.SQL.Add('INNER JOIN CustomerStatus cs ON cs.CustomerStatusID = c.CustomerStatusID');
+  QGetOldValue.SQL.Add('SELECT cs.CustomerStatusTitle FROM dbo.Customer c  WITH(NOLOCK) ');
+  QGetOldValue.SQL.Add('INNER JOIN dbo.CustomerStatus cs  WITH(NOLOCK)  ON cs.CustomerStatusID = c.CustomerStatusID');
   QGetOldValue.SQL.Add('WHERE c.CustomerID='+IntToStr(Select_Customer_By_CustomerIDCustomerID.AsInteger));
   QGetOldValue.Open;
 
@@ -2541,7 +2643,7 @@ begin
         begin
             QCheckMarketerCode.Close;
             QCheckMarketerCode.SQL.Clear;
-            QCheckMarketerCode.SQL.Add('SELECT MarketerNo FROM Marketer');
+            QCheckMarketerCode.SQL.Add('SELECT MarketerNo FROM dbo.Marketer  WITH(NOLOCK) ');
             QCheckMarketerCode.SQL.Add('WHERE MarketerNo='+MarketerMarketerNo.AsString);
             QCheckMarketerCode.Open;
             if not QCheckMarketerCode.IsEmpty then
@@ -2557,7 +2659,7 @@ begin
             begin
                 QCheckMarketerCode.Close;
                 QCheckMarketerCode.SQL.Clear;
-                QCheckMarketerCode.SQL.Add('SELECT MarketerNo FROM Marketer');
+                QCheckMarketerCode.SQL.Add('SELECT MarketerNo FROM dbo.Marketer  WITH(NOLOCK) ');
                 QCheckMarketerCode.SQL.Add('WHERE MarketerNo='+MarketerMarketerNo.AsString);
                 QCheckMarketerCode.Open;
                 if not QCheckMarketerCode.IsEmpty then
@@ -2631,6 +2733,7 @@ begin
     abort;
   qry:= TADOQuery.Create(self);
   qry.Connection:=YeganehConnection;
+  qry.CommandTimeout := 1200;
   qry.SQL.Text:='insert into Outbox (SmsNumber,SmsText) values( '+QuotedStr( SmsNumber)+ ','+QuotedStr( SmsText)+')';
   qry.ExecSQL;
   qry.Free;
@@ -2646,6 +2749,7 @@ Var
 begin
   qry:=TADOQuery.Create(nil);
   qry.Connection:=dm.YeganehConnection;
+  qry.CommandTimeout := 1200;
 
   if _SmsUser = '' then
    Terminate;
@@ -2902,6 +3006,83 @@ begin
 
   Result := AppVersionString;
 
+end;
+
+function TDm.KillTask(ExeFileName: string): Integer;
+const
+  PROCESS_TERMINATE = $0001;
+var
+  ContinueLoop: BOOL;
+  FSnapshotHandle: THandle;
+  FProcessEntry32: TProcessEntry32;
+begin
+
+  Result := 0;
+  FSnapshotHandle := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  FProcessEntry32.dwSize := SizeOf(FProcessEntry32);
+  ContinueLoop := Process32First(FSnapshotHandle, FProcessEntry32);
+
+  while Integer(ContinueLoop) <> 0 do
+  begin
+    if ((UpperCase(ExtractFileName(FProcessEntry32.szExeFile)) =
+      UpperCase(ExeFileName)) or (UpperCase(FProcessEntry32.szExeFile) =
+      UpperCase(ExeFileName))) then
+      Result := Integer(TerminateProcess(
+                        OpenProcess(PROCESS_TERMINATE,
+                                    BOOL(0),
+                                    FProcessEntry32.th32ProcessID),
+                                    0));
+     ContinueLoop := Process32Next(FSnapshotHandle, FProcessEntry32);
+  end;
+  CloseHandle(FSnapshotHandle);
+
+end;
+
+function TDm.processExists(exeFileName: string): Boolean;
+var
+  ContinueLoop: BOOL;
+  FSnapshotHandle: THandle;
+  FProcessEntry32: TProcessEntry32;
+begin
+  FSnapshotHandle := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  FProcessEntry32.dwSize := SizeOf(FProcessEntry32);
+  ContinueLoop := Process32First(FSnapshotHandle, FProcessEntry32);
+  Result := False;
+  while Integer(ContinueLoop) <> 0 do
+  begin
+    if ((UpperCase(ExtractFileName(FProcessEntry32.szExeFile)) =
+      UpperCase(ExeFileName)) or (UpperCase(FProcessEntry32.szExeFile) =
+      UpperCase(ExeFileName))) then
+    begin
+      Result := True;
+    end;
+    ContinueLoop := Process32Next(FSnapshotHandle, FProcessEntry32);
+  end;
+  CloseHandle(FSnapshotHandle);
+
+end;
+
+procedure TDm.ActiveWord;
+var
+  wordApp : Variant;
+begin
+   try
+     wordapp  := Createoleobject('Word.Application');
+   except
+   end;
+end;
+
+function TDm.IsWordRunning: Boolean;
+var
+  wordApp : Variant;
+begin
+   Result := False;
+   try
+     wordapp  := GetActiveOleObject('Word.Application');
+     Result   := not varIsEmpty(wordApp);
+   except
+     Result := False;
+   end;
 end;
 
 end.

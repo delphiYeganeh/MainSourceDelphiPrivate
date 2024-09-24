@@ -45,6 +45,7 @@ begin
     dsr  := TDataSource.Create(nil);
     with Qry  do
     begin
+        CommandTimeout := 1200;
         Close;
         Connection :=dm.YeganehConnection;
         SQL.Text := 'Select * from GuaranteeType';

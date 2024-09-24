@@ -199,40 +199,59 @@ begin
 end;
 
 procedure TUserDefineF.btnSaveClick(Sender: TObject);
+var qry : TADOQuery;
 begin
   inherited;
+
   if UserIsSystemUser.AsBoolean then
   begin
      ShowMessage('ò«—»— ”Ì „Ì —« ‰„Ì  Ê«‰Ìœ ÊÌ—«Ì‘ Ê Ì« Õ–› ò‰Ìœ ! ');
      exit;
   end;
+
+   qry := TADOQuery.Create(self);
+   qry.Connection:= dm.YeganehConnection;
+   qry.CommandTimeout := 1200;
+
+   qry.SQL.Text := 'Select id From dbo.Users Where  Username = '''+ DBEdit2.Text + '''  ';
+   qry.Open;
+
+
+   if qry.RecordCount > 1 then
+   begin
+     ShowMessage('‰«„ ò«—»—Ì  ò—«—Ì „Ì »«‘œ');
+     exit;
+   end;
+
     
   if  (user.State in [dsedit,dsinsert] ) then
   begin
-  if (UserTitle.IsNull) or (trim(UserTitle.AsString)='') then
-  begin
-     ShowMessage('‰«„ ò«„· —« „‘Œ’ ò‰Ìœ');
-  end;
-  if (UserUserName.IsNull) or (trim(UserUserName.AsString)='') then
-  begin
-     ShowMessage('‰«„ ò«—»—Ì —« „‘Œ’ ò‰Ìœ');
-  end;
-  if (UserAccessTitle.IsNull) or (trim(UserAccessTitle.AsString)='') then
-  begin
-     ShowMessage('”ÿÕ œ” —”Ì —« „‘Œ’ ò‰Ìœ');
-  end;
-  //if UserPassWord.AsString<>ConfirmPass.Text then
-  if UserNewPassWord.AsString <> ConfirmPass.Text then
-  Begin
+    if (UserTitle.IsNull) or (trim(UserTitle.AsString)='') then
+    begin
+       ShowMessage('‰«„ ò«„· —« „‘Œ’ ò‰Ìœ');
+    end;
+    if (UserUserName.IsNull) or (trim(UserUserName.AsString)='') then
+    begin
+       ShowMessage('‰«„ ò«—»—Ì —« „‘Œ’ ò‰Ìœ');
+    end;
+    if (UserAccessTitle.IsNull) or (trim(UserAccessTitle.AsString)='') then
+    begin
+       ShowMessage('”ÿÕ œ” —”Ì —« „‘Œ’ ò‰Ìœ');
+    end;
+    //if UserPassWord.AsString<>ConfirmPass.Text then
+    if UserNewPassWord.AsString <> ConfirmPass.Text then
+    Begin
 
-    ShowMessage(' ò—«— ò·„Â ⁄»Ê— »« ò·„Â ⁄»Ê— ÌòÌ ‰Ì” ');
-    pass.SetFocus;
-  end;
-  user.Post;
-  IF TRIM(UserUserTypeId.AsString)<>'' THEN
-    Qry_SetResult(' Update Marketer SET OrgID='+TRIM(UserUserTypeId.AsString)+' WHERE MarketerID='+UserMarketerID.AsString, DM.YeganehConnection );
+      ShowMessage(' ò—«— ò·„Â ⁄»Ê— »« ò·„Â ⁄»Ê— ÌòÌ ‰Ì” ');
+      pass.SetFocus;
+    end;
 
-  ShowMessage(' €ÌÌ—«  À»  ‘œ');
+    user.Post;
+
+    IF TRIM(UserUserTypeId.AsString)<>'' THEN
+      Qry_SetResult(' Update Marketer SET OrgID='+TRIM(UserUserTypeId.AsString)+' WHERE MarketerID='+UserMarketerID.AsString, DM.YeganehConnection );
+
+    ShowMessage(' €ÌÌ—«  À»  ‘œ');
  end;
 // else
 { Begin
@@ -286,10 +305,12 @@ var qrydblUserType :TADOQuery;
     ds : TDataSource;
 begin
   qrydblUserType := TADOQuery.Create(nil);
+
   ds := TDataSource.Create(nil);
     with qrydblUserType do
     begin
-    Connection := Dm.YeganehConnection;
+      Connection := Dm.YeganehConnection;
+      CommandTimeout := 1200;
       sql.Clear;
       SQL.Text := 'select UserTypeTitle,UserTypeID from UserType';
       open;

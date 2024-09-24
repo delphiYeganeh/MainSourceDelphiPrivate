@@ -140,7 +140,14 @@ uses
   UTaskReport in 'Reports\UTaskReport.pas' {FTaskReport},
   UBaseRefere in 'UBaseRefere.pas' {FBaseRefere},
   UfollowUpReport in 'Reports\UfollowUpReport.pas' {FfollowUpReport},
-  UFMessageAlarm in 'Reports\UFMessageAlarm.pas' {FMessageAlarm};
+  UFMessageAlarm in 'Reports\UFMessageAlarm.pas' {FMessageAlarm},
+  UReferralUser in 'UReferralUser.pas' {FReferralUser},
+  USendInnerMessage in 'USendInnerMessage.pas' {FSendInnerMessage},
+  USalesFunnel in 'Reports\USalesFunnel.pas' {FSalesFunnel},
+  UActionTypeLevel in 'Basic\UActionTypeLevel.pas' {FActionTypeLevel},
+  UCustomerMap in 'Basic\UCustomerMap.pas' {FCustomerMap},
+  UMapBug in 'Reports\UMapBug.pas' {FMapBug},
+  UCompare_Report in 'Reports\UCompare_Report.pas' {FCompare_Report};
 
 // ReCommiteDialog in 'ReCommitedialog.pas' {RecommiteSave};
 

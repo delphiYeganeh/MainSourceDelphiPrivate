@@ -193,6 +193,18 @@ type
     QrSrchFactorRelatedNumber: TIntegerField;
     QrSrchFactorTotalFactorPrice: TFloatField;
     QrSrchFactorType2: TStringField;
+    btnMap: TBitBtn;
+    GBState: TGroupBox;
+    LblState: TLabel;
+    GroupBox3: TGroupBox;
+    Label28: TLabel;
+    DBEdit14: TDBEdit;
+    Label29: TLabel;
+    DBEdit15: TDBEdit;
+    Label30: TLabel;
+    DBEdit16: TDBEdit;
+    Label31: TLabel;
+    DBCoBoSuccessChance: TDBComboBox;
     procedure DBEdit7Enter(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -232,6 +244,9 @@ type
     procedure dblCityEnter(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btnFactorClick(Sender: TObject);
+    procedure btnMapClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     CustomerID: integer;
     IsNewRecord : Boolean;
@@ -260,7 +275,7 @@ implementation
 
 uses MainU, dmu, YShamsiDate, UFollowUp, UContract, UserTableContentFm,
   BusinessLayer, FmOtherPerson_U, FmSystemSettings_U, UCustomerLetter,
-  USingleMessage, SearchFM, FactorDM, FactorFM;
+  USingleMessage, SearchFM, FactorDM, FactorFM, UCustomerMap;
 
 {$R *.dfm}
 
@@ -323,6 +338,7 @@ begin
     open;
   end;
    dm.tbCompanyStructures.Open;
+   
 end;
 
 procedure TPropertiesForm.YchecklistBox1NeedCheck(ID: Integer;
@@ -417,7 +433,7 @@ begin
 
     Dm.Marketer.Close;
     Dm.Marketer.SQL.Clear;
-    Dm.Marketer.SQL.Add('SELECT * FROM marketer');
+    Dm.Marketer.SQL.Add('SELECT * FROM dbo.marketer  WITH(NOLOCK) ');
     Dm.Marketer.SQL.Add('WHERE IsActive_=1');
     Dm.Marketer.Open;
 
@@ -427,7 +443,8 @@ begin
   Q_UserType.RecNo := 1;
   q:= TADOQuery.Create(nil);
   q.Connection:= Dm.YeganehConnection;
-  q.SQL.Text := 'Select ID, Title from Users';
+  q.CommandTimeout := 1200;
+  q.SQL.Text := 'Select ID, Title from dbo.Users  WITH(NOLOCK)  ';
   q.Open;
 
   UsersList := nil;
@@ -457,7 +474,7 @@ begin
       while(tmpUL <> nil)do
       begin
          q.Close;
-         q.SQL.Text:='Select HasAccess from UsersCustomerAccess where CustomerID = '+ Dm.Select_Customer_By_CustomerIDCustomerID.AsString +
+         q.SQL.Text:='Select HasAccess from dbo.UsersCustomerAccess  WITH(NOLOCK)  where CustomerID = '+ Dm.Select_Customer_By_CustomerIDCustomerID.AsString +
             ' and UserID = '+ IntToStr(tmpUL^.UserID);
          q.Open;
          if q.RecordCount>0 then
@@ -471,13 +488,22 @@ begin
   // Amin 1391/10/04 End
 
   q.Free;
-  
-  adoCity.SQL.Text := ' SELECT  CItyId , CityTitle ,StateId ,StateNum  FROM [dbo].[City]  where StateId = '+ IntToStr( ADOStateStateID.Value )+' ORDER BY CityTitle ';
+
+  adoCity.SQL.Text := ' SELECT  CItyId , CityTitle ,StateId ,StateNum  FROM [dbo].[City]  WITH(NOLOCK)  where StateId = '+ IntToStr( ADOStateStateID.Value )+' ORDER BY CityTitle ';
   adoCity.Open;
 
   Dm.RefreshHoliday(copy(_today,1,4));
   MssCalendarPro1.HolidayStr := dm.HolidayStr;
-    
+
+  q:= TADOQuery.Create(nil);
+  q.Connection:= Dm.YeganehConnection;
+  q.CommandTimeout := 1200;
+  q.SQL.Text:= 'SELECT [dbo].[fn_GetCurrentStateCustomer] (' + IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.ASInteger) +')';
+  q.Open;
+  LblState.Caption := q.Fields[0].AsString ;
+  q.Free;
+  //GBState.Visible := False;
+  //btnMap.Visible := False;
 end;
 
 procedure TPropertiesForm.SBOtherPersonClick(Sender: TObject);
@@ -524,14 +550,14 @@ begin
 
      qry:= TADOQuery.Create(nil);
      qry.Connection:= Dm.YeganehConnection;
-
+     qry.CommandTimeout := 1200;
      qry.SQL.Text:= ' select * from (  select companyname cnt,CustomerID,0 ph  from [dbo].[Customer] where 1=2 ' ;
      if Dm.Select_Customer_By_CustomerIDPhone.AsString <> '' then
-       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID,1 ph FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDPhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' )';
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID,1 ph FROM [dbo].[Customer]  WITH(NOLOCK) where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDPhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDPhone.AsString) +''' )';
      if Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString <> '' then
-       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID,2 FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString )+''' )';
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID,2 FROM [dbo].[Customer]  WITH(NOLOCK) where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDWorkPhone1.AsString )+''' )';
      if Dm.Select_Customer_By_CustomerIDMobilePhone.AsString <> '' then
-       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID,3 FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' ) ';
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID,3 FROM [dbo].[Customer]  WITH(NOLOCK) where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and (ltrim(rtrim(Phone)) = '''+Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' or ltrim(rtrim(MobilePhone)) = '''+trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString)+''' or ltrim(rtrim(WorkPhone1)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDMobilePhone.AsString) +''' ) ';
      qry.SQL.Text:= qry.SQL.Text + ' ) t ';
      qry.Open;
      if qry.RecordCount > 0 then
@@ -549,9 +575,9 @@ begin
          abort;
      end;
 
-     qry.SQL.Text:= ' select * from (  select companyname cnt,CustomerID  from [dbo].[Customer] where 1=2 '  ;
+     qry.SQL.Text:= ' select * from (  select companyname cnt,CustomerID  from [dbo].[Customer]  WITH(NOLOCK) where 1=2 '  ;
      if  ( Dm.Select_Customer_By_CustomerIDEmailAddress.AsString <> '') then
-       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID FROM [dbo].[Customer] where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and ( ltrim(rtrim(EmailAddress)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDEmailAddress.AsString ) +''' ) ';
+       qry.SQL.Text:= qry.SQL.Text + ' union SELECT companyname,CustomerID FROM [dbo].[Customer]  WITH(NOLOCK) where CustomerID <> '+IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger)+' and ( ltrim(rtrim(EmailAddress)) = '''+ Trim(Dm.Select_Customer_By_CustomerIDEmailAddress.AsString ) +''' ) ';
      qry.SQL.Text:= qry.SQL.Text + ' ) t ';
      qry.Open;
 
@@ -599,6 +625,8 @@ begin
    FrFollowUp.refreshData;
    FrFollowUp.dbgFollow.DataSource.DataSet.Last;  // 920307 Hadi Mohamed For Bug #56 ¬Œ—Ì‰ «ﬁœ«„ «‰ Œ«» ‘Êœ
    FrFollowUp.ShowModal;
+   if Assigned(FrFollowUp) then
+     FreeAndNil(FrFollowUp);
 end;
 
 procedure TPropertiesForm.SpeedButton2Click(Sender: TObject);
@@ -612,6 +640,8 @@ begin
 
    FrContract := TFrContract.Create(Application,dm.Select_Customer_By_CustomerIDCustomerID.AsInteger);
    FrContract.ShowModal;
+   if Assigned(FrContract) then
+     FreeAndNil(FrContract);
 end;
 
 procedure TPropertiesForm.SpeedButton3Click(Sender: TObject);
@@ -650,12 +680,13 @@ begin
 
       q:= TADOQuery.Create(nil);
       q.Connection:= Dm.YeganehConnection;
+      q.CommandTimeout := 1200;
       tmpUL:= UsersList;
       while tmpUL <> nil do
       begin
          if clbUsers.checked[tmpUL^.ListItemIndex] then  sqlbool:= 1 else sqlbool:= 0;
 
-         q.SQL.Text:= 'select * from UsersCustomerAccess where CustomerID = '+Dm.Select_Customer_By_CustomerIDCustomerID.AsString+' and UserID = '+ IntToStr(tmpUL^.UserID);
+         q.SQL.Text:= 'select * from dbo.UsersCustomerAccess  WITH(NOLOCK) where CustomerID = '+Dm.Select_Customer_By_CustomerIDCustomerID.AsString+' and UserID = '+ IntToStr(tmpUL^.UserID);
          q.Open;
          if q.RecordCount > 0 then
          begin
@@ -773,6 +804,7 @@ begin
    begin
       q:= TADOQuery.Create(nil);
       q.Connection:= Dm.YeganehConnection;
+      q.CommandTimeout := 1200;
    end;
 end;
 
@@ -790,7 +822,8 @@ begin
          
       q:= TADOQuery.Create(nil);
       q.Connection:= Dm.YeganehConnection;
-      q.SQL.Text:= 'select ID from Users where UserTypeID = ' + dm.Select_Customer_By_CustomerIDUserAccessMode.AsString;
+      q.CommandTimeout := 1200;
+      q.SQL.Text:= 'select ID from dbo.Users  WITH(NOLOCK) where UserTypeID = ' + dm.Select_Customer_By_CustomerIDUserAccessMode.AsString;
       q.Open;
       while not q.Eof do
       begin
@@ -825,7 +858,7 @@ procedure TPropertiesForm.FormCanResize(Sender: TObject; var NewWidth,
   NewHeight: Integer; var Resize: Boolean);
 begin
   { TODO -oparsa : 14030203 }
-  if (NewWidth < 787)  or (NewHeight < 632) then
+  if (NewWidth < 787)  or (NewHeight < 681) then
     Resize := False
   else Resize := True;
    { TODO -oparsa : 14030203 }
@@ -845,19 +878,22 @@ end;
 procedure TPropertiesForm.BtnMessage1Click(Sender: TObject);
 begin
   inherited;
-  ShowMessageForm(DBEdit6.text);
+  if Trim(DBEdit6.text)<> '' then
+    ShowMessageForm(DBEdit6.text);
 end;
 
 procedure TPropertiesForm.BtnMessage2Click(Sender: TObject);
 begin
   inherited;
-  ShowMessageForm(DBEdit7.text);
+  if Trim(DBEdit7.text)<> '' then
+    ShowMessageForm(DBEdit7.text);
 end;
 
 procedure TPropertiesForm.BtnMessage3Click(Sender: TObject);
 begin
   inherited;
-  ShowMessageForm(DBEdit10.text);
+  if Trim(DBEdit10.text)<> '' then
+    ShowMessageForm(DBEdit10.text);
 end;
 
 procedure TPropertiesForm.DBCheckBox1Click(Sender: TObject);
@@ -893,14 +929,14 @@ end;
 procedure TPropertiesForm.dblStateExit(Sender: TObject);
 begin
   inherited;
-  adoCity.SQL.Text := ' SELECT  CItyId , CityTitle ,StateId ,StateNum  FROM [dbo].[City]  where StateId = '+ IntToStr( ADOStateStateID.Value )+' ORDER BY CityTitle ';
+  adoCity.SQL.Text := ' SELECT  CItyId , CityTitle ,StateId ,StateNum  FROM [dbo].[City]   WITH(NOLOCK) where StateId = '+ IntToStr( ADOStateStateID.Value )+' ORDER BY CityTitle ';
   adoCity.Open;
 end;
 
 procedure TPropertiesForm.dblCityEnter(Sender: TObject);
 begin
   inherited;
-  adoCity.SQL.Text := ' SELECT  CItyId , CityTitle ,StateId ,StateNum  FROM [dbo].[City]  where StateId = '+ IntToStr( ADOStateStateID.Value )+' ORDER BY CityTitle ';
+  adoCity.SQL.Text := ' SELECT  CItyId , CityTitle ,StateId ,StateNum  FROM [dbo].[City]  WITH(NOLOCK)  where StateId = '+ IntToStr( ADOStateStateID.Value )+' ORDER BY CityTitle ';
   adoCity.Open;
 end;
 
@@ -939,6 +975,49 @@ begin
     FMFactor.ExternalFactorId   := QrSrchFactorFactor_Id.Asinteger ;
     FMFactor.ShowModal;
   end;
+end;
+
+procedure TPropertiesForm.btnMapClick(Sender: TObject);
+begin
+  inherited;
+   if (Dm.Select_Customer_By_CustomerID.State in [dsedit,dsinsert]) then
+     ShowMessage('«ÿ·«⁄«  œ—Õ«· ÊÌ—«Ì‘ „Ì »«‘œ ·ÿ›« «» œ« À»  «‰Ã«„ œÂÌœ')
+   else
+   begin
+     FCustomerMap := TFCustomerMap.Create(Application,Dm.Select_Customer_By_CustomerIDCustomerID.AsInteger) ;
+     FCustomerMap.Showmodal;
+     if Assigned(FCustomerMap) then
+       FreeAndNil(FCustomerMap);
+   end;
+end;
+
+procedure TPropertiesForm.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+
+begin
+  inherited;
+
+    if DBNavigator1.Visible then
+      If (Shift = [ssctrl]) and (inttostr(key) = '113') then   //f2
+      begin     //edit
+        if MainForm.N15.Visible then      // œ” —”Ì ÊÌ—«Ì‘
+          if  DBNavigator1.DataSource.DataSet.State  in [dsBrowse] then
+            DBNavigator1.BtnClick(nbEdit);
+      end
+      else
+      If (Shift = [ssctrl]) and (inttostr(key) = '116') then  //f5
+      begin    //post
+        if  DBNavigator1.DataSource.DataSet.State in [dsEdit, dsInsert] then
+          DBNavigator1.BtnClick(nbPost);
+      end
+      else
+      If (Shift = [ssctrl]) and (inttostr(key) = '78') then //n
+      begin               //new
+        if  MainForm.NInsertCustomer.Visible then //œ” —”Ì œ—Ã
+          if  DBNavigator1.DataSource.DataSet.State  in [dsBrowse] then
+            DBNavigator1.BtnClick(nbInsert);
+      end;
+
 end;
 
 end.

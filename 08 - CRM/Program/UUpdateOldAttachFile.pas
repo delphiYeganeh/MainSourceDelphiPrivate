@@ -110,6 +110,7 @@ begin
        with ADOQryContractUpdate do
        begin
           Connection := Dm.YeganehConnection;
+          CommandTimeout := 1200;
           if  UpdateKind = 0 then
                  SQL.Text := 'Select ContractID,ContractText,Attachment from contract where Attachment <> '''' and (ContractText is null)'
           else
@@ -166,6 +167,7 @@ begin
           ADOQryFollowUpUpdate            := TADOQuery.Create(nil);
           with ADOQryFollowUpUpdate do
           begin
+            CommandTimeout := 1200;
             Connection := Dm.YeganehConnection;
             if  UpdateKind = 0 then
             SQL.Text := 'Select FollowUpId,CustomerId, Attachment1, Attachment2, WordAttachment, PicAttachment from FollowUp where  (isnull(Attachment1,'''') <> '''' and WordAttachment is null)'+
@@ -259,6 +261,7 @@ begin
 
     with ADOQryContract do
     begin
+      CommandTimeout := 1200;
       Connection := Dm.YeganehConnection;
       SQL.Text := 'Select cast(CustomerId as nvarchar) CustomerIdChar ,ContractID,CustomerId,Attachment,BeginDate from contract where Attachment <> '''' and (ContractText is null)';
       Open;
@@ -277,6 +280,7 @@ begin
 
     with ADOQryFollow do
     begin
+      CommandTimeout := 1200;
       Connection := Dm.YeganehConnection;
       SQL.Text := 'Select cast(CustomerId as nvarchar) CustomerIdChar ,FollowUpId,CustomerId,ToDoDate, Attachment1, Attachment2 from FollowUp where  (isnull(Attachment1,'''') <> '''' and WordAttachment is null)'+
                                                                                         'or(isnull(Attachment2,'''') <> '''' and PicAttachment is null) ';

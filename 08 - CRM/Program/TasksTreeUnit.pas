@@ -101,6 +101,7 @@ begin
 
    q:= TADOQuery.Create(nil);
    q.Connection:= Dm.YeganehConnection;
+   q.CommandTimeout := 1200;
    q.SQL.Text := 'Select * from FollowUp where FollowupID = ' + IntToStr(FFollowupID);
    q.Open;
 

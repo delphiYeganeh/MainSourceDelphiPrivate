@@ -73,6 +73,7 @@ inherited create(AOwner);
   with qry do
   begin
     Connection := dm.YeganehConnection;
+    CommandTimeout := 1200;
     if   OpenType = 1 then
     begin
         IdName :=  'TaskID';

@@ -51,6 +51,7 @@ begin
   with   qryHoliday do
   begin
     Connection := dm.YeganehConnection;
+    CommandTimeout := 1200;
     SQL.Text := 'SElect * from CalendarHoliday';
     Open;
     DSForm.DataSet := qryHoliday;

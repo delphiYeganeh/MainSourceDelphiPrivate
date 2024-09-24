@@ -155,6 +155,7 @@ begin
 
   qry := TADOQuery.Create(self);
   qry.Connection := dm.YeganehConnection;
+  qry.CommandTimeout := 1200;
   qry.SQL.Text   := ' UPDATE [dbo].[Users] SET ThemTypeColor = '+IntToStr(_ThemTypeColor)+', Color1 = '''+ColorToString(_Color1)+''' ,Color2 = '''+ColorToString(_Color2)+''',Color3 = '''+ColorToString(_Color3)+''',Color4= '''+ColorToString(_Color4)+''' WHERE id ='+ IntToStr(_UserId );
   if qry.SQL.Text <> '' then
     qry.ExecSQL;

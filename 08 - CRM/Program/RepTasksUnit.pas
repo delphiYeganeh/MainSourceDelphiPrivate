@@ -20,8 +20,6 @@ type
     spRepUserWorkCustomerID: TAutoIncField;
     pnlMain: TPanel;
     Panel1: TPanel;
-    SpeedButton1: TSpeedButton;
-    SpeedButton5: TSpeedButton;
     Label3: TLabel;
     GroupBox1: TGroupBox;
     SpeedButton4: TSpeedButton;
@@ -37,6 +35,12 @@ type
     CheckBox1: TCheckBox;
     Panel2: TPanel;
     YDBGrid1: TYDBGrid;
+    Panel3: TPanel;
+    SpeedButton6: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    SpeedButton8: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton5: TSpeedButton;
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
@@ -48,6 +52,9 @@ type
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
     procedure FormShow(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
+    procedure SpeedButton8Click(Sender: TObject);
+    procedure SpeedButton7Click(Sender: TObject);
   private
     FUserID: Integer;
     FUserName: String;
@@ -166,6 +173,27 @@ begin
   
   Dm.RefreshHoliday(copy(_today,1,4));
   MssCalendarPro1.HolidayStr := dm.HolidayStr;
+end;
+
+procedure TFRepTasks.SpeedButton6Click(Sender: TObject);
+begin
+  inherited;
+  if spRepUserWork.RecordCount >0 then
+    YDBGrid1.ExportToExcel;
+end;
+
+procedure TFRepTasks.SpeedButton8Click(Sender: TObject);
+begin
+  inherited;
+  if spRepUserWork.RecordCount >0 then
+    YDBGrid1.ExportToWord;
+end;
+
+procedure TFRepTasks.SpeedButton7Click(Sender: TObject);
+begin
+  inherited;
+  if spRepUserWork.RecordCount >0 then
+    YDBGrid1.Print;
 end;
 
 end.

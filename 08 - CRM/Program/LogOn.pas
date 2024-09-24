@@ -105,6 +105,7 @@ begin
     //StrVer     := dm.UserLastVertionLogin.AsString ;// Qry_GetResult(' Select Isnull((SELECT LastVertionLogin FROM dbo.Users WHERE ID = '+Dm.UserId.AsString+' ),'''') ',dm.YeganehConnection);
     StrVerLast := Qry_GetResult(' Select Isnull((SELECT Value FROM dbo.SystemSettings WHERE VariableId = 3 ),'''') ',dm.YeganehConnection);
 
+   // UserName.Text := replace1(Trim(UserName.Text),char(223),char(152));
 
     if ( Locate('userName',UserName.Text,[])) and
        (((dm.UserLastVertionLogin.AsString = '') and (Trim(dm.UserNewPassWord.AsString) = Trim(Password.text))))  then
