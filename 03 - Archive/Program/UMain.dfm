@@ -429,7 +429,7 @@ inherited MainForm: TMainForm
       Top = 2
       Width = 186
       Height = 846
-      ActivePage = TShArchive
+      ActivePage = TShAHome
       Align = alClient
       TabOrder = 0
       TabPosition = tpBottom

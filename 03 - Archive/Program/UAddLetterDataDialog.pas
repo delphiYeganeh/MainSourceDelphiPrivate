@@ -430,7 +430,9 @@ begin
   else if tntOpenDialog.Execute then
     begin
      Path.Text := tntOpenDialog.FileName;
-     DSForm.DataSet.FieldByName('description').AsString := ExtractFileName(TntOpenDialog.FileName);
+     if Trim(DSForm.DataSet.FieldByName('description').AsString ) = '' then
+       DSForm.DataSet.FieldByName('description').AsString := ExtractFileName(TntOpenDialog.FileName) ;
+    // else
     end;
 end;
 

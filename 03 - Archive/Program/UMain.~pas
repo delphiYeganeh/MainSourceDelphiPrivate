@@ -1141,6 +1141,7 @@ begin
    end;
 
     { TODO -oparsa : 14030524-bug340 }
+    (*
     _AllowToEditWordFiles := True;
     Dm.qtemp.Close;
     Dm.qtemp.SQL.Clear;
@@ -1148,7 +1149,7 @@ begin
     Dm.qtemp.Open;
     if Dm.qtemp.FieldByName('IsCopy').AsString <> '' then
       _AllowToEditWordFiles:= not Dm.qtemp.FieldByName('IsCopy').AsBoolean;
-
+               *)
     { TODO -oparsa : 14030524-bug340 }
 
    with Dm.Get_All_Letter do
@@ -2460,8 +2461,13 @@ begin
   if s = '' then
     Exit;
 
-  Result := '(RTRIM(LTRIM(REPLACE(REPLACE(AttachTitle, NCHAR(1740), NCHAR(1610)), NCHAR(1705), NCHAR(1603)))) Like (RTRIM(LTRIM(REPLACE(REPLACE(''%' +
-            s + '%'', NCHAR(1740), NCHAR(1610)), NCHAR(1705), NCHAR(1603))))))';
+  { TODO -oparsa : 14030708 }
+  //Result := '(RTRIM(LTRIM(REPLACE(REPLACE(AttachTitle, NCHAR(1740), NCHAR(1610)), NCHAR(1705), NCHAR(1603)))) Like (RTRIM(LTRIM(REPLACE(REPLACE(''%' +
+  //            s + '%'', NCHAR(1740), NCHAR(1610)), NCHAR(1705), NCHAR(1603))))))';
+  Result := ' ( LetterID IN (SELECT LETTERID FROM dbo.LetterData LD WHERE  RTRIM(LTRIM(REPLACE(REPLACE(LD.Description , NCHAR(1740), NCHAR(1610)), NCHAR(1705), NCHAR(1603)))) Like (RTRIM(LTRIM(REPLACE(REPLACE(''%' +
+              s + '%'', NCHAR(1740), NCHAR(1610)), NCHAR(1705), NCHAR(1603))))))  )';
+  { TODO -oparsa : 14030708 }
+
 
   //Result:=' (AttachTitle Like ''%'+ S1 +'%'') ';
 end;
@@ -2539,7 +2545,7 @@ var
   i : byte;
 begin
   Initialize;
-  items:=TStringList.Create;
+  items := TStringList.Create;
   condition:='';
   with items do
   begin
@@ -2565,7 +2571,7 @@ begin
         else
           condition := condition +' and '+ items[i];
   end;
-  MainForm.Where:=Condition;
+  MainForm.Where:= Condition;
   //ShowMessage(MainForm.Condition);
 end;
 

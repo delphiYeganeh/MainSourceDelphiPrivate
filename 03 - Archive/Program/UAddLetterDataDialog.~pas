@@ -88,7 +88,7 @@ Var
 begin
 
    { TODO -oparsa : 14030126 }
-   if (dm.Get_LetterData_by_LetterID.State in (dsInsert)) then
+   if (dm.Get_LetterData_by_LetterID.State in [dsInsert]) then
      dm.Get_LetterData_by_LetterID.Post;
    { TODO -oparsa : 14030126 }
  //   ID := Dm.Get_LetterData_by_LetterIDLetterDataID.AsInteger;

@@ -2461,8 +2461,13 @@ begin
   if s = '' then
     Exit;
 
-  Result := '(RTRIM(LTRIM(REPLACE(REPLACE(AttachTitle, NCHAR(1740), NCHAR(1610)), NCHAR(1705), NCHAR(1603)))) Like (RTRIM(LTRIM(REPLACE(REPLACE(''%' +
-            s + '%'', NCHAR(1740), NCHAR(1610)), NCHAR(1705), NCHAR(1603))))))';
+  { TODO -oparsa : 14030708 }
+  //Result := '(RTRIM(LTRIM(REPLACE(REPLACE(AttachTitle, NCHAR(1740), NCHAR(1610)), NCHAR(1705), NCHAR(1603)))) Like (RTRIM(LTRIM(REPLACE(REPLACE(''%' +
+  //            s + '%'', NCHAR(1740), NCHAR(1610)), NCHAR(1705), NCHAR(1603))))))';
+  Result := ' ( Letter.LetterID IN (SELECT LETTERID FROM dbo.LetterData LD WHERE  RTRIM(LTRIM(REPLACE(REPLACE(LD.Description , NCHAR(1740), NCHAR(1610)), NCHAR(1705), NCHAR(1603)))) Like (RTRIM(LTRIM(REPLACE(REPLACE(''%' +
+              s + '%'', NCHAR(1740), NCHAR(1610)), NCHAR(1705), NCHAR(1603))))))  )';
+  { TODO -oparsa : 14030708 }
+
 
   //Result:=' (AttachTitle Like ''%'+ S1 +'%'') ';
 end;
@@ -2540,7 +2545,7 @@ var
   i : byte;
 begin
   Initialize;
-  items:=TStringList.Create;
+  items := TStringList.Create;
   condition:='';
   with items do
   begin
@@ -2566,7 +2571,7 @@ begin
         else
           condition := condition +' and '+ items[i];
   end;
-  MainForm.Where:=Condition;
+  MainForm.Where:= Condition;
   //ShowMessage(MainForm.Condition);
 end;
 
