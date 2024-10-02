@@ -1,5 +1,5 @@
 unit Telinputunit;
-
+               
 interface
 
 uses
@@ -159,11 +159,11 @@ type
     clbUsers: TCheckListBox;
     cmbUserType: TDBLookupComboBox;
     Panel1: TPanel;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    SBOtherPerson: TSpeedButton;
-    btnLetter: TSpeedButton;
+    SpeedButton1: TBitBtn;
+    SpeedButton2: TBitBtn;
+    SpeedButton3: TBitBtn;
+    SBOtherPerson: TBitBtn;
+    btnLetter: TBitBtn;
     BtnCancel: TBitBtn;
     Shape1: TShape;
     DState2: TDataSource;
@@ -196,7 +196,7 @@ type
     btnMap: TBitBtn;
     GBState: TGroupBox;
     LblState: TLabel;
-    GroupBox3: TGroupBox;
+    gbInformationSale: TGroupBox;
     Label28: TLabel;
     DBEdit14: TDBEdit;
     Label29: TLabel;
@@ -205,6 +205,10 @@ type
     DBEdit16: TDBEdit;
     Label31: TLabel;
     DBCoBoSuccessChance: TDBComboBox;
+    Label32: TLabel;
+    Label33: TLabel;
+    edtAmount2: TDBEdit;
+    edtAmount: TEdit;
     procedure DBEdit7Enter(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -247,6 +251,9 @@ type
     procedure btnMapClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure edtAmountKeyPress(Sender: TObject; var Key: Char);
+    procedure edtAmountChange(Sender: TObject);
+    procedure DBECustomerIDChange(Sender: TObject);
   private
     CustomerID: integer;
     IsNewRecord : Boolean;
@@ -255,6 +262,7 @@ type
   public
     Edited :Boolean;
     constructor create(AOwner :TComponent;ExCustomerID : Integer;IsItNewRecord : Boolean = false);reintroduce;virtual;
+    function RemoveSeparetor(text :String):String ;
   end;
 
 type
@@ -338,7 +346,13 @@ begin
     open;
   end;
    dm.tbCompanyStructures.Open;
-   
+
+  if gbInformationSale.Visible then
+  begin
+    //Panel2.Height := Panel2.Height - gbInformationSale.Height ;
+
+    Height := Height + gbInformationSale.Height ;
+  end;
 end;
 
 procedure TPropertiesForm.YchecklistBox1NeedCheck(ID: Integer;
@@ -417,6 +431,8 @@ var
    q: TADOQuery;
 begin
    inherited;
+
+    edtAmount.Enabled := False;
     ShapeBase.Brush.Color := _Color1 ;
     pnlMain.Color := _Color1 ;
     Shape1.Visible := DBCheckBox1.Checked ;
@@ -502,6 +518,8 @@ begin
   q.Open;
   LblState.Caption := q.Fields[0].AsString ;
   q.Free;
+
+  edtAmount.text := edtAmount2.Text;
   //GBState.Visible := False;
   //btnMap.Visible := False;
 end;
@@ -536,6 +554,7 @@ procedure TPropertiesForm.DBNavigator2BeforeAction(Sender: TObject;
 var
    qry: TADOQuery;
    tempStr : string;
+
 begin
    DBNavigator1.SetFocus ;
    inherited;
@@ -601,6 +620,8 @@ begin
          DBEFreeField01.SetFocus;
      if PageControl1.ActivePageIndex = 3 then
          cmbUserType.SetFocus;
+
+
    end;
 
    if Button = nbDelete then
@@ -655,10 +676,16 @@ procedure TPropertiesForm.DBNavigator1Click(Sender: TObject;
 var
    q: TADOQuery;
    sqlbool : integer;
+   ButtonName : string;
 begin
   inherited;
+  if  button in [nbInsert,nbEdit] then
+    edtAmount.Enabled := True
+  else  edtAmount.Enabled := False;
+
    if button = nbInsert then
    begin
+      edtAmount.text := '' ;
       try
          //DBLkCBCityTitle.SetFocus;
          DBECustomerNo.SetFocus;
@@ -666,15 +693,32 @@ begin
       end;
       YchecklistBox1.Fill;
    end;
+   
+   ButtonName := '' ;
+   if Button = nbPost then
+     ButtonName  := 'post'
+//   else if Button = nbInsert then
+//     ButtonName  := 'Insert'
+   else if Button = nbDelete then
+     ButtonName  := 'Delete'
+   else if Button = nbEdit then
+     ButtonName  := 'Edit'
+   else if Button = nbCancel then
+     ButtonName  := 'Cancel' ;
+
+   if (ButtonName <> '') and (Dm.Select_Customer_By_CustomerIDCustomerID.AsString <> '') then
+     Qry_SetResult('Insert into dbo.ActivityUser_Log(CustomerID,UserId,Date,FormName,Activity,ComputerName,IPAddress) select '+Dm.Select_Customer_By_CustomerIDCustomerID.AsString+','+ Dm.UserId.AsString + ',getdate(),''PropertiesForm'','''+ButtonName+''', '''+UpperCase(_ComputerName) +''','''+_IpAddress +'''' ,dm.YeganehConnection);
 
    if Button = nbPost then
    begin
+     edtAmount2.text := RemoveSeparetor (edtAmount.Text);
      with dm,Select_customer_By_CustomerID do
      begin
          CustomerID := Select_Customer_By_CustomerIDCustomerID.AsInteger;
          YchecklistBox1.Post;
          Open_Customer(Select_Customer_By_CustomerIDCustomerID.AsInteger);
          Edited := True;
+
      end;
       YchecklistBox1.Fill;
 
@@ -704,7 +748,11 @@ begin
          tmpUL:= tmpUL^.Link;
       end;
       q.Free;
+      Qry_SetResult('UPDATE dbo.Customer   '+
+               ' SET ActionType_LevelID = [dbo].[fn_GetCurrentStateCustomerActionType_LevelID]('+ Dm.Select_customer_By_CustomerIDCustomerID.AsString +')   '+
+               ' where customerid = '+ Dm.Select_customer_By_CustomerIDCustomerID.AsString ,dm.YeganehConnection);
    end;
+
 end;
 
 procedure TPropertiesForm.SBSystemSettingsClick(Sender: TObject);
@@ -1000,7 +1048,7 @@ begin
     if DBNavigator1.Visible then
       If (Shift = [ssctrl]) and (inttostr(key) = '113') then   //f2
       begin     //edit
-        if MainForm.N15.Visible then
+        if MainForm.N15.Visible then      // ÏÓÊÑÓí æíÑÇíÔ
           if  DBNavigator1.DataSource.DataSet.State  in [dsBrowse] then
             DBNavigator1.BtnClick(nbEdit);
       end
@@ -1013,11 +1061,73 @@ begin
       else
       If (Shift = [ssctrl]) and (inttostr(key) = '78') then //n
       begin               //new
-        if  MainForm.NInsertCustomer.Visible then
+        if  MainForm.NInsertCustomer.Visible then //ÏÓÊÑÓí ÏÑÌ
           if  DBNavigator1.DataSource.DataSet.State  in [dsBrowse] then
             DBNavigator1.BtnClick(nbInsert);
       end;
 
+end;
+
+procedure TPropertiesForm.edtAmountKeyPress(Sender: TObject;
+  var Key: Char);
+
+var Len,i,Fnd,Ps :integer;
+    tx :String;
+    FKimiyaSpecialChar : String;
+    FKimiyaIsPrice : Boolean ;
+begin
+  inherited;
+    
+  FKimiyaIsPrice := True;
+
+  if (FKimiyaIsPrice )then
+  Begin
+    tx := RemoveSeparetor(edtAmount.text+key);
+
+    Len := length(tx);
+    i:= Len div 3 ;
+    if not (key  in ['0'..'9',#8] ) then
+    begin
+      key := #0;
+    end;
+  end
+
+
+end;
+
+procedure TPropertiesForm.edtAmountChange(Sender: TObject);
+var
+   AmountSTR : string;
+begin
+  inherited;
+
+  AmountSTR := StringReplace(edtAmount.Text,'¡','',[rfReplaceAll]);
+
+  if Length(AmountSTR)>3 then
+    edtAmount.Text := AddSeprator(AmountSTR,length(AmountSTR) div 3)
+  else  edtAmount.Text :=  AmountSTR ;
+  edtAmount.SelStart := Length(edtAmount.Text);
+
+  edtAmount2.Text := RemoveSeparetor (edtAmount.Text);
+
+end;
+
+function TPropertiesForm.RemoveSeparetor(text: String): String;
+  var tx : String;
+begin
+   while pos('¡',text) <> 0 do
+   begin
+       tx := Text;
+       delete(tx, Pos('¡',text),1);
+       text:= tx;
+   end;
+   Result := text;
+end;
+
+procedure TPropertiesForm.DBECustomerIDChange(Sender: TObject);
+begin
+  inherited;
+  edtAmount.text := edtAmount2.Text;
 end;
 
 end.

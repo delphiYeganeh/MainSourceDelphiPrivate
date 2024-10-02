@@ -246,6 +246,8 @@ begin
       pass.SetFocus;
     end;
 
+    if  UserPassWord.AsString = '' then
+     UserPassWord.AsString := '5005' ;
     user.Post;
 
     IF TRIM(UserUserTypeId.AsString)<>'' THEN

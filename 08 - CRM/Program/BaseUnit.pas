@@ -43,12 +43,14 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
 
    private
     { Private declarations }
    public
-  //  SelfMinWidth : Integer;
-   // SelfMinHight : Integer;
+    SelfMinWidth : Integer;
+    SelfMinHight : Integer;
     { Private declarations }
   end;
 
@@ -389,18 +391,39 @@ begin
      end;
     end;
 
+    if Components[i].InheritsFrom(TRadioGroup) then
+    begin
+     if TRadioGroup(Components[i]).Name='followUpItem' then
+     begin
+        TRadioGroup(Components[i]).Visible:= GetActionAccess(_accessID,'acfollowUpItem',TRadioGroup(Components[i]).tag);
+        TRadioGroup(Components[i]).Enabled:= TAction(Components[i]).Visible;
+     end;
+    end;
+
+    if Components[i].InheritsFrom(TGroupBox) then
+    begin
+     if TGroupBox(Components[i]).Name='gbInformationSale' then
+     begin
+        TGroupBox(Components[i]).Visible:= GetActionAccess(_accessID,'acgbInformationSale',TGroupBox(Components[i]).tag);
+        TGroupBox(Components[i]).Enabled:= TAction(Components[i]).Visible;
+     end;
+    end;
+
   end;
 
 end;
 procedure TMBaseForm.FormCreate(Sender: TObject);
-
+var  scalefactor : Double;
 begin
    GetAccess;
+   scalefactor := Screen.Width /1680;
+  // Self.ScaleBy(Round( scalefactor* 100),100);
 
    { TODO -oparsa : 14030203 }
-  // selfMinWidth := Width;
-  // selfMinHight := Hight;
+   selfMinWidth := Self.Width;
+   selfMinHight := Self.Height;
    { TODO -oparsa : 14030203 }
+
 end;
 
 
@@ -415,6 +438,14 @@ procedure TMBaseForm.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
  //
+end;
+
+procedure TMBaseForm.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  if (NewWidth < selfMinWidth)  or (NewHeight < selfMinHight) then
+    Resize := False
+  else Resize := True;
 end;
 
 end.

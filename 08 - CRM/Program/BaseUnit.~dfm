@@ -14,6 +14,7 @@ object MBaseForm: TMBaseForm
   OldCreateOrder = False
   ParentBiDiMode = False
   Position = poScreenCenter
+  OnCanResize = FormCanResize
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown

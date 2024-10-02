@@ -9991,6 +9991,12 @@ object Dm: TDm
         DataType = ftString
         Size = 2
         Value = #39#39
+      end
+      item
+        Name = '@ActionType_LevelID'
+        DataType = ftInteger
+        Size = 16
+        Value = 0
       end>
     Left = 583
     Top = 118
@@ -10377,6 +10383,15 @@ object Dm: TDm
     object CustomerOtherPerson: TBooleanField
       FieldName = 'OtherPerson'
     end
+    object CustomerComputerName: TStringField
+      FieldName = 'ComputerName'
+      Size = 50
+    end
+    object CustomerIPAddress: TStringField
+      DisplayWidth = 50
+      FieldName = 'IPAddress'
+      Size = 50
+    end
   end
   object SystemSettings: TADODataSet
     Connection = YeganehConnection
@@ -10510,16 +10525,16 @@ object Dm: TDm
   end
   object DDoneStatus: TDataSource
     DataSet = DoneStatus
-    Left = 556
-    Top = 223
+    Left = 780
+    Top = 151
   end
   object DoneStatus: TADOTable
     Connection = YeganehConnection
     CursorType = ctStatic
     CommandTimeout = 300
     TableName = 'DoneStatus'
-    Left = 540
-    Top = 197
+    Left = 780
+    Top = 101
     object DoneStatusDoneStatusID: TWordField
       FieldName = 'DoneStatusID'
     end
@@ -10668,7 +10683,7 @@ object Dm: TDm
       Alignment = taRightJustify
       FieldKind = fkLookup
       FieldName = 'DoneStatusTitle'
-      LookupDataSet = DoneStatus
+      LookupDataSet = DoneStatusShow
       LookupKeyFields = 'DoneStatusID'
       LookupResultField = 'DoneStatustitle'
       KeyFields = 'DoneStatusID'
@@ -10740,6 +10755,27 @@ object Dm: TDm
     end
     object Select_FollowUP_By_CustomerIDFTPSpace: TBooleanField
       FieldName = 'FTPSpace'
+    end
+    object Select_FollowUP_By_CustomerIDDoneStatusTitleAll: TStringField
+      FieldKind = fkLookup
+      FieldName = 'DoneStatusTitleAll'
+      LookupDataSet = DoneStatus
+      LookupKeyFields = 'DoneStatusID'
+      LookupResultField = 'DoneStatustitle'
+      KeyFields = 'DoneStatusID'
+      Size = 100
+      Lookup = True
+    end
+    object Select_FollowUP_By_CustomerIDParentMarketerID: TIntegerField
+      FieldName = 'ParentMarketerID'
+    end
+    object Select_FollowUP_By_CustomerIDComputerName: TStringField
+      FieldName = 'ComputerName'
+      Size = 50
+    end
+    object Select_FollowUP_By_CustomerIDIPAddress: TStringField
+      FieldName = 'IPAddress'
+      Size = 50
     end
   end
   object DSelect_FollowUP_By_CustomerID: TDataSource
@@ -11851,6 +11887,18 @@ object Dm: TDm
     object Select_Customer_By_CustomerIDCustomerSuccessChance: TSmallintField
       FieldName = 'CustomerSuccessChance'
     end
+    object Select_Customer_By_CustomerIDPriceestimate: TFloatField
+      FieldName = 'Priceestimate'
+      DisplayFormat = '###'#1548'###.##'
+    end
+    object Select_Customer_By_CustomerIDComputerName: TStringField
+      FieldName = 'ComputerName'
+      Size = 50
+    end
+    object Select_Customer_By_CustomerIDIPAddress: TStringField
+      FieldName = 'IPAddress'
+      Size = 50
+    end
   end
   object Report_Contract: TADOStoredProc
     Connection = YeganehConnection
@@ -12474,6 +12522,12 @@ object Dm: TDm
     object ProductavgFollouwup: TIntegerField
       FieldName = 'avgFollouwup'
     end
+    object ProductShowInSale: TBooleanField
+      FieldName = 'ShowInSale'
+    end
+    object ProductOrderId: TIntegerField
+      FieldName = 'OrderId'
+    end
   end
   object ContractType: TADODataSet
     Connection = YeganehConnection
@@ -12562,7 +12616,7 @@ object Dm: TDm
     CursorType = ctStatic
     CommandTimeout = 1200
     Parameters = <>
-    Left = 368
+    Left = 456
     Top = 704
     object ActionTypeByUserTypeActionTypeID: TAutoIncField
       FieldName = 'ActionTypeID'
@@ -14463,9 +14517,7 @@ object Dm: TDm
     Parameters = <>
     SQL.Strings = (
       'Select * '
-      'from ActionType_Level'
-      'WHERE LEVEL=1'
-      'Order By ParentID,OrderId')
+      'from [dbo].[VWActionType_Level_Detail]')
     Left = 1052
     Top = 397
     object qryActionType_LevelID: TIntegerField
@@ -14495,5 +14547,27 @@ object Dm: TDm
     DataSet = qryActionType_Level
     Left = 1120
     Top = 392
+  end
+  object DDoneStatusShow: TDataSource
+    DataSet = DoneStatusShow
+    Left = 876
+    Top = 143
+  end
+  object DoneStatusShow: TADOQuery
+    Connection = YeganehConnection
+    CommandTimeout = 300
+    Parameters = <>
+    SQL.Strings = (
+      'select * from [dbo].[DoneStatus]'
+      'where DoneStatusID < 3')
+    Left = 872
+    Top = 96
+    object DoneStatusShowDoneStatusID: TIntegerField
+      FieldName = 'DoneStatusID'
+    end
+    object DoneStatusShowDoneStatustitle: TStringField
+      FieldName = 'DoneStatustitle'
+      Size = 50
+    end
   end
 end

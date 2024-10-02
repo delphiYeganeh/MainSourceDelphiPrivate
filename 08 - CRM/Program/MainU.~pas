@@ -461,6 +461,7 @@ type
     N93: TMenuItem;
     Label47: TLabel;
     dblActionType_Level: TDBLookupComboBox;
+    N94: TMenuItem;
     procedure AinsertExecute(Sender: TObject);
     procedure Action6Execute(Sender: TObject);
     procedure ApropertyExecute(Sender: TObject);
@@ -714,6 +715,9 @@ type
     procedure N93Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure dblActionType_LevelKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure N94Click(Sender: TObject);
 
   private
     qrydblsrchContractType :TADOQuery;
@@ -769,7 +773,7 @@ Uses Telinputunit, dmu,  about, Report, ReportPhone,
   UVersionProduct, URefrenceInPerson, UToRefer, UUpdateJobStatus,
   UTaskReport, UBaseRefere, UfollowUpReport, UFMessageAlarm, UReferralUser,
   USendInnerMessage, USalesFunnel, UActionTypeLevel, UCustomerMap,UMapBug,
-  UCompare_Report;
+  UCompare_Report, UTimeIntervalSale;
 
 {$R *.dfm}
 
@@ -842,7 +846,7 @@ begin
 
    WindowState:=WSmaximized;
    dm.Product.Locate('ProductID',_ProductID,[]);
-   StatusBar1.Panels[1].Text:=dm.ProductProductTitle.AsString;
+   StatusBar1.Panels[1].Text:= dm.ProductProductTitle.AsString;
    BDate.Text :=copy(_today,1,8)+'01';
    eDate.Text :=copy(_today,1,8)+'29' ;
    { TODO -oparsa : 14030201 }
@@ -902,11 +906,14 @@ procedure TMainForm.ADeleteExecute(Sender: TObject);
 var checkErr: Integer;
 begin
 
-   if MessageDlg('¬Ì« «“ Õ–› «Ì‰ «ÿ·«⁄«  «ÿ„Ì‰«‰ œ«—Ìœø',mtConfirmation,[mbyes,mbno],0)=mryes then
+   //if MessageDlg('¬Ì« «“ Õ–› «Ì‰ «ÿ·«⁄«  «ÿ„Ì‰«‰ œ«—Ìœø',mtConfirmation,[mbyes,mbno],0)=mryes then
+   if MessageDlg(' ¬Ì« «“ Õ–› „‘ —Ì ' +'('+Dm.CustomerCustomerID.AsString+')'+ ' «ÿ„Ì‰«‰ œ«—Ìœø ' ,mtConfirmation,[mbyes,mbno],0)=mryes then
    begin
        checkErr:= Open_CheckCustomer(Dm.CustomerCustomerID.Value).FieldByName('ERROR').Value;
          if checkErr = 0 then
          begin
+          Qry_SetResult('Insert into dbo.ActivityUser_Log(CustomerID,UserId,Date,FormName,Activity,ComputerName,IPAddress) select '+Dm.CustomerCustomerID.AsString+','+ Dm.UserId.AsString + ',getdate(),''MenuDeleteCustomer'','''+'Delete'+''', '''+UpperCase(_ComputerName) +''','''+_IpAddress +'''' ,dm.YeganehConnection);
+
           Qry_SetResult('Delete From customer where CustomerId = '+ Dm.CustomerCustomerID.AsString,Dm.YeganehConnection);
           RefreshCustomer;
          end
@@ -1016,8 +1023,8 @@ begin
    End;
     *)
    SetMarketerRate;
-   StatusBar1.Panels[4].Text:='ò«—»— :'+_UserName;
-   StatusBar1.Panels[0].Text :='‰”ŒÂ :'+ _SoftVersion+COPY(_SoftVersionDB,1,1)+'.'+ COPY(_SoftVersionDB,2,1);
+   StatusBar1.Panels[4].Text :='ò«—»— : '+_UserName;
+   StatusBar1.Panels[0].Text :='‰”ŒÂ : '+ _SoftVersion ; //+COPY(_SoftVersionDB,1,1)+'.'+ COPY(_SoftVersionDB,2,1);
    CalcRecourdCount;
    try
       lblCompanyName.Caption := GetSystemSetting('CompanyName');
@@ -1675,6 +1682,7 @@ begin
   OnlyCurrentMarketer.Checked:=false;
   dblProduct.KeyValue :=null;
   dblCustomerStatus.KeyValue :=null;
+  dblActionType_Level.KeyValue := null;
   SearchEdit.Text :='';
   gsrcCustomerStatusId := 0;
   gsrcProductId := 0;
@@ -1871,7 +1879,7 @@ end;
 procedure TMainForm.N38Click(Sender: TObject);
 begin
    inherited;
-   AccessForm:=TAccessForm.Create(Application);
+   AccessForm := TAccessForm.Create(Application);
    AccessForm.ShowModal;
    if Assigned(AccessForm) then
      FreeAndNil(AccessForm);
@@ -3096,23 +3104,28 @@ begin
    DBGrid_SaveColumns(Self.Name,ContractGrid);
    DBGrid_SaveColumns(Self.Name,dbgMyTasks);
    DBGrid_SaveColumns(Self.Name,PinFollowGrid);
+  Qry_SetResult('UPDATE dbo.Users SET LastLogOutDateTime = getdate()  WHERE ID = '+Dm.UserId.AsString ,dm.YeganehConnection);
+  Qry_SetResult('Insert into dbo.User_LogIn_Log(UserId,logOut,ComputerName,IPAddress) select '+ Dm.UserId.AsString + ',getdate(),'''+UpperCase(_ComputerName) +''','''+_IpAddress +'''' ,dm.YeganehConnection);
 end;
 
 procedure TMainForm.acShowUserSequenceExecute(Sender: TObject);
 begin
   inherited;
 //  if FUsersSequence=nil then
-  FUsersSequence:=TFUsersSequence.Create(Application);
+  FUsersSequence:= TFUsersSequence.Create(Application);
   FUsersSequence.ShowModal;
   if Assigned(FUsersSequence) then
     FreeAndNil(FUsersSequence);
 end;
 
 procedure TMainForm.SetActiveUserOnStatusBar;
+var AccessName : string;
 begin
   Dm.QGetActiveUser.Close;
   Dm.QGetActiveUser.Open;
-  StatusBar1.Panels[3].Text:='‰Ê» :'+dm.QGetActiveUserTitle.AsString;
+  //StatusBar1.Panels[3].Text:='‰Ê» :'+dm.QGetActiveUserTitle.AsString;
+  AccessName := Dm.GetSql(' select top 1 isnull(PositionInCrm,title) from dbo.Accesses where Id ='+ IntToStr( _accessID));
+  StatusBar1.Panels[3].Text:='”„  : '+ AccessName;
 end;
 
 procedure TMainForm.SetActiveUserTimer(Sender: TObject);
@@ -3222,6 +3235,10 @@ begin
   inherited;
    if Dm.DoneStatus.Active = false then
       Dm.DoneStatus.Open;
+
+   if Dm.DoneStatusShow.Active = false then
+      Dm.DoneStatusShow.Open;
+
    cboDoneStatus.Enabled := chkDoneStatus.Checked;
    cboDoneStatus.KeyValue := 1;
 end;
@@ -3376,6 +3393,11 @@ begin
       if dblProduct.KeyValue <> null then
         ParamByName('@ProductId').Value:= dblProduct.KeyValue
       else ParamByName('@ProductId').Value := 0;
+
+      if dblActionType_Level.KeyValue <> null then
+        ParamByName('@ActionType_LevelId').Value:= dblActionType_Level.KeyValue
+      else ParamByName('@ActionType_LevelId').Value := 0;
+
 
       //  ParamByName('@Email').Value:=edtEmail.Text;
 
@@ -4309,6 +4331,22 @@ begin
         BitBtn1Click(self);
     end;
   end;
+end;
+
+procedure TMainForm.dblActionType_LevelKeyUp(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  inherited;
+  SearchEditChange(Sender);
+end;
+
+procedure TMainForm.N94Click(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TFTimeIntervalSale, FTimeIntervalSale);
+  FTimeIntervalSale.Showmodal;
+  if Assigned(FTimeIntervalSale) then
+    FreeAndNil(FTimeIntervalSale);
 end;
 
 end.

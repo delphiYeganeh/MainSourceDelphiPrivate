@@ -5,7 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, Buttons, DB, ADODB, Grids, DBGrids, ActnList,Registry,
-  jpeg, {WinSkinData,} ComCtrls, xpBitBtn, dxGDIPlusClasses;
+  jpeg, {WinSkinData,} ComCtrls, xpBitBtn, dxGDIPlusClasses, Winsock;
+
+
 
 type
   TLoginForm = class(TForm)
@@ -66,6 +68,8 @@ type
     { Private declarations }
     function CenterInParent(Place,NumberOfPlaces,ObjectWidth,ParentWidth,CropPercent: Integer): Integer;
     procedure ScaleAllForms(const ScaleFactor: integer);
+    function GetIpAddress (): string ;
+    
   public
     { Public declarations }
   end;
@@ -80,7 +84,10 @@ var correct:boolean;
 {$R *.dfm}
 
 procedure TLoginForm.FormCreate(Sender: TObject);
+var  scalefactor : Double;
 begin
+  scalefactor := Screen.Width /1680;
+  Self.ScaleBy(Round( scalefactor* 100),100);
 
   correct:=false;
   //.Caption:=Dm.GetSystemValue(2);
@@ -95,10 +102,13 @@ procedure TLoginForm.BBOKClick(Sender: TObject);
 var
   StrVerLast : string ;
   textPassWord : string;
+  messageText : String ;
 begin
-  textPassWord := '' ;
-  textPassWord := Password.text ;
-
+  textPassWord  := '' ;
+  textPassWord  := Password.text ;
+  messageText   := '' ;
+  _ComputerName := Win_GetComputerName;
+  _IpAddress    := GetIPAddress;
   
   with dm.User do
   begin
@@ -126,7 +136,8 @@ begin
 
       if _SoftVersion <> StrVerLast then
       begin
-        ShowMessage(' áØÝÇ ÇÒ ÂÎÑíä äÓÎå äÑã ÇÝÒÇÑ ÇÓÊÝÇÏå äãÇííÏ ' + StrVerLast );
+        messageText := Qry_GetResult(' Select Isnull((SELECT Value FROM dbo.SystemSettings WHERE VariableId = 4 ),''áØÝÇ ÈÇ äÓÎå Ð˜Ñ ÔÏå æÇÑÏ ÔæíÏ -->'') ',dm.YeganehConnection);
+        ShowMessage( messageText +' ' + StrVerLast );
       end
       else
       if not dm.UserIsActive.AsBoolean then
@@ -135,8 +146,10 @@ begin
       end
       else
       begin
+
         //Qry_SetResult('UPDATE dbo.Users SET PassWord = ltrim(rtrim(NewPassWord)) WHERE isnull(LastVertionLogin,'''')= '''' and ID = '+Dm.UserId.AsString ,dm.YeganehConnection);
-        Qry_SetResult('UPDATE dbo.Users SET LastVertionLogin = '''+_SoftVersion+''' WHERE ID = '+Dm.UserId.AsString ,dm.YeganehConnection);
+        Qry_SetResult('UPDATE dbo.Users SET LastVertionLogin = '''+_SoftVersion+''' , LastLoginDateTime = getdate()  WHERE ID = '+Dm.UserId.AsString ,dm.YeganehConnection);
+        Qry_SetResult('Insert into dbo.User_LogIn_Log(UserId,LogIn,ComputerName,IPAddress) select '+ Dm.UserId.AsString + ',getdate(),'''+UpperCase(_ComputerName) +''','''+_IpAddress +'''' ,dm.YeganehConnection);
         alogin.Execute
       end;
     end;
@@ -214,6 +227,7 @@ begin
       _ManagerSupport    := UserManagerSupport.AsBoolean ;
       _ManagerOfficial   := UserManagerOfficial.AsBoolean ;
 
+
       if  _ThemTypeColor >0 then
       begin
         _Color1 := StringToColor( UserColor1.AsString );
@@ -284,7 +298,7 @@ begin
 // Self.ScaleBy(200,100);
 ////  Self.ScaleBy(_PercentScale,100);
 
-  Self.ScaleBy(Screen.PixelsPerInch,96);
+ ///// Self.ScaleBy(Screen.PixelsPerInch,96);
 
   StatusBar1.Panels[0].Text := _SoftVersion;//+COPY(_SoftVersionDB,1,1)+'.'+ COPY(_SoftVersionDB,2,1);
   try
@@ -435,5 +449,26 @@ begin
   end;
 
 end;
-  
+
+
+Function TLoginForm.GetIPAddress:String;
+type
+  pu_long = ^u_long;
+var
+  varTWSAData : TWSAData;
+  varPHostEnt : PHostEnt;
+  varTInAddr : TInAddr;
+  namebuf : Array[0..255] of char;
+begin
+  If WSAStartup($101,varTWSAData) <> 0 Then
+  Result := 'No. IP Address'
+  Else Begin
+    gethostname(namebuf,sizeof(namebuf));
+    varPHostEnt := gethostbyname(namebuf);
+    varTInAddr.S_addr := u_long(pu_long(varPHostEnt^.h_addr_list^)^);
+    Result := inet_ntoa(varTInAddr);
+  End;
+  WSACleanup;
+end;
+
 end.

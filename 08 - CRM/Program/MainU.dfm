@@ -1665,7 +1665,7 @@ inherited MainForm: TMainForm
             1191
             36)
           object xpBitBtn7: TBitBtn
-            Left = 834
+            Left = 877
             Top = 5
             Width = 100
             Height = 25
@@ -1716,7 +1716,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object xpBitBtn5: TBitBtn
-            Left = 731
+            Left = 774
             Top = 5
             Width = 100
             Height = 25
@@ -1767,7 +1767,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object xpBitBtn3: TBitBtn
-            Left = 937
+            Left = 980
             Top = 5
             Width = 100
             Height = 25
@@ -1818,7 +1818,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object BitBtn7: TBitBtn
-            Left = 1040
+            Left = 1083
             Top = 5
             Width = 109
             Height = 25
@@ -1869,7 +1869,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object BitBtn2: TBitBtn
-            Left = 628
+            Left = 671
             Top = 5
             Width = 100
             Height = 25
@@ -1920,7 +1920,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object pnlAllContract: TPanel
-            Left = -244
+            Left = -252
             Top = 3
             Width = 553
             Height = 31
@@ -2057,7 +2057,7 @@ inherited MainForm: TMainForm
               Text = '1300/01/01'#0
             end
             object BtnAllContract: TBitBtn
-              Left = 322
+              Left = 356
               Top = 1
               Width = 188
               Height = 25
@@ -3151,7 +3151,7 @@ inherited MainForm: TMainForm
               1191
               38)
             object Button22: TBitBtn
-              Left = 974
+              Left = 991
               Top = 5
               Width = 80
               Height = 25
@@ -3202,7 +3202,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button25: TBitBtn
-              Left = 893
+              Left = 910
               Top = 5
               Width = 80
               Height = 25
@@ -3253,7 +3253,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button18: TBitBtn
-              Left = 813
+              Left = 830
               Top = 5
               Width = 80
               Height = 25
@@ -3304,7 +3304,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button21: TBitBtn
-              Left = 733
+              Left = 750
               Top = 5
               Width = 80
               Height = 25
@@ -3355,7 +3355,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button23: TBitBtn
-              Left = 653
+              Left = 670
               Top = 5
               Width = 80
               Height = 25
@@ -3456,7 +3456,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object btnViwCustomer: TBitBtn
-              Left = 1055
+              Left = 1072
               Top = 5
               Width = 113
               Height = 25
@@ -3507,7 +3507,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object PnlAllAct: TPanel
-              Left = 88
+              Left = 82
               Top = 2
               Width = 443
               Height = 35
@@ -3692,7 +3692,7 @@ inherited MainForm: TMainForm
               end
             end
             object BitBtn9: TBitBtn
-              Left = -42
+              Left = -48
               Top = 5
               Width = 127
               Height = 25
@@ -4409,7 +4409,7 @@ inherited MainForm: TMainForm
             ParentFont = False
           end
           object BitBtn1: TBitBtn
-            Left = 1084
+            Left = 1088
             Top = 4
             Width = 95
             Height = 28
@@ -4455,7 +4455,7 @@ inherited MainForm: TMainForm
               3C85131A10280000000000000000000000000000000000000000}
           end
           object BitBtn3: TBitBtn
-            Left = 986
+            Left = 990
             Top = 4
             Width = 95
             Height = 28
@@ -4500,7 +4500,7 @@ inherited MainForm: TMainForm
               399A000000000000000000000000000000000000000000000000}
           end
           object BitBtn5: TBitBtn
-            Left = 674
+            Left = 678
             Top = 4
             Width = 95
             Height = 28
@@ -4585,7 +4585,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object btnContract: TBitBtn
-            Left = 888
+            Left = 892
             Top = 4
             Width = 95
             Height = 28
@@ -4670,7 +4670,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object btnCustomerReportX: TBitBtn
-            Left = 542
+            Left = 546
             Top = 4
             Width = 129
             Height = 28
@@ -4717,7 +4717,7 @@ inherited MainForm: TMainForm
           end
           object BitBtnCase: TBitBtn
             Tag = 1
-            Left = 400
+            Left = 404
             Top = 4
             Width = 139
             Height = 28
@@ -4804,7 +4804,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object btnMaps: TBitBtn
-            Left = 772
+            Left = 776
             Top = 4
             Width = 113
             Height = 28
@@ -6258,7 +6258,7 @@ inherited MainForm: TMainForm
             TabOrder = 14
             OnCloseUp = SearchEditChange
             OnKeyDown = DBLookUpKeyDown
-            OnKeyUp = dblCustomerStatusKeyUp
+            OnKeyUp = dblActionType_LevelKeyUp
           end
         end
       end
@@ -6291,7 +6291,7 @@ inherited MainForm: TMainForm
             Width = 100
           end
           item
-            Width = 150
+            Width = 200
           end
           item
             Width = 150
@@ -16107,6 +16107,10 @@ inherited MainForm: TMainForm
         Caption = #1711#1586#1575#1585#1588' '#1605#1585#1575#1581#1604' '#1601#1585#1608#1588'('#1602#1610#1601' '#1601#1585#1608#1588')'
         Visible = False
         OnClick = N80Click
+      end
+      object N94: TMenuItem
+        Caption = #1711#1586#1575#1585#1588' '#1601#1575#1589#1604#1607' '#1586#1605#1575#1606#1610' '#1605#1585#1575#1581#1604' '#1601#1585#1608#1588
+        OnClick = N94Click
       end
       object N81: TMenuItem
         Caption = '-'

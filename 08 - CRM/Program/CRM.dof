@@ -115,7 +115,7 @@ AutoIncBuild=0
 MajorVer=4
 MinorVer=0
 Release=0
-Build=2
+Build=4
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=1256
 [Version Info Keys]
 CompanyName=‘—ò  Ìê«‰Â
 FileDescription=CRM
-FileVersion=4.0.0.2
+FileVersion=4.0.0.4
 InternalName=
 LegalCopyright=
 LegalTrademarks=

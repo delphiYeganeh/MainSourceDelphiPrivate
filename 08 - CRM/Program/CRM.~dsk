@@ -1,37 +1,41 @@
 [Closed Files]
-File_0=SourceModule,'D:\matin\08 - CRM\Program\GroupsInp.pas',0,1,100,41,110,1,0
-File_1=SourceModule,'D:\matin\08 - CRM\Vcl\YShamsiDate.pas',0,1,1930,1,1938,0,0
-File_2=SourceModule,'D:\matin\08 - CRM\Program\ACC\SecendArtGroupFM.pas',0,1,75,9,88,1,0
-File_3=SourceModule,'D:\matin\08 - CRM\Program\marketer.pas',0,1,108,12,121,1,0
-File_4=SourceModule,'D:\matin\08 - CRM\Program\ACC\StoreFM.pas',0,1,45,12,58,1,0
-File_5=SourceModule,'D:\matin\08 - CRM\Program\Reports\USalesFunnel.pas',0,1,81,1,102,1,0
-File_6=SourceModule,'D:\matin\08 - CRM\Program\Reports\UfollowUpReport.pas',0,1,143,121,156,1,0
-File_7=SourceModule,'D:\matin\08 - CRM\Program\Reports\untCustStatusReport.pas',0,1,219,1,222,1,0
-File_8=SourceModule,'D:\matin\08 - CRM\Program\Reports\USaleReport.pas',0,1,364,1,387,1,0
+File_0=SourceModule,'D:\matin\08 - CRM\Program\Reports\UCompare_Report.pas',0,1,183,164,190,0,0
+File_1=SourceModule,'D:\matin\08 - CRM\Program\Reports\USalesFunnel.pas',0,1,1,1,1,1,0
+File_2=SourceModule,'D:\matin\08 - CRM\Program\Telinputunit.dfm',0,1,1,1,1,0,0
+File_3=SourceModule,'D:\matin\08 - CRM\Program\FmOtherPerson_U.pas',0,1,1,1,1,1,0
+File_4=SourceModule,'D:\matin\08 - CRM\Program\Basic\UActionTypeLevel.pas',0,1,431,88,447,1,0
+File_5=SourceModule,'D:\matin\08 - CRM\Program\userDefine.pas',0,1,180,39,187,1,0
+File_6=SourceModule,'D:\matin\08 - CRM\Program\LogOn.pas',0,1,186,7,209,1,0
+File_7=SourceModule,'D:\matin\08 - CRM\Program\UCase.pas',0,1,360,10,365,1,0
+File_8=SourceModule,'D:\matin\08 - CRM\Program\Basic\UCustomerMap.pas',0,1,133,55,143,1,0
 
 [Modules]
-Module0=D:\matin\08 - CRM\Program\UFollowUp.pas
-Module1=D:\matin\08 - CRM\Program\dmu.pas
-Module2=D:\matin\08 - CRM\Program\CRM.dpr
-Module3=D:\matin\08 - CRM\Program\Telinputunit.pas
-Module4=D:\matin\08 - CRM\YDbgrid.pas
-Module5=D:\matin\08 - CRM\Program\MainU.pas
-Module6=C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas
-Module7=c:\program files (x86)\borland\delphi7\source\vcl\dbctrls.pas
-Module8=c:\program files (x86)\borland\delphi7\source\rtl\Sys\system.pas
-Module9=D:\matin\08 - CRM\Program\Basic\UActionTypeLevel.pas
-Module10=D:\matin\08 - CRM\Program\USingleMessage.pas
-Module11=D:\matin\08 - CRM\Program\USMSEndContract.pas
-Module12=D:\matin\08 - CRM\Program\LogOn.pas
-Count=13
+Module0=D:\matin\08 - CRM\Program\Reports\UfollowUpReport.pas
+Module1=D:\matin\08 - CRM\Program\MainU.pas
+Module2=D:\matin\08 - CRM\Program\Reports\UTimeIntervalSale.pas
+Module3=D:\matin\08 - CRM\Program\CRM.dpr
+Module4=D:\matin\08 - CRM\Program\Telinputunit.pas
+Module5=D:\matin\08 - CRM\Program\UFollowUp.pas
+Module6=D:\matin\08 - CRM\Program\BusinessLayer.pas
+Module7=D:\matin\08 - CRM\Program\dmu.pas
+Module8=D:\matin\08 - CRM\Program\UContractAdd.pas
+Module9=D:\matin\08 - CRM\Program\UContract.pas
+Module10=C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas
+Module11=D:\matin\08 - CRM\Program\BaseUnit.pas
+Count=12
 EditWindowCount=1
 
-[D:\matin\08 - CRM\Program\UFollowUp.pas]
+[D:\matin\08 - CRM\Program\Reports\UfollowUpReport.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\08 - CRM\Program\dmu.pas]
+[D:\matin\08 - CRM\Program\MainU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\08 - CRM\Program\Reports\UTimeIntervalSale.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -46,12 +50,27 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\08 - CRM\YDbgrid.pas]
+[D:\matin\08 - CRM\Program\UFollowUp.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\08 - CRM\Program\BusinessLayer.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\matin\08 - CRM\Program\MainU.pas]
+[D:\matin\08 - CRM\Program\dmu.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\08 - CRM\Program\UContractAdd.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\08 - CRM\Program\UContract.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -61,37 +80,8 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[c:\program files (x86)\borland\delphi7\source\vcl\dbctrls.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[c:\program files (x86)\borland\delphi7\source\rtl\Sys\system.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[D:\matin\08 - CRM\Program\Basic\UActionTypeLevel.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\08 - CRM\Program\USingleMessage.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\08 - CRM\Program\USMSEndContract.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\08 - CRM\Program\LogOn.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
 [D:\matin\08 - CRM\Program\BaseUnit.pas]
+ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
@@ -99,13 +89,9 @@ FormOnTop=0
 FormState=0
 FormOnTop=0
 
-[D:\matin\08 - CRM\Program\ACC\SecendArtGroupDM.pas]
-FormState=0
-FormOnTop=0
-
 [EditWindow0]
-ViewCount=13
-CurrentView=7
+ViewCount=12
+CurrentView=2
 View0=0
 View1=1
 View2=2
@@ -118,7 +104,6 @@ View8=8
 View9=9
 View10=10
 View11=11
-View12=12
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -136,99 +121,92 @@ LeftPanelSize=0
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=00000400010000000C000000436F64654578706C6F726572000000000000000000000000000000000001000000000000000000000000FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=93
+BottomPanelSize=56
 BottomPanelClients=WatchWindow,MessageView@EditWindow0
-BottomPanelData=00000400010000000B000000576174636857696E646F77BD05000000000000025D000000000000000100000001000000000000000002000000009D000000000000000200000002B6060000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000100000000BD050000000000000100000000BD050000000000000100000000BD050000000000000100000000BD050000000000000100000000BD0500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=00000400010000000B000000576174636857696E646F77BD050000000000000238000000000000000100000001000000000000000002000000009D000000000000000200000002B6060000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000100000000BD0500000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=D:\matin\08 - CRM\Program\CRM.dpr
-CursorX=3
-CursorY=24
-TopLine=20
+CursorX=1
+CursorY=166
+TopLine=150
 LeftCol=1
 
 [View1]
 Module=D:\matin\08 - CRM\Program\MainU.pas
-CursorX=1
-CursorY=816
-TopLine=793
+CursorX=54
+CursorY=3130
+TopLine=3120
 LeftCol=1
 
 [View2]
-Module=D:\matin\08 - CRM\YDbgrid.pas
-CursorX=1
-CursorY=1334
-TopLine=1311
+Module=D:\matin\08 - CRM\Program\Reports\UfollowUpReport.pas
+CursorX=32
+CursorY=211
+TopLine=192
 LeftCol=1
 
 [View3]
-Module=c:\program files (x86)\borland\delphi7\source\rtl\Sys\system.pas
-CursorX=1
-CursorY=18
-TopLine=649
+Module=D:\matin\08 - CRM\Program\Reports\UTimeIntervalSale.pas
+CursorX=32
+CursorY=182
+TopLine=163
 LeftCol=1
 
 [View4]
-Module=D:\matin\08 - CRM\Program\USMSEndContract.pas
-CursorX=131
-CursorY=268
-TopLine=244
+Module=D:\matin\08 - CRM\Program\Telinputunit.pas
+CursorX=19
+CursorY=4
+TopLine=1
 LeftCol=1
 
 [View5]
-Module=D:\matin\08 - CRM\Program\USingleMessage.pas
-CursorX=69
-CursorY=173
-TopLine=156
+Module=D:\matin\08 - CRM\Program\BusinessLayer.pas
+CursorX=32
+CursorY=678
+TopLine=651
 LeftCol=1
 
 [View6]
-Module=D:\matin\08 - CRM\Program\Basic\UActionTypeLevel.pas
-CursorX=31
-CursorY=122
-TopLine=110
-LeftCol=1
-
-[View7]
-Module=D:\matin\08 - CRM\Program\UFollowUp.pas
-CursorX=37
-CursorY=1344
-TopLine=1339
-LeftCol=1
-
-[View8]
-Module=D:\matin\08 - CRM\Program\Telinputunit.pas
-CursorX=77
-CursorY=618
-TopLine=605
-LeftCol=1
-
-[View9]
 Module=C:\Program Files (x86)\TntWare\Delphi Unicode Controls\Source\TntForms.pas
-CursorX=46
-CursorY=769
+CursorX=1
+CursorY=767
 TopLine=744
 LeftCol=1
 
+[View7]
+Module=D:\matin\08 - CRM\Program\UContract.pas
+CursorX=42
+CursorY=724
+TopLine=718
+LeftCol=1
+
+[View8]
+Module=D:\matin\08 - CRM\Program\UContractAdd.pas
+CursorX=56
+CursorY=311
+TopLine=289
+LeftCol=1
+
+[View9]
+Module=D:\matin\08 - CRM\Program\UFollowUp.pas
+CursorX=65
+CursorY=1461
+TopLine=1443
+LeftCol=1
+
 [View10]
-Module=c:\program files (x86)\borland\delphi7\source\vcl\dbctrls.pas
-CursorX=45
-CursorY=837
-TopLine=817
+Module=D:\matin\08 - CRM\Program\BaseUnit.pas
+CursorX=55
+CursorY=25
+TopLine=21
 LeftCol=1
 
 [View11]
-Module=D:\matin\08 - CRM\Program\LogOn.pas
-CursorX=17
-CursorY=167
-TopLine=157
-LeftCol=1
-
-[View12]
 Module=D:\matin\08 - CRM\Program\dmu.pas
 CursorX=73
-CursorY=1617
-TopLine=1603
+CursorY=886
+TopLine=867
 LeftCol=1
 
 [Watches]
@@ -255,8 +233,12 @@ LRDockWidth=1180
 Dockable=1
 
 [Breakpoints]
-Count=1
-Breakpoint0='D:\matin\08 - CRM\Program\UFollowUp.pas',1345,'',0,1,'',1,0,0,'',1,'','',''
+Count=5
+Breakpoint0='D:\matin\08 - CRM\Program\UFollowUp.pas',487,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint1='D:\matin\08 - CRM\Program\MainU.pas',2701,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint2='D:\matin\08 - CRM\Program\UFollowUp.pas',397,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint3='D:\matin\08 - CRM\Program\userDefine.pas',203,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint4='D:\matin\08 - CRM\Program\UFollowUp.pas',520,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -328,78 +310,20 @@ Visible=1
 State=0
 Left=-3
 Top=490
-Width=447
+Width=463
 Height=524
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=431
+ClientWidth=447
 ClientHeight=485
 TBDockHeight=556
 LRDockWidth=190
 Dockable=1
-SplitPos=122
+SplitPos=118
 ArrangeBy=Name
-SelectedItem=OnKeyDown
-ExpandedItems=Anchors,Title
+SelectedItem=Action
+ExpandedItems=Anchors,Title,Title.Font,Title.Font.Style,Value
 HiddenCategories=
-
-[BreakpointWindow]
-Create=1
-Visible=0
-State=0
-Left=432
-Top=186
-Width=845
-Height=496
-MaxLeft=-1
-MaxTop=-1
-ClientWidth=829
-ClientHeight=457
-TBDockHeight=496
-LRDockWidth=845
-Dockable=1
-Column0Width=100
-Column1Width=75
-Column2Width=200
-Column3Width=200
-Column4Width=75
-Column5Width=75
-
-[CallStackWindow]
-Create=1
-Visible=0
-State=0
-Left=693
-Top=444
-Width=411
-Height=242
-MaxLeft=-1
-MaxTop=-1
-ClientWidth=395
-ClientHeight=203
-TBDockHeight=242
-LRDockWidth=411
-Dockable=1
-
-[ThreadStatusWindow]
-Create=1
-Visible=0
-State=0
-Left=488
-Top=289
-Width=624
-Height=387
-MaxLeft=-1
-MaxTop=-1
-ClientWidth=608
-ClientHeight=348
-TBDockHeight=387
-LRDockWidth=624
-Dockable=1
-Column0Width=145
-Column1Width=100
-Column2Width=115
-Column3Width=250
 
 [ObjectTree]
 Create=1
@@ -407,98 +331,14 @@ Visible=1
 State=0
 Left=-4
 Top=116
-Width=408
-Height=376
+Width=353
+Height=386
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=392
-ClientHeight=337
+ClientWidth=337
+ClientHeight=347
 TBDockHeight=370
 LRDockWidth=190
-Dockable=1
-
-[DebugLogView]
-Create=1
-Visible=0
-State=0
-Left=408
-Top=286
-Width=692
-Height=394
-MaxLeft=-1
-MaxTop=-1
-ClientWidth=676
-ClientHeight=355
-TBDockHeight=394
-LRDockWidth=692
-Dockable=1
-
-[LocalVarsWindow]
-Create=1
-Visible=0
-State=0
-Left=273
-Top=197
-Width=429
-Height=204
-MaxLeft=-1
-MaxTop=-1
-ClientWidth=413
-ClientHeight=165
-TBDockHeight=204
-LRDockWidth=429
-Dockable=1
-
-[FPUWindow]
-Create=1
-Visible=0
-State=0
-Left=271
-Top=248
-Width=788
-Height=333
-MaxLeft=-1
-MaxTop=-1
-ClientWidth=772
-ClientHeight=294
-RegisterPane=121
-FlagPane=59
-
-[ModuleWindow]
-Create=1
-Visible=0
-State=0
-Left=481
-Top=262
-Width=638
-Height=515
-MaxLeft=-1
-MaxTop=-1
-ClientWidth=622
-ClientHeight=476
-TBDockHeight=515
-LRDockWidth=638
-Dockable=1
-Column0Width=125
-Column1Width=100
-Column2Width=155
-EntryPointPane=108
-CompUnitPane=104
-
-[MessageHintFrm]
-Create=1
-Visible=0
-State=0
-Left=481
-Top=423
-Width=383
-Height=195
-MaxLeft=-1
-MaxTop=-1
-ClientWidth=367
-ClientHeight=156
-TBDockHeight=195
-LRDockWidth=383
 Dockable=1
 
 [fmGrepResults]
@@ -572,12 +412,12 @@ State=0
 Left=12
 Top=0
 Width=1457
-Height=93
+Height=56
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1457
-ClientHeight=93
-TBDockHeight=93
+ClientHeight=56
+TBDockHeight=56
 LRDockWidth=443
 Dockable=1
 

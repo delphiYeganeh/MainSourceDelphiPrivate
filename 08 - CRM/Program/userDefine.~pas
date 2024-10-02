@@ -211,6 +211,7 @@ begin
 
    qry := TADOQuery.Create(self);
    qry.Connection:= dm.YeganehConnection;
+   qry.CommandTimeout := 1200;
 
    qry.SQL.Text := 'Select id From dbo.Users Where  Username = '''+ DBEdit2.Text + '''  ';
    qry.Open;
@@ -304,10 +305,12 @@ var qrydblUserType :TADOQuery;
     ds : TDataSource;
 begin
   qrydblUserType := TADOQuery.Create(nil);
+
   ds := TDataSource.Create(nil);
     with qrydblUserType do
     begin
-    Connection := Dm.YeganehConnection;
+      Connection := Dm.YeganehConnection;
+      CommandTimeout := 1200;
       sql.Clear;
       SQL.Text := 'select UserTypeTitle,UserTypeID from UserType';
       open;

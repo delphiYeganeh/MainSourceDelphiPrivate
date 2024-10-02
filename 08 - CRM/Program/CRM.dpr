@@ -147,7 +147,8 @@ uses
   UActionTypeLevel in 'Basic\UActionTypeLevel.pas' {FActionTypeLevel},
   UCustomerMap in 'Basic\UCustomerMap.pas' {FCustomerMap},
   UMapBug in 'Reports\UMapBug.pas' {FMapBug},
-  UCompare_Report in 'Reports\UCompare_Report.pas' {FCompare_Report};
+  UCompare_Report in 'Reports\UCompare_Report.pas' {FCompare_Report},
+  UTimeIntervalSale in 'Reports\UTimeIntervalSale.pas' {FTimeIntervalSale};
 
 // ReCommiteDialog in 'ReCommitedialog.pas' {RecommiteSave};
 

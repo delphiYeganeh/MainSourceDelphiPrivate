@@ -428,7 +428,7 @@ inherited frCaseAdd: TfrCaseAdd
         160)
       object Label7: TLabel
         Left = 822
-        Top = 39
+        Top = 42
         Width = 53
         Height = 13
         Anchors = [akTop, akRight]
@@ -470,7 +470,7 @@ inherited frCaseAdd: TfrCaseAdd
       end
       object Label4: TLabel
         Left = 837
-        Top = 15
+        Top = 18
         Width = 38
         Height = 13
         Anchors = [akTop, akRight]
@@ -528,7 +528,7 @@ inherited frCaseAdd: TfrCaseAdd
       end
       object edtCaseTitle: TEdit
         Left = 232
-        Top = 35
+        Top = 38
         Width = 588
         Height = 21
         Anchors = [akLeft, akTop, akRight]
@@ -568,7 +568,7 @@ inherited frCaseAdd: TfrCaseAdd
       end
       object edtCaseID: TEdit
         Left = 667
-        Top = 11
+        Top = 14
         Width = 153
         Height = 21
         Anchors = [akTop, akRight]

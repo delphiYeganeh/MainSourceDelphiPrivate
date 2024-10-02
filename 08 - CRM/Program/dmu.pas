@@ -877,6 +877,20 @@ type
     qryActionType_LevelDescription: TStringField;
     qryActionType_LevelLevel: TIntegerField;
     qryActionType_LevelType: TIntegerField;
+    DDoneStatusShow: TDataSource;
+    DoneStatusShow: TADOQuery;
+    DoneStatusShowDoneStatusID: TIntegerField;
+    DoneStatusShowDoneStatustitle: TStringField;
+    Select_FollowUP_By_CustomerIDDoneStatusTitleAll: TStringField;
+    Select_FollowUP_By_CustomerIDParentMarketerID: TIntegerField;
+    ProductShowInSale: TBooleanField;
+    ProductOrderId: TIntegerField;
+    Select_Customer_By_CustomerIDComputerName: TStringField;
+    Select_Customer_By_CustomerIDIPAddress: TStringField;
+    Select_FollowUP_By_CustomerIDComputerName: TStringField;
+    Select_FollowUP_By_CustomerIDIPAddress: TStringField;
+    CustomerComputerName: TStringField;
+    CustomerIPAddress: TStringField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
     function GetSql(s:string):Variant;
     function GetNewCode:string;
@@ -923,7 +937,7 @@ type
     function  Post(param1:string): string;
     procedure tblMessagesCalcFields(DataSet: TDataSet);
     function  processExists(exeFileName: string): Boolean;    
-    function  KillTask(ExeFileName: string): Integer;    
+    function  KillTask(ExeFileName: string): Integer;
     { TODO -oparsa : 14030204 }
 
   private
@@ -1053,6 +1067,10 @@ Var
   _ManagerOfficial : Boolean ;
   _IsSystemUserID : Integer;
   _SoftVersion : string;
+  _ComputerName : string;
+  _IpAddress : string;
+
+
 
   { TODO -oparsa : 14030204 }
    //---
@@ -1060,7 +1078,7 @@ Var
 Const
      ProductID = 'Y_Crm';
     // _SoftVersion = '4.0.0.0' ;//'2.4.';
-    _LastUpdate = '1403/06/06'; //'1393/08/20';
+    _LastUpdate = '1403/07/04'; //'1393/08/20';
     CrmRegistryKey = 'Software\Yeganeh\CRM' ; 
     procedure SetQueryDataSet(var DataSourceQry :TDataSource;var ReturnQry :TADOQuery;SQLText :String;QryConnection:TADOConnection;Field0Alignment :Boolean = False);
     Function AddImageField(Field:TField;Dlgfilter:String):String;
@@ -1174,6 +1192,20 @@ begin
    LoginForm.ShowModal;
 
    Citys.Open;
+
+   if _accessID in [4,7] then //  ò«—»— ›—Ê‘
+   begin
+     Product.sql.Text := ' Select * From  dbo.Product  WITH(NOLOCK)  where ISNULL(ShowInSale,0) >0  order by OrderId ' ;
+
+   end
+   else
+   if _accessID in [10,11] then //  ò«—»— Ê«Õœ «œ«—Ì
+   begin
+     //
+
+   end;
+
+
    Product.Open;
    ActionType.Open;
 
@@ -2062,6 +2094,8 @@ begin
    DM.Select_Customer_By_CustomerIDGroupId.AsInteger := 1;
    DM.Select_Customer_By_CustomerIDCustomerStatusID.AsInteger := 1;
    DM.Select_Customer_By_CustomerIDMarketerID.AsInteger := _MarketerID;
+   DM.Select_Customer_By_CustomerIDComputerName.AsString := UpperCase(_ComputerName) ;
+   DM.Select_Customer_By_CustomerIDIPAddress.AsString    := _IpAddress ;
    //---
 end;
 
