@@ -891,6 +891,13 @@ type
     Select_FollowUP_By_CustomerIDIPAddress: TStringField;
     CustomerComputerName: TStringField;
     CustomerIPAddress: TStringField;
+    Select_FollowUP_By_CustomerIDMarketerTitleAll: TStringField;
+    MarketerMarketerIsDone: TBooleanField;
+    MarketerALLMarketerIsDone: TBooleanField;
+    MarketerALLIsActive_: TBooleanField;
+    Select_Customer_By_CustomerIDMarketerTitleAll: TStringField;
+    MarketerALLOrderByID: TIntegerField;
+    MarketerOrderByID: TIntegerField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
     function GetSql(s:string):Variant;
     function GetNewCode:string;
@@ -1078,7 +1085,7 @@ Var
 Const
      ProductID = 'Y_Crm';
     // _SoftVersion = '4.0.0.0' ;//'2.4.';
-    _LastUpdate = '1403/07/04'; //'1393/08/20';
+    _LastUpdate = '1403/07/16'; //'1393/08/20';
     CrmRegistryKey = 'Software\Yeganeh\CRM' ; 
     procedure SetQueryDataSet(var DataSourceQry :TDataSource;var ReturnQry :TADOQuery;SQLText :String;QryConnection:TADOConnection;Field0Alignment :Boolean = False);
     Function AddImageField(Field:TField;Dlgfilter:String):String;

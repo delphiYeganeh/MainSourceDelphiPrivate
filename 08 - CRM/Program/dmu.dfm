@@ -9847,8 +9847,8 @@ object Dm: TDm
   end
   object DMarketer: TDataSource
     DataSet = Marketer
-    Left = 257
-    Top = 223
+    Left = 265
+    Top = 231
   end
   object OpenDialog: TOpenDialog
     Filter = '*.doc'
@@ -9998,8 +9998,8 @@ object Dm: TDm
         Size = 16
         Value = 0
       end>
-    Left = 583
-    Top = 118
+    Left = 543
+    Top = 134
     object Customernickname: TWideStringField
       Alignment = taRightJustify
       FieldName = 'nickname'
@@ -10776,6 +10776,15 @@ object Dm: TDm
     object Select_FollowUP_By_CustomerIDIPAddress: TStringField
       FieldName = 'IPAddress'
       Size = 50
+    end
+    object Select_FollowUP_By_CustomerIDMarketerTitleAll: TStringField
+      FieldKind = fkLookup
+      FieldName = 'MarketerTitleAll'
+      LookupDataSet = MarketerALL
+      LookupKeyFields = 'MarketerID'
+      LookupResultField = 'MarketerTitle'
+      KeyFields = 'MarketerID'
+      Lookup = True
     end
   end
   object DSelect_FollowUP_By_CustomerID: TDataSource
@@ -11899,6 +11908,15 @@ object Dm: TDm
       FieldName = 'IPAddress'
       Size = 50
     end
+    object Select_Customer_By_CustomerIDMarketerTitleAll: TStringField
+      FieldKind = fkLookup
+      FieldName = 'MarketerTitleAll'
+      LookupDataSet = MarketerALL
+      LookupKeyFields = 'MarketerID'
+      LookupResultField = 'MarketerTitle'
+      KeyFields = 'MarketerID'
+      Lookup = True
+    end
   end
   object Report_Contract: TADOStoredProc
     Connection = YeganehConnection
@@ -12998,7 +13016,7 @@ object Dm: TDm
       '*/'
       ''
       'Select * from dbo.Users  WITH(NOLOCK) '
-      'where isactive = 1')
+      'where  isactive = 1')
     Left = 40
     Top = 176
     object UserByCaseFilterId: TAutoIncField
@@ -13247,10 +13265,10 @@ object Dm: TDm
     CommandTimeout = 300
     Parameters = <>
     SQL.Strings = (
-      'SELECT * FROM marketer'
+      'SELECT *  FROM  VW_Marketer'
       '')
-    Left = 248
-    Top = 200
+    Left = 264
+    Top = 192
     object MarketerMarketerID: TAutoIncField
       FieldName = 'MarketerID'
       ReadOnly = True
@@ -13275,11 +13293,17 @@ object Dm: TDm
     object MarketerIsActive_: TBooleanField
       FieldName = 'IsActive_'
     end
+    object MarketerMarketerIsDone: TBooleanField
+      FieldName = 'MarketerIsDone'
+    end
+    object MarketerOrderByID: TIntegerField
+      FieldName = 'OrderByID'
+    end
   end
   object DMarketerALL: TDataSource
     DataSet = MarketerALL
     Left = 321
-    Top = 223
+    Top = 231
   end
   object MarketerALL: TADOTable
     Connection = YeganehConnection
@@ -13287,7 +13311,7 @@ object Dm: TDm
     CommandTimeout = 300
     TableName = 'Marketer'
     Left = 321
-    Top = 197
+    Top = 189
     object MarketerALLMarketerID: TAutoIncField
       DisplayWidth = 12
       FieldName = 'MarketerID'
@@ -13317,6 +13341,15 @@ object Dm: TDm
     object MarketerALLOrgID: TIntegerField
       DisplayWidth = 12
       FieldName = 'OrgID'
+    end
+    object MarketerALLMarketerIsDone: TBooleanField
+      FieldName = 'MarketerIsDone'
+    end
+    object MarketerALLIsActive_: TBooleanField
+      FieldName = 'IsActive_'
+    end
+    object MarketerALLOrderByID: TIntegerField
+      FieldName = 'OrderByID'
     end
   end
   object QIsUserInSequenceList: TADOQuery

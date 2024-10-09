@@ -21,6 +21,9 @@ inherited frContractAdd: TfrContractAdd
     Height = 381
     Align = alClient
     TabOrder = 0
+    DesignSize = (
+      491
+      381)
     object Label5: TLabel
       Left = 165
       Top = 1
@@ -69,9 +72,9 @@ inherited frContractAdd: TfrContractAdd
       Caption = '%'
     end
     object Label9: TLabel
-      Left = 389
+      Left = 447
       Top = 276
-      Width = 86
+      Width = 28
       Height = 13
       Caption = #1605#1575#1604#1610#1575#1578
       Transparent = True
@@ -85,9 +88,9 @@ inherited frContractAdd: TfrContractAdd
       Transparent = True
     end
     object Label11: TLabel
-      Left = 390
+      Left = 408
       Top = 253
-      Width = 86
+      Width = 68
       Height = 13
       Caption = #1581#1587#1606' '#1575#1606#1580#1575#1605' '#1705#1575#1585
       Transparent = True
@@ -662,6 +665,16 @@ inherited frContractAdd: TfrContractAdd
         0000}
       NumGlyphs = 2
     end
+    object DBEAllMarketer: TDBEdit
+      Left = 241
+      Top = 6
+      Width = 150
+      Height = 17
+      Anchors = [akTop, akRight]
+      BorderStyle = bsNone
+      DataField = 'MarketerTitleAll'
+      TabOrder = 20
+    end
   end
   inherited DSForm: TDataSource
     Left = 16
@@ -669,18 +682,18 @@ inherited frContractAdd: TfrContractAdd
   end
   inherited ActionList: TActionList
     Left = 16
-    Top = 64
+    Top = 80
     inherited Aexit: TAction
       OnExecute = btnCancelClick
     end
   end
   object OpenDialog: TOpenDialog
-    Left = 12
-    Top = 125
+    Left = 28
+    Top = 133
   end
   object ppmContractDate: TPopupMenu
-    Left = 16
-    Top = 96
+    Left = 32
+    Top = 184
     object N1: TMenuItem
       Caption = #1610#1705' '#1587#1575#1604#1607
       OnClick = N1Click

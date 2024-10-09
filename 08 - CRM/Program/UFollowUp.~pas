@@ -126,7 +126,7 @@ type
     Label29: TLabel;
     SpeedButton11: TSpeedButton;
     DBLkCBActionTypeTitle: TDBLookupComboBox;
-    DBLookupComboBox1: TDBLookupComboBox;
+    DBLMarketerTitle: TDBLookupComboBox;
     DBMemoComment: TDBMemo;
     DBEdit11: TDBEdit;
     DBEdit9: TDBEdit;
@@ -218,6 +218,8 @@ type
     edtAmount: TDBEdit;
     Select_customer_By_CustomerIDPriceestimate: TFloatField;
     Label38: TLabel;
+    ALLMarketerTitleShow: TDBEdit;
+    ALLActionTypeTitleShow: TDBEdit;
     procedure btnWordViewClick(Sender: TObject);
     procedure btnAttachPicClick(Sender: TObject);
     procedure refreshData;
@@ -269,8 +271,8 @@ type
     procedure PinClick(Sender: TObject);
     procedure btnRefrenceInPersonClick(Sender: TObject);
     procedure btnFactorClick(Sender: TObject);
-    procedure DBLookupComboBox1Enter(Sender: TObject);
-    procedure DBLookupComboBox1Exit(Sender: TObject);
+    procedure DBLMarketerTitleEnter(Sender: TObject);
+    procedure DBLMarketerTitleExit(Sender: TObject);
     procedure BitBtn5Click(Sender: TObject);
     procedure BitBtn6Click(Sender: TObject);
     procedure BitBtn7Click(Sender: TObject);
@@ -860,7 +862,7 @@ begin
 
     Dm.Marketer.Close;
     Dm.Marketer.SQL.Clear;
-    Dm.Marketer.SQL.Add('SELECT * FROM dbo.marketer  WITH(NOLOCK) ');
+    Dm.Marketer.SQL.Add('SELECT * FROM dbo.VW_Marketer  WITH(NOLOCK) ');
     //////Dm.Marketer.SQL.Add('WHERE IsActive_=1');
     Dm.Marketer.Open;
 
@@ -1385,20 +1387,20 @@ begin
   else MessageDlg('·ÿ›« «ﬁœ«„ „Ê—œ ‰Ÿ— À»  ò‰Ìœ ”Å” ›«ò Ê— —« œ—Ã ‰„«ÌÌœ',mtConfirmation,[mbyes],0)
 end;
 
-procedure TFrFollowUp.DBLookupComboBox1Enter(Sender: TObject);
+procedure TFrFollowUp.DBLMarketerTitleEnter(Sender: TObject);
 begin
   inherited;
   Dm.Marketer.Filtered := False;
-  Dm.Marketer.Filter := ' IsActive_=1 ' ;
+  Dm.Marketer.Filter := '';//' IsActive_=1 ' ;
   Dm.Marketer.Filtered := True;
 end;
 
-procedure TFrFollowUp.DBLookupComboBox1Exit(Sender: TObject);
+procedure TFrFollowUp.DBLMarketerTitleExit(Sender: TObject);
 begin
   inherited;
   Dm.Marketer.Filtered := False;
   Dm.Marketer.Filter := '' ;
-  Dm.Marketer.Filtered := True; 
+  Dm.Marketer.Filtered := True;
 end;
 
 procedure TFrFollowUp.BitBtn5Click(Sender: TObject);

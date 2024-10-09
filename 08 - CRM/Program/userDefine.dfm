@@ -183,12 +183,18 @@ inherited UserDefineF: TUserDefineF
         Caption = #1578#1705#1585#1575#1585'        :'
       end
       object Label2: TLabel
-        Left = 489
+        Left = 493
         Top = 89
-        Width = 55
-        Height = 13
+        Width = 51
+        Height = 11
         Anchors = [akTop, akRight]
         Caption = #1603#1583' '#1576#1575#1586#1575#1585#1610#1575#1576#1610':'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -9
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
       object Label5: TLabel
         Left = 449
@@ -222,6 +228,12 @@ inherited UserDefineF: TUserDefineF
         Anchors = [akTop, akRight]
         Caption = #1587#1591#1581' '#1583#1587#1578#1585#1587#1610'   :'
       end
+      object Bevel1: TBevel
+        Left = 173
+        Top = 60
+        Width = 377
+        Height = 71
+      end
       object Pass: TDBEdit
         Left = 354
         Top = 37
@@ -249,6 +261,7 @@ inherited UserDefineF: TUserDefineF
         Height = 21
         Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
+        Color = 15332329
         DataField = 'MarketerID'
         DataSource = DSForm
         KeyField = 'MarketerID'
@@ -282,6 +295,7 @@ inherited UserDefineF: TUserDefineF
         Height = 21
         Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
+        Color = 13434879
         DataField = 'UserTypeId'
         DataSource = DSForm
         KeyField = 'UserTypeId'
@@ -291,11 +305,11 @@ inherited UserDefineF: TUserDefineF
         OnKeyDown = dblUserTypeKeyDown
       end
       object dbckIsActive: TDBCheckBox
-        Left = 32
+        Left = 0
         Top = 18
-        Width = 73
+        Width = 113
         Height = 17
-        Caption = #1705#1575#1585#1576#1585' '#1601#1593#1575#1604
+        Caption = #1575#1580#1575#1586#1607' '#1608#1585#1608#1583' '#1583#1575#1585#1583'/'#1601#1593#1575#1604
         DataField = 'IsActive'
         DataSource = DSForm
         TabOrder = 4
@@ -433,6 +447,7 @@ inherited UserDefineF: TUserDefineF
         Height = 21
         Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
+        Color = 12706047
         DataField = 'AccessTitle'
         DataSource = DSForm
         ParentBiDiMode = False
@@ -452,7 +467,7 @@ inherited UserDefineF: TUserDefineF
         ValueUnchecked = 'False'
       end
       object DBCheckBox9: TDBCheckBox
-        Left = 9
+        Left = 16
         Top = 38
         Width = 97
         Height = 17
@@ -490,7 +505,7 @@ inherited UserDefineF: TUserDefineF
         ValueUnchecked = 'False'
       end
       object DBCheckBox12: TDBCheckBox
-        Left = 39
+        Left = 40
         Top = 187
         Width = 128
         Height = 17
@@ -757,6 +772,7 @@ inherited UserDefineF: TUserDefineF
       InvertFarsiDate = True
       TitleSort = True
       AutoInsert = False
+      OnNeedColorCondition = dbgUserListNeedColorCondition
       FooterFields = 'Count'
       Columns = <
         item

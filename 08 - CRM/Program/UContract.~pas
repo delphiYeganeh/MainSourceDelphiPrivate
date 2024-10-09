@@ -229,6 +229,7 @@ type
     Select_customer_By_CustomerIDProductsIdSTR: TStringField;
     SpDbgridContractComputerName: TStringField;
     SpDbgridContractIPAddress: TStringField;
+    SpDbgridContractMarketerTitleAll: TStringField;
     procedure BtnCancelClick(Sender: TObject);
     procedure RefreshData;
     procedure btnDelClick(Sender: TObject);
@@ -598,8 +599,8 @@ begin
   grbCustomer.Caption := ' «ÿ·«⁄«  ‘—ò  / ”«“„«‰  : '+  Select_customer_By_CustomerIDCompanyName.AsString;
   Dm.Marketer.Close;
   Dm.Marketer.SQL.Clear;
-  Dm.Marketer.SQL.Add('SELECT * FROM marketer');
-  Dm.Marketer.SQL.Add('WHERE IsActive_=1');
+  Dm.Marketer.SQL.Add('SELECT * FROM VW_Marketer');
+  //Dm.Marketer.SQL.Add('WHERE IsActive_=1');
   Dm.Marketer.Open;
 
   DBNCheckInsert.DataSource := dbgChequePay.DataSource;
@@ -671,6 +672,9 @@ begin
       gID:=0;
       with  SpDbgridContract do
       begin
+        if State in [dsEdit] then
+          Qry_SetResult('Insert into dbo.ActivityUser_Log(CustomerID,ContractID,UserId,Date,FormName,Activity,ComputerName,IPAddress) select '+dbdCustomerNo.text+','+SpDbgridContract.FieldByName('ContractID').AsString+','+ Dm.UserId.AsString + ',getdate(),''FrContract'','''+'Edit'+''', '''+UpperCase(_ComputerName) +''','''+_IpAddress +'''' ,dm.YeganehConnection);
+
          Post;
          gId := fieldByName('ContractID').Value;
       end;
@@ -693,9 +697,6 @@ begin
           Dm.Customer.Open;
           Dm.Customer.Locate('CustomerId',CustomerID,[]);
         end;
-
-        if _EditContract then
-          Qry_SetResult('Insert into dbo.ActivityUser_Log(CustomerID,ContractID,UserId,Date,FormName,Activity,ComputerName,IPAddress) select '+dbdCustomerNo.text+','+SpDbgridContract.FieldByName('ContractID').AsString+','+ Dm.UserId.AsString + ',getdate(),''FrContract'','''+'Edit'+''', '''+UpperCase(_ComputerName) +''','''+_IpAddress +'''' ,dm.YeganehConnection);
 
 
         { TODO -oparsa : 14030427 }

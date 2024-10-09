@@ -5,7 +5,6 @@ inherited FRefrenceInPerson: TFRefrenceInPerson
   Height = 551
   Caption = #1605#1585#1575#1580#1593#1607' '#1581#1590#1608#1585#1610
   OldCreateOrder = True
-  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape
@@ -253,6 +252,17 @@ inherited FRefrenceInPerson: TFRefrenceInPerson
           DataField = 'FollowUpDescription'
           DataSource = DSForm
           TabOrder = 10
+        end
+        object ALLMarketerTitleShow: TDBEdit
+          Left = 18
+          Top = 69
+          Width = 195
+          Height = 17
+          Anchors = [akTop, akRight]
+          BorderStyle = bsNone
+          DataField = 'MarketerTitleAll'
+          DataSource = DSForm
+          TabOrder = 13
         end
       end
       object GroupBox2: TGroupBox
@@ -573,6 +583,17 @@ inherited FRefrenceInPerson: TFRefrenceInPerson
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000}
         end
+        object ALLMarketerTitleShow2: TDBEdit
+          Left = 424
+          Top = 11
+          Width = 147
+          Height = 17
+          Anchors = [akTop, akRight]
+          BorderStyle = bsNone
+          DataField = 'MarketerTtle2All'
+          DataSource = DSForm
+          TabOrder = 2
+        end
       end
     end
     object Panel4: TPanel
@@ -759,6 +780,24 @@ inherited FRefrenceInPerson: TFRefrenceInPerson
     end
     object Select_FollowUpInPersonUserId: TIntegerField
       FieldName = 'UserId'
+    end
+    object Select_FollowUpInPersonMarketerTitleAll: TStringField
+      FieldKind = fkLookup
+      FieldName = 'MarketerTitleAll'
+      LookupDataSet = Dm.MarketerALL
+      LookupKeyFields = 'MarketerID'
+      LookupResultField = 'MarketerTitle'
+      KeyFields = 'ExpertId'
+      Lookup = True
+    end
+    object Select_FollowUpInPersonMarketerTtle2All: TStringField
+      FieldKind = fkLookup
+      FieldName = 'MarketerTtle2All'
+      LookupDataSet = Dm.MarketerALL
+      LookupKeyFields = 'MarketerID'
+      LookupResultField = 'MarketerTitle'
+      KeyFields = 'ValuatorUserID'
+      Lookup = True
     end
   end
   object MssCalendarPro1: TMssCalendarPro

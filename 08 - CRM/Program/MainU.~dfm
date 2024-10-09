@@ -29,7 +29,7 @@ inherited MainForm: TMainForm
       Top = 35
       Width = 1203
       Height = 549
-      ActivePage = ContractTabSheet
+      ActivePage = xpTabSheet2
       Align = alClient
       BiDiMode = bdRightToLeft
       Font.Charset = ARABIC_CHARSET
@@ -1665,7 +1665,7 @@ inherited MainForm: TMainForm
             1191
             36)
           object xpBitBtn7: TBitBtn
-            Left = 877
+            Left = 873
             Top = 5
             Width = 100
             Height = 25
@@ -1716,7 +1716,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object xpBitBtn5: TBitBtn
-            Left = 774
+            Left = 770
             Top = 5
             Width = 100
             Height = 25
@@ -1767,7 +1767,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object xpBitBtn3: TBitBtn
-            Left = 980
+            Left = 976
             Top = 5
             Width = 100
             Height = 25
@@ -1818,7 +1818,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object BitBtn7: TBitBtn
-            Left = 1083
+            Left = 1079
             Top = 5
             Width = 109
             Height = 25
@@ -1869,7 +1869,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object BitBtn2: TBitBtn
-            Left = 671
+            Left = 667
             Top = 5
             Width = 100
             Height = 25
@@ -1920,7 +1920,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object pnlAllContract: TPanel
-            Left = -252
+            Left = -256
             Top = 3
             Width = 553
             Height = 31
@@ -2057,7 +2057,7 @@ inherited MainForm: TMainForm
               Text = '1300/01/01'#0
             end
             object BtnAllContract: TBitBtn
-              Left = 356
+              Left = 352
               Top = 1
               Width = 188
               Height = 25
@@ -3151,7 +3151,7 @@ inherited MainForm: TMainForm
               1191
               38)
             object Button22: TBitBtn
-              Left = 991
+              Left = 989
               Top = 5
               Width = 80
               Height = 25
@@ -3202,7 +3202,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button25: TBitBtn
-              Left = 910
+              Left = 908
               Top = 5
               Width = 80
               Height = 25
@@ -3253,7 +3253,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button18: TBitBtn
-              Left = 830
+              Left = 828
               Top = 5
               Width = 80
               Height = 25
@@ -3304,7 +3304,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button21: TBitBtn
-              Left = 750
+              Left = 748
               Top = 5
               Width = 80
               Height = 25
@@ -3355,7 +3355,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button23: TBitBtn
-              Left = 670
+              Left = 668
               Top = 5
               Width = 80
               Height = 25
@@ -3456,7 +3456,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object btnViwCustomer: TBitBtn
-              Left = 1072
+              Left = 1070
               Top = 5
               Width = 113
               Height = 25
@@ -3507,7 +3507,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object PnlAllAct: TPanel
-              Left = 82
+              Left = 80
               Top = 2
               Width = 443
               Height = 35
@@ -3692,7 +3692,7 @@ inherited MainForm: TMainForm
               end
             end
             object BitBtn9: TBitBtn
-              Left = -48
+              Left = -50
               Top = 5
               Width = 127
               Height = 25
@@ -15764,7 +15764,7 @@ inherited MainForm: TMainForm
       end
     end
     object N2: TMenuItem
-      Caption = #1578#1593#1575#1585#1610#1601
+      Caption = #1578#1593#1575#1585#1610#1601' '#1662#1575#1610#1607
       object emplates1: TMenuItem
         Caption = #1608#1610#1585#1575#1610#1588' Templates'
         OnClick = emplates1Click
@@ -15829,21 +15829,6 @@ inherited MainForm: TMainForm
         OnClick = N59Click
       end
     end
-    object N24: TMenuItem
-      Caption = #1605#1581#1589#1608#1604#1575#1578
-      object N23: TMenuItem
-        Action = AProduct
-      end
-      object N27: TMenuItem
-        Action = AAddProduct
-        Caption = #1575#1582#1578#1589#1575#1589' '#1605#1581#1589#1608#1604' '#1576#1607' '#1605#1588#1578#1585#1610
-      end
-      object N61: TMenuItem
-        Caption = #1605#1581#1589#1608#1604' '#1608' '#1583#1585#1589#1583' '#1662#1608#1585#1587#1575#1606#1578
-        Visible = False
-        OnClick = N61Click
-      end
-    end
     object N22: TMenuItem
       Caption = #1605#1583#1610#1585#1610#1578' '#1587#1610#1587#1578#1605
       object N20: TMenuItem
@@ -15898,6 +15883,77 @@ inherited MainForm: TMainForm
       object n92: TMenuItem
         Caption = #1583#1587#1578#1607' '#1576#1606#1583#1610' '#1602#1587#1605#1578#1607#1575#1610' '#1605#1582#1578#1604#1601' '#1588#1585#1705#1578
         OnClick = n92Click
+      end
+    end
+    object N24: TMenuItem
+      Caption = #1605#1581#1589#1608#1604#1575#1578
+      object N23: TMenuItem
+        Action = AProduct
+      end
+      object N27: TMenuItem
+        Action = AAddProduct
+        Caption = #1575#1582#1578#1589#1575#1589' '#1605#1581#1589#1608#1604' '#1576#1607' '#1605#1588#1578#1585#1610
+      end
+      object N61: TMenuItem
+        Caption = #1605#1581#1589#1608#1604' '#1608' '#1583#1585#1589#1583' '#1662#1608#1585#1587#1575#1606#1578
+        Visible = False
+        OnClick = N61Click
+      end
+    end
+    object Yeganehmenu: TMenuItem
+      Caption = #1588#1585#1603#1578' '#1610#1711#1575#1606#1607
+      Visible = False
+      object N32: TMenuItem
+        Caption = #1575#1610#1580#1575#1583' '#1602#1601#1604' '#1580#1583#1610#1583
+        Visible = False
+        OnClick = N32Click
+      end
+      object N56: TMenuItem
+        Caption = #1575#1610#1580#1575#1583' '#1602#1601#1604' '#1587#1582#1578' '#1575#1601#1586#1575#1585#1610
+        Visible = False
+        OnClick = N56Click
+      end
+      object N25: TMenuItem
+        Caption = #1589#1583#1608#1585' '#1588#1605#1575#1585#1607' '#1587#1585#1610#1575#1604
+        Visible = False
+        OnClick = N25Click
+      end
+      object N74: TMenuItem
+        Caption = #1602#1601#1604' '#1606#1585#1605' '#1575#1601#1586#1575#1585#1610
+        OnClick = N74Click
+      end
+      object N7: TMenuItem
+        Caption = '-'
+      end
+      object N63: TMenuItem
+        Action = acShowPoorsantList
+      end
+      object N55: TMenuItem
+        Caption = #1711#1586#1575#1585#1588' '#1602#1601#1604' '#1607#1575#1610' '#1589#1575#1583#1585#1607
+        Visible = False
+        OnClick = N55Click
+      end
+      object N64: TMenuItem
+        Action = acSendSMSForCustomerLock
+      end
+      object N34: TMenuItem
+        Caption = #1711#1586#1575#1585#1588' '#1578#1605#1575#1587' '#1608' '#1601#1585#1608#1588
+        Visible = False
+        OnClick = N34Click
+      end
+      object N13: TMenuItem
+        Caption = '-'
+      end
+      object N33: TMenuItem
+        Action = Action5
+        Visible = False
+      end
+      object N83: TMenuItem
+        Caption = '-'
+      end
+      object N84: TMenuItem
+        Caption = #1604#1610#1587#1578' '#1578#1594#1610#1610#1585#1575#1578' '#1608#1585#1688#1606' '#1606#1587#1582#1607' '#1607#1575
+        OnClick = N84Click
       end
     end
     object N16: TMenuItem
@@ -15985,64 +16041,8 @@ inherited MainForm: TMainForm
         OnClick = NCheque2Click
       end
     end
-    object Yeganehmenu: TMenuItem
-      Caption = #1588#1585#1603#1578' '#1610#1711#1575#1606#1607
-      Visible = False
-      object N32: TMenuItem
-        Caption = #1575#1610#1580#1575#1583' '#1602#1601#1604' '#1580#1583#1610#1583
-        Visible = False
-        OnClick = N32Click
-      end
-      object N56: TMenuItem
-        Caption = #1575#1610#1580#1575#1583' '#1602#1601#1604' '#1587#1582#1578' '#1575#1601#1586#1575#1585#1610
-        Visible = False
-        OnClick = N56Click
-      end
-      object N25: TMenuItem
-        Caption = #1589#1583#1608#1585' '#1588#1605#1575#1585#1607' '#1587#1585#1610#1575#1604
-        Visible = False
-        OnClick = N25Click
-      end
-      object N74: TMenuItem
-        Caption = #1602#1601#1604' '#1606#1585#1605' '#1575#1601#1586#1575#1585#1610
-        OnClick = N74Click
-      end
-      object N7: TMenuItem
-        Caption = '-'
-      end
-      object N63: TMenuItem
-        Action = acShowPoorsantList
-      end
-      object N55: TMenuItem
-        Caption = #1711#1586#1575#1585#1588' '#1602#1601#1604' '#1607#1575#1610' '#1589#1575#1583#1585#1607
-        Visible = False
-        OnClick = N55Click
-      end
-      object N64: TMenuItem
-        Action = acSendSMSForCustomerLock
-      end
-      object N34: TMenuItem
-        Caption = #1711#1586#1575#1585#1588' '#1578#1605#1575#1587' '#1608' '#1601#1585#1608#1588
-        Visible = False
-        OnClick = N34Click
-      end
-      object N13: TMenuItem
-        Caption = '-'
-      end
-      object N33: TMenuItem
-        Action = Action5
-        Visible = False
-      end
-      object N83: TMenuItem
-        Caption = '-'
-      end
-      object N84: TMenuItem
-        Caption = #1604#1610#1587#1578' '#1578#1594#1610#1610#1585#1575#1578' '#1608#1585#1688#1606' '#1606#1587#1582#1607' '#1607#1575
-        OnClick = N84Click
-      end
-    end
     object N9: TMenuItem
-      Caption = #1711#1586#1575#1585#1588
+      Caption = #1711#1586#1575#1585#1588#1575#1578
       object N8: TMenuItem
         Caption = #1711#1586#1575#1585#1588' '#1575#1586' '#1575#1591#1604#1575#1593#1575#1578' '#1605#1588#1578#1585#1610#1575#1606
         ImageIndex = 8

@@ -9,8 +9,6 @@ inherited marketerInp: TmarketerInp
   ClientWidth = 583
   KeyPreview = True
   OldCreateOrder = True
-  OnCanResize = FormCanResize
-  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape
@@ -39,8 +37,7 @@ inherited marketerInp: TmarketerInp
         Height = 261
         Cursor = crHandPoint
         Align = alClient
-        Color = 16772351
-        DataSource = Dm.DMarketer
+        DataSource = DSForm
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect]
         ReadOnly = True
         TabOrder = 0
@@ -62,6 +59,7 @@ inherited marketerInp: TmarketerInp
         InvertFarsiDate = True
         TitleSort = True
         AutoInsert = False
+        OnNeedColorCondition = DBGFromORGNeedColorCondition
         FooterFields = 'Count'
         Columns = <
           item
@@ -86,6 +84,13 @@ inherited marketerInp: TmarketerInp
             Title.Alignment = taCenter
             Title.Caption = #1583#1585#1589#1583' '#1601#1593#1575#1604#1610#1578
             Width = 89
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'OrderByID'
+            Title.Caption = #1578#1585#1578#1610#1576' '#1606#1605#1575#1610#1588' '#1583#1585' '#1604#1610#1587#1578
+            Width = 117
             Visible = True
           end>
       end
@@ -133,7 +138,7 @@ inherited marketerInp: TmarketerInp
           Height = 21
           Anchors = [akTop, akRight]
           DataField = 'MarketerNo'
-          DataSource = Dm.DMarketer
+          DataSource = DSForm
           TabOrder = 0
         end
         object DBEMarketerTitle: TDBEdit
@@ -143,7 +148,7 @@ inherited marketerInp: TmarketerInp
           Height = 21
           Anchors = [akTop, akRight]
           DataField = 'MarketerTitle'
-          DataSource = Dm.DMarketer
+          DataSource = DSForm
           TabOrder = 1
         end
         object DBEPPercent: TDBEdit
@@ -153,18 +158,30 @@ inherited marketerInp: TmarketerInp
           Height = 21
           Anchors = [akLeft, akTop, akRight]
           DataField = 'PPercent'
-          DataSource = Dm.DMarketer
+          DataSource = DSForm
           TabOrder = 2
         end
         object DBCheckBox1: TDBCheckBox
-          Left = 424
+          Left = 504
           Top = 40
           Width = 65
           Height = 17
           Caption = #1601#1593#1575#1604
           DataField = 'IsActive_'
-          DataSource = Dm.DMarketer
+          DataSource = DSForm
           TabOrder = 3
+          ValueChecked = 'True'
+          ValueUnchecked = 'False'
+        end
+        object DBCheckBox2: TDBCheckBox
+          Left = 224
+          Top = 40
+          Width = 201
+          Height = 17
+          Caption = #1576#1575#1586#1575#1585#1610#1575#1576' '#1583#1610#1711#1585' '#1583#1585' '#1588#1585#1705#1578' '#1601#1593#1575#1604#1610#1578' '#1606#1605#1610' '#1705#1606#1583
+          DataField = 'MarketerIsDone'
+          DataSource = DSForm
+          TabOrder = 4
           ValueChecked = 'True'
           ValueUnchecked = 'False'
         end
@@ -198,7 +215,7 @@ inherited marketerInp: TmarketerInp
         OnChange = Edit1Change
       end
       object Button1: TButton
-        Left = 40
+        Left = 15
         Top = 8
         Width = 75
         Height = 25
@@ -477,7 +494,7 @@ inherited marketerInp: TmarketerInp
         Top = 1
         Width = 495
         Height = 50
-        DataSource = Dm.DMarketer
+        DataSource = DSForm
         VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbEdit, nbPost, nbCancel]
         Align = alRight
         Anchors = [akLeft, akTop, akRight, akBottom]
@@ -489,6 +506,9 @@ inherited marketerInp: TmarketerInp
         OnClick = DBNavigator1Click
       end
     end
+  end
+  inherited DSForm: TDataSource
+    DataSet = Marketer
   end
   object ActionManager1: TActionManager
     ActionBars.SessionCount = 108
@@ -565,6 +585,51 @@ inherited marketerInp: TmarketerInp
     object N2: TMenuItem
       Caption = #1576#1575#1586#1575#1585#1610#1575#1576' '#1594#1610#1585' '#1601#1593#1575#1604
       OnClick = N2Click
+    end
+    object t1: TMenuItem
+      Caption = #1607#1605#1607' '
+      OnClick = t1Click
+    end
+  end
+  object Marketer: TADOQuery
+    Connection = Dm.YeganehConnection
+    CursorType = ctStatic
+    CommandTimeout = 300
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT *  FROM  VW_Marketer'
+      '')
+    Left = 72
+    Top = 200
+    object MarketerMarketerID: TAutoIncField
+      FieldName = 'MarketerID'
+      ReadOnly = True
+    end
+    object MarketerMarketerNo: TStringField
+      FieldName = 'MarketerNo'
+      Size = 50
+    end
+    object MarketerMarketerTitle: TWideStringField
+      FieldName = 'MarketerTitle'
+      Size = 50
+    end
+    object MarketerTag: TBooleanField
+      FieldName = 'Tag'
+    end
+    object MarketerPPercent: TWordField
+      FieldName = 'PPercent'
+    end
+    object MarketerOrgID: TIntegerField
+      FieldName = 'OrgID'
+    end
+    object MarketerIsActive_: TBooleanField
+      FieldName = 'IsActive_'
+    end
+    object MarketerMarketerIsDone: TBooleanField
+      FieldName = 'MarketerIsDone'
+    end
+    object MarketerOrderByID: TIntegerField
+      FieldName = 'OrderByID'
     end
   end
 end

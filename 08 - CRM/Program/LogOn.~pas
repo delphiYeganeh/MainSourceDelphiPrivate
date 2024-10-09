@@ -149,7 +149,7 @@ begin
 
         //Qry_SetResult('UPDATE dbo.Users SET PassWord = ltrim(rtrim(NewPassWord)) WHERE isnull(LastVertionLogin,'''')= '''' and ID = '+Dm.UserId.AsString ,dm.YeganehConnection);
         Qry_SetResult('UPDATE dbo.Users SET LastVertionLogin = '''+_SoftVersion+''' , LastLoginDateTime = getdate()  WHERE ID = '+Dm.UserId.AsString ,dm.YeganehConnection);
-        Qry_SetResult('Insert into dbo.User_LogIn_Log(UserId,LogIn,ComputerName,IPAddress) select '+ Dm.UserId.AsString + ',getdate(),'''+UpperCase(Win_GetComputerName) +''','''+_IpAddress +'''' ,dm.YeganehConnection);
+        Qry_SetResult('Insert into dbo.User_LogIn_Log(UserId,LogIn,ComputerName,IPAddress) select '+ Dm.UserId.AsString + ',getdate(),'''+UpperCase(_ComputerName) +''','''+_IpAddress +'''' ,dm.YeganehConnection);
         alogin.Execute
       end;
     end;

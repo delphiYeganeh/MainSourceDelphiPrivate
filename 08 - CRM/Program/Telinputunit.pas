@@ -209,6 +209,7 @@ type
     Label33: TLabel;
     edtAmount2: TDBEdit;
     edtAmount: TEdit;
+    ALLMarketerTitleShow: TDBEdit;
     procedure DBEdit7Enter(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -449,8 +450,8 @@ begin
 
     Dm.Marketer.Close;
     Dm.Marketer.SQL.Clear;
-    Dm.Marketer.SQL.Add('SELECT * FROM dbo.marketer  WITH(NOLOCK) ');
-    Dm.Marketer.SQL.Add('WHERE IsActive_=1');
+    Dm.Marketer.SQL.Add('SELECT * FROM dbo.VW_Marketer  WITH(NOLOCK) ORDER BY OrderByID ');
+   // Dm.Marketer.SQL.Add('WHERE IsActive_=1');
     Dm.Marketer.Open;
 
     

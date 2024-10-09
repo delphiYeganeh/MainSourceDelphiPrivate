@@ -55,6 +55,7 @@ type
     BitBtn3: TBitBtn;
     BitBtn2: TBitBtn;
     BitBtn1: TBitBtn;
+    DBEAllMarketer: TDBEdit;
     procedure btnAddContractWordClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
@@ -197,6 +198,7 @@ begin
     SetdblContractType;
     dblMarketerCNT.DataSource:=FrContract.DsdbgContract;
     dblProductsCNT.DataSource:=FrContract.DsdbgContract;
+    DBEAllMarketer.DataSource:=FrContract.DsdbgContract;
     dbeSignUpDateCNT.DataSource:=FrContract.DsdbgContract;
     dbeBeginDateCNT.DataSource:=FrContract.DsdbgContract;
     dbeEndDateCNT.DataSource:=FrContract.DsdbgContract;

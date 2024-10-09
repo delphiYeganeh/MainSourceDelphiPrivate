@@ -94,6 +94,7 @@ type
     UserManagerOfficial: TBooleanField;
     UserIsSystemUser: TBooleanField;
     UserNewPassWord: TStringField;
+    Bevel1: TBevel;
     procedure Action11Execute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -115,6 +116,8 @@ type
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
     procedure FormShow(Sender: TObject);
+    procedure dbgUserListNeedColorCondition(Column: TColumn;
+      State: TGridDrawState; var Color: TColor);
   private
 
     { Private declarations }
@@ -140,14 +143,14 @@ end;
 procedure TUserDefineF.FormCreate(Sender: TObject);
 begin
   inherited;
-with  User do
- begin
+  with  User do
+  begin
    close;
    Open;
    //ConfirmPass.Text:=UserPassWord.AsString;
    ConfirmPass.Text:= UserNewPassWord.AsString;
 
- end;
+  end;
   setDblDate();
   Dm.Marketer.Close;
   Dm.Marketer.Open;
@@ -409,6 +412,20 @@ begin
   xpPanel1.TitleStartColor :=  _Color3;
   xpPanel1.TitleEndColor   :=  _Color4;
 
+end;
+
+procedure TUserDefineF.dbgUserListNeedColorCondition(Column: TColumn;
+  State: TGridDrawState; var Color: TColor);
+begin
+  inherited;
+   Color:= clWindow;
+   try
+
+     if not UserIsActive.AsBoolean THEN
+         Color:= $00DDDDFF ;
+
+   except
+   end;
 end;
 
 end.

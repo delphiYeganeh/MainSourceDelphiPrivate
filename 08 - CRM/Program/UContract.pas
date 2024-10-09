@@ -229,6 +229,7 @@ type
     Select_customer_By_CustomerIDProductsIdSTR: TStringField;
     SpDbgridContractComputerName: TStringField;
     SpDbgridContractIPAddress: TStringField;
+    SpDbgridContractMarketerTitleAll: TStringField;
     procedure BtnCancelClick(Sender: TObject);
     procedure RefreshData;
     procedure btnDelClick(Sender: TObject);
@@ -598,8 +599,8 @@ begin
   grbCustomer.Caption := ' «ÿ·«⁄«  ‘—ò  / ”«“„«‰  : '+  Select_customer_By_CustomerIDCompanyName.AsString;
   Dm.Marketer.Close;
   Dm.Marketer.SQL.Clear;
-  Dm.Marketer.SQL.Add('SELECT * FROM marketer');
-  Dm.Marketer.SQL.Add('WHERE IsActive_=1');
+  Dm.Marketer.SQL.Add('SELECT * FROM VW_Marketer  ORDER BY OrderByID ');
+  //Dm.Marketer.SQL.Add('WHERE IsActive_=1');
   Dm.Marketer.Open;
 
   DBNCheckInsert.DataSource := dbgChequePay.DataSource;

@@ -136,7 +136,7 @@ begin
 
       if _SoftVersion <> StrVerLast then
       begin
-        messageText := Qry_GetResult(' Select Isnull((SELECT Value FROM dbo.SystemSettings WHERE VariableId = 4 ),''áØÝÇ ÈÇ äÓÎå Ð˜Ñ ÔÏå æÇÑÏ ÔæíÏ -->'') ',dm.YeganehConnection);
+        messageText := Qry_GetResult(' Select Isnull((SELECT DESCRIPTION FROM dbo.VWVersionDescription  ),''áØÝÇ ÈÇ äÓÎå Ð˜Ñ ÔÏå æÇÑÏ ÔæíÏ -->'') ',dm.YeganehConnection);
         ShowMessage( messageText +' ' + StrVerLast );
       end
       else

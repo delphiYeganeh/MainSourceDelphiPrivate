@@ -96,6 +96,10 @@ type
     SpSelect_CasesCheckUserID: TIntegerField;
     SpSelect_CasesIsBug: TBooleanField;
     SpSelect_CasesFollowUpID: TIntegerField;
+    ALLMarketerTitleShow: TDBEdit;
+    ALLMarketerTitleShow2: TDBEdit;
+    Select_FollowUpInPersonMarketerTitleAll: TStringField;
+    Select_FollowUpInPersonMarketerTtle2All: TStringField;
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
@@ -249,7 +253,7 @@ begin
   btnAssessment.Visible := _UserAssesstAcess ;
 
   Dm.Marketer.Filtered := False;
-  Dm.Marketer.Filter := ' IsActive_=1 ' ;
+  Dm.Marketer.Filter := '';//' IsActive_=1 ' ;
   Dm.Marketer.Filtered := True;  
 
   Dm.RefreshHoliday(copy(_today,1,4));

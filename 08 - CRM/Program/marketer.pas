@@ -39,6 +39,20 @@ type
     Panel1: TPanel;
     SBClose: TSpeedButton;
     DBNavigator1: TDBNavigator;
+    DBCheckBox2: TDBCheckBox;
+    Marketer: TADOQuery;
+    MarketerMarketerID: TAutoIncField;
+    MarketerMarketerNo: TStringField;
+    MarketerMarketerTitle: TWideStringField;
+    MarketerTag: TBooleanField;
+    MarketerPPercent: TWordField;
+    MarketerOrgID: TIntegerField;
+    MarketerIsActive_: TBooleanField;
+    MarketerMarketerIsDone: TBooleanField;
+    t1: TMenuItem;
+    MarketerOrderByID: TIntegerField;
+    Label5: TLabel;
+    DBEdit1: TDBEdit;
     procedure ACloseExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Edit1Change(Sender: TObject);
@@ -54,6 +68,9 @@ type
     procedure N2Click(Sender: TObject);
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
+    procedure t1Click(Sender: TObject);
+    procedure DBGFromORGNeedColorCondition(Column: TColumn;
+      State: TGridDrawState; var Color: TColor);
 
   private
 
@@ -79,11 +96,15 @@ end;
 procedure TmarketerInp.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    Action:=caFree;
+   Dm.Marketer.Close;
+   Dm.Marketer.Open;
+   Dm.MarketerALL.Close;
+   Dm.MarketerALL.Open;
 end;
 
 procedure TmarketerInp.Edit1Change(Sender: TObject);
 begin
-   Dm.Marketer.Locate('marketertitle',edit1.Text,[lopartialkey]);
+   Marketer.Locate('marketertitle',edit1.Text,[lopartialkey]);
 end;
 
 procedure TmarketerInp.SBCloseClick(Sender: TObject);
@@ -109,10 +130,13 @@ end;
 
 procedure TmarketerInp.FormShow(Sender: TObject);
 begin
+  t1Click (self);
+  
   ShapeBase.Brush.Color := _Color1 ;
   pnlMain.Color := _Color1 ;
 
-   DBNav_Setup(DBNavigator1);
+  DBNav_Setup(DBNavigator1);
+
 end;
 
 procedure TmarketerInp.FormKeyDown(Sender: TObject; var Key: Word;
@@ -133,21 +157,21 @@ end;
 procedure TmarketerInp.N1Click(Sender: TObject);
 begin
   inherited;
-    Dm.Marketer.Close;
-    Dm.Marketer.SQL.Clear;
-    Dm.Marketer.SQL.Add('SELECT * FROM marketer');
-    Dm.Marketer.SQL.Add('WHERE IsActive_=1');
-    Dm.Marketer.Open;
+    Marketer.Close;
+    Marketer.SQL.Clear;
+    Marketer.SQL.Add('SELECT * FROM Marketer');
+    Marketer.SQL.Add('WHERE IsActive_=1');
+    Marketer.Open;
 end;
 
 procedure TmarketerInp.N2Click(Sender: TObject);
 begin
   inherited;
-    Dm.Marketer.Close;
-    Dm.Marketer.SQL.Clear;
-    Dm.Marketer.SQL.Add('SELECT * FROM marketer');
-    Dm.Marketer.SQL.Add('WHERE IsActive_=0');
-    Dm.Marketer.Open;
+    Marketer.Close;
+    Marketer.SQL.Clear;
+    Marketer.SQL.Add('SELECT * FROM Marketer');
+    Marketer.SQL.Add('WHERE IsActive_=0');
+    Marketer.Open;
 
 end;
 
@@ -161,6 +185,29 @@ begin
    { TODO -oparsa : 14030203 }
   inherited;
 
+end;
+
+procedure TmarketerInp.t1Click(Sender: TObject);
+begin
+  inherited;
+    Marketer.Close;
+    Marketer.SQL.Clear;
+    Marketer.SQL.Add(' SELECT * FROM Marketer ');
+    Marketer.Open;
+end;
+
+procedure TmarketerInp.DBGFromORGNeedColorCondition(Column: TColumn;
+  State: TGridDrawState; var Color: TColor);
+begin
+  inherited;
+   Color:= clWindow;
+   try
+
+     if MarketerMarketerIsDone.AsBoolean THEN
+         Color:= $00DDDDFF ;
+
+   except
+   end;
 end;
 
 end.

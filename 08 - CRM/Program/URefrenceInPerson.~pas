@@ -96,6 +96,8 @@ type
     SpSelect_CasesCheckUserID: TIntegerField;
     SpSelect_CasesIsBug: TBooleanField;
     SpSelect_CasesFollowUpID: TIntegerField;
+    ALLMarketerTitleShow: TDBEdit;
+    DBEdit2: TDBEdit;
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
@@ -202,9 +204,9 @@ begin
   Application.CreateForm(TFAssessment, FAssessment);
   FAssessment.FollowUpId     := FollowUpId ;
   Caseid                     := Qry_GetResult(' select top 1 CaseID  FROM dbo.Cases where FollowUpID = '+inttostr(FollowUpId)+' order by CaseID desc' ,dm.YeganehConnection) ;
-  FAssessment.CaseId         := Caseid  ;
-  TaskId                     := Qry_GetResult(' select top 1 TaskID  FROM dbo.Tasks where CaseID = '+inttostr(TaskId)+' order by TaskID desc' ,dm.YeganehConnection)  ;
-  FAssessment.TaskId         := TaskId ;
+  FAssessment.CaseId         := StrToInt(Caseid)  ;
+  TaskId                     := Qry_GetResult(' select top 1 TaskID  FROM dbo.Tasks where CaseID = '+Caseid+' order by TaskID desc' ,dm.YeganehConnection)  ;
+  FAssessment.TaskId         := StrToInt(TaskId) ;
   FAssessment.CustomerId     := CustomerId ;
   FAssessment.FollowUpInPerson := Select_FollowUpInPerson.FieldByName('Id').AsInteger ;
   FAssessment.ValuatorUserID := Select_FollowUpInPerson.FieldByName('ValuatorUserID').AsInteger  ;
@@ -249,7 +251,7 @@ begin
   btnAssessment.Visible := _UserAssesstAcess ;
 
   Dm.Marketer.Filtered := False;
-  Dm.Marketer.Filter := ' IsActive_=1 ' ;
+  Dm.Marketer.Filter := '';//' IsActive_=1 ' ;
   Dm.Marketer.Filtered := True;  
 
   Dm.RefreshHoliday(copy(_today,1,4));
