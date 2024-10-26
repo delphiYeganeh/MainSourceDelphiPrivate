@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, BaseUnit, ExtCtrls, Grids, DBGrids,  Menus, ActnList,
-  StdCtrls, Mask, Buttons, YDbgrid, DBCtrls;
+  StdCtrls, Mask, Buttons, YDbgrid, DBCtrls, DB, ADODB;
 
 type
   TFrAvrage = class(TYBaseForm)

@@ -91,45 +91,45 @@ Var
       XLApp, Sheet: OLEVariant;
       x, y, r,row: Integer;
 begin
-        tab.CLOSE;
-        Q_DeleteT.ExecSQL;
-        Result := False;
-        XLApp := CreateOleObject('Excel.Application');
-        Try
-        XLApp.Visible := False;
-        XLApp.Workbooks.Open(SFile); //open file
-        Sheet := XLApp.Workbooks[ExtractFileName(SFile)].WorkSheets[1];
-        Sheet.Cells.SpecialCells(xlCellTypeLastCell, EmptyParam).Activate;
-        row := XLApp.ActiveCell.Row;
-        y := XLApp.ActiveCell.Column;
-        x := 2; //number of row in excel start import
+  tab.CLOSE;
+  Q_DeleteT.ExecSQL;
+  Result := False;
+  XLApp := CreateOleObject('Excel.Application');
+  Try
+    XLApp.Visible := False;
+    XLApp.Workbooks.Open(SFile); //open file
+    Sheet := XLApp.Workbooks[ExtractFileName(SFile)].WorkSheets[1];
+    Sheet.Cells.SpecialCells(xlCellTypeLastCell, EmptyParam).Activate;
+    row := XLApp.ActiveCell.Row;
+    y := XLApp.ActiveCell.Column;
+    x := 2; //number of row in excel start import
 
-        tab.Open;
-//        Repeat
-        WHILE   x<row+1 DO
-        BEGIN
-            tab.Append;
-            for r := 1 to y do
-              tab.Fields[y-r].AsString:= trim(XLApp.Cells.Item[x, r].Value);
+    tab.Open;
+  //        Repeat
+  WHILE   x<row+1 DO
+  BEGIN
+    tab.Append;
+    for r := 1 to y do
+      tab.Fields[y-r].AsString:= trim(XLApp.Cells.Item[x, r].Value);
 
-            r:=1; // donít remove this value, to keep value columns
-            tab.Post;
+    r:=1; // donít remove this value, to keep value columns
+    tab.Post;
 //            IF ROW<>2 THEN
-             Inc(x, 1);
-        END;//WHILE     
-//          Until XLApp.Cells.Item[x, r].Value='';
-//          Until x=row+1;
-        Finally
+     Inc(x, 1);
+  END;//WHILE     
+  //          Until XLApp.Cells.Item[x, r].Value='';
+  //          Until x=row+1;
+  Finally
 
-        IF not VarIsEmpty(XLApp) then
-        Begin
-            XLApp.Quit;
-            XLAPP := Unassigned;
-            Sheet := Unassigned;
-            Result := True;
-        End;
+  IF not VarIsEmpty(XLApp) then
+  Begin
+    XLApp.Quit;
+    XLAPP := Unassigned;
+    Sheet := Unassigned;
+    Result := True;
+  End;
 
-        end;
+  end;
 END;
 
 procedure TFrPaymentImportFromExcel.BitBtn1Click(Sender: TObject);
@@ -188,12 +188,21 @@ begin
   Q_Tmp.Close;
   Q_Tmp.SQL.Text:=' Select Radif from TbExcel where Radif is null or Radif='''' ';
   Q_Tmp.Open;
-  CheckExcelFileForError:=False;//dosent have error
+  CheckExcelFileForError:= False;//dosent have error
   if NOT Q_Tmp.IsEmpty then
     RAISE  Exception.Create('Ìò Ì«  ⁄œ«œÌ «“ —œÌ› ›«Ì· «ò”· „ﬁœ«— œÂÌ ‰‘œÂ «”  ·ÿ›« «’·«Õ ‰„«ÌÌœ Ê ”Å” „Ãœœ« «‰ ﬁ«· œÂÌœ.');
 
    _Erorr:='';
    ListBox1.Clear;
+
+   { TODO -oparsa : 14030701 }
+   if not TbExcel.Active then
+   begin
+     ListBox1.Items.Add('›«Ì· «ò”· ÊÃÊœ ‰œ«—œ/„⁄ »— ‰„Ì »«‘œ ');
+     CheckExcelFileForError:= True;
+     Exit;
+   end;
+   { TODO -oparsa : 14030701 }
    TbExcel.First;
    ListBox1.Items.Add(' ·Ì”  Œÿ«Â«Ì ›«Ì· „«ÂÌ«‰Â „Ê—Œ'+_Today);
 
@@ -236,13 +245,16 @@ end;
 procedure TFrPaymentImportFromExcel.FormShow(Sender: TObject);
 begin
   inherited;
+  //MEDate.Text :='14  /  /  ';
   TbExcel.Close;
 end;
 
 procedure TFrPaymentImportFromExcel.SpeedButton1Click(Sender: TObject);
 begin
   inherited;
-  import(TbExcel,Trim(EdtPathExcel.Text));
+  if FileExists(Trim(EdtPathExcel.Text)) then
+    import(TbExcel,Trim(EdtPathExcel.Text))
+  else  ShowMessage('›«Ì· œ— „”Ì— Ì«›  ‰‘œ');
 
 end;
 
@@ -266,7 +278,7 @@ begin
     abort;
   end   ;
 
-  if MEDate.Text ='13  /  /  ' then
+  if (MEDate.Text ='14  /  /  ')  or (MEDate.Text ='') then
   begin
     ShowMessage(' «—ÌŒ —« „‘Œ’ ‰„«ÌÌœ');
     abort;
@@ -361,8 +373,8 @@ end;
 procedure TFrPaymentImportFromExcel.SpeedButton4Click(Sender: TObject);
 begin
   inherited;
-   if OpenExcelFile.Execute then
-    EdtPathExcel.Text:= OpenExcelFile.FileName;
+  if OpenExcelFile.Execute then
+     EdtPathExcel.Text:= OpenExcelFile.FileName;
 
 end;
 

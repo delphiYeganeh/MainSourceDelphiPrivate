@@ -412,13 +412,49 @@ begin
       exit;
     end;
 
-  if ACCOUNT_IS_DOUBLICATE(Dm.Select_AccountAccountNo.AsString)=1 then
-  begin
-    ShowMessage('‘„«—Â Õ”«»  ò—«—Ì «” .');
-    Exit;
-  end;
+    { TODO -oparsa : 14030701 }
+    if Trim(DbName.Text) = '' then
+    begin
+      ShowMessage('Ê«—œ ò—œ‰ ‰«„ «Ã»«— „Ì »«‘œ');
+      DbName.SetFocus;
+      exit;
+    end;
+    if Trim(DBEdit3.Text) = '' then
+    begin
+      ShowMessage('Ê«—œ ò—œ‰ ‰«„ Œ«‰Ê«œêÌ «Ã»«— „Ì »«‘œ');
+      DBEdit3.SetFocus;
+      exit;
+    end;
+
+    if Trim(DBEdit2.Text) = '' then
+    begin
+      ShowMessage('Ê«—œ ò—œ‰ ‰«„ Åœ— «Ã»«—Ì „Ì »«‘œ');
+      DBEdit2.SetFocus;
+      exit;
+    end;
+
+    if HasAccount then
+      if Trim(AccountNo.Text) = '' then
+      begin
+        ShowMessage('Ê«—œ ò—œ‰ ‘„«—Â Õ”«» «Ã»«—Ì „Ì »«‘œ');
+        AccountNo.SetFocus;
+        exit;
+      end;
+    { TODO -oparsa : 14030701 }
+
+  { TODO -oparsa : 14030701 }
+  //if ACCOUNT_IS_DOUBLICATE(Dm.Select_AccountAccountNo.AsString)=1 then
+  if HasAccount then
+    if (ACCOUNT_IS_DOUBLICATE(Dm.Select_AccountAccountNo.AsString)=1) then
+    { TODO -oparsa : 14030701 }
+    begin
+      ShowMessage('‘„«—Â Õ”«»  ò—«—Ì «” .');
+      Exit;
+    end;
+
   Dm.Select_Contact.Post;
   FContactID:=dm.Select_ContactContactID.AsInteger;
+
   if HasAccount then
   begin
     dm.Select_AccountContactID.AsInteger:=ContactID;
@@ -433,6 +469,7 @@ begin
          FamilyLabel.Checked := true; }
     Dm.Select_Account.Post;
   end;
+
   EnableButton;
    //FirstBalance.visible:=IsInsert;
 

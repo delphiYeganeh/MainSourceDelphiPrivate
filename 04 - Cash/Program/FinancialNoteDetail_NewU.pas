@@ -99,7 +99,7 @@ procedure TFrFinancialNoteDetail_New.ShowInPanel(P:TWinControl);
 begin
   ManualDock(p,nil,alClient);
   Show;
-  Align:=alClient;
+  Align := alClient;
 end;
 
 procedure TFrFinancialNoteDetail_New.FormCreate(Sender: TObject);

@@ -2666,14 +2666,17 @@ function Get_Farsi_Message(ErrorMsg:widestring; var ShowMessage :boolean):widest
  var ADOSP:TADOStoredProc;
  begin
   ADOSP:=TADOStoredProc.create(nil);
-  ADOSP.ProcedureName:='Get_Farsi_Message';
+//  ADOSP.ProcedureName:='Get_Farsi_Message';
+  ADOSP.ProcedureName:='GET_FARSI_MESSAGE';
 
   with ADOSP.Parameters.AddParameter do
       begin
       DataType := ftwidestring;
       Direction := pdInput;
-      Name:='@ErrorMsg';
-      size:= 1000;
+     // Name:='@ErrorMsg';
+     //size:= 1000;
+      Name:='@ERRORMSG';
+      size:= 500;
       Value :=ErrorMsg;
 
     end;
@@ -2682,20 +2685,28 @@ function Get_Farsi_Message(ErrorMsg:widestring; var ShowMessage :boolean):widest
       begin
       DataType := ftwidestring;
       Direction := pdoutput;
-      Name:='@FarsiMessage';
-      size:= 1000;
+     // Name:='@FarsiMessage';
+     //size:= 1000;
+      Name:='@FARSIMESSAGE';
+      size:= 500;
     end;
 
   with ADOSP.Parameters.AddParameter do
       begin
       DataType := ftboolean;
       Direction := pdoutput;
-      Name:='@ShowMsg';
+      //Name:='@ShowMsg';
+      Name:='@SHOWMSG';
     end;
     ADOSP.Connection:=dm.YeganehConnection;
     ADOSP.ExecProc;
-   Result:=ADOSP.Parameters.ParamByname('@FarsiMessage').value;
-   ShowMessage:=ADOSP.Parameters.ParamByname('@ShowMsg').value;
+   //Result:=ADOSP.Parameters.ParamByname('@FarsiMessage').value;
+   //ShowMessage:=ADOSP.Parameters.ParamByname('@ShowMsg').value;
+   Result:= '' ;
+   if ADOSP.Parameters.ParamByname('@FARSIMESSAGE').value <> '' then
+     Result:= ADOSP.Parameters.ParamByname('@FARSIMESSAGE').value;
+   ShowMessage:= ADOSP.Parameters.ParamByname('@SHOWMSG').value;
+
 end;
 
 Procedure  Change_UserPassword(Password:string);

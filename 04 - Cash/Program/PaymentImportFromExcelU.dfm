@@ -136,11 +136,15 @@ inherited FrPaymentImportFromExcel: TFrPaymentImportFromExcel
     Anchors = [akLeft, akTop, akRight]
     Caption = #1583#1585#1580' '#1576#1585' '#1575#1587#1575#1587
     TabOrder = 3
+    DesignSize = (
+      462
+      41)
     object RadioButton2: TRadioButton
       Left = 112
       Top = 16
       Width = 113
       Height = 17
+      Anchors = [akTop, akRight]
       Caption = #1588#1605#1575#1585#1607' '#1581#1587#1575#1576
       TabOrder = 0
     end
@@ -149,6 +153,7 @@ inherited FrPaymentImportFromExcel: TFrPaymentImportFromExcel
       Top = 16
       Width = 113
       Height = 17
+      Anchors = [akTop, akRight]
       Caption = #1588#1605#1575#1585#1607' '#1705#1575#1585#1605#1606#1583#1610
       Checked = True
       TabOrder = 1
@@ -420,11 +425,15 @@ inherited FrPaymentImportFromExcel: TFrPaymentImportFromExcel
     Anchors = [akLeft, akTop, akRight]
     Caption = #1583#1585' '#1589#1608#1585#1578' '#1593#1583#1605' '#1608#1580#1608#1583' '#1605#1575#1607#1610#1575#1606#1607' '#1583#1585' '#1587#1610#1587#1578#1605' '
     TabOrder = 8
+    DesignSize = (
+      462
+      41)
     object rbInsert: TRadioButton
       Left = 112
       Top = 16
       Width = 113
       Height = 17
+      Anchors = [akTop, akRight]
       Caption = #1583#1585#1580' '#1588#1608#1583
       TabOrder = 0
     end
@@ -433,6 +442,7 @@ inherited FrPaymentImportFromExcel: TFrPaymentImportFromExcel
       Top = 16
       Width = 113
       Height = 17
+      Anchors = [akTop, akRight]
       Caption = #1583#1585#1580' '#1606#1588#1608#1583
       Checked = True
       TabOrder = 1
@@ -440,27 +450,30 @@ inherited FrPaymentImportFromExcel: TFrPaymentImportFromExcel
     end
   end
   inherited ahmadvand: TActionList
-    Left = 5
-    Top = 11
+    Top = 19
   end
   inherited Grid_PopupMenu: TPopupMenu
-    Left = 7
-    Top = 44
+    Left = 39
+    Top = 20
+  end
+  inherited qSetting: TADOQuery
+    Left = 184
+    Top = 24
   end
   object Q_DeleteT: TADOQuery
     Connection = dm.YeganehConnection
     Parameters = <>
     SQL.Strings = (
       'truncate table TbExcel')
-    Left = 8
-    Top = 184
+    Left = 432
+    Top = 224
   end
   object TbExcel: TADOTable
     Connection = dm.YeganehConnection
     CursorType = ctStatic
     TableName = 'TbExcel'
-    Left = 8
-    Top = 128
+    Left = 432
+    Top = 168
     object TbExcelRadif: TIntegerField
       DisplayLabel = #1585#1583#1610#1601
       DisplayWidth = 5
@@ -497,19 +510,19 @@ inherited FrPaymentImportFromExcel: TFrPaymentImportFromExcel
   end
   object dTbExcel: TDataSource
     DataSet = TbExcel
-    Left = 40
-    Top = 136
+    Left = 432
+    Top = 112
   end
   object Q_Tmp: TADOQuery
     Connection = dm.YeganehConnection
     Parameters = <>
     SQL.Strings = (
       'truncate table table1')
-    Left = 32
-    Top = 248
+    Left = 432
+    Top = 56
   end
   object OpenExcelFile: TOpenDialog
-    Left = 88
-    Top = 32
+    Left = 272
+    Top = 16
   end
 end

@@ -1,26 +1,230 @@
 [Closed Files]
-File_0=SourceModule,'D:\matin\04 - Cash\Program\BaseUnit.pas',0,1,1,1,1,0,0
-File_1=SourceModule,'D:\matin\04 - Cash\Program\Dmu.pas',0,1,1,1,1,0,0
-File_2=SourceModule,'D:\matin\04 - Cash\Program\MainU.pas',0,1,3045,6,3054,1,0
-File_3=SourceModule,'D:\matin\04 - Cash\Program\ReportAccountU.pas',0,1,107,49,117,1,0
-File_4=SourceModule,'D:\matin\04 - Cash\Program\Income_SummeryU.pas',0,1,1,41,4,1,0
-File_5=SourceModule,'D:\matin\04 - Cash\Program\SummeryPayment_allU.pas',0,1,1,15,3,1,0
-File_6=SourceModule,'D:\matin\04 - Cash\Program\EditLoanU.pas',0,1,1,14,12,1,0
-File_7=SourceModule,'D:\matin\04 - Cash\Program\ReportAccountPaymentsU.pas',0,1,155,26,164,1,0
-File_8=SourceModule,'D:\matin\04 - Cash\Program\SumPaymentU.pas',0,1,80,53,89,1,0
-File_9=SourceModule,'D:\matin\04 - Cash\Program\ReportAccountPaymentsPBKU.pas',0,1,73,45,87,1,0
+File_0=SourceModule,'D:\matin\04 - Cash\Program\PaymentImportFromExcelU.dfm',0,1,1,1,1,0,0
+File_1=SourceModule,'D:\matin\04 - Cash\Program\SumPaymentDM.pas',0,1,1,1,1,0,0
+File_2=SourceModule,'D:\matin\04 - Cash\Program\ReportAccountU.pas',0,1,107,49,117,1,0
+File_3=SourceModule,'D:\matin\04 - Cash\Program\Income_SummeryU.pas',0,1,1,41,4,1,0
+File_4=SourceModule,'D:\matin\04 - Cash\Program\SummeryPayment_allU.pas',0,1,1,15,3,1,0
+File_5=SourceModule,'D:\matin\04 - Cash\Program\EditLoanU.pas',0,1,1,14,12,1,0
+File_6=SourceModule,'D:\matin\04 - Cash\Program\ReportAccountPaymentsU.pas',0,1,155,26,164,1,0
+File_7=SourceModule,'D:\matin\04 - Cash\Program\SumPaymentU.pas',0,1,80,53,89,1,0
 
 [Modules]
-Count=0
-EditWindowCount=0
+Module0=D:\matin\04 - Cash\Program\BaseUnit.pas
+Module1=D:\matin\04 - Cash\Program\PaymentImportFromExcelU.pas
+Module2=D:\matin\04 - Cash\Program\MainU.pas
+Module3=D:\matin\04 - Cash\Program\Dmu.pas
+Module4=D:\matin\04 - Cash\Program\AddContactU.pas
+Module5=D:\matin\04 - Cash\Program\AddPaymentU.pas
+Module6=D:\matin\04 - Cash\Program\FinancialNoteDetail_NewU.pas
+Module7=H:\Yeganeh\Windows\Delphi\Component\Vcl\Kimiya\Solar_Calendar\SolarCalendarPackage.pas
+Module8=D:\matin\04 - Cash\Program\BusinessLayer.pas
+Module9=D:\matin\04 - Cash\Program\AvrageU.pas
+Module10=D:\matin\04 - Cash\Program\DividBenefit_NewU.pas
+Module11=D:\matin\04 - Cash\Program\AddRemainLoanU.pas
+Module12=D:\matin\04 - Cash\Program\Yeganeh_DCash_V_4.dpr
+Count=13
+EditWindowCount=1
+
+[D:\matin\04 - Cash\Program\BaseUnit.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\PaymentImportFromExcelU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
+
+[D:\matin\04 - Cash\Program\MainU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\Dmu.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
+
+[D:\matin\04 - Cash\Program\AddContactU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\AddPaymentU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\FinancialNoteDetail_NewU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[H:\Yeganeh\Windows\Delphi\Component\Vcl\Kimiya\Solar_Calendar\SolarCalendarPackage.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\BusinessLayer.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\AvrageU.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\DividBenefit_NewU.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\04 - Cash\Program\AddRemainLoanU.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
 
 [D:\matin\04 - Cash\Program\Yeganeh_DCash_V_4.dpr]
+ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
 [C:\Program Files (x86)\Borland\Delphi7\Projects\ProjectGroup1.bpg]
 FormState=0
 FormOnTop=0
+
+[D:\matin\04 - Cash\Program\ConnectU.pas]
+FormState=0
+FormOnTop=0
+
+[EditWindow0]
+ViewCount=13
+CurrentView=12
+View0=0
+View1=1
+View2=2
+View3=3
+View4=4
+View5=5
+View6=6
+View7=7
+View8=8
+View9=9
+View10=10
+View11=11
+View12=12
+CodeExplorer=CodeExplorer@EditWindow0
+MessageView=MessageView@EditWindow0
+Create=1
+Visible=1
+State=0
+Left=193
+Top=114
+Width=1485
+Height=910
+MaxLeft=-8
+MaxTop=114
+ClientWidth=1469
+ClientHeight=871
+LeftPanelSize=0
+LeftPanelClients=CodeExplorer@EditWindow0
+LeftPanelData=00000400010000000C000000436F64654578706C6F726572000000000000000000000000000000000001000000000000000000000000FFFFFFFF
+RightPanelSize=0
+BottomPanelSize=0
+BottomPanelClients=MessageView@EditWindow0,WatchWindow
+BottomPanelData=00000400020000000B0000004D657373616765566965770B000000576174636857696E646F779D0000000000000001A80400000000000001000000009D000000000000000100000002B606000000000000020000000000000000000000000200000000AD060000000000000200000000B7060000000000000200000000B7060000000000000200000000B7060000000000000200000000B706000000000000FFFFFFFF
+
+[View0]
+Module=D:\matin\04 - Cash\Program\Yeganeh_DCash_V_4.dpr
+CursorX=63
+CursorY=10
+TopLine=1
+LeftCol=1
+
+[View1]
+Module=D:\matin\04 - Cash\Program\MainU.pas
+CursorX=30
+CursorY=623
+TopLine=600
+LeftCol=1
+
+[View2]
+Module=D:\matin\04 - Cash\Program\AddContactU.pas
+CursorX=31
+CursorY=90
+TopLine=87
+LeftCol=1
+
+[View3]
+Module=D:\matin\04 - Cash\Program\AddPaymentU.pas
+CursorX=51
+CursorY=291
+TopLine=271
+LeftCol=1
+
+[View4]
+Module=D:\matin\04 - Cash\Program\AddRemainLoanU.pas
+CursorX=21
+CursorY=270
+TopLine=256
+LeftCol=1
+
+[View5]
+Module=D:\matin\04 - Cash\Program\DividBenefit_NewU.pas
+CursorX=20
+CursorY=154
+TopLine=140
+LeftCol=1
+
+[View6]
+Module=D:\matin\04 - Cash\Program\AvrageU.pas
+CursorX=21
+CursorY=79
+TopLine=65
+LeftCol=1
+
+[View7]
+Module=D:\matin\04 - Cash\Program\FinancialNoteDetail_NewU.pas
+CursorX=40
+CursorY=95
+TopLine=84
+LeftCol=1
+
+[View8]
+Module=D:\matin\04 - Cash\Program\BusinessLayer.pas
+CursorX=28
+CursorY=1685
+TopLine=1677
+LeftCol=1
+
+[View9]
+Module=D:\matin\04 - Cash\Program\PaymentImportFromExcelU.pas
+CursorX=58
+CursorY=171
+TopLine=164
+LeftCol=1
+
+[View10]
+Module=H:\Yeganeh\Windows\Delphi\Component\Vcl\Kimiya\Solar_Calendar\SolarCalendarPackage.pas
+CursorX=1
+CursorY=800
+TopLine=1534
+LeftCol=1
+
+[View11]
+Module=D:\matin\04 - Cash\Program\Dmu.pas
+CursorX=3
+CursorY=1526
+TopLine=1524
+LeftCol=1
+
+[View12]
+Module=D:\matin\04 - Cash\Program\BaseUnit.pas
+CursorX=79
+CursorY=487
+TopLine=471
+LeftCol=1
 
 [Watches]
 Count=0
@@ -31,10 +235,10 @@ WatchShowColumnHeaders=1
 Create=1
 Visible=0
 State=0
-Left=201
-Top=923
-Width=1196
-Height=196
+Left=12
+Top=0
+Width=1180
+Height=157
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1180
@@ -44,10 +248,18 @@ LRDockWidth=1180
 Dockable=1
 
 [Breakpoints]
-Count=3
+Count=11
 Breakpoint0='D:\matin\04 - Cash\Program\SumPaymentU.pas',133,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint1='D:\matin\04 - Cash\Program\AddRemainLoanU.pas',99,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint2='D:\matin\04 - Cash\Program\SumPaymentU.pas',242,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint3='D:\matin\04 - Cash\Program\PaymentImportFromExcelU.pas',264,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint4='D:\matin\04 - Cash\Program\PaymentImportFromExcelU.pas',296,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint5='D:\matin\04 - Cash\Program\PaymentImportFromExcelU.pas',185,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint6='D:\matin\04 - Cash\Program\AddContactU.pas',389,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint7='D:\matin\04 - Cash\Program\AddContactU.pas',375,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint8='D:\matin\04 - Cash\Program\AddContactU.pas',516,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint9='D:\matin\04 - Cash\Program\AddContactU.pas',240,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint10='D:\matin\04 - Cash\Program\AddContactU.pas',243,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -130,8 +342,8 @@ LRDockWidth=190
 Dockable=1
 SplitPos=85
 ArrangeBy=Name
-SelectedItem=
-ExpandedItems=Anchors,Title
+SelectedItem=Name
+ExpandedItems=Title
 HiddenCategories=
 
 [ObjectTree]
@@ -196,6 +408,38 @@ ClientWidth=318
 ClientHeight=476
 TBDockHeight=515
 LRDockWidth=334
+Dockable=1
+
+[CodeExplorer@EditWindow0]
+Create=1
+Visible=0
+State=0
+Left=0
+Top=12
+Width=140
+Height=805
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=140
+ClientHeight=805
+TBDockHeight=305
+LRDockWidth=140
+Dockable=1
+
+[MessageView@EditWindow0]
+Create=1
+Visible=0
+State=0
+Left=12
+Top=0
+Width=1707
+Height=85
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=1707
+ClientHeight=85
+TBDockHeight=85
+LRDockWidth=443
 Dockable=1
 
 [DockHosts]

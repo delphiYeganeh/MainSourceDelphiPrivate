@@ -38,10 +38,12 @@ type
     procedure ExecCommand(s:string);
     procedure FormCreate(Sender: TObject);
     procedure quFileListCalcFields(DataSet: TDataSet);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     function GetTrueFilePath(Path: string): string;
   public
+    RestoreBackUp : Boolean;
     { Public declarations }
   end;
 
@@ -109,14 +111,32 @@ var
   cmd : TADOCommand;
   s : TStrings;
 begin
+
   if MessageDlg('»Â — «”  ﬁ»· «“ «‰Ã«„ «Ì‰ ⁄„· ‰”ŒÂ Å‘ Ì»«‰  ÂÌÂ ò‰Ìœ Ê Â„ç‰Ì‰ ò·ÌÂ ò«—»—«‰ «“ ”Ì” „ Œ«—Ã ‘Ê‰œ'+
   #13#10+' »« «Ì‰ „·«ÕŸ«  ¬Ì« «“ Ã«Ìê“Ì‰Ì ‰”ŒÂ Å‘ Ì»«‰ „ÿ„∆‰ Â” Ìœø',mtConfirmation,[mbyes,mbno],0)<>mryes then
     Exit;
 
-  ProgressBar.Position:=30;
-  RestorePath.Text:=trim(RestorePath.Text);
+  { TODO -oparsa : 14030805-bug414 }
+  if trim(BackupPath.Text)= ''   then
+  begin
+    ShowMessage('„”Ì— ›«Ì· Å‘ Ì»«· —« ·ÿ›« «‰ Œ«» ‰„«ÌÌœ');
+    Exit;
+  end;
+
+  if trim(RestorePath.Text)= ''  then
+  begin
+    ShowMessage('„”Ì— ›«Ì· »«“Ì«»Ì ·ÿ›« «‰ Œ«» ‰„«ÌÌœ');
+    Exit;
+  end;
+  { TODO -oparsa : 14030805-bug414 }
+
+  ProgressBar.Position := 30;
+  sleep(1000);
+  
+  RestorePath.Text     := trim(RestorePath.Text);
+
   if RestorePath.Text[Length(RestorePath.Text)]<>'\' then
-    RestorePath.Text:=RestorePath.Text+'\';
+    RestorePath.Text:= RestorePath.Text+'\';
 
 {with dbinfo do
  begin
@@ -131,15 +151,15 @@ begin
     file2:=Fields[0].AsString; // Amin 1391/10/19
 
  end;  }    //Commented By Hadi Mohamed 920301
-  if(not DirectoryExists(GetTrueFilePath(RestorePath.Text)))   then
+  if( not DirectoryExists(GetTrueFilePath(RestorePath.Text)))   then
   begin
     ShowMessage('.„”Ì— ›«Ì· »«“Ì«»Ì „ÊÃÊœ ‰„Ì »«‘œ');
     Exit;
   end;
 
   // Amin 1391/10/19 DisconnectAllConnections;
-  ProgressBar.Position:=55;
-
+  ProgressBar.Position := 55;
+  sleep(1000);
   // Amin 1391/10/19 Start
   try
 
@@ -161,14 +181,21 @@ begin
         next;
       end;
     end;
-    script:= 'USE [master] Restore DataBase ['+DataBaseName+
-              '] From Disk = '''+GetTrueFilePath(BackupPath.Text)+''' With ';
+    
+    ProgressBar.Position := 65;
+    sleep(1000);
+
+    script:= 'USE [master] Restore DataBase ['+DataBaseName+ '] From Disk = '''+GetTrueFilePath(BackupPath.Text)+''' With ';
+
     quFileList.First;
     while not quFileList.Eof do
     begin
       script := script +' Move '''+ quFileListLogicalName.AsString + ''' to ''' +GetTrueFilePath(RestorePath.Text)+ ExtractFileName(quFileListPhysicalName.AsString)+''' , ';//GetTrueFilePath(RestorePath.Text)+DataBaseName+'.MDF'''
       quFileList.Next;
     end;
+    ProgressBar.Position := 75;
+    sleep(1000);
+
     script := script +' replace';
 
     cmd.CommandText := script;
@@ -176,11 +203,20 @@ begin
     s.Add(script);
     //s.SaveToFile('t.txt');
     cmd.Execute;
-    WinExec(pansichar( Application.ExeName),0);
+    { TODO -oparsa : 14030805-bug414 }
+    //WinExec(pansichar( Application.ExeName),0);
+    RestoreBackUp := True ;
+    ProgressBar.Position := 100;
+    sleep(1000);
+    ShowMessage(' »«“Ì«»Ì »« „Ê›ﬁÌ  «‰Ã«„ ‘œ ·ÿ›« »—‰«„Â œÊ»«—Â «Ã—« ‰„«ÌÌœ ')   ;
     Application.Terminate;
+    { TODO -oparsa : 14030805-bug414 }
     except on e: exception do
       ShowMessage(e.Message);
     end;
+  { TODO -oparsa : 14030805-bug414 }
+  Close;
+  { TODO -oparsa : 14030805-bug414 }
 end;
 
 procedure TFrRestore.DisConnectAllConnections;
@@ -234,6 +270,11 @@ begin
     quFileListDL.Value := '›«Ì· ·«ê';
 
 //   quFileListNewSize.value := IntToStr(quFileListSize.AsInteger div 1048576)+' '+'MB';
+end;
+
+procedure TFrRestore.FormShow(Sender: TObject);
+begin
+  RestoreBackUp := False ;
 end;
 
 end.

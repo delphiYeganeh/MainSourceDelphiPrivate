@@ -22,6 +22,7 @@ type
     memError: TMemo;
     procedure FormShow(Sender: TObject);
     procedure btnUpdateClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     updateType : Integer;
     dbVer, delphiVer, path : String;
@@ -61,6 +62,7 @@ var
   slMain              : TStringList;
   tabs: Array [0..1] of Integer;
   fromVer, toVer, ver : Integer;
+   Action : TCloseAction;
 begin
   lblDbVer.Caption := dbVer;
   lblDelphiVer.Caption := delphiVer;
@@ -108,8 +110,17 @@ begin
       memScripts.Lines.Assign(slMain);
       memScripts.Refresh;
       slMain.Free;
+      { TODO -oparsa : 14030805-bug414 }
+      {
+      if memScripts.Lines.Count = 0 then
+      begin
+        btnUpdateClick(Self);
+        FormClose(Sender , Action);
+      end;  }
+      { TODO -oparsa : 14030805-bug414 }
     end;
   end;
+
 end;
 
 procedure TfmUpdateDbScripts.btnUpdateClick(Sender: TObject);
@@ -319,6 +330,11 @@ begin
   finally
     sl.EndUpdate;
   end;
+end;
+
+procedure TfmUpdateDbScripts.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+//
 end;
 
 end.

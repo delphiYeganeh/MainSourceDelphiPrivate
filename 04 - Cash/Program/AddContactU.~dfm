@@ -312,9 +312,9 @@ inherited FrAddContact: TFrAddContact
           615
           257)
         object Label4: TLabel
-          Left = 502
+          Left = 551
           Top = 72
-          Width = 81
+          Width = 32
           Height = 13
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
@@ -329,9 +329,9 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label3: TLabel
-          Left = 502
+          Left = 564
           Top = 17
-          Width = 81
+          Width = 19
           Height = 13
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
@@ -346,9 +346,9 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label10: TLabel
-          Left = 502
+          Left = 542
           Top = 151
-          Width = 81
+          Width = 41
           Height = 13
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
@@ -380,9 +380,9 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label2: TLabel
-          Left = 502
+          Left = 525
           Top = 44
-          Width = 81
+          Width = 58
           Height = 13
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
@@ -397,9 +397,9 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label7: TLabel
-          Left = 502
+          Left = 542
           Top = 179
-          Width = 81
+          Width = 41
           Height = 13
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
@@ -414,9 +414,9 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object PersonalNo: TLabel
-          Left = 502
+          Left = 512
           Top = 207
-          Width = 81
+          Width = 71
           Height = 13
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
@@ -430,9 +430,9 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label16: TLabel
-          Left = 502
+          Left = 546
           Top = 125
-          Width = 81
+          Width = 37
           Height = 13
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
@@ -447,9 +447,9 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label17: TLabel
-          Left = 502
+          Left = 525
           Top = 231
-          Width = 81
+          Width = 58
           Height = 13
           Anchors = [akTop, akRight]
           BiDiMode = bdRightToLeft
@@ -856,9 +856,9 @@ inherited FrAddContact: TFrAddContact
           615
           178)
         object Label8: TLabel
-          Left = 541
+          Left = 578
           Top = 44
-          Width = 54
+          Width = 25
           Height = 13
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
@@ -873,7 +873,7 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label9: TLabel
-          Left = 541
+          Left = 549
           Top = 22
           Width = 54
           Height = 13
@@ -890,9 +890,9 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object Label15: TLabel
-          Left = 541
+          Left = 563
           Top = 65
-          Width = 54
+          Width = 40
           Height = 13
           Anchors = [akTop, akRight]
           Caption = #1578#1608#1590#1610#1581#1575#1578
@@ -904,9 +904,9 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object userField1: TLabel
-          Left = 541
+          Left = 561
           Top = 110
-          Width = 54
+          Width = 42
           Height = 13
           Hint = #1593#1606#1608#1575#1606' '#1575#1610#1606' '#1601#1610#1604#1583' '#1585#1575' '#1605#1610' '#1578#1608#1575#1606#1610#1583' '#1583#1585' '#1575#1591#1604#1575#1593#1575#1578' '#1579#1575#1576#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1578#1594#1610#1610#1585' '#1583#1607#1610#1583
           Alignment = taRightJustify
@@ -922,9 +922,9 @@ inherited FrAddContact: TFrAddContact
           ParentFont = False
         end
         object userField2: TLabel
-          Left = 541
+          Left = 561
           Top = 134
-          Width = 54
+          Width = 42
           Height = 13
           Hint = #1593#1606#1608#1575#1606' '#1575#1610#1606' '#1601#1610#1604#1583' '#1585#1575' '#1605#1610' '#1578#1608#1575#1606#1610#1583' '#1583#1585' '#1575#1591#1604#1575#1593#1575#1578' '#1579#1575#1576#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1578#1594#1610#1610#1585' '#1583#1607#1610#1583
           Alignment = taRightJustify
@@ -954,7 +954,7 @@ inherited FrAddContact: TFrAddContact
           Caption = #1662#1585#1601#1585#1575#1688' B '#1711#1586#1575#1585#1588' 2 : PerfrajBRep2.fr3'
         end
         object DBEdit4: TDBEdit
-          Left = 27
+          Left = 19
           Top = 41
           Width = 510
           Height = 21
@@ -975,7 +975,7 @@ inherited FrAddContact: TFrAddContact
           OnExit = TEditExit
         end
         object DBEdit7: TDBEdit
-          Left = 272
+          Left = 264
           Top = 18
           Width = 265
           Height = 21
@@ -996,7 +996,7 @@ inherited FrAddContact: TFrAddContact
           OnExit = TEditExit
         end
         object DBMemo1: TDBMemo
-          Left = 27
+          Left = 19
           Top = 63
           Width = 510
           Height = 40
@@ -1012,7 +1012,7 @@ inherited FrAddContact: TFrAddContact
           TabOrder = 2
         end
         object DBEdit12: TDBEdit
-          Left = 241
+          Left = 233
           Top = 106
           Width = 296
           Height = 21
@@ -1034,7 +1034,7 @@ inherited FrAddContact: TFrAddContact
           OnExit = TEditExit
         end
         object DBEdit13: TDBEdit
-          Left = 241
+          Left = 233
           Top = 130
           Width = 296
           Height = 21

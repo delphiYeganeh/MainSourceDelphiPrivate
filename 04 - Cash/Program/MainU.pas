@@ -2319,10 +2319,22 @@ begin
 end;
 
 procedure TFrMain.SpeedButton12Click(Sender: TObject);
+Var
+   Action : TCloseAction;
 begin
   inherited;
   FrRestore:=TFrRestore.Create(Application);
   FrRestore.ShowModal;
+  { TODO -oparsa : 14030805-bug414 }
+
+  if FrRestore.RestoreBackUp then
+  begin
+    FreeAndNil(FrRestore);
+    dm.dmupdate_UserLoginLogout(_UserLoginLogoutID,true);
+   // WinExec(pansichar( Application.ExeName),0);
+    Application.Terminate;
+  end;
+  { TODO -oparsa : 14030805-bug414 }
 end;
 
 procedure TFrMain.AccountGridDblClick(Sender: TObject);
@@ -2549,8 +2561,8 @@ begin
   else
   if i=0 then
   begin
-    FrDatabaseMaintenance:=TFrDatabaseMaintenance.Create(Application);
-    FrDatabaseMaintenance.Mode:=backup;
+    FrDatabaseMaintenance     := TFrDatabaseMaintenance.Create(Application);
+    FrDatabaseMaintenance.Mode:= backup;
     FrDatabaseMaintenance.ShowModal;
     update_UserLoginLogout(_UserLoginLogoutID,true);
   end

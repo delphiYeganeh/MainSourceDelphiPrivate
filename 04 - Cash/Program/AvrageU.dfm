@@ -11,12 +11,12 @@ inherited FrAvrage: TFrAvrage
   object Panel1: TPanel [0]
     Left = 0
     Top = 473
-    Width = 708
+    Width = 683
     Height = 40
     Align = alBottom
     TabOrder = 0
     DesignSize = (
-      708
+      683
       40)
     object BitBtn1: TBitBtn
       Left = 528
@@ -235,12 +235,12 @@ inherited FrAvrage: TFrAvrage
   object Panel2: TPanel [1]
     Left = 0
     Top = 0
-    Width = 708
+    Width = 683
     Height = 38
     Align = alTop
     TabOrder = 1
     DesignSize = (
-      708
+      683
       38)
     object Label3: TLabel
       Left = 494
@@ -404,7 +404,7 @@ inherited FrAvrage: TFrAvrage
   object YDBGrid1: TYDBGrid [2]
     Left = 0
     Top = 38
-    Width = 708
+    Width = 683
     Height = 232
     Cursor = crHandPoint
     Align = alTop
@@ -460,7 +460,7 @@ inherited FrAvrage: TFrAvrage
   object YDBGrid2: TYDBGrid [3]
     Left = 0
     Top = 294
-    Width = 708
+    Width = 683
     Height = 179
     Cursor = crHandPoint
     Align = alBottom
@@ -577,13 +577,13 @@ inherited FrAvrage: TFrAvrage
   object Panel3: TPanel [4]
     Left = 0
     Top = 270
-    Width = 708
+    Width = 683
     Height = 24
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 4
     DesignSize = (
-      708
+      683
       24)
     object DBText1: TDBText
       Left = 525

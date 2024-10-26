@@ -17,6 +17,7 @@ object FrRestore: TFrRestore
   ParentBiDiMode = False
   Position = poScreenCenter
   OnCreate = FormCreate
+  OnShow = FormShow
   DesignSize = (
     518
     185)
@@ -129,14 +130,14 @@ object FrRestore: TFrRestore
     Visible = False
   end
   object OpenDialog: TOpenDialog
-    Left = 48
-    Top = 16
+    Left = 8
+    Top = 8
   end
   object dbinfo: TADOQuery
     Connection = dm.YeganehConnection
     Parameters = <>
-    Left = 240
-    Top = 24
+    Left = 128
+    Top = 96
   end
   object ADOConnection: TADOConnection
     CommandTimeout = 3000
@@ -145,8 +146,8 @@ object FrRestore: TFrRestore
       'fo=False;Initial Catalog=master'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
-    Left = 136
-    Top = 8
+    Left = 368
+    Top = 96
   end
   object Processes: TADOQuery
     Connection = ADOConnection
@@ -166,8 +167,8 @@ object FrRestore: TFrRestore
       'from master..syslockinfo l with (NOLOCK) '
       'where ISNULL(db_name(l.rsc_dbid), N'#39'(internal)'#39')=:Dbname'
       ' ')
-    Left = 336
-    Top = 32
+    Left = 448
+    Top = 96
     object ProcessesProcessID: TIntegerField
       FieldName = 'ProcessID'
     end
@@ -185,8 +186,8 @@ object FrRestore: TFrRestore
       end>
     SQL.Strings = (
       'RESTORE FILELISTONLY FROM DISK = :p1')
-    Left = 128
-    Top = 72
+    Left = 72
+    Top = 96
     object quFileListLogicalName: TWideStringField
       DisplayLabel = #1606#1575#1605' '#1605#1606#1591#1602#1610
       DisplayWidth = 18
@@ -233,7 +234,7 @@ object FrRestore: TFrRestore
   end
   object dsFileList: TDataSource
     DataSet = quFileList
-    Left = 48
-    Top = 160
+    Left = 16
+    Top = 96
   end
 end

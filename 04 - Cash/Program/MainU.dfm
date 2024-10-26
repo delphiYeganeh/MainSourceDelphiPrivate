@@ -32,7 +32,7 @@ inherited FrMain: TFrMain
     Top = 34
     Width = 1100
     Height = 648
-    ActivePage = xpTabSheet4
+    ActivePage = xpTabSheet1
     Align = alClient
     Font.Charset = ARABIC_CHARSET
     Font.Color = clWindowText
@@ -72,7 +72,7 @@ inherited FrMain: TFrMain
           Width = 152
           Height = 35
           Anchors = [akTop, akRight]
-          Caption = #1575#1610#1580#1575#1583' '#1605#1593#1585#1601
+          Caption = '     '#1575#1610#1580#1575#1583' '#1605#1593#1585#1601'   '
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -215,10 +215,10 @@ inherited FrMain: TFrMain
         object SpeedButton43: TSpeedButton
           Left = 914
           Top = 22
-          Width = 152
+          Width = 161
           Height = 35
           Anchors = [akTop, akRight]
-          Caption = #1578#1606#1592#1610#1605' '#1580#1585#1610#1605#1607' '#1583#1610#1585#1705#1585#1583
+          Caption = '  '#1578#1606#1592#1610#1605' '#1580#1585#1610#1605#1607' '#1583#1610#1585#1705#1585#1583
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -364,7 +364,7 @@ inherited FrMain: TFrMain
           Width = 152
           Height = 35
           Anchors = [akTop, akRight]
-          Caption = #1578#1593#1585#1610#1601' '#1582#1575#1606#1608#1575#1583#1607
+          Caption = #1578#1593#1585#1610#1601' '#1582#1575#1606#1608#1575#1583#1607'  '
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -437,7 +437,7 @@ inherited FrMain: TFrMain
           Width = 152
           Height = 35
           Anchors = [akTop, akRight]
-          Caption = #1590#1575#1605#1606' '#1594#1610#1585' '#1593#1590#1608
+          Caption = '        '#1590#1575#1605#1606' '#1594#1610#1585' '#1593#1590#1608'     '
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -507,7 +507,7 @@ inherited FrMain: TFrMain
         object SpeedButton36: TSpeedButton
           Left = 914
           Top = 62
-          Width = 152
+          Width = 161
           Height = 35
           Anchors = [akTop, akRight]
           Caption = #1588#1705#1604' '#1588#1605#1575#1585#1607' '#1581#1587#1575#1576' '
@@ -757,7 +757,7 @@ inherited FrMain: TFrMain
         object xpBitBtn3: TSpeedButton
           Left = 914
           Top = 19
-          Width = 152
+          Width = 161
           Height = 34
           Anchors = [akTop, akRight]
           Caption = #1578#1606#1592#1610#1605#1575#1578' '#1587#1610#1587#1578#1605#1610
@@ -851,7 +851,7 @@ inherited FrMain: TFrMain
           Width = 152
           Height = 34
           Anchors = [akTop, akRight]
-          Caption = #1578#1607#1610#1607' '#1606#1587#1582#1607' '#1662#1588#1578#1610#1576#1575#1606
+          Caption = '  '#1578#1607#1610#1607' '#1606#1587#1582#1607' '#1662#1588#1578#1610#1576#1575#1606'  '
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -994,10 +994,10 @@ inherited FrMain: TFrMain
         object xpBitBtn52: TSpeedButton
           Left = 914
           Top = 57
-          Width = 152
+          Width = 161
           Height = 34
           Anchors = [akTop, akRight]
-          Caption = #1576#1607#1610#1606#1607' '#1587#1575#1586#1610' DB'
+          Caption = '      '#1576#1607#1610#1606#1607' '#1587#1575#1586#1610' DB  '
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -1143,7 +1143,7 @@ inherited FrMain: TFrMain
           Width = 152
           Height = 34
           Anchors = [akTop, akRight]
-          Caption = #1578#1593#1585#1610#1601' '#1705#1575#1585#1576#1585
+          Caption = '         '#1578#1593#1585#1610#1601' '#1705#1575#1585#1576#1585'     '
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -1216,7 +1216,7 @@ inherited FrMain: TFrMain
           Width = 152
           Height = 34
           Anchors = [akTop, akRight]
-          Caption = #1578#1594#1610#1610#1585' '#1705#1604#1605#1607' '#1593#1576#1608#1585
+          Caption = '       '#1578#1594#1610#1610#1585' '#1705#1604#1605#1607' '#1593#1576#1608#1585'  '
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -1380,7 +1380,7 @@ inherited FrMain: TFrMain
           Width = 170
           Height = 34
           Anchors = [akTop, akRight]
-          Caption = #1711#1586#1575#1585#1588' '#1608#1585#1608#1583' '#1705#1575#1585#1576#1585#1575#1606
+          Caption = '    '#1711#1586#1575#1585#1588' '#1608#1585#1608#1583' '#1705#1575#1585#1576#1585#1575#1606'      '
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -1544,7 +1544,7 @@ inherited FrMain: TFrMain
           Width = 132
           Height = 34
           Anchors = [akTop, akRight]
-          Caption = #1575#1585#1587#1575#1604' '#1662#1610#1575#1605#1705
+          Caption = #1575#1585#1587#1575#1604' '#1662#1610#1575#1605#1705'   '
           Flat = True
           Font.Charset = ARABIC_CHARSET
           Font.Color = clNavy
@@ -1791,10 +1791,10 @@ inherited FrMain: TFrMain
         object SpeedButton13: TSpeedButton
           Left = 914
           Top = 61
-          Width = 152
+          Width = 161
           Height = 35
           Anchors = [akTop, akRight]
-          Caption = #1605#1583#1610#1585#1610#1578' '#1662#1610#1594#1575#1605#1607#1575#1610' '#1582#1591#1575
+          Caption = '  '#1605#1583#1610#1585#1610#1578' '#1662#1610#1594#1575#1605#1607#1575#1610' '#1582#1591#1575'        '
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -1864,10 +1864,10 @@ inherited FrMain: TFrMain
         object SpeedButton20: TSpeedButton
           Left = 914
           Top = 21
-          Width = 152
+          Width = 161
           Height = 35
           Anchors = [akTop, akRight]
-          Caption = #1670#1705' '#1608' '#1587#1601#1578#1607
+          Caption = '         '#1670#1705' '#1608' '#1587#1601#1578#1607'              '
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -1940,7 +1940,7 @@ inherited FrMain: TFrMain
           Width = 152
           Height = 35
           Anchors = [akTop, akRight]
-          Caption = #1576#1575#1606#1705' '#1607#1575
+          Caption = '    '#1576#1575#1606#1705' '#1607#1575
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -2195,7 +2195,7 @@ inherited FrMain: TFrMain
           Width = 152
           Height = 35
           Anchors = [akTop, akRight]
-          Caption = #1670#1575#1662' '#1589#1608#1585#1578#1580#1604#1587#1607
+          Caption = '     '#1670#1575#1662' '#1589#1608#1585#1578#1580#1604#1587#1607
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -2268,7 +2268,7 @@ inherited FrMain: TFrMain
           Width = 170
           Height = 35
           Anchors = [akTop, akRight]
-          Caption = #1575#1606#1578#1602#1575#1604' '#1608#1580#1607
+          Caption = '           '#1575#1606#1578#1602#1575#1604' '#1608#1580#1607'         '
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -2488,7 +2488,7 @@ inherited FrMain: TFrMain
           Width = 170
           Height = 35
           Anchors = [akTop, akRight]
-          Caption = #1575#1593#1591#1575#1610' '#1587#1608#1583' '#1587#1662#1585#1583#1607
+          Caption = '     '#1575#1593#1591#1575#1610' '#1587#1608#1583' '#1587#1662#1585#1583#1607'   '
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -2559,7 +2559,7 @@ inherited FrMain: TFrMain
         object SpeedButton24: TSpeedButton
           Left = 914
           Top = 100
-          Width = 152
+          Width = 161
           Height = 35
           Anchors = [akTop, akRight]
           Caption = #1662#1585#1583#1575#1582#1578' '#1605#1575#1607#1610#1575#1606#1607' '#1575#1586' '#1601#1575#1610#1604' '#1575#1705#1587#1604
@@ -2569,6 +2569,81 @@ inherited FrMain: TFrMain
           Font.Height = -11
           Font.Name = 'Tahoma'
           Font.Style = []
+          Glyph.Data = {
+            36090000424D3609000000000000360000002800000018000000180000000100
+            2000000000000009000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000000000000000000000C1003142633
+            08413E530D6959761396719618BE8AB81DEB0000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000A0D0211242F083C3C500D66567212916F9317BB87B41DE697C920FF97C9
+            20FF97C920FF97C920FF97C920FF97C920FF0000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000097C920FF97C920FF97C920FF97C920FF97C920FF97C920FF90C01FF480A9
+            1AD86E9216B95C7A139B97C920FF97C920FF97C920FF97C920FF97C920FF97C9
+            20FF97C920FF97C920FF97C920FF739918C20000000000000000000000000000
+            000097C920FF97C920FF6E9216B95D7B149C4A63107D394C0D602D3C0A4C2D3C
+            0A4C2D3C0A4C2D3C0A4C97C920FF97C920FF97C920FF97C920FF97C920FF97C9
+            20FF97C920FF97C920FF97C920FF97C920FF0000000000000000000000000000
+            000097C920FF97C920FF2D3C0A4C2D3C0A4C2D3C0A4C2D3C0A4C2D3C0A4C2D3C
+            0A4C2D3C0A4C2D3C0A4C97C920FF97C920FF000000000000000097C920FF97C9
+            20FF000000000000000097C920FF97C920FF0000000000000000000000000000
+            000097C920FF97C920FF2D3C0A4C6C9017B7729717C12E3D0A4D2E3D0A4D7297
+            19C06C9117B72D3C0A4C97C920FF97C920FF000000000000000097C920FF97C9
+            20FF000000000000000097C920FF97C920FF0000000000000000000000000000
+            000097C920FF97C920FF2D3C0A4C506B128897C920FF4D6611814B65107F97C9
+            20FF536F128D2D3C0A4C97C920FF97C920FF97C920FF97C920FF97C920FF97C9
+            20FF97C920FF97C920FF97C920FF97C920FF0000000000000000000000000000
+            000097C920FF97C920FF2D3C0A4C2E3D0A4D7FA91BD67EA61AD47AA41BD083B0
+            1CDF2E3E0A4D2D3C0A4C97C920FF97C920FF97C920FF97C920FF97C920FF97C9
+            20FF97C920FF97C920FF97C920FF97C920FF0000000000000000000000000000
+            000097C920FF97C920FF2D3C0A4C2D3C0A4C445B0F7395C620FE96C720FD4C65
+            10812D3C0A4C2D3C0A4C97C920FF97C920FF000000000000000097C920FF97C9
+            20FF000000000000000097C920FF97C920FF0000000000000000000000000000
+            000097C920FF97C920FF2D3C0A4C2D3C0A4C42570E6F95C720FE95C620FE4860
+            0F7A2D3C0A4C2D3C0A4C97C920FF97C920FF000000000000000097C920FF97C9
+            20FF000000000000000097C920FF97C920FF0000000000000000000000000000
+            000097C920FF97C920FF2D3C0A4C2D3C0A4C779E19CA88B51CE5769E18C880A9
+            1AD82D3C0A4C2D3C0A4C97C920FF97C920FF97C920FF97C920FF97C920FF97C9
+            20FF97C920FF97C920FF97C920FF97C920FF0000000000000000000000000000
+            000097C920FF97C920FF2D3C0A4C43590F7095C720FE5E7C149D475F107897C9
+            20FF4D6711832D3C0A4C97C920FF97C920FF97C920FF97C920FF97C920FF97C9
+            20FF97C920FF97C920FF97C920FF97C920FF0000000000000000000000000000
+            000097C920FF97C920FF2D3C0A4C5F7E14A27AA21ACF35470B592D3C0A4C6D92
+            17BA698B15B02D3C0A4C97C920FF97C920FF000000000000000097C920FF97C9
+            20FF000000000000000097C920FF97C920FF0000000000000000000000000000
+            000097C920FF97C920FF2D3C0A4C2D3C0A4C2D3C0A4C2D3C0A4C2D3C0A4C2D3C
+            0A4C2D3C0A4C2D3C0A4C97C920FF97C920FF000000000000000097C920FF97C9
+            20FF000000000000000097C920FF97C920FF0000000000000000000000000000
+            000097C920FF97C920FF6E9216B95D7B149C4A63107D394C0D602D3C0A4C2D3C
+            0A4C2D3C0A4C2D3C0A4C97C920FF97C920FF97C920FF97C920FF97C920FF97C9
+            20FF97C920FF97C920FF97C920FF97C920FF0000000000000000000000000000
+            000097C920FF97C920FF97C920FF97C920FF97C920FF97C920FF90C01FF480A9
+            1AD86E9216B95C7A139B97C920FF97C920FF97C920FF97C920FF97C920FF97C9
+            20FF97C920FF97C920FF97C920FF739A18C30000000000000000000000000000
+            00000A0D0211242F083C3C500D66567212916F9317BB87B41DE697C920FF97C9
+            20FF97C920FF97C920FF97C920FF97C920FF0000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000000000000000000000A0D0211242F
+            083C3C500D66567212916F9317BB87B41DE60000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000}
           ParentFont = False
           OnClick = SpeedButton24Click
         end
@@ -2578,7 +2653,7 @@ inherited FrMain: TFrMain
           Width = 152
           Height = 35
           Anchors = [akTop, akRight]
-          Caption = #1670#1575#1662' '#1662#1585#1601#1585#1575#1688
+          Caption = '         '#1670#1575#1662' '#1662#1585#1601#1585#1575#1688'   '
           Flat = True
           Font.Charset = ARABIC_CHARSET
           Font.Color = clNavy
@@ -2771,7 +2846,7 @@ inherited FrMain: TFrMain
           Width = 152
           Height = 35
           Anchors = [akTop, akRight]
-          Caption = #1670#1575#1662' '#1587#1606#1583
+          Caption = '  '#1670#1575#1662' '#1587#1606#1583' '
           Flat = True
           Font.Charset = ARABIC_CHARSET
           Font.Color = clNavy
@@ -2926,7 +3001,7 @@ inherited FrMain: TFrMain
         object SpeedButton35: TSpeedButton
           Left = 914
           Top = 18
-          Width = 152
+          Width = 161
           Height = 35
           Anchors = [akTop, akRight]
           Caption = #1711#1586#1575#1585#1588' '#1662#1610#1588#1585#1601#1578#1607'  '#1575#1593#1590#1575
@@ -3188,10 +3263,10 @@ inherited FrMain: TFrMain
         object SpeedButton42: TSpeedButton
           Left = 914
           Top = 55
-          Width = 152
+          Width = 161
           Height = 35
           Anchors = [akTop, akRight]
-          Caption = #1575#1590#1575#1601#1607' '#1705#1585#1583#1606' '#1711#1586#1575#1585#1588
+          Caption = '    '#1575#1590#1575#1601#1607' '#1705#1585#1583#1606' '#1711#1586#1575#1585#1588
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -9917,12 +9992,13 @@ inherited FrMain: TFrMain
     Align = alTop
     TabOrder = 2
     object PageControl1: TPageControl
-      Left = 291
+      Left = 290
       Top = 1
-      Width = 808
+      Width = 809
       Height = 32
-      ActivePage = TabSheet2
+      ActivePage = TabSheet1
       Align = alRight
+      MultiLine = True
       TabHeight = 30
       TabOrder = 0
       TabWidth = 134
@@ -10088,7 +10164,7 @@ inherited FrMain: TFrMain
   object TimerSendSms: TTimer
     Interval = 3000
     OnTimer = TimerSendSmsTimer
-    Left = 472
-    Top = 352
+    Left = 96
+    Top = 312
   end
 end

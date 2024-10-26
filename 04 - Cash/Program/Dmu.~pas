@@ -1310,6 +1310,9 @@ type
     Report_ForcePaymentAMERCE: TLargeintField;
     Report_GroupForcePaymentSUMAMERCE: TLargeintField;
     qryAutoRunScript: TADOQuery;
+    spGet_Farsi_Message: TADOStoredProc;
+    spInsert_ErrorMessage: TADOStoredProc;
+    spupdate_UserLoginLogout: TADOStoredProc;
     function  Y_InputQuery (const ACaption, Adefault: string; var Value: string): Boolean;
     function  Y_InputQuery_Double (const ACaption,ACaption2, Adefault,Adefault2: string; var Value,Value2: string): Boolean;
     function  Search(Y:TYwhereEdit):integer;
@@ -1464,6 +1467,9 @@ type
     { TODO -oparsa : 14030108 }
     procedure AutoUpdateDatabase;
     { TODO -oparsa : 14030108 }
+    function dmGet_Farsi_Message(ErrorMsg:string;var ShowMessage :boolean):string;
+    Procedure  dmInsert_ErrorMessage(ErrorMessage:string;UserID:integer);
+    Procedure dmupdate_UserLoginLogout(UserLoginLogoutID:integer;isSafeLogout:boolean);
   end;
 
 type
@@ -1554,7 +1560,7 @@ var
    _SMSCenterNumber : WideString;
 
 Const
-   _SoftVerLastUpdate = '1403/03/26';//'1396/07/17';
+   _SoftVerLastUpdate = '1403/07/01';//'1396/07/17';
 //   _SoftVertion       = '7.0.12.101';//'5.0.0.5';//'4.2.7.7'   ; //'3.2.0.0'
 
 Type
@@ -2415,12 +2421,16 @@ begin
   finally
    FreeAndNil(AList);
   end;
-  farsiMessage := Get_Farsi_Message(e.Message,ShowMsg);
+  
+  farsiMessage := dmGet_Farsi_Message(e.Message,ShowMsg);
+
   if farsiMessage <> '' then
     ShowMessage(farsiMessage)
   else
   begin
-    Insert_ErrorMessage(E.Message,_Userid);
+    //Insert_ErrorMessage(E.Message,_Userid);
+    dmInsert_ErrorMessage(E.Message,_Userid);
+
     if ShowMsg then
       ShowMessage(e.Message);
   end;
@@ -4958,6 +4968,56 @@ begin
     Abort;
   end;
 
+end;
+
+function Tdm.dmGet_Farsi_Message(ErrorMsg: string; var ShowMessage: boolean): string;
+begin
+
+  with DM.spGet_Farsi_Message do
+  begin
+    Close;
+    Parameters.ParamByName('@ERRORMSG').Value:= ErrorMsg ;
+    try
+      Open;
+    except
+    end;
+  end;
+
+  Result:= '' ;
+  if spGet_Farsi_Message.Parameters.ParamByname('@FARSIMESSAGE').value <> '' then
+     Result:= spGet_Farsi_Message.Parameters.ParamByname('@FARSIMESSAGE').value;
+  ShowMessage:= spGet_Farsi_Message.Parameters.ParamByname('@SHOWMSG').value;
+
+end;
+
+
+
+procedure Tdm.dmInsert_ErrorMessage(ErrorMessage: string; UserID: integer);
+begin
+  with DM.spInsert_ErrorMessage do
+  begin
+    Close;
+    Parameters.ParamByName('@ERRORMESSAGE').Value:= ErrorMessage ;
+    Parameters.ParamByName('@USERID').Value:= UserID ;
+    try
+      Open;
+    except
+    end;
+  end;
+end;
+
+procedure Tdm.dmupdate_UserLoginLogout(UserLoginLogoutID: integer; isSafeLogout: boolean);
+begin
+  with DM.spupdate_UserLoginLogout do
+  begin
+    Close;
+    Parameters.ParamByName('@USERLOGINLOGOUTID').Value:= UserLoginLogoutID ;
+    Parameters.ParamByName('@ISSAFELOGOUT').Value:= isSafeLogout ;
+    try
+      Open;
+    except
+    end;
+  end;
 end;
 
 end.
