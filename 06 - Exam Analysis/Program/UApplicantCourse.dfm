@@ -1,10 +1,10 @@
 inherited frApplicantCourse: TfrApplicantCourse
-  Left = 267
-  Top = 248
+  Left = 501
+  Top = 247
   AutoScroll = False
   Caption = #1604#1610#1587#1578' '#1583#1575#1606#1588#1580#1608#1610#1575#1606' '#1583#1585#1587
   ClientHeight = 495
-  ClientWidth = 696
+  ClientWidth = 728
   OldCreateOrder = True
   Scaled = False
   PixelsPerInch = 96
@@ -14,10 +14,11 @@ inherited frApplicantCourse: TfrApplicantCourse
     Top = 468
     Width = 23
     Height = 13
+    Anchors = [akRight, akBottom]
     Caption = #1578#1593#1583#1575#1583
   end
   object Button2: TxpBitBtn [1]
-    Left = 448
+    Left = 459
     Top = 423
     Width = 126
     Height = 35
@@ -32,12 +33,13 @@ inherited frApplicantCourse: TfrApplicantCourse
     ImageList = Dm.LetterImages
     ImageIndex = 52
     Gradient = True
+    Anchors = [akRight, akBottom]
     TabOrder = 0
     TabStop = True
     OnClick = Button2Click
   end
   object Button3: TxpBitBtn [2]
-    Left = 203
+    Left = 214
     Top = 423
     Width = 100
     Height = 35
@@ -127,12 +129,13 @@ inherited frApplicantCourse: TfrApplicantCourse
       C67452C67452C16F4BC16F4BC16F4BB96A44B96A44B46640B46640B46640AE61
       38AE6138AE6138AE6138}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 1
     TabStop = True
     OnClick = Button3Click
   end
   object Button4: TxpBitBtn [3]
-    Left = 101
+    Left = 112
     Top = 423
     Width = 100
     Height = 35
@@ -222,12 +225,13 @@ inherited frApplicantCourse: TfrApplicantCourse
       5F9B7258966B558E67558E67558E674D87624D87624D876247815D47815D4781
       5D417B57417B57417B57}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 2
     TabStop = True
     OnClick = Button4Click
   end
   object Button5: TxpBitBtn [4]
-    Left = -1
+    Left = 10
     Top = 423
     Width = 100
     Height = 35
@@ -275,12 +279,13 @@ inherited frApplicantCourse: TfrApplicantCourse
       FE9809FEA31CFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA3
       1DFEA31DFEA31DFEA31DFEA31DFEA21AFE9B0BFED99E}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 3
     TabStop = True
     OnClick = Button5Click
   end
   object Button6: TxpBitBtn [5]
-    Left = 310
+    Left = 321
     Top = 423
     Width = 123
     Height = 35
@@ -321,6 +326,7 @@ inherited frApplicantCourse: TfrApplicantCourse
       A116FFA116FFA116FFA116FFA116FFA116FFA116FFA218FF9C0A}
     ImageIndex = 2
     Gradient = True
+    Anchors = [akRight, akBottom]
     TabOrder = 4
     TabStop = True
     OnClick = Button6Click
@@ -328,10 +334,10 @@ inherited frApplicantCourse: TfrApplicantCourse
   object YDBGrid1: TYDBGrid [6]
     Left = 0
     Top = 0
-    Width = 696
+    Width = 728
     Height = 409
-    Cursor = crHandPoint
     Align = alTop
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Color = 16770790
     DataSource = DSelect_Applicant_by_Examid
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -899,7 +905,7 @@ inherited frApplicantCourse: TfrApplicantCourse
         Frame.DrawRight = False
         Size.Values = (
           63.500000000000000000
-          788.458333333333400000
+          788.458333333333300000
           2.645833333333333000
           322.791666666666700000)
         Alignment = taCenter
@@ -1305,7 +1311,7 @@ inherited frApplicantCourse: TfrApplicantCourse
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        97.895833333333340000
+        97.895833333333330000
         1899.708333333333000000)
       Master = QuickRep2
       DataSet = Select_Applicant_by_TrainingCourseID
@@ -1868,7 +1874,7 @@ inherited frApplicantCourse: TfrApplicantCourse
           37.041666666666670000
           0.000000000000000000
           148.166666666666700000
-          518.583333333333400000)
+          518.583333333333300000)
         Alignment = taLeftJustify
         AlignToBand = True
         AutoSize = False
@@ -1890,7 +1896,7 @@ inherited frApplicantCourse: TfrApplicantCourse
     end
   end
   object xpBitBtn1: TxpBitBtn [8]
-    Left = 578
+    Left = 589
     Top = 423
     Width = 117
     Height = 35
@@ -1905,6 +1911,7 @@ inherited frApplicantCourse: TfrApplicantCourse
     ImageList = Dm.LetterImages
     ImageIndex = 51
     Gradient = True
+    Anchors = [akRight, akBottom]
     TabOrder = 7
     TabStop = True
     OnClick = xpBitBtn1Click

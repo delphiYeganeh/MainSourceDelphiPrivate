@@ -94,7 +94,7 @@ var
 
 implementation
 
-uses dmu, Math;
+uses dmu, Math, YShamsiDate;
 
 
 {$R *.dfm}
@@ -140,7 +140,12 @@ end;
 procedure TFrTeacherExamInfo_byDate.FormShow(Sender: TObject);
 begin
   inherited;
-RefreshQuery;
+   BeginExamDate.Text := copy(ShamsiString(now()),1,4)+'/01/01';
+   if ShamsiLeapYear(StrToInt(copy(ShamsiString(now()),1,4))) = 0 then
+      EndExamDate.Text := copy(ShamsiString(now()),1,4)+'/12/29'
+   else
+      EndExamDate.Text := copy(ShamsiString(now()),1,4)+'/12/30';
+   RefreshQuery;
 end;
 
 procedure TFrTeacherExamInfo_byDate.xpBitBtn1Click(Sender: TObject);

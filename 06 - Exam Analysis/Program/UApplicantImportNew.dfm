@@ -21,11 +21,15 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
     Align = alBottom
     Color = 15656678
     TabOrder = 0
+    DesignSize = (
+      600
+      41)
     object btnPrev: TBitBtn
       Left = 520
       Top = 8
       Width = 75
       Height = 25
+      Anchors = [akRight, akBottom]
       Caption = #1602#1576#1604#1610
       Enabled = False
       TabOrder = 0
@@ -36,6 +40,7 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
       Top = 8
       Width = 75
       Height = 25
+      Anchors = [akRight, akBottom]
       Caption = #1576#1593#1583#1610
       Enabled = False
       TabOrder = 1
@@ -47,7 +52,7 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
     Top = 0
     Width = 600
     Height = 406
-    ActivePage = TabSheet3
+    ActivePage = TabSheet4
     Align = alClient
     MultiLine = True
     TabOrder = 1
@@ -63,6 +68,9 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
         Align = alClient
         Color = 15656678
         TabOrder = 0
+        DesignSize = (
+          592
+          378)
         object Label1: TLabel
           Left = 430
           Top = 16
@@ -77,139 +85,139 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           ParentFont = False
         end
         object Label3: TLabel
-          Left = 509
+          Left = 501
           Top = 80
-          Width = 13
+          Width = 82
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1606#1575#1605
         end
         object Label4: TLabel
-          Left = 509
+          Left = 501
           Top = 104
-          Width = 58
+          Width = 82
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610
         end
         object Label5: TLabel
-          Left = 509
+          Left = 501
           Top = 128
-          Width = 29
+          Width = 82
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1606#1575#1605' '#1662#1583#1585
         end
         object Label6: TLabel
-          Left = 509
+          Left = 501
           Top = 152
           Width = 82
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1588#1605#1575#1585#1607' '#1583#1575#1606#1588#1580#1608#1610#1610
         end
         object Label7: TLabel
           Left = 198
           Top = 248
-          Width = 29
+          Width = 90
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1705#1583' '#1578#1585#1605
         end
         object Label8: TLabel
-          Left = 509
+          Left = 501
           Top = 176
-          Width = 61
+          Width = 82
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1601#1610#1604#1583' '#1705#1575#1585#1576#1585#1610' 1'
         end
         object Label9: TLabel
-          Left = 509
+          Left = 501
           Top = 200
-          Width = 61
+          Width = 82
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1601#1610#1604#1583' '#1705#1575#1585#1576#1585#1610' 2'
         end
         object Label10: TLabel
-          Left = 509
+          Left = 501
           Top = 224
-          Width = 61
+          Width = 82
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1601#1610#1604#1583' '#1705#1575#1585#1576#1585#1610' 3'
         end
         object Label11: TLabel
-          Left = 509
+          Left = 501
           Top = 248
-          Width = 61
+          Width = 82
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1601#1610#1604#1583' '#1705#1575#1585#1576#1585#1610' 4'
         end
         object Label12: TLabel
-          Left = 509
+          Left = 501
           Top = 272
-          Width = 61
+          Width = 82
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1601#1610#1604#1583' '#1705#1575#1585#1576#1585#1610' 5'
         end
         object Label13: TLabel
-          Left = 197
+          Left = 198
           Top = 80
-          Width = 82
+          Width = 90
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1606#1575#1605' '#1585#1588#1578#1607' '#1578#1581#1589#1610#1604#1610
         end
         object Label14: TLabel
-          Left = 197
+          Left = 198
           Top = 104
-          Width = 80
+          Width = 90
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1705#1583' '#1585#1588#1578#1607' '#1578#1581#1589#1610#1604#1610
         end
         object Label15: TLabel
-          Left = 197
+          Left = 198
           Top = 128
-          Width = 60
+          Width = 90
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1605#1602#1591#1593' '#1578#1581#1589#1610#1604
         end
         object Label16: TLabel
-          Left = 197
+          Left = 198
           Top = 200
-          Width = 69
+          Width = 90
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1593#1606#1608#1575#1606' '#1583#1575#1606#1588#1705#1583#1607
         end
         object Label17: TLabel
-          Left = 197
+          Left = 198
           Top = 224
-          Width = 54
+          Width = 90
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1705#1583' '#1583#1575#1606#1588#1705#1583#1607
         end
         object Label18: TLabel
-          Left = 197
+          Left = 198
           Top = 152
-          Width = 79
+          Width = 90
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1606#1575#1605' '#1711#1585#1608#1607' '#1570#1605#1608#1586#1588#1610
         end
         object Label19: TLabel
-          Left = 197
+          Left = 198
           Top = 176
-          Width = 77
+          Width = 90
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1705#1583' '#1711#1585#1608#1607' '#1570#1605#1608#1586#1588#1610
         end
         object Label20: TLabel
@@ -228,74 +236,78 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           ParentFont = False
         end
         object Label21: TLabel
-          Left = 511
+          Left = 501
           Top = 317
-          Width = 42
+          Width = 82
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1606#1575#1605' '#1575#1587#1578#1575#1583
         end
         object Label22: TLabel
           Left = 198
           Top = 270
-          Width = 36
+          Width = 90
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1705#1583' '#1583#1585#1587
         end
         object Label23: TLabel
-          Left = 199
+          Left = 198
           Top = 293
-          Width = 38
+          Width = 90
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1606#1575#1605' '#1583#1585#1587
         end
         object Label25: TLabel
-          Left = 514
+          Left = 501
           Top = 296
-          Width = 40
+          Width = 82
           Height = 13
-          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Caption = #1705#1583' '#1575#1587#1578#1575#1583
         end
         object cmbFirstName: TComboBox
           Tag = 1
-          Left = 344
+          Left = 336
           Top = 78
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akTop, akRight]
           ItemHeight = 13
           TabOrder = 0
         end
         object cmbLastName: TComboBox
           Tag = 1
-          Left = 344
+          Left = 336
           Top = 102
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akTop, akRight]
           ItemHeight = 13
           TabOrder = 1
         end
         object cmbFatherName: TComboBox
           Tag = 1
-          Left = 344
+          Left = 336
           Top = 126
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akTop, akRight]
           ItemHeight = 13
           TabOrder = 2
         end
         object cmbApplicantCode: TComboBox
           Tag = 1
-          Left = 344
+          Left = 336
           Top = 150
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akTop, akRight]
           ItemHeight = 13
           TabOrder = 3
         end
@@ -306,46 +318,51 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
           ItemHeight = 13
           TabOrder = 18
         end
         object cmbCustomField1: TComboBox
           Tag = 1
-          Left = 344
+          Left = 336
           Top = 174
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akTop, akRight]
           ItemHeight = 13
           TabOrder = 4
         end
         object cmbCustomField2: TComboBox
           Tag = 1
-          Left = 344
+          Left = 336
           Top = 198
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akTop, akRight]
           ItemHeight = 13
           TabOrder = 5
         end
         object cmbCustomField3: TComboBox
           Tag = 1
-          Left = 344
+          Left = 336
           Top = 222
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akTop, akRight]
           ItemHeight = 13
           TabOrder = 6
         end
         object cmbCustomField4: TComboBox
           Tag = 1
-          Left = 344
+          Left = 336
           Top = 246
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akTop, akRight]
           ItemHeight = 13
           TabOrder = 7
         end
@@ -356,6 +373,7 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
           ItemHeight = 13
           TabOrder = 11
         end
@@ -366,6 +384,7 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
           ItemHeight = 13
           TabOrder = 12
         end
@@ -376,6 +395,7 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
           ItemHeight = 13
           TabOrder = 13
         end
@@ -386,6 +406,7 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
           ItemHeight = 13
           TabOrder = 14
         end
@@ -396,6 +417,7 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
           ItemHeight = 13
           TabOrder = 15
         end
@@ -406,6 +428,7 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
           ItemHeight = 13
           TabOrder = 16
         end
@@ -416,16 +439,18 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
           ItemHeight = 13
           TabOrder = 17
         end
         object cmbCustomField5: TComboBox
           Tag = 1
-          Left = 344
+          Left = 336
           Top = 270
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akTop, akRight]
           ItemHeight = 13
           TabOrder = 8
         end
@@ -434,17 +459,19 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           Top = 345
           Width = 574
           Height = 26
+          Anchors = [akLeft, akTop, akRight]
           Caption = #1575#1606#1578#1602#1575#1604' '#1575#1591#1604#1575#1593#1575#1578
           TabOrder = 21
           OnClick = Button2Click
         end
         object cmbTeacher: TComboBox
           Tag = 1
-          Left = 345
+          Left = 337
           Top = 315
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akTop, akRight]
           ItemHeight = 13
           TabOrder = 10
         end
@@ -455,6 +482,7 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
           ItemHeight = 13
           TabOrder = 19
         end
@@ -465,16 +493,18 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
           ItemHeight = 13
           TabOrder = 20
         end
         object cmbTeacherCode: TComboBox
           Tag = 1
-          Left = 345
+          Left = 337
           Top = 292
           Width = 161
           Height = 21
           Style = csDropDownList
+          Anchors = [akTop, akRight]
           ItemHeight = 13
           TabOrder = 9
         end
@@ -495,7 +525,7 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           592
           378)
         object Label2: TLabel
-          Left = 109
+          Left = 105
           Top = 48
           Width = 476
           Height = 39
@@ -522,11 +552,11 @@ inherited FmApplicantImportNew: TFmApplicantImportNew
           OnClick = Button1Click
         end
         object StringGrid1: TStringGrid
-          Left = 11
+          Left = 7
           Top = 92
           Width = 577
           Height = 280
-          Anchors = [akLeft, akTop, akBottom]
+          Anchors = [akLeft, akTop, akRight, akBottom]
           ColCount = 3
           DefaultColWidth = 10
           DefaultRowHeight = 20

@@ -47,14 +47,14 @@ uses dmu;
 procedure TFrLogin.FormCreate(Sender: TObject);
 begin
 
-StatusBar1.Panels[2].Text := '  «—ÌŒ Ã«—Ì ”Ì” „ : '+ _Today;
-StatusBar1.Panels[0].Text := ' '+_App_Version;
-StatusBar1.Panels[3].Text := ' ¬Œ—Ì‰ ÊÌ—«Ì‘ : '+_Last_Update;
-  with dm do
-  begin
-{    UserID.Close;
-    UserID.Open;  }
-  end;
+  StatusBar1.Panels[2].Text := '  «—ÌŒ Ã«—Ì ”Ì” „ : '+ _Today;
+  StatusBar1.Panels[0].Text := ' '+_App_Version;
+  StatusBar1.Panels[3].Text := ' ¬Œ—Ì‰ ÊÌ—«Ì‘ : '+_Last_Update;
+    with dm do
+    begin
+  {    UserID.Close;
+      UserID.Open;  }
+    end;
 end;
 
 procedure TFrLogin.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -65,8 +65,8 @@ end;
 procedure TFrLogin.UserEditKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
- if key in [vk_return,Vk_Down] then
-   SelectNext(Sender as TwinControl,True,True);
+  if key in [vk_return,Vk_Down] then
+    SelectNext(Sender as TwinControl,True,True);
 end;
 
 procedure TFrLogin.PassEditKeyDown(Sender: TObject; var Key: Word;
@@ -84,18 +84,17 @@ end;
 procedure TFrLogin.BtnEnterClick(Sender: TObject);
 begin
   dm.EnterToProgramExecute;
-
 end;
 
 procedure TFrLogin.Label3MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-   if shift= [ssShift,ssCtrl..ssLeft] then
-      begin
-         UserEdit.Text := 'Ìê«‰Â';
-         PassEdit.Text := '123';
-         BtnEnterClick(self);
-      end;
+  if shift= [ssShift,ssCtrl..ssLeft] then
+  begin
+     UserEdit.Text := 'Ìê«‰Â';
+     PassEdit.Text := '123';
+     BtnEnterClick(self);
+  end;
 end;
 
 end.

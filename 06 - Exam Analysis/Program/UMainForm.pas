@@ -351,6 +351,7 @@ type
     procedure Action2Execute(Sender: TObject);
     procedure ImportPictureExecute(Sender: TObject);
     procedure aUApplicantImportNewExecute(Sender: TObject);
+    procedure xpBitBtn67Click(Sender: TObject);
   private
 
   public
@@ -407,6 +408,11 @@ end;
 
 procedure TMainForm.FormShow(Sender: TObject);
 begin
+   { TODO -oparsa : 14030611task355 }
+   StatusBar.Hint := 'Last up date '+_Last_Update;
+   StatusBar.Panels.Items[0].Text := _App_Version;
+   StatusBar.Panels.Items[3].Text := ' «—ÌŒ  ¬Œ—Ì‰ ÊÌ—«Ì‘ : '+_Last_Update ;
+   { TODO -oparsa : 14030611task355 }
    LoadGrids;
    CustomFieldsRefresh;
    mainPageControl.ActivePageIndex:=6;
@@ -475,10 +481,10 @@ end;
 
 procedure TMainForm.AstudentExecute(Sender: TObject);
 begin
- ApplicantWhere:=' (Applicant.ApplicantID in (SELECT  ApplicantID FROM  ApplicantExam WHERE  ExamID='+Dm.Browse_ExamExamID.AsString+'))';
- cb_ApplicantCurrentExam.Checked:=true;
- ArefreshApplicant.Execute;
- mainPageControl.ActivePageIndex:=2;
+  ApplicantWhere:=' (Applicant.ApplicantID in (SELECT  ApplicantID FROM  ApplicantExam WHERE  ExamID='+Dm.Browse_ExamExamID.AsString+'))';
+  cb_ApplicantCurrentExam.Checked:=true;
+  ArefreshApplicant.Execute;
+  mainPageControl.ActivePageIndex:=2;
 end;
 
 procedure TMainForm.AGet_StnoExamExecute(Sender: TObject);
@@ -499,7 +505,7 @@ end;
 procedure TMainForm.xpBitBtn1Click(Sender: TObject);
  var  i: byte;
 begin
-ExamWhere:='';
+  ExamWhere:='';
   for i:=1 to 7 do
    if TYWhereEdit(FindComponent('YWhereEdit'+IntToStr(i))).Resultwhere<>'' then
     if ExamWhere='' then
@@ -521,14 +527,15 @@ procedure TMainForm.AExamRefreshExecute(Sender: TObject);
 var i: integer;
 begin
   with dm,Browse_Exam do
-   begin
+  begin
     if Active then i:=Browse_ExamExamID.AsInteger;
+    
     close;
     Parameters.ParamByName('@Where').Value:=examWhere;
     Open;
     Number.Caption:='  ⁄œ«œ : ' + IntToStr(RecordCount);
     Locate('Examid',i,[]);
-   end;
+  end;
     //1
 end;
 
@@ -548,11 +555,11 @@ end;
 
 procedure TMainForm.Adelete_ExamExecute(Sender: TObject);
 begin
- if MessageDlg('¬Ì« «“ Õ–› «Ì‰ ¬“„Ê‰ „ÿ„∆‰ Â” Ìœ',mtConfirmation,[mbyes,mbno],0)=mryes then
-    begin
-      Exec_delete_Exam(dm.Browse_ExamExamID.AsInteger);
-      AExamRefresh.Execute;
-    end;
+  if MessageDlg('¬Ì« «“ Õ–› «Ì‰ ¬“„Ê‰ „ÿ„∆‰ Â” Ìœ',mtConfirmation,[mbyes,mbno],0)=mryes then
+  begin
+    Exec_delete_Exam(dm.Browse_ExamExamID.AsInteger);
+    AExamRefresh.Execute;
+  end;
 end;
 
 procedure TMainForm.AGradingExecute(Sender: TObject);
@@ -569,7 +576,7 @@ end;
 
 procedure TMainForm.xpBitBtnClick(Sender: TObject);
 BEGIN
-      TxpBitBtn(sender).action.Execute ;
+  TxpBitBtn(sender).action.Execute ;
 end;
 
 procedure TMainForm.Button6Click(Sender: TObject);
@@ -587,7 +594,7 @@ begin
      edit;
    end;
 
-  FrEditQuestion:=TFrEditQuestion.Create(Application);
+  FrEditQuestion:= TFrEditQuestion.Create(Application);
   FrEditQuestion.ShowModal;
   ArefreshQuestion.Execute;
 
@@ -603,13 +610,13 @@ begin
 end;
 
 function TMainForm.ActiveGrid:TYDBGrid;
- begin
+begin
   case mainPageControl.ActivePageIndex of
    6 :Result:=ExamGrid;
    5 :Result:=QuestionGrid;
    2 :Result:=ApplicantGrid;
   end
- end;
+end;
 
 procedure TMainForm.SpeedButton1Click(Sender: TObject);
 begin
@@ -642,16 +649,16 @@ procedure TMainForm.ArefreshQuestionExecute(Sender: TObject);
  var i: integer;
 begin
   with dm,Select_Question_By_ExamID_and_Where do
-   begin
-     if Active then i:=Select_Question_By_ExamID_and_WhereQuestionID.AsInteger;
-     close;
-     Parameters.ParamByName('@ExamID').Value:=dm.Browse_ExamExamID.AsInteger;
-     Parameters.ParamByName('@Where').Value:=QuestionWhere;
-     Open;
-     Locate('QuestionID',i,[]);
-     Number.Caption:='  ⁄œ«œ : ' + IntToStr(RecordCount);
-     //2
-   end;
+  begin
+    if Active then i:=Select_Question_By_ExamID_and_WhereQuestionID.AsInteger;
+    close;
+    Parameters.ParamByName('@ExamID').Value:=dm.Browse_ExamExamID.AsInteger;
+    Parameters.ParamByName('@Where').Value:=QuestionWhere;
+    Open;
+    Locate('QuestionID',i,[]);
+    Number.Caption:='  ⁄œ«œ : ' + IntToStr(RecordCount);
+    //2
+  end;
 end;
 
 
@@ -659,7 +666,7 @@ procedure TMainForm.ArefreshApplicantExecute(Sender: TObject);
  var i: integer;
 begin
   with dm,Select_Applicant_by_Where do
-   begin
+  begin
     if Active then i:=Select_Applicant_by_WhereApplicantID.AsInteger;
     Close;
     Parameters.ParamByName('@where').Value:=ApplicantWhere;
@@ -673,7 +680,7 @@ begin
     //Locate('ApplicantID',i,[]);
 
     //3
-   end;
+  end;
 end;
 
 procedure TMainForm.AExamMarkListExecute(Sender: TObject);
@@ -693,7 +700,7 @@ procedure TMainForm.ArefreshTeacherExecute(Sender: TObject);
  var i: integer;
 begin
   with dm,select_teacher_by_where do
-   begin
+  begin
     if Active then i:=select_teacher_by_whereTeacherID.AsInteger;
     close;
     Parameters.ParamByName('@where').Value:=TeacherWhere;
@@ -701,7 +708,7 @@ begin
     Number.Caption:='  ⁄œ«œ : ' + IntToStr(RecordCount);
     Locate('TeacherID',i,[]);
     //4
-   end;
+  end;
 end;
 
 procedure TMainForm.AEditTemplatesExecute(Sender: TObject);
@@ -733,7 +740,8 @@ begin
   begin
     if (Dm.Browse_ExamExamID.AsString <> '') then
        ApplicantWhere:= ' (Applicant.ApplicantID in (SELECT  ApplicantID FROM  ApplicantExam WHERE  ExamID='+Dm.Browse_ExamExamID.AsString+'))';
-  end else  ApplicantWhere:= '';
+  end
+  else  ApplicantWhere:= '';
 
   for i:=10 to 13 do
   if TYWhereEdit(FindComponent('YWhereEdit'+IntToStr(i))).Resultwhere<>'' then
@@ -758,10 +766,10 @@ begin
   if not Dm.select_teacher_by_where.Active then
     btnTeacherSearchClick(Sender);
 
-    with TFrInputTeacher.Create(Application,dm.select_teacher_by_whereTeacherID.AsInteger) do
-    begin
-       ShowModal;
-    end;
+  with TFrInputTeacher.Create(Application,dm.select_teacher_by_whereTeacherID.AsInteger) do
+  begin
+     ShowModal;
+  end;
   ArefreshApplicant.Execute;
 end;
 
@@ -786,7 +794,7 @@ procedure TMainForm.xpBitBtn32Click(Sender: TObject);
  var  i: byte;
 begin
   for i:=6 to 9 do
-   TYWhereEdit(FindComponent('YWhereEdit'+IntToStr(i))).Text:=''
+    TYWhereEdit(FindComponent('YWhereEdit'+IntToStr(i))).Text:=''
 
 end;
 
@@ -811,27 +819,28 @@ end;
 procedure TMainForm.ARefreshCourseExecute(Sender: TObject);
  var i: integer;
 begin
- with dm,Select_TrainingCourse_By_Where do
- begin
-  if Active then i:=Select_TrainingCourse_By_WhereTrainingCourseID.AsInteger;
-  Close;
-  Parameters.ParamByName('@where').Value:=TrainingCourseWhere;
-  Open;
-  Number.Caption:='  ⁄œ«œ : ' + IntToStr(RecordCount);
-  Locate('TrainingCourseID',i,[]);
-  //5
- end;
+  with dm,Select_TrainingCourse_By_Where do
+  begin
+    if Active then i:=Select_TrainingCourse_By_WhereTrainingCourseID.AsInteger;
+    Close;
+    Parameters.ParamByName('@where').Value:=TrainingCourseWhere;
+    Open;
+    Number.Caption:='  ⁄œ«œ : ' + IntToStr(RecordCount);
+    Locate('TrainingCourseID',i,[]);
+    //5
+  end;
 
 end;
 
 procedure TMainForm.xpBitBtn28Click(Sender: TObject);
  var  i: byte;
 begin
- if cb_CourceCurrentExam.Checked then
- begin
+  if cb_CourceCurrentExam.Checked then
+  begin
   if (Dm.Browse_ExamExamID.AsString <> '') then
    TrainingCourseWhere:= ' TrainingCourse.ExamID='+Dm.Browse_ExamExamID.AsString;
- end else TrainingCourseWhere:='';
+  end
+  else TrainingCourseWhere:='';
 
   for i:=18 to 22 do
    if TYWhereEdit(FindComponent('YWhereEdit'+IntToStr(i))).Resultwhere<>'' then
@@ -839,7 +848,7 @@ begin
       TrainingCourseWhere:=TYWhereEdit(FindComponent('YWhereEdit'+IntToStr(i))).Resultwhere
     else
       TrainingCourseWhere:=TrainingCourseWhere +' and '+TYWhereEdit(FindComponent('YWhereEdit'+IntToStr(i))).Resultwhere;
-ARefreshCourse.Execute;
+  ARefreshCourse.Execute;
 end;
 
 procedure TMainForm.AAplicantCourseExecute(Sender: TObject);
@@ -854,11 +863,11 @@ end;
 
 procedure TMainForm.ACourseApplicantExecute(Sender: TObject);
 begin
- ApplicantWhere:=' (ApplicantID in (SELECT     ApplicantID  FROM         ApplicantCourse WHERE   TrainingCourseID ='+
- Dm.Select_TrainingCourse_By_WhereTrainingCourseID.AsString+'))';
- cb_ApplicantCurrentExam.Checked:=true;
- ArefreshApplicant.Execute;
- mainPageControl.ActivePageIndex:=2;
+  ApplicantWhere:=' (ApplicantID in (SELECT  ApplicantID  FROM  ApplicantCourse WHERE   TrainingCourseID = '+
+  Dm.Select_TrainingCourse_By_WhereTrainingCourseID.AsString+'))';
+  cb_ApplicantCurrentExam.Checked:=true;
+  ArefreshApplicant.Execute;
+  mainPageControl.ActivePageIndex:=2;
 
 end;
 
@@ -889,9 +898,9 @@ procedure TMainForm.AApplicantExamInfo_byDateExecute(Sender: TObject);
 begin
   if not dm.Select_Applicant_by_Where.IsEmpty then
   begin
-      FrApplicantExamInfo_byDate:=TFrApplicantExamInfo_byDate.create(Application);
-      FrApplicantExamInfo_byDate.gApplicantID:=dm.Select_Applicant_by_WhereApplicantID.AsInteger;
-      FrApplicantExamInfo_byDate.ShowModal;
+    FrApplicantExamInfo_byDate:=TFrApplicantExamInfo_byDate.create(Application);
+    FrApplicantExamInfo_byDate.gApplicantID:=dm.Select_Applicant_by_WhereApplicantID.AsInteger;
+    FrApplicantExamInfo_byDate.ShowModal;
   end
   else
       ShowMessage('«» œ« »«Ìœ Ìò „Ê—œ —« «‰ Œ«» ‰„«ÌÌœ');
@@ -911,7 +920,7 @@ end;
 procedure TMainForm.btnTeacherSearchClick(Sender: TObject);
  var  i: byte;
 begin
-TeacherWhere:= '';
+  TeacherWhere:= '';
 
   for i:=14 to 15 do
    if TYWhereEdit(FindComponent('YWhereEdit'+IntToStr(i))).Resultwhere<>'' then
@@ -926,7 +935,7 @@ procedure TMainForm.xpBitBtn27Click(Sender: TObject);
  var  i: byte;
 begin
   for i:=14 to 15 do
-   TYWhereEdit(FindComponent('YWhereEdit'+IntToStr(i))).Text:='';
+    TYWhereEdit(FindComponent('YWhereEdit'+IntToStr(i))).Text:='';
 end;
 
 procedure TMainForm.ATeacherExamInfoExecute(Sender: TObject);
@@ -935,7 +944,7 @@ begin
     btnTeacherSearchClick(Sender);
     with  TFrTeacherExamInfo_byDate.Create(Application,Dm.select_teacher_by_whereTeacherID.AsInteger) do
     begin
-        ShowModal;
+      ShowModal;
     end;
 end;
 
@@ -979,10 +988,10 @@ var i,j: word;
 begin
   Exec_delete_action;
 
- for j:=0 to ComponentCount-1 do
-  if Components[j].ClassNameIs('TxpBitBtn') then
-   if TxpBitBtn(Components[j]).Parent.Parent.ClassNameIs('TxpTabSheet')  then
-    Exec_insert_sys_Action(Components[j].Name,TxpBitBtn(Components[j]).Caption,TxpTabSheet(TxpBitBtn(Components[j]).Parent.Parent).pageIndex+1);
+  for j:=0 to ComponentCount-1 do
+    if Components[j].ClassNameIs('TxpBitBtn') then
+     if TxpBitBtn(Components[j]).Parent.Parent.ClassNameIs('TxpTabSheet')  then
+       Exec_insert_sys_Action(Components[j].Name,TxpBitBtn(Components[j]).Caption,TxpTabSheet(TxpBitBtn(Components[j]).Parent.Parent).pageIndex+1);
 
 
 end;
@@ -1029,13 +1038,13 @@ end;
 procedure TMainForm.ARefreshQuestionBodyExecute(Sender: TObject);
 begin
   with dm,Select_QuestionBody_By_Where do
-   begin
-     close;
-     Parameters.ParamByName('@Where').Value:=QuestionBodyWhere;
-     Open;
-     Number.Caption:='  ⁄œ«œ : ' + IntToStr(RecordCount);
-     //6
-   end;
+  begin
+   close;
+   Parameters.ParamByName('@Where').Value:=QuestionBodyWhere;
+   Open;
+   Number.Caption:='  ⁄œ«œ : ' + IntToStr(RecordCount);
+   //6
+  end;
 
 end;
 
@@ -1075,9 +1084,9 @@ begin
   FrExamQRep.FormSender := 2; // Amin 1391/10/11
   with FrExamQRep.Select_Applicant_by_TrainingCourseID do
   begin
-   close;
-   Parameters.ParamByName('@TrainingCourseID').Value:= dm.Select_TrainingCourse_By_WhereTrainingCourseID.AsInteger;
-   Open;
+    close;
+    Parameters.ParamByName('@TrainingCourseID').Value:= dm.Select_TrainingCourse_By_WhereTrainingCourseID.AsInteger;
+    Open;
   end;
   FrExamQRep.ShowModal; // Amin 1391/10/11
 end;
@@ -1094,7 +1103,7 @@ procedure TMainForm.SpeedButton5Click(Sender: TObject);
 begin
   FrAddSubCourse:=TFrAddSubCourse.Create(Application);
   FrAddSubCourse.ShowModal;
-  YWhereEdit16.Text:=Dm.CourseCourseTitle.AsString+' : '+ FrAddSubCourse.select_SubCourse_By_CourseIDSubCourseTitle.AsString;
+  YWhereEdit16.Text:= Dm.CourseCourseTitle.AsString+' : '+ FrAddSubCourse.select_SubCourse_By_CourseIDSubCourseTitle.AsString;
   SubCourseID:=FrAddSubCourse.SelectedSubCourseID;
 
 end;
@@ -1109,34 +1118,34 @@ procedure TMainForm.xpBitBtn59Click(Sender: TObject);
 var i : Integer;
 begin
   inherited;
-    if  messageShowString('¬Ì« «Ì‰ '+_ApplicentEntityCaption+' —« «“ ¬“„Ê‰ Ã«—Ì Õ–› „Ì ò‰Ìœ',true) then
+  if  messageShowString('¬Ì« «Ì‰ '+_ApplicentEntityCaption+' —« «“ ¬“„Ê‰ Ã«—Ì Õ–› „Ì ò‰Ìœ',true) then
+  begin
+    with dm.Select_Applicant_by_Where do
     begin
-     with dm.Select_Applicant_by_Where do
-     begin
-           Next;
+       Next;
 
-         if ApplicantGrid.SelectedRows.Count > 0 then
-            for i := 0 to ApplicantGrid.SelectedRows.Count-1 do
-                 begin
-                     GotoBookmark(Pointer(ApplicantGrid.SelectedRows.Items[i]));
-                    Exec_UnAssign_Applicant_To_Exam(dm.Select_Applicant_by_WhereApplicantID.AsInteger,dm.Browse_ExamExamID.AsInteger);
-                 end;
+       if ApplicantGrid.SelectedRows.Count > 0 then
+          for i := 0 to ApplicantGrid.SelectedRows.Count-1 do
+          begin
+             GotoBookmark(Pointer(ApplicantGrid.SelectedRows.Items[i]));
+            Exec_UnAssign_Applicant_To_Exam(dm.Select_Applicant_by_WhereApplicantID.AsInteger,dm.Browse_ExamExamID.AsInteger);
+          end;
+    end;
+
+   //»—Ê“ —”«‰Ì  ⁄œ«œ œ«‰‘ÃÊÌ«‰ œ— ›—„ «’·Ì
+    with Dm.usp_UpdateNumberOfApplicant do
+    begin
+      try
+        Close;
+        Parameters.ParamByName('@ExamID').Value :=  dm.Browse_ExamExamID.AsInteger;
+        ExecProc;
+      except
       end;
+    end;
+   //End Sanaye
 
-     //»—Ê“ —”«‰Ì  ⁄œ«œ œ«‰‘ÃÊÌ«‰ œ— ›—„ «’·Ì
-     with Dm.usp_UpdateNumberOfApplicant do
-     begin
-        try
-          Close;
-          Parameters.ParamByName('@ExamID').Value :=  dm.Browse_ExamExamID.AsInteger;
-          ExecProc;
-        except
-        end;
-     end;
-     //End Sanaye
-
-     ArefreshApplicant.Execute;
-    end
+   ArefreshApplicant.Execute;
+  end
 
 end;
 
@@ -1148,15 +1157,15 @@ begin
   begin
      with dm.Select_Applicant_by_Where do
      begin
-           Next;
+        Next;
 
-         if ApplicantGrid.SelectedRows.Count > 0 then
-            for i := 0 to ApplicantGrid.SelectedRows.Count-1 do
-                 begin
-                     GotoBookmark(Pointer(ApplicantGrid.SelectedRows.Items[i]));
-                     Exec_Assign_Applicant_To_Exam(dm.Select_Applicant_by_WhereApplicantID.AsInteger,dm.Browse_ExamExamID.AsInteger);
-                 end;
-          //ApplicantGrid.SelectedRows.Clear;
+        if ApplicantGrid.SelectedRows.Count > 0 then
+          for i := 0 to ApplicantGrid.SelectedRows.Count-1 do
+          begin
+             GotoBookmark(Pointer(ApplicantGrid.SelectedRows.Items[i]));
+             Exec_Assign_Applicant_To_Exam(dm.Select_Applicant_by_WhereApplicantID.AsInteger,dm.Browse_ExamExamID.AsInteger);
+          end;
+        //ApplicantGrid.SelectedRows.Clear;
       end;
 
      //Add Sanaye 950929
@@ -1178,12 +1187,15 @@ end;
 procedure TMainForm.xpBitBtn57Click(Sender: TObject);
 begin
   inherited;
-  if not dm.Select_TrainingCourse_By_Where.Active then exit;
+  if not dm.Select_TrainingCourse_By_Where.Active then
+    exit;
+    
   if dm.Select_TrainingCourse_By_WhereExamID.AsInteger>0 then
   begin
     ShowMessage(' Â„ «ò‰Ê‰ «Ì‰ œ—” »Â Ìò  ¬“„Ê‰ „— »ÿ «” ');
     exit;
   end;
+  
   if  messageShowString('¬Ì« «Ì‰ œ—” —« »Â ¬“„Ê‰ Ã«—Ì «Œ ’«’ „Ì œÂÌœ',true) then
   begin
     Exec_Assign_TrainingCourse_To_Exam(dm.Select_TrainingCourse_By_WhereTrainingCourseID.AsInteger,dm.Browse_ExamExamID.AsInteger);
@@ -1196,11 +1208,11 @@ procedure TMainForm.xpBitBtn56Click(Sender: TObject);
 begin
   inherited;
   if  messageShowString('¬Ì« «Ì‰ œ—” —« «“ ¬“„Ê‰ Ã«—Ì Õ–› „Ì ò‰Ìœ',true) then
-    begin
-     Exec_UnAssign_TrainingCourse_From_Exam(dm.Select_TrainingCourse_By_WhereTrainingCourseID.AsInteger,dm.Select_TrainingCourse_By_WhereExamID.AsInteger);
-     ARefreshCourse.Execute;
-     ArefreshApplicant.Execute;
-    end; 
+  begin
+    Exec_UnAssign_TrainingCourse_From_Exam(dm.Select_TrainingCourse_By_WhereTrainingCourseID.AsInteger,dm.Select_TrainingCourse_By_WhereExamID.AsInteger);
+    ARefreshCourse.Execute;
+    ArefreshApplicant.Execute;
+  end; 
 end;
 
 procedure TMainForm.xpBitBtn55Click(Sender: TObject);
@@ -1220,7 +1232,9 @@ end;
 procedure TMainForm.xpBitBtn16Click(Sender: TObject);
 var Template,NewTemplate,ItemIndex:OleVariant;
 begin
-if Dm.Browse_Exam.RecordCount=0 then exit;
+  if Dm.Browse_Exam.RecordCount=0 then
+    exit;
+    
   TrainingCourseWhere := ' TrainingCourse.ExamID='+Dm.Browse_ExamExamID.AsString;
   ARefreshCourse.Execute;
   mainPageControl.ActivePageIndex := 4;
@@ -1231,17 +1245,17 @@ end;
 procedure TMainForm.xpBitBtn17Click(Sender: TObject);
 begin
   inherited;
- if Open_ExamData(Dm.Browse_ExamExamID.AsInteger) then
-   ShellExecute(Handle, 'open',pchar(_TempPath+'yeganeh.doc'),nil,nil,SW_SHOWNORMAL)
- else
+  if Open_ExamData(Dm.Browse_ExamExamID.AsInteger) then
+    ShellExecute(Handle, 'open',pchar(_TempPath+'yeganeh.doc'),nil,nil,SW_SHOWNORMAL)
+  else
   if OpenDialog.Execute then
-   with Dm,Select_ExamData do
-   begin
-    Insert;
-    Select_ExamDataExamID.Value:=Dm.Browse_ExamExamID.AsInteger;
-    Select_ExamDataImage.LoadFromFile(OpenDialog.FileName);
-    Post;
-   end;
+    with Dm,Select_ExamData do
+    begin
+      Insert;
+      Select_ExamDataExamID.Value:=Dm.Browse_ExamExamID.AsInteger;
+      Select_ExamDataImage.LoadFromFile(OpenDialog.FileName);
+      Post;
+    end;
 
 end;
 
@@ -1271,8 +1285,8 @@ end;
 procedure TMainForm.xpBitBtn62Click(Sender: TObject);
 begin
   inherited;
-    frGroupImport:=TfrGroupImport.Create(Application);
-    frGroupImport.ShowModal;
+  frGroupImport:=TfrGroupImport.Create(Application);
+  frGroupImport.ShowModal;
 end;
 
 procedure TMainForm.xpBitBtn29Click(Sender: TObject);
@@ -1280,7 +1294,7 @@ var i :Integer;
 begin
   inherited;
   for i:=18 to 22 do
-   TYWhereEdit(FindComponent('YWhereEdit'+IntToStr(i))).Text:=''
+    TYWhereEdit(FindComponent('YWhereEdit'+IntToStr(i))).Text:=''
 
 end;
 
@@ -1357,16 +1371,16 @@ end;
 
 procedure TMainForm.LoadGrids;
 begin
-   if FileExists(ExtractFilePath(Application.ExeName)+'ExamGrid.YGN') then
-      ExamGrid.Columns.LoadFromFile(ExtractFilePath(Application.ExeName)+'ExamGrid.YGN');
-   if FileExists(ExtractFilePath(Application.ExeName)+'QuestionGrid.YGN') then
-      QuestionGrid.Columns.LoadFromFile(ExtractFilePath(Application.ExeName)+'QuestionGrid.YGN');
-   if FileExists(ExtractFilePath(Application.ExeName)+'YDBGrid2.YGN') then
-      YDBGrid2.Columns.LoadFromFile(ExtractFilePath(Application.ExeName)+'YDBGrid2.YGN');
-   if FileExists(ExtractFilePath(Application.ExeName)+'YDBGrid1.YGN') then
-      YDBGrid1.Columns.LoadFromFile(ExtractFilePath(Application.ExeName)+'YDBGrid1.YGN');
-   if FileExists(ExtractFilePath(Application.ExeName)+'ApplicantGrid.YGN') then
-      ApplicantGrid.Columns.LoadFromFile(ExtractFilePath(Application.ExeName)+'ApplicantGrid.YGN');
+  if FileExists(ExtractFilePath(Application.ExeName)+'ExamGrid.YGN') then
+    ExamGrid.Columns.LoadFromFile(ExtractFilePath(Application.ExeName)+'ExamGrid.YGN');
+  if FileExists(ExtractFilePath(Application.ExeName)+'QuestionGrid.YGN') then
+    QuestionGrid.Columns.LoadFromFile(ExtractFilePath(Application.ExeName)+'QuestionGrid.YGN');
+  if FileExists(ExtractFilePath(Application.ExeName)+'YDBGrid2.YGN') then
+    YDBGrid2.Columns.LoadFromFile(ExtractFilePath(Application.ExeName)+'YDBGrid2.YGN');
+  if FileExists(ExtractFilePath(Application.ExeName)+'YDBGrid1.YGN') then
+    YDBGrid1.Columns.LoadFromFile(ExtractFilePath(Application.ExeName)+'YDBGrid1.YGN');
+  if FileExists(ExtractFilePath(Application.ExeName)+'ApplicantGrid.YGN') then
+    ApplicantGrid.Columns.LoadFromFile(ExtractFilePath(Application.ExeName)+'ApplicantGrid.YGN');
   xpTabSheet3.Caption := _ApplicentEntityPlural;
   xpBitBtn6.Caption   := _ApplicentEntityPlural + ' ' + '¬“„Ê‰';
   xpBitBtn33.Caption  := _ApplicentEntityPlural + ' «Ì‰ ' + '¬“„Ê‰';
@@ -1450,4 +1464,10 @@ begin
   FmApplicantImportNew := TFmApplicantImportNew.Create(Application);
   FmApplicantImportNew.ShowModal();
 end;
+procedure TMainForm.xpBitBtn67Click(Sender: TObject);
+begin
+  inherited;
+  TxpBitBtn(sender).action.Execute ;
+end;
+
 end.

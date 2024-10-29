@@ -67,14 +67,15 @@ begin
    with dm.sp_Update_Table_CustomFieldsCaption do
    begin
       close;
-      Parameters.ParamByName('@TableName').Value := 'Applicant';
-      Parameters.ParamByName('@cfc1').Value := edApplicantCFC1.Text;
-      Parameters.ParamByName('@cfc2').Value := edApplicantCFC2.Text;
-      Parameters.ParamByName('@cfc3').Value := edApplicantCFC3.Text;
-      Parameters.ParamByName('@cfc4').Value := edApplicantCFC4.Text;
-      Parameters.ParamByName('@cfc5').Value := edApplicantCFC5.Text;
+      Parameters.ParamByName('@TableName').Value := 'Exam';
+      Parameters.ParamByName('@cfc1').Value := edExamCFC1.Text;
+      Parameters.ParamByName('@cfc2').Value := edExamCFC2.Text;
+      Parameters.ParamByName('@cfc3').Value := edExamCFC3.Text;
+      Parameters.ParamByName('@cfc4').Value := edExamCFC4.Text;
+      Parameters.ParamByName('@cfc5').Value := edExamCFC5.Text;
       ExecProc;
    end;
+
    Close;
    MainForm.CustomFieldsRefresh;
 end;

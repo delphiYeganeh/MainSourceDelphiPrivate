@@ -1,11 +1,10 @@
 inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
-  Left = 231
-  Top = 129
+  Left = 525
+  Top = 157
   Width = 800
   Height = 600
   Caption = #1575#1591#1604#1575#1593#1575#1578' '#1578#1581#1604#1610#1604' '#1570#1586#1605#1608#1606#1607#1575#1610#1610' '#1705#1607' '#1575#1587#1578#1575#1583' '#1583#1585' '#1570#1606' '#1605#1583#1585#1587' '#1576#1608#1583#1607' '#1575#1587#1578
   OldCreateOrder = True
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object number: TLabel [0]
@@ -13,20 +12,25 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
     Top = 528
     Width = 23
     Height = 13
+    Anchors = [akRight, akBottom]
     Caption = #1578#1593#1583#1575#1583
   end
   object Panel1: TPanel [1]
     Left = 0
     Top = 0
-    Width = 792
+    Width = 784
     Height = 59
     Align = alTop
     TabOrder = 0
+    DesignSize = (
+      784
+      59)
     object Label1: TLabel
       Left = 724
       Top = 8
       Width = 51
       Height = 14
+      Anchors = [akTop, akRight]
       Caption = #1705#1583' '#1575#1587#1578#1575#1583
       FocusControl = DBEdit1
       Font.Charset = ARABIC_CHARSET
@@ -39,8 +43,9 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
     object Label4: TLabel
       Left = 724
       Top = 33
-      Width = 16
+      Width = 51
       Height = 14
+      Anchors = [akTop, akRight]
       Caption = #1606#1575#1605
       FocusControl = DBEdit4
       Font.Charset = ARABIC_CHARSET
@@ -55,6 +60,7 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
       Top = 4
       Width = 128
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       DataField = 'TeacherCode'
       DataSource = Dm.Dselect_teacher_by_where
       TabOrder = 0
@@ -64,6 +70,7 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
       Top = 29
       Width = 249
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       DataField = 'FullName'
       DataSource = Dm.Dselect_teacher_by_where
       TabOrder = 1
@@ -72,15 +79,19 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
   object Panel2: TPanel [2]
     Left = 0
     Top = 59
-    Width = 792
+    Width = 784
     Height = 41
     Align = alTop
     TabOrder = 1
+    DesignSize = (
+      784
+      41)
     object Label3: TLabel
       Left = 523
       Top = 12
       Width = 12
       Height = 14
+      Anchors = [akTop, akRight]
       Caption = #1578#1575' '
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -90,10 +101,11 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
       ParentFont = False
     end
     object Label6: TLabel
-      Left = 661
-      Top = 12
+      Left = 664
+      Top = 11
       Width = 82
       Height = 14
+      Anchors = [akTop, akRight]
       Caption = #1578#1575#1585#1610#1582' '#1570#1586#1605#1608#1606' '#1575#1586' '
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -107,6 +119,7 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
       Top = 8
       Width = 121
       Height = 21
+      Anchors = [akTop, akRight]
       TabOrder = 0
       Text = '1390/12/29'
     end
@@ -115,6 +128,7 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
       Top = 8
       Width = 121
       Height = 21
+      Anchors = [akTop, akRight]
       TabOrder = 1
       Text = '1370/01/01'
     end
@@ -134,6 +148,7 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
       ImageList = Dm.LetterImages
       ImageIndex = 28
       Gradient = True
+      Anchors = [akTop, akRight]
       TabOrder = 2
       TabStop = True
       OnClick = xpBitBtn1Click
@@ -230,6 +245,7 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
       C67452C67452C16F4BC16F4BC16F4BB96A44B96A44B46640B46640B46640AE61
       38AE6138AE6138AE6138}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 2
     TabStop = True
     OnClick = Button3Click
@@ -325,6 +341,7 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
       5F9B7258966B558E67558E67558E674D87624D87624D876247815D47815D4781
       5D417B57417B57417B57}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 3
     TabStop = True
     OnClick = Button4Click
@@ -378,6 +395,7 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
       FE9809FEA31CFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA3
       1DFEA31DFEA31DFEA31DFEA31DFEA21AFE9B0BFED99E}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 4
     TabStop = True
     OnClick = Button5Click
@@ -424,6 +442,7 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
       A116FFA116FFA116FFA116FFA116FFA116FFA116FFA218FF9C0A}
     ImageIndex = 2
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 5
     TabStop = True
     OnClick = Button6Click
@@ -431,15 +450,16 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
   object Panel3: TPanel [7]
     Left = 0
     Top = 100
-    Width = 792
+    Width = 784
     Height = 405
     Align = alTop
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = 'Panel3'
     TabOrder = 6
     object YDBGrid1: TYDBGrid
       Left = 1
       Top = 1
-      Width = 790
+      Width = 782
       Height = 168
       Cursor = crHandPoint
       Align = alTop
@@ -655,7 +675,7 @@ inherited FrInstructorExamInfo_byDate: TFrInstructorExamInfo_byDate
     object YDBGrid2: TYDBGrid
       Left = 1
       Top = 169
-      Width = 790
+      Width = 782
       Height = 235
       Cursor = crHandPoint
       Align = alClient

@@ -42,6 +42,7 @@ type
     procedure DataSetPrior1Execute(Sender: TObject);
     procedure DataSetNext1Execute(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
 
     { Private declarations }
@@ -130,6 +131,12 @@ procedure TFrAddUser.BitBtn1Click(Sender: TObject);
 begin
   inherited;
 close;
+end;
+
+procedure TFrAddUser.FormShow(Sender: TObject);
+begin
+  inherited;
+  //
 end;
 
 end.

@@ -246,7 +246,7 @@ var l,t,r,d:integer ;
 procedure TFrExamCourseLog.FormCreate(Sender: TObject);
 begin
   inherited;
-with Select_Applicant_by_Examid do
+ with Select_Applicant_by_Examid do
  begin
    close;
    Parameters.ParamByName('@examID').Value:=dm.Browse_ExamExamID.AsInteger;
@@ -262,29 +262,28 @@ var i,j: byte;
 begin
   inherited;
   with Select_ApplicantExam_Log do
-   begin
+  begin
     close;
     Parameters.ParamByName('@ApplicantID').Value:=Select_Applicant_by_ExamidApplicantID.AsInteger;
     Parameters.ParamByName('@ExamID').Value:=dm.Browse_ExamExamID.AsInteger;
     Open;
-     first;
-   end;
-     i:=1;
-    while not Select_ApplicantExam_Log.eof do
-      begin
-         TQRLabel( FindComponent('QC'+IntToStr(i))).Caption:=Select_ApplicantExam_Logcoursetitle.AsString;
-         TQRLabel( FindComponent('Qm'+IntToStr(i))).Caption:=Select_ApplicantExam_LogPercentMark.AsString;
-         Select_ApplicantExam_Log.Next;
-         i:=i+1
-      end;
-     for j:=i to 10 do
-      begin
-         TQRLabel( FindComponent('QC'+IntToStr(j))).Caption:='';
-         TQRLabel( FindComponent('Qm'+IntToStr(j))).Caption:='';
-      end;
-
-
+    first;
   end;
+  i:=1;
+  while not Select_ApplicantExam_Log.eof do
+  begin
+    TQRLabel( FindComponent('QC'+IntToStr(i))).Caption:=Select_ApplicantExam_Logcoursetitle.AsString;
+    TQRLabel( FindComponent('Qm'+IntToStr(i))).Caption:=Select_ApplicantExam_LogPercentMark.AsString;
+    Select_ApplicantExam_Log.Next;
+    i:=i+1
+  end;
+  for j:=i to 10 do
+  begin
+    TQRLabel( FindComponent('QC'+IntToStr(j))).Caption:='';
+    TQRLabel( FindComponent('Qm'+IntToStr(j))).Caption:='';
+  end;
+
+end;
 
 procedure TFrExamCourseLog.QuickRep1Preview(Sender: TObject);
 begin
@@ -298,7 +297,7 @@ end;
 procedure TFrExamCourseLog.BitBtn2Click(Sender: TObject);
 begin
   inherited;
-close;
+  close;
 end;
 
 procedure TFrExamCourseLog.BitBtn1Click(Sender: TObject);
@@ -333,16 +332,16 @@ begin
     end;
     i:=1;
     while not Select_ApplicantExam_Log.eof do
-      begin
-         TQRShape(FindComponent('Line'+IntToStr(i))).Enabled := true;
-         TQRShape(FindComponent('Rect'+IntToStr(i))).Enabled := true;
-         TQRLabel(FindComponent('Course'+IntToStr(i))).Enabled := true;
-         TQRLabel(FindComponent('Num'+IntToStr(i))).Enabled := true;
-         TQRLabel(FindComponent('Course'+IntToStr(i))).Caption:=Select_ApplicantExam_Logcoursetitle.AsString;
-         TQRLabel(FindComponent('Num'+IntToStr(i))).Caption:=Select_ApplicantExam_LogPercentMark.AsString;
-         Select_ApplicantExam_Log.Next;
-         inc(i);
-      end;
+    begin
+       TQRShape(FindComponent('Line'+IntToStr(i))).Enabled := true;
+       TQRShape(FindComponent('Rect'+IntToStr(i))).Enabled := true;
+       TQRLabel(FindComponent('Course'+IntToStr(i))).Enabled := true;
+       TQRLabel(FindComponent('Num'+IntToStr(i))).Enabled := true;
+       TQRLabel(FindComponent('Course'+IntToStr(i))).Caption:=Select_ApplicantExam_Logcoursetitle.AsString;
+       TQRLabel(FindComponent('Num'+IntToStr(i))).Caption:=Select_ApplicantExam_LogPercentMark.AsString;
+       Select_ApplicantExam_Log.Next;
+       inc(i);
+    end;
 
 end;
 

@@ -1,6 +1,6 @@
 object FrLogin: TFrLogin
-  Left = 611
-  Top = 283
+  Left = 537
+  Top = 277
   BiDiMode = bdRightToLeft
   BorderIcons = []
   BorderStyle = bsSingle

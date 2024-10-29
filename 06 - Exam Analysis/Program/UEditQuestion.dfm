@@ -11,8 +11,9 @@ inherited FrEditQuestion: TFrEditQuestion
   object Label1: TLabel [0]
     Left = 296
     Top = 11
-    Width = 80
+    Width = 104
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1588#1605#1575#1585#1607' '#1587#1574#1608#1575#1604
     FocusControl = DBEdit1
     Font.Charset = ARABIC_CHARSET
@@ -25,8 +26,9 @@ inherited FrEditQuestion: TFrEditQuestion
   object Label2: TLabel [1]
     Left = 296
     Top = 41
-    Width = 64
+    Width = 104
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1570#1610#1578#1605' '#1583#1585#1587#1578
     FocusControl = DBEdit2
     Font.Charset = ARABIC_CHARSET
@@ -39,8 +41,9 @@ inherited FrEditQuestion: TFrEditQuestion
   object Label4: TLabel [2]
     Left = 296
     Top = 72
-    Width = 90
+    Width = 104
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1570#1610#1578#1605' '#1583#1585#1587#1578' '#1583#1608#1605
     FocusControl = DBEdit4
     Font.Charset = ARABIC_CHARSET
@@ -53,8 +56,9 @@ inherited FrEditQuestion: TFrEditQuestion
   object Label5: TLabel [3]
     Left = 296
     Top = 259
-    Width = 69
+    Width = 104
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1578#1575#1579#1610#1585' '#1583#1585' '#1606#1605#1585#1607
     FocusControl = DBLookupComboBox1
     Font.Charset = ARABIC_CHARSET
@@ -67,8 +71,9 @@ inherited FrEditQuestion: TFrEditQuestion
   object Label6: TLabel [4]
     Left = 296
     Top = 290
-    Width = 28
+    Width = 104
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1591#1585#1575#1581
     FocusControl = DBLookupComboBox2
     Font.Charset = ARABIC_CHARSET
@@ -81,8 +86,9 @@ inherited FrEditQuestion: TFrEditQuestion
   object Label7: TLabel [5]
     Left = 296
     Top = 321
-    Width = 30
+    Width = 104
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1583#1585#1587
     FocusControl = DBLookupComboBox3
     Font.Charset = ARABIC_CHARSET
@@ -95,8 +101,9 @@ inherited FrEditQuestion: TFrEditQuestion
   object Label3: TLabel [6]
     Left = 296
     Top = 199
-    Width = 33
+    Width = 104
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1590#1585#1610#1576
     FocusControl = DBEdit3
     Font.Charset = ARABIC_CHARSET
@@ -109,8 +116,9 @@ inherited FrEditQuestion: TFrEditQuestion
   object Label8: TLabel [7]
     Left = 296
     Top = 231
-    Width = 68
+    Width = 104
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1578#1575#1705#1587#1608#1606#1608#1605#1610
     FocusControl = DBEdit5
     Font.Charset = ARABIC_CHARSET
@@ -123,8 +131,9 @@ inherited FrEditQuestion: TFrEditQuestion
   object Label9: TLabel [8]
     Left = 296
     Top = 96
-    Width = 96
+    Width = 104
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1570#1610#1578#1605' '#1583#1585#1587#1578' '#1587#1608#1605
     FocusControl = DBEdit6
     Font.Charset = ARABIC_CHARSET
@@ -137,8 +146,9 @@ inherited FrEditQuestion: TFrEditQuestion
   object Label10: TLabel [9]
     Left = 296
     Top = 120
-    Width = 102
+    Width = 104
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1570#1610#1578#1605' '#1583#1585#1587#1578' '#1670#1607#1575#1585#1605
     FocusControl = DBEdit7
     Font.Charset = ARABIC_CHARSET
@@ -151,8 +161,9 @@ inherited FrEditQuestion: TFrEditQuestion
   object Label11: TLabel [10]
     Left = 296
     Top = 144
-    Width = 95
+    Width = 104
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1570#1610#1578#1605' '#1583#1585#1587#1578' '#1662#1606#1670#1605
     FocusControl = DBEdit8
     Font.Charset = ARABIC_CHARSET
@@ -167,6 +178,7 @@ inherited FrEditQuestion: TFrEditQuestion
     Top = 168
     Width = 104
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1570#1610#1578#1605' '#1583#1585#1587#1578' '#1588#1588#1605
     FocusControl = DBEdit9
     Font.Charset = ARABIC_CHARSET
@@ -181,6 +193,7 @@ inherited FrEditQuestion: TFrEditQuestion
     Top = 8
     Width = 134
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'Number'
     DataSource = Dm.DSelect_Question
     TabOrder = 0
@@ -190,6 +203,7 @@ inherited FrEditQuestion: TFrEditQuestion
     Top = 38
     Width = 134
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'CorrectItemNumber'
     DataSource = Dm.DSelect_Question
     TabOrder = 1
@@ -199,6 +213,7 @@ inherited FrEditQuestion: TFrEditQuestion
     Top = 69
     Width = 134
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'CorrectItemNumber2'
     DataSource = Dm.DSelect_Question
     TabOrder = 2
@@ -208,6 +223,7 @@ inherited FrEditQuestion: TFrEditQuestion
     Top = 256
     Width = 274
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'QuestionActivityTitle'
     DataSource = Dm.DSelect_Question
     TabOrder = 5
@@ -217,6 +233,7 @@ inherited FrEditQuestion: TFrEditQuestion
     Top = 287
     Width = 274
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'DesignerTitle'
     DataSource = Dm.DSelect_Question
     TabOrder = 6
@@ -226,6 +243,7 @@ inherited FrEditQuestion: TFrEditQuestion
     Top = 318
     Width = 274
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'CourseTitle'
     DataSource = Dm.DSelect_Question
     TabOrder = 7
@@ -235,6 +253,7 @@ inherited FrEditQuestion: TFrEditQuestion
     Top = 196
     Width = 134
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'Coefficient'
     DataSource = Dm.DSelect_Question
     TabOrder = 3
@@ -284,6 +303,7 @@ inherited FrEditQuestion: TFrEditQuestion
       7588FB0080800080800080800080800080800080800080800080800080800080
       8000808000808000808000808000}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 8
     TabStop = True
     OnClick = xpBitBtn1Click
@@ -328,6 +348,7 @@ inherited FrEditQuestion: TFrEditQuestion
       0080800080800080800080800080800080800080800080800080800080800080
       8000808000FF00008080}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 9
     TabStop = True
     OnClick = xpBitBtn2Click
@@ -337,6 +358,7 @@ inherited FrEditQuestion: TFrEditQuestion
     Top = 228
     Width = 134
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'Taxonomy'
     DataSource = Dm.DSelect_Question
     TabOrder = 4
@@ -346,6 +368,7 @@ inherited FrEditQuestion: TFrEditQuestion
     Top = 93
     Width = 134
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'CorrectItemNumber3'
     DataSource = Dm.DSelect_Question
     TabOrder = 10
@@ -355,6 +378,7 @@ inherited FrEditQuestion: TFrEditQuestion
     Top = 117
     Width = 134
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'CorrectItemNumber4'
     DataSource = Dm.DSelect_Question
     TabOrder = 11
@@ -364,6 +388,7 @@ inherited FrEditQuestion: TFrEditQuestion
     Top = 141
     Width = 134
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'CorrectItemNumber5'
     DataSource = Dm.DSelect_Question
     TabOrder = 12
@@ -373,6 +398,7 @@ inherited FrEditQuestion: TFrEditQuestion
     Top = 165
     Width = 134
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'CorrectItemNumber6'
     DataSource = Dm.DSelect_Question
     TabOrder = 13

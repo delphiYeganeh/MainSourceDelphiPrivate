@@ -2,7 +2,7 @@ inherited FrExamDetails: TFrExamDetails
   Left = 437
   Top = 239
   Width = 800
-  Height = 567
+  Height = 571
   Caption = ''
   Color = 16244694
   Font.Height = -13
@@ -15,8 +15,9 @@ inherited FrExamDetails: TFrExamDetails
     Top = 0
     Width = 784
     Height = 489
-    ActivePage = xpTabSheet1
+    ActivePage = xpTabSheet2
     Align = alTop
+    Anchors = [akLeft, akTop, akRight, akBottom]
     ParentShowHint = False
     ShowHint = True
     Style = pcsXP
@@ -32,11 +33,15 @@ inherited FrExamDetails: TFrExamDetails
       GradientStartColor = clWhite
       GradientEndColor = 16244694
       GradientFillDir = fdTopToBottom
+      DesignSize = (
+        776
+        456)
       object Label1: TLabel
         Left = 680
         Top = 16
-        Width = 57
+        Width = 93
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1593#1606#1608#1575#1606' '#1570#1586#1605#1608#1606
         FocusControl = DBEdit1
         Font.Charset = ARABIC_CHARSET
@@ -49,8 +54,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label2: TLabel
         Left = 680
         Top = 48
-        Width = 62
+        Width = 93
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1578#1575#1585#1610#1582' '#1576#1585#1711#1586#1575#1585#1610
         FocusControl = DBEdit2
         Font.Charset = ARABIC_CHARSET
@@ -65,6 +71,7 @@ inherited FrExamDetails: TFrExamDetails
         Top = 84
         Width = 93
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1575#1605#1578#1610#1575#1586' '#1662#1575#1587#1582' '#1583#1585#1587#1578
         FocusControl = DBEdit3
         Font.Charset = ARABIC_CHARSET
@@ -77,8 +84,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label4: TLabel
         Left = 680
         Top = 121
-        Width = 100
+        Width = 93
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1575#1605#1578#1610#1575#1586' '#1662#1575#1587#1582' '#1606#1575#1583#1585#1587#1578
         FocusControl = DBEdit4
         Font.Charset = ARABIC_CHARSET
@@ -91,8 +99,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label5: TLabel
         Left = 680
         Top = 157
-        Width = 87
+        Width = 93
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1575#1605#1578#1610#1575#1586' '#1576#1583#1608#1606' '#1662#1575#1587#1582' '
         FocusControl = DBEdit5
         Font.Charset = ARABIC_CHARSET
@@ -105,8 +114,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label6: TLabel
         Left = 680
         Top = 193
-        Width = 54
+        Width = 93
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1606#1605#1585#1607' '#1602#1576#1608#1604#1610
         FocusControl = DBEdit6
         Font.Charset = ARABIC_CHARSET
@@ -119,8 +129,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label7: TLabel
         Left = 680
         Top = 229
-        Width = 54
+        Width = 93
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1578#1593#1583#1575#1583' '#1711#1586#1610#1606#1607
         FocusControl = DBEdit7
         Font.Charset = ARABIC_CHARSET
@@ -133,8 +144,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label8: TLabel
         Left = 680
         Top = 266
-        Width = 61
+        Width = 93
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1578#1593#1583#1575#1583' '#1587#1574#1608#1575#1604
         FocusControl = DBEdit8
         Font.Charset = ARABIC_CHARSET
@@ -147,8 +159,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label9: TLabel
         Left = 680
         Top = 339
-        Width = 66
+        Width = 93
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1578#1593#1583#1575#1583' '#1583#1575#1608#1591#1604#1576
         FocusControl = DBEdit9
         Font.Charset = ARABIC_CHARSET
@@ -163,6 +176,7 @@ inherited FrExamDetails: TFrExamDetails
         Top = 55
         Width = 116
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1578#1593#1583#1575#1583' '#1587#1574#1608#1575#1604#1575#1578' 2 '#1711#1586#1610#1606#1607' '#1575#1610
         FocusControl = DBEdit21
         Font.Charset = ARABIC_CHARSET
@@ -177,6 +191,7 @@ inherited FrExamDetails: TFrExamDetails
         Top = 22
         Width = 116
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1578#1593#1583#1575#1583' '#1587#1574#1608#1575#1604#1575#1578' 1 '#1711#1586#1610#1606#1607' '#1575#1610
         FocusControl = DBEdit22
         Font.Charset = ARABIC_CHARSET
@@ -189,8 +204,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label24: TLabel
         Left = 380
         Top = 89
-        Width = 72
+        Width = 130
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1583#1588#1608#1575#1585#1610':'#1587#1575#1583#1607
         FocusControl = DBEdit24
         Font.Charset = ARABIC_CHARSET
@@ -203,8 +219,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label25: TLabel
         Left = 380
         Top = 125
-        Width = 79
+        Width = 130
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1583#1588#1608#1575#1585#1610':'#1605#1578#1608#1587#1591
         FocusControl = DBEdit25
         Font.Charset = ARABIC_CHARSET
@@ -217,8 +234,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label26: TLabel
         Left = 380
         Top = 161
-        Width = 74
+        Width = 130
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1583#1588#1608#1575#1585#1610':'#1583#1588#1608#1575#1585
         FocusControl = DBEdit26
         Font.Charset = ARABIC_CHARSET
@@ -231,8 +249,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label27: TLabel
         Left = 380
         Top = 197
-        Width = 106
+        Width = 130
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1583#1588#1608#1575#1585#1610':'#1582#1610#1604#1610' '#1583#1588#1608#1575#1585
         FocusControl = DBEdit27
         Font.Charset = ARABIC_CHARSET
@@ -247,6 +266,7 @@ inherited FrExamDetails: TFrExamDetails
         Top = 233
         Width = 130
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1583#1588#1608#1575#1585#1610':'#1601#1608#1602' '#1575#1604#1593#1575#1583#1607' '#1583#1588#1608#1575#1585
         FocusControl = DBEdit28
         Font.Charset = ARABIC_CHARSET
@@ -259,8 +279,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label29: TLabel
         Left = 380
         Top = 294
-        Width = 57
+        Width = 130
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1575#1601#1578#1585#1575#1602':'#1582#1608#1576
         FocusControl = DBEdit29
         Font.Charset = ARABIC_CHARSET
@@ -273,8 +294,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label30: TLabel
         Left = 380
         Top = 321
-        Width = 69
+        Width = 130
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1575#1601#1578#1585#1575#1602':'#1605#1578#1608#1587#1591
         FocusControl = DBEdit30
         Font.Charset = ARABIC_CHARSET
@@ -287,8 +309,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label31: TLabel
         Left = 380
         Top = 348
-        Width = 62
+        Width = 130
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1575#1601#1578#1585#1575#1602':'#1605#1606#1601#1610
         FocusControl = DBEdit31
         Font.Charset = ARABIC_CHARSET
@@ -301,8 +324,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label32: TLabel
         Left = 680
         Top = 375
-        Width = 72
+        Width = 93
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1590#1585#1610#1576' '#1583#1588#1608#1575#1585#1610
         FocusControl = DBEdit32
         Font.Charset = ARABIC_CHARSET
@@ -315,8 +339,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label33: TLabel
         Left = 680
         Top = 412
-        Width = 62
+        Width = 93
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1590#1585#1610#1576' '#1575#1601#1578#1585#1575#1602
         FocusControl = DBEdit33
         Font.Charset = ARABIC_CHARSET
@@ -329,8 +354,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label12: TLabel
         Left = 380
         Top = 383
-        Width = 68
+        Width = 130
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1605#1610#1575#1606#1711#1610#1606' '#1606#1605#1585#1575#1578
         FocusControl = DBEdit12
         Font.Charset = ARABIC_CHARSET
@@ -343,8 +369,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label15: TLabel
         Left = 126
         Top = 252
-        Width = 81
+        Width = 116
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1575#1587#1578#1575#1606#1583#1575#1585#1583' '#1583#1608#1610#1588#1606' '
         FocusControl = DBEdit15
         Font.Charset = ARABIC_CHARSET
@@ -357,8 +384,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label16: TLabel
         Left = 126
         Top = 285
-        Width = 69
+        Width = 116
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1576#1610#1588#1578#1585#1610#1606' '#1606#1605#1585#1575#1578
         FocusControl = DBEdit16
         Font.Charset = ARABIC_CHARSET
@@ -371,8 +399,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label17: TLabel
         Left = 126
         Top = 319
-        Width = 62
+        Width = 116
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1705#1605#1578#1585#1610#1606' '#1606#1605#1585#1575#1578
         FocusControl = DBEdit17
         Font.Charset = ARABIC_CHARSET
@@ -385,8 +414,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label18: TLabel
         Left = 126
         Top = 353
-        Width = 57
+        Width = 116
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = 'Recardo_co'
         FocusControl = DBEdit18
         Font.Charset = ARABIC_CHARSET
@@ -399,8 +429,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label23: TLabel
         Left = 126
         Top = 384
-        Width = 73
+        Width = 116
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1582#1591#1575#1610' '#1575#1587#1578#1575#1606#1583#1575#1585#1583
         FocusControl = DBEdit23
         Font.Charset = ARABIC_CHARSET
@@ -413,8 +444,9 @@ inherited FrExamDetails: TFrExamDetails
       object Label13: TLabel
         Left = 126
         Top = 221
-        Width = 65
+        Width = 116
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1608#1575#1585#1610#1575#1606#1587' '#1606#1605#1585#1575#1578
         FocusControl = DBEdit13
         Font.Charset = ARABIC_CHARSET
@@ -429,6 +461,7 @@ inherited FrExamDetails: TFrExamDetails
         Top = 121
         Width = 116
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1578#1593#1583#1575#1583' '#1587#1574#1608#1575#1604#1575#1578' 4 '#1711#1586#1610#1606#1607' '#1575#1610
         FocusControl = DBEdit19
         Font.Charset = ARABIC_CHARSET
@@ -443,6 +476,7 @@ inherited FrExamDetails: TFrExamDetails
         Top = 89
         Width = 116
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1578#1593#1583#1575#1583' '#1587#1574#1608#1575#1604#1575#1578' 3 '#1711#1586#1610#1606#1607' '#1575#1610
         FocusControl = DBEdit20
         Font.Charset = ARABIC_CHARSET
@@ -457,6 +491,7 @@ inherited FrExamDetails: TFrExamDetails
         Top = 154
         Width = 116
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1578#1593#1583#1575#1583' '#1587#1574#1608#1575#1604#1575#1578' 5 '#1711#1586#1610#1606#1607' '#1575#1610
         FocusControl = DBEdit20
         Font.Charset = ARABIC_CHARSET
@@ -471,6 +506,7 @@ inherited FrExamDetails: TFrExamDetails
         Top = 188
         Width = 116
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1578#1593#1583#1575#1583' '#1587#1574#1608#1575#1604#1575#1578' 6 '#1711#1586#1610#1606#1607' '#1575#1610
         FocusControl = DBEdit19
         Font.Charset = ARABIC_CHARSET
@@ -481,10 +517,11 @@ inherited FrExamDetails: TFrExamDetails
         ParentFont = False
       end
       object Label35: TLabel
-        Left = 378
+        Left = 380
         Top = 267
-        Width = 64
+        Width = 130
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1575#1601#1578#1585#1575#1602':'#1590#1593#1610#1601
         FocusControl = DBEdit14
         Font.Charset = ARABIC_CHARSET
@@ -499,6 +536,7 @@ inherited FrExamDetails: TFrExamDetails
         Top = 300
         Width = 93
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1578#1593#1583#1575#1583' '#1587#1608#1575#1604#1575#1578' '#1581#1584#1601#1610
         FocusControl = DBEdit34
         Font.Charset = ARABIC_CHARSET
@@ -524,6 +562,7 @@ inherited FrExamDetails: TFrExamDetails
         ImageList = Dm.LetterImages
         ImageIndex = 25
         Gradient = True
+        Anchors = [akLeft, akBottom]
         TabOrder = 0
         TabStop = True
         OnClick = Button7Click
@@ -534,6 +573,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 425
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -556,6 +596,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 144
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = clWhite
@@ -578,6 +619,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 144
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -600,6 +642,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 144
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -622,6 +665,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 144
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -644,6 +688,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 144
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -666,6 +711,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 144
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -688,6 +734,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 144
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -710,6 +757,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 144
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -732,6 +780,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 116
         Height = 22
         TabStop = False
+        Anchors = [akLeft, akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -754,6 +803,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 116
         Height = 22
         TabStop = False
+        Anchors = [akLeft, akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -776,6 +826,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 117
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -798,6 +849,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 117
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -820,6 +872,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 117
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -842,6 +895,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 117
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -864,6 +918,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 117
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -886,6 +941,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 117
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -908,6 +964,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 117
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -930,6 +987,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 117
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -952,6 +1010,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 144
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -974,6 +1033,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 144
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -996,6 +1056,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 117
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -1018,6 +1079,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 116
         Height = 22
         TabStop = False
+        Anchors = [akLeft, akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -1040,6 +1102,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 116
         Height = 22
         TabStop = False
+        Anchors = [akLeft, akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -1062,6 +1125,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 116
         Height = 22
         TabStop = False
+        Anchors = [akLeft, akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -1084,6 +1148,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 116
         Height = 22
         TabStop = False
+        Anchors = [akLeft, akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -1106,6 +1171,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 116
         Height = 22
         TabStop = False
+        Anchors = [akLeft, akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -1128,6 +1194,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 116
         Height = 22
         TabStop = False
+        Anchors = [akLeft, akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -1150,6 +1217,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 116
         Height = 22
         TabStop = False
+        Anchors = [akLeft, akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -1172,6 +1240,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 117
         Height = 22
         TabStop = False
+        Anchors = [akLeft, akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -1194,6 +1263,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 116
         Height = 22
         TabStop = False
+        Anchors = [akLeft, akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -1216,6 +1286,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 116
         Height = 22
         TabStop = False
+        Anchors = [akLeft, akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -1246,6 +1317,7 @@ inherited FrExamDetails: TFrExamDetails
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         Gradient = True
+        Anchors = [akLeft, akBottom]
         TabOrder = 33
         TabStop = True
         OnClick = xpBitBtn1Click
@@ -1256,6 +1328,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 117
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -1278,6 +1351,7 @@ inherited FrExamDetails: TFrExamDetails
         Width = 144
         Height = 22
         TabStop = False
+        Anchors = [akTop, akRight]
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16315379
@@ -1302,11 +1376,15 @@ inherited FrExamDetails: TFrExamDetails
       GradientStartColor = clWhite
       GradientEndColor = clSilver
       GradientFillDir = fdTopToBottom
+      DesignSize = (
+        776
+        456)
       object Label10: TLabel
         Left = 592
         Top = 8
         Width = 180
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = #1587#1574#1608#1575#1604#1575#1578' '#1576#1607' '#1578#1601#1705#1610#1705' '#1711#1586#1610#1606#1607' '#1583#1585#1587#1578
         Font.Charset = ARABIC_CHARSET
         Font.Color = clWindowText
@@ -1316,10 +1394,11 @@ inherited FrExamDetails: TFrExamDetails
         ParentFont = False
       end
       object Label11: TLabel
-        Left = 227
+        Left = 219
         Top = 8
         Width = 177
         Height = 14
+        Anchors = [akLeft, akTop, akRight]
         Caption = #1587#1574#1608#1575#1604#1575#1578' '#1576#1607' '#1578#1601#1705#1610#1705' '#1578#1575#1579#1610#1585' '#1583#1585' '#1606#1605#1585#1607
         Font.Charset = ARABIC_CHARSET
         Font.Color = clWindowText
@@ -1329,10 +1408,11 @@ inherited FrExamDetails: TFrExamDetails
         ParentFont = False
       end
       object DBGrid1: TDBGrid
-        Left = 448
+        Left = 416
         Top = 32
-        Width = 320
-        Height = 361
+        Width = 352
+        Height = 409
+        Anchors = [akTop, akRight, akBottom]
         DataSource = DSelect_Exam_CorrectNumber
         TabOrder = 0
         TitleFont.Charset = ARABIC_CHARSET
@@ -1357,10 +1437,11 @@ inherited FrExamDetails: TFrExamDetails
           end>
       end
       object DBGrid2: TDBGrid
-        Left = 64
+        Left = 16
         Top = 32
-        Width = 328
-        Height = 361
+        Width = 376
+        Height = 409
+        Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = DSelect_Exam_QuestionActivity
         TabOrder = 1
         TitleFont.Charset = ARABIC_CHARSET
@@ -1435,6 +1516,7 @@ inherited FrExamDetails: TFrExamDetails
       FE9809FEA31CFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA3
       1DFEA31DFEA31DFEA31DFEA31DFEA21AFE9B0BFED99E}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 1
     TabStop = True
     OnClick = Button5Click
@@ -1493,13 +1575,13 @@ inherited FrExamDetails: TFrExamDetails
   end
   object DSelect_Exam_QuestionActivity: TDataSource
     DataSet = Select_Exam_QuestionActivity
-    Left = 473
-    Top = 159
+    Left = 569
+    Top = 167
   end
   object DSelect_Exam_CorrectNumber: TDataSource
     DataSet = Select_Exam_CorrectNumber
-    Left = 473
-    Top = 95
+    Left = 577
+    Top = 103
   end
   object spSelect_Applicant_by_Examid: TADOStoredProc
     Connection = Dm.YeganehConnection

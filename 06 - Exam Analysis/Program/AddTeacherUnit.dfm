@@ -1,15 +1,16 @@
 inherited FAddTeacher: TFAddTeacher
-  Left = 592
-  Top = 64
+  Left = 714
+  Top = 284
   Width = 311
   Height = 281
   Caption = #1575#1601#1586#1608#1583#1606' '#1575#1587#1578#1575#1583
+  OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
-    Top = 206
-    Width = 303
+    Top = 201
+    Width = 295
     Height = 41
     Align = alBottom
     TabOrder = 0
@@ -87,29 +88,35 @@ inherited FAddTeacher: TFAddTeacher
   object Panel2: TPanel [1]
     Left = 0
     Top = 0
-    Width = 303
-    Height = 206
+    Width = 295
+    Height = 201
     Align = alClient
     TabOrder = 1
+    DesignSize = (
+      295
+      201)
     object Label1: TLabel
       Left = 224
       Top = 18
-      Width = 13
+      Width = 58
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1606#1575#1605
     end
     object Label2: TLabel
       Left = 224
       Top = 130
-      Width = 11
+      Width = 58
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1705#1583
     end
     object Label3: TLabel
       Left = 224
       Top = 168
-      Width = 21
+      Width = 58
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1578#1604#1601#1606
     end
     object Label4: TLabel
@@ -117,13 +124,15 @@ inherited FAddTeacher: TFAddTeacher
       Top = 58
       Width = 58
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610
     end
     object Label5: TLabel
       Left = 224
       Top = 96
-      Width = 26
+      Width = 58
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1593#1606#1608#1575#1606
     end
     object edtName: TEdit
@@ -131,6 +140,7 @@ inherited FAddTeacher: TFAddTeacher
       Top = 16
       Width = 200
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       TabOrder = 0
     end
     object edtCode: TEdit
@@ -138,6 +148,7 @@ inherited FAddTeacher: TFAddTeacher
       Top = 130
       Width = 200
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       TabOrder = 3
     end
     object edtTitle: TEdit
@@ -145,6 +156,7 @@ inherited FAddTeacher: TFAddTeacher
       Top = 92
       Width = 200
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       TabOrder = 2
     end
     object edtFamily: TEdit
@@ -152,6 +164,7 @@ inherited FAddTeacher: TFAddTeacher
       Top = 54
       Width = 200
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       TabOrder = 1
     end
     object edtPhone: TEdit
@@ -159,6 +172,7 @@ inherited FAddTeacher: TFAddTeacher
       Top = 168
       Width = 200
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       TabOrder = 4
     end
   end

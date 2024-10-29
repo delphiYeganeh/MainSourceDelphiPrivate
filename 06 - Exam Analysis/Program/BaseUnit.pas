@@ -15,25 +15,28 @@ type
     AexportToWord: TAction;
     xpWindow1: TxpWindow;
     CloseForm: TAction;
-   procedure FormClose(Sender: TObject; var Action: TCloseAction);
-   procedure TEditEnter(Sender: TObject);
-   procedure TEditExit(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure TEditEnter(Sender: TObject);
+    procedure TEditExit(Sender: TObject);
     procedure APrintExecute(Sender: TObject);
     procedure ACustomizePrintExecute(Sender: TObject);
     procedure GetAccess;
     procedure FormCreate(Sender: TObject);
     procedure ShowMsgString(AppMessage: string);
-    Function messageShowString(AppMessage: string;ShowCancel:boolean):boolean;
+    Function  messageShowString(AppMessage: string;ShowCancel:boolean):boolean;
     procedure CtrlSpace(Sender: TObject; var key: Word; Shift: TShiftState);
     procedure AexportToWordExecute(Sender: TObject);
     procedure CloseFormExecute(Sender: TObject);
     procedure GotoNext(Sender: TObject; var key: Word; Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
 
    private
     { Private declarations }
    public
-
-    { Private declarations }
+    BaseNewWidth : Integer;
+    BaseNewHeight: Integer;
   end;
 
 var
@@ -48,7 +51,7 @@ uses dmu, Math, ShowmessageU;
 procedure TMBaseForm.GotoNext(Sender: TObject; var key: Word; Shift: TShiftState);
 var o:TDBLookupComboBox;
     i:integer;
- begin
+begin
   case key of
      vk_return:
              begin
@@ -73,7 +76,7 @@ var o:TDBLookupComboBox;
                   end;
                end;
      end;
-   end;
+end;
 
 procedure TMBaseForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -81,27 +84,27 @@ begin
 end;
 procedure TMBaseForm.TEditEnter(Sender: TObject);
 begin
- if Sender.ClassNameIs('TEdit') then
+if Sender.ClassNameIs('TEdit') then
   begin
     TEdit(Sender).Color := dm.focusedColor;
     TEdit(sender).Font.Style:=[fsBold];
   end else
- if Sender.ClassNameIs('TdbEdit') then
+   if Sender.ClassNameIs('TdbEdit') then
   begin
      TdbEdit(Sender).Color := dm.focusedColor;;
      TdbEdit(Sender).font.Style:=[fsBold];
   end else
- if Sender.ClassNameIs('TComboBox') then
+  if Sender.ClassNameIs('TComboBox') then
   begin
     TComboBox(Sender).Color := dm.focusedColor;;
     TComboBox(Sender).font.Style:=[fsBold];
   end else
- if Sender.ClassNameIs('TDBShamsiDateEdit') then
+  if Sender.ClassNameIs('TDBShamsiDateEdit') then
   begin
     TDBShamsiDateEdit(Sender).Color := dm.focusedColor;;
     TDBShamsiDateEdit(Sender).Font.Style:=[fsBold];
   end else
- if Sender.ClassNameIs('TDBMemo') then
+  if Sender.ClassNameIs('TDBMemo') then
   begin
     TDBMemo(Sender).Color := dm.focusedColor;;
     TDBMemo(Sender).Font.Style:=[fsBold];
@@ -109,27 +112,27 @@ begin
 end;
 procedure TMBaseForm.TEditExit(Sender: TObject);
 begin
- if Sender.ClassNameIs('TEdit') then
+  if Sender.ClassNameIs('TEdit') then
   begin
     TEdit(Sender).Color := clWhite;
     TEdit(Sender).Font.Style:=[];
   end else
- if Sender.ClassNameIs('TComboBox') then
+  if Sender.ClassNameIs('TComboBox') then
   begin
     TComboBox(Sender).Color := clWhite;
     TComboBox(Sender).Font.Style:=[];
   end else
- if Sender.ClassNameIs('TdbEdit') then
+  if Sender.ClassNameIs('TdbEdit') then
   begin
     TdbEdit(Sender).Color := clWhite;
     TdbEdit(Sender).Font.Style:=[];
   end else
- if Sender.ClassNameIs('TDBShamsiDateEdit') then
+  if Sender.ClassNameIs('TDBShamsiDateEdit') then
   begin
     TDBShamsiDateEdit(Sender).Color := clWhite;
     TDBShamsiDateEdit(Sender).Font.Style:=[];
   end else
- if Sender.ClassNameIs('TDBMemo') then
+  if Sender.ClassNameIs('TDBMemo') then
   begin
     TDBMemo(Sender).Color := clWhite;
     TDBMemo(Sender).Font.Style:=[];
@@ -203,7 +206,7 @@ end;
 
 procedure TMBaseForm.ShowMsgString(AppMessage: string);
 begin
- ShowMessageF:=TShowMessageF.Create(self);
+  ShowMessageF:=TShowMessageF.Create(self);
   ShowMessageF.Label1.Caption:=AppMessage;
   ShowMessageF.ShowCancel:=false;
   ShowMessageF.ShowModal;
@@ -211,7 +214,7 @@ end;
 
 Function TMBaseForm.messageShowString(AppMessage: string;ShowCancel:boolean):boolean;
 begin
- ShowMessageF:=TShowMessageF.Create(self);
+  ShowMessageF:=TShowMessageF.Create(self);
   ShowMessageF.Label1.Caption:=AppMessage;
   ShowMessageF.ShowCancel:=ShowCancel;
   ShowMessageF.ShowModal;
@@ -241,7 +244,24 @@ end;
 
 procedure TMBaseForm.CloseFormExecute(Sender: TObject);
 begin
-Close;
+  Close;
+end;
+
+procedure TMBaseForm.FormShow(Sender: TObject);
+begin
+
+   BaseNewWidth := Self.Width;
+   BaseNewHeight:= Self.Height;
+end;
+
+procedure TMBaseForm.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  { TODO -oparsa : 14030721 }
+  if (NewWidth < BaseNewWidth)  or (NewHeight < BaseNewHeight) then
+    Resize := False
+  else Resize := True;
+  { TODO -oparsa : 14030721 }
 end;
 
 end.

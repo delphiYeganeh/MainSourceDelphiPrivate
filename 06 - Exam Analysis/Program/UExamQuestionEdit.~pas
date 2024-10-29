@@ -37,6 +37,7 @@ type
     usp_Calc_CourseMark_As_MaxMark: TADOStoredProc;
     usp_Calc_CourseMark_As_MaxMarkMaxMark: TFloatField;
     usp_Calc_CourseMark_As_MaxMarkSumCourseMark: TFloatField;
+    usp_UpdateNumberOfQuestion: TADOStoredProc;
     procedure xpBitBtn1Click(Sender: TObject);
     procedure xpBitBtn2Click(Sender: TObject);
     procedure ebChange(Sender: TObject);
@@ -141,6 +142,18 @@ begin
        end
        else next;
      end;
+     //Add Sanaye 950929
+     //»—Ê“ —”«‰Ì  ⁄œ«œ ”Ê«·«  œ— ›—„ «’·Ì
+     with usp_UpdateNumberOfQuestion do
+      begin
+        try
+          Close;
+          Parameters.ParamByName('@ExamID').Value := Dm.Browse_ExamExamID.AsInteger;
+          ExecProc;
+        except
+        end;
+      end;
+     //End Sanaye
   end;
 
 end;

@@ -3,11 +3,10 @@ inherited FrExamReport: TFrExamReport
   Top = 106
   AutoScroll = False
   Caption = ''
-  ClientHeight = 559
+  ClientHeight = 565
   ClientWidth = 720
   OldCreateOrder = True
   Scaled = False
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object FilterPanel: TPanel [0]
@@ -22,7 +21,7 @@ inherited FrExamReport: TFrExamReport
     Left = 0
     Top = 153
     Width = 720
-    Height = 346
+    Height = 343
     Cursor = crHandPoint
     Align = alClient
     Color = 15656678
@@ -275,9 +274,9 @@ inherited FrExamReport: TFrExamReport
   end
   object Panel1: TPanel [2]
     Left = 0
-    Top = 499
+    Top = 496
     Width = 720
-    Height = 60
+    Height = 69
     Align = alBottom
     TabOrder = 2
     object Number: TLabel

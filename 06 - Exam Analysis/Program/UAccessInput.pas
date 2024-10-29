@@ -83,7 +83,8 @@ end;
 
 procedure TFrAccess.FormShow(Sender: TObject);
 begin
- dm.sys_Access.First;
+  inherited;
+  dm.sys_Access.First;
 
 end;
 

@@ -392,7 +392,7 @@ type
     procedure RefreshTemplate;
     procedure SaveQuestionBodyTemplateToFile;
     procedure SaveTemplateToFile;
-    function Search(Y:TYwhereEdit):string;
+    function  Search(Y:TYwhereEdit):string;
     procedure EnterToProgramExecute;
     procedure EnabledButtonExecute;
     procedure FacultyAfterScroll(DataSet: TDataSet);
@@ -424,8 +424,8 @@ var
 
   _EXEDIR : string;
 const
-   _App_Version = '10.0.0.1';
-   _Last_Update = '1403/04/02';
+   _App_Version = '10.0.0.3';
+   _Last_Update = '1403/08/8';
 
 implementation
 

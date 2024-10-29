@@ -5464,6 +5464,7 @@ object Dm: TDm
   end
   object ImportStudentPic: TADOStoredProc
     Connection = YeganehConnection
+    CommandTimeout = 60000
     ProcedureName = 'ImportStudentPic'
     Parameters = <
       item
@@ -5481,7 +5482,7 @@ object Dm: TDm
         Value = Null
       end>
     Left = 80
-    Top = 648
+    Top = 568
   end
   object XPManifest1: TXPManifest
     Left = 1019

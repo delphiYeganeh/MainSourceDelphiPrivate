@@ -68,7 +68,6 @@ type
     Label23: TLabel;
     Label25: TLabel;
     cmbTeacherCode: TComboBox;
-    XPManifest1: TXPManifest;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure btnNextClick(Sender: TObject);

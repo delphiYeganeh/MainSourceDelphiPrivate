@@ -20,6 +20,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure btnSubmitAnswersClick(Sender: TObject);
     procedure sbtBrowseFilePathClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,8 +53,8 @@ begin
    MessageDlg('„”Ì— «‰ Œ«» ‘œÂ ÊÃÊœ ‰œ«—œ',   mtConfirmation,[mbOK],0);
    Exit;
   end;
- Dm.ImportStudentPic.Parameters.ParamByName('@RootFolder').Value := EdPath.Text;
- Dm.ImportStudentPic.ExecProc;
+  Dm.ImportStudentPic.Parameters.ParamByName('@FolderRoot').Value := EdPath.Text;
+  Dm.ImportStudentPic.ExecProc;
 end;
 
 procedure TfrmImportPicture.sbtBrowseFilePathClick(Sender: TObject);
@@ -62,6 +63,12 @@ begin
  FolderDialog1.Execute;
  if FolderDialog1.Directory <> '' then
   EdPath.Text := FolderDialog1.Directory;
+end;
+
+procedure TfrmImportPicture.FormShow(Sender: TObject);
+begin
+  inherited;
+  //
 end;
 
 end.

@@ -41,16 +41,17 @@ uses  ShamsiDate, Dmu, YShamsiDate, ADODB;
 function IntToY:string ;
 var i,j,k,n:integer;
 begin
-Result:='';
-i:=60+3+1+1;
-j:=2*60+2*3+1;
-k:=15*11+3+1;
- for n:=1 to 66 do
-   begin
-      if (i>=28+1-1) and (i<=128+1-1) then
-          Result:=Result+char(i);
-     i:=k*i mod j;
-   end;
+  Result:='';
+  i:=60+3+1+1;
+  j:=2*60+2*3+1;
+  k:=15*11+3+1;
+  
+  for n:=1 to 66 do
+  begin
+    if (i>=28+1-1) and (i<=128+1-1) then
+        Result:=Result+char(i);
+    i:=k*i mod j;
+  end;
 end;
 
 procedure TFconnect.Connect;
@@ -58,27 +59,34 @@ var R: TRegistry;
 begin
   r:=TRegistry.Create;
   with R do
-   begin
-    RootKey:=HKEY_CURRENT_USER;
+  begin
+    RootKey := HKEY_CURRENT_USER;
     OpenKey(RegistryKey, True);
-    ServerName:=ReadString('ServerName');
-    DataBaseName:=ReadString('DataBaseName');
-    if DataBaseName='' then  DataBaseName:='ExamAnalysis' ;
-   WriteString('DataBaseName', DataBaseName);
 
-   end;
+    ServerName  := ReadString('ServerName');
+    DataBaseName:= ReadString('DataBaseName');
+
+    if DataBaseName ='' then
+      DataBaseName:='ExamAnalysis' ;
+
+    WriteString('DataBaseName', DataBaseName);
+
+  end;
+
   with DM.YeganehConnection do
-   begin
-     Connected:=false;
-     ConnectionString:='Provider=SQLOLEDB.1;Password=12;User ID=12;Initial Catalog='+DataBaseName+';Data Source='+ SERVERNAME;
-     ConnectionTimeout:=5;
-   end;
-try
-dm.YeganehConnection.Open('YeganehCorporate_ExamAnalysis', IntToY);
+  begin
+    Connected := false;
+    ConnectionString:='Provider=SQLOLEDB.1;Password=12;User ID=12;Initial Catalog='+DataBaseName+';Data Source='+ SERVERNAME;
+    ConnectionTimeout:=5;
+  end;
 
-dm.YeganehConnection.Connected:=true;
-timer1.Enabled:=true;
-except ShowModal;end;
+  try
+    dm.YeganehConnection.Open('YeganehCorporate_ExamAnalysis', IntToY);
+    dm.YeganehConnection.Connected:=true;
+    timer1.Enabled:=true;
+  except
+    ShowModal;
+  end;
 end;
 
 procedure TFconnect.Button2Click(Sender: TObject);
@@ -86,19 +94,20 @@ var R: TRegistry;
 begin
   r:=TRegistry.Create;
   with R do
-   begin
-   RootKey:=HKEY_CURRENT_USER;
-   OpenKey(RegistryKey, True);
-   if trim(adminServer.Text)<>'' then
-     WriteString('ServerName', adminServer.Text);
+  begin
+    RootKey:=HKEY_CURRENT_USER;
+    OpenKey(RegistryKey, True);
+    
+    if trim(adminServer.Text)<>'' then
+      WriteString('ServerName', adminServer.Text);
 
-   end;
-Connect;
+  end;
+  Connect;
 end;
 
 procedure TFconnect.BitBtn1Click(Sender: TObject);
 begin
-halt;
+ halt;
 end;
 
 procedure TFconnect.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -108,12 +117,12 @@ end;
 
 procedure TFconnect.Timer1Timer(Sender: TObject);
 begin
-close;
+ close;
 end;
 
 procedure TFconnect.FormCreate(Sender: TObject);
 begin
-Connect;
+ Connect;
 end;
 
 end.

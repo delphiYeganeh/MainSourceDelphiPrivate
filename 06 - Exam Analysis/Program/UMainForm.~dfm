@@ -6,7 +6,6 @@ inherited MainForm: TMainForm
   Caption = #1606#1585#1605' '#1575#1601#1586#1575#1585' '#1570#1606#1575#1604#1610#1586' '#1570#1586#1605#1608#1606
   Color = clBtnFace
   OldCreateOrder = True
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object mainPageControl: TxpPageControl [0]
@@ -14,7 +13,7 @@ inherited MainForm: TMainForm
     Top = 0
     Width = 1008
     Height = 517
-    ActivePage = xpTabSheet3
+    ActivePage = xpTabSheet7
     Align = alClient
     Anchors = [akTop, akRight, akBottom]
     Font.Charset = ARABIC_CHARSET
@@ -1045,9 +1044,10 @@ inherited MainForm: TMainForm
           Top = 46
           Width = 145
           Height = 35
+          Hint = #1705#1575#1585#1606#1575#1605#1607' '#1578#1601#1705#1610#1705#1610' / '#1662#1575#1587#1582' '#1606#1575#1605#1607' '#1607#1575
           startColor = clSilver
           EndColor = clWhite
-          Caption = #1705#1575#1585#1606#1575#1605#1607' '#1578#1601#1705#1610#1705#1610
+          Caption = #1705#1575#1585#1606#1575#1605#1607' '#1578#1601#1705#1610#1705#1610'/'#1662
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
           Font.Height = -11
@@ -1125,6 +1125,7 @@ inherited MainForm: TMainForm
           action = ImportPicture
           TabOrder = 11
           TabStop = True
+          OnClick = xpBitBtn67Click
         end
         object xpBitBtn68: TxpBitBtn
           Left = 155
@@ -1710,6 +1711,7 @@ inherited MainForm: TMainForm
         Top = 90
         Width = 809
         Height = 392
+        Cursor = crHandPoint
         Align = alClient
         Color = 16770790
         DataSource = Dm.Dselect_teacher_by_where
@@ -4095,13 +4097,13 @@ inherited MainForm: TMainForm
     Top = 541
     Width = 1008
     Height = 20
-    Hint = 'Last up date 1391/03/09'
+    Hint = 'Last up date 1403/06/11'
     Panels = <
       item
         Alignment = taCenter
         BiDiMode = bdRightToLeft
         ParentBiDiMode = False
-        Text = '5.1.1.0'
+        Text = '10.0.0.1'
         Width = 50
       end
       item
@@ -4116,7 +4118,7 @@ inherited MainForm: TMainForm
       end
       item
         Alignment = taCenter
-        Text = #1578#1575#1585#1610#1582'  '#1570#1582#1585#1610#1606' '#1608#1610#1585#1575#1610#1588' : 1395/11/09'
+        Text = #1578#1575#1585#1610#1582'  '#1570#1582#1585#1610#1606' '#1608#1610#1585#1575#1610#1588' : 1403/06/11'
         Width = 450
       end
       item

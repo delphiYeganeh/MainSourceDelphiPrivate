@@ -1,6 +1,6 @@
 inherited FrAccess: TFrAccess
-  Left = 202
-  Top = 140
+  Left = 279
+  Top = 228
   AutoScroll = False
   BorderIcons = [biSystemMenu]
   Caption = #1578#1593#1585#1610#1601' '#1587#1591#1608#1581' '#1583#1587#1578#1585#1587#1610
@@ -14,6 +14,7 @@ inherited FrAccess: TFrAccess
     Top = 400
     Width = 150
     Height = 26
+    Anchors = [akLeft, akBottom]
     Caption = #1576#1575' '#1583#1575#1576#1604' '#1603#1604#1610#1603' '#1585#1608#1610' '#1580#1583#1608#1604' '#1605#1610' '#1578#1608#1575#1606#1610#1583' '#1583#1587#1578#1585#1587#1610' '#1585#1575' '#1578#1594#1610#1610#1585' '#1583#1607#1610#1583
     Font.Charset = ARABIC_CHARSET
     Font.Color = clGray
@@ -63,6 +64,7 @@ inherited FrAccess: TFrAccess
       0080800080800080800080800080800080800080800080800080800080800080
       8000808000FF00008080}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 0
     TabStop = True
     Default = True
@@ -140,6 +142,7 @@ inherited FrAccess: TFrAccess
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFBFBD7B5B5CA9B9BE2C4C4E0
       C9C9C6A0A0E0C6C6B58989E7D6D6FFFFFFFFFFFFFFFFFF000000}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 1
     TabStop = True
     OnClick = BitBtn1Click
@@ -152,11 +155,15 @@ inherited FrAccess: TFrAccess
     Align = alTop
     ParentColor = True
     TabOrder = 2
+    DesignSize = (
+      627
+      41)
     object Label1: TLabel
       Left = 533
       Top = 16
       Width = 77
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1587#1591#1581' '#1583#1587#1578#1585#1587#1610
     end
     object DBLookupComboBox1: TDBLookupComboBox
@@ -164,6 +171,7 @@ inherited FrAccess: TFrAccess
       Top = 12
       Width = 350
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       KeyField = 'AccessID'
       ListField = 'AccessTitle'
       ListSource = Dm.Dsys_Access
@@ -270,6 +278,7 @@ inherited FrAccess: TFrAccess
     Width = 627
     Height = 341
     Align = alTop
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = 'Panel2'
     TabOrder = 3
     object DBGrid2: TYDBGrid
@@ -301,6 +310,7 @@ inherited FrAccess: TFrAccess
       InvertFarsiDate = True
       TitleSort = True
       AutoInsert = False
+      FooterFields = 'Count'
       Columns = <
         item
           Alignment = taCenter
@@ -344,6 +354,7 @@ inherited FrAccess: TFrAccess
       TitleSort = True
       AutoInsert = False
       OnNeedColorCondition = YDBGrid1NeedColorCondition
+      FooterFields = 'Count'
       OnNeedFontCondition = YDBGrid1NeedFontCondition
       Columns = <
         item
@@ -369,18 +380,20 @@ inherited FrAccess: TFrAccess
   end
   object Panel3: TPanel [6]
     Left = 296
-    Top = 394
+    Top = 398
     Width = 85
     Height = 19
+    Anchors = [akLeft, akBottom]
     Caption = #1583#1587#1578#1585#1587#1610' '#1583#1575#1585#1583
     Color = 16773087
     TabOrder = 5
   end
   object Panel4: TPanel [7]
     Left = 296
-    Top = 417
+    Top = 418
     Width = 85
     Height = 18
+    Anchors = [akLeft, akBottom]
     Caption = #1583#1587#1578#1585#1587#1610' '#1606#1583#1575#1585#1583
     Color = 11448063
     Font.Charset = ARABIC_CHARSET
@@ -394,7 +407,7 @@ inherited FrAccess: TFrAccess
   object DSelect_ActionAccess_By_ActionGroupID: TDataSource
     DataSet = Select_ActionAccess_By_ActionGroupID
     Left = 376
-    Top = 360
+    Top = 336
   end
   object sys_ActionGroup: TADOTable
     Connection = Dm.YeganehConnection
@@ -413,8 +426,8 @@ inherited FrAccess: TFrAccess
   end
   object Dsys_ActionGroup: TDataSource
     DataSet = sys_ActionGroup
-    Left = 288
-    Top = 352
+    Left = 256
+    Top = 304
   end
   object sys_Action: TADOTable
     Connection = Dm.YeganehConnection

@@ -20,6 +20,7 @@ type
     BitBtn1: TxpBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,15 +39,21 @@ uses dmu;
 procedure TFrFixForm.FormCreate(Sender: TObject);
 begin
   inherited;
-dm.Difficulty.Open;
-dm.ExamType.Open;
-dm.Discrimination.Open;
+  dm.Difficulty.Open;
+  dm.ExamType.Open;
+  dm.Discrimination.Open;
 end;
 
 procedure TFrFixForm.BitBtn1Click(Sender: TObject);
 begin
   inherited;
-close;
+  close;
+end;
+
+procedure TFrFixForm.FormShow(Sender: TObject);
+begin
+  inherited;
+  //
 end;
 
 end.

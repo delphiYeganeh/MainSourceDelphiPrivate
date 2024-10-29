@@ -1,6 +1,6 @@
 object frmExamDetailLogList: TfrmExamDetailLogList
-  Left = 584
-  Top = 182
+  Left = 708
+  Top = 240
   AutoScroll = False
   BiDiMode = bdRightToLeft
   Caption = #1705#1575#1585#1606#1575#1605#1607' '#1578#1601#1705#1610#1705#1610' '
@@ -361,13 +361,18 @@ object frmExamDetailLogList: TfrmExamDetailLogList
   object spSelect_ApplicantExam_Log_List: TADOStoredProc
     Connection = Dm.YeganehConnection
     ProcedureName = 'Select_ApplicantExam_Log_List'
-    Parameters = <>
-    Left = 328
-    Top = 88
+    Parameters = <
+      item
+        Name = '@ExamId'
+        DataType = ftLargeint
+        Value = 0
+      end>
+    Left = 224
+    Top = 72
   end
   object dSelect_ApplicantExam_Log_List: TDataSource
     DataSet = spSelect_ApplicantExam_Log_List
-    Left = 384
-    Top = 96
+    Left = 464
+    Top = 72
   end
 end

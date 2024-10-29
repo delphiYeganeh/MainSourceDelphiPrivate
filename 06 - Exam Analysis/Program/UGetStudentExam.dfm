@@ -4,14 +4,14 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
   AutoScroll = False
   Caption = ''
   ClientHeight = 478
-  ClientWidth = 1094
+  ClientWidth = 1113
   Color = 16773862
   OldCreateOrder = True
   Scaled = False
   PixelsPerInch = 96
   TextHeight = 13
   object btnMakeReport: TxpBitBtn [0]
-    Left = 988
+    Left = 1007
     Top = 439
     Width = 95
     Height = 35
@@ -59,17 +59,17 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
   object Panel1: TPanel [1]
     Left = 0
     Top = 55
-    Width = 1094
+    Width = 1113
     Height = 37
     Align = alTop
     BevelOuter = bvNone
     Color = 16772829
     TabOrder = 1
     DesignSize = (
-      1094
+      1113
       37)
     object Label1: TLabel
-      Left = 1001
+      Left = 1020
       Top = 13
       Width = 82
       Height = 13
@@ -77,7 +77,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
       Caption = #1588#1605#1575#1585#1607' '#1583#1575#1606#1588#1580#1608#1610#1610
     end
     object studentNumber: TEdit
-      Left = 824
+      Left = 843
       Top = 8
       Width = 165
       Height = 21
@@ -89,7 +89,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
   object Panel2: TPanel [2]
     Left = 0
     Top = 92
-    Width = 1094
+    Width = 1113
     Height = 344
     Align = alTop
     BevelOuter = bvNone
@@ -106,7 +106,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
     object Label3: TLabel
       Left = 180
       Top = 36
-      Width = 13
+      Width = 82
       Height = 13
       Caption = #1606#1575#1605
       FocusControl = DBEdit2
@@ -114,7 +114,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
     object Label4: TLabel
       Left = 180
       Top = 61
-      Width = 58
+      Width = 82
       Height = 13
       Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610
       FocusControl = DBEdit3
@@ -122,7 +122,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
     object Label5: TLabel
       Left = 180
       Top = 86
-      Width = 58
+      Width = 82
       Height = 13
       Caption = #1606#1610#1605#1587#1575#1604' '#1608#1585#1608#1583
       FocusControl = DBEdit4
@@ -130,7 +130,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
     object Label6: TLabel
       Left = 180
       Top = 110
-      Width = 25
+      Width = 82
       Height = 13
       Caption = #1585#1588#1578#1607
       FocusControl = DBEdit5
@@ -138,14 +138,14 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
     object Label7: TLabel
       Left = 180
       Top = 160
-      Width = 49
+      Width = 82
       Height = 13
       Caption = #1606#1605#1585#1607' '#1606#1607#1575#1610#1610
     end
     object Label8: TLabel
       Left = 180
       Top = 135
-      Width = 20
+      Width = 82
       Height = 13
       Caption = #1711#1585#1608#1607
       FocusControl = DBEdit7
@@ -153,7 +153,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
     object Label9: TLabel
       Left = 180
       Top = 184
-      Width = 17
+      Width = 82
       Height = 13
       Caption = #1585#1578#1576#1607
       FocusControl = DBEdit8
@@ -161,7 +161,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
     object Label10: TLabel
       Left = 180
       Top = 209
-      Width = 58
+      Width = 82
       Height = 13
       Caption = #1662#1575#1587#1582' '#1583#1585#1587#1578
       FocusControl = DBEdit9
@@ -169,7 +169,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
     object Label11: TLabel
       Left = 180
       Top = 234
-      Width = 64
+      Width = 82
       Height = 13
       Caption = #1662#1575#1587#1582' '#1606#1575#1583#1585#1587#1578
       FocusControl = DBEdit10
@@ -177,18 +177,18 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
     object Label12: TLabel
       Left = 180
       Top = 259
-      Width = 49
+      Width = 82
       Height = 13
       Caption = #1576#1583#1608#1606' '#1662#1575#1587#1582
       FocusControl = DBEdit11
     end
     object YDBGrid1: TYDBGrid
-      Left = 258
+      Left = 277
       Top = 0
       Width = 836
       Height = 344
-      Cursor = crHandPoint
       Align = alRight
+      Anchors = [akLeft, akTop, akRight, akBottom]
       Color = 14934982
       DataSource = DGet_StnoExam
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -559,17 +559,17 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
   object Panel3: TPanel [3]
     Left = 0
     Top = 0
-    Width = 1094
+    Width = 1113
     Height = 55
     Align = alTop
     BevelInner = bvLowered
     Color = 16772829
     TabOrder = 3
     DesignSize = (
-      1094
+      1113
       55)
     object Label13: TLabel
-      Left = 1001
+      Left = 1020
       Top = 13
       Width = 54
       Height = 13
@@ -578,7 +578,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
       FocusControl = DBEdit12
     end
     object Label14: TLabel
-      Left = 1001
+      Left = 1020
       Top = 32
       Width = 49
       Height = 13
@@ -587,7 +587,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
       FocusControl = DBEdit13
     end
     object Label15: TLabel
-      Left = 807
+      Left = 826
       Top = 29
       Width = 59
       Height = 13
@@ -596,7 +596,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
       FocusControl = DBEdit14
     end
     object Label16: TLabel
-      Left = 648
+      Left = 667
       Top = 34
       Width = 74
       Height = 13
@@ -612,7 +612,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
       Caption = #1585#1588#1578#1607
     end
     object DBEdit12: TDBEdit
-      Left = 571
+      Left = 590
       Top = 5
       Width = 417
       Height = 21
@@ -623,7 +623,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
       TabOrder = 0
     end
     object DBEdit13: TDBEdit
-      Left = 868
+      Left = 887
       Top = 29
       Width = 120
       Height = 21
@@ -634,7 +634,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
       TabOrder = 1
     end
     object DBEdit14: TDBEdit
-      Left = 731
+      Left = 750
       Top = 29
       Width = 76
       Height = 21
@@ -645,7 +645,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
       TabOrder = 2
     end
     object DBEdit15: TDBEdit
-      Left = 571
+      Left = 590
       Top = 29
       Width = 76
       Height = 21
@@ -657,7 +657,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
     end
   end
   object Button2: TxpBitBtn [4]
-    Left = 749
+    Left = 768
     Top = 439
     Width = 100
     Height = 35
@@ -678,7 +678,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
     OnClick = Button2Click
   end
   object Button3: TxpBitBtn [5]
-    Left = 640
+    Left = 659
     Top = 439
     Width = 100
     Height = 35
@@ -774,7 +774,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
     OnClick = Button3Click
   end
   object Button4: TxpBitBtn [6]
-    Left = 531
+    Left = 550
     Top = 439
     Width = 100
     Height = 35
@@ -923,7 +923,7 @@ inherited FrGet_StnoExam: TFrGet_StnoExam
     OnClick = Button5Click
   end
   object Button6: TxpBitBtn [8]
-    Left = 858
+    Left = 877
     Top = 439
     Width = 123
     Height = 35

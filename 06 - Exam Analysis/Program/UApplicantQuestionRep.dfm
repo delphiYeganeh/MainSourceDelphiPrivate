@@ -1,6 +1,6 @@
 inherited FrExamQRep: TFrExamQRep
-  Left = 453
-  Top = 517
+  Left = 544
+  Top = 402
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1662#1575#1587#1582#1606#1575#1605#1607' '#1607#1575
@@ -8,7 +8,6 @@ inherited FrExamQRep: TFrExamQRep
   ClientWidth = 533
   OldCreateOrder = True
   Scaled = False
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object QuickRep1: TQuickRep [0]
@@ -3283,18 +3282,19 @@ inherited FrExamQRep: TFrExamQRep
     end
     object Label1: TLabel
       Left = 428
-      Top = 19
+      Top = 11
       Width = 82
       Height = 13
-      Anchors = [akLeft, akBottom]
+      Anchors = [akRight, akBottom]
       Caption = #1588#1605#1575#1585#1607' '#1583#1575#1606#1588#1580#1608#1610#1610
       OnClick = ACustomizePrintExecute
     end
     object Label9: TLabel
       Left = 110
-      Top = 87
+      Top = 79
       Width = 73
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1606#1608#1593' '#1605#1585#1578#1576' '#1587#1575#1586#1610
     end
     object xpBitBtn2: TxpBitBtn
@@ -3359,10 +3359,10 @@ inherited FrExamQRep: TFrExamQRep
     end
     object ordering: TRadioGroup
       Left = 4
-      Top = 13
+      Top = 5
       Width = 177
       Height = 68
-      Anchors = [akLeft, akBottom]
+      Anchors = [akLeft, akRight, akBottom]
       Caption = #1578#1585#1578#1610#1576' '#1576#1585' '#1575#1587#1575#1587' '
       ItemIndex = 0
       Items.Strings = (
@@ -3374,7 +3374,7 @@ inherited FrExamQRep: TFrExamQRep
     end
     object btnReport: TxpBitBtn
       Left = 225
-      Top = 109
+      Top = 104
       Width = 83
       Height = 30
       startColor = 16645629
@@ -3406,10 +3406,10 @@ inherited FrExamQRep: TFrExamQRep
     end
     object Stno: TYWhereEdit
       Left = 247
-      Top = 15
+      Top = 7
       Width = 174
       Height = 21
-      Anchors = [akLeft, akBottom]
+      Anchors = [akRight, akBottom]
       BiDiMode = bdLeftToRight
       ParentBiDiMode = False
       TabOrder = 3
@@ -3428,7 +3428,7 @@ inherited FrExamQRep: TFrExamQRep
     end
     object btnDesign: TxpBitBtn
       Left = 431
-      Top = 108
+      Top = 103
       Width = 83
       Height = 30
       startColor = 16645629
@@ -3440,14 +3440,14 @@ inherited FrExamQRep: TFrExamQRep
       Font.Name = 'Tahoma'
       Font.Style = []
       Gradient = True
-      Anchors = [akLeft, akBottom]
+      Anchors = [akRight, akBottom]
       TabOrder = 4
       TabStop = True
       OnClick = btnDesignClick
     end
     object BitBtn2: TxpBitBtn
       Left = 19
-      Top = 109
+      Top = 104
       Width = 83
       Height = 30
       startColor = 16645629
@@ -3466,10 +3466,11 @@ inherited FrExamQRep: TFrExamQRep
     end
     object cmbOrderType: TComboBox
       Left = 7
-      Top = 84
+      Top = 76
       Width = 98
       Height = 21
       Style = csDropDownList
+      Anchors = [akLeft, akTop, akRight]
       ItemHeight = 13
       ItemIndex = 0
       TabOrder = 9
@@ -3487,8 +3488,8 @@ inherited FrExamQRep: TFrExamQRep
     end
   end
   inherited xpWindow1: TxpWindow
-    Left = 226
-    Top = 44
+    Left = 498
+    Top = 68
   end
   object DataSource1: TDataSource
     Left = 312
@@ -3512,7 +3513,7 @@ inherited FrExamQRep: TFrExamQRep
       'end.')
     OnProgressStart = frxRepAnswerPaperProgressStart
     OnProgress = frxRepAnswerPaperProgress
-    Left = 232
+    Left = 184
     Top = 12
     Datasets = <
       item
@@ -46830,8 +46831,8 @@ inherited FrExamQRep: TFrExamQRep
       'Barcode='#1576#1575#1585#1705#1583
       'ShamsiDate=ShamsiDate')
     DataSource = dReports
-    Left = 200
-    Top = 60
+    Left = 216
+    Top = 4
   end
   object ppmReport: TPopupMenu
     Images = ImageList1
@@ -46908,7 +46909,7 @@ inherited FrExamQRep: TFrExamQRep
         Value = 1
       end>
     Left = 376
-    Top = 104
+    Top = 48
     object Select_Applicant_by_TrainingCourseIDApplicantID: TAutoIncField
       FieldName = 'ApplicantID'
       ReadOnly = True
@@ -47074,8 +47075,8 @@ inherited FrExamQRep: TFrExamQRep
         Size = 4
         Value = 0
       end>
-    Left = 441
-    Top = 16
+    Left = 393
+    Top = 65528
     object Select_Applicant_by_ExamAndWhereApplicantCode: TStringField
       FieldName = 'ApplicantCode'
     end
@@ -47208,15 +47209,15 @@ inherited FrExamQRep: TFrExamQRep
   end
   object dReports: TDataSource
     DataSet = Select_Applicant_by_ExamAndWhere
-    Left = 216
-    Top = 20
+    Left = 8
+    Top = 44
   end
   object quReports: TADOQuery
     Connection = Dm.YeganehConnection
     Parameters = <>
     SQL.Strings = (
       'SELECT ')
-    Left = 200
+    Left = 8
   end
   object OpenDialog1: TOpenDialog
     Filter = '*.fr3'
@@ -47227,8 +47228,8 @@ inherited FrExamQRep: TFrExamQRep
     Connection = Dm.YeganehConnection
     ProcedureName = 'AssignGroupExamToApplicanet'
     Parameters = <>
-    Left = 376
-    Top = 64
+    Left = 432
+    Top = 40
   end
   object frxBarCodeObject1: TfrxBarCodeObject
     Left = 259
@@ -47250,7 +47251,7 @@ inherited FrExamQRep: TFrExamQRep
     end
   end
   object ImageList1: TImageList
-    Left = 336
+    Left = 304
     Top = 56
     Bitmap = {
       494C010103000400040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600

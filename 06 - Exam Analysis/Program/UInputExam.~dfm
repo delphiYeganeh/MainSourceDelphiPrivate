@@ -1,18 +1,17 @@
 inherited FInputExam: TFInputExam
-  Left = 386
-  Top = 229
+  Left = 340
+  Top = 225
   BorderStyle = bsDialog
   Caption = #1608#1585#1608#1583' '#1575#1591#1604#1575#1593#1575#1578' '#1570#1586#1605#1608#1606
   ClientHeight = 617
   ClientWidth = 690
   OldCreateOrder = True
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel [0]
-    Left = 545
+    Left = 544
     Top = 39
-    Width = 64
+    Width = 132
     Height = 13
     Caption = #1593#1606#1608#1575#1606' '#1570#1586#1605#1608#1606
     FocusControl = DBEdit1
@@ -38,9 +37,9 @@ inherited FInputExam: TFInputExam
     ParentFont = False
   end
   object Label3: TLabel [2]
-    Left = 545
+    Left = 544
     Top = 64
-    Width = 60
+    Width = 132
     Height = 13
     Caption = #1578#1575#1585#1610#1582' '#1570#1586#1605#1608#1606
     FocusControl = DBEdit3
@@ -52,9 +51,9 @@ inherited FInputExam: TFInputExam
     ParentFont = False
   end
   object Label4: TLabel [3]
-    Left = 545
+    Left = 544
     Top = 96
-    Width = 115
+    Width = 132
     Height = 13
     Caption = #1575#1605#1578#1610#1575#1586' '#1570#1610#1578#1605' '#1607#1575#1610' '#1583#1585#1587#1578
     FocusControl = DBEdit4
@@ -66,9 +65,9 @@ inherited FInputExam: TFInputExam
     ParentFont = False
   end
   object Label5: TLabel [4]
-    Left = 545
+    Left = 544
     Top = 129
-    Width = 109
+    Width = 132
     Height = 13
     Caption = #1575#1605#1578#1610#1575#1586' '#1580#1608#1575#1576' '#1607#1575#1610' '#1594#1604#1591
     FocusControl = DBEdit5
@@ -94,9 +93,9 @@ inherited FInputExam: TFInputExam
     ParentFont = False
   end
   object Label7: TLabel [6]
-    Left = 234
+    Left = 252
     Top = 99
-    Width = 98
+    Width = 134
     Height = 13
     Caption = #1705#1605#1578#1585#1610#1606' '#1606#1605#1585#1607' '#1602#1576#1608#1604#1610
     FocusControl = DBEdit7
@@ -108,9 +107,9 @@ inherited FInputExam: TFInputExam
     ParentFont = False
   end
   object Label8: TLabel [7]
-    Left = 234
+    Left = 252
     Top = 131
-    Width = 65
+    Width = 134
     Height = 13
     Caption = #1578#1593#1583#1575#1583' '#1570#1610#1578#1605' '#1607#1575
     Font.Charset = ARABIC_CHARSET
@@ -123,7 +122,7 @@ inherited FInputExam: TFInputExam
   object Label9: TLabel [8]
     Left = 544
     Top = 159
-    Width = 26
+    Width = 132
     Height = 13
     Caption = #1583#1585#1587
     FocusControl = dblkcbbCourseTitle
@@ -137,7 +136,7 @@ inherited FInputExam: TFInputExam
   object Label10: TLabel [9]
     Left = 544
     Top = 193
-    Width = 30
+    Width = 132
     Height = 13
     Caption = #1591#1585#1575#1581' '
     FocusControl = DBLookupComboBox2
@@ -151,7 +150,7 @@ inherited FInputExam: TFInputExam
   object Label11: TLabel [10]
     Left = 544
     Top = 225
-    Width = 52
+    Width = 132
     Height = 13
     Caption = #1606#1608#1593' '#1570#1586#1605#1608#1606
     FocusControl = DBLookupComboBox3
@@ -355,9 +354,9 @@ inherited FInputExam: TFInputExam
     ParentFont = False
   end
   object Label26: TLabel [23]
-    Left = 545
+    Left = 544
     Top = 273
-    Width = 87
+    Width = 132
     Height = 13
     Caption = #1601#1585#1605#1578' '#1601#1575#1610#1604' '#1605#1578#1606#1610
     FocusControl = DBLookupComboBox4
@@ -369,9 +368,9 @@ inherited FInputExam: TFInputExam
     ParentFont = False
   end
   object Label27: TLabel [24]
-    Left = 545
+    Left = 544
     Top = 303
-    Width = 85
+    Width = 132
     Height = 13
     Caption = #1606#1610#1605#1587#1575#1604' '#1576#1585#1711#1586#1575#1585#1610
     FocusControl = DBEdit9
@@ -436,11 +435,10 @@ inherited FInputExam: TFInputExam
     ParentFont = False
   end
   object DBText1: TDBText [29]
-    Left = 550
+    Left = 544
     Top = 336
-    Width = 113
+    Width = 132
     Height = 17
-    Alignment = taRightJustify
     DataField = 'CFC1'
     DataSource = Dm.Dsp_Table_CustomFieldsCaption
     Font.Charset = ARABIC_CHARSET
@@ -466,11 +464,10 @@ inherited FInputExam: TFInputExam
     ParentFont = False
   end
   object DBText3: TDBText [31]
-    Left = 549
+    Left = 544
     Top = 368
-    Width = 113
+    Width = 132
     Height = 17
-    Alignment = taRightJustify
     DataField = 'CFC3'
     DataSource = Dm.Dsp_Table_CustomFieldsCaption
     Font.Charset = ARABIC_CHARSET
@@ -496,11 +493,10 @@ inherited FInputExam: TFInputExam
     ParentFont = False
   end
   object DBText5: TDBText [33]
-    Left = 549
+    Left = 544
     Top = 400
-    Width = 113
+    Width = 132
     Height = 17
-    Alignment = taRightJustify
     DataField = 'CFC5'
     DataSource = Dm.Dsp_Table_CustomFieldsCaption
     Font.Charset = ARABIC_CHARSET
@@ -662,13 +658,14 @@ inherited FInputExam: TFInputExam
     Top = 0
     Width = 690
     Height = 30
+    UseSystemFont = False
     ActionManager = ActionManager1
     Caption = 'ActionMainMenuBar1'
     ColorMap.HighlightColor = clWhite
     ColorMap.BtnSelectedColor = clBtnFace
     ColorMap.UnusedColor = clWhite
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clMenuText
+    Font.Color = clWindowText
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []

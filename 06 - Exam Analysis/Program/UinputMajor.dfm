@@ -1,17 +1,17 @@
 inherited frinputMajor: TfrinputMajor
-  Left = 502
-  Top = 158
-  Width = 702
-  Height = 497
+  Left = 510
+  Top = 186
+  Width = 715
+  Height = 504
   Caption = #1578#1593#1585#1610#1601' '#1585#1588#1578#1607' '#1548' '#1583#1575#1606#1588#1705#1583#1607' '#1608' '#1711#1585#1608#1607
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel [0]
-    Left = 440
+    Left = 445
     Top = 0
     Width = 254
-    Height = 422
+    Height = 424
     Align = alRight
     TabOrder = 0
     object Label1: TLabel
@@ -29,11 +29,12 @@ inherited frinputMajor: TfrinputMajor
     end
     object YDBGrid1: TYDBGrid
       Left = 1
-      Top = 56
+      Top = 58
       Width = 252
       Height = 365
       Cursor = crHandPoint
       Align = alBottom
+      Anchors = [akLeft, akTop, akRight, akBottom]
       DataSource = Dm.DFaculty
       TabOrder = 0
       TitleFont.Charset = ARABIC_CHARSET
@@ -121,15 +122,14 @@ inherited frinputMajor: TfrinputMajor
   object Panel2: TPanel [1]
     Left = 0
     Top = 0
-    Width = 440
-    Height = 422
+    Width = 445
+    Height = 424
     Align = alClient
-    Caption = 'Panel2'
     TabOrder = 1
     object Panel4: TPanel
       Left = 1
       Top = 1
-      Width = 438
+      Width = 443
       Height = 184
       Align = alTop
       TabOrder = 0
@@ -149,10 +149,11 @@ inherited frinputMajor: TfrinputMajor
       object YDBGrid2: TYDBGrid
         Left = 1
         Top = 31
-        Width = 436
+        Width = 441
         Height = 152
         Cursor = crHandPoint
         Align = alBottom
+        Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = Dm.DSelect_EducationGroup_by_FacultyID
         TabOrder = 0
         TitleFont.Charset = ARABIC_CHARSET
@@ -247,8 +248,8 @@ inherited frinputMajor: TfrinputMajor
     object Panel5: TPanel
       Left = 1
       Top = 185
-      Width = 438
-      Height = 236
+      Width = 443
+      Height = 238
       Align = alClient
       TabOrder = 1
       object Label2: TLabel
@@ -266,10 +267,11 @@ inherited frinputMajor: TfrinputMajor
       end
       object YDBGrid3: TYDBGrid
         Left = 1
-        Top = 27
-        Width = 436
+        Top = 29
+        Width = 441
         Height = 208
         Align = alBottom
+        Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = Dm.DSelect_Major_by_EducationGroupID
         TabOrder = 0
         TitleFont.Charset = ARABIC_CHARSET
@@ -370,8 +372,8 @@ inherited frinputMajor: TfrinputMajor
   end
   object Panel3: TPanel [2]
     Left = 0
-    Top = 422
-    Width = 694
+    Top = 424
+    Width = 699
     Height = 41
     Align = alBottom
     TabOrder = 2

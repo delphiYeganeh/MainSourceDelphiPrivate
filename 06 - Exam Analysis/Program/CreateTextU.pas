@@ -88,8 +88,8 @@ procedure TCreateText.FormCreate(Sender: TObject);
 begin
   inherited;
   with dm.LetterTemplate do if not Active then Open;
-Fields.Open;
-dm.Tables.Filtered:=false;
+  Fields.Open;
+  dm.Tables.Filtered:=false;
 end;
 
 procedure TCreateText.AcloseExecute(Sender: TObject);
@@ -140,7 +140,7 @@ end;
 procedure TCreateText.Edit1Enter(Sender: TObject);
 begin
   inherited;
- TEdit(Sender).Text:='';
+  TEdit(Sender).Text:='';
 end;
 
 procedure TCreateText.Button6Click(Sender: TObject);

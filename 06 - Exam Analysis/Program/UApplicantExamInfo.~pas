@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, BaseUnit, DB, ExtActns, ActnList, ADODB, ExtCtrls, Grids,
   DBGrids, YDbgrid, StdCtrls, Buttons, YWhereEdit, CheckLst, YchecklistBox,
-  ComCtrls, Yeganeh_Word, QuickRpt, QRCtrls, DBCtrls, UemsVCL, Mask,
+  ComCtrls, Yeganeh_Word, QuickRpt, QRCtrls, DBCtrls, UemsVCL, Mask,Math,
   xpWindow, xpBitBtn,frmWait
   ,ActiveX;
 
@@ -179,6 +179,7 @@ type
     QRDBText10: TQRDBText;
     usp_ListTafkikiKol: TADOStoredProc;
     Select_Applicant_by_ExamidSumScore: TWideStringField;
+    Select_Applicant_by_ExamidRoundFinalMark: TFloatField;
     procedure Button6Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -203,6 +204,7 @@ type
     procedure QuickRep2Preview(Sender: TObject);
   private
     FExamID: Integer;
+    TempLenFrac : Integer;
     procedure SetExamID(const Value: Integer);
     { Private declarations }
   public
@@ -211,14 +213,14 @@ type
   end;
 
 
-TReIndexThread = class(TThread)
-private
-FrmWait : TWaitForm;
-protected
-procedure Execute; override;
-public
-Class procedure Run;
-end;
+  TReIndexThread = class(TThread)
+  private
+    FrmWait : TWaitForm;
+  protected
+    procedure Execute; override;
+  public
+    Class procedure Run;
+  end;
 
 
 var
@@ -232,20 +234,20 @@ uses dmu, BusinessLayer,  ULetterTemplate, YShamsiDate, Upreview,
 {$R *.dfm}
 Procedure SetDataset(D:TDataSet);
 begin
-with FrApplicantExam do
- begin
- Qrmark.DataSet:=d;
+  with FrApplicantExam do
+  begin
+    Qrmark.DataSet:=d;
 
- QRSubDetail2.DataSet:=d;
- QuickRep2.DataSet:=d;
+    QRSubDetail2.DataSet:=d;
+    QuickRep2.DataSet:=d;
 
- QrDBStName1.DataSet:=d;
- QRDBText20.DataSet:=d;
- QRDBText28.DataSet:=d;
- QRDBText1.DataSet:=d;
-// QRDBText17.DataSet:=d;
+    QrDBStName1.DataSet:=d;
+    QRDBText20.DataSet:=d;
+    QRDBText28.DataSet:=d;
+    QRDBText1.DataSet:=d;
+    // QRDBText17.DataSet:=d;
 
- end;
+  end;
 
 end;
 
@@ -287,6 +289,10 @@ end;
 procedure TFrApplicantExam.FormCreate(Sender: TObject);
 var
   AcceptPercent,RejectPercent:Real;
+  temp     : Extended;
+  tempStr  : string ;
+  apos     : integer ;
+  alentemp : Integer;
 begin
   inherited;
 
@@ -305,7 +311,9 @@ begin
      end;
     end;
   end;
-   
+
+  TempLenFrac := 0 ;
+
   RDate.Caption:=_Today;
   with dm,Select_Applicant_by_Examid do
   begin
@@ -316,6 +324,7 @@ begin
    Number.Caption:='ÊÚÏÇÏ:'+IntToStr(RecordCount);
    YDBGrid1.PrintTitle:='áíÓÊ ÏÇäÔÌæíÇä ÂÒãæä '+dm.Browse_ExamExamTitle.AsString;
   end;
+
 
 end;
 
@@ -388,10 +397,33 @@ end;
 
 procedure TFrApplicantExam.Select_Applicant_by_ExamidCalcFields(
   DataSet: TDataSet);
+  var
+    roundNumber : Double;
+  temp     : Extended;
+  tempStr  : string ;
+  apos     : integer ;
+  alentemp : Integer;
 begin
   inherited;
-  Select_Applicant_by_ExamidFarsiMark.Value:=FloatBill(Select_Applicant_by_Examidmark.AsFloat);
-  Select_Applicant_by_ExamidFarsiMark100.Value:=FloatBill(Select_Applicant_by_Examidmark100.AsFloat);
+  Select_Applicant_by_ExamidFarsiMark.Value      :=FloatBill(Select_Applicant_by_Examidmark.AsFloat);
+  Select_Applicant_by_ExamidFarsiMark100.Value   :=FloatBill(Select_Applicant_by_Examidmark100.AsFloat);
+
+  if  TempLenFrac = 0 then
+  begin
+    TempLenFrac := 0 ;
+    temp        := frac(Select_Applicant_by_ExamidmaxMark.AsFloat) ;
+    tempStr     := FloatToStr(temp) ;
+    apos        := Pos('/',tempStr) ;
+    alentemp    := Length( tempStr);
+
+    TempLenFrac :=  Length( Copy(tempStr,apos+1, (alentemp -apos) ) );
+  end ;
+
+  if TempLenFrac >0 then
+    roundNumber :=  Round(Select_Applicant_by_ExamidFinalMark.AsFloat * Power (10,TempLenFrac))/power(10,TempLenFrac)
+  else roundNumber :=  Select_Applicant_by_ExamidFinalMark.AsFloat ;
+
+  Select_Applicant_by_ExamidRoundFinalMark.Value := roundNumber ;
 end;
 
 procedure TFrApplicantExam.QRSubDetail1BeforePrint(Sender: TQRCustomBand;

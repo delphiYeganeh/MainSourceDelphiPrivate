@@ -38,17 +38,26 @@ uses dmu;
 
 procedure TfrmExamDetailLogList.FormCreate(Sender: TObject);
 begin
+  {
    spSelect_ApplicantExam_Log_List.Close;
-   spSelect_ApplicantExam_Log_List.Parameters.Refresh;
-   spSelect_ApplicantExam_Log_List.Parameters.ParamByName('@ExamId').Value:=dm.Browse_ExamExamID.AsInteger;
+   //spSelect_ApplicantExam_Log_List.Parameters.Refresh;
+   spSelect_ApplicantExam_Log_List.Parameters.ParamByName('@ExamId').Value:= dm.Browse_ExamExamID.AsInteger;
    spSelect_ApplicantExam_Log_List.open;
+   }
+  with spSelect_ApplicantExam_Log_List do
+  begin
+     close;
+     Parameters.ParamByName('@ExamId').Value:= dm.Browse_ExamExamID.AsInteger;
+     Open;
+     first;
+  end;
 
 end;
 
 procedure TfrmExamDetailLogList.Button6Click(Sender: TObject);
 begin
   inherited;
- YDBGrid1.CustomizePrint;
+  YDBGrid1.CustomizePrint;
 end;
 
 procedure TfrmExamDetailLogList.Button3Click(Sender: TObject);
@@ -66,7 +75,7 @@ end;
 procedure TfrmExamDetailLogList.Button5Click(Sender: TObject);
 begin
   inherited;
-  close; 
+  close;
 end;
 
 end.

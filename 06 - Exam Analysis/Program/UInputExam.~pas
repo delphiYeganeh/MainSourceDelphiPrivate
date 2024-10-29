@@ -266,7 +266,8 @@ begin
   dblkcbbCourseTitle.KeyValue := FrmSearchDataSet.ActivateSearch('Course','CourseID','CourseCode','CourseTitle');
   dblkcbbCourseCode.KeyValue := dblkcbbCourseTitle.KeyValue;
   if  Select_Exam_ByExamID.State in [dsinsert, dsedit] then
-    Select_Exam_ByExamIDCourseID.Value:= dblkcbbCourseTitle.KeyValue;
+    if dblkcbbCourseTitle.KeyValue <> '' then
+       Select_Exam_ByExamIDCourseID.Value:= dblkcbbCourseTitle.KeyValue;
 end;
 
  procedure TFInputExam.xpBitBtn4Click(Sender: TObject);
@@ -274,7 +275,8 @@ begin
   inherited;
   dblkcbblkTeacher.KeyValue := FrmSearchDataSet.ActivateSearch('Teacher','TeacherID','TeacherCode','fullName');
   if Select_Exam_ByExamID.State in [dsinsert, dsedit] then
-    intgrfldSelect_Exam_ByExamIDTeacherID.Value:= dblkcbblkTeacher.KeyValue;
+    if dblkcbblkTeacher.KeyValue <> '' then
+       intgrfldSelect_Exam_ByExamIDTeacherID.Value:= dblkcbblkTeacher.KeyValue;
 end;
 
 end.

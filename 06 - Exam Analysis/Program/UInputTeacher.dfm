@@ -9,9 +9,10 @@ inherited FrInputTeacher: TFrInputTeacher
   TextHeight = 13
   object Label2: TLabel [0]
     Left = 306
-    Top = 48
-    Width = 45
+    Top = 52
+    Width = 94
     Height = 13
+    Anchors = [akTop, akRight]
     Caption = #1705#1583' '#1575#1587#1578#1575#1583
     FocusControl = DBEdit2
     Font.Charset = ARABIC_CHARSET
@@ -23,9 +24,10 @@ inherited FrInputTeacher: TFrInputTeacher
   end
   object Label3: TLabel [1]
     Left = 306
-    Top = 84
-    Width = 18
+    Top = 89
+    Width = 94
     Height = 13
+    Anchors = [akTop, akRight]
     Caption = #1606#1575#1605' '
     FocusControl = DBEdit3
     Font.Charset = ARABIC_CHARSET
@@ -37,9 +39,10 @@ inherited FrInputTeacher: TFrInputTeacher
   end
   object Label4: TLabel [2]
     Left = 306
-    Top = 120
-    Width = 69
+    Top = 127
+    Width = 94
     Height = 13
+    Anchors = [akTop, akRight]
     Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610
     FocusControl = DBEdit4
     Font.Charset = ARABIC_CHARSET
@@ -51,9 +54,10 @@ inherited FrInputTeacher: TFrInputTeacher
   end
   object Label5: TLabel [3]
     Left = 306
-    Top = 156
-    Width = 44
+    Top = 161
+    Width = 94
     Height = 13
+    Anchors = [akTop, akRight]
     Caption = #1606#1575#1605' '#1705#1575#1605#1604
     FocusControl = DBEdit5
     Font.Charset = ARABIC_CHARSET
@@ -65,9 +69,10 @@ inherited FrInputTeacher: TFrInputTeacher
   end
   object Label7: TLabel [4]
     Left = 306
-    Top = 192
+    Top = 194
     Width = 94
     Height = 13
+    Anchors = [akTop, akRight]
     Caption = #1588#1605#1575#1585#1607' '#1607#1575#1610' '#1578#1605#1575#1587
     FocusControl = DBEdit7
     Font.Charset = ARABIC_CHARSET
@@ -80,14 +85,14 @@ inherited FrInputTeacher: TFrInputTeacher
   object ActionMainMenuBar1: TActionMainMenuBar [5]
     Left = 0
     Top = 0
-    Width = 421
+    Width = 413
     Height = 30
     UseSystemFont = False
     ActionManager = ActionManager1
     Caption = 'ActionMainMenuBar1'
-    ColorMap.HighlightColor = 15921906
+    ColorMap.HighlightColor = clWhite
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = 15921906
+    ColorMap.UnusedColor = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -144,42 +149,47 @@ inherited FrInputTeacher: TFrInputTeacher
       FE9809FEA31CFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA3
       1DFEA31DFEA31DFEA31DFEA31DFEA21AFE9B0BFED99E}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 1
     TabStop = True
     OnClick = xpBitBtn1Click
   end
   object DBEdit2: TDBEdit [7]
     Left = 160
-    Top = 48
+    Top = 49
     Width = 144
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'TeacherCode'
     DataSource = DSelect_Teacher_by_TeacherID
     TabOrder = 2
   end
   object DBEdit3: TDBEdit [8]
-    Left = 88
-    Top = 86
-    Width = 216
+    Left = 40
+    Top = 85
+    Width = 264
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'FirstName'
     DataSource = DSelect_Teacher_by_TeacherID
     TabOrder = 3
   end
   object DBEdit4: TDBEdit [9]
-    Left = 88
-    Top = 124
-    Width = 216
+    Left = 40
+    Top = 122
+    Width = 264
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'LastName'
     DataSource = DSelect_Teacher_by_TeacherID
     TabOrder = 4
   end
   object DBEdit5: TDBEdit [10]
     Left = 40
-    Top = 162
+    Top = 158
     Width = 264
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'FullName'
     DataSource = DSelect_Teacher_by_TeacherID
     TabOrder = 5
@@ -189,6 +199,7 @@ inherited FrInputTeacher: TFrInputTeacher
     Top = 192
     Width = 296
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'PhoneNumbers'
     DataSource = DSelect_Teacher_by_TeacherID
     TabOrder = 6
@@ -220,8 +231,8 @@ inherited FrInputTeacher: TFrInputTeacher
         Precision = 5
         Value = 1
       end>
-    Left = 168
-    Top = 64
+    Left = 16
+    Top = 32
     object Select_Teacher_by_TeacherIDTeacherID: TSmallintField
       FieldName = 'TeacherID'
       ReadOnly = True
@@ -252,8 +263,8 @@ inherited FrInputTeacher: TFrInputTeacher
   object DSelect_Teacher_by_TeacherID: TDataSource
     AutoEdit = False
     DataSet = Select_Teacher_by_TeacherID
-    Left = 168
-    Top = 128
+    Left = 136
+    Top = 8
   end
   object ActionManager1: TActionManager
     ActionBars = <
@@ -274,8 +285,8 @@ inherited FrInputTeacher: TFrInputTeacher
         ActionBar = ActionMainMenuBar1
       end>
     Images = Dm.LetterImages
-    Left = 264
-    Top = 104
+    Left = 80
+    Top = 8
     StyleName = 'XP Style'
     object DataSetInsert1: TDataSetInsert
       Category = 'Dataset'

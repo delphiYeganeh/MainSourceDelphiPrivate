@@ -1,8 +1,8 @@
 inherited FrInputApplicant: TFrInputApplicant
   Left = 473
   Top = 279
-  Width = 483
-  Height = 460
+  Width = 497
+  Height = 464
   Caption = #1575#1591#1604#1575#1593#1575#1578' '#1583#1575#1606#1588#1580#1608#1610#1575#1606
   OldCreateOrder = True
   PixelsPerInch = 96
@@ -12,6 +12,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 40
     Width = 105
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1588#1605#1575#1585#1607' '#1583#1575#1606#1588#1580#1608#1610#1610
     FocusControl = DBEdit1
     Font.Charset = ARABIC_CHARSET
@@ -24,8 +25,9 @@ inherited FrInputApplicant: TFrInputApplicant
   object Label2: TLabel [1]
     Left = 358
     Top = 132
-    Width = 48
+    Width = 105
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1606#1575#1605' '#1705#1575#1605#1604
     FocusControl = DBEdit2
     Font.Charset = ARABIC_CHARSET
@@ -38,8 +40,9 @@ inherited FrInputApplicant: TFrInputApplicant
   object Label3: TLabel [2]
     Left = 358
     Top = 192
-    Width = 75
+    Width = 105
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1606#1610#1605#1587#1575#1604' '#1608#1585#1608#1583
     FocusControl = DBEdit3
     Font.Charset = ARABIC_CHARSET
@@ -52,8 +55,9 @@ inherited FrInputApplicant: TFrInputApplicant
   object Label4: TLabel [3]
     Left = 358
     Top = 215
-    Width = 32
+    Width = 105
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1585#1588#1578#1607
     FocusControl = DBLookupComboBox1
     Font.Charset = ARABIC_CHARSET
@@ -66,8 +70,9 @@ inherited FrInputApplicant: TFrInputApplicant
   object Label5: TLabel [4]
     Left = 358
     Top = 72
-    Width = 20
+    Width = 105
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1606#1575#1605' '
     FocusControl = DBEdit4
     Font.Charset = ARABIC_CHARSET
@@ -80,8 +85,9 @@ inherited FrInputApplicant: TFrInputApplicant
   object Label6: TLabel [5]
     Left = 358
     Top = 101
-    Width = 80
+    Width = 105
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610' '
     FocusControl = DBEdit5
     Font.Charset = ARABIC_CHARSET
@@ -94,8 +100,9 @@ inherited FrInputApplicant: TFrInputApplicant
   object Label7: TLabel [6]
     Left = 358
     Top = 162
-    Width = 37
+    Width = 105
     Height = 14
+    Anchors = [akTop, akRight]
     Caption = #1606#1575#1605' '#1662#1583#1585
     FocusControl = DBEdit6
     Font.Charset = ARABIC_CHARSET
@@ -106,11 +113,11 @@ inherited FrInputApplicant: TFrInputApplicant
     ParentFont = False
   end
   object DBText1: TDBText [7]
-    Left = 360
+    Left = 358
     Top = 244
     Width = 105
     Height = 17
-    Alignment = taRightJustify
+    Anchors = [akTop, akRight]
     DataField = 'CFC1'
     DataSource = Dm.Dsp_Table_CustomFieldsCaption
     Font.Charset = ARABIC_CHARSET
@@ -121,11 +128,11 @@ inherited FrInputApplicant: TFrInputApplicant
     ParentFont = False
   end
   object DBText2: TDBText [8]
-    Left = 360
+    Left = 358
     Top = 274
     Width = 105
     Height = 17
-    Alignment = taRightJustify
+    Anchors = [akTop, akRight]
     DataField = 'CFC2'
     DataSource = Dm.Dsp_Table_CustomFieldsCaption
     Font.Charset = ARABIC_CHARSET
@@ -136,11 +143,11 @@ inherited FrInputApplicant: TFrInputApplicant
     ParentFont = False
   end
   object DBText3: TDBText [9]
-    Left = 360
+    Left = 358
     Top = 304
     Width = 105
     Height = 17
-    Alignment = taRightJustify
+    Anchors = [akTop, akRight]
     DataField = 'CFC3'
     DataSource = Dm.Dsp_Table_CustomFieldsCaption
     Font.Charset = ARABIC_CHARSET
@@ -151,11 +158,11 @@ inherited FrInputApplicant: TFrInputApplicant
     ParentFont = False
   end
   object DBText4: TDBText [10]
-    Left = 360
+    Left = 358
     Top = 334
     Width = 105
     Height = 17
-    Alignment = taRightJustify
+    Anchors = [akTop, akRight]
     DataField = 'CFC4'
     DataSource = Dm.Dsp_Table_CustomFieldsCaption
     Font.Charset = ARABIC_CHARSET
@@ -166,11 +173,11 @@ inherited FrInputApplicant: TFrInputApplicant
     ParentFont = False
   end
   object DBText5: TDBText [11]
-    Left = 360
+    Left = 358
     Top = 362
     Width = 105
     Height = 17
-    Alignment = taRightJustify
+    Anchors = [akTop, akRight]
     DataField = 'CFC5'
     DataSource = Dm.Dsp_Table_CustomFieldsCaption
     Font.Charset = ARABIC_CHARSET
@@ -185,6 +192,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 40
     Width = 176
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'ApplicantCode'
     DataSource = DSelect_Applicant_By_ApplicantID
     TabOrder = 0
@@ -195,6 +203,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 127
     Width = 264
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'FullName'
     DataSource = DSelect_Applicant_By_ApplicantID
     TabOrder = 3
@@ -204,6 +213,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 185
     Width = 88
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'Termcode'
     DataSource = DSelect_Applicant_By_ApplicantID
     TabOrder = 5
@@ -214,6 +224,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 214
     Width = 264
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'majorTitle'
     DataSource = DSelect_Applicant_By_ApplicantID
     TabOrder = 6
@@ -221,17 +232,17 @@ inherited FrInputApplicant: TFrInputApplicant
   object ActionMainMenuBar1: TActionMainMenuBar [16]
     Left = 0
     Top = 0
-    Width = 475
+    Width = 481
     Height = 30
     ActionManager = ActionManager1
     Caption = 'ActionMainMenuBar1'
-    ColorMap.HighlightColor = 15660791
+    ColorMap.HighlightColor = clWhite
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = 15660791
+    ColorMap.UnusedColor = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clMenuText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
     Font.Style = []
     Spacing = 0
   end
@@ -284,6 +295,7 @@ inherited FrInputApplicant: TFrInputApplicant
       FE9809FEA31CFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA3
       1DFEA31DFEA31DFEA31DFEA31DFEA21AFE9B0BFED99E}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 14
     TabStop = True
     OnClick = xpBitBtn1Click
@@ -293,6 +305,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 69
     Width = 300
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'FirstName'
     DataSource = DSelect_Applicant_By_ApplicantID
     TabOrder = 1
@@ -303,6 +316,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 98
     Width = 300
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'LastName'
     DataSource = DSelect_Applicant_By_ApplicantID
     TabOrder = 2
@@ -313,6 +327,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 392
     Width = 177
     Height = 17
+    Anchors = [akTop, akRight]
     Caption = #1576#1607' '#1570#1586#1605#1608#1606' '#1580#1575#1585#1610' '#1575#1582#1578#1589#1575#1589' '#1583#1575#1583#1607' '#1588#1608#1583
     Checked = True
     State = cbChecked
@@ -323,6 +338,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 156
     Width = 264
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'FatherName'
     DataSource = DSelect_Applicant_By_ApplicantID
     TabOrder = 4
@@ -332,6 +348,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 243
     Width = 264
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'CustomField1'
     DataSource = DSelect_Applicant_By_ApplicantID
     TabOrder = 7
@@ -341,6 +358,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 272
     Width = 264
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'CustomField2'
     DataSource = DSelect_Applicant_By_ApplicantID
     TabOrder = 8
@@ -350,6 +368,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 302
     Width = 264
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'CustomField3'
     DataSource = DSelect_Applicant_By_ApplicantID
     TabOrder = 9
@@ -359,6 +378,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 331
     Width = 264
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'CustomField4'
     DataSource = DSelect_Applicant_By_ApplicantID
     TabOrder = 10
@@ -368,6 +388,7 @@ inherited FrInputApplicant: TFrInputApplicant
     Top = 359
     Width = 264
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'CustomField5'
     DataSource = DSelect_Applicant_By_ApplicantID
     TabOrder = 11

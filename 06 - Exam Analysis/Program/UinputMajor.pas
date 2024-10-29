@@ -38,6 +38,7 @@ type
     procedure xpBitBtn9Click(Sender: TObject);
     procedure xpBitBtn5Click(Sender: TObject);
     procedure xpBitBtn3Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -56,7 +57,7 @@ uses dmu, YInputQuery, UMajorEdit;
 procedure TfrinputMajor.xpBitBtn1Click(Sender: TObject);
 begin
   inherited;
-close;
+  close;
 end;
 
 procedure TfrinputMajor.xpBitBtn10Click(Sender: TObject);
@@ -64,7 +65,7 @@ procedure TfrinputMajor.xpBitBtn10Click(Sender: TObject);
 begin
   inherited;
   with dm,Faculty do
-if dm.Y_InputQuery('ÏÇäÔ˜Ïå ÌÏíÏ','ÏÇäÔ˜Ïå ÌÏíÏ',s) then
+  if dm.Y_InputQuery('ÏÇäÔ˜Ïå ÌÏíÏ','ÏÇäÔ˜Ïå ÌÏíÏ',s) then
   begin
    Insert;
    FacultyFacultyTitle.AsString:=s;
@@ -77,7 +78,7 @@ procedure TfrinputMajor.xpBitBtn6Click(Sender: TObject);
 begin
   inherited;
   with dm,Select_EducationGroup_by_FacultyID do
-if dm.Y_InputQuery('Ñæå ÂãæÒÔí ÌÏíÏ','Ñæå ÂãæÒÔí ÌÏíÏ',s) then
+  if dm.Y_InputQuery('Ñæå ÂãæÒÔí ÌÏíÏ','Ñæå ÂãæÒÔí ÌÏíÏ',s) then
   begin
    Insert;
    Select_EducationGroup_by_FacultyIDEducationGroupTitle.AsString:=s;
@@ -92,7 +93,7 @@ begin
   with dm,Select_Major_by_EducationGroupID do
   begin
    Insert;
-   FrMajorEdit:=TFrMajorEdit.Create(Application);
+   FrMajorEdit:= TFrMajorEdit.Create(Application);
    FrMajorEdit.ShowModal;
   end;
 end;
@@ -102,7 +103,7 @@ procedure TfrinputMajor.xpBitBtn9Click(Sender: TObject);
 begin
   inherited;
   with dm,Faculty do
-if dm.Y_InputQuery('ÏÇäÔ˜Ïå ÌÏíÏ','ÏÇäÔ˜Ïå ÌÏíÏ',s) then
+  if dm.Y_InputQuery('ÏÇäÔ˜Ïå ÌÏíÏ','ÏÇäÔ˜Ïå ÌÏíÏ',s) then
   begin
    edit;
    FacultyFacultyTitle.AsString:=s;
@@ -115,7 +116,7 @@ procedure TfrinputMajor.xpBitBtn5Click(Sender: TObject);
 begin
   inherited;
   with dm,Select_EducationGroup_by_FacultyID do
-if dm.Y_InputQuery('Ñæå ÂãæÒÔí ÌÏíÏ','Ñæå ÂãæÒÔí ÌÏíÏ',s) then
+  if dm.Y_InputQuery('Ñæå ÂãæÒÔí ÌÏíÏ','Ñæå ÂãæÒÔí ÌÏíÏ',s) then
   begin
    edit;
    Select_EducationGroup_by_FacultyIDEducationGroupTitle.AsString:=s;
@@ -133,6 +134,12 @@ begin
    FrMajorEdit:=TFrMajorEdit.Create(Application);
    FrMajorEdit.ShowModal;
   end;
+end;
+
+procedure TfrinputMajor.FormShow(Sender: TObject);
+begin
+  inherited;
+   //
 end;
 
 end.

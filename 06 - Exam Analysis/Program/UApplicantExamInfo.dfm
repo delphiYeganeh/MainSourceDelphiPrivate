@@ -3,8 +3,8 @@ inherited FrApplicantExam: TFrApplicantExam
   Top = 182
   AutoScroll = False
   Caption = #1604#1610#1587#1578' '#1606#1605#1585#1607
-  ClientHeight = 550
-  ClientWidth = 739
+  ClientHeight = 562
+  ClientWidth = 896
   OldCreateOrder = True
   Scaled = False
   PixelsPerInch = 96
@@ -2761,16 +2761,20 @@ inherited FrApplicantExam: TFrApplicantExam
   end
   object Panel1: TPanel [2]
     Left = 0
-    Top = 460
-    Width = 739
+    Top = 472
+    Width = 896
     Height = 90
     Align = alBottom
     TabOrder = 2
+    DesignSize = (
+      896
+      90)
     object Number: TLabel
       Left = 423
       Top = 59
       Width = 3
       Height = 13
+      Anchors = [akRight, akBottom]
     end
     object Button2: TxpBitBtn
       Left = 22
@@ -2788,12 +2792,13 @@ inherited FrApplicantExam: TFrApplicantExam
       ImageList = Dm.LetterImages
       ImageIndex = 51
       Gradient = True
+      Anchors = [akLeft, akBottom]
       TabOrder = 0
       TabStop = True
       OnClick = Button2Click
     end
     object Button3: TxpBitBtn
-      Left = 447
+      Left = 604
       Top = 48
       Width = 126
       Height = 35
@@ -2883,12 +2888,13 @@ inherited FrApplicantExam: TFrApplicantExam
         C67452C67452C16F4BC16F4BC16F4BB96A44B96A44B46640B46640B46640AE61
         38AE6138AE6138AE6138}
       Gradient = True
+      Anchors = [akRight, akBottom]
       TabOrder = 1
       TabStop = True
       OnClick = Button3Click
     end
     object Button4: TxpBitBtn
-      Left = 307
+      Left = 464
       Top = 48
       Width = 126
       Height = 35
@@ -2978,6 +2984,7 @@ inherited FrApplicantExam: TFrApplicantExam
         5F9B7258966B558E67558E67558E674D87624D87624D876247815D47815D4781
         5D417B57417B57417B57}
       Gradient = True
+      Anchors = [akRight, akBottom]
       TabOrder = 2
       TabStop = True
       OnClick = Button4Click
@@ -3031,12 +3038,13 @@ inherited FrApplicantExam: TFrApplicantExam
         FE9809FEA31CFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA3
         1DFEA31DFEA31DFEA31DFEA31DFEA21AFE9B0BFED99E}
       Gradient = True
+      Anchors = [akLeft, akBottom]
       TabOrder = 3
       TabStop = True
       OnClick = Button5Click
     end
     object Button6: TxpBitBtn
-      Left = 588
+      Left = 745
       Top = 48
       Width = 126
       Height = 35
@@ -3077,12 +3085,13 @@ inherited FrApplicantExam: TFrApplicantExam
         A116FFA116FFA116FFA116FFA116FFA116FFA116FFA218FF9C0A}
       ImageIndex = 2
       Gradient = True
+      Anchors = [akRight, akBottom]
       TabOrder = 4
       TabStop = True
       OnClick = Button6Click
     end
     object xpBitBtn1: TxpBitBtn
-      Left = 447
+      Left = 604
       Top = 7
       Width = 126
       Height = 35
@@ -3097,12 +3106,13 @@ inherited FrApplicantExam: TFrApplicantExam
       ImageList = Dm.LetterImages
       ImageIndex = 51
       Gradient = True
+      Anchors = [akRight, akBottom]
       TabOrder = 5
       TabStop = True
       OnClick = xpBitBtn1Click
     end
     object xpBitBtn2: TxpBitBtn
-      Left = 306
+      Left = 463
       Top = 7
       Width = 126
       Height = 35
@@ -3117,12 +3127,13 @@ inherited FrApplicantExam: TFrApplicantExam
       ImageList = Dm.LetterImages
       ImageIndex = 51
       Gradient = True
+      Anchors = [akRight, akBottom]
       TabOrder = 6
       TabStop = True
       OnClick = xpBitBtn2Click
     end
     object xpBitBtn3: TxpBitBtn
-      Left = 587
+      Left = 744
       Top = 7
       Width = 126
       Height = 35
@@ -3135,6 +3146,7 @@ inherited FrApplicantExam: TFrApplicantExam
       Font.Name = 'Tahoma'
       Font.Style = []
       Gradient = True
+      Anchors = [akRight, akBottom]
       TabOrder = 7
       TabStop = True
       OnClick = xpBitBtn3Click
@@ -3155,6 +3167,7 @@ inherited FrApplicantExam: TFrApplicantExam
       ImageList = Dm.LetterImages
       ImageIndex = 51
       Gradient = True
+      Anchors = [akLeft, akBottom]
       TabOrder = 8
       TabStop = True
       OnClick = xpBitBtn4Click
@@ -3163,10 +3176,11 @@ inherited FrApplicantExam: TFrApplicantExam
   object YDBGrid1: TYDBGrid [3]
     Left = 0
     Top = 0
-    Width = 739
-    Height = 461
+    Width = 896
+    Height = 473
     Cursor = crHandPoint
     Align = alTop
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Color = 16770790
     DataSource = DSelect_Applicant_by_Examid
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -3350,6 +3364,12 @@ inherited FrApplicantExam: TFrApplicantExam
         Title.Caption = #1606#1605#1585#1607' '#1578#1588#1585#1610#1581#1610
         Width = 78
         Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'RoundFinalMark'
+        Title.Caption = #1606#1605#1585#1607' '#1583#1575#1606#1588#1580#1608
+        Visible = False
       end>
   end
   inherited ActionList: TActionList
@@ -3521,6 +3541,11 @@ inherited FrApplicantExam: TFrApplicantExam
     object Select_Applicant_by_ExamidSumScore: TWideStringField
       FieldName = 'SumScore'
       Size = 0
+    end
+    object Select_Applicant_by_ExamidRoundFinalMark: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'RoundFinalMark'
+      Calculated = True
     end
   end
   object Select_Applicant_by_Examid_advanced: TADOStoredProc

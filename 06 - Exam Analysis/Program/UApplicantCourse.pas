@@ -151,14 +151,14 @@ procedure TfrApplicantCourse.FormCreate(Sender: TObject);
 begin
   inherited;
   RDate.Caption:=_Today;
-with dm,Select_Applicant_by_TrainingCourseID do
- begin
+  with dm,Select_Applicant_by_TrainingCourseID do
+  begin
    close;
    Parameters.ParamByName('@TrainingCourseID').Value:=dm.Select_TrainingCourse_By_WhereTrainingCourseID.AsInteger;
    Open;
    Number.Caption:=' ⁄œ«œ:'+IntToStr(RecordCount);
       YDBGrid1.PrintTitle:='·Ì”  œ«‰‘ÃÊÌ«‰ œ—” '+dm.Select_TrainingCourse_By_WhereCourseTitle.AsString;
- end;
+  end;
 
 end;
 
@@ -166,7 +166,7 @@ procedure TfrApplicantCourse.QRSubDetail2BeforePrint(Sender: TQRCustomBand;
   var PrintBand: Boolean);
 begin
   inherited;
-farsimark.Caption:=FloatBill(Select_Applicant_by_TrainingCourseID.Fieldbyname(Qrmark.DataField).AsFloat);
+  farsimark.Caption:=FloatBill(Select_Applicant_by_TrainingCourseID.Fieldbyname(Qrmark.DataField).AsFloat);
 end;
 
 procedure TfrApplicantCourse.xpBitBtn1Click(Sender: TObject);

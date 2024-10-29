@@ -12,7 +12,7 @@ inherited FrAddUser: TFrAddUser
   PixelsPerInch = 96
   TextHeight = 13
   object BitBtn1: TxpBitBtn [0]
-    Left = 3
+    Left = 5
     Top = 163
     Width = 85
     Height = 29
@@ -51,6 +51,7 @@ inherited FrAddUser: TFrAddUser
       0080800080800080800080800080800080800080800080800080800080800080
       8000808000FF00008080}
     Gradient = True
+    Anchors = [akLeft, akBottom]
     TabOrder = 0
     TabStop = True
     OnClick = BitBtn1Click
@@ -61,6 +62,7 @@ inherited FrAddUser: TFrAddUser
     Width = 481
     Height = 153
     Align = alTop
+    Anchors = [akLeft, akTop, akRight, akBottom]
     ParentColor = True
     TabOrder = 1
     DesignSize = (
@@ -77,7 +79,7 @@ inherited FrAddUser: TFrAddUser
     object Label3: TLabel
       Left = 393
       Top = 62
-      Width = 46
+      Width = 77
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1606#1575#1605' '#1705#1575#1585#1576#1585#1610
@@ -86,13 +88,13 @@ inherited FrAddUser: TFrAddUser
     object Label4: TLabel
       Left = 393
       Top = 90
-      Width = 45
+      Width = 77
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1705#1604#1605#1607' '#1593#1576#1608#1585
     end
     object Label10: TLabel
-      Left = 217
+      Left = 184
       Top = 90
       Width = 21
       Height = 13
@@ -102,18 +104,18 @@ inherited FrAddUser: TFrAddUser
     object Label9: TLabel
       Left = 393
       Top = 38
-      Width = 38
+      Width = 77
       Height = 13
       Anchors = [akTop, akRight]
       Caption = #1606#1575#1605' '#1705#1575#1605#1604
       FocusControl = DBEdit2
     end
     object DBLookupComboBox1: TDBLookupComboBox
-      Left = 74
+      Left = 40
       Top = 114
-      Width = 313
+      Width = 347
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       DataField = 'AccessID'
       DataSource = Dm.Dsys_User
       KeyField = 'AccessID'
@@ -148,17 +150,17 @@ inherited FrAddUser: TFrAddUser
       Height = 30
       ActionManager = ActionManager
       Caption = 'ActionToolBar1'
-      ColorMap.HighlightColor = 15660791
+      ColorMap.HighlightColor = clWhite
       ColorMap.BtnSelectedColor = clBtnFace
-      ColorMap.UnusedColor = 15660791
+      ColorMap.UnusedColor = clWhite
       EdgeOuter = esRaised
       Orientation = boRightToLeft
       Spacing = 0
     end
     object Pass: TDBEdit
-      Left = 250
+      Left = 239
       Top = 87
-      Width = 140
+      Width = 151
       Height = 21
       Anchors = [akTop, akRight]
       DataField = 'PassWord'
@@ -167,11 +169,11 @@ inherited FrAddUser: TFrAddUser
       TabOrder = 2
     end
     object ConfirmPass: TEdit
-      Left = 74
+      Left = 41
       Top = 86
       Width = 140
       Height = 21
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       PasswordChar = '*'
       TabOrder = 3
     end
