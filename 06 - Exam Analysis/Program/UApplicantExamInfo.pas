@@ -415,13 +415,13 @@ begin
     tempStr     := FloatToStr(temp) ;
     apos        := Pos('/',tempStr) ;
     alentemp    := Length( tempStr) ;
-
-    TempLenFrac :=  Length( Copy(tempStr,apos+1, (alentemp -apos) ) );
+    if apos > 0 then
+      TempLenFrac :=  Length( Copy(tempStr,apos+1, (alentemp -apos) ) )
+    else  TempLenFrac := 2 ;
   end ;
 
   if TempLenFrac >0 then
-    roundNumber :=  Round(Select_Applicant_by_ExamidFinalMark.AsFloat * Power (10,TempLenFrac))/power(10,TempLenFrac)
-  else roundNumber :=  Select_Applicant_by_ExamidFinalMark.AsFloat ;
+    roundNumber :=  Round(Select_Applicant_by_ExamidFinalMark.AsFloat * Power (10,TempLenFrac))/power(10,TempLenFrac) ;
 
   Select_Applicant_by_ExamidRoundFinalMark.Value := roundNumber ;
 end;

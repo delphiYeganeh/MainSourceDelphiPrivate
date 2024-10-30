@@ -76,8 +76,13 @@ var MajorStart:integer;var MajorLength:integer;var TermcodeStart:integer;var Ter
 var CourseStart:integer;var CourseLength:integer;var CourseGroupStart:integer;var CourseGroupLength:integer;
 var AnswerStart:integer;var indiscernibleChar:string;var KeyLineNumber:integer;var AnswerStartLineNumber:integer;
 var GroupExamStart:integer;var AnserEnd:integer;var ExPositive_Start:integer;var ExPositive_End:integer);
- var ADOSP:TADOStoredProc;
- begin
+var
+  ADOSP:TADOStoredProc;
+  aAnserEnd:Variant;
+  aExPositive_Start:Variant;
+  aExPositive_End:Variant;
+
+begin
   ADOSP:=TADOStoredProc.create(nil);
   ADOSP.ProcedureName:='Get_TextFormat_By_ExamID';
 
@@ -200,42 +205,52 @@ var GroupExamStart:integer;var AnserEnd:integer;var ExPositive_Start:integer;var
       DataType := ftinteger;
       Direction := pdoutput;
       Name:='@AnserEnd';
+      Value := 0 ;
     end;
   with ADOSP.Parameters.AddParameter do
       begin
       DataType := ftinteger;
       Direction := pdoutput;
       Name:='@ExPositive_Start';
+      Value := 0 ;
     end;
   with ADOSP.Parameters.AddParameter do
       begin
       DataType := ftinteger;
       Direction := pdoutput;
       Name:='@ExPositive_End';
+      Value := 0 ;
     end;
     ADOSP.Connection:=dm.YeganehConnection;
     ADOSP.ExecProc;
 
     with ADOSP.Parameters do
      Begin
-          StnoStart:=ParamByName('@StnoStart').value;
+          StnoStart :=ParamByName('@StnoStart').value;
           StnoLength:=ParamByName('@StnoLength').value;
           MajorStart:=ParamByName('@MajorStart').value;
           MajorLength:=ParamByName('@MajorLength').value;
-          TermcodeStart:=ParamByName('@TermcodeStart').value;
+          TermcodeStart :=ParamByName('@TermcodeStart').value;
           TermCodeLength:=ParamByName('@TermCodeLength').value;
-          CourseStart:=ParamByName('@CourseStart').value;
+          CourseStart :=ParamByName('@CourseStart').value;
           CourseLength:=ParamByName('@CourseLength').value;
-          CourseGroupStart:=ParamByName('@CourseGroupStart').value;
+          CourseGroupStart :=ParamByName('@CourseGroupStart').value;
           CourseGroupLength:=ParamByName('@CourseGroupLength').value;
-          AnswerStart:=ParamByName('@AnswerStart').value;
+          AnswerStart      :=ParamByName('@AnswerStart').value;
           indiscernibleChar:=ParamByName('@indiscernibleChar').value;
-          KeyLineNumber:=ParamByName('@KeyLineNumber').value;
+          KeyLineNumber    :=ParamByName('@KeyLineNumber').value;
           AnswerStartLineNumber:=ParamByName('@AnswerStartLineNumber').value;
-          GroupExamStart:=ParamByName('@GroupExamStart').value;
-          AnserEnd:=ParamByName('@AnserEnd').value;
-          ExPositive_Start:=ParamByName('@ExPositive_Start').value;
-          ExPositive_End:=ParamByName('@ExPositive_End').value;
+          GroupExamStart       :=ParamByName('@GroupExamStart').value;
+
+          aAnserEnd        := ParamByName('@AnserEnd').Value;
+          if  aAnserEnd >0 then
+            AnserEnd := aAnserEnd ;
+          aExPositive_Start:= ParamByName('@ExPositive_Start').value;
+          if  aExPositive_Start >0 then
+            ExPositive_Start := aExPositive_Start ;
+          aExPositive_End  := ParamByName('@ExPositive_End').value;
+          if  aExPositive_End >0 then
+            ExPositive_End := aExPositive_End ;
 
     End;
 
@@ -471,6 +486,7 @@ Procedure  Exec_update_Exam_Numbers(ExamID:integer;Number_of_Question:integer;nu
     ADOSP.ExecProc;    
 
 end;
+
 Procedure  Exec_insert_Question_ByExamID(ExamID:integer);
  var ADOSP:TADOStoredProc;
  begin
@@ -822,6 +838,7 @@ function  Exec_SaveAs_Accesses(oldID:integer; Title:widestring):integer;
     result:=ADOSP.Parameters.ParamByName('@newID').Value
 
 end;
+
 Procedure  Exec_delete_Accesses(AccessID:byte);
  var ADOSP:TADOStoredProc;
  begin

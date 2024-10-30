@@ -12,9 +12,9 @@ File_9=SourceModule,'D:\matin\06 - Exam Analysis\Program\BusinessLayer.pas',0,1,
 
 [Modules]
 Module0=D:\matin\06 - Exam Analysis\Program\UMainForm.pas
-Module1=D:\matin\06 - Exam Analysis\Program\Uconnect.pas
+Module1=D:\matin\06 - Exam Analysis\Program\BaseUnit.pas
 Module2=D:\matin\06 - Exam Analysis\Program\UFrLogin.pas
-Module3=D:\matin\06 - Exam Analysis\Program\BaseUnit.pas
+Module3=D:\matin\06 - Exam Analysis\Program\Uconnect.pas
 Module4=D:\matin\06 - Exam Analysis\Program\ExamAnalyser.dpr
 Count=5
 EditWindowCount=1
@@ -24,7 +24,7 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\06 - Exam Analysis\Program\Uconnect.pas]
+[D:\matin\06 - Exam Analysis\Program\BaseUnit.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -34,7 +34,7 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\06 - Exam Analysis\Program\BaseUnit.pas]
+[D:\matin\06 - Exam Analysis\Program\Uconnect.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -77,9 +77,9 @@ LeftPanelSize=0
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=00000400010000000C000000436F64654578706C6F726572000000000000000000000000000000000001000000000000000000000000FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=85
-BottomPanelClients=WatchWindow,MessageView@EditWindow0
-BottomPanelData=00000400010000000B000000576174636857696E646F77BD050000000000000255000000000000000100000001000000000000000002000000009D000000000000000200000002B6060000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000100000000BD0500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelSize=0
+BottomPanelClients=MessageView@EditWindow0,WatchWindow
+BottomPanelData=00000400020000000B0000004D657373616765566965770B000000576174636857696E646F779D0000000000000001A80400000000000001000000009D000000000000000100000002B606000000000000020000000000000000000000000200000000AD060000000000000200000000B7060000000000000200000000B7060000000000000200000000B7060000000000000200000000B706000000000000FFFFFFFF
 
 [View0]
 Module=D:\matin\06 - Exam Analysis\Program\ExamAnalyser.dpr
@@ -111,8 +111,8 @@ LeftCol=1
 
 [View4]
 Module=D:\matin\06 - Exam Analysis\Program\BaseUnit.pas
-CursorX=6
-CursorY=246
+CursorX=59
+CursorY=241
 TopLine=236
 LeftCol=1
 
@@ -245,7 +245,7 @@ LRDockWidth=190
 Dockable=1
 SplitPos=85
 ArrangeBy=Name
-SelectedItem=OnActivate
+SelectedItem=Name
 ExpandedItems=Title
 HiddenCategories=
 
@@ -331,15 +331,15 @@ Dockable=1
 
 [MessageView@EditWindow0]
 Create=1
-Visible=1
+Visible=0
 State=0
 Left=12
 Top=0
-Width=1457
+Width=1707
 Height=85
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1457
+ClientWidth=1707
 ClientHeight=85
 TBDockHeight=85
 LRDockWidth=443

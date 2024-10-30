@@ -122,7 +122,7 @@ end;
 procedure TfrGroupImport.Initialize;
 begin
   inherited;
-Exec_Get_TextFormat_By_ExamID
+  Exec_Get_TextFormat_By_ExamID
             (64,StnoStart,StnoLength,MajorStart,MajorLength,
             TermcodeStart,TermCodeLength,CourseStart,CourseLength,CourseGroupStart,CourseGroupLength,
             AnswerStart,indiscernibleChar,KeyLineNumber,AnswerStartLineNumber ,GroupExamStart,AnserEnd,ExPositive_Start,ExPositive_End)

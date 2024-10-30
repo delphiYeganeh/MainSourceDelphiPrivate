@@ -45,8 +45,8 @@ uses dmu, BusinessLayer, YShamsiDate;
 procedure TFApplicantExamInput.sbtBrowseFilePathClick(Sender: TObject);
 begin
   inherited;
- if OpenDialog.Execute then
-   EdPath.Text:=OpenDialog.FileName;
+  if OpenDialog.Execute then
+    EdPath.Text:=OpenDialog.FileName;
 end;
 
 
@@ -54,16 +54,16 @@ function Refine( s:widestring;SpecialChar :String = '';IsAnswerLine :Boolean =Fa
 var i: integer;
     str :String;
 begin
-str := ' 1234567890'+SpecialChar;
-{if    (SpecialChar <> '') then
-    if IsAnswerLine then
-      str := str+ SpecialChar
-      else s  := Replace(s,SpecialChar,'9');}
+  str := ' 1234567890'+SpecialChar;
+  {if    (SpecialChar <> '') then
+      if IsAnswerLine then
+        str := str+ SpecialChar
+        else s  := Replace(s,SpecialChar,'9');}
 
-Result:='';
-for i:=1 to length(s) do
-  if pos(s[i],str)<>0 then
-    result:=result+s[i];
+  Result:='';
+  for i:=1 to length(s) do
+    if pos(s[i],str)<>0 then
+      result:=result+s[i];
   
 end;                    
 
@@ -85,7 +85,7 @@ procedure TFApplicantExamInput.btnSubmitAnswersClick(Sender: TObject);
   var number :Integer;
   var ExPositiveKey : String;
   aaa :String;
- begin
+begin
   inherited;
   if EdPath.Text = '' then
   begin
@@ -101,14 +101,14 @@ procedure TFApplicantExamInput.btnSubmitAnswersClick(Sender: TObject);
   begin
     if FileHasBadCharacter=True then Break;
     Readln(f,str);
-  ExamID:=dm.Browse_ExamExamID.AsInteger;
+    ExamID := dm.Browse_ExamExamID.AsInteger;
       Exec_Get_TextFormat_By_ExamID
             (ExamID,StnoStart,StnoLength,MajorStart,MajorLength,
             TermcodeStart,TermCodeLength,CourseStart,CourseLength,CourseGroupStart,CourseGroupLength,
             AnswerStart,indiscernibleChar,KeyLineNumber,AnswerStartLineNumber ,GroupExamStart,AnserEnd,ExPositive_Start, ExPositive_End);
 
-   if ExPositive_Start = 0 then
-   begin
+    if ExPositive_Start = 0 then
+    begin
       for x:=0 to length(str) do
       begin
          if not (Ord(str[x]) in [0,32,42,43,48,49,50,51,52,53,54,55,56,57,58]) then
@@ -121,9 +121,9 @@ procedure TFApplicantExamInput.btnSubmitAnswersClick(Sender: TObject);
                Break;
          end;
       end;
-   end
-   else
-   begin
+    end
+    else
+    begin
       for x:=0 to length(str)-(length(str)-(ExPositive_Start-1)) do
       begin
          if not (Ord(str[x]) in [0,32,42,43,48,49,50,51,52,53,54,55,56,57,58]) then
@@ -136,7 +136,7 @@ procedure TFApplicantExamInput.btnSubmitAnswersClick(Sender: TObject);
                Break;
          end;
       end;
-   end;
+    end;
   end;
   if (FileHasBadCharacter=True) and (ReplaceBadCharacter=False) then
        Exit;
@@ -194,16 +194,16 @@ procedure TFApplicantExamInput.btnSubmitAnswersClick(Sender: TObject);
             AnswerStart,indiscernibleChar,KeyLineNumber,AnswerStartLineNumber ,GroupExamStart,AnserEnd,ExPositive_Start, ExPositive_End);
 
 
- ProgressBar.Position:=ProgressBar.Position+1;
- LineNumber:=1;
+  ProgressBar.Position:=ProgressBar.Position+1;
+  LineNumber:=1;
 
-if MessageDlg('«ê— ﬁ»·« «ÿ·«⁄«  «Ì‰ ¬“„Ê‰ —« Ê«—œ ﬂ—œÂ «Ìœ »« Ê—Êœ „Ãœœ «ÿ·«⁄«  ﬁ»·Ì «“ »Ì‰ „Ì —Êœ ° ¬Ì« «œ«„Â „Ì œÂÌœø',
-   mtConfirmation,[mbyes,mbno],0)<> mryes then
- exit;
+  if MessageDlg('«ê— ﬁ»·« «ÿ·«⁄«  «Ì‰ ¬“„Ê‰ —« Ê«—œ ﬂ—œÂ «Ìœ »« Ê—Êœ „Ãœœ «ÿ·«⁄«  ﬁ»·Ì «“ »Ì‰ „Ì —Êœ ° ¬Ì« «œ«„Â „Ì œÂÌœø',
+     mtConfirmation,[mbyes,mbno],0)<> mryes then
+   exit;
 
 
- number_of_applicant:=0;
- number := 0;
+   number_of_applicant:=0;
+   number := 0;
     while not eof (f) do
     begin
       number := number + 1;
@@ -255,25 +255,25 @@ if MessageDlg('«ê— ﬁ»·« «ÿ·«⁄«  «Ì‰ ¬“„Ê‰ —« Ê«—œ ﬂ—œÂ «Ìœ »« Ê—Êœ „Ãœœ «ÿ·«⁄«  
          number_of_Question:=length(AnswerKey);
       end
       else
-        if LineNumber>=AnswerStartLineNumber then
-         begin
-         if ExPositive_Start > 0 then
-         begin
-           AnswerKey:=copy(line,AnswerStart,Abs(ExPositive_Start- AnswerStart));
-         end
-         else
-         begin
-           AnswerKey :=copy    (line,AnswerStart,Length(line)-AnswerStart+1);
-         end;
+      if LineNumber>=AnswerStartLineNumber then
+      begin
+        if ExPositive_Start > 0 then
+        begin
+         AnswerKey:=copy(line,AnswerStart,Abs(ExPositive_Start- AnswerStart));
+        end
+        else
+        begin
+         AnswerKey :=copy    (line,AnswerStart,Length(line)-AnswerStart+1);
+        end;
 
-          //
-          AnswerKey :=copy    (Refine (AnswerKey,indiscernibleChar),1,number_of_Question);
-          AnswerKey :=Replace         (AnswerKey,' ','0');
+        //
+        AnswerKey :=copy    (Refine (AnswerKey,indiscernibleChar),1,number_of_Question);
+        AnswerKey :=Replace         (AnswerKey,' ','0');
 
-          Exec_insert_AnswerLine(ExamID,Stno,AnswerKey,termcode,major,Course,CourseGroup,StrToIntDef(GroupExamId,1));
-          inc(number_of_applicant);
+        Exec_insert_AnswerLine(ExamID,trim(Stno),AnswerKey,termcode,major,Course,CourseGroup,StrToIntDef(GroupExamId,1));
+        inc(number_of_applicant);
 
-         end;
+      end;
 
 
       ProgressBar.Position:=ProgressBar.Position+1;
@@ -305,10 +305,10 @@ if MessageDlg('«ê— ﬁ»·« «ÿ·«⁄«  «Ì‰ ¬“„Ê‰ —« Ê«—œ ﬂ—œÂ «Ìœ »« Ê—Êœ „Ãœœ «ÿ·«⁄«  
     Exec_insert_Question_ByExamID(ExamID);
 
 
- closeFile(f);
- ProgressBar.Position:=1000;
- ShowMessage('»« „Ê›ﬁÌ   «ÿ·«⁄«  Å«”Œ‰«„Â Â« «‰ ﬁ«· Ì«› ');
- ProgressBar.Position:=0
+   closeFile(f);
+   ProgressBar.Position:=1000;
+   ShowMessage('»« „Ê›ﬁÌ   «ÿ·«⁄«  Å«”Œ‰«„Â Â« «‰ ﬁ«· Ì«› ');
+   ProgressBar.Position:=0
 
 end;
 
@@ -332,7 +332,7 @@ end;
 procedure TFApplicantExamInput.Button2Click(Sender: TObject);
 begin
   inherited;
-close
+  close
 end;
 
 end.

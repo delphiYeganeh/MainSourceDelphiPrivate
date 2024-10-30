@@ -424,8 +424,8 @@ var
 
   _EXEDIR : string;
 const
-   _App_Version = '10.0.0.3';
-   _Last_Update = '1403/08/8';
+   _App_Version = '10.0.0.4';
+   _Last_Update = '1403/08/9';
 
 implementation
 

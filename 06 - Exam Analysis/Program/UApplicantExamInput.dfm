@@ -131,8 +131,8 @@ inherited FApplicantExamInput: TFApplicantExamInput
     Top = 80
   end
   inherited xpWindow1: TxpWindow
-    Left = 192
-    Top = 144
+    Left = 176
+    Top = 112
   end
   object ExPositive_Insert: TADOStoredProc
     Connection = Dm.YeganehConnection
@@ -167,7 +167,7 @@ inherited FApplicantExamInput: TFApplicantExamInput
         Size = -1
         Value = Null
       end>
-    Left = 152
-    Top = 112
+    Left = 424
+    Top = 40
   end
 end
