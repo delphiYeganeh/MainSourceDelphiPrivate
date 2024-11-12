@@ -1,0 +1,29 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_AddUserNote]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_AddUserNote]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_AddUserNote](@UserID INT,@Note NTEXT,@Date CHAR(10))
+AS
+
+INSERT INTO UserNote
+(
+	-- UserNoteID -- this column value is auto-generated
+	UserID,
+	Note,
+	CreateDate
+)
+VALUES
+(
+	@UserID,@Note,@Date
+)
+GO
+
+COMMIT
+GO

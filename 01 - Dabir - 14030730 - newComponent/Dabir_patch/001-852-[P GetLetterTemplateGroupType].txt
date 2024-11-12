@@ -1,0 +1,29 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[GetLetterTemplateGroupType]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[GetLetterTemplateGroupType]
+END
+GO
+
+CREATE  PROCEDURE [dbo].[GetLetterTemplateGroupType]
+(
+	@ID		Int,
+	@type	Char(1) output
+)
+
+As
+
+Select @type = TemplateGroupType
+	From TemplateGroup As TG
+	Where TG.TemplateGroupID = @ID
+
+Set @type = IsNULL(@type, 'w')
+
+GO
+
+COMMIT
+GO

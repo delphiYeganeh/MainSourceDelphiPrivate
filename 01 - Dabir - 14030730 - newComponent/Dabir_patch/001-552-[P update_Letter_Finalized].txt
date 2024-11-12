@@ -1,0 +1,37 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[update_Letter_Finalized]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[update_Letter_Finalized]
+END
+GO
+
+CREATE  procedure [dbo].[update_Letter_Finalized]
+	(@LetterID 	INT,
+	 @Finalized BIT,
+	 @ISCopy_InDabir BIT=1
+	)
+
+AS 
+
+CREATE TABLE #TPT(ID INT)
+
+UPDATE dbo.Letter  
+SET  Finalized	 = @Finalized  
+WHERE  ( LetterID	 = @LetterID)
+
+IF @ISCopy_InDabir=1
+ 	UPDATE ReCommites
+	SET	IsCopy_In_Dabir = 1, IsCopy = 1
+	WHERE LetterID=@LetterID
+
+	UPDATE ReCommites
+	SET SentToDabir=1
+	WHERE LetterID=@LetterID
+GO
+
+COMMIT
+GO

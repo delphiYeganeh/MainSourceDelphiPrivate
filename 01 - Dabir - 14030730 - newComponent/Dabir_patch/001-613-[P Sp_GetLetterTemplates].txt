@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetLetterTemplates]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetLetterTemplates]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetLetterTemplates](@groupId INT)
+AS
+	IF(@groupId<>0)
+	  SELECT   *
+	  FROM LetterTemplate lt WHERE lt.TemplateGroupID=@groupId
+	ELSE
+	  SELECT   *
+	  FROM LetterTemplate lt
+GO
+
+COMMIT
+GO

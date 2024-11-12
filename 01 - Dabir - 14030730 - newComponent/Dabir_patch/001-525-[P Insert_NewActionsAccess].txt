@@ -1,0 +1,70 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Insert_NewActionsAccess]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Insert_NewActionsAccess]
+END
+GO
+
+CREATE  procedure [dbo].[Insert_NewActionsAccess]
+AS  
+  
+--Delete from ActionsAccess 
+--where Str(Formtag) not in (Select Str(FormTag) from Actions)      
+--And RTrim(ActionID) not in (Select RTrim(ID) from Actions) 
+
+/*دادن دسترسي*/      
+--INSERT INTO [dbo].[ActionsAccess]( [AccessID],[ActionID],[FormTag],[HasAccess])           
+--SELECT Acc.ID,A.ID,A.FormTag,1          
+--FROM Accesses Acc,Actions A         
+--where (Str(A.formtag)+LTrim(RTrim(A.ID))+ Str(Acc.ID) not in   
+--      (Select Str(AAC.formtag)+LTrim(RTrim(AAC.ActionID))+ Str(AAC.AccessID) From ActionsAccess AAC) )
+
+	SELECT 
+		Acc.ID AS AccID,
+		A.ID,
+		A.FormTag,
+		1 as flag ,
+		Str(A.formtag)+LTrim(RTrim(A.ID))+ Str(Acc.ID) as fild1        
+	INTO #temp1
+	FROM Accesses Acc,Actions A         
+
+	SELECT 
+	   Str(AAC.formtag)+LTrim(RTrim(AAC.ActionID))+ Str(AAC.AccessID)  Fild2
+	INTO #temp2
+	FROM ActionsAccess AAC
+
+	DELETE FROM ActionsAccess
+	WHERE GUID  IN (
+					SELECT 
+					   GUID
+					FROM #temp2
+					WHERE FormTag NOT IN (SELECT FormTag FROM #temp1 ) 
+					AND ActionID NOT IN (sELECT ID FROM #temp1)
+				   )
+
+	INSERT INTO [dbo].[ActionsAccess]
+			   ( [AccessID],
+				 [ActionID],
+				 [FormTag],
+				 [HasAccess])           
+	SELECT 
+		AccID,
+		A.ID,
+		A.FormTag,
+		flag 
+	FROM #temp1 a
+	WHERE fild1 NOT IN (
+						 SELECT 
+							fild2 
+						 FROM #temp2)
+
+	DROP TABLE #temp1
+	DROP TABLE #temp2
+GO
+
+COMMIT
+GO

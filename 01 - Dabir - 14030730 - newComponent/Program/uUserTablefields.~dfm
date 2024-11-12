@@ -1,0 +1,346 @@
+inherited FrTableFields: TFrTableFields
+  Left = 621
+  Top = 258
+  BorderIcons = []
+  Caption = #1578#1593#1585#1610#1601' '#1601#1610#1604#1583' '#1607#1575
+  ClientHeight = 510
+  ClientWidth = 625
+  Color = 16773070
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlMain: TPanel [0]
+    Left = 0
+    Top = 0
+    Width = 625
+    Height = 510
+    Align = alClient
+    ParentColor = True
+    TabOrder = 0
+    object YDBGrid1: TYDBGrid
+      Left = 1
+      Top = 1
+      Width = 623
+      Height = 467
+      Cursor = crHandPoint
+      Align = alClient
+      Color = 16771304
+      DataSource = DSForm
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Charset = ARABIC_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      YeganehColor = True
+      YeganehFinish = False
+      PageNumber = False
+      RecordNumber = False
+      HasTime = False
+      Oriention = poPortrait
+      HasDate = False
+      HasIndex = False
+      PrintTitle = #1604#1610#1587#1578' '#1578#1607#1610#1607' '#1588#1583#1607' '#1578#1608#1587#1591' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1610#1711#1575#1606#1607
+      InvertFarsiDate = True
+      TitleSort = True
+      AutoInsert = False
+      FooterFields = 'Count'
+      Columns = <
+        item
+          Alignment = taLeftJustify
+          Expanded = False
+          FieldName = 'Description'
+          Title.Caption = #1606#1608#1593' '#1601#1610#1604#1583
+          Title.Color = 16773087
+          Width = 282
+          Visible = True
+        end
+        item
+          Alignment = taLeftJustify
+          Expanded = False
+          FieldName = 'FieldTypeTitle'
+          Title.Caption = #1606#1608#1593' '#1601#1610#1604#1583
+          Title.Color = 16773087
+          Visible = True
+        end
+        item
+          Alignment = taLeftJustify
+          Expanded = False
+          FieldName = 'order'
+          Title.Caption = #1578#1585#1578#1610#1576' '#1606#1605#1575#1610#1588
+          Title.Color = 16773087
+          Visible = True
+        end
+        item
+          Alignment = taLeftJustify
+          Expanded = False
+          FieldName = 'ReferenceTanleTitle'
+          Title.Caption = #1606#1575#1605' '#1580#1583#1608#1604' '#1605#1585#1580#1593
+          Title.Color = 16773087
+          Visible = True
+        end>
+    end
+    object Panel1: TPanel
+      Left = 1
+      Top = 468
+      Width = 623
+      Height = 41
+      Align = alBottom
+      ParentColor = True
+      TabOrder = 1
+      object xpBitBtn1: TAdvGlowButton
+        Left = 452
+        Top = 7
+        Width = 80
+        Height = 28
+        Cursor = crHandPoint
+        Caption = #1608#1610#1585#1575#1610#1588
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 37
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = xpBitBtn1Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object xpBitBtn2: TAdvGlowButton
+        Left = 536
+        Top = 7
+        Width = 80
+        Height = 28
+        Cursor = crHandPoint
+        Caption = #1580#1583#1610#1583
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 60
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = xpBitBtn2Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object xpBitBtn3: TAdvGlowButton
+        Left = 368
+        Top = 7
+        Width = 80
+        Height = 28
+        Cursor = crHandPoint
+        Caption = #1581#1584#1601
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 90
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = xpBitBtn3Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object xpBitBtn4: TAdvGlowButton
+        Left = 8
+        Top = 10
+        Width = 75
+        Height = 25
+        Cursor = crHandPoint
+        Caption = #1582#1585#1608#1580
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 84
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 3
+        OnClick = xpBitBtn4Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+    end
+  end
+  inherited DSForm: TDataSource
+    DataSet = Get_UserFields_By_TableID
+    Left = 88
+    Top = 168
+  end
+  inherited ActionList: TActionList
+    Left = 544
+    Top = 56
+    inherited RefreshAction: TAction
+      OnExecute = nil
+    end
+  end
+  object Get_UserFields_By_TableID: TADOStoredProc
+    Connection = Dm.YeganehConnection
+    CursorType = ctStatic
+    ProcedureName = 'get_userfields_by_tableID'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@tableID'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = 1
+      end>
+    Left = 88
+    Top = 112
+    object Get_UserFields_By_TableIDID: TAutoIncField
+      FieldName = 'ID'
+      ReadOnly = True
+    end
+    object Get_UserFields_By_TableIDDescription: TWideStringField
+      Alignment = taRightJustify
+      FieldName = 'Description'
+      Size = 50
+    end
+    object Get_UserFields_By_TableIDFieldTypeID: TWordField
+      FieldName = 'FieldTypeID'
+    end
+    object Get_UserFields_By_TableIDReferenceTableID: TIntegerField
+      FieldName = 'ReferenceTableID'
+    end
+    object Get_UserFields_By_TableIDorder: TIntegerField
+      FieldName = 'order'
+    end
+    object Get_UserFields_By_TableIDFieldTypeTitle: TWideStringField
+      Alignment = taRightJustify
+      FieldKind = fkLookup
+      FieldName = 'FieldTypeTitle'
+      LookupDataSet = Dm.FieldType
+      LookupKeyFields = 'FieldTypeID'
+      LookupResultField = 'FieldTypeTitle'
+      KeyFields = 'FieldTypeID'
+      Lookup = True
+    end
+    object Get_UserFields_By_TableIDReferenceTanleTitle: TWideStringField
+      Alignment = taRightJustify
+      FieldKind = fkLookup
+      FieldName = 'ReferenceTanleTitle'
+      LookupDataSet = Dm.ReferenceTables
+      LookupKeyFields = 'TableId'
+      LookupResultField = 'Description'
+      KeyFields = 'ReferenceTableID'
+      Lookup = True
+    end
+    object Get_UserFields_By_TableIDTableID: TIntegerField
+      FieldName = 'TableID'
+    end
+    object Get_UserFields_By_TableIDFieldName: TStringField
+      Alignment = taRightJustify
+      FieldName = 'FieldName'
+      Size = 50
+    end
+  end
+  object QryDelFieldAccess: TADOQuery
+    Connection = Dm.YeganehConnection
+    Parameters = <
+      item
+        Name = 'FieldID'
+        DataType = ftInteger
+        Size = -1
+        Value = 0
+      end>
+    SQL.Strings = (
+      'Delete From FieldAccess'
+      'Where FieldID = :FieldID')
+    Left = 216
+    Top = 112
+  end
+end

@@ -1,0 +1,41 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_WebletterContainText]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_WebletterContainText]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_WebletterContainText]
+ @secID tinyint,@where nvarchar(500),@OrgID INT
+AS 
+
+	declare @sqlCommand nvarchar(4000)
+	set @where=ltrim(rtrim(isnull(@where,'')))
+
+	SELECT distinct Letter.LetterID,ReCommites.RecommiteID,Letter_type, indicatorid, RegistrationDate, 
+			Memo, FromOrganizations.Title AS FromTitle, ToOrganizations.Title AS ToTitle 
+		FROM LetterText 
+			INNER JOIN   Letter on letter.letterid=LetterText.letterid
+			INNER JOIN  ReCommites ON ReCommites.LetterID = Letter.LetterID  
+			INNER JOIN  FromOrganizations ON FromOrgID = FromOrganizations.ID
+			INNER JOIN  FromOrganizations ToOrganizations ON ToOrgID = ToOrganizations.ID  
+		WHERE   (ReCommites.Finallized=1)
+			and ((ReCommites.OrgID  in (SELECT distinct fo.ID 
+										from FromOrganizations fo 
+										inner join ChartWorkGroupDetails t1 on t1.OrgID=fo.id and AccessForErja=1 and 
+										t1.GroupID in (SELECT  distinct  t1.GroupID
+														FROM FromOrganizations fo INNER JOIN ChartWorkGroupDetails t1 ON fo.GroupID=t1.GroupID
+														inner join users t2 on t2.id=@OrgID 
+														and (fo.id=t2.FromOrgID or fo.id=t2.FiveOrgID or fo.id=t2.FourOrgID or fo.id=t2.TreeOrgID or fo.id=t2.SecondOrgID))
+										WHERE fo.IsInnerOrg=1 AND t1.AccessForErja=1))  or (@OrgID is null or @OrgID=0)) 
+			and (letter.LetterFormat in (1,2)) 
+			AND ( (@secID= 0 or @secID is null) or SecretariatID = @secID)
+			And (@where is null or LetterText.TypeText LIKE N'%'+@where+'%')
+GO
+
+COMMIT
+GO

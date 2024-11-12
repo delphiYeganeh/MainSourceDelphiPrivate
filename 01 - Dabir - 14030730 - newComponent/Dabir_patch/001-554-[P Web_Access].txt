@@ -1,0 +1,68 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Web_Access]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Web_Access]
+END
+GO
+
+CREATE  procedure [dbo].[Web_Access](@userid int,
+                                   @Result varchar(4000) output)
+as
+set @result=''
+SELECT    @result=@result+case when hasaccess=1 then
+case ActionID
+when 'ReceiveInsert' then 'Incomming'
+when 'SendInsert'  then 'Outgoing'
+when 'ADarftIns' then 'Draft'
+when 'AinnerLetter' then 'Inner'
+when 'adeleteScan' then 'Drop_Attach'
+WHEN 'AArchiveFolders' THEN 'Archive'
+WHEN 'ActPhone' THEN 'PhoneBook'
+WHEN 'acShowWorkSheetBase' THEN 'WorkSheet'
+WHEN 'acWorkSheetAllRep' THEN 'WorkSheetReport'
+WHEN 'aSENDMessage' THEN 'OfflineMessage'
+WHEN 'AddNews' THEN 'News'
+WHEN 'ALetterReport' THEN 'LetterReport'
+WHEN 'AFulltext' THEN 'FullTextReport'
+WHEN 'ARecommiteReport' THEN 'RecommiteReport'
+WHEN 'acRepMohlateEghdam' THEN 'MohlateEghdamReport'
+WHEN 'AARCHIVE' THEN 'ArchiveLetter'
+WHEN 'AnewRecommite' THEN 'NewRecommite'
+WHEN 'AaddLetterData' THEN 'NewLetterData'
+WHEN 'AActivate' THEN 'AllowActivate'
+WHEN 'AAnswer' THEN 'AllowAnswer'
+WHEN 'AAnswerletter' THEN 'AllowAnswerLetter'
+WHEN 'ADraftToLetter' THEN 'AllowSendDraft'
+WHEN 'adeleteWord' THEN 'AllowDeleteWord'
+WHEN 'AExpotToWord' THEN 'AllowAtachWord'
+WHEN 'Arecommite' THEN 'RecommiteHistory'
+WHEN 'ADoCommite' THEN 'ADoCommite'
+WHEN 'ACustomizeGrid' THEN 'ACustomizeGrid'
+WHEN 'AAddAlternativeUser' THEN 'AAddAlternativeUser'
+WHEN 'DataSetDelete1' THEN 'Recommite_Drop'
+WHEN 'SendToSecretariat' THEN 'AllowSendDraft'
+end+';'
+else '' end
+FROM         ActionsAccess INNER JOIN
+           Users 
+		   ON ActionsAccess.AccessID = Users.AccessID
+           WHERE     (Users.Id = @userid) 
+AND ActionsAccess.ActionID IN 
+           ('ReceiveInsert','SendInsert' , 'AinnerLetter','adeleteScan','ADarftIns', 'AArchiveFolders', 
+            'ActPhone', 'acShowWorkSheetBase', 'acWorkSheetAllRep', 'aSENDMessage', 'AddNews', 'ALetterReport',
+            'AFulltext', 'ARecommiteReport', 'acRepMohlateEghdam','AARCHIVE','AnewRecommite','AaddLetterData',
+            'AActivate','AAnswer','AAnswerletter','ADraftToLetter','adeleteWord','AExpotToWord','Arecommite','ADoCommite',
+            'ACustomizeGrid','AAddAlternativeUser','DataSetDelete1','SendToSecretariat')
+
+--select * from ActionsAccess
+-- where ActionID='AAnswer'
+-- and AccessID=1
+-- select 8 from 
+GO
+
+COMMIT
+GO

@@ -1,0 +1,22 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[usp_recommiteUnread]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[usp_recommiteUnread]
+END
+GO
+
+CREATE  procedure [dbo].[usp_recommiteUnread]
+@userId int=1
+As
+	select count(*) from ReCommites t1
+	inner join Users u
+	on u.id=@userId and ( u.FromOrgID =t1.OrgID or u.SecondOrgID=t1.OrgID or u.TreeOrgID=t1.OrgID or u.FourOrgID=t1.OrgID or u.FiveOrgID=t1.OrgID)
+where viewdate is null
+GO
+
+COMMIT
+GO

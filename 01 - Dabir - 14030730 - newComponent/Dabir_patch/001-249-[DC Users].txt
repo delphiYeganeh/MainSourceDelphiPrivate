@@ -1,0 +1,13 @@
+BEGIN TRANSACTION
+GO
+
+IF EXISTS (SELECT 1 
+			FROM sys.foreign_keys 
+			WHERE object_id = OBJECT_ID(N'FK_Users_FromOrganizations')
+				AND parent_object_id = OBJECT_ID(N'dbo.Users'))
+
+	ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_Users_FromOrganizations]
+GO
+
+COMMIT
+GO

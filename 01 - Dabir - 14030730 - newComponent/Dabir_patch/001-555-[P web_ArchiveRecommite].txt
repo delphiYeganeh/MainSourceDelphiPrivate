@@ -1,0 +1,45 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[web_ArchiveRecommite]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[web_ArchiveRecommite]
+END
+GO
+
+CREATE  procedure [dbo].[web_ArchiveRecommite]
+	(@RecommiteID 	[int],
+	 @ArchiveFolderID 	[int],
+	 @ArchiveDate 	[char](10),
+	 @Page 	[int],
+	 @ArchiveNotes 	[nvarchar](50),
+	 @StaffMemo 	[nvarchar](255),
+	 @LetterArchiveID 	[int] output)
+
+AS
+
+INSERT INTO [dbo].[LetterArchiveFolder]
+	 (
+	 [ArchiveFolderID],
+	 [LetterID],
+	 [ArchiveDate],
+	 [Page],
+	 [ArchiveNotes])
+
+VALUES
+	(
+	 @ArchiveFolderID,
+	 @RecommiteId,
+	 @ArchiveDate,
+	 @Page,
+	 @ArchiveNotes)
+
+Update Recommites Set Proceeded=1, staffMemo=@StaffMemo where LetterID=@RecommiteId
+
+set @LetterArchiveID=SCOPE_IDENTITY()
+GO
+
+COMMIT
+GO

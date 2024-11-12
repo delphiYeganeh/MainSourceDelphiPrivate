@@ -1,0 +1,19 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_DeleteWorkSheet]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_DeleteWorkSheet]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_DeleteWorkSheet](@Id INT)
+AS
+
+DELETE FROM WorkSheet_Base WHERE ID=@Id
+GO
+
+COMMIT
+GO

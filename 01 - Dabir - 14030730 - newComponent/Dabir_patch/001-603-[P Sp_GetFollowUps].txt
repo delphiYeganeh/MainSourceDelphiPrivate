@@ -1,0 +1,40 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetFollowUps]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetFollowUps]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetFollowUps](@letterId INT,@All BIT)
+AS
+
+IF(@All=1)
+BEGIN
+	SELECT FollowUPID, fu.FollowUPTypeID,fut.FollowUpTypeTitle AS FollowUPType,
+      (CASE WHEN DoneStatusID=0 THEN 'درحال بررسي' WHEN DoneStatusID=1 THEN 'انجام شده' ELSE 'انجام نشده' END) DoneStatus, 
+       Comment, ToDoDate, ToDoTime, DoneComment
+ 
+    FROM FollowUp fu INNER JOIN FollowUpType fut
+    ON fu.FollowUPTypeID=fut.FollowUpTypeID
+    WHERE fu.Letterid=@letterId
+    ORDER BY FollowUPID DESC
+END
+ELSE
+	BEGIN
+		SELECT FollowUPID, fu.FollowUPTypeID,fut.FollowUpTypeTitle AS FollowUPType,
+      (CASE WHEN DoneStatusID=0 THEN 'درحال بررسي'  END) DoneStatus, 
+       Comment, ToDoDate, ToDoTime, DoneComment
+ 
+       FROM FollowUp fu INNER JOIN FollowUpType fut
+       ON fu.FollowUPTypeID=fut.FollowUpTypeID
+       WHERE fu.Letterid=@letterId AND fu.DoneStatusID=0
+       ORDER BY FollowUPID DESC
+	END
+GO
+
+COMMIT
+GO

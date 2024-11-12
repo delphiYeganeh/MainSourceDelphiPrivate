@@ -1,0 +1,107 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[sp_ArchivePlaces]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[sp_ArchivePlaces]
+END
+GO
+
+CREATE  procedure [dbo].[sp_ArchivePlaces]  
+@LetterID int,@ArchiveCenterID  int, @result  nvarchar(1000) output
+AS
+
+DECLARE @IID INT
+DECLARE @result1   nvarchar(1000)
+DECLARE @result2   nvarchar(1000)
+DECLARE @resultT   nvarchar(1000)
+DECLARE @DAT       nvarchar(1000)
+
+set @DAT = ''
+
+DECLARE @INDX INT
+
+DECLARE @Title NVARCHAR(1000)
+
+DECLARE @LetterArchiveID INT
+SET @IID       = 0
+set @result    = ''
+set @result1   = ''
+set @result2   = ''
+set @resultT   = ''
+
+SET @INDX = 1
+
+DECLARE 
+@CNT AS int
+
+DECLARE EXM_CURSOR CURSOR FOR
+SELECT ParentFolderID,Title,LetterArchiveID FROM LetterArchiveFolder 
+INNER JOIN ArchiveFolder ON LetterArchiveFolder.ArchiveFolderID = ArchiveFolder.FolderID
+where  ArchiveFolder.ArchiveCenterID=@ArchiveCenterID AND
+LetterID = @LetterID
+OPEN EXM_CURSOR
+FETCH NEXT FROM EXM_CURSOR
+INTO @CNT,@Title,@LetterArchiveID
+
+WHILE (@@FETCH_STATUS = 0)
+BEGIN
+
+IF @INDX > 1
+BEGIN
+SET @result = @result + ' ### '
+END
+
+SET @result1 = @Title
+
+IF EXISTS (SELECT  ParentFolderID
+FROM LetterArchiveFolder 
+INNER JOIN ArchiveFolder ON LetterArchiveFolder.ArchiveFolderID = ArchiveFolder.FolderID
+WHERE LetterID = @LetterID AND LetterArchiveID = @LetterArchiveID)
+BEGIN
+SET @IID = (SELECT  ISNULL(ParentFolderID,0)
+FROM LetterArchiveFolder 
+INNER JOIN ArchiveFolder ON LetterArchiveFolder.ArchiveFolderID = ArchiveFolder.FolderID
+WHERE LetterID = @LetterID AND LetterArchiveID = @LetterArchiveID)
+END
+
+WHILE (@IID > 0)
+BEGIN
+
+IF EXISTS (SELECT ISNULL(Title,'-') FROM ArchiveFolder WHERE FolderID = @IID)
+BEGIN
+SET @resultT = ( SELECT Title FROM ArchiveFolder WHERE FolderID = @IID )
+SET @resultT = REPLACE(@resultT, NCHAR(1740), NCHAR(1610))
+SET @resultT = REPLACE(@resultT, NCHAR(1705), NCHAR(1603))
+SET @result2 = @resultT + ' --> ' + @result2
+END
+
+IF EXISTS ( SELECT ParentFolderID FROM ArchiveFolder WHERE FolderID = @IID)
+BEGIN
+SET @IID = ( SELECT ParentFolderID FROM ArchiveFolder WHERE FolderID = @IID)
+END
+
+END
+
+
+SET @DAT = @DAT + @result2 + @result1
+
+SET @result = @result + ' زونکن ' + CONVERT(VARCHAR(50) , @INDX) + ' : ' + @DAT 
+SET @INDX = @INDX + 1
+
+SET @DAT = ''
+SET @result2 = ''
+SET @result1 = ''
+    
+FETCH NEXT FROM EXM_CURSOR
+INTO @CNT,@Title,@LetterArchiveID
+END
+
+CLOSE EXM_CURSOR
+DEALLOCATE EXM_CURSOR
+GO
+
+COMMIT
+GO

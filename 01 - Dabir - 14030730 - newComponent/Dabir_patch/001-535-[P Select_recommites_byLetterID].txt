@@ -1,0 +1,60 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_recommites_byLetterID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_recommites_byLetterID]
+END
+GO
+
+CREATE  procedure [dbo].[Select_recommites_byLetterID]
+	(
+	   @letterId int
+	)
+AS
+begin
+SELECT
+		l.IndicatorID AS [اندیکاتور],
+		l.Memo[مضمون نامه],
+
+		FromOrganizations.Title AS [ارجاع شونده],
+		FromOrganizations_1.Title AS [ارجاع دهنده], 
+		ReCommites.Paraph AS [مضمون ارجاع], 
+		ReCommites.RecommiteDate AS [تاريخ ارجاع], 
+		ReCommites.viewdate AS [تاريخ مشاهده], 
+		ReCommites.DeadLineDate AS [مهلت اقدام],
+		RecommiteTypes.Title AS [نوع ارجاع],
+		FromOrganizations_1.ResponsibleStaffer AS[نام ارجاع دهنده], 
+		FromOrganizations.ResponsibleStaffer AS [نام ارجاع گيرنده],
+		Users.Title AS [کاربر ثبت کننده], 
+		ReCommites.IsCopy AS [کپي؟],
+		ReCommites.Proceeded AS [اقدام شده؟], 
+		ReCommites.ProceedDate AS [تاريخ اقدام يا ارجاع],
+		ReCommites.staffmemo AS [ملاحظات بايگاني], 
+		ReCommites.OrgStaff AS [نام ارجاع شونده ]
+		 
+FROM       ReCommites
+LEFT JOIN  RecommiteTypes
+   ON RecommiteTypes.ID = ReCommites.Type
+LEFT JOIN  Users 
+   ON ReCommites.UserID = Users.Id 
+LEFT JOIN  FromOrganizations 
+   ON ReCommites.OrgID = FromOrganizations.ID 
+LEFT JOIN  ReCommites ReCommites_1 
+   ON ReCommites.LetterID = ReCommites_1.LetterID
+   AND   ReCommites.ParentId = ReCommites_1.ID 
+   AND ReCommites.Type = ReCommites_1.Type  
+LEFT JOIN  FromOrganizations FromOrganizations_1
+   ON  FromOrganizations_1.ID = ReCommites_1.OrgID 
+INNER JOIN Letter AS l 
+	ON l.LetterID = ReCommites.LetterID
+WHERE    recommites.type=3
+  AND ReCommites.LetterID = @letterId
+      	
+END
+GO
+
+COMMIT
+GO

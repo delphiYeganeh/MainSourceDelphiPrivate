@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'FileName'
+          AND Object_ID = Object_ID(N'dbo.RecommitePayvast'))
+BEGIN
+	ALTER TABLE [dbo].[RecommitePayvast] 
+	ADD	[FileName] NVarchar(100)
+END
+GO
+
+COMMIT
+GO

@@ -1,0 +1,123 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Transfer_Insert_SentLetter]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Transfer_Insert_SentLetter]
+END
+GO
+
+CREATE  procedure [dbo].[Transfer_Insert_SentLetter]
+	(@IndicatorID 	[int],
+	 @MYear			[int],
+	 @SecretariatID 	[tinyint],
+	 @Letter_Type 	[tinyint],
+	 @letterformat 	[tinyint],
+	 @IncommingNO 	[nvarchar](50),
+	 @Incommingdate 	[nvarchar](10),
+	 @CenterNo 	[nvarchar](50),
+	 @CenterDate 	[char](10),
+	 @FromOrgID 	[int],
+	 @ToOrgID 	[int],
+	 @Signerid 	[nvarchar](50),
+	 @ClassificationID 	[tinyint],
+	 @UrgencyID 	[smallint],
+	 @Memo 	[nvarchar](500),
+	 @AttachTitle 	[nvarchar](50),
+	 @NumberOfAttachPages 	[smallint],
+	 @NumberOfPage 	[tinyint],
+	 @ReceiveTypeID 	[tinyint],
+	 @UserID 	[int],
+	 @RetroactionNo 	[nvarchar](50),
+	 @UserMemo 	[nvarchar](255),
+	 @RegistrationDate 	[char](10),
+	 @RegistrationTime 	[varchar](5),
+	 @FollowLetterNo 	[nvarchar](50),
+	 @ToStaffer 	[nvarchar](50),
+	 @SentLetterID 	[int],
+	 @TemplateID 	[int],
+	 @HeaderID 	[int],
+	 @LetterRecommites 	[nvarchar](500),
+	 @FromStaffer 	[nvarchar](50),
+	 @Finalized 	[bit],
+	 @SendStatusID 	[tinyint],
+@LetterID int output)
+
+AS INSERT INTO  [Letter] 
+	 ( [IndicatorID],	 [MYear],	 [SecretariatID],	 [Letter_Type],
+	 [letterformat],	 [IncommingNO],	 [Incommingdate],	 [CenterNo],
+	 [CenterDate],
+	 [FromOrgID],
+	 [ToOrgID],
+	 [Signerid],
+	 [ClassificationID],
+	 [UrgencyID],
+	 [Memo],
+	 [AttachTitle],
+	 [NumberOfAttachPages],
+	 [NumberOfPage],
+	 [ReceiveTypeID],
+	 [UserID],
+	 [RetroactionNo],
+	 [UserMemo],
+	 [RegistrationDate],
+	 [RegistrationTime],
+	 [FollowLetterNo],
+	 [ToStaffer],
+	 [SentLetterID],
+	 [TemplateID],
+	 [HeaderID],
+	 [LetterRecommites],
+	 [FromStaffer],
+	 [Finalized],
+	 [SendStatusID]) 
+
+VALUES 
+	( @IndicatorID,
+	 @MYear,
+	 @SecretariatID,
+	 @Letter_Type,
+	 @letterformat,
+	 @IncommingNO,
+	 @Incommingdate,
+	 @CenterNo,
+	 @CenterDate,
+	 @FromOrgID,
+	 @ToOrgID,
+	 @Signerid,
+	 @ClassificationID,
+	 @UrgencyID,
+	 @Memo,
+	 @AttachTitle,
+	 @NumberOfAttachPages,
+	 @NumberOfPage,
+	 @ReceiveTypeID,
+	 @UserID,
+	 @RetroactionNo,
+	 @UserMemo,
+	 @RegistrationDate,
+	 @RegistrationTime,
+	 @FollowLetterNo,
+	 @ToStaffer,
+	 @SentLetterID,
+	 @TemplateID,
+	 @HeaderID,
+	 @LetterRecommites,
+	 @FromStaffer,
+	 @Finalized,
+	 @SendStatusID)
+select @letterID=@@identity
+
+
+
+INSERT INTO  ReCommites( LetterID, [ID], Type, ParentId, OrgID, Paraph, RecommiteDate, UserID, IsCopy, Proceeded, ProceedDate, staffmemo, 
+viewdate, OrgStaff, DeadLineDate, LastUpdate, UniqueID,
+ActionTypeID, DeadLineToint, IsAnswer, ISFollowup)
+VALUES(@letterID,1, 3, 0, 1, 'رسيده از رپليکيت',@RegistrationDate , @UserID,0, 0, NULL,'', NULL,
+ '',NULL, GETDATE(), 0, 1, 0, 0, 0)
+GO
+
+COMMIT
+GO

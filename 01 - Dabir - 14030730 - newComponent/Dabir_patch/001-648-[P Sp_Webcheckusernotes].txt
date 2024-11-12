@@ -1,0 +1,50 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_Webcheckusernotes]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_Webcheckusernotes]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_Webcheckusernotes]
+@USERID INT ,@DateID int ,@where nvarchar(1000)
+AS
+
+	if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[TempSelect4]') )
+	drop table [dbo].[TempSelect4]
+
+	create TABLE [dbo].[TempSelect4] (
+		UserNoteID INT,
+		UserID INT,
+		Note NTEXT,
+		CreateDate CHAR(10),
+		Abstract NTEXT
+		)
+
+	declare @sql nvarchar (4000)
+
+	set @sql=' SELECT top 10000 *,substring(note,1,100)+'' ...'' as Abstract  from UserNote where userid='+cast(@USERID as varchar(5))
+	set @where =ltrim(rtrim(isnull(@where ,'')))
+	if @where <>'' 
+	set @sql=@sql+' and '+@where 
+
+	if @DateID<>0
+	begin
+	 declare @today char(10),@dw tinyint,@bdate char(10),@edate char(10)
+	 set @today=dbo.shamsi(getdate())
+	 set @dw=datepart(dw,getdate())
+	 select @bdate=begindate,@edate=Enddate from HistoryDateList(@today ,@dw) where id=@DateID
+	 set @sql=@sql+' AND CreateDate between '''+@bdate+''' and '''+@edate+''''
+	end
+
+	INSERT INTO [dbo].[TempSelect4]
+	exec sp_executesql @sql
+
+	SELECT * FROM [dbo].[TempSelect4]
+GO
+
+COMMIT
+GO

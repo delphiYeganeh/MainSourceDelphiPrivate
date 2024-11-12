@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_Fields_by_TableID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_Fields_by_TableID]
+END
+GO
+
+CREATE  procedure [dbo].[Select_Fields_by_TableID]
+@LetterID int
+as
+
+	SELECT     *
+		FROM      Fields
+		WHERE TableID in ( SELECT UserTableID2  FROM   Letter WHERE LetterID =1220)
+			OR TableID in ( SELECT UserTableID   FROM   Letter WHERE LetterID =1220)
+GO
+
+COMMIT
+GO

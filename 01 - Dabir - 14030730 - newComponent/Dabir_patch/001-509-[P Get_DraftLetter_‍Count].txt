@@ -1,0 +1,31 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_DraftLetter_‍Count]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_DraftLetter_‍Count]
+END
+GO
+
+CREATE  procedure [dbo].[Get_DraftLetter_‍Count] @Myear int,@SecretariatID int,@UserID int ,@Count int output    
+AS  
+
+	Declare @HasSecureLetterAccess Tinyint
+	Select @HasSecureLetterAccess = HasSecureLetterAccess From Users Where ID = @UserID   --1=كاربر دبيرخانه
+
+	Select @Count = Count(*)  
+		from Letter  
+		where Myear=@Myear 
+			And letterformat=2 /*پيشنويس*/
+			And SecretariatID=@SecretariatID
+			And Finalized=1
+	--Ranjbar اگر كاربر دبيرخانه بود همه پيش نويس ها را مشاهده كند در غير اينصورت فقط پيش نويس هاي ثبت شده توسط كاربر  
+			And (@HasSecureLetterAccess = 1 or UserID=@UserID)
+
+	Set @Count=IsNull(@Count,0)
+GO
+
+COMMIT
+GO

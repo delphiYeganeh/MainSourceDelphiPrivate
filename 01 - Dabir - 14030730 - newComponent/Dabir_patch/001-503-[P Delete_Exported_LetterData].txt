@@ -1,0 +1,21 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Delete_Exported_LetterData]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Delete_Exported_LetterData]
+END
+GO
+
+CREATE  procedure [dbo].[Delete_Exported_LetterData](@SecretariatID int, @myear int)
+as
+	Delete     LetterData
+		FROM         LetterData 
+			INNER JOIN       Letter ON LetterData.LetterID = Letter.LetterID
+		WHERE     (Letter.SecretariatID = @SecretariatID) AND (Letter.MYear = @myear)
+GO
+
+COMMIT
+GO

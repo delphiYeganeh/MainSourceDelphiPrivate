@@ -1,0 +1,54 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[get_ArchiveFolder_byUserID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[get_ArchiveFolder_byUserID]
+END
+GO
+
+CREATE  procedure [dbo].[get_ArchiveFolder_byUserID]
+@userID int,@SecID int =0,@ArchiveCenterID int = -1, @DabirOrKartable int=0
+AS
+/*
+* @DabirOrKartable=0 دبيرخانه
+* @DabirOrKartable=1 کارتايل
+* ArchiveCenterID=-1 براي کارتابل است چون براي کارتابل مرکز بايگاني معني ندارد
+* ArchiveCenterID<>-1 براي دبيرخانه است و در حقيقت مخزن يا ظرفي است که زونکن ها داخل آن قرار ميگيرند
+* */
+ 
+	declare  @RSL table
+	(FolderID int,ParentFolderID int,Title nvarchar(100),UserID int,Notes nvarchar(500),Place nvarchar(100),ArchiveCenterID int)
+
+	IF (@DabirOrKartable=1)
+	BEGIN
+		-- کارتابل
+			INSERT INTO @RSL
+			SELECT      *
+				FROM         ArchiveFolder
+				WHERE     (UserID = @userID) AND (ArchiveCenterID=-1)			
+
+			update @RSL 
+				set Title='بايگاني'
+				where Title='بايگاني'		
+	END
+	ELSE
+	BEGIN
+	   -- دبيرخانه	
+			INSERT INTO @RSL
+			SELECT AF.*	
+				FROM ArchiveFolder AF
+					Inner Join UserAccArchive UAA On UAA.ArchiveFolderID = AF.FolderID
+				Where(UAA.SecID = @SecID)
+					And(UAA.UserID = @userID)
+					And(AF.ArchiveCenterID = @ArchiveCenterID)
+					And(UAA.IsAccess = 1)   
+	END	
+
+	SELECT * FROM @RSL
+GO
+
+COMMIT
+GO

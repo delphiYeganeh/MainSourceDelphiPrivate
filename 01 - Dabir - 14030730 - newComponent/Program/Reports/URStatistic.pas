@@ -1,0 +1,298 @@
+unit URStatistic;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, BaseUnit, ExtCtrls, AppEvnts, Menus, ExtActns, ActnList, DB,
+  DBCtrls, StdCtrls, AdvGlowButton, Series, TeEngine, TeeProcs, Chart,
+  DbChart, Grids, DBGrids, YDbgrid, ExtDlgs, WordXP, OleServer, ADODB;
+
+type
+  TFRStatistic = class(TMBaseForm)
+    pnlMain: TPanel;
+    PtoolBar: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    List6: TDBLookupComboBox;
+    List5: TDBLookupComboBox;
+    pnlList: TPanel;
+    pnlTopBtn: TPanel;
+    BitBtn1: TAdvGlowButton;
+    BitBtn2: TAdvGlowButton;
+    BitBtn3: TAdvGlowButton;
+    BitBtn4: TAdvGlowButton;
+    BitBtn5: TAdvGlowButton;
+    BitBtn6: TAdvGlowButton;
+    PSearch: TPanel;
+    lettersDbGrid: TYDBGrid;
+    BarChart: TDBChart;
+    Series1: TBarSeries;
+    Piechart: TDBChart;
+    BarSeries1: TPieSeries;
+    fastlineChart: TDBChart;
+    PieSeries1: TLineSeries;
+    DGetList5: TDataSource;
+    sp_Statistic: TADOStoredProc;
+    sp_Statisticid: TIntegerField;
+    sp_Statistictitle: TWideStringField;
+    sp_Statisticnumber: TIntegerField;
+    GetList5: TADOStoredProc;
+    GetList6: TADOStoredProc;
+    DgetList6: TDataSource;
+    WordApplication: TWordApplication;
+    WordDocument: TWordDocument;
+    SavePictureDialog: TSavePictureDialog;
+    LetterPopup: TPopupMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N32: TMenuItem;
+    N5: TMenuItem;
+    N8: TMenuItem;
+    N11: TMenuItem;
+    N12: TMenuItem;
+    N14: TMenuItem;
+    N7: TMenuItem;
+    N13: TMenuItem;
+    N9: TMenuItem;
+    N10: TMenuItem;
+    AOtherSenders1: TMenuItem;
+    N6: TMenuItem;
+    N4: TMenuItem;
+    ExactCopy1: TMenuItem;
+    Dsp_Statistic: TDataSource;
+    procedure BitBtn5Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure BitBtn6Click(Sender: TObject);
+    procedure List6Click(Sender: TObject);
+    procedure List5Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure N9Click(Sender: TObject);
+    procedure N13Click(Sender: TObject);
+    procedure WordApplicationDocumentBeforeClose(ASender: TObject;
+      const Doc: _Document; var Cancel: WordBool);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure RefreshQuery;    
+  private
+
+  public
+    { Public declarations }
+  end;
+
+var
+  FRStatistic: TFRStatistic;
+
+implementation
+
+uses UMain, Dmu;
+
+{$R *.dfm}
+
+procedure TFRStatistic.BitBtn5Click(Sender: TObject);
+begin
+  inherited;
+  MainForm.StatisticMode:=false;
+  close;
+end;
+
+procedure TFRStatistic.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  if List6.KeyValue=0 then
+    lettersDbGrid.ExportToWord
+  else
+  begin
+   if SavePictureDialog.Execute then
+   case List6.KeyValue of
+    1: BarChart.SaveToBitmapFile(SavePictureDialog.FileName+'.bmp');
+    2: Piechart.SaveToBitmapFile(SavePictureDialog.FileName);
+    3: fastlineChart.SaveToBitmapFile(SavePictureDialog.FileName);
+   end;
+  end;
+end;
+
+procedure TFRStatistic.BitBtn2Click(Sender: TObject);
+ var Template,NewTemplate,ItemIndex:OleVariant;
+  procedure NewFile;
+  begin
+    Template := EmptyParam;
+    NewTemplate := false;
+    ItemIndex := 1;
+    Wordapplication.Visible := True;
+    WordApplication.Caption := 'Yeganeh';
+    Template := EmptyParam;
+    NewTemplate := False;
+    WordApplication.Documents.Add(Template, NewTemplate,Template,Template);
+    WordDocument.ConnectTo(WordApplication.Documents.Item(ItemIndex));
+
+  end;
+begin
+  inherited;
+  if List6.KeyValue=0 then
+  begin
+   lettersDbGrid.Print;
+   exit;
+  end
+  else
+  begin
+   if messageShow(44,True) then
+   case List6.KeyValue of
+    1: BarChart.CopyToClipboardBitmap;
+    2: Piechart.CopyToClipboardBitmap;
+    3: fastlineChart.CopyToClipboardBitmap;
+   end;
+  end;
+  NewFile;
+
+  with WordApplication do
+  begin
+    Documents.Item(ItemIndex).PageSetup.Orientation := wdOrientLandscape;
+    Selection.Paste;
+    ActiveDocument.PrintPreview;
+
+  end;
+
+end;
+
+procedure TFRStatistic.BitBtn4Click(Sender: TObject);
+  var s: string;
+  tempStr : string ;
+begin
+  inherited;
+  case List6.KeyValue of
+    1: tempStr := BarChart.Title.Text.Text ;
+    2: tempStr := Piechart.Title.Text.Text ;
+    3: tempStr := fastlineChart.Title.Text.Text ;
+    else tempStr :=  '⁄‰Ê«‰' ;
+  end;
+
+  if List6.KeyValue = 0 then
+    lettersDbGrid.CustomizePrint
+  else
+  begin
+    if dm.Y_InputQuery('⁄‰Ê«‰ ‰„Êœ«—',tempStr,s,'') then
+      case List6.KeyValue of
+        1: BarChart.Title.Text.Text := s;
+        2: Piechart.Title.Text.Text := s;
+        3: fastlineChart.Title.Text.Text := s;
+      end;
+  end;
+end;
+
+procedure TFRStatistic.BitBtn3Click(Sender: TObject);
+begin
+  inherited;
+  lettersDbGrid.ExportToWord;
+end;
+
+procedure TFRStatistic.BitBtn6Click(Sender: TObject);
+begin
+  inherited;
+  lettersDbGrid.ExportToExcel;
+end;
+
+procedure TFRStatistic.List6Click(Sender: TObject);
+begin
+  inherited;
+  lettersDbGrid.hide;
+  BarChart.Hide;
+  Piechart.Hide;
+  fastlineChart.Hide;
+  case List6.KeyValue of
+    0: lettersDbGrid.Show;
+    1: BarChart.Show;
+    2: Piechart.Show;
+    3: fastlineChart.Show;
+  end;
+end;
+
+procedure TFRStatistic.List5Click(Sender: TObject);
+begin
+  inherited;
+  RefreshQuery;
+  lettersDbGrid.PrintTitle := List5.Text;
+  BarChart.Title.Text.Text := List5.Text;
+  Piechart.Title.Text.Text := List5.Text;
+  fastlineChart.Title.Text.Text := List5.Text;
+end;
+
+procedure TFRStatistic.FormCreate(Sender: TObject);
+begin
+  inherited;
+  GetList6.Open;
+  GetList5.Open;
+  List5.KeyValue := 0;
+  List6.KeyValue := 0;
+end;
+
+procedure TFRStatistic.FormShow(Sender: TObject);
+begin
+  inherited;
+  lettersDbGrid.Columns[0].Title.Caption := '—œÌ›';
+  lettersDbGrid.PrintTitle := List5.Text;
+  BarChart.Title.Text.Text := List5.Text;
+  Piechart.Title.Text.Text := List5.Text;
+  fastlineChart.Title.Text.Text := List5.Text;
+  { TODO -oparsa : 14030717 }
+  List5Click (SELF);
+  { TODO -oparsa : 14030717 }
+end;
+
+procedure TFRStatistic.RefreshQuery;
+begin
+  with sp_Statistic,Parameters do
+  begin
+    close;
+    ParamByName('@where').Value:=MainForm.Where;
+    ParamByName('@GroupBy').Value:=List5.KeyValue+1;
+    ParamByName('@archiveFolderID').value:=MainForm.archiveFolderID;
+    ParamByName('@Letter_Type').value:=MainForm.Letter_Type;
+    ParamByName('@LetterFormat').value:=MainForm.LetterFormat;
+    if List5.KeyValue<>4 then
+     ParamByName('@myear').value:=dm.CurrentMyear
+    else
+     ParamByName('@myear').value:=0;
+
+    ParamByName('@Secretariatid').value:=dm.SecID;
+    open;
+  end;
+  lettersDbGrid.Columns[1].Title.Caption:=copy(List5.Text,14,length(List5.Text)-13);
+
+end;
+
+procedure TFRStatistic.N9Click(Sender: TObject);
+begin
+  inherited;
+  lettersDbGrid.Print;
+end;
+
+procedure TFRStatistic.N13Click(Sender: TObject);
+begin
+  inherited;
+  lettersDbGrid.CustomizePrint;
+end;
+
+procedure TFRStatistic.WordApplicationDocumentBeforeClose(ASender: TObject;
+  const Doc: _Document; var Cancel: WordBool);
+begin
+  inherited;
+ WordApplication.Disconnect;
+ { TODO -oparsa : 14030505-bug349 }
+ WordDocument.Disconnect;
+ { TODO -oparsa : 14030505-bug349 }
+end;
+
+procedure TFRStatistic.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+ // MainForm.List.Show;
+  MainForm.PSearch.Show;
+end;
+
+end.

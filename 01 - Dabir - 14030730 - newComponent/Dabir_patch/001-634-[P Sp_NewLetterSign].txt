@@ -1,0 +1,36 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_NewLetterSign]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_NewLetterSign]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_NewLetterSign](@id [int]OUTPUT,@letterId INT,@userId INT,@paraph NVARCHAR(255))
+AS
+	DECLARE @Time VARCHAR(5)
+
+	SELECT @Time = CASE when DATEPART(HH, GETDATE())<10 THEN '0'+CAST(DATEPART(HH, GETDATE()) AS VARCHAR(2)) ELSE cast(DATEPART(HH, GETDATE()) AS VARCHAR(2)) END + ':' +
+			CASE when DATEPART(mi, GETDATE())<10 THEN '0'+CAST(DATEPART(mi, GETDATE()) AS VARCHAR(2)) ELSE cast(DATEPART(mi, GETDATE()) AS varchar(2)) END
+			
+	INSERT INTO LetterSign
+	(
+		LetterID,
+		UserID,
+		Date,
+		[Time],	
+		paraph
+	)
+	VALUES
+	(
+		@letterId,@userId,dbo.Shamsi(GETDATE()),@Time,@paraph
+		
+	)
+	SELECT @id = IDENT_CURRENT ('dbo.LetterSign')
+GO
+
+COMMIT
+GO

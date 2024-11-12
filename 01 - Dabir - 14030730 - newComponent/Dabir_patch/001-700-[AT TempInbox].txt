@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'row_num'
+          AND Object_ID = Object_ID(N'dbo.TempInbox'))
+BEGIN
+	ALTER TABLE [dbo].[TempInbox] 
+	ADD	[row_num] [int] NULL
+END
+GO
+
+COMMIT
+GO

@@ -1,0 +1,61 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetLetter_ByIndNum_LetNum]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetLetter_ByIndNum_LetNum]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetLetter_ByIndNum_LetNum](@srchno INT,@letter_type INT)
+AS
+
+ IF(@letter_type=1)
+
+     SELECT      Letter.LetterID, IndicatorID, MYear, SecretariatID, Letter_Type, Letter.letterformat,
+            lf.Title AS formattitle,
+            IncommingNO, Incommingdate, CenterNo, CenterDate, FromOrgID,
+            (SELECT Title FROM FromOrganizations fo WHERE fo.ID=FromOrgID) AS FromorgTitle,
+            ToOrgID,(SELECT Title FROM FromOrganizations fo WHERE fo.ID=ToOrgID) AS ToorgTitle, Signerid,
+            (SELECT Title FROM FromOrganizations fo WHERE fo.ID=Signerid) AS SignerTitle,
+            ClassificationID,c.Title AS ClassificationTitle,
+            UrgencyID,u.Title AS UrgencyTitle, Memo, AttachTitle, NumberOfAttachPages, NumberOfPage,
+            ReceiveTypeID,rt.Title AS ReceiveTitle, UserID,
+            RetroactionNo, UserMemo, RegistrationDate, 
+            RegistrationTime, FollowLetterNo, ToStaffer, SentLetterID, TemplateID, HeaderID, LetterRecommites, PreCode, fromstaffer, Finalized, SendStatusID, LastUpdate, 
+            UserTableID, UniqueID, Archived, SubjectDescription, SubjectID, LatestActionTypeID, LatestActionReason, DeadLineDate, ActionTypeID, UserTableID2, 
+            EmailNuFromDate, OldSecretariatID, CustomerID, InnerNO, ECEAnswer, RetroactionYear, FollowLetterYear,Html
+     FROM        Letter INNER JOIN LetterFormats lf
+     ON Letter.letterformat=lf.Code 
+     INNER JOIN Classifications c
+     ON Letter.ClassificationID=c.ID INNER JOIN Urgenceis u
+     ON Letter.UrgencyID=u.ID INNER JOIN ReceiveTypes rt
+     ON Letter.ReceiveTypeID=rt.ID left JOIN  lettertext ON lettertext.LetterID = Letter.LetterID
+     WHERE Letter.Letter_Type=@letter_type AND Letter.IncommingNO=@srchno
+ ELSE
+ 	     SELECT      Letter.LetterID, IndicatorID, MYear, SecretariatID, Letter_Type, Letter.letterformat,
+            lf.Title AS formattitle,
+            IncommingNO, Incommingdate, CenterNo, CenterDate, FromOrgID,
+            (SELECT Title FROM FromOrganizations fo WHERE fo.ID=FromOrgID) AS FromorgTitle,
+            ToOrgID,(SELECT Title FROM FromOrganizations fo WHERE fo.ID=ToOrgID) AS ToorgTitle, Signerid,
+            (SELECT Title FROM FromOrganizations fo WHERE fo.ID=Signerid) AS SignerTitle,
+            ClassificationID,c.Title AS ClassificationTitle,
+            UrgencyID,u.Title AS UrgencyTitle, Memo, AttachTitle, NumberOfAttachPages, NumberOfPage,
+            ReceiveTypeID,rt.Title AS ReceiveTitle, UserID,
+            RetroactionNo, UserMemo, RegistrationDate, 
+            RegistrationTime, FollowLetterNo, ToStaffer, SentLetterID, TemplateID, HeaderID, LetterRecommites, PreCode, fromstaffer, Finalized, SendStatusID, LastUpdate, 
+            UserTableID, UniqueID, Archived, SubjectDescription, SubjectID, LatestActionTypeID, LatestActionReason, DeadLineDate, ActionTypeID, UserTableID2, 
+            EmailNuFromDate, OldSecretariatID, CustomerID, InnerNO, ECEAnswer, RetroactionYear, FollowLetterYear,Html
+     FROM        Letter INNER JOIN LetterFormats lf
+     ON Letter.letterformat=lf.Code 
+     INNER JOIN Classifications c
+     ON Letter.ClassificationID=c.ID INNER JOIN Urgenceis u
+     ON Letter.UrgencyID=u.ID INNER JOIN ReceiveTypes rt
+     ON Letter.ReceiveTypeID=rt.ID left JOIN  lettertext ON lettertext.LetterID = Letter.LetterID
+     WHERE Letter.Letter_Type=@letter_type AND Letter.IndicatorID=@srchno
+GO
+
+COMMIT
+GO

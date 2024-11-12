@@ -1,0 +1,22 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_UpdateUserNote]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_UpdateUserNote]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_UpdateUserNote](@UserNoteID INT,@Note NTEXT,@Date CHAR(10))
+AS
+	UPDATE UserNote
+	SET
+		Note = @Note,
+		CreateDate = @Date
+	WHERE UserNoteID=@UserNoteID
+GO
+
+COMMIT
+GO

@@ -1,0 +1,36 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[has_WordPage]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[has_WordPage]
+END
+GO
+
+CREATE FUNCTION [dbo].[has_WordPage]
+(
+	@LetterID int
+)
+
+RETURNS bit AS  
+BEGIN 
+	declare @res bit
+	
+	If Exists(Select PageNumber	
+					From LetterData
+					Where LetterID = @LetterID 
+						And ([extention] = 3 Or [extention] = dbo.GetExcelId()))
+		Set @res=1
+	Else
+		Set @res=0
+
+Return(@res)
+
+END
+
+GO
+
+COMMIT
+GO

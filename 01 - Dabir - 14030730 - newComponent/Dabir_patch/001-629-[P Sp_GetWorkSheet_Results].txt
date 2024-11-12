@@ -1,0 +1,21 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetWorkSheet_Results]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetWorkSheet_Results]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetWorkSheet_Results](@WorkSheetId INT)
+AS
+
+	SELECT wsr.ID,wsr.[Description] AS Mean
+		FROM WorkSheet_Results wsr 
+		WHERE wsr.WorkSheetBaseID=@WorkSheetId
+GO
+
+COMMIT
+GO

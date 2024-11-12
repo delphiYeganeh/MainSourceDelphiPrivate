@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_DatabaseName_By_Year]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_DatabaseName_By_Year]
+END
+GO
+
+CREATE  procedure [dbo].[Get_DatabaseName_By_Year]
+@myear int,@dbName varchar(50) output
+as
+	set @dbName='Nothing'
+	if @myear>=86   
+		set @dbName='ydabir' 
+	else  
+		set @dbName='ahwaz'
+GO
+
+COMMIT
+GO

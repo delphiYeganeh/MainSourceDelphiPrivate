@@ -1,0 +1,27 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_FromOrganizationsTitles]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_FromOrganizationsTitles]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_FromOrganizationsTitles](@isInnerOrg TINYINT,@title NVARCHAR(100))
+AS
+
+	IF(@isInnerOrg=0)
+	  SELECT * FROM FromOrganizations fo
+	  WHERE fo.IsInnerOrg=0 AND fo.ResponsibleStaffer LIKE '%'+@title+'%'
+	ELSE IF(@isInnerOrg=1)
+	  SELECT * FROM FromOrganizations fo
+	  WHERE fo.IsInnerOrg=1 AND fo.ResponsibleStaffer LIKE '%'+@title+'%'
+	ELSE
+	  SELECT * FROM FromOrganizations fo
+	  WHERE  fo.ResponsibleStaffer LIKE '%'+@title+'%'
+GO
+
+COMMIT
+GO

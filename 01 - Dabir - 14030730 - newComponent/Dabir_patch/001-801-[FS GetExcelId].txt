@@ -1,0 +1,26 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[GetExcelId]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[GetExcelId]
+END
+GO
+
+CREATE FUNCTION [dbo].[GetExcelId]()
+RETURNS Int AS  
+BEGIN 
+	Declare @res int
+	Set @res = 0
+	If Exists(Select  Top 1 ExtentionID From Extention Where Lower(Extention) = 'xls')
+		Set @res = (Select Top 1 ExtentionID From Extention Where Lower(Extention) = 'xls')
+
+	Return(@res)
+
+END
+GO
+
+COMMIT
+GO

@@ -1,0 +1,24 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1 FROM sys.objects WHERE [object_id] = OBJECT_ID(N'[dbo].[trgDelDataToLetterFieldValue]')
+               AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[trgDelDataToLetterFieldValue];
+END
+GO
+
+CREATE TRIGGER [dbo].[trgDelDataToLetterFieldValue] 
+   ON  [dbo].[LetterForms] 
+   AFTER DELETE
+AS 
+BEGIN
+	SET NOCOUNT ON
+	DELETE FROM LetterFieldValue WHERE FormOrder=(SELECT ID FROM DELETED)
+END
+
+GO
+
+ALTER TABLE [dbo].[LetterForms] ENABLE TRIGGER [trgDelDataToLetterFieldValue]
+GO
+COMMIT
+GO

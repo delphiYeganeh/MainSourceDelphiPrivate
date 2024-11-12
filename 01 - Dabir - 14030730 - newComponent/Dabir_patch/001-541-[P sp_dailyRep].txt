@@ -1,0 +1,56 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[sp_dailyRep]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[sp_dailyRep]
+END
+GO
+
+CREATE  procedure [dbo].[sp_dailyRep] 
+@myear int,@bdate char(10),@edate char(10),@where nvarchar(1000)
+as
+ declare @sql nvarchar (4000)
+
+declare @rw nvarchar(255)
+
+set @RW='WHERE l.myear=l.myear'--+cast(@myear as varchar(10))
+
+
+set @rw=@rw+' AND (L.RegistrationDaTE between '''+@bdate+''' and '''+@edate+''')'
+
+set @sql='select distinct l.LetterID, IndicatorID, Memo, AttachTitle,RegistrationDate,  ToStaffer, FollowLetterNo, 
+UserMemo, RetroactionNo, NumberOfPage, NumberOfAttachPages, CenterDate, CenterNo,IncommingDate,
+lettertypes.title ReceiveMode ,SentLetterID, Incommingno,
+lETTERrecommites RECOMMITES,TTO.title toorgtitle,
+Classifications.Title AS Classificationtitle, Urgenceis.Title AS UrgencyTitle, LetterFormats.Title AS FormatTitle,
+ LetterTemplate.Title AS TemplateTitle, FromOrganizations.Title AS SignerTitle,Users.Title UserTitle
+FROM ReCommites RC 
+INNER JOIN Letter L ON RC.LetterID = l.LetterID 
+left JOIN ReCommites PRC ON RC.LetterID = PRC.LetterID AND PRC.ID = RC.ParentId 
+left JOIN FromOrganizations FO ON FO.ID = PRC.OrgID 
+left JOIN fromOrganizations TTO ON TTO.ID = l.ToOrgID 
+LEFT JOIN LETTERTYPES on lettertypes.id=l.letter_type
+left JOIN RecommiteTypes    ON RC.Type = RecommiteTypes.ID 
+Left JOIN Urgenceis         ON L.UrgencyID = Urgenceis.ID 
+LEFT JOIN FromOrganizations ON L.Signerid=FromOrganizations.ID
+LEFT JOIN LetterFormats     ON L.letterformat = LetterFormats.Code 
+LEFT JOIN Classifications   ON L.ClassificationID = Classifications.ID 
+LEFT JOIN LetterTemplate    ON L.TemplateID = LetterTemplate.ID 
+LEFT JOIN Users    ON L.UserID = Users.ID '+@rW
+
+
+
+set @where=isnull(ltrim(rtrim(@where)),'')
+if @where<>''
+select @sql=@sql+' and  '+@where
+
+set @sql=@sql+' order by 1 desc'
+exec(@sql)
+			  
+GO
+
+COMMIT
+GO

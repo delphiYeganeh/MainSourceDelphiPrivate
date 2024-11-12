@@ -1,0 +1,22 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetUserByUserName]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetUserByUserName]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetUserByUserName](@username NVARCHAR(50))
+AS
+
+	SET @username=REPLACE(@username,NCHAR(1610),NCHAR(1740));
+	SELECT   *
+		FROM     Users
+		WHERE Active = 1 AND REPLACE(UserName,NCHAR(1610),NCHAR(1740))=@username
+GO
+
+COMMIT
+GO

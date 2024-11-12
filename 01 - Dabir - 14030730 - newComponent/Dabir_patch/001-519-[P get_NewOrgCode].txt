@@ -1,0 +1,39 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[get_NewOrgCode]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[get_NewOrgCode]
+END
+GO
+
+CREATE  procedure [dbo].[get_NewOrgCode]
+	(@ParentID [int] ,@newCode nvarchar(50) output)
+AS 
+	declare @ParentCode nvarchar(50),@maxCode Nvarchar(50)
+
+	select @ParentCode=Code from Fromorganizations where id=@Parentid
+	select @maxCode=max(code) from  Fromorganizations where Parentid=@Parentid
+
+	DECLARE @Found BIT
+	SET @Found = 0
+	WHILE @Found = 0
+	BEGIN
+		if @maxCode is not null and isnumeric(@maxcode)=1
+			set @newCode=cast(cast(@maxcode as int)+1 as nvarchar(50))
+		ELSE
+			set @newCode=@parentCode+'01'
+			
+		IF not EXISTS(SELECT ID FROM FromOrganizations WHERE CODE = @newCode)
+			SET @Found = 1
+		ELSE
+			SET @maxCode = cast((cast(IsNull(@maxCode, '0') AS INT) + 1) AS VARCHAR(50))
+	END
+
+	set @newcode=Replace(ltrim(rtrim(@newCode)),' ','0')
+GO
+
+COMMIT
+GO

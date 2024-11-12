@@ -1,0 +1,131 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_LastIndicatorID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_LastIndicatorID]
+END
+GO
+
+CREATE  procedure [dbo].[Get_LastIndicatorID](@letter_type Tinyint ,@SecretariatID int,@Myear int,      
+                @LetterFormat Tinyint,@newIndicatorid int Output)      
+As  
+  
+	Declare @RecivedInd int ,@SentInd  int,@InnerInd int,@DocInd int      
+	Declare @UniqueIndSec int , @UniqueIndSecID int
+	Declare @TempIndicatorID int
+
+	--منحصر بفرد بون شماره انديكاتور براي تمامي دبيرخانه ها
+	Set @UniqueIndSec = dbo.GetSystemValue('UniqueIndSec')
+	if @UniqueIndSec = 0  /* -1= Active , 0= InActive */   
+	begin
+
+	   /*آخرين مقدار نامه هاي داخلي*/ 
+	   Select @RecivedInd=isnull(max(indicatorID),0)+1 from Letter where myear=@myear and LetterFormat=@LetterFormat      
+			  And SecretariatID=@SecretariatID and letter_type=1       
+
+	   /*آخرين مقدار نامه هاي صادره*/
+	   Select @SentInd=isnull(max(indicatorID),0)+1 from Letter where myear=@myear and LetterFormat=@LetterFormat      
+			  And SecretariatID=@SecretariatID and letter_type=2
+
+	   /*آخرين مقدار نامه هاي داخلي*/
+	   Select @innerind=isnull(max(indicatorID),0)+1 from Letter where myear=@myear and LetterFormat=@LetterFormat      
+			  And SecretariatID=@SecretariatID and letter_type=3
+
+	   /*آخرين مقدار نامه هاي مدارك*/  
+	   Select @DocInd=isnull(max(indicatorID),0)+1 from Letter where myear=@myear and LetterFormat=@LetterFormat      
+			  And SecretariatID=@SecretariatID and letter_type=4
+	end
+	else
+	begin    
+		  /*بدست آوردن بزرگترين شماره انديكاتور تمامي دبيرخانه ها*/
+		  Select @RecivedInd = isnull(Max(indicatorID),0)+1 from Letter where myear=@myear and LetterFormat=@LetterFormat      
+					/*And SecretariatID=@SecretariatID*/ And letter_type=1       
+
+		  /*بدست آوردن بزرگترين شماره انديكاتور تمامي دبيرخانه ها*/
+		  Select @SentInd = isnull(max(indicatorID),0)+1 from Letter where myear=@myear And LetterFormat=@LetterFormat      
+					/*And SecretariatID=@SecretariatID*/ And letter_type=2
+
+		  /*بدست آوردن بزرگترين شماره انديكاتور تمامي دبيرخانه ها*/
+		  Select @innerind = isnull(max(indicatorID),0)+1 from Letter where myear=@myear and LetterFormat=@LetterFormat      
+				 /*And SecretariatID=@SecretariatID*/ and letter_type=3       
+
+		  /*بدست آوردن بزرگترين شماره انديكاتور تمامي دبيرخانه ها*/
+		  Select @DocInd = isnull(max(indicatorID),0)+1 from Letter where myear=@myear and LetterFormat=@LetterFormat      
+				/* And SecretariatID=@SecretariatID */and letter_type=4       
+	end  
+		
+	--------
+	/*تنظيمات - شروع ش انديكاتور براي نامه هاي وارده*/      
+	if @RecivedInd<dbo.GetSystemValue('BeginIndicator')--3       
+	   set  @RecivedInd=dbo.GetSystemValue('BeginIndicator')--3      
+		  
+	/*تنظيمات - شروع ش انديكاتور براي نامه هاي صادره*/          
+	if @SentInd<dbo.GetSystemValue('BeginIndicator')--3       
+	   set  @SentInd=dbo.GetSystemValue('BeginIndicator')--3   
+		 
+	/*تنظيمات - شروع ش انديكاتور براي نامه هاي داخلي*/              
+	if @innerind<dbo.GetSystemValue('BeginIndicator')--3       
+	   set @innerind=dbo.GetSystemValue('BeginIndicator')--3      
+	--------
+	/*نامه داخلي*/      
+	if @letter_type=3       
+	begin      
+	  set @newIndicatorid=@innerind      
+	 -- return      
+	end      
+	  
+	/*نامه مدارك*/    
+	if @letter_type=4       
+	begin      
+	  set @newIndicatorid=@DocInd      
+	  return      
+	end      
+	--------      
+	/*شماره نامه وارده و صادره پيوسته باشد*/      
+	if dbo.GetSystemValue('UniqeIndicator')=0   --5     
+	begin      
+	   if @SentInd > @RecivedInd      
+		  set @newIndicatorid=@SentInd      
+	   else      
+		  set @newIndicatorid=@RecivedInd  
+	   if (@InnerInd > @newIndicatorid )
+		 set @newIndicatorid= @InnerInd
+	   if (@InnerInd < @newIndicatorid ) 
+		 set @newIndicatorid= @newIndicatorid	          
+	end      
+	  
+	/*شماره نامه وارده و صادره مجزا و سريال باشد*/      
+	if dbo.GetSystemValue('UniqeIndicator')=1  --5    
+	begin      
+	   if @letter_type=1      
+		  set @newIndicatorid=@RecivedInd      
+	   if @letter_type=2      
+		  set @newIndicatorid=@SentInd      
+	end      
+	  
+	/*شماره نامه هاي صادره زوج  و وارده فرد باشد*/      
+	if dbo.GetSystemValue('UniqeIndicator')=2  --5    
+	begin      
+	   if @letter_type=2      
+		  set @newIndicatorid=2*(1+(@SentInd-1)/2)      
+		  
+	   if @letter_type=1      
+		  set @newIndicatorid=2*(1+(@RecivedInd-1)/2)+1      
+	end      
+	  
+	/*شماره نامه هاي صادره فرد  و وارده زوج باشد*/      
+	if dbo.GetSystemValue('UniqeIndicator')=3  --5    
+	begin      
+	   if @letter_type=1      
+		  set @newIndicatorid=2*(1+(@RecivedInd-1)/2)      
+		  
+	   if @letter_type=2      
+		  set @newIndicatorid=2*(1+(@SentInd -1)/2)+1      
+	end
+GO
+
+COMMIT
+GO

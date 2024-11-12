@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'GUID'
+          AND Object_ID = Object_ID(N'dbo.Actions'))
+BEGIN
+	ALTER TABLE [dbo].[Actions] 
+	ADD	[GUID] [int] NOT NULL IDENTITY(1, 1)
+END
+GO
+
+COMMIT
+GO

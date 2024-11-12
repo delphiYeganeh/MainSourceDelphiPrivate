@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'TemplateGroupType'
+          AND Object_ID = Object_ID(N'dbo.TemplateGroup'))
+BEGIN
+	ALTER TABLE [dbo].[TemplateGroup] 
+	ADD	[TemplateGroupType] char(1) Not Null Default('w')
+END
+GO
+
+COMMIT
+GO

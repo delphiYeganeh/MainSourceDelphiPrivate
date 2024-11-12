@@ -1,0 +1,32 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_UpdateFollowUp]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_UpdateFollowUp]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_UpdateFollowUp]
+ ( 
+  	@FollowUpId INT,@TypeID INT ,@Comment NVARCHAR(255),
+  	@ToDoDate CHAR(10),@ToDoTime CHAR(5),
+  	@DoneComment NVARCHAR(255),@DoneStatus TINYINT
+  )
+AS
+	UPDATE FollowUp
+	SET		
+		FollowUPTypeID = @TypeID,
+		DoneStatusID = @DoneStatus,	
+		Comment = @Comment,
+		ToDoDate = @ToDoDate,
+		ToDoTime = @ToDoTime,
+		DoneComment = @DoneComment
+		
+	WHERE FollowUPID=@FollowUpId	
+GO
+
+COMMIT
+GO

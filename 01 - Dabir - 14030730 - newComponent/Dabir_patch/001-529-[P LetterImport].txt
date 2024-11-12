@@ -1,0 +1,296 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[LetterImport]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[LetterImport]
+END
+GO
+
+CREATE  procedure [dbo].[LetterImport] 
+	@canInsert bit,
+	@canEdit bit,
+	@year int,
+	@secID tinyint,
+	@LetterNo nvarchar(50),
+	@IndicatorID int ,
+	@LetterDate nvarchar(10),
+	@LetterType nvarchar(10),
+	@userID INT,
+	@Subject nvarchar(100),
+	@Summery nvarchar(2000),
+	@classification nvarchar(50),
+	@priority nvarchar(50),
+	@sender nvarchar(255),
+	@receiver nvarchar(255),
+	@userMemo nvarchar(255),
+	--@LetterRecommites int,
+	@FormID int,
+	@FormField1 nvarchar(255)=NULL,
+	@FormField2 nvarchar(255)=NULL,
+	@FormField3 nvarchar(255)=NULL,
+	@FormField4 nvarchar(255)=NULL,
+	@FormField5 nvarchar(255)=NULL,
+	@FormField6 nvarchar(255)=Null,
+	@FormField7 nvarchar(255)=NULL,
+	@FormField8 nvarchar(255)=NULL,
+	@FormField9 nvarchar(255)=NULL,
+	@FormField10 nvarchar(255)=NULL,
+	@FormField11 nvarchar(255)=NULL,
+	@FormField12 nvarchar(255)=NULL,
+	@FormField13 nvarchar(255)=NULL,
+	@FormField14 nvarchar(255)=NULL,
+	@FormField15 nvarchar(255)=NULL,
+	@FormField16 nvarchar(255)=NULL,
+	@FormField17 nvarchar(255)=NULL,
+	@FormField18 nvarchar(255)=NULL,
+	@FormField19 nvarchar(255)=NULL,
+	@FormField20 nvarchar(255)=NULL
+	AS
+	begin
+		declare @result int --      1=edited      -1=cannot edit      2=inserted      -2=cannot insert
+		declare @LetterID int
+		declare @claID TINYINT, @TypeID INT, @priorID INT, @senderID INT, @receiverID int 
+		declare @subjID int
+		set @LetterID = -1
+		
+			if object_id('#tmpFields') is not null
+		drop table #tmpFields
+
+		--------------------------------------------------------------------------------------------------------------	
+		select @LetterID= LetterID From  Letter where IndicatorID = @IndicatorID and MYear = @year and SecretariatID = @secID
+			--------------------------------------------------------------------------------------------------------------
+		
+		if @LetterID>0 
+		begin
+			if @canEdit=1 
+			begin
+				------------------------------------Edit Letter-----------------------------------------------------
+				set @claID =1 --عادي
+				set @subjID = -1
+				SET @TypeID = 1 -- varedeh
+				SET @priorID = 1 -- addiiii
+				SET @receiverID = -1
+				SET @senderID = -1
+				
+				
+				
+				SELECT @TypeID = [ID]  FROM [LetterTypes] WHERE [Title] = @LetterType
+				SELECT @priorID = [ID]  FROM Urgenceis WHERE [Title] = @priority
+				select @claID=ID from Classifications where Title = @classification
+				
+				select @subjID=[SubjectID] from [SUBJECT] where [SubjectTitle] = @Subject
+				if @subjID<0
+				begin 
+					insert into [SUBJECT]([SubjectTitle] ,[IsActive]) 
+					values(@Subject,1)
+					SELECT @subjID=SCOPE_IDENTITY()
+				end
+				
+				
+				select @senderID=id from FromOrganizations where (Title = @sender and @TypeID <>1) or (Title = @receiver and @TypeID =1)
+				select @receiverID=id from FromOrganizations where (Title = @sender and @TypeID =1) or (Title = @receiver and @TypeID <>1)
+				if @senderID<0
+				begin 
+					insert into FromOrganizations([Title],[ParentID],[ResponsibleStaffer],[IsActive],[IsInnerOrg],[Code]) 
+					values((case when @TypeID = 1 then @receiver else @sender end),-1,'',1,(case when @TypeID = 1 then 0 else 1 end),(select MAX(CONVERT(int,code))+1 from FromOrganizations))
+					SELECT @senderID=SCOPE_IDENTITY()
+				end
+				if @receiverID<0
+				begin 
+					insert into FromOrganizations([Title],[ParentID],[ResponsibleStaffer],[IsActive],[IsInnerOrg],[Code]) 
+					values((case when @TypeID = 1 then @sender else @receiver end),-1,'',1,(case when @TypeID = 1 then 1 else 0 end),(select MAX(CONVERT(int,code))+1 from FromOrganizations))
+					SELECT @receiverID=SCOPE_IDENTITY()
+				end
+				update Letter set 
+					Incommingdate = @letterDate , 
+					IncommingNO	=	@LetterNo,
+					indicatorid=@IndicatorID,
+					Letter_Type = @TypeID,
+					SubjectID = @subjID, 
+					ClassificationID = @claID,
+					UrgencyID = @priorID,
+					Memo = @Summery,
+					FromOrgID = case when @TypeID = 1 then @receiverID else @senderID end,
+					ToOrgID = case when @TypeID = 1 then @senderID else @receiverID end,
+					UserMemo = @userMemo
+				where LetterID = @letterID
+				------------------------------------------------------------------------------------------------------
+				set @result = 1
+			end
+			else
+				set @result = -1
+								
+		end
+		else 
+		begin
+		
+			if @canInsert=1 
+			begin
+				-------------------------------------Insert Letter--------------------------------------------------
+				set @claID =1 --عادي
+				set @subjID = -1
+				SET @TypeID = 1 -- varedeh
+				SET @priorID = 1 -- addiiii
+				SET @receiverID = -1
+				SET @senderID = -1
+				
+				
+				
+				SELECT @TypeID = [ID]  FROM [LetterTypes] WHERE [Title] = @LetterType
+				SELECT @priorID = [ID]  FROM Urgenceis WHERE [Title] = @priority
+				select @claID=ID from Classifications where Title = @classification
+				
+				select @subjID=[SubjectID] from [SUBJECT] where [SubjectTitle] = @Subject
+				if @subjID<0
+				begin 
+					insert into [SUBJECT]([SubjectTitle] ,[IsActive]) 
+					values(@Subject,1)
+					SELECT @subjID=SCOPE_IDENTITY()
+				end
+				
+				
+				select @senderID=id from FromOrganizations where (Title = @sender and @TypeID <>1) or (Title = @receiver and @TypeID =1)
+				select @receiverID=id from FromOrganizations where (Title = @sender and @TypeID =1) or (Title = @receiver and @TypeID <>1)
+				
+
+				if @senderID<0
+				begin 
+					insert into FromOrganizations([Title],[ParentID],[ResponsibleStaffer],[IsActive],[IsInnerOrg],[Code]) 
+					select (case when @TypeID = 1 then @receiver else @sender end),-1,'',1,(case when @TypeID = 1 then 0 else 1 end),
+					(select MAX(CONVERT(int,code))+1 from FromOrganizations where isnumeric(code)=1)
+					SELECT @senderID=SCOPE_IDENTITY()
+				end
+				
+				if @receiverID<0
+				begin 
+					insert into FromOrganizations([Title],[ParentID],[ResponsibleStaffer],[IsActive],[IsInnerOrg],[Code]) 
+					values((case when @TypeID = 1 then @sender else @receiver end),-1,'',1,(case when @TypeID = 1 then 1 else 0 end),(select MAX(CONVERT(int,code))+1 from FromOrganizations where isnumeric(code)=1))
+					SELECT @receiverID=SCOPE_IDENTITY()
+				end
+				
+--				select @indicatorID = Max(indicatorID)+1 FROM Letter Where MYear = @Year and SecretariatID = @SecID
+				
+				
+	      
+	      
+				insert into Letter(IndicatorID,MYear,SecretariatID,Letter_Type,letterformat,IncommingNO,Incommingdate
+									,FromOrgID,ToOrgID,UserID,ClassificationID,UrgencyID,Memo,NumberOfAttachPages
+									
+									,NumberOfPage,ReceiveTypeID,RegistrationDate,RegistrationTime,LastUpdate
+									,SendStatusID,Finalized,UserMemo,/*[LetterRecommites],[ToStaffer],[fromstaffer]
+									,*/[Archived],[SubjectID],/*[LatestActionTypeID],*/[ActionTypeID])/*[RetroactionYear],[FollowLetterYear])*/
+
+					 values(@indicatorID,@year,@secID,@TypeID,1,@LetterNo,@LetterDate,
+							@senderID,@receiverID,@userID,@claID,@priorID,@Summery,1,
+							
+							
+							1,@TypeID, dbo.Shamsi(getdate()),LEFT(RIGHT(CONVERT(VARCHAR, GETDATE(), 100),7),5),GETDATE(),
+							1,1,@userMemo,0,   @subjID,1)
+							
+	/*						dbo.shamsi(getdate()),LEFT(RIGHT(CONVERT(VARCHAR, GETDATE(), 100),7),5),getdate(),1,1,
+							@customField1,@customField2,@customField3)*/
+				SELECT @LetterID=SCOPE_IDENTITY()
+				------------------------------------------------------------------------------------------------------
+				set @result = 2
+			end
+			else
+				set @result = -2
+		end
+		
+		if @result>0
+			if @LetterID>0
+				if @FormID>0
+				begin
+					----------------------------------------------------------
+					update Letter set UserTableID = @FormID	where LetterID = @LetterID
+					
+					insert into  LetterFieldValue(letterid,FieldID)
+						select @LetterId,ID
+						from Fields
+						where tableid=@FormID and id not in (select FieldID from LetterFieldValue where Letterid=@Letterid)
+
+					CREATE TABLE #tmpFields
+					(
+						ord INT,
+						val nvarchar(255)
+					)
+
+					INSERT INTO #tmpFields
+						select 1,@FormField1 union 
+						select 2,@FormField2 union
+						select 3,@FormField3 union 
+						select 4,@FormField4 union
+						select 5,@FormField5 union 
+						select 6,@FormField6 union
+						select 7,@FormField7 union 
+						select 8,@FormField8 union
+						select 9,@FormField9 union 
+						select 10,@FormField10 union
+						select 11,@FormField11 union 
+						select 12,@FormField12 union
+						select 13,@FormField13 union 
+						select 14,@FormField14 union
+						select 15,@FormField15 union 
+						select 16,@FormField16 union
+						select 17,@FormField17 union 
+						select 18,@FormField18 union
+						select 19,@FormField19 union 
+						select 20,@FormField20 
+						
+					declare @FieldID int ,@ord int, @FTypeID tinyint,@LFVID int 
+
+					DECLARE cr CURSOR FOR  
+						select ID,fieldTypeID,ROW_NUMBER() OVER (ORDER BY [Order]) AS Row from Fields where TableID = @FormID order by [order] 
+
+					OPEN cr  
+					FETCH NEXT FROM cr INTO @FieldID,@FTypeID,@ord  
+
+					WHILE @@FETCH_STATUS = 0  
+					BEGIN
+						select @LFVID = LetterFieldValueID from LetterFieldValue where FieldID = @FieldID and LetterID=@LetterID
+						if @FTypeID = 5  -- bit true/false 
+							update LetterFieldValue set FieldValue = (case when val IN('T','1','بله','true','yes') then 1 else 0 end) from #tmpFields
+							where ord=@ord  and LetterFieldValueID=@LFVID
+						if @FTypeID = 6 -- combo box  value ID 
+						begin
+							declare @intval int, @refTblID int
+							declare @strVal nvarchar(255)
+							select @refTblID=ReferenceTableID from Fields where ID = @FieldID
+							
+							select @strVal = val from #tmpFields where ord = @ord 
+							
+							set @intval = 0
+							
+							select @intval = dataID from ReferenceTableData 
+							where TableID = @refTblID and  DataTitle = @strVal
+							
+							if @intval = 0 
+								insert into	ReferenceTableData	(TableID,DataID,DataTitle)
+								values(@refTblID,(select MAX(dataid)+1 from ReferenceTableData where TableID = @refTblID),@strVal)
+								
+							select @intval = dataID from ReferenceTableData 
+							where TableID = @refTblID and  DataTitle = @strVal
+							
+							update LetterFieldValue set FieldValue = CONVERT(VARCHAR, @intval) 
+							where  LetterFieldValueID=@LFVID
+						end
+						else
+							update LetterFieldValue set FieldValue = val from #tmpFields
+							where ord=@ord  and LetterFieldValueID=@LFVID
+
+						FETCH NEXT FROM cr INTO @FieldID,@FTypeID,@ord  
+					END  
+		
+					CLOSE cr  
+					DEALLOCATE cr  
+					----------------------------------------------------------
+				end
+		select @result
+	end
+GO
+
+COMMIT
+GO

@@ -1,0 +1,76 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'LetterData_Log')
+BEGIN
+	CREATE TABLE [dbo].[LetterData_Log](
+		[ID] [int] IDENTITY(1,1) NOT NULL,
+		[LetterDataID] [int] NULL,
+		[LetterID] [int] NULL,
+		[PageNumber] [int] NULL,
+		[Image] [image] NULL,
+		[extention] [tinyint] NULL,
+		[Description] [nvarchar](200) NULL,
+		[LastUpdate] [datetime] NULL,
+		[UniqueID] [bigint] NULL,
+		[ListItemsID] [int] NULL,
+		[IsCorrectedImage] [bit] NULL,
+		[VersionNo] [varchar](10) NULL,
+		[VersionDate] [varchar](10) NULL,
+		[archiveID] [int] NULL,
+		[isDocument] [bit] NULL,
+		[UserName] [nvarchar](100) NULL,
+		[DateAction] [datetime] NULL,
+		[TypeAction] [nvarchar](100) NULL,
+	 CONSTRAINT [PK_LetterData_Log] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90) ON [PRIMARY]
+	) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+
+IF NOT EXISTS (SELECT 1
+      FROM sys.all_columns c
+      join sys.tables t ON t.object_id = c.object_id
+      join sys.schemas s ON s.schema_id = t.schema_id
+      join sys.default_constraints d ON c.default_object_id = d.object_id
+    WHERE t.NAME = 'LetterData_Log'
+      and c.NAME = 'PageNumber'
+      and s.NAME = 'dbo')
+BEGIN
+	ALTER TABLE [dbo].[LetterData_Log] ADD  DEFAULT ((0)) FOR [PageNumber]
+END
+GO
+
+IF NOT EXISTS (SELECT 1
+      FROM sys.all_columns c
+      join sys.tables t ON t.object_id = c.object_id
+      join sys.schemas s ON s.schema_id = t.schema_id
+      join sys.default_constraints d ON c.default_object_id = d.object_id
+    WHERE t.NAME = 'LetterData_Log'
+      and c.NAME = 'extention'
+      and s.NAME = 'dbo')
+BEGIN
+	ALTER TABLE [dbo].[LetterData_Log] ADD  DEFAULT ((1)) FOR [extention]
+END
+GO
+
+IF NOT EXISTS (SELECT 1
+      FROM sys.all_columns c
+      join sys.tables t ON t.object_id = c.object_id
+      join sys.schemas s ON s.schema_id = t.schema_id
+      join sys.default_constraints d ON c.default_object_id = d.object_id
+    WHERE t.NAME = 'LetterData_Log'
+      and c.NAME = 'LastUpdate'
+      and s.NAME = 'dbo')
+BEGIN
+	ALTER TABLE [dbo].[LetterData_Log] ADD  DEFAULT (getdate()) FOR [LastUpdate]
+END
+GO
+
+COMMIT
+GO

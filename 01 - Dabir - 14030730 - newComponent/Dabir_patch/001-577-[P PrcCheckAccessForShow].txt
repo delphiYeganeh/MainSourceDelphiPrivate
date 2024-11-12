@@ -1,0 +1,57 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PrcCheckAccessForShow]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PrcCheckAccessForShow]
+END
+GO
+
+CREATE  procedure [dbo].[PrcCheckAccessForShow]
+(
+	  @letterID INT = 76469
+	 ,@UserID INT =   34
+)
+AS
+	DECLARE @Letter_Type INT  
+	DECLARE @AccessID INT 
+
+
+	SELECT 
+	   @AccessID = AccessID 
+	FROm Users
+	Where ID = @userID 
+
+	SELECT 
+	  @Letter_Type = Letter_Type 
+	FROM Letter
+	WHERE LetterID = @letterID
+
+
+
+	IF @Letter_Type = 1 --وارده
+	BEGIN
+	  SELECT ISNULL(IsIncom,0)AS IsShow FROM Accesses
+	  WHERE ID = @AccessID
+	END
+	IF @Letter_Type = 2 --صادره
+	BEGIN
+	  SELECT ISNULL(IsExp,0) AS IsShow FROM Accesses
+	  WHERE ID = @AccessID
+	END
+	IF @Letter_Type = 3 --داخلی
+	BEGIN
+	  SELECT ISNULL(IsInter,0) AS IsShow FROM Accesses
+	  WHERE ID = @AccessID
+	END
+	IF @Letter_Type = 4 --مدرک
+	BEGIN
+	  SELECT ISNULL(IsDoc,0) AS IsShow FROM Accesses
+	  WHERE ID = @AccessID
+	END
+GO
+
+COMMIT
+GO

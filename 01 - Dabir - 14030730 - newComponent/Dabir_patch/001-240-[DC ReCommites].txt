@@ -1,0 +1,13 @@
+BEGIN TRANSACTION
+GO
+
+IF EXISTS (SELECT 1 
+			FROM sys.foreign_keys 
+			WHERE object_id = OBJECT_ID(N'FK_ReCommites_FromOrganizations')
+				AND parent_object_id = OBJECT_ID(N'dbo.ReCommites'))
+
+	ALTER TABLE [dbo].[ReCommites] DROP CONSTRAINT [FK_ReCommites_FromOrganizations]
+GO
+
+COMMIT
+GO

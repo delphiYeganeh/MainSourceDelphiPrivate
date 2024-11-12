@@ -1,0 +1,28 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_AddLetterForm]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_AddLetterForm]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_AddLetterForm](@LetterID INT,@FormID INT,@UserID INT)
+AS
+
+INSERT INTO LetterForms
+(	
+	LetterID,
+	FormID,
+	UserID
+)
+VALUES
+(
+	@LetterID,@FormID,@UserID
+)
+GO
+
+COMMIT
+GO

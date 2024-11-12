@@ -1,0 +1,16 @@
+BEGIN TRANSACTION
+GO
+
+If Not Exists(Select 1 From ActionsAccess Where FormTag = 8 And  ActionID = 'AOrg' And AccessID = 1)
+Begin
+	Insert Into ActionsAccess (AccessID, ActionID, FormTag, HasAccess)
+		Values(1, 'AOrg', 8, 1)
+End
+
+Insert Into ActionsAccess (AccessID, ActionID, FormTag, HasAccess)
+	Select ID, 'AOrg', 8, 0 From Accesses Where ID <> 1 And Not (ID In (Select AccessID From ActionsAccess Where FormTag = 8 And  ActionID = 'AOrg' And AccessID <> 1))
+
+GO
+
+COMMIT
+GO

@@ -1,0 +1,209 @@
+inherited fmAssignLetterIndicator: TfmAssignLetterIndicator
+  Left = 869
+  Top = 184
+  Caption = '«Œ ’«’ ‘„«—Â ‰«„Â'
+  ClientHeight = 186
+  ClientWidth = 457
+  Constraints.MinHeight = 220
+  Constraints.MinWidth = 400
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlMain: TPanel [0]
+    Left = 0
+    Top = 0
+    Width = 457
+    Height = 186
+    Align = alClient
+    ParentColor = True
+    TabOrder = 0
+    object Panel2: TPanel
+      Left = 1
+      Top = 1
+      Width = 455
+      Height = 148
+      Align = alClient
+      ParentColor = True
+      TabOrder = 0
+      DesignSize = (
+        455
+        148)
+      object lblMessage: TLabel
+        Left = 8
+        Top = 8
+        Width = 424
+        Height = 25
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Message'
+        Color = 16771304
+        ParentColor = False
+        WordWrap = True
+      end
+      object IsCopy: TCheckBox
+        Left = 223
+        Top = 48
+        Width = 209
+        Height = 17
+        Anchors = [akTop, akRight]
+        Caption = 'ÅÌÊ”  Â«Ì ‰«„Â ›ﬁÿ ŒÊ«‰œ‰Ì ‘Êœ'
+        TabOrder = 0
+      end
+      object Proceed: TCheckBox
+        Left = 239
+        Top = 74
+        Width = 193
+        Height = 17
+        Anchors = [akTop, akRight]
+        Caption = '‰«„Â «“ ò«— «»· œÌê— ò«—„‰œ«‰ Õ–› ‘Êœ'
+        TabOrder = 1
+      end
+      object ArchiveCurrent: TCheckBox
+        Left = 264
+        Top = 100
+        Width = 168
+        Height = 17
+        Anchors = [akTop, akRight]
+        Caption = '‰«„Â «“ ò«— «»·  ›⁄·Ì Õ–› ‘Êœ'
+        Checked = True
+        State = cbChecked
+        TabOrder = 2
+      end
+      object IsCopy_In_Dabir: TCheckBox
+        Left = 190
+        Top = 128
+        Width = 241
+        Height = 17
+        Anchors = [akTop, akRight]
+        Caption = 'ÅÌÊ” Â«Ì ‰«„Â œ— œ»Ì—Œ«‰Â ›ﬁÿ ŒÊ«‰œ‰Ì ‘Êœ'
+        TabOrder = 3
+        Visible = False
+      end
+    end
+    object Panel1: TPanel
+      Left = 1
+      Top = 149
+      Width = 455
+      Height = 36
+      Align = alBottom
+      ParentColor = True
+      TabOrder = 1
+      DesignSize = (
+        455
+        36)
+      object BitBtn1: TAdvGlowButton
+        Left = 359
+        Top = 5
+        Width = 75
+        Height = 25
+        Anchors = [akTop, akRight]
+        Caption = ' «ÌÌœ'
+        TabOrder = 0
+        Kind = bkOK
+      end
+      object BitBtn2: TAdvGlowButton
+        Left = 279
+        Top = 5
+        Width = 75
+        Height = 25
+        Anchors = [akTop, akRight]
+        Caption = '«‰’—«›'
+        TabOrder = 1
+        Kind = bkCancel
+      end
+    end
+  end
+  inherited DSForm: TDataSource
+    Left = 48
+    Top = 24
+  end
+  inherited ActionList: TActionList
+    Left = 8
+    Top = 24
+  end
+  inherited Grid_PopupMenu: TPopupMenu
+    Left = 127
+  end
+  object ReCommites: TADODataSet
+    Connection = Dm.YeganehConnection
+    CursorType = ctStatic
+    CommandText = 
+      'SELECT R.*'#13#10'FROM ReCommites R '#13#10'where r.RecommiteID=:@RecommiteI' +
+      'D'
+    Parameters = <
+      item
+        Name = '@RecommiteID'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    Left = 89
+    Top = 27
+    object ReCommitesRecommiteID: TAutoIncField
+      FieldName = 'RecommiteID'
+      ReadOnly = True
+    end
+    object ReCommitesLetterID: TIntegerField
+      FieldName = 'LetterID'
+    end
+    object ReCommitesID: TSmallintField
+      FieldName = 'ID'
+    end
+    object ReCommitesType: TWordField
+      FieldName = 'Type'
+    end
+    object ReCommitesParentId: TSmallintField
+      FieldName = 'ParentId'
+    end
+    object ReCommitesOrgID: TIntegerField
+      FieldName = 'OrgID'
+    end
+    object ReCommitesParaph: TWideStringField
+      FieldName = 'Paraph'
+      Size = 500
+    end
+    object ReCommitesRecommiteDate: TStringField
+      FieldName = 'RecommiteDate'
+      Size = 10
+    end
+    object ReCommitesUserID: TWordField
+      FieldName = 'UserID'
+    end
+    object ReCommitesIsCopy: TBooleanField
+      FieldName = 'IsCopy'
+    end
+    object ReCommitesProceeded: TBooleanField
+      FieldName = 'Proceeded'
+    end
+    object ReCommitesProceedDate: TStringField
+      FieldName = 'ProceedDate'
+      Size = 10
+    end
+    object ReCommitesstaffmemo: TWideStringField
+      FieldName = 'staffmemo'
+      Size = 255
+    end
+    object ReCommitesviewdate: TStringField
+      FieldName = 'viewdate'
+      FixedChar = True
+      Size = 10
+    end
+    object ReCommitesOrgStaff: TWideStringField
+      FieldName = 'OrgStaff'
+      Size = 50
+    end
+    object ReCommitesDeadLineDate: TStringField
+      FieldName = 'DeadLineDate'
+      FixedChar = True
+      Size = 10
+    end
+    object ReCommitesLastUpdate: TDateTimeField
+      FieldName = 'LastUpdate'
+    end
+    object ReCommitesActionTypeID: TWordField
+      FieldName = 'ActionTypeID'
+    end
+  end
+end

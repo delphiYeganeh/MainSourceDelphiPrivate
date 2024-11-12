@@ -1,0 +1,20 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetLetterFormMaker]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetLetterFormMaker]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetLetterFormMaker](@ID INT)
+AS
+	SELECT LF.UserID 
+	FROM LetterForms LF 
+	WHERE  LF.ID=@ID
+GO
+
+COMMIT
+GO

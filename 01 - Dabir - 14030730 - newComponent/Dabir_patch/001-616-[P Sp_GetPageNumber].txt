@@ -1,0 +1,19 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetPageNumber]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetPageNumber]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetPageNumber](@Extention INT,@LetterID INT,@count INT OUTPUT)
+AS
+
+SET @count=(Select count(*) from LetterData where LetterId=@LetterID AND extention=@Extention)
+GO
+
+COMMIT
+GO

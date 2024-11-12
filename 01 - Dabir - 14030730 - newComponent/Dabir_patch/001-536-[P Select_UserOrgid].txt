@@ -1,0 +1,55 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_UserOrgid]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_UserOrgid]
+END
+GO
+
+CREATE  procedure [dbo].[Select_UserOrgid]
+@UserID int,@today char(10)
+as
+create  table #Org (Orgid int,Comment nvarchar(255))
+insert into #Org
+SELECT  	[FromOrgID],case when id=@userid then 'سمت اصلي' else 'جانشين'  end
+FROM [Users]
+where @userID=id or (AlternativeUserID=@userid and @today between AlternativebeginDate and AlternativeEndDate )
+
+
+insert into #Org
+SELECT [SecondOrgID],case when id=@userid then 'سمت دوم' else 'جانشين'  end
+FROM [Users]
+where [SecondOrgID] is not null and  (@userID=id or (AlternativeUserID=@userid and @today between AlternativebeginDate and AlternativeEndDate ))
+
+--***************************شروع درج سمت سوم به بعد************************************
+insert into #Org
+SELECT [TreeOrgID],case when id=@userid then 'سمت سوم' else 'جانشين'  end
+FROM [Users]
+where [TreeOrgID] is not null and  (@userID=id or (AlternativeUserID=@userid and @today between AlternativebeginDate and AlternativeEndDate ))
+
+insert into #Org
+SELECT [FourOrgID],case when id=@userid then 'سمت چهارم' else 'جانشين'  end
+FROM [Users]
+where [FourOrgID] is not null and  (@userID=id or (AlternativeUserID=@userid and @today between AlternativebeginDate and AlternativeEndDate ))
+
+insert into #Org
+SELECT [FiveOrgID],case when id=@userid then 'سمت پنجم' else 'جانشين'  end
+FROM [Users]
+where [FiveOrgID] is not null and  (@userID=id or (AlternativeUserID=@userid and @today between AlternativebeginDate and AlternativeEndDate ))
+--***************************پایان درج سمت سوم به بعد************************************
+
+update #Org
+set comment=comment+':'+title
+from #Org
+inner join fromorganizations on fromorganizations.id=#Org.orgid
+
+
+select *
+from #Org
+GO
+
+COMMIT
+GO

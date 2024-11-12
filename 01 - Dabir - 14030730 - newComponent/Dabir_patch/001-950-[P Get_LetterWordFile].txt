@@ -1,0 +1,25 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_LetterWordFile]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_LetterWordFile]
+END
+GO
+
+Create  PROCEDURE [dbo].[Get_LetterWordFile]
+(
+	@Ext		int,
+	@LetterID	int
+) AS
+BEGIN
+SELECT     *
+FROM         LetterData
+WHERE     (extention = @Ext) AND (LetterID = @LetterID)
+END
+GO
+
+COMMIT
+GO

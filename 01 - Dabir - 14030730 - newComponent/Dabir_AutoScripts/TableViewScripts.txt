@@ -1,0 +1,62 @@
+[SECTION_MAX_NO]=6
+
+[BEGIN_S_NO]=1
+
+IF NOT EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N'[DBO].[TBLAPPSETTING]') AND TYPE IN (N'U'))
+BEGIN 
+CREATE TABLE [dbo].[TBLAPPSETTING](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descript] [nvarchar](2000) NULL,
+	[Max_TableScriptNumber] [int] NULL,
+	[Max_ViewScriptNumber] [int] NULL,
+	[Last_TableScriptNumber] [int] NULL,
+	[Last_ViewScriptNumber] [int] NULL,
+	[Error_RunTableScriptNumber] [int] NULL,
+	[Error_RunViewScriptNumber] [int] NULL,
+        [Date] datetime null,
+        [AppVersion] nvarchar(100)
+) ON [PRIMARY]
+
+END 
+
+[END_S_NO]
+
+[BEGIN_S_NO]=2
+
+    IF COL_LENGTH('dbo.Letter', 'IsNetWork') IS  NULL  
+    ALTER TABLE dbo.Letter  ADD IsNetWork bit NULL ;
+
+[END_S_NO]
+
+[BEGIN_S_NO]=3
+
+   IF COL_LENGTH('dbo.LetterData', 'IsTemplate') IS  NULL  
+    ALTER TABLE dbo.LetterData   ADD IsTemplate bit NULL ;    
+
+[END_S_NO]
+
+
+[BEGIN_S_NO]=4
+
+  INSERT INTO [dbo].[Fields] (FieldName,Description)
+  SELECT 'Sign','امضا' WHERE (SELECT COUNT(id) FROM dbo.Fields AS F WHERE fieldname='Sign') = 0 
+
+[END_S_NO]
+
+[BEGIN_S_NO]=5
+
+  IF ( SELECT COUNT(UserId) FROM dbo.settings WHERE userid =-1 AND VariableName ='DongleType' )=0
+  begin
+    INSERT INTO [dbo].[Settings] ([UserID],[Value],[VariableName])
+    SELECT -1,0,'DongleType'
+  end
+
+[END_S_NO]
+
+
+[BEGIN_S_NO]=6
+
+  INSERT INTO [dbo].[Fields] (FieldName,Description)
+  SELECT 'DateOfCurrentDay','تاریخ مرتبط با شماره دبیرخانه' WHERE (SELECT COUNT(id) FROM dbo.Fields AS F WHERE fieldname='DateOfCurrentDay') = 0 
+
+[END_S_NO]

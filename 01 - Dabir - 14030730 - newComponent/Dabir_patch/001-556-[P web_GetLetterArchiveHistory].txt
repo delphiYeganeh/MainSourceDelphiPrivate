@@ -1,0 +1,29 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[web_GetLetterArchiveHistory]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[web_GetLetterArchiveHistory]
+END
+GO
+
+CREATE  procedure [dbo].[web_GetLetterArchiveHistory]
+(
+	@letterId int,
+	@userId int
+)
+AS
+
+SELECT     dbo.LetterArchiveFolder.ArchiveDate, dbo.ArchiveFolder.*
+FROM         dbo.ArchiveFolder INNER JOIN
+                      dbo.LetterArchiveFolder ON dbo.ArchiveFolder.FolderID = dbo.LetterArchiveFolder.ArchiveFolderID
+					  left join ReCommites r on r.RecommiteID=LetterArchiveFolder.LetterID
+					  inner join letter l on r.letterid = l.LetterID
+
+Where l.LetterID = @letterId and ArchiveFolder.UserId=@userId
+GO
+
+COMMIT
+GO

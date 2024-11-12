@@ -1,0 +1,346 @@
+inherited FrFieldAccess: TFrFieldAccess
+  Left = 402
+  Top = 194
+  Caption = #1583#1587#1578#1585#1587#1610' '#1601#1585#1605' '#1607#1575
+  ClientWidth = 781
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlMain: TPanel [0]
+    Left = 0
+    Top = 0
+    Width = 781
+    Height = 473
+    Align = alClient
+    ParentColor = True
+    TabOrder = 0
+    object Panel1: TPanel
+      Left = 1
+      Top = 1
+      Width = 779
+      Height = 41
+      Align = alTop
+      ParentColor = True
+      TabOrder = 0
+      DesignSize = (
+        779
+        41)
+      object Label1: TLabel
+        Left = 729
+        Top = 11
+        Width = 36
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1606#1575#1605' '#1705#1575#1585#1576#1585
+      end
+      object DBLookupComboBox1: TDBLookupComboBox
+        Left = 384
+        Top = 8
+        Width = 327
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        BiDiMode = bdLeftToRight
+        KeyField = 'Id'
+        ListField = 'Title'
+        ListSource = Dm.Dusers
+        ParentBiDiMode = False
+        TabOrder = 0
+        OnClick = DBLookupComboBox1Click
+      end
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 431
+      Width = 779
+      Height = 41
+      Align = alBottom
+      ParentColor = True
+      TabOrder = 1
+      object xpBitBtn1: TAdvGlowButton
+        Left = 15
+        Top = 7
+        Width = 75
+        Height = 27
+        Cursor = crHandPoint
+        Caption = #1582#1585#1608#1580
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 84
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = xpBitBtn1Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+    end
+    object Panel3: TPanel
+      Left = 431
+      Top = 42
+      Width = 349
+      Height = 389
+      Align = alRight
+      Caption = 'Panel3'
+      ParentColor = True
+      TabOrder = 2
+      object YDBGrid2: TYDBGrid
+        Left = 1
+        Top = 1
+        Width = 347
+        Height = 387
+        Align = alClient
+        Color = 14671871
+        DataSource = DSForm
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = ARABIC_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        OnCellClick = YDBGrid2CellClick
+        OnDblClick = YDBGrid2DblClick
+        YeganehColor = True
+        YeganehFinish = False
+        PageNumber = False
+        RecordNumber = False
+        HasTime = False
+        Oriention = poPortrait
+        HasDate = False
+        HasIndex = False
+        PrintTitle = #1593#1606#1608#1575#1606
+        InvertFarsiDate = True
+        TitleSort = True
+        AutoInsert = False
+        FooterFields = 'Count'
+        Columns = <
+          item
+            Color = 16434943
+            Expanded = False
+            FieldName = 'Description'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = #1606#1575#1605' '#1601#1585#1605
+            Width = 189
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'hasAccess'
+            Title.Alignment = taCenter
+            Title.Caption = #1606#1605#1575#1610#1588
+            Width = 59
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'HasDelete'
+            Title.Caption = #1581#1584#1601
+            Width = 50
+            Visible = True
+          end>
+      end
+    end
+    object YDBGrid1: TYDBGrid
+      Left = 1
+      Top = 42
+      Width = 430
+      Height = 389
+      Cursor = crHandPoint
+      Align = alClient
+      DataSource = Dm.DSelect_FieldAccess_by_TableID
+      TabOrder = 3
+      TitleFont.Charset = ARABIC_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      YeganehColor = False
+      YeganehFinish = False
+      PageNumber = False
+      RecordNumber = False
+      HasTime = False
+      Oriention = poPortrait
+      HasDate = False
+      HasIndex = False
+      PrintTitle = #1604#1610#1587#1578' '#1578#1607#1610#1607' '#1588#1583#1607' '#1578#1608#1587#1591' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1610#1711#1575#1606#1607
+      InvertFarsiDate = True
+      TitleSort = True
+      AutoInsert = False
+      FooterFields = 'Count'
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'FieldTitle'
+          ReadOnly = True
+          Title.Caption = #1606#1575#1605' '#1601#1610#1604#1583
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'AccessTypeTitle'
+          Title.Caption = #1606#1608#1593' '#1583#1587#1578#1585#1587#1610
+          Visible = True
+        end>
+    end
+  end
+  inherited DSForm: TDataSource
+    DataSet = get_userTable_by_UserID
+    Left = 72
+    Top = 112
+  end
+  object sp_get_userTable_by_UserID: TADOStoredProc
+    Connection = Dm.YeganehConnection
+    OnCalcFields = sp_get_userTable_by_UserIDCalcFields
+    ProcedureName = 'get_userTable_by_UserID;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@userID'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@like'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        Size = 100
+        Value = Null
+      end>
+    Left = 232
+    Top = 168
+    object sp_get_userTable_by_UserIDTableId: TIntegerField
+      FieldName = 'TableId'
+    end
+    object sp_get_userTable_by_UserIDTableName: TWideStringField
+      FieldName = 'TableName'
+      Size = 50
+    end
+    object sp_get_userTable_by_UserIDDescription: TWideStringField
+      FieldName = 'Description'
+      Size = 50
+    end
+    object sp_get_userTable_by_UserIDTableType: TWordField
+      FieldName = 'TableType'
+    end
+    object sp_get_userTable_by_UserIDTableCode: TStringField
+      FieldName = 'TableCode'
+      Size = 50
+    end
+    object sp_get_userTable_by_UserIDUserField1: TWideStringField
+      FieldName = 'UserField1'
+      Size = 50
+    end
+    object sp_get_userTable_by_UserIDUserField2: TWideStringField
+      FieldName = 'UserField2'
+      Size = 50
+    end
+    object sp_get_userTable_by_UserIDhasAccess: TBooleanField
+      FieldName = 'hasAccess'
+    end
+    object sp_get_userTable_by_UserIDAccessName: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'AccessName'
+      Size = 5
+      Calculated = True
+    end
+  end
+  object Insert_TableAccess: TADOStoredProc
+    Connection = Dm.YeganehConnection
+    ProcedureName = 'Insert_TableAccess;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end>
+    Left = 80
+    Top = 216
+  end
+  object get_userTable_by_UserID: TADOQuery
+    Connection = Dm.YeganehConnection
+    Parameters = <
+      item
+        Name = 'userID'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    SQL.Strings = (
+      'SELECT     Tables.*,UserTable.hasAccess,HasDelete'
+      
+        'FROM         Tables INNER JOIN UserTable ON Tables.TableId = Use' +
+        'rTable.tableID'
+      
+        'WHERE     (TableType = 3)AND (UserTable.userID= :userID) and des' +
+        'cription like '#39'%%'#39)
+    Left = 184
+    Top = 248
+    object get_userTable_by_UserIDTableId: TIntegerField
+      FieldName = 'TableId'
+    end
+    object get_userTable_by_UserIDTableName: TWideStringField
+      FieldName = 'TableName'
+      Size = 50
+    end
+    object get_userTable_by_UserIDDescription: TWideStringField
+      FieldName = 'Description'
+      Size = 50
+    end
+    object get_userTable_by_UserIDTableType: TWordField
+      FieldName = 'TableType'
+    end
+    object get_userTable_by_UserIDTableCode: TStringField
+      FieldName = 'TableCode'
+      Size = 50
+    end
+    object get_userTable_by_UserIDUserField1: TWideStringField
+      FieldName = 'UserField1'
+      Size = 50
+    end
+    object get_userTable_by_UserIDUserField2: TWideStringField
+      FieldName = 'UserField2'
+      Size = 50
+    end
+    object get_userTable_by_UserIDhasAccess: TBooleanField
+      FieldName = 'hasAccess'
+    end
+    object get_userTable_by_UserIDHasDelete: TBooleanField
+      FieldName = 'HasDelete'
+    end
+  end
+end

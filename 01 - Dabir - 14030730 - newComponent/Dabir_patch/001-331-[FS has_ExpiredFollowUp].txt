@@ -1,0 +1,30 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[has_ExpiredFollowUp]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[has_ExpiredFollowUp]
+END
+GO
+
+CREATE FUNCTION [dbo].[has_ExpiredFollowUp](@LetterID int)
+RETURNS bit AS  
+BEGIN 
+	declare @res bit
+
+	if exists(
+	SELECT     FollowUPID
+	FROM       FollowUp
+	WHERE     LetterID=@LetterID and dbo.ShamsiToMiladi(ToDoDate)< GETDATE() AND DoneStatusID=0 )
+	set @res=1
+	else
+	set @res=0
+	return(@res)
+
+END
+GO
+
+COMMIT
+GO

@@ -1,0 +1,28 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_Letter]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_Letter]
+END
+GO
+
+CREATE  procedure [dbo].[Select_Letter] @LetterID INT 
+AS
+    BEGIN
+        SELECT  Letter.* ,
+                title senderTitle ,
+                dbo.InnerNo(Letter.LetterID,letter.Letter_Type) AS IndicatorInnerNo ,
+                --dbo.InnerNo(91912,4) AS IndicatorInnerNo ,
+
+                0 AS ParentFollowLetter --dbo.GetParentOfFollowLetter(@LetterID) ParentFollowLetter
+        FROM    Letter
+                LEFT JOIN FromOrganizations ON Letter.ToOrgID = FromOrganizations.ID
+        WHERE   LetterID =  @LetterID
+    END
+GO
+
+COMMIT
+GO

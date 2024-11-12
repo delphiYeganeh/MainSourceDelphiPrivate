@@ -1,0 +1,21 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetApprovedUsers]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetApprovedUsers]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetApprovedUsers](@WorkSheetId INT)
+AS
+
+SELECT r.*, u.Title as UserTitle 
+FROM WorkSheet_ResultUsers r inner join Users u on r.UserID=u.ID 
+WHERE r.WorkSheet_ResultsID=@WorkSheetId
+GO
+
+COMMIT
+GO

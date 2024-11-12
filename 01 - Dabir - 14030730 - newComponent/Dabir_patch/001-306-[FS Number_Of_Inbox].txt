@@ -1,0 +1,32 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Number_Of_Inbox]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[Number_Of_Inbox]
+END
+GO
+
+CREATE Function [dbo].[Number_Of_Inbox]
+(
+	@SecretariatID int, @LetterFormat tinyint,@OrgID int,
+	@Proceeded bit,@myear int,@Letter_Type int
+)
+	returns int
+BEGIN
+	return( SELECT count(Letter.letterID)
+			FROM ReCommites
+				INNER JOIN Letter  ON ReCommites.LetterID = Letter.LetterID
+			Where (Letter.myear = @myear)
+				and (SecretariatID= @SecretariatID or @SecretariatID = 0)
+				and (LetterFormat = @LetterFormat or  @LetterFormat = 0)
+				and (OrgID = @OrgID )
+				and (Proceeded = @Proceeded)
+				and (Letter_Type = @Letter_Type or @Letter_Type = 0))
+END
+GO
+
+COMMIT
+GO

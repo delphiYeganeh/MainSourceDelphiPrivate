@@ -1,0 +1,56 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Prc_CreateTbDbName]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Prc_CreateTbDbName]
+END
+GO
+
+CREATE  procedure [dbo].[Prc_CreateTbDbName]
+	(
+		 @DbName_New nvarchar(max) = 'ydabir1117'
+		,@DbName_Old nvarchar(max) = 'ydabir9803'
+	)
+AS
+DECLARE @SqlSelect  nvarchar(Max)
+DECLARE @SqlInsert  nvarchar(Max)
+SET @SqlSelect = '
+					IF NOT EXISTS(
+									SELECT * 
+									FROM  ' + @DbName_New +'.sys.tables
+									WHERE name = ''tbDbName''
+								 )
+					BEGIN
+					CREATE TABLE '+  @DbName_New +'. [dbo].[tbDbName](
+								[ID] [int] IDENTITY(1,1) NOT NULL,
+								[Name] [nvarchar](100) NOT NULL,
+								[ServerName] [nvarchar](100) NULL,
+								[DBName] [nvarchar](100) NOT NULL,
+							 CONSTRAINT [PK_tbDbName] PRIMARY KEY CLUSTERED 
+							(
+								[ID] ASC
+							)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+							) ON [PRIMARY]
+
+    
+					END'
+EXEC sp_executesql @SqlSelect
+
+SET @SqlInsert = ' DELETE FROM '+  @DbName_New +'.[dbo].[tbDbName]
+INSERT INTO '+  @DbName_New +'.[dbo].[tbDbName]
+							   ([Name]
+							   ,[ServerName]
+							   ,[DBName])
+					SELECT [Name]
+							,[ServerName]
+							,[DBName]
+					FROM '+  @DbName_Old +'.[dbo].[tbDbName]
+'
+EXEC sp_executesql @SqlInsert
+GO
+
+COMMIT
+GO

@@ -1,0 +1,39 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'userMailInfo')
+BEGIN
+	CREATE TABLE [dbo].[userMailInfo](
+		[id] [int] IDENTITY(1,1) NOT NULL,
+		[userId] [int] NULL,
+		[mailAddress] [nvarchar](50) NULL,
+		[mailPWD] [nvarchar](50) NULL,
+		[SMTP] [nvarchar](50) NULL,
+		[SMTP_port] [int] NULL,
+		[pop3MailServer] [nvarchar](50) NULL,
+		[pop3MailServerPort] [int] NULL,
+		[isSSL] [bit] NULL,
+	PRIMARY KEY CLUSTERED 
+	(
+		[id] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+END
+GO
+
+IF NOT EXISTS (SELECT 1 
+  FROM sys.foreign_keys 
+   WHERE parent_object_id = OBJECT_ID(N'dbo.userMailInfo')
+	AND referenced_object_id = OBJECT_ID(N'dbo.Users')
+)
+BEGIN
+	ALTER TABLE [dbo].[userMailInfo]  WITH NOCHECK ADD FOREIGN KEY([userId])
+	REFERENCES [dbo].[Users] ([Id])
+END
+GO
+
+COMMIT
+GO

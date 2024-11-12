@@ -1,0 +1,19 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_SetNewsNotShowStatus]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_SetNewsNotShowStatus]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_SetNewsNotShowStatus](@UserID INT,@NewsID INT)
+AS
+	UPDATE NewsUsers
+	SET NotShow = 1 WHERE NewsID=@NewsID AND UsersID=@UserID
+GO
+
+COMMIT
+GO

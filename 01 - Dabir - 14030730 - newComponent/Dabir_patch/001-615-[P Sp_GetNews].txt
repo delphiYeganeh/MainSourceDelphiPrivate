@@ -1,0 +1,38 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetNews]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetNews]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetNews](@userid INT,@unRead BIT,@messagePart NVARCHAR(300))
+AS
+IF (@unRead=1)
+
+	Select N.* , NU.UsersID as ReciverUserID , NU.ISRead,(Select Title from Users Where ID = N.UserID) as UsersTitle
+      ,(Select Title From Urgenceis Where ID = N.UrgenceisID) as Urgenceis
+      ,(Select ImDa.FileName from ImageData ImDa
+    Where ImDa.TableName = 'News'
+      And ImDa.TableID = N.NewsID )as AttachFileName
+    From News N
+    Inner Join NewsUsers NU On NU.NewsID = N.NewsID
+    Where(NU.UsersID =@userid) AND (N.Title like @messagePart) AND ISNULL(IsRead,0)=0
+
+ELSE
+
+	Select N.* , NU.UsersID as ReciverUserID , NU.ISRead,(Select Title from Users Where ID = N.UserID) as UsersTitle
+      ,(Select Title From Urgenceis Where ID = N.UrgenceisID) as Urgenceis
+      ,(Select ImDa.FileName from ImageData ImDa
+    Where ImDa.TableName = 'News'
+      And ImDa.TableID = N.NewsID )as AttachFileName
+    From News N
+    Inner Join NewsUsers NU On NU.NewsID = N.NewsID
+    Where(NU.UsersID =@userid) AND (N.Title like @messagePart) AND ISNULL(NU.NotShow,0)=0
+GO
+
+COMMIT
+GO

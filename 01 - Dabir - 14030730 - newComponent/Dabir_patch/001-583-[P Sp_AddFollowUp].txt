@@ -1,0 +1,41 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_AddFollowUp]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_AddFollowUp]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_AddFollowUp]
+  ( 
+  	@FollowUpId [int]OUTPUT,@TypeID INT,@UserID INT,
+  	@Comment NVARCHAR(255),@ToDoDate CHAR(10),@ToDoTime CHAR(5),
+  	@DoneComment NVARCHAR(255),@LetterID INT
+  )
+AS
+
+INSERT INTO FollowUp
+(
+	-- FollowUPID -- this column value is auto-generated
+	StartFollowUpID,
+	FollowUPTypeID,
+	DoneStatusID,
+	UserID,
+	Comment,
+	ToDoDate,
+	ToDoTime,
+	DoneComment,
+	HasAlarm,
+	Letterid
+)
+VALUES
+    (0,@TypeID,0,@UserID,@Comment,@ToDoDate,@ToDoTime,@DoneComment,1,@LetterID)
+    
+SET @FollowUpId=@@identity 
+GO
+
+COMMIT
+GO

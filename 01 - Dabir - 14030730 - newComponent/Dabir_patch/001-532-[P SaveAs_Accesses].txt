@@ -1,0 +1,39 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[SaveAs_Accesses]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[SaveAs_Accesses]
+END
+GO
+
+CREATE  procedure [dbo].[SaveAs_Accesses]
+(
+	@Title nvarchar(50),
+	@oldaccessID int,
+	@newID int output
+)
+
+AS
+
+Delete From ActionsAccess Where AccessID Not In (Select ID From accesses)
+
+Insert Into [dbo].[Accesses] ([Title]) Values(@Title)
+
+Select @newID = max(ID) From accesses
+
+Insert Into ActionsAccess(accessid, ActionID, FormTag, HasAccess)
+	Select Distinct @newid, ActionID, FormTag, HasAccess
+		From ActionsAccess
+		Where accessid=@oldaccessID
+
+Insert Into ActionsAccess(accessid, ActionID, FormTag, HasAccess)
+	Select Distinct Accesses.ID AS accessid, Actions.ID AS actionid, Actions.FormTag, 0 AS hasaccess
+	From Actions , Accesses
+	Where (str(Accesses.ID) + Actions.ID + str(Actions.FormTag)) Not In (select str(accessid) + ActionID + str(FormTag) from ActionsAccess)
+GO
+
+COMMIT
+GO

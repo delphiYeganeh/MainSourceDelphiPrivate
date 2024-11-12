@@ -1,0 +1,20 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_UpdateLetterData]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_UpdateLetterData]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_UpdateLetterData](@letterdataId INT,@image IMAGE)
+AS
+	UPDATE LetterData
+	SET	[Image] = @image
+	WHERE LetterDataID=@letterdataId
+GO
+
+COMMIT
+GO

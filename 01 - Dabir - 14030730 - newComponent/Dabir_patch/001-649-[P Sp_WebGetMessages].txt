@@ -1,0 +1,47 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_WebGetMessages]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_WebGetMessages]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_WebGetMessages](@UserID INT, @FolderID INT = 2)
+AS
+
+		
+	IF @FolderID IN (1, 2)
+		SELECT um.UserMessageID, um.To_, u1.Title AS ReceiverTitle, um.From_, u2.Title AS SenderTitle,
+	           um.Code, um.MsgDate, um.MsgTime, um.[Subject], 
+	           um.[Message], um.[Status]
+	    FROM UserMessage um INNER JOIN
+	         Users u1 ON u1.Id = um.To_ INNER JOIN
+	         Users u2 ON u2.Id = um.From_
+	    WHERE  isnull(um.IsForSender, 0) = 0 and um.To_ = cast(@UserID AS VARCHAR(10)) 
+		ORDER BY um.Status, um.MsgDate desc, um.MsgTime desc
+	    
+   ELSE IF @FolderID = 3	   
+	    SELECT um.UserMessageID, um.To_, u1.Title AS ReceiverTitle, um.From_, u2.Title AS SenderTitle,
+	           um.Code, um.MsgDate, um.MsgTime, um.[Subject], 
+	           um.[Message], um.[Status]
+	    FROM UserMessage um INNER JOIN
+	         Users u1 ON u1.Id = um.To_ INNER JOIN
+	         Users u2 ON u2.Id = um.From_
+	    WHERE isnull(um.IsForSender, 0) = 0 and um.[Status] = 1 and um.To_ = cast(@UserID AS VARCHAR(10)) 
+	    ORDER BY um.Status, um.MsgDate desc, um.MsgTime desc    
+  ELSE IF @FolderID = 4  
+	    SELECT um.UserMessageID, um.To_, u1.Title AS ReceiverTitle, um.From_, u2.Title AS SenderTitle,
+	           um.Code, um.MsgDate, um.MsgTime, um.[Subject], 
+	           um.[Message], um.[Status]
+	    FROM UserMessage um INNER JOIN
+	         Users u1 ON u1.Id = um.To_ INNER JOIN
+	         Users u2 ON u2.Id = um.From_
+	    WHERE isnull(um.IsForSender, 0) = 1 and um.From_ = cast(@UserID AS VARCHAR(10))     	
+	    ORDER BY um.Status, um.MsgDate desc, um.MsgTime desc
+GO
+
+COMMIT
+GO

@@ -1,0 +1,172 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[spCreateNewsFromWorkSheet]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[spCreateNewsFromWorkSheet]
+END
+GO
+
+CREATE PROCEDURE [dbo].[spCreateNewsFromWorkSheet]
+	@DateAnnonce VARCHAR(10),
+	@TimeAnnonce VARCHAR(10),
+	@UserID INT,
+	@WorkSheetID INT,
+	@SendFlag INT=0	
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @NewCode INT,
+		@WorkSheetType INT , 
+		@WorkSheetUserID INT, 
+		@LastInsertedID INT,
+		@Title VARCHAR(300) , 
+		@Memo VARCHAR(3000),
+		@Description Varchar(3000)
+	
+	BEGIN TRAN
+	
+	SELECT @WorkSheetType=TYPE,@Title=SUBJECT, @Description = Description FROM WorkSheet_Base WHERE ID=@WorkSheetID
+	IF @WorkSheetType=1	SET @Memo='دعوت به جلسه با کد:'+CAST(@WorkSheetID AS VARCHAR) + ' ' + @Description
+	IF @WorkSheetType=2	SET @Memo='دعوت به ملاقات با کد:'+CAST(@WorkSheetID AS VARCHAR) + ' ' + @Description
+	IF @WorkSheetType=3	SET @Memo='دعوت به انجام کار با کد:'+CAST(@WorkSheetID AS VARCHAR) + ' ' + @Description
+			
+	SELECT @NewCode=MAX(Code) FROM News
+	SET @NewCode=isnull(@NewCode,0)+1
+
+	IF @SendFlag=1
+	BEGIN
+		IF NOT EXISTS(
+					  SELECT userid FROM WorkSheet_Sessions WHERE WorkSheetBaseID=@WorkSheetID AND UserResponse=3
+						UNION ALL
+					  SELECT userid FROM WorkSheet_Visits   WHERE WorkSheetBaseID=@WorkSheetID AND UserResponse=3
+						UNION ALL
+					  SELECT userid FROM WorkSheet_Tasks    WHERE WorkSheetBaseID=@WorkSheetID AND UserResponse=3
+					 )
+			RETURN
+	END
+
+	INSERT INTO News(Code,Title,Memo,UrgenceisID,DateAnnounce,TimeAnnounce,DateExpire,UserID)
+	VALUES(@NewCode,@Title,@Memo,1,@DateAnnonce,@TimeAnnonce,NULL,@UserID)
+	SELECT @LastInsertedID=SCOPE_IDENTITY() FROM News
+	
+	IF @WorkSheetType=1 -- جلسه
+	BEGIN
+		IF @SendFlag=0
+		BEGIN
+			DECLARE cr CURSOR FOR 		
+			SELECT UserID FROM WorkSheet_Sessions 
+			WHERE WorkSheetBaseID=@WorkSheetID		
+			OPEN cr
+			FETCH NEXT FROM cr INTO @WorkSheetUserID
+			WHILE @@FETCH_STATUS = 0
+			BEGIN
+				INSERT INTO NewsUsers(NewsID,UsersID,IsRead,NotShow)
+				VALUES(@LastInsertedID,@WorkSheetUserID,0,0)
+				FETCH NEXT FROM cr INTO @WorkSheetUserID
+			END
+			CLOSE cr
+			DEALLOCATE cr
+		END
+		ELSE
+		BEGIN
+			DECLARE cr CURSOR FOR 		
+			SELECT UserID FROM WorkSheet_Sessions 
+			WHERE WorkSheetBaseID=@WorkSheetID AND UserResponse=3	
+			OPEN cr
+			FETCH NEXT FROM cr INTO @WorkSheetUserID
+			WHILE @@FETCH_STATUS = 0
+			BEGIN
+				INSERT INTO NewsUsers(NewsID,UsersID,IsRead,NotShow)
+				VALUES(@LastInsertedID,@WorkSheetUserID,0,0)
+				FETCH NEXT FROM cr INTO @WorkSheetUserID
+			END
+			CLOSE cr
+			DEALLOCATE cr			
+		END	
+	END
+	IF @WorkSheetType=2 -- قرارملاقات
+	BEGIN
+		IF @SendFlag=0
+		BEGIN
+			DECLARE cr CURSOR FOR 		
+			SELECT UserID FROM WorkSheet_Visits 
+			WHERE WorkSheetBaseID=@WorkSheetID		
+			OPEN cr
+			FETCH NEXT FROM cr INTO @WorkSheetUserID
+			WHILE @@FETCH_STATUS = 0
+			BEGIN
+				INSERT INTO NewsUsers(NewsID,UsersID,IsRead,NotShow)
+				VALUES(@LastInsertedID,@WorkSheetUserID,0,0)
+				FETCH NEXT FROM cr INTO @WorkSheetUserID
+			END
+			CLOSE cr
+			DEALLOCATE cr
+		END
+		ELSE
+		BEGIN
+			DECLARE cr CURSOR FOR 		
+			SELECT UserID FROM WorkSheet_Visits 
+			WHERE WorkSheetBaseID=@WorkSheetID AND UserResponse=3		
+			OPEN cr
+			FETCH NEXT FROM cr INTO @WorkSheetUserID
+			WHILE @@FETCH_STATUS = 0
+			BEGIN
+				INSERT INTO NewsUsers(NewsID,UsersID,IsRead,NotShow)
+				VALUES(@LastInsertedID,@WorkSheetUserID,0,0)
+				FETCH NEXT FROM cr INTO @WorkSheetUserID
+			END
+			CLOSE cr
+			DEALLOCATE cr			
+		END						
+	END
+	IF @WorkSheetType=3 -- Task
+	BEGIN
+		IF @SendFlag=0
+		BEGIN
+			DECLARE cr CURSOR FOR 		
+			SELECT UserID FROM WorkSheet_Tasks 
+			WHERE WorkSheetBaseID=@WorkSheetID		
+			OPEN cr
+			FETCH NEXT FROM cr INTO @WorkSheetUserID
+			WHILE @@FETCH_STATUS = 0
+			BEGIN
+				INSERT INTO NewsUsers(NewsID,UsersID,IsRead,NotShow)
+				VALUES(@LastInsertedID,@WorkSheetUserID,0,0)
+				FETCH NEXT FROM cr INTO @WorkSheetUserID
+			END
+			CLOSE cr
+			DEALLOCATE cr
+		END
+		ELSE
+		BEGIN
+			DECLARE cr CURSOR FOR 		
+			SELECT UserID FROM WorkSheet_Tasks 
+			WHERE WorkSheetBaseID=@WorkSheetID AND UserResponse=3	
+			OPEN cr
+			FETCH NEXT FROM cr INTO @WorkSheetUserID
+			WHILE @@FETCH_STATUS = 0
+			BEGIN
+				INSERT INTO NewsUsers(NewsID,UsersID,IsRead,NotShow)
+				VALUES(@LastInsertedID,@WorkSheetUserID,0,0)
+				FETCH NEXT FROM cr INTO @WorkSheetUserID
+			END
+			CLOSE cr
+			DEALLOCATE cr			
+		END						
+	END	
+	
+	UPDATE WorkSheet_Base
+	SET SendNews=1
+	WHERE ID=@WorkSheetID
+	
+	COMMIT TRAN
+		
+END
+
+GO
+
+COMMIT
+GO

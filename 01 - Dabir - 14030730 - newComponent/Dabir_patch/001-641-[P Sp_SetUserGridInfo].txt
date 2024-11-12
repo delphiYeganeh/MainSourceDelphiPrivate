@@ -1,0 +1,21 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_SetUserGridInfo]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_SetUserGridInfo]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_SetUserGridInfo](@ID INT,@gridInfo VARCHAR(500))
+AS
+	UPDATE Users
+	SET
+		eCartableGridInfo=@gridInfo
+	WHERE Id=@ID
+GO
+
+COMMIT
+GO

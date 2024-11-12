@@ -1,0 +1,19 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetWorkSheetMustCome]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetWorkSheetMustCome]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetWorkSheetMustCome]
+AS
+	SELECT * 
+		FROM WorkSheetSessionsMustCome wssmc
+GO
+
+COMMIT
+GO

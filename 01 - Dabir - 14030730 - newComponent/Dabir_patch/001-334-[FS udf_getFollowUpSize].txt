@@ -1,0 +1,30 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[udf_getFollowUpSize]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[udf_getFollowUpSize]
+END
+GO
+
+CREATE function [dbo].[udf_getFollowUpSize]
+(
+	@UserId int
+)
+returns int
+as
+begin
+	declare @count int=0
+	select @count=count(*) from FollowUp
+	where  1=1
+	and CONVERT(date,dbo.ShamsiToMiladi(ToDoDate)) = CONVERT(date,getdate())
+	and convert(varchar(5),convert(time,SYSDATETIME())) =  SUBSTRING(ToDoTime,1, 5)
+	and UserID=@UserId
+	return @count
+	end
+GO
+
+COMMIT
+GO

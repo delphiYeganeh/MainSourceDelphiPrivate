@@ -1,0 +1,97 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[sp_Statistic]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[sp_Statistic]
+END
+GO
+
+CREATE  procedure [dbo].[sp_Statistic]
+@Secretariatid int,@myear int,@Letter_Type int,@LetterFormat int, @where nvarchar(2000),@archiveFolderID int,@GroupBy int
+as 
+
+set @where= case when isnull(ltrim(rtrim(@where)),'')<>'' then
+                          'where len(registrationdate)=10 and '+@where else ' where len(registrationdate)=10' end
+
+if @Letter_Type<>0 
+  set @where=@where+' and (Letter_Type = '+Cast(@Letter_Type as varchar(5))+')'
+
+if @Secretariatid<>0 
+  set @where=@where+' and (Secretariatid = '+Cast(@Secretariatid as varchar(5))+')'
+
+if @Myear<>0 
+  set @where=@where+' and (myear = '+Cast(@myear as varchar(5))+')'
+
+if @LetterFormat<>0 
+  set @where=@where+' and (LetterFormat = '+Cast(@LetterFormat as varchar(5))+')'
+
+
+
+declare @sql nvarchar(4000),@select  varchar(500),@joins varchar(500)
+
+
+
+set @joins =case when @groupby<8         then ' '
+                             when @groupby=8 then ' left JOIN Classifications ON Letter.ClassificationID = Classifications.ID '                     
+                             when @groupby=9 then ' left JOIN Urgenceis ON Letter.UrgencyID = Urgenceis.ID '                     
+                             when @groupby=10 then ' left JOIN  Fromorganizations  ToOrganizations ON Letter.ToOrgID = ToOrganizations.ID '
+                             when @groupby=11 then ' left JOIN  Fromorganizations   ON Letter.FromOrgID = Fromorganizations.ID '   
+                             when @groupby=12 then ' left JOIN  users   ON Letter.userid = users.ID '   end
+
+           
+
+
+declare @Field varchar(100)
+set @field= case @groupby 
+                         when 1  then 'registrationdate '
+                          when 2  then 'dbo.ShamsiDayOfWeek(registrationdate) '
+                          when 3  then 'substring(registrationdate,6,2) '
+                          when 4  then 'dbo.fasl(registrationdate) '
+                          when 5  then 'substring(registrationdate,1,4) '
+                          when 6  then 'substring(registrationTime,1,2) '
+                          when 7  then 'dbo.pm(registrationtime) '
+                          when 8  then 'Classifications.Title '
+                          when 9  then 'Urgenceis.Title '
+                          when 10 then 'ToOrganizations.title ' 
+                          when 11 then 'FromOrganizations.title ' 
+                          when 12 then 'users.title ' end
+
+set @select ='select '+@field+' ,count(1)  from letter '
+
+create table ##s(id int identity(1,1),title nvarchar(255),number int)
+
+
+set @sql=' insert  into ##s(title,number) '+@select+  @joins+@where+
++'group by '+@field +' order by 2 desc '
+
+exec(@sql)
+
+if @groupby in (1,10,11)
+ begin
+   declare @c int,@d int
+   select  @d=number from ##s where id=50 
+   set @d=isnull(@d,0)
+   select @c=sum(number) from ##s where number<=@d
+   delete from ##s where number<=@d
+   set  IDENTITY_INSERT ##s On
+   insert into ##s(id,title,number) values(50,'ساير ',@c)
+ end
+  
+ 
+create table #s(id int identity(1,1),title nvarchar(255),number int)
+
+insert into #s(title,number)
+select title,number from ##s order by title
+
+select cast(id as int) id ,title,number
+from #s
+order by title
+
+drop table ##s
+GO
+
+COMMIT
+GO

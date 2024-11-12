@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[GetList]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[GetList]
+END
+GO
+
+CREATE  procedure [dbo].[GetList]
+(
+	@ListID int
+)
+AS
+	SELECT *,KeyValue, Title, Notes
+		FROM ListItems
+		where ListID=@ListID
+GO
+
+COMMIT
+GO

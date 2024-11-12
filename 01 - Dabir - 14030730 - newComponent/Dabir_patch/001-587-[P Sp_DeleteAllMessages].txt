@@ -1,0 +1,24 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_DeleteAllMessages]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_DeleteAllMessages]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_DeleteAllMessages](@UserID INT,@FolderID INT)
+AS
+
+	IF(@FolderID=1 OR @FolderID=2)
+		DELETE FROM UserMessage WHERE isnull(IsForSender, 0) = 0 and To_ =@UserID
+	ELSE IF(@FolderID=3)
+		DELETE FROM UserMessage WHERE isnull(IsForSender, 0) = 0 and To_ =@UserID AND [Status]=1
+	ELSE IF(@FolderID=4)
+		DELETE FROM UserMessage WHERE isnull(IsForSender, 0) = 1 and From_ =@UserID
+GO
+
+COMMIT
+GO

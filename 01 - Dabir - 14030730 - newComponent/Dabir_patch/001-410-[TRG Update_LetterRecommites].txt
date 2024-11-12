@@ -1,0 +1,48 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1 FROM sys.objects WHERE [object_id] = OBJECT_ID(N'[dbo].[Update_LetterRecommites]')
+               AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[Update_LetterRecommites];
+END
+GO
+
+CREATE TRIGGER [dbo].[Update_LetterRecommites] 
+ON [dbo].[ReCommites] 
+FOR INSERT, UPDATE, DELETE
+AS
+	
+	If OBJECT_ID('tempdb..#TPT') IS NOT NULL Return
+
+	CREATE TABLE #TPT (ID INT)
+
+	If Exists(Select 1 From inserted i)
+	Begin
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED 
+
+		UPDATE    L
+			SET    LetterRecommites = CAST(dbo.Recommites_by_indicator(i.LetterID)+'آخرين پاراف: '+isnull(i.Paraph,'') AS NVARCHAR(500)),
+			latestActionTypeid = i.ActionTypeID
+			From Letter L
+			Inner Join inserted i On i.LetterID = L.LetterID
+	End
+	Else
+	Begin
+		If Exists(Select 1 From deleted)
+		Begin
+		
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED 
+
+		UPDATE    L
+			SET    LetterRecommites = CAST(dbo.Recommites_by_indicator(d.LetterID)+'آخرين پاراف: '+isnull(d.Paraph,'') AS NVARCHAR(500))
+			From Letter L
+			Inner Join deleted d On d.LetterID = L.LetterID
+		End
+	End
+GO
+
+ALTER TABLE [dbo].[ReCommites] ENABLE TRIGGER [Update_LetterRecommites]
+GO
+
+COMMIT
+GO

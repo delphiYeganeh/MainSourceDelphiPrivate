@@ -1,0 +1,52 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PRC_LetterFormula_Insert]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PRC_LetterFormula_Insert]
+END
+GO
+
+CREATE  procedure [dbo].[PRC_LetterFormula_Insert]
+	(
+		@SecID int,
+		@LetterFormulaPart1 varchar(50),
+		@LetterFormulaPart2 varchar(50),
+		@LetterFormulaPart3 varchar(50),
+		@LetterFormulaPart4 varchar(50),
+		@LetterFormulaPart5 varchar(50),
+		@LetterFormulaPart6 varchar(50),
+		@LetterFormulaSeperator varchar(50),
+		@UseForWord bit,
+		@letterTypeID int
+	)
+AS 
+
+INSERT INTO [dbo].[LetterFormula]
+           ([SecID]
+           ,[LetterFormulaPart1]
+           ,[LetterFormulaPart2]
+           ,[LetterFormulaPart3]
+           ,[LetterFormulaPart4]
+           ,[LetterFormulaPart5]
+           ,[LetterFormulaPart6]
+           ,[LetterFormulaSeperator]
+           ,[UseForWord]
+           ,[letterTypeID])
+     VALUES
+           (@SecID,
+            @LetterFormulaPart1,
+            @LetterFormulaPart2,
+            @LetterFormulaPart3,
+            @LetterFormulaPart4,
+            @LetterFormulaPart5,
+            @LetterFormulaPart6,
+            @LetterFormulaSeperator,
+            @UseForWord,
+            @letterTypeID)
+GO
+
+COMMIT
+GO

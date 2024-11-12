@@ -1,0 +1,29 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[udf_recommiteUnreadSize]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[udf_recommiteUnreadSize]
+END
+GO
+
+CREATE FUNCTION [dbo].[udf_recommiteUnreadSize]
+(
+	@userId int
+)
+returns int
+As
+Begin
+	declare @result int=0;
+	select @result= count(*) from ReCommites t1
+	inner join Users u
+	on u.id=@userId and ( u.FromOrgID =t1.OrgID or u.SecondOrgID=t1.OrgID or u.TreeOrgID=t1.OrgID or u.FourOrgID=t1.OrgID or u.FiveOrgID=t1.OrgID)
+	where viewdate is null
+	return @result
+End
+GO
+
+COMMIT
+GO

@@ -1,0 +1,25 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[usp_getLetterNotifications]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[usp_getLetterNotifications]
+END
+GO
+
+CREATE  procedure [dbo].[usp_getLetterNotifications]
+@userId int,@secondDiff int
+As
+begin
+	select distinct ToOrgID,l.LetterID,l.LastUpdate from letter l
+	inner join Users u
+	on u.id=@userId and ( u.FromOrgID =l.ToOrgID or u.SecondOrgID=l.ToOrgID or u.TreeOrgID=l.ToOrgID or u.FourOrgID=l.ToOrgID or u.FiveOrgID=l.ToOrgID)
+
+	where l.LastUpdate> DATEADd(SECOND,-1*@secondDiff,getdate())
+end;
+GO
+
+COMMIT
+GO

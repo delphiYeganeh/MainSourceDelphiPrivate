@@ -1,0 +1,20 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetUrgenceis]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetUrgenceis]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetUrgenceis]
+AS
+	SELECT   *
+		FROM Urgenceis u
+		ORDER BY u.ID
+GO
+
+COMMIT
+GO

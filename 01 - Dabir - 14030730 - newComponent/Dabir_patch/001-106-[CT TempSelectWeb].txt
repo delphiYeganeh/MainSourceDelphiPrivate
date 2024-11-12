@@ -1,0 +1,109 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'TempSelectWeb')
+BEGIN
+	CREATE TABLE [dbo].[TempSelectWeb](
+		[LetterID] [int] NOT NULL,
+		[IndicatorID] [int] NOT NULL,
+		[MYear] [int] NOT NULL,
+		[SecretariatID] [int] NOT NULL,
+		[Letter_Type] [int] NOT NULL,
+		[letterformat] [int] NOT NULL,
+		[IncommingNO] [nvarchar](50) NULL,
+		[Incommingdate] [nvarchar](10) NULL,
+		[CenterNo] [nvarchar](50) NULL,
+		[CenterDate] [char](10) NULL,
+		[FromOrgID] [int] NOT NULL,
+		[ToOrgID] [int] NOT NULL,
+		[Signerid] [nvarchar](50) NULL,
+		[ClassificationID] [int] NOT NULL,
+		[UrgencyID] [int] NOT NULL,
+		[Memo] [nvarchar](2000) NULL,
+		[AttachTitle] [nvarchar](255) NULL,
+		[NumberOfAttachPages] [smallint] NULL,
+		[NumberOfPage] [tinyint] NOT NULL,
+		[ReceiveTypeID] [int] NOT NULL,
+		[UserID] [int] NOT NULL,
+		[RetroactionNo] [nvarchar](50) NULL,
+		[UserMemo] [nvarchar](255) NULL,
+		[RegistrationDate] [char](10) NOT NULL,
+		[RegistrationTime] [varchar](5) NOT NULL,
+		[FollowLetterNo] [nvarchar](50) NULL,
+		[ToStaffer] [nvarchar](50) NULL,
+		[SentLetterID] [int] NULL,
+		[TemplateID] [int] NULL,
+		[HeaderID] [int] NULL,
+		[LetterRecommites] [nvarchar](500) NULL,
+		[PreCode] [nvarchar](50) NULL,
+		[fromstaffer] [nvarchar](50) NULL,
+		[Finalized] [bit] NOT NULL,
+		[SendStatusID] [int] NOT NULL,
+		[LastUpdate] [datetime] NOT NULL,
+		[UserTableID] [int] NULL,
+		[UniqueID] [bigint] NULL,
+		[Archived] [bit] NOT NULL,
+		[SubjectDescription] [nvarchar](255) NULL,
+		[SubjectID] [int] NULL,
+		[LatestActionTypeID] [int] NULL,
+		[LatestActionReason] [nvarchar](255) NULL,
+		[DeadLineDate] [char](10) NULL,
+		[ActionTypeID] [int] NOT NULL,
+		[UserTableID2] [int] NULL,
+		[EmailNuFromDate] [nvarchar](20) NULL,
+		[OldSecretariatID] [int] NULL,
+		[CustomerID] [int] NULL,
+		[InnerNO] [varchar](50) NULL,
+		[ECEAnswer] [bit] NULL,
+		[RetroactionYear] [int] NULL,
+		[FollowLetterYear] [int] NULL,
+		[InnerNoForWord] [varchar](50) NULL,
+		[anjam_shod] [int] NULL,
+		[LetterIDUP] [int] NULL,
+		[letterTypeID] [int] NULL,
+		[EmailFromDateTime] [nvarchar](20) NULL,
+		[ReciveTitle] [nvarchar](50) NULL,
+		[ClassificatioTitle] [nvarchar](50) NULL,
+		[UrgencyTitle] [nvarchar](50) NULL,
+		[UserTitle] [nvarchar](100) NULL,
+		[FormatTitle] [nvarchar](50) NULL,
+		[ToOrgTitle] [nvarchar](100) NULL,
+		[TemplateTitle] [nvarchar](50) NULL,
+		[FromTitle] [nvarchar](100) NULL,
+		[LetterTypeTitle] [nvarchar](50) NULL,
+		[AnswerMYear] [int] NULL,
+		[AnswerIndicatorID] [int] NULL,
+		[has_Page] [bit] NULL,
+		[has_WordPage] [bit] NULL,
+		[has_file] [bit] NULL
+	) ON [PRIMARY]
+END
+GO
+
+IF EXISTS(SELECT 1 
+		FROM INFORMATION_SCHEMA.COLUMNS
+		WHERE TABLE_NAME = 'TempSelectWeb' 
+			AND COLUMN_NAME = 'MYear' 
+			AND DATA_TYPE = 'tinyint')
+BEGIN
+	ALTER TABLE [dbo].[TempSelectWeb] 
+	ALTER COLUMN	[MYear] [int] NOT NULL
+END
+GO
+
+IF EXISTS(SELECT 1 
+		FROM INFORMATION_SCHEMA.COLUMNS
+		WHERE TABLE_NAME = 'TempSelectWeb' 
+			AND COLUMN_NAME = 'AnswerMYear' 
+			AND DATA_TYPE = 'tinyint')
+BEGIN
+	ALTER TABLE [dbo].[TempSelectWeb] 
+	ALTER COLUMN	[AnswerMYear] [int] NULL
+END
+GO
+
+COMMIT
+GO

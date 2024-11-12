@@ -1,0 +1,20 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetLetterForms]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetLetterForms]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetLetterForms](@UserId INT,@LetterID INT)
+AS
+	SELECT LF.ID, T.DESCRIPTION AS FormDsc 
+	FROM LetterForms LF INNER JOIN Tables t ON LF.FormID = t.TableId 
+	WHERE  LF.LetterID =@LetterID
+GO
+
+COMMIT
+GO

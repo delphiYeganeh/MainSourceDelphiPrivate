@@ -1,0 +1,240 @@
+inherited FRestorLetterData: TFRestorLetterData
+  Left = 565
+  Top = 329
+  Caption = #1576#1575#1586#1711#1585#1583#1575#1606#1583#1606' '#1606#1575#1605#1607' '#1607#1575
+  ClientHeight = 176
+  ClientWidth = 439
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlMain: TPanel [0]
+    Left = 0
+    Top = 0
+    Width = 439
+    Height = 176
+    Align = alClient
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 279
+      Top = 12
+      Width = 130
+      Height = 13
+      Caption = #1605#1587#1610#1585' '#1606#1711#1607#1583#1575#1585#1610' '#1601#1575#1610#1604' '#1662#1588#1578#1610#1576#1575#1606
+    end
+    object Label2: TLabel
+      Left = 279
+      Top = 37
+      Width = 138
+      Height = 13
+      Caption = #1605#1587#1610#1585' '#1578#1588#1603#1610#1604' '#1601#1575#1610#1604' '#1607#1575#1610' '#1605#1608#1602#1578
+    end
+    object SpeedButton1: TAdvGlowButton
+      Left = 255
+      Top = 8
+      Width = 21
+      Height = 19
+      Cursor = crHandPoint
+      ImageIndex = 26
+      Images = Dm.ImageList_MainNew
+      NotesFont.Charset = DEFAULT_CHARSET
+      NotesFont.Color = clWindowText
+      NotesFont.Height = -11
+      NotesFont.Name = 'Tahoma'
+      NotesFont.Style = []
+      TabOrder = 6
+      OnClick = SpeedButton1Click
+      Appearance.ColorChecked = 16111818
+      Appearance.ColorCheckedTo = 16367008
+      Appearance.ColorDisabled = 15921906
+      Appearance.ColorDisabledTo = 15921906
+      Appearance.ColorDown = 16111818
+      Appearance.ColorDownTo = 16367008
+      Appearance.ColorHot = 16117985
+      Appearance.ColorHotTo = 16372402
+      Appearance.ColorMirrorHot = 16107693
+      Appearance.ColorMirrorHotTo = 16775412
+      Appearance.ColorMirrorDown = 16102556
+      Appearance.ColorMirrorDownTo = 16768988
+      Appearance.ColorMirrorChecked = 16102556
+      Appearance.ColorMirrorCheckedTo = 16768988
+      Appearance.ColorMirrorDisabled = 11974326
+      Appearance.ColorMirrorDisabledTo = 15921906
+    end
+    object SpeedButton2: TAdvGlowButton
+      Left = 255
+      Top = 35
+      Width = 21
+      Height = 19
+      Cursor = crHandPoint
+      ImageIndex = 26
+      Images = Dm.ImageList_MainNew
+      NotesFont.Charset = DEFAULT_CHARSET
+      NotesFont.Color = clWindowText
+      NotesFont.Height = -11
+      NotesFont.Name = 'Tahoma'
+      NotesFont.Style = []
+      TabOrder = 7
+      OnClick = SpeedButton2Click
+      Appearance.ColorChecked = 16111818
+      Appearance.ColorCheckedTo = 16367008
+      Appearance.ColorDisabled = 15921906
+      Appearance.ColorDisabledTo = 15921906
+      Appearance.ColorDown = 16111818
+      Appearance.ColorDownTo = 16367008
+      Appearance.ColorHot = 16117985
+      Appearance.ColorHotTo = 16372402
+      Appearance.ColorMirrorHot = 16107693
+      Appearance.ColorMirrorHotTo = 16775412
+      Appearance.ColorMirrorDown = 16102556
+      Appearance.ColorMirrorDownTo = 16768988
+      Appearance.ColorMirrorChecked = 16102556
+      Appearance.ColorMirrorCheckedTo = 16768988
+      Appearance.ColorMirrorDisabled = 11974326
+      Appearance.ColorMirrorDisabledTo = 15921906
+    end
+    object ProgressBar: TProgressBar
+      Left = 1
+      Top = 159
+      Width = 437
+      Height = 16
+      Align = alBottom
+      Max = 10
+      TabOrder = 0
+    end
+    object path: TEdit
+      Left = 21
+      Top = 7
+      Width = 232
+      Height = 21
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object BitBtn1: TAdvGlowButton
+      Left = 163
+      Top = 89
+      Width = 170
+      Height = 30
+      Cursor = crHandPoint
+      Caption = #1576#1585#1711#1585#1583#1575#1606#1583#1606' '#1606#1575#1605#1607' '#1607#1575#1610' '#1580#1583#1610#1583
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ImageIndex = 21
+      Images = Dm.LetterImages_New
+      NotesFont.Charset = DEFAULT_CHARSET
+      NotesFont.Color = clWindowText
+      NotesFont.Height = -11
+      NotesFont.Name = 'Tahoma'
+      NotesFont.Style = []
+      ParentFont = False
+      TabOrder = 2
+      OnClick = BitBtn1Click
+      Appearance.ColorChecked = 16111818
+      Appearance.ColorCheckedTo = 16367008
+      Appearance.ColorDisabled = 15921906
+      Appearance.ColorDisabledTo = 15921906
+      Appearance.ColorDown = 16111818
+      Appearance.ColorDownTo = 16367008
+      Appearance.ColorHot = 16117985
+      Appearance.ColorHotTo = 16372402
+      Appearance.ColorMirrorHot = 16107693
+      Appearance.ColorMirrorHotTo = 16775412
+      Appearance.ColorMirrorDown = 16102556
+      Appearance.ColorMirrorDownTo = 16768988
+      Appearance.ColorMirrorChecked = 16102556
+      Appearance.ColorMirrorCheckedTo = 16768988
+      Appearance.ColorMirrorDisabled = 11974326
+      Appearance.ColorMirrorDisabledTo = 15921906
+    end
+    object DriveComboBox1: TDriveComboBox
+      Left = 17
+      Top = 39
+      Width = 32
+      Height = 19
+      BevelInner = bvSpace
+      BevelOuter = bvRaised
+      TabOrder = 3
+      TextCase = tcUpperCase
+      Visible = False
+    end
+    object Button1: TAdvGlowButton
+      Left = 14
+      Top = 123
+      Width = 75
+      Height = 28
+      Cursor = crHandPoint
+      Cancel = True
+      Caption = #1582#1585#1608#1580
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ImageIndex = 84
+      Images = Dm.ImageList_MainNew
+      NotesFont.Charset = DEFAULT_CHARSET
+      NotesFont.Color = clWindowText
+      NotesFont.Height = -11
+      NotesFont.Name = 'Tahoma'
+      NotesFont.Style = []
+      ParentFont = False
+      TabOrder = 4
+      OnClick = Button1Click
+      Appearance.ColorChecked = 16111818
+      Appearance.ColorCheckedTo = 16367008
+      Appearance.ColorDisabled = 15921906
+      Appearance.ColorDisabledTo = 15921906
+      Appearance.ColorDown = 16111818
+      Appearance.ColorDownTo = 16367008
+      Appearance.ColorHot = 16117985
+      Appearance.ColorHotTo = 16372402
+      Appearance.ColorMirrorHot = 16107693
+      Appearance.ColorMirrorHotTo = 16775412
+      Appearance.ColorMirrorDown = 16102556
+      Appearance.ColorMirrorDownTo = 16768988
+      Appearance.ColorMirrorChecked = 16102556
+      Appearance.ColorMirrorCheckedTo = 16768988
+      Appearance.ColorMirrorDisabled = 11974326
+      Appearance.ColorMirrorDisabledTo = 15921906
+    end
+    object Edit1: TEdit
+      Left = 21
+      Top = 33
+      Width = 232
+      Height = 21
+      ReadOnly = True
+      TabOrder = 5
+    end
+  end
+  inherited DSForm: TDataSource
+    Left = 68
+    Top = 11
+  end
+  inherited ActionList: TActionList
+    Left = 34
+    Top = 74
+  end
+  inherited Grid_PopupMenu: TPopupMenu
+    Left = 207
+    Top = 44
+  end
+  object OpenDialog: TOpenDialog
+    Left = 90
+    Top = 93
+  end
+  object dbinfo: TADOQuery
+    Connection = Dm.YeganehConnection
+    Parameters = <>
+    Left = 49
+    Top = 29
+  end
+  object ADOCommand: TADOCommand
+    CommandTimeout = 200000
+    Connection = Dm.YeganehConnection
+    Parameters = <>
+    Left = 143
+    Top = 59
+  end
+end

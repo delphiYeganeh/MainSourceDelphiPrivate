@@ -1,0 +1,26 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[CountIncommingNO_PRC]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[CountIncommingNO_PRC]
+END
+GO
+
+CREATE  procedure [dbo].[CountIncommingNO_PRC]
+			(
+				  @IncommingNO nvarchar(50) = 25
+				 ,@Year INT = 96
+				 ,@SecretariatID INT = 0
+			)
+AS 
+	SELECT COUNT(IncommingNO)Cnt
+	FROM Letter
+	WHERE LTRIM(RTRIM(IncommingNO)) = @IncommingNO
+	AND MYear = @Year
+GO
+
+COMMIT
+GO

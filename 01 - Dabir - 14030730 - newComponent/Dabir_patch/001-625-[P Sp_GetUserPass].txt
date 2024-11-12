@@ -1,0 +1,21 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetUserPass]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetUserPass]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetUserPass](@username NVARCHAR(50))
+AS
+	SET @username=REPLACE(@username,NCHAR(1740),NCHAR(1610));
+	SELECT   PassWord
+		FROM      Users
+		WHERE UserName=@username
+GO
+
+COMMIT
+GO

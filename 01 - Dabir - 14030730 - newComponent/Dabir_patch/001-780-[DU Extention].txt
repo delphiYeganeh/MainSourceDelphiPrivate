@@ -1,0 +1,12 @@
+BEGIN TRANSACTION
+GO
+
+	If  Exists(Select  Top 1 ExtentionID From Extention Where Lower(Extention) = 'xls')
+		Update Top (1) Extention Set IsSystem = 1 Where Lower(Extention) = 'xls'
+	Else 
+		Insert Into Extention (ExtentionTitle, Extention, IsSystem)
+			Values ('اکسل xls', 'xls', 1)
+GO
+
+COMMIT
+GO

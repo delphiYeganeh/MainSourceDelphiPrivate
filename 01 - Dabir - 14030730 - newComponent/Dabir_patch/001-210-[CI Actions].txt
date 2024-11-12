@@ -1,0 +1,11 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE name = 'IX_Actions_ID' AND object_id = OBJECT_ID('dbo.Actions'))
+BEGIN
+	CREATE INDEX IX_Actions_ID ON dbo.Actions(ID, FormTag);
+END
+GO
+
+COMMIT
+GO

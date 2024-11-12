@@ -1,0 +1,19 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_GetReferenceTableData]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_GetReferenceTableData]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_GetReferenceTableData](@FieldID INT)
+AS
+
+SELECT * FROM ReferenceTableData WHERE TableID = (SELECT ReferenceTableID FROM Fields WHERE ID =@FieldID)
+GO
+
+COMMIT
+GO

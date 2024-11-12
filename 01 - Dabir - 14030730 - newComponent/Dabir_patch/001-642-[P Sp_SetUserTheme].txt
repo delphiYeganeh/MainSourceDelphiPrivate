@@ -1,0 +1,19 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_SetUserTheme]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_SetUserTheme]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_SetUserTheme](@Id INT,@theme NVARCHAR)
+AS
+	Update Users Set eCartableTheme=@theme
+	WHERE Id=@Id
+GO
+
+COMMIT
+GO

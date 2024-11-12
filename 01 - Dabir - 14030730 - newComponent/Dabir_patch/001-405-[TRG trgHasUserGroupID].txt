@@ -1,0 +1,53 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1 FROM sys.objects WHERE [object_id] = OBJECT_ID(N'[dbo].[trgHasUserGroupID]')
+               AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[trgHasUserGroupID];
+END
+GO
+
+CREATE TRIGGER [dbo].[trgHasUserGroupID]
+   ON  [dbo].[Letter] 
+   AFTER INSERT,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON
+
+	IF (OBJECT_ID('tempdb..#Topol') IS NOT NULL) Or (OBJECT_ID('tempdb..#TPT') IS NOT NULL)  RETURN
+
+	DECLARE @LetterID INT , @GroupID INT,@LetterTypeID INT, @InnerNo varchar(50), @LetterIDUP int
+
+	
+	Select @LetterID = IsNull(LetterID,0), @LetterTypeID = Letter_Type, @LetterIDUP = LetterIDUP, @InnerNo = dbo.InnerNo(IsNull(LetterID,0), Letter_Type)  
+		From inserted
+	
+	CREATE TABLE #Topol(ID INT)	
+	
+	if @LetterIDUP is null
+	Begin
+		Update Letter
+			Set InnerNO = @InnerNo,
+				CenterNo = Case When (LTrim(RTrim(IsNull(CenterNo, ''))) = '') Then @InnerNo End,
+				CenterDate = Case When (LTrim(RTrim(IsNull(CenterNo, ''))) = '') Then RegistrationDate End
+			Where LetterID=@LetterID
+				And LetterIDUP is null
+
+	End
+	Else
+	Begin
+		UPDATE Letter
+			SET	CenterNo = (Select ISNULL(InnerNO,CenterNo) from Letter WHERE LetterID=(Select LetterIDUP from Letter Where Letterid =@LetterID))--(Select InnerNO from Letter WHERE LetterID=@LetterID )--InnerNO
+		WHERE LetterID=@LetterID
+			AND LetterIDUP is not null
+			And (CenterNo is null or ltrim(rtrim(CenterNo)) = '') or (CenterNo is null)--ltrim(rtrim(CenterNo)) IS null
+
+	End
+END
+GO
+
+ALTER TABLE [dbo].[Letter] ENABLE TRIGGER [trgHasUserGroupID]
+GO
+
+COMMIT
+GO

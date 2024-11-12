@@ -1,0 +1,62 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT *
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_Subset_OrgID]') 
+                   and OBJECTPROPERTY(id, N'IsTableFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[Get_Subset_OrgID]
+END
+GO
+
+/*Ranjbar تابع بدست آوردن زير شاخه هاي يك چارت سازماني*/  
+CREATE Function [dbo].[Get_Subset_OrgID]
+(
+	@OrgID int
+)  
+	Returns @ReturnTable TABLE (OrgID int)  
+As  
+begin  
+	Insert into @ReturnTable(OrgID)
+	Values(@OrgID)
+	While @@RowCount > 0
+	begin
+	   Insert into @ReturnTable(OrgID)   
+	   Select ID from FromOrganizations Where ParentID in (Select OrgID from @ReturnTable) And not ID in (Select OrgID from @ReturnTable)  
+	end
+
+	/*
+	روش دوم
+	Declare @LocalTable1 TABLE (OrgID int)  
+	Declare @LocalTable2 TABLE (OrgID int)  
+  
+	Insert into @LocalTable1(OrgID)  
+	Select @OrgID as ID   
+	Union  
+	Select ID from FromOrganizations Where ParentID = @OrgID  --And IsInnerOrg = 1  
+  
+	Insert into @LocalTable2(OrgID)  
+	Select OrgID From @LocalTable1   
+  
+	While @@ROWCOUNT > 0  
+	begin     
+	   Insert into @ReturnTable(OrgID)  
+	   Select OrgID from @LocalTable1   
+  
+	   Delete From @LocalTable1    
+  
+	   Insert into @LocalTable1(OrgID)  
+	   Select ID from FromOrganizations Where ParentID in (Select OrgID From @LocalTable2)   --And IsInnerOrg = 1
+     
+	   Delete From @LocalTable2  
+  
+	   Insert into @LocalTable2(OrgID)  
+	   Select OrgID from @LocalTable1  
+	end */
+  
+	Return 
+end  
+GO
+
+COMMIT
+GO

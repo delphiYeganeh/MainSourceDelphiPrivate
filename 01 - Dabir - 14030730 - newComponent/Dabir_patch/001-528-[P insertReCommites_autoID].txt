@@ -1,0 +1,92 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[insertReCommites_autoID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[insertReCommites_autoID]
+END
+GO
+
+CREATE  procedure [dbo].[insertReCommites_autoID]
+    (
+      @LetterID INT ,
+      @Type TINYINT ,
+      @ParentId SMALLINT ,
+      @OrgID INT ,
+      @Paraph NVARCHAR(500) ,
+      @RecommiteDate VARCHAR(10) ,
+      @UserID INT ,
+      @IsCopy BIT ,
+      @GroupFlag INT = 0 ,
+      @ISSecure BIT ,
+	  @DeadLineDate varchar(10) ,
+      @DeadLineToInt  int,
+	  @ReCommiteTime varchar(10)
+    )
+AS
+    BEGIN
+        DECLARE @ID INT ,
+            @orgstaff NVARCHAR(50) 
+		/*Hamed_Ansari_990230,
+            @DeadLineDate VARCHAR(10) ,
+            @DeadLineToInt INT ,
+            @IsFollowUp BIT ,
+            @ReCommiteTime NVARCHAR(5)
+        */
+
+        SELECT  @id = MAX(id) + 1
+        FROM    recommites
+        WHERE   Letterid = @LetterID
+
+        SELECT  @orgstaff = ResponsibleStaffer
+        FROM    fromorganizations
+        WHERE   id = @OrgID
+		/*Hamed_Ansari_990230
+        IF @GroupFlag > 0
+            SELECT  @DeadLineDate = DeadLineDate ,
+                    @DeadLineToInt = DeadLineToInt ,
+                    @IsFollowUp = ISFollowup ,
+                    @ReCommiteTime = RecommiteTime
+            FROM    dbo.ReCommites
+            WHERE   RecommiteID = @GroupFlag
+        */
+        INSERT  INTO [ReCommites]
+                ( LetterID ,
+                  ID ,
+                  Type ,
+                  ParentId ,
+                  OrgID ,
+                  Paraph ,
+                  RecommiteDate ,
+                  UserID ,
+                  IsCopy ,
+                  orgstaff ,
+                  DeadLineDate ,
+                  DeadLineToint ,
+                  GroupFlag ,
+                  IsSecure,
+				  RecommiteTime 
+                )
+        VALUES  ( @LetterID ,
+                  @ID ,
+                  @Type ,
+                  @ParentId ,
+                  @OrgID ,
+                  @Paraph ,
+                  @RecommiteDate ,
+                  @UserID ,
+                  @IsCopy ,
+                  @orgstaff ,
+                  @DeadLineDate ,
+                  @DeadLineToInt ,
+                  @GroupFlag ,
+                  @ISSecure, 
+				  @ReCommiteTime
+                )
+END
+GO
+
+COMMIT
+GO

@@ -1,0 +1,46 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Delete_Letter]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Delete_Letter]
+END
+GO
+
+CREATE  procedure [dbo].[Delete_Letter]  
+	@LetterID int,
+	@newInd int  
+AS  
+	Declare @letterformat TINYINT, @EmailNuFromDate Nvarchar(20), @indicatorID INT
+
+	IF OBJECT_ID('tempdb..#Topol') IS NOT NULL 
+		DROP TABLE #Topol
+	CREATE TABLE #Topol(ID INT)
+	  
+	Select @letterformat=letterformat, @indicatorID=IndicatorID, @EmailNuFromDate = EmailNuFromDate   
+		From letter  
+		Where letterid=@LetterID 
+
+	IF NOT EXISTS (SELECT 1 FROM DeletedLetters WHERE LetterID = @LetterID)
+		INSERT INTO DeletedLetters(letterID,IndicatorID, EmailNuFromDate) VALUES (@LetterID,@indicatorID, @EmailNuFromDate) 
+	ELSE
+		UPDATE DeletedLetters SET IndicatorID=@indicatorID, EmailNuFromDate = @EmailNuFromDate WHERE LetterID = @LetterID
+	  
+	if @letterformat=1   
+	  UPDATE    Letter  
+		SET        LetterFormat = 3 ,memo=isnull(memo,'') +'('+cast(@newInd as varchar(6))+')', indicatorid=@newind  
+		WHERE     (LetterID = @LetterID)  
+
+	if @letterformat in (2,3)  
+	begin    
+	  DELETE [ReCommites]  	WHERE     (LetterID = @LetterID)  
+	  DELETE [LetterText]  	WHERE     (LetterID = @LetterID)  
+	  DELETE [LetterData]  	WHERE     (LetterID = @LetterID)  
+	  DELETE [Letter] 		WHERE     (LetterID = @LetterID)  
+	end
+GO
+
+COMMIT
+GO

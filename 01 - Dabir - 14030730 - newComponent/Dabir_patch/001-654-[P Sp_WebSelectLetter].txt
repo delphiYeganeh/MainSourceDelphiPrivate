@@ -1,0 +1,48 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_WebSelectLetter]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_WebSelectLetter]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_WebSelectLetter](@where nvarchar(2000)) 
+as 
+
+	if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[TempSelectWeb]') )
+	drop table [dbo].[TempSelectWeb]
+
+	declare @sqlCommand nvarchar(4000)
+	set @sqlCommand='select l.*, 
+	 ReceiveTypes.Title AS ReciveTitle, Classifications.Title AS ClassificatioTitle, Urgenceis.Title AS UrgencyTitle, Users.Title AS UserTitle, 
+	 LetterFormats.Title AS FormatTitle, ToOrg.Title AS ToOrgTitle, LetterTemplate.Title AS TemplateTitle,  
+	 FromOrganizations.Title AS FromTitle,LetterTypes.Title LetterTypeTitle, AnswerLetter.MYear AnswerMYear , AnswerLetter.IndicatorID  AnswerIndicatorID,
+	 dbo.has_Page(L.letterid) has_Page, dbo.has_WordPage(L.letterid) has_WordPage,dbo.has_file(l.letterID) has_file
+	into TempSelectWeb 
+	from Letter as L
+	 Left JOIN ReceiveTypes ON ReceiveTypes.ID = L.ReceiveTypeID
+	 Left JOIN Classifications ON L.ClassificationID = Classifications.ID 
+	 Left JOIN Urgenceis ON L.UrgencyID = Urgenceis.ID
+	 Left JOIN Users ON L.UserID = Users.Id
+	 Left JOIN FromOrganizations ON L.FromOrgID = FromOrganizations.ID 
+	 Left JOIN fromOrganizations ToOrg ON L.ToOrgID = ToOrg.ID
+	 Left JOIN LetterFormats ON L.letterformat = LetterFormats.Code
+	 left JOIN LetterTemplate ON l.TemplateID = LetterTemplate.ID
+	 left JOIN LetterTypes ON l.Letter_type = LetterTypes.ID
+	 LEFT JOIN Letter AnswerLetter ON L.SentLetterID = AnswerLetter.LetterID ' 
+	set @where=isnull(ltrim(rtrim(@where)),'')
+	if @where<>'' 
+	 set @sqlCommand=@sqlCommand+' where '+@where
+	 set @sqlCommand=@sqlCommand+' order by l.indicatorid desc '
+	 
+	exec sp_executesql @sqlCommand
+
+
+	SELECT * FROM TempSelectWeb
+GO
+
+COMMIT
+GO

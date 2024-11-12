@@ -1,0 +1,39 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[update_ReCommites_viewDate]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[update_ReCommites_viewDate]
+END
+GO
+
+CREATE  procedure [dbo].[update_ReCommites_viewDate]
+	(@RecommiteID int,
+	 @ViewDate 	[char](10))
+AS 
+
+IF OBJECT_ID('tempdb..#Topol') IS NOT NULL DROP TABLE #Topol
+CREATE TABLE #Topol(ID INT)
+
+IF @ViewDate <> ''
+BEGIN
+	UPDATE [dbo].[ReCommites] 
+	SET  	 ViewDate=@ViewDate
+	WHERE 
+		( RecommiteID	 = @RecommiteID)
+			AND (ViewDate IS  NULL OR ViewDate = '')
+END
+ELSE
+BEGIN
+	UPDATE [dbo].[ReCommites] 
+	SET  	 ViewDate=@ViewDate
+	WHERE 
+		( RecommiteID	 = @RecommiteID)
+
+END
+GO
+
+COMMIT
+GO

@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[GetPermittedWorkGroup]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[GetPermittedWorkGroup]
+END
+GO
+
+CREATE  procedure [dbo].[GetPermittedWorkGroup]
+	@UserId int
+AS
+Begin
+	select t1.GroupID from ChartWorkGroupDetails t1
+	inner join Users t2 on (t1.OrgID=t2.FromOrgID or t1.OrgID=t2.FiveOrgID or t1.OrgID=t2.FourOrgID or t1.OrgID=t2.TreeOrgID or t1.OrgID=t2.SecondOrgID) and t1.AccessForErja=1 and t2.id=@UserId
+	inner join ChartWorkGroup t3 on t1.GroupID=t3.GroupID
+End
+GO
+
+COMMIT
+GO

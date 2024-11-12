@@ -1,0 +1,51 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Prc_Settings_Insert_Update]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Prc_Settings_Insert_Update]
+END
+GO
+
+CREATE  procedure [dbo].[Prc_Settings_Insert_Update]
+     (
+            @Value nvarchar(255)
+           ,@VariableName varchar(50)
+           ,@VariableName_New varchar(50)
+		   ,@DbName_New nvarchar(50)
+
+     )
+AS
+	DECLARE @sql nvarchar(max)
+	SET @sql = '
+	IF EXISTS (
+				SELECT 
+				   * 
+				FROM ' + @DbName_New + '.dbo. Settings
+				WHERE VariableName = ' + ''''+ @VariableName + ''''+ '
+			  )
+	BEGIN
+	   UPDATE ' + @DbName_New + '.dbo.Settings
+	   SET VariableName = ' + ''''+@VariableName_New + '''' +'
+	   WHERE VariableName = ' + ''''+ @VariableName + '''' +'
+	END
+	ELSE
+	BEGIN
+		INSERT INTO ' + @DbName_New + '.[dbo].[Settings]
+				   ([UserID]
+				   ,[VariableId]
+				   ,[Value]
+				   ,[VariableName])
+			 VALUES
+				   (-1
+				   ,''''
+				   ,' + ''''+ @Value +''''+'
+				   ,'+''''+ @VariableName_New + ''''+')
+	END '
+	EXEC sp_executesql @sql
+GO
+
+COMMIT
+GO

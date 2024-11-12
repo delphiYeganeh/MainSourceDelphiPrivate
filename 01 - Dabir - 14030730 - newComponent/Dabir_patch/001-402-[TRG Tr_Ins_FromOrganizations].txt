@@ -1,0 +1,43 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1 
+			FROM sys.objects 
+			WHERE [object_id] = OBJECT_ID(N'[dbo].[Tr_Ins_FromOrganizations]')
+               AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[Tr_Ins_FromOrganizations];
+END
+GO
+
+CREATE TRIGGER [dbo].[Tr_Ins_FromOrganizations]
+	On [dbo].[FromOrganizations]
+FOR INSERT  
+As
+Declare @FromOrgID INT , @GROUPID INT
+Select @FromOrgID = ID FROM INSERTED
+
+DECLARE cur CURSOR FOR 
+SELECT GROUPID FROM ChartWorkGroup
+
+OPEN cur
+
+FETCH NEXT FROM cur INTO @GROUPID
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+ 	IF NOT EXISTS( SELECT * FROM ChartWorkGroupDetails WHERE GroupID=@GROUPID AND OrgID=@FromOrgID )
+	BEGIN			
+		INSERT INTO ChartWorkGroupDetails(GroupID,OrgID,AccessForErja)
+		VALUES(@GroupID,@FromOrgID,0)
+	END	 
+	
+	FETCH NEXT FROM cur INTO @GROUPID
+END
+CLOSE cur
+DEALLOCATE cur
+GO
+
+ALTER TABLE [dbo].[FromOrganizations] ENABLE TRIGGER [Tr_Ins_FromOrganizations]
+GO
+COMMIT
+GO

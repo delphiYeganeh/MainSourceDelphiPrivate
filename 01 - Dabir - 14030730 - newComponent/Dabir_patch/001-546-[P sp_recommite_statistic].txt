@@ -1,0 +1,53 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[sp_recommite_statistic]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[sp_recommite_statistic]
+END
+GO
+
+CREATE  procedure [dbo].[sp_recommite_statistic] 
+@SecretariatID int,@myear int,@where nvarchar(1000)
+
+as
+declare @sql nvarchar (4000),@rw nvarchar(2000),@Today char(10)
+
+select @today=dbo.shamsi(getdate())
+
+set @RW=' 
+ WHERE  not (l.letter_type=2 and l.letterformat=1 ) and  (l.LetterFormat <3) AND  L.myear='+cast(@myear as varchar(10))
+if @SecretariatID>0 
+set @rw=@rw+'
+ AND (SecretariatID = '+cast(@SecretariatID as varchar(10))+')'
+
+
+set @sql=' SELECT top 1000   Fo.Title Recommited, 
+min(dbo.Recommite_DeadLine(rc.Recommiteid,isnull(Rc.Proceeddate,'''+@today+'''))) MinDeadlineDays,
+max(dbo.Recommite_DeadLine(rc.Recommiteid,isnull(Rc.Proceeddate,'''+@today+'''))) MaxDeadlineDays,
+avg(dbo.Recommite_DeadLine(rc.Recommiteid,isnull(Rc.Proceeddate,'''+@today+'''))) AvgDeadlineDays,
+min(dbo.shamsidatediff(rc.Recommitedate,isnull(Rc.Proceeddate,'''+@today+'''))) MinProgressDays,
+max(dbo.shamsidatediff(rc.Recommitedate,isnull(Rc.Proceeddate,'''+@today+'''))) MaxProgressDays,
+avg(dbo.shamsidatediff(rc.Recommitedate,isnull(Rc.Proceeddate,'''+@today+'''))) AvgProgressDays
+
+FROM ReCommites RC 
+INNER JOIN Letter L ON RC.LetterID = L.LetterID
+INNER JOIN Secretariats  ON Secretariats.Secid = L.SecretariatID
+left JOIN FromOrganizations FO ON FO.ID = RC.OrgID '
+
+set @sql=@sql+@rW
+
+set @where=isnull(ltrim(rtrim(@where)),'')
+ if (@where<>'') 
+   select @sql=@sql+' and '+@where
+
+set @sql=@sql+'
+ group by  Fo.Title
+ order by Fo.Title '
+exec sp_executesql  @sql
+GO
+
+COMMIT
+GO

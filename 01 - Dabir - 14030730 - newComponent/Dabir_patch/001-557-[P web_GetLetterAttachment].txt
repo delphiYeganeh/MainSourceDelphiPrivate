@@ -1,0 +1,29 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[web_GetLetterAttachment]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[web_GetLetterAttachment]
+END
+GO
+
+CREATE  procedure [dbo].[web_GetLetterAttachment](@letterID INT,@OnlyWord BIT) 
+as
+
+IF(@OnlyWord=1)
+   SELECT     LetterData.*, Extention.ExtentionTitle, Extention.Extention
+   FROM       LetterData 
+   left JOIN  Extention ON LetterData.extention = Extention.ExtentionID
+   WHERE LetterID=@LetterID AND LetterData.extention=3
+ELSE
+	
+  SELECT     LetterData.*, Extention.ExtentionTitle, Extention.Extention
+  FROM       LetterData 
+  left JOIN  Extention ON LetterData.extention = Extention.ExtentionID
+  WHERE LetterID=@LetterID
+GO
+
+COMMIT
+GO

@@ -1,0 +1,124 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Transfer_Insert_SharedLetter]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Transfer_Insert_SharedLetter]
+END
+GO
+
+CREATE  procedure [dbo].[Transfer_Insert_SharedLetter]
+
+	(@IndicatorID 	[int],
+	 @MYear 	[int],
+	 @SecretariatID 	[tinyint],
+	 @Letter_Type 	[tinyint],
+	 @letterformat 	[tinyint],
+	 @IncommingNO 	[nvarchar](50),
+	 @Incommingdate 	[nvarchar](10),
+	 @CenterNo 	[nvarchar](50),
+	 @CenterDate 	[char](10),
+	 @FromOrgID 	[int],
+	 @ToOrgID 	[int],
+	 @Signerid 	[nvarchar](50),
+	 @ClassificationID 	[tinyint],
+	 @UrgencyID 	[smallint],
+	 @Memo 	[nvarchar](500),
+	 @AttachTitle 	[nvarchar](50),
+	 @NumberOfAttachPages 	[smallint],
+	 @NumberOfPage 	[tinyint],
+	 @ReceiveTypeID 	[tinyint],
+	 @UserID 	[int],
+	 @RetroactionNo 	[nvarchar](50),
+	 @UserMemo 	[nvarchar](255),
+	 @RegistrationDate 	[char](10),
+	 @RegistrationTime 	[varchar](5),
+	 @FollowLetterNo 	[nvarchar](50),
+	 @ToStaffer 	[nvarchar](50),
+	 @SentLetterID 	[int],
+	 @TemplateID 	[int],
+	 @HeaderID 	[int],
+	 @LetterRecommites 	[nvarchar](500),
+	 @FromStaffer 	[nvarchar](50),
+	 @Finalized 	[bit],
+	 @SendStatusID 	[tinyint],
+	 @LastUpdate 	datetime,
+	 @UserTableID 	[int],
+	 @UniqueID  bigint,
+@LetterID int output)
+
+AS INSERT INTO  [Letter] 
+	 ( [IndicatorID],	 [MYear],	 [SecretariatID],	 [Letter_Type],
+	 [letterformat],	 [IncommingNO],	 [Incommingdate],	 [CenterNo],
+	 [CenterDate],
+	 [FromOrgID],
+	 [ToOrgID],
+	 [Signerid],
+	 [ClassificationID],
+	 [UrgencyID],
+	 [Memo],
+	 [AttachTitle],
+	 [NumberOfAttachPages],
+	 [NumberOfPage],
+	 [ReceiveTypeID],
+	 [UserID],
+	 [RetroactionNo],
+	 [UserMemo],
+	 [RegistrationDate],
+	 [RegistrationTime],
+	 [FollowLetterNo],
+	 [ToStaffer],
+	 [SentLetterID],
+	 [TemplateID],
+	 [HeaderID],
+	 [LetterRecommites],
+	 [FromStaffer],
+	 [Finalized],
+	 [SendStatusID],
+	 LastUpdate 	,
+	 UserTableID 	,
+	 UniqueID ) 
+VALUES 
+	( @IndicatorID,
+	 @MYear,
+	 @SecretariatID,
+	 @Letter_Type,
+	 @letterformat,
+	 @IncommingNO,
+	 @Incommingdate,
+	 @CenterNo,
+	 @CenterDate,
+	 @FromOrgID,
+	 @ToOrgID,
+	 @Signerid,
+	 @ClassificationID,
+	 @UrgencyID,
+	 @Memo,
+	 @AttachTitle,
+	 @NumberOfAttachPages,
+	 @NumberOfPage,
+	 @ReceiveTypeID,
+	 @UserID,
+	 @RetroactionNo,
+	 @UserMemo,
+	 @RegistrationDate,
+	 @RegistrationTime,
+	 @FollowLetterNo,
+	 @ToStaffer,
+	 @SentLetterID,
+	 @TemplateID,
+	 @HeaderID,
+	 @LetterRecommites,
+	 @FromStaffer,
+	 @Finalized,
+	 @SendStatusID,
+	 @LastUpdate 	,
+	 @UserTableID 	,
+	 @UniqueID )
+select @letterID=@@identity
+GO
+
+COMMIT
+GO

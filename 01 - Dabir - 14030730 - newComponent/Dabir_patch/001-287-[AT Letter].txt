@@ -1,0 +1,37 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'CenterNo'
+          AND Object_ID = Object_ID(N'dbo.Letter'))
+BEGIN
+    ALTER TABLE [dbo].[Letter] 
+	DROP COLUMN	[CenterNo] 
+END
+GO
+COMMIT
+GO
+
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'CenterNo'
+          AND Object_ID = Object_ID(N'dbo.Letter'))
+BEGIN
+	ALTER TABLE [dbo].[Letter] 
+	ADD	[CenterNo] [nvarchar] (50) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL
+END
+GO
+COMMIT
+GO
+
+BEGIN TRANSACTION
+GO
+IF EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'CenterNo'
+          AND Object_ID = Object_ID(N'dbo.Letter'))
+BEGIN
+	Update Letter Set CenterNo = InnerNo
+END
+GO
+COMMIT
+GO
