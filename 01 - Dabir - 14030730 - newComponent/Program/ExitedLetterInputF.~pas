@@ -1076,6 +1076,9 @@ begin
 
   OldIndicID := DBEIndicatorID.Text;
 
+  if GetUserSetting('ExitLetterpnlDetailMinimize') then
+   pnlDetail.Minimized := True ;
+   
 end;
 
 procedure TSentLetterInputForm.SpeedButton6Click(Sender: TObject);

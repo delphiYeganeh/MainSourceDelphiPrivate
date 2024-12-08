@@ -485,6 +485,7 @@ inherited FWorkSheetBase: TFWorkSheetBase
         Top = 34
         Width = 22
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1605#1705#1575#1606
         FocusControl = DBEdit7
       end
@@ -493,6 +494,7 @@ inherited FWorkSheetBase: TFWorkSheetBase
         Top = 60
         Width = 32
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1605#1608#1590#1608#1593
         FocusControl = DBEdit8
       end
@@ -510,6 +512,7 @@ inherited FWorkSheetBase: TFWorkSheetBase
         Top = 119
         Width = 40
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1578#1608#1590#1610#1581#1575#1578
       end
       object Label13: TLabel
@@ -517,6 +520,7 @@ inherited FWorkSheetBase: TFWorkSheetBase
         Top = 87
         Width = 64
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = #1605#1583#1610#1585'('#1711#1585#1583#1575#1606#1606#1583#1607')'
       end
       object Label14: TLabel

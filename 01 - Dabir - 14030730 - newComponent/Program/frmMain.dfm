@@ -151,6 +151,7 @@ object Form_WorkGroupFM: TForm_WorkGroupFM
         Width = 554
         Height = 80
         Align = alTop
+        ParentColor = True
         TabOrder = 5
         DesignSize = (
           554

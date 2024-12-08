@@ -698,9 +698,9 @@ inherited FrRecommiteReport: TFrRecommiteReport
           Appearance.ColorMirrorDisabledTo = 15921906
         end
         object YWhereEdit27: TYWhereEdit
-          Left = 183
+          Left = 182
           Top = 65
-          Width = 89
+          Width = 90
           Height = 21
           Anchors = [akTop, akRight]
           BiDiMode = bdLeftToRight

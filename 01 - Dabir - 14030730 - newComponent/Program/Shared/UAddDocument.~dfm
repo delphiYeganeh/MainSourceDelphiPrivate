@@ -959,7 +959,6 @@ inherited FrAddDocument: TFrAddDocument
             Cursor = crHandPoint
             DataSource = dsQAddedForms
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-            ParentColor = True
             ReadOnly = True
             TabOrder = 1
             TitleFont.Charset = ARABIC_CHARSET
@@ -1117,7 +1116,6 @@ inherited FrAddDocument: TFrAddDocument
     Top = 107
   end
   inherited ActionList: TActionList
-    Left = 104
     Top = 96
   end
   inherited Grid_PopupMenu: TPopupMenu

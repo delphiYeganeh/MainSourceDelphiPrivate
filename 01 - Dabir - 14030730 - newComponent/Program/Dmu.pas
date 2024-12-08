@@ -3494,20 +3494,20 @@ begin
       Tiny1.UserPassWord := '44F43C10BF4C384BB4A4A8497FB728';
       Tiny1.ShowTinyInfo := True;
       i:=Tiny1.TinyErrCode;
-     if (i>0) then
+      if (i>0) then
       begin
         Result:=False;
         case i of
-        1 : ShowMessage('Şİá ÓÎÊ ÇİÒÇÑí íÇİÊ äÔÏ');
-        2 : ShowMessage('˜áíÏ ÎæÇäÏä íÇ äæÔÊä ÇÔÊÈÇå ãí ÈÇÔÏ');
-        3 : ShowMessage('Şİá ÚæÖ ÔÏå ÇÓÊ');
-        4 : ShowMessage('ÎØÇ åäÇã äæÔÊä ÇØáÇÚÇÊ');
-        5 : ShowMessage('ÎØÇ ÏÑ ÈÇÑÒÇÑí ÇØáÇÚÇÊ Çæáíå');
-        6 : ShowMessage('ÎØÇ ÏÑíÇİÊ æ ÇÑÓÇá ÇØáÇÚÇÊ');
-        7 : ShowMessage('ÎØÇí ÊÚÏÇÏ ˜ÇÑÈÑÇä ãÌÇÒ');
-        8 : ShowMessage('ÎØÇí Ç˜ÊíæÇí˜Ó');
-        9 : ShowMessage('ÎØÇí ÇØáÇÚÇÊ ÇÔÊÈÇå Ñæí Şİá');
-        10: ShowMessage('ÎØÇ Şİá äÇãÚÊÈÑ');
+          1 : ShowMessage('Şİá ÓÎÊ ÇİÒÇÑí íÇİÊ äÔÏ');
+          2 : ShowMessage('˜áíÏ ÎæÇäÏä íÇ äæÔÊä ÇÔÊÈÇå ãí ÈÇÔÏ');
+          3 : ShowMessage('Şİá ÚæÖ ÔÏå ÇÓÊ');
+          4 : ShowMessage('ÎØÇ åäÇã äæÔÊä ÇØáÇÚÇÊ');
+          5 : ShowMessage('ÎØÇ ÏÑ ÈÇÑÒÇÑí ÇØáÇÚÇÊ Çæáíå');
+          6 : ShowMessage('ÎØÇ ÏÑíÇİÊ æ ÇÑÓÇá ÇØáÇÚÇÊ');
+          7 : ShowMessage('ÎØÇí ÊÚÏÇÏ ˜ÇÑÈÑÇä ãÌÇÒ');
+          8 : ShowMessage('ÎØÇí Ç˜ÊíæÇí˜Ó');
+          9 : ShowMessage('ÎØÇí ÇØáÇÚÇÊ ÇÔÊÈÇå Ñæí Şİá');
+          10: ShowMessage('ÎØÇ Şİá äÇãÚÊÈÑ');
         else ShowMessage(IntToStr(i));
         end
       end
@@ -3519,15 +3519,17 @@ begin
           if Copy(lockData,4,10)<ShamsiString(Now) then
           begin
             Result:=False;
+            ShowMessage('ÊÇÑíÎ Şİá ÓÎÊ ÇİÒÇÑí Èå ÇíÇä ÑÓíÏå ÇÓÊ äÓÈÊ Èå ÊãÏíÏ Şİá ÇŞÏÇã äãÇííÏ');
+            {
             J := Random(4);
             case J of
-             0: Application.MessageBox('SYSTEM_THREAD_EXCEPTION_NOT_HANDLED','Windows error',0);
-             1: Application.MessageBox('SYSTEM_SERVICE_EXCEPTION','Windows error',0);
-             2: Application.MessageBox('System Files are damaged','Windows error',0);
-             3: Application.MessageBox('SYSTEM_FILES_INVALID','Windows error',0);
-             4: Application.MessageBox('DPC_WATCHDOG_VIOLATION','Windows error',0);
+             0: Application.MessageBox('SYSTEM_THREAD_EXCEPTION_NOT_HANDLED'+' (Tiny Lock)','Lock error',0);
+             1: Application.MessageBox('SYSTEM_SERVICE_EXCEPTION'+' (Tiny lock)','Lock error',0);
+             2: Application.MessageBox('System Files are damaged'+' (Tiny lock)','Lock error',0);
+             3: Application.MessageBox('SYSTEM_FILES_INVALID'+' (Tiny lock)','Lock error',0);
+             4: Application.MessageBox('DPC_WATCHDOG_VIOLATION'+' (Tiny lock)','Lock error',0);
             end;
-
+              }
           end
           else
           begin

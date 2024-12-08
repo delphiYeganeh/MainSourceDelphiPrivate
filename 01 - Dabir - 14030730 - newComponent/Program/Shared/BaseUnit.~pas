@@ -459,7 +459,7 @@ begin
 
       TxpPanel(Components[i]).TitleStartColor := _Color3;// := dm.GetActionAccess(TxpPanel(Components[i]).Name, Self.Tag);
 
-      if _ColorSetting = 1 then
+      if _ColorSetting = 0 then
         TxpPanel(Components[i]).TitleEndColor  := _Color4
       else  TxpPanel(Components[i]).TitleEndColor  := _Color1; //:= TxpPanel(Components[i]).Visible;
 

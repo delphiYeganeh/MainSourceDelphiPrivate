@@ -416,7 +416,7 @@ begin
      // _Color3  :=  $00276165 ;
      /// _Color3  := $0025635C ;
      /// _Color3  := $002F7B72 ;
-      _Color3  := $005FA2A5 ;
+      _Color3  := $0073ADB0 ;
      //// _Color4 := $00002F2F ; // line
      _Color4 :=  $00005D6F ;
       _Color5 := clCream  ;

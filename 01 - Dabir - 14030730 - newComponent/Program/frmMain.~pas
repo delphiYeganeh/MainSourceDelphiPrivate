@@ -346,6 +346,7 @@ end;
 procedure TForm_WorkGroupFM.FormCreate(Sender: TObject);
 begin
   Self.Color := _Color1 ;
+  Self.Font.Name :=  _MainFont ;  
 end;
 
 end.

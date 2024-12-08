@@ -8,7 +8,7 @@ uses
   Grids, DBGrids, DBActns, ActnList, ActnMan, ToolWin, Mask, DBCtrls, StrUtils,
   ActnCtrls, ActnMenus, jpeg, UemsVCL, Menus, DBTreeView, ExtActns,
  xpBitBtn, XPStyleActnCtrls, YDbgrid, ShowRouneveshtUnit, ImgList, AppEvnts,
-  AdvGlowButton, xpPanel;
+  AdvGlowButton, xpPanel, dxGDIPlusClasses;
 
 type
   TReCommite = class(TMBaseForm)
@@ -53,7 +53,6 @@ type
     Label2: TLabel;
     pnlMain: TPanel;
     Panel3: TPanel;
-    BitBtn2: TAdvGlowButton;
     BBDelRecommite: TAdvGlowButton;
     NewRecommite: TAdvGlowButton;
     BBOK: TAdvGlowButton;
@@ -62,6 +61,7 @@ type
     AaddLetterData: TAdvGlowButton;
     Bevel1: TBevel;
     Bevel2: TBevel;
+    btnTranscripts: TAdvGlowButton;
     procedure Action1Execute(Sender: TObject);
     procedure AInsertExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -527,8 +527,8 @@ begin
   if (AaddLetterData.Visible) then
     AaddLetterData.Enabled:=False;
 
-  if (BitBtn2.Visible) then
-    BitBtn2.Enabled:=False;
+  if (btnTranscripts.Visible) then
+    btnTranscripts.Enabled:=False;
 end;
 
 procedure TReCommite.DoNotSecure;
@@ -543,8 +543,8 @@ begin
   if (AaddLetterData.Visible) then
     AaddLetterData.Enabled:=True;
 
-  if (BitBtn2.Visible) then
-    BitBtn2.Enabled:=True;
+  if (btnTranscripts.Visible) then
+    btnTranscripts.Enabled:=True;
 end;
 
 function TReCommite.User_IS_Girandeh: Boolean;

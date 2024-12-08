@@ -33,9 +33,9 @@ inherited FmScanImage: TFmScanImage
         1103
         52)
       object Label2: TLabel
-        Left = 569
+        Left = 576
         Top = 7
-        Width = 62
+        Width = 55
         Height = 26
         Anchors = [akTop, akRight]
         Caption = #1575#1576#1593#1575#1583' '#1578#1589#1608#1610#1585' : ('#1662#1610#1705#1587#1604')'
@@ -1442,7 +1442,7 @@ inherited FmScanImage: TFmScanImage
             Width = 26
             Height = 26
             Cursor = crHandPoint
-            Hint = #1583#1585#1580' '#1575#1588#1610#1575#1610' '#1585#1608#1610' '#1578#1589#1608#1610#1585
+            Hint = #1581#1584#1601' '#1605#1581#1578#1608#1610#1575#1578' '#1578#1589#1608#1610#1585
             Anchors = [akTop, akRight]
             Glyph.Data = {
               EE030000424DEE03000000000000360000002800000012000000110000000100

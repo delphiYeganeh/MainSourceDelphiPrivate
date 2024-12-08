@@ -22,9 +22,9 @@ inherited FromOrgForm: TFromOrgForm
     TabOrder = 0
     object Panel3: TxpPanel
       Left = 393
-      Top = 1
+      Top = 34
       Width = 148
-      Height = 489
+      Height = 456
       StartColor = 16511469
       EndColor = 16244694
       FillDirection = fdLeftToRight
@@ -50,7 +50,7 @@ inherited FromOrgForm: TFromOrgForm
       TabOrder = 0
       DesignSize = (
         146
-        487)
+        454)
       object Image2: TImage
         Left = 49
         Top = 31
@@ -58,27 +58,34 @@ inherited FromOrgForm: TFromOrgForm
         Height = 56
         Anchors = [akTop, akRight]
         Picture.Data = {
-          07544269746D617076020000424D760200000000000076000000280000002000
-          0000200000000100040000000000000200000000000000000000100000001000
-          0000000000000000800000800000008080008000000080008000808000008080
-          8000C0C0C0000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
-          FF00888777888888888888887777777777788000078888888888888000000000
-          077880EE0788888888888880EEEEEEE7077880EE0000000000000000E00000E7
-          077880EE07E7E7E7E7E7E7E0E07770E7077880EE077E7E7E7E7E7E70E07770E7
-          077880EE07E7E7E7E7E7E7E0E00000E7077880EE077E7E7E7E7E7E70EEEEEEE7
-          077880EE07E7E7E7E7E7E7E0E00000E7077880EE077E7E7E7E7E7E70E07770E7
-          077880EE0777777777777770E07770E7077880EE0000000000000000E00000E7
-          077880EEEEEEEEEEEEEEEEEEEEEEEEE707788000000000000000000000000000
-          078880F0888888888880FF9999999FFF078880F0898777777780FFFF00FFFFFF
-          078880F0888888888880FFFF0FFFFFFF078880F0000000000000FFFFF00FFFFF
-          078880FFF077777770FFFFFFFFF00FFF078880FFF07E7E7E70FFFFFFFFFFF00F
-          078880FFF077E7E770FFFFFF1FFFF00F078880FFF07E7E7E70FFFFF11FFF0FFF
-          078880FFF077777770FFFF1111F0FFFF078880FFF000000000FFF199911FFFFF
-          078880FFFFFFFFFFFFFFFFFF191FFFFF07888077777777777777777777777777
-          07788000000000000000000000000000077880E777777777770FE77777777777
-          077880EE7E7E7E7E770FEE7E7E7E7E77077880E7E7E7E7E7E70FE7E7E7E7E7E7
-          077880EEEEEEEEEEEE0FEEEEEEEEEEEE07788000000000000000000000000000
-          0888}
+          0B546478504E47496D61676589504E470D0A1A0A0000000D4948445200000040
+          000000400806000000AA6971DE0000000467414D410000B18F0BFC6105000000
+          097048597300000B1300000B1301009A9C180000030F49444154785EED94B18D
+          DD4010C5AE0377E5DC7DB94B17724E181018AE318182FD860830E30E9E127DBD
+          BCBCBC147FBE7E7EFF4FF2597BEAC827CB67EDA9239F2C9FB5A78E7CB27CD69E
+          3AF2C9F2597BEAC827CB67EDA9239F2C9FB5A78E7CB27CD69E3A62C9AEA1365A
+          B23D75C4925D436DB4647BEA8825BB86DA68C9F6D4114B760DB5D192EDA92396
+          EC1A6AA325DB53472CD935D4464BB6A78E58B2C18F5FBFBFFF25D9917A63C906
+          B5D192EDA923966C50A32DD9917A63C906B5D192EDA923966C50A32DD9917A63
+          C906B5D192EDA923966C50A32DD9917A63C906B5D192EDA923966C50A32DD991
+          7A63C906B5D192EDA923966C50A32DD9917A63C906B5D192EDA923966C50A32D
+          D9917A63C906B5D192EDA923966C50A32DD9917A63C906B5D192EDA92396EC1A
+          6AA325DB53472CD935D4464BB6A78E58B26BA88D966C4F1DB164D7501B2DD99E
+          3A62C906F5E3B26447EA8D251BD4464BB6A78E58B2418DB66447EA8D251BD446
+          4BB6A78E58B2418DB66447EA8D251BD4464BB6A78E58B2418DB66447EA8D251B
+          D4464BB6A78E58B2418DB66447EA8D251BD4464BB6A78E58B2418DB66447EA8D
+          251BD4464BB6A78E58B2418DB66447EA8D251BD4464BB6A78E58B2418DB66447
+          EA8D251BD4464BB6A78E58B26BA88D966C4F1DB164D7501B2DD99E3A62C9AEA1
+          365AB23D75C4925D436DB4647BEA88251BD48FCB921DA937966C501B2DD99E3A
+          62C90635DA921DA937966C501B2DD99E3A62C90635DA921DA937966C501B2DD9
+          9E3A62C90635DA921DA937966C501B2DD99E3A62C90635DA921DA937966C501B
+          2DD99E3A62C90635DA921DA937966C501B2DD99E3A62C90635DA921DA937966C
+          501B2DD99E3A62C90635DA921DA937966C501B2DD99E3A62C91EA73EDA920D6A
+          A325DB53472CD9E3D4475BB2416DB4647BEA88257B9CFA684B36A88D966C4F1D
+          B1648F531F6DC906B5D192EDA92396EC71EAA32DD9A0365AB23D75C4923D4E7D
+          B4251BD4464BB6A78E58B2C7A98FB66483DA68C9F6D4114BF638F5D1966C501B
+          2DD99E3A62C91EA73EDA920D6AA325DB53472CD9E3D4475BB2416DB4642F2F2F
+          2FE2EBEB2F7F8373B49B8ABBF20000000049454E44AE426082}
         Stretch = True
         Transparent = True
       end
@@ -110,9 +117,9 @@ inherited FromOrgForm: TFromOrgForm
       end
       object LblPaste: TLabel
         Left = 8
-        Top = 398
+        Top = 376
         Width = 129
-        Height = 41
+        Height = 65
         Anchors = [akTop, akRight]
         AutoSize = False
         Caption = 'LblPaste'
@@ -128,12 +135,18 @@ inherited FromOrgForm: TFromOrgForm
         WordWrap = True
       end
       object Label6: TLabel
-        Left = 93
+        Left = 51
         Top = 6
-        Width = 48
+        Width = 57
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1587#1575#1586#1605#1575#1606' '#1607#1575
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
       object BBOK: TAdvGlowButton
         Left = 39
@@ -405,7 +418,7 @@ inherited FromOrgForm: TFromOrgForm
       end
       object Button1: TButton
         Left = 16
-        Top = 491
+        Top = 458
         Width = 121
         Height = 25
         Cursor = crHandPoint
@@ -418,34 +431,36 @@ inherited FromOrgForm: TFromOrgForm
     end
     object Panel2: TPanel
       Left = 1
-      Top = 1
+      Top = 34
       Width = 392
-      Height = 489
+      Height = 456
       Align = alClient
       Caption = 'Panel2'
       ParentColor = True
       TabOrder = 1
       object PageControl: TPageControl
         Left = 1
-        Top = 28
+        Top = 1
         Width = 390
-        Height = 433
+        Height = 427
         Cursor = crHandPoint
-        ActivePage = TabSheet1
+        ActivePage = TabSheet2
         Align = alClient
         BiDiMode = bdRightToLeft
         ParentBiDiMode = False
         TabHeight = 30
         TabOrder = 0
+        TabWidth = 80
         OnChange = PageControlChange
         object TabSheet1: TTabSheet
           Caption = #1583#1585#1582#1578#1610
+          ImageIndex = 96
           OnShow = TabSheet1Show
           object vdbTree: TVirtualDBTree
             Left = 0
             Top = 0
             Width = 382
-            Height = 393
+            Height = 387
             Cursor = crHandPoint
             Align = alClient
             DBOptions = [dboAlwaysStructured, dboCheckDBStructure, dboParentStructure, dboTrackActive, dboTrackChanges, dboTrackCursor, dboViewAll, dboWriteLevel, dboWriteSecondary]
@@ -471,14 +486,13 @@ inherited FromOrgForm: TFromOrgForm
         end
         object TabSheet2: TTabSheet
           Caption = #1604#1610#1587#1578#1610
-          ImageIndex = 1
+          ImageIndex = 95
           OnShow = TabSheet2Show
           object DBGFromORG: TYDBGrid
             Left = 0
-            Top = 31
+            Top = 58
             Width = 382
-            Height = 362
-            Cursor = crHandPoint
+            Height = 329
             Align = alClient
             DataSource = DFromOrg
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -548,7 +562,7 @@ inherited FromOrgForm: TFromOrgForm
           end
           object Panel5: TPanel
             Left = 0
-            Top = 0
+            Top = 27
             Width = 382
             Height = 31
             Align = alTop
@@ -575,64 +589,65 @@ inherited FromOrgForm: TFromOrgForm
               OnChange = SEditChange
             end
           end
-        end
-      end
-      object Panel1: TPanel
-        Left = 1
-        Top = 1
-        Width = 390
-        Height = 27
-        Align = alTop
-        ParentColor = True
-        TabOrder = 1
-        DesignSize = (
-          390
-          27)
-        object RBInnerOrg: TRadioButton
-          Left = 198
-          Top = 4
-          Width = 89
-          Height = 17
-          Anchors = [akTop, akRight]
-          Caption = #1583#1585#1608#1606' '#1587#1575#1586#1605#1575#1606#1610
-          TabOrder = 0
-          Visible = False
-          OnClick = RBInnerOrgClick
-        end
-        object RBOuterOrg: TRadioButton
-          Left = 100
-          Top = 4
-          Width = 89
-          Height = 17
-          Anchors = [akTop, akRight]
-          Caption = #1576#1585#1608#1606' '#1587#1575#1586#1605#1575#1606#1610
-          TabOrder = 1
-          Visible = False
-          OnClick = RBOuterOrgClick
-        end
-        object RBAllOrg: TRadioButton
-          Left = 297
-          Top = 4
-          Width = 49
-          Height = 17
-          Anchors = [akTop, akRight]
-          Caption = #1607#1605#1607
-          Checked = True
-          TabOrder = 2
-          TabStop = True
-          Visible = False
-          OnClick = RBAllOrgClick
+          object Panel1: TPanel
+            Left = 0
+            Top = 0
+            Width = 382
+            Height = 27
+            Align = alTop
+            BevelOuter = bvNone
+            ParentColor = True
+            TabOrder = 2
+            DesignSize = (
+              382
+              27)
+            object RBInnerOrg: TRadioButton
+              Left = 195
+              Top = 4
+              Width = 89
+              Height = 17
+              Anchors = [akTop, akRight]
+              Caption = #1583#1585#1608#1606' '#1587#1575#1586#1605#1575#1606#1610
+              TabOrder = 0
+              Visible = False
+              OnClick = RBInnerOrgClick
+            end
+            object RBOuterOrg: TRadioButton
+              Left = 65
+              Top = 4
+              Width = 89
+              Height = 17
+              Anchors = [akTop, akRight]
+              Caption = #1576#1585#1608#1606' '#1587#1575#1586#1605#1575#1606#1610
+              TabOrder = 1
+              Visible = False
+              OnClick = RBOuterOrgClick
+            end
+            object RBAllOrg: TRadioButton
+              Left = 328
+              Top = 4
+              Width = 49
+              Height = 17
+              Anchors = [akTop, akRight]
+              Caption = #1607#1605#1607
+              Checked = True
+              TabOrder = 2
+              TabStop = True
+              Visible = False
+              OnClick = RBAllOrgClick
+            end
+          end
         end
       end
       object Panel4: TPanel
         Left = 1
-        Top = 461
+        Top = 428
         Width = 390
         Height = 27
         Align = alBottom
         BevelOuter = bvNone
         ParentColor = True
-        TabOrder = 2
+        TabOrder = 1
         DesignSize = (
           390
           27)
@@ -808,7 +823,7 @@ inherited FromOrgForm: TFromOrgForm
         Top = 43
         Width = 325
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         Ctl3D = True
         ParentCtl3D = False
         ReadOnly = True
@@ -821,11 +836,102 @@ inherited FromOrgForm: TFromOrgForm
         Top = 17
         Width = 88
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         ReadOnly = True
         TabOrder = 1
         OnEnter = TEditEnter
         OnExit = TEditExit
+      end
+    end
+    object pnlHead: TPanel
+      Left = 1
+      Top = 1
+      Width = 540
+      Height = 33
+      Align = alTop
+      TabOrder = 3
+      object SpeedButton1: TAdvGlowButton
+        Left = 269
+        Top = 1
+        Width = 270
+        Height = 31
+        Cursor = crHandPoint
+        Align = alRight
+        Caption = #1604#1610#1587#1578#1610
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 95
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = SpeedButton1Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+        Down = True
+        GroupIndex = 1
+      end
+      object SpeedButton2: TAdvGlowButton
+        Left = 1
+        Top = 1
+        Width = 268
+        Height = 31
+        Cursor = crHandPoint
+        Align = alClient
+        Caption = #1583#1585#1582#1578#1610
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 96
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = SpeedButton2Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+        GroupIndex = 1
       end
     end
   end

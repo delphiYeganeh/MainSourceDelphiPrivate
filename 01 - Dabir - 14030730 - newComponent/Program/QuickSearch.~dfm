@@ -1008,8 +1008,8 @@ inherited QuickSearchF: TQuickSearchF
     end
   end
   inherited DSForm: TDataSource
-    Left = 10
-    Top = 629
+    Left = 26
+    Top = 581
   end
   inherited ActionList: TActionList
     Left = 114
@@ -1020,8 +1020,8 @@ inherited QuickSearchF: TQuickSearchF
     Top = 638
   end
   inherited Timer1sssss: TTimer
-    Left = 48
-    Top = 626
+    Left = 40
+    Top = 586
   end
   inherited ApplicationEvents1: TApplicationEvents
     Left = 65528

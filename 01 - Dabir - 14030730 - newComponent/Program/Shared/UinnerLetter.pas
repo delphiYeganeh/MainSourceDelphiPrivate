@@ -196,6 +196,10 @@ type
     Label4: TLabel;
     DBEUserMemo: TDBEdit;
     xpBitBtn1: TAdvGlowButton;
+    DataSetDel: TDataSetInsert;
+    ADOQuery1: TADOQuery;
+    ADOQuery1code: TStringField;
+    ADOQuery1ResponsibleStaffer: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormActivate(Sender: TObject);
     function GetLetter(LetterID:integer):boolean;
@@ -261,6 +265,7 @@ type
     procedure SpeedButton4Click(Sender: TObject);
     procedure QAddedFormsAfterScroll(DataSet: TDataSet);
     procedure N3Click(Sender: TObject);
+    procedure DataSetDelExecute(Sender: TObject);
   private
     prewNum : string;
     function IS_Girandeh_in_Group:Boolean;
@@ -1537,6 +1542,21 @@ begin
   end;
   Exec_insert_UserLog(Self.Tag,'Arecommite',select_LetterLetterID.AsInteger);
 
+end;
+
+procedure TFinnerLetter.DataSetDelExecute(Sender: TObject);
+begin
+  inherited;
+  if select_Letterletterformat.AsInteger=1 then
+    if Select_LetterUserID.AsInteger = _UserID then
+      if not (LetterHasViewDate(Select_LetterLetterID.AsInteger)) then
+        if messageShow(38,True) then
+        begin
+          //Exec_delete_Letter(select_LetterLetterID.AsInteger, Exec_get_LastIndicatorID(2,3,dm.CurrentmYear,SecID));
+          Exec_delete_Letter(select_LetterLetterID.AsInteger, Exec_get_LastIndicatorID(Select_LetterLetter_Type.AsInteger,Select_Letterletterformat.AsInteger,dm.CurrentmYear,SecID));
+          GetLetter(0);
+          UpdateDblookup(False);
+        end;
 end;
 
 end.

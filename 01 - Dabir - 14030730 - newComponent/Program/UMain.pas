@@ -473,6 +473,12 @@ Type
     ATopPanel: TPanel;
     ActionMainMenuBar1: TActionMainMenuBar;
     status6: TxpPanel;
+    Bevel1: TBevel;
+    Bevel2: TBevel;
+    Bevel3: TBevel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure ReceiveInsertExecute(Sender: TObject);
     procedure SendInsertExecute(Sender: TObject);
@@ -1450,6 +1456,7 @@ begin
   FromOrgForm := TFromOrgForm.Create(Application);
   MainForm.TypeNoa:= 1;
   FromOrgForm.OrganizeMode := True;
+  FromOrgForm.InnerMode  := True ;
   FromOrgForm.ShowModal;
   MainForm.TypeNoa:= 0;
   flag := 0;
@@ -2729,12 +2736,12 @@ begin
   
   N317.Visible := False ;
   AmonitorTables.Visible := False ;
-
+   {
   if _ColorSetting = 0 then
    SpDown.Color := clBackground
   else
   SpDown.Color := _Color4 ;
-  
+    }
 
 
 //  if isRunQuery=False then

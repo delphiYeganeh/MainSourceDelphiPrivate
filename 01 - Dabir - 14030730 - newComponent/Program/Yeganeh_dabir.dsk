@@ -1,31 +1,24 @@
 [Closed Files]
-File_0=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\UinnerLetter.dfm',0,1,1,1,1,0,0
-File_1=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\EnteredLetterInputF.dfm',0,1,1,1,1,0,0
-File_2=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\ExitedLetterInputF.dfm',0,1,1,1,1,0,0
-File_3=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\AccessInput.pas',0,1,260,15,263,1,0
-File_4=SourceModule,'c:\program files (x86)\borland\delphi7\source\vcl\dbctrls.pas',0,1,857,25,870,0,0
-File_5=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\ScanImageFm.pas',0,1,419,33,421,1,0
-File_6=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\frmMain.pas',0,1,341,33,349,1,0
-File_7=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\UDbName.pas',0,1,528,33,536,1,0
-File_8=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\Shared\YInputQuery.pas',0,1,51,33,59,1,0
-File_9=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\Shared\ShowmessageU.pas',0,1,52,33,60,1,0
+File_0=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\userDefine.pas',0,1,296,28,300,1,0
+File_1=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\YArchiveLetterData.pas',0,1,1,1,1,1,0
+File_2=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\UGroupUser.pas',0,1,1,80,12,1,0
+File_3=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\UFillLetterData.pas',0,1,1,83,12,1,0
+File_4=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\Shared\YShamsiDate.pas',0,1,2624,38,2653,0,0
+File_5=SourceModule,'D:\99 - Shared\YDbgrid.pas',0,1,660,48,683,0,0
+File_6=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\UaddLetterData.pas',0,1,620,23,633,1,0
+File_7=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\FExcelAttach.pas',0,1,109,54,123,1,0
+File_8=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\UAddLetterDataDialog.pas',0,1,1,41,23,1,0
+File_9=SourceModule,'D:\matin\01 - Dabir - 14030730 - newComponent\Program\UInputUserTable.pas',0,1,1,1,1,1,0
 
 [Modules]
 Module0=D:\matin\01 - Dabir - 14030730 - newComponent\Program\UMain.pas
-Module1=D:\matin\01 - Dabir - 14030730 - newComponent\Program\YeganehDemo.pas
+Module1=D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\FromOrgU.pas
 Module2=D:\matin\01 - Dabir - 14030730 - newComponent\Program\LogOn.pas
-Module3=D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\UAddDocument.pas
-Module4=D:\matin\01 - Dabir - 14030730 - newComponent\Program\UImportFax.pas
-Module5=D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\UinnerLetter.pas
-Module6=D:\matin\01 - Dabir - 14030730 - newComponent\Program\EnteredLetterInputF.pas
-Module7=D:\matin\01 - Dabir - 14030730 - newComponent\Program\ExitedLetterInputF.pas
-Module8=D:\matin\01 - Dabir - 14030730 - newComponent\Program\QuickSearch.pas
-Module9=D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\BaseUnit.pas
-Module10=D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\Settingsu.pas
-Module11=D:\matin\01 - Dabir - 14030730 - newComponent\Program\Dmu.pas
-Module12=D:\matin\01 - Dabir - 14030730 - newComponent\Program\Shared\YShamsiDate.pas
-Module13=D:\matin\01 - Dabir - 14030730 - newComponent\Program\Yeganeh_dabir.dpr
-Count=14
+Module3=D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\BaseUnit.pas
+Module4=D:\matin\01 - Dabir - 14030730 - newComponent\Program\QuickSearch.pas
+Module5=D:\matin\01 - Dabir - 14030730 - newComponent\Program\Dmu.pas
+Module6=D:\matin\01 - Dabir - 14030730 - newComponent\Program\Yeganeh_dabir.dpr
+Count=7
 EditWindowCount=1
 
 [D:\matin\01 - Dabir - 14030730 - newComponent\Program\UMain.pas]
@@ -33,42 +26,12 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\01 - Dabir - 14030730 - newComponent\Program\YeganehDemo.pas]
+[D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\FromOrgU.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
 [D:\matin\01 - Dabir - 14030730 - newComponent\Program\LogOn.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=1
-
-[D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\UAddDocument.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\01 - Dabir - 14030730 - newComponent\Program\UImportFax.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\UinnerLetter.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\01 - Dabir - 14030730 - newComponent\Program\EnteredLetterInputF.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\01 - Dabir - 14030730 - newComponent\Program\ExitedLetterInputF.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\01 - Dabir - 14030730 - newComponent\Program\QuickSearch.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -78,19 +41,14 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\Settingsu.pas]
+[D:\matin\01 - Dabir - 14030730 - newComponent\Program\QuickSearch.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
 [D:\matin\01 - Dabir - 14030730 - newComponent\Program\Dmu.pas]
 ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[D:\matin\01 - Dabir - 14030730 - newComponent\Program\Shared\YShamsiDate.pas]
-ModuleType=SourceModule
-FormState=0
+FormState=1
 FormOnTop=0
 
 [D:\matin\01 - Dabir - 14030730 - newComponent\Program\Yeganeh_dabir.dpr]
@@ -103,8 +61,8 @@ FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=14
-CurrentView=3
+ViewCount=7
+CurrentView=2
 View0=0
 View1=1
 View2=2
@@ -112,13 +70,6 @@ View3=3
 View4=4
 View5=5
 View6=6
-View7=7
-View8=8
-View9=9
-View10=10
-View11=11
-View12=12
-View13=13
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -138,104 +89,55 @@ LeftPanelData=00000400010000000C000000436F64654578706C6F726572000000000000000000
 RightPanelSize=0
 BottomPanelSize=0
 BottomPanelClients=MessageView@EditWindow0,WatchWindow
-BottomPanelData=00000400020000000B0000004D657373616765566965770B000000576174636857696E646F779D0000000000000001A80400000000000001000000009D000000000000000100000002B606000000000000020000000000000000000000000200000000AD060000000000000200000000B7060000000000000200000000B7060000000000000200000000B7060000000000000200000000B706000000000000FFFFFFFF
+BottomPanelData=00000400020000000B0000004D657373616765566965770B000000576174636857696E646F77BD050000000000000255000000000000000100000001000000000000000002000000009D000000000000000200000002B6060000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000100000000BD05000000000000FFFFFFFF
 
 [View0]
 Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\Yeganeh_dabir.dpr
-CursorX=55
-CursorY=217
-TopLine=201
+CursorX=59
+CursorY=216
+TopLine=185
 LeftCol=1
 
 [View1]
-Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\Shared\YShamsiDate.pas
-CursorX=22
-CursorY=3
-TopLine=1
+Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\BaseUnit.pas
+CursorX=42
+CursorY=358
+TopLine=346
 LeftCol=1
 
 [View2]
-Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\BaseUnit.pas
-CursorX=39
-CursorY=450
-TopLine=438
+Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\UMain.pas
+CursorX=54
+CursorY=1473
+TopLine=1452
 LeftCol=1
 
 [View3]
-Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\UMain.pas
-CursorX=86
-CursorY=2219
-TopLine=2215
+Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\FromOrgU.pas
+CursorX=18
+CursorY=450
+TopLine=427
 LeftCol=1
 
 [View4]
 Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\QuickSearch.pas
-CursorX=46
-CursorY=4
+CursorX=43
+CursorY=17
 TopLine=1
 LeftCol=1
 
 [View5]
-Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\UImportFax.pas
-CursorX=66
-CursorY=12
-TopLine=1
+Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\Dmu.pas
+CursorX=58
+CursorY=3508
+TopLine=3489
 LeftCol=1
 
 [View6]
-Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\ExitedLetterInputF.pas
-CursorX=65
-CursorY=18
-TopLine=1
-LeftCol=1
-
-[View7]
-Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\EnteredLetterInputF.pas
-CursorX=1
-CursorY=1
-TopLine=1
-LeftCol=1
-
-[View8]
-Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\UAddDocument.pas
-CursorX=50
-CursorY=456
-TopLine=449
-LeftCol=1
-
-[View9]
-Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\UinnerLetter.pas
-CursorX=43
-CursorY=19
-TopLine=1
-LeftCol=1
-
-[View10]
-Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\Dmu.pas
-CursorX=17
-CursorY=1110
-TopLine=1094
-LeftCol=1
-
-[View11]
-Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\YeganehDemo.pas
-CursorX=52
-CursorY=4
-TopLine=1
-LeftCol=1
-
-[View12]
 Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\LogOn.pas
-CursorX=55
-CursorY=401
-TopLine=392
-LeftCol=1
-
-[View13]
-Module=D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\Settingsu.pas
-CursorX=127
-CursorY=322
-TopLine=312
+CursorX=31
+CursorY=457
+TopLine=444
 LeftCol=1
 
 [Watches]
@@ -270,7 +172,7 @@ Breakpoint1='D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\PhoneF
 Breakpoint2='D:\matin\01 - Dabir - 14030730 - newComponent\Program\shared\PhoneFm.pas',592,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint3='D:\matin\01 - Dabir - 14030730 - newComponent\Program\ustatistic.pas',296,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint4='D:\matin\01 - Dabir - 14030730 - newComponent\Program\ustatistic.pas',116,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint5='D:\matin\01 - Dabir - 14030730 - newComponent\Program\UMain.pas',2803,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint5='D:\matin\01 - Dabir - 14030730 - newComponent\Program\UMain.pas',2810,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -285,9 +187,9 @@ Width=1680
 Height=123
 MaxLeft=-1
 MaxTop=-1
-MaxWidth=1936
+MaxWidth=1696
 MaxHeight=123
-ClientWidth=1920
+ClientWidth=1680
 ClientHeight=84
 
 [ProjectManager]
@@ -342,18 +244,18 @@ Visible=1
 State=0
 Left=-3
 Top=490
-Width=208
+Width=294
 Height=524
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=192
+ClientWidth=278
 ClientHeight=485
 TBDockHeight=556
 LRDockWidth=190
 Dockable=1
 SplitPos=85
 ArrangeBy=Name
-SelectedItem=Caption
+SelectedItem=Name
 ExpandedItems=Title
 HiddenCategories=
 
@@ -363,11 +265,11 @@ Visible=1
 State=0
 Left=-4
 Top=116
-Width=211
+Width=330
 Height=386
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=195
+ClientWidth=314
 ClientHeight=347
 TBDockHeight=370
 LRDockWidth=190
@@ -443,11 +345,11 @@ Visible=0
 State=0
 Left=12
 Top=0
-Width=1707
+Width=1457
 Height=85
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1707
+ClientWidth=1457
 ClientHeight=85
 TBDockHeight=85
 LRDockWidth=443

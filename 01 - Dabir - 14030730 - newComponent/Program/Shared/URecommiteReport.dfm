@@ -201,7 +201,7 @@ inherited FrRecommiteReport: TFrRecommiteReport
           Font.Height = -11
           Font.Name = 'Tahoma'
           Font.Style = []
-          ImageIndex = 98
+          ImageIndex = 97
           Images = Dm.ImageList_MainNew
           NotesFont.Charset = DEFAULT_CHARSET
           NotesFont.Color = clWindowText
@@ -670,7 +670,7 @@ inherited FrRecommiteReport: TFrRecommiteReport
           Font.Height = -11
           Font.Name = 'Tahoma'
           Font.Style = []
-          ImageIndex = 97
+          ImageIndex = 98
           Images = Dm.ImageList_MainNew
           NotesFont.Charset = DEFAULT_CHARSET
           NotesFont.Color = clWindowText

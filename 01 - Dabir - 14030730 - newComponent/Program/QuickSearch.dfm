@@ -206,7 +206,7 @@ inherited QuickSearchF: TQuickSearchF
         Top = 35
         Width = 162
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         Color = clCream
         Rounding = 3
         TabOrder = 0
@@ -278,7 +278,7 @@ inherited QuickSearchF: TQuickSearchF
         Top = 94
         Width = 187
         Height = 80
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         Caption = '   '#1580#1587#1578#1580#1608#1610' '#1593#1591#1601' / '#1662#1610#1585#1608'   '
         TabOrder = 4
         DesignSize = (
@@ -415,7 +415,7 @@ inherited QuickSearchF: TQuickSearchF
         Top = 73
         Width = 162
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         Color = clCream
         Rounding = 3
         TabOrder = 8
@@ -498,7 +498,7 @@ inherited QuickSearchF: TQuickSearchF
         Top = 16
         Width = 162
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         Color = clCream
         Rounding = 3
         TabOrder = 1
@@ -605,7 +605,7 @@ inherited QuickSearchF: TQuickSearchF
         Width = 77
         Height = 28
         Cursor = crHandPoint
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         Caption = #1580#1583#1610#1583
         ImageIndex = 13
         Images = Dm.ImageList_MainNew
@@ -638,7 +638,7 @@ inherited QuickSearchF: TQuickSearchF
         Top = 48
         Width = 180
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         Rounding = 3
         TabOrder = 2
         TabStop = False
@@ -834,7 +834,7 @@ inherited QuickSearchF: TQuickSearchF
         Top = 22
         Width = 89
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         Rounding = 3
         TabOrder = 0
         TabStop = False
@@ -866,7 +866,7 @@ inherited QuickSearchF: TQuickSearchF
         Top = 57
         Width = 180
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         Rounding = 3
         TabOrder = 2
         TabStop = False
@@ -922,7 +922,7 @@ inherited QuickSearchF: TQuickSearchF
         Top = 95
         Width = 80
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         AutoSize = False
         BiDiMode = bdLeftToRight
         EditMask = '!9999/99/99;1; '
@@ -940,7 +940,7 @@ inherited QuickSearchF: TQuickSearchF
         Top = 128
         Width = 180
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         Rounding = 3
         TabOrder = 7
         TabStop = False
@@ -956,7 +956,7 @@ inherited QuickSearchF: TQuickSearchF
         Top = 161
         Width = 180
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         Rounding = 3
         TabOrder = 8
         TabStop = False
@@ -972,7 +972,7 @@ inherited QuickSearchF: TQuickSearchF
         Top = 196
         Width = 180
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         Rounding = 3
         TabOrder = 9
         TabStop = False

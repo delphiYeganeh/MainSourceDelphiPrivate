@@ -343,26 +343,20 @@ inherited FrInputUserTable: TFrInputUserTable
       BGImageAlign = iaStretch
       Align = alClient
       TabOrder = 1
-      DesignSize = (
-        284
-        644)
       object GroupBox2: TGroupBox
-        Left = 8
-        Top = 0
-        Width = 273
+        Left = 1
+        Top = 1
+        Width = 282
         Height = 601
-        Anchors = [akLeft, akTop, akRight, akBottom]
+        Align = alTop
         Caption = #1604#1610#1587#1578' '#1601#1585#1605' '#1607#1575#1610' '#1575#1606#1578#1582#1575#1576' '#1588#1583#1607
         TabOrder = 0
-        DesignSize = (
-          273
-          601)
         object lstSelectedForms: TListBox
-          Left = 16
-          Top = 24
-          Width = 241
+          Left = 2
+          Top = 15
+          Width = 278
           Height = 529
-          Anchors = [akLeft, akTop, akRight, akBottom]
+          Align = alTop
           Color = clWhite
           ItemHeight = 13
           TabOrder = 0

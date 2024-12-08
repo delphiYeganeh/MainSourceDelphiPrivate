@@ -206,6 +206,8 @@ uses
   function Exec_has_WordExcel(LetterId : Integer):Integer;
   function Exec_GetExcelId():Integer;
   function IncommingNoRevers(strSource : String):String;
+
+  function LetterHasViewDate(LetterId:Integer): boolean;
 const
    {$IFDEF ADA}
         RegistryKey = 'Software\ADA\dabir';
@@ -6347,6 +6349,33 @@ begin
     strTarget := strTarget + List.Strings[i-1];
 
   Result := strTarget;
+end;
+
+function LetterHasViewDate(LetterId:Integer): boolean;
+Var
+   ADOSP:TADOStoredProc;
+begin
+   ADOSP:=TADOStoredProc.create(nil);
+   ADOSP.ProcedureName:='LetterHasViewDate';
+
+   with ADOSP.Parameters.AddParameter do
+   begin
+      DataType := ftInteger;
+      Direction := pdInput;
+      Name:='@LetterId';
+      Value :=LetterId;
+   end;
+
+   with ADOSP.Parameters.AddParameter do
+   begin
+      DataType := ftInteger;
+      Direction := pdOutput;
+      Name:='@res';
+   end;
+
+   ADOSP.Connection:=dm.YeganehConnection;
+   ADOSP.ExecProc;
+   Result := (ADOSP.Parameters.ParamByname('@res').value = 1);
 end;
 
 end.

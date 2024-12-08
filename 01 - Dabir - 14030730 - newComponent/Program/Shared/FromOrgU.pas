@@ -8,7 +8,7 @@ uses
   Graphics, ExtCtrls, Classes, ActnList, DB,dialogs,SysUtils,Forms,
   ExtActns, ADODB, businessLayer, ImgList, Menus, XPStyleActnCtrls,Types,
   VirtualTrees, VirtualDBTree, dxtree, dxdbtree, RzTreeVw, AppEvnts,
-  AdvGlowButton, xpPanel;
+  AdvGlowButton, xpPanel, dxGDIPlusClasses;
 
 type
   TFromOrgForm = class(TMBaseForm)
@@ -76,6 +76,9 @@ type
     PFromOrgIsInnerOrg: TBooleanField;
     pnlMain: TPanel;
     Label6: TLabel;
+    pnlHead: TPanel;
+    SpeedButton1: TAdvGlowButton;
+    SpeedButton2: TAdvGlowButton;
     procedure FormCreate(Sender: TObject);
     procedure ACloseExecute(Sender: TObject);
     procedure SetOrganizeMode(value:boolean);
@@ -119,6 +122,8 @@ type
     procedure qryTreeFetchProgress(DataSet: TCustomADODataSet; Progress,
       MaxProgress: Integer; var EventStatus: TEventStatus);
     procedure FormActivate(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
 
   private
     FOrganizeMode : Boolean;
@@ -398,7 +403,9 @@ procedure TFromOrgForm.FormShow(Sender: TObject);
 begin
   inherited;
   try
-    PageControl.TabWidth := (PageControl.ClientWidth div Round(PageControl.PageCount)) - 3;
+   // PageControl.TabWidth := (PageControl.ClientWidth div Round(PageControl.PageCount)) - 3;
+    PageControl.TabWidth := 1;
+    PageControl.TabHeight := 1;
     _FirstTree := false;
 
     Dm.FromOrganizations.Close;
@@ -993,6 +1000,20 @@ procedure TFromOrgForm.FormActivate(Sender: TObject);
 begin
   inherited;
   LoadTree(2, Rootid);
+end;
+
+procedure TFromOrgForm.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+  PageControl.ActivePageIndex := 1;
+  PageControlChange(Sender);
+end;
+
+procedure TFromOrgForm.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+  PageControl.ActivePageIndex := 0;
+  PageControlChange(Sender);
 end;
 
 end.

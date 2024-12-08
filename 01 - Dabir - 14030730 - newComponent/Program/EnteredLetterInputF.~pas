@@ -1584,6 +1584,9 @@ begin
 
   cbPersianClick(Self);
   OldIndicID := DBEIndicatorID.Text;
+
+  if GetUserSetting('EnterLetterpnlDetailMinimize') then
+   pnlDetail.Minimized := True ;
 end;
 
 procedure TReceivedLetterInputForm.N5Click(Sender: TObject);

@@ -394,40 +394,14 @@ begin
    else
    if _ColorSetting = 1 then
    begin
-     // _Color1 := $00477471 ; //main form //end clor  pnl
-     /// _Color1 := $00395E5A ;
-     /// _Color1 := $0063A09A ;
       _Color1 := $00B1D0D1 ;
-     // _Color2 := $003C807D ; //start color  pnl    // fixcolor
-     // _Color2 := $00428C89 ;
-     // _Color2 := $00499C98 ;
-    //  _Color2 := $0063B6B1 ;
-     // _Color2 := $0063B6A3 ;
-    ////  _Color2 := $005FB6BA ;
-    _Color2 := $00BED2D3 ;
-    //  _Color3 := $0040C2C0 ; // title endcolor   pnl
-    //  _Color3  := $00ABE4E3 ;
-     // _Color3  := $00ABD3E4 ;
-     // _Color3  :=  $0082BDD7 ;
-     // _Color3  :=  $0044ACB5 ;
-     // _Color3  := $003E9CA4  ;
-
-      ///_Color3  := $003A9198 ;
-     // _Color3  :=  $00276165 ;
-     /// _Color3  := $0025635C ;
-     /// _Color3  := $002F7B72 ;
+      _Color2 := $00BED2D3 ;
       _Color3  := $0073ADB0 ;
-     //// _Color4 := $00002F2F ; // line
-     _Color4 :=  $00005D6F ;
+      _Color4 :=  $00005D6F ;
       _Color5 := clCream  ;
    end
    else if _ColorSetting = 0 then
-   begin           {
-      _Color1 := $00F7DFD6 ; //main form //end clor  pnl
-      _Color2 := $00FBF1ED ; //start color  pnl    // fixcolor
-      _Color3 := $00F0BDAA ; // title endcolor   pnl
-      _Color4 := $00EAAB93 ; // line
-                }
+   begin
       _Color1 := $00FFF4F4 ;
       _Color2 := $00FFD9D9 ;
       _Color3 := clWhite ;

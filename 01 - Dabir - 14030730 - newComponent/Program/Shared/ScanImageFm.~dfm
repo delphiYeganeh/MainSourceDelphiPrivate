@@ -43,7 +43,7 @@ inherited FmScanImage: TFmScanImage
       end
       object SBGoToPAge: TAdvGlowButton
         Left = 264
-        Top = 2
+        Top = 4
         Width = 137
         Height = 22
         Cursor = crHandPoint
@@ -107,7 +107,7 @@ inherited FmScanImage: TFmScanImage
       end
       object SBReplacePic: TAdvGlowButton
         Left = 142
-        Top = 2
+        Top = 4
         Width = 121
         Height = 22
         Cursor = crHandPoint
@@ -178,7 +178,7 @@ inherited FmScanImage: TFmScanImage
       end
       object SpeedButton7: TAdvGlowButton
         Left = -16
-        Top = 2
+        Top = 4
         Width = 157
         Height = 22
         Cursor = crHandPoint

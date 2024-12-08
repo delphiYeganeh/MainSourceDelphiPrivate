@@ -326,13 +326,13 @@ begin
      end;
      if Trim(QWorkSheetBaseMonth_Shamsi.AsString)='' then
      begin
-          ShowMessage('›Ì·œ „«Â ‰«„⁄ »— «” ');
+          ShowMessage('«‰ Œ«» „«Â «Ã»«—Ì „Ì »«‘œ');
           DBComboBox2.SetFocus ;
           Abort;
      end;
      if Trim(QWorkSheetBaseDay_Shamsi.AsString)='' then
      begin
-          ShowMessage('›Ì·œ —Ê“ ‰«„⁄ »— «” ');
+          ShowMessage('«‰ Œ«» —Ê“ «Ã»«—Ì „Ì »«‘œ');
           DBComboBox3.SetFocus ;
           Abort;
      end;

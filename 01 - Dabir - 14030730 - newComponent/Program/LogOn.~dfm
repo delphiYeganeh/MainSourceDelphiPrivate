@@ -30339,7 +30339,7 @@ inherited LoginForm: TLoginForm
     Height = 23
     Caption = 'color3'
     Font.Charset = ARABIC_CHARSET
-    Font.Color = 6267557
+    Font.Color = 7581104
     Font.Height = -19
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
