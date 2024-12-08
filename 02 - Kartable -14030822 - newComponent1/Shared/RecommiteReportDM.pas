@@ -1,0 +1,90 @@
+unit RecommiteReportDM;
+
+interface
+
+uses
+  SysUtils, Classes, DB, ADODB, frxExportTXT, frxExportText,
+  frxExportImage, frxExportRTF, frxExportXML, frxExportXLS, frxClass,
+  frxExportPDF, frxDesgn, frxDBSet;
+
+type
+  TDMRecommiteReport = class(TDataModule)
+    QrOrg: TADOQuery;
+    QrOrgID: TAutoIncField;
+    QrOrgTitle: TWideStringField;
+    QrOrgResponsibleStaffer: TWideStringField;
+    DSOrg: TDataSource;
+    frxDesigner1: TfrxDesigner;
+    frxDBRecommite_report: TfrxDBDataset;
+    sp_recommite_report: TADOStoredProc;
+    DS_recommite_report: TDataSource;
+    frxRepRecommite_report: TfrxReport;
+    sp_recommite_reportLetterID: TAutoIncField;
+    sp_recommite_reportIndicatorID: TIntegerField;
+    sp_recommite_reportIncommingDate: TWideStringField;
+    sp_recommite_reportMemo: TWideStringField;
+    sp_recommite_reportRetroactionNo: TWideStringField;
+    sp_recommite_reportRegistrationDate: TStringField;
+    sp_recommite_reportFollowLetterNo: TWideStringField;
+    sp_recommite_reportToStaffer: TWideStringField;
+    sp_recommite_reportSenderTitle: TWideStringField;
+    sp_recommite_reportDeliverTitle: TWideStringField;
+    sp_recommite_reportLetterTypeTitle: TWideStringField;
+    sp_recommite_reportLetterRecommites: TWideStringField;
+    sp_recommite_reportParaph: TWideStringField;
+    sp_recommite_reportRecommiteDate: TStringField;
+    sp_recommite_reportProceeded: TBooleanField;
+    sp_recommite_reportProceedDate: TStringField;
+    sp_recommite_reportRecommitTypeTitle: TWideStringField;
+    sp_recommite_reportRecommiterTitle: TWideStringField;
+    sp_recommite_reportRecommited: TWideStringField;
+    sp_recommite_reportViewDate: TStringField;
+    sp_recommite_reportStaffMemo: TWideStringField;
+    sp_recommite_reportDeadlineDays: TIntegerField;
+    sp_recommite_reportProgressDays: TIntegerField;
+    sp_recommite_reportDeadLineDate: TStringField;
+    sp_recommite_reportActionTypeTitle: TWideStringField;
+    sp_recommite_reportIncommingNo: TWideStringField;
+    sp_recommite_reportSecTitle: TWideStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DMRecommiteReport: TDMRecommiteReport;
+
+implementation
+
+{$R *.dfm}
+
+{frxDBRecommite_report
+IndicatorID=‘ «‰œÌò« Ê—
+IncommingDate= «—ÌŒ «—Ã«⁄
+Memo=„÷„Ê‰ ‰«„Â
+RetroactionNo=⁄ÿ›
+RegistrationDate= «—ÌŒ À»  ‰«„Â
+FollowLetterNo=ÅÌ—Ê
+ToStaffer=‘Œ’ ÿ—› „ò« »Â
+SenderTitle=›—” ‰œÂ
+DeliverTitle=êÌ—‰œÂ
+LetterTypeTitle=‰Ê⁄ ‰«„Â
+LetterRecommites=«—Ã«⁄«  ‰«„Â
+Paraph=„ ‰ «—Ã«⁄
+RecommiteDate= «—ÌŒ «—Ã«⁄
+ProceedDate= «—ÌŒ «ﬁœ«„
+RecommiterTitle=«—Ã«⁄ œÂ‰œÂ
+Recommited=«—Ã«⁄ ‘Ê‰œÂ
+ViewDate= «—ÌŒ ŒÊ«‰œ‰
+DeadlineDays= ⁄œ«œ —Ê“  «ŒÌ—
+ProgressDays= ⁄œ«œ —Ê“ «ﬁœ«„
+DeadLineDate=„Â·  «ﬁœ«„
+ActionTypeTitle=‰Ê⁄ «ﬁœ«„
+-Proceeded=Proceeded
+-LetterID=LetterID
+-RecommitTypeTitle=RecommitTypeTitle
+-StaffMemo=StaffMemo
+}
+
+end.

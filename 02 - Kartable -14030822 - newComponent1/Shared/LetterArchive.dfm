@@ -1,0 +1,384 @@
+inherited LetterArchiveform: TLetterArchiveform
+  Tag = 17
+  Left = 576
+  Top = 275
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = #1576#1575#1610#1711#1575#1606#1610' '#1606#1575#1605#1607
+  ClientHeight = 338
+  ClientWidth = 591
+  Constraints.MinHeight = 300
+  Constraints.MinWidth = 500
+  OldCreateOrder = True
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlMain: TPanel [0]
+    Left = 0
+    Top = 0
+    Width = 591
+    Height = 338
+    Align = alClient
+    TabOrder = 0
+    object Label2: TLabel
+      Left = 50
+      Top = 8
+      Width = 3
+      Height = 13
+    end
+    object Panel1: TxpPanel
+      Left = 1
+      Top = 268
+      Width = 589
+      Height = 69
+      StartColor = 16511469
+      EndColor = 16244694
+      FillDirection = fdLeftToRight
+      TitleShow = False
+      Caption = 'xpPanel'
+      Title = 'xpPanelTitle'
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clNavy
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = [fsBold]
+      TitleAlignment = taCenter
+      TitleStartColor = clWhite
+      TitleEndColor = 15777194
+      TitleColor = clWhite
+      TitleFillDirect = fdLeftToRight
+      TitleImageAlign = tiaLeft
+      TitleButtons = [tbMinimize]
+      DefaultHeight = 60
+      BorderColor = clWhite
+      BGImageAlign = iaStretch
+      Align = alBottom
+      TabOrder = 0
+      DesignSize = (
+        587
+        67)
+      object Label1: TLabel
+        Left = 434
+        Top = 43
+        Width = 141
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1575#1606#1578#1582#1575#1576' '#1586#1608#1606#1705#1606' '#1575#1586' '#1591#1585#1610#1602' '#1605#1705#1575#1606' '#1570#1606' :'
+      end
+      object SpeedButton4: TAdvGlowButton
+        Left = 505
+        Top = 6
+        Width = 77
+        Height = 25
+        Cursor = crHandPoint
+        Action = Add
+        Anchors = [akTop, akRight]
+        Caption = #1580#1583#1610#1583
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 60
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 0
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object SpeedButton3: TAdvGlowButton
+        Left = 427
+        Top = 6
+        Width = 77
+        Height = 25
+        Cursor = crHandPoint
+        Action = Delete
+        Anchors = [akTop, akRight]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 1
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 1
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object xpBitBtn1: TAdvGlowButton
+        Left = 349
+        Top = 6
+        Width = 77
+        Height = 25
+        Cursor = crHandPoint
+        Anchors = [akTop, akRight]
+        Caption = #1578#1608#1590#1610#1581#1575#1578
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 78
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = xpBitBtn1Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object Edit1: TEdit
+        Left = 348
+        Top = 39
+        Width = 82
+        Height = 21
+        Anchors = [akTop, akRight]
+        TabOrder = 3
+      end
+      object BitBtn2: TAdvGlowButton
+        Left = 261
+        Top = 37
+        Width = 80
+        Height = 25
+        Cursor = crHandPoint
+        Action = APost
+        Anchors = [akTop, akRight]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 36
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 4
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object BitBtn1: TAdvGlowButton
+        Left = 7
+        Top = 38
+        Width = 75
+        Height = 25
+        Cursor = crHandPoint
+        Caption = #1582#1585#1608#1580
+        Default = True
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 84
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 5
+        OnClick = BitBtn1Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 1
+      Width = 589
+      Height = 267
+      Align = alClient
+      TabOrder = 1
+      object DBG: TYDBGrid
+        Left = 1
+        Top = 1
+        Width = 587
+        Height = 265
+        Cursor = crHandPoint
+        Align = alClient
+        DataSource = DSForm
+        ReadOnly = True
+        TabOrder = 0
+        TitleFont.Charset = ARABIC_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        YeganehColor = True
+        YeganehFinish = False
+        PageNumber = False
+        RecordNumber = False
+        HasTime = False
+        Oriention = poPortrait
+        HasDate = False
+        HasIndex = False
+        PrintTitle = #1604#1610#1587#1578' '#1578#1607#1610#1607' '#1588#1583#1607' '#1578#1608#1587#1591' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1610#1711#1575#1606#1607
+        InvertFarsiDate = True
+        TitleSort = True
+        AutoInsert = False
+        FooterFields = 'Count'
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'Place'
+            Title.Caption = #1605#1705#1575#1606
+            Width = 38
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Title'
+            Title.Alignment = taCenter
+            Title.Caption = #1593#1606#1608#1575#1606
+            Width = 161
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ArchiveNotes'
+            Title.Caption = #1578#1608#1590#1610#1581#1575#1578
+            Width = 194
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'archivedate'
+            Title.Caption = #1578#1575#1585#1610#1582' '#1576#1575#1610#1711#1575#1606#1610
+            Width = 85
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'UserTitle'
+            Title.Caption = #1705#1575#1585#1576#1585
+            Visible = True
+          end>
+      end
+    end
+  end
+  inherited DSForm: TDataSource
+    Left = 32
+    Top = 64
+  end
+  inherited ActionList: TActionList
+    Left = 448
+    Top = 104
+  end
+  object ActionManager: TActionManager
+    Images = Dm.LetterImages
+    Left = 446
+    Top = 52
+    StyleName = 'XP Style'
+    object Add: TAction
+      Caption = #1583#1585#1580
+      ImageIndex = 16
+      ShortCut = 45
+      OnExecute = AddExecute
+    end
+    object Delete: TAction
+      Caption = #1581#1584#1601
+      ImageIndex = 17
+      ShortCut = 16430
+      OnExecute = DeleteExecute
+    end
+    object Aexit: TAction
+      ShortCut = 27
+      OnExecute = AexitExecute
+    end
+    object APost: TAction
+      Caption = #1584#1582#1610#1585#1607' F2'
+      ShortCut = 113
+      OnExecute = APostExecute
+    end
+  end
+end

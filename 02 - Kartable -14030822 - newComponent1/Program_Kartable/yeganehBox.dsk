@@ -1,0 +1,431 @@
+[Closed Files]
+File_0=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ShowMessageFm.dfm',0,1,1,1,1,0,0
+File_1=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ArchiveOrganize.dfm',0,1,1,1,1,0,0
+File_2=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\U_SEE_PAYVAST_ERJA_FRM.pas',0,1,232,55,260,1,0
+File_3=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\OtherUnit\U_ADD_PEYVAST_DIALOG_FRM.pas',0,1,106,47,112,1,0
+File_4=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\shared\ReCommiteU.pas',0,1,495,55,513,1,0
+File_5=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\shared\RecommiteReportDM.pas',0,1,1,1,1,0,0
+File_6=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\shared\URecommiteReport.pas',0,1,129,74,152,1,0
+File_7=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\OtherUnit\U_ADD_PEYVAST_DIALOG_FRM.dfm',0,1,1,1,1,0,0
+File_8=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\shared\ShowmessageU.pas',0,1,30,1,50,1,0
+
+[Modules]
+Module0=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Dmu.pas
+Module1=c:\program files (x86)\borland\delphi7\source\rtl\Sys\system.pas
+Module2=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\yeganehBox.dpr
+Module3=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas
+Module4=D:\matin\02 - Kartable -14030822 - newComponent1\shared\BaseUnit.pas
+Module5=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ShowMessageFm.pas
+Module6=D:\matin\02 - Kartable -14030822 - newComponent1\shared\Settingsu.pas
+Module7=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ArchiveOrganize.pas
+Module8=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\UMain.pas
+Module9=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\LogOn.pas
+Module10=D:\matin\02 - Kartable -14030822 - newComponent1\shared\UaddLetterData.pas
+Module11=D:\matin\02 - Kartable -14030822 - newComponent1\shared\URetroExist.pas
+Count=12
+EditWindowCount=1
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Dmu.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[c:\program files (x86)\borland\delphi7\source\rtl\Sys\system.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\yeganehBox.dpr]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\shared\BaseUnit.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ShowMessageFm.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\shared\Settingsu.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ArchiveOrganize.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\UMain.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\LogOn.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\shared\UaddLetterData.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\shared\URetroExist.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[C:\Program Files (x86)\Borland\Delphi7\Projects\ProjectGroup1.bpg]
+FormState=0
+FormOnTop=0
+
+[EditWindow0]
+ViewCount=12
+CurrentView=10
+View0=0
+View1=1
+View2=2
+View3=3
+View4=4
+View5=5
+View6=6
+View7=7
+View8=8
+View9=9
+View10=10
+View11=11
+CodeExplorer=CodeExplorer@EditWindow0
+MessageView=MessageView@EditWindow0
+Create=1
+Visible=1
+State=0
+Left=193
+Top=114
+Width=1485
+Height=910
+MaxLeft=-8
+MaxTop=114
+ClientWidth=1469
+ClientHeight=871
+LeftPanelSize=0
+LeftPanelClients=CodeExplorer@EditWindow0
+LeftPanelData=00000400010000000C000000436F64654578706C6F726572000000000000000000000000000000000001000000000000000000000000FFFFFFFF
+RightPanelSize=0
+BottomPanelSize=85
+BottomPanelClients=WatchWindow,MessageView@EditWindow0
+BottomPanelData=00000400010000000B000000576174636857696E646F77BD050000000000000255000000000000000100000001000000000000000002000000009D000000000000000200000002B6060000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000100000000BD0500000B0000004D65737361676556696577FFFFFFFF
+
+[View0]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\yeganehBox.dpr
+CursorX=1
+CursorY=140
+TopLine=109
+LeftCol=1
+
+[View1]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\URetroExist.pas
+CursorX=6
+CursorY=1
+TopLine=1
+LeftCol=1
+
+[View2]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\UaddLetterData.pas
+CursorX=1
+CursorY=1
+TopLine=1
+LeftCol=1
+
+[View3]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\LogOn.pas
+CursorX=1
+CursorY=449
+TopLine=443
+LeftCol=1
+
+[View4]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\UMain.pas
+CursorX=1
+CursorY=1
+TopLine=1
+LeftCol=1
+
+[View5]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ArchiveOrganize.pas
+CursorX=65
+CursorY=16
+TopLine=1
+LeftCol=1
+
+[View6]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\Settingsu.pas
+CursorX=56
+CursorY=382
+TopLine=371
+LeftCol=1
+
+[View7]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas
+CursorX=149
+CursorY=1008
+TopLine=1006
+LeftCol=1
+
+[View8]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ShowMessageFm.pas
+CursorX=1
+CursorY=1
+TopLine=129
+LeftCol=1
+
+[View9]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\BaseUnit.pas
+CursorX=1
+CursorY=395
+TopLine=384
+LeftCol=1
+
+[View10]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Dmu.pas
+CursorX=60
+CursorY=2971
+TopLine=2960
+LeftCol=1
+
+[View11]
+Module=c:\program files (x86)\borland\delphi7\source\rtl\Sys\system.pas
+CursorX=1
+CursorY=18
+TopLine=1
+LeftCol=1
+
+[Watches]
+Count=3
+Watch0='selst',256,0,18,1,0,'Watches'
+Watch1='w',256,0,18,1,0,'Watches'
+Watch2='Result',256,0,18,1,0,'Watches'
+
+[WatchWindow]
+WatchColumnWidth=100
+WatchShowColumnHeaders=1
+Create=1
+Visible=0
+State=0
+Left=12
+Top=0
+Width=1180
+Height=157
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=1180
+ClientHeight=157
+TBDockHeight=157
+LRDockWidth=1180
+Dockable=1
+
+[Breakpoints]
+Count=9
+Breakpoint0='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ReCommitedialog.pas',1182,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint1='D:\matin\02 - Kartable -14030822 - newComponent1\shared\UinnerLetter.pas',1017,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint2='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas',541,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint3='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas',484,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint4='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas',562,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint5='D:\matin\02 - Kartable -14030822 - newComponent1\shared\UinnerLetter.pas',417,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint6='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\UMain.pas',2041,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint7='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\UMain.pas',2054,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint8='D:\matin\02 - Kartable -14030822 - newComponent1\shared\URecommiteReport.pas',171,'',0,1,'',1,0,0,'',1,'','',''
+
+[AddressBreakpoints]
+Count=0
+
+[Main Window]
+Create=1
+Visible=1
+State=2
+Left=0
+Top=0
+Width=1680
+Height=123
+MaxLeft=-1
+MaxTop=-1
+MaxWidth=1696
+MaxHeight=123
+ClientWidth=1680
+ClientHeight=84
+
+[ProjectManager]
+Create=1
+Visible=0
+State=0
+Left=369
+Top=372
+Width=446
+Height=318
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=430
+ClientHeight=279
+TBDockHeight=318
+LRDockWidth=446
+Dockable=1
+
+[CPUWindow]
+Create=1
+Visible=0
+State=0
+Left=160
+Top=143
+Width=1240
+Height=794
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=1224
+ClientHeight=755
+DumpPane=79
+DisassemblyPane=187
+RegisterPane=231
+FlagPane=64
+
+[AlignmentPalette]
+Create=1
+Visible=0
+State=0
+Left=200
+Top=125
+Width=156
+Height=89
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=150
+ClientHeight=60
+
+[PropertyInspector]
+Create=1
+Visible=1
+State=0
+Left=-3
+Top=490
+Width=208
+Height=524
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=192
+ClientHeight=485
+TBDockHeight=556
+LRDockWidth=190
+Dockable=1
+SplitPos=85
+ArrangeBy=Name
+SelectedItem=Name
+ExpandedItems=Title
+HiddenCategories=
+
+[ObjectTree]
+Create=1
+Visible=1
+State=0
+Left=-4
+Top=116
+Width=211
+Height=386
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=195
+ClientHeight=347
+TBDockHeight=370
+LRDockWidth=190
+Dockable=1
+
+[fmGrepResults]
+Create=1
+Visible=0
+State=0
+Left=640
+Top=166
+Width=639
+Height=748
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=623
+ClientHeight=709
+TBDockHeight=748
+LRDockWidth=639
+Dockable=1
+
+[fmMacroLibrary]
+Create=1
+Visible=0
+State=0
+Left=786
+Top=317
+Width=347
+Height=416
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=331
+ClientHeight=377
+TBDockHeight=416
+LRDockWidth=347
+Dockable=1
+
+[DsmToolWindow]
+Create=1
+Visible=0
+State=0
+Left=373
+Top=252
+Width=334
+Height=515
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=318
+ClientHeight=476
+TBDockHeight=515
+LRDockWidth=334
+Dockable=1
+
+[CodeExplorer@EditWindow0]
+Create=1
+Visible=0
+State=0
+Left=0
+Top=12
+Width=140
+Height=805
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=140
+ClientHeight=805
+TBDockHeight=305
+LRDockWidth=140
+Dockable=1
+
+[MessageView@EditWindow0]
+Create=1
+Visible=1
+State=0
+Left=12
+Top=0
+Width=1457
+Height=85
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=1457
+ClientHeight=85
+TBDockHeight=85
+LRDockWidth=443
+Dockable=1
+
+[DockHosts]
+DockHostCount=0
+

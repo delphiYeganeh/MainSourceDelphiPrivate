@@ -1,0 +1,2834 @@
+unit Inbox;
+
+interface
+
+uses
+  Windows, BaseUnit, Menus, DB, Classes, ActnList, ActnMan, ADODB,Controls,
+  StdCtrls, DBTreeView, ComCtrls, Buttons, DBCtrls, Grids,  DBGrids, YDbgrid,
+  ExtCtrls,Graphics,variants,FORMS,SysUtils, XPStyleActnCtrls, Mask,
+  ExtActns, xpWindow, ImgList,mmsystem, xpBitBtn, PDJRotoLabel, IdSocketHandle,
+  YRotateLabel, xpPages, YWhereEdit , Dialogs, ieview, imageenview,
+  dbimageen, AppEvnts, AdvGlowButton, CurvyControls, xpPanel,
+  dxGDIPlusClasses;
+
+  type
+   TDblclickAction=(viewLetter,ViewJpg,ViewWord,ViewPdf);
+   TFInbox = class(TMBaseForm)
+    List: TPanel;
+    PSearch: TPanel;
+    Pdata: TPanel;
+    Splitter1: TSplitter;
+    SplitterRight: TSplitter;
+    PtoolBar: TPanel;
+    GroupingPanel: TxpPanel;
+    Dcommon: TDataSource;
+    Dsp_distinctDate: TDataSource;
+    QueryRefresher: TTimer;
+    Label4: TLabel;
+    DbParaph: TDBEdit;
+    Label9: TLabel;
+    DBEStaffMemo: TDBEdit;
+    GetList1: TADOStoredProc;
+    GetList2: TADOStoredProc;
+    GetList3: TADOStoredProc;
+    DGetList3: TDataSource;
+    DgetList2: TDataSource;
+    DGetList1: TDataSource;
+    dUserSecs: TDataSource;
+    Label12: TLabel;
+    Sp_DistinctDate: TADODataSet;
+    Sp_DistinctDateid: TIntegerField;
+    Sp_DistinctDateTitle: TWideStringField;
+    Sp_DistinctDatebeginDate: TStringField;
+    Sp_DistinctDateEnddate: TStringField;
+    PopupMenu: TPopupMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    Excel1: TMenuItem;
+    Word1: TMenuItem;
+    Settings: TADOTable;
+    SettingsUserID: TIntegerField;
+    SettingsVariableId: TIntegerField;
+    SettingsValue: TWideStringField;
+    Settingsdescription: TWideStringField;
+    FollowupPanel: TPanel;
+    Panel1: TPanel;
+    SpeedButton1: TAdvGlowButton;
+    CloseBtn: TAdvGlowButton;
+    openBtn: TAdvGlowButton;
+    lettersDbGrid: TYDBGrid;
+    MinimizedPanel: TPanel;
+    labell: TYRotateLabel;
+    PDJRotoLabel1: TYRotateLabel;
+    Label21: TLabel;
+    DBEDeadLineDate: TDBEdit;
+    DSletterformats: TDataSource;
+    Qrletterformats: TADOQuery;
+    QrletterformatsCode: TIntegerField;
+    QrletterformatsTitle: TStringField;
+    ImageList: TImageList;
+    ImageList1: TImageList;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
+    FromOrgTree_old: TDBTreeView;
+    TabSheet4: TTabSheet;
+    ToOrgDbgrid: TYDBGrid;
+    TabSheet5: TTabSheet;
+    GBReturnReport: TGroupBox;
+    Label8: TLabel;
+    Label11: TLabel;
+    Label13: TLabel;
+    RecommiteDate: TYWhereEdit;
+    DeadLineDate: TYWhereEdit;
+    ProceedDate: TYWhereEdit;
+    Search: TAdvGlowButton;
+    RGState: TRadioGroup;
+    DBTreeView: TDBTreeView;
+    Panel4: TPanel;
+    SpeedButton2: TAdvGlowButton;
+    DBText1: TDBText;
+    Panel5: TxpPanel;
+    Label2: TLabel;
+    Label1: TLabel;
+    Label3: TLabel;
+    No: TCurvyEdit;
+    Search8: TAdvGlowButton;
+    Memo: TCurvyEdit;
+    date: TComboBox;
+    Get_UserSecretariat_Tree: TADOStoredProc;
+    Get_UserSecretariat_TreeID: TAutoIncField;
+    Get_UserSecretariat_TreeSecID: TIntegerField;
+    Get_UserSecretariat_TreeParentID: TIntegerField;
+    Get_UserSecretariat_TreeTag: TIntegerField;
+    Get_UserSecretariat_TreeTitle: TStringField;
+    DGet_UserSecretariat_Tree: TDataSource;
+    PageControl2: TPageControl;
+    TshFollowUp: TTabSheet;
+    TshMessage: TTabSheet;
+    YDBGrid2: TYDBGrid;
+    Panel2: TPanel;
+    Button2: TAdvGlowButton;
+    Button3: TAdvGlowButton;
+    Button1: TAdvGlowButton;
+    Panel6: TPanel;
+    GroupBox1: TGroupBox;
+    MessageLabel: TLabel;
+    BBOK: TAdvGlowButton;
+    GroupBox2: TGroupBox;
+    Panel9: TPanel;
+    Panel7: TPanel;
+    BBNewsOK: TAdvGlowButton;
+    DBGrid1: TDBGrid;
+    QrNews: TADOQuery;
+    DSNews: TDataSource;
+    QrNewsNewsID: TAutoIncField;
+    QrNewsCode: TIntegerField;
+    QrNewsTitle: TWideStringField;
+    QrNewsISRead: TBooleanField;
+    LabelDelayed: TLabel;
+    UserTimer: TTimer;
+    Panel8: TPanel;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    N6: TMenuItem;
+    N7: TMenuItem;
+    N8: TMenuItem;
+    N9: TMenuItem;
+    Word2: TMenuItem;
+    N10: TMenuItem;
+    N11: TMenuItem;
+    N12: TMenuItem;
+    N13: TMenuItem;
+    Get_UserSecretariat_TreeProceed: TBooleanField;
+    DBArchiveTree: TDBTreeView;
+    Panel10: TxpPanel;
+    eArchiveYear: TMaskEdit;
+    OnlyOneYear: TCheckBox;
+    SpeedButton3: TAdvGlowButton;
+    QrSrchArchFolder: TADOQuery;
+    QrSrchArchFolderFolderID: TAutoIncField;
+    QrSrchArchFolderTitle: TWideStringField;
+    ChBoFollowRetroaction: TCheckBox;
+    LabelUserMemo: TLabel;
+    EdtUserMemo: TCurvyEdit;
+    ImageEnDBView1: TImageEnDBView;
+    QrLetterData: TADOQuery;
+    DSLetterData: TDataSource;
+    QrLetterDataLetterDataID: TAutoIncField;
+    QrLetterDataLetterID: TIntegerField;
+    QrLetterDataImage: TBlobField;
+    TabSheet6: TTabSheet;
+    GroupBox3: TGroupBox;
+    Label6: TLabel;
+    Label7: TLabel;
+    DestinationComputer: TAdvGlowButton;
+    Edit1: TCurvyEdit;
+    GroupBox4: TGroupBox;
+    Memo1: TMemo;
+    GroupBox6: TGroupBox;
+    btbSend: TAdvGlowButton;
+    Memo2: TMemo;
+    CheckBox1: TCheckBox;
+    chkbAllYear: TCheckBox;
+    YRotateLabel1: TYRotateLabel;
+    pnlInformation: TPanel;
+    Image1: TImage;
+    Image2: TImage;
+    Image4: TImage;
+    Image5: TImage;
+    Image6: TImage;
+    Image7: TImage;
+    Image8: TImage;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label20: TLabel;
+    Label23: TLabel;
+    ArchiveFolders: TMemo;
+    ChbAllSec: TCheckBox;
+    ASetActions: TAction;
+    quHasSign: TADOQuery;
+    quHasSignC: TIntegerField;
+    Image9: TImage;
+    Label24: TLabel;
+    chkJustNotArchived: TCheckBox;
+    N14: TMenuItem;
+    Dcommon2: TDataSource;
+    QrViewDate: TADOQuery;
+    QrViewDateviewdate: TStringField;
+    ADOHasAccess: TADOQuery;
+    ADOHasAccessHasAccess: TIntegerField;
+    FromOrgTree: TDBTreeView;
+    Action1: TAction;
+    Label25: TLabel;
+    Label26: TLabel;
+    eFromDate: TCurvyEdit;
+    Panel3: TxpPanel;
+    SBHome: TAdvGlowButton;
+    SBOrg: TAdvGlowButton;
+    SBDate: TAdvGlowButton;
+    SBArchive: TAdvGlowButton;
+    Label22: TLabel;
+    Label10: TLabel;
+    SBReport: TAdvGlowButton;
+    lblYear: TLabel;
+    Label5: TLabel;
+    Label19: TLabel;
+    SHOW_ALL_BTN: TAdvGlowButton;
+    SHOW_NOT_READ_BTN: TAdvGlowButton;
+    SpeedButton4: TAdvGlowButton;
+    SpeedButton5: TAdvGlowButton;
+    CBReCommiteType: TDBLookupComboBox;
+    DBLkCBLetterFormat: TDBLookupComboBox;
+    SpinEdit: TCurvyEdit;
+    Timer1: TTimer;
+    ImageList_New: TImageList;
+    ImageList1_new: TImageList;
+    UpAndDownBtn: TAdvGlowButton;
+    UpAndDownBtn2: TAdvGlowButton;
+    ImageList2: TImageList;
+    Image3: TImage;
+    Label27: TLabel;
+    Bevel1: TBevel;
+    Image10: TImage;
+    Label28: TLabel;
+    Bevel2: TBevel;
+    Bevel3: TBevel;
+    ImagePic: TImage;
+    LblPic: TLabel;
+    Bevel4: TBevel;
+    Image11: TImage;
+    Label29: TLabel;
+    Image12: TImage;
+    Label30: TLabel;
+    Image13: TImage;
+    Label31: TLabel;
+    Bevel5: TBevel;
+    Image14: TImage;
+    Label32: TLabel;
+    Bevel6: TBevel;
+    Label33: TLabel;
+    Label34: TLabel;
+    Label35: TLabel;
+    Label36: TLabel;
+    Label37: TLabel;
+    Label38: TLabel;
+    LblReadFilter: TLabel;
+    Label39: TLabel;
+    MemoSender: TCurvyEdit;
+    Label40: TLabel;
+    Label41: TLabel;
+    Label42: TLabel;
+    Label43: TLabel;
+    Label44: TLabel;
+    procedure SetReceiveMode(value:boolean);
+    procedure AChangeColorExecute(Sender: TObject);
+    //procedure AHomeExecute(Sender: TObject);
+    procedure AviewAllletterExecute(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure N9Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure N13Click(Sender: TObject);
+    procedure CBFormatChange(Sender: TObject);
+    procedure SetProceed(value:boolean);
+    procedure SetIBType(value:byte);
+    procedure FormCreate(Sender: TObject);
+    procedure CBReCommiteTypeChange(Sender: TObject);
+    procedure SetRdate(value:integer);
+    procedure SetCurrentOrgId(value:integer);
+    procedure FromOrgTree_oldClick(Sender: TObject);
+    procedure SBOrgClick(Sender: TObject);
+    procedure Sp_DistinctDateAfterScroll(DataSet: TDataSet);
+    procedure SBDateClick(Sender: TObject);
+    procedure QueryRefresherTimer(Sender: TObject);
+    procedure lettersDbGridNeedFontCondition(Column: TColumn;
+      State: TGridDrawState; var F: TFont);
+    procedure SBArchiveClick(Sender: TObject);
+    procedure lettersDbGridNeedImageIndex(Column: TColumn;
+      var ImageIndex: Integer);
+    procedure N1Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure Excel1Click(Sender: TObject);
+    procedure Word1Click(Sender: TObject);
+    procedure lettersDbGridMouseMove(Sender: TObject; Shift: TShiftState;
+      X, Y: Integer);
+    {Ranjbar 87.12.10}
+    //procedure SLowMessage(s:string;ShowButton:boolean);
+    procedure SLowMessage;
+    //---
+    Procedure SetShowFollowUp(Value: boolean);
+    procedure CloseBtnClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure labellClick(Sender: TObject);
+    procedure SearchClick(Sender: TObject);
+    procedure NullSearch;
+    procedure Button1Click(Sender: TObject);
+    procedure YDBGrid2NeedFontCondition(Column: TColumn;
+      State: TGridDrawState; var F: TFont);
+    procedure YDBGrid2NeedImageIndex(Column: TColumn;
+      var ImageIndex: Integer);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure RefreshFollowUP;
+    procedure YDBGrid2DblClick(Sender: TObject);
+    procedure RefreshFollowLabel;
+    procedure DBLkCBLetterFormatClick(Sender: TObject);
+    procedure NoKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure Search8Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure DBTreeViewClick(Sender: TObject);
+    procedure DBTreeViewGetSelectedIndex(Sender: TObject; Node: TTreeNode);
+    procedure RGStateClick(Sender: TObject);
+    procedure SBReportClick(Sender: TObject);
+    procedure SBHomeClick(Sender: TObject);
+    procedure BBOKClick(Sender: TObject);
+    procedure BBNewsOKClick(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure UserTimerTimer(Sender: TObject);
+    procedure N3Click(Sender: TObject);
+    procedure OnlyOneYearClick(Sender: TObject);
+    procedure eArchiveYearChange(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure NoKeyPress(Sender: TObject; var Key: Char);
+    procedure lettersDbGridMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure DBArchiveTreeClick(Sender: TObject);
+    procedure DBArchiveTreeKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DestinationComputerClick(Sender: TObject);
+    procedure btbSendClick(Sender: TObject);
+    procedure Memo2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure PageControl2Enter(Sender: TObject);
+    procedure YRotateLabel1Click(Sender: TObject);
+    procedure TabSheet6Show(Sender: TObject);
+    procedure ASetActionsExecute(Sender: TObject);
+    procedure SHOW_ALL_BTNClick(Sender: TObject);
+    procedure lettersDbGridCellClick(Column: TColumn);
+    procedure RadioGroup2Click(Sender: TObject);
+    procedure FromOrgTreeClick(Sender: TObject);
+    procedure Action1Execute(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure UpAndDownBtnClick(Sender: TObject);
+    procedure GroupingPanelAfterClose(Sender: TObject);
+    procedure UpAndDownBtn2Click(Sender: TObject);
+  private
+    FReceiveMode:boolean;
+    FProceed:boolean;
+    FIBType :byte;
+    FCurrentOrgId:integer;
+    FRdate:integer;
+    FShowFollowUp: boolean;
+    Do_RefreshTree :Boolean;
+
+    //Old_MessageCount , Old_NewsCount : Integer;
+    {Ranjbar 89.10.01 ID=191}
+    OldLetterID : Integer;
+    Activated: Boolean;
+    FChatActivated: Boolean;
+    //---
+
+    function NoCondition:String;
+    function DateCondition(DateFilter : Boolean):String;
+    function likeCondition:string;
+    function UserMemoCondition:string;
+    procedure Refresh;
+    procedure RefreshTree;
+    procedure SetChatActivated(const Value: Boolean);
+    procedure PrepareForChat;
+    procedure UDPException(Sender: TObject);
+    procedure SearchEvent(ResultIP, ResultName: String);
+    procedure PrepareSet;
+    procedure SearchPanelShow;
+   public
+     Condition :String;
+     {Ranjbar 90.02.14 ID=367}
+     IsSoftInWaitting : Boolean;
+     Bm : TBookMark;
+    valueLocate: Integer;
+     //---
+     procedure BringKartabl;
+     Property Rdate: integer read FRdate write SetRdate;
+     Property CurrentOrgId: integer read FCurrentOrgId write SetCurrentOrgId;
+     Property Proceed : Boolean read FProceed write SetProceed;
+     Property IBType : byte read FIBType write SetIBType;
+     Property ShowFollowing: Boolean read FShowFollowUp write SetShowFollowUp;
+     //Ranjbar
+     procedure DisplayStatus;
+     procedure OpenCloseSp_DistinctDate;
+     property ChatActivated:Boolean read FChatActivated write SetChatActivated;
+     procedure UDPRead(Sender: TObject; AData: TStream;ABinding: TIdSocketHandle);
+     procedure ViewAllLetters;
+     procedure ViewAllLetters2;
+     //---
+
+  end;
+
+Var
+   FInbox: TFInbox;
+
+implementation
+
+uses UMain{,  colorSetting} , Dmu, businessLayer,
+     YShamsiDate, UGetMessage, Math, UFollowUp, ShowMessageFm, NewsUsersFm,
+  SearchFM, UDP;
+
+{$R *.DFM}
+
+Type
+    code=^integer;
+
+var
+   DblclickAction:TDblclickAction;
+
+Procedure TFInbox.SetShowFollowUp(Value: boolean);
+begin
+  FShowFollowUp:=value;
+  if  value then
+  begin
+    CloseBtn.show;
+    openBtn.hide;
+    {Ranjbar}
+    FollowupPanel.Width:=300;
+    //TaskPanel.Show;
+    //---
+    MinimizedPanel.Hide;
+    RefreshFollowUP;
+  end
+  else
+  begin
+    CloseBtn.hide;
+    openBtn.show;
+    FollowupPanel.Width:=25;
+    {Ranjbar}
+    //TaskPanel.Hide;
+    //---
+    MinimizedPanel.Show;
+    MainForm.DeadLine:=-2;
+    MainForm.DeadLineWhere:='';
+  end
+end;
+
+function TFInbox.NoCondition:String;
+var
+  s:string;
+  FI,Ti:word;
+begin
+  Result:='';
+  s:=ReplaceKaf( trim(No.text));
+  if s='' then
+    exit;
+
+  if dm.isIndicator(s,FI,Ti) then
+    if fi<>ti then
+    begin
+      result:='(IndicatorID>='+inttostr(FI)+' and IndicatorID<='+IntToStr(TI)+')';
+      exit;
+    end;
+  Result:='( (incommingno like ''%'+s+'%'') or ( indicatorid='+s+')  )';
+end;
+
+
+function TFInbox.likeCondition:string;
+Var
+   s: string;
+   str2: string;
+begin
+   result:='';
+   s:=ReplaceKaf(trim(Memo.Text));
+   str2:=ReplaceKaf(trim(MemoSender.Text));
+   if (s='') and (str2 = '') then
+      exit;
+   {Ranjbar 89.10.01 ID=261}
+   {Result := '((' +dm.MemoCondition(memo.Text,'Memo') +') or  ('+                             //„÷„Ê‰
+                 dm.MemoCondition(Memo.Text,'UserMemo')+') or ( '+                             //„·«ÕŸ«  ﬂ«—»—Ì
+             'Toorgid in (select id from fromorganizations where title like ''%'+s+'%''))  )'; //›—” ‰œÂ
+   }
+   { TODO -oparsa : Task-no328 }
+   {
+   Result := '((' +dm.MemoCondition(memo.Text,'Memo') +') or ( '+
+             'Toorgid in (select id from fromorganizations where title like ''%'+s+'%''))  )'; //›—” ‰œÂ
+             }
+   if (s<>'') and (str2 <> '') then
+     Result := '((' +dm.MemoCondition(memo.Text,'Memo') +') and ( '+
+             'Toorgid in (select id from fromorganizations where title like ''%'+str2+'%''))  )'  //›—” ‰œÂ
+   else if (s <> '')  then
+     Result := '((' +dm.MemoCondition(memo.Text,'Memo') +'))'
+   else if (str2 <> '') then
+     Result := '( Toorgid in (select id from fromorganizations where title like ''%'+str2+'%''))  )'  ;
+   { TODO -oparsa : Task-no328 }
+   //---
+end;
+
+{Ranjbar 89.10.01 ID=261}
+function TFInbox.UserMemoCondition:string;
+Var
+   s: string;
+begin
+   result:='';
+   s := ReplaceKaf(Trim(EdtUserMemo.Text));
+   if s='' then
+      Exit;
+   Result := '( ' + Dm.MemoCondition(EdtUserMemo.Text,'UserMemo') + ' )';
+end;
+//---
+
+procedure TFInbox.Refresh;
+var
+  items : TStrings;
+  i : byte;
+begin
+  inherited;
+  if MainForm.SHOW_NOT_READ then
+  begin
+    LblReadFilter.Caption := '‰«„Â Â«Ì ŒÊ«‰œÂ ‰‘œÂ' ;
+    LblReadFilter.Font.Color := clMaroon ;
+  end
+  else
+  begin
+    LblReadFilter.Caption := 'Â„Â ‰«„Â Â«' ;
+    LblReadFilter.Font.Color := clTeal ;
+  end;
+
+  items:=TStringList.Create;
+  condition:='';
+  With items do
+  begin
+    Clear;
+    Add(NoCondition);
+    if (date.Text <> '') and (eFromDate.Text = '') then
+      Add(DateCondition(True));
+    if (date.Text <> '') and (eFromDate.Text <> '') then
+      Add(DateCondition(False));
+    Add(LikeCondition);
+    {Ranjbar 89.10.01 ID=261}
+    Add(UserMemoCondition);
+    //---
+    for i:=0 to Count-1 do
+      if  items[i]<>'' then
+        if Condition='' then
+          Condition:=items[i]
+        else
+          condition:=condition+' and '+items[i];
+  end;
+  MainForm.Where:=Condition;
+end;
+
+procedure TFInbox.RefreshTree;
+var
+  current_index:integer;
+  d : TDateTime;
+begin
+  inherited;
+  if Do_RefreshTree then
+    with Get_UserSecretariat_Tree do
+    begin
+      if Active then
+        current_index:=FieldByName('id').Value;
+      Close;
+      Parameters.ParamByName('@userid').Value:=_userid;
+      //Parameters.ParamByName('@myear').Value:=dm.CurrentMYear;
+      d:=now;
+      Open;
+      DBTreeView.Items[0].Expand(False);
+      Locate('id',current_index,[]);
+    end;
+end;
+
+procedure TFInbox.SetProceed(value:boolean);
+  var i: byte;
+begin
+  FProceed:=value;
+
+  MainForm.AnewRecommite.Visible:=not value;
+  MainForm.AnewRecommite.Enabled:=not value;
+
+  MainForm.AAnswer.Visible:=not value;
+  MainForm.AAnswer.Enabled:=not value;
+
+  MainForm.AdeleteWord.Visible:=not value;
+  MainForm.AdeleteWord.Enabled:=not value;
+
+
+  if value then
+    DbParaph.DataField:='CHILDPARAPH'
+  else
+    DbParaph.DataField:='PARAPH';
+
+  with lettersDbGrid,Columns do
+    for i:= 0 to Columns.Count-1 do
+    begin
+      if (UpperCase(Columns[i].FieldName) = 'VIEWDATE') or
+         (UpperCase(Columns[i].FieldName) = 'PROCEEDDATE') or
+        {Ranjbar 89.09.30 ID=258}//»œ·Ì· »œÊ‰ «” ›«œÂ »Êœ‰
+        //(UpperCase(Columns[i].FieldName) = 'FIRSTVIEW')or
+        //---
+         (UpperCase(Columns[i].FieldName) = 'CHILDPROCEEDED')or
+         (UpperCase(Columns[i].FieldName) = 'ACTIONTYPETITLE') then
+        Columns[i].Visible:=value;
+
+      if (UpperCase(Columns[i].FieldName) = 'RECOMMITERTITLE') or
+         (UpperCase(Columns[i].FieldName) = 'CHILDORG') then
+      begin
+        if value then
+        begin
+          Columns[i].Title.Caption:='«—Ã«⁄ ‘Ê‰œÂ';
+          Columns[i].FieldName:='ChildOrg';
+        end
+        else
+        begin
+          Columns[i].Title.Caption:='«—Ã«⁄ ò‰‰œÂ';
+          Columns[i].FieldName:='RecommiterTitle';
+        end
+      end;
+
+      if (UpperCase(Columns[i].FieldName) = 'PARAPH') or
+         (UpperCase(Columns[i].FieldName) = 'CHILDPARAPH')         then
+      begin
+        if value then
+          Columns[i].FieldName:='ChildParaph'
+        else
+          Columns[i].FieldName:='Paraph';
+      end;
+
+    end;
+
+  MainForm.Where:='';
+end;
+
+procedure TFInbox.SetIBType(value:byte);
+begin
+  FIBType:=value;
+  CBReCommiteType.KeyValue:=FIBType;
+  try
+     {Ranjbar}
+     //QuickSearchF.ANewSearch.Execute
+     //ANewSearch.Execute
+  except
+  end;
+   MainForm.Where:='';
+end;
+
+procedure TFInbox.SetRdate(value:integer);
+begin
+  FRdate:=value;
+  MainForm.Where:='';
+end;
+
+procedure TFInbox.SetCurrentOrgId(value:integer);
+begin
+  FCurrentOrgId:=value;
+  _UserFromOrgID:=value;
+  MainForm.Where:='';
+end;
+
+procedure TFInbox.SetReceiveMode(value:boolean);
+begin
+  if FReceiveMode<>value then
+  begin
+    FReceiveMode:=value;
+  end;
+end;
+
+procedure TFInbox.AChangeColorExecute(Sender: TObject);
+begin
+  inherited;
+   {ColorSettingF:=TColorSettingF.Create(Application);
+   ColorSettingF.ShowModal;
+   setcolors;}
+end;
+
+procedure TFInbox.RefreshFollowUP;
+var
+  i: integer;
+begin
+  inherited;
+  if DM.Select_FollowUP_By_Date.Active then
+    i:=dm.Select_FollowUP_By_DateFollowUPID.AsInteger
+  else
+    i:=0;
+
+  dm.Exec_Select_FollowUP_By_Date(ShamsiIncDate(_Today,0,-2,0),ShamsiIncDate(_Today,0,1,0),1);
+  if i>0 then
+    dm.Select_FollowUP_By_Date.Locate('FollowUPID',i,[]);
+end;
+
+procedure TFInbox.BringKartabl;
+begin
+  inherited;
+  ShowFollowing:=false;
+  MainForm.DoRefresh:=false;
+  IBType:=0;
+  with TADOQuery.Create(nil) do
+  begin
+    Connection := Dm.YeganehConnection;
+    SQL.Text := 'SELECT SecId FROM UserSecretariats WHERE UserId='+IntToStr(_UserID);
+    Open;
+    if recordcount=1 then
+      dm.SecID := fields[0].Value
+    else
+      dm.SecID:=0;
+  end;
+  Proceed:=false;//«ﬁœ«„ ‰‘œÂ
+  CurrentOrgId:=_UserFromOrgID;
+  Rdate:=0;
+  with MainForm do
+  begin
+    LetterFormat:=1;
+    where:='';
+    archiveFolderID:=0;
+  end;
+
+  MainForm.Letter_Type := CBReCommiteType.KeyValue;
+  MainForm.LetterFormat := DBLkCBLetterFormat.KeyValue;
+
+  DBTreeView.DataSource.DataSet.First;
+  DBTreeView.Items.Item[0].Selected := True;
+
+  RGState.ItemIndex := 0;
+  RGStateClick(Nil);
+  MainForm.DoRefresh := True;
+  MainForm.RefreshQuery;
+end;
+
+procedure TFInbox.AviewAllletterExecute(Sender: TObject);
+begin
+  inherited;
+  if SBArchive.Down then
+  begin
+    valueLocate := MainForm.sp_inbox2.FIELDBYNAME('recommiteid').AsInteger;
+    ViewAllLetters2;
+  end
+  else
+  begin
+    if DBTreeView.Selected.Text='ò«— «»·' then
+    begin
+      //if Length(Trim(Dm.Sp_InboxViewDate.AsString))>0 then
+      ViewAllLetters
+      { else
+       begin
+          OldLetterID:= Dm.Sp_InboxLetterID.AsInteger;
+          SBHomeClick(Application);
+          if Dm.Sp_Inbox.Locate('LetterID',OldLetterID,[]) then
+            ViewAllLetters
+          else
+            ShowMsgString('«—Ã«⁄ «Ì‰ ‰«„Â  €ÌÌ— Ì«› Â «”  »‰«»—«Ì‰ «“ ò«— «»· ‘„« Õ–› ‘œ');
+       end;}
+    end
+    else
+      ViewAllLetters;
+  end;
+//     if ISMessageShow then
+  if GetUserSetting('cbAlarmMessage') then
+    SLowMessage
+  else
+    try
+      FmShowMessage.Close;
+    except
+    end;
+end;
+
+procedure TFInbox.DisplayStatus;
+var
+  J : integer;
+  Tag:byte;
+begin
+
+  //MessagePanel.Height:=0;
+  Case Get_UserSecretariat_TreeTag.AsInteger of
+      1: Tag := 1; //ﬂ«— «»·
+      2: Tag := 2; //«—”«·Â«Ì »«Ìê«‰Ì ‰‘œÂ
+      else Tag := 1;
+  end;
+  //---
+
+  {i := Exec_sp_DelayedLetter(0,dm.CurrentMYear,0,_userid, Tag );
+  if i>0 then
+
+  //SLowMessage( ' ‘„« '+Bill(i)+' ‰«„Â  «ﬁœ«„ ‰‘œÂ œ«—Ìœ («—”«·Ì Ì« œ—Ì«› Ì) òÂ „Â·  «ﬁœ«„ ¬‰Â« «„—Ê“ Å«Ì«‰ „Ì Ì«»œ,',false);
+      Case Tag of
+         1: LabelDelayed.Caption := ' ‘„« œ— ﬂ«— «»· ŒÊœ  '+ Bill(i) +' ‰«„Â  «ﬁœ«„ ‰‘œÂ œ«—Ìœ  òÂ „Â·  «ﬁœ«„ ¬‰Â« «„—Ê“ Å«Ì«‰ „Ì Ì«»œ.';
+         2: LabelDelayed.Caption := ' ‘„« œ— ﬁ”„  "«—”«·Â«Ì »«Ìê«‰Ì ‰‘œÂ "   '+ Bill(i) +'  ‰«„Â  «ﬁœ«„ ‰‘œÂ œ«—Ìœ  òÂ „Â·  «ﬁœ«„ ¬‰Â« «„—Ê“ Å«Ì«‰ „Ì Ì«»œ.  ';
+      end;
+      //---
+   }
+
+  if dm.Sp_Inbox.Active then
+  begin
+    dm.Sp_Inbox.Filter := '(ColorFlag=''RED'')';
+    //if not(SBArchive.Down) then
+    //begin
+    BM := dm.sp_inbox.GetBookmark;
+    dm.sp_inbox.Filtered := True;
+    LabelDelayed.Caption := ' ‘„« œ— ﬂ«— «»· ŒÊœ  '+ Bill(Dm.Sp_Inbox.RecordCount) +' ‰«„Â  «ﬁœ«„ ‰‘œÂ œ«—Ìœ  òÂ „Â·  «ﬁœ«„ ¬‰Â« «„—Ê“ Å«Ì«‰ „Ì Ì«»œ.';
+    dm.sp_inbox.Filtered := False;
+    dm.sp_inbox.GotoBookmark(bm);
+    dm.sp_inbox.FreebookMark(bm);
+    //end
+    //else
+    //LabelDelayed.Caption := '-----';
+  end;
+
+  j := Exec_Get_FollowUP_Count(_userid,ShamsiIncDate(_Today,0,-2,0),ShamsiIncDate(_Today,0,1,0),1);
+  if j>0 then
+    labell.Caption := Bill(j)+  '  ÅÌêÌ—Ì »—«Ì «‰Ã«„ ÊÃÊœ œ«—œ '
+  else
+    labell.Caption := '„Ê—œÌ »—«Ì ÅÌêÌ—Ì  ÊÃÊœ ‰œ«—œ';
+end;
+
+procedure TFInbox.FormShow(Sender: TObject);
+begin
+  inherited;
+  {Ranjbar 87.10.30}
+  PageControl1.TabIndex  := 0;
+  PageControl1.TabHeight := 1;
+  PageControl1.TabWidth  := 1;
+  BidiModeToRight(DBTreeView);
+  BidiModeToRight(DBArchiveTree);
+  BidiModeToRight(FromOrgTree);
+  //---
+  {Ranjbar 89.09.28 ID=212}
+  SpinEdit.Text := IntToStr(Dm.MaxLetterInKartable); // ⁄œ«œ ‰«„Â œ— ﬂ«— «»·
+  //---
+
+  {Ranjbar 89.10.15}
+  //SBHome.Click;//RefreshQuery , BringKartabl
+  //---
+
+  {Ranjbar 89.10.15}
+  MainForm.DoRefresh := False; //«‰Ã«„ ‰‘Êœ RefreshQuery
+  //---
+  if tmpYear <> 0 then
+  begin
+    dm.CurrentMyear:=tmpYear ; //RefreshQuery
+    tmpyear:=0;
+  end
+  else
+    dm.CurrentMyear:=strtoint(copy(_Today,1,4)); //RefreshQuery
+
+
+//  ShowMessage('1');
+  DisplayStatus;
+
+  {Ranjbar 87.10.30}
+  DBTreeView.FullExpand;
+  DBTreeView.Items.Item[0].Selected := True;
+  //---
+//   ShowMessage('2');
+  {Ranjbar 87.12.10}
+  QrNews.Close; //Œ»—Â«Ì ŒÊ«‰œÂ ‰‘œÂ
+  QrNews.Parameters.ParamByName('Pa_UsersID').Value := _UserID;
+  QrNews.Open;
+  DBGrid_LoadColumns('Kartabl_'+Self.Name,lettersDbGrid);
+
+//DBTreeViewClick(Sender);   //RefreshQuery
+  //---
+
+  {Ranjbar 89.10.15}
+  MainForm.DoRefresh := True; //«‰Ã«„ ‘Êœ RefreshQuery
+  SBHome.Click;//RefreshQuery , BringKartabl
+  //---
+
+  //Û°Û]Ú 1400
+  //eArchiveYear.Text := '13'+IntToStr( dm.CurrentmYear);
+  eArchiveYear.Text := IntToStr( dm.CurrentmYear);
+  {Ranjbar 89.10.01 ID=261}
+  LabelUserMemo.Caption := Dm.UserMemoDisplay;
+  //---
+
+  chkbAllYear.Checked:=False;
+  lettersDbGrid.Font:=StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Font:= StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[0].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[1].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[2].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[3].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[4].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[5].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[6].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[7].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[8].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[9].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[10].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[11].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[12].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[13].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[14].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[15].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[16].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[17].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[18].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[19].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[20].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[21].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[22].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[23].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[24].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[25].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[26].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[27].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[28].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[29].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[30].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[31].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[32].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[33].Font := StrToFont(GetUserSetting('MemoFont'));
+  lettersDbGrid.Columns.Items[34].Font := StrToFont(GetUserSetting('MemoFont'));
+
+  ADOHasAccess.Close;
+  ADOHasAccess.Parameters.ParamByName('@UserID1').Value := _UserID;
+  ADOHasAccess.Parameters.ParamByName('@UserID2').Value := _UserID;
+  ADOHasAccess.Parameters.ParamByName('@UserID3').Value := _UserID;
+  ADOHasAccess.Open;
+
+
+ { FromOrganizations.Close;
+  FromOrganizations.Open;
+  }
+
+  SBOrg.Visible := dm.GetActionAccess('AOrg', 8);
+
+end;
+
+procedure TFInbox.N9Click(Sender: TObject);
+begin
+  inherited;
+  lettersDbGrid.Print;
+end;
+
+procedure TFInbox.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  {Ranjbar 89.10.01 ID=191}
+  QrLetterData.Close;
+  //---
+  Abort;
+end;
+
+procedure TFInbox.N13Click(Sender: TObject);
+begin
+  inherited;
+  lettersDbGrid.CustomizePrint;
+end;
+
+procedure TFInbox.CBFormatChange(Sender: TObject);
+begin
+  inherited;
+  with mainform do
+    LetterFormat:=TDBLookupComboBox(Sender).KeyValue;
+end;
+
+procedure TFInbox.OpenCloseSp_DistinctDate;
+Var
+   MyYear:String;
+begin
+  //Ranjbar
+  if dm.CurrentMyear < 1300 then
+    MyYear := IntToStr(1300 + dm.CurrentMyear)
+  else
+    MyYear := IntToStr(dm.CurrentMyear);
+  //---
+
+  with sp_distinctDate do
+  begin
+    Close;
+    //Ranjbar
+    Parameters.ParamByName('@MyFarsiToday').Value := MyYear + Copy( Trim(_Today) ,5,6 ); //„Ê—œ «” ›«œÂ »—«Ì ”«·Â«Ì ﬁ»·
+    //---
+    Open; //AfterScroll => RefreshQuery
+    AfterScroll := Sp_distinctDateAfterScroll;
+  end;
+end;
+
+procedure TFInbox.FormCreate(Sender: TObject);
+var
+   i: integer; // Amin 1391/12/06
+begin
+  inherited;
+  {Ranjbar}
+  Do_RefreshTree:=true;
+  RefreshTree;
+  //---
+  {Ranjbar}
+  MessageLabel.Caption := '';
+//  FromOrgTree.RootID:=_UserFromOrgID;
+  GetList1.Open;
+  GetList2.Open;
+  GetList3.Open;
+  GetList3.Filter:='KeyValue<3';
+  GetList3.Filtered:=true;
+  Qrletterformats.Open;
+  DBLkCBLetterFormat.KeyValue := QrletterformatsCode.AsInteger;
+
+  {Ranjbar 89.10.15}
+  MainForm.DoRefresh := false;
+  //---
+  //Ranjbar
+  OpenCloseSp_DistinctDate; //RefreshQuery
+  //---
+
+  ShowFollowing := False;
+  QueryRefresher.Interval:=1000*GetSystemSetting('RefreshPriodTime');
+  ChatActivated := False;
+
+  // Amin 1391/12/06 Start
+  for i:= 0 to lettersDbGrid.Columns.Count-1 do
+  begin
+    if lettersDbGrid.Columns.Items[i].FieldName = 'UserMemo' then
+      lettersDbGrid.Columns.Items[i].Title.Caption := dm.UserMemoDisplay;
+  end;
+
+  if GetUserSetting('AskMonoSelect')=true then
+    lettersDbGrid.Options := [dgTitles,dgIndicator,dgColumnResize,dgColLines,dgAlwaysShowSelection,dgMultiSelect]
+  else
+    lettersDbGrid.Options := [dgTitles,dgIndicator,dgColumnResize,dgColLines,dgRowSelect,dgAlwaysShowSelection,dgMultiSelect];
+  // Amin 1391/12/06 End
+  RGState.Color := _Color1;
+  GBReturnReport .Color := _Color1;
+end;
+
+procedure TFInbox.CBReCommiteTypeChange(Sender: TObject);
+begin
+  inherited;
+  {Ranjbar 87.11.06}
+  //IBType:=CBReCommiteType.KeyValue;
+  if CBReCommiteType.KeyValue <> Null then
+     MainForm.Letter_Type := CBReCommiteType.KeyValue; //RefreshQuery
+  //---
+end;
+
+procedure TFInbox.FromOrgTree_oldClick(Sender: TObject);
+begin
+  inherited;
+  CurrentOrgId:= integer(TDBTreeView(sender).Selected.data);
+
+  // Amin 1391/05/31 Start
+   MainForm.DoRefresh := true;
+   MainForm.RefreshQuery;
+  // Amin 1391/05/31 End
+end;
+procedure TFInbox.SBOrgClick(Sender: TObject);
+begin
+  inherited;
+  SearchPanelShow;
+    
+  {Ranjbar}
+  //GroupingPanel.show;
+  //PFromOrg.Show;
+  //PDate.Hide;
+  //SearchPanel.Hide;
+  //PArchive.Hide;
+  //GroupingPanel.Align := alLeft;
+
+  RGState.ItemIndex := 0;
+  RGStateClick(Nil);
+  PageControl1.TabIndex := 2;
+  BringKartabl;
+   Mainform.AviewRecommite.Visible := (FInbox.PageControl1.TabIndex <> 1);
+   ASetActionsExecute(self);
+
+ { FromOrganizations.Close;
+  FromOrganizations.Open;
+  }
+  if SBArchive.Down then
+     lettersDbGrid.DataSource := Dcommon2
+     else
+     lettersDbGrid.DataSource := Dcommon;
+
+end;
+
+procedure TFInbox.Sp_DistinctDateAfterScroll(DataSet: TDataSet);
+begin
+  inherited;
+  Rdate := sp_distinctDateid.AsInteger;
+end;
+
+procedure TFInbox.SBDateClick(Sender: TObject);
+begin
+  inherited;
+  SearchPanelShow;
+  
+  CurrentOrgId:=_UserFromOrgID;
+  {Ranjbar}
+  {GroupingPanel.show;
+  PFromOrg.hide;
+  PDate.show;
+  SearchPanel.Hide;
+  PArchive.Hide;
+  GroupingPanel.Align := alRight;
+  }
+  {Ranjbar}
+  RGState.ItemIndex := 0;
+  RGStateClick(Nil);
+  PageControl1.TabIndex := 3;//Å‰·  «—ÌŒ
+  //AHomeExecute(Sender);
+  BringKartabl;
+  //---
+  {Ranjbar 88.05.31 Code=131}
+   //œﬂ„Â „‘«ÂœÂ «—Ã«⁄ : ›ﬁÿ »—«Ì »—êÂ »«Ìê«‰Ì ﬁ«»· „‘«ÂœÂ ‰»«‘œ
+   Mainform.AviewRecommite.Visible := (FInbox.PageControl1.TabIndex <> 1);
+   //---
+   ASetActionsExecute(self);
+  if SBArchive.Down then
+     lettersDbGrid.DataSource := Dcommon2
+     else
+     lettersDbGrid.DataSource := Dcommon;
+end;
+
+procedure TFInbox.QueryRefresherTimer(Sender: TObject);
+var i,j: integer;
+
+begin
+   inherited;
+   //»œ”  ¬Ê—œ‰  ⁄œ«œ ‰«„Â Â«Ì ÃœÌœ Ì« ŒÊ«‰œÂ ‰‘œÂ
+   {Ranjbar 90.02.14 ID=367}
+   //«ê— Å‰Ã—Â ›⁄«· ›—„ «’·Ì ‰»Êœ ¬‰ê«Â
+   if (GetActiveWindow <> MainForm.Handle) And (IsSoftInWaitting = False) then
+      Exit;
+   //---
+   i := Dm.Sp_Inbox.RecordCount; //‰„«Ì‘  ⁄œ«œ ‰«„Â Â«
+   try
+      MainForm.RefreshQuery;
+
+      RGStateClick(Nil);
+      {
+      if dm.Sp_Inbox.Active then
+      begin
+        dm.Sp_Inbox.Filter := '(ColorFlag=''RED'')';
+        BM := dm.sp_inbox.GetBookmark;
+        dm.sp_inbox.Filtered := True;
+        LabelDelayed.Caption := ' ‘„« œ— ﬂ«— «»· ŒÊœ  '+ Bill(Dm.Sp_Inbox.RecordCount) +' ‰«„Â  «ﬁœ«„ ‰‘œÂ œ«—Ìœ  òÂ „Â·  «ﬁœ«„ ¬‰Â« «„—Ê“ Å«Ì«‰ „Ì Ì«»œ.';
+        dm.sp_inbox.Filtered := False;
+        dm.sp_inbox.GotoBookmark(bm);
+        dm.sp_inbox.FreebookMark(bm);
+      end;
+      }
+   except
+   end;
+
+   j := Dm.Sp_Inbox.RecordCount;
+
+   if j > i then
+   begin
+      QueryRefresher.Enabled:=false;
+      Try
+         PlaySound(PChar(GetWinDirectory+'\Media\Notify.wav'), 0, SND_ASYNC);
+      Except
+      End;
+
+     if not MainForm.Visible then
+        if MessageShowString('‘„« '+IntToStr(j-i)+' ‰«„Â ÃœÌœ œ«—Ìœ  ¬Ì« „«Ì· »Â ŒÊ«‰œ‰ «Ì‰ ‰«„Â Â« Â” Ìœø',true) then
+        begin
+           MainForm.Show;
+           ShowWindow(Application.Handle, SW_SHOW);
+        end;
+   end;
+
+   RefreshFollowLabel;
+   QueryRefresher.Enabled:=True;
+end;
+
+procedure TFInbox.lettersDbGridNeedFontCondition(Column: TColumn;
+  State: TGridDrawState; var F: TFont);
+begin
+  inherited;
+   if SBArchive.Down then
+   begin
+      QrViewDate.Close;
+      QrViewDate.Parameters.ParamByName('letterid').Value := MainForm.sp_inbox2.fieldbyname('LetterID').AsInteger;
+      QrViewDate.Open;
+
+      if MainForm.sp_inbox2.FieldByName('Finalized').AsBoolean then //Finalized.AsBoolean then
+          f.Style:=f.Style-[fsbold]
+      else
+          f.Style:=f.Style+[fsitalic];
+
+
+      Case MainForm.sp_inbox2.FieldByName('letterformat').AsInteger  of//letterformat.AsInteger  of
+         1  : f.Style:=[];
+         2,3: f.Style:=[fsitalic];
+      end;
+
+      if MainForm.sp_inbox2.FieldByName('letterformat').AsInteger = 2 then//letterformat.AsInteger = 2  then
+         f.Style:=f.Style+[fsItalic];
+
+      //if Trim(dm.sp_inbox2.FieldByName('ViewDate').AsString) = '' then //ViewDate.AsString) = ''  then
+        if Trim(QrViewDateviewdate.AsString) = '' then
+         f.Style:=f.Style+[fsBold];
+
+      f.Color:=clBlack;// Added By Saeedi On 1390/05/09
+
+      if MainForm.Sp_Inbox2.FieldByName('ColorFlag').AsString='RED' then//ColorFlag.AsString='RED' then
+         f.Color:=clRed;
+//  if Dm.IS_Nameh_In_Cartable(Dm.Sp_InboxLetterID.AsInteger,_UserID) then
+//      if ((dm.sp_inboxDeadLineDays.AsInteger < -1) and (dm.Sp_Inboxsentletterid.AsInteger<=0))
+//           or
+//         ((dm.sp_inboxDeadLineDays.AsInteger < -1) and (dm.Sp_InboxDeadLineDate.AsString<>'') and (dm.Sp_InboxDeadLineDate.AsString<dm.Sp_InboxRecommiteDate.AsString) and (dm.Sp_Inboxsentletterid.AsInteger<=0))
+//      then
+//         f.Color:=clRed;   //œ«—«Ì „Â·  «ﬁœ«„ »Â  «ŒÌ— «› «œÂ
+
+
+   end
+   else
+   begin
+      if dm.sp_inboxFinalized.AsBoolean then
+          f.Style:=f.Style-[fsbold]
+      else
+          f.Style:=f.Style+[fsbold];
+
+
+      Case dm.sp_inboxletterformat.AsInteger  of
+         1  : f.Style:=[];
+         2,3: f.Style:=[fsitalic];
+      end;
+
+      if dm.sp_inboxletterformat.AsInteger = 2  then
+         f.Style:=f.Style+[fsItalic];
+
+      if Trim(dm.sp_inboxViewDate.AsString) = ''  then
+         f.Style:=f.Style+[fsBold];
+
+      f.Color:=clBlack;// Added By Saeedi On 1390/05/09
+
+      if Dm.Sp_InboxColorFlag.AsString='RED' then
+         f.Color:=clRed;
+//  if Dm.IS_Nameh_In_Cartable(Dm.Sp_InboxLetterID.AsInteger,_UserID) then
+//      if ((dm.sp_inboxDeadLineDays.AsInteger < -1) and (dm.Sp_Inboxsentletterid.AsInteger<=0))
+//           or
+//         ((dm.sp_inboxDeadLineDays.AsInteger < -1) and (dm.Sp_InboxDeadLineDate.AsString<>'') and (dm.Sp_InboxDeadLineDate.AsString<dm.Sp_InboxRecommiteDate.AsString) and (dm.Sp_Inboxsentletterid.AsInteger<=0))
+//      then
+//         f.Color:=clRed;   //œ«—«Ì „Â·  «ﬁœ«„ »Â  «ŒÌ— «› «œÂ
+   end;
+end;
+
+procedure TFInbox.SBArchiveClick(Sender: TObject);
+begin
+  inherited;
+  SearchPanelShow;
+    
+  if (PageControl1.TabIndex = 4)then
+  begin
+    DeadLineDate.Text := '';
+    RecommiteDate.Text := '';
+    ProceedDate.Text := '';
+    SearchClick(Self);
+  end;
+  {Ranjbar}
+  valueLocate := 0;
+  RGState.ItemIndex := 0;
+  RGStateClick(Nil);
+  PageControl1.TabIndex := 1;//»«Ìê«‰Ì
+  //---
+  MainForm.DoRefresh:=False;
+  {Ranjbar}
+  MainForm.ReCommiteTag := False;
+  //---
+  CurrentOrgId:=_UserFromOrgID;
+  //dm.SecID:=0;
+  dm.SecID:=dm.SecretariatsSecID.AsInteger;
+  Proceed:=True; //«ﬁœ«„ ‘œÂ
+  MainForm.archiveFolderID:=0;
+  MainForm.DoRefresh:=True;
+  {Ranjbar}
+  {GroupingPanel.show;
+  PFromOrg.hide;
+  PDate.Hide;
+  GroupingPanel.Align := alRight;
+  PArchive.Show;}
+  //CBArchived.Checked:=false;
+  //---
+  DSForm.DataSet := Exec_Get_ArchiveFolder_byUserID(_userid,1); //·Ì”  “Ê‰ﬂ‰Â«
+  {Ranjbar}
+  DBArchiveTree.SetFocus;
+  DBArchiveTreeClick(Sender);
+  //œﬂ„Â „‘«ÂœÂ «—Ã«⁄ : ›ﬁÿ »—«Ì »—êÂ »«Ìê«‰Ì ﬁ«»· „‘«ÂœÂ ‰»«‘œ
+  Mainform.AviewRecommite.Visible := (PageControl1.TabIndex <> 1);
+  //---
+  ASetActionsExecute(self);
+  if SBArchive.Down then
+  begin
+    lettersDbGrid.DataSource := Dcommon2;
+    DbParaph.DataSource:= Dcommon2;
+    DBEStaffMemo.DataSource:= Dcommon2;
+    DBEDeadLineDate.DataSource:= Dcommon2;
+  end
+  else
+  begin
+    lettersDbGrid.DataSource := Dcommon;
+    DbParaph.DataSource:= Dcommon;
+    DBEStaffMemo.DataSource:= Dcommon;
+    DBEDeadLineDate.DataSource:= Dcommon;
+  end;
+  LabelDelayed.Caption := '-----------';
+  //dm.Sp_Inbox2.Locate('recommiteid', valueLocate,[loCaseInsensitive])
+end;
+
+procedure TFInbox.lettersDbGridNeedImageIndex(Column: TColumn; var ImageIndex: Integer);
+begin
+  inherited;
+
+  if SBArchive.Down then
+  begin
+    if MainForm.Sp_Inbox2.IsEmpty then
+    begin
+      ImageIndex:=0;
+      Exit;
+    end;
+
+    ImageIndex:=-1;
+    //picture p
+    if UpperCase(Column.FieldName)=UpperCase('has_Page') then
+      if MainForm.Sp_Inbox2.FieldByName('has_Page').AsBoolean then
+        ImageIndex:=3
+      else
+        ImageIndex:=0;
+
+    // word w
+    if UpperCase(Column.FieldName)=UpperCase('has_WordPage') then
+    begin   //word
+      if Exec_has_WordExcel(MainForm.Sp_Inbox2.FieldByName('Letterid').AsInteger) = 3 then
+      begin
+        if MainForm.Sp_Inbox2.FieldByName('has_WordPage').AsBoolean then
+        begin
+          if MainForm.Sp_Inbox2.FieldByName('has_sign').AsBoolean then
+            ImageIndex:=57
+          else
+            ImageIndex := 2;
+        end
+        else
+          ImageIndex:=0;
+      end
+      else    //excel
+      begin
+        if MainForm.Sp_Inbox2.FieldByName('has_WordPage').AsBoolean then
+        begin
+          if MainForm.Sp_Inbox2.FieldByName('has_sign').AsBoolean then
+            ImageIndex:=59
+          else
+            ImageIndex := 58;
+        end
+        else
+          ImageIndex:=0;
+      end;
+    end;
+
+    // file f
+    if UpperCase(Column.FieldName) = UpperCase('has_file') then
+      if MainForm.Sp_Inbox2.FieldByName('has_file').AsBoolean then
+        ImageIndex:=1
+      else
+        ImageIndex:=0;
+
+    //letter l
+    {Letter_Type
+    1  Ê«—œÂ
+    2  ’«œ—Â
+    3  œ«Œ·Ì
+    4 „œ«—ò
+    }
+    if UpperCase(Column.FieldName) = UpperCase('Letter_Type') then //‰Ê⁄ ‰«„Â
+    begin
+      Case MainForm.Sp_Inbox2.FieldByName('Letter_Type').AsInteger of
+         1: ImageIndex:=26; //Ê«—œÂ
+         2: ImageIndex:=30; //’«œ—Â
+         3: ImageIndex:=34; //œ«Œ·Ì
+         4: ImageIndex:=41;//„œ«—ò
+         else ImageIndex:=0;
+      end;
+    end;
+
+    {letterformat
+    1  „⁄„Ê·Ì
+    2  ÅÌ‘ ‰ÊÌ”
+    3 Õ–› ‘œÂ
+    }
+    if UpperCase(Column.FieldName) = UpperCase('ReType') then
+    begin
+      ImageIndex := 0;   // ‰«„Â „⁄„Ê·Ì
+      if MainForm.Sp_Inbox2.FieldByName('letterformat').AsInteger = 2 then // ÅÌ‘ ‰ÊÌ”
+        ImageIndex := 43;  // ÅÌ‘ ‰ÊÌ”
+
+      {RecommiteTypes.id ReTyp
+      1 —Ê‰Ê‘ 
+      2 œÌê— êÌ—‰œê«‰
+      3  «—Ã«⁄
+      }
+      if MainForm.Sp_Inbox2.FieldByName('ReType').AsInteger = 1  then  //‰Ê⁄ —Ê‰Ê‘ 
+      begin
+        if MainForm.Sp_Inbox2.FieldByName('letterformat').AsInteger = 2 then  // ÅÌ‘ ‰ÊÌ”
+          ImageIndex := 55   //—Ê‰Ê‘  ÅÌ‘ ‰ÊÌ”
+        else
+          ImageIndex := 42;//—Ê‰Ê‘ 
+      end;
+    end;
+
+    // D    „Â·  «ﬁœ«„
+    if UpperCase(Column.FieldName) = UpperCase('DeadLineDate') then //›Ì·œ „Â·  «ﬁœ«„
+      if UpperCase(MainForm.Sp_Inbox2.FieldByName('ColorFlag').AsString)=UpperCase('Green') then
+        ImageIndex := 54
+      else
+        if UpperCase(MainForm.Sp_Inbox2.FieldByName('ColorFlag').AsString)=UpperCase('RED') then
+          ImageIndex := 8;
+
+      // ›—„Â«Ì «œ«—Ì
+      if UpperCase(Column.FieldName) = UpperCase('HasLetterForms') then
+      begin
+        if MainForm.Sp_Inbox2.FieldByName('HasLetterForms').AsBoolean then
+          ImageIndex := 60
+        else
+          ImageIndex := 0;
+      end;
+  end
+  else
+  begin
+    ImageIndex:=-1;
+    if UpperCase(Column.FieldName)=UpperCase('has_Page') then
+      if dm.sp_inboxhas_Page.AsBoolean then
+        ImageIndex:=3
+      else
+        ImageIndex:=0;
+
+    if UpperCase(Column.FieldName)=UpperCase('has_WordPage') then
+    begin
+      if Exec_has_WordExcel(dm.Sp_InboxLetterID.AsInteger) = 3 then
+      begin
+        if dm.sp_inboxhas_WordPage.AsBoolean then
+        begin
+          if dm.sp_inboxhas_sign.AsBoolean then
+            ImageIndex := 57
+          else
+            ImageIndex := 2;
+        end
+        else
+          ImageIndex := 0;
+      end
+      else
+      begin
+        if dm.sp_inboxhas_WordPage.AsBoolean then
+        begin
+          if dm.sp_inboxhas_sign.AsBoolean then
+            ImageIndex := 59
+          else
+            ImageIndex := 58;
+        end
+        else
+          ImageIndex := 0;
+      end;
+    end;
+
+      if UpperCase(Column.FieldName) = UpperCase('has_file') then
+        if dm.sp_inboxhas_file.AsBoolean then
+          ImageIndex:=1
+        else
+          ImageIndex:=0;
+
+      if UpperCase(Column.FieldName) = UpperCase('Letter_Type') then //‰Ê⁄ ‰«„Â
+      begin
+        Case dm.sp_inboxLetter_Type.AsInteger of
+           1: ImageIndex:=26; //Ê«—œÂ
+           2: ImageIndex:=30; //’«œ—Â
+           3: ImageIndex:=34; //œ«Œ·Ì
+           4: ImageIndex:=41;//„œ«—ò
+           else ImageIndex:=0;
+        end;
+      end;
+
+      if UpperCase(Column.FieldName) = UpperCase('ReType') then
+      begin
+        ImageIndex := 0;
+        if dm.sp_inboxletterformat.AsInteger = 2 then //ÅÌ‘ ‰ÊÌ”
+          ImageIndex := 43;
+
+        if dm.sp_inboxReType.AsInteger=1 then //‰Ê⁄ «—Ã«⁄
+          if dm.sp_inboxletterformat.AsInteger = 2 then //ÅÌ‘ ‰ÊÌ”
+            ImageIndex := 55
+          else
+            ImageIndex := 42;//—Ê‰Ê‘ 
+      end;
+
+      if UpperCase(Column.FieldName) = UpperCase('DeadLineDate') then //›Ì·œ „Â·  «ﬁœ«„
+        if UpperCase(Dm.Sp_InboxColorFlag.AsString)=UpperCase('Green') then
+          ImageIndex := 54
+        else
+          if UpperCase(Dm.Sp_InboxColorFlag.AsString)=UpperCase('RED') then
+            ImageIndex := 8;
+
+      if UpperCase(Column.FieldName) = UpperCase('HasLetterForms') then
+      begin
+        if Dm.Sp_InboxHasLetterForms.AsBoolean then
+          ImageIndex := 60
+        else
+          ImageIndex := 0;
+      end;
+  end;
+
+
+
+
+//        else if UpperCase(Dm.Sp_InboxColorFlag.AsString)=UpperCase('ORANGE') then
+//           ImageIndex := 56;
+//      if (Trim(dm.Sp_InboxDeadLineDate.AsString) <> '') then
+//         if (dm.Sp_Inboxsentletterid.AsInteger<=0) or (dm.Sp_Inboxsentletterid.IsNull) then
+//         begin
+//            if Dm.IS_Nameh_In_Cartable(Dm.Sp_InboxLetterID.AsInteger,_UserID) then
+//            begin
+//                if (Dm.Sp_InboxDeadlineDays.AsInteger < 0) then // ⁄œ«œ —Ê“Â«Ì œ«—«Ì  «ŒÌ—
+//                   ImageIndex := 8  //œ«—«Ì  «ŒÌ—
+//                else
+//                   ImageIndex := 54//»œÊ‰  «ŒÌ—
+//            end
+//            else
+//               ImageIndex := 54//»œÊ‰  «ŒÌ—
+//         end
+//         else
+//             ImageIndex := 54;//»œÊ‰  «ŒÌ—
+end;
+
+procedure TFInbox.N1Click(Sender: TObject);
+begin
+  inherited;
+  lettersDbGrid.CustomizePrint;
+end;
+
+procedure TFInbox.N2Click(Sender: TObject);
+begin
+  inherited;
+  lettersDbGrid.Print;
+end;
+
+procedure TFInbox.Excel1Click(Sender: TObject);
+{begin
+  inherited;
+ if lettersDbGrid.SelectedRows.Count > 0 then
+   lettersDbGrid.ExportToExcel;
+ }
+Var
+   I:integer;
+   j :String;
+begin
+  inherited;
+
+  j := '';
+
+  if lettersDbGrid.SelectedRows.Count > 0 then
+    with Dm.Sp_Inbox do
+      for i :=  0 to lettersDbGrid.SelectedRows.Count-1 do
+      begin
+        GotoBookmark(pointer(lettersDbGrid.SelectedRows.Items[i]));
+        if j  = '' then
+          j := 'LetterID=' + Dm.Sp_InboxLetterID.AsString
+        else
+          j := j + ' OR LetterID=' + Dm.Sp_InboxLetterID.AsString;
+      end;
+
+  Dm.Sp_Inbox.Filter := j;//'LetterID IN('+j+')';
+  Dm.Sp_Inbox.Filtered := True;
+
+  lettersDbGrid.ExportToExcel;
+  Dm.Sp_Inbox.Filtered := False;
+end;
+
+procedure TFInbox.Word1Click(Sender: TObject);
+{begin
+  inherited;
+  lettersDbGrid.ExportToWord;
+ }
+ Var
+   I:integer;
+   j :String;
+begin
+  inherited;
+
+  j := '';
+
+  if lettersDbGrid.SelectedRows.Count > 0 then
+    with Dm.Sp_Inbox do
+      for i:=0 to lettersDbGrid.SelectedRows.Count-1 do
+      begin
+        GotoBookmark(pointer(lettersDbGrid.SelectedRows.Items[i]));
+        if j  = '' then
+          j := 'LetterID=' + Dm.Sp_InboxLetterID.AsString
+        else
+          j := j + ' OR LetterID=' + Dm.Sp_InboxLetterID.AsString;
+      end;
+
+  Dm.Sp_Inbox.Filter := j;//'LetterID IN('+j+')';
+  Dm.Sp_Inbox.Filtered := True;
+  lettersDbGrid.ExportToWord;
+  Dm.Sp_Inbox.Filtered := False;
+end;
+
+procedure TFInbox.lettersDbGridMouseMove(Sender: TObject;Shift: TShiftState; X, Y: Integer);
+var
+   pt: TGridcoord;
+   r,j,i: byte;
+begin
+  DblclickAction :=viewLetter;
+  pt := lettersDbGrid.MouseCoord(x, y);
+  j:=0; //0
+  for i:=1 to 6 do   //for i:=1 to 3 do
+    if  lettersDbGrid.Columns[i-1].Visible then
+    begin
+      inc(j);
+      if j=pt.x then
+        r:=i
+    end;
+
+  if pt.X>0 then
+  begin
+    if lettersDbGrid.Columns[pt.X-1].FieldName='has_Page'  then//if r=4 then //if r=1 then
+      DblclickAction:=ViewJpg
+    else
+      if lettersDbGrid.Columns[pt.X-1].FieldName = 'has_WordPage' then//if r=5 then //if r=2 then
+        DblclickAction:=ViewWord
+      else
+        if lettersDbGrid.Columns[pt.X-1].FieldName = 'has_file' then//if r=6 then //if r=3 then
+          DblclickAction:=ViewPdf;
+  end;
+   {Ranjbar 89.10.01 ID=191}
+  if R <> 4 then
+    ImageEnDBView1.Visible := False;
+   //---
+end;
+
+procedure TFInbox.SLowMessage;
+Var
+   MessageCount,NewsCount,OldNewsID : Integer;
+begin
+   inherited;
+   Exec_update_UserLoginLogout(_UserLoginLogoutID,false,true);
+   // ⁄œ«œ ÅÌ€«„Â«
+   MessageCount := Exec_Get_UserMessageCount;
+   MessageLabel.Caption := '‘„«  '+IntToStr(MessageCount)+'   ÅÌ«„ ŒÊ«‰œÂ ‰‘œÂ œ«—Ìœ ¬Ì« „«Ì· »Â ŒÊ«‰œ‰ ¬‰Â« Â” Ìœ';
+
+   OldNewsID := QrNewsNewsID.AsInteger;
+   QrNews.Close; //Œ»—Â«Ì ŒÊ«‰œÂ ‰‘œÂ
+   QrNews.Parameters.ParamByName('Pa_UsersID').Value := _userid;
+   QrNews.Open;
+   QrNews.Locate('NewsID',OldNewsID,[]);
+   // ⁄œ«œ Œ»—Â«
+   NewsCount := QrNews.RecordCount;
+
+   //if ShowFollowing then
+   //     Exit;
+//****************************BEGIN movahed13970921**********************
+ {  if (MessageCount=0) And (NewsCount=0) then
+   Begin
+      try
+        FmShowMessage.Close;
+      except
+      end;
+      Exit;
+   end;
+   }
+//****************************END movahed13970921************************
+   //ÃÂ  Ã·ÊêÌ—Ì «“ ‰„«Ì‘ „Ãœœ Å‰Ã—Â ÅÌ€«„
+   {if (Old_MessageCount = MessageCount)And(Old_NewsCount = NewsCount) Then
+     Exit;}
+
+   With FmShowMessage do
+   begin
+      try
+         FmShowMessage.Free;
+      except
+
+      end;
+      FmShowMessage := TFmShowMessage.Create(Application);
+      LblMessage.Caption := IntToStr(MessageCount); //'  ⁄œ«œ ÅÌ€«„Â«Ì ŒÊ«‰œÂ ‰‘œÂ : '
+      LblNews2.Caption := IntToStr(NewsCount); //'  ⁄œ«œ Œ»—Â«Ì ŒÊ«‰œÂ ‰‘œÂ : '
+      Left := MainForm.Width  - (Width+20);
+      Top  := MainForm.Height - (Height+20);
+      Show;
+   end;
+   {if Not Assigned(FmShowMessage) then
+    begin
+        FmShowMessage := TFmShowMessage.Create(Application);
+        FmShowMessage.ShowAlarm := True;
+    end;
+    With FmShowMessage do
+    begin
+        if Not ShowAlarm then
+           Exit;
+        LblMessage.Caption := IntToStr(MessageCount); //'  ⁄œ«œ ÅÌ€«„Â«Ì ŒÊ«‰œÂ ‰‘œÂ : '
+        LblNews2.Caption := IntToStr(NewsCount); //'  ⁄œ«œ Œ»—Â«Ì ŒÊ«‰œÂ ‰‘œÂ : '
+        Left := MainForm.Width  - (Width+20);
+        Top  := MainForm.Height - (Height+20);
+        Show;
+    end;
+
+    //Old_MessageCount := MessageCount;
+    //Old_NewsCount := NewsCount;}
+end;
+//---
+
+procedure TFInbox.CloseBtnClick(Sender: TObject);
+begin
+  inherited;
+  ShowFollowing := Not ShowFollowing;
+end;
+
+procedure TFInbox.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+  {Ranjbar 87.12.10}
+  ShowFollowing := False;
+  //---
+  FollowupPanel.Hide;
+  UpAndDownBtn2.Visible := True ;
+end;
+
+procedure TFInbox.labellClick(Sender: TObject);
+begin
+  inherited;
+  ShowFollowing := True;
+end;
+
+procedure TFInbox.SearchClick(Sender: TObject);
+ var w: string;
+begin
+  inherited;
+  if SBArchive.Down then
+     lettersDbGrid.DataSource := Dcommon2
+  else
+     lettersDbGrid.DataSource := Dcommon;
+   w:='';
+   MainForm.DeadLine:=-2;
+   Proceed:=False;//HKH
+   if Proceed then
+        DeadLineDate.FieldName:='ChildRecommite.DeadLineDate'
+   else
+      DeadLineDate.FieldName:='Rc.DeadLineDate';
+
+   if RecommiteDate.Resultwhere<>'' then
+      w:=RecommiteDate.Resultwhere;
+
+   if DeadLineDate.Resultwhere<>'' then
+     if w<>'' then
+       w:=w+' and '+DeadLineDate.Resultwhere
+     else
+       w:=DeadLineDate.Resultwhere;
+
+   if ProceedDate.Resultwhere<>'' then
+     if w<>'' then
+       w:=w+' and '+ProceedDate.Resultwhere
+     else
+       w:=ProceedDate.Resultwhere;
+
+   MainForm.DeadLineWhere:=w;
+   MainForm.RefreshQuery;
+end;
+
+procedure TFInbox.Button1Click(Sender: TObject);
+begin
+  inherited;
+  FrFollowUp:=TFrFollowUp.Create(Application);
+  FrFollowUp.StartFollowUpID:=0;
+  FrFollowUp.refreshData;
+  FrFollowUp.Select_FollowUp_ByStart.Insert;
+  FrFollowUp.ShowModal;
+end;
+
+procedure TFInbox.YDBGrid2NeedFontCondition(Column: TColumn;
+  State: TGridDrawState; var F: TFont);
+begin
+  inherited;
+  case dm.Select_FollowUP_By_DateDelayStatus.AsInteger of
+   -1 : begin
+         F.Color:=clRed;
+         F.Style:=Font.Style+[fsBold];
+        end;
+   0 : begin
+         F.Color:=clBlack;
+         F.Style:=Font.Style-[fsBold];
+        end;
+   1 : begin
+         F.Color:=clBlue;
+         F.Style:=Font.Style-[fsBold];
+        end;
+   end
+end;
+
+procedure TFInbox.YDBGrid2NeedImageIndex(Column: TColumn;
+  var ImageIndex: Integer);
+begin
+  inherited;
+  if Column.Index=2 then
+     ImageIndex:=dm.Select_FollowUP_By_DateFollowUPTypeID.AsInteger-1
+end;
+
+procedure TFInbox.Button2Click(Sender: TObject);
+ var i: integer;
+ qry : TADOQuery;
+begin
+  inherited;
+
+  try
+    qry := TADOQuery.Create(Self);
+    qry.Connection := Dm.YeganehConnection;
+    qry.Close;
+    qry.SQL.Clear;
+    qry.SQL.Add('update letter set anjam_shod = 1 where LetterID='+IntToStr(Dm.Sp_Inbox.fieldbyname('LetterID').AsInteger));
+    qry.ExecSQL;
+    qry.Close;
+    FreeAndNil(qry);
+    Refresh;
+  except on e:Exception do
+    ShowMessage(e.Message);
+  end;
+
+
+  with dm,Select_FollowUP_By_Date do
+  begin
+    if Recordcount=0 then
+      exit;
+
+    if not eof then
+    begin
+      next;
+      i:=Select_FollowUP_By_DateFollowUPID.AsInteger;
+      Prior;
+    end
+    else
+    begin
+      Prior;
+      i:=Select_FollowUP_By_DateFollowUPID.AsInteger;
+      Next;
+    end;
+
+    Edit;
+    Select_FollowUP_By_DateDoneStatusID.AsInteger:=2;
+    post;
+    RefreshFollowUP;
+    Locate('FollowUPID',i,[]);
+  end;
+end;
+
+procedure TFInbox.Button3Click(Sender: TObject);
+var
+  i: integer;
+begin
+  inherited;
+  with dm ,Select_FollowUP_By_Date,FrFollowUp do
+  begin
+    if Recordcount=0 then
+      exit;
+    i:=Select_FollowUP_By_DateFollowUPID.AsInteger;
+    FrFollowUp:=TFrFollowUp.Create(Application);
+    StartFollowUpID:=Select_FollowUP_By_DateStartFollowUpID.AsInteger;
+    refreshData;
+    Select_FollowUp_ByStart.Locate('FollowUPID',i,[]);
+    Select_FollowUp_ByStart.edit;
+    ShowModal;
+    RefreshFollowUP;
+  end
+end;
+
+procedure TFInbox.YDBGrid2DblClick(Sender: TObject);
+var
+  lt: integer;
+begin
+  inherited;
+  if dm.Select_FollowUP_By_DateLetterid.AsInteger>0 then
+  begin
+    lt:=dm.YeganehConnection.Execute('select Letter_Type from letter where letterid='+dm.Select_FollowUP_By_DateLetterid.AsString).Fields[0].Value;
+    with MainForm do
+    case lt of
+      1:ViewReceivedLetter(dm.Select_FollowUP_By_DateLetterid.AsInteger);
+      2:ViewSentLetter(dm.Select_FollowUP_By_DateLetterid.AsInteger);
+      // 3:ViewInnerLetter; // Amin 1391/07/15
+      3:ViewInnerLetter(Dm.sp_inboxLetterID.AsInteger); // Amin 1391/07/15
+    end;
+  end
+  else
+    Button3.OnClick(Button3);
+end;
+
+procedure TFInbox.RefreshFollowLabel;
+var
+  i: integer;
+begin
+  inherited;
+  i := Exec_Get_FollowUP_Count(_userid,ShamsiIncDate(_Today,0,-2,0),ShamsiIncDate(_Today,0,1,0),1);;
+  if i>0 then
+    labell.Caption:=Bill(i)+  '  ÅÌêÌ—Ì »—«Ì «‰Ã«„ ÊÃÊœ œ«—œ '
+  else
+    labell.Caption:='„Ê—œÌ »—«Ì ÅÌêÌ—Ì  ÊÃÊœ ‰œ«—œ';
+end;
+
+procedure TFInbox.DBLkCBLetterFormatClick(Sender: TObject);
+begin
+  inherited;
+  {Ranjbar 87.11.06}
+  MainForm.LetterFormat := DBLkCBLetterFormat.KeyValue;
+  //---
+end;
+
+procedure TFInbox.NoKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if key =13 then
+    Refresh;
+end;
+
+procedure TFInbox.Search8Click(Sender: TObject);
+begin
+  inherited;
+  Refresh;
+end;
+
+procedure TFInbox.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+  RefreshTree;
+end;
+
+procedure TFInbox.DBTreeViewClick(Sender: TObject);
+begin
+  inherited;
+  Try
+    MainForm.do_srch   := True;
+    MainForm.DoRefresh := false;
+    Do_RefreshTree := false;
+    Proceed := Get_UserSecretariat_TreeProceed.AsBoolean;
+    CBReCommiteTypeChange(Nil); //RefreshQuery  //‰Ê⁄ ‰«„Â
+    DBLkCBLetterFormatClick(Nil); //Ê÷⁄Ì  ‰«„Â
+    MainForm.ReCommiteTagVal:=Get_UserSecretariat_TreeTag.AsInteger;
+    if (Get_UserSecretariat_TreeTag.AsInteger = 2) OR (Get_UserSecretariat_TreeTag.AsInteger = 3) then //«—”«·Â«Ì »«Ìê«‰Ì ‰‘œÂ
+      MainForm.ReCommiteTag := True
+    else
+      MainForm.ReCommiteTag := False;
+    //---
+    MainForm.DoRefresh := True;
+    dm.SecID := Get_UserSecretariat_TreeSecID.Value; //„Ì‘Êœ RefreshQuery
+    Do_RefreshTree := True;
+
+    RGStateClick(Application);
+
+  finally
+  end;
+end;
+
+procedure TFInbox.DBTreeViewGetSelectedIndex(Sender: TObject;
+  Node: TTreeNode);
+begin
+  inherited;
+  Node.ImageIndex:=1;
+end;
+
+procedure TFInbox.RGStateClick(Sender: TObject);
+begin
+  inherited;
+  if SBArchive.Down then
+    lettersDbGrid.DataSource := Dcommon2
+  else
+    lettersDbGrid.DataSource := Dcommon;
+
+  Case RGState.ItemIndex  of
+      0: begin
+
+           if dm.Sp_Inbox.Active then
+           begin
+              dm.Sp_Inbox.Filter := '(ColorFlag=''RED'')';
+              if not(SBArchive.Down) then
+              begin
+                BM := dm.sp_inbox.GetBookmark;
+                dm.sp_inbox.Filtered := True;
+                LabelDelayed.Caption := ' ‘„« œ— ﬂ«— «»· ŒÊœ  '+ Bill(Dm.Sp_Inbox.RecordCount) +' ‰«„Â  «ﬁœ«„ ‰‘œÂ œ«—Ìœ  òÂ „Â·  «ﬁœ«„ ¬‰Â« «„—Ê“ Å«Ì«‰ „Ì Ì«»œ.';
+                dm.sp_inbox.Filtered := False;
+                dm.sp_inbox.GotoBookmark(bm);
+                dm.sp_inbox.FreebookMark(bm);
+              end
+              else
+                LabelDelayed.Caption := '----------'
+            end;
+
+            dm.sp_inbox.Filtered := False; //Â„Â «—Ã«⁄« 
+//            LabelDelayed.Caption := '-----------';
+           end;
+
+      1: begin //«—Ã«⁄«  ÃœÌœ
+           if dm.Sp_Inbox.Active then
+           begin
+              dm.Sp_Inbox.Filter := '(ColorFlag=''RED'')';
+              if not(SBArchive.Down) then
+              begin
+                BM := dm.sp_inbox.GetBookmark;
+                dm.sp_inbox.Filtered := True;
+                LabelDelayed.Caption := ' ‘„« œ— ﬂ«— «»· ŒÊœ  '+ Bill(Dm.Sp_Inbox.RecordCount) +' ‰«„Â  «ﬁœ«„ ‰‘œÂ œ«—Ìœ  òÂ „Â·  «ﬁœ«„ ¬‰Â« «„—Ê“ Å«Ì«‰ „Ì Ì«»œ.';
+                dm.sp_inbox.Filtered := False;
+                dm.sp_inbox.GotoBookmark(bm);
+                dm.sp_inbox.FreebookMark(bm);
+              end
+              else
+                LabelDelayed.Caption := '----------'
+           end;
+
+           dm.sp_inbox.Filtered := False;
+           dm.sp_inbox.Filter := 'ViewDate = Null';//UserRecomCount = null
+           dm.sp_inbox.Filtered := True;
+//         LabelDelayed.Caption := '-----------';
+         end;
+
+      2: begin //œ«—«Ì  «ŒÌ—
+           Dm.sp_inbox.Filtered := False;
+//         dm.sp_inbox.Filter := '(DeadLineDays <= ''-1'') and (sentletterid=NULL)';
+           dm.Sp_Inbox.Filter := '(ColorFlag=''RED'')';
+           dm.sp_inbox.Filtered := True;
+
+           if not(SBArchive.Down) then
+           begin
+              LabelDelayed.Caption := ' ‘„« œ— ﬂ«— «»· ŒÊœ  '+ Bill(Dm.Sp_Inbox.RecordCount) +' ‰«„Â  «ﬁœ«„ ‰‘œÂ œ«—Ìœ  òÂ „Â·  «ﬁœ«„ ¬‰Â« «„—Ê“ Å«Ì«‰ „Ì Ì«»œ.';
+           end
+           else
+              LabelDelayed.Caption := '----------'
+         end;
+      3: begin //—Ê‰Ê‘ 
+           if dm.Sp_Inbox.Active then
+           begin
+              dm.Sp_Inbox.Filter := '(ColorFlag=''RED'')';
+              BM := dm.sp_inbox.GetBookmark;
+              dm.sp_inbox.Filtered := True;
+              LabelDelayed.Caption := ' ‘„« œ— ﬂ«— «»· ŒÊœ  '+ Bill(Dm.Sp_Inbox.RecordCount) +' ‰«„Â  «ﬁœ«„ ‰‘œÂ œ«—Ìœ  òÂ „Â·  «ﬁœ«„ ¬‰Â« «„—Ê“ Å«Ì«‰ „Ì Ì«»œ.';
+              dm.sp_inbox.Filtered := False;
+              dm.sp_inbox.GotoBookmark(bm);
+              dm.sp_inbox.FreebookMark(bm);
+           end;
+
+           if not(SBArchive.Down) then
+           begin
+              dm.sp_inbox.Filtered := False;
+              dm.sp_inbox.Filter := 'ReType = ''1''';
+              dm.sp_inbox.Filtered := True;
+//            LabelDelayed.Caption := '-----------';
+           end
+           else
+              LabelDelayed.Caption := '----------'
+         end;
+      4: begin //œ«—«Ì ÃÊ«»
+           if dm.Sp_Inbox.Active then
+           begin
+              dm.Sp_Inbox.Filter := '(ColorFlag=''RED'')';
+              BM := dm.sp_inbox.GetBookmark;
+              dm.sp_inbox.Filtered := True;
+              LabelDelayed.Caption := ' ‘„« œ— ﬂ«— «»· ŒÊœ  '+ Bill(Dm.Sp_Inbox.RecordCount) +' ‰«„Â  «ﬁœ«„ ‰‘œÂ œ«—Ìœ  òÂ „Â·  «ﬁœ«„ ¬‰Â« «„—Ê“ Å«Ì«‰ „Ì Ì«»œ.';
+              dm.sp_inbox.Filtered := False;
+              dm.sp_inbox.GotoBookmark(bm);
+              dm.sp_inbox.FreebookMark(bm);
+           end;
+
+           if not(SBArchive.Down) then
+           begin
+              dm.sp_inbox.Filtered := False;
+              dm.sp_inbox.Filter := 'IsAnswer = ''1''';
+              dm.sp_inbox.Filtered := True;
+//            LabelDelayed.Caption := '-----------';
+           end
+           else
+              LabelDelayed.Caption := '----------'
+         end;
+      5: begin //œ«—«Ì ÅÌêÌ—Ì
+           if dm.Sp_Inbox.Active then
+           begin
+              dm.Sp_Inbox.Filter := '(ColorFlag=''RED'')';
+              BM := dm.sp_inbox.GetBookmark;
+              dm.sp_inbox.Filtered := True;
+              LabelDelayed.Caption := ' ‘„« œ— ﬂ«— «»· ŒÊœ  '+ Bill(Dm.Sp_Inbox.RecordCount) +' ‰«„Â  «ﬁœ«„ ‰‘œÂ œ«—Ìœ  òÂ „Â·  «ﬁœ«„ ¬‰Â« «„—Ê“ Å«Ì«‰ „Ì Ì«»œ.';
+              dm.sp_inbox.Filtered := False;
+              dm.sp_inbox.GotoBookmark(bm);
+              dm.sp_inbox.FreebookMark(bm);
+           end;
+
+           if not(SBArchive.Down) then
+           begin
+              dm.sp_inbox.Filtered := False;
+              dm.sp_inbox.Filter := 'ISFollowup = ''1''';
+              dm.sp_inbox.Filtered := True;
+//            LabelDelayed.Caption := '-----------';
+           end
+           else
+              LabelDelayed.Caption := '----------'
+         end;
+      6: begin //»Â œ»Ì—Œ«‰Â «—”«· ‘œÂ Â«
+           if dm.Sp_Inbox.Active then
+           begin
+              dm.Sp_Inbox.Filter := '(ColorFlag=''RED'')';
+              BM := dm.sp_inbox.GetBookmark;
+              dm.sp_inbox.Filtered := True;
+              LabelDelayed.Caption := ' ‘„« œ— ﬂ«— «»· ŒÊœ  '+ Bill(Dm.Sp_Inbox.RecordCount) +' ‰«„Â  «ﬁœ«„ ‰‘œÂ œ«—Ìœ  òÂ „Â·  «ﬁœ«„ ¬‰Â« «„—Ê“ Å«Ì«‰ „Ì Ì«»œ.';
+              dm.sp_inbox.Filtered := False;
+              dm.sp_inbox.GotoBookmark(bm);
+              dm.sp_inbox.FreebookMark(bm);
+           end;
+
+           if not(SBArchive.Down) then
+           begin
+              dm.sp_inbox.Filtered := False;
+              dm.sp_inbox.Filter := '(SentToDabir = ''1'')';
+              dm.sp_inbox.Filtered := True;
+//            LabelDelayed.Caption := '-----------';
+           end
+           else
+              LabelDelayed.Caption := '----------'
+         end;
+      // Amin 1391/11/30 Start
+      7: begin //„Õ—„«‰Â Â«
+           if dm.Sp_Inbox.Active then
+           begin
+              dm.Sp_Inbox.Filter := '(ColorFlag=''RED'')';
+              BM := dm.sp_inbox.GetBookmark;
+              dm.sp_inbox.Filtered := True;
+              LabelDelayed.Caption := ' ‘„« œ— ﬂ«— «»· ŒÊœ  '+ Bill(Dm.Sp_Inbox.RecordCount) +' ‰«„Â  «ﬁœ«„ ‰‘œÂ œ«—Ìœ  òÂ „Â·  «ﬁœ«„ ¬‰Â« «„—Ê“ Å«Ì«‰ „Ì Ì«»œ.';
+              dm.sp_inbox.Filtered := False;
+              dm.sp_inbox.GotoBookmark(bm);
+              dm.sp_inbox.FreebookMark(bm);
+           end;
+
+           if not(SBArchive.Down) then
+           begin
+              dm.sp_inbox.Filtered := False;
+              dm.sp_inbox.Filter := '(IsSecure = ''1'')';
+              dm.sp_inbox.Filtered := True;
+//            LabelDelayed.Caption := '-----------';
+           end
+           else
+              LabelDelayed.Caption := '----------'
+         end;
+      // Amin 1391/11/30 End
+    End;
+end;
+
+procedure TFInbox.SBReportClick(Sender: TObject);
+begin
+   inherited;
+   SearchPanelShow ;
+
+   {Ranjbar}
+     
+    lettersDbGrid.DataSource := nil;
+
+  // RadioGroup1.ItemIndex := 0;
+  // RadioGroup1Click(Nil);
+   MainForm.archiveFolderID := 0;
+   PageControl1.TabIndex := 4;//ê“«—‘Ì «“ «—Ã«⁄« 
+   Proceed:=True; //«ﬁœ«„ ‘œÂ
+   //---
+     //œﬂ„Â „‘«ÂœÂ «—Ã«⁄ : ›ﬁÿ »—«Ì »—êÂ »«Ìê«‰Ì ﬁ«»· „‘«ÂœÂ ‰»«‘œ
+   Mainform.AviewRecommite.Visible := (FInbox.PageControl1.TabIndex <> 1);
+   //---
+   ASetActionsExecute(self);
+
+  if SBArchive.Down then
+     lettersDbGrid.DataSource := Dcommon2
+  else
+     lettersDbGrid.DataSource := Dcommon;
+
+ // NullSearch;
+end;
+
+procedure TFInbox.SBHomeClick(Sender: TObject);
+begin
+  inherited;
+  SearchPanelShow;
+
+  PageControl1.TabIndex := 0;
+  BringKartabl;
+  DBTreeView.SetFocus;
+  Mainform.AviewRecommite.Visible := (FInbox.PageControl1.TabIndex <> 1);
+  ASetActionsExecute(self);
+
+  if SBArchive.Down then
+    lettersDbGrid.DataSource := Dcommon2
+  else
+    lettersDbGrid.DataSource := Dcommon;
+end;
+
+procedure TFInbox.BBOKClick(Sender: TObject);
+begin
+  inherited;
+  FrGetMessage := TFrGetMessage.Create(Application);
+  FrGetMessage.ShowModal;
+end;
+
+procedure TFInbox.BBNewsOKClick(Sender: TObject);
+begin
+  inherited;
+  //‰„«Ì‘ ›—„ ·Ì”  Œ»—Â«
+  MainForm.ShowFmNewsUsers(QrNewsNewsID.AsInteger);
+  if GetUserSetting('cbAlarmMessage') then
+    SLowMessage
+  else
+    try
+      FmShowMessage.Close;
+    except
+    end;
+  //---
+end;
+
+procedure TFInbox.DBGrid1DblClick(Sender: TObject);
+begin
+  inherited;
+  BBNewsOK.Click;
+end;
+
+procedure TFInbox.UserTimerTimer(Sender: TObject);
+begin
+   inherited;
+   {Ranjbar 90.02.14 ID=367}
+   //«ê— Å‰Ã—Â ›⁄«· ›—„ «’·Ì ‰»Êœ ¬‰ê«Â
+   if (GetActiveWindow <> MainForm.Handle) And (IsSoftInWaitting = False) then //IsSoftInWaitting:œ— Õ«·  «‰ Ÿ«— »Êœ‰ ‰—„«›“«—
+      Exit;
+   //---
+
+   {Ranjbar 87.12.10}
+
+//     if ISMessageShow then
+   if GetUserSetting('cbAlarmMessage') then
+      SLowMessage
+   else
+      try
+        FmShowMessage.Close;
+      except
+      end;
+
+   //---
+end;
+
+{Ranjbar 87.12.14}
+procedure TFInbox.N3Click(Sender: TObject);
+begin
+  inherited;
+  //›ﬁÿ »—«Ì ò«— «»· Ê “Ì— ‘«ŒÂ Â«Ì‘
+  if not(Get_UserSecretariat_TreeTag.AsInteger in [1,10]) then //1: Kartable  10:Kartable Branch
+  begin
+     MBaseForm.messageShowString('«Ì‰ ⁄„· ›ﬁÿ »—«Ì ‰«„Â Â«Ì œ«Œ· ò«— «»· ﬁ«»· «‰Ã«„ «” ', False);
+     Exit;
+  end;
+
+  if Trim(dm.sp_inboxViewDate.AsString) <> '' then
+  begin
+     //«Ì‰ ‰«„Â ŒÊ«‰œÂ ‰‘œÂ »«‘œ
+     Exec_update_ReCommites_viewDate(dm.sp_inboxrecommiteid.AsInteger,'');
+     MainForm.RefreshQuery;
+  end;
+end;
+//---
+
+procedure TFInbox.OnlyOneYearClick(Sender: TObject);
+begin
+   inherited;
+   if TCheckBox(Sender).Checked then
+      ArchiveYear := StrToIntDef(copy(eArchiveYear.Text,1,4),-1)
+   else
+      ArchiveYear := 0;
+   //eArchiveYear.Visible := TCheckBox(Sender).Checked;
+   eArchiveYear.Enabled := TCheckBox(Sender).Checked;
+end;
+
+procedure TFInbox.eArchiveYearChange(Sender: TObject);
+begin
+   inherited;
+   ArchiveYear:=StrToIntDef(copy(eArchiveYear.Text,1,4),-1);
+end;
+
+procedure TFInbox.SpeedButton3Click(Sender: TObject);
+Var
+   I:integer;
+begin
+  inherited;
+  With QrSrchArchFolder do
+  begin
+    Close;
+    Parameters.ParamByName('UserID').Value := _UserID;
+    Open;
+
+    if FmSearch.GetSearchValue(QrSrchArchFolder,'FolderID','Title',' ',400,400)<>'0' then
+    begin
+      DBArchiveTree.SetFocus;
+      For I:=0 to DBArchiveTree.Items.Count-1 do
+        if Integer(DBArchiveTree.Items.Item[I].Data) = (QrSrchArchFolderFolderID.AsInteger) then
+        begin
+          DBArchiveTree.Items.Item[I].Selected := True;
+          Break;
+        end;
+      //Exec_Get_ArchiveFolder_byUserID.Locate('FolderID',QrSrchArchFolderFolderID.AsInteger,[]);
+    end;
+  end;
+
+end;
+
+procedure TFInbox.NoKeyPress(Sender: TObject; var Key: Char);
+begin
+   inherited;
+   {Ranjbar 89.09.13 ID=210}
+   if not ChBoFollowRetroaction.Checked then
+      No.Text := Keyboard_TypeWithDivider(No.Text,Key);
+   //---
+end;
+
+procedure TFInbox.lettersDbGridMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+   inherited;
+   {Ranjbar 89.10.01 ID=191}
+   if not(ssAlt in Shift) then
+      Exit;
+
+   if DblclickAction <> ViewJpg then
+      Exit;
+
+   if not(Dm.Sp_Inboxhas_Page.AsBoolean)And(ImageEnDBView1.Visible) then
+      ImageEnDBView1.Visible := False;
+   if (Dm.Sp_Inboxhas_Page.AsBoolean)And(OldLetterID=Dm.Sp_InboxLetterID.AsInteger)
+       And (ImageEnDBView1.Visible = False) then
+      ImageEnDBView1.Visible := True;
+   if (Dm.Sp_Inboxhas_Page.AsBoolean)And(OldLetterID <> Dm.Sp_InboxLetterID.AsInteger) then
+   begin
+      QrLetterData.Close;
+      QrLetterData.Parameters.ParamByName('LetterID').Value := Dm.Sp_InboxLetterID.AsInteger;
+      QrLetterData.Open;
+
+      ImageEnDBView1.Height := lettersDbGrid.Height;
+      ImageEnDBView1.Width := (lettersDbGrid.Width Div 2)+(lettersDbGrid.Width Div 4);
+      ImageEnDBView1.Left := lettersDbGrid.Left;
+      ImageEnDBView1.Top := lettersDbGrid.Top;
+      AnimateWindow(ImageEnDBView1.Handle,100,AW_HOR_POSITIVE or AW_HOR_NEGATIVE or AW_CENTER);
+      ImageEnDBView1.Visible := True;
+      ImageEnDBView1.Refresh;
+      ImageEnDBView1.FitToWidth;
+      OldLetterID := Dm.Sp_InboxLetterID.AsInteger;
+   end;
+   //---
+end;
+
+procedure TFInbox.DBArchiveTreeClick(Sender: TObject);
+begin
+  inherited;
+  if DBArchiveTree.Items.Count>0 then
+    MainForm.archiveFolderID := dsform.DataSet.fieldbyname('folderid').AsInteger;
+end;
+
+procedure TFInbox.DBArchiveTreeKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if Key in [Vk_Up,Vk_Down,Vk_Left,Vk_Right] then
+    DBArchiveTreeClick(Sender);
+end;
+
+procedure TFInbox.DestinationComputerClick(Sender: TObject);
+begin
+  if not ChatActivated then
+    PrepareForChat;
+
+  UDPSearchForm.SearchEvent := SearchEvent;
+  UDPSearchForm.Left := Left;
+  UDPSearchForm.Top := Top;
+  UDPSearchForm.AktIP := Edit1.Text;
+  UDPSearchForm.SearchPartner;
+end;
+
+procedure TFInbox.btbSendClick(Sender: TObject);
+var
+  x: Array[0..10000] of Byte;
+  i: Integer;
+begin
+  if not ChatActivated then PrepareForChat;
+  UDPSearchForm.Host := Edit1.Text;
+  UDPSearchForm.Active := true;
+  x[0] := $10; // Text
+  x[1] := 0;   // Type 0
+//  for i := 1 to Length(Edit2.Text) do begin
+  for i := 1 to Length(Memo2.Text) do begin
+    x[i+3] := Byte(Memo2.Text[i]);
+  end;
+  UDPSearchForm.DoSend(x, 4+Length(Memo2.Text), length(x));
+  Memo2.Clear;
+  Memo2.SelStart:=0;
+end;
+
+procedure TFInbox.Memo2KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key=VK_RETURN) and (Shift=[ssShift]) and (Memo2.Focused) then
+  begin
+     Key:=0;
+     if (Length(Edit1.Text)>5) and (Length(Trim(Memo2.Text))>0) then
+         Button2Click(Application);
+  end;
+end;
+
+procedure TFInbox.SetChatActivated(const Value: Boolean);
+begin
+  FChatActivated := Value;
+end;
+
+procedure TFInbox.PrepareForChat;
+var
+  s: String;
+begin
+  if Activated then exit;
+  Memo1.Clear;
+  Activated := true;
+  UDPSearchForm.OnUDPRead := UDPRead;
+  UDPSearchForm.OnException := UDPException;
+  UDPSearchForm.Active := true;
+  s := UDPSearchForm.LocalAddress;
+//  s2 := UDPSearchForm.WSGetHostByAddr(s);
+//  Memo1.Lines.Add(s+'            Ê ¬œ—” „‰            '+s2+'    '+'‰«„ ò«„ÅÌÊ — „‰');
+  Memo1.Lines.Add(s+'   >> ŒÊœ„ Â” „');
+  ChatActivated:=True;
+end;
+
+procedure TFInbox.SearchEvent(ResultIP, ResultName: String);
+begin
+  Edit1.Text := ResultIP;
+  Label2.Caption := ResultName;
+  if pos('Myself',Label2.Caption) <> 0  then Label2.Caption:='ŒÊœ„';
+end;
+
+procedure TFInbox.PageControl2Enter(Sender: TObject);
+begin
+  if Activated then exit;
+
+  //PageControl2.Pages[2].TabVisible:=False;
+
+end;
+
+procedure TFInbox.UDPRead(Sender: TObject; AData: TStream;
+  ABinding: TIdSocketHandle);
+var
+  Buffer: Array [0..2047] of Byte;
+  count: Integer;
+  PeerIP: String;
+  PeerPort: Integer;
+  s, ss: String;
+  i: Integer;
+begin
+  PeerIP := ABinding.PeerIP;
+  PeerPort:= ABinding.PeerPort;
+  count := AData.Size;
+  if count > Length(Buffer) then begin
+    exit;
+  end;
+  AData.Read(Buffer, count);
+  if (Buffer[0] <> $00) and  (Buffer[0] <> $01) then begin  // not search
+    Edit1.Text:= PeerIP;
+  end;
+  case Buffer[0] of
+   $00: begin   // search request
+    case count of
+     4: begin
+      case Buffer[1] of
+       0: begin
+        Buffer[0] := $01;
+        UDPSearchForm.Host := PeerIP;
+        UDPSearchForm.DoSend(Buffer, 4, Length(Buffer));
+        //Memo1.Lines.Add('Inquiry [' + UDPSearchForm.WSGetHostByAddr(PeerIP) + ' ' + PeerIP + ' ' +          ' Port: ' + IntToStr(PeerPort) +
+        //  ']');
+       end;
+      end;
+     end;
+    end;
+   end;
+   $01: begin // Search Reply
+    case count of
+     4: begin
+      case Buffer[1] of
+       0: begin
+       // ss := UDPSearchForm.WSGetHostByAddr(PeerIP);
+        s := ' ' + ss + ' ' + PeerIP + ' ' +
+          ' Client Port: ' + IntToStr(PeerPort) +
+          ' ';
+        //Memo1.Lines.Add('Inquiry Reply ' + s);
+        if PeerIp = UDPSearchForm.LocalAddress then begin
+          ss := '<Myself>' + ss;
+        end;
+        UDPSearchForm.Add(PeerIP, ss);
+       end;
+      end;
+     end;
+    end;
+   end;
+   $10: begin // Text
+    case Buffer[1] of
+     0: begin
+      s := '';
+      for i := 4 to count-1 do begin
+        s := s + char(Buffer[i]);
+      end;
+      Memo1.Lines.Add(PeerIP+'   >>' + s);
+      if CheckBox1.Checked then Beep;
+     end;
+    end;
+   end;
+  end;
+
+end;
+
+procedure TFInbox.UDPException(Sender: TObject);
+begin
+//
+end;
+
+procedure TFInbox.ViewAllLetters;
+begin
+  ImageEnDBView1.Visible := False;
+  if (DblclickAction = ViewJpg) and (Dm.sp_inboxhas_Page.AsBoolean) then
+    MainForm.Apicture.Execute
+  else
+    if (DblclickAction = ViewWord) and (Dm.sp_inboxhas_WordPage.AsBoolean) then
+      MainForm.AExpotToWord.Execute
+    else
+      if (DblclickAction = viewPdf) and (Dm.Sp_Inboxhas_file.AsBoolean) then
+      begin
+        if GetNumberOfLetterAttach(dm.sp_inboxLetterID.AsInteger)=1 then
+        begin
+          //if has_pdf(dm.sp_inboxLetterID.AsInteger) then
+            //MainForm.AloadPDF.Execute   //RefreshQuery œ«—«Ì œ” Ê—
+          //else
+          MainForm.AloadFile.Execute;
+        end
+        else
+          MainForm.AaddLetterData.Execute;
+      end
+      else
+        MainForm.AviewAllletterExecute(Application);
+end;
+
+procedure TFInbox.ViewAllLetters2;
+begin
+  ImageEnDBView1.Visible := False;
+  if (DblclickAction = ViewJpg) and (MainForm.Sp_Inbox2.FieldByName('Has_Page').AsBoolean) then
+    MainForm.Apicture.Execute
+  else
+    if (DblclickAction = ViewWord) and (MainForm.sp_inbox2.FieldByName('Has_WordPage').AsBoolean) then
+      MainForm.AExpotToWord.Execute
+    else
+      if (DblclickAction = viewPdf) and (MainForm.Sp_Inbox2.FieldByName('Has_file').AsBoolean) then
+      begin
+        if GetNumberOfLetterAttach(MainForm.sp_inbox2.fieldbyname('LetterID').AsInteger)=1 then
+        begin
+          MainForm.AloadFile.Execute;
+        end
+        else
+          MainForm.AaddLetterData.Execute;
+      end
+      else
+        MainForm.AviewAllletterExecute(Application);
+end;
+
+procedure TFInbox.YRotateLabel1Click(Sender: TObject);
+begin
+  if pnlInformation.Visible then
+  begin
+    pnlInformation.Visible:=False;
+    YRotateLabel1.Caption:='>';
+    pnlInformation.Align := alBottom;
+  end
+  else
+  begin
+    pnlInformation.Visible:=True;
+    YRotateLabel1.Caption:='<';
+    pnlInformation.Align := alBottom;
+  end;
+end;
+
+procedure TFInbox.TabSheet6Show(Sender: TObject);
+begin
+  inherited;
+//  if UDPSearchForm=nil then
+//     UDPSearchForm:=TUDPSearchForm.Create(Self);
+//
+//  PrepareSet;
+end;
+
+procedure TFInbox.PrepareSet;
+begin
+//  Memo1.Clear;
+//  Activated := true;
+//  UDPSearchForm.OnUDPRead := UDPRead;
+//  UDPSearchForm.OnException := UDPException;
+//  UDPSearchForm.Active := true;
+//  s := UDPSearchForm.LocalAddress;
+//  Memo1.Lines.Add(s+'   >> ŒÊœ„ Â” „');
+end;
+
+procedure TFInbox.ASetActionsExecute(Sender: TObject);
+var
+  en : boolean;
+begin
+  inherited;
+  if PageControl1.ActivePageIndex = 2 then
+    en := False
+  else
+    en := True;
+
+  with MainForm do
+  begin
+    AArchive.Visible := en;
+    AAnswer.Visible := en;
+    AinnerLetter.Visible := en;
+    AnewRecommite.Visible := en;
+    ADoCommite.Visible := en;
+    ADarftIns.Visible := en;
+    SendToSecretariat.Visible := en;
+    ADraftToLetter.Visible := en;
+    AdeleteWord.Visible := en;
+    AEdit.Visible := en;
+    AviewArchiveNote.Visible := en;
+    AEditSubject.Visible := en;
+    aarchiveOrganize.Visible := en;
+    AnotePad.Visible := en;
+    AChangeOrgID.Visible := en;
+    LetterFollowUp.Visible := en;
+    Action7.Visible := en;
+    Action8.Visible := en;
+    acMyWorkSheet.Visible := en;
+    AChangeColor.Visible := en;
+    AUserSetting.Visible := en;
+    AshortCut.Visible := en;
+    AchangePassword.Visible := en;
+    AviewArchiveNote.Visible := en;
+    ACustomizeGrid.Visible := en;
+    ASendMessage.Visible := en;
+    AGetMessage.Visible := en;
+    F9Key.Visible := en;
+    Email.Visible := en;
+    ActPhone.Visible := en;
+    ASendMessage.Visible := en;
+    AGetMessage.Visible := en;
+    AaddLetterData.Visible := en;
+    N3.Visible := en;
+    N8.Visible := en;
+    Arefresh.Visible := en;
+    PDJRotoLabel1.Visible := en;
+    QueryRefresher.Enabled := en;
+  end;
+end;
+
+procedure TFInbox.SHOW_ALL_BTNClick(Sender: TObject);
+begin
+  inherited;
+
+  if SHOW_NOT_READ_BTN.Down then
+    MainForm.SHOW_NOT_READ := True
+  else
+    MainForm.SHOW_NOT_READ := False;
+
+  Refresh;
+end;
+
+procedure TFInbox.lettersDbGridCellClick(Column: TColumn);
+begin
+  inherited;
+  if SBArchive.Down then
+  begin
+    valueLocate := MainForm.sp_inbox2.FIELDBYNAME('recommiteid').AsInteger;
+  end
+end;
+
+procedure TFInbox.RadioGroup2Click(Sender: TObject);
+begin
+//  inherited;
+
+
+end;
+
+procedure TFInbox.NullSearch;
+var
+  w: String;
+begin
+  inherited;
+  w:='';
+  MainForm.DeadLine:=-2;
+  Proceed:=True;//HKH
+  if Proceed then
+    DeadLineDate.FieldName := 'ChildRecommite.DeadLineDate'
+  else
+    DeadLineDate.FieldName := 'Rc.DeadLineDate';
+
+  if RecommiteDate.Resultwhere <> '' then
+    w := RecommiteDate.Resultwhere;
+
+  if DeadLineDate.Resultwhere <> '' then
+    if w <> '' then
+      w := w + ' and ' + DeadLineDate.Resultwhere
+    else
+      w := DeadLineDate.Resultwhere;
+
+  if ProceedDate.Resultwhere <> '' then
+    if w <> '' then
+      w := w + ' and ' + ProceedDate.Resultwhere
+    else
+      w := ProceedDate.Resultwhere;
+
+  MainForm.DeadLineWhere:=w;
+  MainForm.RefreshQuery;
+//Dm.Sp_Inbox.Close;
+//Dm.Sp_Inbox2.Close;
+
+end;
+
+procedure TFInbox.FromOrgTreeClick(Sender: TObject);
+begin
+  inherited;
+  CurrentOrgId:= integer(TDBTreeView(sender).Selected.data);
+  // Amin 1391/05/31 Start
+  MainForm.DoRefresh := true;
+  MainForm.RefreshQuery;
+  // Amin 1391/05/31 End
+end;
+
+procedure TFInbox.Action1Execute(Sender: TObject);
+begin
+  inherited;
+  DBGrid1.SelectedRows.Clear;
+  Dm.Sp_Inbox.First;
+  repeat
+    Application.ProcessMessages;
+    lettersDbGrid.SelectedRows.CurrentRowSelected := true;
+    Dm.Sp_Inbox.Next;
+  until Dm.Sp_Inbox.Eof;
+end;
+
+procedure TFInbox.SpeedButton4Click(Sender: TObject);
+begin
+  inherited;
+  MainForm.SHOW_NOT_READ := True;
+  Refresh;
+end;
+
+procedure TFInbox.SpeedButton5Click(Sender: TObject);
+begin
+  inherited;
+  MainForm.SHOW_NOT_READ := False;
+
+  Refresh;
+end;
+
+function TFInbox.DateCondition(DateFilter: Boolean): String;
+var
+  FDate,TDate:String;
+  s:String;
+begin
+  s := Trim(date.Text);
+  Result := '';
+
+  if DateFilter then
+  begin
+    if isDate(_Today,s,FDate,TDate) then
+      Result:='((Registrationdate<='''+TDate+''') and  (Registrationdate>='''+FDate+''')) or '+
+              '((incommingdate<='''+TDate+''')    and  (incommingdate>='''+FDate   +'''))    ';
+  end;
+
+  if not DateFilter then
+    Result := '((Registrationdate>=''' + date.Text + ''') and  (Registrationdate<=''' + eFromDate.text + '''))';
+
+  if Result <> '' then
+    Result := '(' + Result + ')';
+end;
+procedure TFInbox.Timer1Timer(Sender: TObject);
+begin
+  inherited;
+  if ADOHasAccessHasAccess.AsInteger = 1 then
+  begin
+    if GetUserSetting('cbAlarmMessage') then
+      SLowMessage;
+  end;
+  Timer1.Enabled := False;
+end;
+
+procedure TFInbox.UpAndDownBtnClick(Sender: TObject);
+begin
+  inherited;
+
+   if pnlInformation.Visible=False then
+   begin
+       pnlInformation.Visible:=True;
+       UpAndDownBtn.ImageIndex := 92 ;
+       YRotateLabel1.Caption:='<';
+   end
+   else
+   begin
+       pnlInformation.Visible:=False;
+       UpAndDownBtn.ImageIndex := 91 ;
+       YRotateLabel1.Caption:='>';
+   end;
+
+end;
+
+procedure TFInbox.GroupingPanelAfterClose(Sender: TObject);
+begin
+  inherited;
+  SplitterRight.Hide;
+end;
+
+procedure TFInbox.SearchPanelShow;
+begin
+  if GroupingPanel.Width <10 then
+    GroupingPanel.Width := 206 ;
+  GroupingPanel.Show;
+  SplitterRight.Show;
+end;
+
+procedure TFInbox.UpAndDownBtn2Click(Sender: TObject);
+begin
+  inherited;
+   if pnlInformation.Visible then
+   begin
+       pnlInformation.Visible:=False;
+       UpAndDownBtn.ImageIndex := 91 ;
+       YRotateLabel1.Caption:='>';
+   end;
+end;
+
+end.
