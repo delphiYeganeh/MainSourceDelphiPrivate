@@ -6,7 +6,6 @@ inherited frCustomerReport: TfrCustomerReport
   Caption = ''
   Color = 16244694
   OldCreateOrder = True
-  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape

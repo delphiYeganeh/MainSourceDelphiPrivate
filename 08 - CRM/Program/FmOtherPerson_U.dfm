@@ -8,7 +8,6 @@ inherited FmOtherPerson: TFmOtherPerson
   KeyPreview = True
   OldCreateOrder = True
   Position = poDesktopCenter
-  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape
@@ -292,6 +291,7 @@ inherited FmOtherPerson: TFmOtherPerson
         Top = 1
         Width = 496
         Height = 50
+        Hint = '  Ctrl + N  '#1583#1585#1580' '#1580#1583#1610#1583' - Ctrl+F2  '#1608#1610#1585#1575#1610#1588' - Ctrl+F5   '#1579#1576#1578' '#1578#1594#1610#1610#1585#1575#1578
         DataSource = DSelect_Person_By_CustomerID
         VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbEdit, nbPost, nbCancel]
         Align = alRight
@@ -300,6 +300,18 @@ inherited FmOtherPerson: TFmOtherPerson
         Constraints.MinWidth = 50
         Flat = True
         Ctl3D = True
+        Hints.Strings = (
+          #1575#1608#1604#1610#1606' '#1585#1705#1608#1585#1583
+          #1585#1705#1608#1585#1583' '#1602#1576#1604#1610
+          #1585#1705#1608#1585#1583' '#1576#1593#1583#1610
+          #1570#1582#1585#1610#1606' '#1585#1705#1608#1585#1583
+          'Ctrl + N  '#1583#1585#1580' '#1580#1583#1610#1583
+          #1581#1584#1601
+          'Ctrl+F2  '#1608#1610#1585#1575#1610#1588
+          'Ctrl+F5   '#1579#1576#1578' '#1578#1594#1610#1610#1585#1575#1578
+          #1575#1606#1589#1585#1575#1601
+          #1576#1607' '#1585#1608#1586' '#1585#1587#1575#1606#1610' '#1583#1610#1578#1575
+          '')
         ParentCtl3D = False
         ParentShowHint = False
         ConfirmDelete = False
@@ -321,7 +333,7 @@ inherited FmOtherPerson: TFmOtherPerson
         161)
       object Label1: TLabel
         Left = 527
-        Top = 16
+        Top = 46
         Width = 13
         Height = 13
         Anchors = [akTop, akRight]
@@ -330,7 +342,7 @@ inherited FmOtherPerson: TFmOtherPerson
       end
       object Label2: TLabel
         Left = 527
-        Top = 42
+        Top = 23
         Width = 58
         Height = 13
         Anchors = [akTop, akRight]
@@ -384,7 +396,7 @@ inherited FmOtherPerson: TFmOtherPerson
       end
       object Label8: TLabel
         Left = 527
-        Top = 68
+        Top = 69
         Width = 28
         Height = 13
         Anchors = [akTop, akRight]
@@ -400,25 +412,38 @@ inherited FmOtherPerson: TFmOtherPerson
         Caption = #1578#1608#1590#1610#1581#1575#1578
         FocusControl = DBENotes
       end
-      object DBEFirstName: TDBEdit
-        Left = 320
-        Top = 16
-        Width = 200
-        Height = 21
-        Anchors = [akTop, akRight]
-        DataField = 'FirstName'
-        DataSource = DSelect_Person_By_CustomerID
-        TabOrder = 0
+      object Label12: TLabel
+        Left = 307
+        Top = 18
+        Width = 10
+        Height = 19
+        Caption = '*'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clRed
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
-      object DBELastName: TDBEdit
+      object DBEFirstName: TDBEdit
         Left = 320
         Top = 42
         Width = 200
         Height = 21
         Anchors = [akTop, akRight]
-        DataField = 'LastName'
+        DataField = 'FirstName'
         DataSource = DSelect_Person_By_CustomerID
         TabOrder = 1
+      end
+      object DBELastName: TDBEdit
+        Left = 320
+        Top = 17
+        Width = 200
+        Height = 21
+        Anchors = [akTop, akRight]
+        DataField = 'LastName'
+        DataSource = DSelect_Person_By_CustomerID
+        TabOrder = 0
       end
       object DBEEmailAddress: TDBEdit
         Left = 320
@@ -476,7 +501,7 @@ inherited FmOtherPerson: TFmOtherPerson
       end
       object DBEJobTitle: TDBEdit
         Left = 320
-        Top = 68
+        Top = 66
         Width = 200
         Height = 21
         Anchors = [akTop, akRight]
@@ -609,9 +634,9 @@ inherited FmOtherPerson: TFmOtherPerson
         599
         72)
       object Label10: TLabel
-        Left = 495
+        Left = 540
         Top = 16
-        Width = 58
+        Width = 13
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1606#1575#1605
@@ -781,6 +806,7 @@ inherited FmOtherPerson: TFmOtherPerson
     Connection = Dm.YeganehConnection
     CursorType = ctStatic
     AfterInsert = Select_Person_By_CustomerIDAfterInsert
+    BeforePost = Select_Person_By_CustomerIDBeforePost
     ProcedureName = 'Select_Person_By_CustomerID;1'
     Parameters = <
       item

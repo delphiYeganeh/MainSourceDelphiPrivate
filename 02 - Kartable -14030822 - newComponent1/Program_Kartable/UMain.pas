@@ -799,7 +799,7 @@ begin
 //   end;
 
 
-  MainForm.Status3.Caption := ' ⁄œ«œ:'+IntToStr(dm.sp_inbox.RecordCount);
+  MainForm.Status3.Caption := ' ⁄œ«œ «”‰«œ :'+IntToStr(dm.sp_inbox.RecordCount);
 
 //   ADoCommite.Visible := Not FInbox.Proceed;
 //   ADoCommite.Enabled := ADoCommite.Visible;
@@ -2912,7 +2912,9 @@ procedure TMainForm.FormShow(Sender: TObject);
 begin
   inherited;
   status6.Caption := '‘—ò  ‰—„ «›“«—Ì  '+_yeganeh;
-  Caption := '« Ê„«”ÌÊ‰ «œ«—Ì  '+_yeganeh;
+  //Caption := '« Ê„«”ÌÊ‰ «œ«—Ì  '+_yeganeh;
+  // Caption :=  '« Ê„«”ÌÊ‰ «œ«—Ì  '+_yeganeh + ' : ‰”ŒÂ ' + _SoftVersion;
+  Caption := '‰—„ «›“«— « Ê„«”ÌÊ‰ «œ«—Ì ‘—ò  ›‰«Ê—Ì «ÿ·«⁄«  Ìê«‰Â' + ' : ‰”ŒÂ ' + _SoftVersion;
 end;
 
 function BrowseDialogCallBack (Wnd: HWND; uMsg: UINT; lParam, lpData: LPARAM):integer stdcall;

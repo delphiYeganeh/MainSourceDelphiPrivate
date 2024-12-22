@@ -22,6 +22,9 @@ inherited FrAddDocument: TFrAddDocument
     Align = alClient
     ParentColor = True
     TabOrder = 0
+    DesignSize = (
+      884
+      431)
     object xpPageControl1: TxpPageControl
       Left = 1
       Top = 1
@@ -31,7 +34,7 @@ inherited FrAddDocument: TFrAddDocument
       Align = alClient
       ParentShowHint = False
       ShowHint = True
-      Style = pcsXP
+      Style = pcsFlatButtons
       TabHeight = 23
       TabOrder = 0
       TabPosition = tpTop
@@ -45,18 +48,6 @@ inherited FrAddDocument: TFrAddDocument
         GradientStartColor = clWhite
         GradientEndColor = clBtnFace
         GradientFillDir = fdTopToBottom
-        DesignSize = (
-          874
-          396)
-        object Label4: TLabel
-          Left = 794
-          Top = 263
-          Width = 75
-          Height = 13
-          Anchors = [akTop, akRight]
-          Caption = #1578#1608#1590#1610#1581#1575#1578' '#1576#1575#1610#1711#1575#1606#1610
-          Transparent = True
-        end
         object MainPanel: TPanel
           Left = 0
           Top = 60
@@ -71,9 +62,9 @@ inherited FrAddDocument: TFrAddDocument
             870
             196)
           object Label14: TLabel
-            Left = 786
-            Top = 41
-            Width = 80
+            Left = 784
+            Top = 39
+            Width = 82
             Height = 13
             Anchors = [akTop, akRight]
             Caption = #1605#1608#1590#1608#1593' '#1610#1575' '#1606#1608#1593' '#1606#1575#1605#1607
@@ -85,9 +76,9 @@ inherited FrAddDocument: TFrAddDocument
             ParentFont = False
           end
           object Label11: TLabel
-            Left = 812
+            Left = 784
             Top = 64
-            Width = 53
+            Width = 82
             Height = 13
             Anchors = [akTop, akRight]
             Caption = #1601#1585#1605' '#1662#1610#1608#1587#1578
@@ -101,7 +92,7 @@ inherited FrAddDocument: TFrAddDocument
           end
           object UserField: TLabel
             Left = 784
-            Top = 10
+            Top = 14
             Width = 82
             Height = 13
             Anchors = [akTop, akRight]
@@ -128,7 +119,7 @@ inherited FrAddDocument: TFrAddDocument
             Width = 393
             Height = 91
             Alignment = taRightJustify
-            Anchors = [akTop, akRight]
+            Anchors = [akLeft, akTop, akRight, akBottom]
             BiDiMode = bdRightToLeftNoAlign
             DataField = 'Memo'
             DataSource = DSForm
@@ -145,7 +136,7 @@ inherited FrAddDocument: TFrAddDocument
           end
           object DBLookupComboBox1: TDBLookupComboBox
             Left = 519
-            Top = 37
+            Top = 35
             Width = 260
             Height = 21
             Anchors = [akTop, akRight]
@@ -176,7 +167,7 @@ inherited FrAddDocument: TFrAddDocument
           end
           object DBEdit12: TDBEdit
             Left = 519
-            Top = 6
+            Top = 10
             Width = 260
             Height = 21
             Anchors = [akTop, akRight]
@@ -296,14 +287,16 @@ inherited FrAddDocument: TFrAddDocument
             Width = 393
             Height = 185
             ActivePage = TabSheet1
+            Images = Dm.ImageList_MainNew
             TabOrder = 7
             object TabSheet1: TTabSheet
               Caption = #1575#1587#1606#1575#1583' '#1605#1585#1578#1576#1591
+              ImageIndex = 118
               object lettersDbGrid: TDBGrid
                 Left = 0
                 Top = 0
                 Width = 385
-                Height = 157
+                Height = 156
                 Align = alClient
                 DataSource = DSRelated
                 Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -356,10 +349,10 @@ inherited FrAddDocument: TFrAddDocument
             end
             object TabSheet2: TTabSheet
               Caption = #1601#1610#1604#1578#1585
-              ImageIndex = 1
+              ImageIndex = 197
               DesignSize = (
                 385
-                157)
+                156)
               object Label6: TLabel
                 Left = 299
                 Top = 11
@@ -625,11 +618,13 @@ inherited FrAddDocument: TFrAddDocument
             TabStop = False
             Anchors = [akTop, akRight]
             BiDiMode = bdLeftToRight
+            BorderStyle = bsNone
             CheckValidity = True
             ShowMsg = False
             Ctl3D = False
             DataField = 'RegistrationDate'
             DataSource = DSForm
+            Enabled = False
             Font.Charset = ARABIC_CHARSET
             Font.Color = clBlue
             Font.Height = -11
@@ -649,9 +644,11 @@ inherited FrAddDocument: TFrAddDocument
             TabStop = False
             Anchors = [akTop, akRight]
             BiDiMode = bdLeftToRight
+            BorderStyle = bsNone
             Ctl3D = False
             DataField = 'RegistrationTime'
             DataSource = DSForm
+            Enabled = False
             Font.Charset = ARABIC_CHARSET
             Font.Color = clBlue
             Font.Height = -11
@@ -671,9 +668,11 @@ inherited FrAddDocument: TFrAddDocument
             TabStop = False
             Anchors = [akTop, akRight]
             BiDiMode = bdLeftToRight
+            BorderStyle = bsNone
             Ctl3D = False
             DataField = 'UserTitle'
             DataSource = DSForm
+            Enabled = False
             Font.Charset = ARABIC_CHARSET
             Font.Color = clBlue
             Font.Height = -11
@@ -693,9 +692,11 @@ inherited FrAddDocument: TFrAddDocument
             TabStop = False
             Anchors = [akTop, akRight]
             BiDiMode = bdRightToLeft
+            BorderStyle = bsNone
             Ctl3D = False
             DataField = 'IndicatorInnerNo'
             DataSource = DSForm
+            Enabled = False
             Font.Charset = ARABIC_CHARSET
             Font.Color = clBlue
             Font.Height = -12
@@ -867,38 +868,60 @@ inherited FrAddDocument: TFrAddDocument
             Appearance.ColorMirrorDisabledTo = 15921906
           end
         end
-        object DBMemo1: TDBMemo
-          Left = 0
-          Top = 277
-          Width = 874
-          Height = 82
-          Align = alBottom
-          Alignment = taRightJustify
-          BiDiMode = bdRightToLeftNoAlign
-          DataField = 'SubjectDescription'
-          DataSource = DSForm
-          Font.Charset = ARABIC_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentBiDiMode = False
-          ParentFont = False
-          TabOrder = 3
-        end
         object GroupBox5: TGroupBox
           Left = 0
           Top = 359
           Width = 874
           Height = 37
           Align = alBottom
-          TabOrder = 4
+          TabOrder = 3
           object lblHasForms: TLabel
             Left = 2
             Top = 15
             Width = 870
             Height = 20
             Align = alClient
+          end
+        end
+        object Panel3: TPanel
+          Left = 0
+          Top = 260
+          Width = 874
+          Height = 99
+          Align = alClient
+          ParentColor = True
+          TabOrder = 4
+          DesignSize = (
+            874
+            99)
+          object Label4: TLabel
+            Left = 794
+            Top = 4
+            Width = 75
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = #1578#1608#1590#1610#1581#1575#1578' '#1576#1575#1610#1711#1575#1606#1610
+            Transparent = True
+          end
+          object DBMemo1: TDBMemo
+            Left = 1
+            Top = 24
+            Width = 872
+            Height = 74
+            Align = alBottom
+            Alignment = taRightJustify
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            BiDiMode = bdRightToLeftNoAlign
+            DataField = 'SubjectDescription'
+            DataSource = DSForm
+            Font.Charset = ARABIC_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentBiDiMode = False
+            ParentFont = False
+            TabOrder = 0
           end
         end
       end
@@ -1107,15 +1130,26 @@ inherited FrAddDocument: TFrAddDocument
         end
       end
     end
+    object pnlTopHeader: TPanel
+      Left = 1
+      Top = 1
+      Width = 882
+      Height = 5
+      Anchors = [akLeft, akTop, akRight]
+      BevelOuter = bvNone
+      ParentColor = True
+      TabOrder = 1
+    end
   end
   inherited DSForm: TDataSource
     AutoEdit = False
     DataSet = Select_Letter
     OnDataChange = DSFormDataChange
-    Left = 187
-    Top = 107
+    Left = 275
+    Top = 91
   end
   inherited ActionList: TActionList
+    Left = 312
     Top = 96
   end
   inherited Grid_PopupMenu: TPopupMenu
@@ -1404,8 +1438,8 @@ inherited FrAddDocument: TFrAddDocument
         Precision = 10
         Value = 0
       end>
-    Left = 149
-    Top = 109
+    Left = 245
+    Top = 93
     object Select_LetterUserTableTitle: TStringField
       Alignment = taRightJustify
       FieldKind = fkLookup
@@ -1826,8 +1860,8 @@ inherited FrAddDocument: TFrAddDocument
     Top = 153
   end
   object PopupMenu: TPopupMenu
-    Left = 281
-    Top = 90
+    Left = 409
+    Top = 82
     object N2: TMenuItem
       Caption = #1670#1575#1662
       OnClick = N2Click

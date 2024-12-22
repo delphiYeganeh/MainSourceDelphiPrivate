@@ -5,7 +5,6 @@ inherited FAssessment: TFAssessment
   Height = 454
   Caption = #1575#1585#1586#1610#1575#1576#1610
   OldCreateOrder = True
-  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape

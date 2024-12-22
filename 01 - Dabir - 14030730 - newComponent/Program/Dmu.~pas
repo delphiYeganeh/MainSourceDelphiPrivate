@@ -3498,16 +3498,16 @@ begin
       begin
         Result:=False;
         case i of
-        1 : ShowMessage('Şİá ÓÎÊ ÇİÒÇÑí íÇİÊ äÔÏ');
-        2 : ShowMessage('˜áíÏ ÎæÇäÏä íÇ äæÔÊä ÇÔÊÈÇå ãí ÈÇÔÏ');
-        3 : ShowMessage('Şİá ÚæÖ ÔÏå ÇÓÊ');
-        4 : ShowMessage('ÎØÇ åäÇã äæÔÊä ÇØáÇÚÇÊ');
-        5 : ShowMessage('ÎØÇ ÏÑ ÈÇÑÒÇÑí ÇØáÇÚÇÊ Çæáíå');
-        6 : ShowMessage('ÎØÇ ÏÑíÇİÊ æ ÇÑÓÇá ÇØáÇÚÇÊ');
-        7 : ShowMessage('ÎØÇí ÊÚÏÇÏ ˜ÇÑÈÑÇä ãÌÇÒ');
-        8 : ShowMessage('ÎØÇí Ç˜ÊíæÇí˜Ó');
-        9 : ShowMessage('ÎØÇí ÇØáÇÚÇÊ ÇÔÊÈÇå Ñæí Şİá');
-        10: ShowMessage('ÎØÇ Şİá äÇãÚÊÈÑ');
+          1 : ShowMessage('Şİá ÓÎÊ ÇİÒÇÑí íÇİÊ äÔÏ');
+          2 : ShowMessage('˜áíÏ ÎæÇäÏä íÇ äæÔÊä ÇÔÊÈÇå ãí ÈÇÔÏ');
+          3 : ShowMessage('Şİá ÚæÖ ÔÏå ÇÓÊ');
+          4 : ShowMessage('ÎØÇ åäÇã äæÔÊä ÇØáÇÚÇÊ');
+          5 : ShowMessage('ÎØÇ ÏÑ ÈÇÑÒÇÑí ÇØáÇÚÇÊ Çæáíå');
+          6 : ShowMessage('ÎØÇ ÏÑíÇİÊ æ ÇÑÓÇá ÇØáÇÚÇÊ');
+          7 : ShowMessage('ÎØÇí ÊÚÏÇÏ ˜ÇÑÈÑÇä ãÌÇÒ');
+          8 : ShowMessage('ÎØÇí Ç˜ÊíæÇí˜Ó');
+          9 : ShowMessage('ÎØÇí ÇØáÇÚÇÊ ÇÔÊÈÇå Ñæí Şİá');
+          10: ShowMessage('ÎØÇ Şİá äÇãÚÊÈÑ');
         else ShowMessage(IntToStr(i));
         end
       end

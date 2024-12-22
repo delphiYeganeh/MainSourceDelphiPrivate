@@ -191,7 +191,7 @@ begin
       begin
        Connection := Dm.YeganehConnection;
        CommandTimeout := 1200;
-       SQL.Text :=  '  Insert into [dbo].[Log_Processes] ([Message] ,[Type])  values ('+IntToStr(CaseId)+',5)' ;
+       SQL.Text :=  '  Insert into [dbo].[Log_Processes] ([Message] ,[Type])  values ('''+IntToStr(CaseId)+''',5)' ;
        ExecSQL;
       end;
       ShowMyMessage('ÅÌ€«„','⁄„·Ì«  À»  «—“Ì«»Ì »« Œÿ« „Ê«ÃÂ ‘œ ·ÿ›« œÊ»«—Â  ·«‘ ‰„«ÌÌœ',[mbOK],mtInformation);

@@ -164,7 +164,7 @@ end;
 procedure TfrCustomerReport.FormShow(Sender: TObject);
 begin
   inherited;
-  SetColorForm ;
+  //SetColorForm ;
 end;
 
 end.

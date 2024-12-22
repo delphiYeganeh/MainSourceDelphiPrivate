@@ -91,10 +91,8 @@ type
     Label11: TLabel;
     UserField: TLabel;
     DBEdit12: TDBEdit;
-    DBMemo1: TDBMemo;
     Label2: TLabel;
     Select_LetterSubjectDescription: TWideStringField;
-    Label4: TLabel;
     AAddLetterData: TAdvGlowButton;
     xpForms: TxpTabSheet;
     Panel2: TPanel;
@@ -160,6 +158,10 @@ type
     qry_AccessDelete: TADOQuery;
     qry_AccessDeleteHasDelete: TBooleanField;
     pnlMain: TPanel;
+    pnlTopHeader: TPanel;
+    Panel3: TPanel;
+    DBMemo1: TDBMemo;
+    Label4: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     function GetLetter(LetterID:integer):boolean;
     procedure OwnerComboKeyDown(Sender: TObject; var Key: Word;
@@ -215,7 +217,8 @@ type
     procedure Show_xpFormsTab;
     procedure ShowCount;
     function LetterHasForms:Boolean;
-    function CheckFormExist:Boolean;    
+    function CheckFormExist:Boolean;
+    procedure TabShow(mode: Boolean);         
   public
     { Public declarations }
     SecID:integer;
@@ -691,7 +694,8 @@ end;
 
 procedure TFrAddDocument.DontShow_xpFormsTab;
 begin
-  xpPageControl1.Pages[1].TabVisible:=False;
+  xpPageControl1.Pages[1].TabVisible:= False;
+
 end;
 
 function TFrAddDocument.LetterHasForms: Boolean;
@@ -705,7 +709,8 @@ end;
 
 procedure TFrAddDocument.Show_xpFormsTab;
 begin
-  xpPageControl1.Pages[1].TabVisible:=True;
+  xpPageControl1.Pages[1].TabVisible:= True;
+  TabShow(True);
 end;
 
 procedure TFrAddDocument.ShowCount;
@@ -718,6 +723,8 @@ begin
   inherited;
   if xpPageControl1.ActivePageIndex=0 then
        Select_Letter.Requery;
+
+  TabShow(false);
 end;
 
 procedure TFrAddDocument.Select_LetterAfterScroll(DataSet: TDataSet);
@@ -1260,6 +1267,7 @@ begin
          //   SBOther.Visible := false;
        {$ENDIF}
    {$ENDIF}
+  TabShow(false);
 end;
 
 procedure TFrAddDocument.QAddedFormsAfterScroll(DataSet: TDataSet);
@@ -1270,6 +1278,22 @@ begin
    qry_AccessDelete.Active := True;
 
    xpBitBtn5.Enabled := qry_AccessDeleteHasDelete.AsBoolean;
+end;
+
+procedure TFrAddDocument.TabShow(mode: Boolean);
+begin
+  if mode then
+  begin
+    pnlTopHeader.Height := 0 ;
+    xpPageControl1.TabHeight := 23 ;
+    xpPageControl1.TabWidth  := 0 ;
+  end
+  else
+  begin
+    pnlTopHeader.Height := 5 ;
+    xpPageControl1.TabHeight := 1 ;
+    xpPageControl1.TabWidth  := 1 ;
+  end;
 end;
 
 end.

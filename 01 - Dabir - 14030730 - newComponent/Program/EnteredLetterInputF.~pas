@@ -277,6 +277,8 @@ type
     btnOtherHistory: TAdvGlowButton;
     DBGToORG: TYDBGrid;
     sbSubjectDel: TAdvGlowButton;
+    Panel1: TPanel;
+    pnlTopHeader: TPanel;
     procedure btnTypeClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -394,6 +396,7 @@ type
     function GetExtensionID(ExtensionName:String):Integer;
     function GetEmail:String;
     procedure SetDescForECE(const Value: String);
+    procedure TabShow(mode: Boolean);
 
   public
     LetterFormat:Byte;
@@ -1587,6 +1590,9 @@ begin
 
   if GetUserSetting('EnterLetterpnlDetailMinimize') then
    pnlDetail.Minimized := True ;
+
+  TabShow(false) ;
+
 end;
 
 procedure TReceivedLetterInputForm.N5Click(Sender: TObject);
@@ -1928,7 +1934,10 @@ end;
 
 procedure TReceivedLetterInputForm.Show_xpFormsTab;
 begin
-  xpPageControl1.Pages[1].TabVisible:=True;
+  xpPageControl1.Pages[1].TabVisible:= True;
+
+  TabShow(True) ;
+
 end;
 
 procedure TReceivedLetterInputForm.DSFormDataChange(Sender: TObject;
@@ -2006,6 +2015,9 @@ begin
   inherited;
   if xpPageControl1.ActivePageIndex=0 then
     Select_Letter.Refresh;
+    
+  TabShow(false) ;
+
 end;
 
 procedure TReceivedLetterInputForm.acReadECEExecute(Sender: TObject);
@@ -2880,6 +2892,22 @@ procedure TReceivedLetterInputForm.sbSubjectDelClick(Sender: TObject);
 begin
   inherited;
   DBLookupComboBox5.KeyValue := null;
+end;
+
+procedure TReceivedLetterInputForm.TabShow(mode: Boolean);
+begin
+  if mode then
+  begin
+    pnlTopHeader.Height := 0 ;
+    xpPageControl1.TabHeight := 23 ;
+    xpPageControl1.TabWidth  := 0 ;
+  end
+  else
+  begin
+    pnlTopHeader.Height := 5 ;
+    xpPageControl1.TabHeight := 1 ;
+    xpPageControl1.TabWidth  := 1 ;
+  end;
 end;
 
 end.

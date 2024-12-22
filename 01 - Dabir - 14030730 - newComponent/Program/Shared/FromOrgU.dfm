@@ -52,8 +52,8 @@ inherited FromOrgForm: TFromOrgForm
         146
         454)
       object Image2: TImage
-        Left = 49
-        Top = 31
+        Left = 41
+        Top = 3
         Width = 62
         Height = 56
         Anchors = [akTop, akRight]
@@ -91,55 +91,38 @@ inherited FromOrgForm: TFromOrgForm
       end
       object Label5: TLabel
         Left = 22
-        Top = 309
+        Top = 275
         Width = 98
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1578#1585#1578#1610#1576' '#1576#1585' '#1575#1587#1575#1587' '#1593#1606#1608#1575#1606
+        Transparent = True
       end
       object Label3: TLabel
         Left = 61
-        Top = 328
+        Top = 294
         Width = 59
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1670#1575#1585#1578' '#1583#1575#1582#1604#1610' '
+        Transparent = True
         Visible = False
       end
       object Label4: TLabel
         Left = 6
-        Top = 346
+        Top = 312
         Width = 114
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1587#1575#1586#1605#1575#1606' '#1607#1575#1610' '#1591#1585#1601' '#1605#1603#1575#1578#1576#1607
+        Transparent = True
         Visible = False
       end
-      object LblPaste: TLabel
+      object LblSide: TLabel
         Left = 8
-        Top = 376
-        Width = 129
-        Height = 65
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = 'LblPaste'
-        Color = clWindow
-        Font.Charset = ARABIC_CHARSET
-        Font.Color = clRed
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Visible = False
-        WordWrap = True
-      end
-      object Label6: TLabel
-        Left = 51
-        Top = 6
-        Width = 57
-        Height = 13
-        Anchors = [akTop, akRight]
+        Top = 70
+        Width = 132
+        Height = 59
         Caption = #1587#1575#1586#1605#1575#1606' '#1607#1575
         Font.Charset = ARABIC_CHARSET
         Font.Color = clWindowText
@@ -147,10 +130,11 @@ inherited FromOrgForm: TFromOrgForm
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
+        Transparent = True
       end
       object BBOK: TAdvGlowButton
         Left = 39
-        Top = 95
+        Top = 376
         Width = 82
         Height = 25
         Cursor = crHandPoint
@@ -192,7 +176,7 @@ inherited FromOrgForm: TFromOrgForm
       end
       object BBCancel: TAdvGlowButton
         Left = 39
-        Top = 121
+        Top = 405
         Width = 82
         Height = 25
         Cursor = crHandPoint
@@ -233,7 +217,7 @@ inherited FromOrgForm: TFromOrgForm
       end
       object BBInsert: TAdvGlowButton
         Left = 39
-        Top = 178
+        Top = 133
         Width = 82
         Height = 25
         Cursor = crHandPoint
@@ -273,7 +257,7 @@ inherited FromOrgForm: TFromOrgForm
       end
       object EditBtn: TAdvGlowButton
         Left = 39
-        Top = 205
+        Top = 160
         Width = 82
         Height = 25
         Cursor = crHandPoint
@@ -314,7 +298,7 @@ inherited FromOrgForm: TFromOrgForm
       end
       object deleteBtn: TAdvGlowButton
         Left = 39
-        Top = 233
+        Top = 188
         Width = 82
         Height = 25
         Cursor = crHandPoint
@@ -354,7 +338,7 @@ inherited FromOrgForm: TFromOrgForm
       end
       object orderByTitle: TCheckBox
         Left = 121
-        Top = 308
+        Top = 274
         Width = 16
         Height = 17
         Cursor = crHandPoint
@@ -363,7 +347,7 @@ inherited FromOrgForm: TFromOrgForm
       end
       object innerOrg: TCheckBox
         Left = 121
-        Top = 325
+        Top = 291
         Width = 16
         Height = 17
         Cursor = crHandPoint
@@ -375,7 +359,7 @@ inherited FromOrgForm: TFromOrgForm
       end
       object outerOrg: TCheckBox
         Left = 124
-        Top = 343
+        Top = 309
         Width = 13
         Height = 17
         Cursor = crHandPoint
@@ -385,7 +369,7 @@ inherited FromOrgForm: TFromOrgForm
       end
       object BitBtn1: TAdvGlowButton
         Left = 40
-        Top = 261
+        Top = 216
         Width = 82
         Height = 25
         Action = acUserGroup
@@ -479,6 +463,7 @@ inherited FromOrgForm: TFromOrgForm
             OnFocusChanged = vdbTreeFocusChanged
             OnGetImageIndex = vdbTreeGetImageIndex
             ParentFieldName = 'ParentID'
+            PopupMenu = PopupMenu_Right
             TabOrder = 0
             ViewFieldName = 'D'
             Columns = <>
@@ -493,6 +478,7 @@ inherited FromOrgForm: TFromOrgForm
             Top = 58
             Width = 382
             Height = 329
+            Cursor = crHandPoint
             Align = alClient
             DataSource = DFromOrg
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -502,6 +488,7 @@ inherited FromOrgForm: TFromOrgForm
             TitleFont.Height = -11
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
+            OnCellClick = DBGFromORGCellClick
             OnDrawColumnCell = DBGFromORGDrawColumnCell
             OnDblClick = DBGFromORGDblClick
             YeganehColor = True
@@ -651,12 +638,32 @@ inherited FromOrgForm: TFromOrgForm
         DesignSize = (
           390
           27)
+        object LblPaste: TLabel
+          Left = 49
+          Top = 4
+          Width = 281
+          Height = 19
+          AutoSize = False
+          Caption = 'LblPaste'
+          Color = clWindow
+          Font.Charset = ARABIC_CHARSET
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          Transparent = True
+          Visible = False
+          WordWrap = True
+        end
         object Cut: TAdvGlowButton
-          Left = 330
+          Left = 332
           Top = 2
           Width = 56
           Height = 22
           Cursor = crHandPoint
+          Hint = 'Ctrl+C'
           Anchors = [akTop, akRight]
           Caption = 'Cut'
           ImageIndex = 89
@@ -666,6 +673,8 @@ inherited FromOrgForm: TFromOrgForm
           NotesFont.Height = -11
           NotesFont.Name = 'Tahoma'
           NotesFont.Style = []
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 0
           OnClick = CutClick
           Appearance.ColorChecked = 16111818
@@ -686,11 +695,12 @@ inherited FromOrgForm: TFromOrgForm
           Appearance.ColorMirrorDisabledTo = 15921906
         end
         object Paste: TAdvGlowButton
-          Left = 330
+          Left = 332
           Top = 2
           Width = 56
           Height = 22
           Cursor = crHandPoint
+          Hint = 'Ctrl+V'
           Anchors = [akTop, akRight]
           Caption = 'Paste'
           ImageIndex = 60
@@ -700,6 +710,8 @@ inherited FromOrgForm: TFromOrgForm
           NotesFont.Height = -11
           NotesFont.Name = 'Tahoma'
           NotesFont.Style = []
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 1
           Visible = False
           OnClick = PasteClick
@@ -721,7 +733,7 @@ inherited FromOrgForm: TFromOrgForm
           Appearance.ColorMirrorDisabledTo = 15921906
         end
         object SBExpand: TAdvGlowButton
-          Left = 37
+          Left = 27
           Top = 2
           Width = 23
           Height = 22
@@ -755,7 +767,7 @@ inherited FromOrgForm: TFromOrgForm
           Appearance.ColorMirrorDisabledTo = 15921906
         end
         object SBCollapse: TAdvGlowButton
-          Left = 13
+          Left = 3
           Top = 2
           Width = 23
           Height = 22
@@ -810,18 +822,18 @@ inherited FromOrgForm: TFromOrgForm
         Caption = #1605#1587#1574#1608#1604':'
       end
       object Label1: TLabel
-        Left = 494
+        Left = 493
         Top = 21
-        Width = 15
+        Width = 39
         Height = 13
         Anchors = [akTop, akRight]
-        Caption = #1705#1583':'
+        Caption = #1705#1583'        :'
         FocusControl = ECode
       end
       object Erespon: TEdit
-        Left = 164
+        Left = 8
         Top = 43
-        Width = 325
+        Width = 481
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         Ctl3D = True
@@ -832,9 +844,9 @@ inherited FromOrgForm: TFromOrgForm
         OnExit = TEditExit
       end
       object ECode: TEdit
-        Left = 402
+        Left = 296
         Top = 17
-        Width = 88
+        Width = 194
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         ReadOnly = True
@@ -1045,8 +1057,8 @@ inherited FromOrgForm: TFromOrgForm
       'select ID, code,Title, ResponsibleStaffer ,parentid,IsInnerOrg f' +
       'rom dbo.FromOrganizations_fn(3445)'
     Parameters = <>
-    Left = 110
-    Top = 98
+    Left = 174
+    Top = 154
     object FromOrgTitle: TWideStringField
       FieldName = 'Title'
       Size = 100
@@ -1138,5 +1150,20 @@ inherited FromOrgForm: TFromOrgForm
     DataSet = qryTree
     Left = 101
     Top = 256
+  end
+  object PopupMenu_Right: TPopupMenu
+    Tag = 11
+    Left = 308
+    Top = 262
+    object C1: TMenuItem
+      Caption = 'Cut'
+      ShortCut = 16451
+      OnClick = C1Click
+    end
+    object p1: TMenuItem
+      Caption = 'Past'
+      ShortCut = 16470
+      OnClick = p1Click
+    end
   end
 end

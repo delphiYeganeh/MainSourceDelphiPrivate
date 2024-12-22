@@ -2,29 +2,28 @@ inherited frCase: TfrCase
   Left = 392
   Top = 130
   Width = 924
-  Height = 691
+  Height = 713
   Caption = #1605#1608#1575#1585#1583'/'#1576#1575#1711' '#1607#1575
   Color = 16244694
   OldCreateOrder = True
-  OnCanResize = FormCanResize
   OnCloseQuery = FormCloseQuery
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape
     Width = 908
-    Height = 652
+    Height = 674
   end
   object pnlMain: TPanel [1]
     Left = 0
     Top = 0
     Width = 908
-    Height = 652
+    Height = 674
     Align = alClient
     Caption = ' '
     TabOrder = 0
     object xpPanel1: TxpPanel
       Left = 1
-      Top = 241
+      Top = 257
       Width = 906
       Height = 124
       StartColor = 16511469
@@ -329,7 +328,7 @@ inherited frCase: TfrCase
     end
     object Panel2: TPanel
       Left = 1
-      Top = 607
+      Top = 629
       Width = 906
       Height = 44
       Align = alBottom
@@ -660,7 +659,7 @@ inherited frCase: TfrCase
     end
     object Panel1: TPanel
       Left = 1
-      Top = 503
+      Top = 525
       Width = 906
       Height = 104
       Align = alBottom
@@ -714,9 +713,9 @@ inherited frCase: TfrCase
     end
     object dbgCase: TYDBGrid
       Left = 1
-      Top = 365
+      Top = 381
       Width = 906
-      Height = 138
+      Height = 144
       Cursor = crHandPoint
       Align = alClient
       DataSource = DsSelect_Cases
@@ -862,14 +861,14 @@ inherited frCase: TfrCase
       Left = 1
       Top = 1
       Width = 906
-      Height = 240
+      Height = 136
       Align = alTop
       Caption = '  '#1575#1591#1604#1575#1593#1575#1578' '#1605#1608#1585#1583
       Enabled = False
       TabOrder = 4
       DesignSize = (
         906
-        240)
+        136)
       object Label12: TLabel
         Left = 414
         Top = 79
@@ -1105,17 +1104,6 @@ inherited frCase: TfrCase
         ParentBiDiMode = False
         TabOrder = 4
       end
-      object DBMemComment: TDBMemo
-        Left = 8
-        Top = 133
-        Width = 889
-        Height = 91
-        Anchors = [akLeft, akTop, akRight]
-        DataField = 'Comment'
-        DataSource = DsSelect_Cases
-        ScrollBars = ssVertical
-        TabOrder = 5
-      end
       object DBEdit3: TDBEdit
         Left = 496
         Top = 76
@@ -1124,7 +1112,7 @@ inherited frCase: TfrCase
         Anchors = [akTop, akRight]
         DataSource = DsSelect_Cases
         ReadOnly = True
-        TabOrder = 6
+        TabOrder = 5
         Visible = False
       end
       object DBEdit4: TDBEdit
@@ -1135,7 +1123,7 @@ inherited frCase: TfrCase
         Anchors = [akTop, akRight]
         DataField = 'CustomerID'
         DataSource = DsSelect_Cases
-        TabOrder = 7
+        TabOrder = 6
       end
       object Edit1: TEdit
         Left = 496
@@ -1143,7 +1131,7 @@ inherited frCase: TfrCase
         Width = 314
         Height = 21
         Anchors = [akTop, akRight]
-        TabOrder = 8
+        TabOrder = 7
       end
       object DBEdit5: TDBEdit
         Left = 711
@@ -1154,7 +1142,7 @@ inherited frCase: TfrCase
         DataField = 'CaseID'
         DataSource = DsSelect_Cases
         Enabled = False
-        TabOrder = 9
+        TabOrder = 8
       end
       object DBchIsBug: TDBCheckBox
         Left = 528
@@ -1165,7 +1153,7 @@ inherited frCase: TfrCase
         Caption = #1575#1585#1580#1575#1593' '#1575#1578#1608#1605#1575#1578#1610#1705' '#1578#1608#1587#1591' '#1587#1610#1587#1578#1605
         DataField = 'IsBug'
         DataSource = DsSelect_Cases
-        TabOrder = 10
+        TabOrder = 9
         ValueChecked = 'True'
         ValueUnchecked = 'False'
       end
@@ -1177,7 +1165,7 @@ inherited frCase: TfrCase
         Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
         ParentBiDiMode = False
-        TabOrder = 11
+        TabOrder = 10
         Visible = False
         OnChange = edtCustomerChange
         OnExit = edtCustomerExit
@@ -1202,10 +1190,21 @@ inherited frCase: TfrCase
         DataField = 'CustomerID'
         DataSource = DsSelect_Cases
         ParentBiDiMode = False
-        TabOrder = 12
+        TabOrder = 11
         Visible = False
         OnCloseUp = dblCustomerCloseUp
       end
+    end
+    object DBMemComment: TDBMemo
+      Left = 1
+      Top = 137
+      Width = 906
+      Height = 120
+      Align = alTop
+      DataField = 'Comment'
+      DataSource = DsSelect_Cases
+      ScrollBars = ssVertical
+      TabOrder = 5
     end
   end
   inherited DSForm: TDataSource

@@ -5,7 +5,6 @@ inherited FFillPicture: TFFillPicture
   Caption = #1582#1608#1575#1606#1583#1606' '#1593#1603#1587' '#1575#1586' '#1610#1603' '#1601#1604#1583#1585
   ClientHeight = 345
   ClientWidth = 469
-  Color = clBtnFace
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13

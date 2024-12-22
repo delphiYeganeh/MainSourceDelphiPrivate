@@ -243,6 +243,8 @@ type
     Select_LetterIsNetWork: TBooleanField;
     pnlMain: TPanel;
     pnlDetail: TxpPanel;
+    Panel3: TPanel;
+    pnlTopHeader: TPanel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormActivate(Sender: TObject);
     procedure SpeedButton7Click(Sender: TObject);
@@ -336,6 +338,7 @@ type
     function LetterHasForms:Boolean;
     function CheckFormExist:Boolean;
     function GetEmail:String;
+    procedure TabShow(mode: Boolean);
   public
    OldIndicID : String;
    IsAnswer:boolean;
@@ -1078,7 +1081,7 @@ begin
 
   if GetUserSetting('ExitLetterpnlDetailMinimize') then
    pnlDetail.Minimized := True ;
-   
+  TabShow(false) ;   
 end;
 
 procedure TSentLetterInputForm.SpeedButton6Click(Sender: TObject);
@@ -1636,6 +1639,7 @@ end;
 procedure TSentLetterInputForm.Show_xpFormsTab;
 begin
   xpPageControl1.Pages[1].TabVisible:=True;
+  TabShow(True) ;
 end;
 
 procedure TSentLetterInputForm.BitBtn2Click(Sender: TObject);
@@ -1788,6 +1792,7 @@ begin
   inherited;
   if xpPageControl1.ActivePageIndex=0 then
        Select_Letter.Refresh;
+  TabShow(false) ;       
 end;
 
 procedure TSentLetterInputForm.acConvertLetterToECEExecute(Sender: TObject);
@@ -2548,5 +2553,21 @@ begin
   DBLookupComboBox6.KeyValue := null;
 end;
 
+
+procedure TSentLetterInputForm.TabShow(mode: Boolean);
+begin
+  if mode then
+  begin
+    pnlTopHeader.Height := 0 ;
+    xpPageControl1.TabHeight := 23 ;
+    xpPageControl1.TabWidth  := 0 ;
+  end
+  else
+  begin
+    pnlTopHeader.Height := 5 ;
+    xpPageControl1.TabHeight := 1 ;
+    xpPageControl1.TabWidth  := 1 ;
+  end;
+end;
 
 end.

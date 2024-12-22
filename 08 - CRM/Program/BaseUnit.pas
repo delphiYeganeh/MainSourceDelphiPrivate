@@ -409,6 +409,35 @@ begin
      end;
     end;
 
+    if Components[i].InheritsFrom(TPanel) then
+    begin
+     if TPanel(Components[i]).Name='pnlCLBCompaginIDs' then
+     begin
+        TPanel(Components[i]).Visible:= GetActionAccess(_accessID,'acpnlCLBCompaginIDs',TPanel(Components[i]).tag);
+        TPanel(Components[i]).Enabled:= TAction(Components[i]).Visible;
+     end;
+    end;
+
+    if Components[i].InheritsFrom(TPanel) then
+    begin
+     if TPanel(Components[i]).Name='pnlOtherMarketer' then
+     begin
+        TPanel(Components[i]).Visible:= GetActionAccess(_accessID,'acpnlOtherMarketer',TPanel(Components[i]).tag);
+        TPanel(Components[i]).Enabled:= TAction(Components[i]).Visible;
+     end;
+    end;
+
+    if Components[i].InheritsFrom(TPanel) then
+    begin
+     if TPanel(Components[i]).Name='pnlContractMarketer' then
+     begin
+        TPanel(Components[i]).Visible:= GetActionAccess(_accessID,'acpnlContractMarketer',TPanel(Components[i]).tag);
+        TPanel(Components[i]).Enabled:= TAction(Components[i]).Visible;
+     end;
+    end;
+
+
+
   end;
 
 end;
@@ -423,7 +452,7 @@ begin
    selfMinWidth := Self.Width;
    selfMinHight := Self.Height;
    { TODO -oparsa : 14030203 }
-
+   //SetWindowRgn(Handle, CreateRoundRectRgn(0,0,Width,Height,20,20),True);
 end;
 
 

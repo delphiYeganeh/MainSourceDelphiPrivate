@@ -4,8 +4,8 @@ object RetroExist: TRetroExist
   BiDiMode = bdRightToLeft
   BorderStyle = bsToolWindow
   Caption = #1606#1575#1605#1607' '#1605#1588#1575#1576#1607
-  ClientHeight = 156
-  ClientWidth = 488
+  ClientHeight = 151
+  ClientWidth = 480
   Color = 16377053
   Constraints.MaxHeight = 190
   Constraints.MaxWidth = 496

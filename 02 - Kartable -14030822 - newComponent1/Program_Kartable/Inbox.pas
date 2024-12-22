@@ -266,6 +266,8 @@ uses
     Label42: TLabel;
     Label43: TLabel;
     Label44: TLabel;
+    Panel11: TPanel;
+    Panel12: TPanel;
     procedure SetReceiveMode(value:boolean);
     procedure AChangeColorExecute(Sender: TObject);
     //procedure AHomeExecute(Sender: TObject);

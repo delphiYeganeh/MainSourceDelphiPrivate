@@ -106,26 +106,26 @@ inherited UserDefineF: TUserDefineF
             661
             542)
           object Label1: TLabel
-            Left = 568
+            Left = 580
             Top = 137
-            Width = 89
+            Width = 77
             Height = 13
             Anchors = [akTop, akRight]
             Caption = #1587#1591#1581' '#1583#1587#1578#1585#1587#1610
           end
           object Label3: TLabel
-            Left = 568
+            Left = 611
             Top = 59
-            Width = 89
+            Width = 46
             Height = 13
             Anchors = [akTop, akRight]
             Caption = #1606#1575#1605' '#1705#1575#1585#1576#1585#1610
             FocusControl = DBEUserName
           end
           object Label4: TLabel
-            Left = 568
+            Left = 612
             Top = 85
-            Width = 89
+            Width = 45
             Height = 13
             Anchors = [akTop, akRight]
             Caption = #1705#1604#1605#1607' '#1593#1576#1608#1585
@@ -139,9 +139,9 @@ inherited UserDefineF: TUserDefineF
             Caption = #1578#1705#1585#1575#1585' '#1705#1604#1605#1607' '#1593#1576#1608#1585
           end
           object Label9: TLabel
-            Left = 568
+            Left = 619
             Top = 34
-            Width = 89
+            Width = 38
             Height = 13
             Anchors = [akTop, akRight]
             Caption = #1606#1575#1605' '#1705#1575#1605#1604
@@ -164,10 +164,10 @@ inherited UserDefineF: TUserDefineF
             Caption = #1602#1575#1604#1576' '#1607#1575#1610' '#1605#1608#1585#1583' '#1575#1587#1578#1601#1575#1583#1607' '
           end
           object Label11: TLabel
-            Left = 568
+            Left = 571
             Top = 163
-            Width = 89
-            Height = 14
+            Width = 86
+            Height = 13
             Anchors = [akTop, akRight]
             Caption = #1583#1576#1610#1585#1582#1575#1606#1607' '#1662#1610#1588' '#1601#1585#1590
             Font.Charset = ARABIC_CHARSET
@@ -179,9 +179,9 @@ inherited UserDefineF: TUserDefineF
             WordWrap = True
           end
           object Label13: TLabel
-            Left = 568
+            Left = 601
             Top = 189
-            Width = 89
+            Width = 56
             Height = 13
             Anchors = [akTop, akRight]
             Caption = #1588#1585#1608#1593' '#1575#1593#1578#1576#1575#1585
@@ -205,9 +205,9 @@ inherited UserDefineF: TUserDefineF
             Caption = #1586#1608#1606#1705#1606' '#1607#1575#1610' '#1602#1575#1576#1604' '#1583#1587#1578#1585#1587#1610
           end
           object Label2: TLabel
-            Left = 568
+            Left = 632
             Top = 216
-            Width = 89
+            Width = 25
             Height = 13
             Anchors = [akTop, akRight]
             Caption = #1575#1610#1605#1610#1604
@@ -531,13 +531,11 @@ inherited UserDefineF: TUserDefineF
             TabOrder = 1
           end
           object ActionToolBar1: TActionToolBar
-            Left = 14
+            Left = 0
             Top = 0
-            Width = 647
+            Width = 661
             Height = 27
             ActionManager = ActionManager
-            Align = alNone
-            Anchors = [akTop, akRight, akBottom]
             Caption = 'ActionToolBar1'
             ColorMap.HighlightColor = clWhite
             ColorMap.BtnSelectedColor = clBtnFace

@@ -126,6 +126,8 @@ Function Email_GetAddress(aText:String):String;
 
 Procedure DBGrid_LoadColumns(aFormName:String ; aDBGrid: TDBGrid ; aDBGrid2: TDBGrid );
 Procedure DBGrid_SaveColumns(aFormName:String ; aDBGrid: TYDBGrid);
+function  DBGrid_LoadSort(aFormName:String ; aDBGrid: TDBGrid ):boolean;
+Procedure DBGrid_SaveSort(aFormName:String ; aDBGrid: TYDBGrid);
 procedure DBGrid_Columns_Caption(aDBGrid: TYDBGrid);
 Procedure DBGrid_SelectNextCol(aDBGrid:TDBGrid;AppendORNext:Boolean=True;DBGFirstColIndex:Integer=0;Key:Word=Vk_Return;Shift:TShiftState=[]);
 {Ranjbar}
@@ -2399,7 +2401,46 @@ begin
    aDBGrid.Columns.SaveToFile( FileNamePath );
 end;
 
+///////////////////////////////////////////////////////////////////////
+// BY Hadi Mohamed 92/04/10
+// To Force A YDBGrid to save and load user sort
+///////////////////////////////////////////////////////////////////////
+function DBGrid_LoadSort(aFormName:String ; aDBGrid: TDBGrid ):boolean;
+Var
+   FileNamePath , UserFolder : String;
+begin
+   UserFolder := ExtractFilePath(Application.ExeName) + 'UserFolder\';
+   if pos('\\',UserFolder)<>0  then exit;
+   if not DirectoryExists(UserFolder) then
+      CreateDir(UserFolder);
+   FileNamePath := UserFolder + aFormName + '_' + aDBGrid.Name + '.SRT' ;
 
+   if FileExists( FileNamePath ) then
+      TADODataSet(aDBGrid.DataSource.DataSet).Sort := ReadFromTXTFile(FileNamePath);
+end;
+
+Procedure DBGrid_SaveSort(aFormName:String ; aDBGrid: TYDBGrid );
+Var
+   FileNamePath ,UserFolder ,SRT: String;
+begin
+   UserFolder := ExtractFilePath(Application.ExeName) + 'UserFolder\' ;
+   if pos('\\',UserFolder)<>0  then exit;
+
+   if not DirectoryExists(UserFolder) then
+      CreateDir(UserFolder);
+   FileNamePath := UserFolder + aFormName + '_' + aDBGrid.Name + '.SRT' ;
+   if FileExists( FileNamePath ) then
+   begin
+      SysUtils.FileSetReadOnly(Pchar(FileNamePath) , false);
+      DeleteFile( Pchar(FileNamePath) );
+   end;
+   SRT := TADODataSet(aDBGrid.DataSource.DataSet).Sort;
+   WriteToTXTFile(FileNamePath,SRT);
+end;
+/////////////////////////////////////////////////////////////////
+// BY Hadi Mohamed 92/04/10
+// To Save a Little String in a TXT File
+//////////////////////////////////////////////////////////////////
 
 {Ranjbar 88.03.11
  «»⁄ «Ã—« ﬂ—œ‰ «”ﬂ—ÌÅ Â«
@@ -3207,6 +3248,7 @@ begin
       Result := False;
       QrResult := TAdoQuery.Create(Nil);
       QrResult.Connection := aADOConnection;
+      QrResult.CommandTimeout := 1200;
       QrResult.SQL.Text := aQueryText;
       QrResult.ExecSQL;
       Result := True;
@@ -3364,15 +3406,18 @@ Var
 begin
    Qrprocesses := TAdoQuery.Create(Nil);
    QrKillProc := TAdoQuery.Create(Nil);
+
    Try
       Try
          Qrprocesses.Connection := aAdoConnection;
+         Qrprocesses.CommandTimeout := 1200;
          Qrprocesses.Close;
          Qrprocesses.sql.Text := 'Select SpID from Master..Sysprocesses Where dbid=DB_ID( '+ QuotedStr(aDBName) + ' )';
          Qrprocesses.Open;
          Qrprocesses.First;
 
          QrKillProc.Connection := aAdoConnection;
+         QrKillProc.CommandTimeout := 1200;
 
          While Not Qrprocesses.Eof do
          begin

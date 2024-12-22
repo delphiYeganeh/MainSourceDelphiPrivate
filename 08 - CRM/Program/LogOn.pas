@@ -86,6 +86,7 @@ var correct:boolean;
 procedure TLoginForm.FormCreate(Sender: TObject);
 var  scalefactor : Double;
 begin
+ // SetWindowRgn(Handle, CreateRoundRectRgn(0,0,Width,Height,20,20),True);
   scalefactor := Screen.Width /1680;
   Self.ScaleBy(Round( scalefactor* 100),100);
 

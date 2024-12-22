@@ -2977,6 +2977,8 @@ begin
           if Copy(lockData,4,10)<ShamsiString(Now) then
           begin
             Result:=False;
+            ShowMessage('ÊÇÑíÎ ÞÝá ÓÎÊ ÇÝÒÇÑí Èå ÇíÇä ÑÓíÏå ÇÓÊ äÓÈÊ Èå ÊãÏíÏ ÞÝá ÇÞÏÇã äãÇííÏ');
+            {
             J := Random(4);
             case J of
              0: Application.MessageBox('SYSTEM_THREAD_EXCEPTION_NOT_HANDLED'+' (Tiny Lock)','Lock error',0);
@@ -2985,6 +2987,7 @@ begin
              3: Application.MessageBox('SYSTEM_FILES_INVALID'+' (Tiny lock)','Lock error',0);
              4: Application.MessageBox('DPC_WATCHDOG_VIOLATION'+' (Tiny lock)','Lock error',0);
             end;
+            }
           end;
         end
         else

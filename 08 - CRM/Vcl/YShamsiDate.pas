@@ -126,6 +126,11 @@ Function Email_GetAddress(aText:String):String;
 
 Procedure DBGrid_LoadColumns(aFormName:String ; aDBGrid: TDBGrid ; aDBGrid2: TDBGrid );
 Procedure DBGrid_SaveColumns(aFormName:String ; aDBGrid: TYDBGrid);
+function  DBGrid_LoadSort(aFormName:String ; aDBGrid: TDBGrid ):boolean;
+Procedure DBGrid_SaveSort(aFormName:String ; aDBGrid: TYDBGrid);
+procedure CreateTXTFile(FN: String);
+procedure WriteToTXTFile(FN,STR:String);
+function  ReadFromTXTFile(FN: string):string;
 procedure DBGrid_Columns_Caption(aDBGrid: TYDBGrid);
 Procedure DBGrid_SelectNextCol(aDBGrid:TDBGrid;AppendORNext:Boolean=True;DBGFirstColIndex:Integer=0;Key:Word=Vk_Return;Shift:TShiftState=[]);
 {Ranjbar}
@@ -2399,7 +2404,87 @@ begin
    aDBGrid.Columns.SaveToFile( FileNamePath );
 end;
 
+///////////////////////////////////////////////////////////////////////
+// BY Hadi Mohamed 92/04/10
+// To Force A YDBGrid to save and load user sort
+///////////////////////////////////////////////////////////////////////
+function DBGrid_LoadSort(aFormName:String ; aDBGrid: TDBGrid ):boolean;
+Var
+   FileNamePath , UserFolder : String;
+begin
+   UserFolder := ExtractFilePath(Application.ExeName) + 'UserFolder\';
+   if pos('\\',UserFolder)<>0  then exit;
+   if not DirectoryExists(UserFolder) then
+      CreateDir(UserFolder);
+   FileNamePath := UserFolder + aFormName + '_' + aDBGrid.Name + '.SRT' ;
 
+   if FileExists( FileNamePath ) then
+      TADODataSet(aDBGrid.DataSource.DataSet).Sort := ReadFromTXTFile(FileNamePath);
+end;
+
+Procedure DBGrid_SaveSort(aFormName:String ; aDBGrid: TYDBGrid );
+Var
+   FileNamePath ,UserFolder ,SRT: String;
+begin
+   UserFolder := ExtractFilePath(Application.ExeName) + 'UserFolder\' ;
+   if pos('\\',UserFolder)<>0  then exit;
+
+   if not DirectoryExists(UserFolder) then
+      CreateDir(UserFolder);
+   FileNamePath := UserFolder + aFormName + '_' + aDBGrid.Name + '.SRT' ;
+   if FileExists( FileNamePath ) then
+   begin
+      SysUtils.FileSetReadOnly(Pchar(FileNamePath) , false);
+      DeleteFile( Pchar(FileNamePath) );
+   end;
+   SRT := TADODataSet(aDBGrid.DataSource.DataSet).Sort;
+   WriteToTXTFile(FileNamePath,SRT);
+end;
+/////////////////////////////////////////////////////////////////
+// BY Hadi Mohamed 92/04/10
+// To Save a Little String in a TXT File
+//////////////////////////////////////////////////////////////////
+procedure CreateTXTFile(FN: String);
+var
+  F : TextFile;
+begin
+  AssignFile(F, FN);
+  Rewrite(F);
+  Append(F);
+  CloseFile(F);
+end;
+
+procedure WriteToTXTFile(FN,STR:String);
+var
+  F :TextFile;
+begin
+  if (not FileExists(FN)) then
+  begin
+    CreateTXTFile(FN);
+  end;
+  AssignFile(F, FN);
+  Append(F);
+  WriteLn(F, STR);
+  CloseFile(F);
+end;
+
+function ReadFromTXTFile(FN: string):string;
+var
+  F :TextFile;
+  SRT : string;
+begin
+  if (not FileExists(FN)) then
+    Result :=''
+  else
+  begin
+    AssignFile(F, FN);
+    Reset(F);
+    readln(F, SRT);
+    CloseFile(F);
+    Result := SRT;
+  end;
+end;
+//////////////////////////////////////////////////////////////
 
 {Ranjbar 88.03.11
  «»⁄ «Ã—« ﬂ—œ‰ «”ﬂ—ÌÅ Â«

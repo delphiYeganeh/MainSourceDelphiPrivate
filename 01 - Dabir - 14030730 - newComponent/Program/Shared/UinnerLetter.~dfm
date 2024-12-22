@@ -21,6 +21,9 @@ inherited FinnerLetter: TFinnerLetter
     Align = alClient
     ParentColor = True
     TabOrder = 0
+    DesignSize = (
+      843
+      581)
     object xpPageControl1: TxpPageControl
       Left = 1
       Top = 1
@@ -1957,9 +1960,9 @@ inherited FinnerLetter: TFinnerLetter
             Appearance.ColorMirrorDisabledTo = 15921906
           end
           object ActionToolBar1: TActionToolBar
-            Left = 576
+            Left = 512
             Top = 2
-            Width = 255
+            Width = 319
             Height = 28
             ActionManager = ActionManager
             Align = alNone
@@ -2038,6 +2041,16 @@ inherited FinnerLetter: TFinnerLetter
             Appearance.ColorMirrorCheckedTo = 16768988
             Appearance.ColorMirrorDisabled = 11974326
             Appearance.ColorMirrorDisabledTo = 15921906
+          end
+          object Panel3: TPanel
+            Left = 504
+            Top = 2
+            Width = 88
+            Height = 28
+            Anchors = [akLeft, akTop, akRight]
+            BevelOuter = bvNone
+            ParentColor = True
+            TabOrder = 6
           end
         end
       end
@@ -2246,6 +2259,16 @@ inherited FinnerLetter: TFinnerLetter
         end
       end
     end
+    object pnlTopHeader: TPanel
+      Left = 1
+      Top = 1
+      Width = 841
+      Height = 5
+      Anchors = [akLeft, akTop, akRight]
+      BevelOuter = bvNone
+      ParentColor = True
+      TabOrder = 1
+    end
   end
   inherited DSForm: TDataSource
     AutoEdit = False
@@ -2426,7 +2449,7 @@ inherited FinnerLetter: TFinnerLetter
           end
           item
             Action = DataSetEdit
-            ImageIndex = 37
+            ImageIndex = 2
             ShortCut = 115
           end
           item
@@ -2438,6 +2461,9 @@ inherited FinnerLetter: TFinnerLetter
             Action = DataSetCancel
             ImageIndex = 90
             ShortCut = 32776
+          end
+          item
+            Caption = '-'
           end>
         ActionBar = ActionToolBar1
       end>

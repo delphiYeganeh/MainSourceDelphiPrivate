@@ -479,6 +479,7 @@ Type
     Label4: TLabel;
     Label6: TLabel;
     Label7: TLabel;
+    ImageList3_new: TImageList;
     procedure FormCreate(Sender: TObject);
     procedure ReceiveInsertExecute(Sender: TObject);
     procedure SendInsertExecute(Sender: TObject);
@@ -795,7 +796,7 @@ uses Dmu , FixedTableF, EnteredLetterInputF, ExitedLetterInputF,
      LetterReportU, CreateTextU,   EditSentense, FullTextSearch,
      Fsecretariats,  USecChange, addUserSecs, ErrorMsg, SystemSetting,ustatistic,
      Udailyrep, UFillLetterData, HelpU,  FUserShortCut,
-     UchangePassword, businessLayer, ArchiveOrganize, LetterArchive,
+     UchangePassword, ArchiveOrganize, LetterArchive,
      UImportFax, UserLoginLogoutReportU, YArchiveLetterData, RestorLetterData,
      FActiveUsers, UTotalRecommite, UTotalExactCopy, UchangeCricitalFields,
      about, UTemplateGroup, uAddExtention, UEditUserExtention, UaddLetterData,
@@ -815,7 +816,7 @@ uses Dmu , FixedTableF, EnteredLetterInputF, ExitedLetterInputF,
      DefineUserGroupUnit, UMyMessage, WorkSheetBaseUnit, WorkSheetAllRepUnit,
      WorkSheetBaseResultsUnit, ReciveLetterWithECEUnit, TextSearch,
      ULetterImport, ULetterNoSettingForWord, U_SHOW_ATF_PEYRO_FRM, frmMain, UDbName,
-  URStatistic;
+     URStatistic;
 
 {$R *.DFM}
 
@@ -956,7 +957,7 @@ begin
   if _FaxUpdate then//›⁄«· »Êœ‰ ›ﬂ”
     FaxRefresher.Enabled:=true;
 
-  YEGANEH.Caption := '‰—„ «›“«—Ì '+_Yeganeh;
+  YEGANEH.Caption := '‘—ò  ‰—„ «›“«—Ì '+_Yeganeh;
   {Ranjbar}
   BidiModeToRight(DBTreeArchive);
 
@@ -1170,7 +1171,7 @@ begin
    Dm.Get_All_Letter.Sort := Srt;
    Dm.Get_All_Letter.Locate('LetterID',current_index,[]);
 
-   status3.Caption:=' ⁄œ«œ:'+IntToStr(dm.Get_All_Letter.RecordCount);
+   status3.Caption:=' ⁄œ«œ «”‰«œ :'+IntToStr(dm.Get_All_Letter.RecordCount);
    //ATAIE 1400
    //lblYear.Caption:=' ”«· : '+IntToStr(1300+dm.CurrentMYear);
    lblYear.Caption:=' ”«· : '+IntToStr(dm.CurrentMYear);
@@ -1456,6 +1457,7 @@ begin
   FromOrgForm := TFromOrgForm.Create(Application);
   MainForm.TypeNoa:= 1;
   FromOrgForm.OrganizeMode := True;
+  FromOrgForm.InnerMode  := True ;
   FromOrgForm.ShowModal;
   MainForm.TypeNoa:= 0;
   flag := 0;
@@ -2971,7 +2973,7 @@ end;
 procedure TMainForm.SBCloseArchiveClick(Sender: TObject);
 begin
   inherited;
-DisplayMode:=Search;
+  DisplayMode:=Search;
 end;
 
 procedure TMainForm.AloadImagesExecute(Sender: TObject);
@@ -3957,10 +3959,12 @@ var sf: integer;
 begin
    inherited;
    sf := Exec_Select_FolllowUp_ByLetterID(dm.Get_All_LetterLetterID.AsInteger,_userid);
-   FrFollowUp:=TFrFollowUp.Create(Application);
-   FrFollowUp.StartFollowUpID:=sf;
-   FrFollowUp.LetterID:=dm.Get_All_LetterLetterID.AsInteger;
+
+   FrFollowUp:= TFrFollowUp.Create(Application);
+   FrFollowUp.StartFollowUpID:= sf;
+   FrFollowUp.LetterID := dm.Get_All_LetterLetterID.AsInteger;
    FrFollowUp.refreshData;
+   FrFollowUp.Caption := ' “‰ÃÌ—Â ÅÌêÌ—Ì ';
    if sf=0 then
       FrFollowUp.Select_FollowUp_ByStart.Insert;
    FrFollowUp.ShowModal;

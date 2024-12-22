@@ -168,13 +168,14 @@ begin
     1: tempStr := BarChart.Title.Text.Text ;
     2: tempStr := Piechart.Title.Text.Text ;
     3: tempStr := fastlineChart.Title.Text.Text ;
+    else tempStr :=  'ÚהזÇה' ;
   end;
 
   if List6.KeyValue = 0 then
     lettersDbGrid.CustomizePrint
   else
   begin
-    if dm.Y_InputQuery('ÚהזÇה הדזÏÇÑ','ÚהזÇה',s,'') then
+    if dm.Y_InputQuery('ÚהזÇה הדזÏÇÑ',tempStr,s,'') then
       case List6.KeyValue of
         1: BarChart.Title.Text.Text := s;
         2: Piechart.Title.Text.Text := s;

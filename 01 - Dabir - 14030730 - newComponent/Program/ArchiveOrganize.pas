@@ -7,7 +7,7 @@ jpeg, BaseUnit, DBActns, ActnMan, StdCtrls, DBLookupEdit, Grids, DBGrids,
   YDbgrid, ComCtrls, DBTreeView, Mask, DBCtrls, Controls, Buttons,
   Graphics, ExtCtrls, Classes, ActnList, DB,dialogs,SysUtils,Forms,
   ExtActns, ADODB, Windows, Menus, XPStyleActnCtrls, AppEvnts,
-  AdvGlowButton, xpPanel;
+  AdvGlowButton, xpPanel, dxGDIPlusClasses;
 
 type
   TArchiveOrganizeForm = class(TMBaseForm)
@@ -15,15 +15,8 @@ type
     AClose: TAction;             
     AInsert: TAction;
     Apost: TAction;
-    GroupBox1: TGroupBox;
-    Label4: TLabel;
-    Label9: TLabel;
-    DBEPlace: TDBEdit;
-    DBETitle: TDBEdit;
     Adelete: TAction;
     Dlist: TDataSource;
-    Label1: TLabel;
-    DBENotes: TDBEdit;
     Panel2: TPanel;
     Label2: TLabel;
     SEdit: TEdit;
@@ -36,7 +29,6 @@ type
     SpeedButton1: TAdvGlowButton;
     SpeedButton2: TAdvGlowButton;
     DBText1: TDBText;
-    LabelAccess: TLabel;
     Label3: TLabel;
     ArchiveTree: TDBTreeView;
     Panel4: TPanel;
@@ -47,11 +39,8 @@ type
     BBCancel: TAdvGlowButton;
     BBInsert: TAdvGlowButton;
     DeleteBtn: TAdvGlowButton;
-    LblPaste: TLabel;
     BBEdit: TAdvGlowButton;
     AEdit: TAction;
-    SBCollapse: TAdvGlowButton;
-    SBExpand: TAdvGlowButton;
     Get_ArchiveFolder_ByAccess_And_Title: TADOStoredProc;
     Get_ArchiveFolder_byUserID_and_Title: TADOStoredProc;
     Get_ArchiveFolder_ByUserID: TADOStoredProc;
@@ -85,6 +74,27 @@ type
     Get_ArchiveFolder_ByUserIDPlace: TWideStringField;
     Get_ArchiveFolder_ByUserIDArchiveCenterID: TIntegerField;
     pnlMain: TPanel;
+    LblPaste: TLabel;
+    Image1: TImage;
+    SBExpand: TAdvGlowButton;
+    SBCollapse: TAdvGlowButton;
+    Label5: TLabel;
+    DBText2: TDBText;
+    Panel6: TPanel;
+    GroupBox1: TGroupBox;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label1: TLabel;
+    DBEPlace: TDBEdit;
+    DBETitle: TDBEdit;
+    DBENotes: TDBEdit;
+    Panel7: TPanel;
+    LabelAccess: TLabel;
+    Panel8: TPanel;
+    Panel9: TPanel;
+    PopupMenu_Right: TPopupMenu;
+    C1: TMenuItem;
+    p1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure ACloseExecute(Sender: TObject);
     procedure SetOrganizeMode(Value:boolean);
@@ -117,6 +127,8 @@ type
       DataSet: TDataSet);
     procedure Get_ArchiveFolder_byUserID_and_TitleAfterScroll(
       DataSet: TDataSet);
+    procedure C1Click(Sender: TObject);
+    procedure p1Click(Sender: TObject);
 
   private
      FOrganizeMode: boolean;
@@ -160,8 +172,8 @@ begin
    DBGFromORG.Columns[1].Color := $00FAC6FF;
    done := false;
    {Ranjbar 89.09.13 ID=215}
-   PageControl1.TabHeight := 1;
-   PageControl1.TabWidth := 1;
+  // PageControl1.TabHeight := 1;
+  // PageControl1.TabWidth := 1;
    //---
 end;
 
@@ -456,7 +468,7 @@ begin
 
    //Ranjbar
    SelectedNodeTitle := ArchiveTree.Selected.text ;
-   LblPaste.Caption := SelectedNodeTitle;
+   LblPaste.Caption := 'ò«  ‘œÂ  = ' + SelectedNodeTitle;
    LblPaste.Visible := True;
    //---
    Paste.Show;
@@ -578,6 +590,20 @@ procedure TArchiveOrganizeForm.Get_ArchiveFolder_byUserID_and_TitleAfterScroll(
 begin
   inherited;
   DSForm.DataSet.Locate('FolderID',Get_ArchiveFolder_byUserID_and_Title.FieldByName('FolderID').AsInteger,[]);
+end;
+
+procedure TArchiveOrganizeForm.C1Click(Sender: TObject);
+begin
+  inherited;
+  if Cut.Showing then
+    CutClick (Self) ;
+end;
+
+procedure TArchiveOrganizeForm.p1Click(Sender: TObject);
+begin
+  inherited;
+  if Paste.Showing then
+    PasteClick(self);
 end;
 
 end.

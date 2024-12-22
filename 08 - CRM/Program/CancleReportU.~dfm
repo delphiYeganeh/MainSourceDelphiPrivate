@@ -425,7 +425,7 @@ inherited FrCancleReport: TFrCancleReport
         783
         41)
       object SpeedButton1: TSpeedButton
-        Left = 676
+        Left = 667
         Top = 4
         Width = 110
         Height = 29

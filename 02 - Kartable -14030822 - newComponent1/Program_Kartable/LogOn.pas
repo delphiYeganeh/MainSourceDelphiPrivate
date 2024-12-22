@@ -35,6 +35,7 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
+    Label9: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnLoginClick(Sender: TObject);
     procedure  SaveUserInRegistry;

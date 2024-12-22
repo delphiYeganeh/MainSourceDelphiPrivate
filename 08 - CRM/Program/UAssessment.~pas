@@ -168,15 +168,14 @@ begin
                                                  Select_AssessmentAssessmenScore7.Asinteger + Select_AssessmentAssessmenScore8.Asinteger  ;
       Post;
 
-
-      qryMyTasks.Edit;
-      qryMyTasksTodoDate.AsString := _Today;
-      qryMyTasks.Post;
-
       with TADOQuery.Create(nil) do
       begin
        Connection := Dm.YeganehConnection;
        CommandTimeout := 1200;
+
+       SQL.Text := ' Update dbo.Tasks set TodoDate = '''+_Today+''' where TaskId = '+ IntToStr(TaskId);
+       ExecSQL;
+
        SQL.Text := ' Update dbo.Cases set Completed = 1,CompleteDate = '''+_Today+''',CompleteComment= '''+'«—“Ì«»Ì «‰Ã«„ ‘œ'+''' where caseId = '+ IntToStr(CaseId);
        ExecSQL;
 

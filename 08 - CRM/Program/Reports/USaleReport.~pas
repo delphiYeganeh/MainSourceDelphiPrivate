@@ -5,45 +5,18 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, BaseUnit, ExtActns, ActnList, DB, ExtCtrls, StdCtrls, DBCtrls,
-  Buttons, Grids, DBGrids, YDbgrid, UemsVCL, ADODB, MssCalendarPro;
+  Buttons, Grids, DBGrids, YDbgrid, UemsVCL, ADODB, MssCalendarPro,
+  CheckLst, YchecklistBox, xpPanel, TeEngine, Series, TeeProcs, Chart;
 
 type
   TFSaleReport = class(TMBaseForm)
     pnlMain: TPanel;
-    Panel1: TPanel;
-    LblYear: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    CBYear: TComboBox;
-    DBLookupComboBox1: TDBLookupComboBox;
-    DBLookupComboBox2: TDBLookupComboBox;
-    Button1: TButton;
-    Button2: TButton;
-    DBLkCBGroupTitle: TDBLookupComboBox;
-    Button3: TButton;
-    RGTypeRep: TRadioGroup;
     CustGrid: TYDBGrid;
     Panel2: TPanel;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
     BitBtn1: TBitBtn;
-    cbSeason: TComboBox;
-    cbMonth: TComboBox;
-    pnlPeriod: TPanel;
-    Label1: TLabel;
-    Label5: TLabel;
-    SpeedButton4: TSpeedButton;
-    SpeedButton5: TSpeedButton;
-    ActDateEditTo: TShamsiDateEdit;
-    ActDateEditFrom: TShamsiDateEdit;
-    dblState: TDBLookupComboBox;
-    Label7: TLabel;
-    Label8: TLabel;
-    dblCity: TDBLookupComboBox;
-    Button4: TButton;
-    Button5: TButton;
     ADOQuery: TADOQuery;
     ADOQueryId: TAutoIncField;
     ADOQueryCustomerStatusID: TIntegerField;
@@ -72,6 +45,47 @@ type
     adoStateRepStateID: TIntegerField;
     adoStateRepStateTitle: TStringField;
     DStateRep: TDataSource;
+    xpPanel1: TxpPanel;
+    pnlCLBCompaginIDs: TPanel;
+    Label17: TLabel;
+    CLBCompaginIDs: TYchecklistBox;
+    Button10: TButton;
+    pnlCLBProductIDs: TPanel;
+    Label18: TLabel;
+    CLBProductIDs: TYchecklistBox;
+    Button11: TButton;
+    RGTypeRep: TRadioGroup;
+    LblYear: TLabel;
+    CBYear: TComboBox;
+    Label6: TLabel;
+    dblState: TDBLookupComboBox;
+    Button4: TButton;
+    Label2: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
+    Button2: TButton;
+    cbSeason: TComboBox;
+    cbMonth: TComboBox;
+    pnlPeriod: TPanel;
+    Label1: TLabel;
+    Label5: TLabel;
+    SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    ActDateEditTo: TShamsiDateEdit;
+    ActDateEditFrom: TShamsiDateEdit;
+    Label7: TLabel;
+    dblCity: TDBLookupComboBox;
+    Button5: TButton;
+    Label4: TLabel;
+    DBLkCBGroupTitle: TDBLookupComboBox;
+    Button3: TButton;
+    Label3: TLabel;
+    DBLookupComboBox2: TDBLookupComboBox;
+    Button1: TButton;
+    Chart1: TChart;
+    Series1: TBarSeries;
+    cb3D: TCheckBox;
+    cbChartView: TCheckBox;
+    btnChartShow: TButton;
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
     procedure RGTypeRepClick(Sender: TObject);
@@ -92,10 +106,17 @@ type
     procedure dblStateKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure Button10Click(Sender: TObject);
+    procedure Button11Click(Sender: TObject);
+    procedure btnChartShowClick(Sender: TObject);
   private
    function SpSearch_Contract_Advance(StartDate, EndDate: String;
       MarketerID : integer = 0 ; ContractTypeID : integer = 0 ; ProductId : integer = 0 ; Customerid: integer = 0; UserTypeID : integer = 0 ;
       StateID : integer = 0; CityID: integer = 0): TADOStoredProc;
+    function GetInsertedBarSeries(aName, aTitle: String; aColor: TColor): TBarSeries;
+    function GetInsertedPieSeries(aName, aTitle: String; aColor: TColor): TPieSeries;
+    function GetInsertedLineSeries(aName, aTitle: String; aColor: TColor): TLineSeries;
+    function GenerateRandomColor(const Mix: TColor = clWhite): TColor;
   public
     { Public declarations }
   end;
@@ -145,7 +166,7 @@ var
     CityID	:integer ;
     FromDate : String;
     ToDate : String ;
-
+    str : Tstrings ;
 begin
   inherited;
 
@@ -269,6 +290,27 @@ begin
 
 
    CustGrid.UpdateFooter;
+   
+
+  str := TStringList.Create();
+  str.Add( CustGrid.PrintTitle ) ;
+  Chart1.Foot.Text := str ;
+  str.Text:= '';
+
+  Chart1.Title.Text := str ;
+  CustGrid.Visible  := not cbChartView.Checked ;
+  Chart1.Visible    := cbChartView.Checked ;
+
+  Chart1.View3D := cb3D.Checked ;
+  Chart1.BottomAxis.GridCentered := True;
+
+  SpeedButton1.Enabled := True;
+  SpeedButton2.Enabled := True;
+  SpeedButton3.Enabled := True;
+
+  if cbChartView.Checked then
+    btnChartShowClick(self);
+
 end;
 
 
@@ -362,6 +404,22 @@ begin
       Value := CityID;
    end;
 
+   with ADOSP.Parameters.AddParameter do
+   begin
+      DataType := ftString;
+      Direction := pdInput;
+      Name:='@CompaginIDs';
+      Value := CLBCompaginIDs.SelectedCodes;
+   end;
+
+   with ADOSP.Parameters.AddParameter do
+   begin
+      DataType := ftString;
+      Direction := pdInput;
+      Name:='@ProductIDs';
+      Value := CLBProductIDs.SelectedCodes;
+   end;
+
    ADOSP.Connection := dm.YeganehConnection;
    ADOSP.Open;
    Result := ADOSP;
@@ -377,7 +435,21 @@ end;
 procedure TFSaleReport.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
-  if (_ExportCustomerList) then CustGrid.Print
+  if (_ExportCustomerList) then
+  begin
+   if (cbChartView.Checked) and (chart1.Visible) then
+   begin
+     with TPrintDialog.Create(nil) do
+      try
+        if Execute then
+          Chart1.print;
+      finally
+        Free;
+      end;
+
+   end
+   else CustGrid.Print
+  end
   else ShowMessage('‘„« „ÃÊ“ ê—› ‰ Œ—ÊÃÌ «“ ·Ì”  —« ‰œ«—Ìœ');
 end;
 
@@ -463,11 +535,192 @@ end;
 procedure TFSaleReport.FormShow(Sender: TObject);
 begin
   inherited;
+  xpPanel1.StartColor := _Color1 ;
+  xpPanel1.EndColor   := _Color2 ;
+
+  xpPanel1.TitleStartColor :=  _Color3;
+  xpPanel1.TitleEndColor   :=  _Color4;
+
+  Chart1.Visible    := False ;
+  Chart1.Align      := alClient;
+  Chart1.View3D     := True;
+
   adoStateRep.Close;
   adoStateRep.Open;
   
   Dm.RefreshHoliday(copy(_today,1,4));
   MssCalendarPro1.HolidayStr := dm.HolidayStr;
+  CLBCompaginIDs.Fill;
+  CLBProductIDs .Fill;  
+end;
+
+procedure TFSaleReport.Button10Click(Sender: TObject);
+begin
+  inherited;
+  CLBCompaginIDs.Fill;
+end;
+
+procedure TFSaleReport.Button11Click(Sender: TObject);
+begin
+  inherited;
+  CLBProductIDs .Fill;
+end;
+
+function TFSaleReport.GenerateRandomColor(const Mix: TColor): TColor;
+var
+  Red, Green, Blue: Integer;
+begin
+  Red   := Random(255);
+  Green := Random(255) + Random(50);
+  Blue  := Random(255);
+
+  if (Red = Green) and (Green = Blue)  then
+  begin
+    Red   := Random(255);
+    Green := Random(255);
+    Blue  := Random(255);
+  end ;
+
+
+  Red    := (Red   + GetRValue(ColorToRGB(Mix))) div 2;
+  Green  := (Green + GetGValue(ColorToRGB(Mix))) div 2;
+  Blue   := (Blue  + GetBValue(ColorToRGB(Mix))) div 2;
+  
+  Result := RGB(Red, Green, Blue) ;
+
+end;
+
+function TFSaleReport.GetInsertedBarSeries(aName, aTitle: String;
+  aColor: TColor): TBarSeries;
+begin
+    Result := TBarSeries.Create(Self);
+
+    with Result do
+    begin
+        Name := 'Series' + aName;
+        Title := aTitle + aName ;
+        ColorEachPoint := true;//False;
+        Color := aColor;
+       // Format.Color := aColor;
+       // Marks.Style := smsValue;
+        Marks.Style := smsLabelPercent;//smsPercent;
+        Marks.BackColor := $00C4FFFF ;//clRed;
+        if  aTitle = 'level6' then
+          Marks.ArrowLength := 100
+        else
+        Marks.ArrowLength := 20 ;
+    end;
+
+    Chart1.AddSeries(Result);
+end;
+
+function TFSaleReport.GetInsertedLineSeries(aName, aTitle: String;
+  aColor: TColor): TLineSeries;
+begin
+   Result := TlineSeries.Create(Self);
+
+    with Result do
+    begin
+        Name := 'Series' + aName;
+        Title := aTitle;
+        Color := aColor;
+        Marks.Style :=  smsLegend;//smsValue;
+    end;
+
+    Chart1.AddSeries(Result);
+end;
+
+function TFSaleReport.GetInsertedPieSeries(aName, aTitle: String;
+  aColor: TColor): TPieSeries;
+begin
+    Result := TpieSeries.Create(Self);
+
+    with Result do
+    begin
+        Name := 'Series' + aName;
+        Title := aTitle;
+        Color := aColor;
+        Marks.Style :=  smsLegend;//smsValue;
+
+    end;
+
+    Chart1.AddSeries(Result);
+end;
+
+procedure TFSaleReport.btnChartShowClick(Sender: TObject);
+var
+    Loop ,YearIndex: integer;
+    DeptKey: String;
+    StartBar, TotalBar, EndBar ,LevelEndBar : TBarSeries;
+    Level1Bar, Level2Bar, Level3Bar ,Level4Bar,Level5Bar ,Level6Bar, Level7Bar : TBarSeries;
+    pStartBar, pTotalBar, pEndBar : TPieSeries;
+    smsSeriesTitle : TSeriesMarksStyle ;
+    LinefooterTitle : string;
+    TempColor1,TempColor2,TempColor3 : TColor ;
+    RCount : Integer ;
+    aArrowLength : Integer;
+    aXvalue : Integer;
+    tempint : Integer;
+begin
+
+  chart1.FreeAllSeries;
+  Chart1.AxisVisible := True;
+  Chart1.View3D := cb3D.Checked ;
+  aArrowLength := 5 ;
+
+  RCount := 0 ;
+  with  CustGrid.DataSource.DataSet do
+  begin
+
+    aXvalue := (aArrowLength*RCount) ;
+    
+    TempColor1   := GenerateRandomColor  ;
+    Level1Bar    := GetInsertedBarSeries(IntToStr(RCount)+'level1', 'level1', TempColor1);
+    TempColor2   := GenerateRandomColor  ;
+    Level2Bar    := GetInsertedBarSeries(IntToStr(RCount)+'level2', 'level2', TempColor2);
+    TempColor3   := GenerateRandomColor  ;
+    Level3Bar    := GetInsertedBarSeries(IntToStr(RCount)+'level3', 'level3', TempColor3);
+
+    //---------------------------
+    tempint := FieldByName('CountC').AsInteger ;
+    Level1Bar.AddXY(aXvalue, FieldByName('CountC').AsCurrency,  LinefooterTitle, TempColor1 );
+
+    if Length(trim(FieldByName('CountC').AsString))>3 then
+      Level1Bar.Title :=  AddSeprator(FieldByName('CountC').AsString,length(FieldByName('CountC').AsString) div 3)   +' :'+'  ⁄œ«œ '
+    else  Level1Bar.Title :=  FieldByName('CountC').AsString  +' :'+'  ⁄œ«œ ';
+
+
+    Level1Bar.Marks.Style       := smsValue ;
+    Level1Bar.Marks.ArrowLength := aArrowLength;
+    Level1Bar.SideMargins       := False ;
+
+    //---------------------------
+
+    Level2Bar.AddXY(aXvalue, FieldByName('Amount').AsCurrency, LinefooterTitle, TempColor2 );
+
+    if Length(trim(FieldByName('Amount').AsString))>3 then
+      Level2Bar.Title :=  AddSeprator(FieldByName('Amount').AsString,length(FieldByName('Amount').AsString) div 3)   +' :'+' „»·€ '
+    else  Level2Bar.Title :=  FieldByName('Amount').AsString  +' :'+' „»·€ ';
+
+    Level2Bar.Marks.Style       := smsValue ;
+    Level2Bar.Marks.ArrowLength := aArrowLength;
+    Level2Bar.SideMargins       := False ;
+
+    //----------------------------
+
+    Level3Bar.AddXY(aXvalue, FieldByName('TotalAmount').AsCurrency, LinefooterTitle, TempColor3 );
+
+    Level3Bar.Marks.Style       := smsValue ;
+    Level3Bar.Marks.ArrowLength := aArrowLength;
+    Level3Bar.SideMargins       := False ;
+
+    if Length(trim(FieldByName('TotalAmount').AsString))>3 then
+      Level3Bar.Title :=  AddSeprator(FieldByName('TotalAmount').AsString,length(FieldByName('TotalAmount').AsString) div 3)   +' :'+' „»·€ ò· '
+    else  Level3Bar.Title :=  FieldByName('TotalAmount').AsString  +' :'+' „»·€ ò· ';
+
+
+  end;
+
 end;
 
 end.

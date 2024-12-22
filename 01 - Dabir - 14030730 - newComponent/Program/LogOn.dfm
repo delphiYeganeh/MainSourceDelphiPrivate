@@ -15044,7 +15044,7 @@ inherited LoginForm: TLoginForm
     WordWrap = True
   end
   object Label2: TLabel [2]
-    Left = 249
+    Left = 257
     Top = 381
     Width = 68
     Height = 13
@@ -15058,7 +15058,7 @@ inherited LoginForm: TLoginForm
     Transparent = True
   end
   object lbltxt: TLabel [3]
-    Left = 141
+    Left = 131
     Top = 381
     Width = 69
     Height = 13
@@ -15073,8 +15073,8 @@ inherited LoginForm: TLoginForm
     Transparent = True
   end
   object lblDate: TLabel [4]
-    Left = 82
-    Top = 382
+    Left = 72
+    Top = 381
     Width = 56
     Height = 13
     Anchors = [akLeft, akBottom]
@@ -30269,9 +30269,9 @@ inherited LoginForm: TLoginForm
     Visible = False
   end
   object Label5: TLabel [12]
-    Left = 67
-    Top = 16
-    Width = 257
+    Left = 0
+    Top = 14
+    Width = 400
     Height = 13
     Alignment = taCenter
     AutoSize = False

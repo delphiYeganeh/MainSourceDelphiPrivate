@@ -59,6 +59,7 @@ type
     edtLastName: TEdit;
     edtTel: TEdit;
     edtMobile: TEdit;
+    Label12: TLabel;
     procedure Select_Person_By_CustomerIDAfterInsert(DataSet: TDataSet);
     procedure DBEEmailAddressEnter(Sender: TObject);
     procedure DBEEmailAddressExit(Sender: TObject);
@@ -69,10 +70,13 @@ type
       NewHeight: Integer; var Resize: Boolean);
     procedure btnHomeClick(Sender: TObject);
     procedure SBRefreshClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure Select_Person_By_CustomerIDBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
-    { Public declarations }
+    CustomerID : integer;
   end;
 
 var
@@ -80,14 +84,14 @@ var
 
 implementation
 
-Uses dmu, YShamsiDate;
+Uses dmu, YShamsiDate, MainU;
 
 {$R *.dfm}
 
 procedure TFmOtherPerson.Select_Person_By_CustomerIDAfterInsert(
   DataSet: TDataSet);
 begin
-   Select_Person_By_CustomerIDCustomerID.Value:=dm.Select_Customer_By_CustomerIDCustomerID.AsInteger;
+   Select_Person_By_CustomerIDCustomerID.Value:= dm.Select_Customer_By_CustomerIDCustomerID.AsInteger;
 end;
 
 procedure TFmOtherPerson.DBEEmailAddressEnter(Sender: TObject);
@@ -103,9 +107,12 @@ end;
 procedure TFmOtherPerson.FormShow(Sender: TObject);
 begin
    inherited;
+   DM.Open_Customer(CustomerID);
    ShapeBase.Brush.Color := _Color1 ;
    pnlMain.Color := _Color1 ;
+
    DBNav_Setup(DBNavigator1);
+   DBNavigator1.SetFocus;
 end;
 
 procedure TFmOtherPerson.SBCloseClick(Sender: TObject);
@@ -117,10 +124,12 @@ end;
 procedure TFmOtherPerson.DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
 begin
    inherited;
-
+   DBNavigator1.SetFocus;
+   
    if Button = nbInsert then
    begin
-      DBEFirstName.SetFocus;
+     // DBEFirstName.SetFocus;
+      DBELastName.SetFocus;
    end;
 end;
 
@@ -189,6 +198,51 @@ begin
 
 
 
+end;
+
+procedure TFmOtherPerson.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+    if DBNavigator1.Visible then
+      If (Shift = [ssctrl]) and (inttostr(key) = '113') then   //f2
+      begin     //edit
+        DBNavigator1.SetFocus ;
+        if MainForm.N15.Visible then      // œ” —”Ì ÊÌ—«Ì‘
+          if  DBNavigator1.DataSource.DataSet.State  in [dsBrowse] then
+            DBNavigator1.BtnClick(nbEdit);
+      end
+      else
+      If (Shift = [ssctrl]) and (inttostr(key) = '116') then  //f5
+      begin    //post
+        DBNavigator1.SetFocus ;
+        if  DBNavigator1.DataSource.DataSet.State in [dsEdit, dsInsert] then
+          DBNavigator1.BtnClick(nbPost);
+      end
+      else
+      If (Shift = [ssctrl]) and (inttostr(key) = '78') then //n
+      begin               //new
+        DBNavigator1.SetFocus ;
+        if  MainForm.NInsertCustomer.Visible then //œ” —”Ì œ—Ã
+          if  DBNavigator1.DataSource.DataSet.State  in [dsBrowse] then
+            DBNavigator1.BtnClick(nbInsert);
+      end;
+
+end;
+
+procedure TFmOtherPerson.Select_Person_By_CustomerIDBeforePost(
+  DataSet: TDataSet);
+begin
+  DBNavigator1.SetFocus ;
+  if DBELastName.Text = '' then
+  begin
+     DBELastName.SetFocus;
+     ShowMessage('Å—ò—œ‰ ›Ì·œ ‰«„ Œ«‰Ê«œêÌ «Ã»«—Ì „Ì »«‘œ');
+     DSelect_Person_By_CustomerID.DataSet.Cancel;
+     Exit;
+  end;
+  inherited;
+     
 end;
 
 end.

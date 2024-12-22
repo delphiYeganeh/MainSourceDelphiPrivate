@@ -2047,8 +2047,8 @@ Var
 begin
    inherited;
    if QrLetterData.RecordCount = 0 then
-      Exit;
-   PageNumber := InputBox('‘„«—Â ’›ÕÂ  ’ÊÌ—','·ÿ›« ‘„«—Â ’›ÕÂ —« Ê«—œ ‰„«ÌÌœ', IntToStr(QrLetterData.RecNo));
+      Exit;;
+   PageNumber := InputBox('‘„«—Â ’›ÕÂ  ’ÊÌ—','·ÿ›« ‘„«—Â ’›ÕÂ „Ê—œ ‰Ÿ— —« Ê«—œ ‰„«ÌÌœ', IntToStr(QrLetterData.RecNo));
    if StrToIntDef(PageNumber,0) > 0 then
       {Ranjbar 89.07.05 ID=25}
       //DMScanImage.QrLetterData.RecNo := StrToIntDef(PageNum,0);
@@ -2152,7 +2152,7 @@ begin
       Exit;
    LetterDataID := QrLetterDataLetterDataID.AsInteger;
    Source := QrLetterData.RecNo;
-   Destination := StrToIntDef(InputBox('‘„«—Â ’›ÕÂ','·ÿ›« ‘„«—Â ’›ÕÂ —« «’·«Õ ‰„«ÌÌœ', QrSelImagePageNumber.AsString),0);
+   Destination := StrToIntDef(InputBox('‘„«—Â ’›ÕÂ Ã«—Ì  ’ÊÌ—','·ÿ›« ‘„«—Â ’›ÕÂ «‰ Œ«»Ì —« Ê«—œ ‰„«ÌÌœ', QrSelImagePageNumber.AsString),0);
 
    if Source=Destination then  // «ê— ‘„«—Â „»œ« Ê „ﬁ’œ ÌòÌ »«‘œ
       exit;
@@ -2289,6 +2289,7 @@ begin
          inc(i);
       end;
    end;
+    ShowMessage('‘„«—Â  „«„Ì ’›Õ«   ’«ÊÌ—«“ «» œ« »Â  — Ì» «’·«Õ ‘œ');
 end;
 
 procedure TFmScanImage.YRotateLabel1Click(Sender: TObject);

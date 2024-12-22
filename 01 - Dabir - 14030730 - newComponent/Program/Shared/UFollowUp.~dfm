@@ -15,7 +15,6 @@ inherited FrFollowUp: TFrFollowUp
     Width = 712
     Height = 517
     Align = alClient
-    Caption = 'pnlMain'
     ParentColor = True
     TabOrder = 0
     object Panel3: TPanel

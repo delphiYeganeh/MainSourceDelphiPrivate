@@ -1,13 +1,13 @@
 object Dm: TDm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 305
-  Top = 149
+  Left = 316
+  Top = 117
   Height = 822
-  Width = 1205
+  Width = 1266
   object YeganehConnection: TADOConnection
     CommandTimeout = 30000
-    ConnectionTimeout = 60
+    ConnectionTimeout = 120
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     Left = 48
@@ -9997,6 +9997,12 @@ object Dm: TDm
         DataType = ftInteger
         Size = 16
         Value = 0
+      end
+      item
+        Name = '@CompaginIDs'
+        DataType = ftString
+        Size = -1
+        Value = ''
       end>
     Left = 543
     Top = 134
@@ -10786,6 +10792,9 @@ object Dm: TDm
       KeyFields = 'MarketerID'
       Lookup = True
     end
+    object Select_FollowUP_By_CustomerIDStatusSaveDateTime: TDateTimeField
+      FieldName = 'StatusSaveDateTime'
+    end
   end
   object DSelect_FollowUP_By_CustomerID: TDataSource
     AutoEdit = False
@@ -10895,9 +10904,20 @@ object Dm: TDm
         DataType = ftWideString
         Size = -1
         Value = Null
+      end
+      item
+        Name = '@TimeInterval'
+        DataType = ftInteger
+        Value = Null
+      end
+      item
+        Name = '@CountUniqCustomer'
+        DataType = ftInteger
+        Direction = pdOutput
+        Value = 0
       end>
-    Left = 578
-    Top = 402
+    Left = 610
+    Top = 403
     object Select_FollowUP_By_DateFollowUPID: TAutoIncField
       FieldName = 'FollowUPID'
       ReadOnly = True
@@ -11091,11 +11111,27 @@ object Dm: TDm
     object Select_FollowUP_By_DateIsHoliday: TIntegerField
       FieldName = 'IsHoliday'
     end
+    object Select_FollowUP_By_DateRowID: TLargeintField
+      FieldName = 'RowID'
+    end
+    object Select_FollowUP_By_DateStatusSaveDate: TStringField
+      FieldName = 'StatusSaveDate'
+      Size = 10
+    end
+    object Select_FollowUP_By_DateStatusSaveDateTime: TTimeField
+      FieldName = 'StatusSaveDateTime'
+    end
+    object Select_FollowUP_By_DateISPlusTime: TBooleanField
+      FieldName = 'ISPlusTime'
+    end
+    object Select_FollowUP_By_DateTimeInterval: TStringField
+      FieldName = 'TimeInterval'
+    end
   end
   object DSelect_FollowUP_By_Date: TDataSource
     AutoEdit = False
     DataSet = Select_FollowUP_By_Date
-    Left = 593
+    Left = 609
     Top = 448
   end
   object Select_Contract_By_CustomerID: TADOStoredProc
@@ -11916,6 +11952,9 @@ object Dm: TDm
       LookupResultField = 'MarketerTitle'
       KeyFields = 'MarketerID'
       Lookup = True
+    end
+    object Select_Customer_By_CustomerIDLeadQuality: TIntegerField
+      FieldName = 'LeadQuality'
     end
   end
   object Report_Contract: TADOStoredProc
@@ -13037,7 +13076,7 @@ object Dm: TDm
     Connection = YeganehConnection
     CommandTimeout = 1200
     Parameters = <>
-    Left = 752
+    Left = 720
     Top = 680
   end
   object RunSetting: TADOQuery
@@ -13053,7 +13092,7 @@ object Dm: TDm
       '           (UserID,VariableName,Value)'
       '     VALUES (-1,'#39'ScriptsNumber'#39',1)'#9
       'END')
-    Left = 736
+    Left = 704
     Top = 632
   end
   object Report_Cancles: TADOStoredProc
@@ -13406,7 +13445,7 @@ object Dm: TDm
     Connection = YeganehConnection
     CommandTimeout = 1200
     Parameters = <>
-    Left = 808
+    Left = 776
     Top = 656
   end
   object qryGetAutoText: TADOQuery
@@ -13430,7 +13469,7 @@ object Dm: TDm
     Connection = YeganehConnection
     CommandTimeout = 1200
     Parameters = <>
-    Left = 832
+    Left = 800
     Top = 616
   end
   object Select_FollowUP_By_CustomerID2: TADOStoredProc
@@ -14492,8 +14531,8 @@ object Dm: TDm
         Size = -1
         Value = Null
       end>
-    Left = 624
-    Top = 672
+    Left = 576
+    Top = 632
     object Select_MediaMessageID: TIntegerField
       FieldName = 'ID'
     end
@@ -14535,8 +14574,8 @@ object Dm: TDm
   end
   object DsSelect_MediaMessage: TDataSource
     DataSet = Select_MediaMessage
-    Left = 664
-    Top = 696
+    Left = 616
+    Top = 656
   end
   object DSActionTypeByUserType: TDataSource
     DataSet = ActionTypeByUserType
@@ -14603,5 +14642,164 @@ object Dm: TDm
       FieldName = 'DoneStatustitle'
       Size = 50
     end
+  end
+  object Select_FollowUP_By_date1_CountCustomer: TADOStoredProc
+    Connection = YeganehConnection
+    CursorType = ctStatic
+    CommandTimeout = 300
+    ProcedureName = 'Select_FollowUP_By_date1_CountCustomer;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdOutput
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@MarketerID'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@BDate'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = '@Edate'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = '@DonStatusID'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@ActionTypeID'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Value = Null
+      end
+      item
+        Name = '@Comment_like'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        Size = 255
+        Value = Null
+      end
+      item
+        Name = '@BSuccess'
+        Attributes = [paNullable]
+        DataType = ftWord
+        Precision = 3
+        Value = Null
+      end
+      item
+        Name = '@ESuccess'
+        Attributes = [paNullable]
+        DataType = ftWord
+        Precision = 3
+        Value = Null
+      end
+      item
+        Name = '@DoneComment_like'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        Size = 255
+        Value = Null
+      end
+      item
+        Name = '@CommentTypeOr'
+        Attributes = [paNullable]
+        DataType = ftBoolean
+        Value = Null
+      end
+      item
+        Name = '@UserID'
+        DataType = ftInteger
+        Value = Null
+      end
+      item
+        Name = '@GroupID'
+        DataType = ftInteger
+        Value = Null
+      end
+      item
+        Name = '@CustomerId'
+        DataType = ftInteger
+        Value = Null
+      end
+      item
+        Name = '@CustomerName'
+        DataType = ftWideString
+        Size = -1
+        Value = Null
+      end
+      item
+        Name = '@TimeInterval'
+        DataType = ftInteger
+        Value = Null
+      end>
+    Left = 834
+    Top = 698
+    object Select_FollowUP_By_date1_CountCustomerCustomerID: TIntegerField
+      FieldName = 'CustomerID'
+    end
+  end
+  object DSSelect_FollowUP_By_date1_CountCustomer: TDataSource
+    AutoEdit = False
+    DataSet = Select_FollowUP_By_date1_CountCustomer
+    Left = 665
+    Top = 720
+  end
+  object QrFixAsset: TADOQuery
+    Connection = YeganehConnection
+    Parameters = <>
+    SQL.Strings = (
+      'Select * from dbo.FixedAsset')
+    Left = 1192
+    Top = 624
+    object QrFixAssetFixID: TAutoIncField
+      FieldName = 'FixID'
+      ReadOnly = True
+    end
+    object QrFixAssetName: TWideStringField
+      Alignment = taRightJustify
+      FieldName = 'Name'
+      Size = 50
+    end
+    object QrFixAssetDescription: TStringField
+      FieldName = 'Description'
+      Size = 1000
+    end
+    object QrFixAssetFixNumber: TStringField
+      FieldName = 'FixNumber'
+      Size = 50
+    end
+    object QrFixAssetCount: TIntegerField
+      FieldName = 'Count'
+    end
+    object QrFixAssetUserId: TIntegerField
+      FieldName = 'UserId'
+    end
+    object QrFixAssetDate: TDateTimeField
+      FieldName = 'Date'
+    end
+  end
+  object DSFixAsset: TDataSource
+    AutoEdit = False
+    DataSet = QrFixAsset
+    Left = 1192
+    Top = 672
   end
 end

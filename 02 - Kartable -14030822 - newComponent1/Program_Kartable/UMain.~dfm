@@ -100,7 +100,7 @@ object MainForm: TMainForm
       TabOrder = 1
     end
     object status2: TPanel
-      Left = 681
+      Left = 740
       Top = 0
       Width = 261
       Height = 28
@@ -118,7 +118,7 @@ object MainForm: TMainForm
     object status3: TPanel
       Left = 590
       Top = 0
-      Width = 91
+      Width = 150
       Height = 28
       Align = alLeft
       BevelInner = bvLowered
@@ -132,9 +132,9 @@ object MainForm: TMainForm
       TabOrder = 3
     end
     object status6: TPanel
-      Left = 1060
+      Left = 1119
       Top = 0
-      Width = 157
+      Width = 98
       Height = 28
       Align = alClient
       BevelInner = bvLowered
@@ -149,7 +149,7 @@ object MainForm: TMainForm
       TabOrder = 4
     end
     object status4: TPanel
-      Left = 942
+      Left = 1001
       Top = 0
       Width = 118
       Height = 28
@@ -577,6 +577,7 @@ object MainForm: TMainForm
                 LastSession = 599
               end>
             Caption = #1605#1705#1575#1578#1576#1575#1578
+            ImageIndex = 162
           end
           item
             Items = <
@@ -603,6 +604,7 @@ object MainForm: TMainForm
                 ShortCut = 16453
               end>
             Caption = #1585#1608#1606#1608#1588#1578' '#1608' '#1575#1585#1580#1575#1593#1575#1578
+            ImageIndex = 177
           end
           item
             Items = <
@@ -663,6 +665,7 @@ object MainForm: TMainForm
                 LastSession = 599
               end>
             Caption = #1575#1605#1705#1575#1606#1575#1578
+            ImageIndex = 160
           end
           item
             Items = <
@@ -682,6 +685,7 @@ object MainForm: TMainForm
                 LastSession = 599
               end>
             Caption = #1662#1610#1711#1610#1585#1610' '
+            ImageIndex = 164
           end
           item
             Items = <
@@ -706,6 +710,7 @@ object MainForm: TMainForm
                 LastSession = 599
               end>
             Caption = #1586#1610#1585' '#1587#1610#1587#1578#1605' '#1578#1602#1608#1610#1605' '#1705#1575#1585#1610' '#1608' '#1580#1604#1587#1575#1578
+            ImageIndex = 163
           end
           item
             Items = <
@@ -760,6 +765,7 @@ object MainForm: TMainForm
                 ShortCut = 16500
               end>
             Caption = #1705#1575#1585#1576#1585#1575#1606
+            ImageIndex = 173
           end
           item
             Items = <
@@ -779,6 +785,7 @@ object MainForm: TMainForm
                 LastSession = 599
               end>
             Caption = #1711#1586#1575#1585#1588
+            ImageIndex = 176
           end
           item
             Items = <
@@ -788,6 +795,7 @@ object MainForm: TMainForm
                 LastSession = 599
               end>
             Caption = #1587#1585#1608#1610#1587' '#1607#1575
+            ImageIndex = 165
             LastSession = 599
           end
           item

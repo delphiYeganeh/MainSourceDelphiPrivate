@@ -5,7 +5,6 @@ inherited FRepTasks: TFRepTasks
   Height = 469
   Caption = #1711#1586#1575#1585#1588' '#1705#1575#1585' '#1705#1575#1585#1576#1585#1575#1606
   OldCreateOrder = True
-  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape
@@ -30,18 +29,6 @@ inherited FRepTasks: TFRepTasks
       DesignSize = (
         904
         65)
-      object Label3: TLabel
-        Left = 321
-        Top = 20
-        Width = 3
-        Height = 13
-        Font.Charset = ARABIC_CHARSET
-        Font.Color = clGreen
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
       object GroupBox1: TGroupBox
         Left = 462
         Top = 8
@@ -191,20 +178,21 @@ inherited FRepTasks: TFRepTasks
             Expanded = False
             FieldName = 'ToDoDate'
             Title.Caption = #1578#1575#1585#1610#1582' '#1575#1606#1580#1575#1605
+            Width = 80
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'Title'
             Title.Caption = #1705#1575#1585#1576#1585
-            Width = 100
+            Width = 105
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'CustomerID'
             Title.Caption = #1588#1605#1575#1585#1607' '#1605#1588#1578#1585#1610
-            Width = 120
+            Width = 134
             Visible = True
           end
           item
@@ -420,6 +408,19 @@ inherited FRepTasks: TFRepTasks
         Anchors = [akTop, akRight]
         Caption = #1606#1605#1575#1610#1588
         OnClick = SpeedButton5Click
+      end
+      object Label3: TLabel
+        Left = 497
+        Top = 20
+        Width = 35
+        Height = 13
+        Caption = #1578#1593#1583#1575#1583' 0 '
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
     end
   end

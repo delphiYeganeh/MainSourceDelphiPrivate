@@ -42,7 +42,6 @@ type
     Label18: TLabel;
     Label16: TLabel;
     Label19: TLabel;
-    Label26: TLabel;
     Label27: TLabel;
     Label4: TLabel;
     lblBirthDate: TLabel;
@@ -67,7 +66,6 @@ type
     DBEdit10: TDBEdit;
     DBEdit12: TDBEdit;
     DBEdit8: TDBEdit;
-    DBLookupComboBox5: TDBLookupComboBox;
     DBECustomerID: TDBEdit;
     DBMemo2: TDBMemo;
     GroupBox1: TGroupBox;
@@ -210,6 +208,11 @@ type
     edtAmount2: TDBEdit;
     edtAmount: TEdit;
     ALLMarketerTitleShow: TDBEdit;
+    Label34: TLabel;
+    edtLeadQuality: TDBEdit;
+    pnlCustomerStatus: TPanel;
+    Label26: TLabel;
+    DBLookupComboBox5: TDBLookupComboBox;
     procedure DBEdit7Enter(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -491,8 +494,10 @@ begin
       while(tmpUL <> nil)do
       begin
          q.Close;
-         q.SQL.Text:='Select HasAccess from dbo.UsersCustomerAccess  WITH(NOLOCK)  where CustomerID = '+ Dm.Select_Customer_By_CustomerIDCustomerID.AsString +
+
+         q.SQL.Text:='Select HasAccess from dbo.UsersCustomerAccess  WITH(NOLOCK)  where CustomerID = '+ IntToStr(Dm.Select_Customer_By_CustomerIDCustomerID.ASInteger) +
             ' and UserID = '+ IntToStr(tmpUL^.UserID);
+
          q.Open;
          if q.RecordCount>0 then
             tmpUL^.Selected:= q.FieldValues['HasAccess'];
@@ -523,6 +528,12 @@ begin
   edtAmount.text := edtAmount2.Text;
   //GBState.Visible := False;
   //btnMap.Visible := False;
+  if GetActionAccess(_accessID,'acpnlCustomerStatus',1) = False  then
+    pnlCustomerStatus.Enabled := Dm.Select_Customer_By_CustomerIDCustomerStatusID.asInteger <> 2 ;
+    
+  if  Dm.Select_Customer_By_CustomerIDCustomerStatusID.asInteger = 2 then
+    DBLookupComboBox5.Color := $00CECEFF
+  else DBLookupComboBox5.Color := $00DEEDDE ;
 end;
 
 procedure TPropertiesForm.SBOtherPersonClick(Sender: TObject);
@@ -541,6 +552,7 @@ begin
    end;
 
    FmOtherPerson := TFmOtherPerson.Create(nil);
+   FmOtherPerson.CustomerID := DM.Select_Customer_By_CustomerIDCustomerID.AsInteger;
    with FmOtherPerson.Select_Person_By_CustomerID do
    begin
       Close;
@@ -753,6 +765,13 @@ begin
                ' SET ActionType_LevelID = [dbo].[fn_GetCurrentStateCustomerActionType_LevelID]('+ Dm.Select_customer_By_CustomerIDCustomerID.AsString +')   '+
                ' where customerid = '+ Dm.Select_customer_By_CustomerIDCustomerID.AsString ,dm.YeganehConnection);
    end;
+
+  if GetActionAccess(_accessID,'acpnlCustomerStatus',1) = False  then
+    pnlCustomerStatus.Enabled := Dm.Select_Customer_By_CustomerIDCustomerStatusID.asInteger <> 2 ;
+    
+  if  Dm.Select_Customer_By_CustomerIDCustomerStatusID.asInteger = 2 then
+    DBLookupComboBox5.Color := $00CECEFF
+  else DBLookupComboBox5.Color := $00DEEDDE ;
 
 end;
 
@@ -1058,6 +1077,12 @@ begin
       begin    //post
         if  DBNavigator1.DataSource.DataSet.State in [dsEdit, dsInsert] then
           DBNavigator1.BtnClick(nbPost);
+      end
+      else
+      If (Shift = [ssctrl]) and (inttostr(key) = '117') then  //f6
+      begin    //otherPerson
+        if  DBNavigator1.DataSource.DataSet.State in [dsBrowse] then
+          SBOtherPersonClick(SBOtherPerson);
       end
       else
       If (Shift = [ssctrl]) and (inttostr(key) = '78') then //n

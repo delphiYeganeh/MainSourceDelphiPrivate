@@ -21,6 +21,9 @@ inherited FinnerLetter: TFinnerLetter
     Align = alClient
     ParentColor = True
     TabOrder = 0
+    DesignSize = (
+      843
+      581)
     object xpPageControl1: TxpPageControl
       Left = 1
       Top = 1
@@ -1249,299 +1252,308 @@ inherited FinnerLetter: TFinnerLetter
             Color = clWindow
             Align = alBottom
             TabOrder = 3
-            object attachs: TYCheckGroupBox
+            object Panel3: TPanel
               Left = 1
               Top = 1
               Width = 827
-              Height = 74
-              Align = alTop
-              Caption = '    '#1662#1610#1608#1587#1578' '#1601#1585#1605'   '
-              Font.Charset = ARABIC_CHARSET
-              Font.Color = clBlue
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              ParentFont = False
+              Height = 126
+              Align = alClient
+              ParentColor = True
               TabOrder = 0
-              MinHeight = 15
-              MaxHeight = 75
-              DesignSize = (
-                827
-                74)
-              object Label9: TLabel
-                Left = 740
-                Top = 23
-                Width = 62
-                Height = 13
-                Anchors = [akTop, akRight]
-                Caption = '&'#1593#1606#1608#1575#1606' '#1662#1610#1608#1587#1578
-                FocusControl = DBEdit2
+              object attachs: TYCheckGroupBox
+                Left = 1
+                Top = 1
+                Width = 825
+                Height = 74
+                Align = alTop
+                Caption = '    '#1662#1610#1608#1587#1578' '#1601#1585#1605'   '
                 Font.Charset = ARABIC_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'Tahoma'
-                Font.Style = []
-                ParentFont = False
-              end
-              object Label11: TLabel
-                Left = 740
-                Top = 49
-                Width = 62
-                Height = 13
-                Anchors = [akTop, akRight]
-                Caption = #1601#1585#1605' '#1662#1610#1608#1587#1578' 1'
-                Font.Charset = ARABIC_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'Tahoma'
-                Font.Style = []
-                ParentFont = False
-              end
-              object Label2: TLabel
-                Left = 394
-                Top = 49
-                Width = 62
-                Height = 13
-                Anchors = [akTop, akRight]
-                Caption = #1601#1585#1605' '#1662#1610#1608#1587#1578' 2'
-                Font.Charset = ARABIC_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'Tahoma'
-                Font.Style = []
-                ParentFont = False
-              end
-              object SpeedButton8: TAdvGlowButton
-                Left = 711
-                Top = 44
-                Width = 23
-                Height = 22
-                Cursor = crHandPoint
-                Anchors = [akTop, akRight]
-                ImageIndex = 70
-                Images = Dm.ImageList_MainNew
-                NotesFont.Charset = DEFAULT_CHARSET
-                NotesFont.Color = clWindowText
-                NotesFont.Height = -11
-                NotesFont.Name = 'Tahoma'
-                NotesFont.Style = []
-                TabOrder = 4
-                OnClick = SpeedButton8Click
-                Appearance.ColorChecked = 16111818
-                Appearance.ColorCheckedTo = 16367008
-                Appearance.ColorDisabled = 15921906
-                Appearance.ColorDisabledTo = 15921906
-                Appearance.ColorDown = 16111818
-                Appearance.ColorDownTo = 16367008
-                Appearance.ColorHot = 16117985
-                Appearance.ColorHotTo = 16372402
-                Appearance.ColorMirrorHot = 16107693
-                Appearance.ColorMirrorHotTo = 16775412
-                Appearance.ColorMirrorDown = 16102556
-                Appearance.ColorMirrorDownTo = 16768988
-                Appearance.ColorMirrorChecked = 16102556
-                Appearance.ColorMirrorCheckedTo = 16768988
-                Appearance.ColorMirrorDisabled = 11974326
-                Appearance.ColorMirrorDisabledTo = 15921906
-              end
-              object SpeedButton9: TAdvGlowButton
-                Left = 368
-                Top = 44
-                Width = 23
-                Height = 22
-                Cursor = crHandPoint
-                Anchors = [akTop, akRight]
-                ImageIndex = 70
-                Images = Dm.ImageList_MainNew
-                NotesFont.Charset = DEFAULT_CHARSET
-                NotesFont.Color = clWindowText
-                NotesFont.Height = -11
-                NotesFont.Name = 'Tahoma'
-                NotesFont.Style = []
-                TabOrder = 5
-                OnClick = SpeedButton9Click
-                Appearance.ColorChecked = 16111818
-                Appearance.ColorCheckedTo = 16367008
-                Appearance.ColorDisabled = 15921906
-                Appearance.ColorDisabledTo = 15921906
-                Appearance.ColorDown = 16111818
-                Appearance.ColorDownTo = 16367008
-                Appearance.ColorHot = 16117985
-                Appearance.ColorHotTo = 16372402
-                Appearance.ColorMirrorHot = 16107693
-                Appearance.ColorMirrorHotTo = 16775412
-                Appearance.ColorMirrorDown = 16102556
-                Appearance.ColorMirrorDownTo = 16768988
-                Appearance.ColorMirrorChecked = 16102556
-                Appearance.ColorMirrorCheckedTo = 16768988
-                Appearance.ColorMirrorDisabled = 11974326
-                Appearance.ColorMirrorDisabledTo = 15921906
-              end
-              object DBEdit2: TDBEdit
-                Left = 188
-                Top = 18
-                Width = 546
-                Height = 21
-                Anchors = [akTop, akRight]
-                Color = clWhite
-                DataField = 'AttachTitle'
-                DataSource = DSForm
-                Font.Charset = ARABIC_CHARSET
-                Font.Color = clWindowText
+                Font.Color = clBlue
                 Font.Height = -11
                 Font.Name = 'Tahoma'
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 0
-                OnEnter = TEditEnter
-                OnExit = TEditExit
+                MinHeight = 15
+                MaxHeight = 75
+                DesignSize = (
+                  825
+                  74)
+                object Label9: TLabel
+                  Left = 738
+                  Top = 23
+                  Width = 62
+                  Height = 13
+                  Anchors = [akTop, akRight]
+                  Caption = '&'#1593#1606#1608#1575#1606' '#1662#1610#1608#1587#1578
+                  FocusControl = DBEdit2
+                  Font.Charset = ARABIC_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object Label11: TLabel
+                  Left = 738
+                  Top = 49
+                  Width = 62
+                  Height = 13
+                  Anchors = [akTop, akRight]
+                  Caption = #1601#1585#1605' '#1662#1610#1608#1587#1578' 1'
+                  Font.Charset = ARABIC_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object Label2: TLabel
+                  Left = 392
+                  Top = 49
+                  Width = 62
+                  Height = 13
+                  Anchors = [akTop, akRight]
+                  Caption = #1601#1585#1605' '#1662#1610#1608#1587#1578' 2'
+                  Font.Charset = ARABIC_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object SpeedButton8: TAdvGlowButton
+                  Left = 709
+                  Top = 44
+                  Width = 23
+                  Height = 22
+                  Cursor = crHandPoint
+                  Anchors = [akTop, akRight]
+                  ImageIndex = 70
+                  Images = Dm.ImageList_MainNew
+                  NotesFont.Charset = DEFAULT_CHARSET
+                  NotesFont.Color = clWindowText
+                  NotesFont.Height = -11
+                  NotesFont.Name = 'Tahoma'
+                  NotesFont.Style = []
+                  TabOrder = 4
+                  OnClick = SpeedButton8Click
+                  Appearance.ColorChecked = 16111818
+                  Appearance.ColorCheckedTo = 16367008
+                  Appearance.ColorDisabled = 15921906
+                  Appearance.ColorDisabledTo = 15921906
+                  Appearance.ColorDown = 16111818
+                  Appearance.ColorDownTo = 16367008
+                  Appearance.ColorHot = 16117985
+                  Appearance.ColorHotTo = 16372402
+                  Appearance.ColorMirrorHot = 16107693
+                  Appearance.ColorMirrorHotTo = 16775412
+                  Appearance.ColorMirrorDown = 16102556
+                  Appearance.ColorMirrorDownTo = 16768988
+                  Appearance.ColorMirrorChecked = 16102556
+                  Appearance.ColorMirrorCheckedTo = 16768988
+                  Appearance.ColorMirrorDisabled = 11974326
+                  Appearance.ColorMirrorDisabledTo = 15921906
+                end
+                object SpeedButton9: TAdvGlowButton
+                  Left = 366
+                  Top = 44
+                  Width = 23
+                  Height = 22
+                  Cursor = crHandPoint
+                  Anchors = [akTop, akRight]
+                  ImageIndex = 70
+                  Images = Dm.ImageList_MainNew
+                  NotesFont.Charset = DEFAULT_CHARSET
+                  NotesFont.Color = clWindowText
+                  NotesFont.Height = -11
+                  NotesFont.Name = 'Tahoma'
+                  NotesFont.Style = []
+                  TabOrder = 5
+                  OnClick = SpeedButton9Click
+                  Appearance.ColorChecked = 16111818
+                  Appearance.ColorCheckedTo = 16367008
+                  Appearance.ColorDisabled = 15921906
+                  Appearance.ColorDisabledTo = 15921906
+                  Appearance.ColorDown = 16111818
+                  Appearance.ColorDownTo = 16367008
+                  Appearance.ColorHot = 16117985
+                  Appearance.ColorHotTo = 16372402
+                  Appearance.ColorMirrorHot = 16107693
+                  Appearance.ColorMirrorHotTo = 16775412
+                  Appearance.ColorMirrorDown = 16102556
+                  Appearance.ColorMirrorDownTo = 16768988
+                  Appearance.ColorMirrorChecked = 16102556
+                  Appearance.ColorMirrorCheckedTo = 16768988
+                  Appearance.ColorMirrorDisabled = 11974326
+                  Appearance.ColorMirrorDisabledTo = 15921906
+                end
+                object DBEdit2: TDBEdit
+                  Left = 186
+                  Top = 18
+                  Width = 546
+                  Height = 21
+                  Anchors = [akTop, akRight]
+                  Color = clWhite
+                  DataField = 'AttachTitle'
+                  DataSource = DSForm
+                  Font.Charset = ARABIC_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                  TabOrder = 0
+                  OnEnter = TEditEnter
+                  OnExit = TEditExit
+                end
+                object DBLookupComboBox3: TDBLookupComboBox
+                  Left = 529
+                  Top = 44
+                  Width = 177
+                  Height = 21
+                  Anchors = [akTop, akRight]
+                  BiDiMode = bdLeftToRight
+                  DataField = 'UserTableTitle'
+                  DataSource = DSForm
+                  Font.Charset = ARABIC_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentBiDiMode = False
+                  ParentFont = False
+                  TabOrder = 1
+                end
+                object DBLookupComboBox2: TDBLookupComboBox
+                  Left = 186
+                  Top = 44
+                  Width = 177
+                  Height = 21
+                  Anchors = [akTop, akRight]
+                  BiDiMode = bdLeftToRight
+                  DataField = 'UserTableTitle2'
+                  DataSource = DSForm
+                  Font.Charset = ARABIC_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentBiDiMode = False
+                  ParentFont = False
+                  TabOrder = 3
+                end
               end
-              object DBLookupComboBox3: TDBLookupComboBox
-                Left = 531
-                Top = 44
-                Width = 177
-                Height = 21
-                Anchors = [akTop, akRight]
-                BiDiMode = bdLeftToRight
-                DataField = 'UserTableTitle'
-                DataSource = DSForm
+              object UserMemo: TYCheckGroupBox
+                Left = 1
+                Top = 75
+                Width = 825
+                Height = 50
+                Align = alClient
+                Caption = '    '#1588#1605#1575#1585#1607' '#1583#1575#1606#1588#1580#1608#1610#1610'  '
                 Font.Charset = ARABIC_CHARSET
-                Font.Color = clBlack
+                Font.Color = clBlue
                 Font.Height = -11
                 Font.Name = 'Tahoma'
                 Font.Style = []
-                ParentBiDiMode = False
                 ParentFont = False
                 TabOrder = 1
-              end
-              object DBLookupComboBox2: TDBLookupComboBox
-                Left = 188
-                Top = 44
-                Width = 177
-                Height = 21
-                Anchors = [akTop, akRight]
-                BiDiMode = bdLeftToRight
-                DataField = 'UserTableTitle2'
-                DataSource = DSForm
-                Font.Charset = ARABIC_CHARSET
-                Font.Color = clBlack
-                Font.Height = -11
-                Font.Name = 'Tahoma'
-                Font.Style = []
-                ParentBiDiMode = False
-                ParentFont = False
-                TabOrder = 3
-              end
-            end
-            object UserMemo: TYCheckGroupBox
-              Left = 1
-              Top = 75
-              Width = 827
-              Height = 52
-              Align = alClient
-              Caption = '    '#1588#1605#1575#1585#1607' '#1583#1575#1606#1588#1580#1608#1610#1610'  '
-              Font.Charset = ARABIC_CHARSET
-              Font.Color = clBlue
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              ParentFont = False
-              TabOrder = 1
-              MinHeight = 15
-              MaxHeight = 38
-              DesignSize = (
-                827
-                52)
-              object UserField: TLabel
-                Left = 708
-                Top = 18
-                Width = 82
-                Height = 13
-                Alignment = taRightJustify
-                Anchors = [akTop, akRight]
-                Caption = #1588#1605#1575#1585#1607' '#1583#1575#1606#1588#1580#1608#1610#1610
-                FocusControl = DBEUserMemo
-                Font.Charset = ARABIC_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'Tahoma'
-                Font.Style = []
-                ParentFont = False
-              end
-              object Label4: TLabel
-                Left = 287
-                Top = 21
-                Width = 26
-                Height = 13
-                Anchors = [akTop, akRight]
-                Caption = '(F10)'
-                FocusControl = DBEUserMemo
-                Font.Charset = ARABIC_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'Tahoma'
-                Font.Style = []
-                ParentFont = False
-                Visible = False
-              end
-              object DBEUserMemo: TDBEdit
-                Left = 317
-                Top = 16
-                Width = 380
-                Height = 22
-                Anchors = [akTop, akRight]
-                Color = clWhite
-                DataField = 'UserMemo'
-                DataSource = DSForm
-                Font.Charset = ARABIC_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -12
-                Font.Name = 'Tahoma'
-                Font.Style = []
-                ParentFont = False
-                TabOrder = 0
-                OnEnter = TEditEnter
-                OnExit = TEditExit
-              end
-              object xpBitBtn1: TAdvGlowButton
-                Left = 151
-                Top = 17
-                Width = 130
-                Height = 22
-                Cursor = crHandPoint
-                Anchors = [akTop, akRight]
-                Caption = #1605#1588#1575#1607#1583#1607' '#1587#1575#1610#1585' '#1587#1608#1575#1576#1602
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clNavy
-                Font.Height = -11
-                Font.Name = 'Tahoma'
-                Font.Style = []
-                ImageIndex = 78
-                Images = Dm.ImageList_MainNew
-                NotesFont.Charset = DEFAULT_CHARSET
-                NotesFont.Color = clWindowText
-                NotesFont.Height = -11
-                NotesFont.Name = 'Tahoma'
-                NotesFont.Style = []
-                ParentFont = False
-                TabOrder = 2
-                OnClick = xpBitBtn1Click
-                Appearance.ColorChecked = 16111818
-                Appearance.ColorCheckedTo = 16367008
-                Appearance.ColorDisabled = 15921906
-                Appearance.ColorDisabledTo = 15921906
-                Appearance.ColorDown = 16111818
-                Appearance.ColorDownTo = 16367008
-                Appearance.ColorHot = 16117985
-                Appearance.ColorHotTo = 16372402
-                Appearance.ColorMirrorHot = 16107693
-                Appearance.ColorMirrorHotTo = 16775412
-                Appearance.ColorMirrorDown = 16102556
-                Appearance.ColorMirrorDownTo = 16768988
-                Appearance.ColorMirrorChecked = 16102556
-                Appearance.ColorMirrorCheckedTo = 16768988
-                Appearance.ColorMirrorDisabled = 11974326
-                Appearance.ColorMirrorDisabledTo = 15921906
+                MinHeight = 15
+                MaxHeight = 38
+                DesignSize = (
+                  825
+                  50)
+                object UserField: TLabel
+                  Left = 706
+                  Top = 18
+                  Width = 82
+                  Height = 13
+                  Alignment = taRightJustify
+                  Anchors = [akTop, akRight]
+                  Caption = #1588#1605#1575#1585#1607' '#1583#1575#1606#1588#1580#1608#1610#1610
+                  FocusControl = DBEUserMemo
+                  Font.Charset = ARABIC_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object Label4: TLabel
+                  Left = 285
+                  Top = 21
+                  Width = 26
+                  Height = 13
+                  Anchors = [akTop, akRight]
+                  Caption = '(F10)'
+                  FocusControl = DBEUserMemo
+                  Font.Charset = ARABIC_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                  Visible = False
+                end
+                object DBEUserMemo: TDBEdit
+                  Left = 315
+                  Top = 16
+                  Width = 380
+                  Height = 22
+                  Anchors = [akTop, akRight]
+                  Color = clWhite
+                  DataField = 'UserMemo'
+                  DataSource = DSForm
+                  Font.Charset = ARABIC_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                  TabOrder = 0
+                  OnEnter = TEditEnter
+                  OnExit = TEditExit
+                end
+                object xpBitBtn1: TAdvGlowButton
+                  Left = 149
+                  Top = 17
+                  Width = 130
+                  Height = 22
+                  Cursor = crHandPoint
+                  Anchors = [akTop, akRight]
+                  Caption = #1605#1588#1575#1607#1583#1607' '#1587#1575#1610#1585' '#1587#1608#1575#1576#1602
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clNavy
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ImageIndex = 78
+                  Images = Dm.ImageList_MainNew
+                  NotesFont.Charset = DEFAULT_CHARSET
+                  NotesFont.Color = clWindowText
+                  NotesFont.Height = -11
+                  NotesFont.Name = 'Tahoma'
+                  NotesFont.Style = []
+                  ParentFont = False
+                  TabOrder = 2
+                  OnClick = xpBitBtn1Click
+                  Appearance.ColorChecked = 16111818
+                  Appearance.ColorCheckedTo = 16367008
+                  Appearance.ColorDisabled = 15921906
+                  Appearance.ColorDisabledTo = 15921906
+                  Appearance.ColorDown = 16111818
+                  Appearance.ColorDownTo = 16367008
+                  Appearance.ColorHot = 16117985
+                  Appearance.ColorHotTo = 16372402
+                  Appearance.ColorMirrorHot = 16107693
+                  Appearance.ColorMirrorHotTo = 16775412
+                  Appearance.ColorMirrorDown = 16102556
+                  Appearance.ColorMirrorDownTo = 16768988
+                  Appearance.ColorMirrorChecked = 16102556
+                  Appearance.ColorMirrorCheckedTo = 16768988
+                  Appearance.ColorMirrorDisabled = 11974326
+                  Appearance.ColorMirrorDisabledTo = 15921906
+                end
               end
             end
           end
@@ -2170,6 +2182,16 @@ inherited FinnerLetter: TFinnerLetter
         end
       end
     end
+    object pnlTopHeader: TPanel
+      Left = 1
+      Top = 1
+      Width = 841
+      Height = 5
+      Anchors = [akLeft, akTop, akRight]
+      BevelOuter = bvNone
+      ParentColor = True
+      TabOrder = 1
+    end
   end
   inherited DSForm: TDataSource
     AutoEdit = False
@@ -2346,7 +2368,7 @@ inherited FinnerLetter: TFinnerLetter
           end
           item
             Action = DataSetEdit
-            ImageIndex = 37
+            ImageIndex = 2
             ShortCut = 115
           end
           item

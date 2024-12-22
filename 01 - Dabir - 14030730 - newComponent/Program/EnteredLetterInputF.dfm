@@ -3602,12 +3602,13 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
             Appearance.ColorMirrorDisabledTo = 15921906
           end
           object ActionToolBar1: TActionToolBar
-            Left = 576
+            Left = 456
             Top = 2
-            Width = 251
+            Width = 371
             Height = 26
             ActionManager = ActionManager
             Align = alRight
+            Anchors = [akLeft, akTop, akRight, akBottom]
             Caption = 'ActionToolBar1'
             ColorMap.HighlightColor = clWhite
             ColorMap.BtnSelectedColor = clBtnFace
@@ -3682,6 +3683,16 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
             Appearance.ColorMirrorDisabled = 11974326
             Appearance.ColorMirrorDisabledTo = 15921906
           end
+          object Panel1: TPanel
+            Left = 440
+            Top = 2
+            Width = 148
+            Height = 26
+            Anchors = [akLeft, akTop, akRight]
+            BevelOuter = bvNone
+            ParentColor = True
+            TabOrder = 6
+          end
         end
       end
       object xpForms: TxpTabSheet
@@ -3739,6 +3750,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
             Top = 31
             Width = 811
             Height = 151
+            Cursor = crHandPoint
             Color = clBtnFace
             DataSource = dsQAddedForms
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -3952,13 +3964,23 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
           Visible = True
         end>
     end
+    object pnlTopHeader: TPanel
+      Left = 1
+      Top = 1
+      Width = 837
+      Height = 5
+      Anchors = [akLeft, akTop, akRight]
+      BevelOuter = bvNone
+      ParentColor = True
+      TabOrder = 2
+    end
   end
   inherited DSForm: TDataSource
     AutoEdit = False
     DataSet = Select_Letter
     OnDataChange = DSFormDataChange
-    Left = 289
-    Top = 65523
+    Left = 249
+    Top = 155
   end
   inherited ActionList: TActionList
     Left = 32
@@ -4443,7 +4465,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
           end
           item
             Action = DataSetEdit
-            ImageIndex = 37
+            ImageIndex = 2
             ShortCut = 115
           end
           item
@@ -4453,8 +4475,11 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
           end
           item
             Action = DataSetCancel
-            ImageIndex = 90
+            ImageIndex = 1
             ShortCut = 32776
+          end
+          item
+            Caption = '-'
           end>
         ActionBar = ActionToolBar1
         AutoSize = False
@@ -4930,8 +4955,8 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
   end
   object IdDecoderMIME1: TIdDecoderMIME [18]
     FillChar = '='
-    Left = 488
-    Top = 65520
+    Left = 216
+    Top = 144
   end
   object QAddPayvastFromECE: TADOQuery [19]
     Connection = Dm.YeganehConnection
@@ -4997,8 +5022,8 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
     MessageStyle = mssNone
     DialogSize = 604
     MessageColor = clBtnFace
-    Left = 428
-    Top = 65526
+    Left = 172
+    Top = 150
   end
   object PopupMenu3: TPopupMenu [24]
     Left = 628
@@ -5012,12 +5037,12 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
     end
   end
   inherited Timer1sssss: TTimer
-    Left = 256
-    Top = 65528
+    Left = 200
+    Top = 176
   end
   inherited ApplicationEvents1: TApplicationEvents
-    Left = 328
-    Top = 65528
+    Left = 136
+    Top = 160
   end
   object qry_AccessDelete: TADOQuery
     Connection = Dm.YeganehConnection

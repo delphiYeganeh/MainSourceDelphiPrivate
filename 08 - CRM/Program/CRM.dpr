@@ -148,7 +148,10 @@ uses
   UCustomerMap in 'Basic\UCustomerMap.pas' {FCustomerMap},
   UMapBug in 'Reports\UMapBug.pas' {FMapBug},
   UCompare_Report in 'Reports\UCompare_Report.pas' {FCompare_Report},
-  UTimeIntervalSale in 'Reports\UTimeIntervalSale.pas' {FTimeIntervalSale};
+  UTimeIntervalSale in 'Reports\UTimeIntervalSale.pas' {FTimeIntervalSale},
+  UFixedAsset in 'Fix\UFixedAsset.pas' {FFixedAsset},
+  UFixAssetHeader in 'Fix\UFixAssetHeader.pas' {FFixAssetHeader},
+  UFixAssetMove in 'Fix\UFixAssetMove.pas' {FFixAssetMove};
 
 // ReCommiteDialog in 'ReCommitedialog.pas' {RecommiteSave};
 
@@ -163,7 +166,6 @@ begin
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TfrAttachments, frAttachments);
   Application.CreateForm(TfrCustomerReport, frCustomerReport);
-
   // Application.CreateForm(TRecommiteSave, RecommiteSave);
   // Application.CreateForm(TFrCancleReport, FrCancleReport);
   Application.CreateForm(TYInputQueryF, YInputQueryF);

@@ -58,7 +58,6 @@ type
     Panel5: TPanel;
     SEdit: TEdit;
     Label2: TLabel;
-    LblPaste: TLabel;
     Cut: TAdvGlowButton;
     Paste: TAdvGlowButton;
     RBInnerOrg: TRadioButton;
@@ -75,10 +74,14 @@ type
     vdbTree: TVirtualDBTree;
     PFromOrgIsInnerOrg: TBooleanField;
     pnlMain: TPanel;
-    Label6: TLabel;
     pnlHead: TPanel;
     SpeedButton1: TAdvGlowButton;
     SpeedButton2: TAdvGlowButton;
+    LblPaste: TLabel;
+    PopupMenu_Right: TPopupMenu;
+    C1: TMenuItem;
+    p1: TMenuItem;
+    LblSide: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure ACloseExecute(Sender: TObject);
     procedure SetOrganizeMode(value:boolean);
@@ -124,6 +127,9 @@ type
     procedure FormActivate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure DBGFromORGCellClick(Column: TColumn);
+    procedure C1Click(Sender: TObject);
+    procedure p1Click(Sender: TObject);
 
   private
     FOrganizeMode : Boolean;
@@ -390,13 +396,16 @@ begin
         CommandText:=CommandText+' Code asc  ';
       Open;
     end;
+
+
 end;
 
 procedure TFromOrgForm.FromOrg_oldAfterScroll(DataSet: TDataSet);
 begin
   inherited;
-  ECode.Text:=FromOrgcode.AsString;
-  Erespon.Text:=FromOrgResponsibleStaffer.AsString;
+  ECode.Text  := FromOrgcode.AsString;
+  Erespon.Text:= FromOrgResponsibleStaffer.AsString;
+  LblSide.Caption := FromOrgTitle.AsString;
 end;
 
 procedure TFromOrgForm.FormShow(Sender: TObject);
@@ -589,7 +598,7 @@ begin
   { TODO -oparsa : 14030627 }
   SelectedNodeTitle := qryTree.FieldByName('D').AsString;
 
-  LblPaste.Caption := SelectedNodeTitle;
+  LblPaste.Caption := 'ò«  ‘œÂ  = ' + SelectedNodeTitle;
   LblPaste.Visible := True;
 
   { TODO -oparsa : 14030627 }
@@ -722,8 +731,9 @@ end;
 procedure TFromOrgForm.FromOrgAfterScroll(DataSet: TDataSet);
 begin
   inherited;
-  ECode.Text:=FromOrgcode.AsString;
-  Erespon.Text:=FromOrgResponsibleStaffer.AsString;
+  ECode.Text  := FromOrgcode.AsString;
+  Erespon.Text:= FromOrgResponsibleStaffer.AsString;
+  LblSide.Caption := FromOrgTitle.AsString;
 end;
 
 procedure TFromOrgForm.N1Click(Sender: TObject);
@@ -815,8 +825,9 @@ begin
   inherited;
     SelectedId := qryTree.FieldByName('ID').AsInteger;
     Exec_get_FromOrganizationsTitle_byID(SelectedId,title,respon,Code);
-    ECode.Text := code;
+    ECode.Text   := code;
     Erespon.Text := respon;
+    LblSide.Caption := title;
 end;
 
 procedure TFromOrgForm.LoadTree(intType: Integer; intSelected: Integer);
@@ -1014,6 +1025,27 @@ begin
   inherited;
   PageControl.ActivePageIndex := 0;
   PageControlChange(Sender);
+end;
+
+procedure TFromOrgForm.DBGFromORGCellClick(Column: TColumn);
+begin
+  inherited;
+  if (FromOrg <>  nil)  then
+    qryTree.Locate('ID', FromOrgID.AsInteger, [loCaseInsensitive]);
+end;
+
+procedure TFromOrgForm.C1Click(Sender: TObject);
+begin
+  inherited;
+  if Cut.Showing then
+    CutClick(self);
+end;
+
+procedure TFromOrgForm.p1Click(Sender: TObject);
+begin
+  inherited;
+  if Paste.Showing then
+    PasteClick(Self);
 end;
 
 end.

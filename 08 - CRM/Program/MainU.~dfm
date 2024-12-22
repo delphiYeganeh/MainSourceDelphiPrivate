@@ -29,7 +29,7 @@ inherited MainForm: TMainForm
       Top = 35
       Width = 1203
       Height = 549
-      ActivePage = xpTabSheet2
+      ActivePage = ContractTabSheet
       Align = alClient
       BiDiMode = bdRightToLeft
       Font.Charset = ARABIC_CHARSET
@@ -1665,7 +1665,7 @@ inherited MainForm: TMainForm
             1191
             36)
           object xpBitBtn7: TBitBtn
-            Left = 873
+            Left = 864
             Top = 5
             Width = 100
             Height = 25
@@ -1716,7 +1716,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object xpBitBtn5: TBitBtn
-            Left = 770
+            Left = 761
             Top = 5
             Width = 100
             Height = 25
@@ -1767,7 +1767,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object xpBitBtn3: TBitBtn
-            Left = 976
+            Left = 967
             Top = 5
             Width = 100
             Height = 25
@@ -1818,7 +1818,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object BitBtn7: TBitBtn
-            Left = 1079
+            Left = 1070
             Top = 5
             Width = 109
             Height = 25
@@ -1869,7 +1869,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object BitBtn2: TBitBtn
-            Left = 667
+            Left = 658
             Top = 5
             Width = 100
             Height = 25
@@ -1920,7 +1920,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object pnlAllContract: TPanel
-            Left = -256
+            Left = -332
             Top = 3
             Width = 553
             Height = 31
@@ -2057,7 +2057,7 @@ inherited MainForm: TMainForm
               Text = '1300/01/01'#0
             end
             object BtnAllContract: TBitBtn
-              Left = 352
+              Left = 349
               Top = 1
               Width = 188
               Height = 25
@@ -2106,6 +2106,54 @@ inherited MainForm: TMainForm
                 00FF000000FF000000FF000000F9000000840000000000000000000000000000
                 0000000000000000000000000000000000000000000000000000000000000000
                 0000000000000000000000000000000000000000000000000000}
+            end
+          end
+          object pnlContractMarketer: TPanel
+            Tag = 1
+            Left = 334
+            Top = 0
+            Width = 313
+            Height = 36
+            Anchors = [akTop, akRight]
+            BevelOuter = bvNone
+            ParentColor = True
+            TabOrder = 6
+            DesignSize = (
+              313
+              36)
+            object Label52: TLabel
+              Left = 213
+              Top = 8
+              Width = 82
+              Height = 13
+              Anchors = [akTop, akRight]
+              Caption = ' '#1576#1575#1586#1575#1585#1610#1575#1576' '#1575#1606#1578#1582#1575#1576#1610'  :'
+              Transparent = True
+            end
+            object DBcontractMARKETER: TDBLookupComboBox
+              Left = 58
+              Top = 4
+              Width = 151
+              Height = 21
+              Anchors = [akTop, akRight]
+              BiDiMode = bdLeftToRight
+              DropDownRows = 20
+              KeyField = 'MarketerID'
+              ListField = 'MarketerTitle'
+              ListSource = Dm.DMarketer
+              ParentBiDiMode = False
+              TabOrder = 0
+              OnKeyDown = DBLookUpKeyDown
+            end
+            object BitBtn10: TBitBtn
+              Left = 41
+              Top = 4
+              Width = 15
+              Height = 21
+              Anchors = [akTop, akRight]
+              Caption = '*'
+              TabOrder = 1
+              OnClick = BitBtn4Click
             end
           end
         end
@@ -2585,9 +2633,9 @@ inherited MainForm: TMainForm
         GradientFillDir = fdRightToLeft
         object GridPanel: TPanel
           Left = 0
-          Top = 129
+          Top = 161
           Width = 1195
-          Height = 410
+          Height = 378
           Align = alClient
           ParentColor = True
           TabOrder = 0
@@ -2595,7 +2643,7 @@ inherited MainForm: TMainForm
             Left = 1
             Top = 223
             Width = 1193
-            Height = 186
+            Height = 154
             Cursor = crHandPoint
             Align = alClient
             DataSource = Dm.DSelect_FollowUP_By_Date
@@ -2614,6 +2662,7 @@ inherited MainForm: TMainForm
             TitleFont.Style = [fsBold]
             OnDrawColumnCell = FollowGridDrawColumnCell
             OnDblClick = FollowGridDblClick
+            OnKeyPress = FollowGridKeyPress
             YeganehColor = False
             YeganehFinish = False
             PageNumber = False
@@ -2626,9 +2675,23 @@ inherited MainForm: TMainForm
             InvertFarsiDate = True
             TitleSort = True
             AutoInsert = False
+            OnNeedColorCondition = FollowGridNeedColorCondition
             FooterFields = 'Count'
             OnNeedFontCondition = FollowGridNeedFontCondition
             Columns = <
+              item
+                Expanded = False
+                FieldName = 'RowID'
+                Title.Alignment = taCenter
+                Title.Caption = #1585#1583#1610#1601
+                Title.Font.Charset = ARABIC_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Tahoma'
+                Title.Font.Style = []
+                Width = 35
+                Visible = True
+              end
               item
                 Expanded = False
                 FieldName = 'CustomerID'
@@ -2898,6 +2961,45 @@ inherited MainForm: TMainForm
                 Title.Font.Style = []
                 Width = 100
                 Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'StatusSaveDate'
+                Title.Alignment = taCenter
+                Title.Caption = #1578#1575#1585#1610#1582' '#1575#1606#1580#1575#1605' '#1588#1583#1607
+                Title.Font.Charset = ARABIC_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -12
+                Title.Font.Name = 'Tahoma'
+                Title.Font.Style = []
+                Width = 119
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'StatusSaveDateTime'
+                Title.Alignment = taCenter
+                Title.Caption = #1586#1605#1575#1606' '#1575#1606#1580#1575#1605' '#1588#1583#1607
+                Title.Font.Charset = ARABIC_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -12
+                Title.Font.Name = 'Tahoma'
+                Title.Font.Style = []
+                Width = 123
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'TimeInterval'
+                Title.Alignment = taCenter
+                Title.Caption = #1601#1575#1589#1604#1607' '#1586#1605#1575#1606#1610
+                Title.Font.Charset = ARABIC_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -12
+                Title.Font.Name = 'Tahoma'
+                Title.Font.Style = []
+                Visible = True
               end>
           end
           object Panel13: TPanel
@@ -3150,8 +3252,103 @@ inherited MainForm: TMainForm
             DesignSize = (
               1191
               38)
+            object LockReport: TSpeedButton
+              Left = 620
+              Top = 6
+              Width = 23
+              Height = 22
+              Anchors = [akTop, akRight]
+              Glyph.Data = {
+                36040000424D3604000000000000360000002800000010000000100000000100
+                2000000000000004000000000000000000000000000000000000000000000000
+                00000000000000000000000000004B340D4CBC8122BEEFA52BF3EFA52BF3BB7F
+                21BD4A330D4B0000000000000000000000000000000000000000000000000000
+                00000000000000000000835A1785FCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD
+                2DFFFCAD2DFF8159178300000000000000000000000000000000000000000000
+                0000000000004C340E4DFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD
+                2DFFFCAD2DFFFCAD2DFF4A330D4B000000000000000000000000000000000000
+                000000000000BD8222BFFCAD2DFFFCAD2DFFFCAD2DFFC64F19FFC64F19FFFCAD
+                2DFFFCAD2DFFFCAD2DFFBB7F21BD000000000000000000000000000000000000
+                000000000000EFA52BF3FCAD2DFFFCAD2DFFFCAD2DFFC64F19FFC64F19FFFCAD
+                2DFFFCAD2DFFFCAD2DFFEDA32BF1000000000000000000000000000000000000
+                000000000000EFA52BF3FCAD2DFFFCAD2DFFFCAD2DFFC64F19FFC64F19FFFCAD
+                2DFFFCAD2DFFFCAD2DFFEEA32BF2000000000000000000000000000000000000
+                000000000000BE8222C0FCAD2DFFFCAD2DFFFCAD2DFFC64F19FFC64F19FFFCAD
+                2DFFFCAD2DFFFCAD2DFFBC8122BE000000000000000000000000000000000000
+                0000000000004E360E4FFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD
+                2DFFFCAD2DFFFCAD2DFF4B340D4C000000000000000000000000000000000000
+                00000000000000000000EBB65DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD
+                2DFFFCAD2DFFEAB65EFF00000000000000000000000000000000000000000000
+                00000000000000000000D8C194FFE3BB74FFBE8222C0F0A62AF4F0A62AF4BD82
+                22BFE3BB75FFD8C194FF00000000000000000000000000000000000000000000
+                00000000000000000000D8C194FFD8C194FF0000000000000000000000000000
+                0000D8C194FFD8C194FF00000000000000000000000000000000000000000000
+                00000000000000000000D8C194FFD8C194FF0000000000000000000000000000
+                0000D8C194FFD8C194FF00000000000000000000000000000000000000000000
+                00000000000000000000CDB68CF2D8C194FF1815101C00000000000000001916
+                111DD8C194FFCBB58CF100000000000000000000000000000000000000000000
+                00000000000000000000928264ACD8C194FF998968B51815101C1815101C998A
+                6AB6D8C194FF908163AA00000000000000000000000000000000000000000000
+                000000000000000000001916111DC9B28AEDD8C194FFD8C194FFD8C194FFD8C1
+                94FFC9B28AED1815101C00000000000000000000000000000000000000000000
+                00000000000000000000000000001916111D928264ACCDB68CF2CDB68CF29384
+                65AE211E17270000000000000000000000000000000000000000}
+              Visible = False
+              OnClick = LockReportClick
+            end
+            object UnlockRep: TSpeedButton
+              Left = 620
+              Top = 6
+              Width = 23
+              Height = 22
+              Anchors = [akTop, akRight]
+              Glyph.Data = {
+                36040000424D3604000000000000360000002800000010000000100000000100
+                2000000000000004000000000000000000000000000000000000000000000000
+                0000000000004B340D4CBC8122BEEFA52BF3EFA52BF3BB7F21BD4A330D4B0000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000835A1785FCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFF8159
+                1783000000000000000000000000000000000000000000000000000000004C34
+                0E4DFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD
+                2DFF4A330D4B000000000000000000000000000000000000000000000000BD82
+                22BFFCAD2DFFFCAD2DFFFCAD2DFFC64F19FFC64F19FFFCAD2DFFFCAD2DFFFCAD
+                2DFFBB7F21BD000000000000000000000000000000000000000000000000EFA5
+                2BF3FCAD2DFFFCAD2DFFFCAD2DFFC64F19FFC64F19FFFCAD2DFFFCAD2DFFFCAD
+                2DFFEDA32BF1000000000000000000000000000000000000000000000000EFA5
+                2BF3FCAD2DFFFCAD2DFFFCAD2DFFC64F19FFC64F19FFFCAD2DFFFCAD2DFFFCAD
+                2DFFEEA32BF2000000000000000000000000000000000000000000000000BE82
+                22C0FCAD2DFFFCAD2DFFFCAD2DFFC64F19FFC64F19FFFCAD2DFFFCAD2DFFFCAD
+                2DFFBC8122BE0000000000000000000000000000000000000000000000004E36
+                0E4FFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD
+                2DFF4B340D4C0000000000000000000000000000000000000000000000000000
+                0000865C1888FCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFFCAD2DFFEAB6
+                5EFF000000000000000000000000000000000000000000000000000000000000
+                0000000000004E360E4FBE8222C0F0A62AF4F0A62AF4BD8222BFE3BB75FFD8C1
+                94FF000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000D8C194FFD8C1
+                94FF000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000D8C194FFD8C1
+                94FF000000000000000000000000D8C194FFD8C194FF00000000000000000000
+                0000000000000000000000000000000000000000000000000000D3BB91F9D8C1
+                94FF050503060000000006050407D8C194FFD1BC90F800000000000000000000
+                0000000000000000000000000000000000000000000000000000AC9A76CBD8C1
+                94FF665C46790908060B675C477AD8C194FFA99775C900000000000000000000
+                0000000000000000000000000000000000000000000000000000403A2C4CD8C1
+                94FFD8C194FFD8C194FFD8C194FFD8C194FF443D2E5000000000000000000000
+                000000000000000000000000000000000000000000000000000000000000403A
+                2C4CAA9974CACFB98EF4AA9974CA40392C4B0000000000000000}
+              OnClick = UnlockRepClick
+            end
+            object lblLockRep: TLabel
+              Left = 520
+              Top = 12
+              Width = 93
+              Height = 13
+              Anchors = [akTop, akRight]
+              Caption = #1711#1586#1575#1585#1588#1610' '#1602#1601#1604' '#1606#1610#1587#1578
+            end
             object Button22: TBitBtn
-              Left = 989
+              Left = 969
               Top = 5
               Width = 80
               Height = 25
@@ -3202,7 +3399,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button25: TBitBtn
-              Left = 908
+              Left = 888
               Top = 5
               Width = 80
               Height = 25
@@ -3253,7 +3450,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button18: TBitBtn
-              Left = 828
+              Left = 808
               Top = 5
               Width = 80
               Height = 25
@@ -3304,7 +3501,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button21: TBitBtn
-              Left = 748
+              Left = 728
               Top = 5
               Width = 80
               Height = 25
@@ -3355,7 +3552,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button23: TBitBtn
-              Left = 668
+              Left = 648
               Top = 5
               Width = 80
               Height = 25
@@ -3456,7 +3653,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object btnViwCustomer: TBitBtn
-              Left = 1070
+              Left = 1050
               Top = 5
               Width = 113
               Height = 25
@@ -3507,7 +3704,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object PnlAllAct: TPanel
-              Left = 80
+              Left = 60
               Top = 2
               Width = 443
               Height = 35
@@ -3692,7 +3889,7 @@ inherited MainForm: TMainForm
               end
             end
             object BitBtn9: TBitBtn
-              Left = -50
+              Left = -70
               Top = 5
               Width = 127
               Height = 25
@@ -3748,7 +3945,6 @@ inherited MainForm: TMainForm
             Top = 84
             Width = 1193
             Height = 139
-            Cursor = crHandPoint
             Align = alTop
             DataSource = Dm.DSelect_FollowUP_Pin
             Font.Charset = ARABIC_CHARSET
@@ -3813,7 +4009,7 @@ inherited MainForm: TMainForm
           Left = 0
           Top = 0
           Width = 1195
-          Height = 129
+          Height = 161
           StartColor = 16774388
           EndColor = 16767449
           FillDirection = fdLeftToRight
@@ -3839,10 +4035,10 @@ inherited MainForm: TMainForm
           TabOrder = 1
           DesignSize = (
             1193
-            97)
+            129)
           object Label5: TLabel
             Left = 731
-            Top = 12
+            Top = 45
             Width = 67
             Height = 13
             Anchors = [akTop, akRight]
@@ -3856,7 +4052,7 @@ inherited MainForm: TMainForm
             Transparent = True
           end
           object Label8: TLabel
-            Left = 498
+            Left = 493
             Top = 12
             Width = 71
             Height = 13
@@ -3871,8 +4067,8 @@ inherited MainForm: TMainForm
             Transparent = True
           end
           object Label10: TLabel
-            Left = 1100
-            Top = 38
+            Left = 140
+            Top = 20
             Width = 80
             Height = 13
             Anchors = [akTop, akRight]
@@ -3886,8 +4082,8 @@ inherited MainForm: TMainForm
             Transparent = True
           end
           object Label11: TLabel
-            Left = 1059
-            Top = 38
+            Left = 91
+            Top = 20
             Width = 6
             Height = 13
             Anchors = [akTop, akRight]
@@ -3900,7 +4096,7 @@ inherited MainForm: TMainForm
             ParentFont = False
           end
           object Label9: TLabel
-            Left = 496
+            Left = 490
             Top = 38
             Width = 74
             Height = 13
@@ -3915,7 +4111,7 @@ inherited MainForm: TMainForm
             Transparent = True
           end
           object Label40: TLabel
-            Left = 327
+            Left = 338
             Top = 8
             Width = 13
             Height = 41
@@ -3933,12 +4129,12 @@ inherited MainForm: TMainForm
             Transparent = True
           end
           object Label41: TLabel
-            Left = 947
-            Top = 38
-            Width = 53
+            Left = 733
+            Top = 93
+            Width = 65
             Height = 13
             Anchors = [akTop, akRight]
-            Caption = #1601#1593#1575#1604#1610#1578'      :'
+            Caption = #1601#1593#1575#1604#1610#1578'          :'
             Font.Charset = ARABIC_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -3948,8 +4144,8 @@ inherited MainForm: TMainForm
             Transparent = True
           end
           object Label43: TLabel
-            Left = 499
-            Top = 64
+            Left = 491
+            Top = 72
             Width = 73
             Height = 13
             Anchors = [akTop, akRight]
@@ -3963,8 +4159,8 @@ inherited MainForm: TMainForm
             Transparent = True
           end
           object Label44: TLabel
-            Left = 263
-            Top = 64
+            Left = 495
+            Top = 94
             Width = 69
             Height = 13
             Anchors = [akTop, akRight]
@@ -3979,7 +4175,7 @@ inherited MainForm: TMainForm
           end
           object DonStatus: TComboBox
             Left = 579
-            Top = 8
+            Top = 41
             Width = 150
             Height = 21
             Anchors = [akTop, akRight]
@@ -4000,9 +4196,9 @@ inherited MainForm: TMainForm
               #1575#1606#1580#1575#1605' '#1588#1583#1607)
           end
           object Comment: TEdit
-            Left = 347
+            Left = 352
             Top = 8
-            Width = 150
+            Width = 137
             Height = 21
             Anchors = [akTop, akRight]
             Font.Charset = ARABIC_CHARSET
@@ -4014,8 +4210,8 @@ inherited MainForm: TMainForm
             TabOrder = 2
           end
           object Bsuccess: TEdit
-            Left = 1067
-            Top = 34
+            Left = 99
+            Top = 16
             Width = 34
             Height = 21
             Anchors = [akTop, akRight]
@@ -4029,8 +4225,8 @@ inherited MainForm: TMainForm
             Text = '0'
           end
           object Esuccess: TEdit
-            Left = 1012
-            Top = 34
+            Left = 44
+            Top = 16
             Width = 46
             Height = 21
             Anchors = [akTop, akRight]
@@ -4044,9 +4240,9 @@ inherited MainForm: TMainForm
             Text = '100'
           end
           object DonComment: TEdit
-            Left = 347
+            Left = 352
             Top = 33
-            Width = 150
+            Width = 137
             Height = 21
             Anchors = [akTop, akRight]
             Font.Charset = ARABIC_CHARSET
@@ -4059,7 +4255,7 @@ inherited MainForm: TMainForm
           end
           object ShowAction: TCheckBox
             Left = 731
-            Top = 38
+            Top = 71
             Width = 69
             Height = 13
             Anchors = [akTop, akRight]
@@ -4077,7 +4273,7 @@ inherited MainForm: TMainForm
           end
           object ActionType: TDBLookupComboBox
             Left = 579
-            Top = 33
+            Top = 66
             Width = 150
             Height = 21
             Anchors = [akTop, akRight]
@@ -4097,8 +4293,8 @@ inherited MainForm: TMainForm
             TabOrder = 7
           end
           object btnSrchFollow: TBitBtn
-            Left = 14
-            Top = 18
+            Left = -57
+            Top = 12
             Width = 80
             Height = 26
             Anchors = [akTop, akRight]
@@ -4148,23 +4344,24 @@ inherited MainForm: TMainForm
               1C83151105160000000000000000000000000000000000000000}
           end
           object chkCommentType: TCheckBox
-            Left = 199
-            Top = 24
-            Width = 121
-            Height = 17
+            Left = 247
+            Top = 7
+            Width = 89
+            Height = 45
             Anchors = [akTop, akRight]
             Caption = #1580#1587#1578#1580#1608#1610' '#1578#1585#1705#1610#1576#1610' ('#1610#1575')'
             Color = 16576491
             ParentColor = False
             TabOrder = 9
+            WordWrap = True
           end
           object lcbGroup: TDBLookupComboBox
-            Left = 813
-            Top = 34
-            Width = 134
+            Left = 579
+            Top = 89
+            Width = 150
             Height = 21
             Anchors = [akTop, akRight]
-            BiDiMode = bdRightToLeft
+            BiDiMode = bdLeftToRight
             KeyField = 'GroupID'
             ListField = 'GroupTitle'
             ListSource = DGroups
@@ -4175,13 +4372,13 @@ inherited MainForm: TMainForm
             OnKeyUp = dblGroupsKeyUp
           end
           object RGTypeReport: TRadioGroup
-            Left = 579
-            Top = 57
-            Width = 605
-            Height = 33
+            Left = 816
+            Top = 47
+            Width = 375
+            Height = 50
             Anchors = [akTop, akRight]
-            Caption = #1606#1608#1593' '#1711#1586#1575#1585#1588
-            Columns = 6
+            Caption = #1711#1586#1610#1606#1607' '#1607#1575#1610' '#1575#1606#1578#1582#1575#1576#1610
+            Columns = 3
             ItemIndex = 0
             Items.Strings = (
               #1576#1575#1586#1607' '#1575#1606#1578#1582#1575#1576#1610
@@ -4194,8 +4391,8 @@ inherited MainForm: TMainForm
             OnClick = RGTypeReportClick
           end
           object edtCustomerNo: TEdit
-            Left = 347
-            Top = 59
+            Left = 339
+            Top = 67
             Width = 150
             Height = 21
             Anchors = [akTop, akRight]
@@ -4208,8 +4405,8 @@ inherited MainForm: TMainForm
             TabOrder = 11
           end
           object edtCustomerName: TEdit
-            Left = 109
-            Top = 59
+            Left = 339
+            Top = 91
             Width = 150
             Height = 21
             Anchors = [akTop, akRight]
@@ -4222,8 +4419,8 @@ inherited MainForm: TMainForm
             TabOrder = 12
           end
           object pnlTime: TPanel
-            Left = 803
-            Top = 1
+            Left = 806
+            Top = 97
             Width = 385
             Height = 30
             Anchors = [akTop, akRight]
@@ -4365,6 +4562,200 @@ inherited MainForm: TMainForm
               Text = '1386/12/29'#0
             end
           end
+          object pnlOtherMarketer: TPanel
+            Tag = 1
+            Left = 40
+            Top = 63
+            Width = 278
+            Height = 52
+            Anchors = [akTop, akRight]
+            BevelOuter = bvNone
+            ParentColor = True
+            TabOrder = 14
+            DesignSize = (
+              278
+              52)
+            object Label49: TLabel
+              Left = 159
+              Top = 7
+              Width = 114
+              Height = 13
+              Anchors = [akTop, akRight]
+              Caption = ' '#1576#1575#1586#1575#1585#1610#1575#1576'                         :'
+              Transparent = True
+            end
+            object Label50: TLabel
+              Left = 2
+              Top = 35
+              Width = 38
+              Height = 13
+              Caption = #1576#1607' '#1583#1602#1610#1602#1607
+            end
+            object dblMarketer: TDBLookupComboBox
+              Left = 17
+              Top = 4
+              Width = 136
+              Height = 21
+              Anchors = [akTop, akRight]
+              BiDiMode = bdLeftToRight
+              DropDownRows = 20
+              KeyField = 'MarketerID'
+              ListField = 'MarketerTitle'
+              ListSource = Dm.DMarketer
+              ParentBiDiMode = False
+              TabOrder = 0
+              OnKeyDown = DBLookUpKeyDown
+            end
+            object BitBtn4: TBitBtn
+              Left = 2
+              Top = 4
+              Width = 15
+              Height = 21
+              Anchors = [akTop, akRight]
+              Caption = '*'
+              TabOrder = 1
+              OnClick = BitBtn4Click
+            end
+            object cbTimeInterval: TCheckBox
+              Left = 160
+              Top = 34
+              Width = 117
+              Height = 13
+              Anchors = [akTop, akRight]
+              Caption = #1576#1585#1585#1587#1610' '#1601#1575#1589#1604#1607' '#1586#1605#1575#1606#1610
+              Color = 16576491
+              Font.Charset = ARABIC_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentColor = False
+              ParentFont = False
+              TabOrder = 2
+              OnClick = ShowActionClick
+            end
+            object edtTimeInterval: TEdit
+              Left = 48
+              Top = 31
+              Width = 102
+              Height = 21
+              Anchors = [akTop, akRight]
+              Font.Charset = ARABIC_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              MaxLength = 2
+              ParentFont = False
+              TabOrder = 3
+              Text = '20'
+            end
+          end
+          object pnlSourcedate: TPanel
+            Left = 570
+            Top = 10
+            Width = 233
+            Height = 28
+            Anchors = [akTop, akRight]
+            BevelOuter = bvNone
+            Enabled = False
+            ParentColor = True
+            TabOrder = 15
+            DesignSize = (
+              233
+              28)
+            object SpeedButton14: TSpeedButton
+              Left = 133
+              Top = 3
+              Width = 23
+              Height = 22
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                18000000000000030000C30E0000C30E00000000000000000000ABA4A3827A79
+                827A79827A79827A79827A79827A79827A79827A79827A79827A79827A79827A
+                79827A79827A79827A79ABA4A3DCD4D1F7EEEBF7EEEBF7EEEBE0DEDEF7EEEBF7
+                EEEBF7EEEBF7EEEBE0DEDEF7EEEBF7EEEBF7EEEBD2CAC8827A79ABA4A3DDD5D3
+                F8EFECF8EFECF8EFECDADADAF8EFECF8EFECF8EFECF8EFECDADADAF8EFECF8EF
+                ECF8EFECD2CAC8827A79ABA4A3DED7D4E1DFDEDADADADADADADADADADADADADA
+                DADADADADADADADADADADADADADADADADAE1DFDED4CECB827A79ABA4A3DED8D5
+                F9F2EFF9F2EFF9F2EFDADADA23C8FF23C8FF23C8FF23C8FFDADADAF9F2EFF9F2
+                EFF9F2EFD5CFCD827A79ABA4A3DFD9D7FAF3F1FAF3F1FAF3F1DADADA23C8FF23
+                C8FF23C8FF23C8FFDADADAFAF3F1FAF3F1FAF3F1D6D0CE827A79ABA4A3DFDAD8
+                E1E0E0DADADADADADADADADADADADADADADADADADADADADADADADADADADADADA
+                DAE1E0E0D6D1CF827A79ABA4A3E0DBDAFBF6F4FBF6F4FBF6F4DADADAFBF6F4FB
+                F6F4FBF6F4FBF6F4DADADAFBF6F4FBF6F4FBF6F4D7D2D1827A79ABA4A3E0DDDB
+                FCF7F5FCF7F5FCF7F5E2E0E0FCF7F5FCF7F5FCF7F5FCF7F5E2E0E0FCF7F5FCF7
+                F5FCF7F5D8D4D2827A794242B48280C98E8CD48D8BD28C8BCF8C8ACC8B89CA8B
+                89C88A88C68988C48987C38987C38987C38987C37877B32424AD2828B52828B5
+                2525B12525B04242B4A1A1CC9393C48181BF8888C64D4DAF6060BB2424AD2424
+                AD2424AD2424A42424A42828B53C3CCC4444D54444D56060D2B0B0D9CDCDE37E
+                7ED39797D08383D39494D54444D44444D54444D53737BC2424A42828B54747DB
+                5353E84F4FDC5959E86A6AE56A6AD45757E76969E66060D26666E65454E94E4E
+                D95454EB4141CA2424A42828B53232CD4141AF71718F3434D63838B17B7A9133
+                33D13333B68281933131CA3131BD8585933030C12E2EBD2424A4DEDEEE8080D6
+                8585C89B9BAD8080D38080C7A2A2AE8080CF7D7DC4A8A8AC7F7FC87E7EC2A9A9
+                A97D7DBE7878C0E4E4EEFFFFFFFFFFFFE1E1E3B6B6B6FFFFFFE9E9EAB3B2B3FF
+                FFFFF1F1F2AEAEAEFFFFFFFAFAFAAAA9AAFCFCFDFFFFFFFFFFFF}
+              OnClick = SpeedButton14Click
+            end
+            object Label51: TLabel
+              Left = 161
+              Top = 7
+              Width = 65
+              Height = 13
+              Anchors = [akTop, akRight]
+              Caption = #1578#1575#1585#1610#1582' '#1575#1606#1578#1582#1575#1576#1610' :'
+            end
+            object SpeedButton15: TSpeedButton
+              Left = 33
+              Top = 3
+              Width = 23
+              Height = 22
+              Hint = #1585#1608#1586' '#1576#1593#1583
+              Caption = '+'
+              OnClick = SpeedButton15Click
+            end
+            object SpeedButton16: TSpeedButton
+              Left = 9
+              Top = 3
+              Width = 23
+              Height = 22
+              Hint = #1585#1608#1586' '#1602#1576#1604
+              Caption = '-'
+              OnClick = SpeedButton16Click
+            end
+            object edtSourceDay: TShamsiDateEdit
+              Left = 59
+              Top = 4
+              Width = 73
+              Height = 21
+              Anchors = [akLeft, akTop, akRight]
+              Color = clScrollBar
+              Font.Charset = ARABIC_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+              Text = '1386/12/29'#0
+            end
+          end
+          object RGTypeRepMain: TRadioGroup
+            Left = 816
+            Top = 1
+            Width = 375
+            Height = 41
+            Anchors = [akTop, akRight]
+            Caption = #1606#1608#1593' '#1711#1586#1575#1585#1588
+            Columns = 2
+            ItemIndex = 0
+            Items.Strings = (
+              #1576#1585' '#1575#1587#1575#1587' '#1711#1586#1610#1606#1607' '#1607#1575#1610' '#1575#1606#1578#1582#1575#1576#1610
+              #1576#1585' '#1575#1587#1575#1587' '#1578#1575#1585#1610#1582' '#1575#1606#1578#1582#1575#1576#1610)
+            TabOrder = 16
+            OnClick = RGTypeRepMainClick
+          end
         end
       end
       object xpTabSheet2: TxpTabSheet
@@ -4409,7 +4800,7 @@ inherited MainForm: TMainForm
             ParentFont = False
           end
           object BitBtn1: TBitBtn
-            Left = 1088
+            Left = 1080
             Top = 4
             Width = 95
             Height = 28
@@ -4455,7 +4846,7 @@ inherited MainForm: TMainForm
               3C85131A10280000000000000000000000000000000000000000}
           end
           object BitBtn3: TBitBtn
-            Left = 990
+            Left = 982
             Top = 4
             Width = 95
             Height = 28
@@ -4464,43 +4855,61 @@ inherited MainForm: TMainForm
             Caption = #1575#1602#1583#1575#1605#1575#1578
             TabOrder = 1
             Glyph.Data = {
-              36040000424D3604000000000000360000002800000010000000100000000100
-              2000000000000004000000000000000000000000000000000000000000000000
-              0000000000000000000019110B217C573C9DA57654C9B5865FDCAF815CD5966C
-              4CBA5A402B760302010400000000000000000000000000000000000000000000
-              000000000000573C2970C08E66E3E1AD83FFDCAE8AFFD0AC8EFFDDB393FFDAAA
-              83FFE3AC80FD9E714EC61A130C23000000000000000000000000000000000000
-              00004F382668D49E73F1D7A883FFD1BFADFFFFFAF2FFEDE5DBFFFFFAF2FFF4ED
-              E3FFCFB098FFE1AB83FFA77955D00D0906120000000000000000000000000C08
-              0511B4825DD8D8A883FFFAF2E8FFFFF9F1FFFFFAF2FFFFFAF2FFFFFAF2FFFFFA
-              F2FFFFF9F1FFE8CCB7FFE4AC82FF7E5A3EA20000000000000000000000006647
-              3185E5AD82FFD4BBA8FFF7F0E8FFFFFAF2FFFFFAF2FFFFFAF2FFFFFAF2FFFFFA
-              F2FFFFFAF2FFE2D9CEFFD7AD8CFFBD8A62E00906040D00000000000000008F65
-              47B1DAAA83FFFEF8F0FFFFFAF2FFFFFAF2FFFFFAF2FFFFFAF2FFFFFAF2FFFFFA
-              F2FFFFFAF2FFFFFAF2FFE5C8B1FFE5AB7FFF3F2C1D5500000000000000009A70
-              4FBFD6A887FFE4DBD0FFFFFAF2FFFFFAF2FFFFFAF2FFAB9989FFE1D7CCFFFFFA
-              F2FFFFFAF2FFFFFAF2FFCFBCABFFE4AB7EFF5D412C7B0000000000000000926A
-              4AB6DAAA85FFFFFAF2FFFFFAF2FFFFFAF2FFD9CFC2FFDDD2C7FFFDF8F0FFFFFA
-              F2FFFFFAF2FFFFFAF2FFE7CEB7FFE5AC80FF4832226100000000000000007453
-              3896E3AB80FFE0CEBEFFF7F0E8FFDFD5CBFFE6DDD2FFFFFAF2FFFFFAF2FFFFFA
-              F2FFFFFAF2FFE8E0D6FFD9B293FFC9956AEA130D091A00000000000000001B13
-              0D25C5926AE7D1A785FFFEF8EFFFFFFAF2FFFFFAF2FFFFFAF2FFFFFAF2FFFFFA
-              F2FFFFFAF2FFEAD9C9FFDEA981FF8F6647B40000000000000000000000000000
-              00006D4D358EE1A97FFBD8AE8DFFD8CBBFFFFFFAF2FFF6EFE7FFFFFAF2FFF5EE
-              E6FFD7C3B2FFDBA984FFC28D65E521170E2C0000000000000000000000000000
-              0000010000017A573A9DD9A277F5DBA982FFDDB697FFCCAD93FFDFBC9FFFDBB1
-              8FFFE2AC82FFC18C64E9BA7F52FFA1714BD52F21163F00000000000000000000
-              000000000000000000004330205A996E4DBEC49067E9DDA57AFAD59E73F5B482
-              5DD9815C40A423180F30B78057F2EAAF83FF845C3FAA00000000000000000000
-              000000000000000000000000000000000000724D31A0B57A4EFFB57A4EFF261A
-              1136000000000000000079553A9D8F6446B70403020600000000000000000000
-              000000000000000000000000000000000000AE7B54E1C38F65ECC38F65EC7D58
-              3AA2000000000000000000000000000000000000000000000000000000000000
-              000000000000000000000000000000000000A87551D7BA8862E0BA8862E07854
-              399A000000000000000000000000000000000000000000000000}
+              76060000424D7606000000000000360000002800000014000000140000000100
+              2000000000004006000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              000000000000000000000000000000000000000000006D6D6D7C8A89879B8A89
+              879B8A89879B8A89879B8A89879B8A89879B8A89879B8A89879B8A89879B8A89
+              879B8A89879B8A89879B6B6A6979000000000000000000000000000000000000
+              000023232325E9E9E8FFE9E9E8FFE9E9E8FFE9E9E8FFE9E9E8FFE9E9E8FFE9E9
+              E8FFE9E9E8FFE9E9E8FFE9E9E8FFE9E9E8FFE9E9E8FFE9E9E8FFDEDDDCFF3F3F
+              3D460000000000000000000000000000000023232325F4F4F3FF656464FF605D
+              5DFFB8B7B7FF5AB8F9FF30A3F8FF6FBEF6FFA1A19FFF636161FF727070FFC7C7
+              C7FF636161FF5B5A5BFFE5E4E4FF565654600000000000000000000000000000
+              000023232325F6F6F5FF5C5A59FF585655FFA7A7A7FF47B2F9FF1890F7FF58B4
+              F7FFA7A6A4FF5B5958FF696766FFCBCACAFF5B5958FF52504FFFE5E5E4FF5656
+              54600000000000000000000000000000000023232325F6F6F5FFAFAEACFFA4A4
+              A3FFD2D2D1FFAAD9F6FF8DD0F8FFA7D5F5FFD1D1CFFFABABAAFFABABAAFFE2E2
+              E1FFABABAAFF9D9C9BFFE5E5E4FF565654600000000000000000000000000000
+              000023232325F6F6F5FF6F6F6EFF696767FFBDBCBBFF8A8989FF6D6C6BFF9492
+              92FF8ECDF6FF3DABF8FF54B4F8FFCCCCCBFF6E6C6CFF646262FFE5E5E4FF5656
+              54600000000000000000000000000000000023232325F6F6F5FF5C5A59FF5856
+              55FFA7A7A7FF82807FFF5B5958FF807E7DFF82CBF7FF1890F7FF35A3F8FFCBCA
+              CAFF5B5958FF52504FFFE5E5E4FF565654600000000000000000000000000000
+              000023232325F6F6F5FFAEADACFFA4A4A3FFCFCFCFFFBFBEBEFFABABAAFFB7B7
+              B6FFC2E2F4FF8DD0F8FF90CDF7FFE1E1E1FFABABAAFF9B9A99FFE5E5E4FF5656
+              54600000000000000000000000000000000023232325F6F6F5FF40ACFAFF38A8
+              F9FFADD6F4FF878685FF6A6767FF959392FFA6A5A5FF696867FF797778FFBCDE
+              F3FF3AA8F9FF37A7F9FFE5E5E4FF565654600000000000000000000000000000
+              000023232325F6F6F5FF1A9BFAFF1890F7FF90CBF6FF82807FFF5B5958FF807E
+              7DFFA7A6A4FF5B5958FF696766FFBADFF5FF1894F8FF1994F8FFE5E5E4FF5656
+              54600000000000000000000000000000000023232325F6F6F5FF82CCF8FF78C7
+              F7FFBFDEF4FFB8B7B6FFA2A09FFFB0B0AFFFCBCBCAFFA2A09FFFA1A09FFFD7E9
+              F3FF7FCBF8FF6EC1F7FFE5E5E4FF565654600000000000000000000000000000
+              000022292D2FB2DDF7FFAAD9F6FFAAD9F6FFAAD9F6FFAAD9F6FFAAD9F6FFAAD9
+              F6FFAAD9F6FFAAD9F6FFAAD9F6FFAAD9F6FFAAD9F6FFAAD9F6FF85C4EFFF505D
+              646E00000000000000000000000000000000223743451AA9FFFF1AA9FFFF1AA7
+              FEFF3799F1FF1E99F8FF1AA9FFFF1AA9FFFF1AA9FFFF1AA9FFFF209BF9FF3698
+              F1FF1AA6FEFF1AA9FFFF199BFAFF476A818B0000000000000000000000000000
+              0000223743451AA9FFFF1AA9FFFF199BFBFFCBD6E2FF98BBE1FF1AA9FFFF1AA9
+              FFFF1AA9FFFF1AA9FFFF75AFEBFFCFD4DBFF189BFAFF1AA9FFFF199BFAFF476A
+              818B00000000000000000000000000000000121C222326ACFEFE1AA9FFFF1AA8
+              FFFFD2DEE8FF9DC8E4FF1AA9FFFF1AA9FFFF1AA9FFFF1AA9FFFF7AC1F1FFD3DA
+              DFFF19A8FFFF1AA8FFFF1C9AF8FF2C3D494F0000000000000000000000000000
+              000000000000000000000000000000000000CFCFCFE5959594AD000000000000
+              000000000000000000006D6D6C78D0D0CFEF0000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000C7C6C6DC8C8C8AA2000000000000000000000000000000006464636ECCCB
+              CAE9000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000001E1E1E210C0C0C0E000000000000
+              0000000000000000000007070708212121250000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000}
           end
           object BitBtn5: TBitBtn
-            Left = 678
+            Left = 670
             Top = 4
             Width = 95
             Height = 28
@@ -4585,7 +4994,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object btnContract: TBitBtn
-            Left = 892
+            Left = 884
             Top = 4
             Width = 95
             Height = 28
@@ -4594,83 +5003,89 @@ inherited MainForm: TMainForm
             TabOrder = 2
             OnClick = btnContractClick
             Glyph.Data = {
-              36090000424D3609000000000000360000002800000018000000180000000100
-              2000000000000009000000000000000000000000000000000000000000000000
+              FA090000424DFA09000000000000360000002800000019000000190000000100
+              200000000000C409000000000000000000000000000000000000000000000000
+              0000000000000100000310060640010101060000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              00000000000000000000260F0F9E3F1918FF2C1111B2000000003C39233FD4C9
+              7ADFE2D883EEE2D883EEE2D883EEE2D883EEE2D883EEE2D883EEE2D883EEE2D8
+              83EEE2D883EEE2D883EEE2D883EEDAD07FE75955345E00000000000000000000
+              000000000000000000000F06063E3F1918FE381514E13F1918FF15080853A49D
+              5FADF2E78CFFBBA868FF4C2820FF4B261FFF4B261FFF4B261FFF4B261FFF4B26
+              1FFF4B261FFF4B261FFF522E24FF816543FFE7DB85FFCBC375D7000000000000
+              0000000000000000000000000000331414D03A1715EA06020219371615DD3616
+              14E0A9A061B5F2E78CFFD2C277FF7D6040FF7B5E3FFF7B5E3FFF7B5E3FFF7B5E
+              3FFF7B5E3FFF7B5E3FFF7B5E3FFF76593CFF411C1AFF896E48FFD4C97ADF0000
+              0000000000000000000000000000040202123F1918FF200D0C83000000001B0B
+              0A6F3F1918FF9A8E58BFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E7
+              8CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFF6B4C35FF603F2EFFD4C9
+              7ADF000000000000000000000000000000000100000328100FA10E0505370000
+              0000190A0A653F1918FF998B56C1F2E78CFFF2E78CFFF2E78CFFE3D682FFA58E
+              5AFFD1C277FFEFE38AFFBAA768FF9F8856FFBEAA6AFFF2E78CFF6F5138FF5D3C
+              2CFFD4C97ADF0000000000000000000000000000000000000000000000000000
+              000000000000180A09623F1918FF978A56C1F2E78CFFF2E78CFFF2E78CFFAF99
+              60FF3F1918FF401A19FF5A3934FF3F1918FF3F1918FF532F24FFF2E78CFF6F51
+              38FF5D3C2CFFD4C97ADF00000000000000000000000000000000010000043414
+              13D71609095B000000001709095F3F1918FF968954C2F2E78CFFF2E78CFFF2E7
+              8CFFF2E78CFFDACA7CFF77593DFF4B2720FFA9935DFFDACB7CFFE7DB85FFF2E7
+              8CFF6F5138FF5D3C2CFFD4C97ADF000000000000000000000000000000000301
+              010B3F1918FF210D0C84000000001709095C3F1918FF948753C3F2E78CFFF2E7
+              8CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF1E68BFFF2E78CFFF2E78CFFF2E7
+              8CFFF2E78CFF6F5138FF5D3C2CFFD4C97ADF0000000000000000000000000000
+              00000301010B3F1918FF3F1918FF3F1918FF3F1918FF3F1918FF8F7E50C7F2E7
+              8CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E7
+              8CFFF2E78CFFF2E78CFF6F5138FF5D3C2CFFD4C97ADF00000000000000000000
+              0000000000000301010B3F1918FF331313CE260F0E992F1312BE3F1918FF9383
+              51C4A9945DFF876B46FF876B46FF876B46FF9F8856FFF2E78CFFF2E78CFFF2E7
+              8CFFF2E78CFFF2E78CFFF2E78CFF73553AFF613F2DFFD4C97ADF000000000000
+              00000000000000000000010000043C1716F8260F0E99000000001C0B0B703F19
+              18FF9A8E58BF6A4A33FF3F1918FF3F1918FF3F1918FF573628FFEFE38AFFF2E7
+              8CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFD9CA7BFFD3C378FFD4C97ADF0000
+              0000000000000000000000000000000000002B1110AD3D1918FC2F1312BE3D17
+              16F5341414D1AAA262B5F2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E7
+              8CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFD4C9
+              7ADF00000000000000000000000000000000000000000401010F250F0D953415
+              14D2281010A60703031DABA263B4BEAA6AFF9E8756FF9E8756FF9E8756FF9E87
+              56FF9E8756FF9E8756FF9E8756FFBEAA6AFFF2E78CFFF2E78CFFDFD280FFDBCC
+              7DFFD4C97ADF0000000000000000000000000000000000000000000000000000
+              00000301010C0201010800000000ABA263B45E3D2CFF3F1918FF3F1918FF3F19
+              18FF3F1918FF3F1918FF3F1918FF3F1918FF5E3D2CFFF2E78CFFF2E78CFF7557
+              3BFF62422FFFD3C87ADE00000000000000000000000000000000000000000000
+              000000000000301211C22A1010A800000000ABA263B4EBDE87FFDACB7CFFDACB
+              7CFFDACB7CFFDACB7CFFDACB7CFFDACB7CFFDACB7CFFEBE088FFF2E78CFFF2E7
+              8CFF6F5138FF5D3C2CFF86804D8D000000000000000000000000000000000000
+              00000000000000000000341514D42E1212BA00000000ABA263B4F2E78CFFF2E7
+              8CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFE2D481FFB9A668FFB6A2
+              65FFB6A265FF5F3E2DFF4B2A20F1020201020000000000000000000000000000
+              0000000000000000000000000000341514D42E1212BA00000000ABA263B4F2E7
+              8CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFDDCF7FFF4B261FFF3F19
+              18FF3F1918FF3F1918FF3F1918FF3C1817F20000000000000000000000000000
+              000000000000000000000000000000000000341514D42E1212BA000000009E97
+              5CA7F2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFF2E78CFFAC965EFF3F19
+              18FFB4A164FFB4A064FF441F1BF93A1616EF1007064100000000000000000000
+              00000000000000000000000000000000000000000000341514D42E1212BA0000
+              000027251729AFA764B8C2B970CCC2B970CCC2B970CCC2B970CCC2B970CC8B74
+              4BE13F1918FF9C8B56DA45221DF43B1615EE0D05053300000000000000000000
+              0000000000000000000000000000000000000000000000000000331414D02E13
+              12BF000000000000000000000000000000000000000000000000000000000000
+              00001A0A0A6B3F1918FF3B1715EE391615EB0B05042E00000000000000000000
+              000000000000000000000000000000000000000000000000000000000000260F
+              0E983D1918FB2B1010AF2A1110AA2A1110AA2A1110AA2A1110AA2A1110AA2A11
+              10AA2A1110AA321414CC3F1918FF3B1615EE0B05042E00000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              00000402021128100FA3391716E63B1615EE3B1615EE3B1615EE3B1615EE3B16
+              15EE3B1615EE3B1615EE3A1616EF381515E20B05042E00000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000130000003F0000
-              00A20000009A00000025000000100000006D000000FA00000095000000170000
-              00FF000000FF000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF00000000000000000000
-              0000000000000000000000000000000000000000002E00000000000000000000
-              00FF000000FF000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000ED000000790000
-              00000000000000000019000000C1000000130000000000000000000000990000
-              00FF000000FF000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000560000
-              00000000000B0000000000000071000000C80000001F00000041000000FD0000
-              00FF000000FF000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000160000
-              0000000000B70000000000000015000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000140000
-              0000000000B80000000000000018000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000560000
-              0000000000000000000000000065000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000E80000
-              00490000000F00000054000000F0000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF000000FF000000000000000000000000000000000000
-              001E000000DD000000FF00000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF000000FF0000000000000000000000000000001E0000
-              00DD000000FF0000008800000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF000000FF00000000000000000000001E000000DD0000
-              00FF000000880000000000000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF000000FF000000000000001E000000DD000000FF0000
-              0088000000000000000000000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF000000FF0000001E000000DD000000FF000000880000
-              0000000000000000000000000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF000000FF000000DF000000FF00000080000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              00000000000000000000000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF000000FF000000FF0000008800000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000}
+              000000000000000000000000000000000000000000000000000000000000}
           end
           object btnCustomerReportX: TBitBtn
-            Left = 546
+            Left = 538
             Top = 4
             Width = 129
             Height = 28
@@ -4717,7 +5132,7 @@ inherited MainForm: TMainForm
           end
           object BitBtnCase: TBitBtn
             Tag = 1
-            Left = 404
+            Left = 396
             Top = 4
             Width = 139
             Height = 28
@@ -4804,7 +5219,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object btnMaps: TBitBtn
-            Left = 776
+            Left = 768
             Top = 4
             Width = 113
             Height = 28
@@ -4813,135 +5228,57 @@ inherited MainForm: TMainForm
             TabOrder = 3
             OnClick = btnMapsClick
             Glyph.Data = {
-              36100000424D3610000000000000360000002800000020000000200000000100
-              2000000000000010000000000000000000000000000000000000000000000000
+              76060000424D7606000000000000360000002800000014000000140000000100
+              2000000000004006000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
+              000080A122BBA3CB2DEEA3CB2DEEA3CB2DEEA3CB2DEEA3CB2DEEA3CB2DEEA3CB
+              2DEEA3CB2DEEA3CB2DEEA3CB2DEEA3CB2DEEA3CB2DEEA3CB2DEEA3CB2DEE80A1
+              22BB000000000000000000000000000000004A521163BED42BFFBED42BFFBED4
+              2BFFBED42BFFBED42BFFBED42BFFBED42BFFBED42BFFBED42BFFBED42BFFBED4
+              2BFFBED42BFFBED42BFFBED42BFF495111620000000000000000000000000000
+              0000010100019E9E1EC6CCCD26FFCCCD26FFCCCD26FFCCCD26FFCACB26FF7C8B
+              59FF7C8B58FFCACB26FFCCCD26FFCCCD26FFCCCD26FFCCCD26FFA2A21DCA0202
+              000200000000000000000000000000000000000000002A260731D6C322FCDAC5
+              22FFDAC522FFD8C322FF747D5FFF0B36BBFF0B36B9FF6F7961FFD8C322FFDAC5
+              22FFDAC522FFD7C222FD2D290735000000000000000000000000000000000000
+              000000000000000000002B2406303D3308443D330844293551940A37BEFF0A37
+              BDFF0B36BCFF0B36B9FF2834549B3D3308443D3308442B240630000000000000
               0000000000000000000000000000000000000000000000000000000000000000
+              000003164E6C0937C1FF0937C1FF0A37BFFF0A37BDFF0B36BCFF0B36B9FF0517
+              4F76000000000000000000000000000000000000000000000000000000000000
+              00000000000000000000000000000317506F0838C4FF0838C4FF0937C2FF0937
+              C1FF0A37BFFF0A37BDFF0B36BCFF0B36B9FF05164B6700000000000000000000
+              0000000000000000000000000000000000000000000000000000010C2C3C0637
+              C4FD0738C7FF0838C5FF0838C4FF0937C2FF0937C1FF0A37BFFF0A37BDFF0B36
+              BCFF0B35B5FA030B273600000000000000000000000000000000000000000000
+              00000000000000000000032A96D80638CAFF0638C8FF0738C7FF1F4AC7FF7C90
+              CCFF7B8FCBFF2049C3FF0A37BFFF0A37BDFF0B36BCFF072888BB000000000000
+              0000000000000000000000000000000000000000000000040F130538CAFD0539
+              CBFF0638CAFF1A48CAFFE3E6EFFFF9F9F9FFF9F9F9FFE3E5EEFF1D47C4FF0A37
+              BFFF0A37BDFF0B34BAFC01040D12000000000000000000000000000000000000
+              000000000000010C2B350439CEFF0539CDFF0539CBFF6B85CEFFF9F9F9FFF9F9
+              F9FFF9F9F9FFF9F9F9FF6C83CAFF0937C1FF0A37BFFF0A37BDFF020B27350000
+              00000000000000000000000000000000000000000000010B29320439D0FF0439
+              CEFF0539CDFF627FCEFFF9F9F9FFF9F9F9FFF9F9F9FFF9F9F9FF637DCAFF0937
+              C2FF0937C1FF0A37BFFF020A2430000000000000000000000000000000000000
+              00000000000000030B0D0337CAF80439D0FF0439CEFF0F41CFFFCCD2E5FFF9F9
+              F9FFF9F9F9FFCCD2E4FF1240C7FF0838C4FF0937C2FF0935BCF80003090C0000
+              000000000000000000000000000000000000000000000000000001278DAB033A
+              D1FF0439D0FF0439CEFF0D3FCFFF5373CEFF5272CDFF0E3ECAFF0738C7FF0838
+              C5FF0838C4FF062481A900000000000000000000000000000000000000000000
+              00000000000000000000000920260236C7F2033AD1FF0439D0FF0439CEFF0539
+              CDFF0539CBFF0638CAFF0638C8FF0738C7FF0835B9F101081C24000000000000
+              000000000000000000000000000000000000000000000000000000000000010F
+              39440237C6F1033AD1FF0439D0FF0439CEFF0539CDFF0539CBFF0638CAFF0635
+              BBF0020F34430000000000000000000000000000000000000000000000000000
+              00000000000000000000000000000000000000081B210124849F0337C6F10439
+              D0FF0439CEFF0536C2F102237E9E010719200000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000606
-              0828292530FF292530FF292530FF292530FF292530FF292530FF292530FF2925
-              30FF292530FF292530FF292530FF292530FF292530FF292530FF292530FF2925
-              30FF292530FF292530FF292530FF292530FF292530FF292530FF292530FF2925
-              30FF292530FF292530FF292530FF292530FF0606082800000000000000000000
-              000025202AE5292530FF292530FF292530FF292530FF292530FF292530FF2925
-              30FF292530FF292530FF292530FF292530FF292530FF292530FF292530FF2925
-              30FF292530FF292530FF292530FF292530FF292530FF292530FF292530FF2925
-              30FF292530FF292530FF292530FF24222BE70000000100000000000000000000
-              00001B181FA7292530FF3C7164FF48A687FF48A687FF48A687FF48A687FF48A6
-              87FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A6
-              87FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A6
-              87FF48A687FF3C7164FF292530FF1B181FA70000000000000000000000000000
-              0000110F1468292530FF34514EFF48A687FF48A687FF48A687FF48A687FF48A6
-              87FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A6
-              87FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A6
-              87FF48A687FF34514EFF292530FF110F14680000000000000000000000000000
-              000006060828292530FF2C3238FF48A586FF48A687FF48A687FF48A687FF48A6
-              87FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A6
-              87FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A6
-              87FF48A687FF2C3239FF292530FF060608280000000000000000000000000000
-              00000000000025202AE5292530FF43927AFF48A687FF48A687FF48A687FF48A6
-              87FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A6
-              87FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A6
-              87FF43927AFF292530FF24222BE7000000010000000000000000000000000000
-              0000000000001B181FA7292530FF3C7164FF48A687FF48A687FF48A687FF48A6
-              87FF48A687FF48A687FF48A687FF48A687FF48A687FF57A59EFF57A59EFF48A6
-              87FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A6
-              87FF3C7164FF292530FF1B181FA7000000000000000000000000000000000000
-              000000000000110F1468292530FF34514EFF48A687FF48A687FF48A687FF48A6
-              87FF48A687FF48A687FF48A687FF48A687FF4EA591FFD6DEF7FFDAE1F8FF50A5
-              94FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A6
-              87FF34514EFF292530FF110F1468000000000000000000000000000000000000
-              00000000000006060828292530FF2C3238FF48A586FF48A687FF48A687FF48A6
-              87FF48A687FF48A687FF48A687FF48A689FFBCCCEFFF9FADF6FF9FADF6FFBCCC
-              EFFF48A689FF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF48A6
-              87FF2C3239FF292530FF06060828000000000000000000000000000000000000
-              0000000000000000000025202AE5292530FF43927AFF48A687FF48A687FF48A6
-              87FF48A687FF48A687FF48A687FF99B9DCFFC4CDF9FF1A3CE8FF1A3CE8FFC5CE
-              F9FF99B9DAFF48A687FF48A687FF48A687FF48A687FF48A687FF48A687FF4392
-              7AFF292530FF24222BE700000001000000000000000000000000000000000000
-              000000000000000000001B181FA7292530FF3C7164FF48A687FF48A687FF48A6
-              87FF48A687FF48A687FF68A5B5FFE5E9FCFF2848EAFF1538E8FF1538E8FF2848
-              EAFFE5E9FCFF67A4B6FF48A687FF48A687FF48A687FF48A687FF48A687FF3C71
-              64FF292530FF1B181FA700000000000000000000000000000000000000000000
-              00000000000000000000110F1468292530FF34514EFF48A687FF48A687FF48A6
-              87FF48A687FF4CA193FFDEE4FAFF5A73EFFF1538E8FF1538E8FF1538E8FF1538
-              E8FF566FEEFFE1E6FAFF4EA394FF48A687FF48A687FF48A687FF48A687FF3451
-              4EFF292530FF110F146800000000000000000000000000000000000000000000
-              0000000000000000000006060828292530FF292530FF292530FF292530FF2925
-              30FF292530FF292530FF5B5F82FF1538E8FF1538E8FF1538E8FF1538E8FF1538
-              E8FF1538E8FF595D80FF292530FF292530FF292530FF292530FF292530FF2925
-              30FF292530FF0606082800000000000000000000000000000000000000000000
-              000000000000000000000000000124222BE7292530FF292530FF292530FF2925
-              30FF292530FF28273DFF1F3EDCFF1538E8FF1538E8FF1538E8FF1538E8FF1538
-              E8FF1538E8FF1F3EDCFF28273CFF292530FF292530FF292530FF292530FF2925
-              30FF24222BE70000000100000000000000000000000000000000000000000000
-              000000000000000000000000000000000000000000000000000000000000201D
-              24C6292530FF1E3095FF1538E8FF1538E8FF1538E8FF1538E8FF1538E8FF1538
-              E8FF1538E8FF1538E8FF1F2F8BFF292530FF1F1C25C300000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000080709302925
-              30FF272740FF1537E3FF1538E8FF2F4EEBFFB1BDF7FFF2F4FEFFF2F4FEFFB3BE
-              F8FF3755EBFF1538E8FF1736DCFF28263BFF292530FF0707092E000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              000000000000000000000000000000000000000000000000000018161B952925
-              30FF1F2E89FF1538E8FF3956ECFFE9ECFDFF8396F3FF2D4CEAFF2E4DEAFF8496
-              F3FFEAEDFDFF3755EBFF1538E8FF202E85FF292530FF18151C93000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000231E29D82925
-              30FF1A34C2FF1538E8FFB5C0F8FF8396F3FF1538E8FF1538E8FF1538E8FF1538
-              E8FF8496F3FFB3BEF8FF1538E8FF1934C0FF292530FF221E27D6000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              000000000000000000000000000000000000000000000000000028242EF72925
-              30FF1638E0FF1538E8FFF3F5FEFF2D4CEAFF1538E8FF1538E8FF1538E8FF1538
-              E8FF2E4DEAFFF1F3FEFF1538E8FF1638E0FF292530FF28242EF7000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              000000000000000000000000000000000000000000000000000027232CF12925
-              30FF1637DEFF1538E8FFF3F5FEFF2D4CEAFF1538E8FF1538E8FF1538E8FF1538
-              E8FF2D4CEAFFF2F4FEFF1538E8FF1736DCFF292530FF25232DEF000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000211D26D02925
-              30FF1A34BBFF1538E8FFB3BEF8FF8295F3FF1538E8FF1538E8FF1538E8FF1538
-              E8FF8396F3FFB1BDF7FF1538E8FF1A33BBFF292530FF201E27CE000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              000000000000000000000000000000000000000000000000000015141A892925
-              30FF212C79FF1538E8FF304FEBFFE9ECFDFF8194F3FF2D4CEAFF2D4CEAFF8295
-              F3FFE9ECFDFF2F4EEBFF1538E8FF212D77FF292530FF16141987000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000060507252723
-              2EFA282533FF1934C0FF1538E8FF304FEBFFB3BEF8FFF3F5FEFFF3F5FEFFB5C0
-              F8FF3956ECFF1538E8FF1934C0FF282532FF27232EFA06050724000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000001714
-              1A8C292530FF272741FF1935C3FF1538E8FF1538E8FF1538E8FF1538E8FF1538
-              E8FF1538E8FF1A34C2FF272741FF292530FF15141A8900000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000101
-              01041D1A22B6292530FF282533FF212D7CFF1933BFFF1638E0FF1638E0FF1933
-              BFFF212D7CFF282533FF292530FF1C1A21B50101010400000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              00000101010517151B9029252EFC292530FF292530FF292530FF292530FF2925
-              30FF292530FF27232EFB17141B8D010101040000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              000000000000000000000706082A17151B8E211F28D426222EF426222EF4211F
-              28D417151B8E0706082900000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
+              00000000000000000000000104050007181D0006181D00010405000000000000
               0000000000000000000000000000000000000000000000000000}
           end
         end
@@ -5942,8 +6279,8 @@ inherited MainForm: TMainForm
             Transparent = True
           end
           object Label47: TLabel
-            Left = -266
-            Top = 13
+            Left = -180
+            Top = 5
             Width = 143
             Height = 13
             Anchors = [akTop, akRight]
@@ -6245,8 +6582,8 @@ inherited MainForm: TMainForm
             end
           end
           object dblActionType_Level: TDBLookupComboBox
-            Left = -455
-            Top = 9
+            Left = -218
+            Top = 20
             Width = 182
             Height = 21
             Anchors = [akTop, akRight]
@@ -6259,6 +6596,40 @@ inherited MainForm: TMainForm
             OnCloseUp = SearchEditChange
             OnKeyDown = DBLookUpKeyDown
             OnKeyUp = dblActionType_LevelKeyUp
+          end
+          object pnlCLBCompaginIDs: TPanel
+            Tag = 1
+            Left = -459
+            Top = 0
+            Width = 241
+            Height = 73
+            Anchors = [akTop, akRight]
+            BevelOuter = bvNone
+            TabOrder = 15
+            DesignSize = (
+              241
+              73)
+            object Label48: TLabel
+              Left = 161
+              Top = 2
+              Width = 73
+              Height = 13
+              Anchors = [akTop, akRight]
+              Caption = #1591#1585#1610#1602#1607' '#1605#1593#1585#1601#1610'  :'
+            end
+            object CLBCompaginIDs: TYchecklistBox
+              Left = 0
+              Top = 16
+              Width = 236
+              Height = 55
+              Anchors = [akLeft, akTop, akRight]
+              Columns = 2
+              ItemHeight = 13
+              TabOrder = 0
+              Ydataset = Dm.Compagin
+              TitleField = 'CompaginTitle'
+              IDField = 'CompaginID'
+            end
           end
         end
       end
@@ -6277,7 +6648,7 @@ inherited MainForm: TMainForm
         Top = 1
         Width = 896
         Height = 28
-        Align = alRight
+        Align = alClient
         Panels = <
           item
             Alignment = taCenter
@@ -6288,7 +6659,7 @@ inherited MainForm: TMainForm
           end
           item
             Text = #1578#1593#1583#1575#1583' 5000'
-            Width = 100
+            Width = 200
           end
           item
             Width = 200
@@ -6307,7 +6678,7 @@ inherited MainForm: TMainForm
         Top = 1
         Width = 305
         Height = 28
-        Align = alClient
+        Align = alLeft
         BevelInner = bvRaised
         BevelOuter = bvLowered
         Color = 16244694
@@ -15972,6 +16343,63 @@ inherited MainForm: TMainForm
         Action = acShowUserSequence
       end
     end
+    object N101: TMenuItem
+      Caption = #1578#1593#1575#1585#1610#1601' '#1662#1575#1610#1607' '#1575#1606#1576#1575#1585' '#1608' '#1583#1575#1585#1610' '#1579#1575#1576#1578
+      object N102: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1575#1606#1576#1575#1585
+      end
+      object N103: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1711#1585#1608#1607' '#1705#1575#1604#1575
+      end
+      object N104: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1608#1575#1581#1583' '#1575#1606#1583#1575#1586#1607' '#1711#1610#1585#1610' '#1705#1575#1604#1575
+      end
+      object N105: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1705#1575#1604#1575'/'#1582#1583#1605#1575#1578
+      end
+      object N106: TMenuItem
+        Caption = '-'
+      end
+      object N107: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1587#1591#1608#1581' '#1583#1575#1585#1575#1610#1610' '#1579#1575#1576#1578
+      end
+      object N108: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1711#1585#1608#1607' '#1583#1575#1585#1575#1610#1610' '#1579#1575#1576#1578
+      end
+      object N109: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1608#1575#1581#1583' '#1587#1575#1586#1605#1575#1606#1610
+      end
+      object N110: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1662#1587#1578' '#1587#1575#1586#1605#1575#1606#1610
+      end
+      object N111: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1578#1581#1608#1610#1604' '#1711#1610#1585#1606#1583#1607' / '#1578#1581#1608#1610#1604' '#1583#1607#1606#1583#1607
+      end
+      object N112: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1575#1606#1608#1575#1593' '#1576#1610#1605#1607' '#1583#1575#1585#1575#1610#1610' '#1579#1575#1576#1578
+      end
+      object N116: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1575#1606#1608#1575#1593' '#1583#1575#1585#1575#1610#1610' ('#1608#1585#1608#1583'/'#1582#1585#1608#1580')'
+      end
+      object N113: TMenuItem
+        Caption = '-'
+      end
+      object N114: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1605#1585#1705#1586' '#1575#1587#1578#1602#1585#1575#1585
+      end
+      object N115: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1605#1585#1705#1586' '#1607#1586#1610#1606#1607
+      end
+      object N117: TMenuItem
+        Caption = #1578#1593#1585#1610#1601' '#1662#1604#1575#1705' '#1711#1584#1575#1585#1610' '#1575#1578#1608#1605#1575#1578#1610#1705
+      end
+      object N118: TMenuItem
+        Caption = '-'
+      end
+      object N119: TMenuItem
+        Caption = #1578#1606#1592#1610#1605#1575#1578' '#1583#1575#1585#1575#1610#1610' '#1579#1575#1576#1578
+      end
+    end
     object NMali: TMenuItem
       Caption = #1575#1605#1608#1585' '#1605#1575#1604#1610
       object NStore: TMenuItem
@@ -16039,6 +16467,32 @@ inherited MainForm: TMainForm
       object NCheque2: TMenuItem
         Caption = #1670#1705#1607#1575#1610' '#1662#1585#1583#1575#1582#1578#1610
         OnClick = NCheque2Click
+      end
+    end
+    object N95: TMenuItem
+      Caption = #1605#1583#1610#1585#1610#1578' '#1583#1575#1585#1575#1610#1610' '#1579#1575#1576#1578
+      object N100: TMenuItem
+        Caption = #1604#1610#1587#1578' '#1583#1575#1585#1575#1610#1610' '#1607#1575
+      end
+      object N96: TMenuItem
+        Caption = #1579#1576#1578' '#1583#1575#1585#1575#1610#1610' '#1580#1583#1610#1583
+        OnClick = N96Click
+      end
+      object N97: TMenuItem
+        Caption = #1606#1602#1604' '#1608' '#1575#1606#1578#1602#1575#1604' '#1583#1575#1585#1575#1610#1610
+        OnClick = N97Click
+      end
+      object N98: TMenuItem
+        Caption = '-'
+      end
+      object N99: TMenuItem
+        Caption = #1711#1586#1575#1585#1588' '#1705#1575#1585#1578' '#1583#1575#1585#1575#1610#1610
+      end
+      object N120: TMenuItem
+        Caption = #1711#1586#1575#1585#1588' '#1570#1582#1585#1610#1606' '#1608#1590#1593#1610#1578' '#1583#1575#1585#1575#1610#1610
+      end
+      object N121: TMenuItem
+        Caption = #1711#1586#1575#1585#1588' '#1575#1587#1578#1607#1604#1575#1705' '#1583#1575#1585#1575#1610#1610
       end
     end
     object N9: TMenuItem
@@ -16165,8 +16619,8 @@ inherited MainForm: TMainForm
   end
   object DGroups: TDataSource
     DataSet = Groups
-    Left = 112
-    Top = 401
+    Left = 136
+    Top = 361
   end
   object Citys: TADODataSet
     Connection = Dm.YeganehConnection
@@ -22487,8 +22941,8 @@ inherited MainForm: TMainForm
     Enabled = False
     Interval = 500
     OnTimer = keyboardTimerTimer
-    Left = 1064
-    Top = 517
+    Left = 200
+    Top = 509
   end
   object Groups: TADOQuery
     Connection = Dm.YeganehConnection
@@ -22501,8 +22955,8 @@ inherited MainForm: TMainForm
       'from dbo.Groups  WITH(NOLOCK) '
       'Where LTrim(RTrim(GroupTitle)) <> '#39#39
       'Order By GroupTitle')
-    Left = 65
-    Top = 399
+    Left = 73
+    Top = 359
     object GroupsGroupID: TIntegerField
       FieldName = 'GroupID'
     end
@@ -22767,27 +23221,27 @@ inherited MainForm: TMainForm
     Enabled = False
     Interval = 1000000
     OnTimer = Timer1Timer
-    Left = 976
-    Top = 444
+    Left = 24
+    Top = 508
   end
   object SetActiveUser: TTimer
     Enabled = False
     Interval = 58695
     OnTimer = SetActiveUserTimer
-    Left = 1145
-    Top = 492
+    Left = 273
+    Top = 508
   end
   object MssCalendarPro1: TMssCalendarPro
     Style = mssGold
-    Left = 27
-    Top = 155
+    Left = 19
+    Top = 195
   end
   object RefereshCustomerTimer: TTimer
     Enabled = False
     Interval = 100000
     OnTimer = RefereshCustomerTimerTimer
-    Left = 1055
-    Top = 460
+    Left = 103
+    Top = 508
   end
   object adoState: TADOQuery
     Connection = Dm.YeganehConnection
@@ -22811,8 +23265,8 @@ inherited MainForm: TMainForm
   object TimerSendSms: TTimer
     Interval = 3000
     OnTimer = TimerSendSmsTimer
-    Left = 1145
-    Top = 438
+    Left = 513
+    Top = 502
   end
   object ImageList1: TImageList
     Left = 153
@@ -24952,13 +25406,13 @@ inherited MainForm: TMainForm
     Enabled = False
     Interval = 3600000
     OnTimer = TimerMessageTimer
-    Left = 73
-    Top = 1
+    Left = 593
+    Top = 501
   end
   object TimerTaskLog: TTimer
     Enabled = False
     OnTimer = TimerTaskLogTimer
-    Left = 621
-    Top = 509
+    Left = 429
+    Top = 501
   end
 end

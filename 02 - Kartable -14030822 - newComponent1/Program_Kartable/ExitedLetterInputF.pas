@@ -192,6 +192,8 @@ type
     Label14: TLabel;
     DBEUserMemo: TDBEdit;
     xpBitBtn1: TAdvGlowButton;
+    pnlTopHeader: TPanel;
+    Panel1: TPanel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormActivate(Sender: TObject);
     procedure SpeedButton7Click(Sender: TObject);
@@ -263,7 +265,8 @@ type
     procedure Show_xpFormsTab;
     procedure ShowCount;
     function LetterHasForms:Boolean;
-    function CheckFormExist:Boolean;     
+    function CheckFormExist:Boolean;
+    procedure TabShow(mode: Boolean);      
   public
     IsAnswer : Boolean;
     LetterFormat : Byte;
@@ -753,6 +756,8 @@ begin
 
    if GetUserSetting('KartableExitLetterpnlDetailMinimize') then
      pnlDetail.Minimized := True ;
+
+  TabShow(false);     
 end;
 
 procedure TSentLetterInputForm.SpeedButton6Click(Sender: TObject);
@@ -1230,6 +1235,7 @@ end;
 procedure TSentLetterInputForm.Show_xpFormsTab;
 begin
   xpPageControl1.Pages[1].TabVisible:=True;
+  TabShow(True);
 end;
 
 procedure TSentLetterInputForm.ShowCount;
@@ -1337,6 +1343,7 @@ begin
   inherited;
   if xpPageControl1.ActivePageIndex=0 then
     Select_Letter.Refresh;
+  TabShow(false) ;
 end;
 
 procedure TSentLetterInputForm.FollowLetterYearChange(Sender: TObject);
@@ -1391,6 +1398,22 @@ begin
    qry_AccessDelete.Active := True;
 
    xpBitBtn5.Enabled := qry_AccessDeleteHasDelete.AsBoolean;
+end;
+
+procedure TSentLetterInputForm.TabShow(mode: Boolean);
+begin
+  if mode then
+  begin
+    pnlTopHeader.Height := 0 ;
+    xpPageControl1.TabHeight := 23 ;
+    xpPageControl1.TabWidth  := 0 ;
+  end
+  else
+  begin
+    pnlTopHeader.Height := 5 ;
+    xpPageControl1.TabHeight := 1 ;
+    xpPageControl1.TabWidth  := 1 ;
+  end;
 end;
 
 end.

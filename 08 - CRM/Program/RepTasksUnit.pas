@@ -20,7 +20,6 @@ type
     spRepUserWorkCustomerID: TAutoIncField;
     pnlMain: TPanel;
     Panel1: TPanel;
-    Label3: TLabel;
     GroupBox1: TGroupBox;
     SpeedButton4: TSpeedButton;
     lblUserName: TLabel;
@@ -41,6 +40,7 @@ type
     SpeedButton8: TSpeedButton;
     SpeedButton1: TSpeedButton;
     SpeedButton5: TSpeedButton;
+    Label3: TLabel;
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
@@ -118,9 +118,9 @@ begin
          spRepUserWork.Parameters.ParamByName('@ActionType').Value:= 0;
       spRepUserWork.Open;
       if not spRepUserWork.IsEmpty then
-          Label3.Caption:=IntToStr(spRepUserWork.RecordCount) + ' „Ê—œ '
+          Label3.Caption:= '  ⁄œ«œ ' + IntToStr(spRepUserWork.RecordCount)
       else
-          Label3.Caption:=' 0 „Ê—œ '
+          Label3.Caption:=' 0  ⁄œ«œ '
   end
   else
     ShowMessage('›Ì·œ  «—ÌŒ —«  ‰ŸÌ„ ‰„«ÌÌœ');

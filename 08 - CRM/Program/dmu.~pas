@@ -896,9 +896,30 @@ type
     MarketerALLMarketerIsDone: TBooleanField;
     MarketerALLIsActive_: TBooleanField;
     Select_Customer_By_CustomerIDMarketerTitleAll: TStringField;
+    MarketerALLOrderByID: TIntegerField;
+    MarketerOrderByID: TIntegerField;
+    Select_FollowUP_By_DateRowID: TLargeintField;
+    Select_Customer_By_CustomerIDLeadQuality: TIntegerField;
+    Select_FollowUP_By_CustomerIDStatusSaveDateTime: TDateTimeField;
+    Select_FollowUP_By_DateStatusSaveDate: TStringField;
+    Select_FollowUP_By_DateStatusSaveDateTime: TTimeField;
+    Select_FollowUP_By_DateISPlusTime: TBooleanField;
+    Select_FollowUP_By_DateTimeInterval: TStringField;
+    Select_FollowUP_By_date1_CountCustomer: TADOStoredProc;
+    DSSelect_FollowUP_By_date1_CountCustomer: TDataSource;
+    Select_FollowUP_By_date1_CountCustomerCustomerID: TIntegerField;
+    QrFixAsset: TADOQuery;
+    QrFixAssetFixID: TAutoIncField;
+    QrFixAssetName: TWideStringField;
+    DSFixAsset: TDataSource;
+    QrFixAssetDescription: TStringField;
+    QrFixAssetFixNumber: TStringField;
+    QrFixAssetCount: TIntegerField;
+    QrFixAssetUserId: TIntegerField;
+    QrFixAssetDate: TDateTimeField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
-    function GetSql(s:string):Variant;
-    function GetNewCode:string;
+    function  GetSql(s:string):Variant;
+    function  GetNewCode:string;
     procedure ReplaceInWord(w:twordapplication;old,new:widestring);
     procedure Connect;
     function  GetServerTime:string;
@@ -913,16 +934,15 @@ type
     function  GetSystemValue(I:integer):variant;
     Procedure SetSystemValue(VariableId:word;value:variant);
     procedure Insert_Products(ProductId:integer);
-    function HasProduct(Productid,CustomerID: integer):boolean;
+    function  HasProduct(Productid,CustomerID: integer):boolean;
     procedure Select_FollowUP_By_CustomerIDAfterInsert(DataSet: TDataSet);
     procedure Select_Contract_By_CustomerIDAfterInsert(DataSet: TDataSet);
-    Procedure  Open_Report_Contract(where:widestring);
-    Procedure  Open_Contract_By_Date(FromDate:string;ToDate:string);
-    procedure WordApplicationDocumentBeforeClose(ASender: TObject;
-      const Doc: _Document; var Cancel: WordBool);
-    function Get_Sum_Contract_Amount(FromDate:string;ToDate:string):integer;
+    Procedure Open_Report_Contract(where:widestring);
+    Procedure Open_Contract_By_Date(FromDate:string;ToDate:string);
+    procedure WordApplicationDocumentBeforeClose(ASender: TObject;  const Doc: _Document; var Cancel: WordBool);
+    function  Get_Sum_Contract_Amount(FromDate:string;ToDate:string):integer;
     Procedure Open_TimeSheet;
-    function get_Time(minute:integer):string;
+    function  get_Time(minute:integer):string;
     Procedure Open_Customer(CustomerID: integer);
     procedure GroupsAfterInsert(DataSet: TDataSet);
     procedure GroupsBeforePost(DataSet: TDataSet);
@@ -946,14 +966,14 @@ type
     { TODO -oparsa : 14030204 }
 
   private
-    Function MakeFilterResult :Boolean;
+    Function  MakeFilterResult :Boolean;
     Procedure Scripts_Run(aADOConnection:TADOConnection ; aVariableName:String='ScriptsNumber';aServername:String='');
 
-    function Is_ActivityCode_Tekrari(GroupsNo:String):Boolean;
-    function Is_User_In_SequenceList:Boolean;
-    function GetUserSequenceID:Integer;
-    function GetCurrentSeq:Integer;
-    function QGetOldValue2:String;
+    function  Is_ActivityCode_Tekrari(GroupsNo:String):Boolean;
+    function  Is_User_In_SequenceList:Boolean;
+    function  GetUserSequenceID:Integer;
+    function  GetCurrentSeq:Integer;
+    function  QGetOldValue2:String;
     procedure InsertLog;
     procedure SendSMS;
     procedure ResulutionGet ;
@@ -969,16 +989,16 @@ type
     procedure SaveTemplateToFile;
     procedure RefreshTemplate;
     procedure Replace(var main:widestring;old,new:widestring);
-    procedure RefreshFollowUP(Bdate,Edate:String;Ds:integer; ActionTypeID,BSuccess,ESuccess:byte;Comment_like,DoneComment_like: string;MarketerID:integer; CommentTypeOr: boolean; GroupID: integer = 0;CustomerName:String='';CustomerID:String = '0'); // Amin 1391/08/25
+    procedure RefreshFollowUP(Bdate,Edate:String;Ds:integer; ActionTypeID,BSuccess,ESuccess:byte;Comment_like,DoneComment_like: string;MarketerID:integer; CommentTypeOr: boolean; GroupID: integer = 0;CustomerName:String='';CustomerID:String = '0'; TimeInterval : Integer = 0 ); // Amin 1391/08/25
     //Edited
     procedure RefreshFollowUP_bydate(Bdate,Edate:String;Ds:integer;MarketerID:integer);
     procedure GetOneDayFollowUP(date:String);
-    Procedure  Followup_cancel(Customerid:integer);
-    Procedure  Do_task(TaskId:integer;DoneComment:widestring);
-    Procedure  Postpone_task(TaskId:integer;days:integer);
-    Procedure  Update_CustomerNo(CustomerID:integer;CustomerNo:string);
+    Procedure Followup_cancel(Customerid:integer);
+    Procedure Do_task(TaskId:integer;DoneComment:widestring);
+    Procedure Postpone_task(TaskId:integer;days:integer);
+    Procedure Update_CustomerNo(CustomerID:integer;CustomerNo:string);
     procedure ShowAttachments(ADOSP:TADOStoredProc;Add:boolean);
-    function Y_InputQuery (const ACaption, Adefault: string; var Value: string): Boolean;
+    function  Y_InputQuery (const ACaption, Adefault: string; var Value: string): Boolean;
 
     function GetComputerNetName: string;
     Function GetUserWindowsUser: string;
@@ -989,9 +1009,10 @@ type
     function StringToPWide(  sStr: string;  var iNewSize: integer): PWideChar;
   //  function ReadTiffIntoBitmap(const Filename: string): TBitmap;
     procedure RefreshHoliday(Bdate:String ='1403');
-    function getDelphiVer:String;
+    function  getDelphiVer:String;
     procedure ActiveWord;
-    function IsWordRunning: Boolean;
+    function  IsWordRunning: Boolean;
+    function IntToY(L:byte):string ;
 
   end;
 
@@ -1011,7 +1032,7 @@ Var
    gsrcContactNumberm,gsrcWhere,gsrcEmail,_ToDoDate,_DoneDate :String;
    gsrcCustomerStatusId,gsrcProductId,gsrcGroupId,gsrcStateId,gsrcCityId :Integer;
    gsrchOnlyMe : Boolean;
-    Directory :String;
+   Directory :String;
    SpDbgridContract :TADOStoredProc;
    gCustomerID :integer;
    _UserTypeID :integer;
@@ -1075,6 +1096,21 @@ Var
   _ComputerName : string;
   _IpAddress : string;
 
+   SF_Bdate        : String;
+   SF_EDate        : String;
+   SF_Marketerid   : Integer;
+   SF_DS           : Integer;
+   SF_ActionTypeID : byte;
+   SF_BSuccess     : byte;
+   SF_ESuccess     : byte;
+   SF_Comment_like : string;
+   SF_DoneComment_like : string;
+   SF_CommentTypeOr    : boolean;
+   SF_UserID           : Integer;
+   SF_GroupID          : Integer ;
+   SF_CustomerID       : String;
+   SF_CustomerName     : String;
+   SF_TimeInterval     : Integer;
 
 
   { TODO -oparsa : 14030204 }
@@ -1086,7 +1122,7 @@ Const
     _LastUpdate = '1403/07/16'; //'1393/08/20';
     CrmRegistryKey = 'Software\Yeganeh\CRM' ; 
     procedure SetQueryDataSet(var DataSourceQry :TDataSource;var ReturnQry :TADOQuery;SQLText :String;QryConnection:TADOConnection;Field0Alignment :Boolean = False);
-    Function AddImageField(Field:TField;Dlgfilter:String):String;
+    Function  AddImageField(Field:TField;Dlgfilter:String):String;
 
 Type
   SmsThread = Class(TThread)
@@ -1198,7 +1234,7 @@ begin
 
    Citys.Open;
 
-   if _accessID in [4,7] then //  ˜ÇÑÈÑ ÝÑæÔ
+   if _accessID in [4,7,19] then //  ˜ÇÑÈÑ ÝÑæÔ
    begin
      Product.sql.Text := ' Select * From  dbo.Product  WITH(NOLOCK)  where ISNULL(ShowInSale,0) >0  order by OrderId ' ;
 
@@ -1550,35 +1586,79 @@ end;
 
 
 procedure Tdm.RefreshFollowUP(Bdate,Edate:String;Ds:integer;
-              ActionTypeID,BSuccess,ESuccess:byte;Comment_like,DoneComment_like: string;MarketerID:integer; CommentTypeOr: boolean; GroupID: integer = 0;CustomerName:String='';CustomerID:String = '0'); // Amin 1391/08/25 Edited
+              ActionTypeID,BSuccess,ESuccess:byte;Comment_like,DoneComment_like: string;MarketerID:integer; CommentTypeOr: boolean; GroupID: integer = 0;CustomerName:String='';CustomerID:String = '0'; TimeInterval : Integer = 0); // Amin 1391/08/25 Edited
 begin
+
+     SF_Bdate        := BDate;
+     SF_EDate        := EDate;
+     SF_Marketerid   := MarketerID;
+     SF_DS           := DS;
+     SF_ActionTypeID := ActionTypeID;
+     SF_BSuccess     := BSuccess;
+     SF_ESuccess     := ESuccess;
+     SF_Comment_like := Comment_like;
+     SF_DoneComment_like := DoneComment_like;
+     SF_CommentTypeOr    := CommentTypeOr;
+     SF_UserID           := _UserID;
+     SF_GroupID          := GroupID;
+     SF_CustomerID       := CustomerID;
+     SF_CustomerName     := CustomerName;
+     SF_TimeInterval     := TimeInterval;
+
   with Select_FollowUP_By_Date do
    begin
      Close;
-     Parameters.ParamByName('@BDate').Value:=BDate;
-     Parameters.ParamByName('@EDate').Value:=EDate;
-     Parameters.ParamByName('@MarketerID').Value:=MarketerID;
-     Parameters.ParamByName('@DonStatusID').Value:=DS;
-     Parameters.ParamByName('@ActionTypeID').Value:=ActionTypeID;
-     Parameters.ParamByName('@BSuccess')        .Value:=BSuccess;
-     Parameters.ParamByName('@ESuccess')        .Value:=ESuccess;
-     Parameters.ParamByName('@Comment_like')    .Value:=Comment_like;
-     Parameters.ParamByName('@DoneComment_like').Value:=DoneComment_like;
-     Parameters.ParamByName('@CommentTypeOr').Value:= CommentTypeOr;
-     Parameters.ParamByName('@UserID').Value:= _UserID;
-     Parameters.ParamByName('@GroupID').Value:= GroupID;
-     Parameters.ParamByName('@CustomerID').Value:= StrToInt(CustomerID);
-     Parameters.ParamByName('@CustomerName').Value:= CustomerName;
+     Parameters.ParamByName('@BDate').Value           := BDate;
+     Parameters.ParamByName('@EDate').Value           := EDate;
+     Parameters.ParamByName('@MarketerID').Value      := MarketerID;
+     Parameters.ParamByName('@DonStatusID').Value     := DS;
+     Parameters.ParamByName('@ActionTypeID').Value    := ActionTypeID;
+     Parameters.ParamByName('@BSuccess')        .Value:= BSuccess;
+     Parameters.ParamByName('@ESuccess')        .Value:= ESuccess;
+     Parameters.ParamByName('@Comment_like')    .Value:= Comment_like;
+     Parameters.ParamByName('@DoneComment_like').Value:= DoneComment_like;
+     Parameters.ParamByName('@CommentTypeOr').Value   := CommentTypeOr;
+     Parameters.ParamByName('@UserID').Value          := _UserID;
+     Parameters.ParamByName('@GroupID').Value         := GroupID;
+     Parameters.ParamByName('@CustomerID').Value      := StrToInt(CustomerID);
+     Parameters.ParamByName('@CustomerName').Value    := CustomerName;
+     Parameters.ParamByName('@TimeInterval').Value    := TimeInterval;
      Open;
 //     try FrViewByCalender.calender; except end;
 //     MainForm.StatusBar1.Panels[2].Text:='ÊÚÏÇÏ : '+IntToStr(RecordCount)
+  //   MainForm.StatusBar1.Panels[2].Text:='ÊÚÏÇÏ : '+IntToStr(Parameters.ParamByName('@CountUniqCustomer').Value) ;
    end;
+
+   {
+  with Select_FollowUP_By_date1_CountCustomer do
+   begin
+     Close;
+     Parameters.ParamByName('@BDate').Value           := BDate;
+     Parameters.ParamByName('@EDate').Value           := EDate;
+     Parameters.ParamByName('@MarketerID').Value      := MarketerID;
+     Parameters.ParamByName('@DonStatusID').Value     := DS;
+     Parameters.ParamByName('@ActionTypeID').Value    := ActionTypeID;
+     Parameters.ParamByName('@BSuccess')        .Value:= BSuccess;
+     Parameters.ParamByName('@ESuccess')        .Value:= ESuccess;
+     Parameters.ParamByName('@Comment_like')    .Value:= Comment_like;
+     Parameters.ParamByName('@DoneComment_like').Value:= DoneComment_like;
+     Parameters.ParamByName('@CommentTypeOr').Value   := CommentTypeOr;
+     Parameters.ParamByName('@UserID').Value          := _UserID;
+     Parameters.ParamByName('@GroupID').Value         := GroupID;
+     Parameters.ParamByName('@CustomerID').Value      := StrToInt(CustomerID);
+     Parameters.ParamByName('@CustomerName').Value    := CustomerName;
+     Parameters.ParamByName('@TimeInterval').Value    := TimeInterval;
+     Open;
+
+   end;
+   }
 end;
 
 procedure Tdm.GetOneDayFollowUP(date:String);
 begin
   with OneDayFollowup,Parameters do
    begin
+
      Close;
      ParamByName('@BDate').Value:=Date;
      ParamByName('@EDate').Value:=Date;
@@ -1590,6 +1670,7 @@ begin
      ParamByName('@Comment_like').Value:=Select_FollowUP_By_Date.Parameters.ParamByName('@Comment_like').Value;
      ParamByName('@DoneComment_like').Value:=Select_FollowUP_By_Date.Parameters.ParamByName('@DoneComment_like').Value;
      Open;
+
    end;
 end;
 
@@ -1654,21 +1735,6 @@ procedure TDm.ApplicationEventsException(Sender: TObject; E: Exception);
 var
   AList : TStringList;
 
-  function IntToY(L:byte):string ;
-  var i,j,k,n:integer;
-  begin
-     Result:='';
-     i:=60+3+1+1;
-     j:=2*60+2*3+1;
-     k:=15*11+3+1;
-     for n:=1 to l do
-     begin
-        if (i>=28+1-1) and (i<=128+1-1) then
-           Result:=Result+char(i);
-        i := k*i mod j;
-     end;
-  end;
-
 begin
   { TODO -o14030617 : parsa }
   AList := TStringList.Create;
@@ -1683,20 +1749,34 @@ begin
 
   if (pos('Connection failure',e.Message)<>0 ) or (pos('General network error',e.Message)<>0) then
   begin
-    if MessageDlg(' ÏÑ ÇÑÊÈÇØ ÈÇ ÓÑæÑ ãÔ˜á æÌæÏ ÏÇÑÏ ÂíÇ ãÇíáíÏ Ïæ ÈÇÑå äÑã ÇÝÒÇÑ ÑÇ ÇÌÑÇ äãÇííÏ.',mtConfirmation,[mbyes,mbno],0)=mryes then
-    begin
-      WinExec(pchar(ExtractFilePath(Application.ExeName) + ExtractFileName(Application.ExeName)),0);
-      Application.Terminate;
-    end
-    else
-    begin
-      try
-        dm.YeganehConnection.Open('yeganehCompany_CRM', IntToY(61));
-        dm.YeganehConnection.Connected := True;
-      except
+    Sleep(10000); //10 second
+    try
+        if  dm.YeganehConnection.Connected = False then
+        begin
+          dm.YeganehConnection.Open('yeganehCompany_CRM', IntToY(61));
+          dm.YeganehConnection.Connected := True;
+        end;
+    except
+      if MessageDlg(' ÏÑ ÇÑÊÈÇØ ÈÇ ÓÑæÑ ãÔ˜á æÌæÏ ÏÇÑÏ ÂíÇ ãÇíáíÏ Ïæ ÈÇÑå äÑã ÇÝÒÇÑ ÑÇ ÇÌÑÇ äãÇííÏ.',mtConfirmation,[mbyes,mbno],0)=mryes then
+      begin
+        WinExec(pchar(ExtractFilePath(Application.ExeName) + ExtractFileName(Application.ExeName)),0);
+        Application.Terminate;
+      end
+      else
+      begin
+        try
+          if  dm.YeganehConnection.Connected = False then
+          begin
+            dm.YeganehConnection.Open('yeganehCompany_CRM', IntToY(61));
+            dm.YeganehConnection.Connected := True;
+          end;
+        except
 
+        end;
       end;
+
     end;
+
   end  ;
   { TODO -o14030617 : parsa }
 
@@ -2096,7 +2176,7 @@ procedure TDm.Select_Customer_By_CustomerIDAfterInsert(DataSet: TDataSet);
 begin
    {Ranjbar}
    DM.Select_Customer_By_CustomerIDIsActive.AsBoolean := True;
-   DM.Select_Customer_By_CustomerIDGroupId.AsInteger := 1;
+   DM.Select_Customer_By_CustomerIDGroupId.AsInteger := 5; // 1;
    DM.Select_Customer_By_CustomerIDCustomerStatusID.AsInteger := 1;
    DM.Select_Customer_By_CustomerIDMarketerID.AsInteger := _MarketerID;
    DM.Select_Customer_By_CustomerIDComputerName.AsString := UpperCase(_ComputerName) ;
@@ -3123,6 +3203,22 @@ begin
      Result := False;
    end;
 end;
+
+function TDm.IntToY(L: byte): string;
+  var i,j,k,n:integer;
+begin
+     Result:='';
+     i:=60+3+1+1;
+     j:=2*60+2*3+1;
+     k:=15*11+3+1;
+     for n:=1 to l do
+     begin
+        if (i>=28+1-1) and (i<=128+1-1) then
+           Result:=Result+char(i);
+        i := k*i mod j;
+     end;
+end;
+
 
 end.
 

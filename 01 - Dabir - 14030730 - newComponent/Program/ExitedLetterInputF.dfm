@@ -20,6 +20,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
     Align = alClient
     ParentColor = True
     TabOrder = 0
+    DesignSize = (
+      824
+      632)
     object xpPageControl1: TxpPageControl
       Left = 1
       Top = 1
@@ -3442,9 +3445,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Appearance.ColorMirrorDisabledTo = 15921906
           end
           object ActionToolBar1: TActionToolBar
-            Left = 560
+            Left = 496
             Top = 2
-            Width = 251
+            Width = 316
             Height = 26
             ActionManager = ActionManager
             Align = alNone
@@ -3488,6 +3491,16 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Appearance.ColorMirrorCheckedTo = 16768988
             Appearance.ColorMirrorDisabled = 11974326
             Appearance.ColorMirrorDisabledTo = 15921906
+          end
+          object Panel3: TPanel
+            Left = 488
+            Top = 2
+            Width = 85
+            Height = 26
+            Anchors = [akLeft, akTop, akRight]
+            BevelOuter = bvNone
+            ParentColor = True
+            TabOrder = 6
           end
         end
         object DBGToORG: TYDBGrid
@@ -3751,6 +3764,16 @@ inherited SentLetterInputForm: TSentLetterInputForm
         end
       end
     end
+    object pnlTopHeader: TPanel
+      Left = 1
+      Top = 1
+      Width = 822
+      Height = 5
+      Anchors = [akLeft, akTop, akRight]
+      BevelOuter = bvNone
+      ParentColor = True
+      TabOrder = 1
+    end
   end
   inherited DSForm: TDataSource
     AutoEdit = False
@@ -3768,7 +3791,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
     Top = 269
   end
   inherited Timer1sssss: TTimer
-    Left = 528
+    Left = 320
     Top = 0
   end
   inherited ApplicationEvents1: TApplicationEvents
@@ -3923,7 +3946,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           end
           item
             Action = DataSetEdit
-            ImageIndex = 37
+            ImageIndex = 2
             LastSession = 262
             ShortCut = 115
           end
@@ -3936,13 +3959,16 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Action = DataSetCancel
             ImageIndex = 90
             ShortCut = 32776
+          end
+          item
+            Caption = '-'
           end>
         ActionBar = ActionToolBar1
       end>
     Images = Dm.ImageList_MainNew
     OnExecute = ActionManagerExecute
-    Left = 584
-    Top = 21
+    Left = 608
+    Top = 77
     StyleName = 'XP Style'
     object DataSetInsert: TDataSetInsert
       Tag = 1

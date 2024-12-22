@@ -1,7 +1,7 @@
 object LoginForm: TLoginForm
   Tag = 13
-  Left = 268
-  Top = 138
+  Left = 796
+  Top = 307
   ActiveControl = UserName
   BiDiMode = bdRightToLeft
   BorderIcons = []
@@ -29937,7 +29937,7 @@ object LoginForm: TLoginForm
     Visible = False
   end
   object lblDate: TLabel
-    Left = 98
+    Left = 66
     Top = 382
     Width = 56
     Height = 13
@@ -29952,7 +29952,7 @@ object LoginForm: TLoginForm
     Transparent = True
   end
   object lbltxt: TLabel
-    Left = 157
+    Left = 125
     Top = 381
     Width = 69
     Height = 13
@@ -29967,7 +29967,7 @@ object LoginForm: TLoginForm
     Transparent = True
   end
   object Label2: TLabel
-    Left = 233
+    Left = 265
     Top = 381
     Width = 68
     Height = 13
@@ -29981,8 +29981,8 @@ object LoginForm: TLoginForm
     Transparent = True
   end
   object Label1: TLabel
-    Left = 67
-    Top = 18
+    Left = 70
+    Top = 33
     Width = 257
     Height = 56
     Alignment = taCenter
@@ -30356,6 +30356,22 @@ object LoginForm: TLoginForm
     ParentFont = False
     Transparent = True
     Visible = False
+  end
+  object Label9: TLabel
+    Left = 0
+    Top = 9
+    Width = 400
+    Height = 13
+    Alignment = taCenter
+    AutoSize = False
+    Caption = #1606#1585#1605' '#1575#1601#1586#1575#1585' '#1705#1575#1585#1578#1575#1576#1604
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clWhite
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
   end
   object Password: TEdit
     Left = 119

@@ -6,7 +6,8 @@ uses
 jpeg, BaseUnit, DBActns, ActnMan, StdCtrls, DBLookupEdit, Grids, DBGrids,
   YDbgrid, ComCtrls, DBTreeView, Mask, DBCtrls, Controls, Buttons,
   Graphics, ExtCtrls, Classes, ActnList, DB,dialogs,SysUtils,Forms,
-  ExtActns, ADODB, Windows, Menus, XPStyleActnCtrls, AdvGlowButton;
+  ExtActns, ADODB, Windows, Menus, XPStyleActnCtrls, AdvGlowButton,
+  dxGDIPlusClasses, xpPanel;
 
 type
   TArchiveOrganizeForm = class(TMBaseForm)
@@ -14,15 +15,8 @@ type
     AClose: TAction;             
     AInsert: TAction;
     Apost: TAction;
-    GroupBox1: TGroupBox;
-    Label4: TLabel;
-    Label9: TLabel;
-    DBEPlace: TDBEdit;
-    DBETitle: TDBEdit;
     Adelete: TAction;
     Dlist: TDataSource;
-    Label1: TLabel;
-    DBENotes: TDBEdit;
     Panel2: TPanel;
     Label2: TLabel;
     SEdit: TEdit;
@@ -35,7 +29,6 @@ type
     SpeedButton1: TAdvGlowButton;
     SpeedButton2: TAdvGlowButton;
     DBText1: TDBText;
-    LabelAccess: TLabel;
     Label3: TLabel;
     ArchiveTree: TDBTreeView;
     Panel4: TPanel;
@@ -46,12 +39,28 @@ type
     BBCancel: TAdvGlowButton;
     BBInsert: TAdvGlowButton;
     DeleteBtn: TAdvGlowButton;
-    LblPaste: TLabel;
     BBEdit: TAdvGlowButton;
     AEdit: TAction;
-    SBCollapse: TAdvGlowButton;
-    SBExpand: TAdvGlowButton;
     pnlMain: TPanel;
+    SBExpand: TAdvGlowButton;
+    SBCollapse: TAdvGlowButton;
+    LblPaste: TLabel;
+    Panel6: TxpPanel;
+    Image1: TImage;
+    Label5: TLabel;
+    DBText2: TDBText;
+    Panel7: TPanel;
+    GroupBox1: TGroupBox;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label1: TLabel;
+    DBEPlace: TDBEdit;
+    DBETitle: TDBEdit;
+    DBENotes: TDBEdit;
+    Panel9: TPanel;
+    PopupMenu_Right: TPopupMenu;
+    C1: TMenuItem;
+    p1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure ACloseExecute(Sender: TObject);
     procedure SetOrganizeMode(Value:boolean);
@@ -80,6 +89,8 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure BBEditClick(Sender: TObject);
     procedure AEditExecute(Sender: TObject);
+    procedure C1Click(Sender: TObject);
+    procedure p1Click(Sender: TObject);
 
   private
      FOrganizeMode: boolean;
@@ -123,8 +134,8 @@ begin
    DBGFromORG.Columns[1].Color := $00FAC6FF;
    done := false;
    {Ranjbar 89.09.13 ID=215}
-   PageControl1.TabHeight := 1;
-   PageControl1.TabWidth := 1;
+  // PageControl1.TabHeight := 1;
+  // PageControl1.TabWidth := 1;
    //---
 end;
 
@@ -269,22 +280,31 @@ begin
          DSForm.DataSet:=Exec_get_ArchiveFolder_byUserID(_Userid,1);
 
    if Dm.ListFromorg then
-      PageControl1.ActivePageIndex := 0
+   begin
+      PageControl1.ActivePageIndex := 0  ;
+      SpeedButton2.Down := true;
+   end
    else
+   begin
       PageControl1.ActivePageIndex := 1;
+      SpeedButton1.Down := true;
+   end;
    {Ranjbar 87.12.17}
    BidiModeToRight(ArchiveTree);
    //---
-   if _Kartable then
-      LabelAccess.Visible := False;
+ //  if _Kartable then
+ //     LabelAccess.Visible := False;
+
+   Paste.Hide ;
+
 end;
 
 procedure TArchiveOrganizeForm.FormClose(Sender: TObject;var Action: TCloseAction);
 begin
   inherited;
 
-dm.ListFromorg:=PageControl1.ActivePageIndex=0;
-SetUserSetting('ListFromorg',dm.ListFromorg);
+  dm.ListFromorg:=PageControl1.ActivePageIndex=0;
+  SetUserSetting('ListFromorg',dm.ListFromorg);
 end;
 
 procedure TArchiveOrganizeForm.ArchiveTreeGetImageIndex(Sender: TObject;
@@ -361,10 +381,11 @@ begin
 
    //Ranjbar
    SelectedNodeTitle := ArchiveTree.Selected.text ;
-   LblPaste.Caption := SelectedNodeTitle;
+   LblPaste.Caption := 'ò«  ‘œÂ  = ' + SelectedNodeTitle;
    LblPaste.Visible := True;
    //---
    Paste.Show;
+   Cut.Hide;
 end;
 
 procedure TArchiveOrganizeForm.PasteClick(Sender: TObject);
@@ -381,7 +402,12 @@ begin
    begin
       dm.YeganehConnection.Execute('update ArchiveFolder set ParentFolderID= '+IntToStr(ParentID)+' where FolderID='+IntToStr(SelectedNodeID));
       FormShow(self);
+      LblPaste.Caption := '';
+      LblPaste.Visible := False;
+      Paste.Hide;
+      Cut.Show;
    end;
+
 end;
 
 procedure TArchiveOrganizeForm.SBExpandClick(Sender: TObject);
@@ -447,6 +473,20 @@ begin
              DSForm.DataSet:=Exec_get_ArchiveFolder_byUserID(_Userid,1);
           end
        end;
+end;
+
+procedure TArchiveOrganizeForm.C1Click(Sender: TObject);
+begin
+  inherited;
+  if Cut.Showing then
+    CutClick(self);
+end;
+
+procedure TArchiveOrganizeForm.p1Click(Sender: TObject);
+begin
+  inherited;
+  if Paste.Showing then
+    PasteClick(self);
 end;
 
 end.

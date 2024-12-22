@@ -140,7 +140,7 @@ type
     SpeedButton2: TSpeedButton;
     lblDate2: TLabel;
     Label24: TLabel;
-    DBText1: TDBText;
+    DBTextStatusSaveDate: TDBText;
     DBLkCBDoneStatusTitle: TDBLookupComboBox;
     DBMemoDoneComment: TDBMemo;
     DBCoBoSuccessChance: TDBComboBox;
@@ -153,8 +153,6 @@ type
     Button4: TButton;
     btnAddSub: TBitBtn;
     Panel2: TPanel;
-    BitBtn3: TBitBtn;
-    BitBtn4: TBitBtn;
     BtnCancel: TBitBtn;
     btnShowContractWord: TBitBtn;
     Label27: TLabel;
@@ -164,10 +162,6 @@ type
     Splitter1: TSplitter;
     stb: TStatusBar;
     btnRefrenceInPerson: TBitBtn;
-    pnlFactor: TPanel;
-    btnFactor: TBitBtn;
-    chFactor: TDBCheckBox;
-    chPreFactor: TDBCheckBox;
     SpSelect_Cases: TADOStoredProc;
     SpSelect_CasesCaseID: TLargeintField;
     SpSelect_CasesCaseTitle: TWideStringField;
@@ -220,13 +214,23 @@ type
     Label38: TLabel;
     ALLMarketerTitleShow: TDBEdit;
     ALLActionTypeTitleShow: TDBEdit;
+    Button5: TButton;
+    DBText3: TDBText;
+    OtherPeople: TBitBtn;
+    pnlStateCustomer: TPanel;
+    BitBtn3: TBitBtn;
+    btnChangeStateCustomer: TBitBtn;
+    pnlFactor: TPanel;
+    btnFactor: TBitBtn;
+    chFactor: TDBCheckBox;
+    chPreFactor: TDBCheckBox;
     procedure btnWordViewClick(Sender: TObject);
     procedure btnAttachPicClick(Sender: TObject);
     procedure refreshData;
     procedure BitBtn2Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
-    procedure BitBtn4Click(Sender: TObject);
+    procedure btnChangeStateCustomerClick(Sender: TObject);
     procedure BtnCancelClick(Sender: TObject);
     procedure btnDelClick(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
@@ -280,14 +284,19 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edtAmountChange(Sender: TObject);
+    procedure OtherPeopleClick(Sender: TObject);
+    procedure dbgFollowNeedImageIndex(Column: TColumn;
+      var ImageIndex: Integer);
   private
    Function  LoadImageField(Field:TField;Path:String):Boolean;
    procedure SetColorForm ;
+   procedure EnableButtom ( amode : String);
     { Private declarations }
   public
     { Public declarations }
        FUID : integer;
     CustomerID: integer;
+    Edited :Boolean;
   end;
 
 var
@@ -296,7 +305,7 @@ var
 implementation
 
 uses dmu, YShamsiDate, UContract, CancelCustomerU, Telinputunit, ImageUnit,
-  URefrenceInPerson, FactorFM,BusinessLayer;
+  URefrenceInPerson, FactorFM,BusinessLayer, FmOtherPerson_U;
 
 {$R *.dfm}
 
@@ -398,7 +407,7 @@ end;
 procedure TFrFollowUp.BitBtn2Click(Sender: TObject);
 begin
   inherited;
-
+  EnableButtom('EDIT');
   if (Dm.Select_FollowUP_By_CustomerIDIsAuto.AsBoolean) then
   begin
     if (Dm.Select_FollowUP_By_CustomerIDParentMarketerID.AsInteger <> _MarketerID) then
@@ -417,7 +426,8 @@ begin
         Exit;
       end;
     end;
-
+    
+  pnlStateCustomer.Enabled := False ;
   treFollowUps.DataSource:= nil;  // Amin 1391/08/25
    dm.Select_FollowUP_By_CustomerID.Edit;
 //     if not (UpperCase(_AreYouYeganeh) = UpperCase('True')) then
@@ -447,16 +457,27 @@ begin
 
 end;
 
-procedure TFrFollowUp.BitBtn4Click(Sender: TObject);
+procedure TFrFollowUp.btnChangeStateCustomerClick(Sender: TObject);
 begin
   inherited;
-FrCancelCustomer:=TFrCancelCustomer.Create(Application);
-with FrCancelCustomer do
- begin
-  CustomerID:=Dm.Select_FollowUP_By_CustomerIDCustomerID.AsInteger;
-  RefreshData;
-  ShowModal;
- end;
+  FrCancelCustomer := TFrCancelCustomer.Create(Application);
+  with FrCancelCustomer do
+  begin
+    if Dm.Select_FollowUP_By_CustomerIDCustomerID.AsInteger = 0 then
+      CustomerID := Self.Select_customer_By_CustomerIDCustomerID.AsInteger  //Dm.Select_FollowUP_By_CustomerIDCustomerID.AsInteger;
+    else  CustomerID := Dm.Select_FollowUP_By_CustomerIDCustomerID.AsInteger;
+    
+    RefreshData;
+    ShowModal;
+
+    if FrCancelCustomer.RefreshNeed  then
+    begin
+      Self.followUpItem.ItemIndex := -1 ;
+      Self.refreshData;
+    end;
+  end;
+
+
 end;
 
 procedure TFrFollowUp.BtnCancelClick(Sender: TObject);
@@ -464,7 +485,9 @@ begin
   inherited;
   Dm.Marketer.Filtered := False;
   Dm.Marketer.Filter := '' ;
-  Dm.Marketer.Filtered := True;   
+  Dm.Marketer.Filtered := True;
+  pnlStateCustomer.Enabled := True ;
+  EnableButtom('OK');
   close
 end;
 
@@ -488,12 +511,20 @@ var
    ParentID : integer;     // Amin 1391/08/25
 begin
   inherited;
-
+  EnableButtom('ADD');
+   With Dm.Select_FollowUP_By_CustomerID do
+      if State in [dsEdit,dsInsert] then
+      begin
+        BitBtn1Click(self);
+      end;
+  
    if not( Select_customer_By_CustomerIDCustomerStatusID.AsInteger  in [1,2])  then
    begin
       ShowMessage('Ê÷⁄Ì  «Ì‰ „‘ —Ì œ— Õ«· ÅÌêÌ—Ì ‰Ì”  ·–« ‰„Ì  Ê«‰ Ìò ÅÌêÌ—Ì »—«Ì ¬‰ À»  ò—œ');
       Exit;
    end;
+   
+   pnlStateCustomer.Enabled := False ;
 
    // Amin 1391/08/25 Start
    if((sender as TBitBtn).Name = 'btnAdd') then
@@ -513,6 +544,7 @@ begin
    // Amin 1391/08/25 End
 
    treFollowUps.DataSource := nil;    // Amin 1391/08/25
+
    Dm.Select_FollowUP_By_CustomerID.Last ;
 
    //Dm.Select_FollowUP_By_CustomerID.insert;//Append;
@@ -521,7 +553,7 @@ begin
 
    if Dm.Select_FollowUP_By_CustomerID.RecordCount  = 0 then
    begin
-     if _accessID in [4,7] then //  ò«—»— ›—Ê‘
+     if _accessID in [4,7,19] then //  ò«—»— ›—Ê‘
      begin
        if Dm.Select_Customer_By_CustomerIDCompaginID.AsInteger = 1 then
          Dm.Select_FollowUP_By_CustomerIDActionTypeID.AsInteger := 72
@@ -549,6 +581,10 @@ var
    IndicatorID : integer; // Amin 1391/12/26
    CaseAccept : string;
    ButtonName : string;
+   InputValue : string;
+   Isnumber : Boolean;
+   indx : Integer;
+   TempDate : TDateTime ;
 begin
   inherited;
    With Dm.Select_FollowUP_By_CustomerID do
@@ -564,6 +600,29 @@ begin
             DBLkCBActionTypeTitle.DropDown;
             Abort;
          end;
+
+         if _accessID in [6,9,15] then //  ò«—»— Å‘ Ì»«‰Ì
+           if (Trim(DBMemoComment.Text) = '' ) then
+           begin
+              ShowMyMessage('ÅÌ€«„','·ÿ›«  Ê÷ÌÕ «ﬁœ«„ —« Å— ‰„«ÌÌœ',[mbOK],mtInformation);
+              DBMemoComment.SetFocus;
+              Abort;
+           end;
+
+
+         if ( DBLkCBDoneStatusTitle.KeyValue = 2 ) and //(Dm.Select_FollowUP_By_CustomerIDDoneStatusID.Value = 2) and
+            ((Dm.Select_FollowUP_By_CustomerIDStatusSaveDate.Value = Null) or
+             (Dm.Select_FollowUP_By_CustomerIDStatusSaveDate.AsString = '') or
+             (Trim(DBTextStatusSaveDate.Caption )= '') )then
+         begin
+            TempDate := dm.GetSql( ' select getdate() ' );
+            Dm.Select_FollowUP_By_CustomerIDStatusSaveDate.Value := ShamsiString(TempDate);
+            Dm.Select_FollowUP_By_CustomerIDStatusSaveDateTime.Value := TempDate;
+
+            if Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString = '' then
+              Dm.Select_FollowUP_By_CustomerIDDoneDate.Value  := ShamsiString(TempDate);
+         end;
+         
 
          if State = dsInsert then
          begin
@@ -584,11 +643,41 @@ begin
          begin
             IsInEditMode := true; // Amin 1391/12/26
             IndicatorID := dm.Select_FollowUP_By_CustomerIDFollowUPID.AsInteger; // Amin 1391/12/26
+
+            if _accessID in [4,7,19] then //  ò«—»— ›—Ê‘
+            begin
+              if DBLkCBDoneStatusTitle.KeyValue = 2 then
+              begin
+                 if (dm.Select_FollowUP_By_CustomerIDActionTypeID.Value in [78,8,62] ) then
+                 begin
+                   if MessageDlg('¬Ì« „Ì ŒÊ«ÂÌœ ﬁÌ„  »—¬Ê—œ ›—Ê‘  €ÌÌ— œÂÌœø' + ' ' + edtAmount.Text  ,
+                     mtConfirmation, [mbYes, mbNo], 0) = mryes then
+                   begin
+                     InputValue := InputBox('·ÿ›« „»·€ Ê«—œ ‘Êœ ','»—«Ê—œ ›—Ê‘','');
+                     Isnumber := True;
+                     for indx :=1 to Length(InputValue) do
+                     begin
+                       if not (InputValue[indx] in ['0'..'9']) then
+                       begin
+                          Isnumber := False;
+                          break;
+                       end;
+                     end;
+                     if Isnumber then
+                     begin
+                       Qry_SetResult('UPDATE dbo.Customer   '+
+                             ' SET Priceestimate = '+InputValue  +
+                             ' where customerid = '+IntToStr( Select_customer_By_CustomerIDCustomerID.ASInteger) ,dm.YeganehConnection);
+                             edtAmount.Text :=   InputValue ;
+                     end
+                     else showmessage('·ÿ›« ÃÂ  »—¬Ê—œ ﬁÌ„  ›ﬁÿ ⁄œœ Ê«—œ ò‰Ìœ')
+                   end;
+                 end;
+              end;
+            end;  
          end;
 
-         if (Dm.Select_FollowUP_By_CustomerIDDoneStatusID.Value = 2) and
-            ((Dm.Select_FollowUP_By_CustomerIDStatusSaveDate.Value = Null) or (Dm.Select_FollowUP_By_CustomerIDStatusSaveDate.AsString = ''))then
-            Dm.Select_FollowUP_By_CustomerIDStatusSaveDate.Value := ShamsiString(Now);
+
 
          if not(Select_customer_By_CustomerIDCustomerStatusID.AsInteger in [1,2]) then
          begin
@@ -684,6 +773,9 @@ begin
      BitBtn2.Enabled        := True;
      btnDelEghdamat.Enabled := True;
      BitBtn1.Enabled        := True;
+     Edited := True;
+     pnlStateCustomer.Enabled := True ;
+     EnableButtom('OK');     
     //  treFollowUps.Refresh;  // Amin 1391/08/25
       {// Amin 1391/12/23 treFollowUps.DataSource:= Dm.DSelect_FollowUP_By_CustomerID;  // Amin 1391/08/25 }
 end;
@@ -769,12 +861,14 @@ end;
 
 procedure TFrFollowUp.FormCreate(Sender: TObject);
 begin
+
   inherited;
+   Edited := False ;
    With dm.ActionTypeByUserType do
    begin
      Close;
 
-     if _accessID in [4,7] then //  ò«—»— ›—Ê‘
+     if _accessID in [4,7,19] then //  ò«—»— ›—Ê‘
      begin
        SQL.Text := ' Select * from dbo.ActionType  WITH(NOLOCK)  Where ( UserTypeId = '+IntToStr(_UserTypeID)+' or (UserTypeId is null) or '+IntToStr(_UserTypeID)+'= 0 )'+
        ' and  isnull(SortOrderInSale ,0) >0  order by SortOrderInSale ' ;
@@ -887,6 +981,11 @@ begin
   BitBtn2.Enabled        := (dbgFollow.DataSource.DataSet.RecordCount > 0);
   btnDelEghdamat.Enabled := (dbgFollow.DataSource.DataSet.RecordCount > 0);
   BitBtn1.Enabled        := (dbgFollow.DataSource.DataSet.RecordCount > 0);
+
+  if GetActionAccess(_accessID,'acpnlCustomerStatus',1) = False  then
+    btnChangeStateCustomer.Enabled := Select_Customer_By_CustomerIDCustomerStatusID.asInteger <> 2 ;
+
+  EnableButtom('FIRST');
 end;
 
 procedure TFrFollowUp.edtToDoDateKeyPress(Sender: TObject; var Key: Char);
@@ -980,6 +1079,15 @@ procedure TFrFollowUp.dbgFollowNeedColorCondition(Column: TColumn;
   State: TGridDrawState; var Color: TColor);
 begin
   inherited;
+
+  if (Dm.Select_FollowUP_By_CustomerIDActionTypeID.AsInteger in  [78,62] ) then
+       Color:= TColor(RGB(255, 201, 14));
+
+
+  if (Dm.Select_FollowUP_By_CustomerIDActionTypeID.AsInteger in  [37,7,64] ) then
+       Color:= TColor(RGB(210, 166, 255));
+
+
   if not (Dm.Select_FollowUP_By_CustomerIDExcellAttachment.IsNull) then
             Color:= TColor(RGB(250, 170, 49));
 
@@ -1063,7 +1171,13 @@ procedure TFrFollowUp.Button4Click(Sender: TObject);
 begin
   inherited;
   if (Dm.Select_FollowUP_By_CustomerID.State=dsInsert) or (Dm.Select_FollowUP_By_CustomerID.State=dsEdit) then
-      Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString:=ShamsiIncDate(DBEdit10.Text,0,0,1)
+  begin
+     if (trim(DBEdit10.Text) = '') then
+       Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString:=ShamsiIncDate(_today,0,0,1)
+     else
+      Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString:=ShamsiIncDate(DBEdit10.Text,0,0,1);
+      
+  end
   else
       ShowMessage('»«Ìœ œ— Õ«·  ÊÌ—«Ì‘ Ì« œ—Ã «ÿ·«⁄«  »«‘Ìœ');
 end;
@@ -1111,6 +1225,8 @@ begin
       ShowMessage('«„ò«‰ Õ–› Ê ÊÌ—«Ì‘ «ﬁœ«„«  „—»Êÿ »Â ò«—»—«‰ œÌê— ÊÃÊœ ‰œ«—œ');
       Exit;
     end;
+    
+  EnableButtom('DEL');
 
   IF MessageDlg('¬Ì« «“ Õ–› «ÿ·«⁄«  „ÿ„∆‰ Â” Ìœø',mtConfirmation,[mbyes,mbno],0)=mryes then
   Begin
@@ -1137,6 +1253,8 @@ begin
            ' SET ActionType_LevelID = [dbo].[fn_GetCurrentStateCustomerActionType_LevelID]('+IntToStr( Select_customer_By_CustomerIDCustomerID.ASInteger) +')   '+
            ' where customerid = '+IntToStr( Select_customer_By_CustomerIDCustomerID.ASInteger) ,dm.YeganehConnection);
 
+  Edited := True ;
+  EnableButtom('OK');        
 end;
 
 procedure TFrFollowUp.dbgFollowCellClick(Column: TColumn);
@@ -1349,7 +1467,7 @@ begin
     end
     else MessageDlg('«Ì‰ ›—„ ÃÂ  «ﬁœ«„«  Õ÷Ê—Ì „Ì »«‘œ',mtConfirmation,[mbyes],0)
   end
-  else MessageDlg('·ÿ›« «ﬁœ«„ „Ê—œ ‰Ÿ— À»  ò‰Ìœ ”Å” ›«ò Ê— —« œ—Ã ‰„«ÌÌœ',mtConfirmation,[mbyes],0) ;
+  else MessageDlg('·ÿ›« «ﬁœ«„ „Ê—œ ‰Ÿ— À»  ò‰Ìœ ”Å” „—«Ã⁄Â Õ÷Ê—Ì —« œ—Ã ‰„«ÌÌœ',mtConfirmation,[mbyes],0) ;
 end;
 
 procedure TFrFollowUp.btnFactorClick(Sender: TObject);
@@ -1428,6 +1546,9 @@ begin
   PropertiesForm.Showmodal;
   if Assigned(PropertiesForm) then
     FreeAndNil(PropertiesForm);
+
+  if GetActionAccess(_accessID,'acpnlCustomerStatus',1) = False  then
+    btnChangeStateCustomer.Enabled := Select_Customer_By_CustomerIDCustomerStatusID.asInteger <> 2 ;
 end;
 
 procedure TFrFollowUp.FormKeyDown(Sender: TObject; var Key: Word;
@@ -1457,6 +1578,23 @@ begin
       if  dbgFollow.DataSource.DataSet.State  in [dsBrowse] then
         btnAddClick(btnAdd);
 
+    end
+    else
+    If (Shift = [ssctrl]) and (inttostr(key) = '117') then //f6
+    begin
+           // otherperson
+      if OtherPeople.Visible and OtherPeople.Enabled then
+      if  dbgFollow.DataSource.DataSet.State  in [dsBrowse] then
+        OtherPeopleClick(OtherPeople);
+
+    end
+    else
+    If (Shift = [ssctrl]) and (inttostr(key) = '118') then //f7
+    begin
+           // person
+      if btnViwCustomer.Visible and btnViwCustomer.Enabled then
+        btnViwCustomerClick(Sender);
+
     end;
 end;
 
@@ -1473,6 +1611,82 @@ begin
   else  edtAmount.Text :=  AmountSTR ;
   edtAmount.SelStart := Length(edtAmount.Text);
 
+
+end;
+
+procedure TFrFollowUp.OtherPeopleClick(Sender: TObject);
+begin
+  inherited;
+   FmOtherPerson := TFmOtherPerson.Create(nil);
+   FmOtherPerson.CustomerID := Select_customer_By_CustomerIDCustomerID.AsInteger ;
+   with FmOtherPerson.Select_Person_By_CustomerID do
+   begin
+      Close;
+      Parameters.ParamByName('@customerID').Value := Select_customer_By_CustomerIDCustomerID.AsInteger;
+      Open;
+   end;
+   FmOtherPerson.ShowModal;
+end;
+
+procedure TFrFollowUp.dbgFollowNeedImageIndex(Column: TColumn; var ImageIndex: Integer);
+begin
+  inherited;
+  btnRefrenceInPerson.Visible := (Dm.Select_FollowUP_By_CustomerIDActionTypeID.AsInteger in [ 19,20,21,22,23,26,45] ) ;
+end;
+
+procedure TFrFollowUp.EnableButtom(amode: String);
+begin
+  if (amode = 'ADD') or (amode = 'EDIT') then
+  begin
+   btnAdd.Enabled    := False ;
+   btnAddSub.Enabled := False ;
+   BitBtn1.Enabled   := True ;
+   btnDelEghdamat.Enabled := False ;
+   BitBtn2.Enabled        := False ;
+ end
+ else if  amode = 'OK' then
+ begin
+   btnAdd.Enabled    := True ;
+   btnAddSub.Enabled := True ;
+   BitBtn1.Enabled   := False ;
+
+   if Dm.Select_FollowUP_By_CustomerID.RecordCount>0  then
+   begin
+     btnDelEghdamat.Enabled := True ;
+     BitBtn2.Enabled        := True ;
+   end
+   else
+   begin
+     btnDelEghdamat.Enabled := False ;
+     BitBtn2.Enabled        := False ;
+   end;
+
+ end
+ else if  amode = 'DEL' then
+ begin
+   btnAdd.Enabled    := False ;
+   btnAddSub.Enabled := False ;
+   BitBtn1.Enabled   := False ;
+   btnDelEghdamat.Enabled := False ;
+   BitBtn2.Enabled        := False ;
+ end
+ else if  amode = 'FIRST' then
+ begin
+   btnAdd.Enabled    := True ;
+   btnAddSub.Enabled := False ;
+   BitBtn1.Enabled   := False ;
+   if Dm.Select_FollowUP_By_CustomerID.RecordCount>0  then
+   begin
+     btnDelEghdamat.Enabled := True ;
+     BitBtn2.Enabled        := True ;
+   end
+   else
+   begin
+     btnDelEghdamat.Enabled := False ;
+     BitBtn2.Enabled        := False ;
+   end;
+
+ end;
 
 end;
 

@@ -9,7 +9,7 @@ uses
   DBActns, YDbgrid, DBTreeView, XPStyleActnCtrls, xpPages, UemsVCL,
   xpBitBtn, ActnColorMaps, xpPanel, Spin,dateutils, BaseUnit, ExtActns,
   YWhereEdit, YAmountEdit, KimiyaEdit,shellAPI, MssCalendarPro,
-  acArcControls, TntDB, wwdbdatetimepicker ;
+  acArcControls, TntDB, wwdbdatetimepicker, CheckLst, YchecklistBox ;
 
 type
   TMainForm = class(TMBaseForm)
@@ -462,6 +462,57 @@ type
     Label47: TLabel;
     dblActionType_Level: TDBLookupComboBox;
     N94: TMenuItem;
+    pnlCLBCompaginIDs: TPanel;
+    Label48: TLabel;
+    CLBCompaginIDs: TYchecklistBox;
+    pnlOtherMarketer: TPanel;
+    Label49: TLabel;
+    dblMarketer: TDBLookupComboBox;
+    BitBtn4: TBitBtn;
+    cbTimeInterval: TCheckBox;
+    edtTimeInterval: TEdit;
+    Label50: TLabel;
+    LockReport: TSpeedButton;
+    UnlockRep: TSpeedButton;
+    lblLockRep: TLabel;
+    pnlSourcedate: TPanel;
+    edtSourceDay: TShamsiDateEdit;
+    SpeedButton14: TSpeedButton;
+    Label51: TLabel;
+    SpeedButton15: TSpeedButton;
+    SpeedButton16: TSpeedButton;
+    RGTypeRepMain: TRadioGroup;
+    N95: TMenuItem;
+    N96: TMenuItem;
+    N97: TMenuItem;
+    N98: TMenuItem;
+    N99: TMenuItem;
+    N100: TMenuItem;
+    N101: TMenuItem;
+    N102: TMenuItem;
+    N103: TMenuItem;
+    N104: TMenuItem;
+    N105: TMenuItem;
+    N106: TMenuItem;
+    N107: TMenuItem;
+    N108: TMenuItem;
+    N109: TMenuItem;
+    N110: TMenuItem;
+    N111: TMenuItem;
+    N112: TMenuItem;
+    N113: TMenuItem;
+    N114: TMenuItem;
+    N115: TMenuItem;
+    N116: TMenuItem;
+    N117: TMenuItem;
+    N118: TMenuItem;
+    N119: TMenuItem;
+    N120: TMenuItem;
+    N121: TMenuItem;
+    pnlContractMarketer: TPanel;
+    Label52: TLabel;
+    DBcontractMARKETER: TDBLookupComboBox;
+    BitBtn10: TBitBtn;
     procedure AinsertExecute(Sender: TObject);
     procedure Action6Execute(Sender: TObject);
     procedure ApropertyExecute(Sender: TObject);
@@ -718,6 +769,18 @@ type
     procedure dblActionType_LevelKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure N94Click(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
+    procedure FollowGridKeyPress(Sender: TObject; var Key: Char);
+    procedure FollowGridNeedColorCondition(Column: TColumn;
+      State: TGridDrawState; var Color: TColor);
+    procedure UnlockRepClick(Sender: TObject);
+    procedure LockReportClick(Sender: TObject);
+    procedure SpeedButton14Click(Sender: TObject);
+    procedure SpeedButton15Click(Sender: TObject);
+    procedure SpeedButton16Click(Sender: TObject);
+    procedure RGTypeRepMainClick(Sender: TObject);
+    procedure N96Click(Sender: TObject);
+    procedure N97Click(Sender: TObject);
 
   private
     qrydblsrchContractType :TADOQuery;
@@ -727,6 +790,7 @@ type
     oldTopRecord : Integer;
     StartTimeTaskLog : TDateTime;
     MainTaskLogId : Integer ;
+    CurentReportRun : string;
     { TODO -oparsa : 14030126 }
     procedure SetdblContractType;
     Function  LoadImageField(Field:TField;Path:String):Boolean;
@@ -736,6 +800,7 @@ type
     procedure SetColorForm ;
     procedure RunTaskQuery (TypeR : Integer=1);
     procedure RefreshAlarmMessage ;
+    procedure CountPanelSet;
   public
     GroupId: integer;
     CityId: integer;
@@ -773,7 +838,7 @@ Uses Telinputunit, dmu,  about, Report, ReportPhone,
   UVersionProduct, URefrenceInPerson, UToRefer, UUpdateJobStatus,
   UTaskReport, UBaseRefere, UfollowUpReport, UFMessageAlarm, UReferralUser,
   USendInnerMessage, USalesFunnel, UActionTypeLevel, UCustomerMap,UMapBug,
-  UCompare_Report, UTimeIntervalSale;
+  UCompare_Report, UTimeIntervalSale, UFixedAsset, UFixAssetMove;
 
 {$R *.dfm}
 
@@ -815,15 +880,20 @@ procedure TMainForm.ApropertyExecute(Sender: TObject);
 var Id :integer;
 begin
    Id := dm.CustomerCustomerID.AsInteger;
-   propertiesForm := TPropertiesForm.Create(Application,dm.CustomerCustomerID.AsInteger) ;
-   PropertiesForm.Showmodal;
-   if PropertiesForm.Edited = true then
+   if Id > 0 then
    begin
-     RefreshCustomer;
-     dm.Customer.Locate('CustomerId',Id,[])
-    end;
-  if Assigned(PropertiesForm) then
-    FreeAndNil(PropertiesForm);
+     propertiesForm := TPropertiesForm.Create(Application,dm.CustomerCustomerID.AsInteger) ;
+     PropertiesForm.Showmodal;
+
+     if (PropertiesForm<> nil) and (PropertiesForm.Edited = true) then
+     begin
+       RefreshCustomer;
+       dm.Customer.Locate('CustomerId',Id,[])
+     end;
+     if Assigned(PropertiesForm) then
+       FreeAndNil(PropertiesForm);
+   end;
+
 end;
 
 procedure TMainForm.AreportExecute(Sender: TObject);
@@ -849,6 +919,7 @@ begin
    StatusBar1.Panels[1].Text:= dm.ProductProductTitle.AsString;
    BDate.Text :=copy(_today,1,8)+'01';
    eDate.Text :=copy(_today,1,8)+'29' ;
+   edtSourceDay.Text :=_today;
    { TODO -oparsa : 14030201 }
    ActDateEditTo.Text :=copy(_today,1,5)+'12/29' ;
    ContractDateEditTo.Text :=copy(_today,1,5)+'12/29' ;
@@ -897,7 +968,7 @@ begin
    //RefreshCustomer;
 
    SetActiveUser.Interval:=_ActiveUserRefreshTime;
-   SetActiveUser.Enabled:=True;
+   SetActiveUser.Enabled := True;
 
 end;
 
@@ -1156,7 +1227,15 @@ begin
 
   RefreshAlarmMessage ;
   TimerMessage.Enabled := True;
+  
+  Dm.Compagin.Close;
+  Dm.Compagin.Open;
+  CLBCompaginIDs.Fill;
 
+  StatusBar1.Panels[2].Text:=' ⁄œ«œ : '+IntToStr(PhoneGrid.DataSource.DataSet.RecordCount);
+
+  PnlAllAct.Visible:=_BtnAllAct;
+  PnlAllContract.Visible:=_BtnAllContract;
 End;
 
 Function TMainForm.MakeStrSearch(s:string):string;
@@ -1343,26 +1422,46 @@ begin
    FrFollowUp.CustomerID := Dm.Select_FollowUP_By_DateCustomerID.AsInteger;
    FrFollowUp.refreshData;
    FrFollowUp.FUID :=  dm.Select_FollowUP_By_DateFollowUPID.AsInteger;
-   Dm.Select_FollowUP_By_CustomerID.Locate('FollowUPID',dm.Select_FollowUP_By_DateFollowUPID.AsInteger,[]);
-   Dm.Select_FollowUP_By_CustomerID.Edit;
+   if  Dm.Select_FollowUP_By_CustomerID.Locate('FollowUPID',dm.Select_FollowUP_By_DateFollowUPID.AsInteger,[]) then
+     Dm.Select_FollowUP_By_CustomerID.Edit;
 //   Dm.Select_FollowUP_By_CustomerID.Last;
 {  if Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString = '' then
       Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString := _Today; }
    FrFollowUp.Showmodal;
+
+   id := Dm.Select_FollowUP_By_DateFollowUPID.Value;
+   if FrFollowUp.Edited = true then
+   begin
+      with dm.Select_FollowUP_By_Date do
+      begin
+         // Requery;
+        ///  Button18Click(self);
+          DBGrid_SaveSort(Self.Name,FollowGrid);
+
+          dm.RefreshFollowUP(SF_Bdate,SF_Edate,SF_Ds,SF_ActionTypeID,SF_BSuccess,SF_ESuccess,SF_Comment_like,SF_DoneComment_like,SF_MarketerID,SF_CommentTypeOr,SF_GroupID,SF_CustomerName,SF_CustomerID, SF_TimeInterval );
+          if LockReport.Visible then
+            DBGrid_LoadSort(self.Name,FollowGrid);
+            
+          Locate('FollowUPID',id,[]);
+      end;
+   end;
+
    if Assigned(FrFollowUp) then
      FreeAndNil(FrFollowUp);
-   id := Dm.Select_FollowUP_By_DateFollowUPID.Value;
 
-    with dm.Select_FollowUP_By_Date do
-    begin
-        Requery;
-        Locate('FollowUPID',id,[]);
-    end;
 end;
 
 procedure TMainForm.Button25Click(Sender: TObject);
 begin
+   if LockReport.Visible then
+   begin
+     if MessageDlg('ê“«—‘ ﬁ›· „Ì »«‘œ ·ÿ›« «» œ« ê“«—‘ «“ Õ«·  ﬁ›· Œ«—Ã ‰„«ÌÌœ',mtWarning,[mbyes,mbno],0)=mryes then
+       LockReportClick(self)
+     else  
+     Exit;
+   end;
    // Amin 1391/10/04 Start
+   BitBtn4Click(self);
    if(chkDoneStatus.Checked) and (cboDoneStatus.KeyValue <> NULL) then
       Dm.RefreshFollowUP_ByDate('1300/01/01',_today,cboDoneStatus.KeyValue,_CurrentMarketerID)
    else
@@ -1370,17 +1469,23 @@ begin
    // Amin 1391/10/04 End
 
    // Amin 1391/10/04 Dm.RefreshFollowUP_ByDate('1300/01/01',_today,1,_CurrentMarketerID);
-   if Dm.Select_FollowUP_By_Date.RecordCount > 0 then
-      StatusBar1.Panels[2].Text := '  ⁄œ«œ ' + IntToStr(Dm.Select_FollowUP_By_Date.RecordCount)
-   else
-      StatusBar1.Panels[2].Text := '  ⁄œ«œ 0';
+   CountPanelSet;
 
    FollowGrid.Columns[9].Visible:=False;
+   CurentReportRun := 'ToToday';
 end;
 
 procedure TMainForm.Button18Click(Sender: TObject);
 begin
+   if LockReport.Visible then
+   begin
+     if MessageDlg('ê“«—‘ ﬁ›· „Ì »«‘œ ·ÿ›« «» œ« ê“«—‘ «“ Õ«·  ﬁ›· Œ«—Ã ‰„«ÌÌœ',mtWarning,[mbyes,mbno],0)=mryes then
+       LockReportClick(self)
+     else  
+     Exit;
+   end;
    // Amin 1391/10/04 Start
+   BitBtn4Click(self);
    if(chkDoneStatus.Checked) and (cboDoneStatus.KeyValue <> NULL) then
       Dm.RefreshFollowUP_ByDate(_today,_today,cboDoneStatus.KeyValue,_CurrentMarketerID)
    else
@@ -1388,100 +1493,173 @@ begin
    // Amin 1391/10/04 End
 
    // Amin 1391/10/04 Dm.RefreshFollowUP_ByDate(_today,_today,1,_CurrentMarketerID, cboDoneStatus.KeyValue);
-if Dm.Select_FollowUP_By_Date.RecordCount > 0 then
-      StatusBar1.Panels[2].Text := '  ⁄œ«œ ' + IntToStr(Dm.Select_FollowUP_By_Date.RecordCount)
-else
-      StatusBar1.Panels[2].Text := '  ⁄œ«œ 0';
+   {
+  if Dm.Select_FollowUP_By_Date.RecordCount > 0 then
+        StatusBar1.Panels[2].Text := '  ⁄œ«œ ' + IntToStr(Dm.Select_FollowUP_By_Date.RecordCount)
+  else StatusBar1.Panels[2].Text := '  ⁄œ«œ 0';
+               }
+   CountPanelSet;
+
    FollowGrid.Columns[9].Visible:=False;
+   CurentReportRun := 'Today';
 end;
 
 procedure TMainForm.Button21Click(Sender: TObject);
 begin
+   if LockReport.Visible then
+   begin
+     if MessageDlg('ê“«—‘ ﬁ›· „Ì »«‘œ ·ÿ›« «» œ« ê“«—‘ «“ Õ«·  ﬁ›· Œ«—Ã ‰„«ÌÌœ',mtWarning,[mbyes,mbno],0)=mryes then
+       LockReportClick(self)
+     else
+     Exit;
+   end;
    // Amin 1391/10/04 Start
+   BitBtn4Click(self);
    if(chkDoneStatus.Checked) and (cboDoneStatus.KeyValue <> NULL) then
       Dm.RefreshFollowUP_ByDate(ShamsiIncDate(_today,0,0,1),ShamsiIncDate(_today,0,0,1),cboDoneStatus.KeyValue,_CurrentMarketerID)
    else
       Dm.RefreshFollowUP_ByDate(ShamsiIncDate(_today,0,0,1),ShamsiIncDate(_today,0,0,1),0,_CurrentMarketerID);
    // Amin 1391/10/04 End
-
+     {
    // Amin 1391/10/04 Dm.RefreshFollowUP_ByDate(ShamsiIncDate(_today,0,0,1),ShamsiIncDate(_today,0,0,1),1,_CurrentMarketerID, cboDoneStatus.KeyValue);
-   if Dm.Select_FollowUP_By_Date.RecordCount > 0 then
-      StatusBar1.Panels[2].Text := '  ⁄œ«œ ' + IntToStr(Dm.Select_FollowUP_By_Date.RecordCount)
-else
-      StatusBar1.Panels[2].Text := '  ⁄œ«œ 0';
+  if Dm.Select_FollowUP_By_Date.RecordCount > 0 then
+    StatusBar1.Panels[2].Text := '  ⁄œ«œ ' + IntToStr(Dm.Select_FollowUP_By_Date.RecordCount)
+  else
+    StatusBar1.Panels[2].Text := '  ⁄œ«œ 0';
+         }
+  CountPanelSet;
+
    FollowGrid.Columns[9].Visible:=False;
+   CurentReportRun := 'LastDay';
 end;
 
 procedure TMainForm.Button22Click(Sender: TObject);
 begin
    // Amin 1391/10/04 Start
+   if LockReport.Visible then
+   begin
+     if MessageDlg('ê“«—‘ ﬁ›· „Ì »«‘œ ·ÿ›« «» œ« ê“«—‘ «“ Õ«·  ﬁ›· Œ«—Ã ‰„«ÌÌœ',mtWarning,[mbyes,mbno],0)=mryes then
+       LockReportClick(self)
+     else
+     Exit;
+   end;
+
+   BitBtn4Click(self);
    if(chkDoneStatus.Checked) and (cboDoneStatus.KeyValue <> NULL) then
       Dm.RefreshFollowUP_ByDate(ShamsiIncDate(_today,0,0,-1),ShamsiIncDate(_today,0,0,-1),cboDoneStatus.KeyValue,_CurrentMarketerID)
    else
       Dm.RefreshFollowUP_ByDate(ShamsiIncDate(_today,0,0,-1),ShamsiIncDate(_today,0,0,-1),0,_CurrentMarketerID);
    // Amin 1391/10/04 End
-
-   // Amin 1391/10/04 Dm.RefreshFollowUP_ByDate(ShamsiIncDate(_today,0,0,-1),ShamsiIncDate(_today,0,0,-1),1,_CurrentMarketerID, cboDoneStatus.KeyValue);
-   if Dm.Select_FollowUP_By_Date.RecordCount > 0 then
-      StatusBar1.Panels[2].Text := '  ⁄œ«œ ' + IntToStr(Dm.Select_FollowUP_By_Date.RecordCount)
-else
-      StatusBar1.Panels[2].Text := '  ⁄œ«œ 0';
+       {
+  // Amin 1391/10/04 Dm.RefreshFollowUP_ByDate(ShamsiIncDate(_today,0,0,-1),ShamsiIncDate(_today,0,0,-1),1,_CurrentMarketerID, cboDoneStatus.KeyValue);
+  if Dm.Select_FollowUP_By_Date.RecordCount > 0 then
+    StatusBar1.Panels[2].Text := '  ⁄œ«œ ' + IntToStr(Dm.Select_FollowUP_By_Date.RecordCount)
+  else
+    StatusBar1.Panels[2].Text := '  ⁄œ«œ 0';
+                    }
+   CountPanelSet;
    FollowGrid.Columns[9].Visible:=False;
+   CurentReportRun := 'BeforeDay';
 end;
 
 procedure TMainForm.Button23Click(Sender: TObject);
 begin
+   if LockReport.Visible then
+   begin
+     if MessageDlg('ê“«—‘ ﬁ›· „Ì »«‘œ ·ÿ›« «» œ« ê“«—‘ «“ Õ«·  ﬁ›· Œ«—Ã ‰„«ÌÌœ',mtWarning,[mbyes,mbno],0)=mryes then
+       LockReportClick(self)
+     else
+     Exit;
+   end;
    // Amin 1391/10/04 Start
+   BitBtn4Click(self);
    if(chkDoneStatus.Checked) and (cboDoneStatus.KeyValue <> NULL) then
       Dm.RefreshFollowUP_ByDate(ShamsiIncDate(_today,0,0,-ShamsidayInWeek(_today)),ShamsiIncDate(_today,0,0,7-ShamsidayInWeek(_today)),cboDoneStatus.KeyValue,_CurrentMarketerID)
    else
       Dm.RefreshFollowUP_ByDate(ShamsiIncDate(_today,0,0,-ShamsidayInWeek(_today)),ShamsiIncDate(_today,0,0,7-ShamsidayInWeek(_today)),0,_CurrentMarketerID);
    // Amin 1391/10/04 End
-
-   // Amin 1391/10/04 Dm.RefreshFollowUP_ByDate(ShamsiIncDate(_today,0,0,-ShamsidayInWeek(_today)),ShamsiIncDate(_today,0,0,7-ShamsidayInWeek(_today)),1,_CurrentMarketerID, cboDoneStatus.KeyValue);
-   if Dm.Select_FollowUP_By_Date.RecordCount > 0 then
-      StatusBar1.Panels[2].Text := '  ⁄œ«œ ' + IntToStr(Dm.Select_FollowUP_By_Date.RecordCount)
-else
-      StatusBar1.Panels[2].Text := '  ⁄œ«œ 0';
+                    {
+  // Amin 1391/10/04 Dm.RefreshFollowUP_ByDate(ShamsiIncDate(_today,0,0,-ShamsidayInWeek(_today)),ShamsiIncDate(_today,0,0,7-ShamsidayInWeek(_today)),1,_CurrentMarketerID, cboDoneStatus.KeyValue);
+  if Dm.Select_FollowUP_By_Date.RecordCount > 0 then
+    StatusBar1.Panels[2].Text := '  ⁄œ«œ ' + IntToStr(Dm.Select_FollowUP_By_Date.RecordCount)
+  else
+    StatusBar1.Panels[2].Text := '  ⁄œ«œ 0';
+                     }
+   CountPanelSet;
    FollowGrid.Columns[9].Visible:=False;
+   CurentReportRun := 'ThisWeek';
 end;
 
 procedure TMainForm.btnSrchFollowClick(Sender: TObject);
 var
    groupID : integer;
+   MarketerId : Integer;
+   TimeInterval : Integer;
 begin
+   if LockReport.Visible then
+   begin
+     if MessageDlg('ê“«—‘ ﬁ›· „Ì »«‘œ ·ÿ›« «» œ« ê“«—‘ «“ Õ«·  ﬁ›· Œ«—Ã ‰„«ÌÌœ',mtWarning,[mbyes,mbno],0)=mryes then
+       LockReportClick(self)
+     else   Exit;
+   end;
+   
+   RGTypeReportClick(self);
+
+   TimeInterval := 0 ;
+   if cbTimeInterval.Checked then
+   begin
+     TimeInterval := StrToInt(edtTimeInterval.text) ;
+   end;
+
    if lcbGroup.KeyValue>0 then
       groupID :=  lcbGroup.KeyValue
    else
       groupID := 0;
-      
+
+   MarketerId := _CurrentMarketerID ;
+   if pnlOtherMarketer.Visible and dblMarketer.KeyValue > 0 then
+     MarketerId := dblMarketer.KeyValue  ;
+
    if DonStatus.ItemIndex<0 then
       DonStatus.ItemIndex:=0;
    FollowGrid.Columns[7].Visible:=DonStatus.ItemIndex=0;
    if ShowAction.Checked then
-      Dm.RefreshFollowUP(BDate.Text,Edate.Text,DonStatus.ItemIndex,ActionType.KeyValue,StrToInt( Bsuccess.Text),StrToInt(Esuccess.Text),Comment.Text,DonComment.Text,_CurrentMarketerID, chkCommentType.Checked,groupID,trim(edtCustomerName.Text),ifthen((trim(edtCustomerNo.Text) <> ''),trim(edtCustomerNo.Text) ,'0') ) // Amin 1391/08/25
+      Dm.RefreshFollowUP(BDate.Text,Edate.Text,DonStatus.ItemIndex,ActionType.KeyValue,StrToInt( Bsuccess.Text),StrToInt(Esuccess.Text),Comment.Text,DonComment.Text,MarketerId, chkCommentType.Checked,groupID,trim(edtCustomerName.Text),ifthen((trim(edtCustomerNo.Text) <> ''),trim(edtCustomerNo.Text) ,'0') ,TimeInterval) // Amin 1391/08/25
    else
-      Dm.RefreshFollowUP(BDate.Text,Edate.Text,DonStatus.ItemIndex,0 ,StrToInt( Bsuccess.Text),StrToInt(Esuccess.Text),Comment.Text,DonComment.Text,_CurrentMarketerID, chkCommentType.Checked,groupID,trim(edtCustomerName.Text),ifthen((trim(edtCustomerNo.Text) <> ''),trim(edtCustomerNo.Text) ,'0') ); // Amin 1391/08/25
+      Dm.RefreshFollowUP(BDate.Text,Edate.Text,DonStatus.ItemIndex,0 ,StrToInt( Bsuccess.Text),StrToInt(Esuccess.Text),Comment.Text,DonComment.Text,MarketerId, chkCommentType.Checked,groupID,trim(edtCustomerName.Text),ifthen((trim(edtCustomerNo.Text) <> ''),trim(edtCustomerNo.Text) ,'0'),TimeInterval ); // Amin 1391/08/25
+      {
   if Dm.Select_FollowUP_By_Date.RecordCount > 0 then
         StatusBar1.Panels[2].Text := '  ⁄œ«œ ' + IntToStr(Dm.Select_FollowUP_By_Date.RecordCount)
   else
         StatusBar1.Panels[2].Text := '  ⁄œ«œ 0';
+        }
+  CountPanelSet;
 end;
 
 procedure TMainForm.xpTabSheet1Show(Sender: TObject);
 begin
-   // Amin 1391/10/04 Start
-   if(chkDoneStatus.Checked) then
+   if UnlockRep.Visible then
    begin
-      chkDoneStatusClick(chkDoneStatus);
-         
-      Dm.RefreshFollowUP_ByDate(_today,_today,cboDoneStatus.KeyValue,_CurrentMarketerID);
-   end
-   else
-      Dm.RefreshFollowUP_ByDate(_today,_today,1,_CurrentMarketerID);
+     // Amin 1391/10/04 Start
+     if(chkDoneStatus.Checked) then
+     begin
+        chkDoneStatusClick(chkDoneStatus);
+
+        Dm.RefreshFollowUP_ByDate(_today,_today,cboDoneStatus.KeyValue,_CurrentMarketerID);
+     end
+     else
+        Dm.RefreshFollowUP_ByDate(_today,_today,1,_CurrentMarketerID);
+   end;
+                    {
+  if (FollowGrid.DataSource <> nil) and  (FollowGrid.DataSource.DataSet.Active) then
+    StatusBar1.Panels[2].Text:=' ⁄œ«œ : '+IntToStr(FollowGrid.DataSource.DataSet.RecordCount)
+  else StatusBar1.Panels[2].Text:=' ⁄œ«œ : ' + '0' ;
+  }
    // Amin 1391/10/04 End
 
    // Amin 1391/10/04 Dm.RefreshFollowUP_ByDate(_today,_today,1,_CurrentMarketerID, cboDoneStatus.KeyValue);
+
+   
 end;
 
 procedure TMainForm.AContractExecute(Sender: TObject);
@@ -1543,8 +1721,7 @@ begin
       if Assigned(PropertiesForm) then
         FreeAndNil(PropertiesForm);
    end
-      else
-         ShowMyMessage('ÅÌ€«„','ÂÌç «ÿ·«⁄« Ì Ì«›  ‰‘œ',[mbOK],mtInformation);
+   else ShowMyMessage('ÅÌ€«„','ÂÌç «ÿ·«⁄« Ì Ì«›  ‰‘œ',[mbOK],mtInformation);
 end;
 
 procedure TMainForm.xpBitBtn10Click(Sender: TObject);
@@ -1567,15 +1744,22 @@ end;
 procedure TMainForm.RefreshContract(FromDate:string;ToDate:string);
 var ContractTypeId ,ProductId : integer;
     dsdbgContract :TDataSource;
+    tempMarketerId : Integer ;
 begin
+  tempMarketerId :=  _MarketerID ;
+  if (pnlContractMarketer.Visible) and (DBcontractMARKETER.KeyValue <> null ) THEN
+    tempMarketerId :=  DBcontractMARKETER.KeyValue ;
 
-if dblSrchContractType.KeyValue = null then
-    ContractTypeId  := 0 else     ContractTypeId  := dblSrchContractType.KeyValue;
-if dblsrchProductID.KeyValue = null then
-    ProductId  := 0 else     ProductId  := dblsrchProductID.KeyValue;
+  if dblSrchContractType.KeyValue = null then
+    ContractTypeId  := 0
+  else  ContractTypeId  := dblSrchContractType.KeyValue;
+
+  if dblsrchProductID.KeyValue = null then
+    ProductId  := 0
+  else  ProductId  := dblsrchProductID.KeyValue;
 
     dsdbgContract := TDataSource.Create(nil);
-    dsdbgContract.DataSet := SpSearch_Contract_Advance(FromDate,ToDate,_MarketerID,ContractTypeId,ProductId,StrToIntDef(edtCustomer.Text,0),_UserTypeID);
+    dsdbgContract.DataSet := SpSearch_Contract_Advance(FromDate,ToDate,tempMarketerId,ContractTypeId,ProductId,StrToIntDef(edtCustomer.Text,0),_UserTypeID);
 //    dsdbgContract.DataSet.FieldByName('Amount').OnGetText :=ContractGridGetText;
     ContractGrid.DataSource := dsdbgContract;
   if CurrentGrid.DataSource.DataSet.Active then
@@ -1689,6 +1873,7 @@ begin
   gsrcGroupId := 0;
   chkContractFinished.Checked :=false;
   Dm.Customer.Filtered:=False;
+  CLBCompaginIDs.Fill;
   //dm.Customer.Close;
   //dm.Customer.Open;
   CalcRecourdCount;
@@ -1723,19 +1908,19 @@ end;
 
 procedure TMainForm.SpeedButton3Click(Sender: TObject);
 begin
-if (_ExportCustomerList = true)or (CurrentGrid <> PhoneGrid) then     CurrentGrid.ExportToExcel
- else ShowMessage('‘„« „ÃÊ“ ê—› ‰ Œ—ÊÃÌ «“ ·Ì”  —« ‰œ«—Ìœ');
+  if (_ExportCustomerList = true)or (CurrentGrid <> PhoneGrid) then     CurrentGrid.ExportToExcel
+  else ShowMessage('‘„« „ÃÊ“ ê—› ‰ Œ—ÊÃÌ «“ ·Ì”  —« ‰œ«—Ìœ');
 end;
 
 procedure TMainForm.SpeedButton2Click(Sender: TObject);
 begin
-if (_ExportCustomerList = true)or (CurrentGrid <> PhoneGrid) then     CurrentGrid.Print
- else ShowMessage('‘„« „ÃÊ“ ê—› ‰ Œ—ÊÃÌ «“ ·Ì”  —« ‰œ«—Ìœ');
+  if (_ExportCustomerList = true)or (CurrentGrid <> PhoneGrid) then     CurrentGrid.Print
+  else ShowMessage('‘„« „ÃÊ“ ê—› ‰ Œ—ÊÃÌ «“ ·Ì”  —« ‰œ«—Ìœ');
 end;
 
 procedure TMainForm.SpeedButton1Click(Sender: TObject);
 begin
-if (_ExportCustomerList = true)or (CurrentGrid <> PhoneGrid) then
+  if (_ExportCustomerList = true)or (CurrentGrid <> PhoneGrid) then
       CurrentGrid.ExportToWord else ShowMessage('‘„« „ÃÊ“ ê—› ‰ Œ—ÊÃÌ «“ ·Ì”  —« ‰œ«—Ìœ');
 
 end;
@@ -2270,22 +2455,22 @@ end;
 procedure TMainForm.edtState1Change(Sender: TObject);
 begin
   inherited;
-if edtState.Text <> '' then
- begin
-   if State.Locate('StateID',StrtoInt (edtState.Text),[])and(edtstate.Focused) then
-          dblState.KeyValue := StrtoInt (edtState.Text)
-          else     dblState.KeyValue := null
+  if edtState.Text <> '' then
+  begin
+   if State.Locate('StateID',StrtoInt (edtState.Text),[]) and (edtstate.Focused) then
+     dblState.KeyValue := StrtoInt (edtState.Text)
+   else   dblState.KeyValue := null
   end
-  else begin
-        dblState.KeyValue := null;
-        dblCity.Enabled :=false;
-        edtcity.Enabled :=False;
-        edtcity.Clear;
-        gsrcStateId :=  0;
-      end;
+  else
+  begin
+    dblState.KeyValue := null;
+    dblCity.Enabled :=false;
+    edtcity.Enabled :=False;
+    edtcity.Clear;
+    gsrcStateId :=  0;
+  end;
 
-
-      SearchEditChange(Sender);
+  SearchEditChange(Sender);
 
 end;
 
@@ -2331,8 +2516,8 @@ end;
 procedure TMainForm.edtcityChange(Sender: TObject);
 begin
   inherited;
-if edtcity.Text <> '' then
- begin
+  if edtcity.Text <> '' then
+  begin
    if dm.CitysFilterByState.Locate('CityID',StrtoInt (edtcity.Text),[])and(edtcity.Focused) then
          dblCity.KeyValue := StrtoInt (edtcity.Text)
        //else dblCity.KeyValue := null;
@@ -2362,23 +2547,23 @@ end;
 procedure TMainForm.edtContactNumberChange(Sender: TObject);
 begin
   inherited;
-with Dm.Customer do
-begin
-          PhoneGrid.SelectedIndex:=0;
-          Filtered:=False;
-          gsrcContactNumberm := edtContactNumber.text;
-          Filtered:=True;
+  with Dm.Customer do
+  begin
+    PhoneGrid.SelectedIndex:=0;
+    Filtered:=False;
+    gsrcContactNumberm := edtContactNumber.text;
+    Filtered:=True;
 
-      CalcRecourdCount;
+    CalcRecourdCount;
 
-end;
+  end;
 // RefreshCustomer;
 end;
 
 procedure TMainForm.dblStateExit(Sender: TObject);
 begin
   inherited;
- if dblState.KeyValue = null then edtState.Clear;
+  if dblState.KeyValue = null then edtState.Clear;
 end;
 
 procedure TMainForm.dblCityExit(Sender: TObject);
@@ -2419,13 +2604,13 @@ end;
 procedure TMainForm.edtProductChange(Sender: TObject);
 begin
   inherited;
-RefreshCustomer;
+  RefreshCustomer;
 end;
 
 procedure TMainForm.edtStatusChange(Sender: TObject);
 begin
   inherited;
-RefreshCustomer;
+  RefreshCustomer;
 end;
 
 procedure TMainForm.ContractTabSheetEnter(Sender: TObject);
@@ -2448,7 +2633,9 @@ begin
      begin
          qrydblsrchContractType.Fields[0].Alignment:=   taRightJustify;
          SetDbLookUp(dblsrchContractType,dsdblsrchContractType,'ContractTypetitle','ContractTypeID');
-     end;
+         StatusBar1.Panels[2].Text:=' ⁄œ«œ : '+IntToStr(qrydblsrchContractType.RecordCount);
+     end
+     else StatusBar1.Panels[2].Text:=' ⁄œ«œ : '+ ' 0';
 
 end;
 
@@ -2592,12 +2779,16 @@ Begin
 
    propertiesForm := TPropertiesForm.Create(Application,dm.Select_FollowUP_By_DateCustomerID.AsInteger) ;
    PropertiesForm.Showmodal;
+   if PropertiesForm.Edited then
+   begin
+     id := Dm.Select_FollowUP_By_DateFollowUPID.Value;
+     //Dm.Select_FollowUP_By_Date.Requery;
+     dm.RefreshFollowUP(SF_Bdate,SF_Edate,SF_Ds,SF_ActionTypeID,SF_BSuccess,SF_ESuccess,SF_Comment_like,SF_DoneComment_like,SF_MarketerID,SF_CommentTypeOr,SF_GroupID,SF_CustomerName,SF_CustomerID, SF_TimeInterval );
+     Dm.Select_FollowUP_By_Date.Locate('FollowUPID',id,[]);
+   end;
    if Assigned(PropertiesForm) then
      FreeAndNil(PropertiesForm);
-     
-   id := Dm.Select_FollowUP_By_DateFollowUPID.Value;
-   Dm.Select_FollowUP_By_Date.Requery;
-   Dm.Select_FollowUP_By_Date.Locate('FollowUPID',id,[]);
+
    FollowGrid.Columns[9].Visible:=False;
 end;
 
@@ -3024,6 +3215,7 @@ end;
 procedure TMainForm.BtnAllActClick(Sender: TObject);
 begin
   inherited;
+  BitBtn4Click(self);
    FollowGrid.Columns[9].Visible:=_BtnAllAct;
    // Amin 1391/10/04 Start
    if(chkDoneStatus.Checked) and (cboDoneStatus.KeyValue <> NULL) then
@@ -3059,7 +3251,7 @@ begin
     Open;
    End;
    dm.MarketerInsertRate.First;
-   IF UpperCase(_AreYouYeganeh) =UpperCase('True') Then
+   IF UpperCase(_AreYouYeganeh) = UpperCase('True') Then
         SetActiveUserOnStatusBar;
 //     StatusBar1.Panels[3].Text:='‰Ê» :'+dm.MarketerInsertRateMarketerTitle.AsString;
 end;
@@ -3095,15 +3287,17 @@ end;
 procedure TMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
-   if btnStop.Enabled then
-   begin
-     btnStopClick(self);
-   end;
-   DBGrid_SaveColumns(Self.Name,PhoneGrid);
-   DBGrid_SaveColumns(Self.Name,FollowGrid);
-   DBGrid_SaveColumns(Self.Name,ContractGrid);
-   DBGrid_SaveColumns(Self.Name,dbgMyTasks);
-   DBGrid_SaveColumns(Self.Name,PinFollowGrid);
+  if btnStop.Enabled then
+  begin
+   btnStopClick(self);
+  end;
+  DBGrid_SaveColumns(Self.Name,PhoneGrid);
+  DBGrid_SaveColumns(Self.Name,FollowGrid);
+  DBGrid_SaveColumns(Self.Name,ContractGrid);
+  DBGrid_SaveColumns(Self.Name,dbgMyTasks);
+  DBGrid_SaveColumns(Self.Name,PinFollowGrid);
+ // DBGrid_SaveSort(Self.Name,FollowGrid);
+
   Qry_SetResult('UPDATE dbo.Users SET LastLogOutDateTime = getdate()  WHERE ID = '+Dm.UserId.AsString ,dm.YeganehConnection);
   Qry_SetResult('Insert into dbo.User_LogIn_Log(UserId,logOut,ComputerName,IPAddress) select '+ Dm.UserId.AsString + ',getdate(),'''+UpperCase(_ComputerName) +''','''+_IpAddress +'''' ,dm.YeganehConnection);
 end;
@@ -3398,6 +3592,9 @@ begin
         ParamByName('@ActionType_LevelId').Value:= dblActionType_Level.KeyValue
       else ParamByName('@ActionType_LevelId').Value := 0;
 
+     if CLBCompaginIDs.SelectedCodes <> ''  then
+       ParamByName('@CompaginIDs').value    := CLBCompaginIDs.SelectedCodes
+     else  ParamByName('@CompaginIDs').value    := '0';
 
       //  ParamByName('@Email').Value:=edtEmail.Text;
 
@@ -3538,14 +3735,18 @@ begin
   begin
     try
       if dm.YeganehConnection.Connected = false then
-        dm.YeganehConnection.Connected:=True;
+      begin
+        Sleep(10000);
+        dm.YeganehConnection.Open('yeganehCompany_CRM', Dm.IntToY(61));
+        dm.YeganehConnection.Connected := True;
+      end;
 
       qry:=TADOQuery.Create(self);
-      qry.Connection:=dm.YeganehConnection;
+      qry.Connection := dm.YeganehConnection;
       qry.CommandTimeout := 1200;
 
       qryUpdate:=TADOQuery.Create(self);
-      qryUpdate.Connection:=dm.YeganehConnection;
+      qryUpdate.Connection := dm.YeganehConnection;
       qryUpdate.CommandTimeout := 1200;
 
       qry.SQL.Text := 'Select * From dbo.OutBox  WITH(NOLOCK)  Where  SmsStatus Is null And InProcess=0 And issend=0';
@@ -3730,8 +3931,11 @@ begin
   btnCustomer.EndColor    :=  _Color2 ;
   btnDaily.EndColor       :=  _Color1 ;
   btntabContract.EndColor :=  _Color1 ;
-  btnCartabl.EndColor     :=  _Color1 ;  
+  btnCartabl.EndColor     :=  _Color1 ;
 
+  if (PhoneGrid.DataSource <> nil) and (PhoneGrid.DataSource.DataSet.Active) then
+    StatusBar1.Panels[2].Text:=' ⁄œ«œ : '+IntToStr(PhoneGrid.DataSource.DataSet.RecordCount)
+  else  StatusBar1.Panels[2].Text:=' ⁄œ«œ : '+ '0' ;
 end;
 
 procedure TMainForm.btnDailyClick(Sender: TObject);
@@ -3741,7 +3945,11 @@ begin
   btnCustomer.EndColor    :=  _Color1 ;
   btnDaily.EndColor       :=  _Color2 ;
   btntabContract.EndColor :=  _Color1 ;
-  btnCartabl.EndColor     :=  _Color1 ;  
+  btnCartabl.EndColor     :=  _Color1 ;
+
+  if (FollowGrid.DataSource <> nil) and  (FollowGrid.DataSource.DataSet.Active) then
+    StatusBar1.Panels[2].Text:=' ⁄œ«œ : '+IntToStr(FollowGrid.DataSource.DataSet.RecordCount)
+  else StatusBar1.Panels[2].Text:=' ⁄œ«œ : ' + '0' ;
 end;
 
 procedure TMainForm.btntabContractClick(Sender: TObject);
@@ -3750,8 +3958,12 @@ begin
   pgcMain.ActivePage      := ContractTabSheet;
   btnCustomer.EndColor    :=  _Color1 ;
   btnDaily.EndColor       :=  _Color1 ;
-  btnCartabl.EndColor     :=  _Color1 ;  
+  btnCartabl.EndColor     :=  _Color1 ;
   btntabContract.EndColor :=  _Color2 ;
+  
+  if (ContractGrid.DataSource <> nil) and (ContractGrid.DataSource.DataSet.Active) then
+   StatusBar1.Panels[2].Text:=' ⁄œ«œ : '+IntToStr(ContractGrid.DataSource.DataSet.RecordCount)
+  else StatusBar1.Panels[2].Text:=' ⁄œ«œ : ' + '0';
 end;
 
 procedure TMainForm.NCallClick(Sender: TObject);
@@ -3798,38 +4010,55 @@ begin
   btntabContract.EndColor :=  _Color1 ;
   btnCartabl.EndColor     :=  _Color2 ;
   qryMyTasks.Requery;
+
+  if  qryMyTasks.Active then
+    StatusBar1.Panels[2].Text:=' ⁄œ«œ : '+IntToStr(qryMyTasks.RecordCount)
+  else StatusBar1.Panels[2].Text:=' ⁄œ«œ : ' + '0' ;
 end;
 
 procedure TMainForm.RGTypeReportClick(Sender: TObject);
+var
+   temp_Today :String;
 begin
   inherited;
+  temp_Today := _today ;
+  if RGTypeRepMain.ItemIndex = 1 then
+  begin
+    temp_Today :=  edtSourceDay.Text;
+    RGTypeReport.ItemIndex := 3 ;
+  end;
+    
   case  RGTypeReport.ItemIndex of
   0:begin
-    BDate.Text :=copy(_today,1,8)+'01';
-    eDate.Text :=copy(_today,1,8)+'29' ;
+    if BDate.Text ='' then
+      BDate.Text := copy(temp_Today,1,8)+'01';
+
+    if eDate.Text ='' then
+      eDate.Text := copy(temp_Today,1,8)+'29' ;
   end;
   1:begin
-    BDate.Text := ShamsiIncDate(_today,0,0,-1);
-    Edate.Text := ShamsiIncDate(_today,0,0,-1);
+    BDate.Text := ShamsiIncDate(temp_Today,0,0,-1);
+    Edate.Text := ShamsiIncDate(temp_Today,0,0,-1);
   end ;
   2:begin
     BDate.Text := '1300/01/01';
-    Edate.Text := _today;
+    Edate.Text := temp_Today;
   end  ;
   3: begin
-    BDate.Text := _today;
-    Edate.Text := _today;
+    BDate.Text := temp_Today;
+    Edate.Text := temp_Today;
   end     ;
   4: begin
-    BDate.Text := ShamsiIncDate(_today,0,0,1);
-    Edate.Text := ShamsiIncDate(_today,0,0,1);
+    BDate.Text := ShamsiIncDate(temp_Today,0,0,1);
+    Edate.Text := ShamsiIncDate(temp_Today,0,0,1);
   end      ;
   5:begin
-    BDate.Text := ShamsiIncDate(_today,0,0,-ShamsidayInWeek(_today));
-    Edate.Text := ShamsiIncDate(_today,0,0,7-ShamsidayInWeek(_today));
+    BDate.Text := ShamsiIncDate(temp_Today,0,0,-ShamsidayInWeek(temp_Today));
+    Edate.Text := ShamsiIncDate(temp_Today,0,0,7-ShamsidayInWeek(temp_Today));
   end    ;
   end;  
-  pnlTime.Enabled :=  RGTypeReport.ItemIndex = 0 ;
+  pnlTime.Enabled :=  (RGTypeReport.ItemIndex = 0) and (RGTypeRepMain.ItemIndex =0) ;
+  pnlSourcedate .Enabled := (RGTypeRepMain.ItemIndex = 1) ;
 
 //
 end;
@@ -3929,6 +4158,7 @@ begin
   inherited;
 //
   RunTaskQuery(RGCartablType.ItemIndex+1);
+  
 end;
 
 procedure TMainForm.RunTaskQuery(TypeR : Integer=1);
@@ -4007,6 +4237,10 @@ begin
       End;
    End;
    qryMyTasks.Requery;
+
+  if  qryMyTasks.Active then
+    StatusBar1.Panels[2].Text:=' ⁄œ«œ : '+IntToStr(qryMyTasks.RecordCount)
+  else StatusBar1.Panels[2].Text:=' ⁄œ«œ : ' + '0' ;
 end;
 
 procedure TMainForm.dbgMyTasksNeedColorCondition(Column: TColumn;
@@ -4130,6 +4364,14 @@ begin
 
   end;
   *)
+  
+  if dm.YeganehConnection.Connected = false then
+  begin
+    Sleep(10000);
+    dm.YeganehConnection.Open('yeganehCompany_CRM', Dm.IntToY(61));
+    dm.YeganehConnection.Connected := True;
+  end;
+
   Qry_SetResult(' EXEC sp_InsertAutoMessage '+ inttostr(_userid) ,dm.YeganehConnection);
   
 
@@ -4347,6 +4589,140 @@ begin
   FTimeIntervalSale.Showmodal;
   if Assigned(FTimeIntervalSale) then
     FreeAndNil(FTimeIntervalSale);
+end;
+
+procedure TMainForm.BitBtn4Click(Sender: TObject);
+begin
+  inherited;
+  dblMarketer.KeyValue := null;
+end;
+
+procedure TMainForm.FollowGridKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  if Key = #13 then
+    FollowGridDblClick(self);
+end;
+
+procedure TMainForm.FollowGridNeedColorCondition(Column: TColumn;
+  State: TGridDrawState; var Color: TColor);
+begin
+  inherited;
+  Color:= clWindow ;
+  if cbTimeInterval.checked then
+  begin
+    try
+      with dm do
+      if (Select_FollowUP_By_DateISPlusTime.AsBoolean ) then
+        Color := $009595FF ;
+    except
+    end;
+  end;
+end;
+
+procedure TMainForm.UnlockRepClick(Sender: TObject);
+begin
+  inherited;
+  lblLockRep.Caption := 'ê“«—‘ ﬁ›· „Ì »«‘œ';
+  LockReport.Visible := True;
+  UnlockRep.Visible  := False;
+end;
+
+procedure TMainForm.LockReportClick(Sender: TObject);
+begin
+  inherited;
+  {
+  if CurentReportRun = 'Today'  then
+    lblLockRep.Caption := '«„—Ê“'
+  else if CurentReportRun = 'BeforeDay'  then
+    lblLockRep.Caption := 'œÌ—Ê“'
+  else if CurentReportRun = 'LastDay'  then
+    lblLockRep.Caption := '›—œ«'
+  else if CurentReportRun = 'ToToday'  then
+    lblLockRep.Caption := ' « «„—Ê“'
+  else if CurentReportRun = 'ThisWeek'  then
+    lblLockRep.Caption := '«Ì‰ Â› Â' ;
+           }
+
+  lblLockRep.Caption := 'ê“«—‘Ì ﬁ›· ‰Ì” ';
+
+  LockReport.Visible := False;
+  UnlockRep.Visible  := True;
+
+end;
+
+procedure TMainForm.CountPanelSet;
+begin
+
+   if (FollowGrid.DataSource <> nil) and  (FollowGrid.DataSource.DataSet.Active) then
+      StatusBar1.Panels[2].Text := '  ⁄œ«œ „‘ —Ì : ' +IntToStr(Dm.Select_FollowUP_By_Date.Parameters.ParamByName('@CountUniqCustomer').Value)
+   else
+      StatusBar1.Panels[2].Text := ' ⁄œ«œ : ' + '0' ;
+
+end;
+
+procedure TMainForm.SpeedButton14Click(Sender: TObject);
+begin
+  inherited;
+   edtSourceDay.Text := MssCalendarPro1.Execute('/');
+end;
+
+procedure TMainForm.SpeedButton15Click(Sender: TObject);
+begin
+  inherited;
+  edtSourceDay.Text := ShamsiIncDate(edtSourceDay.Text,0,0,1);
+  
+  btnSrchFollowClick(Sender );
+end;
+
+procedure TMainForm.SpeedButton16Click(Sender: TObject);
+begin
+  inherited;
+  edtSourceDay.Text := ShamsiIncDate(edtSourceDay.Text,0,0,-1);
+
+  btnSrchFollowClick(Sender );
+end;
+
+procedure TMainForm.RGTypeRepMainClick(Sender: TObject);
+begin
+  inherited;
+  pnlTime.Enabled      :=  (RGTypeReport.ItemIndex = 0) and (RGTypeRepMain.ItemIndex =0) ;
+  RGTypeReport.Enabled :=  (RGTypeRepMain.ItemIndex =0);
+
+
+
+  pnlSourcedate .Enabled := (RGTypeRepMain.ItemIndex = 1) ;
+
+  if RGTypeRepMain.ItemIndex =0 then
+  begin
+    edtSourceDay.Color :=  clScrollBar;
+    BDate.Color :=  clWindow;
+    Edate.Color :=  clWindow;
+  end
+  else
+  begin
+    edtSourceDay.Color :=  clWindow;
+    BDate.Color :=  clScrollBar;
+    Edate.Color :=  clScrollBar;
+  end;
+end;
+
+procedure TMainForm.N96Click(Sender: TObject);
+begin
+  inherited;
+   FFixedAsset := TFFixedAsset.Create(Application);
+   FFixedAsset.ShowModal;
+   if Assigned(FFixedAsset) then
+     FreeAndNil(FFixedAsset);
+end;
+
+procedure TMainForm.N97Click(Sender: TObject);
+begin
+  inherited;
+   FFixAssetMove := TFFixAssetMove.Create(Application);
+   FFixAssetMove.ShowModal;
+   if Assigned(FFixAssetMove) then
+     FreeAndNil(FFixAssetMove);
 end;
 
 end.

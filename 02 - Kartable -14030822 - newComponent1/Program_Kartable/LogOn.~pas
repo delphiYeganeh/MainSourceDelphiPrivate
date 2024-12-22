@@ -35,6 +35,7 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
+    Label9: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnLoginClick(Sender: TObject);
     procedure  SaveUserInRegistry;
@@ -448,10 +449,10 @@ begin
    _Color5 := clWindow  ;
    if _ColorSetting = 2 then
    begin
-      _Color1 := GetUserSetting('AppMColor1');
-      _Color2 := GetUserSetting('AppMColor2');
-      _Color3 := GetUserSetting('AppMColor3');
-      _Color4 := GetUserSetting('AppMColor4');
+      _Color1 := GetUserSetting('KAppMColor1');
+      _Color2 := GetUserSetting('KAppMColor2');
+      _Color3 := GetUserSetting('KAppMColor3');
+      _Color4 := GetUserSetting('KAppMColor4');
    end
    else
    if _ColorSetting = 1 then

@@ -244,6 +244,7 @@ begin
     btnSave       .Enabled := True;
     btnEdit       .Enabled := false;
     grbCase       .Enabled := true;
+    DBMemComment.ReadOnly  := False;
     btnAdd        .Enabled := false;
     btnDelBR2     .Enabled := false;
     btnAddTask    .Enabled := false;
@@ -325,6 +326,7 @@ begin
   SpSelect_CasesRegisterDate.Value   := _Today;
 
   grbCase.Enabled       := True;
+  DBMemComment.ReadOnly := False;  
   btnSave.Enabled       := True;
   btnAdd.Enabled        := false;
   btnEdit.Enabled       := False;
@@ -348,6 +350,13 @@ var Id:integer;
 begin
   inherited;
 
+  if dblCaseType.KeyValue = null then
+  begin
+    ShowMyMessage('ÅÌ€«„','·ÿ›« ‰Ê⁄ „—»Êÿ »Â „Ê—œ/»«ê «‰ Œ«» ‰„«ÌÌœ',[mbOK],mtInformation);
+    dblCaseType.SetFocus;
+    Abort;
+  end;
+
   if SpSelect_CasesCaseTypeID.Value = 9 then
   begin
     ShowMyMessage('ÅÌ€«„','«„ò«‰ À»  «—“Ì«»Ì «“ «Ì‰ ›—„ ÊÃÊœ ‰œ«—œ «Ì‰ „Ê—œ »Â ’Ê—  « Ê„« Ìò „— »ÿ »« «ﬁœ«„ À»  „Ì ‘Êœ',[mbOK],mtInformation);
@@ -359,6 +368,14 @@ begin
 
     CaseAccept  :=  Qry_GetResult(' select top 1 UserID  FROM dbo.TaskReferral where UserTypeID = '+ IntToStr(_UserTypeID) +
                                   ' AND CaseTypeID = '+ IntToStr(dblCaseType.KeyValue) +' AND ProductID = '+IntToStr(dblProduct.KeyValue) +'  order by id desc' ,dm.YeganehConnection) ;
+
+    if CaseAccept = '' then  //Â„Â „Õ’Ê·«  
+    begin
+      CaseAccept  :=  Qry_GetResult(' select top 1 UserID  FROM dbo.TaskReferral where UserTypeID = '+ IntToStr(_UserTypeID) +
+                                  ' AND CaseTypeID = '+ IntToStr(dblCaseType.KeyValue) +' AND ProductID = 0  order by id desc' ,dm.YeganehConnection) ;
+
+    end;
+
     if CaseAccept = '' then
     begin
       // „œÌ— Å‘ Ì»«‰Ì
@@ -466,6 +483,7 @@ begin
     SpSelect_Cases.Cancel;
     canclose              := false;
     grbCase   .Enabled    := False;
+    DBMemComment.ReadOnly := True;
     btnSave   .Enabled    := False;
     btnAdd    .Enabled    := True;
     btnEdit   .Enabled    := True;
@@ -602,6 +620,7 @@ begin
   btnAddTask.Enabled    := True;
   btnAttachment.Enabled := True;
   grbCase.Enabled       := false;
+  DBMemComment.ReadOnly := True;
   DBMemComment.Enabled  := True;
 end;
 

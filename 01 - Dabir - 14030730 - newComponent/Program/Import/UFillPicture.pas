@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, BaseUnit, StdCtrls, DB, ADODB, DBCtrls, ExtActns, ActnList,
-  Buttons,FileCtrl, YFillPictureFields, xpWindow;
+  Buttons,FileCtrl, YFillPictureFields, xpWindow, AppEvnts, ExtCtrls, Menus;
 
 type
   TFFillPicture = class(TMBaseForm)

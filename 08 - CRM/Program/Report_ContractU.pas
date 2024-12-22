@@ -96,6 +96,10 @@ type
     adoCityCityTitle: TStringField;
     adoCityStateNum: TStringField;
     DSCity: TDataSource;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -122,6 +126,10 @@ type
     procedure dblContractTypeDataChange(Sender: TObject; Field: TField);
     procedure dblContractTypeCNTExit(Sender: TObject);
     procedure dblContractSubTypeCNTEnter(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -452,6 +460,30 @@ procedure TFrep2.dblContractSubTypeCNTEnter(Sender: TObject);
 begin
   inherited;
   SetdblContractType;
+end;
+
+procedure TFrep2.Button1Click(Sender: TObject);
+begin
+  inherited;
+  dblContractTypeCNT.KeyValue := null ;
+end;
+
+procedure TFrep2.Button4Click(Sender: TObject);
+begin
+  inherited;
+  dblCity.KeyValue := null ;
+end;
+
+procedure TFrep2.Button2Click(Sender: TObject);
+begin
+  inherited;
+  dblContractSubTypeCNT.KeyValue := null ;
+end;
+
+procedure TFrep2.Button3Click(Sender: TObject);
+begin
+  inherited;
+  dblState.KeyValue := null ;
 end;
 
 end.

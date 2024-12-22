@@ -200,6 +200,8 @@ type
     ADOQuery1: TADOQuery;
     ADOQuery1code: TStringField;
     ADOQuery1ResponsibleStaffer: TStringField;
+    Panel3: TPanel;
+    pnlTopHeader: TPanel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormActivate(Sender: TObject);
     function GetLetter(LetterID:integer):boolean;
@@ -275,7 +277,7 @@ type
     procedure ShowCount;
     function LetterHasForms:Boolean;
     function CheckFormExist:Boolean;
-
+    procedure TabShow(mode: Boolean);
   public
     SecID : Integer;
     Read_Only :Boolean;
@@ -1073,6 +1075,7 @@ begin
        
   if GetUserSetting('InnerLetterpnlDetailMinimize') then
    pnlDetail.Minimized := True ;
+  TabShow(false) ;   
 end;
 
 procedure TFinnerLetter.SBSimpleEditorClick(Sender: TObject);
@@ -1407,6 +1410,7 @@ end;
 procedure TFinnerLetter.Show_xpFormsTab;
 begin
   xpPageControl1.Pages[1].TabVisible:=True;
+  TabShow(True) ;
 end;
 
 procedure TFinnerLetter.ShowCount;
@@ -1478,6 +1482,7 @@ begin
   if xpPageControl1.ActivePageIndex=0 then
     Select_Letter.Requery;
     //Select_Letter.Refresh;
+  TabShow(false) ;    
 end;
 
 procedure TFinnerLetter.SpeedButton2Click(Sender: TObject);
@@ -1557,6 +1562,22 @@ begin
           GetLetter(0);
           UpdateDblookup(False);
         end;
+end;
+
+procedure TFinnerLetter.TabShow(mode: Boolean);
+begin
+  if mode then
+  begin
+    pnlTopHeader.Height := 0 ;
+    xpPageControl1.TabHeight := 23 ;
+    xpPageControl1.TabWidth  := 0 ;
+  end
+  else
+  begin
+    pnlTopHeader.Height := 5 ;
+    xpPageControl1.TabHeight := 1 ;
+    xpPageControl1.TabWidth  := 1 ;
+  end;
 end;
 
 end.

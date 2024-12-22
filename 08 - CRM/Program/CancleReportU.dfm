@@ -5,7 +5,6 @@ inherited FrCancleReport: TFrCancleReport
   Height = 458
   Caption = ' '
   OldCreateOrder = True
-  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape
@@ -412,6 +411,36 @@ inherited FrCancleReport: TFrCancleReport
           DataFieldType = dftSolar
           DataFieldAutoSaveModified = False
         end
+        object Button1: TButton
+          Left = 7
+          Top = 8
+          Width = 17
+          Height = 20
+          Anchors = [akTop, akRight]
+          Caption = '*'
+          TabOrder = 8
+          OnClick = Button1Click
+        end
+        object Button2: TButton
+          Left = 215
+          Top = 4
+          Width = 17
+          Height = 20
+          Anchors = [akTop, akRight]
+          Caption = '*'
+          TabOrder = 9
+          OnClick = Button2Click
+        end
+        object Button3: TButton
+          Left = 216
+          Top = 29
+          Width = 17
+          Height = 20
+          Anchors = [akTop, akRight]
+          Caption = '*'
+          TabOrder = 10
+          OnClick = Button3Click
+        end
       end
     end
     object Panel2: TPanel
@@ -528,11 +557,11 @@ inherited FrCancleReport: TFrCancleReport
     end
   end
   inherited DSForm: TDataSource
-    Left = 8
-    Top = 56
+    Left = 16
+    Top = 88
   end
   inherited ActionList: TActionList
-    Left = 8
-    Top = 8
+    Left = 64
+    Top = 65520
   end
 end
