@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS(SELECT 1 
+		FROM INFORMATION_SCHEMA.COLUMNS
+		WHERE TABLE_NAME = 'AutomationRelation' 
+			AND COLUMN_NAME = 'DabirMyear' 
+			AND DATA_TYPE = 'tinyint')
+BEGIN
+	ALTER TABLE [dbo].[AutomationRelation] 
+	ALTER COLUMN	[DabirMyear] [int] NOT NULL
+END
+GO
+COMMIT
+GO

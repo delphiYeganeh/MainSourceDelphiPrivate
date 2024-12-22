@@ -1,0 +1,30 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[insert_LetterDataText]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[insert_LetterDataText]
+END
+GO
+
+CREATE PROCEDURE [dbo].[insert_LetterDataText]
+	(@LetterDataID int,
+	 @FileText   	ntext)
+AS 
+	DECLARE @textPart NVARCHAR(450)
+	--DELETE FROM LetterDataText WHERE letterDataID = @LetterDataID  
+	WHILE DATALENGTH(@FileText)>0
+	BEGIN
+		SET @textPart = SUBSTRING(@FileText,0,450)
+		SET @textPart = REVERSE(RIGHT(REVERSE (@textPart), len(@textPart) - NULLIF(charindex(' ', REVERSE(@textPart)),0)))
+		SET @FileText = SUBSTRING(@FileText,LEN(@textPart),DATALENGTH(@FileText)/2-LEN(@textPart))
+		SET @textPart = dbo.YTrim(@textPart)
+		INSERT INTO [dbo].[LetterDataText]( [LetterDataID], [textPart])
+			VALUES 	( @LetterDataID, @textPart  )
+	END
+GO
+
+COMMIT
+GO

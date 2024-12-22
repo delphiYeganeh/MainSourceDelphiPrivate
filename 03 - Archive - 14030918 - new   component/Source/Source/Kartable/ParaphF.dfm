@@ -1,0 +1,347 @@
+inherited Paraph: TParaph
+  Tag = 5
+  Left = 220
+  Top = 175
+  AutoScroll = False
+  BiDiMode = bdRightToLeft
+  Caption = ''
+  ClientHeight = 406
+  ClientWidth = 476
+  Color = clBtnFace
+  Ctl3D = True
+  OldCreateOrder = True
+  ParentBiDiMode = False
+  Position = poMainFormCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label10: TLabel [0]
+    Left = 428
+    Top = 0
+    Width = 36
+    Height = 13
+    Caption = #1575#1585#1580#1575#1593#1575#1578
+  end
+  object Image2: TImage [1]
+    Left = 26
+    Top = 11
+    Width = 64
+    Height = 55
+    Picture.Data = {
+      07544269746D617076020000424D760200000000000076000000280000002000
+      0000200000000100040000000000000200000000000000000000100000001000
+      0000000000000000800000800000008080008000000080008000808000008080
+      8000C0C0C0000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+      FF00888888888888888888888888888888888888888888888888888888888888
+      8888000000000000000000008888888888880F222FFF222FFF222F7F00888888
+      88880FF2FFFFF2FFFFF2F7FFFF008888888802FFFFFF7FFFFF7F7FFFFF7F0888
+      8888022FFFF7FFFFF7F7FFFFF7F70888888802FFFF7FFFFF7F7FFFFF7F7F0888
+      88880FFFF7FFFFF7F7FFFFF7F7F7088888880FFF7FFFFF7F7FFFFF7F7F7F0888
+      88880FF7FFFFF7F7FFFFF7F7F7FF08888888027FFFFF7F7FFFFF7F7F7FFF0888
+      8888022FFFF7F7FFFFF7F7F7FFFF0000088802FFF17110FFFF7F7F7FFFFF0191
+      90880FFFF7F1FF00F2F2000000FF001919080FFF7F7FFF090000FFFFFF00FF01
+      91980FF7F7FFFFF00FFFFFFFFFFFFFF01918027F7FFFFF7F000000FFFFFFFFF0
+      91980227FFFFF7F70090F0FFFFFFFFF01918027FFFFF7F7F0F0900FFFFFFFFF0
+      910807F2FFF7F2F70FF090FFFFFFFF0000880F222F7F222FF0FF090FFFFF0088
+      8888000000000000000FF090FFF0888888888888888888888880FF0900088888
+      8888888888888888888800009088888888888888888888888888888809088888
+      8888888888888888888888888090888888888888888888888888888888090888
+      8888888888888888888888888880908888888888888888888888888888880908
+      8888888888888888888888888888800888888888888888888888888888888888
+      8888}
+    Stretch = True
+    Transparent = True
+  end
+  object GroupBox1: TGroupBox [2]
+    Left = 0
+    Top = 252
+    Width = 476
+    Height = 154
+    Align = alBottom
+    Caption = #1575#1591#1604#1575#1593#1575#1578' '#1575#1585#1580#1575#1593#1575#1578
+    TabOrder = 0
+    DesignSize = (
+      476
+      154)
+    object Label1: TLabel
+      Left = 435
+      Top = 31
+      Width = 15
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1705#1583':'
+      Enabled = False
+    end
+    object Label8: TLabel
+      Left = 435
+      Top = 81
+      Width = 38
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1605#1590#1605#1608#1606':'
+    end
+    object Label5: TLabel
+      Left = 291
+      Top = 60
+      Width = 52
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1578#1575#1585#1610#1582' '#1575#1602#1583#1575#1605':'
+      Visible = False
+    end
+    object Label6: TLabel
+      Left = 435
+      Top = 60
+      Width = 25
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1578#1575#1585#1610#1582':'
+      Enabled = False
+    end
+    object DBECode: TDBEdit
+      Left = 384
+      Top = 27
+      Width = 49
+      Height = 21
+      Anchors = [akTop, akRight]
+      Ctl3D = True
+      DataField = 'ID'
+      DataSource = DSForm
+      Enabled = False
+      ParentCtl3D = False
+      TabOrder = 0
+    end
+    object DBShamsiDateEdit1: TDBShamsiDateEdit
+      Left = 198
+      Top = 56
+      Width = 83
+      Height = 21
+      Anchors = [akTop, akRight]
+      CheckValidity = True
+      DataField = 'ProceedDate'
+      DataSource = DSForm
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Visible = False
+    end
+    object DBShamsiDateEdit2: TDBShamsiDateEdit
+      Left = 351
+      Top = 56
+      Width = 81
+      Height = 21
+      Anchors = [akTop, akRight]
+      CheckValidity = True
+      DataField = 'date1'
+      DataSource = DSForm
+      Enabled = False
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+    end
+    object DBParaph: TDBMemo
+      Left = 8
+      Top = 82
+      Width = 424
+      Height = 66
+      DataField = 'Paraph'
+      DataSource = DSForm
+      TabOrder = 3
+    end
+    object DBCIsCopy: TDBCheckBox
+      Left = 112
+      Top = 54
+      Width = 49
+      Height = 25
+      Caption = #1705#1662#1610
+      DataField = 'IsCopy'
+      DataSource = DSForm
+      ReadOnly = True
+      TabOrder = 4
+      ValueChecked = 'True'
+      ValueUnchecked = 'False'
+    end
+    object DBCheckBox1: TDBCheckBox
+      Left = 24
+      Top = 54
+      Width = 65
+      Height = 25
+      Caption = #1575#1602#1583#1575#1605' '#1588#1583
+      DataField = 'Proceeded'
+      DataSource = DSForm
+      TabOrder = 5
+      ValueChecked = 'True'
+      ValueUnchecked = 'False'
+      Visible = False
+    end
+  end
+  object ReCommitesTree: TTreeView [3]
+    Left = 121
+    Top = 17
+    Width = 345
+    Height = 234
+    Images = dm.LetterImages
+    Indent = 19
+    ReadOnly = True
+    TabOrder = 2
+    OnChange = ReCommitesTreeChange
+    OnExpanding = ReCommitesTreeExpanding
+  end
+  object BBOK: TBitBtn [4]
+    Left = 7
+    Top = 79
+    Width = 92
+    Height = 31
+    Caption = #1578#1575#1610#1610#1583
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+    Glyph.Data = {
+      DE010000424DDE01000000000000760000002800000024000000120000000100
+      0400000000006801000000000000000000001000000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+      3333333333333333333333330000333333333333333333333333F33333333333
+      00003333344333333333333333388F3333333333000033334224333333333333
+      338338F3333333330000333422224333333333333833338F3333333300003342
+      222224333333333383333338F3333333000034222A22224333333338F338F333
+      8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
+      33333338F83338F338F33333000033A33333A222433333338333338F338F3333
+      0000333333333A222433333333333338F338F33300003333333333A222433333
+      333333338F338F33000033333333333A222433333333333338F338F300003333
+      33333333A222433333333333338F338F00003333333333333A22433333333333
+      3338F38F000033333333333333A223333333333333338F830000333333333333
+      333A333333333333333338330000333333333333333333333333333333333333
+      0000}
+    NumGlyphs = 2
+  end
+  object BitBtn2: TBitBtn [5]
+    Left = 8
+    Top = 122
+    Width = 92
+    Height = 31
+    Action = AInsert
+    Caption = #1575#1585#1580#1575#1593' '#1580#1583#1610#1583
+    TabOrder = 3
+    Glyph.Data = {
+      36040000424D3604000000000000360000002800000010000000100000000100
+      2000000000000004000000000000000000000000000000000000FF00FF00FF00
+      FF00FF00FF00BBBBBC00C4C4C6008B8B9B000000750000005E008B8B8A00C4C4
+      CA00BBBBBB00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00BDBEBE00BCBD
+      BD00BBBDBD00BDBEBE00D4D4C20096969F000000E9000000B70096967800D4D4
+      CD00BDBEBF00BBBDBC00BCBDBD00BCBDBD00BCBDBD00BCBDBD00C3C0C000C7C0
+      C000D3CBCA00A39EA40033356700262767000000DF000000D20026275E003335
+      6000A39E9B00D3CBCC00C8C1C100CAC3C300CAC2C200C9C3C300778787003051
+      52002A4B480019304B000000DF000000FF000000FD000000FF000000FF000000
+      B200192F27002B4D50002747470028474700264949002F4747004B9292000E9B
+      9B006AE4E30034B0C6002241B3002233AF000001ED000202CA002A3A99002A49
+      B50036B1BD005ADCDC0052D8D80050D6D60063E5E500155A5A0063A1A1002196
+      960041BCBC0094FFFF0088FFFE0064C2CD000000EC000000BC00257F60003FC7
+      C00096FFFF0084FFFF0084FFFF0097FFFF0041C3C300034343004E8D8D006FEF
+      EF0036B3B3002CAAAB0094FFFF0060D0E80007179200373086002488840034BC
+      C1002EABAA008CFFFF008AFFFF002DAAAA0036BABA0028848400519090005DDC
+      DC0096FFFF002CABAB0042BEBE0039C8C600355E5100CBC0B6006B75760089EE
+      EE0030AEAE0039B6B60042C0C0002CA9A90096FFFF001F7676005190900060DF
+      DF0080FBFB0096FFFF000A8C8C00309E9E008B9396009D9A9C00838B8A007BE3
+      E3008FFFFF0031AEAE000A88880096FFFF0080FBFB0020787800519090005DDC
+      DC0096FFFF002CAAAA0042C5C50060CECE007D878700A59B9B003CA7A70085FF
+      FF0079F7F7008FFFFF0039B8B8002DAAAA0096FFFF001F7676004F8E8E0071F0
+      F00038B4B40030ADAD008EFFFF0088FFFF0011777700AD9D9D005B5E5E0051BD
+      BD0088FDFD007AF7F7008EFFFF0030ABAB0038BBBB002A8585005D9F9F001491
+      910034B8B80089FFFF007CFFFF003DAEAE004B4D4E006C7E7F004063650080E9
+      E90079FFFF007AFFFF0077FDFD008AFFFF0034BFBF00003C3C0077A3A300287F
+      7F0057B6B6004EABAB004BB2B300356B6C00C0B2AE008597920055A9A20050B6
+      B8004EADAD004FAEAE004FAEAE004DABAB0057B5B500307C7C00C3C1C100CAC5
+      C500C0B9B900C0BABB00CFC7B700ACA9CD009698C900A39FCF00897FCA00CEC6
+      B600BFB8BB00C1BABA00C1BABA00C1BBBB00C0B9B900C8C6C600BDBDBD00BCBD
+      BD00BCBEBF00C3C4BD008183D300A7A8C400A1A0C8009798C900A8AAC6009FA0
+      C900C4C5BD00BDBFBF00BDBFBF00BDBFBF00BDBFBF00BCBCBC00FF00FF00BDBD
+      BE00C4C4BC00A5A5C6008585D000CCCCB9009696CB009797CB00CDCDB9009F9F
+      C800A1A1C700FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+  end
+  inherited DSForm: TDataSource
+    DataSet = dm.ReCommites
+    Left = 152
+    Top = 124
+  end
+  object ActionManager1: TActionManager
+    ActionBars.SessionCount = 44
+    ActionBars = <
+      item
+        Items = <
+          item
+            Items = <
+              item
+                Action = DataSetDelete1
+                ImageIndex = 6
+                ShortCut = 16430
+              end
+              item
+                Action = DataSetEdit1
+                ImageIndex = 7
+                ShortCut = 115
+              end>
+            Caption = #1585#1705#1608#1585#1583
+          end
+          item
+            Action = Action1
+            ShortCut = 27
+          end>
+        AutoSize = False
+      end>
+    LinkedActionLists = <>
+    Images = dm.LetterImages
+    OnExecute = ActionManager1Execute
+    Left = 272
+    Top = 84
+    object DataSetDelete1: TDataSetDelete
+      Tag = 1
+      Category = #1585#1705#1608#1585#1583
+      Caption = #1581#1584#1601' '
+      Hint = 'Delete'
+      ImageIndex = 3
+      ShortCut = 16430
+      DataSource = DSForm
+    end
+    object DataSetEdit1: TDataSetEdit
+      Tag = 2
+      Category = #1585#1705#1608#1585#1583
+      Caption = #1608#1610#1585#1575#1610#1588' '
+      Hint = 'Edit'
+      ImageIndex = 13
+      ShortCut = 115
+      DataSource = DSForm
+    end
+    object Action1: TAction
+      Tag = 3
+      Caption = #1582#1585#1608#1580
+      ShortCut = 27
+      OnExecute = Action1Execute
+    end
+    object AInsert: TAction
+      Tag = 4
+      Category = #1585#1705#1608#1585#1583
+      Caption = #1580#1583#1610#1583
+      ImageIndex = 2
+      ShortCut = 45
+      OnExecute = AInsertExecute
+    end
+    object Apost: TAction
+      Tag = 5
+      Category = #1585#1705#1608#1585#1583
+      Caption = #1584#1582#1610#1585#1607
+      ImageIndex = 4
+      ShortCut = 113
+      OnExecute = ApostExecute
+    end
+  end
+end

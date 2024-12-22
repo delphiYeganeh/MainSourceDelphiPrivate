@@ -1,0 +1,24 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PRCTbExcel_AccessFroDelete]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PRCTbExcel_AccessFroDelete]
+END
+GO
+
+CREATE  procedure [dbo].[PRCTbExcel_AccessFroDelete]
+(
+	@UserID int
+)
+AS
+	SELECT ISNULL(AccessID,1)AccessID
+		FROM Users
+		WHERE ID = @UserID 
+
+GO
+
+COMMIT
+GO

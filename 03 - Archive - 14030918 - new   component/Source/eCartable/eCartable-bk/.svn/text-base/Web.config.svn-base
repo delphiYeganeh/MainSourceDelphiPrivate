@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<configuration>
+	<configSections>
+		<sectionGroup name="microsoft.web" type="Microsoft.Web.Configuration.MicrosoftWebSectionGroup, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+			<sectionGroup name="scripting" type="Microsoft.Web.Configuration.ScriptingSectionGroup, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+				<sectionGroup name="webServices" type="Microsoft.Web.Configuration.ScriptingWebServicesSectionGroup, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+					<section name="jsonSerialization" type="Microsoft.Web.Configuration.ScriptingJsonSerializationSection, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" requirePermission="false"/>
+					<section name="profileService" type="Microsoft.Web.Configuration.ScriptingProfileServiceSection, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" requirePermission="false"/>
+					<section name="authenticationService" type="Microsoft.Web.Configuration.ScriptingAuthenticationServiceSection, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" requirePermission="false"/>
+				</sectionGroup>
+			</sectionGroup>
+		</sectionGroup>
+		<section name="Cartable" type="Cartable.CartableConfigSection" allowDefinition="Everywhere"/>
+	</configSections>
+	<!-- You should add your types here -->
+	<Cartable>
+		<Exception filePath="Exceptions.xml">
+		</Exception>
+		<Providers>
+			<DalProvider name="System.Data.SqlClient">
+				<add>
+					<TypeItem name="Letter" type="Cartable.Dal.SQLClient.sqlLetterProvider"/>
+					<TypeItem name="Users" type="Cartable.Dal.SQLClient.sqlUserProvider"/>
+					<TypeItem name="Recommite" type="Cartable.Dal.SQLClient.sqlRecommiteProvider"/>
+					<TypeItem name="FromOrganizations" type="Cartable.Dal.SQLClient.sqlFromOrganizationProvider"/>
+					<TypeItem name="ArchiveFolders" type="Cartable.Dal.SQLClient.sqlArchiveFolderProvider"/>
+					<TypeItem name="Inbox" type="Cartable.Dal.SQLClient.sqlInboxProvider"/>
+					<TypeItem name="Attachment" type="Cartable.Dal.SQLClient.sqlAttachmentProvider"/>
+					<TypeItem name="Helpers" type="Cartable.Dal.SQLClient.sqlHelperProvider"/>
+				</add>
+			</DalProvider>
+			<DalProvider name="System.Data.OleDb">
+			</DalProvider>
+		</Providers>
+	</Cartable>
+	<connectionStrings>
+		<remove name="LocalSqlServer"/>
+		<add name="LocalSqlServer" connectionString="Data Source=(local);Initial Catalog=ydabir;integrated security=true;" providerName="System.Data.SqlClient"/>
+	</connectionStrings>
+	<system.web>
+		<authentication mode="Forms">
+			<forms name="login" loginUrl="login.aspx"/>
+		</authentication>
+		<customErrors mode="Off"/>
+		<pages>
+			<!--<controls>
+				<add tagPrefix="asp" namespace="Microsoft.Web.UI" assembly="Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+				<add tagPrefix="asp" namespace="Microsoft.Web.UI.Controls" assembly="Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+			</controls>
+			<tagMapping>
+				<add tagType="System.Web.UI.WebControls.CompareValidator" mappedTagType="Microsoft.Web.UI.Compatibility.CompareValidator, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+				<add tagType="System.Web.UI.WebControls.CustomValidator" mappedTagType="Microsoft.Web.UI.Compatibility.CustomValidator, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+				<add tagType="System.Web.UI.WebControls.RangeValidator" mappedTagType="Microsoft.Web.UI.Compatibility.RangeValidator, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+				<add tagType="System.Web.UI.WebControls.RegularExpressionValidator" mappedTagType="Microsoft.Web.UI.Compatibility.RegularExpressionValidator, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+				<add tagType="System.Web.UI.WebControls.RequiredFieldValidator" mappedTagType="Microsoft.Web.UI.Compatibility.RequiredFieldValidator, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+				<add tagType="System.Web.UI.WebControls.ValidationSummary" mappedTagType="Microsoft.Web.UI.Compatibility.ValidationSummary, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+			</tagMapping>-->
+		</pages>
+		<!-- 
+          Set compilation debug="true" to insert debugging 
+          symbols into the compiled page. Because this 
+          affects performance, set this value to true only 
+          during development.
+    -->
+		<compilation debug="true">
+			<assemblies>
+				<!--<add assembly="Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>-->
+				<add assembly="System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A"/>
+				<add assembly="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/></assemblies>
+		</compilation>
+		<httpHandlers>
+			<remove verb="*" path="*.asmx"/>
+			<!--<add verb="*" path="*.asmx" validate="false" type="Microsoft.Web.Script.Services.ScriptHandlerFactory, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>-->
+		</httpHandlers>
+		<httpModules>
+			<!--<add name="WebResourceCompression" type="Microsoft.Web.Handlers.WebResourceCompressionModule, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+			<add name="ScriptModule" type="Microsoft.Web.UI.ScriptModule, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>-->
+		</httpModules>
+	</system.web>
+	<system.webServer>
+		<validation validateIntegratedModeConfiguration="false"/>
+		<modules>
+			<add name="ScriptModule" preCondition="integratedMode" type="Microsoft.Web.UI.ScriptModule, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+		</modules>
+		<handlers>
+			<remove name="WebServiceHandlerFactory-ISAPI-2.0"/>
+			<add name="ScriptHandlerFactory" verb="*" path="*.asmx" preCondition="integratedMode" type="Microsoft.Web.Script.Services.ScriptHandlerFactory, Microsoft.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+		</handlers>
+	</system.webServer>
+</configuration>

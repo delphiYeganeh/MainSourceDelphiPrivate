@@ -1,0 +1,140 @@
+inherited FEditSentense: TFEditSentense
+  Tag = 10
+  Left = 608
+  Top = 242
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = #1575#1590#1575#1601#1607' '#1705#1585#1583#1606' '#1593#1576#1575#1585#1578
+  ClientHeight = 362
+  ClientWidth = 442
+  Constraints.MinHeight = 300
+  Constraints.MinWidth = 450
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlMain: TPanel [0]
+    Left = 0
+    Top = 0
+    Width = 442
+    Height = 362
+    Align = alClient
+    ParentColor = True
+    TabOrder = 0
+    object Panel2: TPanel
+      Left = 1
+      Top = 1
+      Width = 440
+      Height = 319
+      Align = alClient
+      ParentColor = True
+      TabOrder = 0
+      object DBGrid2: TDBGrid
+        Left = 1
+        Top = 1
+        Width = 438
+        Height = 317
+        Cursor = crHandPoint
+        Align = alClient
+        DataSource = DSForm
+        TabOrder = 0
+        TitleFont.Charset = ARABIC_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'SentenseName'
+            Title.Alignment = taCenter
+            Title.Caption = #1606#1575#1605' '#1593#1576#1575#1585#1578
+            Width = 105
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'SentensValue'
+            Title.Alignment = taCenter
+            Title.Caption = #1605#1578#1606' '#1593#1576#1575#1585#1578
+            Width = 297
+            Visible = True
+          end>
+      end
+    end
+    object Panel1: TPanel
+      Left = 1
+      Top = 320
+      Width = 440
+      Height = 41
+      Align = alBottom
+      ParentColor = True
+      TabOrder = 1
+      object BitBtn1: TAdvGlowButton
+        Left = 10
+        Top = 6
+        Width = 75
+        Height = 28
+        Cursor = crHandPoint
+        Action = Action1
+        Cancel = True
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 84
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 0
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+    end
+  end
+  inherited DSForm: TDataSource
+    DataSet = Dm.Sentenses
+    Left = 48
+    Top = 128
+  end
+  inherited ActionList: TActionList
+    Left = 184
+    Top = 112
+  end
+  inherited xpWindow1: TxpWindow
+    Left = 184
+    Top = 168
+  end
+  object ActionManager: TActionManager
+    Images = Dm.LetterImages
+    Left = 184
+    Top = 56
+    StyleName = 'XP Style'
+    object Action1: TAction
+      Tag = 1
+      Caption = #1582#1585#1608#1580
+      ShortCut = 27
+      OnExecute = Action1Execute
+    end
+  end
+end

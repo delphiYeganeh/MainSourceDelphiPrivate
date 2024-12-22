@@ -1,0 +1,19 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[SetSystemSetting]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[SetSystemSetting]
+END
+GO
+
+CREATE PROCEDURE [dbo].[SetSystemSetting]
+@VariableName varchar(50),@Value nvarchar(255)
+AS
+exec SetUserSetting -1 ,@VariableName ,@Value
+GO
+
+COMMIT
+GO

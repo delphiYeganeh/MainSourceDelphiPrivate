@@ -1,0 +1,25 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Archive_ParentFolders]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Archive_ParentFolders]
+END
+GO
+
+CREATE Procedure [dbo].[Archive_ParentFolders] (@LetterID int,@UserID  tinyint,@result  nvarchar(4000) output )
+as
+	Set @Result = ''
+
+	Select @Result = @Result + ' # ' + dbo.ParentFoldersCTE(ArchiveFolder.FolderID)
+		From LetterArchiveFolder 
+			Inner Join ArchiveFolder ON LetterArchiveFolder.ArchiveFolderID = ArchiveFolder.FolderID
+		Where ArchiveFolder.UserID=@userid and Letterid =@LetterID
+
+	If @Result <> '' Set  @Result = Substring(@Result,4,1000)
+GO
+
+COMMIT
+GO

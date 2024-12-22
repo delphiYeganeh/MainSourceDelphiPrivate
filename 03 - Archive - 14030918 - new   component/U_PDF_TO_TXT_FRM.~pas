@@ -1,0 +1,198 @@
+unit U_PDF_TO_TXT_FRM;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, gtPDFClasses, gtCstPDFDoc, gtExPDFDoc, gtExProPDFDoc,
+  gtPDFDoc, GenTransparent , frmWait , ActiveX, Buttons, Gauges;
+
+type
+  TPDF_TO_TXT_FRM = class(TForm)
+    PDF_ADRS: TLabel;
+    PDFDoc: TgtPDFDocument;
+    Memo1: TMemo;
+    BitBtn1: TBitBtn;
+    Label1: TLabel;
+
+    procedure MAKE;
+    procedure FormShow(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  PAGE_CNT : Integer;
+
+  SWIDE : WideString;
+
+  strList: TStringList;
+
+  TXT_STR : array[1..1000] of WideString;
+  TXT_LEN : Integer;
+  end;
+
+TReIndexThread = class(TThread)
+private
+FrmWait : TWaitForm;
+protected
+procedure Execute; override;
+public
+Class procedure Run;
+end;
+
+var
+  PDF_TO_TXT_FRM: TPDF_TO_TXT_FRM;
+
+implementation
+
+{$R *.dfm}
+
+function DeControl(const S: String): String;
+   var
+     I: Integer; 
+   begin 
+   Result := S; 
+   for I := 1 to Length(Result) do 
+     if Result[I] in [#0..#31, #127] then
+       Result[I] := ' '
+end;
+
+procedure TPDF_TO_TXT_FRM.MAKE;
+var
+  PageElements: TgtPDFPageElementList;
+  PageItem: TgtPDFTextElement;
+  LI, JI : Integer;
+  XCord, YCord : Double;
+  Result : String;
+
+  ss : WideString;
+
+  J : Integer;
+begin
+
+//SWIDE := '';
+
+//strList := TStringList.Create;
+
+TXT_LEN := 0;
+
+for J := 1 to PAGE_CNT do
+BEGIN
+  try
+
+    ss := '';
+
+    PDFDoc.LoadFromFile(PDF_ADRS.Caption);
+
+    PageElements :=
+            PDFDoc.GetPageElements(J,[etText],muPixels);
+    for JI := 0 to PageElements.Count -1 do
+    begin
+      Result := '';
+      PageItem :=  TgtPDFTextElement(PageElements.Items[JI]);
+      XCord :=  TgtPDFPageElement(PageItem).X;
+      YCord := TgtPDFPageElement(PageItem).Y;
+        Result := PageItem.Text;
+
+        Result := StringReplace(Result,#$A,'',[rfReplaceAll]);
+
+        Result := StringReplace(Result,#$D,'',[rfReplaceAll]);
+
+        Result := StringReplace(Result,'''','',[rfReplaceAll]);
+
+        Result := StringReplace(Result,'"','',[rfReplaceAll]);
+
+        ss := ss + Result;
+
+        //Result := Result + DeControl(Result);
+
+        //Memo1.Text := Memo1.Text + DeControl(Result);
+        //SWIDE := SWIDE + Result;
+        //strList.Add(Result);
+    end;
+    InputBox('','',ss);
+    TXT_STR[J] := ss;
+    TXT_LEN := TXT_LEN + 1;
+  finally
+    //FreeAndNil(PageElements);
+    Self.Close;
+  end;
+END;
+END;
+
+//-----------------------------------------------------------------------
+{ TReIndexThread }
+
+procedure TReIndexThread.Execute;
+//var
+//err : TErr_msg;
+begin
+  inherited;
+
+  CoInitialize(nil);
+
+  try
+  FrmWait.Cursor := crSQLWait;
+
+     try
+     TPDF_TO_TXT_FRM(Application.MainForm).MAKE;
+
+     except
+     on e:exception do
+     begin
+     //TForm1(Application.MainForm).ADOQuery1.Close;
+     //err      := TErr_msg.Create(nil);
+     //err.MSG_1 := '???';
+     //err.MSG_2 := E.Message;
+     //err.ShowModal;
+     //err.Free;
+     END;
+     END;
+
+  finally
+  Terminate;
+  FrmWait.Close;
+  end;
+
+  CoUninitialize();
+
+end;
+
+class procedure TReIndexThread.Run;
+begin
+
+  with TReIndexThread.Create( True ) do
+  begin
+    FreeOnTerminate := True;
+    Priority := tpTimeCritical;
+    Application.CreateForm(TWaitForm, FrmWait);
+    Resume;
+    try
+    FrmWait.ShowModal;
+    finally
+
+    end;
+  end;
+
+end;
+//-----------------------------------------------------------------------
+
+
+procedure TPDF_TO_TXT_FRM.FormShow(Sender: TObject);
+//VAR
+//a : TTransparentForm;
+begin
+//  a := TTransparentForm.Create(Self);
+//  a.Dispaly;
+//  TReIndexThread.Run;
+//  a.Free;
+MAKE;
+end;
+
+procedure TPDF_TO_TXT_FRM.BitBtn1Click(Sender: TObject);
+begin
+close;
+end;
+
+end.

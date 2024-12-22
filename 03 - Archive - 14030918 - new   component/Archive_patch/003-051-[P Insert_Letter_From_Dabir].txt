@@ -1,0 +1,90 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Insert_Letter_From_Dabir]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Insert_Letter_From_Dabir]
+END
+GO
+
+CREATE PROCEDURE [dbo].[Insert_Letter_From_Dabir] 
+	 @INNO NVARCHAR(50),
+	 @IndicatorID 	[int],
+	 @MYear 	[int],
+	 @SecretariatID 	[tinyint],
+	 @Letter_Type 	[tinyint],
+	 @letterformat 	[tinyint],
+	 @Memo 	[nvarchar](500),
+	 @UserID 	[int],
+	 @RegistrationDate 	[char](10),
+	 @RegistrationTime 	[varchar](5),
+	 @ExtenTionType NVARCHAR(5),
+	 @ExtenTionDesc NVARCHAR(100),
+	 @DataDesc NVARCHAR(50),
+	 @out_LetterDataID INT OUT
+AS
+-----------------------------------------------------------------------------------------------------------
+DECLARE @LetterID INT , @extID INT
+----------------------------------------------------------------------------------------------------------- 
+IF NOT EXISTS(SELECT * FROM Users WHERE Title = 'کاربر دبيرخانه')
+BEGIN
+	INSERT INTO users(Title,UserName,DefualtSecretariatID,HasSecureLetterAccess)
+		VALUES('کاربر دبيرخانه','کاربر دبيرخانه',1,1)
+END 
+-----------------------------------------------------------------------------------------------------------
+SELECT @userID=id FROM Users 
+WHERE Title = 'کاربر دبيرخانه'
+-----------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
+IF NOT EXISTS(SELECT * FROM Extention WHERE Extention = @ExtenTionType)
+BEGIN
+	INSERT INTO Extention(Extention,ExtentionTitle,IsSystem)
+		VALUES(@ExtenTionType,@ExtenTionDesc,0)
+END
+-----------------------------------------------------------------------------------------------------------
+SELECT @extID = ExtentionID FROM Extention WHERE Extention = @ExtenTionType
+-----------------------------------------------------------------------------------------------------------
+select @indicatorID = Max(indicatorID)+1 FROM Letter Where MYear = @MYear and SecretariatID = @SecretariatID
+-----------------------------------------------------------------------------------------------------------
+IF NOT EXISTS(SELECT LetterID FROM Letter WHERE IncommingNO = @INNO)
+BEGIN
+	INSERT INTO [dbo].[Letter] 
+	 ( [IndicatorID],
+	 [MYear],
+	 [SecretariatID],
+	 [Letter_Type],
+	 [letterformat],
+	 [Memo],
+	 [UserID],
+	 [Incommingdate],
+	 [RegistrationDate],
+	 [RegistrationTime],
+	 [IncommingNO]) 
+ 
+VALUES 
+	( @IndicatorID,
+	 @MYear,
+	 @SecretariatID,
+	 @Letter_Type,
+	 @letterformat,
+	 @Memo,
+	 @UserID,
+	 @RegistrationDate,
+	 @RegistrationDate,
+	 @RegistrationTime,
+	 @INNO)
+END 
+-----------------------------------------------------------------------------------------------------------
+SELECT @LetterID =LetterID FROM Letter WHERE IncommingNO = @INNO
+-----------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
+INSERT INTO LetterData(LetterID,extention,PageNumber,[Description],LastUpdate)
+	VALUES(@LetterID,@extID,(SELECT MAX(PageNumber)FROM LetterData WHERE LetterID = @LetterID),@DataDesc,GETDATE())
+SET @out_LetterDataID =@@identity
+
+GO
+
+COMMIT
+GO

@@ -1,0 +1,12 @@
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'Has_File'
+          AND Object_ID = Object_ID(N'dbo.Letter'))
+BEGIN
+	ALTER TABLE [dbo].[Letter] 
+	ADD	[Has_File] [bit] NULL CONSTRAINT [DF_Letter_Has_File] DEFAULT ((0))
+END
+GO
+COMMIT
+GO

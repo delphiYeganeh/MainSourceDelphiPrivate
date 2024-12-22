@@ -1,0 +1,133 @@
+8
+
+dir
+131
+svn://dlib.itrc.ac.ir/eCartable/App_Code
+svn://dlib.itrc.ac.ir/eCartable
+
+
+
+2008-02-24T17:15:57.192250Z
+129
+mahdi
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+76e0edb9-7613-5b4a-9688-4d125da3a7a4
+
+DAL
+dir
+
+Model
+dir
+
+MessageBox.cs
+file
+
+
+
+
+2008-02-26T08:47:07.750000Z
+c93ec8c83967d3dd1bb5a8247a01ab3f
+2008-01-01T06:41:46.605875Z
+93
+mahdi
+
+BaseForm.cs
+file
+
+
+
+
+2008-02-26T08:47:07.843750Z
+366aa81ef1d5d4305473cb1b59e630b7
+2008-02-24T17:15:57.192250Z
+129
+mahdi
+
+Exceptions.cs
+file
+
+
+
+
+2008-02-26T08:47:07.859375Z
+806c23a503337d3489a6b31e60bc30d3
+2007-09-20T11:09:46.115000Z
+1
+mahdi
+
+Globals.cs
+file
+
+
+
+
+2008-02-26T08:47:07.968750Z
+66474f25b45377a3b7a7b19621c8e864
+2008-01-13T06:07:52.525375Z
+113
+mahdi
+
+BLL
+dir
+
+BaseMaster.cs
+file
+
+
+
+
+2008-02-26T08:47:07.968750Z
+b3160b2ab2e45ac8dc5f754099c84417
+2007-09-20T11:09:46.115000Z
+1
+mahdi
+
+ModuleControl.cs
+file
+
+
+
+
+2008-02-26T08:47:07.984375Z
+9f43519aaa01c3a50fae2b0a17d7fe4b
+2007-09-20T11:09:46.115000Z
+1
+mahdi
+
+ClientDialogBox.cs
+file
+
+
+
+
+2008-02-26T08:47:08.000000Z
+efbb3334986308e83358fc2bec2ce1a0
+2008-01-01T19:02:28.699625Z
+94
+mahdi
+
+ConfigSection.cs
+file
+
+
+
+
+2008-02-26T08:47:08.000000Z
+91a00cea684033eb3b266fc124828ba3
+2008-01-13T06:07:52.525375Z
+113
+mahdi
+

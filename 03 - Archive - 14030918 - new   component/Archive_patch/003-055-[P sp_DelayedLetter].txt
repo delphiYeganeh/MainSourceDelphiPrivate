@@ -1,0 +1,55 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[sp_DelayedLetter]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[sp_DelayedLetter]
+END
+GO
+
+CREATE PROCEDURE [dbo].[sp_DelayedLetter] 
+@SecretariatID int,@myear int,@DeadLine int, @userID int
+as
+
+declare 
+@sql nvarchar (4000),
+@rw nvarchar(255),
+@Today char(10),
+@deadlineDate char(10),
+@OrgID int
+
+select @today=dbo.shamsi(getdate())
+
+if @DeadLine between -30 and 30 
+  set @deadlineDate=dbo.ShamsiIncDate(@today,0,0,@DeadLine)
+
+SELECT     @OrgID=FromOrgID
+FROM         Users
+WHERE     Id = @userID
+
+set @RW='WHERE Proceeded=0 and   ( L.myear='+cast(@myear as varchar(10))+') AND (Rc.OrgID = '+
+cast(@OrgID as varchar(10))+') '
+
+if @SecretariatID>0 
+set @rw=@rw+' AND (SecretariatID = '+cast(@SecretariatID as varchar(10))+')'
+else 
+set @rw=@rw+' AND (SecretariatID in (SELECT SecId FROM UserSecretariats WHERE UserId = '+cast(@userid as varchar(5))+'))'
+
+set @rw=@rw+' AND (ltrim(isnull(DeadLineDate,''''))<>'''' and  ltrim(isnull(DeadLineDate,''''))<= '''+@deadlineDate+''')' 
+
+
+
+set @sql=' SELECT count( *)
+FROM ReCommites RC 
+INNER JOIN Letter L ON RC.LetterID = L.LetterID '
+
+set @sql=@sql+@rW
+
+exec sp_executesql  @sql
+
+GO
+
+COMMIT
+GO

@@ -1,0 +1,12 @@
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'UserId'
+          AND Object_ID = Object_ID(N'dbo.Rent'))
+BEGIN
+	ALTER TABLE [dbo].[Rent] 
+	ADD	[UserId] [int] NULL
+END
+GO
+COMMIT
+GO

@@ -1,0 +1,51 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[insert_Letter]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[insert_Letter]
+END
+GO
+
+CREATE PROCEDURE [dbo].[insert_Letter]
+	(@letterID integer output,
+@IndicatorID 	[int],
+	 @MYear 	[int],
+	 @SecretariatID 	[tinyint],
+	 @Letter_Type 	[tinyint],
+	 @letterformat 	[tinyint],
+	 @Memo 	[nvarchar](500),
+	 @UserID 	[int],
+	 @RegistrationDate 	[char](10),
+	 @RegistrationTime 	[varchar](5))
+
+AS INSERT INTO [dbo].[Letter] 
+	 ( [IndicatorID],
+	 [MYear],
+	 [SecretariatID],
+	 [Letter_Type],
+	 [letterformat],
+	 [Memo],
+	 [UserID],
+	 [RegistrationDate],
+	 [RegistrationTime]) 
+ 
+VALUES 
+	( @IndicatorID,
+	 @MYear,
+	 @SecretariatID,
+	 @Letter_Type,
+	 @letterformat,
+	 @Memo,
+	 @UserID,
+	 @RegistrationDate,
+	 @RegistrationTime)
+
+SET @LetterID=@@Identity
+
+GO
+
+COMMIT
+GO

@@ -1,0 +1,355 @@
+﻿<%@ page language="C#" autoeventwireup="true" inherits="Cartable.UI.Default, eCartable" masterpagefile="Horizontal.master" %>
+
+<asp:Content ID="plhContent" ContentPlaceHolderID="plcContent" runat="server">
+
+    <table align="center" border="0" dir="rtl" width="986">
+        <tr>
+            <td valign="top" class="right">
+                <table cellpadding="1" cellspacing="0" border="0">
+                    <tr>
+                        <td>
+                            <div class="all-top-but"><div class="combobox-right">
+                                <asp:DropDownList runat="server" ID="cmbType" CssClass="textbox">
+                                    <asp:ListItem Text="همه نامه ها" Selected="True" Value="0" />
+                                    <asp:ListItem Text="ارجاعات" Value="3" />
+                                    <asp:ListItem Text="رونوشت ها" Value="1" />
+                                </asp:DropDownList></div>
+                               <div class="home-button-refresh"> <asp:ImageButton runat="server" ID="btnChangeType" SkinID="btnDo" OnClick="btnChangeType_Click" />
+                                <asp:ImageButton  runat="server" ID="btnReset" SkinID="btnReset" AlternateText="تمامی نامه ها"
+                                    OnClick="btnReset_Click" /></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="title">
+                                <div class="title-font">
+                                    جستجو</div>
+                                <div class="arr-up">
+                                    <asp:ImageButton runat="server" ID="btnOpenSer" CommandArgument="pnlSearch" SkinID="btnMaximize"
+                                        OnCommand="btnOpen_Command" TabIndex="2" Visible="false" />
+                                    <asp:ImageButton runat="server" ID="btnCloseSer" CommandArgument="pnlSearch" SkinID="btnMinimize"
+                                        OnCommand="btnClose_Command" TabIndex="3" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Panel runat="server" ID="pnlSearch" Visible="true">
+                                <div class="content-right">
+                                    <div class="t1-content--right">
+                                    </div>
+                                    <div class="border-content-right">
+                                        <div class="text-content-right">
+                                            شماره نامه :
+                                        </div>
+                                        <div class="textbox-content-right">
+                                            <asp:TextBox CssClass="textBox" runat="server" ID="txtLetterId"></asp:TextBox>
+                                        </div>
+                                        <div class="text-content-right">
+                                            تاریخ نامه :
+                                        </div>
+                                        <div class="textbox-content-right">
+                                            <asp:TextBox CssClass="textBox" runat="server" ID="txtLetterDate" dir="ltr"></asp:TextBox>
+                                        </div>
+                                        <div class="text-content-right">
+                                            مضمون، فرستنده و ملاحظات نامه :</div>
+                                        <div class="textbox-content-right">
+                                            <asp:TextBox CssClass="textBox" runat="server" ID="txtMemo"></asp:TextBox>
+                                        </div>
+                                        <div class="button-content-right">
+                                            <asp:ImageButton CssClass="button" runat="server" ID="btnSearch" OnClick="btnSearch_Click"
+                                                SkinID="btnSearch" TabIndex="1" />
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="t2-content--right">
+                                    </div>
+                                </div>
+                            </asp:Panel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="title">
+                                <div class="title-font">
+                                    فهرست دبیرخانه ها</div>
+                                <div class="arr-up">
+                                    <asp:ImageButton runat="server" ID="btnOpenSec" SkinID="btnMaximize" CommandArgument="pnlSecretaries"
+                                        OnCommand="btnOpen_Command" TabIndex="4" Visible="false" />
+                                    <asp:ImageButton runat="server" ID="btnCloseSec" CommandArgument="pnlSecretaries"
+                                        SkinID="btnMinimize" OnCommand="btnClose_Command" TabIndex="5" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <asp:Panel runat="server" ID="pnlSecretaries" Visible="True">
+                            <td class="content-right">
+                                <div class="t1-content--right">
+                                </div>
+                                <div class="border-content-right">
+                                    <asp:TreeView CssClass="text-list-right" runat="server" ID="trvConstruct" OnSelectedNodeChanged="trvConstruct_SelectedNodeChanged">
+                                        <SelectedNodeStyle CssClass="text-list-right" />
+                                        <NodeStyle CssClass="text-list-right" ImageUrl="~/App_Themes/Default/Images/Cartable-small.gif" />
+                                    </asp:TreeView>
+                                </div>
+                                <div class="t2-content--right">
+                                </div>
+                            </td>
+                        </asp:Panel>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="title">
+                                <div class="title-font">
+                                    بایگانی</div>
+                                <div class="arr-up">
+                                    <asp:ImageButton runat="server" ID="btnOpenArch" SkinID="btnMaximize" CommandArgument="pnlArchiveFolder"
+                                        OnCommand="btnOpen_Command" />
+                                    <asp:ImageButton runat="server" ID="btnCloseArch" CommandArgument="pnlArchiveFolder"
+                                        SkinID="btnMinimize" OnCommand="btnClose_Command" Visible="false" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <asp:Panel runat="server" ID="pnlArchiveFolder" Visible="false" CssClass="pnlRightMenu">
+                            <td class="content-right">
+                                <div class="t1-content--right">
+                                </div>
+                                <div class="border-content-right">
+                                    <asp:TreeView CssClass="text-list-right" runat="server" ID="trvArchiveFolder" OnSelectedNodeChanged="trvArchiveFolder_SelectedNodeChanged">
+                                        <SelectedNodeStyle CssClass="text-list-right" />
+                                        <NodeStyle CssClass="text-list-right" ImageUrl="~/App_Themes/Default/Images/Cartable-small.gif" />
+                                    </asp:TreeView>
+                                </div>
+                                <div class="t2-content--right">
+                                </div>
+                            </td>
+                        </asp:Panel>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="title">
+                                <div class="title-font">
+                                    نمودار سازمانی</div>
+                                <div class="arr-up">
+                                    <asp:ImageButton runat="server" ID="btnOpenChart" SkinID="btnMaximize" CommandArgument="pnlOrgChart"
+                                        OnCommand="btnOpen_Command" TabIndex="7" />
+                                    <asp:ImageButton runat="server" ID="btnCloseChart" CommandArgument="pnlOrgChart"
+                                        SkinID="btnMinimize" OnCommand="btnClose_Command" TabIndex="8" Visible="false" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <asp:Panel runat="server" ID="pnlOrgChart" Visible="false">
+                            <td class="content-right">
+                                <div class="t1-content--right">
+                                </div>
+                                <div class="border-content-right">
+                                    <asp:TreeView CssClass="text-list-right" runat="server" ID="trvOrgChart" OnSelectedNodeChanged="trvOrgChart_SelectedNodeChanged">
+                                        <SelectedNodeStyle CssClass="text-list-right" />
+                                        <NodeStyle CssClass="text-list-right" ImageUrl="~/App_Themes/Default/Images/Cartable-small.gif" />
+                                    </asp:TreeView>
+                                </div>
+                                <div class="t2-content--right">
+                                </div>
+                            </td>
+                        </asp:Panel>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="title">
+                                <div class="title-font">
+                                    مهلت اقدام</div>
+                                <div class="arr-up">
+                                    <asp:ImageButton runat="server" ID="btnOpenDeadline" SkinID="btnMaximize" CommandArgument="pnlDeadline"
+                                        OnCommand="btnOpen_Command" TabIndex="7" />
+                                    <asp:ImageButton runat="server" ID="btnCloseDeadline" CommandArgument="pnlDeadline"
+                                        SkinID="btnMinimize" OnCommand="btnClose_Command" TabIndex="8" Visible="false" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <asp:Panel CssClass="text-list-right" runat="server" ID="pnlDeadline" Visible="false">
+                            <td class="content-right">
+                                <div class="t1-content--right">
+                                </div>
+                                <div class="border-content-right">
+                                    <asp:TreeView CssClass="text-list-right" runat="server" ID="trvDeadline" OnSelectedNodeChanged="trvDeadline_SelectedNodeChanged">
+                                        <Nodes>
+                                            <asp:TreeNode Text="همه موارد" Value="-2" Selected="true" />
+                                            <asp:TreeNode Text="نامه های عقب افتاده" Value="-1" />
+                                            <asp:TreeNode Text="تا امروز" Value="0" />
+                                            <asp:TreeNode Text="تا فردا" Value="1" />
+                                            <asp:TreeNode Text="تا آخر هفته" Value="3" />
+                                        </Nodes>
+                                        <SelectedNodeStyle CssClass="text-list-right" />
+                                        <NodeStyle CssClass="text-list-right" ImageUrl="~/App_Themes/Default/Images/Cartable-small.gif" />
+                                    </asp:TreeView>
+                                    <br />
+                                </div>
+                                <div class="t2-content--right">
+                                </div>
+                            </td>
+                        </asp:Panel>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="title">
+                                <div class="title-font">
+                                    گزینش ستونها</div>
+                                <div class="arr-up">
+                                    <asp:ImageButton runat="server" ID="btnOpenOutputs" SkinID="btnMaximize" CommandArgument="pnlOutputs"
+                                        OnCommand="btnOpen_Command" TabIndex="10" />
+                                    <asp:ImageButton runat="server" ID="btnCloseOutputs" CommandArgument="pnlOutputs"
+                                        SkinID="btnMinimize" OnCommand="btnClose_Command" TabIndex="11" Visible="false" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <asp:Panel runat="server" ID="pnlOutputs" Visible="false">
+                            <td class="content-right">
+                                <div class="t1-content--right">
+                                </div>
+                                <div class="border-content-right">
+                                    <asp:CheckBoxList ID="lstGridOutput" runat="server" CssClass="text-list-right-last"
+                                        Width="90%">
+                                        <asp:ListItem Value="IndicatorID" Selected="True">شماره اندیکاتور </asp:ListItem>
+                                        <asp:ListItem Value="IncommingDate" Selected="True">تاریخ وارده </asp:ListItem>
+                                        <asp:ListItem Value="IncommingNO" Selected="True">شماره وارده</asp:ListItem>
+                                        <asp:ListItem Value="RegistrationDate" Selected="True">تاریخ ثبت</asp:ListItem>
+                                        <asp:ListItem Value="Memo" Selected="True">مضمون</asp:ListItem>
+                                        <asp:ListItem Value="RecommiteDate" Selected="True">تاریخ ارجاع</asp:ListItem>
+                                        <asp:ListItem Value="RecommiterTitle" Selected="True">ارجاع دهنده</asp:ListItem>
+                                        <asp:ListItem Value="Paraph" Selected="True">متن ارجاع</asp:ListItem>
+                                        <asp:ListItem Value="CenterNo">شماره نامه دبیرخانه مرکزی</asp:ListItem>
+                                        <asp:ListItem Value="CenterDate">تاریخ دبیرخانه مرکزی</asp:ListItem>
+                                        <asp:ListItem Value="AttachTitle">عنوان پیوست</asp:ListItem>
+                                        <asp:ListItem Value="RetroactionNo">شماره عطف</asp:ListItem>
+                                        <asp:ListItem Value="UserMemo">توضیحات کاربری</asp:ListItem>
+                                        <asp:ListItem Value="RegistrationTime">زمان ثبت</asp:ListItem>
+                                        <asp:ListItem Value="FollowLetterNo">شماره پیرو</asp:ListItem>
+                                        <asp:ListItem Value="InnerNo">شماره داخلی نامه</asp:ListItem>
+                                        <asp:ListItem Value="sendertitle">فرستنده نامه</asp:ListItem>
+                                        <asp:ListItem Value="ViewDate">تاریخ دیدن</asp:ListItem>
+                                    </asp:CheckBoxList>
+                                    <div class="button-content-right">
+                                        <asp:ImageButton runat="server" ID="btnApplyOutput" SkinID="btnOk" OnClick="btnApplyOutput_Click"
+                                            TabIndex="9" /></div>
+                                </div>
+                                <div class="t2-content--right">
+                                </div>
+                            </td>
+                        </asp:Panel>
+                    </tr>
+                </table>
+            </td>
+            <td class="main">
+                <div id="divToolbar">
+                    <table>
+                        <tr>
+                            <td>
+                                <asp:ImageButton runat="server" ID="btnDraft" AlternateText="ثبت پيش نوِیس" SkinID="btnDraft"
+                                    OnClick="btnDraft_Click" />
+                            </td>
+                            <td>
+                                <asp:ImageButton runat="server" ID="btnInnerLetter" AlternateText="ثبت نامه داخلی"
+                                    SkinID="btnInnerLetter" OnClick="btnInnerLetter_Click" />
+                            </td>
+                            <td>
+                                <asp:ImageButton runat="server" ID="btnSentLetter" AlternateText="ثبت نامه صادره"
+                                    SkinID="btnSentLetter" OnClick="btnSentLetter_Click" />
+                            </td>
+                            <td>
+                                <asp:ImageButton runat="server" ID="btnReceivedLetter" AlternateText="ثبت نامه وارده"
+                                    SkinID="btnReceivedLetter" OnClick="btnReceivedLetter_Click" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="divGrid">
+                    <asp:GridView runat="server" ID="grdInbox" CellPadding="4" ForeColor="#13426c" GridLines="None"
+                        AllowPaging="True" PageSize="15" AutoGenerateColumns="False" DataSourceID="dsInbox"
+                        CssClass="gridView" AllowSorting="True" OnRowCommand="grdInbox_RowCommand" OnRowDataBound="grdInbox_RowDataBound">
+                        <FooterStyle />
+                        <RowStyle CssClass="gridRow" />
+                        <EditRowStyle />
+                        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#13426c" />
+                        <PagerStyle CssClass="footer-main-st" />
+                        <HeaderStyle CssClass="header-main-st" />
+                        <AlternatingRowStyle CssClass="gridRowAlt" Wrap="false" />
+                        <RowStyle Wrap="false" />
+                        <EmptyDataTemplate>
+                            <span class="message">هيچ نامه اي برای نمایش وجود ندارد. </span>
+                        </EmptyDataTemplate>
+                        <Columns>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <table border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <asp:ImageButton runat="server" ID="imgAttach" SkinID="imgAttach" CommandName="ViewAttach"
+                                                    AlternateText="پیوست ها" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "LetterId")+ "-" + DataBinder.Eval(Container.DataItem, "RecommiteId") %>'
+                                                    Visible='<%# LetterHasAttachment(DataBinder.Eval(Container.DataItem, "LetterId").ToString()) %>' />
+                                            </td>
+                                            <td>
+                                                <asp:ImageButton runat="server" ID="imgInfo" SkinID="imgInfo" CommandName="ViewInfo"
+                                                    AlternateText="داده هاي بيشتر" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "LetterId") + "-" + DataBinder.Eval(Container.DataItem, "RecommiteId") %>' />
+                                            </td>
+                                            <td>
+                                                <asp:ImageButton runat="server" ID="imgRecommite" SkinID="imgRecommite" CommandName="Recommite"
+                                                    Visible='<%# !Convert.ToBoolean(DataBinder.Eval(Container.DataItem, "Proceeded")) %>'
+                                                    AlternateText="ارجاع" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "RecommiteId")%>' />
+                                            </td>
+                                            <td>
+                                                <asp:ImageButton runat="server" ID="imgActivate" SkinID="imgActivate" CommandName="Activate"
+                                                    Visible='<%# Convert.ToBoolean(DataBinder.Eval(Container.DataItem, "Proceeded")) %>'
+                                                    AlternateText="فعال کردن" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "RecommiteId") %>' />
+                                            </td>
+                                            <td>
+                                                <asp:ImageButton runat="server" ID="imgSendDraft" SkinID="imgSendDraft" AlternateText="فرستادن پيش نوِیس به دبیرخانه"
+                                                    CommandName="SendDraft" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "LetterId") %>'
+                                                    Visible='<%# DataBinder.Eval(Container.DataItem, "LetterFormat").ToString()=="2" ? true : false %>' />
+                                            </td>
+                                            <td>
+                                                <asp:ImageButton runat="server" ID="imgAnswer" SkinID="imgAnswer" AlternateText="جواب"
+                                                    CommandName="Answer" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "LetterId") %>'
+                                                    Visible='<%# DataBinder.Eval(Container.DataItem, "LetterType").ToString()=="1" ? true : false %>' />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                        <PagerSettings Mode="NumericFirstLast" />
+                    </asp:GridView>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <asp:ObjectDataSource ID="dsInbox" runat="server" SelectMethod="GetInbox" SortParameterName="sortExpression"
+        TypeName="Cartable.BLL.Letters.Inbox">
+        <SelectParameters>
+            <asp:Parameter Name="secretariatID" Type="Int32" />
+            <asp:Parameter Name="letterFormat" Type="Byte" DefaultValue="1" />
+            <asp:Parameter Name="orgID" Type="Int32" />
+            <asp:Parameter Name="proceeded" Type="Boolean" DefaultValue="false" />
+            <asp:Parameter Name="type" Type="Byte" DefaultValue="0" />
+            <asp:Parameter Name="mYear" Type="Byte" DefaultValue="86" />
+            <asp:Parameter Name="date" Type="Byte" DefaultValue="0" />
+            <asp:Parameter Name="archiveFolderID" Type="Int32" DefaultValue="0" />
+            <asp:Parameter Name="where" Type="String" DefaultValue="" />
+            <asp:Parameter Name="userID" Type="Int32" />
+            <asp:Parameter Name="letterType" Type="Int32" DefaultValue="0" />
+            <asp:Parameter Name="deadLine" Type="Int32" DefaultValue="-2" />
+            <asp:Parameter Name="sortExpression" Type="String" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+</asp:Content>

@@ -1,0 +1,60 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Report_UserLog]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Report_UserLog]
+END
+GO
+
+CREATE PROCEDURE [dbo].[Report_UserLog]
+@Secretariatid int,
+@myear int,
+@where nvarchar(2000),
+@topCnt int=1000
+as 
+declare @sqlCommand nvarchar(4000)
+set @sqlCommand = 'SELECT '
+if @topCnt > 0 
+	set @sqlCommand = @sqlCommand + ' top '+ CONVERT(varchar(5),@topCnt)
+set @sqlCommand = @sqlCommand + ' 
+ ApplicationForms.Title AS FormTitle,
+ Users.Title AS UserTitle,
+ Actions.Title AS ActionTitle,
+ Letter.IndicatorID,
+ LetterTypes.Title AS LetterType,
+ Letter.IncommingNO,
+ Letter.Incommingdate,
+ Letter.RegistrationDate,
+ Letter.Memo,
+ dbo.Shamsi(UserLog.Time1) AS Date,
+ right(cast(UserLog.Time1 as varchar(50)),7) as Time
+
+FROM       UserLog
+INNER JOIN Users            ON Users.Id = UserLog.UserID
+INNER JOIN Actions          ON UserLog.Actionname = Actions.Actionname 
+INNER JOIN ApplicationForms ON ApplicationForms.ID = Actions.FormTag
+LEFT  JOIN Letter           ON UserLog.LetterID = Letter.LetterID
+LEFT  JOIN LetterTypes      ON Letter.Letter_Type = LetterTypes.ID '
+
+
+set @where=isnull(ltrim(rtrim(@where)),'')
+if @where <>'' set @where =' and '+@where
+
+if @Secretariatid<>0
+  set @where=@where+' and (Secretariatid = '+Cast(@Secretariatid as varchar(5))+')'
+
+if @Myear<>0
+  set @where=@where+' and (myear = '+Cast(@myear as varchar(10))+')'
+
+if substring(@where,1,4)=' and' set @where=' where '+substring(@where,5,4000)
+
+ set @sqlCommand=@sqlCommand+@where + ' order by time1  '
+exec(@sqlCommand)
+
+GO
+
+COMMIT
+GO

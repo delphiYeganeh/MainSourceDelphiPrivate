@@ -1,0 +1,563 @@
+inherited FrInputUserTable: TFrInputUserTable
+  Left = 401
+  Top = 105
+  BorderIcons = []
+  Caption = #1578#1593#1585#1610#1601' '#1601#1585#1605' '#1607#1575#1610' '#1575#1583#1575#1585#1610
+  ClientHeight = 584
+  ClientWidth = 961
+  Constraints.MinHeight = 300
+  Constraints.MinWidth = 680
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel2: TPanel [0]
+    Left = 290
+    Top = 0
+    Width = 671
+    Height = 584
+    Align = alClient
+    TabOrder = 0
+    DesignSize = (
+      671
+      584)
+    object GroupBox1: TGroupBox
+      Left = 12
+      Top = 8
+      Width = 654
+      Height = 49
+      Anchors = [akLeft, akTop, akRight]
+      Caption = #1580#1587#1578#1580#1608
+      TabOrder = 0
+      DesignSize = (
+        654
+        49)
+      object Label1: TLabel
+        Left = 504
+        Top = 17
+        Width = 103
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1576#1585' '#1575#1587#1575#1587' '#1593#1606#1608#1575#1606' '#1601#1585#1605
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object SearchEdit: TEdit
+        Left = 298
+        Top = 15
+        Width = 202
+        Height = 21
+        Anchors = [akTop, akRight]
+        Color = clWhite
+        TabOrder = 0
+        OnChange = SearchEditChange
+      end
+    end
+    object YDBGrid1: TYDBGrid
+      Left = 11
+      Top = 64
+      Width = 655
+      Height = 475
+      Anchors = [akLeft, akTop, akRight, akBottom]
+      Color = clBtnFace
+      DataSource = DSForm
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
+      TabOrder = 1
+      TitleFont.Charset = ARABIC_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      OnDblClick = YDBGrid1DblClick
+      YeganehColor = False
+      YeganehFinish = False
+      PageNumber = False
+      RecordNumber = False
+      HasTime = False
+      Oriention = poPortrait
+      HasDate = False
+      HasIndex = False
+      PrintTitle = #1604#1610#1587#1578' '#1578#1607#1610#1607' '#1588#1583#1607' '#1578#1608#1587#1591' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1610#1711#1575#1606#1607
+      InvertFarsiDate = True
+      TitleSort = True
+      AutoInsert = False
+      OnNeedColorCondition = YDBGrid1NeedColorCondition
+      FooterFields = 'Count'
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'Description'
+          Title.Caption = #1593#1606#1608#1575#1606' '#1601#1585#1605
+          Title.Color = 11184810
+          Width = 200
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TableCode'
+          Title.Caption = #1705#1583' '#1575#1610#1586#1608
+          Title.Color = 12829635
+          Width = 70
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'UserField1'
+          Title.Caption = #1578#1608#1590#1610#1581#1575#1578' 1'
+          Title.Color = 14145495
+          Width = 130
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'UserField2'
+          Title.Caption = #1578#1608#1590#1610#1581#1575#1578' 2'
+          Title.Color = 15658734
+          Width = 130
+          Visible = True
+        end>
+    end
+    object btnMoveToList: TBitBtn
+      Left = 13
+      Top = 548
+      Width = 110
+      Height = 28
+      Cursor = crHandPoint
+      Anchors = [akLeft, akBottom]
+      Caption = #1575#1606#1578#1602#1575#1604' '#1576#1607' '#1604#1610#1587#1578
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      OnClick = btnMoveToListClick
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000C40E0000C40E00000000000000000000000000000000
+        0000000000000000000000000000000000000000001A6A1A1451140000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        00002390232CA83229A429186118000000000000000000000000000000000000
+        0000000000000000000000000000002390232EAB364FDB7F49D0712AA72A1863
+        18000000000000000000000000269A262085200000000000000000002390232E
+        AB364FDA7D4ED76259E1764FD6782BAB2B196519000000000000000000269B26
+        2BA4332187210000002390232EAB3650DB7E4FD86457DE6A61E5756AED8A54DA
+        7D2CAE2C1A6719000000000000269C264EDA862DA83627A1272EAB3650DB7F50
+        D96559DF6C63E6776BEC8071EF8773F29356DB7F2DB12D155415000000279E27
+        4BDA7B4AD77836B64B51DC8051DA675AE06E64E7786CED8172F08774F08973EF
+        8D61E69230B6341A6A1A000000279F274BD97842CF554FDB7153DB685CE16F65
+        E87A6DED8272F08874F08972EE8C61E69131B73625932400000000000027A027
+        4EDB7B4AD45B53DB665DE27167E97B6EEE8373F08874F08972EE8C61E69031B7
+        3625932400000000000000000028A22854DF8255DC675FE37268EA7C6FEE8473
+        F08974EF8971ED8B61E59031B73625932400000000000000000000000028A428
+        5BE58960E47469EA7E70EF8574F08974EF8971ED8A60E59031B7362593240000
+        0000000000000000000000000029A52862E9906AEB7F70EF8674F08974EF8971
+        EB866CEB933BC14B2DB22C00000000000000000000000000000000000029A729
+        67ED9771EF8774F08973EE8970EA856CE58066DF7B5DDF8C34BC3D289D270000
+        000000000000000000000000002AA82962E99769ED9768EC9766E99463E69160
+        E38D5DDF8959DB8753DA8732BB36289F270000000000000000000000002AAA2A
+        2BAB2A2BAD2B2CAF2B2CB02C2DB22C2DB32C2EB52D2EB62D2FB72E2FB92E2FBA
+        2E00000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000}
+    end
+  end
+  object Panel1: TPanel [1]
+    Left = 0
+    Top = 0
+    Width = 290
+    Height = 584
+    Align = alLeft
+    TabOrder = 1
+    DesignSize = (
+      290
+      584)
+    object GroupBox2: TGroupBox
+      Left = 8
+      Top = 8
+      Width = 273
+      Height = 529
+      Anchors = [akLeft, akTop, akBottom]
+      Caption = #1604#1610#1587#1578' '#1601#1585#1605' '#1607#1575#1610' '#1575#1606#1578#1582#1575#1576' '#1588#1583#1607
+      TabOrder = 0
+      DesignSize = (
+        273
+        529)
+      object lstSelectedForms: TListBox
+        Left = 16
+        Top = 24
+        Width = 241
+        Height = 457
+        Anchors = [akLeft, akTop, akBottom]
+        Color = clWhite
+        ItemHeight = 13
+        TabOrder = 0
+      end
+      object BitBtn1: TBitBtn
+        Left = 32
+        Top = 494
+        Width = 97
+        Height = 28
+        Cursor = crHandPoint
+        Anchors = [akLeft, akBottom]
+        Caption = #1581#1584#1601' '#1575#1586' '#1604#1610#1587#1578
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = BitBtn1Click
+        Glyph.Data = {
+          AA030000424DAA03000000000000360000002800000011000000110000000100
+          1800000000007403000000000000000000000000000000000000FFFFFF7270C9
+          0B0A9D5251B3DDDCEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA4A3DE7373
+          C3F1EFF8FFFFFFFFFFFFFFFFFF00BDBCE4000AC21F63FF0B3CF30004AB908ED8
+          FFFEFEFFFFFFFFFFFFFFFFFFA29FDD0001B70026EC0002AC5153C6E2E1F6FFFF
+          FF00484BB51247FD1E51FF1C50FF1C59FF000EC26F70D0F4F2F8FFFFFF9D9CDA
+          0513BA104BFF0F46FF0A47FF001BDE5052C4FAF9FB006969C01033D82156FF1D
+          4EFF1D4FFF1F59FF0827D36265C7928ECC1729C30F46FE1346FF1042FF0D3FFF
+          0C47FF000DCBB0B0DE00EEEBF4000CA9275FFF2051FF1F50FF1F50FF1E54FF12
+          34D70E23C01346F6184CFF1445FF1344FF1041FF1048FF0024EB5C5DBD00E1DF
+          F20000B42A66FF2558FF2153FF2051FF2052FF1E50FD1C4DFC1C4FFF184AFF16
+          48FF1445FF144BFF0029E42532C3C4C3E500F9F9FD6B6CCB0318BE194FF6275E
+          FF2557FF2252FF2053FF2051FF1D4EFF1A4CFF184BFF144DFF0022E13D40BED2
+          D0EDFFFFFF00FFFFFFFDFCFCCECDEA7378D2263DCE214EF02658FF2354FF2153
+          FF1F51FF1D50FF1848FA2136C69897D8F1F0F8FFFFFFFFFFFF00FFFFFFFFFFFF
+          FFFFFFFFFFFF9089C81C3DE02C5EFF2657FF2555FF2354FF1F50FF1B51FC2425
+          A9EEEBF5FFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFBFAFE2727B12F66FF
+          2C5BFF295AFF285AFF2557FF2252FF2056FF1140F1514EB7FEFDFEFFFFFFFFFF
+          FF00FFFFFFFFFFFFFFFFFF9E99D4294ADF3165FF2E5EFF2D5FFF2452F32253F8
+          2557FF2151FF1C53FF1331D89896D5FFFFFFFFFFFF00FFFFFFFFFFFFFFFFFF58
+          57BE2858ED3466FF3162FF2A5CFA232EBC1B2BC22358FF2354FF1F53FF1344F4
+          2B39C7D7D4EEFFFFFF00FFFFFFFFFFFFCFCDE93D50D43263F93565FF3165FF21
+          41D88986CE9792D01529C7255DFF2052FF1F54FF052CE06264C6FFFFFF00FFFF
+          FFFFFFFF9897D4284BDD3C6FFF3768FF2C5DF64447BBF5F3F9FFFFFF8E89CE03
+          1CC72760FF1E50FF1B51FF051EC5BBBAE000FFFFFFFFFFFF8D8BCE1834D1437B
+          FF4179FF1D32CBB0ACDDFFFFFFFFFFFFFFFFFF6B69C90020D02460FF205BFF0B
+          44FF282BAA00FFFFFFFFFFFFF1F0F97274CF010CAE1337DC4745B7FFFFFFFFFF
+          FFFFFFFFFFFFFFF8F7FC474BC60026DB0016CA1B24B7A1A1DB00FFFFFFFFFFFF
+          FFFFFFFFFFFFF5F4FA7877C6E3E2F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6E5
+          F55F5EC0B3B2DEFEFDFCFFFFFF00}
+      end
+      object btnAddFormToLetter: TBitBtn
+        Left = 131
+        Top = 494
+        Width = 97
+        Height = 28
+        Cursor = crHandPoint
+        Anchors = [akLeft, akBottom]
+        Caption = #1575#1601#1586#1608#1583#1606' '#1576#1607' '#1606#1575#1605#1607
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = btnAddFormToLetterClick
+        Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          20000000000000040000C40E0000C40E00000000000000000000000000000000
+          000000000000000000000000000000000000000000000000000000000000FFFF
+          FFFF30AF3DFF39BD52FF2FAB3DFFFFFFFFFF0000000000000000000000000000
+          0000000000000000000000000000C57208FFA25E07FF0000000000000000FFFF
+          FFFF39BD50FF3CCB4CFF38BA4FFFFFFFFFFF0000000000000000000000000000
+          0000000000000000000000000000B16708FFF7DAB4FFEAD3B2FFFFFFFFFFFFFF
+          FFFF3EC255FF46D257FF39BC50FFFFFFFFFFFFFFFFFFFFFFFFFF000000000000
+          00000000000000000000000000007A4707FFFCE5BEFF67C85DFF55C056FF46C9
+          5DFF54D976FF5AE06DFF48CF69FF39BB50FF37B94EFF2FAB3CFF000000000000
+          0000AB6508FFCE7F1DFFCD8020FFCF8221FFF7D9B0FF54CF68FF64DD77FF6EE9
+          83FF72EF88FF6CED81FF5DE270FF4BD55DFF3ECC4FFF39BD52FF000000000000
+          0000E49F4DFFF9F6C1FFF9F9C5FFF9F9C8FFFCFCE3FF65CE63FF60D16BFF62D2
+          6EFF5CDD7CFF72EF88FF5ADC7AFF5ECB68FF53BB52FF31AF3EFF000000000000
+          0000E8A555FFF9F0B7FFF9F6BCFFF9F9C0FFFCFCDFFFFCFCE1FFFCFCE1FFFCFC
+          E0FF62D26CFF6CE680FF63D06DFFFCF3D8FFEBA556FF00000000AB6508FFCF81
+          20FFE7A252FFF9ECB6FFF9F2BAFFF9CBA1FFECBD99FFECBD99FFECBD99FFF5DD
+          CAFF5EC463FF5ED771FF61CF6AFFFCF2D8FFEBA556FF00000000E49F4DFFF9F6
+          C1FFE9AA5CFFF9E7B5FFF9EDB7FFF9F2BAFFF9F6BCFFF9F8BDFFF9F8BDFFFCFB
+          DCFF68CC62FF55CD65FF67C860FFFCF0D6FFEBA456FF00000000E8A555FFF9F0
+          B7FFE9A85BFFF9F9DEFFF9F5CAFFF9C8A0FFECBD99FFECBD99FFECBD99FFF5DD
+          CAFFF5DDCAFFFCE2CDFFFCF1D6FFFCEFD5FFEBA456FF00000000E8A455FFF9EC
+          B6FFE9A75BFFF9F9F5FFF9F9F9FFF9F9F9FFF9F9EFFFF9F9E0FFF9F9D5FFF9F6
+          CBFFF9F0C2FFF9E7B9FFF9E0B0FFF9DCADFFEBA255FF00000000E8A453FFF9E7
+          B5FFE9A75AFFF9F9F9FFF9F9F9FFF9F9F9FFF9F9F9FFF9F9F8FFF9F9EAFFF9F9
+          DAFFF9F0C8FFF9E4B9FFF9DCAFFFF9D8ACFFEBA255FF00000000E8A253FFF9F9
+          DEFFD8B776FFE7AF76FFE7B47CFFE7B67DFFE7B47BFFE7B378FFE7B176FFE7AE
+          75FFE7AC72FFE7AA6EFFE7A86CFFE7A76AFFAB6508FF00000000E8A153FFF9F9
+          F5FFF9F9F9FFF9F9F9FFF9F9EFFFF9F9E0FFF9F9D5FFF9F6CBFFF9F0C2FFF9E7
+          B9FFF9E0B0FFF9DCADFFEBA255FF000000000000000000000000E8A152FFF9F9
+          F9FFF9F9F9FFF9F9F9FFF9F9F9FFF9F9F8FFF9F9EAFFF9F9DAFFF9F0C8FFF9E4
+          B9FFF9DCAFFFF9D8ACFFEBA255FF000000000000000000000000AB6508FFE7AF
+          76FFE7B47CFFE7B67DFFE7B47BFFE7B378FFE7B176FFE7AE75FFE7AC72FFE7AA
+          6EFFE7A86CFFE7A76AFFAB6508FF000000000000000000000000}
+      end
+    end
+    object xpBitBtn3: TBitBtn
+      Left = 16
+      Top = 547
+      Width = 75
+      Height = 28
+      Cursor = crHandPoint
+      Anchors = [akLeft, akBottom]
+      Caption = #1582#1585#1608#1580
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = xpBitBtn3Click
+      Glyph.Data = {
+        1E060000424D1E06000000000000360000002800000018000000150000000100
+        180000000000E8050000000000000000000000000000000000000D0B038394FF
+        0133F00606AEB7B4DDFFFFFFBEBBE7060EB10005A56D6FCAF9F9F5FFFCE8FFF6
+        E7FFF6E9FFF6E9FFF7E9FFF7E9FFF7E9FFF7E9FFF8E9FFF8E9FFF8E9FFF5E6FF
+        FFFF0B0700858FFF0E4FFF236FFF0008B42E166F161CA70747FF074BFF1C2ECF
+        B5886FFFB428FF9E1AFF9F1DFF9F1DFF9E1CFF9E1CFF9D1CFF9D1BFF9C1AFF9C
+        1AFF9B1DFF9305FFAD32161404C4B4E70012D72C66FF215EFF042AE1103FF019
+        54FF022BDD3B47C4D8D6F6FFFFFFFFF1FFFFF1FFFFEFFFFFEDFFFFEBFFFFE9FF
+        FFE7FFFFE3FFFFE1FBFFDEF9FFEEFFFF93000C0800FFFFD33536B90B2ACF2B67
+        FF245AFF2059FF113DE32826AAC3B9DAFFFAEFFFE7E6FFE4E3FFE3E2FFE1E0FF
+        DFDEFFDAD9FFDAD9FFD8D7FFD5D3FFD2D1FFCDC9FFE3FFFF9A04040000FFFFBF
+        FFFFFF2920881B4CF92A62FF2158FF1532CD776EB2FFFFFFFFF0EDFFEBEBFFE9
+        E9FFE7E7FFE5E5FFE1E1FFDFDFFFDEDEFFDBDBFFD8D8FFD6D6FFD0CEFFE6FFFF
+        9A03050000FFFFC2E7E9FE11159F377BFF2352F11A4BEF1A53F12530C1B9B1D9
+        FFFDF6FFEFEEFFEBEBFFE9E9FFE7E7FFE4E4FFE2E2FFE0E0FFDDDDFFDADAFFD7
+        D7FFD1CFFFE8FFFF9A04050000FFFFCC7F7DDA1233D23470FA2330B93039B810
+        40EA154BEE565AC2EBE4EBFFF9F4FFECEDFFECECFFE9E9FFE6E6FFE4E4FFE1E1
+        FFDEDEFFDBDBFFD8D8FFD3D1FFE9FFFF9A03050000FFFFCF4E50C90734DB1B3C
+        D4857BBFDBD6E53D47C60026E32948D9BEB9DEFFFFFAFFEFEFFFEDEDFFEBEBFF
+        E8E8FFE4E4FFE2E2FFDFDFFFDCDCFFD9D9FFD4D2FFE9FFFF9A03050000FFFFC8
+        B4B6EB3E4BCF3237BDF2EFF9FFFFFFE2DFF3363CCD4251D7D0CEE9FFFFFBFFF2
+        F2FFF0F0FFEDEDFFEAEAFFE6E6FFE4E4FFE1E1FFDEDEFFDADAFFD5D3FFE9FFFF
+        9A02050000FFFFC3FFFFFFDEDBF2B3B1E3FFFFFFFFFFFFFFFFFFEDECF5BFBBE2
+        FBF9F7FFFBF9FFF4F4FFF2F2FFEFEFFFECECFFE8E8FFE5E5FFE2E2FFDFDFFFDC
+        DCFFD6D5FFEBFFFF9B02050000FFFFC4F6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFEFFF9F9FFF6F6FFF3F3FFF0F0FFEDEDFFE9E9FFE6E6
+        FFE3E3FFE0E0FFDDDDFFD7D5FFECFFFF9B03050000FFFFC4F6FCFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFFFBFBFFF7F7FFF4F4FFF1F1FF
+        EDEDFFEAEAFFE7E7FFE4E4FFDFDFFFDDDDFFD7D5FFECFFFF9A03050000FFFFC4
+        F6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFFF7
+        F7FFF4F4FFF2F2FFEDEDFFEBEBFFE8E8FFE5E5FFDFDFFFDEDEFFD8D6FFEDFFFF
+        9A03050000FFFFC4F6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFDFDFFF7F7FFF4F4FFF3F3FFEDEDFFEBEBFFE8E8FFE5E5FFDFDFFFDE
+        DEFFD8D6FFEDFFFF9A03050000FFFFC4F6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFDFDFFF7F7FFF4F4FFF3F2FFEDEDFFEAEAFFE7E7
+        FFE4E4FFDFDFFFDDDDFFD7D6FFEDFFFF9A03050000FFFFC7FCFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFBFDFFF9FAFF
+        F4F4FFF1F2FFEEEFFFEBECFFE6E7FFE4E5FFDFDDFFF3FFFF9A04050000FFFFCA
+        D2E9FFDAE9FBDAE8FBDAE8FBDAE8FBDAE8FBDAE8FBDAE8FBDAE7FADAE6F9DAE1
+        F4DADFF3DADBEFDAD9EBDAD4E8DAD2E5DACFE2DACBDEDAC8DBD9C0D3DBD7FFFD
+        9B09040408FFE66EF98F0BFC9615FB9716FB9716FB9716FB9716FB9716FB9716
+        FB9615FB9615FB9715FB9715FB9614FB9714FB9714FB9613FB9713FB9713FB97
+        12FB9711FB971AFF9700040304FFF391F38800EB7700ED7C00ED7B00ED7B00ED
+        7B00ED7B00ED7B00ED7B00ED7B00ED7C00ED7C00ED7C00ED7C00ED7C00ED7C00
+        ED7C00ED7C00ED7C00EB7C00F18500FF9500040100FFFEB5F9BD8AF5B97CF5BB
+        81F5BB80F5BB80F5BB80F5BB80F5BB80F5BB80F5BB80F5BB80F5BB80F5BB80F5
+        BB80F5BB80F5BB80F5BB80F5BB80F5BB84F5B97CF9A43DFE9D0B04090FFFFFD2
+        FF9805FF9D09FF9E0DFF9E0DFF9E0DFF9E0DFF9E0DFF9E0DFF9E0DFF9E0DFF9E
+        0DFF9E0DFF9E0DFF9E0DFF9E0DFF9E0DFF9E0DFF9E0DFF9F0EFF9B06FF9F13FF
+        E4B9}
+    end
+  end
+  inherited DSForm: TDataSource
+    DataSet = Dm.Get_UserTable
+    Left = 496
+    Top = 224
+  end
+  inherited ActionList: TActionList
+    Left = 680
+    Top = 360
+  end
+  inherited Grid_PopupMenu: TPopupMenu
+    Left = 671
+    Top = 204
+  end
+  object get_userfields_by_tableID: TADOStoredProc
+    Connection = Dm.YeganehConnection
+    CursorType = ctStatic
+    ProcedureName = 'get_userfields_by_tableID;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@tableID'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end>
+    Left = 528
+    Top = 336
+    object get_userfields_by_tableIDID: TAutoIncField
+      FieldName = 'ID'
+      ReadOnly = True
+    end
+    object get_userfields_by_tableIDFieldName: TWideStringField
+      FieldName = 'FieldName'
+      Size = 50
+    end
+    object get_userfields_by_tableIDTableID: TIntegerField
+      FieldName = 'TableID'
+    end
+    object get_userfields_by_tableIDDescription: TWideStringField
+      FieldName = 'Description'
+      Size = 50
+    end
+    object get_userfields_by_tableIDIsWhere: TBooleanField
+      FieldName = 'IsWhere'
+    end
+    object get_userfields_by_tableIDISString: TBooleanField
+      FieldName = 'ISString'
+    end
+    object get_userfields_by_tableIDIsLike: TBooleanField
+      FieldName = 'IsLike'
+    end
+    object get_userfields_by_tableIDEveryLike: TBooleanField
+      FieldName = 'EveryLike'
+    end
+    object get_userfields_by_tableIDVisibleInGrid: TBooleanField
+      FieldName = 'VisibleInGrid'
+    end
+    object get_userfields_by_tableIDisblob: TBooleanField
+      FieldName = 'isblob'
+    end
+    object get_userfields_by_tableIDFieldTypeID: TIntegerField
+      FieldName = 'FieldTypeID'
+    end
+    object get_userfields_by_tableIDReferenceTableID: TIntegerField
+      FieldName = 'ReferenceTableID'
+    end
+    object get_userfields_by_tableIDorder: TIntegerField
+      FieldName = 'order'
+    end
+    object get_userfields_by_tableIDFieldGroupID: TIntegerField
+      FieldName = 'FieldGroupID'
+    end
+    object get_userfields_by_tableIDisboolean: TBooleanField
+      FieldName = 'isboolean'
+    end
+  end
+  object QInsertSelectedFormsToLetter: TADOQuery
+    Connection = Dm.YeganehConnection
+    Parameters = <
+      item
+        Name = 'LetterID'
+        Attributes = [paSigned, paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end
+      item
+        Name = 'FormID'
+        Attributes = [paSigned, paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end
+      item
+        Name = 'UserID'
+        Attributes = [paSigned, paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      'INSERT INTO letterForms(LetterID,FormID,UserID)'
+      'VALUES(:LetterID , :FormID , :UserID )')
+    Left = 144
+    Top = 56
+  end
+  object Insert_TableAccess: TADOStoredProc
+    Connection = Dm.YeganehConnection
+    ProcedureName = 'Insert_TableAccess;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end>
+    Left = 416
+    Top = 224
+  end
+  object sp_get_userTable_by_UserID: TADOStoredProc
+    Connection = Dm.YeganehConnection
+    ProcedureName = 'get_userTable_by_UserID;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@userID'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@like'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        Size = 100
+        Value = Null
+      end>
+    Left = 232
+    Top = 240
+    object sp_get_userTable_by_UserIDTableId: TIntegerField
+      FieldName = 'TableId'
+    end
+    object sp_get_userTable_by_UserIDTableName: TWideStringField
+      FieldName = 'TableName'
+      Size = 50
+    end
+    object sp_get_userTable_by_UserIDDescription: TWideStringField
+      FieldName = 'Description'
+      Size = 50
+    end
+    object sp_get_userTable_by_UserIDTableType: TWordField
+      FieldName = 'TableType'
+    end
+    object sp_get_userTable_by_UserIDTableCode: TStringField
+      FieldName = 'TableCode'
+      Size = 50
+    end
+    object sp_get_userTable_by_UserIDUserField1: TWideStringField
+      FieldName = 'UserField1'
+      Size = 50
+    end
+    object sp_get_userTable_by_UserIDUserField2: TWideStringField
+      FieldName = 'UserField2'
+      Size = 50
+    end
+    object sp_get_userTable_by_UserIDhasAccess: TBooleanField
+      FieldName = 'hasAccess'
+    end
+    object sp_get_userTable_by_UserIDAccessName: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'AccessName'
+      Size = 5
+      Calculated = True
+    end
+  end
+end

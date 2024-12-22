@@ -1,0 +1,65 @@
+BEGIN TRANSACTION
+GO
+
+ALTER TRIGGER [dbo].[trgManageActionColors] 
+   ON  [dbo].[DefineColors] 
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Color VARCHAR(50) , @OldColor VARCHAR(50) , @AccessDesc VARCHAR(200),
+			@ColorID INT			
+	
+	IF EXISTS(SELECT ID FROM INSERTED)
+	BEGIN
+		IF NOT EXISTS(SELECT ID FROM DELETED)
+		BEGIN
+			/*-- Insert */
+			SELECT @Color=Color,@AccessDesc=LTRIM(RTRIM(AccessDesc)) FROM INSERTED
+			SET @Color='ac'+@Color 		  			  			
+			IF NOT EXISTS( SELECT * FROM Actions WHERE ActionName= @Color)
+			BEGIN
+				IF LEN(@AccessDesc)<=0 SET @AccessDesc='فاقد شرح دسترسي در جدول تعريف رنگ ها مي باشد'
+				INSERT INTO Actions (FormTag,ActionName,Title)
+				VALUES(9,@Color,@AccessDesc)	
+			END 			 			
+		END
+		ELSE
+		BEGIN
+			/*-- Update */
+			SELECT @Color=Color,@AccessDesc=LTRIM(RTRIM(AccessDesc)) FROM INSERTED
+			SET @Color='ac'+@Color
+			IF LEN(@AccessDesc)<=0 SET @AccessDesc='فاقد شرح دسترسي در جدول تعريف رنگ ها مي باشد'  			 			
+			SELECT @OldColor=Color FROM DELETED
+			SET @OldColor='ac'+@OldColor
+			ALTER TABLE Actions DISABLE TRIGGER ALL
+			UPDATE Actions
+			SET	ActionName = @Color,
+				Title = @AccessDesc
+			WHERE ActionName=@OldColor 	
+			ALTER TABLE Actions ENABLE TRIGGER ALL
+		END	 		
+	END
+	ELSE
+	BEGIN
+		/*-- Delete */
+		SELECT @OldColor=Color,@ColorID=ID FROM DELETED
+		SET @OldColor='ac'+@OldColor 		
+		IF EXISTS( SELECT LetterDataID FROM LetterData WHERE ColorID=@ColorID )
+		BEGIN
+			RAISERROR('اين رنگ به برخي پيوست ها انتصاب داده شده است امکان حذف نداريد',16,10)
+			ROLLBACK
+			RETURN
+		END
+		ELSE
+		BEGIN
+ 			ALTER TABLE Actions DISABLE TRIGGER ALL
+			DELETE FROM Actions WHERE ActionName=@OldColor
+			ALTER TABLE Actions ENABLE TRIGGER ALL 			
+		END	 		
+	END		
+END
+GO
+
+COMMIT
+GO

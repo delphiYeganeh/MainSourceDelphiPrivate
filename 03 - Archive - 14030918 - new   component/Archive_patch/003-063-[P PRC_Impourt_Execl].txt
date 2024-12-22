@@ -1,0 +1,300 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PRC_Impourt_Execl]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PRC_Impourt_Execl]
+END
+GO
+
+CREATE  procedure [dbo].[PRC_Impourt_Execl]
+(
+   @SecretariatsID int = 1,
+   @Path nvarchar(500) = 'D:\bafgh\hesab\xlsx conv\anbar.xlsx'
+)
+AS
+
+  IF @SecretariatsID < 1 
+    Set @SecretariatsID = 1
+
+/* **************************************************شروع خواندن از اکسل******************************************************** */
+DECLARE @w nvarchar(max)
+
+DECLARE @sql nvarchar(max)
+
+CREATE TABLE  #temptable
+(
+   f1  nvarchar(max)  NULL,
+   f2  nvarchar(max)  NULL,
+   f3  nvarchar(max)  NULL,
+   f4  nvarchar(max)  NULL,
+   f5  nvarchar(max)  NULL,
+   f6  nvarchar(max)  NULL,
+   f7  nvarchar(max)  NULL,
+   f8  nvarchar(max)  NULL,
+   f9  nvarchar(max)  NULL,
+   f10 nvarchar(max)  NULL,
+   f11 nvarchar(max)  NULL,
+   f12 nvarchar(max)  NULL,
+   f13 nvarchar(max)  NULL,
+   f14 nvarchar(max)  NULL,
+   f15 nvarchar(max)  NULL,
+   f16 nvarchar(max)  NULL,
+   f17 nvarchar(max)  NULL,
+   f18 nvarchar(max)  NULL,
+   f19 nvarchar(max)  NULL,
+   f20 nvarchar(max)  NULL,
+   f21 nvarchar(max)  NULL,
+   f22 nvarchar(max)  NULL,
+   f23 nvarchar(max)  NULL,
+   f24 nvarchar(max)  NULL,
+   f25 nvarchar(max)  NULL,
+   f26 nvarchar(max)  NULL,
+   f27 nvarchar(max)  NULL,
+   f28 nvarchar(max)  NULL,
+   f29 nvarchar(max)  NULL,
+   f30 nvarchar(max)  NULL,
+   f31 nvarchar(max)  NULL,
+   f32 nvarchar(max)  NULL,
+   f33 nvarchar(max)  NULL
+   )
+
+SET @sql = '
+SELECT *
+FROM OPENROWSET(''Microsoft.ACE.OLEDB.12.0'', ''Excel 12.0 Xml;HDR=YES;IMEX=1;Database=' + ''+ @path +'''' +','+ '''SELECT * FROM [Sheet1$]''' +')' 
+
+INSERT INTO #temptable
+EXEC SP_EXECUTESQL  @sql  
+
+ALTER TABLE letter ALTER COLUMN MYear nvarchar(50)
+
+/* *************************************************شروع حذف برای درج مجدد رکورد ها******************************************* */
+
+DELETE FROM TbExcel
+WHERE IDNumber In(
+                   SELECT DISTINCT IDNumber  
+				   FROM TbExcel
+                   WHERE f1 IN(
+								SELECT DISTINCT f1 
+								FROM #temptable
+								WHERE ISNULL(f33,0) = 0
+                              )
+                 )
+/* *************************************************پایان حذف برای درج مجدد رکورد ها****************************************** */
+
+
+/* **************************************************پایان خواندن از اکسل****************************************************** */
+DECLARE @IDNumber int	 
+SET @IDNumber = (SELECT MAX(ISNULL(IDNumber,0))+ 1 FROM TbExcel ) 
+/* **************************************************شروع درج در جدول انتقال اکسل********************************************* */
+	DECLARE @LetterID_Insert int
+    DECLARE @TbExcelID_Insert int 
+
+INSERT INTO [dbo].[TbExcel]
+           ([LetterID]
+           ,[F1]
+           ,[F2]
+           ,[F3]
+           ,[F4]
+           ,[F5]
+           ,[F6]
+           ,[F7]
+           ,[F8]
+           ,[F9]
+           ,[F10]
+           ,[F11]
+           ,[F12]
+           ,[F13]
+           ,[F14]
+           ,[F15]
+           ,[F16]
+           ,[F17]
+           ,[F18]
+           ,[F19]
+           ,[F20]
+           ,[F21]
+           ,[F22]
+           ,[F23]
+           ,[F24]
+           ,[F25]
+           ,[F26]
+           ,[F27]
+           ,[F28]
+           ,[F29]
+           ,[F30]
+           ,[F31]
+           ,[F32]
+           ,[F33]
+		   ,IDNumber)
+SELECT 
+   b.LetterID,
+   a.f1,
+   a.f2,
+   a.f3,
+   a.f4,
+   a.f5,
+   a.f6,
+   a.f7,
+   a.f8,
+   a.f9,
+   a.f10,
+   a.f11,
+   a.f12,
+   a.f13,
+   a.f14,
+   a.f15,
+   a.f16,
+   a.f17,
+   a.f18,
+   a.f19,
+   a.f20,
+   a.f21,
+   a.f22,
+   a.f23,
+   a.f24,
+   a.f25,
+   a.f26,
+   a.f27,
+   a.f28,
+   a.f29,
+   a.f30,
+   a.f31,
+   a.f32,
+   a.f33,
+   @IDNumber
+FROM #temptable a 
+LEFT JOIN letter b
+  ON  a.f1 = b.IncommingNO
+  AND a.f8 = MYear
+/* **************************************************پایان درج در جدول انتقال اکسل******************************************** */
+
+/* ************************************************** شروع درج نامه های که در جدول letter وجود ندارند************************* */
+
+INSERT INTO [dbo].[Letter]
+           (
+             [IncommingNO]
+	  	    ,[MYear]
+			,SecretariatID
+			,IndicatorID
+			,RegistrationDate
+			,RegistrationTime
+           )
+ 	SELECT 
+		F1 AS ShonarehSanad,
+		F8  AS Myear,
+		@SecretariatsID,
+		(select ISNULL(Max(indicatorID),0)+1 FROM Letter WHERE MYear = b.f8 and SecretariatID = @SecretariatsID ),
+		( Select dbo.Shamsi(GETDATE()) ) ,
+		(SELECT SUBSTRING( CONVERT(VARCHAR(8), getdate(), 108) , 1,5 ))
+	FROM TbExcel b
+	WHERE ISNULL(F33,0) = 0
+	AND DateModify IS NULL
+	AND LetterID IS NULL
+	AND IDNumber = @IDNumber
+	GROUP BY f1,F8
+
+	DECLARE cur CURSOR FOR
+	SELECT
+			b.LetterID,
+			a.id 
+	FROM TbExcel a
+	INNER JOIN Letter b
+		ON a.F1 = b.IncommingNO
+		AND a.F8 = b.MYear
+		AND b.SecretariatID = @SecretariatsID
+	WHERE ISNULL(F33,0) = 0
+	AND DateModify IS NULL
+	AND a.LetterID IS NULL
+	AND IDNumber = @IDNumber
+	
+OPEN  cur  
+FETCH NEXT FROM cur 
+INTO @LetterID_Insert,@TbExcelID_Insert
+
+WHILE @@FETCH_STATUS = 0  
+BEGIN
+	UPDATE TbExcel
+	SET LetterID = @LetterID_Insert
+	WHERE ID  = @TbExcelID_Insert
+
+FETCH NEXT FROM cur 
+INTO @LetterID_Insert,@TbExcelID_Insert
+END   
+CLOSE cur 
+DEALLOCATE cur 
+
+/* ************************************************** پایان درج نامه های که در جدول letter وجود ندارند*************************** */
+
+
+/* ************************************************** شروع بروز رسانی برای نامه موجود در سیستم********************************* */
+DECLARE @TbExcelID      int
+DECLARE @LetterID      int
+DECLARE @ShonarehSanad nvarchar(500)
+DECLARE @TarikheSanad  nvarchar(500)
+DECLARE @SharheKhat    nvarchar(500)
+DECLARE @KholaseSanad  nvarchar(500)
+DECLARE @MKarBari1     nvarchar(500)
+DECLARE @MKarBari2     nvarchar(500)
+DECLARE @MKarBari3     nvarchar(500)
+DECLARE @Myear         nvarchar(500)
+
+DECLARE vend_cursor CURSOR FOR
+
+	SELECT 
+	    ID AS TbExcelID,
+		LetterID AS LetterID,
+		F1 AS ShonarehSanad,
+		F2 AS TarikheSanad,
+		F3 AS SharheKhat,
+		F4 AS KholaseSanad,
+		F5 AS MKarBari1,
+		F6 AS MKarBari2,
+		F7 AS MKarBari3,
+		F8 AS Myear
+	FROM TbExcel
+	WHERE ISNULL(F33,0) = 0
+	AND DateModify IS NULL
+	AND LetterID IS NOT NULL
+
+OPEN  vend_cursor  
+FETCH NEXT FROM vend_cursor 
+INTO @TbExcelID,@LetterID,@ShonarehSanad,@TarikheSanad,@SharheKhat,
+     @KholaseSanad,@MKarBari1,@MKarBari2,@MKarBari3,@Myear         
+
+WHILE @@FETCH_STATUS = 0  
+BEGIN
+    
+	UPDATE Letter
+	SET IncommingNO   =  @ShonarehSanad
+	,   Incommingdate =  @TarikheSanad
+	,   [Subject]     =  @SharheKhat
+	,   Memo          =  @KholaseSanad
+	,   UserMemo      =  @MKarBari1
+	,   UserMemo1     =  @MKarBari2              
+	,   UserMemo2     =  @MKarBari3
+	,   MYear         =  @Myear
+	WHERE LetterID = @LetterID
+
+	UPDATE TbExcel
+	SET DateModify = Getdate()
+	WHERE ID = @TbExcelID 
+
+    FETCH NEXT FROM vend_cursor   
+    INTO @TbExcelID,@LetterID,@ShonarehSanad,@TarikheSanad,@SharheKhat,
+         @KholaseSanad,@MKarBari1,@MKarBari2,@MKarBari3,@Myear         
+END   
+CLOSE vend_cursor  
+DEALLOCATE vend_cursor  
+
+ALTER TABLE letter ALTER COLUMN MYear int
+
+/* ************************************************** پایان بروز رسانی برای نامه موجود در سیستم******************************** */
+
+DROP TABLE #temptable 
+
+GO
+
+COMMIT
+GO

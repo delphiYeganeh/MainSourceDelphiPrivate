@@ -1,0 +1,168 @@
+inherited VersionEditFrom: TVersionEditFrom
+  Left = 383
+  Top = 200
+  Width = 385
+  Height = 217
+  Caption = #1608#1610#1585#1575#1610#1588' '#1575#1591#1604#1575#1593#1575#1578
+  Constraints.MaxHeight = 217
+  Constraints.MinHeight = 217
+  Constraints.MinWidth = 370
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlMain: TPanel [0]
+    Left = 0
+    Top = 0
+    Width = 369
+    Height = 178
+    Align = alClient
+    ParentColor = True
+    TabOrder = 0
+    DesignSize = (
+      369
+      178)
+    object Label3: TLabel
+      Left = 280
+      Top = 101
+      Width = 81
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1578#1575#1585#1610#1582' '#1608#1610#1585#1575#1610#1588' '#1587#1606#1583
+    end
+    object Label2: TLabel
+      Left = 271
+      Top = 53
+      Width = 90
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1588#1605#1575#1585#1607' '#1608#1610#1585#1575#1610#1588' '#1587#1606#1583
+    end
+    object Label1: TLabel
+      Left = 302
+      Top = 5
+      Width = 59
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1588#1585#1581' '#1662#1610#1608#1587#1578
+    end
+    object output: TEdit
+      Left = 16
+      Top = 18
+      Width = 348
+      Height = 24
+      Anchors = [akLeft, akTop, akRight]
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+    end
+    object MaskEdit1: TMaskEdit
+      Left = 16
+      Top = 118
+      Width = 350
+      Height = 21
+      Anchors = [akLeft, akTop, akRight]
+      EditMask = '!9999/99/00;1;_'
+      MaxLength = 10
+      TabOrder = 1
+      Text = '    /  /  '
+    end
+    object Edit1: TEdit
+      Left = 16
+      Top = 68
+      Width = 348
+      Height = 24
+      Anchors = [akLeft, akTop, akRight]
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+    end
+    object BitBtn2: TAdvGlowButton
+      Left = 207
+      Top = 148
+      Width = 75
+      Height = 25
+      Anchors = [akTop, akRight]
+      Cancel = True
+      Caption = #1575#1606#1589#1585#1575#1601
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ImageIndex = 1
+      Images = Dm.ImageList_MainNew
+      NotesFont.Charset = DEFAULT_CHARSET
+      NotesFont.Color = clWindowText
+      NotesFont.Height = -11
+      NotesFont.Name = 'Tahoma'
+      NotesFont.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = BitBtn2Click
+      Appearance.ColorChecked = 16111818
+      Appearance.ColorCheckedTo = 16367008
+      Appearance.ColorDisabled = 15921906
+      Appearance.ColorDisabledTo = 15921906
+      Appearance.ColorDown = 16111818
+      Appearance.ColorDownTo = 16367008
+      Appearance.ColorHot = 16117985
+      Appearance.ColorHotTo = 16372402
+      Appearance.ColorMirrorHot = 16107693
+      Appearance.ColorMirrorHotTo = 16775412
+      Appearance.ColorMirrorDown = 16102556
+      Appearance.ColorMirrorDownTo = 16768988
+      Appearance.ColorMirrorChecked = 16102556
+      Appearance.ColorMirrorCheckedTo = 16768988
+      Appearance.ColorMirrorDisabled = 11974326
+      Appearance.ColorMirrorDisabledTo = 15921906
+    end
+    object BitBtn1: TAdvGlowButton
+      Left = 287
+      Top = 148
+      Width = 75
+      Height = 25
+      Anchors = [akTop, akRight]
+      Caption = #1578#1575#1610#1610#1583
+      Default = True
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ImageIndex = 59
+      Images = Dm.ImageList_MainNew
+      NotesFont.Charset = DEFAULT_CHARSET
+      NotesFont.Color = clWindowText
+      NotesFont.Height = -11
+      NotesFont.Name = 'Tahoma'
+      NotesFont.Style = []
+      ParentFont = False
+      TabOrder = 4
+      OnClick = BitBtn1Click
+      Appearance.ColorChecked = 16111818
+      Appearance.ColorCheckedTo = 16367008
+      Appearance.ColorDisabled = 15921906
+      Appearance.ColorDisabledTo = 15921906
+      Appearance.ColorDown = 16111818
+      Appearance.ColorDownTo = 16367008
+      Appearance.ColorHot = 16117985
+      Appearance.ColorHotTo = 16372402
+      Appearance.ColorMirrorHot = 16107693
+      Appearance.ColorMirrorHotTo = 16775412
+      Appearance.ColorMirrorDown = 16102556
+      Appearance.ColorMirrorDownTo = 16768988
+      Appearance.ColorMirrorChecked = 16102556
+      Appearance.ColorMirrorCheckedTo = 16768988
+      Appearance.ColorMirrorDisabled = 11974326
+      Appearance.ColorMirrorDisabledTo = 15921906
+    end
+  end
+end

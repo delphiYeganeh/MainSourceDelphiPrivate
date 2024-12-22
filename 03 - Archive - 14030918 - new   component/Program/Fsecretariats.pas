@@ -1,0 +1,107 @@
+unit Fsecretariats;
+
+interface
+
+uses
+   YDbgrid, BaseUnit, ActnMan, Controls, Grids, DBGrids, Buttons, SysUtils,Classes,
+  ActnList, DB, StdCtrls, ExtActns, XPStyleActnCtrls,DIALOGS, xpWindow,
+  xpBitBtn, ADODB, ExtCtrls, Menus, AdvGlowButton;
+
+type
+  TFEditSecs = class(TMBaseForm)
+    ActionManager: TActionManager;
+    Action1: TAction;
+    Action2: TAction;
+    QrDelUserSec: TADOQuery;
+    Panel1: TPanel;
+    BitBtn1: TAdvGlowButton;
+    Button1: TAdvGlowButton;
+    Button2: TAdvGlowButton;
+    Button3: TAdvGlowButton;
+    Panel2: TPanel;
+    DBGrid2: TYDBGrid;
+    pnlMain: TPanel;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure Action1Execute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    Modale : Boolean;
+  end;
+
+var
+  FEditSecs: TFEditSecs;
+
+implementation
+
+uses Dmu, businessLayer, UAddSecretariat,YShamsiDate, Forms;
+
+{$R *.dfm}
+
+procedure TFEditSecs.BitBtn1Click(Sender: TObject);
+begin
+   inherited;
+   Close;
+end;
+
+procedure TFEditSecs.Action1Execute(Sender: TObject);
+begin
+   inherited;
+   Close;
+end;
+
+procedure TFEditSecs.FormCreate(Sender: TObject);
+begin
+   inherited;
+   DBGrid2.Color := Dm.GetValue(1009);
+end;
+
+procedure TFEditSecs.Button1Click(Sender: TObject);
+begin
+   inherited;
+   With Dm , Secretariats do
+   begin
+      Insert;
+      FrAddSecretariat := TFrAddSecretariat.Create(Self);
+      FrAddSecretariat.ShowModal;
+      if Modale = True then  //Ranjbar
+         MessageShowString('·ÿ›« œ” —”Ì »Â «Ì‰ œ› — »«Ìê«‰Ì —« œ— ﬁ”„   ⁄—Ì› ò«—»— »Â ò«—»—«‰ „—»ÊÿÂ «Œ ’«’ œÂÌœ',false);
+   end;
+end;
+
+
+procedure TFEditSecs.Button2Click(Sender: TObject);
+var i: integer;
+begin
+   inherited;
+   if MBaseForm.MessageShowString('¬Ì« „«Ì· »Â Õ–› œ»Ì—Œ«‰Â Â” Ìœø', True) = False then
+      Exit;
+
+   i := Exec_NumberOfLetter_By_SecID(dm.SecretariatsSecID.AsInteger);
+   if i > 0 then
+      MessageShowString(inttostr(i) + '  ' + Get_sysAppMessage(84),false)
+   else
+      begin
+         {Ranjbar Õ–› œ»Ì—Œ«‰Â Â«Ì ﬁ«»· œ” —”Ì  Ê”ÿ ﬂ«—»—«‰}
+         Qry_SetResult('Delete UserSecretariats Where SecID = ' + dm.SecretariatsSecID.AsString ,Dm.YeganehConnection);
+         //---
+         Dm.Secretariats.Delete;
+      end;
+end;
+
+procedure TFEditSecs.Button3Click(Sender: TObject);
+begin
+   inherited;
+   With  dm,secretariats do
+   begin
+      Edit;
+      FrAddSecretariat := TFrAddSecretariat.Create(self);
+      FrAddSecretariat.ShowModal;
+   end;
+end;
+
+end.

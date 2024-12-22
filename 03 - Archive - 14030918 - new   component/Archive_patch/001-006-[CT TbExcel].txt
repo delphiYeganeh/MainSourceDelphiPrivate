@@ -1,0 +1,51 @@
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'TbExcel')
+BEGIN
+	CREATE TABLE [dbo].[TbExcel]
+	(
+	[ID] [int] NOT NULL IDENTITY(1, 1),
+	[LetterID] [int] NULL,
+	[F1] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F2] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F3] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F4] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F5] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F6] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F7] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F8] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F9] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F10] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F11] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F12] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F13] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F14] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F15] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F16] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F17] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F18] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F19] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F20] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F21] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F22] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F23] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F24] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F25] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F26] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F27] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F28] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F29] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F30] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F31] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F32] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[F33] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL,
+	[DateModify] [datetime] NULL,
+	[IDNumber] [int] NULL
+	)
+END
+GO
+COMMIT
+GO

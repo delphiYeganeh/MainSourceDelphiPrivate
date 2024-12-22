@@ -1,0 +1,10 @@
+BEGIN TRANSACTION
+GO
+
+Update Letter
+	Set MYear = 1300 + MYear
+	Where MYear < 100
+GO
+
+COMMIT
+GO	

@@ -1,0 +1,22 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Prc_latererdata]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Prc_latererdata]
+END
+GO
+
+CREATE PROC [dbo].[Prc_latererdata]
+(
+  @LetterDataID  INT   
+)
+AS
+
+	Select * From  LetterData Where LetterDataID = @LetterDataID
+GO
+
+COMMIT
+GO

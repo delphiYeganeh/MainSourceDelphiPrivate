@@ -1,0 +1,133 @@
+inherited BackupRestore: TBackupRestore
+  Left = 353
+  Top = 146
+  ActiveControl = EPath
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = #1578#1607#1610#1607' '#1606#1587#1582#1607' '#1662#1588#1578#1610#1576#1575#1606
+  ClientHeight = 114
+  ClientWidth = 561
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Lpath: TLabel [0]
+    Left = 457
+    Top = 18
+    Width = 89
+    Height = 13
+    Anchors = [akTop, akRight]
+    Caption = #1605#1587#1610#1585' '#1601#1575#1610#1604' '#1662#1588#1578#1610#1576#1575#1606
+  end
+  object Getdir: TSpeedButton [1]
+    Left = 429
+    Top = 13
+    Width = 22
+    Height = 22
+    Cursor = crHandPoint
+    Anchors = [akTop, akRight]
+    Caption = '...'
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    OnClick = GetdirClick
+  end
+  object StaticText1: TLabel [2]
+    Left = 196
+    Top = 72
+    Width = 189
+    Height = 13
+    Anchors = [akTop, akRight]
+    Caption = #1575#1610#1606' '#1593#1605#1604' '#1585#1575' '#1585#1608#1610' '#1705#1575#1605#1662#1610#1608#1578#1585' '#1587#1585#1608#1585' '#1575#1606#1580#1575#1605' '#1583#1607#1610#1583
+  end
+  object EPath: TEdit [3]
+    Left = 10
+    Top = 14
+    Width = 414
+    Height = 21
+    Anchors = [akTop, akRight]
+    BiDiMode = bdLeftToRight
+    ParentBiDiMode = False
+    ParentColor = True
+    TabOrder = 0
+    OnChange = EPathChange
+    OnEnter = EPathEnter
+    OnExit = EPathExit
+  end
+  object BitBtn1: TBitBtn [4]
+    Left = 200
+    Top = 44
+    Width = 75
+    Height = 25
+    Cursor = crHandPoint
+    Anchors = [akTop, akRight]
+    Caption = #1578#1575#1610#1610#1583
+    Default = True
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnClick = BitBtn1Click
+    Glyph.Data = {
+      06030000424D06030000000000003600000028000000100000000F0000000100
+      180000000000D002000000000000000000000000000000000000008080008080
+      0080800080808000008000000080800080800080800080800080800080800080
+      8000808000808000808000808000808000808080000000800000800080000000
+      8080008080008080008080008080008080008080008080008080008080008080
+      8000000080000080000080000080008000000080800080800080800080800080
+      8000808000808000808000808080000000800000800000800000800000800000
+      8000800000008080008080008080008080008080008080008080800000008000
+      00800000800000FF000080000080000080000080008000000080800080800080
+      8000808000808000808000800000800000800000FF0000808000808000800000
+      800000800080000000808000808000808000808000808000808000FF00008000
+      00FF0000808000808000808000FF000080000080000080008000000080800080
+      8000808000808000808000808000FF0000808000808000808000808000808000
+      FF00008000008000008000800000008080008080008080008080008080008080
+      00808000808000808000808000808000808000FF000080000080000080008000
+      0000808000808000808000808000808000808000808000808000808000808000
+      808000808000FF00008000008000008000800000008080008080008080008080
+      00808000808000808000808000808000808000808000808000FF000080000080
+      0000800080000000808000808000808000808000808000808000808000808000
+      808000808000808000808000FF00008000008000008000800000008080008080
+      00808000808000808000808000808000808000808000808000808000808000FF
+      0000800000800080000000808000808000808000808000808000808000808000
+      808000808000808000808000808000808000FF00008000008000008080008080
+      0080800080800080800080800080800080800080800080800080800080800080
+      8000808000FF00008080}
+  end
+  object ProgressBar1: TProgressBar [5]
+    Left = 0
+    Top = 98
+    Width = 561
+    Height = 16
+    Align = alBottom
+    TabOrder = 2
+  end
+  inherited DSForm: TDataSource
+    Left = 128
+  end
+  inherited Grid_PopupMenu: TPopupMenu
+    Left = 351
+    Top = 44
+  end
+  object ActionManager: TActionManager
+    Images = Dm.LetterImages
+    Left = 144
+    Top = 8
+    StyleName = 'XP Style'
+    object Aclose: TAction
+      Caption = 'Aclose'
+      ShortCut = 27
+      OnExecute = AcloseExecute
+    end
+  end
+  object OpenDialog: TTntOpenDialog
+    Left = 48
+    Top = 48
+  end
+end

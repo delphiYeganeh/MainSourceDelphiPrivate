@@ -1,0 +1,36 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[sp_dailyRep]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[sp_dailyRep]
+END
+GO
+
+CREATE  PROCEDURE [dbo].[sp_dailyRep]
+@myear tinyint,@bdate char(10),@edate char(10),@where nvarchar(1000)
+as
+declare @sql nvarchar (4000)
+
+SET @sql='select  1 AS MY , 0 AS SORT_INT, U.UserName AS USER_NAME,l.*,
+lettertypes.title ReceiveMode ,lETTERrecommites rECOMMITES,TTO.title toorgtitle
+FROM Letter L 
+left JOIN fromOrganizations TTO ON TTO.ID = l.ToOrgID 
+LEFT JOIN LETTERTYPES on lettertypes.id=l.letter_type
+INNER JOIN dbo.Users U ON l.UserID = U.Id
+WHERE   (L.RegistrationDaTE between '''+@bdate+''' and '''+@edate+''')'
+
+
+
+set @where=isnull(ltrim(rtrim(@where)),'')
+if @where<>''
+select @sql=@sql+' and  '+@where
+
+set @sql=@sql+' order by 1 desc'
+exec(@sql)
+GO
+
+COMMIT
+GO

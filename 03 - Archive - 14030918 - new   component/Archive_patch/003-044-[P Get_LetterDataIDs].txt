@@ -1,0 +1,21 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_LetterDataIDs]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_LetterDataIDs]
+END
+GO
+
+CREATE proc [dbo].[Get_LetterDataIDs](@SecretariatID int, @myear int)
+as
+SELECT     LetterData.LetterDataID  
+FROM         LetterData 
+INNER JOIN       Letter ON LetterData.LetterID = Letter.LetterID
+WHERE     (Letter.SecretariatID = @SecretariatID) AND (Letter.MYear = @myear)
+GO
+
+COMMIT
+GO

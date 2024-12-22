@@ -1,0 +1,305 @@
+object Form_WorkGroupFM: TForm_WorkGroupFM
+  Left = 690
+  Top = 253
+  Width = 574
+  Height = 755
+  BiDiMode = bdRightToLeft
+  Caption = 'Dm'
+  Color = clBtnFace
+  Font.Charset = ARABIC_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  ParentBiDiMode = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel3: TPanel
+    Left = 0
+    Top = 676
+    Width = 558
+    Height = 41
+    Align = alBottom
+    TabOrder = 0
+    object BitBtn1: TBitBtn
+      Left = 10
+      Top = 8
+      Width = 75
+      Height = 25
+      Cursor = crHandPoint
+      Caption = #1582#1585#1608#1580
+      TabOrder = 0
+      Kind = bkClose
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 309
+    Width = 558
+    Height = 367
+    Align = alBottom
+    TabOrder = 1
+    DesignSize = (
+      558
+      367)
+    object Label1: TLabel
+      Left = 409
+      Top = 85
+      Width = 142
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1578#1593#1610#1610#1606' '#1593#1590#1608#1607#1575#1610' '#1610#1705' '#1711#1585#1608#1607' '#1705#1575#1585#1610' :'
+    end
+    object Label_AllRec: TLabel
+      Left = 11
+      Top = 344
+      Width = 6
+      Height = 13
+      Caption = '0'
+    end
+    object Label_Grid: TLabel
+      Left = 294
+      Top = 344
+      Width = 6
+      Height = 13
+      Caption = '0'
+    end
+    object Edit1: TEdit
+      Left = 356
+      Top = 104
+      Width = 193
+      Height = 21
+      TabOrder = 0
+      Text = #1580#1607#1578' '#1580#1587#1578#1580#1608' '#1606#1575#1605' '#1610#1575' '#1587#1605#1578' '#1585#1575' '#1608#1575#1585#1583' '#1705#1606#1610#1583
+      OnChange = Edit1Change
+      OnClick = Edit1Click
+    end
+    object Button1: TButton
+      Left = 275
+      Top = 102
+      Width = 75
+      Height = 25
+      Caption = #1584#1582#1610#1585#1607
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+    object ListBox1: TListBox
+      Left = 4
+      Top = 144
+      Width = 273
+      Height = 201
+      ItemHeight = 13
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnDblClick = ListBox1DblClick
+    end
+    object DBGrid1: TDBGrid
+      Left = 284
+      Top = 144
+      Width = 265
+      Height = 201
+      DataSource = DataSource2
+      TabOrder = 3
+      TitleFont.Charset = ARABIC_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      OnDblClick = DBGrid1DblClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'Title'
+          Title.Caption = #1587#1605#1578#1607#1575
+          Width = 250
+          Visible = True
+        end>
+    end
+    object ListBox2: TListBox
+      Left = 576
+      Top = 120
+      Width = 225
+      Height = 201
+      ItemHeight = 13
+      TabOrder = 4
+      OnDblClick = ListBox1DblClick
+    end
+    object Panel5: TPanel
+      Left = 1
+      Top = 1
+      Width = 556
+      Height = 80
+      Align = alTop
+      TabOrder = 5
+      DesignSize = (
+        556
+        80)
+      object Label2: TLabel
+        Left = 508
+        Top = 34
+        Width = 47
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1578#1608#1590#1610#1581#1575#1578' :'
+      end
+      object Label3: TLabel
+        Left = 500
+        Top = 8
+        Width = 56
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1593#1606#1608#1575#1606' '#1711#1585#1608#1607' :'
+      end
+      object DBEDescript: TDBEdit
+        Left = 7
+        Top = 34
+        Width = 494
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        Ctl3D = True
+        DataField = 'Descript'
+        DataSource = DataSource1
+        ParentCtl3D = False
+        TabOrder = 0
+      end
+      object DBETitle: TDBEdit
+        Left = 270
+        Top = 8
+        Width = 231
+        Height = 21
+        Anchors = [akTop, akRight]
+        DataField = 'Title'
+        DataSource = DataSource1
+        TabOrder = 1
+      end
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 558
+    Height = 32
+    Align = alTop
+    BevelOuter = bvNone
+    Ctl3D = True
+    ParentCtl3D = False
+    TabOrder = 2
+    object Button2: TButton
+      Left = 359
+      Top = 6
+      Width = 75
+      Height = 25
+      Caption = #1580#1583#1610#1583
+      TabOrder = 0
+      OnClick = Button2Click
+    end
+    object Button3: TButton
+      Left = 255
+      Top = 7
+      Width = 75
+      Height = 25
+      Caption = #1608#1610#1585#1575#1610#1588
+      TabOrder = 1
+      OnClick = Button3Click
+    end
+    object Button4: TButton
+      Left = 151
+      Top = 7
+      Width = 75
+      Height = 25
+      Caption = #1575#1606#1589#1585#1575#1601
+      TabOrder = 2
+    end
+  end
+  object Panel4: TPanel
+    Left = 0
+    Top = 32
+    Width = 558
+    Height = 277
+    Align = alClient
+    TabOrder = 3
+    object YDBGrid1: TYDBGrid
+      Left = 1
+      Top = 1
+      Width = 556
+      Height = 275
+      Cursor = crHandPoint
+      Align = alClient
+      DataSource = DataSource1
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Charset = ARABIC_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      OnCellClick = YDBGrid1CellClick
+      OnKeyDown = YDBGrid1KeyDown
+      OnKeyUp = YDBGrid1KeyUp
+      YeganehColor = False
+      YeganehFinish = False
+      PageNumber = False
+      RecordNumber = False
+      HasTime = False
+      Oriention = poPortrait
+      HasDate = False
+      HasIndex = False
+      InvertFarsiDate = True
+      TitleSort = True
+      AutoInsert = False
+      FooterFields = 'Count'
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'Title'
+          Title.Alignment = taCenter
+          Title.Caption = #1593#1606#1608#1575#1606' '#1711#1585#1608#1607
+          Width = 174
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Descript'
+          Title.Alignment = taCenter
+          Title.Caption = #1578#1608#1590#1610#1581#1575#1578
+          Width = 199
+          Visible = True
+        end>
+    end
+    object YDBComboBox1: TYDBComboBox
+      Left = 208
+      Top = 128
+      Width = 145
+      Height = 21
+      ItemHeight = 13
+      TabOrder = 1
+      Text = 'YDBComboBox1'
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = ADOQuery1
+    Left = 40
+    Top = 152
+  end
+  object ADOQuery1: TADOQuery
+    Connection = Dm.YeganehConnection
+    Parameters = <>
+    Left = 40
+    Top = 96
+  end
+  object ADOQuery2: TADOQuery
+    Connection = Dm.YeganehConnection
+    Parameters = <>
+    Left = 40
+    Top = 208
+  end
+  object DataSource2: TDataSource
+    DataSet = ADOQuery2
+    Left = 40
+    Top = 264
+  end
+end

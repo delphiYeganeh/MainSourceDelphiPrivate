@@ -1,0 +1,178 @@
+
+
+Alter PROCEDURE [dbo].[Get_All_Letter]    
+    
+@Secretariatid int,        
+@Myear tinyint,        
+@Letter_Type int,        
+@LetterFormat int,        
+@Where nvarchar(2000),        
+@Top smallint ,        
+@ArchiveFolderID int,        
+@ArchiveStatus tinyint ,-- 0 ,1 and 2(= all)     
+@Userid int       
+As
+ 
+Declare @sqlCommand nvarchar(4000) , @archiveLetter nvarchar(4000)    
+DECLARE @InnerNo NVARCHAR(500);        
+declare @Delimeter char(1)        
+Declare @ArchivedText Nvarchar(2000)
+
+set @Delimeter=dbo.GetSystemValue('LetterFormulaSeperator')--44        
+set @InnerNo=case  dbo.GetSystemValue('LetterFormulaPart1') --35       
+                   when 0 then ''        
+                   when 1 then 'isnull(Secretariats.Precode,'''')+'''+@Delimeter+'''+'        
+                   when 2 then 'cast(Myear as char(2))+'''+@Delimeter+'''+'        
+                   when 3 then 'cast(indicatorid as nvarchar(10))+'''+@Delimeter+'''+'        
+                   when 4 then 'case when len(sender.Code)>5 then sender.PreCode else sender.Code end +'''+@Delimeter+'''+'        
+                   when 5 then 'case when len(Deliver.Code)>5 then Deliver.PreCode else Deliver.Code end +'''+@Delimeter+'''+'        
+                   when 6 then 'isnull(LetterTypes.PreCode,'''')+'''+@Delimeter+'''+'        
+                   when 7 then 'isnull(UserMemo,'''')+'''+@Delimeter+'''+'        
+                   when 8 then 'isnull(Deliver.Precode,'''')+'''+@Delimeter+'''+' end+        
+        
+             case  dbo.GetSystemValue('LetterFormulaPart2')--36        
+                   when 0 then ''        
+                   when 1 then 'isnull(Secretariats.Precode,'''')+'''+@Delimeter+'''+'        
+                   when 2 then 'cast(Myear as char(2))+'''+@Delimeter+'''+'        
+                   when 3 then 'cast(indicatorid as nvarchar(10))+'''+@Delimeter+'''+'        
+                   when 4 then 'case when len(sender.Code)>5 then sender.PreCode else sender.Code end +'''+@Delimeter+'''+'        
+                   when 5 then 'case when len(Deliver.Code)>5 then Deliver.PreCode else Deliver.Code end +'''+@Delimeter+'''+'        
+                   when 6 then 'isnull(LetterTypes.PreCode,'''')+'''+@Delimeter+'''+'        
+                   when 7 then 'isnull(UserMemo,'''')+'''+@Delimeter+'''+'        
+                   when 8 then 'isnull(Deliver.Precode,'''')+'''+@Delimeter+'''+' end+        
+        
+             case  dbo.GetSystemValue('LetterFormulaPart3')--37  
+                   when 0 then ''        
+                   when 1 then 'isnull(Secretariats.Precode,'''')+'''+@Delimeter+'''+'        
+                   when 2 then 'cast(Myear as char(2))+'''+@Delimeter+'''+'        
+                   when 3 then 'cast(indicatorid as nvarchar(10))+'''+@Delimeter+'''+'        
+                   when 4 then 'case when len(sender.Code)>5 then sender.PreCode else sender.Code end +'''+@Delimeter+'''+'        
+                   when 5 then 'case when len(Deliver.Code)>5 then Deliver.PreCode else Deliver.Code end +'''+@Delimeter+'''+'        
+                   when 6 then 'isnull(LetterTypes.PreCode,'''')+'''+@Delimeter+'''+'        
+                   when 7 then 'isnull(UserMemo,'''')+'''+@Delimeter+'''+'        
+                   when 8 then 'isnull(Deliver.Precode,'''')+'''+@Delimeter+'''+' end+        
+        
+             case  dbo.GetSystemValue('LetterFormulaPart4')--38        
+                   when 0 then ''        
+                   when 1 then 'isnull(Secretariats.Precode,'''')+'''+@Delimeter+'''+'        
+                   when 2 then 'cast(Myear as char(2))+'''+@Delimeter+'''+'        
+                   when 3 then 'cast(indicatorid as nvarchar(10))+'''+@Delimeter+'''+'        
+                   when 4 then 'case when len(sender.Code)>5 then sender.PreCode else sender.Code end +'''+@Delimeter+'''+'        
+                   when 5 then 'case when len(Deliver.Code)>5 then Deliver.PreCode else Deliver.Code end +'''+@Delimeter+'''+'        
+                   when 6 then 'isnull(LetterTypes.PreCode,'''')+'''+@Delimeter+'''+'        
+                   when 7 then 'isnull(UserMemo,'''')+'''+@Delimeter+'''+'        
+                   when 8 then 'isnull(Deliver.Precode,'''')+'''+@Delimeter+'''+' end+        
+        
+             case  dbo.GetSystemValue('LetterFormulaPart5')--39        
+                   when 0 then ''        
+                   when 1 then 'isnull(Secretariats.Precode,'''')+'''+@Delimeter+'''+'                         
+     when 2 then 'cast(Myear as char(2))+'''+@Delimeter+'''+'        
+                   when 3 then 'cast(indicatorid as nvarchar(10))+'''+@Delimeter+'''+'        
+                   when 4 then 'case when len(sender.Code)>5 then sender.PreCode else sender.Code end +'''+@Delimeter+'''+'        
+                   when 5 then 'case when len(Deliver.Code)>5 then Deliver.PreCode else Deliver.Code end +'''+@Delimeter+'''+'        
+                   when 6 then 'isnull(LetterTypes.PreCode,'''')+'''+@Delimeter+'''+'        
+                   when 7 then 'isnull(UserMemo,'''')+'''+@Delimeter+'''+'        
+                   when 8 then 'isnull(Deliver.Precode,'''')+'''+@Delimeter+'''+' end+        
+        
+             case  dbo.GetSystemValue('LetterFormulaPart6')--40        
+                   when 0 then ''        
+                   when 1 then 'isnull(Secretariats.Precode,'''')+'''+@Delimeter+'''+'        
+                   when 2 then 'cast(Myear as char(2))+'''+@Delimeter+'''+'        
+                   when 3 then 'cast(indicatorid as nvarchar(10))+'''+@Delimeter+'''+'        
+                   when 4 then 'case when len(sender.Code)>5 then sender.PreCode else sender.Code end +'''+@Delimeter+'''+'        
+                   when 5 then 'case when len(Deliver.Code)>5 then Deliver.PreCode else Deliver.Code end +'''+@Delimeter+'''+'        
+                   when 6 then 'isnull(LetterTypes.PreCode,'''')+'''+@Delimeter+'''+'        
+                   when 7 then 'isnull(UserMemo,'''')+'''+@Delimeter+'''+'        
+                   when 8 then 'isnull(Deliver.Precode,'''')+'''+@Delimeter+'''+'   
+             end        
+        
+IF len(@InnerNo) > 5        
+   if substring(@InnerNo,len(@InnerNo)-4,5)='+'''+@Delimeter+'''+'        
+      Set @InnerNo=substring(@InnerNo,1,len(@InnerNo)-5)        
+        
+if @innerno<>''        
+   set @InnerNo='replace(replace(ltrim(rtrim('+@InnerNo+')),'''+@Delimeter+@Delimeter+''','''+@Delimeter+'''),'''+@Delimeter+@Delimeter+''','''+@Delimeter+''')'        
+else        
+   set @innerno = 'cast(indicatorid as nvarchar(500))'        
+    
+Set @archiveLetter = 
+'Select  l.LetterID    
+from LETTER L    
+LEFT JOIN LetterArchiveFolder laf ON laf.Letterid=l.letterid    
+LEFT join archivefolder af  on laf.ArchiveFolderID=af.FolderID    
+LEFT join UserAccArchive uac on uac.ArchiveFolderID=af.FolderID and uac.secid=L.SecretariatID    
+where ISNULL(uac.UserID,' + cast(@userid as varchar(10)) + ')=' + cast(@userid as varchar(10)) + ' and ISNULL(uac.ISAccess,1)=1'    
+    
+        
+Set @sqlCommand = 
+'Select Top  ' +  Cast(@Top as varchar(5)) + '     Letter.LetterID, Letter.IndicatorID, Letter.MYear, Letter.SecretariatID,        
+Letter.Letter_Type, Letter.letterformat, Letter.IncommingNO, Letter.FromOrgID,Letter.IncommingDate,        
+Letter.ToOrgID, Letter.UrgencyID, Letter.Memo, Letter.RetroactionNo, Letter.RegistrationDate, Letter.FollowLetterNo,        
+Letter.ToStaffer, Letter.SentLetterID, Letter.TemplateID, Letter.UserMemo,Letter.DeadLineDate, sender.Title AS SenderTitle,        
+Deliver.Title AS DeliverTitle,dbo.has_Page(Letter.letterid) has_Page,        
+dbo.has_WordPage(Letter.letterid) has_WordPage,dbo.has_file(letter.letterID) has_file, Letter.SubjectID,       
+LetterTypes.Title LetterTypeTitle,LetterRecommites,sendstatusTitle,' + @innerno + '  InnerNo,Letter.Archived        
+,ActionTypeTitle , Letter.SignerID , (Select Title from FromOrganizations FO Where(FO.ID = Letter.SignerID)) as SignerTitle       
+,Letter.ReceiveTypeID , letter.ClassificationID     
+      
+FROM Letter left  JOIN        
+     FromOrganizations sender ON Letter.ToOrgID = sender.ID left JOIN        
+     FromOrganizations Deliver ON Letter.FromOrgID = Deliver.ID        
+     Left join LetterTypes on LetterTypes.ID=Letter.Letter_type        
+     inner join sendstatus on sendstatus.sendstatusID=Letter.sendstatusID        
+     inner join Secretariats on Secretariats.Secid=Letter.SecretariatID        
+     left JOIN ActionType  ON ActionType.ActionTypeID = Letter.LatestActionTypeID '        
+              
+if @ArchiveFolderID > 0        
+   Set @sqlCommand = @sqlCommand + ' Left join LetterArchiveFolder on LetterArchiveFolder.Letterid=Letter.LetterID '        
+        
+Set @sqlCommand = @sqlCommand + ' where letter.Finalized=1 '        
+              
+Set @where = isnull(ltrim(rtrim(@where)),'')        
+if @where <> '' 
+   Set @where = ' and ' + @where        
+        
+if @Letter_Type <> 0        
+   Set @where = @where + ' and (Letter_Type = ' + Cast(@Letter_Type as varchar(5)) + ')'        
+        
+if @Secretariatid <> 0        
+   Set @where = @where + ' and (Secretariatid = ' + Cast(@Secretariatid as varchar(5)) + ')'        
+        
+if @Myear <> 0        
+   Set @where = @where + ' and (myear = ' + Cast(@myear as varchar(5)) + ')'        
+              
+if @LetterFormat <> 0        
+   Set @where = @where + ' and (LetterFormat = ' + Cast(@LetterFormat as varchar(5)) + ')'        
+        
+----
+if @ArchiveStatus=0   --ÌÇÑí    
+   Set @where = @where + ' And Archived=0 '    
+
+Set @ArchivedText = ' Exists (SELECT LetterArchiveFolder.letterID 
+                              FROM LetterArchiveFolder,ArchiveFolder 
+                              Where(Letterid =Letter.LetterID)        
+                                And(ArchiveFolder.UserID=0 or ArchiveFolder.Archivecenterid>0)  
+                                And(LetterArchiveFolder.ArchiveFolderID = ArchiveFolder.FolderID) )  
+                      And Archived=1  '        
+if @ArchiveStatus = 1  --(ÂÑÔíæ ÔÏå (ÈÇíÇäí ÔÏå
+   --Ranjbar ID=155
+   --Set @where = @where+' and Archived=1'     
+   Set @where = @where + ' And ' + @ArchivedText
+        
+Set @ArchiveLetter = @ArchiveLetter + @where         
+        
+if @ArchiveStatus = 2 --(ÂÑÔíæ ÈÏæä ÏÓÊå ÈäÏí (ÈÇíÇäí äÔÏå       
+   Set @where = @where + ' And Not ' + @ArchivedText        
+
+----
+       
+if @ArchiveFolderID > 0        
+    Set @where = @where + ' and (archiveFolderID = ' + Cast(@archiveFolderID as varchar(5)) + ')'         
+Set @where = @where + ' and Letter.letterid in (' + @archiveLetter + ')'    
+        
+Set @sqlCommand = @sqlCommand + @where + ' order by indicatorid desc '        
+Print @sqlcommand        
+Exec sp_executesql @sqlCommand 
+
+-- Exec Get_All_Letter 1, 89, 0, 1, N'', 100, 0, 2, 3
+GO

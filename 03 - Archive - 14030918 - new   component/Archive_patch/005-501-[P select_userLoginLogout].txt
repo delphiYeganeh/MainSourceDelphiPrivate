@@ -1,0 +1,26 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[select_userLoginLogout]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[select_userLoginLogout]
+END
+GO
+
+CREATE PROCEDURE [dbo].[select_userLoginLogout](@bdate char(10), @edate char(10), @userid int)    
+as    
+SELECT Users.UserName, UIO.IPAddress, UIO.ComputerName ,      
+       dbo.Shamsi(UIO.LoginTime) LoginDate,cast(datepart(hh, UIO.LoginTime) as varchar(2))+':'+cast (datepart(mi, UIO.LoginTime) as varchar(2)) LoginTime,    
+       dbo.Shamsi(UIO.LogoutTime) LogoutDate,cast(datepart(hh, UIO.LogoutTime) as varchar(2))+':'+cast (datepart(mi, UIO.LogoutTime) as varchar(2)) LogoutTime,    
+       UIO.isSafeLogout    
+FROM UserLoginLogout UIO INNER JOIN    
+     Users ON UIO.UserID = Users.Id    
+where dbo.Shamsi(UIO.LoginTime) between @bdate and @edate  
+Order By UIO.LoginTime Desc
+
+GO
+
+COMMIT
+GO

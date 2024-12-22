@@ -1,0 +1,38 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_LetterData_by_LetterID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_LetterData_by_LetterID]
+END
+GO
+
+CREATE proc [dbo].[Get_LetterData_by_LetterID]
+(
+ @LetterID int, 
+ @LetterDataID int = 0, 
+ @flag int = 0
+)    
+As  
+IF @flag = 0
+BEGIN
+Select letterid,LetterDataID, LetterData.Extention, description, Extention.Extention As ExtentionName,LetterData.VersionNo,
+       LetterData.VersionDate
+From LetterData Inner Join  
+      Extention On LetterData.extention = Extention.ExtentionID  
+Where(Extention.IsSystem = 0) AND (LetterData.LetterID = @LetterID) 
+END
+IF @flag = 1
+begin
+Select letterid,LetterDataID, LetterData.Extention, description, Extention.Extention As ExtentionName,LetterData.VersionNo,
+       LetterData.VersionDate
+From LetterData Inner Join  
+      Extention On LetterData.extention = Extention.ExtentionID  
+Where(Extention.IsSystem = 0) AND (LetterData.LetterID = @LetterID) AND LetterDataID = @LetterDataID 
+end
+GO
+
+COMMIT
+GO

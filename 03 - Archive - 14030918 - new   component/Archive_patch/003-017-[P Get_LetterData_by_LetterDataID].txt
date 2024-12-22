@@ -1,0 +1,20 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_LetterData_by_LetterDataID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_LetterData_by_LetterDataID]
+END
+GO
+
+CREATE proc [dbo].[Get_LetterData_by_LetterDataID](@LetterDataID int )
+as
+SELECT     LetterDataID, Image, LetterData.VersionNo, LetterData.VersionDate,ISNULL(PageNumber,0)PageNumber,[Path]
+FROM        LetterData
+WHERE     (LetterDataID = @LetterDataID)
+GO
+
+COMMIT
+GO

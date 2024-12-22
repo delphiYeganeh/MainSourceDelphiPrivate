@@ -1,0 +1,125 @@
+unit ShowAddDocFm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, ADODB, StdCtrls, Buttons, ExtCtrls, BaseUnit, xpWindow,
+  ExtActns, ActnList, DBCtrls, UemsVCL, Mask;
+
+type
+  TFmShowAddDoc = class(TMBaseForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    BitBtn1: TBitBtn;
+    DBEIncommingNO: TDBEdit;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label8: TLabel;
+    DBMemo: TDBMemo;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label15: TLabel;
+    DBEAttachTitle: TDBEdit;
+    UserMemo1: TLabel;
+    DBEUserMemo: TDBEdit;
+    Label4: TLabel;
+    UserMemo2: TLabel;
+    DBEUserMemo1: TDBEdit;
+    UserMemo3: TLabel;
+    DBEUserMemo2: TDBEdit;
+    Panel3: TPanel;
+    SpeedButton11: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton110: TSpeedButton;
+    DBEClassificationTitle: TDBEdit;
+    DBEUserTableTitle: TDBEdit;
+    DBEsenderTitle: TDBEdit;
+    DBEIncommingdate: TDBEdit;
+    procedure FormShow(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure SpeedButton11Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton110Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    fLetterID:Integer;
+    Property LetterID : Integer read fLetterID Write fLetterID;
+  end;
+
+var
+  FmShowAddDoc: TFmShowAddDoc;
+
+implementation
+
+uses Dmu, ShowAddDocDM, ScanImageFm, UaddLetterData;
+
+{$R *.dfm}
+
+procedure TFmShowAddDoc.FormShow(Sender: TObject);
+begin
+   inherited;
+   DMShowAddDoc := TDMShowAddDoc.Create(Self);
+   With DMShowAddDoc do
+   begin
+      QrSelLetter.Close;
+      QrSelLetter.Parameters.ParamByName('LetterID').Value := LetterID;
+      QrSelLetter.Open;
+   end;
+
+   UserMemo1.Caption:= dm.UserMemo1;
+   UserMemo2.Caption:= dm.UserMemo2;
+   UserMemo3.Caption:= dm.UserMemo3;
+
+end;
+
+procedure TFmShowAddDoc.BitBtn1Click(Sender: TObject);
+begin
+   inherited;
+   Close;
+end;
+
+procedure TFmShowAddDoc.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+   inherited;
+   DMShowAddDoc.QrSelLetter.Close;
+   FreeAndNil(DMShowAddDoc);
+end;
+
+procedure TFmShowAddDoc.SpeedButton11Click(Sender: TObject);
+begin
+   inherited;
+   Try
+      FmScanImage := TFmScanImage.Create(Nil);
+      FmScanImage.LetterID := LetterID;
+      FmScanImage.ShowModal;
+   Finally
+      FreeAndNil(FmScanImage);
+   End;
+end;
+
+procedure TFmShowAddDoc.SpeedButton1Click(Sender: TObject);
+begin
+   inherited;
+   if _Word_Is_Opened then
+   begin
+      messageShow(86,FALSE) ;
+      Exit;
+   end;
+
+   if not dm.ExecGet_LetterWordFile(LetterID,True) then
+      MBaseForm.MessageShowString('ÂÌç ›«Ì· Ê—œÌ Ì«›  ‰‘œ', False);
+end;
+
+procedure TFmShowAddDoc.SpeedButton110Click(Sender: TObject);
+begin
+   inherited;
+   FraddLetterData := TFraddLetterData.Create(Application);
+   FraddLetterData.LetterID := LetterID;
+   FraddLetterData.ShowModal;
+end;
+
+end.

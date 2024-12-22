@@ -1,0 +1,29 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[ArchiveFolders]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1 )
+BEGIN
+    DROP FUNCTION [dbo].[ArchiveFolders]
+END
+GO
+
+CREATE FUNCTION [dbo].[ArchiveFolders] (@LetterID int, @UserID  tinyint)  
+RETURNS nvarchar(2000)
+BEGIN
+	Declare @Result  nvarchar(2000)
+	Set @Result=''
+
+	Select @Result = @Result + ' , ' + Title + ' - ' + ArchiveDate
+		From LetterArchiveFolder Inner Join ArchiveFolder ON LetterArchiveFolder.ArchiveFolderID = ArchiveFolder.FolderID
+		Where  ArchiveFolder.UserID = @userid and Letterid = @LetterID
+
+	If @Result <> '' set  @Result = 'بایگانی در: ' + substring(@Result,4,2000)
+
+	return(@Result)
+end
+GO
+
+COMMIT
+GO

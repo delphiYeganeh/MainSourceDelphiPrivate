@@ -1,0 +1,145 @@
+inherited FrAddAlternativeUser: TFrAddAlternativeUser
+  Left = 490
+  Top = 199
+  Caption = #1578#1593#1610#1610#1606' '#1580#1575#1606#1588#1610#1606
+  ClientHeight = 136
+  ClientWidth = 392
+  Constraints.MaxHeight = 174
+  Constraints.MaxWidth = 408
+  Constraints.MinHeight = 170
+  Constraints.MinWidth = 400
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [0]
+    Left = 303
+    Top = 32
+    Width = 60
+    Height = 13
+    Caption = #1705#1575#1585#1576#1585' '#1580#1575#1606#1588#1610#1606
+  end
+  object Label2: TLabel [1]
+    Left = 303
+    Top = 65
+    Width = 80
+    Height = 13
+    Caption = #1578#1575#1585#1610#1582' '#1588#1585#1608#1593' '#1575#1593#1578#1576#1575#1585
+  end
+  object Label3: TLabel [2]
+    Left = 153
+    Top = 65
+    Width = 6
+    Height = 13
+    Caption = #1578#1575
+  end
+  object Button2: TBitBtn [3]
+    Left = 96
+    Top = 104
+    Width = 68
+    Height = 27
+    Cursor = crHandPoint
+    Caption = #1578#1575#1610#1610#1583
+    Default = True
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    OnClick = Button2Click
+    Glyph.Data = {
+      06030000424D06030000000000003600000028000000100000000F0000000100
+      180000000000D002000000000000000000000000000000000000008080008080
+      0080800080808000008000000080800080800080800080800080800080800080
+      8000808000808000808000808000808000808080000000800000800080000000
+      8080008080008080008080008080008080008080008080008080008080008080
+      8000000080000080000080000080008000000080800080800080800080800080
+      8000808000808000808000808080000000800000800000800000800000800000
+      8000800000008080008080008080008080008080008080008080800000008000
+      00800000800000FF000080000080000080000080008000000080800080800080
+      8000808000808000808000800000800000800000FF0000808000808000800000
+      800000800080000000808000808000808000808000808000808000FF00008000
+      00FF0000808000808000808000FF000080000080000080008000000080800080
+      8000808000808000808000808000FF0000808000808000808000808000808000
+      FF00008000008000008000800000008080008080008080008080008080008080
+      00808000808000808000808000808000808000FF000080000080000080008000
+      0000808000808000808000808000808000808000808000808000808000808000
+      808000808000FF00008000008000008000800000008080008080008080008080
+      00808000808000808000808000808000808000808000808000FF000080000080
+      0000800080000000808000808000808000808000808000808000808000808000
+      808000808000808000808000FF00008000008000008000800000008080008080
+      00808000808000808000808000808000808000808000808000808000808000FF
+      0000800000800080000000808000808000808000808000808000808000808000
+      808000808000808000808000808000808000FF00008000008000008080008080
+      0080800080800080800080800080800080800080800080800080800080800080
+      8000808000FF00008080}
+  end
+  object Button3: TBitBtn [4]
+    Left = 21
+    Top = 104
+    Width = 68
+    Height = 27
+    Cursor = crHandPoint
+    Caption = #1575#1606#1589#1585#1575#1601
+    Font.Charset = ARABIC_CHARSET
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnClick = Button3Click
+    Kind = bkCancel
+  end
+  object DBLookupComboBox1: TDBLookupComboBox [5]
+    Left = 24
+    Top = 29
+    Width = 273
+    Height = 21
+    BiDiMode = bdLeftToRight
+    DataField = 'AlternativeUserTitle'
+    DataSource = Dm.DSelect_AlternativeInfo_ByUserID
+    ParentBiDiMode = False
+    TabOrder = 2
+  end
+  object BeginDate: TDBShamsiDateEdit [6]
+    Left = 176
+    Top = 64
+    Width = 121
+    Height = 21
+    CheckValidity = True
+    ShowMsg = False
+    DataField = 'AlternativebeginDate'
+    DataSource = Dm.DSelect_AlternativeInfo_ByUserID
+    TabOrder = 3
+  end
+  object EndDate: TDBShamsiDateEdit [7]
+    Left = 24
+    Top = 64
+    Width = 118
+    Height = 21
+    CheckValidity = True
+    ShowMsg = False
+    DataField = 'AlternativeEndDate'
+    DataSource = Dm.DSelect_AlternativeInfo_ByUserID
+    TabOrder = 4
+  end
+  object BitBtn1: TBitBtn [8]
+    Left = 208
+    Top = 104
+    Width = 89
+    Height = 27
+    Caption = #1581#1584#1601' '#1580#1575#1606#1588#1610#1606
+    TabOrder = 5
+    OnClick = BitBtn1Click
+    Kind = bkNo
+  end
+  inherited DSForm: TDataSource
+    Top = 24
+  end
+  inherited ActionList: TActionList
+    Left = 160
+    Top = 24
+  end
+end

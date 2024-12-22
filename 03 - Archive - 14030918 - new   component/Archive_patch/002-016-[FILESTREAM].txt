@@ -1,0 +1,10 @@
+IF (EXISTS(SELECT 1 FROM sys.database_files WHERE type_desc = 'FILESTREAM')) 
+BEGIN
+	IF NOT EXISTS(SELECT 1 FROM sys.columns
+		WHERE Name = N'BLOBData'
+		AND Object_ID = Object_ID(N'dbo.LetterData'))
+	BEGIN
+		ALTER TABLE dbo.LetterData ADD BLOBData varbinary(MAX) NULL
+	END
+END
+GO

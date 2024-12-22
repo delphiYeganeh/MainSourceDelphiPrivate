@@ -1,0 +1,49 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_Rent_byLetterID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_Rent_byLetterID]
+END
+GO
+
+CREATE Procedure [dbo].[Select_Rent_byLetterID] --Select_Rent_byLetterID 9731,3
+@LetterID int,
+@userid int = 0
+AS
+--declare @LetterID int =9731 
+--declare @userid int =3
+SELECT rr.RenterTitle,
+       u.Title AS Title,--as N'کاربر تحویل دهنده ', --اضافه کردن ستون کاربر وارد شده به نرم افزار در قسمت وضعیت گزارش دهی از سند 
+       r.RentID,
+	   r.RenterID,
+	   l.LetterID,
+	   R.BeginDate,
+	   R.EndDate,
+	   R.Comment,
+	   R.MatureDate  
+ FROM  Letter AS L   
+  Left Join rent AS R      
+     ON L.letterid=R.letterid 
+  Left Join users AS U   
+     ON U.ID=r.userid  
+  Left  Join Renter  AS RR  
+	 ON RR.RenterID=R.RenterID   
+	 WHERE L.letterid=@LetterID
+	 AND   (u.Id=@userid or @userid = 0) 
+ORDER BY BeginDate DESC
+
+--ALTER PROCEDURE [DBO].[SELECT_RENT_BYLETTERID]
+--@LETTERID INT
+--AS
+--SELECT RENT.*,RENTERTITLE
+--  FROM  RENT
+--LEFT JOIN RENTER ON RENTER.RENTERID=RENT.RENTERID
+--  WHERE LETTERID=@LETTERID
+--ORDER BY BEGINDATE DESC
+GO
+
+COMMIT
+GO

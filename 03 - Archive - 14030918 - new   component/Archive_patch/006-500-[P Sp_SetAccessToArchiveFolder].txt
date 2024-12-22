@@ -1,0 +1,87 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_SetAccessToArchiveFolder]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_SetAccessToArchiveFolder]
+END
+GO
+
+CREATE PROCEDURE [dbo].[Sp_SetAccessToArchiveFolder] 
+	@ArchiveFolderID Int,
+	@UserId Int
+As   
+
+Declare @Root int
+
+Set @Root = 0;
+
+if Not Exists(Select 1 From UserAccArchive Where ArchiveFolderId = @ArchiveFolderID)
+Begin
+	Insert Into UserAccArchive (UserID, ArchiveCenterID, ArchiveFolderID, ISAccess, SecID) 
+		Select US.UserId, AF.ArchiveCenterID, @ArchiveFolderID as ArchiveFolderID, 1 as ISAccess, US.SecID 
+			From UserSecretariats US, ArchiveFolder AF
+			Where US.UserId = @UserId
+				--And US.AccessId = 1
+				And AF.FolderID = @ArchiveFolderID
+End
+
+Select @Root = ParentFolderID
+    From ArchiveFolder 
+	Where FolderID = @ArchiveFolderID
+
+Insert Into UserAccArchive (UserID, ArchiveCenterID, ArchiveFolderID, ISAccess, SecID)
+	Select UserId, ArchiveCenterID, @ArchiveFolderID as ArchiveCenterID, ISAccess, SecID
+		From UserAccArchive 
+		Where ArchiveFolderId = @Root 
+			And UserId <> @UserId 
+			And	SecId in (Select SecId 
+							From UserAccArchive 
+							Where ArchiveFolderId = @Root 
+							And UserId = @UserId
+							And IsAccess = 1
+							And IsNull(SecId, -1) <> -1)
+
+
+
+/*براي تمامي كاربران UserAccArchive دادن دسترسي به زونكن جديد در جدول*/   
+/*
+Declare @UserId int    
+Declare @SecId int
+Declare @ArchiveCenterId int
+Select @ArchiveCenterId = ArchiveCenterID From ArchiveFolder Where FolderID = @ArchiveFolderID     
+
+Declare Cu_Users Cursor For 
+Select UserId, SecId From UserSecretariats Where AccessId = 1
+
+Open Cu_Users     
+Fetch Next From Cu_Users Into @UserId, @SecId
+While @@FETCH_STATUS = 0    
+Begin    
+
+     If Exists(Select * From UserAccArchive Where UserID = @UserId And ArchiveCenterID = @ArchiveCenterID And ArchiveCenterID = @ArchiveFolderID And SecID = @SecId)
+	 Begin
+		Update UserAccArchive
+			Set ISAccess = 1
+			Where UserID = @UserId And ArchiveCenterID = @ArchiveCenterID And ArchiveCenterID = @ArchiveFolderID And SecID = @SecId
+	 End
+	 Else
+	 Begin
+
+		Insert Into UserAccArchive(UserID, ArchiveCenterID, ArchiveFolderID, ISAccess, SecID)
+		Values(@UserID,@ArchiveCenterID,@ArchiveFolderID,1, @SecID)
+
+	 End
+
+	Fetch Next From Cu_Users Into @UserId, @SecId
+End    
+Close Cu_Users    
+Deallocate Cu_Users
+*/
+
+GO
+
+COMMIT
+GO

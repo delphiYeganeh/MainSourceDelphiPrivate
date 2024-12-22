@@ -1,0 +1,241 @@
+[SECTION_MAX_NO]=7
+
+[BEGIN_S_NO]=1
+
+ALTER Procedure [dbo].[Sp_SetAccessToArchiveFolder] @ArchiveFolderID INT,@UserId int 
+As   
+/*براي تمامي كاربران UserAccArchive دادن دسترسي به زونكن جديد در جدول*/   
+--Declare @UserId int    
+Declare @SecId int
+Declare @ArchiveCenterId int
+Select @ArchiveCenterId = ArchiveCenterID From ArchiveFolder Where FolderID = @ArchiveFolderID     
+
+Declare Cu_Users Cursor For 
+Select /*UserId,*/ SecId From UserSecretariats Where AccessId = 1
+--Select ID from Users    
+
+Open Cu_Users     
+Fetch Next From Cu_Users Into /*@UserId,*/ @SecId
+While @@FETCH_STATUS = 0    
+Begin    
+
+	--Declare @SecID int
+
+	--SELECT @SecID = DefualtSecretariatID FROM users WHERE Id = @UserID
+     If Exists(Select * From UserAccArchive Where UserID = @UserId And ArchiveCenterID = @ArchiveCenterID And ArchiveCenterID = @ArchiveFolderID And SecID = @SecId)
+	 Begin
+		Update UserAccArchive
+			Set ISAccess = 1
+			Where UserID = @UserId And ArchiveCenterID = @ArchiveCenterID And ArchiveCenterID = @ArchiveFolderID And SecID = @SecId
+	 End
+	 Else
+	 Begin
+
+		Insert Into UserAccArchive(UserID, ArchiveCenterID, ArchiveFolderID, ISAccess, SecID)
+		Values(@UserID,@ArchiveCenterID,@ArchiveFolderID,1, @SecID)
+
+	 End
+
+	Fetch Next From Cu_Users Into /*@UserId,*/ @SecId
+End    
+Close Cu_Users    
+Deallocate Cu_Users
+
+
+
+[END_S_NO]
+
+
+[BEGIN_S_NO]=2
+
+alter PROCEDURE [dbo].[Sp_SetAccessToArchiveFolder] 
+	@ArchiveFolderID Int,
+	@UserId Int
+As   
+
+Declare @Root int
+
+Set @Root = 0;
+
+if Not Exists(Select 1 From UserAccArchive Where ArchiveFolderId = @ArchiveFolderID)
+Begin
+	Insert Into UserAccArchive (UserID, ArchiveCenterID, ArchiveFolderID, ISAccess, SecID) 
+		Select US.UserId, AF.ArchiveCenterID, @ArchiveFolderID as ArchiveFolderID, 1 as ISAccess, US.SecID 
+			From UserSecretariats US, ArchiveFolder AF
+			Where US.UserId = @UserId
+				--And US.AccessId = 1
+				And AF.FolderID = @ArchiveFolderID
+End
+
+Select @Root = ParentFolderID
+    From ArchiveFolder 
+	Where FolderID = @ArchiveFolderID
+
+Insert Into UserAccArchive (UserID, ArchiveCenterID, ArchiveFolderID, ISAccess, SecID)
+	Select UserId, ArchiveCenterID, @ArchiveFolderID as ArchiveCenterID, ISAccess, SecID
+		From UserAccArchive 
+		Where ArchiveFolderId = @Root 
+			And UserId <> @UserId 
+			And	SecId in (Select SecId 
+							From UserAccArchive 
+							Where ArchiveFolderId = @Root 
+							And UserId = @UserId
+							And IsAccess = 1
+							And IsNull(SecId, -1) <> -1)
+
+
+
+[END_S_NO]
+
+
+
+[BEGIN_S_NO]=3
+
+alter PROCEDURE [dbo].[Sp_SetAccessToArchiveFolder] 
+	@ArchiveFolderID Int,
+	@UserId Int
+As   
+
+Declare @Root int
+
+Set @Root = 0;
+
+if Not Exists(Select 1 From UserAccArchive Where ArchiveFolderId = @ArchiveFolderID)
+Begin
+	Insert Into UserAccArchive (UserID, ArchiveCenterID, ArchiveFolderID, ISAccess, SecID) 
+		Select US.UserId, AF.ArchiveCenterID, @ArchiveFolderID as ArchiveFolderID, 1 as ISAccess, US.SecID 
+			From UserSecretariats US, ArchiveFolder AF
+			Where US.UserId = @UserId
+				--And US.AccessId = 1
+				And AF.FolderID = @ArchiveFolderID
+End
+
+Select @Root = ParentFolderID
+    From ArchiveFolder 
+	Where FolderID = @ArchiveFolderID
+
+Insert Into UserAccArchive (UserID, ArchiveCenterID, ArchiveFolderID, ISAccess, SecID)
+	Select UserId, ArchiveCenterID, @ArchiveFolderID as ArchiveCenterID, ISAccess, SecID
+		From UserAccArchive 
+		Where ArchiveFolderId = @Root 
+			And UserId <> @UserId 
+			And	SecId in (Select SecId 
+							From UserAccArchive 
+							Where ArchiveFolderId = @Root 
+							And UserId = @UserId
+							And IsAccess = 1
+							And IsNull(SecId, -1) <> -1)
+
+
+
+[END_S_NO]
+
+[BEGIN_S_NO]=4
+
+[END_S_NO]
+[BEGIN_S_NO]=5
+
+DROP INDEX [dbo].[Users].[IX_Users_AccessID] 
+
+
+DROP INDEX [dbo].[Users].[IX_Users_DefualtSecretariatID] ;
+
+
+  ALTER TABLE [dbo].[Users]
+ALTER COLUMN [AccessID] int;
+
+ALTER TABLE [dbo].[Users] 
+DROP CONSTRAINT  [DF_Users_DefualtSecretariatID]
+
+  ALTER TABLE [dbo].[Users]
+ALTER COLUMN [DefualtSecretariatID] int;
+
+
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_DefualtSecretariatID]  DEFAULT (1) FOR [DefualtSecretariatID]
+
+
+
+CREATE NONCLUSTERED INDEX [IX_Users_AccessID] ON [dbo].[Users]
+(
+	[AccessID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+
+
+CREATE NONCLUSTERED INDEX [IX_Users_DefualtSecretariatID] ON [dbo].[Users]
+(
+	[DefualtSecretariatID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+
+
+
+[END_S_NO]
+
+[BEGIN_S_NO]=6
+
+  DROP INDEX [dbo].[Letter].[Letter_IDX_Indicator] ;
+  DROP INDEX [dbo].[Letter].[IX_Letter_SecretariatID] ;
+  
+  ALTER TABLE [dbo].[Letter] 
+  DROP CONSTRAINT  [DF__Letter__Secretar__1DBB5747]
+  
+  ALTER TABLE [dbo].[Letter]
+    ALTER COLUMN [SecretariatID] int;
+
+  ALTER TABLE [dbo].[Letter] ADD  CONSTRAINT [DF__Letter__Secretar__1DBB5747]  DEFAULT (1) FOR [SecretariatID]
+
+
+CREATE NONCLUSTERED INDEX [Letter_IDX_Indicator] ON [dbo].[Letter]
+(
+	[IndicatorID] ASC,
+	[MYear] ASC,
+	[SecretariatID] ASC,
+	[Letter_Type] ASC,
+	[letterformat] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+
+CREATE NONCLUSTERED INDEX [IX_Letter_SecretariatID] ON [dbo].[Letter]
+(
+	[SecretariatID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+
+
+[END_S_NO]
+
+[BEGIN_S_NO]=7
+
+Alter Function [dbo].[ParentFoldersCTE] (@FolderID int)  
+Returns nvarchar(2000) 
+As  
+Begin 
+	Declare @Res Nvarchar(2000)
+	Set @Res = ''
+
+	;With Tree 
+	As
+	(
+		Select FolderID, ParentFolderId, Title, Place, 1 As Depth 
+			From ArchiveFolder
+			Where FolderID = @FolderID
+
+		Union All
+
+		Select T.FolderID, T.ParentFolderId, T.Title, T.Place, Tree.Depth + 1
+			From ArchiveFolder T  
+			Inner Join Tree On T.FolderID = Tree.ParentFolderId
+	)
+
+	Select @Res = @Res + ' --> ' + Title /*+ Ltrim(Rtrim(Cast(Isnull('['+ Place + ']','') as Nvarchar(10))))*/
+		From Tree 
+		Order By Depth desc
+		option (maxrecursion 0)
+
+	return(SubString(@Res, 5, Len(@Res)))
+
+End
+
+[END_S_NO]
+
+
+
+
+				   
