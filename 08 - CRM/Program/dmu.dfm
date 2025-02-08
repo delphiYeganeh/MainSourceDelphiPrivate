@@ -1,8 +1,8 @@
 object Dm: TDm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 316
-  Top = 117
+  Left = 481
+  Top = 116
   Height = 822
   Width = 1266
   object YeganehConnection: TADOConnection
@@ -10795,6 +10795,15 @@ object Dm: TDm
     object Select_FollowUP_By_CustomerIDStatusSaveDateTime: TDateTimeField
       FieldName = 'StatusSaveDateTime'
     end
+    object Select_FollowUP_By_CustomerIDparentMarketerTitle: TStringField
+      FieldKind = fkLookup
+      FieldName = 'parentMarketerTitle'
+      LookupDataSet = MarketerALL
+      LookupKeyFields = 'MarketerID'
+      LookupResultField = 'MarketerTitle'
+      KeyFields = 'ParentMarketerID'
+      Lookup = True
+    end
   end
   object DSelect_FollowUP_By_CustomerID: TDataSource
     AutoEdit = False
@@ -10911,13 +10920,23 @@ object Dm: TDm
         Value = Null
       end
       item
+        Name = '@CompaginID'
+        DataType = ftInteger
+        Value = 0
+      end
+      item
         Name = '@CountUniqCustomer'
         DataType = ftInteger
         Direction = pdOutput
         Value = 0
+      end
+      item
+        Name = '@StateID'
+        DataType = ftInteger
+        Value = 0
       end>
     Left = 610
-    Top = 403
+    Top = 387
     object Select_FollowUP_By_DateFollowUPID: TAutoIncField
       FieldName = 'FollowUPID'
       ReadOnly = True
@@ -11127,6 +11146,9 @@ object Dm: TDm
     object Select_FollowUP_By_DateTimeInterval: TStringField
       FieldName = 'TimeInterval'
     end
+    object Select_FollowUP_By_DateparentMarketerTitle: TStringField
+      FieldName = 'parentMarketerTitle'
+    end
   end
   object DSelect_FollowUP_By_Date: TDataSource
     AutoEdit = False
@@ -11316,7 +11338,7 @@ object Dm: TDm
         Size = 255
         Value = Null
       end>
-    Left = 32
+    Left = 80
     Top = 280
     object AutoIncField1: TAutoIncField
       FieldName = 'FollowUPID'

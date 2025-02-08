@@ -1,0 +1,40 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[GetAccountProfile]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[GetAccountProfile]
+END
+GO
+
+CREATE  procedure [dbo].[GetAccountProfile] 
+@AccountId	Int,
+@Year		Int
+
+AS    
+	Declare @EndDate Char(10) 
+	Set @EndDate = Cast(@Year As Char(4)) + '/12/29'
+
+	Select	A.AccountNo,
+		C.LastName + ' ' + C.FirstName As LFName,
+		C.FatherName,
+		A.AccountDate,
+		C.BirthDate,
+		S.Title,
+		IsNull(C.Phones, '') As Phones,
+		IsNull(C.PersonalNo, '') As PersonalNo,
+		dbo.Exist(A.AccountID, @EndDate) As Exist,
+		dbo.TotalExist(A.AccountID, @EndDate, 0) As TotalExist,
+		M.MonthlyTypeTitle,
+		C.picture
+	From Account As A
+	Left Outer Join Contact As C On A.ContactID = C.ContactID
+	Left Outer Join Sexes As S On C.SexId = S.Sexid
+	Left Outer Join MonthlyType As M On A.MonthlyTypeID = M.MonthlyTypeID
+	Where A.AccountId = @AccountId
+GO
+
+COMMIT
+GO

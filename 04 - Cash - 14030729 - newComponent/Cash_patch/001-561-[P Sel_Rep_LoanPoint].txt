@@ -1,0 +1,19 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sel_Rep_LoanPoint]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sel_Rep_LoanPoint]
+END
+GO
+
+CREATE  procedure [dbo].[Sel_Rep_LoanPoint]
+AS
+select * from Rep_LoanPoint
+ORDER BY POINT DESC
+GO
+
+COMMIT
+GO

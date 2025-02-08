@@ -1,0 +1,341 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Report_PaymentInDetail]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Report_PaymentInDetail]
+END
+GO
+
+CREATE  procedure [dbo].[Report_PaymentInDetail]  
+	@DateFrom Char(10),
+	@DateTo Char(10),
+	@PayType int,
+	@Grouped int
+AS 
+if @PayType=0   
+BEGIN 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'P_MAIN') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table P_MAIN
+
+if exists (select * from dbo.sysobjects where id = object_id(N'P_MAIN_2') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table P_MAIN_2
+
+if exists (select * from dbo.sysobjects where id = object_id(N'P'))
+drop table P
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Loan_Tmp') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table Loan_Tmp
+
+SELECT    CAST( 'اقساط پرداخت شده' AS VARCHAR(100)) AS COMMENT,  
+           Payment.PayTypeID,  
+           Payment.CreditorAccountId,   
+           Payment.Amount,  
+            Cast(1 as smallint) AS status,   
+           Payment.[Date]  
+Into P    
+FROM       Payment INNER JOIN  
+           Account AC2 ON Payment.CreditorAccountId = AC2.AccountID    
+WHERE     (Payment.PayTypeID = 3)
+
+Insert InTo P      
+SELECT     'اقساط پرداخت شده' AS COMMENT,  
+           Payment.PayTypeID,  
+           Payment.DebtorAccountID,   
+           Payment.Amount,  
+           - 1 AS status,   
+           Payment.[Date]  
+FROM       Payment INNER JOIN  
+           Account AC2 ON Payment.DebtorAccountId = AC2.AccountID    
+WHERE     (Payment.PayTypeID = 3)
+
+Insert InTo P      
+SELECT     'ماهيانه اعضا' AS COMMENT,  
+           Payment.PayTypeID,  
+           Payment.CreditorAccountId,   
+           Payment.Amount,  
+            Cast(1 as smallint) AS status,   
+           Payment.[Date]  
+FROM       Payment INNER JOIN  
+           Account AC2 ON Payment.CreditorAccountId = AC2.AccountID    
+WHERE     (Payment.PayTypeID = 2) AND  AC2.AccountTypeId=1 
+
+Insert InTo P      
+SELECT     'ماهيانه اعضا' AS COMMENT,  
+           Payment.PayTypeID,  
+           Payment.DebtorAccountID,   
+           Payment.Amount,  
+           - 1 AS status,   
+           Payment.[Date]  
+FROM       Payment INNER JOIN  
+           Account AC2 ON Payment.DebtorAccountId = AC2.AccountID    
+WHERE     (Payment.PayTypeID = 2) AND  AC2.AccountTypeId=1  
+
+Insert InTo P      
+SELECT     'صندوق' AS COMMENT,  
+           9 AS PayTypeID,  
+           Payment.CreditorAccountId,   
+           Payment.Amount,  
+           Cast(1 AS smallint) AS status,   
+           Payment.[Date]  
+FROM       Payment INNER JOIN  
+           Account AC2 ON Payment.CreditorAccountId = AC2.AccountID    
+WHERE      Payment.CreditorAccountId=1 
+
+Insert InTo P      
+SELECT     'صندوق' AS COMMENT,  
+           9 AS PayTypeID ,  
+           Payment.DebtorAccountID,   
+           Payment.Amount,  
+           - 1 AS status,   
+           Payment.[Date]  
+FROM       Payment INNER JOIN  
+           Account AC2 ON Payment.DebtorAccountId = AC2.AccountID    
+WHERE      Payment.DebtorAccountID=1 
+
+Insert InTo P      
+SELECT     'هزينه هاي صندوق' AS COMMENT,  
+           5 AS PayTypeID,  
+           Payment.CreditorAccountId,   
+           Payment.Amount,  
+           Cast(1 AS smallint) AS status,   
+           Payment.[Date]  
+FROM       Payment INNER JOIN  
+           Account AC2 ON Payment.CreditorAccountId = AC2.AccountID    
+WHERE      Payment.CreditorAccountId=5 
+
+Insert InTo P      
+SELECT     'هزينه هاي صندوق' AS COMMENT,  
+           5 AS PayTypeID ,  
+           Payment.DebtorAccountID,   
+           Payment.Amount,  
+           - 1 AS status,   
+           Payment.[Date]  
+FROM       Payment INNER JOIN  
+           Account AC2 ON Payment.DebtorAccountId = AC2.AccountID    
+WHERE      Payment.DebtorAccountID=5 
+
+Insert InTo P      
+SELECT     'سود وام' AS COMMENT,  
+           7 AS PayTypeID,  
+           Payment.CreditorAccountId,   
+           Payment.Amount,  
+           Cast(1 AS smallint) AS status,   
+           Payment.[Date]  
+FROM       Payment INNER JOIN  
+           Account AC2 ON Payment.CreditorAccountId = AC2.AccountID    
+WHERE      Payment.CreditorAccountId=4 
+
+Insert InTo P      
+SELECT     'سود وام' AS COMMENT,  
+           7 AS PayTypeID ,  
+           Payment.DebtorAccountID,   
+           Payment.Amount,  
+           - 1 AS status,   
+           Payment.[Date]  
+FROM       Payment INNER JOIN  
+           Account AC2 ON Payment.DebtorAccountId = AC2.AccountID    
+WHERE      Payment.DebtorAccountID=4  
+  
+Insert InTo P      
+SELECT    'اعضا' AS COMMENT,  
+          8  AS PayTypeID,  
+          CreditorAccountId ,        
+          Amount,    
+          Cast(1 AS SmallInt) Status,    
+          Date        
+From Payment  Inner Join     
+     Account AC1 ON CreditorAccountId=AC1.AccountId      
+Where AC1.AccountTypeId=1  
+
+Insert InTo P      
+SELECT    'اعضا' AS COMMENT,  
+          8 AS PayTypeID,  
+          DebtorAccountId ,        
+          Amount,    
+         -1 status,    
+         Date      
+From Payment  Inner Join     
+     Account ac2 ON DebtorAccountId=Ac2.AccountId      
+Where Ac2.AccountTypeId=1  
+  
+Insert InTo P      
+SELECT     'دريافت و پرداخت اعضا' AS COMMENT,  
+           Payment.PayTypeID,  
+           Payment.CreditorAccountId,   
+           Payment.Amount,  
+            1 AS status,   
+           Payment.[Date]  
+FROM       Payment INNER JOIN  
+           Account AC2 ON Payment.CreditorAccountId = AC2.AccountID    
+WHERE     (Payment.PayTypeID = 1) AND  AC2.AccountTypeId=1
+
+Insert InTo P      
+SELECT     'دريافت و پرداخت اعضا' AS COMMENT,  
+           Payment.PayTypeID,  
+           Payment.DebtorAccountID,   
+           Payment.Amount,  
+           - 1 AS status,   
+           Payment.[Date]  
+FROM       Payment INNER JOIN  
+           Account AC2 ON Payment.DebtorAccountId = AC2.AccountID    
+WHERE     (Payment.PayTypeID = 1) AND  AC2.AccountTypeId=1
+  
+SELECT     Loan.LoanID, Loan.LoanNO, Loan.LoanDate, Loan.PartsBeginDate, Loan.Amount,Account.AccountID, Account.AccountNo,  
+          (SELECT     COUNT(1) FROM FORCEPAYMENT  WHERE PARENTID = LOAN.LOANID AND FORCETYPEID = 1             ) AS NUMBEROFPART,  
+          (SELECT     COUNT(1) FROM FORCEPAYMENT  WHERE PARENTID = LOAN.LOANID AND FORCETYPEID = 1 AND PAID = 1) AS NUMBEROFPAIDPART,  
+          (SELECT  SUM(AMOUNT) FROM FORCEPAYMENT  WHERE FORCETYPEID = 1 AND PARENTID = LOAN.LOANID AND PAID = 0) AS REMAINOFLOAN,  
+          (SELECT     COUNT(1) FROM FORCEPAYMENT  WHERE PARENTID = LOAN.LOANID AND PAID = 0 AND FORCETYPEID = 1 AND MATUREDATE < DBO.SHAMSI(GETDATE())) AS DELAYEDPARTS,   
+           Account.Familyid,  
+          (SELECT     RTRIM(C.LASTNAME) FROM  CONTACT C WHERE     C.CONTACTID = ACCOUNT.CONTACTID) + ' - ' +(SELECT     RTRIM(C.FIRSTNAME) FROM  CONTACT C WHERE  C.CONTACTID = ACCOUNT.CONTACTID) AS ACCOUNTTITLE, Loan.LoanComment  
+INTO Loan_Tmp  
+FROM  Loan INNER JOIN  
+      Account ON Account.AccountID = Loan.AccountID 
+
+insert into P  
+SELECT 'مبلغ مانده وام' AS COMMENT ,    
+          6 AS PayTypeID ,  
+           AccountID,   
+           isnull(REMAINOFLOAN,0) as amount ,  
+            1 AS status,   
+            LoanDate  
+From Loan_Tmp      
+  
+insert into P  
+SELECT 'اقساط پرداخت نشده' AS COMMENT,    
+          4 AS PayTypeID ,  
+           AccountID,   
+           isnull(Amount,0) - isnull(REMAINOFLOAN,0) as amount ,  
+            1 AS status,   
+            LoanDate  
+From Loan_Tmp      
+
+SELECT COMMENT,    
+       PayTypeID,  
+       (SELECT Sum(Case When Status=-1 Then amount Else 0      End) FROM  P AS _pD Where _pD.PayTypeID=P.PayTypeID AND Date Between @DateFrom and @DateTo) AS C1,  
+       (SELECT Sum(Case When Status=-1 Then 0      Else Amount End) FROM  P AS _pD Where _pD.PayTypeID=P.PayTypeID AND Date Between @DateFrom and @DateTo) AS C2,  
+       Sum(Case When status=-1 Then amount Else 0      End) AS C3,       
+       Sum(Case When status=-1 Then 0      Else Amount End) AS C4    
+INTO  P_MAIN                                                                 
+From  P AS P  
+GROUP BY         PayTypeID, COMMENT  
+ORDER BY PayTypeID  
+  
+  
+SELECT COMMENT,    
+       PayTypeID,  
+       C1,  
+       C2,  
+       C3,       
+       C4 ,  
+       Case When C4>C3 Then 0     Else C3-C4 End C5,      
+       Case When C4>C3 Then C4-C3 Else 0     End C6     
+INTO   P_MAIN_2  
+From  P_MAIN  AS M_P   
+ORDER BY PayTypeID   
+
+DECLARE  @C1_F AS BIGINT,@C2_F AS BIGINT,@C3_F AS BIGINT,@C4_F AS BIGINT ,@C5_F AS BIGINT ,@C6_F AS BIGINT,  
+         @C1_T AS BIGINT,@C2_T AS BIGINT,@C3_T AS BIGINT,@C4_T AS BIGINT ,@C5_T AS BIGINT ,@C6_T AS BIGINT  
+  
+ SELECT   @C1_F=ISNULL(Sum(C1),0)   ,  
+		  @C2_F=ISNULL(Sum(C2),0)   ,  
+		  @C3_F=ISNULL(Sum(C3),0)   ,  
+		  @C4_F=ISNULL(Sum(C4),0)   ,  
+		  @C5_F=ISNULL(Sum(C5),0)   ,  
+		  @C6_F=ISNULL(Sum(C6),0)     
+       FROM  P_MAIN_2  Where PayTypeID IN(9,2,3,7)   
+  
+ SELECT   @C1_T=ISNULL(Sum(C1),0)   ,  
+		  @C2_T=ISNULL(Sum(C2),0)   ,  
+	      @C3_T=ISNULL(Sum(C3),0)   ,  
+		  @C4_T=ISNULL(Sum(C4),0)   ,  
+		  @C5_T=ISNULL(Sum(C5),0)   ,  
+		  @C6_T=ISNULL(Sum(C6),0)     
+       FROM  P_MAIN_2  Where PayTypeID IN(5)   
+  
+ SELECT   COMMENT,  
+         PayTypeID,  
+         ISNULL(C1,0) AS C1,  
+         ISNULL(C2,0) AS C2,  
+         ISNULL(C3,0) AS C3,  
+         ISNULL(C4,0) AS C4,  
+         ISNULL(C5,0) AS C5,  
+         ISNULL(C6,0) AS C6  
+ FROM P_MAIN_2  
+ UNION ALL  
+ SELECT TOP 1     'نقدينگي صندوق' AS COMMENT,  
+        10  PayTypeID,  
+        @C1_F-@C1_T,  
+        @C2_F-@C2_T,  
+        @C3_F-@C3_T,  
+        @C4_F-@C4_T,  
+        @C5_F-@C5_T,  
+        @C6_F-@C6_T  
+ FROM     P_MAIN_2  
+
+END  
+
+if @PayType<>0  
+BEGIN  
+	 IF @PayType=10
+         BEGIN
+		  SELECT PayTypeID,  
+		         COMMENT,  
+		         AccountTitle,  
+		         AccountNo,  
+		         (Case When status=-1 Then Amount Else 0      End)amountDb,   
+		         (Case When status=-1 Then 0 Else amount      End)amountcr,  
+		         Date 
+	          INTO #FINAL_Tmp10 
+		  FROM P INNER JOIN ACCOUNT ON P.CreditorAccountId=ACCOUNT.accountid   
+		  Where PayTypeID IN (2,3,7,9,5)  
+		  ORDER BY PAYTYPEID
+  
+  		  IF @GROUPED=1 
+   		     SELECT PayTypeID,COMMENT,AccountTitle,AccountNo,SUM(AmountDb)AmountDb,SUM(AmountCr)AmountCr ,'1389/01/01' AS DATE 
+                     FROM #FINAL_Tmp10 
+                     GROUP BY PayTypeID,COMMENT,AccountTitle,AccountNo 
+	   	     ORDER BY PAYTYPEID,AccountNo
+ 
+                  ELSE IF @GROUPED<>1 
+    		     SELECT *
+                     FROM #FINAL_Tmp10 
+	   	     ORDER BY PAYTYPEID,AccountNo
+
+
+                  DROP TABLE #FINAL_Tmp10
+          END 
+          ELSE
+          BEGIN
+		  SELECT PayTypeID,  
+		         COMMENT,  
+		         AccountTitle,  
+		         AccountNo,  
+		         (Case When status=-1 Then Amount Else 0      End)amountDb,   
+		         (Case When status=-1 Then 0 Else amount      End)amountcr,  
+		         Date   
+	          INTO #FINAL_Tmp    
+		  FROM P INNER JOIN ACCOUNT ON P.CreditorAccountId=ACCOUNT.accountid   
+		  Where PayTypeID=@PayType  
+		  ORDER BY PAYTYPEID,AccountNo
+
+  		  IF @GROUPED=1
+   		     SELECT PayTypeID,COMMENT,AccountTitle,AccountNo,SUM(AmountDb)AmountDb,SUM(AmountCr)AmountCr,'1389/01/01' AS DATE   
+                     FROM #FINAL_Tmp 
+                     GROUP BY PayTypeID,COMMENT,AccountTitle,AccountNo 
+	   	     ORDER BY PAYTYPEID,AccountNo
+                  ELSE IF @GROUPED<>1
+   		     SELECT *
+                     FROM #FINAL_Tmp 
+	   	     ORDER BY PAYTYPEID,AccountNo
+
+                  DROP TABLE #FINAL_Tmp
+          END   
+END
+GO
+
+COMMIT
+GO

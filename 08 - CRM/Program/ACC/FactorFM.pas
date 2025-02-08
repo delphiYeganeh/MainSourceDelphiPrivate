@@ -998,10 +998,8 @@ fa.[CustomerID]
     Memo.Memo.Text := ' '+QHeader.Fields.fieldbyname('Tozihat').AsString + ' ' ;
 
 
-
   TfrxPictureView(MainReport.FindObject('PicCash')).Visible    := not QHeader.Fields.FieldByName('IsNoNCash').AsBoolean  ;
   TfrxPictureView(MainReport.FindObject('PicNotCash')).Visible := QHeader.Fields.FieldByName('IsNonCash').AsBoolean ;
-
 
   Memo := TfrxMemoView(MainReport.FindObject('memBuyerEconomicalNumber'));
   if Memo <> nil then
@@ -1050,7 +1048,6 @@ fa.[CustomerID]
       end;
     end;
   end;
-
 
   MainReport.ShowReport;
 

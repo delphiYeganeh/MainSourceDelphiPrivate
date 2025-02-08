@@ -1,0 +1,24 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Sp_ShowBill]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Sp_ShowBill]
+END
+GO
+
+CREATE  procedure [dbo].[Sp_ShowBill] @PaymentID INT
+AS
+SELECT     Payment.CreditorAccountID, Payment.DebtorAccountID, Payment.[Date], Payment.[Time], Payment.Amount, Payment.Comment, 
+                      Payment.FINANCIALNOTE_DETAILID, Account.AccountTitle AS CreditAccountTitle, Account_1.AccountTitle AS DebitAccountTitle, Payment.documentno, 
+                      Payment.PaymentID,Account.AccountNo AS CreditAccountNo ,Account_1.AccountNo AS DebitAccountNo
+FROM         Payment INNER JOIN
+                      Account ON Payment.CreditorAccountID = Account.AccountID INNER JOIN
+                      Account Account_1 ON Payment.DebtorAccountID = Account_1.AccountID
+WHERE dbo.Payment.PaymentID=@PaymentID
+GO
+
+COMMIT
+GO

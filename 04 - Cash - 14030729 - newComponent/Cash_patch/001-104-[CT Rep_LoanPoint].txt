@@ -1,0 +1,31 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'Rep_LoanPoint')
+BEGIN
+	CREATE TABLE [dbo].[Rep_LoanPoint](
+		[ACCOUNTID] [int] IDENTITY(1,1) NOT NULL,
+		[ACCOUNTNO] [varchar](20) NOT NULL,
+		[ACCOUNTTITLE] [nvarchar](100) NULL,
+		[ACCOUNTDATE] [char](10) NOT NULL,
+		[LASTLOANDATE] [char](10) NULL,
+		[LASTLOANID] [int] NULL,
+		[REQUESTDATE] [char](10) NULL,
+		[PARTDELAY] [int] NULL,
+		[MONTHLYDELAY] [int] NULL,
+		[AVGPOINT] [int] NULL,
+		[POINT] [int] NULL,
+		[NUMBEROFPART] [tinyint] NULL,
+		[LASTLOANAMOUNT] [int] NULL,
+		[LASTLOANNO] [varchar](10) NULL,
+		[REMAINOFLOAN] [int] NULL,
+		[GroupPaymentPoint] [int] NULL
+	) ON [PRIMARY]
+END
+GO
+
+COMMIT
+GO

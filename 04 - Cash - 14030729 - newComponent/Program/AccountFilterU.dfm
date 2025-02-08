@@ -1,0 +1,929 @@
+inherited FrAccountFilter: TFrAccountFilter
+  Left = 721
+  Top = 235
+  Width = 565
+  Height = 391
+  Caption = ''
+  Color = clBtnFace
+  Font.Height = -12
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 14
+  object chbIsActive: TCheckBox [0]
+    Left = 287
+    Top = 248
+    Width = 173
+    Height = 17
+    Anchors = [akTop, akRight]
+    Caption = #1606#1605#1575#1610#1588' '#1581#1587#1575#1576#1607#1575#1610' '#1576#1587#1578#1607' '#1588#1583#1607
+    Checked = True
+    State = cbChecked
+    TabOrder = 0
+  end
+  object chbShowLoanPaymentFinished: TCheckBox [1]
+    Left = 32
+    Top = 248
+    Width = 164
+    Height = 17
+    Anchors = [akLeft, akTop, akRight]
+    Caption = #1606#1605#1575#1610#1588' '#1608#1575#1605#1607#1575#1610' '#1578#1587#1608#1610#1607' '#1606#1588#1583#1607
+    Checked = True
+    State = cbChecked
+    TabOrder = 1
+  end
+  object pnlMain: TPanel [2]
+    Left = 0
+    Top = 0
+    Width = 549
+    Height = 352
+    Align = alClient
+    TabOrder = 2
+    DesignSize = (
+      549
+      352)
+    object userField2: TLabel
+      Left = 183
+      Top = 276
+      Width = 94
+      Height = 14
+      Hint = #1593#1606#1608#1575#1606' '#1575#1610#1606' '#1601#1610#1604#1583' '#1585#1575' '#1605#1610' '#1578#1608#1575#1606#1610#1583' '#1583#1585' '#1575#1591#1604#1575#1593#1575#1578' '#1579#1575#1576#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1578#1594#1610#1610#1585' '#1583#1607#1610#1583
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1601#1610#1604#1583' '#1705#1575#1585#1576#1585
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object userField1: TLabel
+      Left = 183
+      Top = 239
+      Width = 94
+      Height = 14
+      Hint = #1593#1606#1608#1575#1606' '#1575#1610#1606' '#1601#1610#1604#1583' '#1585#1575' '#1605#1610' '#1578#1608#1575#1606#1610#1583' '#1583#1585' '#1575#1591#1604#1575#1593#1575#1578' '#1579#1575#1576#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1578#1594#1610#1610#1585' '#1583#1607#1610#1583
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1601#1610#1604#1583' '#1705#1575#1585#1576#1585
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object LblPersonal: TLabel
+      Left = 445
+      Top = 47
+      Width = 100
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1588#1605#1575#1585#1607' '#1603#1575#1585#1605#1606#1583#1610
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object LblFamily: TLabel
+      Left = 183
+      Top = 49
+      Width = 94
+      Height = 14
+      Anchors = [akTop, akRight]
+      Caption = #1582#1575#1606#1608#1575#1583#1607
+      FocusControl = YWhereedit11
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label9: TLabel
+      Left = 218
+      Top = 162
+      Width = 59
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1588#1605#1575#1585#1607' '#1578#1604#1601#1606
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object Label8: TLabel
+      Left = 445
+      Top = 276
+      Width = 100
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1570#1583#1585#1587
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object Label7: TLabel
+      Left = 183
+      Top = 123
+      Width = 94
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1605#1581#1604' '#1578#1608#1604#1583
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 445
+      Top = 314
+      Width = 100
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1578#1575#1585#1610#1582' '#1575#1601#1578#1578#1575#1581' '#1581#1587#1575#1576
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 445
+      Top = 200
+      Width = 100
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1588#1605#1575#1585#1607' '#1588#1606#1575#1587#1606#1575#1605#1607
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 445
+      Top = 161
+      Width = 100
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1606#1575#1605' '#1662#1583#1585' '
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 445
+      Top = 85
+      Width = 100
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1606#1575#1605
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 445
+      Top = 124
+      Width = 100
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610' '
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object Label15: TLabel
+      Left = 183
+      Top = 85
+      Width = 94
+      Height = 14
+      Anchors = [akTop, akRight]
+      Caption = #1578#1608#1590#1610#1581#1575#1578
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label13: TLabel
+      Left = 183
+      Top = 200
+      Width = 94
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1606#1608#1593' '#1593#1590#1608#1610#1578
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object Label12: TLabel
+      Left = 183
+      Top = 12
+      Width = 94
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1578#1575#1585#1610#1582' '#1588#1585#1608#1593' '#1593#1590#1608#1610#1578
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object Label11: TLabel
+      Left = 183
+      Top = 314
+      Width = 94
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1605#1608#1580#1608#1583#1610
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object Label10: TLabel
+      Left = 445
+      Top = 239
+      Width = 100
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1578#1575#1585#1610#1582' '#1578#1608#1604#1583
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object label1: TLabel
+      Left = 445
+      Top = 9
+      Width = 100
+      Height = 14
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Caption = #1588#1605#1575#1585#1607' '#1581#1587#1575#1576
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+    end
+    object SpeedButton1: TAdvGlowButton
+      Left = 5
+      Top = 45
+      Width = 23
+      Height = 22
+      ImageIndex = 138
+      Images = dm.ImageList_MainNew
+      NotesFont.Charset = DEFAULT_CHARSET
+      NotesFont.Color = clWindowText
+      NotesFont.Height = -11
+      NotesFont.Name = 'Tahoma'
+      NotesFont.Style = []
+      TabOrder = 18
+      OnClick = SpeedButton1Click
+      Appearance.ColorChecked = 16111818
+      Appearance.ColorCheckedTo = 16367008
+      Appearance.ColorDisabled = 15921906
+      Appearance.ColorDisabledTo = 15921906
+      Appearance.ColorDown = 16111818
+      Appearance.ColorDownTo = 16367008
+      Appearance.ColorHot = 16117985
+      Appearance.ColorHotTo = 16372402
+      Appearance.ColorMirrorHot = 16107693
+      Appearance.ColorMirrorHotTo = 16775412
+      Appearance.ColorMirrorDown = 16102556
+      Appearance.ColorMirrorDownTo = 16768988
+      Appearance.ColorMirrorChecked = 16102556
+      Appearance.ColorMirrorCheckedTo = 16768988
+      Appearance.ColorMirrorDisabled = 11974326
+      Appearance.ColorMirrorDisabledTo = 15921906
+    end
+    object SpeedButton2: TAdvGlowButton
+      Left = 5
+      Top = 195
+      Width = 23
+      Height = 22
+      ImageIndex = 138
+      Images = dm.ImageList_MainNew
+      NotesFont.Charset = DEFAULT_CHARSET
+      NotesFont.Color = clWindowText
+      NotesFont.Height = -11
+      NotesFont.Name = 'Tahoma'
+      NotesFont.Style = []
+      TabOrder = 19
+      OnClick = SpeedButton2Click
+      Appearance.ColorChecked = 16111818
+      Appearance.ColorCheckedTo = 16367008
+      Appearance.ColorDisabled = 15921906
+      Appearance.ColorDisabledTo = 15921906
+      Appearance.ColorDown = 16111818
+      Appearance.ColorDownTo = 16367008
+      Appearance.ColorHot = 16117985
+      Appearance.ColorHotTo = 16372402
+      Appearance.ColorMirrorHot = 16107693
+      Appearance.ColorMirrorHotTo = 16775412
+      Appearance.ColorMirrorDown = 16102556
+      Appearance.ColorMirrorDownTo = 16768988
+      Appearance.ColorMirrorChecked = 16102556
+      Appearance.ColorMirrorCheckedTo = 16768988
+      Appearance.ColorMirrorDisabled = 11974326
+      Appearance.ColorMirrorDisabledTo = 15921906
+    end
+    object YWhereEdit8: TYWhereEdit
+      Left = 295
+      Top = 271
+      Width = 150
+      Height = 22
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Color = clWhite
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 0
+      isLike = False
+      isDate = False
+      EveryLike = True
+      isString = True
+      FieldName = 'Address'
+      TableName = 'Contact'
+      CodeField = 'Code'
+      TitleField = 'Title'
+    end
+    object YWhereEdit6: TYWhereEdit
+      Left = 295
+      Top = 194
+      Width = 150
+      Height = 22
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Color = clWhite
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 1
+      isLike = False
+      isDate = False
+      EveryLike = False
+      isString = True
+      FieldName = 'Idno'
+      TableName = 'Contact'
+      CodeField = 'Code'
+      TitleField = 'Title'
+    end
+    object YWhereEdit5: TYWhereEdit
+      Left = 295
+      Top = 156
+      Width = 150
+      Height = 22
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Color = clWhite
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 2
+      isLike = False
+      isDate = False
+      EveryLike = True
+      isString = True
+      FieldName = 'FatherName'
+      TableName = 'Contact'
+      CodeField = 'Code'
+      TitleField = 'Title'
+    end
+    object YWhereEdit4: TYWhereEdit
+      Left = 295
+      Top = 118
+      Width = 150
+      Height = 22
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Color = clWhite
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 3
+      isLike = False
+      isDate = False
+      EveryLike = True
+      isString = True
+      FieldName = 'LastName'
+      TableName = 'Contact'
+      CodeField = 'Code'
+      TitleField = 'Title'
+    end
+    object YWhereEdit3: TYWhereEdit
+      Left = 295
+      Top = 80
+      Width = 150
+      Height = 22
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Color = clWhite
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 4
+      isLike = False
+      isDate = False
+      EveryLike = True
+      isString = True
+      FieldName = 'FirstName'
+      TableName = 'Contact'
+      CodeField = 'Code'
+      TitleField = 'Title'
+    end
+    object YWhereEdit2: TYWhereEdit
+      Left = 295
+      Top = 42
+      Width = 150
+      Height = 22
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Color = clWhite
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 5
+      isLike = False
+      isDate = False
+      EveryLike = True
+      isString = False
+      FieldName = 'PersonalNo'
+      TableName = 'Contact'
+      CodeField = 'Code'
+      TitleField = 'Title'
+    end
+    object YWhereEdit19: TYWhereEdit
+      Left = 30
+      Top = 309
+      Width = 150
+      Height = 22
+      Anchors = [akLeft, akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Color = clWhite
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 6
+      isLike = False
+      isDate = False
+      EveryLike = False
+      isString = False
+      FieldName = 'dbo.Balance(AccountID,'#39'2'#39')'
+      CodeField = 'Code'
+      TitleField = 'Title'
+    end
+    object YWhereEdit17: TYWhereEdit
+      Left = 30
+      Top = 271
+      Width = 150
+      Height = 22
+      Hint = #1593#1606#1608#1575#1606' '#1575#1610#1606' '#1601#1610#1604#1583' '#1585#1575' '#1605#1610' '#1578#1608#1575#1606#1610#1583' '#1583#1585' '#1575#1591#1604#1575#1593#1575#1578' '#1579#1575#1576#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1578#1594#1610#1610#1585' '#1583#1607#1610#1583
+      Anchors = [akLeft, akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Color = clWhite
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 7
+      isLike = False
+      isDate = False
+      EveryLike = True
+      isString = True
+      FieldName = 'UserField2'
+      TableName = 'Contact'
+      CodeField = 'Code'
+      TitleField = 'Title'
+    end
+    object YWhereEdit16: TYWhereEdit
+      Left = 30
+      Top = 233
+      Width = 150
+      Height = 22
+      Hint = #1593#1606#1608#1575#1606' '#1575#1610#1606' '#1601#1610#1604#1583' '#1585#1575' '#1605#1610' '#1578#1608#1575#1606#1610#1583' '#1583#1585' '#1575#1591#1604#1575#1593#1575#1578' '#1579#1575#1576#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1578#1594#1610#1610#1585' '#1583#1607#1610#1583
+      Anchors = [akLeft, akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Color = clWhite
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 8
+      isLike = False
+      isDate = False
+      EveryLike = True
+      isString = True
+      FieldName = 'UserField1'
+      TableName = 'Contact'
+      CodeField = 'Code'
+      TitleField = 'Title'
+    end
+    object ywhereedit15: TYWhereEdit
+      Left = 30
+      Top = 194
+      Width = 150
+      Height = 22
+      Anchors = [akLeft, akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Color = 15395583
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 9
+      OnKeyDown = GotoNext
+      isLike = False
+      isDate = False
+      EveryLike = False
+      isString = False
+      FieldName = 'MonthlyTypeID'
+      TableName = 'Account'
+      ListTable = 'MonthlyType'
+      CodeField = 'MonthlyTypeId'
+      TitleField = 'MonthlyTypeTitle'
+      Connection = dm.YeganehConnection
+    end
+    object YWhereEdit14: TYWhereEdit
+      Left = 30
+      Top = 156
+      Width = 150
+      Height = 22
+      Anchors = [akLeft, akTop, akRight]
+      BiDiMode = bdRightToLeft
+      Color = clWhite
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 10
+      isLike = True
+      isDate = False
+      EveryLike = True
+      isString = True
+      FieldName = 'Phones'
+      TableName = 'Contact'
+      CodeField = 'Code'
+      TitleField = 'Title'
+    end
+    object YWhereEdit13: TYWhereEdit
+      Left = 30
+      Top = 118
+      Width = 150
+      Height = 22
+      Anchors = [akLeft, akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Color = clWhite
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 11
+      isLike = False
+      isDate = False
+      EveryLike = False
+      isString = True
+      FieldName = 'BirthPlace'
+      TableName = 'Contact'
+      CodeField = 'Code'
+      TitleField = 'Title'
+    end
+    object ywhereedit12: TYWhereEdit
+      Left = 30
+      Top = 80
+      Width = 150
+      Height = 22
+      Anchors = [akLeft, akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 12
+      isLike = False
+      isDate = False
+      EveryLike = True
+      isString = True
+      FieldName = 'Memo'
+      TableName = 'Contact'
+      CodeField = 'Code'
+      TitleField = 'Title'
+    end
+    object YWhereedit11: TYWhereEdit
+      Left = 30
+      Top = 44
+      Width = 150
+      Height = 22
+      Anchors = [akLeft, akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Color = 15395583
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 13
+      OnKeyDown = GotoNext
+      isLike = False
+      isDate = False
+      EveryLike = False
+      isString = False
+      FieldName = 'FamilyID'
+      TableName = 'Account'
+      ListTable = 'Family'
+      CodeField = 'FamilyID'
+      TitleField = 'FamilyTitle'
+      Connection = dm.YeganehConnection
+    end
+    object YWhereEdit1: TYWhereEdit
+      Left = 295
+      Top = 4
+      Width = 150
+      Height = 22
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      Color = clWhite
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 14
+      isLike = False
+      isDate = False
+      EveryLike = False
+      isString = True
+      FieldName = 'AccountNo'
+      TableName = 'Account'
+      CodeField = 'Code'
+      TitleField = 'Title'
+    end
+    object MEMonthlyBeginDate: TSolarDatePicker
+      Left = 30
+      Top = 6
+      Width = 150
+      Height = 22
+      Anchors = [akLeft, akTop, akRight]
+      About = 'Created by : Mohamad Khorsandi'
+      BiDiMode = bdLeftToRight
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 15
+      Enabled = True
+      OnEnter = TEditEnter
+      DateKind = dkSolar
+      CheckInputOnExit = True
+      Divider = dSlash
+      ShowToDay = True
+      MonthObject = moComboBox
+      Glyph = gtCalendar
+      ShowDefaultDate = False
+      AutoCheck = False
+      AutoDeleteDelimiter = False
+      EnabledDays = [mcSaturday, mcSunday, mcMonday, mcTuesday, mcWednesday, mcThursday, mcFriday]
+      MaskEnabled = False
+      ColorCaptionStart = 13158600
+      ColorCaptionStop = clWhite
+      ColorBodyStart = clWhite
+      ColorBodyStop = clWhite
+      ColorTodayLine = clBlack
+      ColorSelectBrush = 14474460
+      ColorDisableMonth = clGray
+      ColorVacationDay = clRed
+      ColorNormalDay = clBlack
+      ColorStyle = csWhiteGray
+      ButtonStyle = bsRound
+      DataFieldType = dftSolar
+      DataFieldAutoSaveModified = False
+    end
+    object MEBirthDate: TSolarDatePicker
+      Left = 295
+      Top = 233
+      Width = 150
+      Height = 22
+      Anchors = [akTop, akRight]
+      About = 'Created by : Mohamad Khorsandi'
+      BiDiMode = bdLeftToRight
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 16
+      Enabled = True
+      OnEnter = TEditEnter
+      DateKind = dkSolar
+      CheckInputOnExit = True
+      Divider = dSlash
+      ShowToDay = True
+      MonthObject = moComboBox
+      Glyph = gtCalendar
+      ShowDefaultDate = False
+      AutoCheck = False
+      AutoDeleteDelimiter = False
+      EnabledDays = [mcSaturday, mcSunday, mcMonday, mcTuesday, mcWednesday, mcThursday, mcFriday]
+      MaskEnabled = False
+      ColorCaptionStart = 13158600
+      ColorCaptionStop = clWhite
+      ColorBodyStart = clWhite
+      ColorBodyStop = clWhite
+      ColorTodayLine = clBlack
+      ColorSelectBrush = 14474460
+      ColorDisableMonth = clGray
+      ColorVacationDay = clRed
+      ColorNormalDay = clBlack
+      ColorStyle = csWhiteGray
+      ButtonStyle = bsRound
+      DataFieldType = dftSolar
+      DataFieldAutoSaveModified = False
+    end
+    object MEAccountDate: TSolarDatePicker
+      Left = 295
+      Top = 309
+      Width = 150
+      Height = 22
+      Anchors = [akTop, akRight]
+      About = 'Created by : Mohamad Khorsandi'
+      BiDiMode = bdLeftToRight
+      Font.Charset = ARABIC_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 17
+      Enabled = True
+      OnEnter = TEditEnter
+      DateKind = dkSolar
+      CheckInputOnExit = True
+      Divider = dSlash
+      ShowToDay = True
+      MonthObject = moComboBox
+      Glyph = gtCalendar
+      ShowDefaultDate = False
+      AutoCheck = False
+      AutoDeleteDelimiter = False
+      EnabledDays = [mcSaturday, mcSunday, mcMonday, mcTuesday, mcWednesday, mcThursday, mcFriday]
+      MaskEnabled = False
+      ColorCaptionStart = 13158600
+      ColorCaptionStop = clWhite
+      ColorBodyStart = clWhite
+      ColorBodyStop = clWhite
+      ColorTodayLine = clBlack
+      ColorSelectBrush = 14474460
+      ColorDisableMonth = clGray
+      ColorVacationDay = clRed
+      ColorNormalDay = clBlack
+      ColorStyle = csWhiteGray
+      ButtonStyle = bsRound
+      DataFieldType = dftSolar
+      DataFieldAutoSaveModified = False
+    end
+  end
+  inherited ahmadvand: TActionList
+    Left = 287
+    Top = 228
+  end
+  inherited Grid_PopupMenu: TPopupMenu
+    Left = 79
+    Top = 181
+  end
+  inherited qSetting: TADOQuery
+    Left = 136
+    Top = 176
+  end
+end

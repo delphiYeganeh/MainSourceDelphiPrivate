@@ -1,0 +1,60 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[REPORT_LOAN]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[REPORT_LOAN]
+END
+GO
+
+CREATE  procedure [dbo].[REPORT_LOAN]
+(
+	@WHERE VARCHAR(1000),
+	@ROWCOUNT CHAR(100)=500
+)            
+AS    
+            
+DECLARE @SQL NVARCHAR(4000)                
+SET @WHERE =ISNULL(LTRIM(@WHERE),'')            
+IF @WHERE <>'' SET @WHERE=' WHERE  '+@WHERE  
+          
+IF @ROWCOUNT=0 
+  SET @SQL='SELECT '
+ELSE
+  SET @SQL='SELECT TOP '+@ROWCOUNT  
+            
+SET @SQL=@Sql+'            
+	      LOANID, 
+          LOANNO,
+          LOANDATE,
+          PARTSBEGINDATE,
+          AMOUNT,            
+          LOANTYPETITLE,
+          ACCOUNTNO,/*ACCOUNTTITLE,*/           
+          ISNULL(FIRSTNAME+'' '','''')+LASTNAME SPONSORTITLE, 
+          (SELECT SUM(AMOUNT) FROM FORCEPAYMENT WHERE  PARENTID=LOAN.LOANID AND FORCETYPEID=1 AND PAID=1) PAIEDAMOUNT ,           
+          (SELECT COUNT(1) FROM FORCEPAYMENT WHERE  PARENTID=LOAN.LOANID AND FORCETYPEID=1 ) NUMBEROFPART,            
+          (SELECT COUNT(1) FROM FORCEPAYMENT WHERE  PARENTID=LOAN.LOANID AND  FORCETYPEID=1 AND PAID=1) NUMBEROFPAIDPART,            
+          (SELECT SUM(AMOUNT) FROM FORCEPAYMENT WHERE FORCETYPEID=1 AND PARENTID=LOAN.LOANID AND PAID=0) REMAINOFLOAN,            
+          (SELECT COUNT(1) FROM FORCEPAYMENT WHERE  PARENTID=LOAN.LOANID AND PAID=0 AND FORCETYPEID=1 AND MATUREDATE<DBO.SHAMSI(GETDATE()) ) DELAYEDPARTS,
+          ACCOUNT.FAMILYID /*RANJBAR*/ ,
+          (SELECT RTRIM(C.LASTNAME) FROM CONTACT C WHERE C.CONTACTID = ACCOUNT.CONTACTID) + '' - ''+        
+          (SELECT RTRIM(C.FIRSTNAME) FROM CONTACT C WHERE C.CONTACTID = ACCOUNT.CONTACTID)AS ACCOUNTTITLE   /*RANJBAR*/,        
+          LOANCOMMENT /*RANJBAR*/       ,
+          Family.FamilyTitle   ,Loan.LoanTypeID    
+FROM         Loan INNER JOIN
+                      Account ON Account.AccountID = Loan.AccountID LEFT OUTER JOIN
+                      Family ON Account.Familyid = Family.FamilyID LEFT OUTER JOIN
+                      LoanType ON Loan.LoanTypeID = LoanType.LoanTypeID LEFT OUTER JOIN
+                      Contact ON Loan.SponsorContactID = Contact.ContactID '          
+					       
+            
+SET @SQL=@SQL+@WHERE+' ORDER BY LOANNO '     
+EXEC SP_EXECUTESQL @SQL
+
+GO
+
+COMMIT
+GO

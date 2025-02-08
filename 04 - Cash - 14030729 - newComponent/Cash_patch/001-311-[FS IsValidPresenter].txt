@@ -1,0 +1,37 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[IsValidPresenter]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[IsValidPresenter]
+END
+GO
+
+CREATE FUNCTION [dbo].[IsValidPresenter]
+(
+	@AccountId INT,
+	@ContactID int,
+	@AccountPresenterId INT
+)    
+RETURNS bit AS    
+BEGIN    
+	Declare @IsValidPresenter Bit    
+	IF EXISTS(SELECT AccountPresenterId, AccountId, ContactId
+              FROM   AccountPresenter  
+              where  AccountId=@AccountId AND 
+                     ContactId=@ContactID AND 
+                     AccountPresenterId <> @AccountPresenterId )  
+    
+		Set @IsValidPresenter=0    
+    Else    
+		Set @IsValidPresenter=1    
+    
+    
+	Return(@IsValidPresenter)    
+end 
+GO
+
+COMMIT
+GO

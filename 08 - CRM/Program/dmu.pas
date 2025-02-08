@@ -917,6 +917,8 @@ type
     QrFixAssetCount: TIntegerField;
     QrFixAssetUserId: TIntegerField;
     QrFixAssetDate: TDateTimeField;
+    Select_FollowUP_By_DateparentMarketerTitle: TStringField;
+    Select_FollowUP_By_CustomerIDparentMarketerTitle: TStringField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
     function  GetSql(s:string):Variant;
     function  GetNewCode:string;
@@ -989,7 +991,7 @@ type
     procedure SaveTemplateToFile;
     procedure RefreshTemplate;
     procedure Replace(var main:widestring;old,new:widestring);
-    procedure RefreshFollowUP(Bdate,Edate:String;Ds:integer; ActionTypeID,BSuccess,ESuccess:byte;Comment_like,DoneComment_like: string;MarketerID:integer; CommentTypeOr: boolean; GroupID: integer = 0;CustomerName:String='';CustomerID:String = '0'; TimeInterval : Integer = 0 ); // Amin 1391/08/25
+    procedure RefreshFollowUP(Bdate,Edate:String;Ds:integer; ActionTypeID,BSuccess,ESuccess:byte;Comment_like,DoneComment_like: string;MarketerID:integer; CommentTypeOr: boolean; GroupID: integer = 0;CustomerName:String='';CustomerID:String = '0'; TimeInterval : Integer = 0 ; CompaginID : Integer = 0 ; StateID : Integer = 0); // Amin 1391/08/25
     //Edited
     procedure RefreshFollowUP_bydate(Bdate,Edate:String;Ds:integer;MarketerID:integer);
     procedure GetOneDayFollowUP(date:String);
@@ -1111,7 +1113,8 @@ Var
    SF_CustomerID       : String;
    SF_CustomerName     : String;
    SF_TimeInterval     : Integer;
-
+   SF_CompaginID     : Integer;
+   SF_StateID     : Integer;
 
   { TODO -oparsa : 14030204 }
    //---
@@ -1586,7 +1589,7 @@ end;
 
 
 procedure Tdm.RefreshFollowUP(Bdate,Edate:String;Ds:integer;
-              ActionTypeID,BSuccess,ESuccess:byte;Comment_like,DoneComment_like: string;MarketerID:integer; CommentTypeOr: boolean; GroupID: integer = 0;CustomerName:String='';CustomerID:String = '0'; TimeInterval : Integer = 0); // Amin 1391/08/25 Edited
+              ActionTypeID,BSuccess,ESuccess:byte;Comment_like,DoneComment_like: string;MarketerID:integer; CommentTypeOr: boolean; GroupID: integer = 0;CustomerName:String='';CustomerID:String = '0'; TimeInterval : Integer = 0 ; CompaginID : Integer = 0 ; StateID : Integer = 0); // Amin 1391/08/25 Edited
 begin
 
      SF_Bdate        := BDate;
@@ -1604,6 +1607,8 @@ begin
      SF_CustomerID       := CustomerID;
      SF_CustomerName     := CustomerName;
      SF_TimeInterval     := TimeInterval;
+     SF_CompaginID       := CompaginID ;
+     SF_StateID          := StateID ;
 
   with Select_FollowUP_By_Date do
    begin
@@ -1623,6 +1628,8 @@ begin
      Parameters.ParamByName('@CustomerID').Value      := StrToInt(CustomerID);
      Parameters.ParamByName('@CustomerName').Value    := CustomerName;
      Parameters.ParamByName('@TimeInterval').Value    := TimeInterval;
+     Parameters.ParamByName('@CompaginID').Value      := CompaginID;
+     Parameters.ParamByName('@StateID').Value         := StateID;
      Open;
 //     try FrViewByCalender.calender; except end;
 //     MainForm.StatusBar1.Panels[2].Text:='йзого : '+IntToStr(RecordCount)

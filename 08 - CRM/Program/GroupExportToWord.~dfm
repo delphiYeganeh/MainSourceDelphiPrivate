@@ -1,0 +1,235 @@
+inherited FrMakeGroupExport: TFrMakeGroupExport
+  Left = 1025
+  Top = 128
+  BorderStyle = bsSingle
+  Caption = #1578#1607#1610#1607' '#1711#1586#1575#1585#1588' '#1575#1586
+  ClientHeight = 159
+  ClientWidth = 383
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel [0]
+    Left = 0
+    Top = 118
+    Width = 383
+    Height = 41
+    Align = alBottom
+    TabOrder = 0
+    DesignSize = (
+      383
+      41)
+    object Button2: TButton
+      Left = 276
+      Top = 8
+      Width = 97
+      Height = 25
+      Anchors = [akTop, akRight]
+      Caption = #1575#1585#1587#1575#1604' '#1576#1607' WORD'
+      TabOrder = 0
+      OnClick = Button2Click
+    end
+    object BBClose: TBitBtn
+      Left = 8
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = #1582#1585#1608#1580
+      TabOrder = 1
+      OnClick = BBCloseClick
+      Glyph.Data = {
+        86050000424D8605000000000000360000002800000016000000140000000100
+        18000000000050050000120B0000120B00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF89899E7D7D8FB5B591E8E8
+        D3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF61607B00004803
+        04713F3F6D8B8B82DDDDD5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        6464780A0B840000C800009A232353858580FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFB2B19F1C1D5F0004E40000EA0000861D1D37B1B2ABFFFFFFFF
+        FFFFFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFC5C5B81E1F470206DC0307FC0000B909094F
+        9F9F98FFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC6C6B81F20680509ED0206
+        EE0000CC0606658E8E8CFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF77776C04
+        05970A0EFB0003DD0001CA03035F969694FFFFFF0000FFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        DBDBD2272767080BEC0105EE0204D40102C3080842C1C1B90000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F5F1BEBEBBFFFFFFFFFF
+        FFFFFFFFFFFFFF3B3B530104DB0509F90001DC0306D70000935A5B6C0000FFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB9B8AD46466004043C8A
+        8A84FFFFFFFFFFFFE6E6DB2525590002E60408F70002E80002D30001DC0A0A49
+        0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7E7E18A8A810B0B4800009E
+        1D1D63E9E9DFFFFFFFBBBBAE4343470205B40003F90003F30002EF0002E00003
+        F10000510000FFFFFFFFFFFFFFFFFFFFFFFFEDEDE391918A27274D00007D0000
+        CB0101B12C2C306565673536490B0B610000AB0002F20003F30508F40206F201
+        04EF0102F21415520000FFFFFFE9E9DDC4C4AF84848426265400007B0000CB02
+        04DE0103D70002B200028D0000A20000C30000E20305F70408F10B0EF41013F2
+        1114F50C10FF00008A7F7F84000056567030317500007100009E0000E40004F9
+        0003EF0002E90002E60002E60002E80003EC0206F1070AF40D11F6171BFA1D21
+        FE1C1FFF1215F000007B64656FFFFFFF00000000210002670608C40E11F41C1F
+        FF1E21FF1214F20D10F4080CF40408F6070CFE1216FF171BFF1C20FC1D20F117
+        1AE41113C91011892829538A8A84FFFFFFFFFFFF0000FFFFFFB6B6B36D6D6639
+        395B1717811819C13335FF282BFB1B1EF51518E70C0FC000009B07098A171881
+        262673353562585858A1A19BFFFFFFFFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFF
+        FFFFFFFFFFFFAAAA9D56576614156A2324D22F31FF1416C31D1D268F8F839D9C
+        8BB2B2A6CCCCC2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB0AFA448495E1112921013E6343661FF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF69696213146F
+        00005C929188FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFC6C6C073737FCDCDCDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFF0000}
+    end
+  end
+  object Panel2: TPanel [1]
+    Left = 0
+    Top = 0
+    Width = 383
+    Height = 118
+    Align = alClient
+    TabOrder = 1
+    DesignSize = (
+      383
+      118)
+    object Label3: TLabel
+      Left = 286
+      Top = 11
+      Width = 87
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1602#1575#1604#1576' '#1605#1608#1585#1583' '#1575#1587#1578#1601#1575#1583#1607' '
+    end
+    object Label1: TLabel
+      Left = 225
+      Top = 86
+      Width = 62
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1575#1606#1583#1575#1586#1607' '#1578#1589#1575#1608#1610#1585' :'
+      Visible = False
+    end
+    object Label2: TLabel
+      Left = 201
+      Top = 86
+      Width = 19
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1591#1608#1604
+      Visible = False
+    end
+    object Label4: TLabel
+      Left = 131
+      Top = 86
+      Width = 26
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #1575#1585#1578#1601#1575#1593
+      Visible = False
+    end
+    object DBLkCBTemplateTitle: TDBLookupComboBox
+      Left = 67
+      Top = 8
+      Width = 216
+      Height = 21
+      Anchors = [akTop, akRight]
+      BiDiMode = bdLeftToRight
+      KeyField = 'WordTemplateID'
+      ListField = 'TemplateTitle'
+      ListSource = Dm.DWordTemplate
+      ParentBiDiMode = False
+      TabOrder = 0
+    end
+    object NewPage: TCheckBox
+      Left = 146
+      Top = 36
+      Width = 137
+      Height = 17
+      Anchors = [akTop, akRight]
+      Caption = #1607#1585' '#1585#1603#1608#1585#1583' '#1583#1585' '#1610#1603' '#1589#1601#1581#1607
+      TabOrder = 1
+    end
+    object GetValueInNull: TCheckBox
+      Left = 10
+      Top = 59
+      Width = 273
+      Height = 17
+      Anchors = [akTop, akRight]
+      Caption = #1583#1585' '#1589#1608#1585#1578'  '#1606#1583#1575#1588#1578#1606' '#1605#1602#1583#1575#1585' '#1548' '#1575#1586' '#1603#1575#1585#1576#1585' '#1605#1602#1583#1575#1585' '#1570#1606' '#1662#1585#1587#1610#1583#1607' '#1588#1608#1583
+      TabOrder = 2
+    end
+    object Edit1: TEdit
+      Left = 88
+      Top = 82
+      Width = 33
+      Height = 21
+      Anchors = [akTop, akRight]
+      TabOrder = 3
+      Text = '2.5'
+      Visible = False
+    end
+    object Edit2: TEdit
+      Left = 160
+      Top = 82
+      Width = 33
+      Height = 21
+      Anchors = [akTop, akRight]
+      TabOrder = 4
+      Text = '2'
+      Visible = False
+    end
+  end
+  object DSample: TDataSource
+    Left = 328
+    Top = 64
+  end
+  object Yeganeh_Word: TYeganeh_Word
+    WordApplication = WordApplication
+    WordDocument = WordDocument
+    WordTitle = #1588#1585#1603#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585#1610' '#1610#1711#1575#1606#1607
+    NewPage = False
+    InvertDateNo = False
+    ReplaceInHeader = False
+    OnNeedDataBaseField = Yeganeh_WordNeedDataBaseField
+    OnNeedTextOnNull = Yeganeh_WordNeedTextOnNull
+    DocumetTemplateFile = 'YEGANEH_template_FILE.doc'
+    WordFilePath = 'c:\'
+    invertNumber = False
+    Left = 72
+    Top = 80
+  end
+  object WordDocument: TWordDocument
+    AutoConnect = False
+    ConnectKind = ckRunningOrNew
+    Left = 160
+    Top = 80
+  end
+  object WordApplication: TWordApplication
+    AutoConnect = False
+    ConnectKind = ckRunningOrNew
+    AutoQuit = False
+    Left = 232
+    Top = 80
+  end
+  object Fields: TADODataSet
+    Connection = Dm.YeganehConnection
+    CursorType = ctStatic
+    CommandText = 'select * from Field'
+    Parameters = <>
+    Left = 330
+    Top = 16
+    object FieldsID: TAutoIncField
+      FieldName = 'ID'
+      ReadOnly = True
+    end
+    object FieldsFieldName: TWideStringField
+      FieldName = 'FieldName'
+      Size = 50
+    end
+    object FieldsDescription: TWideStringField
+      FieldName = 'Description'
+      Size = 50
+    end
+  end
+end

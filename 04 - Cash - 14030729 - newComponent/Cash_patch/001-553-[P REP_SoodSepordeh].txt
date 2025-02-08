@@ -1,0 +1,44 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[REP_SoodSepordeh]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[REP_SoodSepordeh]
+END
+GO
+
+CREATE  procedure [dbo].[REP_SoodSepordeh]
+	@startDate NVARCHAR(10) = '',
+	@endDate NVARCHAR(10) = '',
+	@accountNO NVARCHAR(20) = ''
+AS	
+SELECT documentno, [DATE], a1.AccountNo, a1.AccountTitle AS ozvName, a2.AccountTitle AS hesabName, Amount, DebtorAccountID, CreditorAccountID
+FROM Payment 
+	INNER JOIN Account a1 ON CreditorAccountID = a1.AccountID
+	INNER JOIN Account a2 ON DebtorAccountID = a2.AccountID
+WHERE (Comment LIKE '%سود سپرده گذاري در تاريخ%')
+AND ((@accountNO = '') OR @accountNO = a1.AccountNo OR (@accountNO = a2.AccountNo))
+AND ((LTRIM(RTRIM(@startDate)) = '') OR ([DATE] >= @startDate))
+AND ((LTRIM(RTRIM(@endDate)) = '') OR ([DATE] <= @endDate))
+
+UNION ALL
+
+SELECT null,null,'',NULL,'مجموع سود در اين بازه',ISNULL(SUM(Amount), 0),NULL,null
+FROM Payment 
+	INNER JOIN Account a1 ON CreditorAccountID = a1.AccountID
+	INNER JOIN Account a2 ON DebtorAccountID = a2.AccountID
+WHERE (Comment LIKE '%سود سپرده گذاري در تاريخ%')
+AND ((@accountNO = '') OR @accountNO = a1.AccountNo OR (@accountNO = a2.AccountNo))
+AND ((LTRIM(RTRIM(@startDate)) = '') OR ([DATE] >= @startDate))
+AND ((LTRIM(RTRIM(@endDate)) = '') OR ([DATE] <= @endDate))
+
+UNION ALL
+SELECT null,null,'',NULL,'مجموع کل سود پرداخت شده  ',ISNULL(SUM(Amount), 0),NULL,null
+FROM Payment 
+WHERE (Comment LIKE '%سود سپرده گذاري در تاريخ%')
+GO
+
+COMMIT
+GO

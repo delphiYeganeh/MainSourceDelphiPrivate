@@ -1,0 +1,92 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PERFRAJLIST]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PERFRAJLIST]
+END
+GO
+
+CREATE  procedure [dbo].[PERFRAJLIST] 
+(
+	@FROMDATE CHAR(10), 
+	@TODATE CHAR(10), 
+	@PAYKIND INT,
+	@ACCOUNTID INT
+)    
+
+AS     
+    Declare @DateTo Char(10) 
+	Set @DateTo = Left(dbo.Shamsi(GETDATE()), 4) + '/12/30'
+
+	If Exists (select 1 from dbo.sysobjects where id = object_id(N'[dbo].[TotalExistsTmpTb]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)    
+		Drop Table [dbo].[TotalExistsTmpTb]    
+     
+	If @Accountid=0     
+		Select     AccountID ,dbo.Totalexist(Accountid,@DateTo, 0) totalexists    
+			Into TotalExistsTmpTb    
+			From         Account    
+			Where accounttypeid=1      
+	Else    
+		Select     AccountID ,dbo.Totalexist(Accountid,@DateTo, 0) totalexists    
+			Into TotalExistsTmpTb    
+			From         Account    
+			Where accounttypeid=1  and AccountID=@AccountID     
+    
+	Declare @sql Nvarchar(4000)    
+	set @sql=N'    
+	SELECT   Payment.documentNo,Payment.WasPrinted,Payment.PaymentID,Account.Accountid,Account.ContactID, Account.Accountno, Account.AccountTitle, Payment.[Date], Payment.Comment,Payment.Amount, Payment.Amount AS bes, 0 AS bed,ForcePayment.InterestAmount,     
+            ForcePayment.ParentID, PayType.PayTypeTitle ,PayType.PayTypeID ,lloan.LoanID,    
+            CASE PayType.PayTypeID WHEN 1 THEN ''واريز به حساب''    
+                                   WHEN 2 THEN ''پرداخت ماهيانه''      
+                                   WHEN 3 THEN ''پرداخت قسط به شماره ''+ CAST(ForcePayment.OrderNo AS CHAR(5)) END AS DES,    
+            CASE PayType.PayTypeID     
+                                   WHEN 1 THEN (Select totalexists  From TotalExistsTmpTb where accountid=Account.Accountid )       
+                                   WHEN 2 THEN (SELECT SUM(FP_M.Amount)          FROM ForcePayment FP_M  WHERE (FP_M.ParentID = ForcePayment.ParentID)AND(FP_M.ForceTypeID = 2)AND (FP_M.Paid = 1))    
+                                          WHEN 3 THEN  ISNULL((SELECT SUM(fp_Np.Amount) FROM ForcePayment fp_Np WHERE (fp_Np.ParentID = lloan.LOANID)AND FP_NP.ForceTypeid=1 AND (fp_Np.Paid = 0)),0) END AS MANDEH    
+		FROM Loan lloan 
+			RIGHT OUTER JOIN ForcePayment ON lloan.LoanID = ForcePayment.ParentID 
+			RIGHT OUTER JOIN Payment INNER JOIN Account ON Payment.CreditorAccountID = Account.AccountID 
+			INNER JOIN PayType ON Payment.PayTypeID = PayType.PayTypeID ON ForcePayment.PaymentID = Payment.PaymentID    
+		WHERE    Account.AccountTypeID=1 and  Payment.[Date] between '''+@FromDate+''' and '''+@ToDate+''''    
+    
+	if  @PayKind <>0     
+		set @sql=@sql+  ' and PayType.PayTypeID ='+cast(@PayKind as char(5))    
+	
+	if  @Accountid <>0     
+		set @sql=@sql+  ' and Account.AccountID ='+cast(@Accountid as char(10))     
+               
+	set @sql=@sql+'Union     
+	SELECT   Payment.documentNo,Payment.WasPrinted,Payment.PaymentID,Account.Accountid,Account.ContactID, Account.Accountno, Account.AccountTitle, Payment.[Date], Payment.Comment,Payment.Amount, Payment.Amount AS bes, 0 AS bed,ForcePayment.InterestAmount,     
+            ForcePayment.ParentID, PayType.PayTypeTitle ,PayType.PayTypeID ,lloan.LoanID,    
+            CASE PayType.PayTypeID WHEN 1 THEN ''واريز به حساب''    
+                                   WHEN 2 THEN ''پرداخت ماهيانه''      
+                                   WHEN 3 THEN ''پرداخت قسط به شماره ''+ CAST(ForcePayment.OrderNo AS CHAR(5)) END AS DES,    
+            CASE PayType.PayTypeID     
+                                   WHEN 1 THEN  (Select totalexists  From TotalExistsTmpTb where accountid=Account.Accountid )       
+                                   WHEN 2 THEN  (SELECT SUM(FP_M.Amount)          FROM ForcePayment FP_M  WHERE (FP_M.ParentID = lloan.LOANID)AND(FP_M.ForceTypeID = 2)AND (FP_M.Paid = 1))    
+                                   WHEN 3 THEN  ISNULL((SELECT SUM(fp_Np.Amount) FROM ForcePayment fp_Np WHERE (fp_Np.ParentID = lloan.LOANID)AND FP_NP.ForceTypeid=1 AND (fp_Np.Paid = 0)),0) END AS MANDEH    
+		FROM Loan lloan RIGHT OUTER JOIN    
+                       ForcePayment ON lloan.LoanID = ForcePayment.ParentID RIGHT OUTER JOIN    
+                       Payment INNER JOIN    
+                       Account ON Payment.DebtorAccountID = Account.AccountID INNER JOIN    
+                       PayType ON Payment.PayTypeID = PayType.PayTypeID ON ForcePayment.PaymentID = Payment.PaymentID    
+		WHERE  PayType.PayTypeID <> 4 AND Account.AccountTypeID=1 and Payment.[Date] between '''+@FromDate+''' and '''+@ToDate+''''    
+	
+	if  @PayKind <>0     
+		set @sql=@sql+  ' and PayType.PayTypeID ='+cast(@PayKind as char(5))    
+	
+	if  @Accountid <>0     
+		set @sql=@sql+  ' and Account.AccountID ='+cast(@Accountid as char(10))     
+	
+	set @sql=@sql+ ' ORDER BY  Account.Accountno, Account.AccountTitle,PayType.PayTypeID, Payment.[Date] '     
+	set @sql=@sql+ ' Drop Table TotalExistsTmpTb '    
+    
+	exec sp_executesql @sql
+
+GO
+
+COMMIT
+GO

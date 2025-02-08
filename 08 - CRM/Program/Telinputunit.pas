@@ -213,6 +213,8 @@ type
     pnlCustomerStatus: TPanel;
     Label26: TLabel;
     DBLookupComboBox5: TDBLookupComboBox;
+    Label35: TLabel;
+    DBText1: TDBText;
     procedure DBEdit7Enter(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -654,7 +656,8 @@ begin
       Exit;
    end;
 
-   FrFollowUp := TFrFollowUp.Create(Application);
+  // FrFollowUp := TFrFollowUp.Create(Application);
+   FrFollowUp := TFrFollowUp.Create(nil,dm.Select_Customer_By_CustomerIDCustomerID.AsInteger,true);
    FrFollowUp.CustomerID := dm.Select_Customer_By_CustomerIDCustomerID.AsInteger;
    FrFollowUp.refreshData;
    FrFollowUp.dbgFollow.DataSource.DataSet.Last;  // 920307 Hadi Mohamed For Bug #56 ¬Œ—Ì‰ «ﬁœ«„ «‰ Œ«» ‘Êœ

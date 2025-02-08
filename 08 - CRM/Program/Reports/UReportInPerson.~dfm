@@ -5,7 +5,6 @@ inherited FReportInPerson: TFReportInPerson
   Height = 561
   Caption = #1711#1586#1575#1585#1588' '#1575#1585#1586#1610#1575#1576#1610' '#1705#1575#1585#1588#1606#1575#1587
   OldCreateOrder = True
-  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape
@@ -495,8 +494,7 @@ inherited FReportInPerson: TFReportInPerson
   end
   inherited DSForm: TDataSource
     DataSet = SpExpertUserReport
-    Left = 38
-    Top = 103
+    Top = 87
   end
   inherited ActionList: TActionList
     Left = 50
@@ -504,8 +502,8 @@ inherited FReportInPerson: TFReportInPerson
   end
   object MssCalendarPro1: TMssCalendarPro
     Style = mssGold
-    Left = 340
-    Top = 81
+    Left = 116
+    Top = 89
   end
   object SpExpertUserReport: TADOStoredProc
     Connection = Dm.YeganehConnection
@@ -557,7 +555,7 @@ inherited FReportInPerson: TFReportInPerson
         Value = Null
       end>
     Left = 192
-    Top = 56
+    Top = 40
     object SpExpertUserReportCustomerId: TIntegerField
       FieldName = 'CustomerId'
     end

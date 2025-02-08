@@ -224,6 +224,10 @@ type
     btnFactor: TBitBtn;
     chFactor: TDBCheckBox;
     chPreFactor: TDBCheckBox;
+    SpeedButton13: TSpeedButton;
+    btnCopy: TSpeedButton;
+    Label39: TLabel;
+    DBText1: TDBText;
     procedure btnWordViewClick(Sender: TObject);
     procedure btnAttachPicClick(Sender: TObject);
     procedure refreshData;
@@ -287,6 +291,8 @@ type
     procedure OtherPeopleClick(Sender: TObject);
     procedure dbgFollowNeedImageIndex(Column: TColumn;
       var ImageIndex: Integer);
+    procedure SpeedButton13Click(Sender: TObject);
+    procedure btnCopyClick(Sender: TObject);
   private
    Function  LoadImageField(Field:TField;Path:String):Boolean;
    procedure SetColorForm ;
@@ -297,6 +303,7 @@ type
        FUID : integer;
     CustomerID: integer;
     Edited :Boolean;
+    constructor create(AOwner :TComponent;ExCustomerID : Integer;IsItNewRecord : Boolean = false);reintroduce;virtual;
   end;
 
 var
@@ -305,7 +312,7 @@ var
 implementation
 
 uses dmu, YShamsiDate, UContract, CancelCustomerU, Telinputunit, ImageUnit,
-  URefrenceInPerson, FactorFM,BusinessLayer, FmOtherPerson_U;
+  URefrenceInPerson, FactorFM,BusinessLayer, FmOtherPerson_U ,Clipbrd;
 
 {$R *.dfm}
 
@@ -358,6 +365,8 @@ OpenDialog.Filter:='Jpeg Files|*.jpg';
 end;
 
 procedure TFrFollowUp.refreshData;
+var
+  PinValue : string;
 begin
    inherited;
    with Select_customer_By_CustomerID do
@@ -398,7 +407,19 @@ begin
       stb.Panels[1].Text:='ÊÚÏÇÏ:' +IntToStr(RecordCount);
       //Last;
    end;
-   
+
+  { TODO -oparsa : 14030205 }
+  if CustomerID > 0 then
+    PinValue := Qry_GetResult(' select 1 FROM dbo.usersPinFollowUP WHERE CustomerID = '+ DBEdit4.text +'  AND  UserID = '+ IntToStr(_UserId ) ,dm.YeganehConnection);
+
+  Pin.Visible    := PinValue = '1' ;
+  UnPin.Visible  := not Pin.Visible  ;
+
+  { TODO -oparsa : 14030205 }
+
+  if GetActionAccess(_accessID,'acpnlCustomerStatus',1) = False  then
+    btnChangeStateCustomer.Enabled := Select_Customer_By_CustomerIDCustomerStatusID.asInteger <> 2 ;
+
   BitBtn2.Enabled        := (dbgFollow.DataSource.DataSet.RecordCount > 0);
   btnDelEghdamat.Enabled := (dbgFollow.DataSource.DataSet.RecordCount > 0);
   BitBtn1.Enabled        := (dbgFollow.DataSource.DataSet.RecordCount > 0);
@@ -407,7 +428,7 @@ end;
 procedure TFrFollowUp.BitBtn2Click(Sender: TObject);
 begin
   inherited;
-  EnableButtom('EDIT');
+
   if (Dm.Select_FollowUP_By_CustomerIDIsAuto.AsBoolean) then
   begin
     if (Dm.Select_FollowUP_By_CustomerIDParentMarketerID.AsInteger <> _MarketerID) then
@@ -426,7 +447,7 @@ begin
         Exit;
       end;
     end;
-    
+  EnableButtom('EDIT');
   pnlStateCustomer.Enabled := False ;
   treFollowUps.DataSource:= nil;  // Amin 1391/08/25
    dm.Select_FollowUP_By_CustomerID.Edit;
@@ -435,6 +456,8 @@ begin
 //        treFollowUps.DataSource:= Dm.DSelect_FollowUP_By_CustomerID;
 ////      treFollowUps.Refresh;
 //     end;
+
+  DBMemoDoneComment.SetFocus ;
 end;
 
 procedure TFrFollowUp.SpeedButton5Click(Sender: TObject);
@@ -551,6 +574,10 @@ begin
    Dm.Select_FollowUP_By_CustomerID.Append;
    dm.Select_FollowUP_By_CustomerIDParentFollowUpID.Value := ParentID;   // Amin 1391/08/25
 
+   if _accessID in [4,7,19] then //  ˜ÇÑÈÑ ÝÑæÔ
+     Dm.Select_FollowUP_By_CustomerIDActionTypeID.AsInteger  :=  StrToInt(Qry_GetResult('   select top 1 ActionTypeID  FROM dbo.ActionType where SortOrderInSale = 1 ' ,dm.YeganehConnection));
+
+
    if Dm.Select_FollowUP_By_CustomerID.RecordCount  = 0 then
    begin
      if _accessID in [4,7,19] then //  ˜ÇÑÈÑ ÝÑæÔ
@@ -573,6 +600,8 @@ begin
      end;
 
    BitBtn1.Enabled        := True;
+   DBMemoComment.SetFocus;
+
 end;
 
 procedure TFrFollowUp.BitBtn1Click(Sender: TObject);
@@ -748,13 +777,13 @@ begin
 
       end;
 
-      if (dm.Select_FollowUP_By_CustomerIDActionTypeID.Value in [75,76] ) and
+      if ( DBLkCBDoneStatusTitle.KeyValue = 2) and (dm.Select_FollowUP_By_CustomerIDActionTypeID.Value in [75,76] ) and
         ((Dm.Select_FollowUP_By_CustomerIDExcellAttachment.IsNull) and
         (Dm.Select_FollowUP_By_CustomerIDPicAttachment.IsNull) and
         (Dm.Select_FollowUP_By_CustomerIDWordAttachment.IsNull) and
         (Dm.Select_FollowUP_By_CustomerIDPdfAttachment.IsNull)) then
       begin
-        ShowMessage('ËÈÊ ÇäÌÇã ÔÏ (Çíä äæÚ ÇÞÏÇã äíÇÒ Èå íæÓÊ ÏÇÑÏ) ');
+          ShowMessage('ËÈÊ ÇäÌÇã ÔÏ (Çíä äæÚ ÇÞÏÇã äíÇÒ Èå íæÓÊ ÏÇÑÏ) ');
       end
       else
       begin
@@ -931,6 +960,8 @@ var
   PinValue : string;
 begin
   inherited;
+
+  //refreshData ;
   followUpItem.ItemIndex := _orgID ;
 
   xpPanel1.Minimized := True;
@@ -963,13 +994,7 @@ begin
    if dbgFollow.DataSource.DataSet.RecordCount >0  then
      dbgFollow.DataSource.DataSet.Locate('FollowUPID',FUID,[]);
 
-  { TODO -oparsa : 14030205 }
-  PinValue := Qry_GetResult(' select 1 FROM dbo.usersPinFollowUP WHERE CustomerID = '+ DBEdit4.text +'  AND  UserID = '+ IntToStr(_UserId ) ,dm.YeganehConnection);
 
-  Pin.Visible    := PinValue = '1' ;
-  UnPin.Visible  := not Pin.Visible  ;
-
-  { TODO -oparsa : 14030205 }
   Dm.RefreshHoliday(copy(_today,1,4));
   MssCalendarPro1.HolidayStr := dm.HolidayStr;
 
@@ -978,12 +1003,17 @@ begin
     GroupBox1.Height := GroupBox1.Height - gbInformationSale.Height ;
   end;
 
+  { TODO -oparsa : 14030205 }
+  Pin.Visible    := PinValue = '1' ;
+  UnPin.Visible  := not Pin.Visible  ;
+  { TODO -oparsa : 14030205 }
+
   BitBtn2.Enabled        := (dbgFollow.DataSource.DataSet.RecordCount > 0);
   btnDelEghdamat.Enabled := (dbgFollow.DataSource.DataSet.RecordCount > 0);
   BitBtn1.Enabled        := (dbgFollow.DataSource.DataSet.RecordCount > 0);
 
-  if GetActionAccess(_accessID,'acpnlCustomerStatus',1) = False  then
-    btnChangeStateCustomer.Enabled := Select_Customer_By_CustomerIDCustomerStatusID.asInteger <> 2 ;
+ // if GetActionAccess(_accessID,'acpnlCustomerStatus',1) = False  then
+ //   btnChangeStateCustomer.Enabled := Select_Customer_By_CustomerIDCustomerStatusID.asInteger <> 2 ;
 
   EnableButtom('FIRST');
 end;
@@ -1643,6 +1673,7 @@ begin
    BitBtn1.Enabled   := True ;
    btnDelEghdamat.Enabled := False ;
    BitBtn2.Enabled        := False ;
+   GroupBox2.Enabled := False;
  end
  else if  amode = 'OK' then
  begin
@@ -1660,6 +1691,9 @@ begin
      btnDelEghdamat.Enabled := False ;
      BitBtn2.Enabled        := False ;
    end;
+    GroupBox2.Enabled := True;
+   // dbgFollow.Refresh;
+  //  DBMemoComment.SetFocus ;
 
  end
  else if  amode = 'DEL' then
@@ -1669,6 +1703,7 @@ begin
    BitBtn1.Enabled   := False ;
    btnDelEghdamat.Enabled := False ;
    BitBtn2.Enabled        := False ;
+    GroupBox2.Enabled := False;
  end
  else if  amode = 'FIRST' then
  begin
@@ -1685,9 +1720,32 @@ begin
      btnDelEghdamat.Enabled := False ;
      BitBtn2.Enabled        := False ;
    end;
-
+    GroupBox2.Enabled := True;
  end;
 
+end;
+
+procedure TFrFollowUp.SpeedButton13Click(Sender: TObject);
+begin
+  inherited;
+// DBMemoDoneComment
+  ClipBoard.AsText := DBMemoDoneComment.Text ;
+end;
+
+procedure TFrFollowUp.btnCopyClick(Sender: TObject);
+begin
+  inherited;
+//DBMemoComment
+  ClipBoard.AsText := DBMemoComment.Text ;
+end;
+
+constructor TFrFollowUp.create(AOwner: TComponent; ExCustomerID: Integer;
+  IsItNewRecord: Boolean);
+begin
+  inherited create(AOwner);
+   //  Edited       := false;
+     CustomerID   := ExCustomerID;
+   //  IsNewRecord  := IsItNewRecord
 end;
 
 end.

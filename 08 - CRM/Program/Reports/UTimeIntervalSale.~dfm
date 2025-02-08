@@ -20,9 +20,9 @@ inherited FTimeIntervalSale: TFTimeIntervalSale
     TabOrder = 0
     object TimeIntervalGrid: TYDBGrid
       Left = 1
-      Top = 417
+      Top = 473
       Width = 1366
-      Height = 175
+      Height = 119
       Cursor = crHandPoint
       Align = alClient
       DataSource = DSForm
@@ -53,6 +53,7 @@ inherited FTimeIntervalSale: TFTimeIntervalSale
       TitleSort = True
       AutoInsert = False
       FooterFields = 'Amount,LeadQuality,Priceestimate'
+      OnNeedFontCondition = TimeIntervalGridNeedFontCondition
       Columns = <
         item
           Expanded = False
@@ -220,6 +221,11 @@ inherited FTimeIntervalSale: TFTimeIntervalSale
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = []
           Width = 100
+          Visible = True
+        end
+        item
+          Expanded = False
+          Title.Caption = #1602#1585#1575#1585#1583#1575#1583' '#1662#1588#1578#1610#1576#1575#1606#1610
           Visible = True
         end>
     end
@@ -413,7 +419,7 @@ inherited FTimeIntervalSale: TFTimeIntervalSale
       Left = 1
       Top = 1
       Width = 1366
-      Height = 416
+      Height = 472
       StartColor = 16774388
       EndColor = 16767449
       FillDirection = fdLeftToRight
@@ -439,7 +445,7 @@ inherited FTimeIntervalSale: TFTimeIntervalSale
       TabOrder = 2
       DesignSize = (
         1364
-        384)
+        440)
       object Label1: TLabel
         Left = 1187
         Top = 252
@@ -1311,6 +1317,20 @@ inherited FTimeIntervalSale: TFTimeIntervalSale
           #1576#1585' '#1575#1587#1575#1587' '#1578#1575#1585#1610#1582' '#1579#1576#1578' '#1602#1585#1575#1585#1583#1575#1583)
         TabOrder = 19
       end
+      object IsSupportContract: TRadioGroup
+        Left = 776
+        Top = 386
+        Width = 585
+        Height = 49
+        Caption = #1602#1585#1575#1585#1583#1575#1583' '#1662#1588#1578#1610#1576#1575#1606#1610
+        Columns = 3
+        ItemIndex = 0
+        Items.Strings = (
+          #1607#1605#1607
+          #1602#1585#1575#1585#1583#1575#1583' '#1583#1575#1585#1583
+          #1602#1585#1575#1585#1583#1575#1583' '#1606#1583#1575#1585#1583)
+        TabOrder = 20
+      end
     end
     object pnlAverage: TPanel
       Left = 1
@@ -1339,9 +1359,9 @@ inherited FTimeIntervalSale: TFTimeIntervalSale
         Caption = #1605#1610#1575#1606#1711#1610#1606' '#1578#1593#1583#1575#1583' '#1583#1605#1608' '
       end
       object Label22: TLabel
-        Left = 925
+        Left = 929
         Top = 0
-        Width = 180
+        Width = 176
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1605#1610#1575#1606#1711#1610#1606' '#1601#1575#1589#1604#1607' '#1586#1605#1575#1606#1610' '#1575#1586' '#1579#1576#1578' '#1578#1575' '#1583#1605#1608' ('#1585#1608#1586')'
@@ -1443,9 +1463,9 @@ inherited FTimeIntervalSale: TFTimeIntervalSale
         Caption = #1605#1610#1575#1606#1711#1610#1606' '#1578#1593#1583#1575#1583' '#1583#1605#1608' '
       end
       object Count2: TLabel
-        Left = 925
+        Left = 929
         Top = 32
-        Width = 180
+        Width = 176
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1605#1610#1575#1606#1711#1610#1606' '#1601#1575#1589#1604#1607' '#1586#1605#1575#1606#1610' '#1575#1586' '#1579#1576#1578' '#1578#1575' '#1583#1605#1608' ('#1585#1608#1586')'
@@ -1634,9 +1654,14 @@ inherited FTimeIntervalSale: TFTimeIntervalSale
         Name = '@RepDateType'
         Size = -1
         Value = Null
+      end
+      item
+        Name = '@IsSUpportContract'
+        DataType = ftInteger
+        Value = 0
       end>
-    Left = 72
-    Top = 472
+    Left = 208
+    Top = 416
     object SpTimeIntervalSaleCustomerID: TIntegerField
       FieldName = 'CustomerID'
     end
@@ -1690,6 +1715,12 @@ inherited FTimeIntervalSale: TFTimeIntervalSale
     end
     object SpTimeIntervalSaleCustomerStatusID: TIntegerField
       FieldName = 'CustomerStatusID'
+    end
+    object SpTimeIntervalSaleFinishedContractProducts: TStringField
+      FieldName = 'FinishedContractProducts'
+    end
+    object SpTimeIntervalSaleSupportContractStr: TStringField
+      FieldName = 'SupportContractStr'
     end
   end
 end

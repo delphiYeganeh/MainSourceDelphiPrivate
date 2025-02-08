@@ -1,0 +1,128 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[DailyAverage]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[DailyAverage]
+END
+GO
+
+CREATE  procedure [dbo].[DailyAverage]
+       @Year CHAR(4) ,
+       @ReportKind SMALLINT ,
+       @AccountID INT = 0
+AS
+BEGIN
+      IF EXISTS ( SELECT    *
+                  FROM      dbo.sysobjects
+                  WHERE     id = OBJECT_ID(N'[dbo].[#P]') AND OBJECTPROPERTY(id , N'IsUserTable') = 1 )
+         DROP TABLE #P    
+    
+      IF EXISTS ( SELECT    *
+                  FROM      dbo.sysobjects
+                  WHERE     id = OBJECT_ID(N'[dbo].[#_FirstPrice]') AND OBJECTPROPERTY(id , N'IsUserTable') = 1 )
+         DROP TABLE #_FirstPrice    
+    
+      IF EXISTS ( SELECT    *
+                  FROM      dbo.sysobjects
+                  WHERE     id = OBJECT_ID(N'[dbo].[#P2]') AND OBJECTPROPERTY(id , N'IsUserTable') = 1 )
+         DROP TABLE #P2    
+    
+    
+      DECLARE @ToDate VARCHAR(10) ,
+              @FromDate VARCHAR(10)    
+    
+      SET @FromDate = @Year + '/01/01'    
+      SET @ToDate = ( SELECT    DBO.ShamsiIncDate(@Year + '/01/01' , 1 , 0 , 0) )    
+    
+    
+      SELECT    CreditorAccountId AccountId , Amount , CAST(1 AS SMALLINT) status , Date , CAST(0 AS FLOAT) TotalPrice
+      INTO      #P
+      FROM      Payment
+                INNER JOIN Account ac1 ON creditorAccountId = ac1.AccountId
+      WHERE     ACCOUNTTypeId = 1 AND ( @AccountID = 0 OR ac1.AccountID = @AccountID )    
+           
+      INSERT    INTO #P
+                SELECT  DebtorAccountId , Amount , -1 status , Date , 0
+                FROM    Payment
+                        INNER JOIN Account AC2 ON DebtorAccountId = ac2.AccountId
+                WHERE   ACCOUNTTypeId = 1 AND ( @AccountID = 0 OR AC2.AccountID = @AccountID )    
+      SELECT    CAST(0 AS INTEGER) AccountId , CAST(0 AS FLOAT) AS MojoodiEbtedayeDore , CAST(0 AS FLOAT) mojoodiRooz , CAST(0 AS FLOAT) MojRoozJamShodehBaRozGhabl , CAST(0 AS INT)  TedadRooz , CAST('0000/00/00' AS VARCHAR(10)) _DATE , CAST(0 AS FLOAT)  TotalPrice
+      INTO      #p2    
+    
+      SELECT DISTINCT
+                AccountId , SUM(AMOUNT * STATUS) FirstPrice
+      INTO      #_FirstPrice
+      FROM      #P
+      WHERE     date < @FromDate AND ( @AccountID = 0 OR AccountID = @AccountID )
+      GROUP BY  AccountId     
+             
+      DECLARE @_AccountId INT ,
+              @Price FLOAT ,
+              @BeforPrice FLOAT ,
+              @DATE VARCHAR(10) ,
+              @BeforAccountId INT ,
+              @BeforPrice_TMP FLOAT    
+      SET @BeforPrice = 0    
+      SET @BeforAccountId = 0    
+    
+      DECLARE Payment_Cursor CURSOR
+      FOR
+      SELECT    AccountId , SUM(AMOUNT * STATUS) PRICE , DATE
+      FROM      #P
+      WHERE     DATE BETWEEN @FromDate AND @ToDate AND ( @AccountID = 0 OR AccountID = @AccountID )
+      GROUP BY  AccountId , DATE
+      ORDER BY  AccountId , DATE    
+      OPEN Payment_Cursor     
+    
+      FETCH NEXT FROM Payment_Cursor INTO @_AccountId , @Price , @DATE    
+      WHILE @@FETCH_STATUS = 0
+            BEGIN    
+                  SET @BeforPrice_TMP = 0    
+                  IF ( @BeforAccountId <> @AccountId )
+                     BEGIN    
+                           SET @BeforPrice = ISNULL(( SELECT    FirstPrice
+                                                      FROM      #_FirstPrice
+                                                      WHERE     ACCOUNTID = @_Accountid ) , 0)     
+                           SET @BeforPrice_TMP = @BeforPrice    
+                     END    
+    
+                  SET @BeforPrice = @BeforPrice + @Price    
+    
+                  INSERT    INTO #p2
+                            SELECT  @_AccountId , @BeforPrice_TMP , @Price , @BeforPrice , dbo.ShamsiDateDiff(@DATE , @ToDate) AS Total_Price , @DATE AS _date ,    
+                                    @Price * dbo.ShamsiDateDiff(@DATE , @ToDate) AS TotalPrice                 
+                  SET @BeforAccountId = @_AccountId     
+                  FETCH NEXT FROM Payment_Cursor INTO @_AccountId , @price , @DATE    
+            END    
+      CLOSE Payment_Cursor    
+      DEALLOCATE Payment_Cursor      
+    
+      IF @ReportKind = 1
+         SELECT #P2.ACCOUNTID , Account.AccountNo , AccountTitle , ( ISNULL(( SELECT TOP 1
+                                                                                        MojoodiEbtedayeDore
+                                                                              FROM      #P2 PP2
+                                                                              WHERE     #P2.ACCOUNTID = PP2.AccountId AND MojoodiEbtedayeDore <> 0 ) , 0) / 365 ) + SUM(TotalPrice / 365) AS DailyAvrage
+         FROM   #p2
+                INNER JOIN Account ON Account.AccountId = #P2.AccountId
+         GROUP BY #P2.ACCOUNTID , Account.AccountTitle , Account.AccountNo
+         ORDER BY #P2.ACCOUNTID      
+    
+      IF @ReportKind = 2
+         SELECT #P2.* , Account.AccountTitle , Account.AccountNo , ROUND(( TotalPrice / 365 ) , 0) AS DailyAvr
+         FROM   #p2
+                INNER JOIN Account ON Account.AccountId = #P2.AccountId
+         ORDER BY #P2.ACCOUNTID , #P2._Date    
+     
+     
+      DROP TABLE #_FirstPrice    
+      DROP TABLE #p    
+      DROP TABLE #p2    
+END
+
+GO
+
+COMMIT
+GO

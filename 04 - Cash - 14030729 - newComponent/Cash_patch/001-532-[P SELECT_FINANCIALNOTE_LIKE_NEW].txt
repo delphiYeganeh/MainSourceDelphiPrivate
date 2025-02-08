@@ -1,0 +1,48 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[SELECT_FINANCIALNOTE_LIKE_NEW]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[SELECT_FINANCIALNOTE_LIKE_NEW]
+END
+GO
+
+CREATE  procedure [dbo].[SELECT_FINANCIALNOTE_LIKE_NEW] @LIKE NVARCHAR(50),@NOTESTATUSID TINYINT  ,@SHOWALL SMALLINT=0                
+AS                  
+IF @SHOWALL=0             
+SELECT Distinct    FinancialNote_Detail.Amount, FinancialNote_Detail.ForceTypeID, Bank.BankTitle, FinancialNote_Detail.NoteDate,   
+                      FinancialNote_Detail.NoteDescription, FinancialNote_Detail.ForcePaymentID, FinancialNoteStatus.FinancialNoteStatusDesc,   
+                      FinancialNoteType.FinancialNoteTypeTitle, FinancialNote_Detail.NoteNo, FinancialNote_Detail.FinancialNote_MasterID,   
+                      FinancialNote_Detail.FinancialNote_DetailID, FinancialNote_Detail.BankID, FinancialNote_Detail.NoteStatusID, FinancialNote_Detail.BRANCH,   
+                      FinancialNote_Detail.BRANCHCODE, FinancialNote_Detail.BANKACCOUNTNO, FinancialNoteType.FinancialNoteTypeID, FinancialNote_Detail.FND_LoanNo, FinancialNote_Detail.FND_LoanId  
+FROM         PayType INNER JOIN  
+                      Payment ON PayType.PayTypeID = Payment.PayTypeID RIGHT OUTER JOIN  
+                      FinancialNote_Detail INNER JOIN  
+                      FinancialNote_Master ON FinancialNote_Detail.FinancialNote_MasterID = FinancialNote_Master.FinancialNote_MasterID INNER JOIN  
+                      FinancialNoteType ON FinancialNote_Master.FinancialNoteTypeID = FinancialNoteType.FinancialNoteTypeID INNER JOIN  
+                      FinancialNoteStatus ON FinancialNote_Detail.NoteStatusID = FinancialNoteStatus.FinancialNoteStatusID ON   
+                      Payment.FINANCIALNOTE_DETAILID = FinancialNote_Detail.FinancialNote_DetailID LEFT OUTER JOIN  
+                      Bank ON FinancialNote_Detail.BankID = Bank.BankID  
+WHERE     (FINANCIALNOTE_DETAIL.NOTESTATUSID=@NOTESTATUSID OR @NOTESTATUSID=0) AND                
+          (ISNULL(FINANCIALNOTE_DETAIL.NOTENO,'')+ISNULL(BANK.BRANCH,'')+   ISNULL(BANK.BANKACCOUNTNO,'') LIKE '%'+@LIKE+'%'   )                
+ELSE             
+SELECT Distinct    FinancialNote_Detail.Amount, FinancialNote_Detail.ForceTypeID, Bank.BankTitle, FinancialNote_Detail.NoteDate,   
+                      FinancialNote_Detail.NoteDescription, FinancialNote_Detail.ForcePaymentID, FinancialNoteStatus.FinancialNoteStatusDesc,   
+                      FinancialNoteType.FinancialNoteTypeTitle, FinancialNote_Detail.NoteNo, FinancialNote_Detail.FinancialNote_MasterID,   
+                      FinancialNote_Detail.FinancialNote_DetailID, FinancialNote_Detail.BankID, FinancialNote_Detail.NoteStatusID, FinancialNote_Detail.BRANCH,   
+                      FinancialNote_Detail.BRANCHCODE, FinancialNote_Detail.BANKACCOUNTNO, FinancialNoteType.FinancialNoteTypeID,FinancialNote_Detail.FND_LoanNo, FinancialNote_Detail.FND_LoanId  
+FROM         PayType INNER JOIN  
+                      Payment ON PayType.PayTypeID = Payment.PayTypeID RIGHT OUTER JOIN  
+                      FinancialNote_Detail INNER JOIN  
+                      FinancialNote_Master ON FinancialNote_Detail.FinancialNote_MasterID = FinancialNote_Master.FinancialNote_MasterID INNER JOIN  
+                      FinancialNoteType ON FinancialNote_Master.FinancialNoteTypeID = FinancialNoteType.FinancialNoteTypeID INNER JOIN  
+                      FinancialNoteStatus ON FinancialNote_Detail.NoteStatusID = FinancialNoteStatus.FinancialNoteStatusID ON   
+                      Payment.FINANCIALNOTE_DETAILID = FinancialNote_Detail.FinancialNote_DetailID LEFT OUTER JOIN  
+                      Bank ON FinancialNote_Detail.BankID = Bank.BankID  
+WHERE    (FINANCIALNOTE_DETAIL.NOTESTATUSID=@NOTESTATUSID OR @NOTESTATUSID=0)
+GO
+
+COMMIT
+GO

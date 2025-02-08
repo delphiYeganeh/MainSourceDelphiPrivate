@@ -1,0 +1,33 @@
+BEGIN TRANSACTION
+GO
+
+IF EXISTS (SELECT 1 
+			FROM sys.objects 
+			WHERE [object_id] = OBJECT_ID(N'[dbo].[TrgContactUpdate]')
+               AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[TrgContactUpdate];
+END
+GO
+
+CREATE TRIGGER [dbo].[TrgContactUpdate] 
+	ON [dbo].[Contact] 
+	After  UPDATE
+AS
+
+   IF UPDATE(FirstName) 
+	   UPDATE    Contact  
+	   SET       ContactTitle=FirstName +' '+ LastName
+	    WHERE ContactID=(SELECT ContactID FROM INSERTED)
+
+   IF UPDATE(LastName) 
+	   UPDATE    Contact  
+	   SET       ContactTitle=FirstName +' '+ LastName
+	    WHERE ContactID=(SELECT ContactID FROM INSERTED)
+GO
+
+ALTER TABLE [dbo].[Contact] ENABLE TRIGGER [TrgContactUpdate]
+GO
+
+COMMIT
+GO

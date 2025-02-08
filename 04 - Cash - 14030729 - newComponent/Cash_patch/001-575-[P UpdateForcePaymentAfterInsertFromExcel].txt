@@ -1,0 +1,41 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[UpdateForcePaymentAfterInsertFromExcel]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[UpdateForcePaymentAfterInsertFromExcel]
+END
+GO
+
+CREATE  procedure [dbo].[UpdateForcePaymentAfterInsertFromExcel]  @PaymentID INT , @ParentID Int,@AMOUNT int, @MatureDate  CHAR(10),@SwInsert  CHAR(1) 
+AS 
+/*if @SwInsert=1 insert else dont insert*/
+DECLARE @OrderNo INTEGER
+     SET @OrderNo  = (SELECT MAX(ISNULL(OrderNo,0))+1  FROM ForcePayment WHERE SUBSTRING(ForcePayment.MatureDate,1,7)=SUBSTRING(@MatureDate,1,7) and ParentID=@ParentID and ForceTypeID=2)
+     SET @OrderNo  = ISNULL(@OrderNo,1)
+
+        IF NOT EXISTS(SELECT ForcePayment.MatureDate 
+                      FROM   ForcePayment 
+                      WHERE (ForcePayment.ForceTypeID = 2) AND
+                            (ForcePayment.ParentID=@ParentID) AND 
+                            (SUBSTRING(ForcePayment.MatureDate,1,7)=SUBSTRING(@MatureDate,1,7) ))
+        BEGIN
+          IF @SwInsert='1' 
+           INSERT INTO  ForcePayment (  ParentID,ForceTypeID, Amount, MatureDate, PaymentID, Comment                  , Paid, OrderNo, InterestAmount )
+           SELECT                      @ParentID,2          ,@Amount,@MatureDate,@PaymentID,'واريز از طريق فايل اکسل',1,@OrderNo,0
+	END 
+	ELSE
+	BEGIN
+  	  UPDATE  ForcePayment 
+ 	  SET     PAID=1 ,PaymentID =(@PaymentID)
+ 	  WHERE  (ForcePayment.ForceTypeID = 2) AND 
+ 	         (ForcePayment.ParentID=@ParentID)  AND 
+ 	         (SUBSTRING(ForcePayment.MatureDate,1,7)=SUBSTRING(@MatureDate,1,7) ) 
+
+	END
+GO
+
+COMMIT
+GO

@@ -1,0 +1,52 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[GetListOrderNo]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[GetListOrderNo]
+END
+GO
+
+CREATE FUNCTION [dbo].[GetListOrderNo]
+(
+	@ParentId int,
+	@ForceType INT,
+	@str VARCHAR(max)
+)
+RETURNs Varchar(max)
+as
+BEGIN
+		
+	DECLARE @t TABLE (i int)
+	WHILE LEN (@str)<>0
+	BEGIN
+		INSERT INTO @t (i)
+		SELECT CONVERT(INT,	SUBSTRING(@str,1,CHARINDEX(',',@str)-1))			
+		select @str=STUFF(@str,1,CHARINDEX(',',@str),'') 
+	end
+
+	DECLARE @SumOrderNo VARCHAR(max)=''
+	DECLARE @OrderNo int
+	DECLARE i CURSOR FOR 
+					SELECT OrderNo 
+					FROM ForcePayment fp 
+					WHERE parentid=@ParentId AND ForceTypeID=@Forcetype AND ForcePaymentID IN(SELECT i FROM @t)
+					order BY OrderNo
+	OPEN I
+	FETCH NEXT FROM i INTO 	@OrderNo
+	WHILE @@FETCH_STATUS = 0 
+	BEGIN
+		SET @SumOrderNo=@SumOrderNo+','+CONVERT (VARCHAR(10),@OrderNo)
+		FETCH NEXT FROM i INTO 	@OrderNo
+	END
+	CLOSE i 
+	DEALLOCATE i
+	
+	RETURN SUBSTRING(@SumOrderNo,2,LEN(@SumOrderNo))
+END
+GO
+
+COMMIT
+GO

@@ -1,0 +1,44 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[CANDELETE_PAYMENT]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[CANDELETE_PAYMENT]
+END
+GO
+
+CREATE  procedure [dbo].[CANDELETE_PAYMENT]
+	@PaymentId int,
+	@CANDELETE BIT OUT    
+AS          
+   
+	Declare @DOCNO CHAR(10), @DATE CHAR(10),@PAYTYPEID int ,@REFRENCEPaymentId INT    
+		
+	SELECT  @DOCNO= DOCumentNO ,  @PayTypeId=PayTypeId ,@Date=[Date],@REFRENCEPaymentId=REFRENCEPaymentId     
+		From payment     
+		where paymentid=@PaymentId  
+
+	IF  EXISTS(SELECT DOCUMENTNO           
+				  FROM PAYMENT           
+				  WHERE PayTypeSecondId=8 and
+						REFRENCEPaymentId=@PaymentId      
+	)
+		  SET @CANDELETE=0 
+	ELSE	IF  EXISTS(SELECT DOCUMENTNO           
+				  FROM PAYMENT           
+				  WHERE PayTypeSecondId=8 
+					AND PAYTYPEID=@PAYTYPEID 
+					AND DOCUMENTNO=@DOCNO
+					AND [DATE]=@DATE
+					AND REFRENCEPaymentId=@REFRENCEPaymentId      
+	)           
+		  
+		  SET @CANDELETE=0
+	ELSE      
+		  SET @CANDELETE=1
+GO
+
+COMMIT
+GO

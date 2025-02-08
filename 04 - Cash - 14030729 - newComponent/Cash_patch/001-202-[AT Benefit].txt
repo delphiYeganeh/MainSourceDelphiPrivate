@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'PaymentID'
+          AND Object_ID = Object_ID(N'dbo.Benefit'))
+BEGIN
+	ALTER TABLE [dbo].[Benefit] 
+	ADD	[PaymentID] [int] NULL
+END
+GO
+
+COMMIT
+GO

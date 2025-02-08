@@ -1,0 +1,66 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Calculate_Initial_Balance]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Calculate_Initial_Balance]
+END
+GO
+
+CREATE  procedure [dbo].[Calculate_Initial_Balance]
+@AccountID INT,
+@Date VARCHAR(10),
+@WithLoan BIT = 0,
+@Balance BIGINT OUTPUT
+
+AS
+BEGIN
+	DECLARE @tmp BIGINT
+	SET @tmp = 0
+	
+	IF (@WithLoan = 1) 
+	BEGIN
+		Select @Balance = sum(Case when @AccountID=DebtorAccountID   then -Amount else +Amount end)
+		FROM Payment 
+		WHERE Date<= @Date AND (@AccountID in (DebtorAccountID,CreditorAccountID))
+
+/*
+		SELECT @Balance=SUM(amount) FROM Payment 
+		WHERE CreditorAccountID= @AccountID
+			AND Date<= @Date
+		
+		SELECT @tmp=SUM(amount) FROM Payment 
+		WHERE debtorAccountID= @AccountID
+			AND Date<= @Date
+		SET @Balance = @Balance - @tmp		
+*/
+	END	
+	ELSE
+	BEGIN
+		Select @Balance = sum(Case when @AccountID=DebtorAccountID   then -Amount else +Amount end)
+		FROM Payment 
+		WHERE (@AccountID in (DebtorAccountID,CreditorAccountID))
+			AND PayTypeID NOT IN (3,4,5,6,7)
+			AND Date<= @Date
+
+/*
+		SELECT @Balance=SUM(amount) FROM Payment 
+		WHERE CreditorAccountID= @AccountID
+			AND PayTypeID NOT IN (3,4,5,6,7)
+			AND Date<= @Date
+		
+		SELECT @tmp=SUM(amount) FROM Payment 
+		WHERE debtorAccountID= @AccountID
+			AND PayTypeID NOT IN (3,4,5,6,7)
+			AND Date<= @Date
+		SET @Balance = @Balance - @tmp	
+		*/
+	END
+	RETURN
+END
+GO
+
+COMMIT
+GO

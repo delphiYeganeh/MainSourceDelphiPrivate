@@ -29,7 +29,7 @@ inherited MainForm: TMainForm
       Top = 35
       Width = 1203
       Height = 549
-      ActivePage = ContractTabSheet
+      ActivePage = xpTabSheet1
       Align = alClient
       BiDiMode = bdRightToLeft
       Font.Charset = ARABIC_CHARSET
@@ -2057,7 +2057,7 @@ inherited MainForm: TMainForm
               Text = '1300/01/01'#0
             end
             object BtnAllContract: TBitBtn
-              Left = 349
+              Left = 337
               Top = 1
               Width = 188
               Height = 25
@@ -2633,9 +2633,9 @@ inherited MainForm: TMainForm
         GradientFillDir = fdRightToLeft
         object GridPanel: TPanel
           Left = 0
-          Top = 161
+          Top = 169
           Width = 1195
-          Height = 378
+          Height = 370
           Align = alClient
           ParentColor = True
           TabOrder = 0
@@ -2643,7 +2643,7 @@ inherited MainForm: TMainForm
             Left = 1
             Top = 223
             Width = 1193
-            Height = 154
+            Height = 146
             Cursor = crHandPoint
             Align = alClient
             DataSource = Dm.DSelect_FollowUP_By_Date
@@ -2690,6 +2690,18 @@ inherited MainForm: TMainForm
                 Title.Font.Name = 'Tahoma'
                 Title.Font.Style = []
                 Width = 35
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'parentMarketerTitle'
+                Title.Caption = #1579#1576#1578' '#1705#1606#1606#1583#1607' '#1578#1587#1705
+                Title.Font.Charset = ARABIC_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Tahoma'
+                Title.Font.Style = []
+                Width = 100
                 Visible = True
               end
               item
@@ -3253,7 +3265,7 @@ inherited MainForm: TMainForm
               1191
               38)
             object LockReport: TSpeedButton
-              Left = 620
+              Left = 618
               Top = 6
               Width = 23
               Height = 22
@@ -3297,7 +3309,7 @@ inherited MainForm: TMainForm
               OnClick = LockReportClick
             end
             object UnlockRep: TSpeedButton
-              Left = 620
+              Left = 618
               Top = 6
               Width = 23
               Height = 22
@@ -3340,7 +3352,7 @@ inherited MainForm: TMainForm
               OnClick = UnlockRepClick
             end
             object lblLockRep: TLabel
-              Left = 520
+              Left = 518
               Top = 12
               Width = 93
               Height = 13
@@ -3348,7 +3360,7 @@ inherited MainForm: TMainForm
               Caption = #1711#1586#1575#1585#1588#1610' '#1602#1601#1604' '#1606#1610#1587#1578
             end
             object Button22: TBitBtn
-              Left = 969
+              Left = 967
               Top = 5
               Width = 80
               Height = 25
@@ -3399,7 +3411,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button25: TBitBtn
-              Left = 888
+              Left = 886
               Top = 5
               Width = 80
               Height = 25
@@ -3450,7 +3462,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button18: TBitBtn
-              Left = 808
+              Left = 806
               Top = 5
               Width = 80
               Height = 25
@@ -3501,7 +3513,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button21: TBitBtn
-              Left = 728
+              Left = 726
               Top = 5
               Width = 80
               Height = 25
@@ -3552,7 +3564,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button23: TBitBtn
-              Left = 648
+              Left = 646
               Top = 5
               Width = 80
               Height = 25
@@ -3653,7 +3665,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object btnViwCustomer: TBitBtn
-              Left = 1050
+              Left = 1048
               Top = 5
               Width = 113
               Height = 25
@@ -3704,7 +3716,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object PnlAllAct: TPanel
-              Left = 60
+              Left = 58
               Top = 2
               Width = 443
               Height = 35
@@ -3889,7 +3901,7 @@ inherited MainForm: TMainForm
               end
             end
             object BitBtn9: TBitBtn
-              Left = -70
+              Left = -72
               Top = 5
               Width = 127
               Height = 25
@@ -3945,6 +3957,7 @@ inherited MainForm: TMainForm
             Top = 84
             Width = 1193
             Height = 139
+            Cursor = crHandPoint
             Align = alTop
             DataSource = Dm.DSelect_FollowUP_Pin
             Font.Charset = ARABIC_CHARSET
@@ -4009,7 +4022,7 @@ inherited MainForm: TMainForm
           Left = 0
           Top = 0
           Width = 1195
-          Height = 161
+          Height = 169
           StartColor = 16774388
           EndColor = 16767449
           FillDirection = fdLeftToRight
@@ -4035,7 +4048,7 @@ inherited MainForm: TMainForm
           TabOrder = 1
           DesignSize = (
             1193
-            129)
+            137)
           object Label5: TLabel
             Left = 731
             Top = 45
@@ -4171,6 +4184,24 @@ inherited MainForm: TMainForm
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
+            Transparent = True
+          end
+          object Label53: TLabel
+            Left = 730
+            Top = 117
+            Width = 70
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = #1591#1585#1610#1602#1607' '#1605#1593#1585#1601#1610' :'
+            FocusControl = DBLCompagin
+          end
+          object Label54: TLabel
+            Left = 494
+            Top = 117
+            Width = 41
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = #1608#1590#1593#1610#1578' :'
             Transparent = True
           end
           object DonStatus: TComboBox
@@ -4447,7 +4478,7 @@ inherited MainForm: TMainForm
               Transparent = True
             end
             object SpeedButton5: TSpeedButton
-              Left = 210
+              Left = 232
               Top = 7
               Width = 23
               Height = 22
@@ -4482,7 +4513,7 @@ inherited MainForm: TMainForm
               OnClick = SpeedButton5Click
             end
             object Label7: TLabel
-              Left = 149
+              Left = 137
               Top = 12
               Width = 54
               Height = 13
@@ -4497,7 +4528,7 @@ inherited MainForm: TMainForm
               Transparent = True
             end
             object SpeedButton6: TSpeedButton
-              Left = 10
+              Left = 42
               Top = 7
               Width = 23
               Height = 22
@@ -4531,8 +4562,44 @@ inherited MainForm: TMainForm
                 FFFFF1F1F2AEAEAEFFFFFFFAFAFAAAA9AAFCFCFDFFFFFFFFFFFF}
               OnClick = SpeedButton6Click
             end
+            object SpeedButton17: TSpeedButton
+              Left = 20
+              Top = 7
+              Width = 20
+              Height = 22
+              Hint = #1585#1608#1586' '#1576#1593#1583
+              Caption = '+'
+              OnClick = SpeedButton17Click
+            end
+            object SpeedButton18: TSpeedButton
+              Left = 0
+              Top = 7
+              Width = 20
+              Height = 22
+              Hint = #1585#1608#1586' '#1602#1576#1604
+              Caption = '-'
+              OnClick = SpeedButton18Click
+            end
+            object SpeedButton19: TSpeedButton
+              Left = 212
+              Top = 8
+              Width = 20
+              Height = 22
+              Hint = #1585#1608#1586' '#1576#1593#1583
+              Caption = '+'
+              OnClick = SpeedButton19Click
+            end
+            object SpeedButton20: TSpeedButton
+              Left = 192
+              Top = 8
+              Width = 20
+              Height = 22
+              Hint = #1585#1608#1586' '#1602#1576#1604
+              Caption = '-'
+              OnClick = SpeedButton20Click
+            end
             object BDate: TShamsiDateEdit
-              Left = 233
+              Left = 255
               Top = 8
               Width = 67
               Height = 21
@@ -4547,9 +4614,9 @@ inherited MainForm: TMainForm
               Text = '1386/12/29'#0
             end
             object Edate: TShamsiDateEdit
-              Left = 33
+              Left = 64
               Top = 7
-              Width = 109
+              Width = 78
               Height = 21
               Anchors = [akTop, akRight]
               Font.Charset = ARABIC_CHARSET
@@ -4756,6 +4823,53 @@ inherited MainForm: TMainForm
             TabOrder = 16
             OnClick = RGTypeRepMainClick
           end
+          object DBLCompagin: TDBLookupComboBox
+            Left = 579
+            Top = 113
+            Width = 150
+            Height = 21
+            Anchors = [akTop, akRight]
+            BiDiMode = bdLeftToRight
+            DropDownRows = 20
+            KeyField = 'CompaginID'
+            ListField = 'CompaginTitle'
+            ListSource = Dm.DCompagin
+            ParentBiDiMode = False
+            TabOrder = 17
+          end
+          object BitBtn11: TBitBtn
+            Left = 562
+            Top = 113
+            Width = 15
+            Height = 21
+            Anchors = [akTop, akRight]
+            Caption = '*'
+            TabOrder = 18
+            OnClick = BitBtn11Click
+          end
+          object dbComboState: TDBLookupComboBox
+            Left = 339
+            Top = 113
+            Width = 150
+            Height = 21
+            Anchors = [akTop, akRight]
+            BiDiMode = bdRightToLeft
+            KeyField = 'CustomerStatusID'
+            ListField = 'CustomerStatusTitle'
+            ListSource = Dm.DCustomerStatus
+            ParentBiDiMode = False
+            TabOrder = 19
+          end
+          object BitBtn12: TBitBtn
+            Left = 321
+            Top = 114
+            Width = 15
+            Height = 21
+            Anchors = [akTop, akRight]
+            Caption = '*'
+            TabOrder = 20
+            OnClick = BitBtn12Click
+          end
         end
       end
       object xpTabSheet2: TxpTabSheet
@@ -4800,7 +4914,7 @@ inherited MainForm: TMainForm
             ParentFont = False
           end
           object BitBtn1: TBitBtn
-            Left = 1080
+            Left = 1064
             Top = 4
             Width = 95
             Height = 28
@@ -4846,7 +4960,7 @@ inherited MainForm: TMainForm
               3C85131A10280000000000000000000000000000000000000000}
           end
           object BitBtn3: TBitBtn
-            Left = 982
+            Left = 966
             Top = 4
             Width = 95
             Height = 28
@@ -4909,7 +5023,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object BitBtn5: TBitBtn
-            Left = 670
+            Left = 654
             Top = 4
             Width = 95
             Height = 28
@@ -4994,7 +5108,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object btnContract: TBitBtn
-            Left = 884
+            Left = 868
             Top = 4
             Width = 95
             Height = 28
@@ -5085,7 +5199,7 @@ inherited MainForm: TMainForm
               000000000000000000000000000000000000000000000000000000000000}
           end
           object btnCustomerReportX: TBitBtn
-            Left = 538
+            Left = 522
             Top = 4
             Width = 129
             Height = 28
@@ -5132,7 +5246,7 @@ inherited MainForm: TMainForm
           end
           object BitBtnCase: TBitBtn
             Tag = 1
-            Left = 396
+            Left = 380
             Top = 4
             Width = 139
             Height = 28
@@ -5219,7 +5333,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object btnMaps: TBitBtn
-            Left = 768
+            Left = 752
             Top = 4
             Width = 113
             Height = 28
@@ -16565,6 +16679,10 @@ inherited MainForm: TMainForm
       object N94: TMenuItem
         Caption = #1711#1586#1575#1585#1588' '#1601#1575#1589#1604#1607' '#1586#1605#1575#1606#1610' '#1605#1585#1575#1581#1604' '#1601#1585#1608#1588
         OnClick = N94Click
+      end
+      object N122: TMenuItem
+        Caption = #1711#1586#1575#1585#1588' '#1575#1585#1586#1610#1575#1576#1610' '#1575#1602#1583#1575#1605#1575#1578' '#1585#1608#1586#1575#1606#1607'  '#1705#1575#1585#1588#1606#1575#1587#1575#1606
+        OnClick = N122Click
       end
       object N81: TMenuItem
         Caption = '-'

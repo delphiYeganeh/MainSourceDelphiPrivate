@@ -1,0 +1,130 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Report_DelayedLoanPayment]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Report_DelayedLoanPayment]
+END
+GO
+
+CREATE  PROCEDURE [dbo].[Report_DelayedLoanPayment]   
+                 @LoanTypeID      AS SmallInt,
+                 @LoanNO          AS Varchar(10),
+                 @AccountID       AS INT,
+                 @ShowDetail      AS SMALLINT,
+                 @GROUPBY         AS SMALLINT,
+                 @TODate          AS CHAR(10),
+                 @dELAY           AS INT,
+                 @JustDelayedDocs AS INT,
+                 @REMAINOFLOAN    AS INT,/*Tasviyeh Shodeh=0 Nashodeh=1 all=2*/
+                 @Paid AS INT /*NOT PAID=0 , PAID=1 , ALL=2*/
+   
+AS    
+	SELECT     Account.AccountID      ,     
+			   Account.AccountNO      ,     
+			   Account.AccountTitle   ,     
+			   dbo.ShamsiDateDiff(ForcePayment.MatureDate,ISNULL(Payment.[Date],@TODate )) AS DELAY,   
+			   Loan.AMOUNT,  
+			   (Select SUM(AMOUNT)        FROM FORCEPAYMENT WHERE PARENTID=LOAN.LOANID AND FORCETYPEID=1               AND PAID=1)    JamAghsatPardakhti ,               
+			   (Select COUNT(1)           FROM FORCEPAYMENT WHERE PARENTID=LOAN.LOANID AND FORCETYPEID=1                         )    TedadAghsat,                
+			   (Select COUNT(1)           FROM FORCEPAYMENT WHERE PARENTID=LOAN.LOANID AND FORCETYPEID=1               AND PAID=1)    TedadAghsatPardakhti,                
+			   ISNULL((Select SUM(AMOUNT) FROM FORCEPAYMENT WHERE FORCETYPEID=2        AND PARENTID=Account.AccountID  AND PAID=0),0) REMAINOF_MahiyanehPerAccountId,  
+			   isnull((Select SUM(AMOUNT) FROM FORCEPAYMENT WHERE PARENTID=LOAN.LOANID AND FORCETYPEID=1               AND PAID=0),0) REMAINOF_Ghest,                
+			   ISNULL((Select SUM(AMOUNT) FROM FORCEPAYMENT WHERE FORCETYPEID=1        AND PARENTID=LOAN.LOANID        AND PAID=0),0) REMAINOFLOAN,  
+			   (SELECT SUM(F .Amount)     FROM ForcePayment F                          INNER JOIN   
+											   Loan         L ON F.ParentID = L.LoanID INNER JOIN  
+											   Account      A ON L.AccountID= A.AccountID    
+															WHERE (F .Paid =0)                      AND   
+																  (A.AccountID = Account.AccountID) AND   
+																  (F.ForceTypeID = 1) ) RemainOfLoanPerAccountId ,               
+			   Loan.LoanNO            ,     
+			   ForcePayment.OrderNo   ,     
+			   ForcePayment.MatureDate,    
+			   Loan.LoanTypeID        ,    
+			   LoanType.LoanTypeTitle ,      
+			   ' قسط شماره  '+CAST( ForcePayment.OrderNo AS VARCHAR(5)) AS COMMENT ,  
+			   ForcePayment.Paid,  
+			   ForceType.FoceTypeID   
+	INTO #C    
+	FROM ForcePayment
+		INNER JOIN Loan ON ForcePayment.ParentID = Loan.LoanID
+		INNER JOIN Account ON Loan.AccountID = Account.AccountID
+		INNER JOIN LoanType ON Loan.LoanTypeID = LoanType.LoanTypeID
+		INNER JOIN ForceType ON ForcePayment.ForceTypeID = ForceType.FoceTypeID 
+		LEFT OUTER JOIN Payment ON ForcePayment.PaymentID = Payment.PaymentID    
+	WHERE (ForceType.FoceTypeID = 1) 
+		AND (dbo.ShamsiDateDiff(ForcePayment.MatureDate, ISNULL(Payment.[Date],@TODate)) >0) 
+		AND (Account.AccountID=@AccountID OR @AccountID=0 ) 
+		AND (Loan.LoanNO=@LoanNO          OR @LoanNO=0    ) 
+		AND (Loan.LoanTypeID=@LoanTypeID  OR @LoanTypeID=0)   
+		AND (Left(AccountNo, 3) <> 'DEL')
+	ORDER BY Loan.LoanNO ,Loan.AMOUNT   
+
+	IF @ShowDetail=1     
+	BEGIN
+		IF @REMAINOFLOAN=1 
+		BEGIN
+			SELECT *    
+				FROM  #C     
+				WHERE   (Paid=@Paid OR @Paid=2) 
+					and (REMAINOFLOAN >0 ) 
+				ORDER BY AccountTitle 
+		END
+		ELSE  
+		BEGIN
+			SELECT *    
+				FROM  #C     
+				WHERE   (Paid=@Paid OR @Paid=2) 
+					and (REMAINOFLOAN =0 or @REMAINOFLOAN=2) 
+				ORDER BY AccountTitle 
+		END
+	END
+	ELSE    
+	BEGIN    
+		IF @GROUPBY=1
+		BEGIN  
+			IF @REMAINOFLOAN=1 
+			BEGIN
+				SELECT   ACCOUNTID,AccountTitle,ACCOUNTNo,COUNT(OrderNo) OrderNoCount,LoanNo,REMAINOFLOAN,0 AS REMAINOfLoanPerAccountId           
+					FROM #C     
+					WHERE   (Paid=@Paid OR @Paid=2) 
+					GROUP BY ACCOUNTID,AccountTitle,ACCOUNTNo,LoanNO,REMAINOFLOAN  
+					HAVING (COUNT(OrderNo)=@dELAY OR @dELAY=0)AND (REMAINOFLOAN >0 ) 
+					ORDER BY LoanNo    
+			END
+			ELSE  
+			BEGIN
+				SELECT   ACCOUNTID,AccountTitle,ACCOUNTNo,COUNT(OrderNo) OrderNoCount,LoanNo,REMAINOFLOAN,0 AS REMAINOfLoanPerAccountId           
+					FROM #C     
+					WHERE   (Paid=@Paid OR @Paid=2) 
+					GROUP BY ACCOUNTID,AccountTitle,ACCOUNTNo,LoanNO,REMAINOFLOAN  
+					HAVING (COUNT(OrderNo)=@dELAY OR @dELAY=0)AND (REMAINOFLOAN=0  OR @REMAINOFLOAN=2 ) 
+					ORDER BY LoanNo    
+			END
+		END  
+		
+		IF @GROUPBY=2 
+		BEGIN
+			IF @REMAINOFLOAN=1 
+				SELECT ACCOUNTID,AccountTitle,ACCOUNTNo, COUNT(OrderNo)  OrderNoCount ,'' AS  LoanNo ,0 AS REMAINOFLOAN, REMAINOfLoanPerAccountId  
+					FROM #C  
+					WHERE   (Paid=@Paid OR @Paid=2)  
+					GROUP BY ACCOUNTID,AccountTitle,ACCOUNTNo,REMAINOfLoanPerAccountId    
+					HAVING (COUNT(OrderNo)=@dELAY OR @dELAY=0 ) AND (REMAINOfLoanPerAccountId>0)
+			ELSE
+				SELECT ACCOUNTID,AccountTitle,ACCOUNTNo, COUNT(OrderNo)  OrderNoCount ,'' AS  LoanNo ,0 AS REMAINOFLOAN, REMAINOfLoanPerAccountId  
+					FROM #C  
+					WHERE   (Paid=@Paid OR @Paid=2)  
+					GROUP BY ACCOUNTID,AccountTitle,ACCOUNTNo,REMAINOfLoanPerAccountId    
+					HAVING (COUNT(OrderNo)=@dELAY OR @dELAY=0 ) AND (REMAINOfLoanPerAccountId=0 OR @REMAINOFLOAN=2)
+		END    
+	END    
+	  
+	DROP TABLE #C
+
+GO
+
+COMMIT
+GO

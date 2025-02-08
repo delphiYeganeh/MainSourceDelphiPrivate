@@ -1,0 +1,63 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'OutBox')
+BEGIN
+	CREATE TABLE [dbo].[OutBox](
+		[OutBoxId] [int] IDENTITY(1,1) NOT NULL,
+		[SmsNumber] [varchar](11) NULL,
+		[SmsText] [varchar](max) NULL,
+		[SendDate] [datetime] NULL,
+		[Inprocess] [bit] NULL,
+		[IsSend] [bit] NULL,
+		[ErrorMessage] [int] NULL,
+		[SmsStatus] [nvarchar](100) NULL
+	) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+
+
+IF NOT EXISTS (SELECT 1
+      FROM sys.all_columns c
+      join sys.tables t ON t.object_id = c.object_id
+      join sys.schemas s ON s.schema_id = t.schema_id
+      join sys.default_constraints d ON c.default_object_id = d.object_id
+    WHERE t.NAME = 'OutBox'
+      and c.NAME = 'SendDate'
+      and s.NAME = 'dbo')
+BEGIN
+	ALTER TABLE [dbo].[OutBox] ADD  DEFAULT (getdate()) FOR [SendDate]
+END
+GO
+
+IF NOT EXISTS (SELECT 1
+      FROM sys.all_columns c
+      join sys.tables t ON t.object_id = c.object_id
+      join sys.schemas s ON s.schema_id = t.schema_id
+      join sys.default_constraints d ON c.default_object_id = d.object_id
+    WHERE t.NAME = 'OutBox'
+      and c.NAME = 'Inprocess'
+      and s.NAME = 'dbo')
+BEGIN
+	ALTER TABLE [dbo].[OutBox] ADD  DEFAULT ((0)) FOR [Inprocess]
+END
+GO
+
+IF NOT EXISTS (SELECT 1
+      FROM sys.all_columns c
+      join sys.tables t ON t.object_id = c.object_id
+      join sys.schemas s ON s.schema_id = t.schema_id
+      join sys.default_constraints d ON c.default_object_id = d.object_id
+    WHERE t.NAME = 'OutBox'
+      and c.NAME = 'IsSend'
+      and s.NAME = 'dbo')
+BEGIN
+	ALTER TABLE [dbo].[OutBox] ADD  DEFAULT ((0)) FOR [IsSend]
+END
+GO
+
+COMMIT
+GO

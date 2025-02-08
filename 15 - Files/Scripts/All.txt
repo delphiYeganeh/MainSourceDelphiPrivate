@@ -1,0 +1,154 @@
+CREATE TABLE [dbo].[All_Files](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NULL,
+	[FilenameInsertId] [int] NULL,
+	[InsertDateTime] [datetime] NULL,
+	[IsPrint] [bit] NULL,
+	[PrinteDateTime] [datetime] NULL,
+	[PrintByUserId] [int] NULL,
+	[ColumF1] [nvarchar](1000) NULL,
+	[ColumF2] [nvarchar](1000) NULL,
+	[ColumF3] [nvarchar](1000) NULL,
+	[ColumF4] [nvarchar](1000) NULL,
+	[ColumF5] [nvarchar](1000) NULL,
+	[ColumF6] [nvarchar](1000) NULL,
+	[ColumF7] [nvarchar](1000) NULL,
+	[ColumF8] [nvarchar](1000) NULL,
+	[ColumF9] [nvarchar](1000) NULL,
+	[ColumF10] [nvarchar](1000) NULL,
+	[ColumF11] [nvarchar](1000) NULL,
+	[ColumF12] [nvarchar](1000) NULL,
+	[ColumF13] [nvarchar](1000) NULL,
+	[ColumF14] [nvarchar](1000) NULL,
+	[ColumF15] [nvarchar](1000) NULL,
+	[ColumF16] [nvarchar](1000) NULL,
+	[ColumF17] [nvarchar](1000) NULL,
+	[ColumF18] [nvarchar](1000) NULL,
+	[ColumF19] [nvarchar](1000) NULL,
+	[ColumF20] [nvarchar](1000) NULL,
+	[ColumF21] [nvarchar](1000) NULL,
+	[ColumF22] [nvarchar](1000) NULL,
+	[ColumF23] [nvarchar](1000) NULL,
+	[ColumF24] [nvarchar](1000) NULL,
+	[ColumF25] [nvarchar](1000) NULL,
+	[ColumF26] [nvarchar](1000) NULL,
+	[IsHeaderType] [bit] NULL
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[FileNameInsert](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[FileName] [nvarchar](250) NULL,
+	[TabSheet] [int] NULL,
+	[DatetimeInsert] [datetime] NULL,
+	[userid] [int] NULL,
+	[servername] [nvarchar](200) NULL
+) ON [PRIMARY]
+GO
+
+
+CREATE TABLE [dbo].[Settings](
+	[UserID] [int] NOT NULL,
+	[VariableId] [int] NULL,
+	[Value] [nvarchar](255) NULL,
+	[VariableName] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[Users](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](100) NULL,
+	[UserName] [nvarchar](50) NULL,
+	[PassWord] [nvarchar](100) NULL,
+	[AccessID] [tinyint] NULL,
+	[EndActiveDate] [char](10) NULL,
+	[BeginActiveDate] [char](10) NULL,
+	[CanNotLogin] [bit] NULL
+) ON [PRIMARY]
+GO
+
+
+ALTER TABLE [dbo].[All_Files] ADD  CONSTRAINT [DF_All_Files_InsertDateTime]  DEFAULT (getdate()) FOR [InsertDateTime]
+GO
+ALTER TABLE [dbo].[All_Files] ADD  CONSTRAINT [DF_All_Files_IsPrint]  DEFAULT ((0)) FOR [IsPrint]
+GO
+ALTER TABLE [dbo].[All_Files] ADD  CONSTRAINT [DF_All_Files_IsHeaderType]  DEFAULT ((0)) FOR [IsHeaderType]
+GO
+ALTER TABLE [dbo].[FileNameInsert] ADD  CONSTRAINT [DF_FileNameInsert_DatetimeInsert]  DEFAULT (getdate()) FOR [DatetimeInsert]
+GO
+
+--------------------
+
+
+CREATE PROCEDURE [dbo].[GetFilesrecord]
+            @UserID  int,
+            @IsPrint int
+        --  ,  @Value nvarchar(255) output
+AS
+      SELECT [All_Files]. [id]
+      ,[Name]
+      ,[FilenameInsertId]
+      ,[InsertDateTime]
+      ,[IsPrint]
+      ,[PrinteDateTime]
+      ,[PrintByUserId]
+      ,[ColumF1]
+      ,[ColumF2]
+      ,[ColumF3]
+      ,[ColumF4]
+      ,[ColumF5]
+      ,[ColumF6]
+      ,[ColumF7]
+      ,[ColumF8]
+      ,[ColumF9]
+      ,[ColumF10]
+      ,[ColumF11]
+      ,[ColumF12]
+      ,[ColumF13]
+      ,[ColumF14]
+      ,[ColumF15]
+      ,[ColumF16]
+      ,[ColumF17]
+      ,[ColumF18]
+      ,[ColumF19]
+      ,[ColumF20]
+      ,[ColumF21]
+      ,[ColumF22]
+      ,[ColumF23]
+      ,[ColumF24]
+      ,[ColumF25]
+      ,[ColumF26]
+      ,[IsHeaderType]
+  FROM [dbo].[All_Files]
+  LEFT JOIN dbo.FileNameInsert AS FNI ON [All_Files].FilenameInsertId = fni.id
+      WHERE (FNI.userid  = @UserID OR @UserID = 0 ) AND
+       ( @IsPrint = 2 OR IsPrint = CAST(@IsPrint AS bit) ) 
+     and  IsHeaderType = 0
+      ORDER BY id      
+
+GO
+
+
+CREATE PROCEDURE [dbo].[GetUserSetting]
+            @UserID  int,
+            @VariableName varchar(50),
+            @Value nvarchar(255) output
+AS
+            Select @Value = [Value]
+                        From Settings with (NOLOCK)
+                        Where (UserID = @UserID) And (VariableName = @VariableName)
+
+            Set @Value=isnull(@Value,'Not Found')
+
+GO
+
+
+create  procedure [dbo].[SetUserSetting]
+@UserID  int ,@VariableName varchar(50),@Value nvarchar(255)
+AS
+    DELETE FROM Settings WHERE  (UserID = @UserID) AND (VariableName = LTRIM(RTRIM(@VariableName)))
+    insert into Settings(UserID,VariableName,Value) values(@UserID,@VariableName,@Value)
+    Update Settings 
+    set Value=@Value
+    WHERE     (UserID = @UserID) AND (VariableName = @VariableName)
+GO

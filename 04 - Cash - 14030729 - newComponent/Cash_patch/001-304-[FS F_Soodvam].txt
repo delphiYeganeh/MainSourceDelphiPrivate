@@ -1,0 +1,86 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[F_Soodvam]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[F_Soodvam]
+END
+GO
+
+CREATE FUNCTION [dbo].[F_Soodvam] 
+(
+	@DateFrom char(10), 
+	@DateTo char(10)
+)
+
+Returns Bigint    
+begin    
+    
+	DECLARE @sumAmount Bigint        
+		  
+	declare @p table(AccountId INT ,Amount BIGINT,status SMALLINT ,Date NVARCHAR(10),PAYTYPEID INT)       
+		  
+	INSERT INTO @p      
+	Select           
+			 CreditorAccountId   AccountId,              
+			Amount,              
+			Cast(-1 as smallint) status,              
+			Date,    
+			PAYTYPEID                
+	From Payment  Inner Join               
+		 Account ac1 on creditorAccountId=ac1.AccountId                
+
+	WheRE CreditorAccountId=4   and  Date BETWEEN  @DateFrom and @DateTo
+		
+	INSERT INTO @p      
+	Select           
+			 CreditorAccountId   AccountId,              
+			Amount,              
+			Cast(-1 as smallint) status,              
+			Date,    
+			PAYTYPEID                
+	From Payment  Inner Join               
+		 Account ac1 on creditorAccountId=ac1.AccountId                
+
+	WheRE AccountTypeId=1   and  Date BETWEEN  @DateFrom and @DateTo AND PAYTYPEID=7
+				 
+	Insert InTo @p                
+	Select  DebtorAccountId,              
+			Amount,              
+			1 status,              
+			Date  ,    
+			PAYTYPEID              
+	From Payment  Inner Join             
+		 Account AC2 on DebtorAccountId=ac2.AccountId                
+	WheRE DebtorAccountId=4   and  Date BETWEEN  @DateFrom and @DateTo
+
+	Insert InTo @p                
+	Select  DebtorAccountId,              
+			Amount,              
+			1 status,              
+			Date  ,    
+			PAYTYPEID              
+	From Payment  Inner Join             
+		 Account AC2 on DebtorAccountId=ac2.AccountId                
+	Where AccountTypeId=1  and  Date BETWEEN  @DateFrom and @DateTo AND PAYTYPEID=7        
+			   
+	declare @p1 table(ACCOUNTID INT ,PAYTYPEID INT ,C3 BIGINT,C4 BIGINT)       
+	INSERT INTO @p1               
+	Select AccountId,              
+		   PAYTYPEID,    
+		   Sum(Case When status=-1 Then amount Else 0      End)C3,              
+		   Sum(Case When status=-1 Then 0      Else Amount End)C4             
+	From @p          
+	Where Date BETWEEN  @DateFrom and @DateTo  AND (AccountId=4  OR PAYTYPEID=7 )
+	Group by AccountId ,PAYTYPEID              
+
+	SELECT @sumAmount=isnull((select SUM(C3)-SUM(C4) FROM @p1 ),0)       
+
+	Return @SumAmount      
+end
+GO
+
+COMMIT
+GO

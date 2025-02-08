@@ -1203,6 +1203,7 @@ inherited frCase: TfrCase
       Align = alTop
       DataField = 'Comment'
       DataSource = DsSelect_Cases
+      ReadOnly = True
       ScrollBars = ssVertical
       TabOrder = 5
     end

@@ -1,8 +1,8 @@
 inherited FmOtherPerson: TFmOtherPerson
-  Left = 660
-  Top = 255
+  Left = 603
+  Top = 233
   Width = 617
-  Height = 627
+  Height = 646
   BorderIcons = [biSystemMenu]
   Caption = #1601#1585#1605' '#1579#1576#1578' '#1605#1588#1582#1589#1575#1578' '#1587#1575#1610#1585' '#1575#1588#1582#1575#1589' '#1605#1585#1578#1576#1591
   KeyPreview = True
@@ -12,27 +12,550 @@ inherited FmOtherPerson: TFmOtherPerson
   TextHeight = 13
   inherited ShapeBase: TShape
     Width = 601
-    Height = 588
+    Height = 607
   end
   object pnlMain: TPanel [1]
     Left = 0
     Top = 0
     Width = 601
-    Height = 588
+    Height = 607
     Align = alClient
     TabOrder = 0
     object Panel3: TPanel
       Left = 1
-      Top = 535
+      Top = 1
       Width = 599
       Height = 52
-      Align = alBottom
+      Align = alTop
       TabOrder = 0
-      object SBClose: TSpeedButton
-        Left = 12
+      object DBNavigator1: TDBNavigator
+        Left = 102
         Top = 1
-        Width = 55
+        Width = 496
         Height = 50
+        Hint = '  Ctrl + N  '#1583#1585#1580' '#1580#1583#1610#1583' - Ctrl+F2  '#1608#1610#1585#1575#1610#1588' - Ctrl+F5   '#1579#1576#1578' '#1578#1594#1610#1610#1585#1575#1578
+        DataSource = DSelect_Person_By_CustomerID
+        VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbEdit, nbPost, nbCancel]
+        Align = alRight
+        Constraints.MaxHeight = 50
+        Constraints.MinHeight = 50
+        Constraints.MinWidth = 50
+        Flat = True
+        Ctl3D = True
+        Hints.Strings = (
+          #1575#1608#1604#1610#1606' '#1585#1705#1608#1585#1583
+          #1585#1705#1608#1585#1583' '#1602#1576#1604#1610
+          #1585#1705#1608#1585#1583' '#1576#1593#1583#1610
+          #1570#1582#1585#1610#1606' '#1585#1705#1608#1585#1583
+          'Ctrl + N  '#1583#1585#1580' '#1580#1583#1610#1583
+          #1581#1584#1601
+          'Ctrl+F2  '#1608#1610#1585#1575#1610#1588
+          'Ctrl+F5   '#1579#1576#1578' '#1578#1594#1610#1610#1585#1575#1578
+          #1575#1606#1589#1585#1575#1601
+          #1576#1607' '#1585#1608#1586' '#1585#1587#1575#1606#1610' '#1583#1610#1578#1575
+          '')
+        ParentCtl3D = False
+        ParentShowHint = False
+        ConfirmDelete = False
+        ShowHint = True
+        TabOrder = 0
+        TabStop = True
+        BeforeAction = DBNavigator1BeforeAction
+        OnClick = DBNavigator1Click
+      end
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 332
+      Width = 599
+      Height = 161
+      Align = alBottom
+      TabOrder = 1
+      DesignSize = (
+        599
+        161)
+      object Label1: TLabel
+        Left = 527
+        Top = 46
+        Width = 13
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1606#1575#1605
+        FocusControl = DBEFirstName
+      end
+      object Label2: TLabel
+        Left = 527
+        Top = 23
+        Width = 58
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610
+        FocusControl = DBELastName
+      end
+      object Label3: TLabel
+        Left = 527
+        Top = 94
+        Width = 25
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1575#1610#1605#1610#1604
+        FocusControl = DBEEmailAddress
+      end
+      object Label4: TLabel
+        Left = 259
+        Top = 96
+        Width = 46
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1578#1604#1601#1606' '#1605#1606#1586#1604
+        FocusControl = DBEHomePhone
+      end
+      object Label5: TLabel
+        Left = 259
+        Top = 17
+        Width = 21
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1578#1604#1601#1606
+        FocusControl = DBEWorkPhone
+      end
+      object Label6: TLabel
+        Left = 259
+        Top = 69
+        Width = 28
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1605#1608#1576#1575#1610#1604
+        FocusControl = DBEMobilePhone
+      end
+      object Label7: TLabel
+        Left = 259
+        Top = 43
+        Width = 25
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1601#1705#1587
+        FocusControl = DBEFaxNumber
+      end
+      object Label8: TLabel
+        Left = 527
+        Top = 69
+        Width = 28
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1587#1605#1578
+        FocusControl = DBEJobTitle
+      end
+      object Label9: TLabel
+        Left = 527
+        Top = 120
+        Width = 40
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1578#1608#1590#1610#1581#1575#1578
+        FocusControl = DBENotes
+      end
+      object Label12: TLabel
+        Left = 307
+        Top = 18
+        Width = 10
+        Height = 19
+        Caption = '*'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clRed
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object DBEFirstName: TDBEdit
+        Left = 320
+        Top = 42
+        Width = 200
+        Height = 21
+        Anchors = [akTop, akRight]
+        DataField = 'FirstName'
+        DataSource = DSelect_Person_By_CustomerID
+        TabOrder = 1
+      end
+      object DBELastName: TDBEdit
+        Left = 320
+        Top = 17
+        Width = 200
+        Height = 21
+        Anchors = [akTop, akRight]
+        DataField = 'LastName'
+        DataSource = DSelect_Person_By_CustomerID
+        TabOrder = 0
+      end
+      object DBEEmailAddress: TDBEdit
+        Left = 320
+        Top = 94
+        Width = 200
+        Height = 21
+        Anchors = [akTop, akRight]
+        BiDiMode = bdLeftToRight
+        DataField = 'EmailAddress'
+        DataSource = DSelect_Person_By_CustomerID
+        ParentBiDiMode = False
+        TabOrder = 3
+        OnEnter = DBEEmailAddressEnter
+        OnExit = DBEEmailAddressExit
+      end
+      object DBEHomePhone: TDBEdit
+        Left = 53
+        Top = 94
+        Width = 200
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'HomePhone'
+        DataSource = DSelect_Person_By_CustomerID
+        TabOrder = 7
+      end
+      object DBEWorkPhone: TDBEdit
+        Left = 53
+        Top = 16
+        Width = 200
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'WorkPhone'
+        DataSource = DSelect_Person_By_CustomerID
+        TabOrder = 4
+      end
+      object DBEMobilePhone: TDBEdit
+        Left = 53
+        Top = 68
+        Width = 200
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'MobilePhone'
+        DataSource = DSelect_Person_By_CustomerID
+        TabOrder = 6
+      end
+      object DBEFaxNumber: TDBEdit
+        Left = 53
+        Top = 42
+        Width = 200
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'FaxNumber'
+        DataSource = DSelect_Person_By_CustomerID
+        TabOrder = 5
+      end
+      object DBEJobTitle: TDBEdit
+        Left = 320
+        Top = 66
+        Width = 200
+        Height = 21
+        Anchors = [akTop, akRight]
+        DataField = 'JobTitle'
+        DataSource = DSelect_Person_By_CustomerID
+        TabOrder = 2
+      end
+      object DBENotes: TDBEdit
+        Left = 53
+        Top = 120
+        Width = 468
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'Notes'
+        DataSource = DSelect_Person_By_CustomerID
+        TabOrder = 8
+      end
+    end
+    object Panel1: TPanel
+      Left = 1
+      Top = 53
+      Width = 599
+      Height = 279
+      Align = alClient
+      TabOrder = 2
+      object YDBGrid1: TYDBGrid
+        Left = 1
+        Top = 1
+        Width = 597
+        Height = 277
+        Cursor = crHandPoint
+        TabStop = False
+        Align = alClient
+        DataSource = DSelect_Person_By_CustomerID
+        ReadOnly = True
+        TabOrder = 0
+        TitleFont.Charset = ARABIC_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        YeganehColor = False
+        YeganehFinish = False
+        PageNumber = False
+        RecordNumber = False
+        HasTime = False
+        Oriention = poPortrait
+        HasDate = False
+        HasIndex = False
+        PrintTitle = #1604#1610#1587#1578' '#1578#1607#1610#1607' '#1588#1583#1607' '#1578#1608#1587#1591' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1610#1711#1575#1606#1607
+        InvertFarsiDate = True
+        TitleSort = True
+        AutoInsert = False
+        FooterFields = 'Count'
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'FirstName'
+            Title.Alignment = taCenter
+            Title.Caption = #1606#1575#1605
+            Width = 114
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'LastName'
+            Title.Alignment = taCenter
+            Title.Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610
+            Width = 182
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'JobTitle'
+            Title.Alignment = taCenter
+            Title.Caption = #1587#1605#1578
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'WorkPhone'
+            Title.Alignment = taCenter
+            Title.Caption = #1578#1604#1601#1606
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MobilePhone'
+            Title.Alignment = taCenter
+            Title.Caption = #1605#1608#1576#1575#1610#1604
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FaxNumber'
+            Title.Alignment = taCenter
+            Title.Caption = #1601#1705#1587
+            Width = 122
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'HomePhone'
+            Title.Alignment = taCenter
+            Title.Caption = #1578#1604#1601#1606' '#1605#1606#1586#1604
+            Width = 116
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'EmailAddress'
+            Title.Alignment = taCenter
+            Title.Caption = #1575#1610#1605#1610#1604
+            Width = 212
+            Visible = True
+          end>
+      end
+    end
+    object pnlSearch: TPanel
+      Left = 1
+      Top = 493
+      Width = 599
+      Height = 72
+      Align = alBottom
+      TabOrder = 3
+      DesignSize = (
+        599
+        72)
+      object Label10: TLabel
+        Left = 540
+        Top = 16
+        Width = 13
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1606#1575#1605
+      end
+      object Label11: TLabel
+        Left = 495
+        Top = 42
+        Width = 58
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610
+      end
+      object Label14: TLabel
+        Left = 227
+        Top = 17
+        Width = 21
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1578#1604#1601#1606
+      end
+      object Label15: TLabel
+        Left = 227
+        Top = 45
+        Width = 28
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = #1605#1608#1576#1575#1610#1604
+      end
+      object pnlFilter: TPanel
+        Left = 568
+        Top = 1
+        Width = 30
+        Height = 70
+        Align = alRight
+        TabOrder = 0
+        DesignSize = (
+          30
+          70)
+        object SBRefresh: TSpeedButton
+          Left = 2
+          Top = 25
+          Width = 26
+          Height = 24
+          Hint = #1576#1575#1586#1610#1575#1576#1610' '#1583#1608#1576#1575#1585#1607' '#1575#1591#1604#1575#1593#1575#1578
+          Anchors = [akTop, akRight]
+          Flat = True
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000000000000000000000000000000000000000000000000
+            000000000000000000001F150D2B69482F92A26E47E0B0764DF7B2784DF9A26E
+            48E16C4B30981D140D29000000000000000000000000000000005F4029860000
+            0000040302066B482F95B1784FF5CF9569FBE4AB7FFFEDB487FFEEB589FFE5AC
+            80FFCF966AFBB1784FF56D493097050302070000000000000000B57A4EFF6845
+            2D908A5E3DBFBD875BF5EAB185FFD59C71FEB57C54F0B2794EF8B2794DFAB47D
+            52F1D89E74FEEBB386FFBE865DF68D613FC50503020700000000B57A4EFFB67D
+            52F4C0865DF6EAB185FFB67E53F48C603EC2302115440B07050F0906040C3020
+            1443946442CDB77E54F3EBB386FFBE875CF56D49309700000000B57A4EFFEBB2
+            87FFECB387FFB67D53F460412A85000000000000000000000000000000000000
+            00000000000064452C8CB67E54F4EBB287FFB1784FF51D140D29B57A4EFFF0B7
+            8BFFECB387FFB67D52F464442C8C000000000000000000000000000000000000
+            000000000000010000018D603FC3D89E73FECF966AFB6C493096B57A4EFFB57A
+            4EFFB57A4EFFB57A4EFFB57A4EFF5F4029860000000000000000000000000000
+            000000000000000000002E1F1441B57A4EFFB57A4EFF996742D6000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000000000000000000009C6A43D9B57A
+            4EFFB57A4EFF3524174B00000000000000000000000000000000000000000000
+            00005D3F2883B57A4EFFB57A4EFFB57A4EFFB57A4EFFB57A4EFF6F4B319AD196
+            6CFCD59D71FD8B5F3DC101000001000000000000000000000000000000000000
+            00000000000064442C8CB67D52F4ECB387FFF0B78BFFB57A4EFF1F150D2CB278
+            4FF5ECB387FFB77D53F463432B89000000000000000000000000000000000000
+            0000000000005F412A85B67D53F4ECB387FFEBB287FFB57A4EFF00000000714C
+            329CC0875DF6EBB286FFB67D53F4926441CA2D1F14400705030A0B07050F3020
+            14438B5F3DC1B67D53F4EAB185FFC0865DF6B67D52F4B57A4EFF000000000604
+            0208906240C7C1875EF6EBB287FFD79E74FEB37C52EEB2784DF6B2784DF9B47B
+            53F0D59C70FDEBB286FFBD875BF58A5E3DBF68452D90B57A4EFF000000000000
+            000006040208714D329EB2794FF5D0976CFCE6AD80FFEEB589FFEDB488FFE5AC
+            80FFCF9569FBB1784FF56C49309604030206000000005F402986000000000000
+            000000000000000000001F150D2C704C329BA46F49E3B2784DF9B0784DF8A26E
+            48E169472F931F150D2B00000000000000000000000000000000}
+          OnClick = SBRefreshClick
+        end
+        object btnHome: TSpeedButton
+          Left = 2
+          Top = 1
+          Width = 26
+          Height = 24
+          Hint = #1576#1575#1586#1711#1588#1578' '#1576#1607' '#1581#1575#1604#1578' '#1575#1608#1604#1610#1607
+          Anchors = [akTop, akRight]
+          Flat = True
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000000000000000000000000000000000000000000000000
+            000000000000000000000000000000000000000000000000000005040A0E2524
+            66853A3AABDB4040C1F93A3AABDB2121637F0202070900000000000000000000
+            000000000000000000000000000000000000000000001A131C30554CB7F84343
+            C7FF4343C7FF4343C7FF4343C7FF4343C7FF34349AC502020709000000000000
+            0000000000000000000000000000000000003F2E3662705AA9FA4343C7FF9393
+            DFFF7272D5FF4343C7FF7272D5FFA6A6E4FF4343C7FF2121637F000000000000
+            000000000000000000000000000000000000A1758BFF5955C8FF4343C7FF6F6F
+            D4FFEFEFFAFF9595DFFFEFEFFAFF7474D5FF4343C7FF3838A9DA000000000000
+            000000000000000000000000000000000000A1758BFF4746C7FF4343C7FF4343
+            C7FF9191DEFFFEFEFFFF9898E0FF4343C7FF4343C7FF4040C2F8000000000000
+            000000000000000000000000000000000000A1758BFF5B57CAFF4343C7FF6F6F
+            D4FFEFEFFAFF9494DFFFEFEFFAFF7474D5FF4343C7FF3A3AABDB000000000000
+            000000000000000000000000000000000000A1758BFF998AD1FF4343C7FF9393
+            DFFF7272D5FF4343C7FF7272D5FFA6A6E4FF4343C7FF22226480000000000000
+            000000000000000000000000000000000000A1758BFFECD0DBFF6963CBFF4343
+            C7FF4343C7FF4343C7FF4343C7FF4343C7FF33339BC602020709000000000000
+            0000000000000000000000000000503C467DA1758BFFA1758BFF9E738EFF715B
+            A9FF4642B6EE4040C1F93A3AACDC222265810202070900000000000000000000
+            00000000000000000000503B467CA37C8EF5EACCD4FFF2D5DCFFF2D5DCFFEBCD
+            D5FFA57C90F456404B8600000000000000000000000000000000000000000000
+            000000000000503B467CA37C8EF5EACCD4FFF2D5DCFFF2D5DCFFF2D5DCFFF2D5
+            DCFFEBCDD5FFA57C90F456404B86000000000000000000000000000000000000
+            0000503B467CA37C8EF5EACCD4FFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5
+            DCFFF2D5DCFFEBCDD5FFA57C90F456404B86000000000000000000000000503B
+            467CA37C8EF5EACCD4FFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5
+            DCFFF2D5DCFFF2D5DCFFEBCDD5FFA57C90F456404B8600000000503B467CA37C
+            8EF5EACCD4FFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5
+            DCFFF2D5DCFFF2D5DCFFF2D5DCFFEBCDD5FFA57C90F456404B86A1758BFFECCD
+            D6FFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5
+            DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFECCDD6FFA1758BFFA1758BFFA175
+            8BFFA1758BFFA1758BFFA1758BFFA1758BFFA1758BFFA1758BFFA1758BFFA175
+            8BFFA1758BFFA1758BFFA1758BFFA1758BFFA1758BFFA1758BFF}
+          ParentShowHint = False
+          ShowHint = True
+          OnClick = btnHomeClick
+        end
+      end
+      object edtName: TEdit
+        Left = 286
+        Top = 16
+        Width = 200
+        Height = 21
+        Anchors = [akTop, akRight]
+        TabOrder = 1
+      end
+      object edtTel: TEdit
+        Left = 15
+        Top = 15
+        Width = 200
+        Height = 21
+        Anchors = [akTop, akRight]
+        TabOrder = 2
+      end
+      object edtMobile: TEdit
+        Left = 15
+        Top = 40
+        Width = 200
+        Height = 21
+        Anchors = [akTop, akRight]
+        TabOrder = 3
+      end
+      object edtLastName: TEdit
+        Left = 287
+        Top = 41
+        Width = 200
+        Height = 21
+        Anchors = [akTop, akRight]
+        TabOrder = 4
+      end
+    end
+    object Panel4: TPanel
+      Left = 1
+      Top = 565
+      Width = 599
+      Height = 41
+      Align = alBottom
+      TabOrder = 4
+      object SBClose: TSpeedButton
+        Left = 10
+        Top = 4
+        Width = 101
+        Height = 34
         Caption = #1582#1585#1608#1580
         Flat = True
         Glyph.Data = {
@@ -281,526 +804,12 @@ inherited FmOtherPerson: TFmOtherPerson
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6D6D6FEFEFEFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        Layout = blGlyphTop
+        Layout = blGlyphRight
         NumGlyphs = 2
         Spacing = 0
         OnClick = SBCloseClick
       end
-      object DBNavigator1: TDBNavigator
-        Left = 102
-        Top = 1
-        Width = 496
-        Height = 50
-        Hint = '  Ctrl + N  '#1583#1585#1580' '#1580#1583#1610#1583' - Ctrl+F2  '#1608#1610#1585#1575#1610#1588' - Ctrl+F5   '#1579#1576#1578' '#1578#1594#1610#1610#1585#1575#1578
-        DataSource = DSelect_Person_By_CustomerID
-        VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbEdit, nbPost, nbCancel]
-        Align = alRight
-        Constraints.MaxHeight = 50
-        Constraints.MinHeight = 50
-        Constraints.MinWidth = 50
-        Flat = True
-        Ctl3D = True
-        Hints.Strings = (
-          #1575#1608#1604#1610#1606' '#1585#1705#1608#1585#1583
-          #1585#1705#1608#1585#1583' '#1602#1576#1604#1610
-          #1585#1705#1608#1585#1583' '#1576#1593#1583#1610
-          #1570#1582#1585#1610#1606' '#1585#1705#1608#1585#1583
-          'Ctrl + N  '#1583#1585#1580' '#1580#1583#1610#1583
-          #1581#1584#1601
-          'Ctrl+F2  '#1608#1610#1585#1575#1610#1588
-          'Ctrl+F5   '#1579#1576#1578' '#1578#1594#1610#1610#1585#1575#1578
-          #1575#1606#1589#1585#1575#1601
-          #1576#1607' '#1585#1608#1586' '#1585#1587#1575#1606#1610' '#1583#1610#1578#1575
-          '')
-        ParentCtl3D = False
-        ParentShowHint = False
-        ConfirmDelete = False
-        ShowHint = True
-        TabOrder = 0
-        TabStop = True
-        OnClick = DBNavigator1Click
-      end
     end
-    object Panel2: TPanel
-      Left = 1
-      Top = 374
-      Width = 599
-      Height = 161
-      Align = alBottom
-      TabOrder = 1
-      DesignSize = (
-        599
-        161)
-      object Label1: TLabel
-        Left = 527
-        Top = 46
-        Width = 13
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1606#1575#1605
-        FocusControl = DBEFirstName
-      end
-      object Label2: TLabel
-        Left = 527
-        Top = 23
-        Width = 58
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610
-        FocusControl = DBELastName
-      end
-      object Label3: TLabel
-        Left = 527
-        Top = 94
-        Width = 25
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1575#1610#1605#1610#1604
-        FocusControl = DBEEmailAddress
-      end
-      object Label4: TLabel
-        Left = 259
-        Top = 96
-        Width = 46
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1578#1604#1601#1606' '#1605#1606#1586#1604
-        FocusControl = DBEHomePhone
-      end
-      object Label5: TLabel
-        Left = 259
-        Top = 17
-        Width = 21
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1578#1604#1601#1606
-        FocusControl = DBEWorkPhone
-      end
-      object Label6: TLabel
-        Left = 259
-        Top = 69
-        Width = 28
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1605#1608#1576#1575#1610#1604
-        FocusControl = DBEMobilePhone
-      end
-      object Label7: TLabel
-        Left = 259
-        Top = 43
-        Width = 25
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1601#1705#1587
-        FocusControl = DBEFaxNumber
-      end
-      object Label8: TLabel
-        Left = 527
-        Top = 69
-        Width = 28
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1587#1605#1578
-        FocusControl = DBEJobTitle
-      end
-      object Label9: TLabel
-        Left = 527
-        Top = 120
-        Width = 40
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1578#1608#1590#1610#1581#1575#1578
-        FocusControl = DBENotes
-      end
-      object Label12: TLabel
-        Left = 307
-        Top = 18
-        Width = 10
-        Height = 19
-        Caption = '*'
-        Font.Charset = ARABIC_CHARSET
-        Font.Color = clRed
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object DBEFirstName: TDBEdit
-        Left = 320
-        Top = 42
-        Width = 200
-        Height = 21
-        Anchors = [akTop, akRight]
-        DataField = 'FirstName'
-        DataSource = DSelect_Person_By_CustomerID
-        TabOrder = 1
-      end
-      object DBELastName: TDBEdit
-        Left = 320
-        Top = 17
-        Width = 200
-        Height = 21
-        Anchors = [akTop, akRight]
-        DataField = 'LastName'
-        DataSource = DSelect_Person_By_CustomerID
-        TabOrder = 0
-      end
-      object DBEEmailAddress: TDBEdit
-        Left = 320
-        Top = 94
-        Width = 200
-        Height = 21
-        Anchors = [akTop, akRight]
-        BiDiMode = bdLeftToRight
-        DataField = 'EmailAddress'
-        DataSource = DSelect_Person_By_CustomerID
-        ParentBiDiMode = False
-        TabOrder = 3
-        OnEnter = DBEEmailAddressEnter
-        OnExit = DBEEmailAddressExit
-      end
-      object DBEHomePhone: TDBEdit
-        Left = 53
-        Top = 94
-        Width = 200
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        DataField = 'HomePhone'
-        DataSource = DSelect_Person_By_CustomerID
-        TabOrder = 7
-      end
-      object DBEWorkPhone: TDBEdit
-        Left = 53
-        Top = 16
-        Width = 200
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        DataField = 'WorkPhone'
-        DataSource = DSelect_Person_By_CustomerID
-        TabOrder = 4
-      end
-      object DBEMobilePhone: TDBEdit
-        Left = 53
-        Top = 68
-        Width = 200
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        DataField = 'MobilePhone'
-        DataSource = DSelect_Person_By_CustomerID
-        TabOrder = 6
-      end
-      object DBEFaxNumber: TDBEdit
-        Left = 53
-        Top = 42
-        Width = 200
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        DataField = 'FaxNumber'
-        DataSource = DSelect_Person_By_CustomerID
-        TabOrder = 5
-      end
-      object DBEJobTitle: TDBEdit
-        Left = 320
-        Top = 66
-        Width = 200
-        Height = 21
-        Anchors = [akTop, akRight]
-        DataField = 'JobTitle'
-        DataSource = DSelect_Person_By_CustomerID
-        TabOrder = 2
-      end
-      object DBENotes: TDBEdit
-        Left = 53
-        Top = 120
-        Width = 468
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        DataField = 'Notes'
-        DataSource = DSelect_Person_By_CustomerID
-        TabOrder = 8
-      end
-    end
-    object Panel1: TPanel
-      Left = 1
-      Top = 73
-      Width = 599
-      Height = 301
-      Align = alClient
-      TabOrder = 2
-      object YDBGrid1: TYDBGrid
-        Left = 1
-        Top = 1
-        Width = 597
-        Height = 299
-        Cursor = crHandPoint
-        TabStop = False
-        Align = alClient
-        DataSource = DSelect_Person_By_CustomerID
-        ReadOnly = True
-        TabOrder = 0
-        TitleFont.Charset = ARABIC_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-        YeganehColor = False
-        YeganehFinish = False
-        PageNumber = False
-        RecordNumber = False
-        HasTime = False
-        Oriention = poPortrait
-        HasDate = False
-        HasIndex = False
-        PrintTitle = #1604#1610#1587#1578' '#1578#1607#1610#1607' '#1588#1583#1607' '#1578#1608#1587#1591' '#1606#1585#1605' '#1575#1601#1586#1575#1585' '#1610#1711#1575#1606#1607
-        InvertFarsiDate = True
-        TitleSort = True
-        AutoInsert = False
-        FooterFields = 'Count'
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'FirstName'
-            Title.Alignment = taCenter
-            Title.Caption = #1606#1575#1605
-            Width = 114
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'LastName'
-            Title.Alignment = taCenter
-            Title.Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610
-            Width = 182
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'JobTitle'
-            Title.Alignment = taCenter
-            Title.Caption = #1587#1605#1578
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'WorkPhone'
-            Title.Alignment = taCenter
-            Title.Caption = #1578#1604#1601#1606
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'MobilePhone'
-            Title.Alignment = taCenter
-            Title.Caption = #1605#1608#1576#1575#1610#1604
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'FaxNumber'
-            Title.Alignment = taCenter
-            Title.Caption = #1601#1705#1587
-            Width = 122
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'HomePhone'
-            Title.Alignment = taCenter
-            Title.Caption = #1578#1604#1601#1606' '#1605#1606#1586#1604
-            Width = 116
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'EmailAddress'
-            Title.Alignment = taCenter
-            Title.Caption = #1575#1610#1605#1610#1604
-            Width = 212
-            Visible = True
-          end>
-      end
-    end
-    object pnlSearch: TPanel
-      Left = 1
-      Top = 1
-      Width = 599
-      Height = 72
-      Align = alTop
-      TabOrder = 3
-      DesignSize = (
-        599
-        72)
-      object Label10: TLabel
-        Left = 540
-        Top = 16
-        Width = 13
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1606#1575#1605
-      end
-      object Label11: TLabel
-        Left = 495
-        Top = 42
-        Width = 58
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1606#1575#1605' '#1582#1575#1606#1608#1575#1583#1711#1610
-      end
-      object Label14: TLabel
-        Left = 227
-        Top = 17
-        Width = 21
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1578#1604#1601#1606
-      end
-      object Label15: TLabel
-        Left = 227
-        Top = 45
-        Width = 28
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = #1605#1608#1576#1575#1610#1604
-      end
-      object pnlFilter: TPanel
-        Left = 568
-        Top = 1
-        Width = 30
-        Height = 70
-        Align = alRight
-        TabOrder = 0
-        DesignSize = (
-          30
-          70)
-        object SBRefresh: TSpeedButton
-          Left = 2
-          Top = 25
-          Width = 26
-          Height = 24
-          Hint = #1576#1575#1586#1610#1575#1576#1610' '#1583#1608#1576#1575#1585#1607' '#1575#1591#1604#1575#1593#1575#1578
-          Anchors = [akTop, akRight]
-          Flat = True
-          Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            2000000000000004000000000000000000000000000000000000000000000000
-            000000000000000000001F150D2B69482F92A26E47E0B0764DF7B2784DF9A26E
-            48E16C4B30981D140D29000000000000000000000000000000005F4029860000
-            0000040302066B482F95B1784FF5CF9569FBE4AB7FFFEDB487FFEEB589FFE5AC
-            80FFCF966AFBB1784FF56D493097050302070000000000000000B57A4EFF6845
-            2D908A5E3DBFBD875BF5EAB185FFD59C71FEB57C54F0B2794EF8B2794DFAB47D
-            52F1D89E74FEEBB386FFBE865DF68D613FC50503020700000000B57A4EFFB67D
-            52F4C0865DF6EAB185FFB67E53F48C603EC2302115440B07050F0906040C3020
-            1443946442CDB77E54F3EBB386FFBE875CF56D49309700000000B57A4EFFEBB2
-            87FFECB387FFB67D53F460412A85000000000000000000000000000000000000
-            00000000000064452C8CB67E54F4EBB287FFB1784FF51D140D29B57A4EFFF0B7
-            8BFFECB387FFB67D52F464442C8C000000000000000000000000000000000000
-            000000000000010000018D603FC3D89E73FECF966AFB6C493096B57A4EFFB57A
-            4EFFB57A4EFFB57A4EFFB57A4EFF5F4029860000000000000000000000000000
-            000000000000000000002E1F1441B57A4EFFB57A4EFF996742D6000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            00000000000000000000000000000000000000000000000000009C6A43D9B57A
-            4EFFB57A4EFF3524174B00000000000000000000000000000000000000000000
-            00005D3F2883B57A4EFFB57A4EFFB57A4EFFB57A4EFFB57A4EFF6F4B319AD196
-            6CFCD59D71FD8B5F3DC101000001000000000000000000000000000000000000
-            00000000000064442C8CB67D52F4ECB387FFF0B78BFFB57A4EFF1F150D2CB278
-            4FF5ECB387FFB77D53F463432B89000000000000000000000000000000000000
-            0000000000005F412A85B67D53F4ECB387FFEBB287FFB57A4EFF00000000714C
-            329CC0875DF6EBB286FFB67D53F4926441CA2D1F14400705030A0B07050F3020
-            14438B5F3DC1B67D53F4EAB185FFC0865DF6B67D52F4B57A4EFF000000000604
-            0208906240C7C1875EF6EBB287FFD79E74FEB37C52EEB2784DF6B2784DF9B47B
-            53F0D59C70FDEBB286FFBD875BF58A5E3DBF68452D90B57A4EFF000000000000
-            000006040208714D329EB2794FF5D0976CFCE6AD80FFEEB589FFEDB488FFE5AC
-            80FFCF9569FBB1784FF56C49309604030206000000005F402986000000000000
-            000000000000000000001F150D2C704C329BA46F49E3B2784DF9B0784DF8A26E
-            48E169472F931F150D2B00000000000000000000000000000000}
-          OnClick = SBRefreshClick
-        end
-        object btnHome: TSpeedButton
-          Left = 2
-          Top = 1
-          Width = 26
-          Height = 24
-          Hint = #1576#1575#1586#1711#1588#1578' '#1576#1607' '#1581#1575#1604#1578' '#1575#1608#1604#1610#1607
-          Anchors = [akTop, akRight]
-          Flat = True
-          Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            2000000000000004000000000000000000000000000000000000000000000000
-            000000000000000000000000000000000000000000000000000005040A0E2524
-            66853A3AABDB4040C1F93A3AABDB2121637F0202070900000000000000000000
-            000000000000000000000000000000000000000000001A131C30554CB7F84343
-            C7FF4343C7FF4343C7FF4343C7FF4343C7FF34349AC502020709000000000000
-            0000000000000000000000000000000000003F2E3662705AA9FA4343C7FF9393
-            DFFF7272D5FF4343C7FF7272D5FFA6A6E4FF4343C7FF2121637F000000000000
-            000000000000000000000000000000000000A1758BFF5955C8FF4343C7FF6F6F
-            D4FFEFEFFAFF9595DFFFEFEFFAFF7474D5FF4343C7FF3838A9DA000000000000
-            000000000000000000000000000000000000A1758BFF4746C7FF4343C7FF4343
-            C7FF9191DEFFFEFEFFFF9898E0FF4343C7FF4343C7FF4040C2F8000000000000
-            000000000000000000000000000000000000A1758BFF5B57CAFF4343C7FF6F6F
-            D4FFEFEFFAFF9494DFFFEFEFFAFF7474D5FF4343C7FF3A3AABDB000000000000
-            000000000000000000000000000000000000A1758BFF998AD1FF4343C7FF9393
-            DFFF7272D5FF4343C7FF7272D5FFA6A6E4FF4343C7FF22226480000000000000
-            000000000000000000000000000000000000A1758BFFECD0DBFF6963CBFF4343
-            C7FF4343C7FF4343C7FF4343C7FF4343C7FF33339BC602020709000000000000
-            0000000000000000000000000000503C467DA1758BFFA1758BFF9E738EFF715B
-            A9FF4642B6EE4040C1F93A3AACDC222265810202070900000000000000000000
-            00000000000000000000503B467CA37C8EF5EACCD4FFF2D5DCFFF2D5DCFFEBCD
-            D5FFA57C90F456404B8600000000000000000000000000000000000000000000
-            000000000000503B467CA37C8EF5EACCD4FFF2D5DCFFF2D5DCFFF2D5DCFFF2D5
-            DCFFEBCDD5FFA57C90F456404B86000000000000000000000000000000000000
-            0000503B467CA37C8EF5EACCD4FFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5
-            DCFFF2D5DCFFEBCDD5FFA57C90F456404B86000000000000000000000000503B
-            467CA37C8EF5EACCD4FFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5
-            DCFFF2D5DCFFF2D5DCFFEBCDD5FFA57C90F456404B8600000000503B467CA37C
-            8EF5EACCD4FFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5
-            DCFFF2D5DCFFF2D5DCFFF2D5DCFFEBCDD5FFA57C90F456404B86A1758BFFECCD
-            D6FFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5
-            DCFFF2D5DCFFF2D5DCFFF2D5DCFFF2D5DCFFECCDD6FFA1758BFFA1758BFFA175
-            8BFFA1758BFFA1758BFFA1758BFFA1758BFFA1758BFFA1758BFFA1758BFFA175
-            8BFFA1758BFFA1758BFFA1758BFFA1758BFFA1758BFFA1758BFF}
-          ParentShowHint = False
-          ShowHint = True
-          OnClick = btnHomeClick
-        end
-      end
-      object edtName: TEdit
-        Left = 286
-        Top = 16
-        Width = 200
-        Height = 21
-        Anchors = [akTop, akRight]
-        TabOrder = 1
-      end
-      object edtTel: TEdit
-        Left = 15
-        Top = 15
-        Width = 200
-        Height = 21
-        Anchors = [akTop, akRight]
-        TabOrder = 2
-      end
-      object edtMobile: TEdit
-        Left = 15
-        Top = 40
-        Width = 200
-        Height = 21
-        Anchors = [akTop, akRight]
-        TabOrder = 3
-      end
-    end
-  end
-  object edtLastName: TEdit [2]
-    Left = 287
-    Top = 41
-    Width = 200
-    Height = 21
-    Anchors = [akTop, akRight]
-    TabOrder = 1
   end
   object Select_Person_By_CustomerID: TADOStoredProc
     Connection = Dm.YeganehConnection

@@ -463,7 +463,7 @@ begin
       end;
       SpSelect_Cases.Requery;
       SpSelect_Cases.Locate('CaseId',id,[]);
-    except
+    except  On E:Exception do
       ShowMyMessage('íÛÇã','ÚãáíÇÊ ËÈÊ ãæÑÏ/ÈÇ ÈÇ ÎØÇ ãæÇÌå ÔÏ áØİÇ ÏæÈÇÑå ÇŞÏÇã äãÇííÏ',[mbOK],mtInformation);
     end ;
   end;

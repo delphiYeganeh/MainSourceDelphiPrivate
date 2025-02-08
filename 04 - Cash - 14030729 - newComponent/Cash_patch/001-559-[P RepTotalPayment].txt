@@ -1,0 +1,64 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[RepTotalPayment]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[RepTotalPayment]
+END
+GO
+
+CREATE  procedure [dbo].[RepTotalPayment]   @GroupId INT ,
+                                  @FirstDocNo varchar(10),
+                                  @LastDocNo varchar(10),
+				  @BeginDate VARCHAR(10),
+				  @EndDate VARCHAR(10)
+AS				  
+
+DECLARE @StrQry nvarchar(4000),@StrWhere NVARCHAR(1000)
+
+
+SET @StrWhere=' WHERE Payment.PayTypeID IN (2,3) '
+
+IF ISNULL(@GroupId,0)<>0 
+SET @StrWhere=@StrWhere+' AND '+CAST (@GroupId AS VARCHAR(3))+' IN (Account_1.Familyid,Account.Familyid)'
+
+IF  ISNULL(@FirstDocNo,'0')<>'0' AND
+    ISNULL(@LastDocNo,'0') <>'0' 
+	SET @StrWhere=@StrWhere+' AND cast(Payment.documentno as integer) BETWEEN '''+@FirstDocNo+''' And '''+@LastDocNo+''''
+
+IF   @BeginDate ='13  /  /  ' 
+	SET @BeginDate=''
+IF   @EndDate ='13  /  /  '   
+	SET @EndDate=''
+
+IF  ISNULL(@BeginDate,'')<>'' AND
+    ISNULL(@EndDate,'') <>'' 
+	SET @StrWhere=@StrWhere+' AND Payment.[Date] BETWEEN '''+ @BeginDate+''' AND '''+ @EndDate+''''
+
+SET @StrQry= '
+SELECT  Payment.CreditorAccountID,
+        Payment.DebtorAccountID,
+        Payment.[Date],
+        Payment.Amount,
+        Payment.Comment,
+        Payment.PayTypeID,
+        Payment.documentno,
+        PayType.PayTypeTitle,
+        Account.AccountTitle AS crTitle,
+        Account_1.AccountTitle AS dbtitle,
+        CASE  WHEN  ISNULL(Account.FamilyID,0)= 0 THEN ISNULL(Account_1.Familyid,0) ELSE  ISNULL(Account.Familyid,0) END GROUPID,
+         CASE  WHEN  ISNULL(Account.FamilyID,0)= 0 THEN ISNULL(Family_1.FamilyTitle,'''') ELSE  ISNULL(Family.FamilyTitle,'''') END GROUPTitle
+FROM    Payment
+        INNER JOIN PayType ON Payment.PayTypeID = PayType.PayTypeID
+        INNER JOIN Account ON Payment.CreditorAccountID = Account.AccountID
+        INNER JOIN Account Account_1 ON Payment.DebtorAccountID = Account_1.AccountID
+        LEFT OUTER JOIN Family ON Account.Familyid = Family.FamilyID
+        LEFT OUTER JOIN Family Family_1 ON Account_1.Familyid = Family_1.FamilyID'+@StrWhere+''
+
+EXEC sp_executesql @StrQry
+GO
+
+COMMIT
+GO

@@ -1,0 +1,349 @@
+inherited FrSumPayment_Report: TFrSumPayment_Report
+  Left = 716
+  Top = 366
+  Width = 474
+  Height = 225
+  Caption = #1711#1586#1575#1585#1588' '#1608#1575#1585#1610#1586' '#1580#1605#1593#1610
+  Color = clBtnFace
+  Font.Height = -12
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 14
+  object pnlMain: TPanel [0]
+    Left = 0
+    Top = 0
+    Width = 458
+    Height = 186
+    Align = alClient
+    ParentColor = True
+    TabOrder = 0
+    object Panel3: TPanel
+      Left = 1
+      Top = 1
+      Width = 456
+      Height = 132
+      Align = alClient
+      TabOrder = 0
+      object RgReport: TRadioGroup
+        Left = 1
+        Top = 91
+        Width = 454
+        Height = 40
+        Align = alBottom
+        Caption = #1711#1586#1575#1585#1588
+        Columns = 3
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ItemIndex = 0
+        Items.Strings = (
+          #1601#1585#1605#1578' 1'
+          #1601#1585#1605#1578' 2')
+        ParentFont = False
+        TabOrder = 0
+      end
+      object Panel4: TPanel
+        Left = 1
+        Top = 1
+        Width = 454
+        Height = 90
+        Align = alClient
+        BevelInner = bvRaised
+        BevelOuter = bvLowered
+        TabOrder = 1
+        DesignSize = (
+          454
+          90)
+        object Label1: TLabel
+          Left = 353
+          Top = 15
+          Width = 68
+          Height = 14
+          Anchors = [akTop, akRight]
+          Caption = #1588#1605#1575#1585#1607' '#1587#1606#1583' :'
+        end
+        object Label3: TLabel
+          Left = 347
+          Top = 53
+          Width = 74
+          Height = 14
+          Anchors = [akTop, akRight]
+          Caption = #1578#1575#1585#1610#1582'            :'
+        end
+        object SpeedButton1: TAdvGlowButton
+          Left = 58
+          Top = 6
+          Width = 23
+          Height = 22
+          ImageIndex = 78
+          Images = dm.ImageList_MainNew
+          NotesFont.Charset = DEFAULT_CHARSET
+          NotesFont.Color = clWindowText
+          NotesFont.Height = -11
+          NotesFont.Name = 'Tahoma'
+          NotesFont.Style = []
+          TabOrder = 2
+          OnClick = SpeedButton1Click
+          Appearance.ColorChecked = 16111818
+          Appearance.ColorCheckedTo = 16367008
+          Appearance.ColorDisabled = 15921906
+          Appearance.ColorDisabledTo = 15921906
+          Appearance.ColorDown = 16111818
+          Appearance.ColorDownTo = 16367008
+          Appearance.ColorHot = 16117985
+          Appearance.ColorHotTo = 16372402
+          Appearance.ColorMirrorHot = 16107693
+          Appearance.ColorMirrorHotTo = 16775412
+          Appearance.ColorMirrorDown = 16102556
+          Appearance.ColorMirrorDownTo = 16768988
+          Appearance.ColorMirrorChecked = 16102556
+          Appearance.ColorMirrorCheckedTo = 16768988
+          Appearance.ColorMirrorDisabled = 11974326
+          Appearance.ColorMirrorDisabledTo = 15921906
+        end
+        object EdtDocumentNo: TEdit
+          Left = 80
+          Top = 7
+          Width = 260
+          Height = 22
+          Anchors = [akLeft, akTop, akRight]
+          Font.Charset = ARABIC_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+        end
+        object MEDate: TSolarDatePicker
+          Left = 58
+          Top = 48
+          Width = 284
+          Height = 22
+          Anchors = [akLeft, akTop, akRight]
+          About = 'Created by : Mohamad Khorsandi'
+          BiDiMode = bdLeftToRight
+          Font.Charset = ARABIC_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          Enabled = True
+          DateKind = dkSolar
+          CheckInputOnExit = True
+          Divider = dSlash
+          ShowToDay = True
+          MonthObject = moComboBox
+          Glyph = gtCalendar
+          ShowDefaultDate = False
+          AutoCheck = False
+          AutoDeleteDelimiter = False
+          EnabledDays = [mcSaturday, mcSunday, mcMonday, mcTuesday, mcWednesday, mcThursday, mcFriday]
+          MaskEnabled = False
+          ColorCaptionStart = 8957695
+          ColorCaptionStop = clWhite
+          ColorBodyStart = clWhite
+          ColorBodyStop = clWhite
+          ColorTodayLine = clBlack
+          ColorSelectBrush = 12308991
+          ColorDisableMonth = clGray
+          ColorVacationDay = clRed
+          ColorNormalDay = clBlack
+          ColorStyle = csWhiteOrange
+          ButtonStyle = bsRound
+          DataFieldType = dftSolar
+          DataFieldAutoSaveModified = False
+        end
+      end
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 133
+      Width = 456
+      Height = 52
+      Align = alBottom
+      TabOrder = 1
+      DesignSize = (
+        456
+        52)
+      object Label2: TLabel
+        Left = 107
+        Top = 8
+        Width = 192
+        Height = 14
+        Anchors = [akTop, akRight]
+        BiDiMode = bdLeftToRight
+        Caption = '...\Cash\Reports\SumPayment1.fr3'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 107
+        Top = 24
+        Width = 189
+        Height = 14
+        Anchors = [akTop, akRight]
+        BiDiMode = bdLeftToRight
+        Caption = '...\Cash\Reports\TotalPayment.fr3'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 318
+        Top = 8
+        Width = 38
+        Height = 14
+        Anchors = [akTop, akRight]
+        Caption = #1601#1585#1605#1578'1:'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 318
+        Top = 25
+        Width = 38
+        Height = 14
+        Anchors = [akTop, akRight]
+        Caption = #1601#1585#1605#1578'2:'
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object SBReport: TAdvGlowButton
+        Left = 373
+        Top = 13
+        Width = 78
+        Height = 28
+        Cursor = crHandPoint
+        Hint = #1670#1575#1662
+        Anchors = [akTop, akRight]
+        Caption = #1670#1575#1662
+        ImageIndex = 112
+        Images = dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        Spacing = 0
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+        OnClick = SBReportClick
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object Button5: TAdvGlowButton
+        Left = 5
+        Top = 13
+        Width = 84
+        Height = 28
+        Cancel = True
+        Caption = #1582#1585#1608#1580
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 84
+        Images = dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = Button5Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+    end
+  end
+  inherited ahmadvand: TActionList
+    Left = 3
+    Top = 48
+  end
+  inherited Grid_PopupMenu: TPopupMenu
+    Left = 15
+    Top = 0
+  end
+  object RepPopMnu: TPopupMenu
+    MenuAnimation = [maRightToLeft, maTopToBottom]
+    TrackButton = tbLeftButton
+    Top = 65524
+    object NShow: TMenuItem
+      AutoHotkeys = maAutomatic
+      Caption = #1662#1610#1588' '#1606#1605#1575#1610#1588' '#1608' '#1670#1575#1662'   F9'
+      OnClick = NShowClick
+    end
+    object NPrint: TMenuItem
+      Tag = 1
+      AutoHotkeys = maAutomatic
+      Caption = #1670#1575#1662' '#1576#1583#1608#1606' '#1662#1610#1588' '#1606#1605#1575#1610#1588'   Ctrl+F9'
+      OnClick = NShowClick
+    end
+    object NDesign: TMenuItem
+      Tag = 2
+      AutoHotkeys = maAutomatic
+      Caption = #1591#1585#1575#1581#1610' '#1711#1586#1575#1585#1588'   Alt+F9'
+      OnClick = NShowClick
+    end
+    object N8: TMenuItem
+      Caption = '-'
+    end
+    object N11: TMenuItem
+      Caption = #1591#1585#1575#1581#1610' '#1662#1610#1588' '#1601#1585#1590
+      OnClick = N11Click
+    end
+  end
+end

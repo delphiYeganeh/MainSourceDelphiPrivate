@@ -1,0 +1,39 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PureBalance]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[PureBalance]
+END
+GO
+
+CREATE FUNCTION [dbo].[PureBalance]
+(  
+	@AccountID int,
+	@dateTo char(10)  
+)  
+RETURNS bigint  
+AS  
+BEGIN  
+	Declare @SumAmount bigint  
+	IF @ACCOUNTID=4 
+	BEGIN
+		SET @SumAmount= DBO.F_Soodvam ('1300/01/01',@dateTo)
+	END
+	ELSE
+	BEGIN
+		Select @SumAmount=sum(Case when @AccountID=DebtorAccountID   then -Amount else +Amount end)  
+			From Payment  
+			Where Date <=@dateTo  AND (@AccountID in (DebtorAccountID,CreditorAccountID))  
+	END
+	  
+	set @SumAmount=isnull(@SumAmount,0)  
+	  
+	RETURN @SumAmount  
+END  
+GO
+
+COMMIT
+GO

@@ -125,6 +125,9 @@ type
     Label24: TLabel;
     Count8: TLabel;
     SpTimeIntervalSaleCustomerStatusID: TIntegerField;
+    SpTimeIntervalSaleFinishedContractProducts: TStringField;
+    IsSupportContract: TRadioGroup;
+    SpTimeIntervalSaleSupportContractStr: TStringField;
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
@@ -147,6 +150,8 @@ type
     procedure Button10Click(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure SpeedButton7Click(Sender: TObject);
+    procedure TimeIntervalGridNeedFontCondition(Column: TColumn;
+      State: TGridDrawState; var F: TFont);
   private
     { Private declarations }
   public
@@ -248,8 +253,10 @@ begin
   SpTimeIntervalSale.parameters.ParamByName('@cToDate').value           := '0' ;
   SpTimeIntervalSale.parameters.ParamByName('@ContractTypeIds').value   := '0' ;
   SpTimeIntervalSale.parameters.ParamByName('@RepDateType').value       :=  0  ;
+  SpTimeIntervalSale.parameters.ParamByName('@IsSUpportContract').value :=  0 ;
 
   SpTimeIntervalSale.parameters.ParamByName('@RepDateType').value       :=  RGDateType.ItemIndex ;
+  SpTimeIntervalSale.parameters.ParamByName('@IsSUpportContract').value     := IsSupportContract.ItemIndex ;
 
 
   if dblGroups.KeyValue <> null then
@@ -314,6 +321,10 @@ begin
       SpTimeIntervalSale.parameters.ParamByName('@CToDate').value       := CTodate.Text ;
   end;
 
+
+
+
+
   if CLBContractTypeIDs.SelectedCodes <> ''  then
     SpTimeIntervalSale.parameters.ParamByName('@ContractTypeIds').value    := CLBContractTypeIDs.SelectedCodes ;
 
@@ -344,7 +355,8 @@ begin
           c5 := c5 + SpTimeIntervalSalePriceestimate.AsFloat ;
           c6 := c6 + SpTimeIntervalSaleLeadQuality .AsInteger ;
           c7 := c7 + SpTimeIntervalSaleAmount .AsFloat ;
-          c8 := c8 + 1 ;
+          if SpTimeIntervalSaleCustomerStatusID.AsInteger = 2 then
+            c8 := c8 + 1 ;
           sC7 := FloatToStr(StrTofloat(sC7) + SpTimeIntervalSaleAmount .AsFloat) ;
           next;
         end;
@@ -553,6 +565,14 @@ procedure TFTimeIntervalSale.SpeedButton7Click(Sender: TObject);
 begin
   inherited;
   CToDate.Text := dm.MssCalendarPro1.Execute('/');
+end;
+
+procedure TFTimeIntervalSale.TimeIntervalGridNeedFontCondition(
+  Column: TColumn; State: TGridDrawState; var F: TFont);
+begin
+  inherited;
+  if TimeIntervalGrid.DataSource.DataSet.FieldByName('FinishedContractProducts').Value <> '' then
+    f.Color:=clRed;
 end;
 
 end.

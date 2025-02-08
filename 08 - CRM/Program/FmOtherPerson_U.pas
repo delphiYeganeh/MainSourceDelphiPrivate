@@ -24,7 +24,6 @@ type
     DSelect_Person_By_CustomerID: TDataSource;
     pnlMain: TPanel;
     Panel3: TPanel;
-    SBClose: TSpeedButton;
     DBNavigator1: TDBNavigator;
     Panel2: TPanel;
     Label1: TLabel;
@@ -56,10 +55,12 @@ type
     SBRefresh: TSpeedButton;
     btnHome: TSpeedButton;
     edtName: TEdit;
-    edtLastName: TEdit;
     edtTel: TEdit;
     edtMobile: TEdit;
     Label12: TLabel;
+    edtLastName: TEdit;
+    Panel4: TPanel;
+    SBClose: TSpeedButton;
     procedure Select_Person_By_CustomerIDAfterInsert(DataSet: TDataSet);
     procedure DBEEmailAddressEnter(Sender: TObject);
     procedure DBEEmailAddressExit(Sender: TObject);
@@ -73,6 +74,8 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure Select_Person_By_CustomerIDBeforePost(DataSet: TDataSet);
+    procedure DBNavigator1BeforeAction(Sender: TObject;
+      Button: TNavigateBtn);
   private
     { Private declarations }
   public
@@ -112,7 +115,8 @@ begin
    pnlMain.Color := _Color1 ;
 
    DBNav_Setup(DBNavigator1);
-   DBNavigator1.SetFocus;
+  // DBNavigator1.SetFocus;
+  pnlSearch.SetFocus ;
 end;
 
 procedure TFmOtherPerson.SBCloseClick(Sender: TObject);
@@ -125,12 +129,13 @@ procedure TFmOtherPerson.DBNavigator1Click(Sender: TObject; Button: TNavigateBtn
 begin
    inherited;
    DBNavigator1.SetFocus;
-   
+
    if Button = nbInsert then
    begin
      // DBEFirstName.SetFocus;
       DBELastName.SetFocus;
    end;
+
 end;
 
 procedure TFmOtherPerson.FormCanResize(Sender: TObject; var NewWidth,
@@ -243,6 +248,17 @@ begin
   end;
   inherited;
      
+end;
+
+procedure TFmOtherPerson.DBNavigator1BeforeAction(Sender: TObject;
+  Button: TNavigateBtn);
+begin
+  inherited;
+  if Button = nbDelete then
+  begin
+    if MessageDlg('¬Ì« «“ Õ–› „ÿ„∆‰ Â” Ìœ', mtConfirmation,[mbyes,mbno],0) = mrNo then
+       Abort;
+  end;
 end;
 
 end.

@@ -1,0 +1,824 @@
+inherited FrAddMonthlyType: TFrAddMonthlyType
+  Left = 482
+  Top = 282
+  Width = 404
+  Height = 368
+  Caption = #1575#1606#1608#1575#1593' '#1581#1602' '#1593#1590#1608#1610#1578
+  Color = clBtnFace
+  Font.Height = -12
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 14
+  object pnlMain: TPanel [0]
+    Left = 0
+    Top = 0
+    Width = 388
+    Height = 329
+    Align = alClient
+    ParentColor = True
+    TabOrder = 0
+    object Panel3: TPanel
+      Left = 1
+      Top = 162
+      Width = 386
+      Height = 125
+      Align = alClient
+      TabOrder = 0
+      DesignSize = (
+        386
+        125)
+      object BitBtn2: TAdvGlowButton
+        Left = 322
+        Top = 91
+        Width = 60
+        Height = 28
+        Action = DataSetInsert_Detail
+        Anchors = [akRight, akBottom]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 60
+        Images = dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 0
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object BitBtn4: TAdvGlowButton
+        Left = 242
+        Top = 91
+        Width = 79
+        Height = 28
+        Action = DataSetEdit_Detail
+        Anchors = [akRight, akBottom]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 2
+        Images = dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 1
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object BitBtn9: TAdvGlowButton
+        Left = 168
+        Top = 91
+        Width = 73
+        Height = 28
+        Action = DataSetPost_Detail
+        Anchors = [akRight, akBottom]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 59
+        Images = dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = BitBtn9Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object BitBtn10: TAdvGlowButton
+        Left = 106
+        Top = 91
+        Width = 60
+        Height = 28
+        Action = DataSetDelete_Detail
+        Anchors = [akRight, akBottom]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 90
+        Images = dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 3
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object BitBtn11: TAdvGlowButton
+        Left = 45
+        Top = 91
+        Width = 60
+        Height = 28
+        Action = DataSetCancel_Detail
+        Anchors = [akRight, akBottom]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 1
+        Images = dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 4
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object DBGrid1: TDBGrid
+        Left = 1
+        Top = 1
+        Width = 384
+        Height = 85
+        Align = alTop
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        DataSource = dm.DMonthlyType_Detail
+        TabOrder = 5
+        TitleFont.Charset = ARABIC_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -12
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'MonthlyTypeYear'
+            Title.Caption = #1587#1575#1604
+            Width = 168
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Amount'
+            Title.Caption = #1605#1576#1604#1594
+            Width = 173
+            Visible = True
+          end>
+      end
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 1
+      Width = 386
+      Height = 120
+      Align = alTop
+      TabOrder = 1
+      DesignSize = (
+        386
+        120)
+      object Label1: TLabel
+        Left = 366
+        Top = 10
+        Width = 13
+        Height = 14
+        Anchors = [akTop, akRight]
+        Caption = #1705#1583
+        FocusControl = DBEdit1
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 352
+        Top = 48
+        Width = 27
+        Height = 14
+        Anchors = [akTop, akRight]
+        Caption = #1593#1606#1608#1575#1606
+        FocusControl = DBEdit2
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label3: TLabel
+        Left = 358
+        Top = 88
+        Width = 21
+        Height = 14
+        Anchors = [akTop, akRight]
+        Caption = #1605#1576#1604#1594
+        FocusControl = DBEdit3
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        Visible = False
+      end
+      object DBEdit1: TDBEdit
+        Left = 192
+        Top = 4
+        Width = 156
+        Height = 22
+        Anchors = [akLeft, akTop, akRight]
+        BorderStyle = bsNone
+        DataField = 'MonthlyTypeID'
+        DataSource = dm.DMonthlyType
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = True
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+        OnEnter = TEditEnter
+        OnExit = TEditExit
+      end
+      object DBEdit2: TDBEdit
+        Left = 16
+        Top = 42
+        Width = 332
+        Height = 22
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'MonthlyTypeTitle'
+        DataSource = dm.DMonthlyType
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnEnter = TEditEnter
+        OnExit = TEditExit
+      end
+      object DBEdit3: TDBEdit
+        Left = 218
+        Top = 82
+        Width = 130
+        Height = 22
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'Amount'
+        DataSource = dm.DMonthlyType
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        Visible = False
+        OnEnter = TEditEnter
+        OnExit = TEditExit
+      end
+      object DBNavigator1: TDBNavigator
+        Left = 16
+        Top = 87
+        Width = 168
+        Height = 27
+        DataSource = dm.DMonthlyType
+        VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+        Flat = True
+        TabOrder = 3
+      end
+    end
+    object Panel1: TPanel
+      Left = 1
+      Top = 121
+      Width = 386
+      Height = 41
+      Align = alTop
+      TabOrder = 2
+      DesignSize = (
+        386
+        41)
+      object BitBtn1: TAdvGlowButton
+        Left = 322
+        Top = 6
+        Width = 60
+        Height = 28
+        Action = DataSetInsert1
+        Anchors = [akTop, akRight]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 60
+        Images = dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = BitBtn1Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object BitBtn5: TAdvGlowButton
+        Left = 241
+        Top = 6
+        Width = 79
+        Height = 28
+        Action = DataSetEdit1
+        Anchors = [akTop, akRight]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 2
+        Images = dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 1
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object BitBtn3: TAdvGlowButton
+        Left = 179
+        Top = 6
+        Width = 60
+        Height = 28
+        Action = DataSetPost1
+        Anchors = [akTop, akRight]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 59
+        Images = dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 2
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object BitBtn6: TAdvGlowButton
+        Left = 117
+        Top = 6
+        Width = 60
+        Height = 28
+        Action = DataSetDelete1
+        Anchors = [akTop, akRight]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 90
+        Images = dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 3
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object BitBtn7: TAdvGlowButton
+        Left = 55
+        Top = 6
+        Width = 60
+        Height = 28
+        Action = DataSetCancel1
+        Anchors = [akTop, akRight]
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 1
+        Images = dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 4
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+    end
+    object Panel4: TPanel
+      Left = 1
+      Top = 287
+      Width = 386
+      Height = 41
+      Align = alBottom
+      ParentColor = True
+      TabOrder = 3
+      object BitBtn8: TAdvGlowButton
+        Left = 7
+        Top = 6
+        Width = 61
+        Height = 28
+        Action = AExit
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 84
+        Images = dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        TabOrder = 0
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+    end
+  end
+  inherited ahmadvand: TActionList
+    Left = 124
+    Top = 4
+  end
+  inherited Grid_PopupMenu: TPopupMenu
+    Left = 87
+    Top = 4
+  end
+  inherited qSetting: TADOQuery
+    Left = 16
+    Top = 48
+  end
+  object ActionManager1: TActionManager
+    ActionBars.SessionCount = 12
+    ActionBars = <
+      item
+        Items = <
+          item
+            Action = DataSetInsert1
+            ImageIndex = 16
+            ShortCut = 45
+          end
+          item
+            Action = DataSetDelete1
+            ImageIndex = 17
+            ShortCut = 16430
+          end
+          item
+            Action = DataSetEdit1
+            ImageIndex = 48
+            ShortCut = 115
+          end
+          item
+            Action = DataSetPost1
+            ImageIndex = 0
+            ShortCut = 113
+          end
+          item
+            Action = DataSetCancel1
+            ImageIndex = 56
+            ShortCut = 32776
+          end>
+        AutoSize = False
+      end>
+    Left = 37
+    Top = 8
+    StyleName = 'XP Style'
+    object DataSetInsert1: TDataSetInsert
+      Category = 'Dataset'
+      Caption = #1580#1583#1610#1583
+      Hint = 'Insert'
+      ImageIndex = 16
+      ShortCut = 16429
+      DataSource = dm.DMonthlyType
+    end
+    object DataSetDelete1: TDataSetDelete
+      Category = 'Dataset'
+      Caption = #1581#1584#1601
+      Hint = 'Delete'
+      ImageIndex = 17
+      ShortCut = 16430
+      OnExecute = DataSetDelete1Execute
+      DataSource = dm.DMonthlyType
+    end
+    object DataSetEdit1: TDataSetEdit
+      Category = 'Dataset'
+      Caption = #1608#1610#1585#1575#1610#1588
+      Hint = 'Edit'
+      ImageIndex = 48
+      ShortCut = 115
+      DataSource = dm.DMonthlyType
+    end
+    object DataSetPost1: TDataSetPost
+      Category = 'Dataset'
+      Caption = #1584#1582#1610#1585#1607
+      Hint = 'Post'
+      ImageIndex = 0
+      ShortCut = 113
+      DataSource = dm.DMonthlyType
+    end
+    object DataSetCancel1: TDataSetCancel
+      Category = 'Dataset'
+      Caption = #1604#1594#1608
+      Hint = 'Cancel'
+      ImageIndex = 56
+      ShortCut = 32776
+      DataSource = dm.DMonthlyType
+    end
+    object DataSetNext1: TDataSetNext
+      Category = 'Dataset'
+      Caption = #1576#1593#1583#1610
+      Hint = 'Next'
+      ImageIndex = 76
+      ShortCut = 34
+      DataSource = dm.DMonthlyType
+    end
+    object DataSetPrior1: TDataSetPrior
+      Category = 'Dataset'
+      Caption = #1602#1576#1604#1610
+      Hint = 'Prior'
+      ImageIndex = 77
+      ShortCut = 33
+      DataSource = dm.DMonthlyType
+    end
+  end
+  object Action_DETAIL: TActionManager
+    ActionBars.SessionCount = 12
+    ActionBars = <
+      item
+        Items = <
+          item
+            Action = DataSetInsert_Detail
+            ImageIndex = 16
+            ShortCut = 45
+          end
+          item
+            Action = DataSetDelete_Detail
+            ImageIndex = 17
+            ShortCut = 16430
+          end
+          item
+            Action = DataSetEdit_Detail
+            ImageIndex = 48
+            ShortCut = 115
+          end
+          item
+            Action = DataSetPost_Detail
+            ImageIndex = 0
+            ShortCut = 113
+          end
+          item
+            Action = DataSetCancel_Detail
+            ImageIndex = 56
+            ShortCut = 32776
+          end>
+        AutoSize = False
+      end>
+    Left = 85
+    Top = 168
+    StyleName = 'XP Style'
+    object DataSetInsert_Detail: TDataSetInsert
+      Category = 'Dataset'
+      Caption = #1580#1583#1610#1583
+      Hint = 'Insert'
+      ImageIndex = 16
+      ShortCut = 16429
+      DataSource = dm.DMonthlyType_Detail
+    end
+    object DataSetDelete_Detail: TDataSetDelete
+      Category = 'Dataset'
+      Caption = #1581#1584#1601
+      Hint = 'Delete'
+      ImageIndex = 17
+      ShortCut = 16430
+      OnExecute = DataSetDelete1Execute
+      DataSource = dm.DMonthlyType_Detail
+    end
+    object DataSetEdit_Detail: TDataSetEdit
+      Category = 'Dataset'
+      Caption = #1608#1610#1585#1575#1610#1588
+      Hint = 'Edit'
+      ImageIndex = 48
+      ShortCut = 115
+      DataSource = dm.DMonthlyType_Detail
+    end
+    object DataSetPost_Detail: TDataSetPost
+      Category = 'Dataset'
+      Caption = #1584#1582#1610#1585#1607
+      Hint = 'Post'
+      ImageIndex = 0
+      ShortCut = 113
+      DataSource = dm.DMonthlyType_Detail
+    end
+    object DataSetCancel_Detail: TDataSetCancel
+      Category = 'Dataset'
+      Caption = #1604#1594#1608
+      Hint = 'Cancel'
+      ImageIndex = 56
+      ShortCut = 32776
+      DataSource = dm.DMonthlyType_Detail
+    end
+    object DataSetNext_Detail: TDataSetNext
+      Category = 'Dataset'
+      Caption = #1576#1593#1583#1610
+      Hint = 'Next'
+      ImageIndex = 76
+      ShortCut = 34
+      DataSource = dm.DMonthlyType_Detail
+    end
+    object DataSetPrior_Detail: TDataSetPrior
+      Category = 'Dataset'
+      Caption = #1602#1576#1604#1610
+      Hint = 'Prior'
+      ImageIndex = 77
+      ShortCut = 33
+      DataSource = dm.DMonthlyType_Detail
+    end
+  end
+end

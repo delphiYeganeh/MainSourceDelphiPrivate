@@ -1,0 +1,31 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[SP_RestoreDB]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[SP_RestoreDB]
+END
+GO
+
+CREATE  procedure [dbo].[SP_RestoreDB](@BackupPath NVARCHAR(4000), @MDFPath NVARCHAR(4000), @LDFPath NVARCHAR(4000), @Distination NVARCHAR(4000), @DBName NVARCHAR(100))
+AS
+BEGIN
+	DECLARE @query NVARCHAR(4000)
+	SET @query = 'USE [master] Restore DataBase ' + @DBName + 
+				' From Disk = ''' + @BackupPath + '''' +
+				' With Move ''' + @MDFPath + ''' to ''' + @Distination + @DBName + '.MDF'' '+
+				' , Move ''' + @LDFPath + ''' to ''' + @Distination + @DBName + '.LDF'' '+
+				' , replace'
+				
+	PRINT @query
+	EXEC (@query)
+	
+	SET @query = 'Update '+@DBName+'..UserLoginLogout set isSafeLogout = 1';
+	EXEC (@query)	
+END
+GO
+
+COMMIT
+GO

@@ -513,6 +513,17 @@ type
     Label52: TLabel;
     DBcontractMARKETER: TDBLookupComboBox;
     BitBtn10: TBitBtn;
+    Label53: TLabel;
+    DBLCompagin: TDBLookupComboBox;
+    BitBtn11: TBitBtn;
+    Label54: TLabel;
+    dbComboState: TDBLookupComboBox;
+    BitBtn12: TBitBtn;
+    SpeedButton17: TSpeedButton;
+    SpeedButton18: TSpeedButton;
+    SpeedButton19: TSpeedButton;
+    SpeedButton20: TSpeedButton;
+    N122: TMenuItem;
     procedure AinsertExecute(Sender: TObject);
     procedure Action6Execute(Sender: TObject);
     procedure ApropertyExecute(Sender: TObject);
@@ -781,6 +792,13 @@ type
     procedure RGTypeRepMainClick(Sender: TObject);
     procedure N96Click(Sender: TObject);
     procedure N97Click(Sender: TObject);
+    procedure BitBtn11Click(Sender: TObject);
+    procedure BitBtn12Click(Sender: TObject);
+    procedure SpeedButton17Click(Sender: TObject);
+    procedure SpeedButton19Click(Sender: TObject);
+    procedure SpeedButton18Click(Sender: TObject);
+    procedure SpeedButton20Click(Sender: TObject);
+    procedure N122Click(Sender: TObject);
 
   private
     qrydblsrchContractType :TADOQuery;
@@ -838,7 +856,8 @@ Uses Telinputunit, dmu,  about, Report, ReportPhone,
   UVersionProduct, URefrenceInPerson, UToRefer, UUpdateJobStatus,
   UTaskReport, UBaseRefere, UfollowUpReport, UFMessageAlarm, UReferralUser,
   USendInnerMessage, USalesFunnel, UActionTypeLevel, UCustomerMap,UMapBug,
-  UCompare_Report, UTimeIntervalSale, UFixedAsset, UFixAssetMove;
+  UCompare_Report, UTimeIntervalSale, UFixedAsset, UFixAssetMove,
+  UDailyUserReport;
 
 {$R *.dfm}
 
@@ -1407,7 +1426,7 @@ end;
 
 procedure TMainForm.ACustomerFollowUpExecute(Sender: TObject);
 begin
-   FrFollowUp := TFrFollowUp.Create(Application);
+   FrFollowUp := TFrFollowUp.Create(nil,Dm.CustomerCustomerID.AsInteger,true);
    FrFollowUp.CustomerID := Dm.CustomerCustomerID.AsInteger;
    FrFollowUp.refreshData;
    FrFollowUp.ShowModal;
@@ -1418,7 +1437,8 @@ end;
 procedure TMainForm.FollowGridDblClick(Sender: TObject);
 var ID :Integer;
 begin
-   FrFollowUp := TFrFollowUp.Create(Application);
+  // FrFollowUp := TFrFollowUp.Create(Application);
+   FrFollowUp := TFrFollowUp.Create(nil,Dm.Select_FollowUP_By_DateCustomerID.AsInteger,true);
    FrFollowUp.CustomerID := Dm.Select_FollowUP_By_DateCustomerID.AsInteger;
    FrFollowUp.refreshData;
    FrFollowUp.FUID :=  dm.Select_FollowUP_By_DateFollowUPID.AsInteger;
@@ -1595,6 +1615,8 @@ var
    groupID : integer;
    MarketerId : Integer;
    TimeInterval : Integer;
+   CompaginID : Integer ;
+   StateID : Integer ;
 begin
    if LockReport.Visible then
    begin
@@ -1616,6 +1638,16 @@ begin
    else
       groupID := 0;
 
+   if DBLCompagin.KeyValue>0 then
+      CompaginID :=  DBLCompagin.KeyValue
+   else
+      CompaginID := 0;
+
+   if dbComboState.KeyValue>0 then
+      StateID :=  dbComboState.KeyValue
+   else
+      StateID := 0;
+
    MarketerId := _CurrentMarketerID ;
    if pnlOtherMarketer.Visible and dblMarketer.KeyValue > 0 then
      MarketerId := dblMarketer.KeyValue  ;
@@ -1623,10 +1655,11 @@ begin
    if DonStatus.ItemIndex<0 then
       DonStatus.ItemIndex:=0;
    FollowGrid.Columns[7].Visible:=DonStatus.ItemIndex=0;
+
    if ShowAction.Checked then
-      Dm.RefreshFollowUP(BDate.Text,Edate.Text,DonStatus.ItemIndex,ActionType.KeyValue,StrToInt( Bsuccess.Text),StrToInt(Esuccess.Text),Comment.Text,DonComment.Text,MarketerId, chkCommentType.Checked,groupID,trim(edtCustomerName.Text),ifthen((trim(edtCustomerNo.Text) <> ''),trim(edtCustomerNo.Text) ,'0') ,TimeInterval) // Amin 1391/08/25
+      Dm.RefreshFollowUP(BDate.Text,Edate.Text,DonStatus.ItemIndex,ActionType.KeyValue,StrToInt( Bsuccess.Text),StrToInt(Esuccess.Text),Comment.Text,DonComment.Text,MarketerId, chkCommentType.Checked,groupID,trim(edtCustomerName.Text),ifthen((trim(edtCustomerNo.Text) <> ''),trim(edtCustomerNo.Text) ,'0') ,TimeInterval,CompaginID,StateID) // Amin 1391/08/25
    else
-      Dm.RefreshFollowUP(BDate.Text,Edate.Text,DonStatus.ItemIndex,0 ,StrToInt( Bsuccess.Text),StrToInt(Esuccess.Text),Comment.Text,DonComment.Text,MarketerId, chkCommentType.Checked,groupID,trim(edtCustomerName.Text),ifthen((trim(edtCustomerNo.Text) <> ''),trim(edtCustomerNo.Text) ,'0'),TimeInterval ); // Amin 1391/08/25
+      Dm.RefreshFollowUP(BDate.Text,Edate.Text,DonStatus.ItemIndex,0 ,StrToInt( Bsuccess.Text),StrToInt(Esuccess.Text),Comment.Text,DonComment.Text,MarketerId, chkCommentType.Checked,groupID,trim(edtCustomerName.Text),ifthen((trim(edtCustomerNo.Text) <> ''),trim(edtCustomerNo.Text) ,'0'),TimeInterval ,CompaginID,StateID); // Amin 1391/08/25
       {
   if Dm.Select_FollowUP_By_Date.RecordCount > 0 then
         StatusBar1.Panels[2].Text := ' йзого ' + IntToStr(Dm.Select_FollowUP_By_Date.RecordCount)
@@ -3826,7 +3859,8 @@ end;
 procedure TMainForm.PinFollowGridDblClick(Sender: TObject);
 var ID :Integer;
 begin
-   FrFollowUp := TFrFollowUp.Create(Application);
+   //FrFollowUp := TFrFollowUp.Create(Application);
+   FrFollowUp := TFrFollowUp.Create(nil,Dm.Select_FollowUP_PinCustomerId.AsInteger,true);
    FrFollowUp.CustomerID := Dm.Select_FollowUP_PinCustomerId.AsInteger;
    FrFollowUp.refreshData;
    FrFollowUp.FUID :=  dm.Select_FollowUP_By_DateFollowUPID.AsInteger;
@@ -4723,6 +4757,53 @@ begin
    FFixAssetMove.ShowModal;
    if Assigned(FFixAssetMove) then
      FreeAndNil(FFixAssetMove);
+end;
+
+procedure TMainForm.BitBtn11Click(Sender: TObject);
+begin
+  inherited;
+  DBLCompagin.KeyValue := null ;
+end;
+
+procedure TMainForm.BitBtn12Click(Sender: TObject);
+begin
+  inherited;
+  dbComboState.KeyValue := null ;
+end;
+
+procedure TMainForm.SpeedButton17Click(Sender: TObject);
+begin
+  inherited;
+  Edate.Text := ShamsiIncDate(Edate.Text,0,0,1);
+end;
+
+procedure TMainForm.SpeedButton19Click(Sender: TObject);
+begin
+  inherited;
+  BDate.Text := ShamsiIncDate(BDate.Text,0,0,1);
+end;
+
+procedure TMainForm.SpeedButton18Click(Sender: TObject);
+begin
+  inherited;
+  Edate.Text := ShamsiIncDate(Edate.Text,0,0,-1);
+end;
+
+procedure TMainForm.SpeedButton20Click(Sender: TObject);
+begin
+  inherited;
+  BDate.Text := ShamsiIncDate(BDate.Text,0,0,-1);
+end;
+
+procedure TMainForm.N122Click(Sender: TObject);
+begin
+  inherited;
+   FDailyUserReport := TFDailyUserReport.Create(Application);
+   FDailyUserReport.ShowModal;
+   if Assigned(FDailyUserReport) then
+     FreeAndNil(FDailyUserReport);
+
+ // Application.CreateForm(TFDailyUserReport, FDailyUserReport);
 end;
 
 end.

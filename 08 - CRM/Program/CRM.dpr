@@ -151,7 +151,8 @@ uses
   UTimeIntervalSale in 'Reports\UTimeIntervalSale.pas' {FTimeIntervalSale},
   UFixedAsset in 'Fix\UFixedAsset.pas' {FFixedAsset},
   UFixAssetHeader in 'Fix\UFixAssetHeader.pas' {FFixAssetHeader},
-  UFixAssetMove in 'Fix\UFixAssetMove.pas' {FFixAssetMove};
+  UFixAssetMove in 'Fix\UFixAssetMove.pas' {FFixAssetMove},
+  UDailyUserReport in 'Reports\UDailyUserReport.pas' {FDailyUserReport};
 
 // ReCommiteDialog in 'ReCommitedialog.pas' {RecommiteSave};
 
@@ -166,6 +167,7 @@ begin
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TfrAttachments, frAttachments);
   Application.CreateForm(TfrCustomerReport, frCustomerReport);
+
   // Application.CreateForm(TRecommiteSave, RecommiteSave);
   // Application.CreateForm(TFrCancleReport, FrCancleReport);
   Application.CreateForm(TYInputQueryF, YInputQueryF);

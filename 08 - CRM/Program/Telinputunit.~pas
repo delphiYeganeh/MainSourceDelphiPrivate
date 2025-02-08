@@ -213,6 +213,8 @@ type
     pnlCustomerStatus: TPanel;
     Label26: TLabel;
     DBLookupComboBox5: TDBLookupComboBox;
+    Label35: TLabel;
+    DBText1: TDBText;
     procedure DBEdit7Enter(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

@@ -1,0 +1,48 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Count_PAYMENT]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Count_PAYMENT]
+END
+GO
+
+CREATE  procedure [dbo].[Count_PAYMENT]    
+	@PaymentId INT,
+	@DelDATE  char(10),
+	@CountOfPayment INT OUT      
+AS            
+ 
+DECLARE  @Count  INT
+SET   @Count =0
+ 
+DECLARE @_PaymentID INT
+DECLARE Payment_Cursor CURSOR FOR    
+	Select PaymentID 
+		From   Payment
+		Where  DOCumentNO =(Select  DocumentNO 
+							 From    dbo.Payment  
+							 Where   PaymentID=@PaymentId) 
+			AND	DATE BETWEEN SUBSTRING(@DelDATE,1,4) +'/01/01' AND SUBSTRING(@DelDATE,1,4)+'/12/30' 
+OPEN Payment_Cursor     
+
+ 
+DECLARE @CANDELETE BIT     
+FETCH NEXT FROM Payment_Cursor INTO @_PaymentID
+WHILE @@FETCH_STATUS = 0    
+BEGIN 
+	EXEC CANDELETE_PAYMENT     @_PaymentID ,@CANDELETE   OUT
+     
+    IF (@CANDELETE=1)
+		SET   @Count=@Count+1
+    FETCH NEXT FROM Payment_Cursor INTO @_PaymentID   
+END    
+CLOSE Payment_Cursor    
+DEALLOCATE Payment_Cursor   
+SET   @CountOfPayment =@Count
+GO
+
+COMMIT
+GO

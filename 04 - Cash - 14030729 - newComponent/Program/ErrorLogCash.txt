@@ -1,0 +1,312 @@
+1402/02/21 11:32:12 ﬁ.Ÿ TYDBGrid Access violation at address 0089D330 in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000000
+1402/02/21 11:32:16 ﬁ.Ÿ TYDBGrid Access violation at address 0089D330 in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000000
+1402/03/21 03:22:15 ».Ÿ TPopupList Cannot open file "C:\Users\Hojjat\AppData\Local\Temp\CashLogo.jpg". The system cannot find the file specified
+1402/03/21 03:24:24 ».Ÿ TPopupList Cannot open file "C:\Users\Hojjat\AppData\Local\Temp\CashLogo.jpg". The system cannot find the file specified
+1402/03/21 03:25:07 ».Ÿ TPopupList Cannot open file "C:\Users\Hojjat\AppData\Local\Temp\CashLogo.jpg". The system cannot find the file specified
+1402/03/21 03:25:14 ».Ÿ TPopupList Cannot open file "C:\Users\Hojjat\AppData\Local\Temp\CashLogo.jpg". The system cannot find the file specified
+1402/03/21 03:25:22 ».Ÿ TPopupList Cannot open file "C:\Users\Hojjat\AppData\Local\Temp\CashLogo.jpg". The system cannot find the file specified
+1402/03/21 03:30:05 ».Ÿ TPopupList Cannot open file "C:\Users\Hojjat\AppData\Local\Temp\CashLogo.jpg". The system cannot find the file specified
+1402/03/21 03:30:25 ».Ÿ TPopupList Cannot open file "C:\Users\Hojjat\AppData\Local\Temp\CashLogo.jpg". The system cannot find the file specified
+1402/03/21 03:34:44 ».Ÿ TPopupList Cannot open file "C:\Users\Hojjat\AppData\Local\Temp\CashLogo.jpg". The system cannot find the file specified
+1402/03/21 03:37:34 ».Ÿ TPopupList Cannot open file "C:\Users\Hojjat\AppData\Local\Temp\CashLogo.jpg". The system cannot find the file specified
+1402/03/21 03:55:34 ».Ÿ TPopupList Cannot create file "D:\04 - Cash\Program\Reports\". The system cannot find the path specified
+1402/03/21 04:06:07 ».Ÿ TPanel Access violation at address 004CE76B in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000000
+1402/03/21 04:10:15 ».Ÿ TFrAddContact Cannot focus a disabled or invisible window
+1402/03/21 04:10:24 ».Ÿ TFrAddContact Cannot focus a disabled or invisible window
+1402/03/21 04:11:31 ».Ÿ TFrAddContact Cannot focus a disabled or invisible window
+1402/03/21 04:12:19 ».Ÿ TPanel Access violation at address 004CE76B in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000000
+1402/03/21 04:13:42 ».Ÿ TPanel Access violation at address 004CE76B in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000000
+1402/03/21 04:15:17 ».Ÿ TPanel Access violation at address 004CE76B in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000000
+1402/03/21 04:23:27 ».Ÿ TDBGridInplaceEdit AccountPresenter: Dataset not in edit or insert mode
+1402/03/21 04:24:39 ».Ÿ TDBGridInplaceEdit AccountPresenter: Dataset not in edit or insert mode
+1402/03/21 04:26:20 ».Ÿ TDBGridInplaceEdit AccountPresenter: Dataset not in edit or insert mode
+1402/03/21 04:26:30 ».Ÿ TDBNavigator Violation of PRIMARY KEY constraint 'PK_AccountPresentation'. Cannot insert duplicate key in object 'dbo.AccountPresenter'. The duplicate key value is (51, 162)
+1402/06/08 01:45:34 ».Ÿ TFrEditLoan Incorrect syntax near ')'
+1402/06/11 08:28:19 ﬁ.Ÿ TSolarDatePicker Conversion failed when converting the varchar value '6/' to data type int
+1402/06/11 08:30:00 ﬁ.Ÿ TDBEdit '500,000,000' is not a valid integer value
+1402/06/11 08:34:45 ﬁ.Ÿ TPanel '' is not a valid integer value
+1402/06/13 10:54:39 ﬁ.Ÿ TPanel Access violation at address 004CE76B in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000000
+1402/06/13 10:58:46 ﬁ.Ÿ TPanel Access violation at address 004CE76B in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000000
+1402/06/13 11:01:30 ﬁ.Ÿ TPanel Access violation at address 004CE76B in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000000
+1402/06/13 11:15:13 ﬁ.Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/13 12:26:32 ».Ÿ TPanel Access violation at address 0064311D in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000030
+1402/06/13 12:27:05 ».Ÿ TPanel Access violation at address 0064311D in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000030
+1402/06/13 01:08:54 ».Ÿ TFrEditLoan Incorrect syntax near ')'
+1402/06/13 01:09:00 ».Ÿ TTabSheet Incorrect syntax near '='
+1402/06/13 01:44:59 ».Ÿ TPanel ‰„Ì  Ê«‰ ﬁ”ÿ Å—œ«Œ  ‘œÂ —« Õ–› ò—œ
+1402/06/13 01:45:15 ».Ÿ TPanel ‰„Ì  Ê«‰ ﬁ”ÿ Å—œ«Œ  ‘œÂ —« Õ–› ò—œ
+1402/06/13 01:50:01 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/13 01:51:38 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/13 01:51:49 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/13 01:53:58 ».Ÿ TTabSheet '' is not a valid floating point value
+1402/06/13 01:54:48 ».Ÿ TTabSheet '' is not a valid floating point value
+1402/06/13 01:54:54 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/13 01:55:08 ».Ÿ TTabSheet '' is not a valid floating point value
+1402/06/13 02:11:27 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/13 02:11:43 ».Ÿ TTabSheet '' is not a valid floating point value
+1402/06/14 10:36:22 ﬁ.Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/14 10:36:26 ﬁ.Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/14 10:38:17 ﬁ.Ÿ TPanel Select_Loan_Parts: Cannot perform this operation on an empty dataset
+1402/06/14 10:51:51 ﬁ.Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/14 12:08:35 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/14 12:13:37 ».Ÿ TPanel Cannot insert the value NULL into column 'ForcePaymentID', table 'ghorban.dbo.ForcePayment'; column does not allow nulls. INSERT fails
+1402/06/14 12:23:29 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/14 12:35:55 ».Ÿ TTabSheet '' is not a valid floating point value
+1402/06/14 12:36:01 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/14 12:37:33 ».Ÿ TTabSheet '' is not a valid floating point value
+1402/06/16 08:12:58 ﬁ.Ÿ TTabSheet '' is not a valid floating point value
+1402/06/16 08:13:26 ﬁ.Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/16 08:13:37 ﬁ.Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/16 09:18:42 ﬁ.Ÿ TPanel Error converting data type nvarchar to real
+1402/06/16 09:18:47 ﬁ.Ÿ TPanel Error converting data type nvarchar to real
+1402/06/16 09:18:50 ﬁ.Ÿ TPanel Error converting data type nvarchar to real
+1402/06/16 10:01:01 ﬁ.Ÿ TPanel Access violation at address 0064311D in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000030
+1402/06/16 10:01:18 ﬁ.Ÿ TPanel Access violation at address 0064311D in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000030
+1402/06/16 11:05:37 ﬁ.Ÿ TPanel Report_ForcePayment: Cannot perform this operation on a closed dataset
+1402/06/16 11:05:49 ﬁ.Ÿ TPanel Error converting data type nvarchar to real
+1402/06/17 04:31:40 ».Ÿ Tdm Invalid object name 'DebitStatus'
+1402/06/17 09:56:27 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/17 09:56:37 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/17 09:56:51 ».Ÿ TFrEditLoan Incorrect syntax near ')'
+1402/06/17 09:58:41 ».Ÿ TTabSheet '' is not a valid floating point value
+1402/06/17 09:59:49 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 09:59:52 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 09:59:55 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 09:59:58 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:01 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:04 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:07 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:10 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:13 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:16 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:19 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:22 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:25 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:28 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:31 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:34 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:37 ».Ÿ TTimer Invalid object name 'Setting'
+1402/06/17 10:00:57 ».Ÿ TFrEditLoan Incorrect syntax near ')'
+1402/06/17 10:01:41 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/17 10:01:59 ».Ÿ TApplication Row cannot be located for updating. Some values may have been changed since it was last read
+1402/06/17 10:02:05 ».Ÿ TApplication Row cannot be located for updating. Some values may have been changed since it was last read
+1402/06/17 10:02:07 ».Ÿ TTabSheet Row cannot be located for updating. Some values may have been changed since it was last read
+1402/06/17 10:02:34 ».Ÿ TPanel Row cannot be located for updating. Some values may have been changed since it was last read
+1402/06/17 10:07:15 ».Ÿ TTimer [DBNETLIB][ConnectionWrite (send()).]General network error. Check your network documentation
+1402/06/17 10:07:15 ».Ÿ TApplication Connection failure
+1402/06/17 10:07:18 ».Ÿ TTimer Connection failure
+1402/06/17 10:07:21 ».Ÿ TTimer Connection failure
+1402/06/17 10:07:24 ».Ÿ TTimer Connection failure
+1402/06/17 10:07:27 ».Ÿ TTimer Connection failure
+1402/06/17 10:07:30 ».Ÿ TTimer Connection failure
+1402/06/17 10:07:33 ».Ÿ TTimer Connection failure
+1402/06/17 10:07:36 ».Ÿ TTimer Connection failure
+1402/06/17 10:16:40 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/17 10:16:54 ».Ÿ TTabSheet '' is not a valid floating point value
+1402/06/17 10:17:08 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/17 10:22:29 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/18 01:14:18 ».Ÿ TFrEditLoan Incorrect syntax near ')'
+1402/06/18 01:16:39 ».Ÿ TPopupDataList '' is not a valid floating point value
+1402/06/28 03:27:20 ».Ÿ TPanel Access violation at address 004CE76B in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000000
+1402/06/28 05:23:46 ».Ÿ TYDBGrid Violation of PRIMARY KEY constraint 'PK_AccountPresentation'. Cannot insert duplicate key in object 'dbo.AccountPresenter'. The duplicate key value is (15, 15)
+1402/06/28 05:40:08 ».Ÿ TYDBGrid Violation of PRIMARY KEY constraint 'PK_AccountPresentation'. Cannot insert duplicate key in object 'dbo.AccountPresenter'. The duplicate key value is (92, 331)
+1402/06/29 04:33:38 ».Ÿ TDBGridInplaceEdit Cannot insert the value NULL into column 'ContactId', table 'ghorban.dbo.AccountPresenter'; column does not allow nulls. INSERT fails
+1402/06/29 07:10:41 ».Ÿ TDBNavigator Cannot insert the value NULL into column 'ContactId', table 'ghorban.dbo.AccountPresenter'; column does not allow nulls. INSERT fails
+1402/06/29 07:10:44 ».Ÿ TYDBGrid Cannot insert the value NULL into column 'ContactId', table 'ghorban.dbo.AccountPresenter'; column does not allow nulls. INSERT fails
+1402/06/29 07:29:23 ».Ÿ TPanel AccountPresenter: Cannot perform this operation on an empty dataset
+1402/07/03 11:45:18 ﬁ.Ÿ TFrAddPayment Access violation at address 4FDC45FF. Read of address 4FDC45FF
+1402/07/03 11:45:18 ﬁ.Ÿ TFrAddPayment Access violation at address 00488875 in module 'Yeganeh_DCash_V_4.exe'. Read of address 000002C4
+1402/07/03 11:45:24 ﬁ.Ÿ TFrAddPayment Access violation at address 00488875 in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000210
+1402/07/03 11:45:25 ﬁ.Ÿ TApplication Access violation at address 004A78C7 in module 'Yeganeh_DCash_V_4.exe'. Read of address 00000180
+1402/07/03 11:45:25 ﬁ.Ÿ TFrAddPayment Access violation at address 00404150 in module 'Yeganeh_DCash_V_4.exe'. Read of address 30303A0C
+1402/07/03 11:46:28 ﬁ.Ÿ TPopupDataList '' is not a valid floating point value
+1402/07/03 12:06:24 ».Ÿ TTimer [DBNETLIB][ConnectionWrite (send()).]General network error. Check your network documentation
+1402/07/03 12:06:24 ».Ÿ TApplication Connection failure
+1402/07/03 12:06:27 ».Ÿ TTimer Connection failure
+1402/07/03 12:06:30 ».Ÿ TTimer Connection failure
+1402/07/03 12:06:32 ».Ÿ TTimer Connection failure
+1402/07/03 12:06:33 ».Ÿ TTimer Connection failure
+1402/07/03 12:06:36 ».Ÿ TTimer Connection failure
+1402/07/03 12:06:39 ».Ÿ TTimer Connection failure
+1402/07/03 12:06:42 ».Ÿ TTimer Connection failure
+1402/07/03 12:06:45 ».Ÿ TTimer Connection failure
+1402/07/03 12:06:48 ».Ÿ TTimer Connection failure
+1402/07/03 12:06:51 ».Ÿ TTimer Connection failure
+1402/07/03 12:06:54 ».Ÿ TTimer Connection failure
+1402/07/03 12:06:57 ».Ÿ TTimer Connection failure
+1402/07/03 12:07:00 ».Ÿ TTimer Connection failure
+1402/07/03 12:07:03 ».Ÿ TTimer Connection failure
+1402/07/03 12:07:06 ».Ÿ TTimer Connection failure
+1402/07/03 12:07:09 ».Ÿ TTimer Connection failure
+1402/07/03 12:07:12 ».Ÿ TTimer Connection failure
+1402/07/03 12:07:15 ».Ÿ TTimer Connection failure
+1402/07/03 12:07:18 ».Ÿ TTimer Connection failure
+1402/07/03 12:07:21 ».Ÿ TTimer Connection failure
+1402/07/03 12:22:35 ».Ÿ TTimer [DBNETLIB][ConnectionWrite (send()).]General network error. Check your network documentation
+1402/07/03 12:22:35 ».Ÿ TApplication Connection failure
+1402/07/03 12:22:38 ».Ÿ TTimer Connection failure
+1402/07/04 04:19:59 ».Ÿ TFrMain Report_Account: Cannot perform this operation on a closed dataset
+1402/07/04 04:33:34 ».Ÿ TFrMain Report_Account: Cannot perform this operation on a closed dataset
+1402/07/04 04:37:26 ».Ÿ TFrMain Report_Account: Cannot perform this operation on a closed dataset
+1402/07/04 04:44:05 ».Ÿ TFrMain Report_Account: Cannot perform this operation on a closed dataset
+1402/07/04 04:44:44 ».Ÿ TFrMain Report_Account: Cannot perform this operation on a closed dataset
+1402/07/04 04:46:25 ».Ÿ TFrMain Report_Account: Cannot perform this operation on a closed dataset
+1402/07/04 04:47:32 ».Ÿ TFrMain Report_Account: Cannot perform this operation on a closed dataset
+1402/07/05 09:51:24 ﬁ.Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 09:55:13 ﬁ.Ÿ TPanel '' is not a valid integer value
+1402/07/05 01:32:28 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 01:33:59 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 01:57:23 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 01:57:29 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 01:57:37 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 01:58:00 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 01:58:15 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 01:58:19 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 02:07:08 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 02:08:28 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 02:10:17 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 02:13:22 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 02:13:50 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 02:14:19 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 02:14:36 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 02:32:27 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 02:42:35 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 02:44:30 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 02:59:22 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 03:02:53 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:03:01 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:03:11 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:04:07 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:04:11 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:04:38 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:08:06 ».Ÿ TPanel Incorrect syntax near '='
+1402/07/05 03:15:02 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:27:12 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:28:37 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:29:49 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:30:46 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:31:29 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:43:05 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:43:16 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 03:44:31 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/05 04:20:46 ».Ÿ TPanel '' is not a valid integer value
+1402/07/05 04:31:58 ».Ÿ TPanel „»·€ —« „‘Œ’ ‰„«ÌÌœ
+1402/07/05 05:29:29 ».Ÿ TGroupBox Access violation at address 0087A9FF in module 'Yeganeh_DCash_V_4.exe'. Write of address 00000358
+1402/07/05 05:29:36 ».Ÿ TGroupBox Access violation at address 0087A9FF in module 'Yeganeh_DCash_V_4.exe'. Write of address 00000358
+1402/07/05 05:33:27 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 05:48:33 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/05 05:48:56 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/05 05:50:27 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/05 05:50:36 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/05 05:51:04 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/05 05:52:10 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 05:52:29 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 05:54:47 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 05:55:19 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 05:55:42 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 05:57:18 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/05 06:03:51 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/05 06:05:07 ».Ÿ TEdit '˛   ' is not a valid integer value
+1402/07/06 07:55:27 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/06 07:57:02 ».Ÿ TPanel '˛141' is not a valid integer value
+1402/07/06 07:57:07 ».Ÿ TPanel '˛141' is not a valid integer value
+1402/07/06 08:00:08 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/06 08:04:34 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/06 08:05:42 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/06 08:06:11 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/06 08:11:29 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/06 08:16:41 ».Ÿ TPanel Overflow while converting variant of type (Decimal) into type (Integer)
+1402/07/06 08:20:24 ».Ÿ TPanel '˛140' is not a valid integer value
+1402/07/06 08:22:08 ».Ÿ TPanel Overflow while converting variant of type (Decimal) into type (Integer)
+1402/07/06 08:22:23 ».Ÿ TPanel Overflow while converting variant of type (Decimal) into type (Integer)
+1402/07/06 08:23:10 ».Ÿ TPanel Overflow while converting variant of type (Decimal) into type (Integer)
+1402/07/06 08:26:49 ».Ÿ TPanel Overflow while converting variant of type (Decimal) into type (Integer)
+1402/07/06 08:28:37 ».Ÿ TPanel Overflow while converting variant of type (Decimal) into type (Integer)
+1402/07/06 08:28:44 ».Ÿ TPanel Overflow while converting variant of type (Decimal) into type (Integer)
+1402/07/06 08:29:19 ».Ÿ TPanel Overflow while converting variant of type (Decimal) into type (Integer)
+1402/07/11 07:22:35 ﬁ.Ÿ TPanel SReport_DelayedLoanPayment: Type mismatch for field 'REMAINOfLoanPerAccountId', expecting: Integer actual: LargeInt
+1402/07/11 07:22:43 ﬁ.Ÿ TPanel SReport_DelayedLoanPayment: Type mismatch for field 'REMAINOfLoanPerAccountId', expecting: Integer actual: LargeInt
+1402/07/11 07:22:50 ﬁ.Ÿ TPanel SReport_DelayedLoanPayment: Type mismatch for field 'REMAINOfLoanPerAccountId', expecting: Integer actual: LargeInt
+1402/07/11 06:00:34 ».Ÿ TDBEdit '4,767,000' is not a valid integer value
+1402/07/16 11:23:12 ﬁ.Ÿ TMaskEdit [DBNETLIB][ConnectionWrite (send()).]General network error. Check your network documentation
+1402/07/16 11:23:12 ﬁ.Ÿ Tdm Connection failure
+1402/07/16 11:58:35 ﬁ.Ÿ TPanel Server execution failed
+1402/07/17 08:50:24 ».Ÿ TTimer Could not find stored procedure 'GetSystemSetting'
+1402/07/17 08:50:24 ».Ÿ TApplication Could not find stored procedure 'Get_Farsi_Message'
+1402/07/17 08:50:27 ».Ÿ TTimer Could not find stored procedure 'GetSystemSetting'
+1402/07/24 09:39:08 ﬁ.Ÿ TDBNavigator The INSERT statement conflicted with the FOREIGN KEY constraint "FK_ReportsName_Objects1". The conflict occurred in database "yLoanCashgholam", table "dbo.Objects", column 'ObjectName'
+1402/07/28 08:19:43 ﬁ.Ÿ TTimer [DBNETLIB][ConnectionWrite (send()).]General network error. Check your network documentation
+1402/07/28 08:19:43 ﬁ.Ÿ TApplication Connection failure
+1402/07/28 08:19:45 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:19:48 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:19:51 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:19:54 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:19:57 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:00 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:03 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:03 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:06 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:09 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:12 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:15 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:19 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:22 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:25 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:28 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:31 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:34 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:37 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:40 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:43 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:46 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:49 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:52 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 08:20:55 ﬁ.Ÿ TTimer Connection failure
+1402/07/28 07:54:28 ».Ÿ TTimer [DBNETLIB][ConnectionWrite (send()).]General network error. Check your network documentation
+1402/07/28 07:54:28 ».Ÿ TApplication Connection failure
+1402/07/28 07:54:31 ».Ÿ TTimer Connection failure
+1402/07/28 07:54:34 ».Ÿ TTimer Connection failure
+1402/07/28 07:54:37 ».Ÿ TTimer Connection failure
+1402/07/28 07:54:40 ».Ÿ TTimer Connection failure
+1402/07/28 07:54:43 ».Ÿ TTimer Connection failure
+1402/07/28 07:54:46 ».Ÿ TTimer Connection failure
+1402/07/28 07:54:49 ».Ÿ TTimer Connection failure
+1402/07/28 07:54:52 ».Ÿ TTimer Connection failure
+1402/07/28 07:54:55 ».Ÿ TTimer Connection failure
+1402/07/28 07:54:58 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:01 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:04 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:07 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:10 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:13 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:16 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:19 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:22 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:25 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:27 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:28 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:31 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:34 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:37 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:40 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:43 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:46 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:49 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:52 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:55 ».Ÿ TTimer Connection failure
+1402/07/28 07:55:58 ».Ÿ TTimer Connection failure
+1402/07/28 07:56:01 ».Ÿ TTimer Connection failure
+1402/08/13 06:58:21 ».Ÿ TPanel „»·€ —« „‘Œ’ ‰„«ÌÌœ
+1402/08/13 07:56:52 ».Ÿ TFrMain Report_Account: Cannot perform this operation on a closed dataset
+1402/08/14 11:30:00 ﬁ.Ÿ TFrMain Report_Account: Cannot perform this operation on a closed dataset
+ 08:55:34 ﬁ.Ÿ TEdit Cannot make a visible window modal
+ 08:55:34 ﬁ.Ÿ TFrConnect Login failed for user '12'
+ 08:55:34 ﬁ.Ÿ Tdm Login failed for user '12'
+ 12:38:25 ».Ÿ TPanel Cannot make a visible window modal
+ 12:38:31 ».Ÿ TBitBtn [DBNETLIB][ConnectionOpen (Connect()).]SQL Server does not exist or access denied
+ 12:38:31 ».Ÿ TFrConnect [DBNETLIB][ConnectionOpen (Connect()).]SQL Server does not exist or access denied
+ 12:38:31 ».Ÿ Tdm [DBNETLIB][ConnectionOpen (Connect()).]SQL Server does not exist or access denied
+1402/10/07 12:40:21 ».Ÿ TFrMakeMonthly Overflow while converting variant of type (String) into type (Integer)
+1402/10/07 12:41:45 ».Ÿ TFrMakeMonthly Overflow while converting variant of type (String) into type (Integer)
+1402/10/07 12:43:53 ».Ÿ TFrMakeMonthly Overflow while converting variant of type (String) into type (Integer)
+1402/10/07 12:56:26 ».Ÿ TFrMakeMonthly Overflow while converting variant of type (String) into type (Integer)

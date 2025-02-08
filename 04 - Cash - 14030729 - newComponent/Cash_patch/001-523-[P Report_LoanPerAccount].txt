@@ -1,0 +1,102 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Report_LoanPerAccount]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Report_LoanPerAccount]
+END
+GO
+
+CREATE  procedure [dbo].[Report_LoanPerAccount]
+(
+	@AccountID int,
+	@SelAll int
+)      
+AS
+    
+ SELECT DISTINCT Loan.AccountID,  
+  loan.LoanID,
+                  Account.AccountTitle,       
+                  Account.AccountNo,       
+                  Account.AccountDate,       
+                  SUM(Loan.Amount) AS MablaghVam,       
+                  LoanType.LoanTypeTitle,  
+                  DBO.Exist (Loan.AccountID,'9') TOTALEXIST, 
+                  (SELECT COUNT(1)      
+						FROM   Loan  L1 
+							INNER JOIN ForcePayment F1 ON L1.LoanID = F1.ParentID
+						WHERE L1.LoanID=loan.LoanID 
+							and L1.LoanTypeID = Loan.LoanTypeID  
+							AND F1.FORCETYPEID = 1 
+							AND L1.AMOUNT=LOAN.AMOUNT 
+							AND Loan.AccountID =L1.AccountID) AS TedadAghsat,
+                  ISNULL((SELECT TOP 1 F1.AMOUNT+f1.InterestAmount AS t       
+						FROM Loan  L1 
+							INNER JOIN ForcePayment F1 ON L1.LoanID = F1.ParentID        
+						WHERE L1.LoanID=loan.LoanID 
+							and L1.LoanTypeID = Loan.LoanTypeID  
+							AND F1.FORCETYPEID = 1 
+							AND L1.AMOUNT=LOAN.AMOUNT 
+							AND Loan.AccountID =L1.AccountID        
+						ORDER BY t ASC),0) AS MablaghYekGhest,      
+                  ISNULL((SELECT COUNT(1)      
+						FROM Loan  L1 
+							INNER JOIN ForcePayment F1 ON L1.LoanID = F1.ParentID        
+						WHERE L1.LoanID=loan.LoanID 
+							and L1.LoanTypeID = Loan.LoanTypeID  
+							AND F1.FORCETYPEID = 1 
+							AND F1.PAID = 1 
+							AND L1.AMOUNT=LOAN.AMOUNT 
+							AND Loan.AccountID =L1.AccountID),0) AS tedadAghsatPardakhtShode,      
+                  ISNULL((SELECT SUM(F1.AMOUNT)      
+						FROM Loan  L1 
+							INNER JOIN ForcePayment F1 ON L1.LoanID = F1.ParentID        
+						WHERE L1.LoanID=loan.LoanID 
+							and L1.LoanTypeID = Loan.LoanTypeID  
+							AND F1.FORCETYPEID = 1 
+							AND F1.PAID = 1 
+							AND L1.AMOUNT=LOAN.AMOUNT 
+							AND Loan.AccountID =L1.AccountID),0) AS AghsatPardakhti,                
+				  ISNULL((ISNULL(SUM(Loan.Amount),0)-ISNULL((SELECT SUM(F1.AMOUNT)      
+                   FROM Loan  L1 
+						INNER JOIN ForcePayment F1 ON L1.LoanID = F1.ParentID        
+                   WHERE L1.LoanID=loan.LoanID 
+						and L1.LoanTypeID = Loan.LoanTypeID  
+						AND F1.FORCETYPEID = 1 
+						AND F1.PAID = 1 
+						AND L1.AMOUNT=LOAN.AMOUNT 
+						AND Loan.AccountID =L1.AccountID),0)),0) AS mandehVam,
+                  isnull(ISNULL((SELECT isnull(SUM(F1.AMOUNT),0)+isnull(SUM(InterestAmount),0)      
+					FROM   Loan  L1 
+						INNER JOIN ForcePayment F1 ON L1.LoanID = F1.ParentID        
+					WHERE L1.LoanID=loan.LoanID 
+						and F1.PAID =0  
+						AND Loan.AccountID =L1.AccountID 
+						AND F1.ForceTypeID = 1),0),0) AS TotalMandehVam,
+				  ISNULL((SELECT SUM(InterestAmount) FROM ForcePayment WHERE ParentID = Loan.LoanID AND ForceTypeID = 1 AND ForcePayment.Paid = 1),0) AS PaidIntrestAmount,
+				  ISNULL((SELECT SUM(InterestAmount) FROM ForcePayment WHERE ParentID = Loan.LoanID AND ForceTypeID = 1),0) AS TotalIntrestAmount,
+                  ISNULL((SELECT SUM(F1.AMOUNT)+SUM(InterestAmount)      
+                   FROM Loan  L1 
+						INNER JOIN ForcePayment F1 ON L1.LoanID = F1.ParentID        
+                   WHERE L1.LoanID=loan.LoanID 
+					and L1.LoanTypeID = Loan.LoanTypeID  
+					AND F1.FORCETYPEID = 1 
+					AND F1.PAID = 1 
+					AND L1.AMOUNT=LOAN.AMOUNT 
+					AND Loan.AccountID =L1.AccountID),0) AS JamePardakhti 
+ 
+ FROM  Loan 
+	INNER JOIN LoanType ON Loan.LoanTypeID = LoanType.LoanTypeID 
+	INNER JOIN Account  ON Loan.AccountID = Account.AccountID 
+	INNER JOIN Contact  ON Account.ContactID = Contact.ContactID     
+WHERE (Loan.AccountID= @AccountID AND @SelAll<>1) OR (@SelAll = 1)
+GROUP BY  Loan.AccountID, Account.AccountNo,Account.AccountTitle,Account.AccountDate, LoanType.LoanTypeTitle,
+	Loan.Amount,Loan.LoanTypeID, Loan.LoanID
+ORDER BY Account.AccountNo,Account.AccountTitle, Account.AccountDate
+
+GO
+
+COMMIT
+GO

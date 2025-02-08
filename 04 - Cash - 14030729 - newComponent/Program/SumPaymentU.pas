@@ -1,0 +1,433 @@
+ unit SumPaymentU;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, BaseUnit, ActnMan, StdCtrls, DBCtrls, Mask, ExtCtrls, ActnList,
+  Buttons, DBActns, UemsVCL, Grids, DBGrids, YDbgrid, XPStyleActnCtrls,
+  Menus, YAmountEdit, frxClass, frxDBSet, DB, ADODB, SolarCalendarPackage,
+  AdvGlowButton;
+
+type
+  TFrSumPayment = class(TYBaseForm)
+    Panel1: TPanel;
+    LblPrice: TLabel;
+    StatusLabel: TLabel;
+    Label7: TLabel;
+    Label10: TLabel;
+    LblPriceDesc: TLabel;
+    EComment: TEdit;
+    MajorAccount: TDBLookupComboBox;
+    FinancialNotePanel: TPanel;
+    Label1: TLabel;
+    Label3: TLabel;
+    interest: TYAmountEdit;
+    Eamerce: TYAmountEdit;
+    Panel2: TPanel;
+    DoBtn: TAdvGlowButton;
+    BitBtn1: TAdvGlowButton;
+    Panel3: TPanel;
+    MEEDate: TSolarDatePicker;
+    GrpSelection: TRadioGroup;
+    SBReport: TAdvGlowButton;
+    RepPopMnu: TPopupMenu;
+    NShow: TMenuItem;
+    NPrint: TMenuItem;
+    NDesign: TMenuItem;
+    N8: TMenuItem;
+    N11: TMenuItem;
+    RgReport: TRadioGroup;
+    Label2: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label8: TLabel;
+    spCreateSmsTextForSumPayment: TADOStoredProc;
+    spCreateSmsTextForSumPaymentParentID: TIntegerField;
+    spCreateSmsTextForSumPaymentForceTypeID: TWordField;
+    spCreateSmsTextForSumPayment_date: TStringField;
+    spCreateSmsTextForSumPaymentOrderNos: TMemoField;
+    spCreateSmsTextForSumPaymentaccountTitle: TWideStringField;
+    spCreateSmsTextForSumPaymentPhones: TWideStringField;
+    spCreateSmsTextForSumPaymentEXIST: TLargeintField;
+    spCreateSmsTextForSumPayment_sum: TLargeintField;
+    spCreateSmsTextForSumPaymentBM: TLargeintField;
+    pnlMain: TPanel;
+    procedure FormShow(Sender: TObject);
+    procedure DoBtnClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure NShowClick(Sender: TObject);
+    procedure N11Click(Sender: TObject);
+    procedure SBReportClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure GrpSelectionClick(Sender: TObject);
+  private
+    DocumnetNo:String;
+  public
+    FinancialNoteid:integer;
+    Amount,JustSelectedAmount: integer;
+  end;
+
+var
+  FrSumPayment: TFrSumPayment;
+implementation
+
+uses dmu, FinancialNoteDetailU, YShamsiDate, MainU,BusinessLayer,
+  SumPaymentDM, FinancialNoteDetail_NewU, DateUtils;
+
+{$R *.dfm}
+
+
+procedure TFrSumPayment.FormShow(Sender: TObject);
+begin
+   inherited;
+   { TODO -oparsa : 14030701 }
+   (*
+   FrFinancialNoteDetail_New:=TFrFinancialNoteDetail_New.Create(Application);
+   { TODO -oparsa : 14030628- bug369 }
+   FrFinancialNoteDetail_New.Align := alClient ;
+   { TODO -oparsa : 14030628- bug369 }
+   FrFinancialNoteDetail_New.ShowInPanel(FinancialNotePanel);
+   *)
+   { TODO -oparsa : 14030701 }
+   _FinancialNoteid:=-1;
+   FrFinancialNoteDetail_New.FinancialNoteid:=0;
+   FrFinancialNoteDetail_New.DefaultAmount:=Amount;
+   {Ranjbar}
+   //EDate.Text:=_Today;
+   MEEDate.Text := _Today;
+   //---
+//   Label12.Caption:=Bill(Amount)+' —Ì«·';
+   LblPriceDesc.Caption:=Bill(Amount)+' ' +Get_SystemSetting('EdtMoneyUnit')+' ';
+   LblPriceDesc.Top := LblPrice.Top ;
+   MajorAccount.SetFocus;
+
+
+end;
+
+
+function IsStrANumber(const S: string): Boolean;
+var
+  P: PChar;
+begin
+  P      := PChar(S);
+  Result := False;
+  while P^ <> #0 do
+  begin
+    if not (P^ in ['0'..'9']) then Exit;
+    Inc(P);
+  end;
+  Result := True;
+end;
+
+
+procedure TFrSumPayment.DoBtnClick(Sender: TObject);
+Var
+   DebtorAccountID:integer;date:string;comment:widestring;FinancialNoteID_:integer;
+   SelectionMode: byte;
+   LoanID,AccountID : Integer;
+   _Crtr_DetAccountID,_db:INTEGER;
+   _DoesInserted:boolean;
+   FNoteTypeID,SqlText :STRING;
+   smsText: string;
+   ForcePaymentIds:String;
+   msgstr : string ;
+begin
+  inherited;
+  ForcePaymentIds:='';
+
+  { TODO -oparsa : 14030628- bug369 }
+  if Amount = 0   then
+  begin
+    ShowMessage('Õ „« „»·€Ì »Ì‘ — «“ ’›— ÃÂ  Ê«—Ì“ „‘Œ’ ‘Êœ');
+    Exit;
+  end;
+
+  if MajorAccount.KeyValue = null   then
+  begin
+    ShowMessage('·ÿ›« Õ”«» «‰ Œ«» ‰„«ÌÌœ');
+    Exit;
+  end;
+  { TODO -oparsa : 14030628- bug369 }
+
+  if not ISSelectedDbtOrCrtCorrect(MajorAccount.KeyValue,0) then
+  begin
+    ShowMessage('Õ”«» «‰ Œ«» ‘œÂ „Ã«“ ‰Ì” ');
+    Exit;
+  end;
+
+  CASE GrpSelection.ItemIndex OF
+    0:msgstr := '¬Ì« «“ Å—œ«Œ  Ã„⁄Ì " „«„Ì „Ê«—œ" „ÿ„⁄‰ „Ì »«‘Ìœ';
+    1:msgstr := '¬Ì« «“ Å—œ«Œ  Ã„⁄Ì "›ﬁÿ „Ê«—œ «‰ Œ«» ‘œÂ" „ÿ„⁄‰ „Ì »«‘Ìœ';
+    2:msgstr := '¬Ì« «“ Å—œ«Œ  Ã„⁄Ì "Â„Â „Ê«—œ »Â Ã“ „Ê«—œ «‰ Œ«» ‘œÂ" „ÿ„⁄‰ „Ì »«‘Ìœ'  ;
+  END;
+
+  //if not MessageShowString('¬Ì« «“ Å—œ«Œ  Ã„⁄Ì «ÿ„Ì‰«‰ œ«—Ìœ',true) then
+  if not MessageShowString(msgstr,true) then
+    exit;
+
+
+  FinancialNoteid := FrFinancialNoteDetail_New.FinancialNoteid;
+  {Ranjbar 88.07.15}
+  SelectionMode := GrpSelection.ItemIndex;
+  //»œ”  ¬Ê—œ‰ ·Ì”  —ﬂÊ—œÂ«Ì «‰ Œ«» ‘œÂ
+  FrMain.Make_SelectedForcePayment;
+
+  DebtorAccountID := MajorAccount.KeyValue;
+  {Ranjbar}
+  //date:=EDate.Text;
+  Date := Txt_Del254(MEEDate.Text);
+  //---
+  comment := EComment.Text;
+  FinancialNoteID_ := FinancialNoteid;
+  _Crtr_DetAccountID:=0;
+  if FinancialNoteid>0 then
+  begin
+    if Amount+strtoint(DeleteComma(Eamerce.Text))
+       +strtoint(DeleteComma(interest.Text))<>DM.FinancialNote_MasterAmount.AsInteger then
+      raise Exception.Create('„»·€ ò· çò »« Ã„⁄ „»·€ Ê«—Ì“ »—«»— ‰Ì” .·ÿ›« »Â „ÕœÊœ ”«“Ì ‰ÕÊÂ Å—œ«Œ  œﬁ  ‰„«ÌÌœ');
+
+    SqlText:=' SELECT FinancialNote_Master.FinancialNoteTypeID '+
+             ' FROM   FinancialNote_Detail INNER JOIN '+
+             '        FinancialNote_Master ON FinancialNote_Detail.FinancialNote_MasterID = FinancialNote_Master.FinancialNote_MasterID '+
+             ' WHERE  FinancialNote_Detail.FinancialNote_DetailID='+IntToStr(FrFinancialNoteDetail_New.FinancialNoteid);
+
+    FNoteTypeID:=Qry_GetResult(sqlText,Dm.YeganehConnection);
+
+    if FNoteTypeID='' then
+      FNoteTypeID:='0';
+
+      if FNoteTypeID='1' then
+      begin
+        if (Get_SystemSetting('EdtResiveAccount')=NULL) or
+           (Get_SystemSetting('EdtResiveAccount')<1)   then
+          raise Exception.Create('œ— ﬁ”„   ‰ŸÌ„«  ”Ì” „ ‘„«—Â Õ”«» «”‰«œ œ—Ì«› ‰Ì —« „‘Œ’ ‰„«ÌÌœ');
+        _Crtr_DetAccountID:=MajorAccount.KeyValue;;//Dm.Select_PaymentDebtorAccountID.AsInteger;
+    //  _Cr:=Dm.Select_PaymentCreditorAccountID.AsInteger;
+        _Db:=Get_AccountID_ByAccountNo(Get_SystemSetting('EdtResiveAccount'));
+        DebtorAccountID:=_Db;
+      end
+  end;
+
+  DocumnetNo := Get_NewDocumnetNo(MEEDate.Text);
+
+  FrMain._SelectedForcePaymentID := FrMain._SelectedForcePaymentID+',';// »⁄·   ‘ŒÌ’ ‰«œ—”  œ— ç—ŒÂ “Ì—
+
+  { TODO -oparsa : 14030628- bug369 }
+  if not Dm.Report_ForcePayment.Active then
+    Exit;
+  { TODO -oparsa : 14030628- bug369 }
+  with Dm,Report_ForcePayment do
+  begin
+    _DoesInserted:=false;
+    First;
+
+    while not eof do
+    begin
+      if not Dm.Report_ForcePaymentPaid.AsBoolean then
+      begin
+        _DoesInserted:=True;
+        Case SelectionMode of
+          //0: Group_ForcePayment :  «‰ Œ«» ﬂ—œ‰ «ﬁ”«ÿ Ì« „«ÂÌ«‰Â Â« Ê “œ‰ ”‰œ »—«Ì Â— ﬂœ«„ ”Å”   ⁄ÌÌ‰ ﬂ—œ‰ «Ì‰ﬂÂ ﬁ”  Å—œ«Œ  ‘œÂ «” 
+          0:{ „«„Ì „Ê«—œ}
+          begin
+            Group_ForcePayment(Report_ForcePaymentForcePaymentID.AsInteger,DebtorAccountID,date,comment,FinancialNoteID_, _Userid,DocumnetNo,FinancialNoteid,_Crtr_DetAccountID,Report_ForcePaymentAmerce.AsInteger);
+            ForcePaymentIds:=ForcePaymentIds+vartostr(Report_ForcePaymentForcePaymentID.AsString)+',';
+          end;
+          //1: «ﬁ”«ÿ Ì« „«ÂÌ«‰Â Â«Ì «‰ Œ«» ‘œÂ
+          1:
+          if pos(','+Report_ForcePaymentForcePaymentID.AsString+',',FrMain._SelectedForcePaymentID)<>0 then
+          begin
+            Group_ForcePayment(Report_ForcePaymentForcePaymentID.AsInteger,DebtorAccountID,date,comment,FinancialNoteID_, _Userid,DocumnetNo,FinancialNoteid,_Crtr_DetAccountID,Report_ForcePaymentAmerce.AsInteger);
+            ForcePaymentIds:=ForcePaymentIds+vartostr(Report_ForcePaymentForcePaymentID.AsString)+',';
+          end;
+
+          2:
+          if pos(','+Report_ForcePaymentForcePaymentID.AsString+',',FrMain._SelectedForcePaymentID)=0 then
+          begin
+            Group_ForcePayment(Report_ForcePaymentForcePaymentID.AsInteger,DebtorAccountID,date,comment,FinancialNoteID_, _Userid,DocumnetNo,FinancialNoteid,_Crtr_DetAccountID,Report_ForcePaymentAmerce.AsInteger);
+            ForcePaymentIds:=ForcePaymentIds+vartostr(Report_ForcePaymentForcePaymentID.AsString)+',';
+          end;
+        end;
+      end;
+      Next;
+    end;
+  end;
+
+  spCreateSmsTextForSumPayment.Close;
+  { TODO -oparsa : 14030628- bug369 }
+  if ForcePaymentIds = '' then
+    ForcePaymentIds := '0,' ;
+  { TODO -oparsa : 14030628- bug369 }
+  spCreateSmsTextForSumPayment.Parameters.ParamByName('@ForcePaymentIds').Value := ForcePaymentIds;
+  spCreateSmsTextForSumPayment.Open;
+  spCreateSmsTextForSumPayment.First;
+  while not(spCreateSmsTextForSumPayment.Eof) do
+  begin
+    smsText:= '';
+    smsText:= '”·«„ ';
+    if spCreateSmsTextForSumPaymentForceTypeID.Value=1 then
+    begin
+      smsText:=smsText+ 'ﬁ”ÿ ' +spCreateSmsTextForSumPaymentOrderNos.AsString;
+      smsText:=smsText+' '+spCreateSmsTextForSumPaymentaccountTitle.AsString;
+      smsText:=smsText+' »Â „»·€ '+spCreateSmsTextForSumPayment_sum.AsString;
+      smsText:=smsText+'œ—  «—ÌŒ '+MEEDate.Text;
+      smsText:=smsText+'œ—Ì«›  ê—œÌœ.„«‰œÂ Ê«„ '+spCreateSmsTextForSumPaymentBM.AsString+'—Ì«·';
+    end;
+
+    if spCreateSmsTextForSumPaymentForceTypeID.Value=2 then
+    begin
+      smsText:=smsText+' „«ÂÌ«‰Â ' +spCreateSmsTextForSumPaymentOrderNos.AsString;
+      smsText:=smsText+' '+spCreateSmsTextForSumPaymentaccountTitle.AsString;
+      smsText:=smsText+' »Â „»·€ '+spCreateSmsTextForSumPayment_sum.AsString;
+      smsText:=smsText+' œ—  «—ÌŒ '+MEEDate.Text;
+      smsText:=smsText+' œ—Ì«›  ê—œÌœ.„ÊÃÊœÌ '+spCreateSmsTextForSumPaymentEXIST.AsString+'—Ì«·';
+    end;
+    smsText:=smsText+' '+_CashNameForSms;
+
+    if IsStrANumber(spCreateSmsTextForSumPaymentPhones.AsString) then
+      dm.SendSmsToOutBox(spCreateSmsTextForSumPaymentPhones.AsString,smstext);
+
+    spCreateSmsTextForSumPayment.next;
+  end;
+
+  DoBtn.Enabled := False;
+  if _DoesInserted then
+    ShowMessage('Å—œ«Œ  Â« »« ‘„«—Â ”‰œ  '+ DocumnetNo +' À»  ‘œ‰œ');
+
+      {Ranjbar 88.06.24}
+   //ÃÂ  œ— «·ÊÌ  ﬁ—«— œ«œ‰ ⁄÷ÊÂ« »—«Ì ê—› ‰ œÊ»«— Ê«„
+  if Dm.Report_ForcePaymentForceTypeID.AsInteger = 1 then
+  begin
+    if Get_NotPaidLoanPayment(Dm.Report_ForcePaymentAccountID.AsInteger)=0 then
+    begin
+      if MessageDlg('«ﬁ”«ÿ «Ì‰ Õ”«» »Â « „«„ —”ÌœÂ «”  ° ¬Ì« œ— ‰Ê»  Ê«„ ﬁ—«— êÌ—œø',
+         mtConfirmation,[mbYes,mbNo],0)=mrYes then
+      begin
+        //Added By Hadi Mohamed 920628 (Bug #208)
+        Get_LoanID_ByLoanNo(dm.Report_ForcePaymentLoanNO.AsString,loanID,accountID);
+        Ins_AccountToLoanPriority(accountID , loanID);
+      end;
+    end;
+      // Commented By Hadi Mohamed 920628
+    //  Get_LoanID_ByLoanNo(Trim(Dm.Report_ForcePaymentLoanNO.AsString),LoanID,AccountID);//LoanID , AccountID »œ”  ¬Ê—œ‰
+//      Ins_AccountToLoanPriority(Dm.Report_ForcePaymentAccountID.AsInteger , LoanID); //œ«œ‰ «·Ê  »Â Õ”«»Â«
+  end;
+   //---
+end;
+
+procedure TFrSumPayment.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  ModalResult:=mrCancel;
+end;
+
+procedure TFrSumPayment.FormCreate(Sender: TObject);
+begin
+  inherited;
+  {Ranjbar 88.07.15}
+  DMSumPayment := TDMSumPayment.Create(nil);
+  DocumnetNo := '';
+  { TODO -oparsa : 14030701 }
+   FrFinancialNoteDetail_New := TFrFinancialNoteDetail_New.Create(Application);
+   FrFinancialNoteDetail_New.Align := alClient ;
+   FrFinancialNoteDetail_New.ShowInPanel(FinancialNotePanel);
+  { TODO -oparsa : 14030701 }
+  //---
+end;
+
+procedure TFrSumPayment.NShowClick(Sender: TObject);
+begin
+  inherited;
+//if Trim(DocumnetNo)='' then
+//DocumnetNo:=Edit1.Text;
+  if Sender <> NDesign  then //ÿ—«ÕÌ
+    if Trim(DocumnetNo)='' then
+    begin
+      ShowMyMessage('ÅÌ€«„','ÂÌç ‘„«—Â ”‰œÌ Ì«›  ‰‘œ',[mbOK],mtInformation);
+      Exit;
+    end;
+
+  With DMSumPayment do
+  begin
+    Case RgReport.ItemIndex of
+      0:Begin
+          frxRepSumPayment.Pages[1].Visible := True;
+          frxRepSumPayment.Pages[2].Visible := False;
+          QrSumPayment.Close;
+          QrSumPayment.Parameters.ParamByName('DocumentNo').Value := FrSumPayment.DocumnetNo;
+          QrSumPayment.Parameters.ParamByName('Today').Value:=_Today;
+          QrSumPayment.Open;
+          Rep_LoadFile_New(frxRepSumPayment,'SumPayment1.fr3','btn_AM_PardakhteJamee');
+          TfrxMemoView(DMSumPayment.frxRepSumPayment.FindComponent('MemoCompany')).Text := _SoftTitle;
+        end;
+      1:Begin
+          frxRepSumPayment.Pages[1].Visible := False;
+          frxRepSumPayment.Pages[2].Visible := True;
+          ADOSpSumPayment.Close;
+          ADOSpSumPayment.Parameters[1].Value:=FrSumPayment.DocumnetNo;
+          ADOSpSumPayment.Parameters[2].Value:=_Today;
+          ADOSpSumPayment.open;
+          Rep_LoadFile_New(frxRepSumPayment,'TotalPayment.fr3','btn_AM_PardakhteJamee');
+          TfrxMemoView(DMSumPayment.frxRepSumPayment.FindComponent('MemoCompany1')).Text := _SoftTitle;
+        end;
+      end;//case
+
+      try
+
+        if Sender = NShow  then
+          Rep_Show(frxRepSumPayment,rtShow);//ÅÌ‘ ‰„«Ì‘
+        if Sender = NPrint  then
+          Rep_Show(frxRepSumPayment,rtPrint);//ç«Å ”—Ì⁄
+        if Sender = NDesign  then
+          Rep_Show(frxRepSumPayment,rtDesign);//ÿ—«ÕÌ
+      finally
+        QrSumPayment.Close;
+      end;
+   end;
+end;
+
+procedure TFrSumPayment.N11Click(Sender: TObject);
+begin
+   inherited;
+   Rep_CorrectDesign('SumPayment1.fr3');
+end;
+
+procedure TFrSumPayment.SBReportClick(Sender: TObject);
+begin
+   inherited;
+   Cursor_SetPos(Self,SBReport,RepPopMnu);
+end;
+
+procedure TFrSumPayment.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+   inherited;
+   {Ranjbar 88.07.15}
+   FreeAndNil(DMSumPayment);
+   _FrSumPaymentIsShowing:=False;
+   //---
+end;
+
+procedure TFrSumPayment.GrpSelectionClick(Sender: TObject);
+begin
+  inherited;
+
+  CASE GrpSelection.ItemIndex OF
+    0:Amount := FrMain.Sum_ForcePayment_Amount;
+    1:Amount := JustSelectedAmount;
+    2:Amount := FRMAIN.Sum_ForcePayment_Amount-FrFinancialNoteDetail_New.DefaultAmount
+  END;
+  IF  (GrpSelection.ItemIndex IN [1,2]) AND (JustSelectedAmount = 0) THEN
+  BEGIN
+    //ShowMyMessage('ÅÌ€«„','ÂÌç —òÊ—œÌ œ— ›—„ «’·Ì «‰ Œ«» ‰‘œÂ ·ÿ›« ﬁ»· «” ›«œÂ «“ «Ì‰ ê“Ì‰Â œ— ›—„ «’·Ì »— —ÊÌ —òÊ—œ „Ê—œ ‰Ÿ— ò·Ìò ‰„«ÌÌœ',[mbOK],mtInformation);
+    ShowMyMessage('ÅÌ€«„','ÂÌç —òÊ—œÌ œ— ›—„ «’·Ì «‰ Œ«» ‰‘œÂ ·ÿ›« ﬁ»· «” ›«œÂ «“ «Ì‰ ê“Ì‰Â œ— ›—„ «’·Ì »— —ÊÌ —òÊ—œÂ«Ì „Ê—œ ‰Ÿ— (ò‰ —· + ò·Ìò) ‰„«ÌÌœ',[mbOK],mtInformation);
+   // IF GrpSelection.ItemIndex = 2 THEN
+   //  GrpSelection.ItemIndex := 0 ;
+  end;
+
+  LblPriceDesc.Caption:= Bill(Amount)+' '+Get_SystemSetting('EdtMoneyUnit')+' ';
+end;
+
+end.

@@ -104,6 +104,9 @@ type
     DBLookupComboBox3: TDBLookupComboBox;
     Select_customer_By_CustomerIDCustomerStatusTitle: TStringField;
     SpeedButton1: TSpeedButton;
+    Select_CustomerCancelUserId: TIntegerField;
+    Select_CustomerCancelUserTitle: TStringField;
+    lblReturnCustomer: TLabel;
     procedure SpeedButton2Click(Sender: TObject);
     procedure btnAcceptClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
@@ -163,6 +166,8 @@ begin
         ModalResult :=mrNone;
         Exit;
       end;
+
+      Select_CustomerCancelUserId.AsInteger                 := _UserID ;
 
       Post;
       Last;
@@ -311,6 +316,10 @@ begin
   inherited;
   RefreshNeed := False;
   btnReturnCustomer.Enabled := Select_customer_By_CustomerIDCustomerStatusID.AsInteger = 3 ;
+  lblReturnCustomer.Caption := ' ÂÎÑíä ÊÛííÑ æ ÖÚíÊ ÏåäÏå Èå ííÑí ãÌÏÏ = äÏÇÑÏ ' ;
+  if (Select_Customer_By_CustomerIDCustomerID.AsString <> '') then
+    lblReturnCustomer.Caption := ' ÂÎÑíä ÊÛííÑ æ ÖÚíÊ ÏåäÏå Èå ííÑí ãÌÏÏ  ' + ' = ' + Qry_GetResult('SELECT TOP 1 u.title UserTitle  FROM [dbo].[ActivityUser_Log] l LEFT JOIN Users AS U ON u.id = l.userId  WHERE l.CustomerID = '+Select_Customer_By_CustomerIDCustomerID.AsString+'  AND l.FormName = '''+'MenuDeleteCustomer'+''' AND l.Activity = '''+'btnReturnC'+''' ORDER BY l.id desc ' ,dm.YeganehConnection) ;
+
 end;
 
 procedure TFrCancelCustomer.btnDelClick(Sender: TObject);

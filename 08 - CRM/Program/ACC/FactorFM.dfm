@@ -9,7 +9,6 @@ inherited FMFactor: TFMFactor
   KeyPreview = True
   OldCreateOrder = True
   Position = poMainFormCenter
-  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape
@@ -1824,11 +1823,12 @@ inherited FMFactor: TFMFactor
     UserName = 'frxDBFactorDetailDataSet'
     CloseDataSource = False
     DataSource = DSDetail
+    BCDToCurrency = False
     Left = 17
     Top = 287
   end
   object frxReport1: TfrxReport
-    Version = '4.5'
+    Version = '5.4.6'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -1865,6 +1865,7 @@ inherited FMFactor: TFMFactor
       PaperHeight = 210.000000000000000000
       PaperSize = 9
       object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
         Height = 352.496290000000000000
         Top = 18.897650000000000000
         Width = 1122.520410000000000000
@@ -3717,11 +3718,14 @@ inherited FMFactor: TFMFactor
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
             FF00FFFFFF00FFFFFF00}
           HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
         end
         object lineHeader: TfrxLineView
           Align = baWidth
           Left = 1122.520410000000000000
           Top = 112.590551180000000000
+          Color = clBlack
           Frame.Typ = [ftLeft]
         end
         object memSerial: TfrxMemoView
@@ -5317,6 +5321,7 @@ inherited FMFactor: TFMFactor
         end
       end
       object Footer1: TfrxFooter
+        FillType = ftBrush
         Height = 105.826840000000000000
         Top = 604.724800000000000000
         Width = 1122.520410000000000000
@@ -5457,6 +5462,7 @@ inherited FMFactor: TFMFactor
         object lineHeaderFooter: TfrxLineView
           Align = baWidth
           Width = 1122.520410000000000000
+          Color = clBlack
           Frame.Typ = [ftTop]
         end
         object SysMemTotalAmount: TfrxSysMemoView
@@ -6054,6 +6060,8 @@ inherited FMFactor: TFMFactor
             00804B0000001000000000000000050000000E00000014000000000000001000
             000014000000}
           HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
         end
         object PicNotCash: TfrxPictureView
           Left = 724.535433070000000000
@@ -6603,14 +6611,18 @@ inherited FMFactor: TFMFactor
             00804B0000001000000000000000050000000E00000014000000000000001000
             000014000000}
           HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
         end
       end
       object ReportSummary1: TfrxReportSummary
+        FillType = ftBrush
         Height = 22.677180000000000000
         Top = 771.024120000000000000
         Width = 1122.520410000000000000
       end
       object DetailData1: TfrxDetailData
+        FillType = ftBrush
         Height = 37.795519680000000000
         Top = 544.252320000000000000
         Width = 1122.520410000000000000
@@ -6841,6 +6853,7 @@ inherited FMFactor: TFMFactor
         end
       end
       object MasterData1: TfrxMasterData
+        FillType = ftBrush
         Height = 90.708964090000000000
         Top = 430.866420000000000000
         Width = 1122.520410000000000000
@@ -7062,6 +7075,7 @@ inherited FMFactor: TFMFactor
     UserName = 'frxDBFactorHederDataSet'
     CloseDataSource = False
     DataSource = DSHeader
+    BCDToCurrency = False
     Left = 81
     Top = 287
   end
@@ -7088,13 +7102,15 @@ inherited FMFactor: TFMFactor
     DefaultBottomMargin = 10.000000000000000000
     DefaultPaperSize = 9
     DefaultOrientation = poPortrait
+    TemplatesExt = 'fr3'
     Restrictions = []
     RTLLanguage = False
+    MemoParentFont = False
     Left = 40
     Top = 332
   end
   object frxReport2: TfrxReport
-    Version = '4.5'
+    Version = '5.4.6'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -7142,6 +7158,7 @@ inherited FMFactor: TFMFactor
       TopMargin = 5.000000000000000000
       BottomMargin = 5.000000000000000000
       object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
         Height = 372.173470000000000000
         Top = 18.897650000000000000
         Width = 1084.725110000000000000
@@ -7232,6 +7249,7 @@ inherited FMFactor: TFMFactor
           Align = baWidth
           Left = 1084.725110000000000000
           Top = 112.590551180000000000
+          Color = clBlack
           Frame.Typ = [ftLeft]
         end
         object memSerial: TfrxMemoView
@@ -8746,12 +8764,14 @@ inherited FMFactor: TFMFactor
         object Line1: TfrxLineView
           Align = baWidth
           Width = 1084.725110000000000000
+          Color = clBlack
           Diagonal = True
         end
         object Line2: TfrxLineView
           Align = baRight
           Left = 1084.725110000000000000
           Height = 109.606370000000000000
+          Color = clBlack
           Diagonal = True
         end
         object picArm: TfrxPictureView
@@ -10521,6 +10541,8 @@ inherited FMFactor: TFMFactor
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
             FF00FFFFFF00FFFFFF00}
           HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
         end
         object Memo1: TfrxMemoView
           Align = baWidth
@@ -10553,12 +10575,14 @@ inherited FMFactor: TFMFactor
         end
       end
       object Footer1: TfrxFooter
+        FillType = ftBrush
         Height = 136.063080000000000000
         Top = 619.842920000000000000
         Width = 1084.725110000000000000
         object lineHeaderFooter: TfrxLineView
           Align = baWidth
           Width = 1084.725110000000000000
+          Color = clBlack
           Frame.Typ = [ftTop]
         end
         object memSellerSign: TfrxMemoView
@@ -11128,6 +11152,8 @@ inherited FMFactor: TFMFactor
             000000000080300000000C0000000F0000804B00000010000000000000000500
             00000E00000014000000000000001000000014000000}
           HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
         end
         object PicNotCash: TfrxPictureView
           Left = 717.732283460000000000
@@ -11630,6 +11656,8 @@ inherited FMFactor: TFMFactor
             000000000080300000000C0000000F0000804B00000010000000000000000500
             00000E00000014000000000000001000000014000000}
           HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
         end
         object memCashLabel: TfrxMemoView
           Left = 882.410020000000000000
@@ -13769,6 +13797,8 @@ inherited FMFactor: TFMFactor
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
           HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
         end
         object memBuyerSign: TfrxMemoView
           Left = 521.575140000000000000
@@ -13822,11 +13852,13 @@ inherited FMFactor: TFMFactor
         end
       end
       object ReportSummary1: TfrxReportSummary
+        FillType = ftBrush
         Height = 22.677180000000000000
         Top = 816.378480000000000000
         Width = 1084.725110000000000000
       end
       object DetailData1: TfrxDetailData
+        FillType = ftBrush
         Height = 37.795519680000000000
         Top = 559.370440000000000000
         Width = 1084.725110000000000000
@@ -14083,6 +14115,7 @@ inherited FMFactor: TFMFactor
         end
       end
       object MasterData1: TfrxMasterData
+        FillType = ftBrush
         Height = 83.149606299212600000
         Top = 453.543600000000000000
         Width = 1084.725110000000000000
@@ -14300,7 +14333,7 @@ inherited FMFactor: TFMFactor
     end
   end
   object frxReport3: TfrxReport
-    Version = '4.5'
+    Version = '5.4.6'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -14341,6 +14374,7 @@ inherited FMFactor: TFMFactor
       TopMargin = 5.000000000000000000
       BottomMargin = 5.000000000000000000
       object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
         Height = 372.173470000000000000
         Top = 18.897650000000000000
         Width = 1084.725110000000000000
@@ -14431,6 +14465,7 @@ inherited FMFactor: TFMFactor
           Align = baWidth
           Left = 1084.725110000000000000
           Top = 112.590551180000000000
+          Color = clBlack
           Frame.Typ = [ftLeft]
         end
         object memSerial: TfrxMemoView
@@ -16027,12 +16062,14 @@ inherited FMFactor: TFMFactor
         object Line1: TfrxLineView
           Align = baWidth
           Width = 1084.725110000000000000
+          Color = clBlack
           Diagonal = True
         end
         object Line2: TfrxLineView
           Align = baRight
           Left = 1084.725110000000000000
           Height = 109.606370000000000000
+          Color = clBlack
           Diagonal = True
         end
         object picArm: TfrxPictureView
@@ -17802,6 +17839,8 @@ inherited FMFactor: TFMFactor
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
             FF00FFFFFF00FFFFFF00}
           HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
         end
         object Memo1: TfrxMemoView
           Align = baWidth
@@ -17818,12 +17857,14 @@ inherited FMFactor: TFMFactor
         end
       end
       object Footer1: TfrxFooter
+        FillType = ftBrush
         Height = 136.063080000000000000
         Top = 619.842920000000000000
         Width = 1084.725110000000000000
         object lineHeaderFooter: TfrxLineView
           Align = baWidth
           Width = 1084.725110000000000000
+          Color = clBlack
           Frame.Typ = [ftTop]
         end
         object memSellerSign: TfrxMemoView
@@ -18391,6 +18432,8 @@ inherited FMFactor: TFMFactor
             000000000080300000000C0000000F0000804B00000010000000000000000500
             00000E00000014000000000000001000000014000000}
           HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
         end
         object PicNotCash: TfrxPictureView
           Left = 717.732283460000000000
@@ -18892,6 +18935,8 @@ inherited FMFactor: TFMFactor
             000000000080300000000C0000000F0000804B00000010000000000000000500
             00000E00000014000000000000001000000014000000}
           HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
         end
         object memCashLabel: TfrxMemoView
           Left = 882.410020000000000000
@@ -21025,6 +21070,8 @@ inherited FMFactor: TFMFactor
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
           HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
         end
         object memBuyerSign: TfrxMemoView
           Left = 521.354425910000000000
@@ -21063,11 +21110,13 @@ inherited FMFactor: TFMFactor
         end
       end
       object ReportSummary1: TfrxReportSummary
+        FillType = ftBrush
         Height = 22.677180000000000000
         Top = 816.378480000000000000
         Width = 1084.725110000000000000
       end
       object DetailData1: TfrxDetailData
+        FillType = ftBrush
         Height = 37.795519680000000000
         Top = 559.370440000000000000
         Width = 1084.725110000000000000
@@ -21298,6 +21347,7 @@ inherited FMFactor: TFMFactor
         end
       end
       object MasterData1: TfrxMasterData
+        FillType = ftBrush
         Height = 83.149606299212600000
         Top = 453.543600000000000000
         Width = 1084.725110000000000000

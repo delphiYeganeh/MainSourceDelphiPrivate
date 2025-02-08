@@ -1,0 +1,26 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[GET_NEWDOCUMNETNO]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[GET_NEWDOCUMNETNO]
+END
+GO
+
+CREATE  procedure [dbo].[GET_NEWDOCUMNETNO] 
+	@YEAR char(4),
+	@NEWDOCUMNETNO VARCHAR(10) OUTPUT
+
+AS    
+    
+	Select  @NEWDOCUMNETNO=MAX(CAST(DOCUMENTNO AS INT ))+1    
+		From PAYMENT    
+		Where SUBSTRING(DATE,1,4)=''+ltrim(rtrim(@YEAR))+''  
+
+	Set @NEWDOCUMNETNO=ISNULL(@NEWDOCUMNETNO,'1')
+GO
+
+COMMIT
+GO

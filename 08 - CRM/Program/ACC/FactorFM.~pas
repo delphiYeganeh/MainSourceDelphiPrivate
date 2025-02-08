@@ -922,6 +922,7 @@ begin
   ReturnQry       := TADOQuery.Create(nil);
   with ReturnQry do
   begin
+     CommandTimeout := 1200;
      Close;
      Connection := dm.YeganehConnection;
      SQL.Text   := ' select TOP 1 fa.*, s.StateTitle, c.CityTitle,c.CountyTitle, c2.CompanyName   from [dbo].[FactorAddress] fa    '+
@@ -997,7 +998,6 @@ fa.[CustomerID]
     Memo.Memo.Text := ' '+QHeader.Fields.fieldbyname('Tozihat').AsString + ' ' ;
 
 
-
   TfrxPictureView(MainReport.FindObject('PicCash')).Visible    := not QHeader.Fields.FieldByName('IsNoNCash').AsBoolean  ;
   TfrxPictureView(MainReport.FindObject('PicNotCash')).Visible := QHeader.Fields.FieldByName('IsNonCash').AsBoolean ;
 
@@ -1049,7 +1049,6 @@ fa.[CustomerID]
       end;
     end;
   end;
-
 
   MainReport.ShowReport;
 
