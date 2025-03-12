@@ -611,7 +611,7 @@ Const
   // _SoftVersion    = '7.0.0.6';
   //_SoftLastUpdate = '1396/06/29';
   //  _SoftVersion1    = '11.2.12.1';
-    _SoftLastUpdate = '1403/07/08'; //by MRM.moghadam
+    _SoftLastUpdate = '1403/10/02'; //by MRM.moghadam
 
    _Kartable = False;
    ShowLogo = True;
@@ -2313,7 +2313,17 @@ begin
 end;
 
 function TDm.getDBVer: String;
+var
+  qry :TADOQuery;
 begin
+
+  qry := TADOQuery.Create(self);
+  qry.Connection := YeganehConnection;
+  qry.SQL.Text   := ' IF COL_LENGTH(''[dbo].[tblAppVer]'', ''ver'') IS not  NULL   EXEC sp_rename ''[dbo].[tblAppVer].[ver]'', ''version'', ''COLUMN''; '  ;
+
+  qry.ExecSQL;
+  qry.Free;
+
   qryGetDbVer.Close;
   qryGetDbVer.Open;
   Result := qryGetDbVer.Fields.Fields[0].AsString;

@@ -34,7 +34,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
       ParentShowHint = False
       ShowHint = True
       Style = pcsFlatButtons
-      TabHeight = 30
+      TabHeight = 23
       TabOrder = 0
       TabPosition = tpTop
       OnChange = xpPageControl1Change
@@ -49,7 +49,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
         GradientFillDir = fdTopToBottom
         DesignSize = (
           833
-          568)
+          575)
         object Panel: TPanel
           Left = 0
           Top = 0
@@ -461,7 +461,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           Left = 0
           Top = 60
           Width = 833
-          Height = 508
+          Height = 515
           Align = alClient
           Anchors = [akTop, akRight]
           BevelOuter = bvNone
@@ -1524,7 +1524,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Left = 0
             Top = 99
             Width = 829
-            Height = 102
+            Height = 146
             Align = alClient
             Caption = #1605#1590#1605#1608#1606' '#1606#1575#1605#1607
             Font.Charset = ARABIC_CHARSET
@@ -1536,10 +1536,10 @@ inherited SentLetterInputForm: TSentLetterInputForm
             TabOrder = 1
             DesignSize = (
               829
-              102)
+              146)
             object Label13: TLabel
               Left = 734
-              Top = 77
+              Top = 121
               Width = 80
               Height = 13
               Anchors = [akRight, akBottom]
@@ -1555,7 +1555,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               Left = 2
               Top = 15
               Width = 825
-              Height = 55
+              Height = 99
               Align = alTop
               Alignment = taRightJustify
               Anchors = [akLeft, akTop, akRight, akBottom]
@@ -1575,7 +1575,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             end
             object DBLookupComboBox8: TDBLookupComboBox
               Left = 468
-              Top = 73
+              Top = 117
               Width = 259
               Height = 21
               Anchors = [akRight, akBottom]
@@ -1591,25 +1591,45 @@ inherited SentLetterInputForm: TSentLetterInputForm
               ParentFont = False
               TabOrder = 1
             end
-          end
-          object GroupBox5: TGroupBox
-            Left = 0
-            Top = 201
-            Width = 829
-            Height = 37
-            Align = alBottom
-            TabOrder = 2
-            object lblHasForms: TLabel
-              Left = 756
-              Top = 16
-              Width = 57
-              Height = 13
-              Caption = 'lblHasForms'
+            object sbSubjectDel: TAdvGlowButton
+              Left = 445
+              Top = 117
+              Width = 21
+              Height = 20
+              Hint = #1581#1584#1601
+              Anchors = [akRight, akBottom]
+              ImageIndex = 65
+              Images = Dm.ImageList_MainNew
+              NotesFont.Charset = DEFAULT_CHARSET
+              NotesFont.Color = clWindowText
+              NotesFont.Height = -11
+              NotesFont.Name = 'Tahoma'
+              NotesFont.Style = []
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 2
+              OnClick = sbSubjectDelClick
+              Appearance.ColorChecked = 16111818
+              Appearance.ColorCheckedTo = 16367008
+              Appearance.ColorDisabled = 15921906
+              Appearance.ColorDisabledTo = 15921906
+              Appearance.ColorDown = 16111818
+              Appearance.ColorDownTo = 16367008
+              Appearance.ColorHot = 16117985
+              Appearance.ColorHotTo = 16372402
+              Appearance.ColorMirrorHot = 16107693
+              Appearance.ColorMirrorHotTo = 16775412
+              Appearance.ColorMirrorDown = 16102556
+              Appearance.ColorMirrorDownTo = 16768988
+              Appearance.ColorMirrorChecked = 16102556
+              Appearance.ColorMirrorCheckedTo = 16768988
+              Appearance.ColorMirrorDisabled = 11974326
+              Appearance.ColorMirrorDisabledTo = 15921906
             end
           end
           object pnlDetail: TxpPanel
             Left = 0
-            Top = 238
+            Top = 245
             Width = 829
             Height = 266
             StartColor = 16774388
@@ -1635,7 +1655,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             BGImageAlign = iaStretch
             Color = clWindow
             Align = alBottom
-            TabOrder = 3
+            TabOrder = 2
             object Panel1: TPanel
               Left = 1
               Top = 1
@@ -2264,8 +2284,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
           end
         end
         object DBGToORG: TYDBGrid
-          Left = 171
-          Top = 171
+          Left = 179
+          Top = 139
           Width = 422
           Height = 126
           Anchors = [akTop, akRight]
@@ -2505,7 +2525,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           Left = 0
           Top = 216
           Width = 833
-          Height = 352
+          Height = 359
           Align = alClient
           ParentShowHint = False
           ShowHint = True
@@ -2521,11 +2541,26 @@ inherited SentLetterInputForm: TSentLetterInputForm
       Left = 1
       Top = 1
       Width = 841
-      Height = 5
+      Height = 25
       Anchors = [akLeft, akTop, akRight]
       BevelOuter = bvNone
       ParentColor = True
       TabOrder = 1
+      object GroupBox4: TGroupBox
+        Left = 0
+        Top = 0
+        Width = 841
+        Height = 25
+        Align = alClient
+        TabOrder = 0
+        object lblHasForms: TLabel
+          Left = 756
+          Top = 8
+          Width = 57
+          Height = 13
+          Caption = 'lblHasForms'
+        end
+      end
     end
   end
   inherited DSForm: TDataSource
@@ -3244,15 +3279,17 @@ inherited SentLetterInputForm: TSentLetterInputForm
     end
   end
   object PopupMenu2: TPopupMenu
+    Images = Dm.ImageList_MainNew
     Left = 252
     Top = 111
     object N7: TMenuItem
       Caption = #1601#1585#1605' '#1607#1575#1610' '#1662#1610#1608#1587#1578' '#1588#1583#1607
-      ImageIndex = 1
+      ImageIndex = 11
       OnClick = N7Click
     end
     object N4: TMenuItem
       Caption = #1575#1601#1586#1608#1583#1606' '#1601#1585#1605' '#1576#1607' '#1606#1575#1605#1607
+      ImageIndex = 7
       OnClick = N4Click
     end
   end

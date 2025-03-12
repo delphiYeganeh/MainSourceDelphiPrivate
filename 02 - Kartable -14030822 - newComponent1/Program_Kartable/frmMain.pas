@@ -60,6 +60,7 @@ type
     procedure BBDelRecommiteClick(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
     procedure loadGroupDetails;
@@ -347,6 +348,11 @@ procedure TForm_WorkGroupFM.FormCreate(Sender: TObject);
 begin
   Self.Color := _Color1 ;
   Self.Font.Name :=  _MainFont ;  
+end;
+
+procedure TForm_WorkGroupFM.BitBtn1Click(Sender: TObject);
+begin
+  ModalResult := mrCancel ;
 end;
 
 end.

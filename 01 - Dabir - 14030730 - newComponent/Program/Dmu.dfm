@@ -1,8 +1,8 @@
 object Dm: TDm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 312
-  Top = 106
+  Left = 541
+  Top = 135
   Height = 853
   Width = 1247
   object Urgenceis: TADOTable
@@ -2488,12 +2488,12 @@ object Dm: TDm
       Size = 50
     end
   end
-  object WordApplication: TWordApplication
+  object WordApplicationDM: TWordApplication
     AutoConnect = False
     ConnectKind = ckRunningOrNew
     AutoQuit = False
-    OnDocumentOpen = WordApplicationDocumentOpen
-    OnDocumentBeforeClose = WordApplicationDocumentBeforeClose
+    OnDocumentOpen = WordApplicationDMDocumentOpen
+    OnDocumentBeforeClose = WordApplicationDMDocumentBeforeClose
     Left = 1157
     Top = 470
   end
@@ -7042,13 +7042,14 @@ object Dm: TDm
         'Select ID From FromOrganizations Where LTrim(RTrim(REPLACE(REPLA' +
         'CE(Title , NCHAR(1740), NCHAR(1610)),NCHAR(1705),NCHAR(1603)))) ' +
         '= @S')
-    Left = 344
-    Top = 736
+    Left = 360
+    Top = 704
   end
   object qryGetDbVer: TADOQuery
     Connection = YeganehConnection
     Parameters = <>
     SQL.Strings = (
+      '/*'
       
         'IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(' +
         'N'#39'[DBO].[TBLAPPVER]'#39') AND TYPE IN (N'#39'U'#39'))'
@@ -7057,6 +7058,37 @@ object Dm: TDm
       #9#9'SELECT VER FROM TBLAPPVER ORDER BY CHANGEDATE DESC'
       #9'ELSE'
       #9#9'SELECT '#39#39' AS VER'
+      'END'
+      'ELSE'
+      #9'SELECT '#39#39' AS VER'
+      '*/'
+      ''
+      
+        'IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(' +
+        'N'#39'[DBO].[TBLAPPVER]'#39') AND TYPE IN (N'#39'U'#39'))'
+      'BEGIN'
+      
+        #9'IF not EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJEC' +
+        'T_ID(N'#39'[DBO].[TBLAPPSETTING]'#39') AND TYPE IN (N'#39'U'#39'))'
+      #9'BEGIN'
+      #9#9'IF EXISTS(SELECT 1 FROM TBLAPPVER)'
+      #9#9#9'SELECT [version] VER FROM TBLAPPVER ORDER BY CHANGEDATE DESC'
+      #9#9'ELSE'
+      #9#9#9'SELECT '#39#39' AS VER'#9#9
+      #9'END'
+      #9'else '
+      #9'BEGIN'
+      #9'  IF EXISTS(SELECT 1 FROM TBLAPPVER)'
+      #9#9#9'SELECT [version] VER FROM TBLAPPVER ORDER BY CHANGEDATE DESC'
+      #9'  else'#9#9#9
+      
+        #9'  IF EXISTS(SELECT 1 FROM dbo.TBLAPPSETTING WHERE AppVersion >=' +
+        #39'12.0.0.5'#39')'#9
+      #9'    SELECT '#39'13.0.0.0'#39' ver'
+      #9'  ELSE '
+      #9'  '#9'SELECT '#39#39' AS VER '
+      #9'END'#9' '
+      ''
       'END'
       'ELSE'
       #9'SELECT '#39#39' AS VER')
@@ -7291,7 +7323,7 @@ object Dm: TDm
       'ELSE'
       #9'SELECT 0 AS LastTableScriptNumber, 0 AS LastViewScriptNumber '
       #9)
-    Left = 497
+    Left = 473
     Top = 734
   end
   object ImageList_MainNew: TImageList
@@ -13909,7 +13941,7 @@ object Dm: TDm
     Left = 1152
     Top = 288
     Bitmap = {
-      494C0101A200A500040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C0101A200A500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000A0020000010020000000000000A0
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -19457,6 +19489,7 @@ object Dm: TDm
       C110C003F8FFE007CF10CFF38461C7C3CF7CCFF384618FF3CF10CE7398F99FF1
       CF11CE739DF91FF9CF83C8339FF91FF9CFFFC8339FF9FFF9CFF3CE739FF9FFF9
       CFF3CFFF9F3983F9CFC3CFC39E3983F1CFC7CFC784419FE3C00FC04F84419907
-      C01FC05FFE3F900FFFFFFFFFFF3FF83F}
+      C01FC05FFE3F900FFFFFFFFFFF3FF83F00000000000000000000000000000000
+      000000000000}
   end
 end

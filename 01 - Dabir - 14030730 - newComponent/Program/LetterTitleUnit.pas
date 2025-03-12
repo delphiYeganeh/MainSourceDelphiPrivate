@@ -4,16 +4,18 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, Mask, DBCtrls, DB, ADODB;
+  Dialogs, StdCtrls, Buttons, Mask, DBCtrls, DB, ADODB, ExtCtrls,
+  AdvGlowButton;
 
 type
   TLetterTitleForm = class(TForm)
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
+    BitBtn1: TAdvGlowButton;
+    BitBtn2: TAdvGlowButton;
     Label1: TLabel;
     Label2: TLabel;
     DBEdit1: TDBEdit;
     DBEdit2: TDBEdit;
+    pnlMain: TPanel;
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
@@ -28,12 +30,14 @@ var
 
 implementation
 
-uses USubject, Math;
+uses USubject, Math, Dmu ;
 
 {$R *.dfm}
 
 procedure TLetterTitleForm.FormShow(Sender: TObject);
 begin
+  Self.Color := _Color1 ;
+  Self.Font.Name :=  _MainFont ;
    if not(FrSubject.get_Subject.State in [dsEdit, dsInsert]) then
    begin
       ShowMessage('.«ÿ·«⁄«  œ— Õ«·  À»  Ê Ì« ÊÌ—«Ì‘ ‰„Ì »«‘‰œ');
@@ -45,6 +49,7 @@ procedure TLetterTitleForm.BitBtn1Click(Sender: TObject);
 var
    q: TADOStoredProc;
 begin
+   BitBtn1.SetFocus ; 
    if not(FrSubject.get_Subject.State in [dsEdit, dsInsert]) then
    begin
       ShowMessage('.«ÿ·«⁄«  œ— Õ«·  À»  Ê Ì« ÊÌ—«Ì‘ ‰„Ì »«‘‰œ');

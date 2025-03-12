@@ -13,7 +13,7 @@ type
   TFmNews = class(TMBaseForm)
     Panel1: TPanel;
     Panel2: TPanel;
-    Panel3: TPanel;
+    pnlDetail: TPanel;
     Panel4: TPanel;
     YDBGrid1: TYDBGrid;
     Label6: TLabel;
@@ -93,8 +93,6 @@ uses NewsDM, Dmu, SearchFM , UMain,YShamsiDate;
 {$R *.dfm}
 
 
-
-
 procedure TFmNews.FormCreate(Sender: TObject);
 begin
    inherited;
@@ -112,8 +110,6 @@ begin
       SpNews.Last;
    end;
 end;
-
-
 
 
 procedure TFmNews.FormShow(Sender: TObject);
@@ -136,6 +132,7 @@ begin
       SPNewsGroup.Open;
 
    end;
+   pnlDetail.Enabled  :=  (DMNews.SpNews.State in [dsInsert,dsEdit]) ;
 end;
 
 procedure TFmNews.SpeedButton1Click(Sender: TObject);
@@ -188,13 +185,15 @@ procedure TFmNews.BBSaveClick(Sender: TObject);
 Var
    TempStr,FileName:String;
 begin
+   if Not(DMNews.SpNews.State in [dsInsert,dsEdit]) then
+      Exit;
    TempStr := Trim(DMNews.SPImageDataFileName.AsString);
    if TempStr <>'' then
    begin
       FileName := File_GetFileName(TempStr);
       SaveDialog1.FileName := FileName;
-      if SaveDialog1.Execute then
-         DMNews.SPImageDataData.SaveToFile(SaveDialog1.FileName);
+     // if SaveDialog1.Execute then
+       DMNews.SPImageDataData.SaveToFile(SaveDialog1.FileName);
    end;
 end;
 
@@ -203,6 +202,7 @@ Var
    I:integer;
 begin
   inherited;
+   pnlDetail.Enabled  :=  Button in [nbInsert,nbEdit] ;
    With DMNews do
       if Button = nbPost then
       begin
@@ -219,28 +219,33 @@ begin
                 QrNewsUsersNotShow.AsBoolean := False;
                 QrNewsUsers.Post;
              end;
+
+       // if (DMNews.SPImageDataData.Value = null) and  (DBEAttachFileName.text <> '') then
+       //   BBSaveClick(self);
       end;
    //---
-   if Button = nbInsert then
-   begin
+    if Button = nbInsert then
+    begin
       For I:=0 to FmNews.CKLBUsers.Items.Count-1 do
           FmNews.CKLBUsers.Checked[I] := False;
       DBETitle.SetFocus;
-   end;
-   //----
-   if Button in [nbInsert,nbEdit] then
-   begin
+    end;
+    //----
+    if Button in [nbInsert,nbEdit] then
+    begin
       CKLBUsers.Enabled := True;
       DBLkCBNewsGroup.Enabled := True;
-   end
-      else
-      begin
-         CKLBUsers.Enabled := False;
-         DBLkCBNewsGroup.Enabled := False;
-         ChLB_SelectItemsFromTable( CKLBUsers , DMNews.QrNewsUsers ,'UsersID');
-      end;
+
+    end
+    else
+    begin
+       CKLBUsers.Enabled := False;
+       DBLkCBNewsGroup.Enabled := False;
+       ChLB_SelectItemsFromTable( CKLBUsers , DMNews.QrNewsUsers ,'UsersID');
+    end;
    //---
    DBLkCBNewsGroup.KeyValue := 0;
+
 end;
 
 procedure TFmNews.FormKeyDown(Sender: TObject; var Key: Word;

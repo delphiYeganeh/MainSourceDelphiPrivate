@@ -1861,14 +1861,17 @@ Var
    Btn : TNavigateBtn;
    I:byte;
 begin
+  exit ;
   I:=0;
   for Btn := Low(TNavigateBtn) to High(TNavigateBtn) do
     with THackDBNavigator(Navigator).Buttons[btn] do
     begin
       Caption := FarsiCaptions[btn];
+     // Font.Name := 'Tahoma';
       NumGlyphs := 2;
       Glyph := nil;
       Spacing := 0;
+
       if I<9 then
       begin
         Glyph.LoadFromResourceName(HInstance,'DBNav'+IntToStr(I));
@@ -1876,6 +1879,10 @@ begin
       end;
       Layout := blGlyphTop;
     end;
+    THackDBNavigator(Navigator).ParentFont := True;
+    THackDBNavigator(Navigator).font.Name :=  'Tahoma';
+    //TDBNavigator(Navigator).ParentFont := True;
+   // Navigator.font.Name :=  'Tahoma';
    //
  {   With Navigator do
    begin

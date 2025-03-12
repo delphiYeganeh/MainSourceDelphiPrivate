@@ -41,7 +41,7 @@ uses Dmu;
 
 procedure TFEditLetterGroup.BitBtn2Click(Sender: TObject);
 begin
-dm.LetterTemplate.Cancel;
+  dm.LetterTemplate.Cancel;
   ModalResult := mrCancel;
 end;
 

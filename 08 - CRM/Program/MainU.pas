@@ -524,6 +524,13 @@ type
     SpeedButton19: TSpeedButton;
     SpeedButton20: TSpeedButton;
     N122: TMenuItem;
+    pnlCustomerMarketer: TPanel;
+    Label55: TLabel;
+    dblMarketerCustomer: TDBLookupComboBox;
+    BitBtn13: TBitBtn;
+    pnlCustomerStatusFilter: TPanel;
+    Label56: TLabel;
+    ComboBox1: TComboBox;
     procedure AinsertExecute(Sender: TObject);
     procedure Action6Execute(Sender: TObject);
     procedure ApropertyExecute(Sender: TObject);
@@ -799,6 +806,9 @@ type
     procedure SpeedButton18Click(Sender: TObject);
     procedure SpeedButton20Click(Sender: TObject);
     procedure N122Click(Sender: TObject);
+    procedure BitBtn13Click(Sender: TObject);
+    procedure dblMarketerCustomerKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
 
   private
     qrydblsrchContractType :TADOQuery;
@@ -819,6 +829,7 @@ type
     procedure RunTaskQuery (TypeR : Integer=1);
     procedure RefreshAlarmMessage ;
     procedure CountPanelSet;
+    procedure customerstatusFilter;
   public
     GroupId: integer;
     CityId: integer;
@@ -1047,10 +1058,10 @@ begin
   //btnMaps.Enabled := False;
 
    DBGrid_Columns_Caption(PhoneGrid);
-   DBGrid_LoadColumns(Self.Name,PhoneGrid,PhoneGrid);
-   DBGrid_LoadColumns(Self.Name,FollowGrid,FollowGrid);
-   DBGrid_LoadColumns(Self.Name,ContractGrid,ContractGrid);
-   DBGrid_LoadColumns(Self.Name,dbgMyTasks,dbgMyTasks);
+   DBGrid_LoadColumns(Self.Name,PhoneGrid);
+   DBGrid_LoadColumns(Self.Name,FollowGrid);
+   DBGrid_LoadColumns(Self.Name,ContractGrid);
+   DBGrid_LoadColumns(Self.Name,dbgMyTasks);
 
 
    State.Active :=TRUE;
@@ -1178,6 +1189,11 @@ begin
 
       ParamByName('@ContactNumber')   .Value:=Trim(edtContactNumber.Text);
 
+      if pnlCustomerMarketer.Visible and dblMarketerCustomer.KeyValue > 0 then
+      begin
+        ParamByName('@MarketerID').Value:= dblMarketerCustomer.KeyValue ;
+      end
+      else      
       if OnlyCurrentMarketer.Checked then
          ParamByName('@MarketerID').Value:=_MarketerID
       else
@@ -1255,6 +1271,9 @@ begin
 
   PnlAllAct.Visible:=_BtnAllAct;
   PnlAllContract.Visible:=_BtnAllContract;
+
+  chkContractFinished.Visible := not pnlCustomerStatusFilter.Visible ;
+  OnlyCurrentMarketer.Visible := not pnlCustomerStatusFilter.Visible ;
 End;
 
 Function TMainForm.MakeStrSearch(s:string):string;
@@ -1900,12 +1919,14 @@ begin
   dblProduct.KeyValue :=null;
   dblCustomerStatus.KeyValue :=null;
   dblActionType_Level.KeyValue := null;
+  dblMarketerCustomer.KeyValue := null ;  
   SearchEdit.Text :='';
   gsrcCustomerStatusId := 0;
   gsrcProductId := 0;
   gsrcGroupId := 0;
   chkContractFinished.Checked :=false;
   Dm.Customer.Filtered:=False;
+  ComboBox1.ItemIndex := -1 ;
   CLBCompaginIDs.Fill;
   //dm.Customer.Close;
   //dm.Customer.Open;
@@ -2927,6 +2948,8 @@ var Where :WideString;
     txt:String;
 begin
 
+  customerstatusFilter;
+
   if Trim(edtContactNumber.Text) <> '' then
       Where :=  ' ( SearchInt  like ''%'+ edtContactNumber.Text+'%'' )';
 
@@ -2982,6 +3005,15 @@ begin
       else
           Where := ' CityId ='+IntToStr(dblCity.KeyValue);
 
+  if pnlCustomerMarketer.Visible and dblMarketerCustomer.KeyValue > 0 then
+  begin
+
+     if Where <> '' then
+           Where := Where + ' and '+' MarketerID ='+IntToStr(dblMarketerCustomer.KeyValue)
+      else
+           Where := ' MarketerID ='+IntToStr(dblMarketerCustomer.KeyValue);
+  end
+  else
   if OnlyCurrentMarketer.Checked then
      if Where <> '' then
            Where := Where + ' and '+' MarketerID ='+IntToStr(_MarketerID)
@@ -2989,9 +3021,19 @@ begin
            Where := ' MarketerID ='+IntToStr(_MarketerID);
 
   if chkContractFinished.Checked then
+  begin
       if where <> '' then
           where := where + ' and  FinishedContractProducts <> '''''
        else  where := ' FinishedContractProducts <> ''''';
+  end
+  else
+  if ComboBox1.ItemIndex in [3,4]  then
+  begin
+      if where <> '' then
+          where := where + ' and  FinishedContractProducts = '''''
+       else  where := ' FinishedContractProducts = ''''';
+
+  end;
 
     Result :=  Where;
 end;
@@ -3503,6 +3545,7 @@ begin
    //if ((dblProduct.KeyValue <> null ) and ( ChangeProduct )) or (oldTopRecord <> strToint(edRecCount.Text)) then
    //begin
    { TODO -oparsa : 14030126 }
+   customerstatusFilter;
 
    With Dm.Customer,Parameters do
    begin
@@ -3554,10 +3597,20 @@ begin
              Where := ' MarketerID ='+IntToStr(_MarketerID);
              }
 
-         if chkContractFinished.Checked then
+        if chkContractFinished.Checked then
+        begin
             if where <> '' then
               where := where + ' and  FinishedContractProducts <> '''''
             else  where := ' FinishedContractProducts <> ''''';
+        end
+        else
+        if ComboBox1.ItemIndex in [3,4]  then
+        begin
+            if where <> '' then
+                where := where + ' and  FinishedContractProducts = '''''
+             else  where := ' FinishedContractProducts = ''''';
+
+        end;
          { TODO -oparsa : 14030201 }
 
           if where <> '' then where := '('+where+')';
@@ -3582,7 +3635,11 @@ begin
 
       ParamByName('@Email').Value:= edtEmail.Text ;
 
-
+      if pnlCustomerMarketer.Visible and dblMarketerCustomer.KeyValue > 0 then
+      begin
+        ParamByName('@MarketerID').Value:= dblMarketerCustomer.KeyValue ;
+      end
+      else
       if OnlyCurrentMarketer.Checked then
          ParamByName('@MarketerID').Value:= _MarketerID
       else
@@ -3598,6 +3655,11 @@ begin
 
      // ParamByName('@ContactNumber')   .Value:=Trim(edtContactNumber.Text);
 
+      if pnlCustomerMarketer.Visible and dblMarketerCustomer.KeyValue > 0 then
+      begin
+        ParamByName('@MarketerID').Value:= dblMarketerCustomer.KeyValue ;
+      end
+      else
       if OnlyCurrentMarketer.Checked then
          ParamByName('@MarketerID').Value:=_MarketerID
       else
@@ -4652,6 +4714,40 @@ begin
     except
     end;
   end;
+
+
+  if (Dm.Select_FollowUP_By_DateActionTypeID.AsInteger in  [78,62] ) then
+       Color:= TColor(RGB(255, 201, 14));
+
+
+  if (Dm.Select_FollowUP_By_DateActionTypeID.AsInteger in  [37,7,64] ) then
+       Color:= TColor(RGB(210, 166, 255));
+
+    {
+  if not (Dm.Select_FollowUP_By_CustomerIDExcellAttachment.IsNull) then
+            Color:= TColor(RGB(250, 170, 49));
+
+  if not (Dm.Select_FollowUP_By_CustomerIDPicAttachment.IsNull) then
+            Color:=$00ffd683;
+
+
+  if not (Dm.Select_FollowUP_By_CustomerIDWordAttachment.IsNull) then
+            Color:= TColor(RGB(85, 232, 105));
+
+  if not (Dm.Select_FollowUP_By_CustomerIDPdfAttachment.IsNull) then
+            Color:= clred;
+
+  if ((not Dm.Select_FollowUP_By_CustomerIDWordAttachment.IsNull) and (not Dm.Select_FollowUP_By_CustomerIDPicAttachment.IsNull) and (not Dm.Select_FollowUP_By_CustomerIDExcellAttachment.IsNull))
+      or
+      ((not Dm.Select_FollowUP_By_CustomerIDWordAttachment.IsNull) and (not Dm.Select_FollowUP_By_CustomerIDPicAttachment.IsNull))
+      or
+      ((not Dm.Select_FollowUP_By_CustomerIDPicAttachment.IsNull) and (not Dm.Select_FollowUP_By_CustomerIDExcellAttachment.IsNull))
+      or
+      ((not Dm.Select_FollowUP_By_CustomerIDWordAttachment.IsNull) and (not Dm.Select_FollowUP_By_CustomerIDExcellAttachment.IsNull))
+      then
+      Color:=$00d4acfd ;
+            }
+
 end;
 
 procedure TMainForm.UnlockRepClick(Sender: TObject);
@@ -4722,8 +4818,6 @@ begin
   inherited;
   pnlTime.Enabled      :=  (RGTypeReport.ItemIndex = 0) and (RGTypeRepMain.ItemIndex =0) ;
   RGTypeReport.Enabled :=  (RGTypeRepMain.ItemIndex =0);
-
-
 
   pnlSourcedate .Enabled := (RGTypeRepMain.ItemIndex = 1) ;
 
@@ -4804,6 +4898,50 @@ begin
      FreeAndNil(FDailyUserReport);
 
  // Application.CreateForm(TFDailyUserReport, FDailyUserReport);
+end;
+
+procedure TMainForm.BitBtn13Click(Sender: TObject);
+begin
+  inherited;
+  dblMarketerCustomer.KeyValue := null ;
+  SearchEditChange(Sender);
+end;
+
+procedure TMainForm.dblMarketerCustomerKeyUp(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  inherited;
+  SearchEditChange(Sender);
+end;
+
+procedure TMainForm.customerstatusFilter;
+begin
+  if ComboBox1.ItemIndex = 0  then
+  begin
+      chkContractFinished.Checked := True ;
+      OnlyCurrentMarketer.Checked := False ;
+  end
+  else   if ComboBox1.ItemIndex = 1  then
+  begin
+     OnlyCurrentMarketer.Checked := True ;
+     chkContractFinished.Checked := False ;
+  end
+  else   if ComboBox1.ItemIndex = 2  then
+  begin
+     chkContractFinished.Checked := True ;
+     OnlyCurrentMarketer.Checked := True ;
+  end
+  else   if ComboBox1.ItemIndex = 3  then
+  begin
+     OnlyCurrentMarketer.Checked := False ;
+     chkContractFinished.Checked := False ;
+  end
+  else   if ComboBox1.ItemIndex = 4  then
+  begin
+     OnlyCurrentMarketer.Checked := True ;
+     chkContractFinished.Checked := False ;
+  end ;
+
 end;
 
 end.

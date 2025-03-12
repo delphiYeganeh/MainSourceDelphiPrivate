@@ -158,8 +158,6 @@ type
     PopupMenu2: TPopupMenu;
     N7: TMenuItem;
     N8: TMenuItem;
-    GroupBox5: TGroupBox;
-    lblHasForms: TLabel;
     Label5: TLabel;
     SpeedButton2: TAdvGlowButton;
     SpeedButton4: TAdvGlowButton;
@@ -202,6 +200,10 @@ type
     ADOQuery1ResponsibleStaffer: TStringField;
     Panel3: TPanel;
     pnlTopHeader: TPanel;
+    GroupBox2: TGroupBox;
+    lblHasForms: TLabel;
+    sbSubjectDel: TAdvGlowButton;
+    btnSubject: TAdvGlowButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormActivate(Sender: TObject);
     function GetLetter(LetterID:integer):boolean;
@@ -268,6 +270,8 @@ type
     procedure QAddedFormsAfterScroll(DataSet: TDataSet);
     procedure N3Click(Sender: TObject);
     procedure DataSetDelExecute(Sender: TObject);
+    procedure sbSubjectDelClick(Sender: TObject);
+    procedure btnSubjectClick(Sender: TObject);
   private
     prewNum : string;
     function IS_Girandeh_in_Group:Boolean;
@@ -278,6 +282,7 @@ type
     function LetterHasForms:Boolean;
     function CheckFormExist:Boolean;
     procedure TabShow(mode: Boolean);
+    procedure hasformDescription ;
   public
     SecID : Integer;
     Read_Only :Boolean;
@@ -292,7 +297,8 @@ implementation
 Uses YShamsiDate, FromOrgU,   QuickSearch, UMain,Dmu,
      ExportToWord, ReCommiteU, ExactCopy, businessLayer, URetroExist,
      UUserTable_Input, {ScanImageU, ScanImageU1,} UBrowsArchive,
-     UaddLetterData, USearchTitle, ScanImageFm, Variants, UInputUserTable;
+     UaddLetterData, USearchTitle, ScanImageFm, Variants, UInputUserTable,
+  USubject;
      
 {$R *.dfm}
 
@@ -1013,6 +1019,7 @@ end;
 procedure TFinnerLetter.FormShow(Sender: TObject);
 begin
    inherited;
+   TabShow(false) ;
    if Read_Only then
    begin
       DataSetInsert.Enabled := False;
@@ -1075,7 +1082,7 @@ begin
        
   if GetUserSetting('InnerLetterpnlDetailMinimize') then
    pnlDetail.Minimized := True ;
-  TabShow(false) ;   
+
 end;
 
 procedure TFinnerLetter.SBSimpleEditorClick(Sender: TObject);
@@ -1409,8 +1416,8 @@ end;
 
 procedure TFinnerLetter.Show_xpFormsTab;
 begin
-  xpPageControl1.Pages[1].TabVisible:=True;
   TabShow(True) ;
+  xpPageControl1.Pages[1].TabVisible:=True;
 end;
 
 procedure TFinnerLetter.ShowCount;
@@ -1461,19 +1468,24 @@ end;
 procedure TFinnerLetter.DSFormDataChange(Sender: TObject; Field: TField);
 begin
   inherited;
+  {
   if not Select_Letter.IsEmpty then
   begin
     if LetterHasForms then
     begin
       lblHasForms.Font.Color:=clGreen;
       lblHasForms.Caption:='«Ì‰ ‰«„Â œ«—«Ì ›—„ ÅÌÊ”  ‘œÂ „Ì »«‘œ';
+
     end
     else
     begin
       lblHasForms.Font.Color:=clMaroon;
       lblHasForms.Caption:='«Ì‰ ‰«„Â œ«—«Ì ›—„ ÅÌÊ”  ‘œÂ ‰„Ì »«‘œ';
+
     end;
   end;
+  }
+  hasformDescription ;
 end;
 
 procedure TFinnerLetter.xpPageControl1Change(Sender: TObject);
@@ -1482,7 +1494,7 @@ begin
   if xpPageControl1.ActivePageIndex=0 then
     Select_Letter.Requery;
     //Select_Letter.Refresh;
-  TabShow(false) ;    
+  TabShow(false) ;
 end;
 
 procedure TFinnerLetter.SpeedButton2Click(Sender: TObject);
@@ -1566,18 +1578,52 @@ end;
 
 procedure TFinnerLetter.TabShow(mode: Boolean);
 begin
+
   if mode then
   begin
     pnlTopHeader.Height := 0 ;
-    xpPageControl1.TabHeight := 23 ;
-    xpPageControl1.TabWidth  := 0 ;
+   // xpPageControl1.TabHeight := 23 ;
+   // xpPageControl1.TabWidth  := 0 ;
   end
   else
   begin
-    pnlTopHeader.Height := 5 ;
-    xpPageControl1.TabHeight := 1 ;
-    xpPageControl1.TabWidth  := 1 ;
+    pnlTopHeader.Height :=25;// 5 ;
+   // xpPageControl1.TabHeight := 1 ;
+   // xpPageControl1.TabWidth  := 1 ;
   end;
+
+end;
+
+procedure TFinnerLetter.hasformDescription;
+begin
+  if not Select_Letter.IsEmpty then
+  begin
+    if LetterHasForms then
+    begin
+      lblHasForms.Font.Color:=clGreen;
+      lblHasForms.Caption:='«Ì‰ ‰«„Â œ«—«Ì ›—„ ÅÌÊ”  ‘œÂ „Ì »«‘œ';
+
+    end
+    else
+    begin
+      lblHasForms.Font.Color:=clMaroon;
+      lblHasForms.Caption:='«Ì‰ ‰«„Â œ«—«Ì ›—„ ÅÌÊ”  ‘œÂ ‰„Ì »«‘œ';
+
+    end;
+  end;
+end;
+
+procedure TFinnerLetter.sbSubjectDelClick(Sender: TObject);
+begin
+  inherited;
+  DBLookupComboBox1.KeyValue := null;
+end;
+
+procedure TFinnerLetter.btnSubjectClick(Sender: TObject);
+begin
+  inherited;
+   FrSubject := TFrSubject.Create(Application);
+   FrSubject.ShowModal;
 end;
 
 end.

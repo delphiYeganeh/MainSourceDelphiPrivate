@@ -1740,9 +1740,13 @@ begin
          NumGlyphs := 2;
          Glyph := nil;
          Spacing := 0;
-         if I<9 then
+         if I<10 then
          begin
-            Glyph.LoadFromResourceName(HInstance,'DBNav'+IntToStr(I));
+           // Glyph.LoadFromResourceName(HInstance,'DBNav'+IntToStr(I));
+            try
+              Glyph.LoadFromResourceName(HInstance,'DBNav'+IntToStr(I));
+            except
+            end;
             Inc(I);
          end;
          Layout := blGlyphTop;

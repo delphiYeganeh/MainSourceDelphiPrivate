@@ -831,9 +831,9 @@ inherited FromOrgForm: TFromOrgForm
         FocusControl = ECode
       end
       object Erespon: TEdit
-        Left = 164
+        Left = 8
         Top = 43
-        Width = 325
+        Width = 481
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         Ctl3D = True
@@ -844,9 +844,9 @@ inherited FromOrgForm: TFromOrgForm
         OnExit = TEditExit
       end
       object ECode: TEdit
-        Left = 402
+        Left = 296
         Top = 17
-        Width = 88
+        Width = 194
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         ReadOnly = True

@@ -82,7 +82,7 @@ type
     TablesDescription: TWideStringField;
     DTables: TDataSource;
     Get_LetterWordFile: TADOStoredProc;
-    WordApplication: TWordApplication;
+    WordApplicationDM: TWordApplication;
     Timer_SaveWord: TTimer;
     Toorganizations: TADODataSet;
     ToorganizationsTitle: TWideStringField;
@@ -843,7 +843,7 @@ type
     procedure OpenWordFile(Filename:string;Readonly:boolean);
     procedure OpenExcelFile(Filename:string;Readonly:boolean);
     procedure Timer_SaveWordTimer(Sender: TObject);
-    procedure WordApplicationDocumentBeforeClose(ASender: TObject;
+    procedure WordApplicationDMDocumentBeforeClose(ASender: TObject;
                       const Doc: _Document; var Cancel: WordBool);
     function Y_InputQuery (const ACaption, Adefault: string; var Value: string; FormCaption:string): Boolean;
 
@@ -869,7 +869,7 @@ type
     procedure UsersPasswordSetText(Sender: TField; const Text: String);
     procedure ShowSigners(LID: integer; ShowFool: boolean);
     procedure WordApplication2DocumentOpen(ASender: TObject; const Doc: _Document);
-    procedure WordApplicationDocumentOpen(ASender: TObject; const Doc: _Document);
+    procedure WordApplicationDMDocumentOpen(ASender: TObject; const Doc: _Document);
     procedure Get_LetterData_by_LetterIDAfterScroll(DataSet: TDataSet);
     procedure adoFollow_Retroaction_LetterCalcFields(DataSet: TDataSet);
     procedure adoFollow_Retroaction_LetterAfterPost(DataSet: TDataSet);
@@ -880,6 +880,10 @@ type
     procedure Timer1Timer(Sender: TObject);
     function  processExists(exeFileName: string): Boolean;
     function  KillTask(ExeFileName: string): Integer;
+    { TODO -oparsa : Task443-14031012 }
+    function  UnlockAndDeleteFile(const FileName: string): Boolean;
+    function  GetServerTime:string;
+    { TODO -oparsa : Task443-14031012 }
   private
     FCurrentMyear:Integer;
     FSecID:byte;
@@ -1953,16 +1957,19 @@ begin
 }
 
 /////////////////////////////////////////
-  if Trim(_DbVersion) = '' then
-  begin
-    //Run All Scripts
-    frmUpdateDbScripts:=TfmUpdateDbScripts.Create(Application, _DbVersion, _SoftVersion, 1);
-    try
-      frmUpdateDbScripts.ShowModal;
-    finally
-      frmUpdateDbScripts.Free;
+  //if (_SoftVersion = '13.0.0.0')  then   //»⁄œ Ê—é‰ 13 œÌêÂ ·«“„ ‰Ì”  «Ã— ‘Êœ
+  //begin
+    if Trim(_DbVersion) = '' then
+    begin
+      //Run All Scripts
+      frmUpdateDbScripts:=TfmUpdateDbScripts.Create(Application, _DbVersion, _SoftVersion, 1);
+      try
+        frmUpdateDbScripts.ShowModal;
+      finally
+        frmUpdateDbScripts.Free;
+      end;
     end;
-  end;
+  //end;
 
   { TODO -oparsa : 14030108 }
   AutoUpdateDatabase;
@@ -2289,6 +2296,20 @@ begin
       end;
       { TODO -oparsa : 14030413 }
     end
+    else
+    if (pos('Cannot create file',e.Message)<>0 ) and (pos('The process cannot access the file because it is being used by another process',e.Message)<>0)
+        and (pos('YEGANEH_WORD_FILE.DOCX',e.Message)<>0 )  then
+    begin
+      // ShowMessage('›«Ì·  „Å Ê—œ œ— ”Ì” „ »«“ Â” ');
+      {
+       ShowMessage('›«Ì· YEGANEH_WORD_FILE.DOCX œ— ›Ê·œ—  „Å »«ﬁÌ „«‰œÂ Ê Å«ò ‰„Ì ‘Êœ ');
+       if UnlockAndDeleteFile(_TempPath+_WordFileName) then
+         ShowMessage('File deleted successfully')
+       else
+         ShowMessage('Failed to delete file');
+         }
+       UnlockAndDeleteFile(_TempPath+_WordFileName);
+    end;    
     (*
     else
     begin
@@ -2422,7 +2443,7 @@ begin
   { TODO -oparsa : 14030626 }
 
    { TODO -oparsa : 14030501 }
-  WordApplication.connect;
+  WordApplicationDM.connect;
   (*
   try
      WordApplication.connect;
@@ -2433,7 +2454,7 @@ begin
   end;       *)
   { TODO -oparsa : 14030501 }
 
-  with WordApplication do
+  with WordApplicationDM do
   begin
        {Ranjbar 89.08.18 ID=206}
     disconnect;
@@ -2472,9 +2493,9 @@ begin
 
     if ActiveWindow.ActivePane.View.Type_ in [wdNormalView,wdOutlineView] then
       ActiveWindow.ActivePane.View.Type_ := wdPrintView;
-    en := WordApplication.Selection.End_ - 1;
+    en := WordApplicationDM.Selection.End_ - 1;
     if en = 0 then
-      WordApplication.Selection.TypeText(' ');
+      WordApplicationDM.Selection.TypeText(' ');
   end;
 end;
 
@@ -2554,7 +2575,7 @@ begin
   end;
 end;
 
-procedure TDm.WordApplicationDocumentBeforeClose(ASender: TObject;
+procedure TDm.WordApplicationDMDocumentBeforeClose(ASender: TObject;
   const Doc:_Document; var Cancel: WordBool);
 var
    ver : Integer;
@@ -2565,25 +2586,27 @@ begin
   inherited;
   { TODO -oparsa : 14030605-bug349 }
    SaveChanges := True;
-   
+
    if TWordApplication(ASender).ActiveDocument.ReadOnly then
    begin
       _Word_Is_Opened := False;
-      WordApplication.disconnect;
+      WordApplicationDM.Quit;
+      WordApplicationDM.disconnect;
       Exit;
    end;
 
-    ver := StrToint(copy(WordApplication.Version,0,length(TWordApplication(ASender).Version)-2));
+    ver := StrToint(copy(WordApplicationDM.Version,0,length(TWordApplication(ASender).Version)-2));
     if ver < 12 then
     begin
         _Word_Is_Opened := False;
-        WordApplication.disconnect;
+        WordApplicationDM.Quit;
+        WordApplicationDM.disconnect;
         Exit;
     end;
 
    // €ÌÌ— ﬂ‰œ ¬‰ê«Â œ«—Ì„ Save As «ê— ‰«„ ›«Ì· Ê—œ  Ê”ÿ
    //«” ›«œÂ ﬂ‰œ Ê «“ Ìﬂ ‰«„ ÃœÌœ «” ›«œÂ ﬂ‰œ ›«Ì· Ê—œ œ— œÌ «»Ì” –ŒÌ—Â ‰„Ì ‘Êœ Save As  ÊÃÂ : «ê— ﬂ«—»— Å” «“ «⁄„«·  €ÌÌ—«  «“
-   ActDocName := UpperCase(WordApplication.ActiveDocument.Name);
+   ActDocName := UpperCase(WordApplicationDM.ActiveDocument.Name);
    {if (ActDocName <> UpperCase(_WordFileName)) And
       (ActDocName <> UpperCase(_WordFileName+'X')) And
       (ActDocName <> UpperCase(_WordFileName+'.DOCX')) And
@@ -2592,7 +2615,7 @@ begin
    if (ActDocName <> UpperCase(_WordFileName)) then
    begin
       _Word_Is_Opened := False;
-      WordApplication.Disconnect;
+      WordApplicationDM.Disconnect;
       Timer_WordMessage.Enabled := True; //‰„«Ì‘ ÅÌ€«„
       Exit;
    end;
@@ -2611,9 +2634,9 @@ begin
    _Word_Is_Opened := False;
    //WordApplication.disconnect;
 
-   WordApplication.Disconnect;
-   WordApplication.ActiveDocument.Close(SaveChanges,EmptyParam,EmptyParam);
-   WordApplication.Quit;
+   WordApplicationDM.Disconnect;
+   WordApplicationDM.ActiveDocument.Close(SaveChanges,EmptyParam,EmptyParam);
+   WordApplicationDM.Quit;
 
    Timer_SaveWord.Enabled := True; //–ŒÌ—Â ›«Ì· Ê—œ œ— »«‰ﬂ «ÿ·«⁄« 
 
@@ -3153,7 +3176,7 @@ procedure TDm.WordApplication2DocumentOpen(ASender: TObject;
 var
    ver : integer;
 begin
-  ver := StrToint(copy(WordApplication.Version,0,length(TWordApplication(ASender).Version)-2));
+  ver := StrToint(copy(WordApplicationDM.Version,0,length(TWordApplication(ASender).Version)-2));
   if ver<12 then
   begin
     ShowMessage('·ÿ›« «“ ¬›Ì” 2007 »Â »«·« «” ›«œÂ ò‰Ìœ');
@@ -3161,12 +3184,12 @@ begin
   end;
 end;
 
-procedure TDm.WordApplicationDocumentOpen(ASender: TObject;
+procedure TDm.WordApplicationDMDocumentOpen(ASender: TObject;
   const Doc: _Document);
 var
   ver : integer;
 begin
-  ver := StrToint(copy(WordApplication.Version,0,length(TWordApplication(ASender).Version)-2));
+  ver := StrToint(copy(WordApplicationDM.Version,0,length(TWordApplication(ASender).Version)-2));
   if ver<12 then
   begin
     ShowMessage('·ÿ›« «“ ¬›Ì” 2007 »Â »«·« «” ›«œÂ ò‰Ìœ');
@@ -3631,7 +3654,18 @@ begin
 end;
 
 function TDm.getDBVer: String;
+var
+  qry :TADOQuery;
 begin
+
+  qry := TADOQuery.Create(self);
+  qry.Connection := YeganehConnection;
+  qry.SQL.Text   := ' IF COL_LENGTH(''[dbo].[tblAppVer]'', ''ver'') IS not  NULL   EXEC sp_rename ''[dbo].[tblAppVer].[ver]'', ''version'', ''COLUMN''; '  ;
+
+  qry.ExecSQL;
+  qry.Free;
+
+
   qryGetDbVer.Close;
   qryGetDbVer.Open;
   Result := qryGetDbVer.Fields.Fields[0].AsString;
@@ -3815,6 +3849,7 @@ var
   updateOK : Boolean;
   strCommand : WideString ;
   SectionCommand : string ;
+  SectionCommandDrop : string ;
   SectionSTR : string ;
   index : Integer ;
   index2 : Integer ;
@@ -3831,6 +3866,7 @@ var
   SR  : TSearchRec;
   FileAttrs: Integer;
   //qryAutoRunScript :TADOQuery;
+  qry :TADOQuery;
 
   function GetTxtFileAsString(const fn:String):WideString;
   var
@@ -3877,6 +3913,17 @@ var
     Result := strResult;
   end;
 begin
+  // jHAT PAK KARDAN PACH GHADIMI
+  {
+  qry := TADOQuery.Create(self);
+  qry.Connection := YeganehConnection;
+  qry.SQL.Text   := ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U'')) '+
+                    ' UPDATE [dbo].[TBLAPPSETTING] SET Max_TableScriptNumber = 1 ,Last_TableScriptNumber = 1,Max_ViewScriptNumber = 1 ,Last_ViewScriptNumber = 1  '+
+                                  ' WHERE (SELECT TOP 1  SUM(1) FROM dbo.TBLAPPSETTING WHERE DATE<'+'''2024-06-02'''+' ) >0 AND ISNULL((SELECT TOP 1  SUM(1) FROM dbo.TBLAPPSETTING WHERE   DATE>'+'''2024-06-14'''+' ),0) =0   '  ;
+
+  qry.ExecSQL;
+  qry.Free;
+     }
 
   qryAutoRunScript.Close;
   qryAutoRunScript.Open;
@@ -3950,6 +3997,14 @@ begin
 
          SectionCommand := Trim(Copy(strCommand, (PosFirstSec + PosFirstLen) , (PosLastSec - (PosFirstSec + PosFirstLen  )) )) ;
 
+         SectionCommandDrop := '' ;
+         if Pos('/*',SectionCommand) < 10 then
+         begin
+           if FileName = 'FuncProceScripts.txt'  then
+             SectionCommandDrop :=  Copy (SectionCommand,3, (Pos('*/',SectionCommand)-4))
+           else  SectionCommandDrop := '' ;
+         end;
+
          if SectionCommand <> '' then
          begin
            try
@@ -3970,14 +4025,29 @@ begin
 
              //qryAutoRunScript.SQL.Text :=  ' BEGIN TRANSACTION  '+ #13#10 + SectionCommand + #13#10 +' COMMIT TRANSACTION  GO ';
              //qryAutoRunScript.SQL.Text :=  ' BEGIN TRANSACTION  '+ #13#10 + SectionCommand + #13#10 +' COMMIT TRANSACTION ';
-             qryAutoRunScript.SQL.Text :=   SectionCommand ;
-             qryAutoRunScript.ExecuteOptions := [eoAsyncFetch];
-             qryAutoRunScript.ExecSQL;
+             try
+               if SectionCommandDrop <>'' then
+               begin
+                 qryAutoRunScript.SQL.Text :=   SectionCommandDrop ;
+                 qryAutoRunScript.ExecuteOptions := [eoAsyncFetch];
+                 qryAutoRunScript.ExecSQL;
+               end;
+
+               qryAutoRunScript.SQL.Text :=   SectionCommand ;
+               qryAutoRunScript.ExecuteOptions := [eoAsyncFetch];
+               qryAutoRunScript.ExecSQL;
+             except
+             end;
 
              if (FistScript = 1 )  then
              begin
                qryAutoRunScript.SQL.Text   :=  ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[TBLAPPSETTING]'') AND TYPE IN (N''U'')) ' +
                                                '   INSERT INTO [dbo].[TBLAPPSETTING] (Last_TableScriptNumber,Last_ViewScriptNumber,AppVersion,Date) VALUES ( '+ IntToStr(LastTaleNo)+','+ IntToStr(lastViewNo)+','''+_SoftVersion+''',GETDATE() ) ' ;
+               qryAutoRunScript.ExecSQL;
+
+               qryAutoRunScript.SQL.Text  :=  ' IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N''[DBO].[tblAppVer]'') AND TYPE IN (N''U'')) ' +
+                                              '   INSERT INTO dbo.tblAppVer (version, changeDate, Descript) VALUES('''+ Trim(_SoftVersion) + ''', GETDATE(), N''»—Ê“ ‘œ'')';
+
                qryAutoRunScript.ExecSQL;
 
                if  MaxSectionTableNo>0 then
@@ -4067,6 +4137,82 @@ begin
    except
      Result := False;
    end;
+end;
+
+function TDm.UnlockAndDeleteFile(const FileName: string): Boolean;
+var
+  Handle: THandle;
+  hFileRes: HFILE;
+  ErrorCode : DWORD;
+begin
+  Result := False;
+  
+  if not FileExists(FileName) then
+    Exit;
+
+  {
+  hFileRes := CreateFile(PChar(FileName), GENERIC_READ or GENERIC_WRITE,0,nil,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,0);
+
+  Result := (hFileRes = INVALID_HANDLE_VALUE);
+  
+  if hFileRes = INVALID_HANDLE_VALUE then //›Ì· »«“ ‰„Ì ‘Êœ
+  //
+
+  else
+  if hFileRes <> INVALID_HANDLE_VALUE then    //  ›«Ì· »«“ „Ì ‘Êœ
+  begin
+    CloseHandle(hFileRes);
+  end;
+   }
+
+  // Result := False;
+  //Handle := CreateFile(PChar(FileName), GENERIC_WRITE, 0, nil, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+  Handle := CreateFile(PChar(FileName), GENERIC_WRITE, FILE_SHARE_WRITE or FILE_SHARE_READ or FILE_SHARE_DELETE, nil, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+
+  if Handle = INVALID_HANDLE_VALUE then  //›«Ì· »«“ ‰„Ì ‘Êœ
+  begin
+    ErrorCode :=GetLastError;
+    
+    case ErrorCode of
+      ERROR_FILE_NOT_FOUND: ShowMessage('File not found');
+      ERROR_ACCESS_DENIED: ShowMessage('Access denied');
+      ERROR_SHARING_VIOLATION: ShowMessage('Sharing violation');
+    else ShowMessage('Unknown error: ' + IntToStr(ErrorCode));
+    end;
+    
+    if FileExists(pchar(FileName)) then
+    begin
+      if processExists('WINWORD.EXE') then  KillTask('WINWORD.EXE');
+
+      SysUtils.FileSetReadOnly(_TempPath+_WordFileName, false);
+      SysUtils.DeleteFile(_TempPath+_WordFileName);
+    end;
+  end
+  else
+  if Handle <> INVALID_HANDLE_VALUE then // ›«Ì· »« „Ê›ﬁÌ  »«“ ‘œÂ
+  begin
+    CloseHandle(Handle);
+    Result := DeleteFile(PChar(FileName));
+
+    if FileExists(pchar(FileName)) then
+    begin
+      //if processExists('WINWORD.EXE') then  KillTask('WINWORD.EXE');
+
+      SysUtils.FileSetReadOnly(_TempPath+_WordFileName, false);
+      SysUtils.DeleteFile(_TempPath+_WordFileName);
+    end;
+
+  end;
+  if not FileExists(pchar(FileName)) then
+  begin
+    Result := True;
+  end;
+
+end;
+
+function TDm.GetServerTime: string;
+begin
+  Result:=Exec_get_NowTime;
 end;
 
 end.

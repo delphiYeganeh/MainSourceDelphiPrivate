@@ -29,7 +29,7 @@ inherited MainForm: TMainForm
       Top = 35
       Width = 1203
       Height = 549
-      ActivePage = xpTabSheet1
+      ActivePage = xpTabSheet2
       Align = alClient
       BiDiMode = bdRightToLeft
       Font.Charset = ARABIC_CHARSET
@@ -2057,7 +2057,7 @@ inherited MainForm: TMainForm
               Text = '1300/01/01'#0
             end
             object BtnAllContract: TBitBtn
-              Left = 337
+              Left = 317
               Top = 1
               Width = 188
               Height = 25
@@ -3265,7 +3265,7 @@ inherited MainForm: TMainForm
               1191
               38)
             object LockReport: TSpeedButton
-              Left = 618
+              Left = 614
               Top = 6
               Width = 23
               Height = 22
@@ -3309,7 +3309,7 @@ inherited MainForm: TMainForm
               OnClick = LockReportClick
             end
             object UnlockRep: TSpeedButton
-              Left = 618
+              Left = 614
               Top = 6
               Width = 23
               Height = 22
@@ -3352,7 +3352,7 @@ inherited MainForm: TMainForm
               OnClick = UnlockRepClick
             end
             object lblLockRep: TLabel
-              Left = 518
+              Left = 514
               Top = 12
               Width = 93
               Height = 13
@@ -3360,7 +3360,7 @@ inherited MainForm: TMainForm
               Caption = #1711#1586#1575#1585#1588#1610' '#1602#1601#1604' '#1606#1610#1587#1578
             end
             object Button22: TBitBtn
-              Left = 967
+              Left = 963
               Top = 5
               Width = 80
               Height = 25
@@ -3411,7 +3411,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button25: TBitBtn
-              Left = 886
+              Left = 882
               Top = 5
               Width = 80
               Height = 25
@@ -3462,7 +3462,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button18: TBitBtn
-              Left = 806
+              Left = 802
               Top = 5
               Width = 80
               Height = 25
@@ -3513,7 +3513,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button21: TBitBtn
-              Left = 726
+              Left = 722
               Top = 5
               Width = 80
               Height = 25
@@ -3564,7 +3564,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object Button23: TBitBtn
-              Left = 646
+              Left = 642
               Top = 5
               Width = 80
               Height = 25
@@ -3665,7 +3665,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object btnViwCustomer: TBitBtn
-              Left = 1048
+              Left = 1044
               Top = 5
               Width = 113
               Height = 25
@@ -3716,7 +3716,7 @@ inherited MainForm: TMainForm
                 0000000000000000000000000000000000000000000000000000}
             end
             object PnlAllAct: TPanel
-              Left = 58
+              Left = 54
               Top = 2
               Width = 443
               Height = 35
@@ -3901,7 +3901,7 @@ inherited MainForm: TMainForm
               end
             end
             object BitBtn9: TBitBtn
-              Left = -72
+              Left = -76
               Top = 5
               Width = 127
               Height = 25
@@ -4888,7 +4888,7 @@ inherited MainForm: TMainForm
         GradientFillDir = fdLeftToRight
         object Panel2: TPanel
           Left = 0
-          Top = 105
+          Top = 121
           Width = 1195
           Height = 40
           Align = alTop
@@ -4914,7 +4914,7 @@ inherited MainForm: TMainForm
             ParentFont = False
           end
           object BitBtn1: TBitBtn
-            Left = 1064
+            Left = 1052
             Top = 4
             Width = 95
             Height = 28
@@ -4960,7 +4960,7 @@ inherited MainForm: TMainForm
               3C85131A10280000000000000000000000000000000000000000}
           end
           object BitBtn3: TBitBtn
-            Left = 966
+            Left = 954
             Top = 4
             Width = 95
             Height = 28
@@ -5023,7 +5023,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object BitBtn5: TBitBtn
-            Left = 654
+            Left = 642
             Top = 4
             Width = 95
             Height = 28
@@ -5108,7 +5108,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object btnContract: TBitBtn
-            Left = 868
+            Left = 856
             Top = 4
             Width = 95
             Height = 28
@@ -5199,7 +5199,7 @@ inherited MainForm: TMainForm
               000000000000000000000000000000000000000000000000000000000000}
           end
           object btnCustomerReportX: TBitBtn
-            Left = 522
+            Left = 510
             Top = 4
             Width = 129
             Height = 28
@@ -5246,7 +5246,7 @@ inherited MainForm: TMainForm
           end
           object BitBtnCase: TBitBtn
             Tag = 1
-            Left = 380
+            Left = 368
             Top = 4
             Width = 139
             Height = 28
@@ -5333,7 +5333,7 @@ inherited MainForm: TMainForm
               0000000000000000000000000000000000000000000000000000}
           end
           object btnMaps: TBitBtn
-            Left = 752
+            Left = 740
             Top = 4
             Width = 113
             Height = 28
@@ -5398,9 +5398,9 @@ inherited MainForm: TMainForm
         end
         object Panel1: TPanel
           Left = 0
-          Top = 145
+          Top = 161
           Width = 1195
-          Height = 394
+          Height = 378
           Align = alClient
           BevelInner = bvRaised
           BevelOuter = bvLowered
@@ -5411,7 +5411,7 @@ inherited MainForm: TMainForm
             Left = 1177
             Top = 46
             Width = 8
-            Height = 346
+            Height = 330
             Align = alRight
             Beveled = True
             Color = clMoneyGreen
@@ -5424,7 +5424,7 @@ inherited MainForm: TMainForm
             Left = 1185
             Top = 46
             Width = 8
-            Height = 346
+            Height = 330
             Align = alRight
             Beveled = True
             Color = clMoneyGreen
@@ -5437,7 +5437,7 @@ inherited MainForm: TMainForm
             Left = 1098
             Top = 46
             Width = 79
-            Height = 346
+            Height = 330
             Align = alRight
             Alignment = taRightJustify
             BevelInner = bvLowered
@@ -5449,7 +5449,7 @@ inherited MainForm: TMainForm
               Left = 2
               Top = 22
               Width = 75
-              Height = 322
+              Height = 306
               Align = alClient
               BiDiMode = bdLeftToRight
               Font.Charset = ARABIC_CHARSET
@@ -5539,7 +5539,7 @@ inherited MainForm: TMainForm
             Left = 2
             Top = 46
             Width = 1096
-            Height = 346
+            Height = 330
             Align = alClient
             Caption = 'Panel11'
             TabOrder = 1
@@ -5547,7 +5547,7 @@ inherited MainForm: TMainForm
               Left = 1
               Top = 1
               Width = 1094
-              Height = 344
+              Height = 328
               Cursor = crHandPoint
               Align = alClient
               BiDiMode = bdRightToLeft
@@ -6241,7 +6241,7 @@ inherited MainForm: TMainForm
           Left = 0
           Top = 0
           Width = 1195
-          Height = 105
+          Height = 121
           StartColor = 16774388
           EndColor = 16767449
           FillDirection = fdLeftToRight
@@ -6268,7 +6268,7 @@ inherited MainForm: TMainForm
           TabOrder = 2
           DesignSize = (
             1193
-            73)
+            89)
           object Label1: TLabel
             Left = 1110
             Top = 13
@@ -6393,8 +6393,8 @@ inherited MainForm: TMainForm
             Transparent = True
           end
           object Label47: TLabel
-            Left = -180
-            Top = 5
+            Left = -188
+            Top = 37
             Width = 143
             Height = 13
             Anchors = [akTop, akRight]
@@ -6417,7 +6417,7 @@ inherited MainForm: TMainForm
           end
           object OnlyCurrentMarketer: TCheckBox
             Left = -10
-            Top = 31
+            Top = 53
             Width = 185
             Height = 13
             Anchors = [akTop, akRight]
@@ -6536,7 +6536,7 @@ inherited MainForm: TMainForm
           end
           object chkContractFinished: TCheckBox
             Left = -31
-            Top = 52
+            Top = 36
             Width = 206
             Height = 13
             Anchors = [akTop, akRight]
@@ -6596,12 +6596,12 @@ inherited MainForm: TMainForm
             Left = 1162
             Top = 1
             Width = 30
-            Height = 71
+            Height = 87
             Align = alRight
             TabOrder = 13
             DesignSize = (
               30
-              71)
+              87)
             object SBRefresh: TSpeedButton
               Left = 2
               Top = 25
@@ -6696,8 +6696,8 @@ inherited MainForm: TMainForm
             end
           end
           object dblActionType_Level: TDBLookupComboBox
-            Left = -218
-            Top = 20
+            Left = -226
+            Top = 52
             Width = 182
             Height = 21
             Anchors = [akTop, akRight]
@@ -6713,7 +6713,7 @@ inherited MainForm: TMainForm
           end
           object pnlCLBCompaginIDs: TPanel
             Tag = 1
-            Left = -459
+            Left = -483
             Top = 0
             Width = 241
             Height = 73
@@ -6743,6 +6743,103 @@ inherited MainForm: TMainForm
               Ydataset = Dm.Compagin
               TitleField = 'CompaginTitle'
               IDField = 'CompaginID'
+            end
+          end
+          object pnlCustomerMarketer: TPanel
+            Tag = 1
+            Left = 421
+            Top = 59
+            Width = 206
+            Height = 28
+            Anchors = [akTop, akRight]
+            BevelOuter = bvNone
+            Color = clWindow
+            TabOrder = 16
+            DesignSize = (
+              206
+              28)
+            object Label55: TLabel
+              Left = 156
+              Top = 7
+              Width = 45
+              Height = 13
+              Anchors = [akTop, akRight]
+              Caption = ' '#1576#1575#1586#1575#1585#1610#1575#1576'  :'
+              Transparent = True
+            end
+            object dblMarketerCustomer: TDBLookupComboBox
+              Left = 17
+              Top = 4
+              Width = 136
+              Height = 21
+              Anchors = [akTop, akRight]
+              BiDiMode = bdLeftToRight
+              DropDownRows = 20
+              KeyField = 'MarketerID'
+              ListField = 'MarketerTitle'
+              ListSource = Dm.DMarketer
+              ParentBiDiMode = False
+              TabOrder = 0
+              OnCloseUp = SearchEditChange
+              OnKeyDown = DBLookUpKeyDown
+              OnKeyUp = dblMarketerCustomerKeyUp
+            end
+            object BitBtn13: TBitBtn
+              Left = 2
+              Top = 4
+              Width = 15
+              Height = 21
+              Anchors = [akTop, akRight]
+              Caption = '*'
+              TabOrder = 1
+              OnClick = BitBtn13Click
+            end
+          end
+          object pnlCustomerStatusFilter: TPanel
+            Tag = 1
+            Left = 648
+            Top = 56
+            Width = 513
+            Height = 33
+            Anchors = [akTop, akRight]
+            BevelOuter = bvNone
+            Color = clWindow
+            TabOrder = 17
+            DesignSize = (
+              513
+              33)
+            object Label56: TLabel
+              Left = 419
+              Top = 7
+              Width = 81
+              Height = 13
+              Anchors = [akTop, akRight]
+              Caption = #1608#1590#1593#1610#1578' '#1605#1588#1578#1585#1610' :'
+              Font.Charset = ARABIC_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+            end
+            object ComboBox1: TComboBox
+              Left = 4
+              Top = 4
+              Width = 409
+              Height = 21
+              Anchors = [akTop, akRight]
+              ItemHeight = 13
+              TabOrder = 0
+              OnCloseUp = SearchEditChange
+              Items.Strings = (
+                #1605#1588#1578#1585#1610#1575#1606#1610' '#1705#1607' '#1602#1585#1575#1585' '#1583#1575#1583#1588#1575#1606' '#1576#1607' '#1662#1575#1610#1575#1606' '#1585#1587#1610#1583#1607
+                #1575#1591#1604#1575#1593#1575#1578' '#1579#1576#1578' '#1588#1583#1607' '#1578#1608#1587#1591' '#1705#1575#1585#1576#1585' '#1580#1575#1585#1610
+                
+                  #1605#1588#1578#1585#1610#1575#1606#1610' '#1705#1607' '#1602#1585#1575#1585#1583#1575#1583#1588#1575#1606' '#1576#1607' '#1662#1575#1610#1575#1606' '#1585#1587#1610#1583#1607' '#1608' '#1578#1608#1587#1591' '#1705#1575#1585#1576#1585' '#1580#1575#1585#1610' '#1579#1576#1578' '#1588#1583#1607' ' +
+                  #1575#1606#1583
+                #1605#1588#1578#1585#1610#1575#1606#1610' '#1705#1607' '#1602#1585#1575#1585#1583#1575#1583' '#1583#1575#1585#1606#1583
+                #1605#1588#1578#1585#1610#1575#1606#1610' '#1705#1607' '#1602#1585#1575#1585#1583#1575#1583' '#1583#1575#1585#1606#1583' '#1608' '#1578#1608#1587#1591' '#1705#1575#1585#1576#1585' '#1580#1575#1585#1610' '#1579#1576#1578' '#1588#1583#1607' '#1575#1606#1583)
             end
           end
         end

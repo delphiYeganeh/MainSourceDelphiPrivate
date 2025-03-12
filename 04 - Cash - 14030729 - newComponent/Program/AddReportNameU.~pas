@@ -198,6 +198,8 @@ begin
     if Components[i].ClassNameIs('TQRImage') and (pos('CASHLOGO',UpperCase(Components[i].Name))<>0) then
         try TQRImage(Components[i]).Picture.LoadFromFile(_LogoPath); except end;
 
+  DBNav_Setup(DBNavigator1);
+
 end;
 
 procedure TFrAddReportName.GotoNext(Sender: TObject; var key: Word; Shift: TShiftState);

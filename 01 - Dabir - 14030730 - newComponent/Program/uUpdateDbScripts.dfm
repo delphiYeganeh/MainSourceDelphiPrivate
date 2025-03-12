@@ -1,6 +1,6 @@
 object fmUpdateDbScripts: TfmUpdateDbScripts
-  Left = 327
-  Top = 191
+  Left = 491
+  Top = 266
   Width = 1286
   Height = 585
   BiDiMode = bdRightToLeft

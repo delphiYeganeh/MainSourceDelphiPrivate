@@ -1,7 +1,7 @@
 inherited FinnerLetter: TFinnerLetter
   Tag = 10
-  Left = 590
-  Top = 248
+  Left = 424
+  Top = 257
   BorderStyle = bsDialog
   Caption = #1606#1575#1605#1607' '#1583#1575#1582#1604#1610
   ClientHeight = 581
@@ -956,7 +956,7 @@ inherited FinnerLetter: TFinnerLetter
             Left = 1
             Top = 74
             Width = 831
-            Height = 214
+            Height = 251
             Align = alClient
             Caption = #1605#1590#1605#1608#1606' '#1606#1575#1605#1607
             Font.Charset = ARABIC_CHARSET
@@ -968,10 +968,10 @@ inherited FinnerLetter: TFinnerLetter
             TabOrder = 1
             DesignSize = (
               831
-              214)
+              251)
             object Label14: TLabel
               Left = 738
-              Top = 145
+              Top = 182
               Width = 80
               Height = 13
               Anchors = [akRight, akBottom]
@@ -985,7 +985,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object SpeedButton3: TLabel
               Left = 380
-              Top = 179
+              Top = 216
               Width = 17
               Height = 13
               Anchors = [akRight, akBottom]
@@ -999,7 +999,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object SpeedButton1: TLabel
               Left = 373
-              Top = 153
+              Top = 190
               Width = 25
               Height = 13
               Anchors = [akRight, akBottom]
@@ -1013,7 +1013,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object Label7: TLabel
               Left = 716
-              Top = 178
+              Top = 215
               Width = 103
               Height = 13
               Anchors = [akRight, akBottom]
@@ -1028,7 +1028,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object Label8: TLabel
               Left = 510
-              Top = 179
+              Top = 216
               Width = 21
               Height = 13
               Anchors = [akRight, akBottom]
@@ -1043,7 +1043,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object SBFollowLetterNo: TAdvGlowButton
               Left = 347
-              Top = 175
+              Top = 212
               Width = 22
               Height = 22
               Cursor = crHandPoint
@@ -1082,7 +1082,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object SBRetroactionNo: TAdvGlowButton
               Left = 347
-              Top = 146
+              Top = 183
               Width = 22
               Height = 22
               Cursor = crHandPoint
@@ -1123,7 +1123,7 @@ inherited FinnerLetter: TFinnerLetter
               Left = 2
               Top = 15
               Width = 827
-              Height = 122
+              Height = 159
               Align = alTop
               Alignment = taRightJustify
               Anchors = [akLeft, akTop, akRight, akBottom]
@@ -1143,7 +1143,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object SBSimpleEditor: TAdvGlowButton
               Left = 3
-              Top = 138
+              Top = 175
               Width = 23
               Height = 22
               Cursor = crHandPoint
@@ -1177,9 +1177,9 @@ inherited FinnerLetter: TFinnerLetter
               Appearance.ColorMirrorDisabledTo = 15921906
             end
             object DBLookupComboBox1: TDBLookupComboBox
-              Left = 432
-              Top = 144
-              Width = 280
+              Left = 472
+              Top = 181
+              Width = 240
               Height = 21
               Anchors = [akRight, akBottom]
               BiDiMode = bdLeftToRight
@@ -1196,7 +1196,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object DBEFollowLetterNo: TDBEdit
               Left = 218
-              Top = 176
+              Top = 213
               Width = 120
               Height = 21
               Anchors = [akRight, akBottom]
@@ -1215,7 +1215,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object DBERetroactionNo: TDBEdit
               Left = 219
-              Top = 147
+              Top = 184
               Width = 120
               Height = 21
               Anchors = [akRight, akBottom]
@@ -1235,7 +1235,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object DBEdit1: TDBEdit
               Left = 540
-              Top = 174
+              Top = 211
               Width = 170
               Height = 21
               Anchors = [akRight, akBottom]
@@ -1254,9 +1254,9 @@ inherited FinnerLetter: TFinnerLetter
               OnExit = TEditExit
             end
             object DBShamsiDateEdit1: TDBShamsiDateEdit
-              Left = 432
-              Top = 175
-              Width = 73
+              Left = 428
+              Top = 212
+              Width = 75
               Height = 21
               Anchors = [akRight, akBottom]
               BiDiMode = bdLeftToRight
@@ -1275,24 +1275,79 @@ inherited FinnerLetter: TFinnerLetter
               OnEnter = TEditEnter
               OnExit = TEditExit
             end
-          end
-          object GroupBox5: TGroupBox
-            Left = 1
-            Top = 288
-            Width = 831
-            Height = 37
-            Align = alBottom
-            TabOrder = 2
-            DesignSize = (
-              831
-              37)
-            object lblHasForms: TLabel
-              Left = 754
-              Top = 16
-              Width = 57
-              Height = 13
-              Anchors = [akTop, akRight]
-              Caption = 'lblHasForms'
+            object sbSubjectDel: TAdvGlowButton
+              Left = 450
+              Top = 181
+              Width = 21
+              Height = 21
+              Hint = #1581#1584#1601
+              Anchors = [akRight, akBottom]
+              ImageIndex = 65
+              Images = Dm.ImageList_MainNew
+              NotesFont.Charset = DEFAULT_CHARSET
+              NotesFont.Color = clWindowText
+              NotesFont.Height = -11
+              NotesFont.Name = 'Tahoma'
+              NotesFont.Style = []
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 9
+              OnClick = sbSubjectDelClick
+              Appearance.ColorChecked = 16111818
+              Appearance.ColorCheckedTo = 16367008
+              Appearance.ColorDisabled = 15921906
+              Appearance.ColorDisabledTo = 15921906
+              Appearance.ColorDown = 16111818
+              Appearance.ColorDownTo = 16367008
+              Appearance.ColorHot = 16117985
+              Appearance.ColorHotTo = 16372402
+              Appearance.ColorMirrorHot = 16107693
+              Appearance.ColorMirrorHotTo = 16775412
+              Appearance.ColorMirrorDown = 16102556
+              Appearance.ColorMirrorDownTo = 16768988
+              Appearance.ColorMirrorChecked = 16102556
+              Appearance.ColorMirrorCheckedTo = 16768988
+              Appearance.ColorMirrorDisabled = 11974326
+              Appearance.ColorMirrorDisabledTo = 15921906
+            end
+            object btnSubject: TAdvGlowButton
+              Left = 428
+              Top = 181
+              Width = 21
+              Height = 21
+              Cursor = crHandPoint
+              Anchors = [akRight, akBottom]
+              Font.Charset = ARABIC_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ImageIndex = 26
+              Images = Dm.ImageList_MainNew
+              NotesFont.Charset = DEFAULT_CHARSET
+              NotesFont.Color = clWindowText
+              NotesFont.Height = -11
+              NotesFont.Name = 'Tahoma'
+              NotesFont.Style = []
+              ParentFont = False
+              TabOrder = 10
+              OnClick = btnSubjectClick
+              Appearance.ColorChecked = 16111818
+              Appearance.ColorCheckedTo = 16367008
+              Appearance.ColorDisabled = 15921906
+              Appearance.ColorDisabledTo = 15921906
+              Appearance.ColorDown = 16111818
+              Appearance.ColorDownTo = 16367008
+              Appearance.ColorHot = 16117985
+              Appearance.ColorHotTo = 16372402
+              Appearance.ColorMirrorHot = 16107693
+              Appearance.ColorMirrorHotTo = 16775412
+              Appearance.ColorMirrorDown = 16102556
+              Appearance.ColorMirrorDownTo = 16768988
+              Appearance.ColorMirrorChecked = 16102556
+              Appearance.ColorMirrorCheckedTo = 16768988
+              Appearance.ColorMirrorDisabled = 11974326
+              Appearance.ColorMirrorDisabledTo = 15921906
             end
           end
           object pnlDetail: TxpPanel
@@ -1323,7 +1378,7 @@ inherited FinnerLetter: TFinnerLetter
             BGImageAlign = iaStretch
             Color = clWindow
             Align = alBottom
-            TabOrder = 3
+            TabOrder = 2
             object attachs: TYCheckGroupBox
               Left = 1
               Top = 1
@@ -2263,11 +2318,30 @@ inherited FinnerLetter: TFinnerLetter
       Left = 1
       Top = 1
       Width = 841
-      Height = 5
+      Height = 25
       Anchors = [akLeft, akTop, akRight]
       BevelOuter = bvNone
       ParentColor = True
       TabOrder = 1
+      object GroupBox2: TGroupBox
+        Left = 0
+        Top = 0
+        Width = 841
+        Height = 25
+        Align = alClient
+        TabOrder = 0
+        DesignSize = (
+          841
+          25)
+        object lblHasForms: TLabel
+          Left = 762
+          Top = 7
+          Width = 57
+          Height = 13
+          Anchors = [akTop, akRight]
+          Caption = 'lblHasForms'
+        end
+      end
     end
   end
   inherited DSForm: TDataSource
@@ -2459,7 +2533,7 @@ inherited FinnerLetter: TFinnerLetter
           end
           item
             Action = DataSetCancel
-            ImageIndex = 90
+            ImageIndex = 1
             ShortCut = 32776
           end
           item
@@ -2507,7 +2581,7 @@ inherited FinnerLetter: TFinnerLetter
       Category = #1578#1594#1610#1610#1585#1575#1578
       Caption = #1575#1606#1589#1585#1575#1601
       Hint = 'Cancel'
-      ImageIndex = 90
+      ImageIndex = 1
       ShortCut = 32776
       OnExecute = DataSetCancelExecute
       DataSource = DSForm
@@ -2535,7 +2609,7 @@ inherited FinnerLetter: TFinnerLetter
       Category = #1578#1594#1610#1610#1585#1575#1578
       Caption = #1581#1584#1601
       Hint = 'Delete'
-      ImageIndex = 1
+      ImageIndex = 90
       ShortCut = 16430
       OnExecute = DataSetDelExecute
       DataSource = DSForm
@@ -3023,16 +3097,17 @@ inherited FinnerLetter: TFinnerLetter
     end
   end
   object PopupMenu2: TPopupMenu
-    Left = 348
-    Top = 191
+    Images = Dm.ImageList_MainNew
+    Left = 324
+    Top = 127
     object N7: TMenuItem
       Caption = #1601#1585#1605' '#1607#1575#1610' '#1662#1610#1608#1587#1578' '#1588#1583#1607
-      ImageIndex = 1
+      ImageIndex = 11
       OnClick = N7Click
     end
     object N8: TMenuItem
       Caption = #1578#1593#1585#1610#1601' '#1601#1585#1605' '#1580#1583#1610#1583
-      ImageIndex = 2
+      ImageIndex = 7
       OnClick = N8Click
     end
   end

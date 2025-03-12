@@ -137,12 +137,12 @@ inherited FmAlarm: TFmAlarm
           500
           35)
         object Label4: TLabel
-          Left = 436
+          Left = 438
           Top = 9
-          Width = 57
+          Width = 55
           Height = 13
           Anchors = [akTop, akRight]
-          Caption = #1578#1575#1585#1610#1582' :'
+          Caption = #1578#1575#1585#1610#1582'          :'
         end
         object Label5: TLabel
           Left = 310
@@ -350,7 +350,6 @@ inherited FmAlarm: TFmAlarm
         Ctl3D = False
         DataField = 'UsersTitle_LK'
         DataSource = DMAlarm.DSAlarm
-        Enabled = False
         ParentCtl3D = False
         ReadOnly = True
         TabOrder = 0

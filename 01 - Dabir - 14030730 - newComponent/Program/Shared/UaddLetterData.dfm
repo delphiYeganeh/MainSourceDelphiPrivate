@@ -466,8 +466,8 @@ inherited FrAddLetterData: TFrAddLetterData
     end
   end
   inherited DSForm: TDataSource
-    Left = 72
-    Top = 83
+    Left = 520
+    Top = 67
   end
   inherited ActionList: TActionList
     Left = 320
@@ -476,6 +476,10 @@ inherited FrAddLetterData: TFrAddLetterData
   inherited Grid_PopupMenu: TPopupMenu
     Left = 320
     Top = 228
+  end
+  inherited ApplicationEvents1: TApplicationEvents
+    Left = 176
+    Top = 64
   end
   object ActionManager: TActionManager
     Images = DataModuleForm.Dm

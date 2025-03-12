@@ -334,6 +334,7 @@ var
    MemoSms:Tmemo;
 begin
   inherited;
+  DoBtn.SetFocus ;
   AddPaymentInsert.Enabled := False;
   if UsedForMountly then
      Dm.Select_PaymentPayTypeID.AsInteger := 2;

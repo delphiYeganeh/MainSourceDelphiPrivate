@@ -1745,7 +1745,7 @@ procedure TMainForm.SpeedButton16Click(Sender: TObject);
 begin
   inherited;
   DisplayMode := Search;
-  if (GroupingPanel.Width <190) or (GroupingPanel.Width>1000) then
+  if (GroupingPanel.Width <190) or (GroupingPanel.Width>1100) then
     GroupingPanel.Width := 190 ;
   pnlSearch.Show;
   GroupingPanel.Show ;
@@ -1760,7 +1760,7 @@ begin
    if DisplayMode <> Archive then
       DisplayMode := Archive;
       
-  if (GroupingPanel.Width <190) or (GroupingPanel.Width>1000) then
+  if (GroupingPanel.Width <190) or (GroupingPanel.Width>1100) then
     GroupingPanel.Width := 190 ;
    pnlArchive.Show;
    GroupingPanel.Show ;

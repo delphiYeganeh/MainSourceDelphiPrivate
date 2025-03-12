@@ -2313,7 +2313,17 @@ begin
 end;
 
 function TDm.getDBVer: String;
+var
+  qry :TADOQuery;
 begin
+
+  qry := TADOQuery.Create(self);
+  qry.Connection := YeganehConnection;
+  qry.SQL.Text   := ' IF COL_LENGTH(''[dbo].[tblAppVer]'', ''ver'') IS not  NULL   EXEC sp_rename ''[dbo].[tblAppVer].[ver]'', ''version'', ''COLUMN''; '  ;
+
+  qry.ExecSQL;
+  qry.Free;
+
   qryGetDbVer.Close;
   qryGetDbVer.Open;
   Result := qryGetDbVer.Fields.Fields[0].AsString;

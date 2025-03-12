@@ -151,6 +151,7 @@ object Form_WorkGroupFM: TForm_WorkGroupFM
         Width = 554
         Height = 80
         Align = alTop
+        ParentColor = True
         TabOrder = 5
         DesignSize = (
           554
@@ -490,6 +491,7 @@ object Form_WorkGroupFM: TForm_WorkGroupFM
         Caption = #1582#1585#1608#1580
         ImageIndex = 84
         Images = Dm.ImageList_MainNew
+        ModalResult = 2
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
         NotesFont.Height = -11

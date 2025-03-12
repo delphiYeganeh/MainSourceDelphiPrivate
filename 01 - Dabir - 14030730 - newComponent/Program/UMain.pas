@@ -363,7 +363,7 @@ Type
     GetList3KeyValue_1: TIntegerField;
     GetList3Title_1: TWideStringField;
     GetList3Notes_1: TWideStringField;
-    WordApplication: TWordApplication;
+    WordApplicationMainForm: TWordApplication;
     Action12: TAction;
     tmrGetEmail: TTimer;
     Timer: TTimer;
@@ -480,6 +480,9 @@ Type
     Label6: TLabel;
     Label7: TLabel;
     ImageList3_new: TImageList;
+    N86: TMenuItem;
+    N87: TMenuItem;
+    ActFolderToLetter: TAction;
     procedure FormCreate(Sender: TObject);
     procedure ReceiveInsertExecute(Sender: TObject);
     procedure SendInsertExecute(Sender: TObject);
@@ -706,7 +709,7 @@ Type
     procedure Button4Click(Sender: TObject);
     procedure Action3Execute(Sender: TObject);
     procedure Action4Execute(Sender: TObject);
-    procedure WordApplicationDocumentBeforeClose(ASender: TObject;
+    procedure WordApplicationMainFormDocumentBeforeClose(ASender: TObject;
       const Doc: _Document; var Cancel: WordBool);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -718,6 +721,8 @@ Type
     procedure ButtonolorClick(Sender: TObject);
     procedure UpAndDownBtnClick(Sender: TObject);
     procedure UpAndDownBtn2Click(Sender: TObject);
+    procedure N87Click(Sender: TObject);
+    procedure ActFolderToLetterExecute(Sender: TObject);
   private
     blnDisableRefresh : Boolean;
     FDisplayMode  :DisplayModes;
@@ -816,7 +821,7 @@ uses Dmu , FixedTableF, EnteredLetterInputF, ExitedLetterInputF,
      DefineUserGroupUnit, UMyMessage, WorkSheetBaseUnit, WorkSheetAllRepUnit,
      WorkSheetBaseResultsUnit, ReciveLetterWithECEUnit, TextSearch,
      ULetterImport, ULetterNoSettingForWord, U_SHOW_ATF_PEYRO_FRM, frmMain, UDbName,
-     URStatistic, businessLayer;
+     URStatistic, businessLayer, FolderToLetterFm;
 
 {$R *.DFM}
 
@@ -908,7 +913,8 @@ begin
   blnDisableRefresh := False;
 
   terminationDownCounter := 60;
-  LowOrange    := Rgb(255,95,0);
+ // LowOrange    := Rgb(255,95,0);
+  LowOrange    := Rgb(255,134,62);
   LowTurquoise := Rgb(0,175,240); //›Ì—Ê“Â «Ì
   Lowpink      := Rgb(240,90,160); //’Ê— Ì
 
@@ -1438,15 +1444,22 @@ begin
          DeleteFile(_TempPath+'temp.tif');
          { TODO -oparsa : 14030605-bug349 }
          ///if Dm.processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
+
+         { TODO -oparsa : Task443-14031012 }
+         {
          if FileExists(pchar(_TempPath+_WordFileName)) then
          begin
            SysUtils.FileSetReadOnly(pchar(_TempPath+_WordFileName), false);
            DeleteFile(pchar(_TempPath+_WordFileName));
          end;
          if Dm.processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
+         }
+          Dm.UnlockAndDeleteFile(_TempPath+_WordFileName);
+         { TODO -oparsa : Task443-14031012 }
          { TODO -oparsa : 14030605-bug349 }
       end;
    except
+
    end;
 end;
 
@@ -2009,6 +2022,7 @@ begin
   // Amin 1391/10/24 RefreshQuery;
   tmRefereshQuery.Enabled := true; // Amin 1391/10/24
 
+
 end;
 
 
@@ -2072,7 +2086,7 @@ Var
       Dm.spGetInnerNo.Open;
       if not Dm.ExecGet_LetterWordFile(dm.Get_All_LetterLetterID.AsInteger,false,True) then
          Exit;
-      with dm.WordApplication do
+      with dm.WordApplicationDM do
       begin
          if ActiveWindow.ActivePane.View.Type_ in[ wdNormalView ,wdOutlineView] Then
             ActiveWindow.ActivePane.View.Type_:= wdPrintView;
@@ -2080,7 +2094,7 @@ Var
          ActiveWindow.ActivePane.View.SeekView := wdSeekCurrentPageHeader; //«‰ ﬁ«· „ò«‰ ‰„« »Â Âœ— ’›ÕÂ ÊÊ—œ
       end;
    end;
-begin
+begin    /////
   inherited;
   blnDisableRefresh := True;
   { TODO -oparsa : 14030411 }
@@ -2093,12 +2107,11 @@ begin
     Exit;
   end;
 
-  oldIndicatorID      := dm.Get_All_LetterIndicatorID.AsInteger;
-  intOldLetterId      := dm.Get_All_LetterLetterID.AsInteger;
-  intOldLetterTypeId  := Dm.Get_All_LetterLetter_Type.AsInteger;
-  blnHas_WordPage     := dm.Get_All_Letterhas_WordPage.AsBoolean;
+  oldIndicatorID := dm.Get_All_LetterIndicatorID.AsInteger;
+  intOldLetterId := dm.Get_All_LetterLetterID.AsInteger;
+  intOldLetterTypeId := Dm.Get_All_LetterLetter_Type.AsInteger;
+  blnHas_WordPage := dm.Get_All_Letterhas_WordPage.AsBoolean;
   OldDate             := Dm.Get_All_LetterRegistrationDate.AsString ;
-
 
   if (blnHas_WordPage) then
   begin
@@ -2224,7 +2237,7 @@ begin
     if  MainWordApplicationConnect then
     begin
       // Disconnect from Word
-      WordApplication.Disconnect;
+      WordApplicationMainForm.Disconnect;
       MainWordApplicationConnect := False;
     end;
 
@@ -2234,76 +2247,80 @@ begin
     end;
 
     // Connect to Word
-    WordApplication.Connect;
+    WordApplicationMainForm.Connect;
     MainWordApplicationConnect := True ;
 
     { TODO -oparsa : 14030626 }
     { TODO -oparsa : 14030107 }
     //WordApplication.Visible := True;
     { TODO -oparsa : 14030107 }
-    WordApplication.Caption:='Yeganeh';
+    WordApplicationMainForm.Caption:='Yeganeh';
     HNDL := FindWindow('OpusApp', PAnsiChar('Yeganeh'));
     SetForegroundWindow(HNDL);
     f := _TempPath+_WordFileName;
-    WordApplication.Documents.Open(f, EmptyParam, OReadOnly,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam);
-    if WordApplication.ActiveWindow.ActivePane.View.Type_ in [wdNormalView, wdOutlineView] then
-      WordApplication.ActiveWindow.ActivePane.View.Type_:= wdPrintView;
+    WordApplicationMainForm.Documents.Open(f, EmptyParam, OReadOnly,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam);
+    if WordApplicationMainForm.ActiveWindow.ActivePane.View.Type_ in [wdNormalView, wdOutlineView] then
+      WordApplicationMainForm.ActiveWindow.ActivePane.View.Type_:= wdPrintView;
 
     Application.ProcessMessages;
-    WordApplication.ActiveWindow.ActivePane.View.SeekView := wdSeekCurrentPageHeader; //«‰ ﬁ«· „ò«‰ ‰„« »Â Âœ— ’›ÕÂ ÊÊ—œ
+
+    //------------header word----//
+    WordApplicationMainForm.ActiveWindow.ActivePane.View.SeekView := wdSeekCurrentPageHeader; //«‰ ﬁ«· „ò«‰ ‰„« »Â Âœ— ’›ÕÂ ÊÊ—œ
     Application.ProcessMessages;
-    ReplaceInWord(WordApplication, '(('+IntToStr(oldIndicatorID)+'))', IndicatorId);
+    ReplaceInWord(WordApplicationMainForm, '(('+IntToStr(oldIndicatorID)+'))', IndicatorId);
     Application.ProcessMessages;
     { TODO -oparsa : 14030717 }
-    ReplaceInWord(WordApplication, '(( «—ÌŒ „— »ÿ »« ‘„«—Â œ»Ì—Œ«‰Â))', dm.Cdate(_Today));
+    ReplaceInWord(WordApplicationMainForm, '(( «—ÌŒ „— »ÿ »« ‘„«—Â œ»Ì—Œ«‰Â))', dm.Cdate(_Today));
     Application.ProcessMessages;
-    ReplaceInWord(WordApplication, '(('+dm.Cdate(OldDate)+'))', dm.Cdate(_Today));
+    ReplaceInWord(WordApplicationMainForm, '(('+dm.Cdate(OldDate)+'))', dm.Cdate(_Today));
     Application.ProcessMessages;
     { TODO -oparsa : 14030717 }
 
-    WordApplication.ActiveWindow.ActivePane.View.SeekView := wdSeekMainDocument;// «‰ ﬁ«· „ò«‰ ‰„« »Â ’›ÕÂ «’·Ì ÊÊ—œ
+
+    //-------detail word main body----------/////
+    WordApplicationMainForm.ActiveWindow.ActivePane.View.SeekView := wdSeekMainDocument;// «‰ ﬁ«· „ò«‰ ‰„« »Â ’›ÕÂ «’·Ì ÊÊ—œ
     Application.ProcessMessages;
-    
+
     { TODO -oparsa : 14030107 }
-    ReplaceInWord(WordApplication, '(('+IntToStr(oldIndicatorID)+'))', IndicatorId);
-    Application.ProcessMessages;
-
-    { TODO -oparsa : 14030717 }
-    ReplaceInWord(WordApplication, '(( «—ÌŒ „— »ÿ »« ‘„«—Â œ»Ì—Œ«‰Â))', dm.Cdate(_Today));
-    Application.ProcessMessages;
-    ReplaceInWord(WordApplication, '(('+dm.Cdate(OldDate)+'))', dm.Cdate(_Today));
+    ReplaceInWord(WordApplicationMainForm, '(('+IntToStr(oldIndicatorID)+'))', IndicatorId);
     Application.ProcessMessages;
     { TODO -oparsa : 14030717 }
+    ReplaceInWord(WordApplicationMainForm, '(( «—ÌŒ „— »ÿ »« ‘„«—Â œ»Ì—Œ«‰Â))', dm.Cdate(_Today));
+    Application.ProcessMessages;
+    ReplaceInWord(WordApplicationMainForm, '(('+dm.Cdate(OldDate)+'))', dm.Cdate(_Today));
+    Application.ProcessMessages;
+    { TODO -oparsa : 14030717 }
 
-    WordApplication.ActiveWindow.ActivePane.View.SeekView := wdSeekCurrentPageHeader;
+
+    WordApplicationMainForm.ActiveWindow.ActivePane.View.SeekView := wdSeekCurrentPageHeader;
     Application.ProcessMessages;
 
-    WordApplication.Selection.WholeStory;
-    Wordtxt := WordApplication.Selection.Text;
+    WordApplicationMainForm.Selection.WholeStory;
+    Wordtxt := WordApplicationMainForm.Selection.Text;
 
     if pos('(('+IntToStr(oldIndicatorID)+'))',Wordtxt) >0 then
     begin
-      ReplaceInWord(WordApplication, '(('+IntToStr(oldIndicatorID)+'))', IndicatorId);
+      ReplaceInWord(WordApplicationMainForm, '(('+IntToStr(oldIndicatorID)+'))', IndicatorId);
     end;
     Application.ProcessMessages;
 
-    WordApplication.ActiveWindow.ActivePane.View.SeekView := wdSeekMainDocument;
+    WordApplicationMainForm.ActiveWindow.ActivePane.View.SeekView := wdSeekMainDocument;
     Application.ProcessMessages;
     
     Wordtxt := '' ;
-    WordApplication.Selection.WholeStory;
-    Wordtxt := WordApplication.Selection.Text;
+    WordApplicationMainForm.Selection.WholeStory;
+    Wordtxt := WordApplicationMainForm.Selection.Text;
 
     if pos('(('+IntToStr(oldIndicatorID)+'))',Wordtxt) >0 then
     begin
-      ReplaceInWord(WordApplication, '(('+IntToStr(oldIndicatorID)+'))', IndicatorId);
+      ReplaceInWord(WordApplicationMainForm, '(('+IntToStr(oldIndicatorID)+'))', IndicatorId);
     end;
     Application.ProcessMessages;
 
     if Dm.FullTextSearch then
-      Dm.InsertTextIntoLetter(WordApplication,dm.Get_All_Letterletterid.AsInteger);
+      Dm.InsertTextIntoLetter(WordApplicationMainForm,dm.Get_All_Letterletterid.AsInteger);
 
-    WordApplication.Visible := True;
+    WordApplicationMainForm.Visible := True;
     Application.ProcessMessages;
     { TODO -oparsa : 14030107 }
 
@@ -2607,7 +2624,7 @@ end;
 procedure TMainForm.FormShow(Sender: TObject);
 begin
   inherited;
-  
+
  // pnlMain.Visible := True;
  // pnlMain.Enabled := True;
 
@@ -2750,6 +2767,8 @@ begin
 //     RefreshQuery;
 //     isRunQuery:=True;
 //  end;
+  N87.Visible := False;
+  ActFolderToLetter .Visible := False;
 end;
 
 Procedure TMainForm.Message_News;
@@ -2790,7 +2809,7 @@ var
   C1,C2,C3:Tcolor;
 begin
   inherited;
-  {
+  
   C1 := lettersDbGrid.Color;
  // C2 := lettersDbGrid.NearColor(C1,30);
  // C3 := lettersDbGrid.NearColor(C2,30);
@@ -2812,7 +2831,7 @@ begin
 
   if Dm.Get_All_Letter.FieldByName('ClassificationId').asinteger>1 then
     Color := LowOrange;
-    }
+
 end;
 
 procedure TMainForm.alockExecute(Sender: TObject);
@@ -4046,8 +4065,8 @@ end;
 procedure TMainForm.ExactCopyExecute(Sender: TObject);
 begin
    inherited;
-   ExactCopyF:=TExactCopyF.Create(Application);
-   ExactCopyF.LetterID:=dm.Get_All_LetterLetterID.AsInteger;
+   ExactCopyF:= TExactCopyF.Create(Application);
+   ExactCopyF.LetterID:= dm.Get_All_LetterLetterID.AsInteger;
    ExactCopyF.TypeId:=1;
    ExactCopyF.ShowModal;
 end;
@@ -5210,7 +5229,7 @@ begin
   fDbName.Free;
 end;
 
-procedure TMainForm.WordApplicationDocumentBeforeClose(ASender: TObject;
+procedure TMainForm.WordApplicationMainFormDocumentBeforeClose(ASender: TObject;
   const Doc: _Document; var Cancel: WordBool);
 var
   ver : Integer;
@@ -5224,20 +5243,20 @@ begin
       ShowMessage('WORD ERROR B: ');
 
       _Word_Is_Opened := False;
-      WordApplication.disconnect;
+      WordApplicationMainForm.disconnect;
       { TODO -oparsa : 14030626 }
       MainWordApplicationConnect := False;
       { TODO -oparsa : 14030626 }
       Exit;
     end;
 
-    ver := StrToint(copy(WordApplication.Version,0,length(TWordApplication(ASender).Version)-2));
+    ver := StrToint(copy(WordApplicationMainForm.Version,0,length(TWordApplication(ASender).Version)-2));
     if ver < 12 then
     begin
       ShowMessage('WORD ERROR C: ');
 
       _Word_Is_Opened := False;
-      WordApplication.disconnect;
+      WordApplicationMainForm.disconnect;
       Exit;
     end;
 
@@ -5247,10 +5266,10 @@ begin
     //WordApplication.disconnect;
 
     // close one word                   or special one document close
-    WordApplication.ActiveDocument.Close(SaveChanges,EmptyParam,EmptyParam);
+    WordApplicationMainForm.ActiveDocument.Close(SaveChanges,EmptyParam,EmptyParam);
 
     // close all word application        or close word
-    WordApplication.Quit;
+    WordApplicationMainForm.Quit;
 
     //_Dont_save_Word := not SaveChanges;
     dm.Timer_SaveWord.Enabled:=True; //–ŒÌ—Â ›«Ì· Ê—œ œ— »«‰ﬂ «ÿ·«⁄« 
@@ -5385,6 +5404,21 @@ begin
        UpAndDownBtn.ImageIndex := 91 ;
        YRotateLabel1.Caption:='>';
    end;
+end;
+
+procedure TMainForm.N87Click(Sender: TObject);
+begin
+  inherited;
+//
+end;
+
+procedure TMainForm.ActFolderToLetterExecute(Sender: TObject);
+begin
+  inherited;
+   //›—„  »œÌ· ÅÊ‘Â »Â ”‰œ
+  FMFolderToLetter := TFMFolderToLetter.Create(Self);
+  FMFolderToLetter.ShowModal;
+  RefreshQuery;
 end;
 
 end.

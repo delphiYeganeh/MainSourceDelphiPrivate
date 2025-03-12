@@ -7,7 +7,8 @@ uses
   YDbgrid, Controls, xpBitBtn,  ExtActns, Classes, ActnList, DB,
   BaseUnit, Dialogs, XPStyleActnCtrls, ActnMan, Grids, DBGrids , Buttons, SysUtils,
   StdCtrls,  ADODB, windows, Menus, ExtCtrls, IdBaseComponent, IdCoder,
-  IdCoder3to4, IdCoderMIME, AppEvnts, xpPanel, AdvGlowButton;
+  IdCoder3to4, IdCoderMIME, AppEvnts, xpPanel, AdvGlowButton, WordXP, ComObj ,
+  OleServer;
 
 type
   TFrAddLetterData = class(TMBaseForm)
@@ -97,6 +98,9 @@ end;
 procedure TFrAddLetterData.ADeleteAttachmentsClick(Sender: TObject);
 begin
   inherited;
+  if DBGrid2.DataSource.DataSet.RecordCount = 0 then
+    Exit;
+      
   if messageShow(39,True) then
   begin
     if Letter_Or_Erja='Letter' then
@@ -321,6 +325,7 @@ procedure TFrAddLetterData.AddBtnClick(Sender: TObject);
         N1Click(self);
       end;
   end;
+
 end;
 
 //procedure TFrAddLetterData.btnOpenClick(Sender: TObject);
@@ -352,6 +357,9 @@ end;
 
 procedure TFrAddLetterData.BitBtn2Click(Sender: TObject);
 begin
+  if DBGrid2.DataSource.DataSet.RecordCount = 0 then
+    Exit;
+    
   if Letter_Or_Erja = 'Letter' then
   begin
     SaveDialog.Filter := UpperCase(dm.Get_LetterData_by_LetterIDExt.asstring) + ' Files|*.' + dm.Get_LetterData_by_LetterIDExt.asstring;
@@ -417,6 +425,8 @@ var
   f:string;
   ArchivLetID : integer;
 begin
+  if DBGrid2.DataSource.DataSet.RecordCount = 0 then
+    Exit;
   if Letter_Or_Erja='Letter' then
   begin
     with dm,Get_LetterData_by_LetterDataID do
@@ -493,6 +503,7 @@ begin
         SysUtils.FileSetReadOnly(pchar(f), false);
         DeleteFile(pchar(f));
         Get_LetterData_by_LetterDataIDImage.SaveToFile(f);
+
         //if Get_LetterData_by_LetterIDExt.AsString = 'txt' then
         //  ShellExecute(Handle, 'open', PChar('wordpad'), pchar(f), nil, SW_SHOWNORMAL)
         //else
@@ -551,6 +562,8 @@ begin
 end;
 
 procedure TFrAddLetterData.N1Click(Sender: TObject);
+var
+   templetterid : Integer;
 begin
   inherited;
   if Letter_Or_Erja = 'Letter' then
@@ -563,7 +576,6 @@ begin
 
   if Letter_Or_Erja = 'Erja' then
   begin
-   begin
      dm.Get_RecommitePayvast_by_RecommiteID.Parameters.ParamByName('@RecommiteID').Value := RecommitID;
      dm.Get_RecommitePayvast_by_RecommiteID.Open;
     dm.Get_RecommitePayvast_by_RecommiteID.Insert;
@@ -598,7 +610,18 @@ begin
   Dm.Get_LetterData_by_LetterID.Parameters.ParamByName('@LetterID').Value := LetterID;
   Dm.Get_LetterData_by_LetterID.Open;
              }
-   dm.Get_RecommitePayvast_by_RecommiteID.Close;
+  dm.Get_RecommitePayvast_by_RecommiteID.Close;
+
+  templetterid := Dm.Get_LetterData_by_LetterIDletterid.AsInteger
+  if Letter_Or_Erja = 'Letter' then
+  begin
+    with dm,Get_LetterData_by_LetterID do
+    begin
+      Close;
+      Parameters.ParamByName('@LetterID').Value:= templetterid ;
+      Open;
+    end;
+  end;
 end;
 
 procedure TFrAddLetterData.N2Click(Sender: TObject);

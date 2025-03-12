@@ -15,7 +15,7 @@ type
     Aclose: TAction;
     AText: TAction;
     WordDocument: TWordDocument;
-    WordApplication: TWordApplication;
+    WordAppTemp: TWordApplication;
     TimerWord: TTimer;
     Panel1: TPanel;
     YDBGrid2: TYDBGrid;
@@ -43,7 +43,7 @@ type
     procedure YDBGridDblClick(Sender: TObject);
     procedure ATextExecute(Sender: TObject);
     procedure ButtonEditClick(Sender: TObject);
-    procedure WordApplicationDocumentBeforeClose(ASender: TObject;
+    procedure WordAppTempDocumentBeforeClose(ASender: TObject;
               const Doc: _Document; var Cancel: WordBool);
     procedure ButtonViewClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -153,7 +153,7 @@ begin
     tru := True;
     olv := wdOpenFormatAuto;
     IsError := False;
-    with WordApplication do
+    with WordAppTemp do
     begin
         try
           Caption := 'Yeganeh';
@@ -211,7 +211,7 @@ begin
 
         try
         
-          WordApplication.Visible := True;
+          WordAppTemp.Visible := True;
           ChangeFileOpenDirectory(_TempPath);
           if OD then
             f :=_WordFileName +'.docx'
@@ -231,11 +231,11 @@ begin
             ActiveWindow.ActivePane.View.Type_:= wdPrintView;
 
           ItemIndex := 1;
-          WordDocument.ConnectTo(WordApplication.Documents.Item(itemindex));
+          WordDocument.ConnectTo(WordAppTemp.Documents.Item(itemindex));
 
         except  on e:exception do
          begin
-           WordApplication.Visible := False;
+           WordAppTemp.Visible := False;
            MBaseForm.MessageShowString('›—„  ›«Ì· «‰ Œ«»Ì ÃÂ  »«“ ‘œ‰ „‰«”» ‰„Ì »«‘œ' +Char(10) + e.Message ,False);
            EnableDsiable(True);
          end  
@@ -263,16 +263,16 @@ begin
   { TODO -oparsa : 14030505-bug349 }
   //WordApplication.Caption := 'Yeganeh';
   try
-    WordApplication.Caption := 'Yeganeh';
+    WordAppTemp.Caption := 'Yeganeh';
   except
     IsError := True;
   end;
 
   if  IsError then
-    WordApplication.Caption := 'Yeganeh';
+    WordAppTemp.Caption := 'Yeganeh';
   { TODO -oparsa : 14030505-bug349 }
 
-  with WordApplication do
+  with WordAppTemp do
   begin
     Visible := True;
 
@@ -292,7 +292,7 @@ begin
       ActiveWindow.ActivePane.View.Type_:= wdPrintView;
 
     ItemIndex := 1;
-    WordDocument.ConnectTo(WordApplication.Documents.Item(itemindex));
+    WordDocument.ConnectTo(WordAppTemp.Documents.Item(itemindex));
   end;{with wordapplication}
 end;
 
@@ -332,7 +332,7 @@ begin
   end;
 end;
 
-procedure TEditTemplates.WordApplicationDocumentBeforeClose(ASender: TObject;
+procedure TEditTemplates.WordAppTempDocumentBeforeClose(ASender: TObject;
   const Doc: _Document; var Cancel: WordBool);
 var
   fileName: OleVariant;
@@ -346,7 +346,7 @@ begin
     Saved := False;
   end
   else EnableDsiable(True);
-  WordApplication.Disconnect;
+  WordAppTemp.Disconnect;
   { TODO -oparsa : 14030605-bug349 }
   WordDocument.Disconnect;
   { TODO -oparsa : 14030605-bug349 }
@@ -439,7 +439,7 @@ begin
   ItemIndex := 1;
 
   try
-    ver := StrToint(copy(WordApplication.Version,0,length(WordApplication.Version)-2));
+    ver := StrToint(copy(WordAppTemp.Version,0,length(WordAppTemp.Version)-2));
   except
     IsError := True;
   end;
@@ -480,14 +480,14 @@ begin
     Exit;
   end;
 
-  WordApplication.Visible := True;
-  WordApplication.Caption := 'Yeganeh';
+  WordAppTemp.Visible := True;
+  WordAppTemp.Caption := 'Yeganeh';
 
   {Create new document}
   Template := EmptyParam;
   NewTemplate := False;
-  WordApplication.Documents.Add(Template, NewTemplate,Template,Template);
-  WordDocument.ConnectTo(WordApplication.Documents.Item(ItemIndex));
+  WordAppTemp.Documents.Add(Template, NewTemplate,Template,Template);
+  WordDocument.ConnectTo(WordAppTemp.Documents.Item(ItemIndex));
 
   { TODO -oparsa : 14030505-bug349 }
 end;
@@ -685,9 +685,9 @@ begin
           { TODO -oparsa : 14030505-bug349 }
         end;
 
-        en := WordApplication.Selection.End_ - 1;
+        en := WordAppTemp.Selection.End_ - 1;
         if en = 0 then
-          WordApplication.Selection.TypeText(' ');
+          WordAppTemp.Selection.TypeText(' ');
       end
       else
       begin

@@ -286,10 +286,10 @@ inherited FromOrgForm: TFromOrgForm
           Transparent = True
         end
         object lblSite: TLabel
-          Left = 82
+          Left = 0
           Top = 68
-          Width = 57
-          Height = 13
+          Width = 139
+          Height = 37
           Caption = #1587#1575#1586#1605#1575#1606' '#1607#1575
           Font.Charset = ARABIC_CHARSET
           Font.Color = clWindowText
@@ -298,7 +298,6 @@ inherited FromOrgForm: TFromOrgForm
           Font.Style = [fsBold]
           ParentFont = False
           Transparent = True
-          WordWrap = True
         end
         object Image1: TImage
           Left = 42

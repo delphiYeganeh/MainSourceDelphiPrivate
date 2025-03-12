@@ -287,7 +287,7 @@ begin
 end;
 
 procedure TFrAddLetterData.AddBtnClick(Sender: TObject);
- begin
+begin
   if (dm.ArchiveConnection.Connected) and (Letter_Or_Erja = 'Letter') then
   begin
     popAdd.Popup(FrAddLetterData.left + AddBtn.Left + 130, FrAddLetterData.Top + AddBtn.Height + 28 + Panel1.Top + AddBtn.Top);

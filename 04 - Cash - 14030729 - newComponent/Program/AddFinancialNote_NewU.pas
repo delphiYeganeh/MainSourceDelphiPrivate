@@ -120,6 +120,7 @@ type
     procedure BitBtn13Click(Sender: TObject);
     procedure FormCanResize(Sender: TObject; var NewWidth,
       NewHeight: Integer; var Resize: Boolean);
+    procedure FormCreate(Sender: TObject);
 
   private
     { Private declarations }
@@ -766,6 +767,11 @@ begin
   else Resize := True;
 
   { TODO -oparsa : 14030628- bug369 }
+end;
+
+procedure TFrAddFinancialNote_New.FormCreate(Sender: TObject);
+begin
+  //DBNav_Setup(DBNavigator1);  
 end;
 
 end.

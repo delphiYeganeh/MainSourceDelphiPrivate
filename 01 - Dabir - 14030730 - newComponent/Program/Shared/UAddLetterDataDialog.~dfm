@@ -180,7 +180,7 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
         Top = 20
         Width = 274
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         Ctl3D = True
         DataField = 'description'
         DataSource = DSForm
@@ -194,7 +194,7 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
         Top = 48
         Width = 274
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         BiDiMode = bdLeftToRight
         DataField = 'ExtentionTitle'
         DataSource = DSForm
@@ -207,7 +207,7 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
         Top = 72
         Width = 253
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         BiDiMode = bdLeftToRight
         ParentBiDiMode = False
         TabOrder = 2
@@ -227,7 +227,7 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
         Top = 96
         Width = 97
         Height = 21
-        Anchors = [akTop, akRight]
+        Anchors = [akLeft, akTop, akRight]
         DataField = 'VersionDate'
         DataSource = DSForm
         TabOrder = 4

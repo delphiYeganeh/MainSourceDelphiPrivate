@@ -30,7 +30,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
       Top = 1
       Width = 837
       Height = 648
-      ActivePage = xpForms
+      ActivePage = xpTabSheet1
       Align = alClient
       ParentShowHint = False
       ShowHint = True
@@ -2518,7 +2518,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
             Left = 1
             Top = 113
             Width = 827
-            Height = 80
+            Height = 117
             Align = alClient
             Caption = '&'#1605#1590#1605#1608#1606' '#1606#1575#1605#1607
             Font.Charset = ARABIC_CHARSET
@@ -2530,10 +2530,10 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
             TabOrder = 1
             DesignSize = (
               827
-              80)
+              117)
             object Label14: TLabel
               Left = 731
-              Top = 54
+              Top = 91
               Width = 78
               Height = 13
               Anchors = [akRight, akBottom]
@@ -2546,8 +2546,8 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
               ParentFont = False
             end
             object SBSimpleEditor: TAdvGlowButton
-              Left = 6
-              Top = 97
+              Left = 5
+              Top = 84
               Width = 23
               Height = 22
               Cursor = crHandPoint
@@ -2582,7 +2582,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
               Left = 2
               Top = 15
               Width = 823
-              Height = 30
+              Height = 67
               Align = alTop
               Anchors = [akLeft, akTop, akRight, akBottom]
               BiDiMode = bdRightToLeft
@@ -2602,7 +2602,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
             end
             object DBLookupComboBox5: TDBLookupComboBox
               Left = 416
-              Top = 50
+              Top = 87
               Width = 310
               Height = 21
               Anchors = [akRight, akBottom]
@@ -2620,7 +2620,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
             end
             object sbSubjectDel: TAdvGlowButton
               Left = 394
-              Top = 49
+              Top = 86
               Width = 21
               Height = 21
               Hint = #1581#1584#1601
@@ -2636,6 +2636,58 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
               ShowHint = True
               TabOrder = 3
               OnClick = sbSubjectDelClick
+              Appearance.ColorChecked = 16111818
+              Appearance.ColorCheckedTo = 16367008
+              Appearance.ColorDisabled = 15921906
+              Appearance.ColorDisabledTo = 15921906
+              Appearance.ColorDown = 16111818
+              Appearance.ColorDownTo = 16367008
+              Appearance.ColorHot = 16117985
+              Appearance.ColorHotTo = 16372402
+              Appearance.ColorMirrorHot = 16107693
+              Appearance.ColorMirrorHotTo = 16775412
+              Appearance.ColorMirrorDown = 16102556
+              Appearance.ColorMirrorDownTo = 16768988
+              Appearance.ColorMirrorChecked = 16102556
+              Appearance.ColorMirrorCheckedTo = 16768988
+              Appearance.ColorMirrorDisabled = 11974326
+              Appearance.ColorMirrorDisabledTo = 15921906
+            end
+            object ECESend: TDBCheckBox
+              Left = 34
+              Top = 89
+              Width = 97
+              Height = 17
+              Caption = #1575#1585#1587#1575#1604' '#1580#1608#1575#1576' '#1606#1575#1605#1607
+              DataField = 'ECEAnswer'
+              DataSource = DSForm
+              ReadOnly = True
+              TabOrder = 4
+              ValueChecked = 'True'
+              ValueUnchecked = 'False'
+            end
+            object btnSubject: TAdvGlowButton
+              Left = 372
+              Top = 86
+              Width = 21
+              Height = 21
+              Cursor = crHandPoint
+              Anchors = [akRight, akBottom]
+              Font.Charset = ARABIC_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ImageIndex = 26
+              Images = Dm.ImageList_MainNew
+              NotesFont.Charset = DEFAULT_CHARSET
+              NotesFont.Color = clWindowText
+              NotesFont.Height = -11
+              NotesFont.Name = 'Tahoma'
+              NotesFont.Style = []
+              ParentFont = False
+              TabOrder = 5
+              OnClick = btnSubjectClick
               Appearance.ColorChecked = 16111818
               Appearance.ColorCheckedTo = 16367008
               Appearance.ColorDisabled = 15921906
@@ -2757,36 +2809,6 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
               Appearance.ColorMirrorDisabledTo = 15921906
             end
           end
-          object gbDetail: TGroupBox
-            Left = 1
-            Top = 193
-            Width = 827
-            Height = 37
-            Align = alBottom
-            Color = clBtnFace
-            ParentColor = False
-            TabOrder = 3
-            object lblHasForms: TLabel
-              Left = 756
-              Top = 16
-              Width = 57
-              Height = 13
-              Caption = 'lblHasForms'
-            end
-            object ECESend: TDBCheckBox
-              Left = 10
-              Top = 12
-              Width = 97
-              Height = 17
-              Caption = #1575#1585#1587#1575#1604' '#1580#1608#1575#1576' '#1606#1575#1605#1607
-              DataField = 'ECEAnswer'
-              DataSource = DSForm
-              ReadOnly = True
-              TabOrder = 0
-              ValueChecked = 'True'
-              ValueUnchecked = 'False'
-            end
-          end
           object pnlDetail: TxpPanel
             Left = 1
             Top = 230
@@ -2815,7 +2837,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
             BGImageAlign = iaStretch
             Color = clNone
             Align = alBottom
-            TabOrder = 4
+            TabOrder = 3
             object CenterSec: TYCheckGroupBox
               Left = 1
               Top = 1
@@ -3914,8 +3936,8 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
       end
     end
     object DBGToORG: TYDBGrid
-      Left = 95
-      Top = 219
+      Left = 127
+      Top = 99
       Width = 597
       Height = 161
       Cursor = crHandPoint
@@ -3968,18 +3990,35 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
       Left = 1
       Top = 1
       Width = 837
-      Height = 5
+      Height = 25
       Anchors = [akLeft, akTop, akRight]
       BevelOuter = bvNone
       ParentColor = True
       TabOrder = 2
+      object gbDetail: TGroupBox
+        Left = 0
+        Top = 0
+        Width = 837
+        Height = 25
+        Align = alClient
+        Color = clBtnFace
+        ParentColor = False
+        TabOrder = 0
+        object lblHasForms: TLabel
+          Left = 756
+          Top = 7
+          Width = 57
+          Height = 13
+          Caption = 'lblHasForms'
+        end
+      end
     end
   end
   inherited DSForm: TDataSource
     AutoEdit = False
     DataSet = Select_Letter
     OnDataChange = DSFormDataChange
-    Left = 249
+    Left = 297
     Top = 155
   end
   inherited ActionList: TActionList
@@ -4011,8 +4050,8 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
         Precision = 10
         Value = Null
       end>
-    Left = 122
-    Top = 240
+    Left = 298
+    Top = 208
     object Select_LetterFromResponsibleStafferTitle: TWideStringField
       Alignment = taRightJustify
       FieldKind = fkLookup
@@ -4465,7 +4504,7 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
           end
           item
             Action = DataSetEdit
-            ImageIndex = 37
+            ImageIndex = 2
             ShortCut = 115
           end
           item
@@ -4949,8 +4988,8 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
     end
   end
   object XMLDocument1: TXMLDocument [17]
-    Left = 424
-    Top = 264
+    Left = 448
+    Top = 224
     DOMVendorDesc = 'MSXML'
   end
   object IdDecoderMIME1: TIdDecoderMIME [18]
@@ -5112,8 +5151,8 @@ inherited ReceivedLetterInputForm: TReceivedLetterInputForm
         DataType = ftInteger
         Value = Null
       end>
-    Left = 330
-    Top = 272
+    Left = 402
+    Top = 224
     object Ado_CountIncommingNOCnt: TIntegerField
       FieldName = 'Cnt'
     end

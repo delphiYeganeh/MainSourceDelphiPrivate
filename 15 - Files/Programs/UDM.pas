@@ -67,8 +67,8 @@ type
    procedure RenameImagesInFolder(const FolderPath: string; const NewNamePrefix: string;Memo: TMemo; CopyFirst : Integer = 0);
    procedure ReadAndSortStrings (var Strings: Array of Integer);
    procedure QuickSort(var A: array of Integer; Low, High: Integer);
-   procedure CreateExcelImagesInFolder(const FolderPath: string; const FolderName: string; CountPic : Integer = 0);
-   function  CountFilesInFolder(const FolderPath: string; const Prefix :String): Integer;
+   procedure CreateExcelImagesInFolder(const FolderPath: string; const FolderName: string; CountPic : Integer = 0;  CountAllPic: Integer = 0 );
+   function  CountFilesInFolder(const FolderPath: string; const Prefix :String; AllCount : Boolean = false): Integer;
   end;
 
 const
@@ -88,6 +88,7 @@ var
   _PictureMode : Boolean;
   _ExcelMode : Boolean ;
   _ExcelPicMode  : Boolean ;
+  _FolderMode : Boolean;
   DM: TDM;
 
 
@@ -484,6 +485,8 @@ var
   i,l: Integer;
   NewFileName, FileExt: string;
   SearchRec: TSearchRec;
+  numberLen : String;
+  filenameStr :String;
   //slMain              : TStringList;
 begin
   i := 0 ;
@@ -500,6 +503,34 @@ begin
       // ¬“«œ ò—œ‰ „‰«»⁄
       SysUtils.FindClose(SearchRec);
     end;
+  end;
+
+  numberLen := inttostr(i);
+
+  if length(numberLen) = 1 then
+    numberLen := '000' + numberLen
+  else
+  if Length(numberLen) = 2 then
+    numberLen := '00' + numberLen
+  else
+  if length(numberLen) = 3 then
+    numberLen := '0' + numberLen;
+
+  if CopyFirst in [3] then
+  begin
+    if i>0 then
+    begin
+      filenameStr := IncludeTrailingPathDelimiter(FolderPath)+ '\' + NewNamePrefix +'-'+numberLen + '.jpg' ;
+      if FileExists(filenameStr) then
+      begin
+        SysUtils.FileSetReadOnly(PChar(filenameStr), false);
+        DeleteFile(PChar(filenameStr));
+        memo.Lines.Add ( '›«Ì· »« ‰«„ „‘Œ’ ‘œÂ œ— „”Ì— Õ–› ‘œ' + '  '+IncludeTrailingPathDelimiter(FolderPath)+ '  ' + NewNamePrefix +'-'+numberLen +'.jpg') ;
+      end
+      else
+        memo.Lines.Add ( '****"›«Ì·  œ— „”Ì— "Ì«›  ‰‘œ****' + '  '+IncludeTrailingPathDelimiter(FolderPath)+ '  ' + NewNamePrefix +'-'+numberLen +'.jpg') ;
+    end;
+    exit;
   end;
 
   SetLength(Files, i);
@@ -659,7 +690,7 @@ begin
   end;
 end;
 
-procedure TDM.CreateExcelImagesInFolder(const FolderPath,  FolderName: string;  CountPic: Integer);
+procedure TDM.CreateExcelImagesInFolder(const FolderPath,  FolderName: string;  CountPic: Integer;  CountAllPic: Integer);
 var
   ExcelApp, Workbook, Worksheet: Variant;
   i, j: Integer;
@@ -686,14 +717,16 @@ begin
       Workbook.SaveAs(FilePath);
       // «‰ Œ«» «Ê·Ì‰ Worksheet
       Worksheet := Workbook.Worksheets[1];
-      for j := 1 to 3 do
+      for j := 1 to 4 do
       begin
         if j=1 then
           Worksheet.Cells[1, j] := '—œÌ›'
         else if j=2 then
           Worksheet.Cells[1, j] := '‰«„ ›Ê·œ—'
         else if j=3 then
-          Worksheet.Cells[1, j] := ' ⁄œ«œ „Å' ;
+          Worksheet.Cells[1, j] := ' ⁄œ«œ „Å'
+        else if j=4 then
+          Worksheet.Cells[1, j] := ' ⁄œ«œ ò· ›«Ì·' ;
       end;
     end;
 
@@ -713,14 +746,17 @@ begin
         Worksheet.Cells[i, j] := Format('Row %d, Col %d', [i, j]);
                }
 
-      for j := 1 to 3 do
+      for j := 1 to 4 do
       begin
         if j=1 then
           Worksheet.Cells[LastFilledRow, j] := LastFilledRow -1
         else if j=2 then
           Worksheet.Cells[LastFilledRow, j] := FolderName
         else if j=3 then
-          Worksheet.Cells[LastFilledRow, j] := CountPic ;
+          Worksheet.Cells[LastFilledRow, j] := CountPic
+        else if j=4 then
+          Worksheet.Cells[LastFilledRow, j] := CountAllPic;
+
       end;
     // –ŒÌ—Â ›«Ì· «ò”·
     //Workbook.SaveAs('C:\Temp\MyExcelFile.xlsx');
@@ -739,12 +775,14 @@ begin
   end;
 end;
 
-function TDM.CountFilesInFolder(const FolderPath, Prefix : String ): Integer;
+function TDM.CountFilesInFolder(const FolderPath, Prefix : String ; AllCount : Boolean ): Integer;
 var
   SearchRec: TSearchRec;
   FileCount: Integer;
+  ALLFileCount: Integer;
 begin
   FileCount := 0;
+  ALLFileCount := 0;
 
   // ‘—Ê⁄ Ã” ÃÊ »—«Ì ›«Ì·ùÂ« œ— ›Ê·œ—
   if (FindFirst(IncludeTrailingPathDelimiter(FolderPath) + '*.tif', faAnyFile, SearchRec) = 0) then
@@ -755,8 +793,12 @@ begin
       begin
         // »——”Ì «Ì‰òÂ ¬Ì« ¬Ì „ Ìò ›«Ì· «”  (‰Â Ìò ÅÊ‘Â)
         //if (SearchRec.Attr and faDirectory) = 0 then
-        if ((SearchRec.Attr and faDirectory) = 0) and (Pos(Prefix, trim(SearchRec.Name)) = 1) then
-          Inc(FileCount);
+        if ((SearchRec.Attr and faDirectory) = 0) then
+        begin
+          Inc(ALLFileCount);
+          if  (Pos(Prefix, trim(SearchRec.Name)) = 1) then
+            Inc(FileCount);
+        end;
       end;
     until FindNext(SearchRec) <> 0;
 
@@ -773,8 +815,12 @@ begin
       begin
         // »——”Ì «Ì‰òÂ ¬Ì« ¬Ì „ Ìò ›«Ì· «”  (‰Â Ìò ÅÊ‘Â)
         //if (SearchRec.Attr and faDirectory) = 0 then
-        if ((SearchRec.Attr and faDirectory) = 0) and (Pos(Prefix, trim(SearchRec.Name)) = 1) then
-          Inc(FileCount);
+        if ((SearchRec.Attr and faDirectory) = 0) then
+        begin
+          Inc(ALLFileCount);
+          if (Pos(Prefix, trim(SearchRec.Name)) = 1) then
+            Inc(FileCount);
+        end;
       end;
     until FindNext(SearchRec) <> 0;
 
@@ -782,6 +828,9 @@ begin
     SysUtils.FindClose(SearchRec);
   end;
 
+  if AllCount then
+    Result := ALLFileCount
+  else
   Result := FileCount;
 
 end;

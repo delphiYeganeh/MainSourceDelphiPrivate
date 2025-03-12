@@ -1,4 +1,111 @@
 
+{
+WordApp.Quit: «Ì‰ œ” Ê— »«⁄À »” Â ‘œ‰ »—‰«„Â Word „Ìù‘Êœ.
+
+WordApp.Disconnect: «Ì‰ œ” Ê— « ’«· »Ì‰ »—‰«„Â œ·›Ì Ê Word —« ﬁÿ⁄ „Ìùò‰œ.
+
+WordApp.Free: «Ì‰ œ” Ê— ‘Ì¡ TWordApplication —« «“ Õ«›ŸÂ ¬“«œ „Ìùò‰œ.
+-------------
+—«»ÿÂ »Ì‰ WordApplication Ê WordDocument:
+WordApplication ‘Ì¡ «’·Ì «”  òÂ »—‰«„Â Word —« ò‰ —· „Ìùò‰œ.
+
+«“ ÿ—Ìﬁ WordApplication „Ìù Ê«‰Ìœ »Â „Ã„Ê⁄Âù«Ì «“ ”‰œÂ« (Documents) œ” —”Ì œ«‘ Â »«‘Ìœ.
+
+Â— ”‰œ (WordDocument) »Œ‘Ì «“ WordApplication «”  Ê «“ ÿ—Ìﬁ WordApplication.Documents «ÌÃ«œ Ì« »«“ „Ìù‘Êœ.
+
+--„À«·
+var
+  WordApp, WordDoc: Variant;
+begin
+  // «ÌÃ«œ ‘Ì¡ WordApplication
+  WordApp := CreateOleObject('Word.Application');
+  WordApp.Visible := True;
+
+  // «ÌÃ«œ Ìò ”‰œ ÃœÌœ (WordDocument)
+  WordDoc := WordApp.Documents.Add;
+  WordDoc.Content.Text := '«Ì‰ Ìò „ ‰  ”  «” .';
+
+  // –ŒÌ—Â ”‰œ
+  WordDoc.SaveAs('C:\TestDocument.docx');
+
+  // »” ‰ ”‰œ
+  WordDoc.Close(False);
+
+  // »” ‰ »—‰«„Â Word
+  WordApp.Quit;
+end;
+
+-----
+var
+  WordApp: TWordApplication;
+  WordDocument: Variant;
+begin
+  WordApp := TWordApplication.Create(nil);
+  try
+    WordApp.Connect;  // « ’«· »Â Word
+    WordApp.Visible := True;  // ‰„«Ì‘ Word («Œ Ì«—Ì)
+
+    // «ÌÃ«œ Ì« »«“ ò—œ‰ Ìò ”‰œ
+    WordDocument := WordApp.Documents.Add;
+
+    // «‰Ã«„ ⁄„·Ì«  —ÊÌ ”‰œ
+    WordDocument.Content.Text := '«Ì‰ Ìò „ ‰  ”  «” .';
+
+    // –ŒÌ—Â ”‰œ («Œ Ì«—Ì)
+    WordDocument.SaveAs('C:\TestDocument.docx');
+
+    // »” ‰ ”‰œ
+    WordDocument.Close(False);  // False »Â „⁄‰«Ì ⁄œ„ –ŒÌ—Â  €ÌÌ—«  «” 
+
+    // »” ‰ « ’«· »Â Word
+    WordApp.Quit;
+    WordApp.Disconnect;
+  finally
+    WordApp.Free;  // ¬“«œ ò—œ‰ „‰«»⁄
+  end;
+end;
+
+---
+
+var
+  WordApp, WordDocument: Variant;
+begin
+  WordApp := CreateOleObject('Word.Application');
+  try
+    WordApp.Visible := True;
+
+    WordDocument := WordApp.Documents.Add;
+    WordDocument.Content.Text := '«Ì‰ Ìò „ ‰  ”  «” .';
+    WordDocument.SaveAs('C:\TestDocument.docx');
+    WordDocument.Close(False);
+
+    WordApp.Quit;
+  finally
+    WordApp := Unassigned;  // ¬“«œ ò—œ‰ Variant
+  end;
+end;
+---
+
+var
+  WordApp, WordDoc: Variant;
+begin
+  WordApp := CreateOleObject('Word.Application');
+  WordApp.Visible := True;
+
+  // «ÌÃ«œ Ìò ”‰œ ÃœÌœ
+  WordDoc := WordApp.Documents.Add;
+  WordDoc.Content.Text := '«Ì‰ Ìò „ ‰  ”  «” .';
+
+  // –ŒÌ—Â ”‰œ
+  WordDoc.SaveAs('C:\TestDocument.docx');
+
+  // »” ‰ ”‰œ
+  WordDoc.Close(False);
+end;
+
+
+}
+
 unit ExportToWord;
 
 interface
@@ -12,8 +119,8 @@ uses
 
 type
   TFExportToWord = class(TMBaseForm)
-    WordApplication: TWordApplication;
-    WordDocument: TWordDocument;
+    WordApp: TWordApplication;
+    WordDoc: TWordDocument;
     Dsel: TDataSource;
     SelectInfo: TADOStoredProc;
     Fields: TADODataSet;
@@ -51,7 +158,7 @@ type
     pnlMain: TPanel;
     procedure FormShow(Sender: TObject);
     procedure ExpToWordClick(Sender: TObject);
-    procedure WordApplicationDocumentBeforeClose(ASender: TObject;  const Doc: _Document; var Cancel: WordBool);
+    procedure WordAppDocumentBeforeClose(ASender: TObject;  const Doc: _Document; var Cancel: WordBool);
     procedure btnCloseClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure TimerWordTimer(Sender: TObject);
@@ -63,7 +170,7 @@ type
     procedure TimerExcelTimer(Sender: TObject);
     procedure ExcelApplicationWorkbookBeforeClose(ASender: TObject;
       const Wb: _Workbook; var Cancel: WordBool);
-    procedure WordApplicationDocumentOpen(ASender: TObject;
+    procedure WordAppDocumentOpen(ASender: TObject;
       const Doc: _Document);
   private
     WordApplicationversion : String;
@@ -141,11 +248,14 @@ procedure TFExportToWord.ReplaceAll(replaceType:TReplaceWordTypes);
 var
   W,new,old,no,noFW: widestring;
   selst,selen:integer;
+  ImagePath :string;
+  wdgotolast,wdgotopage,wdgotoabsolute : olevariant;
+  Range: Variant;
 procedure ReplaceInArea;
    begin
-       WordApplication.Selection.WholeStory;
-       w:=WordApplication.Selection.Text;
-       WordApplication.Selection.SetRange(0,0);
+       WordApp.Selection.WholeStory;
+       w:=WordApp.Selection.Text;
+       WordApp.Selection.SetRange(0,0);
        selst:=pos('((',w);
        selEn:=pos('))',w);
        Fields.Active:=True;
@@ -169,6 +279,29 @@ procedure ReplaceInArea;
                   new:='(('+dm.cdate(SelectInfo.FieldByName('indicatorID').AsString)+'))'
 
                // else if old = '‘„«—Â  —òÌ»Ì' then  new:=SelectInfo.FieldByName('RegistrationDate').AsString
+                else if (old='«„÷«') then
+                begin
+                  new:=' ';
+                  if SelectInfo.FieldByName('SignerID').AsString <>'' then
+                  begin
+                    // «‰ Œ«» ò· ”‰œ
+                    Range := WordDoc.Content;
+                    if Range.Find.Execute(FindText:='((«„÷«))') then
+                    begin
+                      // «ê— ò·„Â ÅÌœ« ‘œ° »Â ¬‰ ·ÊòÌ‘‰ »—Ê
+                      Range.Select;
+                    end;
+                    Open_UserSign(StrToInt(SelectInfo.FieldByName('SignerID').AsString));
+                    if not dm.Select_UserSignUserSign.IsNull then
+                      dm.Select_UserSignUserSign.SaveToFile(ImagePath);
+                    if FileExists(ImagePath) then
+                    begin
+                      WordApp.selection.inlineshapes.addpicture(ImagePath,EmptyParam,EmptyParam,EmptyParam);
+                      SysUtils.FileSetReadOnly(PChar(ImagePath), false);
+                      DeleteFile(PChar(ImagePath));
+                    end;
+                  end;
+                end
                 else if SelectInfo.FieldByName(FieldsFieldName.AsString).IsNull then
                   new:=' '
                 else if (replaceType in [rwtLetter,rwtDraft]) then
@@ -191,7 +324,7 @@ procedure ReplaceInArea;
            //---
 
            if new<>'' then
-             MainForm.ReplaceInWord(WordApplication,'(('+old+'))',{CorrectFarsi}(new));
+             MainForm.ReplaceInWord(WordApp,'(('+old+'))',{CorrectFarsi}(new));
 
            dm.Replace(w,'(('+old+'))',new);
 
@@ -202,76 +335,110 @@ procedure ReplaceInArea;
 
 
 begin
+   ImagePath := _TempPath+'yeganehWORDsign.jpg' ;
+
+
    Application.ProcessMessages;
    no := SelectInfo.FieldByName('Innerno').AsString;
    noFW := SelectInfo.FieldByName('innernoForWord1').AsString;
-   WordDocument.ActiveWindow.ActivePane.View.SeekView := wdSeekCurrentPageHeader;
+   WordDoc.ActiveWindow.ActivePane.View.SeekView := wdSeekCurrentPageHeader;
 
 
    Application.ProcessMessages;
-   MainForm.ReplaceInWord(WordApplication,'((‘„«—Â  —òÌ»Ì))',dm.Cdate(no));
+   MainForm.ReplaceInWord(WordApp,'((‘„«—Â  —òÌ»Ì))',dm.Cdate(no));
    Application.ProcessMessages;
-   MainForm.ReplaceInWord(WordApplication,'((‘„«—Â  —òÌ»Ì Ê—œ))',dm.Cdate(noFW));
+   MainForm.ReplaceInWord(WordApp,'((‘„«—Â  —òÌ»Ì Ê—œ))',dm.Cdate(noFW));
    Application.ProcessMessages;
-   MainForm.ReplaceInWord(WordApplication,'((‘„«—Â  —òÌ»Ì Word))',dm.Cdate(noFW));
-   Application.ProcessMessages;
-   { TODO -oparsa : 1402-12-19 }
-   MainForm.ReplaceInWord(WordApplication,'((‘„«—Â  —òÌ»Ì))',dm.Cdate(no));
-   Application.ProcessMessages;
-   MainForm.ReplaceInWord(WordApplication,'((‘„«—Â  —ﬂÌ»Ì Ê—œ))',dm.Cdate(noFW));
-   Application.ProcessMessages;
-   MainForm.ReplaceInWord(WordApplication,'((‘„«—Â  —ﬂÌ»Ì Word))',dm.Cdate(noFW));
+   MainForm.ReplaceInWord(WordApp,'((‘„«—Â  —òÌ»Ì Word))',dm.Cdate(noFW));
    Application.ProcessMessages;
    { TODO -oparsa : 1402-12-19 }
-   MainForm.ReplaceInWord(WordApplication,'(( «—ÌŒ ‰«„Â))',dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString) );
+   MainForm.ReplaceInWord(WordApp,'((‘„«—Â  —òÌ»Ì))',dm.Cdate(no));
+   Application.ProcessMessages;
+   MainForm.ReplaceInWord(WordApp,'((‘„«—Â  —ﬂÌ»Ì Ê—œ))',dm.Cdate(noFW));
+   Application.ProcessMessages;
+   MainForm.ReplaceInWord(WordApp,'((‘„«—Â  —ﬂÌ»Ì Word))',dm.Cdate(noFW));
+   Application.ProcessMessages;
+   { TODO -oparsa : 1402-12-19 }
+   MainForm.ReplaceInWord(WordApp,'(( «—ÌŒ ‰«„Â))',dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString) );
    Application.ProcessMessages;
 
    { TODO -oparsa : 14030717 }
-   if replaceType = rwtLetter then
+   if replaceType = rwtLetter then // ‰«„Â
    begin
-      MainForm.ReplaceInWord(WordApplication, '(( «—ÌŒ „— »ÿ »« ‘„«—Â œ»Ì—Œ«‰Â))', dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString)) ;
-      MainForm.ReplaceInWord(WordApplication, '(('+dm.Cdate(SelectInfo.FieldByName('CenterDate').AsString)+'))', dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString)) ;
+      MainForm.ReplaceInWord(WordApp, '(( «—ÌŒ „— »ÿ »« ‘„«—Â œ»Ì—Œ«‰Â))', dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString)) ;
+      MainForm.ReplaceInWord(WordApp, '(('+dm.Cdate(SelectInfo.FieldByName('CenterDate').AsString)+'))', dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString)) ;
    end
-   else
-     MainForm.ReplaceInWord(WordApplication, '(( «—ÌŒ „— »ÿ »« ‘„«—Â œ»Ì—Œ«‰Â))', '(('+dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString)+'))' ) ;
+   else    // ÅÌ‘ ‰ÊÌ”
+     MainForm.ReplaceInWord(WordApp, '(( «—ÌŒ „— »ÿ »« ‘„«—Â œ»Ì—Œ«‰Â))', '(('+dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString)+'))' ) ;
 
    Application.ProcessMessages;
+  // MainForm.ReplaceInWord(WordApp,'((«„÷«))',WordApp.Shapes.AddPicture(ImagePath, False, True, WordApp.Range));
+   //WordDoc.Shapes.AddPicture //(ImagePath, False, True, WordApp.Range);
+   //( ImagePath, null,null,  msoCTrue, 10, 10, 15, 15 , 10) ;
+   {
+    function AddPicture(const FileName: WideString; var LinkToFile: OleVariant;
+                        var SaveWithDocument: OleVariant; var Left: OleVariant;
+                        var Top: OleVariant; var Width: OleVariant; var Height: OleVariant;
+                        var Anchor: OleVariant): Shape; safecall
+                        }
+
+   //WordApp.ActiveDocument.InlineShapes.AddPicture(ImagePath) ;
+   //WordDoc.Content.InlineShapes.AddPicture(ImagePath);
+
+  // WordApp.Selection.GoTo(wdGotoPage,wdGoToLast,wdgotoabsolute,EmptyParam);
+
+
+
    { TODO -oparsa : 14030717 }
 
    ReplaceInArea;
 
-   WordDocument.ActiveWindow.ActivePane.View.SeekView := wdSeekMainDocument;
+   WordDoc.ActiveWindow.ActivePane.View.SeekView := wdSeekMainDocument;
    Application.ProcessMessages;
-   MainForm.ReplaceInWord(WordApplication,'((‘„«—Â  —òÌ»Ì))',dm.Cdate(no) );
+   MainForm.ReplaceInWord(WordApp,'((‘„«—Â  —òÌ»Ì))',dm.Cdate(no) );
    Application.ProcessMessages;
-   MainForm.ReplaceInWord(WordApplication,'(( «—ÌŒ ‰«„Â))',dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString) );
+   MainForm.ReplaceInWord(WordApp,'(( «—ÌŒ ‰«„Â))',dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString) );
    Application.ProcessMessages;
-   MainForm.ReplaceInWord(WordApplication,'((‘„«—Â  —òÌ»Ì Ê—œ))',dm.Cdate(noFW));
+   MainForm.ReplaceInWord(WordApp,'((‘„«—Â  —òÌ»Ì Ê—œ))',dm.Cdate(noFW));
    Application.ProcessMessages;
-   MainForm.ReplaceInWord(WordApplication,'((‘„«—Â  —òÌ»Ì Word))',dm.Cdate(noFW));
+   MainForm.ReplaceInWord(WordApp,'((‘„«—Â  —òÌ»Ì Word))',dm.Cdate(noFW));
    Application.ProcessMessages;
    { TODO -oparsa : 1402-12-19 }
-   MainForm.ReplaceInWord(WordApplication,'((‘„«—Â  —òÌ»Ì))',dm.Cdate(no));
+   MainForm.ReplaceInWord(WordApp,'((‘„«—Â  —òÌ»Ì))',dm.Cdate(no));
    Application.ProcessMessages;
-   MainForm.ReplaceInWord(WordApplication,'((‘„«—Â  —ﬂÌ»Ì Ê—œ))',dm.Cdate(noFW));
+   MainForm.ReplaceInWord(WordApp,'((‘„«—Â  —ﬂÌ»Ì Ê—œ))',dm.Cdate(noFW));
    Application.ProcessMessages;
-   MainForm.ReplaceInWord(WordApplication,'((‘„«—Â  —ﬂÌ»Ì Word))',dm.Cdate(noFW));
+   MainForm.ReplaceInWord(WordApp,'((‘„«—Â  —ﬂÌ»Ì Word))',dm.Cdate(noFW));
    Application.ProcessMessages;
+
    { TODO -oparsa : 1402-12-19 }
 
    { TODO -oparsa : 14030717 }
-   if replaceType = rwtLetter then
+   if replaceType = rwtLetter then //     ‰«„Â
    begin
-      MainForm.ReplaceInWord(WordApplication, '(( «—ÌŒ „— »ÿ »« ‘„«—Â œ»Ì—Œ«‰Â))', dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString)) ;
-      MainForm.ReplaceInWord(WordApplication, '(('+dm.Cdate(SelectInfo.FieldByName('CenterDate').AsString)+'))', dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString)) ;
+      MainForm.ReplaceInWord(WordApp, '(( «—ÌŒ „— »ÿ »« ‘„«—Â œ»Ì—Œ«‰Â))', dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString)) ;
+      MainForm.ReplaceInWord(WordApp, '(('+dm.Cdate(SelectInfo.FieldByName('CenterDate').AsString)+'))', dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString)) ;
    end
-   else
-     MainForm.ReplaceInWord(WordApplication, '(( «—ÌŒ „— »ÿ »« ‘„«—Â œ»Ì—Œ«‰Â))', '(('+dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString)+'))' ) ;
+   else   // ÅÌ‘ ‰ÊÌ”
+     MainForm.ReplaceInWord(WordApp, '(( «—ÌŒ „— »ÿ »« ‘„«—Â œ»Ì—Œ«‰Â))', '(('+dm.Cdate(SelectInfo.FieldByName('registrationdate').AsString)+'))' ) ;
    Application.ProcessMessages;
+   //MainForm.ReplaceInWord(WordApp,'((«„÷«))',WordApp.Shapes.AddPicture(ImagePath, False, True, WordApp.Range));
+   {
+  if SelectInfo.FieldByName('SignerID').AsString <>'' then
+  begin
+    Open_UserSign(StrToInt(SelectInfo.FieldByName('SignerID').AsString));
+    if not dm.Select_UserSignUserSign.IsNull then
+      dm.Select_UserSignUserSign.SaveToFile(ImagePath);
+   WordApp.selection.inlineshapes.addpicture(ImagePath,EmptyParam,EmptyParam,EmptyParam);
+
+   Application.ProcessMessages;
+  end;
+   }
+
    { TODO -oparsa : 14030717 }
 
    ReplaceInArea;
-   WordApplication.Visible := True;
+   WordApp.Visible := True;
    Application.ProcessMessages;
 end;
 
@@ -309,7 +476,7 @@ var
 begin
   inherited;
   fileName := _TempPath + _WordFileName;
-  WordDocument.SaveAs(filename);
+  WordDoc.SaveAs(filename);
 
 end;
 
@@ -317,9 +484,9 @@ end;
 procedure TFExportToWord.ExpToWordClick(Sender: TObject);
 Var
    i: Byte;
-   HNDL:THandle;
+  // HNDL:THandle;
    strType : String;
-   isError : Boolean;
+  // isError : Boolean;
 
    procedure DisableEnableForm (flag : Boolean);
    begin
@@ -344,6 +511,11 @@ begin
  // DisableEnableForm(False);
  { TODO -oparsa : 14030605-bug349 }
  ////////////////////////// if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
+ // „Â„ œ— “„«‰ «‰ Œ«» ›«Ì· Ê—œ Ê—œ Â«Ì ﬁ»·Ì Â„Â »” Â »‘‰
+ // Â„ç‰Ì‰ »«“ »Êœ‰ «» œ«ÌÌ  word Â‰ê«„ Ê—œ »Â »—‰«„Â »«⁄À „‘ò· „Ì‘Â òÂ œ— ¬Œ— «Ì‰ ›—„ »Â œ—” Ì Õ–› ‰„Ì ‘Â Ê Œÿ« ŒÊ«ÂÌ„ œ«‘  Ê œÊ»«—Â »«“ ‰„Ì ‘Êœ
+ //'A component named FExportToWord already exists'
+ //Œÿ “Ì— Õ–› ‰‘Êœ
+ if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
  { TODO -oparsa : 14030605-bug349 }
 
   if dm.LetterTemplate.RecordCount = 0 then
@@ -383,10 +555,10 @@ begin
         ReplaceAll(rwtDraft); //ﬂ—œ‰ ﬂ·„«  Replace\
       end;
     end;
-    WordApplication.Selection.WholeStory;
-    WordApplication.Keyboard(1065);
-    WordApplication.Selection.RtlPara;
-    en := WordApplication.Selection.End_ - 1;
+    WordApp.Selection.WholeStory;
+    WordApp.Keyboard(1065);
+    WordApp.Selection.RtlPara;
+    en := WordApp.Selection.End_ - 1;
     if Dm.LetterHasArchiveCopy then
       InsertCopy(Exacts);
 
@@ -463,7 +635,7 @@ begin
   tru := True;
   olv := wdOpenFormatAuto;
 
-  With WordApplication do
+  With WordApp do
   begin
     try
      Caption := 'Yeganeh'; //_Yeganeh;
@@ -532,7 +704,7 @@ begin
      If ActiveWindow.ActivePane.View.Type_ in[ wdNormalView ,wdOutlineView] Then
         ActiveWindow.ActivePane.View.Type_:= wdPrintView;
      ItemIndex := 1;
-     WordDocument.ConnectTo(WordApplication.Documents.Item(itemindex));
+     WordDoc.ConnectTo(WordApp.Documents.Item(itemindex));
      { TODO -oparsa : 14030605-bug349 }
   end;{with wordapplication}
 end;
@@ -544,7 +716,7 @@ begin
   if Trim(ExtraLines)='' then
     Exit;
 
-  with WordApplication,Selection do
+  with WordApp,Selection do
   begin
     if en=0 then
     begin
@@ -581,38 +753,66 @@ begin
     end;
 end;
 
-procedure TFExportToWord.WordApplicationDocumentBeforeClose(ASender: TObject;
+procedure TFExportToWord.WordAppDocumentBeforeClose(ASender: TObject;
   const Doc: _Document; var Cancel: WordBool);
-
+var
+    ver : Integer;
 begin
   { TODO -oparsa : 14030605-bug349 }
   //Cancel := True;
   inherited;
   { TODO -oparsa : 14030605-bug349 }
+  try
 
+    if  (UpperCase(WordApp.ActiveDocument.Name)<>_WordFileName) and
+        (UpperCase(WordApp.ActiveDocument.Name)<>_WordFileName+'X')    AND
+        (UpperCase(WordApp.ActiveDocument.Name)<>_WordFileName+'.DOCX')    AND
+        (UpperCase(WordApp.ActiveDocument.Name)<>_WordFileName+'.DOCX')    AND
+        (UpperCase(WordApp.ActiveDocument.Name)<>_WordFileName+'.DOC')    then
+     exit;
+     
+     {
 
-  if  (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName) and
-      (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'X')    AND
-      (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'.DOCX')    AND
-      (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'.DOCX')    AND
-      (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'.DOC')    then
-   exit;
+    if TWordApplication(ASender).ActiveDocument.ReadOnly then
+    begin
+      ShowMessage('WORD ERROR B: ');
+      WordApp.Disconnect;
+      Exit;
+    end;
+    }
+
+    ver := StrToint(copy(WordApp.Version,0,length(TWordApplication(ASender).Version)-2));
+    if ver < 12 then
+    begin
+      ShowMessage('WORD ERROR C: ');
+      WordApp.disconnect;
+      Exit;
+    end;
 
     SaveAs;
-     if dm.FullTextSearch then
-       dm.InsertTextIntoLetter(WordApplication,Letterid);
+    
+    if dm.FullTextSearch then
+     dm.InsertTextIntoLetter(WordApp,Letterid);
 
-    WordApplicationversion := WordApplication.version;
+    WordApplicationversion := WordApp.version;
     TimerWord.Enabled:= True;
 
     { TODO -oparsa : 14030605-bug349 }
     //WordApplication.Disconnect;
-   //  if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
+    //  if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
 
-    WordApplication.Disconnect;
-    WordDocument. Disconnect;
+    WordApp.Quit;
+    WordApp.Disconnect;
+
+    WordDoc. Disconnect;
 
     { TODO -oparsa : 14030605-bug349 }
+
+
+  except on e:exception do
+      ShowMessage('WORD ERROR A: ' + e.Message);
+  end;
+
 
 end;
 
@@ -639,7 +839,7 @@ var
 begin
   inherited;
   try
-    if Assigned(WordApplication) then
+    if Assigned(WordApp) then
     begin
       ver := StrToint(copy(WordApplicationVersion,0,length(WordApplicationVersion)-2));
       if ver<12 then
@@ -1030,13 +1230,13 @@ begin
   ExcelApplication.Workbooks.Add(strFileName, LCID);
 end;
 
-procedure TFExportToWord.WordApplicationDocumentOpen(ASender: TObject;
+procedure TFExportToWord.WordAppDocumentOpen(ASender: TObject;
   const Doc: _Document);
 var
   ver : integer;
 begin
   { TODO -oparsa : 14030605-bug349 }
-  ver := StrToint(copy(WordApplication.Version,0,length(TWordApplication(ASender).Version)-2));
+  ver := StrToint(copy(WordApp.Version,0,length(TWordApplication(ASender).Version)-2));
   if ver<12 then
   begin
     ShowMessage('·ÿ›« «“ ¬›Ì” 2007 »Â »«·« «” ›«œÂ ò‰Ìœ');

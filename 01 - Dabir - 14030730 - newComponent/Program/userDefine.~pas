@@ -612,6 +612,7 @@ begin
        DBLkCBDefaultSec.Enabled := True;
      end;
   end;
+  GroupBox1.Caption := ' ’ÊÌ— «„÷« «’·Ì' ;  
 end;
 
 procedure TUserDefineF.DBEEmailEnter(Sender: TObject);
@@ -928,6 +929,7 @@ end;
 procedure TUserDefineF.MenuItem1Click(Sender: TObject);
 begin
   inherited;
+  GroupBox1.Caption := ' ’ÊÌ— «„÷« «’·Ì' ;  
   Open_UserSign(dm.UsersId.AsInteger);
   if dm.Select_UserSignUserSign.IsNull then
     Exit;
@@ -935,11 +937,13 @@ begin
   dm.Select_UserSignUserSign.SaveToFile(_TempPath+'\yeganehsign.jpg');
   DBImage1.Picture.LoadFromFile(_TempPath+'\yeganehsign.jpg');
   isSecoundSign := false;
+
 end;
 
 procedure TUserDefineF.MenuItem2Click(Sender: TObject);
 begin
   inherited;
+  GroupBox1.Caption := ' ’ÊÌ— «„÷« „Êﬁ ' ;
   qrySecoundSign.Close;
   qrySecoundSign.Parameters[0].Value := dm.UsersId.AsInteger;
   qrySecoundSign.Open;
@@ -952,6 +956,7 @@ begin
   qrySecoundSignSecoundSign.SaveToFile(_TempPath+'\yeganehsign2.jpg');
   DBImage1.Picture.LoadFromFile(_TempPath+'\yeganehsign2.jpg');
   isSecoundSign := true;
+
 end;
 
 procedure TUserDefineF.xpBitBtn2Click(Sender: TObject);

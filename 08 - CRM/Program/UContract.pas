@@ -702,7 +702,8 @@ begin
         { TODO -oparsa : 14030427 }
         if (OldStatusId <> 2)  // „‘ —Ì ﬁÿ⁄Ì ‘œÂ »«‘œ
            and
-           (Trim(Select_customer_By_CustomerIDProductsIdSTR.AsString) <> '30')  // Œœ„«  «”ò‰ ‰»«‘œ
+           ( (Trim(Select_customer_By_CustomerIDProductsIdSTR.AsString) <> '30')  // Œœ„«  «”ò‰ ‰»«‘œ
+              and (Trim(Select_customer_By_CustomerIDProductsIdSTR.AsString) <> '') )
             then
         begin
 

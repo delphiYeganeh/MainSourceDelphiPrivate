@@ -1,7 +1,7 @@
 inherited FFillUserMemo: TFFillUserMemo
-  Left = 403
-  Top = 125
-  Width = 820
+  Left = 410
+  Top = 244
+  Width = 1099
   Height = 513
   Caption = #1601#1585#1605' '#1578#1593#1585#1610#1601' '#1605#1602#1575#1583#1610#1585' '#1601#1610#1604#1583#1607#1575'/'#1605#1588#1582#1589#1575#1578' '#1575#1582#1578#1610#1575#1585#1610
   Constraints.MinHeight = 400
@@ -12,7 +12,7 @@ inherited FFillUserMemo: TFFillUserMemo
   object pnlMain: TPanel [0]
     Left = 0
     Top = 0
-    Width = 804
+    Width = 1083
     Height = 474
     Align = alClient
     ParentColor = True
@@ -20,7 +20,7 @@ inherited FFillUserMemo: TFFillUserMemo
     object MssPanelPro3: TMssPanelPro
       Left = 1
       Top = 1
-      Width = 273
+      Width = 360
       Height = 472
       Align = alLeft
       BorderWidth = 5
@@ -31,9 +31,9 @@ inherited FFillUserMemo: TFFillUserMemo
       GradStyle = gsRadialTL
       object MssDBGrid3: TMssDBGrid
         Left = 6
-        Top = 72
-        Width = 261
-        Height = 394
+        Top = 89
+        Width = 348
+        Height = 377
         Align = alClient
         DataSource = DataSource2
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -77,7 +77,7 @@ inherited FFillUserMemo: TFFillUserMemo
       object MssPanelPro6: TMssPanelPro
         Left = 6
         Top = 6
-        Width = 261
+        Width = 348
         Height = 25
         Align = alTop
         Caption = 'MssPanelPro6'
@@ -90,8 +90,8 @@ inherited FFillUserMemo: TFFillUserMemo
       object MssPanelPro9: TMssPanelPro
         Left = 6
         Top = 31
-        Width = 261
-        Height = 41
+        Width = 348
+        Height = 58
         Align = alTop
         TabOrder = 2
         DrawGrad = False
@@ -99,19 +99,21 @@ inherited FFillUserMemo: TFFillUserMemo
         GradToColor = clWhite
         GradStyle = gsRadialTL
         object DBNavigator3: TDBNavigator
-          Left = 8
-          Top = 8
-          Width = 240
-          Height = 25
+          Left = 1
+          Top = 1
+          Width = 346
+          Height = 56
           DataSource = DataSource2
+          Align = alClient
+          Flat = True
           TabOrder = 0
         end
       end
     end
     object MssPanelPro2: TMssPanelPro
-      Left = 274
+      Left = 361
       Top = 1
-      Width = 260
+      Width = 361
       Height = 472
       Align = alClient
       BorderWidth = 5
@@ -122,9 +124,9 @@ inherited FFillUserMemo: TFFillUserMemo
       GradStyle = gsRadialTL
       object MssDBGrid2: TMssDBGrid
         Left = 6
-        Top = 72
-        Width = 248
-        Height = 394
+        Top = 89
+        Width = 349
+        Height = 377
         Align = alClient
         DataSource = DataSource1
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -168,7 +170,7 @@ inherited FFillUserMemo: TFFillUserMemo
       object MssPanelPro5: TMssPanelPro
         Left = 6
         Top = 6
-        Width = 248
+        Width = 349
         Height = 25
         Align = alTop
         Caption = #1601#1610#1604#1583' '#1575#1582#1578#1610#1575#1585#1610' '
@@ -181,8 +183,8 @@ inherited FFillUserMemo: TFFillUserMemo
       object MssPanelPro8: TMssPanelPro
         Left = 6
         Top = 31
-        Width = 248
-        Height = 41
+        Width = 349
+        Height = 58
         Align = alTop
         TabOrder = 2
         DrawGrad = False
@@ -190,19 +192,21 @@ inherited FFillUserMemo: TFFillUserMemo
         GradToColor = clWhite
         GradStyle = gsRadialTL
         object DBNavigator2: TDBNavigator
-          Left = 5
-          Top = 8
-          Width = 240
-          Height = 25
+          Left = 1
+          Top = 1
+          Width = 347
+          Height = 56
           DataSource = DataSource1
+          Align = alClient
+          Flat = True
           TabOrder = 0
         end
       end
     end
     object MssPanelPro1: TMssPanelPro
-      Left = 534
+      Left = 722
       Top = 1
-      Width = 269
+      Width = 360
       Height = 472
       Align = alRight
       BorderWidth = 5
@@ -213,9 +217,9 @@ inherited FFillUserMemo: TFFillUserMemo
       GradStyle = gsRadialTL
       object MssDBGrid1: TMssDBGrid
         Left = 6
-        Top = 72
-        Width = 257
-        Height = 394
+        Top = 89
+        Width = 348
+        Height = 377
         Align = alClient
         DataSource = DSForm
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -259,7 +263,7 @@ inherited FFillUserMemo: TFFillUserMemo
       object MssPanelPro4: TMssPanelPro
         Left = 6
         Top = 6
-        Width = 257
+        Width = 348
         Height = 25
         Align = alTop
         Caption = #1601#1610#1604#1583' '#1575#1582#1578#1610#1575#1585#1610' '#1575#1608#1604
@@ -272,8 +276,8 @@ inherited FFillUserMemo: TFFillUserMemo
       object MssPanelPro7: TMssPanelPro
         Left = 6
         Top = 31
-        Width = 257
-        Height = 41
+        Width = 348
+        Height = 58
         Align = alTop
         TabOrder = 2
         DrawGrad = False
@@ -281,11 +285,13 @@ inherited FFillUserMemo: TFFillUserMemo
         GradToColor = clWhite
         GradStyle = gsRadialTL
         object DBNavigator1: TDBNavigator
-          Left = 8
-          Top = 8
-          Width = 240
-          Height = 25
+          Left = 1
+          Top = 1
+          Width = 346
+          Height = 56
           DataSource = DSForm
+          Align = alClient
+          Flat = True
           TabOrder = 0
         end
       end

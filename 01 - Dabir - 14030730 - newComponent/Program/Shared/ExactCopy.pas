@@ -73,22 +73,28 @@ begin
 
    if dm.Select_LetterReCommite.state in [dsedit,dsinsert] then
       dm.Select_LetterReCommite.Post;
-   i:=OrgId;
-   if i<>0 then
-  CheckAccessForErja.Close;
-  CheckAccessForErja.Parameters.ParamByName('@FromOrgID').Value := _UserFromOrgID;
-  CheckAccessForErja.Parameters.ParamByName('@ToOrgID').Value   := i;//Select_LetterFromOrgID.AsInteger;
-  CheckAccessForErja.Open;
+      
+   i:= OrgId;
+
+  if i<>0 then
+  begin
+    CheckAccessForErja.Close;
+    CheckAccessForErja.Parameters.ParamByName('@FromOrgID').Value := _UserFromOrgID;
+    CheckAccessForErja.Parameters.ParamByName('@ToOrgID').Value   := i;//Select_LetterFromOrgID.AsInteger;
+    CheckAccessForErja.Open;
+  end;
+  
   if CheckAccessForErjaResult.AsInteger = 0 then
   Begin
     ShowMsgString('êÌ—‰œÂ ‰«„Â œ— ê—ÊÂ ò«—Ì À»  ò‰‰œÂ ‰«„Â ﬁ—«— ‰œ«—œ');
    Exec_Select_LetterReCommite(letterID,typeid);
     Abort;
-  end;   
-      if not Finallized then
-         Exec_insert_OtherRecievers(newid(TypeId),true,letterid,i,'',0,false,_Today,TypeId,_userid)
-      else
-         Exec_insert_ReCommites(newid(TypeId),true,letterid,i,'',0,false,_Today,TypeId,_userid);
+  end;
+
+  if not Finallized then
+     Exec_insert_OtherRecievers(newid(TypeId),true,letterid,i,'',0,false,_Today,TypeId,_userid)
+  else
+     Exec_insert_ReCommites(newid(TypeId),true,letterid,i,'',0,false,_Today,TypeId,_userid);
    Exec_Select_LetterReCommite(LetterID,TypeId);
 end;
 
@@ -139,7 +145,7 @@ end;
 procedure TExactCopyF.CheckBox1Click(Sender: TObject);
 begin
   inherited;
-               ShowMsg(47);
+  ShowMsg(47);
 end;
 
 procedure TExactCopyF.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -154,27 +160,29 @@ procedure TExactCopyF.APostExecute(Sender: TObject);
 var i: integer;
 begin
   inherited;
- i:=Exec_Get_FromOrganizationsID_ByCode(Edit1.Text);
- if i>0 then
+  i:= Exec_Get_FromOrganizationsID_ByCode(Edit1.Text);
+  if i>0 then
   begin
-  CheckAccessForErja.Close;
-  CheckAccessForErja.Parameters.ParamByName('@FromOrgID').Value := _UserFromOrgID;
-  CheckAccessForErja.Parameters.ParamByName('@ToOrgID').Value   := i;//Select_LetterFromOrgID.AsInteger;
-  CheckAccessForErja.Open;
-  if CheckAccessForErjaResult.AsInteger = 0 then
-  Begin
-    ShowMsgString('êÌ—‰œÂ ‰«„Â œ— ê—ÊÂ ò«—Ì À»  ò‰‰œÂ ‰«„Â ﬁ—«— ‰œ«—œ');
-       Exec_Select_LetterReCommite(letterID,typeid);
-    Abort;
-  end;
+    CheckAccessForErja.Close;
+    CheckAccessForErja.Parameters.ParamByName('@FromOrgID').Value := _UserFromOrgID;
+    CheckAccessForErja.Parameters.ParamByName('@ToOrgID').Value   := i;//Select_LetterFromOrgID.AsInteger;
+    CheckAccessForErja.Open;
+    if CheckAccessForErjaResult.AsInteger = 0 then
+    Begin
+      ShowMsgString('êÌ—‰œÂ ‰«„Â œ— ê—ÊÂ ò«—Ì À»  ò‰‰œÂ ‰«„Â ﬁ—«— ‰œ«—œ');
+         Exec_Select_LetterReCommite(letterID,typeid);
+      Abort;
+    end;
 
+    if not Finallized then
+     Exec_insert_OtherRecievers(newid(TypeId),true,letterid,i,'',0,false,_Today,TypeId,_userid)
+    else
+     Exec_insert_ReCommites(newid(TypeId),true,letterid,i,'',0,false,_Today,TypeId,_userid);
+    Exec_Select_LetterReCommite(letterID,typeid);
+    
+  end ;
+  //else ShowMsgString('·ÿ›« òœ êÌ—‰œÂ „⁄ »— Ê«—œ ‰„«ÌÌœ');
 
-     if not Finallized then
-       Exec_insert_OtherRecievers(newid(TypeId),true,letterid,i,'',0,false,_Today,TypeId,_userid)
-     else
-       Exec_insert_ReCommites(newid(TypeId),true,letterid,i,'',0,false,_Today,TypeId,_userid);
-   Exec_Select_LetterReCommite(letterID,typeid);
-  end; 
  edit1.Text:='';
  Edit1.SetFocus;
 end;

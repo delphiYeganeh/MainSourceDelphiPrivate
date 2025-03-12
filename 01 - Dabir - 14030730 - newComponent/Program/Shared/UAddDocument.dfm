@@ -786,9 +786,9 @@ inherited FrAddDocument: TFrAddDocument
             Appearance.ColorMirrorDisabledTo = 15921906
           end
           object ActionToolBar1: TActionToolBar
-            Left = 616
+            Left = 552
             Top = 2
-            Width = 256
+            Width = 320
             Height = 28
             ActionManager = ActionManager
             Align = alNone

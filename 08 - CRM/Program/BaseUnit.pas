@@ -436,7 +436,23 @@ begin
      end;
     end;
 
+    if Components[i].InheritsFrom(TPanel) then
+    begin
+     if TPanel(Components[i]).Name='pnlCustomerMarketer' then
+     begin
+        TPanel(Components[i]).Visible:= GetActionAccess(_accessID,'apnlCustomerMarketer',TPanel(Components[i]).tag);
+        TPanel(Components[i]).Enabled:= TAction(Components[i]).Visible;
+     end;
+    end;
 
+    if Components[i].InheritsFrom(TPanel) then
+    begin
+     if TPanel(Components[i]).Name='pnlCustomerStatusFilter' then
+     begin
+        TPanel(Components[i]).Visible:= GetActionAccess(_accessID,'apnlCustomerStatusFilter',TPanel(Components[i]).tag);
+        TPanel(Components[i]).Enabled:= TAction(Components[i]).Visible;
+     end;
+    end;
 
   end;
 

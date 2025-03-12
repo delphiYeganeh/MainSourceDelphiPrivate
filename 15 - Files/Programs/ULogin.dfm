@@ -65,7 +65,7 @@ object FLogin: TFLogin
         317)
       object Label3: TLabel
         Left = 126
-        Top = 23
+        Top = 15
         Width = 200
         Height = 19
         Alignment = taCenter
@@ -99,7 +99,7 @@ object FLogin: TFLogin
       end
       object Label4: TLabel
         Left = 120
-        Top = 56
+        Top = 40
         Width = 200
         Height = 19
         Alignment = taCenter
@@ -293,7 +293,7 @@ object FLogin: TFLogin
       end
       object btnOk: TAdvGlowButton
         Left = 228
-        Top = 241
+        Top = 254
         Width = 90
         Height = 35
         Cursor = crHandPoint
@@ -336,7 +336,7 @@ object FLogin: TFLogin
       end
       object btnCancel: TAdvGlowButton
         Left = 121
-        Top = 241
+        Top = 254
         Width = 88
         Height = 35
         Cursor = crHandPoint
@@ -422,7 +422,7 @@ object FLogin: TFLogin
       end
       object btnExcel: TAdvGlowButton
         Left = 158
-        Top = 89
+        Top = 73
         Width = 113
         Height = 35
         Cursor = crHandPoint
@@ -496,7 +496,7 @@ object FLogin: TFLogin
       end
       object btnPic: TAdvGlowButton
         Left = 160
-        Top = 147
+        Top = 122
         Width = 110
         Height = 35
         Cursor = crHandPoint
@@ -568,7 +568,7 @@ object FLogin: TFLogin
       end
       object btnPicExcel: TAdvGlowButton
         Left = 160
-        Top = 189
+        Top = 164
         Width = 110
         Height = 35
         Cursor = crHandPoint
@@ -627,6 +627,77 @@ object FLogin: TFLogin
         TabStop = True
         Visible = False
         OnClick = btnPicExcelClick
+        Appearance.Color = clMoneyGreen
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirror = clMoneyGreen
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object btnFolder: TAdvGlowButton
+        Left = 160
+        Top = 210
+        Width = 110
+        Height = 35
+        Cursor = crHandPoint
+        Anchors = [akTop, akRight]
+        Caption = #1587#1575#1582#1578' '#1601#1608#1604#1583#1585
+        Default = True
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 35
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        Picture.Data = {
+          89504E470D0A1A0A0000000D49484452000000230000002308060000001ED9B3
+          59000000097048597300000B1300000B1301009A9C180000030A49444154789C
+          EDD6DF4B53611807F0C7B4666A26624626246EE98E89A0FD30C3902849CCC02E
+          B402AFBC096FBA08A2EBFE8182403635104B8B16A568B3B4C6B2E6DCD976B669
+          9969FE2A0BC37489A04DE7F8C6399BA5E9E6961EF1C207BE8C73F69EF7F9F0BE
+          EFC54BB4555BB54E055551305AB26297459B13B17188E66391D09C56419B3F83
+          D705589646E93CEAA80DB574407CCCAB334DD05D02461A00BBD59D1F1D80A114
+          D0E4020F25401D01B5D40F15458BBB2ADA732E8CBE8450CE297766C7007309A0
+          8E059A22FFA635E629AC294501859367E17DCA0E3F56E5E431E80A815FC3C0EC
+          086061C40927EF868539E81BD3929D899E52C0F1C51DB130EEE87D63DE64E761
+          A00C98D40076B5D818C022DBE31DD39E7559C00C94011FCE8B8FB1C953BD637A
+          4B323727A63B4F34C4B43E1923CF65186A96A5AF8EE9BF02D80E8B029965E5E8
+          6B90A2B75E8A4F8DD20CEF988FC547D17B11E83C2EDAAA8C6B9304C8EA189B3C
+          55EC7332A6D9C2309B6B655C16397ACD717861DA059551827AE34EB4EAA2607E
+          16BFB198294E86C74609942CAD18B5260A3DEAC423A2631C5C121EB0DBFF34AE
+          60B7617CBA13BAE1AB4B4035ED2135A263DACDD14B9A569942851B49CF58D5D2
+          153290ABBC83D244C3B82C72541B83FDC3B004054BB745C34C7252F71658F6A2
+          6FFC3E06265418B43F1130538E41E1998FFEF33537C6406D2B63B8E4B8B56226
+          B844A1C9A3AE439899FB0E87D30E87F3A7809977393CCF760CD9EB17B68AF57E
+          6E38E6DD5A30735C322AD920BFB74969A05A1F87984907C77C5D0BA8D91411C8
+          99B9E01523800CB2485899425899EBE0E437024D9F39EE8EB283E6171A561A43
+          E0744DA373F4D6BF90B7000591D8A560A9586920C742E33A5B02EE9AC21643BA
+          2ACCB48F36AACA3B284DC952C3629482A56F4A966EDEB351F87AF408211226DA
+          ED49CCA22CBC0BF78C13AA5A4BA1952C2529F4B47F2DDB2221A20422E2AF8739
+          44944744050124CFF35DBA671E7EBEFFAE8C009BAF16EF775E3F2B8C88E28928
+          C5833B4144A788289788CE1251BEA711FFCB3FF3EFF9FFF971FC78FE3BFE7B7E
+          1E9FF51B08C9A59D435BFAB90000000049454E44AE426082}
+        TabOrder = 8
+        TabStop = True
+        OnClick = btnFolderClick
         Appearance.Color = clMoneyGreen
         Appearance.ColorChecked = 16111818
         Appearance.ColorCheckedTo = 16367008

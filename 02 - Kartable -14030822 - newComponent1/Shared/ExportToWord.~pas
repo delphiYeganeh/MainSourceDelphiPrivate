@@ -141,6 +141,9 @@ procedure TFExportToWord.ReplaceAll(replaceType:TReplaceWordTypes);
 var
   W,new,old,no,noFW: widestring;
   selst,selen:integer;
+  ImagePath :string;
+  wdgotolast,wdgotopage,wdgotoabsolute : olevariant;
+  Range: Variant;
 procedure ReplaceInArea;
    begin
        WordApplication.Selection.WholeStory;
@@ -169,6 +172,27 @@ procedure ReplaceInArea;
                   new:='(('+dm.cdate(SelectInfo.FieldByName('indicatorID').AsString)+'))'
 
                // else if old = '‘„«—Â  —òÌ»Ì' then  new:=SelectInfo.FieldByName('RegistrationDate').AsString
+                else if (old='«„÷«') then
+                begin
+                  new:=' ';
+                  if SelectInfo.FieldByName('SignerID').AsString <>'' then
+                  begin
+                    // «‰ Œ«» ò· ”‰œ
+                    Range := WordDocument.Content;
+                    if Range.Find.Execute(FindText:='((«„÷«))') then
+                    begin
+                      // «ê— ò·„Â ÅÌœ« ‘œ° »Â ¬‰ ·ÊòÌ‘‰ »—Ê
+                      Range.Select;
+                    end;
+                    Open_UserSign(StrToInt(SelectInfo.FieldByName('SignerID').AsString));
+                    if not dm.Select_UserSignUserSign.IsNull then
+                      dm.Select_UserSignUserSign.SaveToFile(ImagePath);
+                    if FileExists(ImagePath) then
+                    begin
+                      WordApplication.selection.inlineshapes.addpicture(ImagePath,EmptyParam,EmptyParam,EmptyParam);
+                    end;
+                  end;
+                end
                 else if SelectInfo.FieldByName(FieldsFieldName.AsString).IsNull then
                   new:=' '
                 else if (replaceType in [rwtLetter,rwtDraft]) then
@@ -202,6 +226,7 @@ procedure ReplaceInArea;
 
 
 begin
+    ImagePath := _TempPath+'\yeganehBoxWORDsign.jpg' ;
    Application.ProcessMessages;
    no := SelectInfo.FieldByName('Innerno').AsString;
    noFW := SelectInfo.FieldByName('innernoForWord1').AsString;
@@ -344,6 +369,8 @@ begin
  // DisableEnableForm(False);
  { TODO -oparsa : 14030605-bug349 }
  ////////////////////////// if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
+
+ if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
  { TODO -oparsa : 14030605-bug349 }
 
   if dm.LetterTemplate.RecordCount = 0 then
@@ -410,7 +437,7 @@ begin
         ReplaceAllExcel(_TempPath + _ExcelFileName, rwtLetter)
       else
       begin
-        IsDraft := True;
+       // IsDraft := True;
         ReplaceAllExcel(_TempPath + _ExcelFileName, rwtDraft);
       end;
     end
@@ -420,7 +447,7 @@ begin
         ReplaceAllExcel(_TempPath + _ExcelFileName, rwtLetter)
       else
       begin
-        IsDraft := True;
+       // IsDraft := True;
         ReplaceAllExcel(_TempPath + _ExcelFileName, rwtDraft);
       end;
     end;
@@ -583,21 +610,30 @@ end;
 
 procedure TFExportToWord.WordApplicationDocumentBeforeClose(ASender: TObject;
   const Doc: _Document; var Cancel: WordBool);
-
+var
+    ver : Integer;
 begin
   { TODO -oparsa : 14030605-bug349 }
   //Cancel := True;
   inherited;
   { TODO -oparsa : 14030605-bug349 }
+  try
 
+    if  (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName) and
+        (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'X')    AND
+        (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'.DOCX')    AND
+        (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'.DOCX')    AND
+        (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'.DOC')    then
+     exit;
 
-  if  (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName) and
-      (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'X')    AND
-      (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'.DOCX')    AND
-      (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'.DOCX')    AND
-      (UpperCase(WordApplication.ActiveDocument.Name)<>_WordFileName+'.DOC')    then
-   exit;
-
+    ver := StrToint(copy(WordApplication.Version,0,length(TWordApplication(ASender).Version)-2));
+    if ver < 12 then
+    begin
+      ShowMessage('WORD ERROR C: ');
+      WordApplication.disconnect;
+      Exit;
+    end;
+         
     SaveAs;
      if dm.FullTextSearch then
        dm.InsertTextIntoLetter(WordApplication,Letterid);
@@ -609,10 +645,14 @@ begin
     //WordApplication.Disconnect;
    //  if processExists('WINWORD.EXE') then Dm.KillTask('WINWORD.EXE');
 
+    WordApplication.Quit;
     WordApplication.Disconnect;
     WordDocument. Disconnect;
 
     { TODO -oparsa : 14030605-bug349 }
+  except on e:exception do
+      ShowMessage('WORD ERROR A: ' + e.Message);
+  end;
 
 end;
 
@@ -639,6 +679,7 @@ var
 begin
   inherited;
   try
+    {
     if Assigned(WordApplication) then
     begin
       ver := StrToint(copy(WordApplicationVersion,0,length(WordApplicationVersion)-2));
@@ -649,7 +690,7 @@ begin
         Close;
         Exit;
       end;
-    end;
+    end; }
 
     with dm,Get_LetterWordFile do
     begin
@@ -828,7 +869,10 @@ var
   Found: ExcelRange;
   MatchCase: OleVariant;
   no, noFW, new, old: widestring;
+
 begin
+
+
   ExcelApplication.DisplayAlerts[LCID] := False;
 
   ExcelApplication.Visible[LCID] := False;
@@ -896,6 +940,7 @@ begin
         else
         if (old = '‘„«—Â  —òÌ»Ì') and (replaceType = rwtDraft) then
           new := '((' + dm.cdate(SelectInfo.FieldByName('indicatorID').AsString) + '))'
+
         else
         if SelectInfo.FieldByName(FieldsFieldName.AsString).IsNull then
           new := ''

@@ -55,12 +55,43 @@ begin
 end;
 
 procedure TfmUpdateDbScripts.FormShow(Sender: TObject);
+  function GetFileCreationTime(const FilePath: string): TDateTime;
+  var
+    FileHandle: THandle;
+    FileTime: TFileTime;
+    LocalFileTime: TFileTime;
+    SystemTime: TSystemTime;
+  begin
+    Result := 0; // „ﬁœ«— ÅÌ‘ù›—÷ œ— ’Ê—  Œÿ«
+
+    // »«“ ò—œ‰ ›«Ì·
+    FileHandle := FileOpen(FilePath, fmOpenRead or fmShareDenyNone);
+    if FileHandle = THandle(-1) then
+      Exit;
+
+    try
+      // œ—Ì«›  “„«‰ «ÌÃ«œ ›«Ì·
+      if GetFileTime(FileHandle, @FileTime, nil, nil) then
+      begin
+        //  »œÌ· “„«‰ ›«Ì· »Â “„«‰ „Õ·Ì
+        FileTimeToLocalFileTime(FileTime, LocalFileTime);
+        //  »œÌ· »Â SystemTime
+        FileTimeToSystemTime(LocalFileTime, SystemTime);
+        //  »œÌ· »Â TDateTime
+        Result := SystemTimeToDateTime(SystemTime);
+      end;
+    finally
+      // »” ‰ ›«Ì·
+      FileClose(FileHandle);
+    end;
+  end;
 var
   fileName            : String;
   SR                  : TSearchRec;
   slMain              : TStringList;
   tabs: Array [0..1] of Integer;
   fromVer, toVer, ver : Integer;
+  CreationTime: TDateTime;
 begin
   lblDbVer.Caption := dbVer;
   lblDelphiVer.Caption := delphiVer;
@@ -85,21 +116,26 @@ begin
       begin
         repeat
           fileName := SR.Name;
-          if (UpperCase(File_GetFileExt(fileName)) = 'TXT') then //'SQL'   Or 'TXT'
-          begin
-            //Version Condition
-            try
-              ver := StrToInt(Copy(fileName, 0, 3));
-            except
-              ver := -1;
-            end;
-
-            if (ver > fromVer) And (ver <= toVer) then
+          { TODO -oparsa : 14031201 }
+          CreationTime := GetFileCreationTime(Path+fileName);
+          if ShamsiString(CreationTime) = _Today then
+          { TODO -oparsa : 14031201 }
+            if (UpperCase(File_GetFileExt(fileName)) = 'TXT') then //'SQL'   Or 'TXT'
             begin
-              fileName := fileName + #9 + 'Detected';
-              slMain.Add(fileName);
+              //Version Condition
+              try
+                ver := 0 ;//StrToInt(Copy(fileName, 0, 3));
+              except
+                ver := -1;
+              end;
+
+              //if (ver > fromVer) And (ver <= toVer) then
+              if  1=1 then
+              begin
+                fileName := fileName + #9 + 'Detected';
+                slMain.Add(fileName);
+              end;
             end;
-          end;
         until FindNext(SR) <> 0;
         FindClose(SR);
       end;
@@ -149,6 +185,7 @@ begin
   begin
     // Update DB Ver
     fileName := 'INSERT INTO dbo.tblAppVer (ver, changeDate, Descript) VALUES('''+ delphiVer + ''', GETDATE(), N''»—Ê“ ‘œ'')';
+    //fileName := 'INSERT INTO dbo.tblAppVer (version, changeDate, Descript) VALUES('''+ delphiVer + ''', GETDATE(), N''»—Ê“ ‘œ'')';
 
     qryRunScript.SQL.Text := fileName;
     qryRunScript.ExecuteOptions := [eoAsyncFetch];

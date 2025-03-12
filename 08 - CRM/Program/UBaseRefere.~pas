@@ -21,6 +21,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btndCaseTypeClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth,
+      NewHeight: Integer; var Resize: Boolean);
   private
     { Private declarations }
   public
@@ -63,6 +65,16 @@ begin
   inherited;
    if ShowMyMessage('ÅÌ€«„','¬Ì« „«Ì· »Â Õ–› —ﬂÊ—œ Ã«—Ì Â” Ìœø',mbOKCancel,mtWarning) = mrOK then
       Dm.tblTaskReferral.Delete;
+end;
+
+procedure TFBaseRefere.FormCanResize(Sender: TObject; var NewWidth,
+  NewHeight: Integer; var Resize: Boolean);
+begin
+  if (NewWidth < 695)  or (NewHeight < 461) then
+    Resize := False
+  else Resize := True;
+  inherited;
+
 end;
 
 end.

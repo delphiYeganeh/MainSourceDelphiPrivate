@@ -61,6 +61,36 @@ begin
 end;
 
 procedure TfmUpdateDbScripts.FormShow(Sender: TObject);
+  function GetFileCreationTime(const FilePath: string): TDateTime;
+  var
+    FileHandle: THandle;
+    FileTime: TFileTime;
+    LocalFileTime: TFileTime;
+    SystemTime: TSystemTime;
+  begin
+    Result := 0; // ãÞÏÇÑ íÔÝÑÖ ÏÑ ÕæÑÊ ÎØÇ
+
+    // ÈÇÒ ˜ÑÏä ÝÇíá
+    FileHandle := FileOpen(FilePath, fmOpenRead or fmShareDenyNone);
+    if FileHandle = THandle(-1) then
+      Exit;
+
+    try
+      // ÏÑíÇÝÊ ÒãÇä ÇíÌÇÏ ÝÇíá
+      if GetFileTime(FileHandle, @FileTime, nil, nil) then
+      begin
+        // ÊÈÏíá ÒãÇä ÝÇíá Èå ÒãÇä ãÍáí
+        FileTimeToLocalFileTime(FileTime, LocalFileTime);
+        // ÊÈÏíá Èå SystemTime
+        FileTimeToSystemTime(LocalFileTime, SystemTime);
+        // ÊÈÏíá Èå TDateTime
+        Result := SystemTimeToDateTime(SystemTime);
+      end;
+    finally
+      // ÈÓÊä ÝÇíá
+      FileClose(FileHandle);
+    end;
+  end;
 var
   fileName            : String;
   SR                  : TSearchRec;
@@ -70,6 +100,7 @@ var
 
   CountScriptvalidCode : Integer ;
   slInvalid              : TStringList;
+  CreationTime: TDateTime;
 begin
   lblDbVer.Caption := dbVer;
   lblDelphiVer.Caption := delphiVer;
@@ -102,29 +133,35 @@ begin
       begin
         repeat
           fileName := SR.Name;
-          if (UpperCase(File_GetFileExt(fileName)) = 'TXT') then //'SQL'
-          begin
-            //Version Condition
-            try
-              ver := StrToInt(Copy(fileName, 0, 3));
-            except
-              ver := -1;
-            end;
+          { TODO -oparsa : 14031201 }
+          CreationTime := GetFileCreationTime(Path+fileName);
+          if ShamsiString(CreationTime) = _Today then
+          { TODO -oparsa : 14031201 }
 
-            if (ver > fromVer) And (ver <= toVer) then
+            if (UpperCase(File_GetFileExt(fileName)) = 'TXT') then //'SQL'
             begin
-              fileName := fileName + #9 + 'Detected';
-              slMain.Add(fileName);
-              Inc(CountScriptvalidCode );
-            end
-            else if (ver > toVer) then
-            begin
-              Inc(CountScriptInvalidCode );
-              if CountScriptInvalidCode = 1 then
-                 slInvalid.Add('--------- Start Invalid Code ---------');
-              slInvalid.Add(fileName);
+              //Version Condition
+              try
+                ver := 0;//StrToInt(Copy(fileName, 0, 3));
+              except
+                ver := -1;
+              end;
+
+              //if (ver > fromVer) And (ver <= toVer) then
+              if 1=1 then
+              begin
+                fileName := fileName + #9 + 'Detected';
+                slMain.Add(fileName);
+                Inc(CountScriptvalidCode );
+              end
+              else if (ver > toVer) then
+              begin
+                Inc(CountScriptInvalidCode );
+                if CountScriptInvalidCode = 1 then
+                   slInvalid.Add('--------- Start Invalid Code ---------');
+                slInvalid.Add(fileName);
+              end;
             end;
-          end;
         until FindNext(SR) <> 0;
         FindClose(SR);
       end;

@@ -67,7 +67,7 @@ var
 
 implementation
 
-uses DMU, BusinessLayer, StrUtils;
+uses DMU, BusinessLayer, StrUtils,YShamsiDate;
 
 {$R *.dfm}
 
@@ -97,6 +97,7 @@ begin
   inherited;
   with dm.MonthlyType do if not Active then Open;
   with dm.MonthlyType_Detail do if not Active then Open;
+  DBNav_Setup(DBNavigator1);  
 
 end;
 

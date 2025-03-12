@@ -27,7 +27,8 @@ type
     Image2: TImage;
     btnExcel: TAdvGlowButton;
     btnPic: TAdvGlowButton;
-    AdvGlowButton1: TAdvGlowButton;
+    btnPicExcel: TAdvGlowButton;
+    btnFolder: TAdvGlowButton;
     procedure btnCancelClick(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -35,7 +36,8 @@ type
     procedure btnExcelClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShortCut(var Msg: TWMKey; var Handled: Boolean);
-    procedure AdvGlowButton1Click(Sender: TObject);
+    procedure btnPicExcelClick(Sender: TObject);
+    procedure btnFolderClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -175,6 +177,7 @@ begin
     Label3.Caption := '‰—„ «›“«— „œÌ—Ì  ›«Ì· Â« ';
     btnExcel.visible := False ;
     btnPic .visible := False ;
+    btnPicExcel.visible := False ;
     edtUsername.SetFocus;
   end
   else
@@ -184,6 +187,7 @@ begin
     Label3.Caption := ' „œÌ—Ì  „Êﬁ  ›«Ì· Â« ';
     btnExcel.visible := True ;
     btnPic .visible := True ;
+    btnPicExcel.visible := True ;
     btnOk   .visible := False ;
     //btnCancel .visible := False ;
     edtPassword .visible := False ;
@@ -234,12 +238,20 @@ begin
   end;
 end;
 
-procedure TFLogin.AdvGlowButton1Click(Sender: TObject);
+procedure TFLogin.btnPicExcelClick(Sender: TObject);
 begin
    edtUsername.Text := 'TEMP' ;
   edtPassword.Text := '123'  ;
   _PictureMode := True ;
   _ExcelPicMode := True ;
+  btnOkClick (self);
+end;
+
+procedure TFLogin.btnFolderClick(Sender: TObject);
+begin
+   edtUsername.Text := 'TEMP' ;
+   edtPassword.Text := '123'  ;
+  _FolderMode := True ;
   btnOkClick (self);
 end;
 

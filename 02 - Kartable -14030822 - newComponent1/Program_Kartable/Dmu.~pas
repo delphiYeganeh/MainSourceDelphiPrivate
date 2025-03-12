@@ -727,6 +727,7 @@ type
     ImageList_MainNew: TImageList;
     qtemp: TADOQuery;
     qryGetIdFromOrganizations: TADOQuery;
+    Get_LetterData_by_LetterIDSignerID: TIntegerField;
 
     function  GetActionAccess(ActionTag : String;FormTag:word):boolean;
     procedure GetUserSettings;

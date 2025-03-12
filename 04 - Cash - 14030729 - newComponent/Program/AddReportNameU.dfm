@@ -147,12 +147,13 @@ object FrAddReportName: TFrAddReportName
         675
         49)
       object DBNavigator1: TDBNavigator
-        Left = 142
-        Top = 8
-        Width = 410
-        Height = 33
+        Left = 80
+        Top = 0
+        Width = 500
+        Height = 49
         DataSource = dm.DReportsName
         Anchors = [akTop, akRight]
+        Flat = True
         TabOrder = 0
       end
     end

@@ -300,7 +300,7 @@ inherited FillLetterData: TFillLetterData
             Left = 5
             Top = 415
             Width = 469
-            Height = 112
+            Height = 111
             Anchors = [akLeft, akTop, akRight, akBottom]
             BiDiMode = bdLeftToRight
             ParentBiDiMode = False
@@ -619,7 +619,7 @@ inherited FillLetterData: TFillLetterData
           Left = 264
           Top = 273
           Width = 209
-          Height = 299
+          Height = 298
           Anchors = [akTop, akRight, akBottom]
           TabOrder = 2
         end
@@ -627,7 +627,7 @@ inherited FillLetterData: TFillLetterData
           Left = -5
           Top = 125
           Width = 263
-          Height = 319
+          Height = 318
           ObjectTypes = [otFolders]
           Root = 'rfDesktop'
           UseShellImages = True

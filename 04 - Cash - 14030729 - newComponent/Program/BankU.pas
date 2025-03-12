@@ -20,6 +20,7 @@ type
     procedure xpBitBtn1Click(Sender: TObject);
     procedure xpBitBtn3Click(Sender: TObject);
     procedure xpBitBtn2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,7 +32,7 @@ var
 
 implementation
 
-uses dmu;
+uses dmu,YShamsiDate;
 
 {$R *.dfm}
 
@@ -65,6 +66,12 @@ begin
      Dm.Bank.Post;
    end;
 
+end;
+
+procedure TFrBank.FormCreate(Sender: TObject);
+begin
+  inherited;
+  DBNav_Setup(DBNavigator1);
 end;
 
 end.

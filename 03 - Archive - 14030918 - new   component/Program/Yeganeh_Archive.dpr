@@ -137,8 +137,8 @@ uses
   Upd_latererdata in 'Upd_latererdata.pas' {frmUpd_latererdata};
 
 {$R *.res}
-
-{$R DBNavBitmap.res}
+{$R dbnavigatorIcon.RES}
+//{$R DBNavBitmap.res}
 
 
 begin

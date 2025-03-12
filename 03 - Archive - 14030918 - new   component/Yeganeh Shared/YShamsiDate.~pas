@@ -9,7 +9,7 @@ uses Forms,DateUtils,SysUtils,classes,Graphics,windows,dialogs ,
      ,TlHelp32, ComCtrls , DBGrids,TINYLib_TLB , DBTreeView ,Registry,Shellapi,ZipForge,sdx ,
      IdMessage,IdGlobal,IdSSLOpenSSL, IdBaseComponent, IdComponent, IdTCPConnection,IdTCPClient,
      IdMessageClient, IdSMTP,winsock,Grids , YDbgrid,IniFiles
-     ,ActiveX ,ShlObj {AXmsCtrl_TLB},ComObj,AdoInt,OleDB,Math, clipbrd, WordXP, OleCtrls,AdvGlowButton;
+     ,ActiveX ,ShlObj {AXmsCtrl_TLB},ComObj,AdoInt,OleDB,Math, clipbrd, WordXP, OleCtrls;
      
 {Ranjbar}
 Type

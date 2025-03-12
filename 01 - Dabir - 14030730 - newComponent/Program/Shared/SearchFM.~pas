@@ -7,7 +7,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DBCtrls, StdCtrls, ExtCtrls, DB, DBTables, Buttons,
   Grids, DBGrids, ADODB, BaseUnit, Menus, ExtActns, ActnList, YDbgrid,
-  AppEvnts;
+  AppEvnts, AdvGlowButton;
 
 type
   TFmSearch = class(TMBaseForm)
@@ -17,8 +17,8 @@ type
     Panel3: TPanel;
     EditSearch: TEdit;
     Label1: TLabel;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
+    BitBtn1: TAdvGlowButton;
+    BitBtn2: TAdvGlowButton;
     DBGridSearch: TYDBGrid;
     LabelDisplayName: TLabel;
     Label2: TLabel;

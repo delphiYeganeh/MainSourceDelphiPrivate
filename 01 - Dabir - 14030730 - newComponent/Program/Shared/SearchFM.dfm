@@ -195,6 +195,7 @@ inherited FmSearch: TFmSearch
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         TabOrder = 1
+        OnClick = BitBtn2Click
         Appearance.ColorChecked = 16111818
         Appearance.ColorCheckedTo = 16367008
         Appearance.ColorDisabled = 15921906

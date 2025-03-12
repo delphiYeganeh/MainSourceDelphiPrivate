@@ -1,4 +1,4 @@
-[SECTION_MAX_NO]=7
+[SECTION_MAX_NO]=8
 
 [BEGIN_S_NO]=1
 
@@ -201,6 +201,7 @@ CREATE NONCLUSTERED INDEX [IX_Letter_SecretariatID] ON [dbo].[Letter]
 
 [END_S_NO]
 
+
 [BEGIN_S_NO]=7
 
 Alter Function [dbo].[ParentFoldersCTE] (@FolderID int)  
@@ -231,6 +232,270 @@ Begin
 
 	return(SubString(@Res, 5, Len(@Res)))
 
+End
+
+[END_S_NO]
+
+[BEGIN_S_NO]=8
+
+
+ALTER PROCEDURE [dbo].[Get_All_Letter] 
+			@Secretariatid		int,
+			@myear				int,
+			@Letter_Type		int,
+			@LetterFormat		int, 
+			@where				nvarchar(4000),
+			@top				int =100000 ,
+			@archiveFolderID	int,
+			@UsersID			int, 
+			@WordText			nvarchar(2000)='', 
+			@AttachText			nvarchar(2000)='',
+			@TYP				char(10)='DATE-AVAL'
+As                
+Begin
+
+	If EXISTS (Select * From sys.objects Where object_id = OBJECT_ID(N'[dbo].[TTES]') And type in (N'U'))
+		Drop Table [dbo].[TTES]
+
+	Declare @today char(10)              
+	Set @today=dbo.Shamsi(getdate())              
+
+	Declare @sqlCommand nvarchar(max)              
+
+	Declare @sqlCommand2 nvarchar(max) 
+	--parsa
+	DECLARE @IncomingStr nvarchar(max)    
+	If EXISTS (Select * From dbo.Settings Where VariableName = 'SORT_IncommingNO' AND Value = 1)
+	Begin 
+	  SET @IncomingStr = '  CONVERT(BIGINT, dbo.CleanAndTrimString(Letter.IncommingNO)) AS IncommingNO_INT , 1 AS SORT_INT ,  '	 
+	END
+	ELSE SET @IncomingStr =	' 0 AS SORT_INT, '	
+	--parsa
+
+	Set @sqlCommand2 = ''
+
+	/*
+	If EXISTS (Select * From dbo.Settings Where VariableName = 'SORT_IncommingNO' AND Value = 1)
+	Begin             
+		Set @sqlCommand='SELECT TOP '+Cast(@top as varchar(MAX)) +
+							' Letter.LetterID,
+							Letter.IndicatorID, 
+							Letter.MYear, 
+							Letter.SecretariatID,               
+							Letter.Letter_Type, 
+							Letter.letterformat, 
+							Letter.IncommingNO, 
+							CONVERT(BIGINT, dbo.CleanAndTrimString(Letter.IncommingNO)) AS IncommingNO_INT , 
+							1 AS SORT_INT , 
+							Letter.FromOrgID,
+							Letter.IncommingDate, 
+							Letter.Subject,              
+							Letter.ToOrgID, 
+							Letter.UrgencyID, 
+							Letter.Memo, 
+							Letter.RetroactionNo, 
+							Letter.RegistrationDate, 
+							Letter.FollowLetterNo,               
+							Letter.ToStaffer, 
+							Letter.SentLetterID, 
+							Letter.TemplateID, 
+							Letter.HeaderID, 
+							sender.Title AS SenderTitle,               
+							Deliver.Title AS DeliverTitle,
+							dbo.has_Page(Letter.letterid) has_Page,              
+							dbo.has_WordPage(Letter.letterid) has_WordPage,
+							dbo.has_file(Letter.letterid) has_file,              
+							LetterTypes.Title LetterTypeTitle,
+							LetterRecommites,
+							dbo.ArchiveFolders(Letter.LetterID,0) ArchiveFolders,              
+							dbo.ArchivePlaces(Letter.LetterID,0) ArchivePlaces,
+							sendstatusTitle,
+							dbo.InnerNo(Letter.LetterID)  InnerNo,              
+							dbo.RentStatus(Letter.LetterID,'''+@today+''') RentStatus ,            
+							LC.ColorID as Color , Letter.ReceiveTypeID,
+							(Select SecTitle 
+									From Secretariats S, UserSecretariats US 
+									Where S.SecID = US.SecId And US.SecId = Letter.SecretariatID And US.UserID = Letter.UserID) as SecTitle,
+							(Select Title 
+									From Classifications 
+									Where Classifications.ID = Letter.ClassificationID) as ClassificationsTitle,
+							(Select Title 
+									From Users 
+									Where Users.ID = Letter.UserID) as UserTitle,
+							Letter.AttachTitle ,
+							Letter.UserMemo ,
+							Letter.UserMemo1,
+							Letter.UserMemo2,
+							Letter.VersionNumber,
+							Letter.VersionDate,
+							/*( Select Top 1 AF.Title 
+									From ArchiveFolder AF , LetterArchiveFolder LAF , Letter L 
+									Where(LAF.LetterID = Letter.LetterID)    
+									And(LAF.LetterID = L.LetterID)  
+									And(LAF.ArchiveFolderID = AF.FolderID) )*/ 
+							dbo.LetterFolders(Letter.LetterID) As ArchiveFolderTitle,
+							(Select dbo.Fu_LetterAlarm(Letter.LetterID, GetDate(),'+ Cast(@UsersID as Nvarchar(10))+') ) as HasLetterAlerm,
+							Letter.UserID AS LUID  
+					-- INTO TTES 
+					From Letter
+						Left	Join FromOrganizations sender On Letter.ToOrgID = sender.ID 
+						Left	Join FromOrganizations Deliver On Letter.FromOrgID = Deliver.ID               
+						Left	Join LetterTypes On LetterTypes.ID=Letter.Letter_type 
+						Left	Join LetterColor LC On Letter.letterID = LC.LetterID and LC.UserID = '+ Cast(@UsersID as Nvarchar(10))+'            
+						Inner	Join sendstatus On sendstatus.sendstatusID=Letter.sendstatusID '              
+	End
+	Else
+	Begin 
+		*/            
+		Set @sqlCommand='SELECT TOP '+Cast(@top as varchar(MAX)) +' 
+							Letter.LetterID,
+							Letter.IndicatorID,
+							Letter.MYear,
+							Letter.SecretariatID,
+							Letter.Letter_Type,
+							Letter.letterformat, 
+							Letter.IncommingNO, '+ @IncomingStr +
+						--	0 AS SORT_INT,
+						  ' Letter.FromOrgID,
+							Letter.IncommingDate,
+							Letter.Subject,
+							Letter.ToOrgID,
+							Letter.UrgencyID,
+							Letter.Memo, 
+							Letter.RetroactionNo,
+							Letter.RegistrationDate,
+							Letter.FollowLetterNo,
+							Letter.ToStaffer, 
+							Letter.SentLetterID,
+							Letter.TemplateID,
+							Letter.HeaderID,
+							sender.Title AS SenderTitle,
+							Deliver.Title AS DeliverTitle,
+							/*dbo.has_Page(Letter.letterid) has_Page,*/
+							/*CAST(CASE WHEN( exists (Select LetterID from LetterData WHERE LetterID=Letter.LetterID And /*PageNumber>0 And*/ Extention in (1,2)) ) then 1 Else 0 END AS BIT) has_Page,*/
+							/*dbo.has_WordPage(Letter.letterid) has_WordPage,*/
+							/*CAST(CASE WHEN( exists (Select PageNumber from LetterData WHERE LetterID=Letter.LetterID And /*PageNumber>0 And*/ Extention = 3) ) then 1 Else 0 END AS BIT) has_WordPage,*/
+							/*dbo.has_file(Letter.letterid) has_file,*/
+							/*CAST (CASE WHEN( exists (Select LetterDataID from LetterData WHERE LetterID=Letter.LetterID And /*PageNumber>0 And*/ Extention > 3) ) then 1 Else 0 END AS BIT) has_file,*/
+							has_Page,
+							has_WordPage,
+							has_filE,
+							LetterTypes.Title LetterTypeTitle,
+							LetterRecommites,
+							/*dbo.ArchiveFolders(Letter.LetterID,0) ArchiveFolders,              
+							dbo.ArchivePlaces(Letter.LetterID,0) ArchivePlaces,*/
+							dbo.ArchiveFolders(Letter.LetterID,0) ArchiveFolders,              
+							dbo.ArchivePlaces(Letter.LetterID,0) ArchivePlaces,
+							/*(a.ArchiveDate + '' ''+ a.Title ) AS ArchiveFolders, (substring(Place,4,1000) ) AS ArchivePlaces,*/
+							sendstatusTitle,
+							/*dbo.InnerNo(Letter.LetterID)  InnerNo,*/
+							CAST(Letter.IndicatorID AS Nvarchar(100))InnerNo,
+							dbo.RentStatus(Letter.LetterID,'''+@today+''') RentStatus,
+							LC.ColorID as Color,
+							Letter.ReceiveTypeID,
+							(Select SecTitle 
+								From Secretariats S,UserSecretariats US 
+								Where S.SecID = US.SecId And US.SecId = Letter.SecretariatID And US.UserID = Letter.UserID) as SecTitle,
+							(Select Title 
+								From Classifications 
+								Where Classifications.ID = Letter.ClassificationID) as ClassificationsTitle,
+							(Select Title 
+								From Users 
+								Where Users.ID = Letter.UserID) as UserTitle,
+							Letter.AttachTitle,
+							Letter.UserMemo,
+							Letter.UserMemo1,
+							Letter.UserMemo2,
+							Letter.VersionNumber,
+							Letter.VersionDate,    
+							/*,(Select Top 1 AF.Title From ArchiveFolder AF ,LetterArchiveFolder LAF ,Letter L Where(LAF.LetterID = Letter.LetterID) And(LAF.LetterID = L.LetterID)And(LAF.ArchiveFolderID = AF.FolderID) ) As ArchiveFolderTitle */
+							dbo.LetterFolders(Letter.LetterID) As ArchiveFolderTitle,
+							(Select dbo.Fu_LetterAlarm(Letter.LetterID, GetDate(),'+ Cast(@UsersID as Nvarchar(10))+')) as HasLetterAlerm,
+							Letter.UserID AS LUID,
+							vw.RenterTitle,
+							vw.BeginDate,
+							vw.EndDate
+						From Letter
+						Left	Join FromOrganizations sender  ON Letter.ToOrgID = sender.ID 
+						Left	Join FromOrganizations Deliver ON Letter.FromOrgID = Deliver.ID               
+						Left	Join LetterTypes on LetterTypes.ID=Letter.Letter_type 
+						Left	Join LetterColor LC on Letter.letterID = LC.LetterID and LC.UserID = '+ Cast(@UsersID as Nvarchar(10))+'            
+						Inner	Join sendstatus on sendstatus.sendstatusID=Letter.sendstatusID 
+						Left	Join Report_Renter vw ON vw.LetterID = Letter.LetterID  
+						Left	Join (SELECT ISNULL(Count(LetterArchiveFolder.LetterID),0) cnt, LetterArchiveFolder.LetterID From LetterArchiveFolder Inner Join ArchiveFolder On LetterArchiveFolder.ArchiveFolderID = ArchiveFolder.FolderID 	Where (ArchiveFolder.UserID = 0) Group By LetterArchiveFolder.LetterID)a On a.LetterID = Letter.LetterID
+						/*LEFT JOIN (SELECT ISNULL(count(LetterArchiveFolder.LetterID),0)cnt,LetterArchiveFolder.LetterID ,LetterArchiveFolder.ArchiveDate ,ArchiveFolder.Title,Place FROM  LetterArchiveFolder INNER JOIN ArchiveFolder ON LetterArchiveFolder.ArchiveFolderID = ArchiveFolder.FolderID WHERE     (ArchiveFolder.UserID = 0)group BY LetterArchiveFolder.LetterID ,LetterID,LetterArchiveFolder.ArchiveDate ,ArchiveFolder.Title,Place )a ON a.LetterID = Letter.LetterID*/ ' 
+	--End
+
+	If @archiveFolderID>0                
+		Set @sqlCommand=@sqlCommand+' Left Join LetterArchiveFolder on LetterArchiveFolder.Letterid=Letter.LetterID ' 
+
+	If len(@WordText)>0   
+		Set @sqlCommand=@sqlCommand+' Inner Join LetterText on LetterText.Letterid=Letter.LetterID '
+
+
+
+	Set @sqlCommand=@sqlCommand+' where letter.Finalized=1 '              
+
+	Set @where=isnull(ltrim(rtrim(@where)),'')              
+
+	If @where <>'' 
+		Set @where =' and '+ @where               
+
+	If @Letter_Type<>0               
+		Set @where=@where+' And (Letter_Type = '+Cast(@Letter_Type as varchar(5))+')'              
+
+	If @Secretariatid<>0               
+		Set @where=@where+' And (Secretariatid = '+Cast(@Secretariatid as varchar(5))+')'              
+
+	If @Myear<>0               
+		Set @where=@where+' And (myear = '+Cast(@myear as varchar(10))+')'              
+
+	If @LetterFormat<>0               
+		Set @where=@where+' And (Letter.LetterFormat = '+Cast(@LetterFormat as varchar(5))+')'              
+
+	If @archiveFolderID>0                
+		Set @where=@where+' And (archiveFolderID = '+Cast(@archiveFolderID as varchar(5))+')'              
+
+	If @archiveFolderID=0                
+		SET @where=@where+' And ISNULL(a.cnt,0) = 0'
+  -- set @where=@where+' And (dbo.Letter_Archived(Letter.LetterID)=0)'              
+
+
+	If len(@WordText)>0 
+		Set @where=@where+' And (replace(CONVERT(nvarchar(Max),TypeText),nchar(1740),nchar(1610)) LIKE ''%'+@WordText+'%'')'  
+
+	If Len(@AttachText)>0
+		Set @where=@where+' And letter.letterid in(select letterid from letterdata where LetterdataID in (select LetterdataID from letterdatatext where (replace(CONVERT(nvarchar(Max),TextPart),nchar(1740),nchar(1610)) LIKE ''%'+@AttachText+'%'')))'  
+
+	If (@archiveFolderID = -1)or(@MYear=0)
+	Begin
+		Set @where=@where+' And  Letter.LetterID not in ( 
+										Select L.LetterID 
+												From Letter L ,LetterArchiveFolder LAF , ArchiveFolder AF,UserAccArchive UAA 
+										Where(L.LetterID = LAF.LetterID) And(UAA.ISAccess = 0) 
+											And (UAA.UserID = ' + Cast(@UsersID as nvarchar(10)) + ')
+											And((UAA.ArchiveCenterID = (Select ArchiveCenterID From Secretariats Where SecID = ' + 
+                                                  Cast(@Secretariatid as nvarchar(10)) + '))or(' + Cast(@Secretariatid as nvarchar(10))+'=0))
+											And(L.Finalized=1)
+											And(L.MYear = ' + Cast(@myear as nvarchar(10)) +' or ' + Cast(@myear as nvarchar(10)) +' = 0 )   
+											And(LAF.ArchiveFolderID = AF.FolderID)
+											And(Af.FolderID = UAA.ArchiveFolderID)
+											AND(l.LetterID NOT IN(SELECT l1.LetterID FROM Letter l1 
+														Inner Join LetterArchiveFolder laf1 ON l1.LetterID = laf1.LetterID
+											Inner Join UserAccArchive uaa1 ON uaa1.ArchiveFolderID = laf1.ArchiveFolderID AND uaa1.UserID = l1.UserID
+										Where l1.UserID = ' + Cast(@UsersID as nvarchar(10)) + '
+											AND ((uaa1.SecID = ' + Cast(@Secretariatid as nvarchar(10)) + ')or(' + Cast(@Secretariatid as nvarchar(10))+'=0))
+											AND (L1.MYear = ' + Cast(@myear as nvarchar(10)) +' or ' + Cast(@myear as nvarchar(10)) +' = 0 )
+											AND uaa1.ISAccess = 1)))'                       
+	End
+
+
+	If @TYP = 'DATE-AVAL'
+
+		Exec ( @sqlCommand+@where + ' ORDER BY REGISTRATIONDATE ASC ,indicatorid ASC ,Memo,IncommingNO  ')
+
+	If @TYP = 'DATE-AKHAR'
+		Exec ( @sqlCommand+@where + ' ORDER BY REGISTRATIONDATE DESC,indicatorid DESC,Memo,IncommingNO ' )
 End
 
 [END_S_NO]

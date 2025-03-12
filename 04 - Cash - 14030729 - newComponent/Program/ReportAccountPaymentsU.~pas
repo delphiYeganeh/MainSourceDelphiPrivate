@@ -111,6 +111,8 @@ type
     procedure rbDateClick(Sender: TObject);
     procedure rbDocNoClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure YDBGridNeedColorCondition(Column: TColumn;
+      State: TGridDrawState; var Color: TColor);
   private
     { Private declarations }
   public
@@ -197,11 +199,9 @@ procedure TFrReportAccountPayments.xpBitBtn1Click(Sender: TObject);
 begin
    inherited;
    {Ranjbar}
-   if MEDateFrom.Text > MEDateTo.Text then
-   begin
-     ShowMessage('áØÝÇ ÈÇÒå ÊÇÑíÎí ÇÕáÇÍ ˜äíÏ ãÞÏÇÑ "ÇÒ ÊÇÑíÎ" äãí ÊæÇäÏ ÈÒÑÊÑÇÒ "ÊÇ ÊÇÑíÎ" ÈÇÔÏ');
-     Exit ;
-   end;
+
+   if not Date_CheckTwoDate(MEDateFrom.Text,MEDateTo.Text) then
+    Exit;
 
    if not(Dm.Report_Payment_ByAccountID.Active)or(Dm.Report_Payment_ByAccountID.RecordCount = 0) then
    begin
@@ -290,6 +290,23 @@ procedure TFrReportAccountPayments.BitBtn1Click(Sender: TObject);
 begin
   inherited;
   YDBGrid.ExportToExcel;
+end;
+
+procedure TFrReportAccountPayments.YDBGridNeedColorCondition(
+  Column: TColumn; State: TGridDrawState; var Color: TColor);
+ var
+   LowOrange :  TColor ;
+   relatedcolor :  TColor ;
+begin
+  inherited;
+  LowOrange    := Rgb(255,217,193);
+  relatedcolor  := Rgb(234,231,245);
+
+  if dm.Report_Payment_ByAccountIDPayTypeSecondId.AsInteger = 8 then
+    Color := LowOrange;
+
+  if dm.Report_Payment_ByAccountIDRelatedID.AsInteger > 0 then
+    Color := relatedcolor;
 end;
 
 end.

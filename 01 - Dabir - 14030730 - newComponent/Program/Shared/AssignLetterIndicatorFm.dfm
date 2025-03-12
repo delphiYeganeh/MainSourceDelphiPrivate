@@ -106,6 +106,7 @@ inherited fmAssignLetterIndicator: TfmAssignLetterIndicator
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         TabOrder = 0
+        OnClick = BitBtn1Click
         Appearance.ColorChecked = 16111818
         Appearance.ColorCheckedTo = 16367008
         Appearance.ColorDisabled = 15921906
@@ -138,6 +139,7 @@ inherited fmAssignLetterIndicator: TfmAssignLetterIndicator
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         TabOrder = 1
+        OnClick = BitBtn2Click
         Appearance.ColorChecked = 16111818
         Appearance.ColorCheckedTo = 16367008
         Appearance.ColorDisabled = 15921906

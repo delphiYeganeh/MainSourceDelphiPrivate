@@ -24,7 +24,7 @@ inherited FmScanImage: TFmScanImage
     TabOrder = 0
     object Panel1: TPanel
       Left = 1
-      Top = 33
+      Top = 1
       Width = 1020
       Height = 52
       Align = alTop
@@ -2086,7 +2086,7 @@ inherited FmScanImage: TFmScanImage
     end
     object Panel8: TPanel
       Left = 1
-      Top = 1
+      Top = 53
       Width = 1020
       Height = 32
       Align = alTop

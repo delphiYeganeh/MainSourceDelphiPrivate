@@ -64,10 +64,28 @@ begin
 end;
 
 procedure TFrmAddFamily.DataSetDelete_MasterExecute(Sender: TObject);
+var
+  tempstring : string;
+  qry,qryUpdate : TADOQuery;
 begin
   inherited;
- if MessageDlg('«Ì« «“ Õ–› „ÿ„∆‰ Â” Ìœ', mtWarning,[mbYes,mbno],0)=mryes then
-   dm.Family.Delete;
+  qry:=TADOQuery.Create(self);
+  qry.Connection:=dm.YeganehConnection;
+  qry.SQL.Text := 'SELECT 1 FROM [dbo].[Account] WHERE Familyid ='+dm.FamilyFamilyID.AsString ;
+  qry.Open;
+
+  if qry.RecordCount>0 then
+  begin
+
+    tempstring := '«„ò«‰ Õ–› ÊÃÊœ ‰œ«—œ ° «Ì‰ ' + Get_SystemSetting('FamilyTitle') + ' »«  ' +'"' +IntToStr( qry.RecordCount ) +'"' + ' Õ”«» „— »ÿ „Ì »«‘œ ' ;
+
+    ShowMessage(tempstring) ;
+  end
+  else
+  if MessageDlg('«Ì« «“ Õ–› „ÿ„∆‰ Â” Ìœ', mtWarning,[mbYes,mbno],0)=mryes then
+  begin
+    dm.Family.Delete;
+  end;  
 end;
 
 procedure TFrmAddFamily.SearchEditChange(Sender: TObject);

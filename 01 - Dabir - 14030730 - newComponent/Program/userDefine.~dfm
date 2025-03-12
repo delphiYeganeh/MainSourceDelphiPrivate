@@ -377,9 +377,9 @@ inherited UserDefineF: TUserDefineF
               Stretch = True
             end
             object xpBitBtn3: TAdvGlowButton
-              Left = 56
+              Left = 48
               Top = 233
-              Width = 62
+              Width = 81
               Height = 25
               Cursor = crHandPoint
               Anchors = [akTop, akRight]
@@ -417,7 +417,7 @@ inherited UserDefineF: TUserDefineF
               Appearance.ColorMirrorDisabledTo = 15921906
             end
             object xpBitBtn2: TAdvGlowButton
-              Left = 128
+              Left = 131
               Top = 233
               Width = 59
               Height = 25
@@ -531,13 +531,11 @@ inherited UserDefineF: TUserDefineF
             TabOrder = 1
           end
           object ActionToolBar1: TActionToolBar
-            Left = 14
+            Left = 0
             Top = 0
-            Width = 647
+            Width = 661
             Height = 27
             ActionManager = ActionManager
-            Align = alNone
-            Anchors = [akTop, akRight, akBottom]
             Caption = 'ActionToolBar1'
             ColorMap.HighlightColor = clWhite
             ColorMap.BtnSelectedColor = clBtnFace

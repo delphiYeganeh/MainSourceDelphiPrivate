@@ -172,7 +172,9 @@ begin
   inherited;
   if Button = nbPost then
   begin
+    DBEUsersTitle_LK.Enabled :=  True;
     DBEUsersTitle_LK.SetFocus;
+    DBEUsersTitle_LK.Enabled :=  False;
     if Time_IsTime(DMAlarm.QrAlarmTimeAlarm.AsString) = False then
     begin
       ShowMessage('ﬂ«—»— ê—«„Ì „ﬁœ«— ›Ì·œ "”«⁄ " «‘ »«Â „Ì »«‘œ ° ·ÿ›«  ’ÕÌÕ ‰„«ÌÌœ');

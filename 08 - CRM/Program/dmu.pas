@@ -919,6 +919,7 @@ type
     QrFixAssetDate: TDateTimeField;
     Select_FollowUP_By_DateparentMarketerTitle: TStringField;
     Select_FollowUP_By_CustomerIDparentMarketerTitle: TStringField;
+    Select_FollowUP_By_DateActionTypeID: TIntegerField;
     Function  SearchTable(Ads1:TDataSet;CodeField,TitleField:string):integer;
     function  GetSql(s:string):Variant;
     function  GetNewCode:string;

@@ -1,7 +1,7 @@
 inherited fmAssignLetterIndicator: TfmAssignLetterIndicator
   Left = 869
   Top = 184
-  Caption = '«Œ ’«’ ‘„«—Â ‰«„Â'
+  Caption = #1575#1582#1578#1589#1575#1589' '#1588#1605#1575#1585#1607' '#1606#1575#1605#1607
   ClientHeight = 186
   ClientWidth = 457
   Constraints.MinHeight = 220
@@ -46,7 +46,7 @@ inherited fmAssignLetterIndicator: TfmAssignLetterIndicator
         Width = 209
         Height = 17
         Anchors = [akTop, akRight]
-        Caption = 'ÅÌÊ”  Â«Ì ‰«„Â ›ﬁÿ ŒÊ«‰œ‰Ì ‘Êœ'
+        Caption = #1662#1610#1608#1587#1578' '#1607#1575#1610' '#1606#1575#1605#1607' '#1601#1602#1591' '#1582#1608#1575#1606#1583#1606#1610' '#1588#1608#1583
         TabOrder = 0
       end
       object Proceed: TCheckBox
@@ -55,7 +55,7 @@ inherited fmAssignLetterIndicator: TfmAssignLetterIndicator
         Width = 193
         Height = 17
         Anchors = [akTop, akRight]
-        Caption = '‰«„Â «“ ò«— «»· œÌê— ò«—„‰œ«‰ Õ–› ‘Êœ'
+        Caption = #1606#1575#1605#1607' '#1575#1586' '#1705#1575#1585#1578#1575#1576#1604' '#1583#1610#1711#1585' '#1705#1575#1585#1605#1606#1583#1575#1606' '#1581#1584#1601' '#1588#1608#1583
         TabOrder = 1
       end
       object ArchiveCurrent: TCheckBox
@@ -64,7 +64,7 @@ inherited fmAssignLetterIndicator: TfmAssignLetterIndicator
         Width = 168
         Height = 17
         Anchors = [akTop, akRight]
-        Caption = '‰«„Â «“ ò«— «»·  ›⁄·Ì Õ–› ‘Êœ'
+        Caption = #1606#1575#1605#1607' '#1575#1586' '#1705#1575#1585#1578#1575#1576#1604'  '#1601#1593#1604#1610' '#1581#1584#1601' '#1588#1608#1583
         Checked = True
         State = cbChecked
         TabOrder = 2
@@ -75,7 +75,7 @@ inherited fmAssignLetterIndicator: TfmAssignLetterIndicator
         Width = 241
         Height = 17
         Anchors = [akTop, akRight]
-        Caption = 'ÅÌÊ” Â«Ì ‰«„Â œ— œ»Ì—Œ«‰Â ›ﬁÿ ŒÊ«‰œ‰Ì ‘Êœ'
+        Caption = #1662#1610#1608#1587#1578#1607#1575#1610' '#1606#1575#1605#1607' '#1583#1585' '#1583#1576#1610#1585#1582#1575#1606#1607' '#1601#1602#1591' '#1582#1608#1575#1606#1583#1606#1610' '#1588#1608#1583
         TabOrder = 3
         Visible = False
       end
@@ -92,14 +92,37 @@ inherited fmAssignLetterIndicator: TfmAssignLetterIndicator
         455
         36)
       object BitBtn1: TAdvGlowButton
-        Left = 359
+        Left = 357
         Top = 5
         Width = 75
         Height = 25
         Anchors = [akTop, akRight]
-        Caption = ' «ÌÌœ'
+        Caption = #1578#1575#1610#1610#1583
+        ImageIndex = 59
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
         TabOrder = 0
-        Kind = bkOK
+        OnClick = BitBtn1Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
       end
       object BitBtn2: TAdvGlowButton
         Left = 279
@@ -107,9 +130,32 @@ inherited fmAssignLetterIndicator: TfmAssignLetterIndicator
         Width = 75
         Height = 25
         Anchors = [akTop, akRight]
-        Caption = '«‰’—«›'
+        Caption = #1575#1606#1589#1585#1575#1601
+        ImageIndex = 1
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
         TabOrder = 1
-        Kind = bkCancel
+        OnClick = BitBtn2Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
       end
     end
   end

@@ -1,7 +1,7 @@
 object DMNews: TDMNews
   OldCreateOrder = False
-  Left = 383
-  Top = 116
+  Left = 762
+  Top = 196
   Height = 489
   Width = 520
   object DSNews: TDataSource
@@ -70,6 +70,15 @@ object DMNews: TDMNews
     end
     object SpNewsUserID: TIntegerField
       FieldName = 'UserID'
+    end
+    object SpNewsUserTitle: TStringField
+      FieldKind = fkLookup
+      FieldName = 'UserTitle'
+      LookupDataSet = QrUsersList
+      LookupKeyFields = 'Id'
+      LookupResultField = 'Title'
+      KeyFields = 'UserID'
+      Lookup = True
     end
   end
   object QrUsersList: TADOQuery
@@ -210,7 +219,7 @@ object DMNews: TDMNews
   end
   object DSNewsGroup: TDataSource
     DataSet = SPNewsGroup
-    Left = 28
+    Left = 68
     Top = 197
   end
   object QrNewsGroupUsers: TADOQuery
@@ -229,8 +238,8 @@ object DMNews: TDMNews
       'From NewsGroupUsers'
       'Where(NewsGroupID = :Pa_NewsGroupID )'
       '')
-    Left = 122
-    Top = 152
+    Left = 186
+    Top = 144
     object QrNewsGroupUsersNewsGroupUsersID: TIntegerField
       FieldName = 'NewsGroupUsersID'
     end
@@ -243,7 +252,7 @@ object DMNews: TDMNews
   end
   object DSNewsGroupUsers: TDataSource
     DataSet = QrNewsGroupUsers
-    Left = 122
+    Left = 178
     Top = 197
   end
   object SPNewsGroup: TADOStoredProc
@@ -264,8 +273,8 @@ object DMNews: TDMNews
         Precision = 10
         Value = 0
       end>
-    Left = 28
-    Top = 152
+    Left = 68
+    Top = 144
     object SPNewsGroupNewsGroupID: TIntegerField
       FieldName = 'NewsGroupID'
     end
@@ -288,6 +297,8 @@ object DMNews: TDMNews
   object frxJPEGExport1: TfrxJPEGExport
     UseFileCache = True
     ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
     Left = 299
     Top = 340
   end
@@ -304,40 +315,54 @@ object DMNews: TDMNews
     DefaultBottomMargin = 10.000000000000000000
     DefaultPaperSize = 9
     DefaultOrientation = poPortrait
+    TemplatesExt = 'fr3'
     Restrictions = []
     RTLLanguage = False
+    MemoParentFont = False
     Left = 299
     Top = 392
   end
   object frxBMPExport1: TfrxBMPExport
     UseFileCache = True
     ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
     Left = 213
     Top = 392
   end
   object frxRTFExport1: TfrxRTFExport
     UseFileCache = True
     ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    PictureType = gpPNG
     Wysiwyg = True
     Creator = 'FastReport http://www.fast-report.com'
     SuppressPageHeadersFooters = False
     HeaderFooterMode = hfText
+    AutoSize = False
     Left = 213
     Top = 340
   end
   object frxXMLExport1: TfrxXMLExport
     UseFileCache = True
     ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
     Background = True
     Creator = 'FastReport'
     EmptyLines = True
     SuppressPageHeadersFooters = False
+    RowsCount = 0
+    Split = ssNotSplit
     Left = 299
     Top = 288
   end
   object frxTXTExport1: TfrxTXTExport
     UseFileCache = True
     ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
     ScaleWidth = 1.000000000000000000
     ScaleHeight = 1.000000000000000000
     Borders = False
@@ -355,15 +380,21 @@ object DMNews: TDMNews
   object frxSimpleTextExport1: TfrxSimpleTextExport
     UseFileCache = True
     ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
     Frames = False
     EmptyLines = False
     OEMCodepage = False
+    DeleteEmptyColumns = True
     Left = 41
     Top = 392
   end
   object frxXLSExport1: TfrxXLSExport
     UseFileCache = True
     ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    ExportEMF = True
     AsText = False
     Background = True
     FastExport = True
@@ -376,25 +407,41 @@ object DMNews: TDMNews
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
     ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
     PrintOptimized = False
     Outline = False
+    Background = False
+    HTMLTags = True
+    Quality = 95
+    Transparency = False
     Author = 'FastReport'
     Subject = 'FastReport PDF export'
-    Background = False
     Creator = 'FastReport (http://www.fast-report.com)'
-    HTMLTags = True
+    ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
+    HideToolbar = False
+    HideMenubar = False
+    HideWindowUI = False
+    FitWindow = False
+    CenterWindow = False
+    PrintScaling = False
+    PdfA = False
     Left = 127
     Top = 288
   end
   object frxGIFExport1: TfrxGIFExport
     UseFileCache = True
     ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
     Left = 127
     Top = 340
   end
   object frxTIFFExport1: TfrxTIFFExport
     UseFileCache = True
     ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
     Left = 41
     Top = 340
   end
@@ -411,8 +458,10 @@ object DMNews: TDMNews
     DefaultBottomMargin = 10.000000000000000000
     DefaultPaperSize = 9
     DefaultOrientation = poPortrait
+    TemplatesExt = 'fr3'
     Restrictions = []
     RTLLanguage = False
+    MemoParentFont = False
     Left = 41
     Top = 288
   end
@@ -500,11 +549,12 @@ object DMNews: TDMNews
       '-UserID=UserID'
       'UserName='#1606#1575#1605' '#1705#1575#1585#1576#1585' '#1579#1576#1578' '#1705#1606#1606#1583#1607)
     DataSet = QrRepNews
+    BCDToCurrency = False
     Left = 424
     Top = 112
   end
   object frxRepNews: TfrxReport
-    Version = '4.3'
+    Version = '5.4.6'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -540,6 +590,7 @@ object DMNews: TDMNews
       TopMargin = 5.000000000000000000
       BottomMargin = 5.000000000000000000
       object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
         Height = 45.354360000000000000
         Top = 18.897650000000000000
         Width = 755.906000000000000000
@@ -547,7 +598,7 @@ object DMNews: TDMNews
           Align = baClient
           Width = 755.906000000000000000
           Height = 45.354360000000000000
-          Color = 11206655
+          Fill.BackColor = 11206655
         end
         object Memo1: TfrxMemoView
           Left = 216.341373330000000000
@@ -583,6 +634,7 @@ object DMNews: TDMNews
         end
       end
       object MasterData1: TfrxMasterData
+        FillType = ftBrush
         Height = 799.211143260000000000
         Top = 170.078850000000000000
         Width = 755.906000000000000000
@@ -600,30 +652,35 @@ object DMNews: TDMNews
           Left = 201.671923330000000000
           Top = 1.028756659999999000
           Height = 26.456710000000000000
+          Color = clBlack
           Frame.Typ = [ftLeft]
         end
         object Line4: TfrxLineView
           Left = 343.166666670000000000
           Top = 0.195423330000011200
           Height = 26.456710000000000000
+          Color = clBlack
           Frame.Typ = [ftLeft]
         end
         object Line2: TfrxLineView
           Left = 696.579160000000000000
           Top = 0.333333330000016300
           Height = 26.456710000000000000
+          Color = clBlack
           Frame.Typ = [ftLeft]
         end
         object Line5: TfrxLineView
           Left = 265.522263330000000000
           Top = 1.028756670000007000
           Height = 26.456710000000000000
+          Color = clBlack
           Frame.Typ = [ftLeft]
         end
         object Line7: TfrxLineView
           Left = 141.015770000000000000
           Top = 0.362089999999994900
           Height = 26.456710000000000000
+          Color = clBlack
           Frame.Typ = [ftLeft]
         end
         object Memo3: TfrxMemoView
@@ -682,6 +739,7 @@ object DMNews: TDMNews
           Left = 0.000000010000000000
           Top = 26.820374810000000000
           Width = 756.589147280000000000
+          Color = clBlack
           Frame.Typ = [ftTop]
         end
         object Memo16: TfrxMemoView
@@ -776,6 +834,7 @@ object DMNews: TDMNews
         end
       end
       object Header1: TfrxHeader
+        FillType = ftBrush
         Height = 24.167903330000000000
         Top = 124.724490000000000000
         Width = 755.906000000000000000
@@ -783,8 +842,8 @@ object DMNews: TDMNews
           Align = baClient
           Width = 755.906000000000000000
           Height = 24.167903330000000000
-          Color = 15329769
           Curve = 1
+          Fill.BackColor = 15329769
           Shape = skRoundRectangle
         end
         object Memo10: TfrxMemoView
@@ -885,6 +944,7 @@ object DMNews: TDMNews
         end
       end
       object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
         Height = 22.677180000000000000
         Top = 1031.811690000000000000
         Width = 755.906000000000000000

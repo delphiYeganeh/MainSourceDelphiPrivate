@@ -230,6 +230,39 @@ type
     Memo1: TMemo;
     ShellTreeView2: TShellTreeView;
     btnpicExcelCreate: TAdvGlowButton;
+    ShellTreeView3: TShellTreeView;
+    TabSheet3: TTabSheet;
+    xpPanel4: TxpPanel;
+    AdvGlowButton16: TAdvGlowButton;
+    AdvGlowButton20: TAdvGlowButton;
+    Panel11: TPanel;
+    GroupBox9: TGroupBox;
+    Label18: TLabel;
+    Label19: TLabel;
+    edtFromfolder: TEdit;
+    edtToFolder: TEdit;
+    Label20: TLabel;
+    edtExcelRoot: TEdit;
+    AdvGlowButton24: TAdvGlowButton;
+    CBFildName: TComboBox;
+    Label21: TLabel;
+    btnExcelTransfer: TAdvGlowButton;
+    Bevel2: TBevel;
+    Label22: TLabel;
+    edtFolderRoot: TEdit;
+    AdvGlowButton22: TAdvGlowButton;
+    btnFolderCreate: TAdvGlowButton;
+    ShellTreeView4: TShellTreeView;
+    YDBGrid1: TYDBGrid;
+    Label23: TLabel;
+    edtExcelWorkSheet: TEdit;
+    Label24: TLabel;
+    edtExcelFrom: TEdit;
+    Label25: TLabel;
+    edtExcelTo: TEdit;
+    ProgressBar3: TProgressBar;
+    lblProcTempExcel: TLabel;
+    Label27: TLabel;
     procedure btnTransferClick(Sender: TObject);
     procedure btnShowWordClick(Sender: TObject);
     procedure AdvGlowButton5Click(Sender: TObject);
@@ -281,6 +314,11 @@ type
     procedure ShellTreeView1DblClick(Sender: TObject);
     procedure AdvGlowButton17Click(Sender: TObject);
     procedure btnpicExcelCreateClick(Sender: TObject);
+    procedure AdvGlowButton24Click(Sender: TObject);
+    procedure AdvGlowButton22Click(Sender: TObject);
+    procedure btnExcelTransferClick(Sender: TObject);
+    procedure btnFolderCreateClick(Sender: TObject);
+    procedure ShellTreeView4DblClick(Sender: TObject);
   private
     TranferAccept : Boolean ;
     newsheet,newpath ,newFrom ,newTo : String ;
@@ -291,6 +329,7 @@ type
     procedure LoadExcelDataToGrid (const FileName: string; Grid: TStringGrid);
     procedure insetDataToTable();
     procedure insetDataToTemp();
+    procedure insetDataToTempFolder();    
     procedure RecordRefresh(IsPrint : Integer = 0; Userid : Integer = 0);
     function  PrintData(id : integer) :integer;
     function  loadReportField(id : integer): boolean;
@@ -390,8 +429,16 @@ begin
       pnlSettingandTransfer.Visible  := False;
       Memo1.Align := alClient ;
     //
-      _ExcelPicMode ;
+      btnpicExcelCreate.Visible :=  _ExcelPicMode ;
+
+      rbPicReverce.Visible :=  not _ExcelPicMode ;
+      btnRenamePic.Visible :=  not _ExcelPicMode ;
+      lblDesc2.Visible :=  not _ExcelPicMode ;
+      lblDesc1.Visible :=  not _ExcelPicMode ;
     end;
+
+    if _FolderMode then
+     mainPageControl.ActivePageIndex:= 5 ;
 
   end;
   Memo1.clear ;
@@ -1800,9 +1847,9 @@ end;
 
 procedure TFMain.btnRenamePicClick(Sender: TObject);
 var
-  I,j : Integer ;
+  I,j,k : Integer ;
   Path : String;
-  tempStr :  string ;
+  tempStr,FoldernameStr :  string ;
 begin
   inherited;
  // ShellTreeView1.Visible:=True;
@@ -1839,9 +1886,12 @@ begin
   else if rbPicReverce.ItemIndex = 1 then
     tempStr := '¬Ì« «“  €ÌÌ— ‰«„ ⁄ò”Â« »Â Â„—«Â òÅÌ œÊ»«—Â ⁄ò” «Ê· „ÿ„⁄‰ „Ì »«‘Ìœø'
   else if rbPicReverce.ItemIndex = 2 then
-    tempStr := '¬Ì« «“ òÅÌ œÊ»«—Â ⁄ò” «Ê· „ÿ„⁄‰ „Ì »«‘Ìœø' ;
+    tempStr := '¬Ì« «“ òÅÌ œÊ»«—Â ⁄ò” «Ê· „ÿ„⁄‰ „Ì »«‘Ìœø'
+  else if rbPicReverce.ItemIndex = 3 then
+    tempStr := '¬Ì« «“ Õ–› ¬Œ—Ì‰ ⁄ò” Â— ›Ê·œ— „ÿ„⁄‰ „Ì »«‘Ìœø' ;
 
-  memo1.Lines.Add ( 'Ã” ÃÊ  « ”Â ”ÿÕ ›Ê·œ— «‰Ã«„ „Ì ‘Êœ ' ) ;
+  //memo1.Lines.Add ( 'Ã” ÃÊ  « ”Â ”ÿÕ ›Ê·œ— «‰Ã«„ „Ì ‘Êœ ' ) ;
+  memo1.Lines.Add ( 'Ã” ÃÊ  « çÂ«— ”ÿÕ ›Ê·œ— «‰Ã«„ „Ì ‘Êœ ' ) ;
 
 
 
@@ -1858,21 +1908,42 @@ begin
         begin
           for j:=0 to ShellTreeView2.Selected.GetLastChild.Index do
           begin
-            Path := ShellTreeView2.Path+'\'+ShellTreeView2.Selected.Item[j].Text;
-            DM. RenameImagesInFolder(Path, 'NewImage',Memo1,rbPicReverce.ItemIndex);
+            //Path := ShellTreeView2.Path+'\'+ShellTreeView2.Selected.Item[j].Text;
+            //DM. RenameImagesInFolder(Path, 'NewImage',Memo1,rbPicReverce.ItemIndex);
+            Path := ShellTreeView2.Path+'\'+ShellTreeView2.Selected.Item[J].Text;
+
+            ShellTreeView3.Path := Path ;
+            ShellTreeView3.Selected.Expand(True);
+            if  ShellTreeView3.Selected.GetLastChild.Index >= 0 then
+            begin
+              for K:=0 to ShellTreeView3.Selected.GetLastChild.Index do
+              begin
+                Path := ShellTreeView3.Path+'\'+ShellTreeView3.Selected.Item[K].Text;
+                FoldernameStr := ShellTreeView3.Selected.Item[K].Text;
+                DM. RenameImagesInFolder(Path, FoldernameStr ,Memo1,rbPicReverce.ItemIndex);
+              end;
+            end
+            else
+            begin
+              Path := ShellTreeView2.Path+'\'+ShellTreeView2.Selected.Item[J].Text;
+              FoldernameStr := ShellTreeView2.Selected.Item[J].Text;
+              DM. RenameImagesInFolder(Path, FoldernameStr ,Memo1,rbPicReverce.ItemIndex);
+            end;
           end;
         end
         else
         begin
           Path := ShellTreeView1.Path+'\'+ShellTreeView1.Selected.Item[I].Text;
-          DM. RenameImagesInFolder(Path, 'NewImage',Memo1,rbPicReverce.ItemIndex);
+          FoldernameStr := ShellTreeView1.Selected.Item[I].Text;
+          DM. RenameImagesInFolder(Path, FoldernameStr,Memo1,rbPicReverce.ItemIndex);
         end;
       end ;
     end
     else
     begin
       Path := ShellTreeView1.Path;
-      DM. RenameImagesInFolder(Path, 'NewImage',Memo1,rbPicReverce.ItemIndex);
+      FoldernameStr := ShellTreeView1.Selected.Item[0].Text;
+      DM. RenameImagesInFolder(Path, FoldernameStr ,Memo1,rbPicReverce.ItemIndex);
     end;
     
   end ;
@@ -1903,9 +1974,11 @@ end;
 
 procedure TFMain.btnpicExcelCreateClick(Sender: TObject);
 var
-  I,j : Integer ;
+  I,j,k : Integer ;
   Path : String;
+  allCounttif,
   Counttif : Integer ;
+
   Prefix,FolderPath : string;
 begin
   inherited;
@@ -1931,7 +2004,8 @@ begin
     ShowMessage('ÅÊ‘Â „Ê—œ ‰Ÿ— Ì«›  ‰‘œ!');
     exit ;
   end;
-  memo1.Lines.Add ( 'Ã” ÃÊ  « ”Â ”ÿÕ ›Ê·œ— «‰Ã«„ „Ì ‘Êœ ' ) ;
+  //memo1.Lines.Add ( 'Ã” ÃÊ  « ”Â ”ÿÕ ›Ê·œ— «‰Ã«„ „Ì ‘Êœ ' ) ;
+  memo1.Lines.Add ( 'Ã” ÃÊ  « çÂ«— ”ÿÕ ›Ê·œ— «‰Ã«„ „Ì ‘Êœ ' ) ;
 
   FolderPath :=  Trim(EditPath.Text+ '_'+'MyExcelFile.xlsx') ;
 
@@ -1955,12 +2029,44 @@ begin
       begin
         for j:=0 to ShellTreeView2.Selected.GetLastChild.Index do
         begin
+          {
           Path := ShellTreeView2.Path+'\'+ShellTreeView2.Selected.Item[j].Text;
           memo1.Lines.Add (  '  „”Ì—   ' + Path   ) ;
           memo1.Lines.Add (  ' ... œ— Õ«· ‘„«—‘  '   ) ;
           Counttif := DM.CountFilesInFolder( Path, Prefix  );
            memo1.Lines.Add (  '  '+  IntToStr(Counttif) + '  =  ⁄œ«œ ›«Ì· Ì«›  ‘œÂ  ') ;
           DM. CreateExcelImagesInFolder(FolderPath, ShellTreeView2.Selected.Item[j].Text,Counttif);
+          }
+          Path := ShellTreeView2.Path+'\'+ShellTreeView2.Selected.Item[j].Text;
+          ShellTreeView3.Path := Path ;
+          ShellTreeView3.Selected.Expand(True);
+          if  ShellTreeView3.Selected.GetLastChild.Index >= 0 then
+          begin
+            for k:=0 to ShellTreeView3.Selected.GetLastChild.Index do
+            begin
+              Path := ShellTreeView3.Path+'\'+ShellTreeView3.Selected.Item[k].Text;
+              memo1.Lines.Add (  '  „”Ì—   ' + Path   ) ;
+              memo1.Lines.Add (  ' ... œ— Õ«· ‘„«—‘  '   ) ;
+              Counttif := DM.CountFilesInFolder( Path, Prefix  );
+              memo1.Lines.Add (  '  '+  IntToStr(Counttif) + '  =  ⁄œ«œ ›«Ì· Ì«›  ‘œÂ  ') ;
+              allCounttif := DM.CountFilesInFolder( Path, Prefix ,true );
+              memo1.Lines.Add (  '  '+ IntToStr(Counttif) + '  =  ⁄œ«œ ò· ›«Ì·Â«Ì Ì«›  ‘œÂ  ') ;
+              DM. CreateExcelImagesInFolder(FolderPath, ShellTreeView3.Selected.Item[k].Text,Counttif,allCounttif);
+
+            end;
+          end
+          else
+          begin
+            Path := ShellTreeView1.Path+'\'+ShellTreeView1.Selected.Item[I].Text;
+              memo1.Lines.Add (  '  „”Ì—   ' + Path   ) ;
+              memo1.Lines.Add (  ' ... œ— Õ«· ‘„«—‘  '   ) ;
+            Counttif := DM.CountFilesInFolder( Path, Prefix  );
+            memo1.Lines.Add (  '  '+ IntToStr(Counttif) + '  =  ⁄œ«œ ›«Ì· Ì«›  ‘œÂ  ') ;
+            allCounttif := DM.CountFilesInFolder( Path, Prefix ,true );
+            memo1.Lines.Add (  '  '+ IntToStr(Counttif) + '  =  ⁄œ«œ ò· ›«Ì·Â«Ì Ì«›  ‘œÂ  ') ;
+            DM. CreateExcelImagesInFolder(FolderPath, ShellTreeView1.Selected.Item[I].Text,Counttif,allCounttif);
+
+          end;
 
         end;
       end
@@ -1971,7 +2077,9 @@ begin
           memo1.Lines.Add (  ' ... œ— Õ«· ‘„«—‘  '   ) ;
         Counttif := DM.CountFilesInFolder( Path, Prefix  );
         memo1.Lines.Add (  '  '+ IntToStr(Counttif) + '  =  ⁄œ«œ ›«Ì· Ì«›  ‘œÂ  ') ;
-        DM. CreateExcelImagesInFolder(FolderPath, ShellTreeView1.Selected.Item[I].Text,Counttif);
+        allCounttif := DM.CountFilesInFolder( Path, Prefix ,true );
+        memo1.Lines.Add (  '  '+ IntToStr(Counttif) + '  =  ⁄œ«œ ò· ›«Ì·Â«Ì Ì«›  ‘œÂ  ') ;
+        DM. CreateExcelImagesInFolder(FolderPath, ShellTreeView1.Selected.Item[I].Text,Counttif,allCounttif);
 
       end;
     end ;
@@ -1984,13 +2092,284 @@ begin
           memo1.Lines.Add (  ' ... œ— Õ«· ‘„«—‘  '   ) ;
     Counttif := DM.CountFilesInFolder( Path, Prefix  );
     memo1.Lines.Add (  '  '+  IntToStr(Counttif) + '  =  ⁄œ«œ ›«Ì· Ì«›  ‘œÂ  ') ;
-    DM. CreateExcelImagesInFolder(FolderPath, ExtractFileName(Path),Counttif);
+    allCounttif := DM.CountFilesInFolder( Path, Prefix ,true );
+    memo1.Lines.Add (  '  '+ IntToStr(Counttif) + '  =  ⁄œ«œ ò· ›«Ì·Â«Ì Ì«›  ‘œÂ  ') ;
+    DM. CreateExcelImagesInFolder(FolderPath, ExtractFileName(Path),Counttif,allCounttif);
 
   end;
+
   memo1.Lines.Add ( ' ' ) ;
   memo1.Lines.Add ( '--- ›«Ì· «ò”· ---' ) ;
   memo1.Lines.Add ( FolderPath ) ;
   memo1.Lines.Add ( '”«Œ  ›«Ì· «ò”· »« „Ê›ﬁÌ  œ— „”Ì— »«·« «‰Ã«„ ‘œ' ) ;
+
+end;
+
+procedure TFMain.AdvGlowButton24Click(Sender: TObject);
+begin
+  inherited;
+  DM.OpenDialog.Execute;
+  edtExcelRoot.Text := DM.OpenDialog.FileName;
+end;
+
+procedure TFMain.AdvGlowButton22Click(Sender: TObject);
+begin
+  inherited;
+  ShellTreeView4.Visible:= not ShellTreeView4.Visible ;
+end;
+
+procedure TFMain.btnExcelTransferClick(Sender: TObject);
+begin
+  inherited;
+  if edtExcelRoot.Text <> '' then
+      if FileExists(edtExcelRoot.Text) then
+      begin
+         insetDataToTempFolder;
+
+      end
+      else ShowMessage('›«Ì· „Ê—œ ‰Ÿ— Ì«›  ‰‘œ ·ÿ›« œÊ»«—Â „”Ì— ›«Ì· „‘Œ’ ‰„«ÌÌœ')
+  else ShowMessage('›«Ì· «ò”· «‰ Œ«» ‰„«ÌÌœ');
+
+end;
+
+procedure TFMain.btnFolderCreateClick(Sender: TObject);
+var
+  node : TTreeNode ;
+  masterPath : String;
+  SelectedNode, ParentNode: TTreeNode;
+  ParentIndex: Integer;
+  foldername : string ;
+begin
+  inherited;
+  foldername := '' ;
+  if edtFolderRoot.Text = '' then
+  begin
+    ShowMessage('·ÿ›« „”Ì— Ê ‰«„ ›Ê·œ— «’·Ì „‘Œ’ ‰„«ÌÌœ');
+    edtFolderRoot.SetFocus;
+    Exit;
+  end;
+  if YDBGrid1.DataSource.DataSet.RecordCount = 0 then
+  begin
+    ShowMessage('ÂÌç œÌ «ÌÌ ÃÂ  «‰ ﬁ«· ÊÃÊœ ‰œ«—œ');
+    YDBGrid1.SetFocus;
+    Exit;
+  end;
+
+  if (edtFromfolder.Text = '') or (edtFromfolder.Text ='0') then
+  begin
+    ShowMessage('·ÿ›« «“ ‘„«—Â —œÌ› —« «‰ Œ«» ‰„«ÌÌœ');
+    edtFromfolder.SetFocus;
+    Exit;
+  end;
+
+  if (edtToFolder.Text = '') or (edtToFolder.Text ='0') then
+  begin
+    ShowMessage('·ÿ›«  « ‘„«—Â —œÌ› «‰ Œ«» ‰„«ÌÌœ');
+    edtToFolder.SetFocus;
+    Exit;
+  end;
+
+  masterPath := trim(edtFolderRoot.Text) ;
+
+  masterPath :=  StringReplace(masterPath, '\\\\', '\', [rfReplaceAll, rfIgnoreCase]);
+  masterPath :=  StringReplace(masterPath, '\\\', '\', [rfReplaceAll, rfIgnoreCase]);
+  masterPath :=  StringReplace(masterPath, '\\', '\', [rfReplaceAll, rfIgnoreCase]);
+
+  if copy (masterPath ,length(masterPath),1) = '\' then
+   masterPath := copy(masterPath ,1, length(masterPath)-1 ) ;
+
+  SelectedNode := ShellTreeView4.Selected; // ê—Â «‰ Œ«»ù‘œÂ
+  ParentNode  := SelectedNode.Parent; // ê—Â Ê«·œ
+
+  // „”Ì— ÅÊ‘Âù«Ì òÂ „ÌùŒÊ«ÂÌœ «ÌÃ«œ ò‰Ìœ
+  //if not DirectoryExists(edtFolderRoot.Text) then
+  if YDBGrid1.DataSource.DataSet.RecordCount >0 then
+  begin
+    try
+      try
+         YDBGrid1.DataSource.DataSet.First;
+         while not (YDBGrid1.DataSource.DataSet.Eof) do
+         begin
+          if  (YDBGrid1.DataSource.DataSet.FieldByName('F14').AsInteger  >= StrToInt(edtFromfolder.Text)) and
+              (YDBGrid1.DataSource.DataSet.FieldByName('F14').AsInteger  <= StrToInt(edtToFolder.Text)) then
+          begin
+            //ÅÊ‘ÂùÂ«Ì ·«“„ œ— „”Ì— „‘Œ’ ‘œÂ —« «ÌÃ«œ „Ìùò‰œ
+            foldername := StringReplace(trim(YDBGrid1.DataSource.DataSet.FieldByName('F1').AsString) ,'/','.', [rfReplaceAll, rfIgnoreCase]);
+            ForceDirectories(masterPath+'\'+foldername);
+            //CreateDir(edtFolderRoot.Text);
+          end;
+
+          YDBGrid1.DataSource.DataSet.Next;
+        end;
+      finally
+        if ParentNode <> nil then
+          ShellTreeView4.Refresh(ParentNode);
+
+       // ShellTreeView4.Repaint;
+        ShowMessage('ÅÊ‘Â Â« »« „Ê›ﬁÌ  òÅÌ ‘œ‰œ');
+      end;
+    except
+
+       ShowMessage('⁄„·Ì«  òÅÌ ›Ê·œ—Â« »« Œÿ« „Ê«ÃÂ ‘œ ·ÿ›« œÊ»«—Â «„ Õ«‰ ò‰Ìœ');
+    end;
+  end ;
+  {
+  else
+  begin
+    ShowMessage('ÅÊ‘Â «“ ﬁ»· ÊÃÊœ œ«—œ.');
+  end;
+   }
+end;
+
+procedure TFMain.ShellTreeView4DblClick(Sender: TObject);
+begin
+  inherited;
+  edtFolderRoot.Text := ShellTreeView4.SelectedFolder.PathName;
+  ShellTreeView4.Visible:=False;
+  try
+    // „À«· «” ›«œÂ «“  «»⁄
+   ShellTreeView4.Visible:=True;
+ //  DM. RenameImagesInFolder(EditPath.Text, 'NewImage');
+  except
+    on E: Exception do
+      Writeln('Error: ' + E.Message);
+  end;
+end;
+
+procedure TFMain.insetDataToTempFolder;
+var
+  ValuePath, sqlCmd, sqlCmdField : String;
+  Cols, Rows, i, j, failure, mYear, intCount: Integer;
+  Excel, XLSheet: Variant;
+  adoCmd: TADOCommand;
+  msgStr : String;
+  WorksheetNUM, FirstRow, LastUserRow: Integer;
+  HeaderID : Integer;
+  HeaderIDStr : string ;
+  Component: TComponent;
+begin
+  inherited;
+
+    newsheet := edtExcelWorkSheet.Text ;
+    newpath  := edtExcelRoot.Text ;
+    newFrom  := edtExcelFrom.Text ;
+    newTo    := edtExcelTo.Text ;
+
+   ValuePath  := newpath ;
+
+  if Trim(newsheet) = '' then
+    WorksheetNUM  := 1
+  else  WorksheetNUM  := StrToInt(Trim(newsheet)) ;
+
+  FirstRow:= StrToInt(Trim(newFrom)) ;
+  if  FirstRow = 0 then
+    FirstRow := 1 ;
+
+  LastUserRow:= 0;
+  if (Trim(newTo) <> '') and (Trim(newTo) <> 'N')  then
+    LastUserRow:= StrToInt(Trim(newTo));
+
+  if Trim(newTo) = 'N' then
+    msgStr  := '¬Ì« «“ «‰ ﬁ«· ”ÿ—'+ '"' +Trim(newFrom)  +'"'+ '  « ”ÿ— ' + '"¬Œ—"' + ' ›«Ì· «‰ Œ«»Ì „ÿ„⁄‰ „Ì »«‘Ìœ ø '
+  else
+    msgStr  := '¬Ì« «“ «‰ ﬁ«· ”ÿ—'+'"' + Trim(newFrom)  +'"' + '  « ”ÿ— ' +'"' + Trim(newTo) +'"' + ' ›«Ì· «‰ Œ«»Ì „ÿ„⁄‰ „Ì »«‘Ìœ ø ' ;
+
+  if MessageDlg(msgStr,mtWarning,[mbyes,mbno],0)=mryes then
+  begin
+
+
+    failure:=0;
+    try
+      Excel:=CreateOleObject('Excel.Application');
+    except
+      failure:=1;
+    end;
+
+    btnExcelTransfer.Enabled := False ;
+    //cbAccept.Enabled    := False ;
+    //TranferAccept        := False ;
+    
+    if failure = 0 then
+    begin
+      Excel.Visible:=False;
+      Excel.WorkBooks.Open(ValuePath);
+      XLSheet := Excel.Worksheets[ WorksheetNUM ];
+      Cols := ColCountTemp  ;// XLSheet.UsedRange.Columns.Count;
+      Rows := XLSheet.UsedRange.Rows.Count;
+
+      if  LastUserRow > 0 then
+       Rows := LastUserRow ;
+
+      ProgressBar3.Max := Rows ;
+      ProgressBar3.Position := 0;
+
+      try
+        lblProcTempExcel.Visible := True;
+        lblProcTempExcel.Caption := 'œ— Õ«· Å—œ«“‘ ›«Ì· «ò”·';
+        Application.ProcessMessages;
+
+
+        intCount := 0;
+        for i := FirstRow to Rows do
+        begin
+          if (Trim(Excel.Cells[i, 1].Value) = '' ) then
+            Continue;
+
+          // œ—Ã —òÊ—œ ÃœÌœ
+          DM.CDTemp.Append; // Ì« ClientDataSet1.Insert;
+
+        //  for j := 1 to Cols do
+        //  begin
+
+            //  ‰ŸÌ„ „ﬁ«œÌ— ›Ì·œÂ«
+            //CDTemp.FieldByName('ID').AsInteger := 1;
+            intCount := intCount + 1;
+            Component := FindComponent('CBFildName');
+            if (Component <> nil) and (Component is TComboBox) then
+            begin
+              if TComboBox(Component).Itemindex > 0 then
+                DM.CDTemp.FieldByName('F1').AsString := Excel.Cells[i,TComboBox(Component).Itemindex ].Value;
+              DM.CDTemp.FieldByName('F14').AsInteger :=  intCount  ;
+            end;
+
+        //   end;
+          // «⁄„«·  €ÌÌ—« 
+          DM.CDTemp.Post;
+
+          //intCount := intCount + 1;
+          lblProcTempExcel.Caption := 'œ— Õ«· Å—œ«“‘  ' + IntToStr(intCount)  + ' —òÊ—œ';
+          Application.ProcessMessages;
+          ProgressBar3.Position := ProgressBar3.Position + 1;
+        end ;
+      finally
+        lblProcTempExcel.Visible := False;
+        FreeAndNil(adoCmd);
+      end;
+
+      Excel.Workbooks.Close;
+      Excel.Quit;
+      Excel:=Unassigned;
+    end;
+
+   // if dm.Secretariats.Active then
+   //   dm.Secretariats.Locate('SecId',_DefaultSec,[]);
+
+    try
+      lblProcTempExcel.Visible := True;
+      lblProcTempExcel.Caption := 'œ— Õ«· «‰ ﬁ«· œ«œÂ ...';
+      Application.ProcessMessages;
+
+
+    finally
+      lblProcTemp.Visible := False;
+      ProgressBar3.Position := ProgressBar3.Max ;
+      ShowMessage(' «‰ ﬁ«·  '+ IntToStr(intCount) +' —òÊ—œ »« „Ê›ﬁÌ  «‰Ã«„ ‘œ ' ) ;
+      //StringGrid1.Color := $00EBEBD6 ;//  clWhite
+      RecordRefresh (gridmode,_UserId);
+      pnlTempPrint.Minimized := false ;
+      pnlSettingandTransfer .Minimized := true ;
+    end;
+  end;
 
 end;
 

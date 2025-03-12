@@ -5,8 +5,8 @@ interface
 uses
  DB, BaseUnit, ExtActns, ActnMan, Buttons, StdCtrls, Mask, DBCtrls,
   Controls, Classes, Windows,ActnList, XPStyleActnCtrls, Dialogs, 
-  xpBitBtn, ExtCtrls, Menus, ADODB, ShellApI, xmldom, XMLIntf, msxmldom,
-  XMLDoc, TntDialogs, AppEvnts, AdvGlowButton;
+  xpBitBtn, ExtCtrls, Menus, ADODB, ShellApI, xmldom, XMLIntf, msxmldom, ComObj , Variants,
+  XMLDoc, TntDialogs, AppEvnts, AdvGlowButton, WordXP, OleServer;
 
 type
   TFrAddLetterDataDialog = class(TMBaseForm)
@@ -17,7 +17,7 @@ type
     DBLookupComboBox1: TDBLookupComboBox;
     Label3: TLabel;
     Path: TEdit;
-    SpeedButton1: TSpeedButton;
+    SpeedButton1: TAdvGlowButton;
     Panel1: TPanel;
     BitBtn2: TAdvGlowButton;
     BitBtn1: TAdvGlowButton;
@@ -47,20 +47,27 @@ type
     OpenDialog: TTntOpenDialog;
     ADOQuery1: TADOQuery;
     pnlMain: TPanel;
+    btnSign: TAdvGlowButton;
+    WordDoc: TWordDocument;
+    WordApp: TWordApplication;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure DBLookupComboBox1Click(Sender: TObject);
+    procedure btnSignClick(Sender: TObject);
   private
     FLetter_Or_Erja: String;
     FGroupFlag1: Boolean;
     FRecommiteID: Integer;
+    filetemp : string;
+    WordSignFileName  : string;
     procedure SetLetter_Or_Erja(const Value: String);
     procedure SetGroupFlag1(const Value: Boolean);
     procedure SetRecommiteID(const Value: Integer);
     function GetFileSize(sFileToExamine: string; bInKBytes: Boolean): string;
     function GetFileSizeFromDB:String;
+    procedure MakePage;
     { Private declarations }
   public
    done:boolean;
@@ -82,7 +89,7 @@ var
 implementation
 
 uses Dmu, UaddLetterData, Forms,YShamsiDate, SysUtils, businessLayer,
-  InputUserPassU, USelArchiveSecID, ReCommitedialog;
+  InputUserPassU, USelArchiveSecID, ReCommitedialog, UMain;
 
 {$R *.dfm}
 
@@ -342,6 +349,40 @@ begin
             end;
         end;
      end;// end of if Path.Text <> '' then
+     
+     { TODO -oparsa : 14031128 }
+     if (filetemp <> '') and (btnSign.Visible) then
+     begin
+        if Letter_Or_Erja='Letter' then
+        begin
+            with dm.Get_LetterData_by_LetterDataID do
+            begin
+               Close;
+               Connection := dm.YeganehConnection;
+               Parameters.ParamByName('@LetterdataID').Value := Dm.Get_LetterData_by_LetterIDLetterDataID.Value;
+               Open;
+               Edit;
+
+               if FileExists(filetemp) then
+               begin
+
+                  Dm.Get_LetterData_by_LetterDataIDImage.LoadFromFile(filetemp);
+                  Post;
+
+                  AddTxtToDB(Dm.Get_LetterData_by_LetterDataIDLetterDataID.AsInteger,DBLookupComboBox1.KeyValue);
+                  SysUtils.FileSetReadOnly(filetemp, false);
+                  DeleteFile(filetemp);
+
+               end
+               else
+               begin
+                  ShowMyMessage('ÅÌ€«„','À»  «„÷« »« Œÿ« „Ê«ÃÂ ‘œ ·ÿ›« œÊ»«—Â  ·«‘ ‰„«ÌÌœ',[mbOK],mtInformation);
+                  Exit;
+               end;
+            end;
+        end;
+     end;
+     { TODO -oparsa : 14031128 }
    end;
    Close;
    if Letter_Or_Erja='Erja' then
@@ -482,6 +523,11 @@ begin
   inherited;
   if Letter_Or_Erja='Letter' then dm.Get_LetterData_by_LetterID.Cancel;
   if Letter_Or_Erja='Erja'   then dm.Get_RecommitePayvast_by_RecommiteID.Cancel;
+  if FileExists(filetemp) then
+  begin
+    SysUtils.FileSetReadOnly(filetemp, false);
+    SysUtils.DeleteFile(filetemp);
+  end;  
   close;
 end;
 
@@ -489,12 +535,16 @@ procedure TFrAddLetterDataDialog.FormShow(Sender: TObject);
 begin
    inherited;
    Title.SetFocus;
+   btnSign.Visible := False;
+   filetemp := '' ;
    // Amin 1391/12/15 Start
    if DSForm.DataSet.State in [dsEdit] then
    begin
       DBLookupComboBox1.Enabled := false;
       SpeedButton1.Enabled := false;
       Path.Enabled := false;
+      if dm.Get_LetterData_by_LetterIDExt.AsString ='docx' then
+        btnSign.Visible := True;
    end;
    // Amin 1391/12/15 End
 end;
@@ -512,17 +562,17 @@ begin
    //OpenDialog.Filter := '';
    if OpenDialog.Execute then
    begin
-         if FileExists(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename))then
-         begin
-           SysUtils.FileSetReadOnly(pchar(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename)), false);
-           DeleteFile(pchar(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename)));
-         end;
-         if CopyFileW(dm.replacePWC(StringToPWide(OpenDialog.filename,i)), StringToPWide(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename),i), False) then
-            Path.Text :=_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename)
-         else if CopyFileW(StringToPWide(OpenDialog.filename,i), StringToPWide(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename),i), False) then
-            Path.Text := _ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename)
-         else
-            ShowMessage('Œÿ« œ— ŒÊ«‰œ‰ ›«Ì· „»œ«');
+     if FileExists(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename))then
+     begin
+       SysUtils.FileSetReadOnly(pchar(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename)), false);
+       DeleteFile(pchar(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename)));
+     end;
+     if CopyFileW(dm.replacePWC(StringToPWide(OpenDialog.filename,i)), StringToPWide(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename),i), False) then
+        Path.Text :=_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename)
+     else if CopyFileW(StringToPWide(OpenDialog.filename,i), StringToPWide(_ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename),i), False) then
+        Path.Text := _ApplicationPath+'tmpFile'+ExtractFileExt(OpenDialog.filename)
+     else
+        ShowMessage('Œÿ« œ— ŒÊ«‰œ‰ ›«Ì· „»œ«');
    end;
 
 end;
@@ -658,6 +708,184 @@ begin
    BitBtn1.Enabled := true;
    SpeedButton1.Enabled := true;
    DBLookupComboBox1.Enabled := true;
+end;
+
+procedure TFrAddLetterDataDialog.btnSignClick(Sender: TObject);
+var
+ // WordApp: TWordApplication;
+ // WordDoc: TWordDocument;
+ // WordApp: Variant; // »—«Ì «ÌÃ«œ Ìò ‰„Ê‰Â «“ »—‰«„Â Word
+ // WordDoc: Variant; // »—«Ì «ÌÃ«œ Ìò ”‰œ Word
+  W,new,old,no,noFW: widestring;
+  selst:integer;
+  Range: Variant;
+  ImagePath :string;
+begin
+  inherited;
+  btnSign.Enabled := False;
+
+  with dm,Get_LetterData_by_LetterDataID do
+  begin
+    Close;
+    Connection := dm.YeganehConnection;
+    Parameters.ParamByName('@LetterdataID').Value := dm.Get_LetterData_by_LetterIDLetterDataID.Value; //dm.Get_LetterData_by_LetterIDLetterDataID.Value;
+    Open;
+
+    WordSignFileName := 'tempSign' + dm.Get_LetterData_by_LetterIDLetterDataID.AsString + '.' + Dm.Get_LetterData_by_LetterIDExt.AsString;
+    filetemp :=_TempPath + WordSignFileName;
+
+    if FileExists(filetemp) then
+    begin
+
+      SysUtils.FileSetReadOnly(filetemp, false);
+      DeleteFile(filetemp);
+
+    end ;
+
+    Dm.Get_LetterData_by_LetterDataIDImage.SaveToFile(filetemp);
+
+  end ;
+
+  //Dm.Get_LetterData_by_LetterDataIDImage.SaveToFile(f);
+
+  if (dm.Get_LetterData_by_LetterIDExt.AsString = 'docx') //or (dm.Get_LetterData_by_LetterIDExt.AsString = 'doc')
+        then
+  begin
+    MakePage ;
+
+    try
+      WordApp.Connect; // « ’«· »Â »—‰«„Â Word
+
+      try
+        ImagePath := _TempPath+'yeganehBoxAddleterWORDsign.jpg' ;
+
+        WordDoc.ActiveWindow.ActivePane.View.SeekView := wdSeekMainDocument;
+        Application.ProcessMessages;
+
+        WordApp.Selection.WholeStory;
+        w:= WordApp.Selection.Text;
+        WordApp.Selection.SetRange(0,0);
+        selst:= pos('((«„÷«))',w);
+
+        // «ÌÃ«œ  €ÌÌ—«  œ— ›«Ì· Ê—œ
+        if (selst>0) then
+        begin
+          try
+            new:=' ';
+            if Dm.Get_LetterData_by_LetterIDSignerID.AsInteger > 0 then
+            begin
+              // «‰ Œ«» ò· ”‰œ
+              Range := WordDoc.Content;
+              if Range.Find.Execute(FindText:='((«„÷«))') then
+              begin
+                // «ê— ò·„Â ÅÌœ« ‘œ° »Â ¬‰ ·ÊòÌ‘‰ »—Ê
+                Range.Select;
+              end;
+              Open_UserSign(Dm.Get_LetterData_by_LetterIDSignerID.AsInteger);
+              if not dm.Select_UserSignUserSign.IsNull then
+                dm.Select_UserSignUserSign.SaveToFile(ImagePath);
+              if FileExists(ImagePath) then
+              begin
+                WordApp.selection.inlineshapes.addpicture(ImagePath,EmptyParam,EmptyParam,EmptyParam);
+                SysUtils.FileSetReadOnly(PChar(ImagePath), false);
+                DeleteFile(PChar(ImagePath));
+              end;
+
+            end;
+
+           // if new =' ' then
+             MainForm.ReplaceInWord(WordApp,'((«„÷«))',(new));
+
+            // –ŒÌ—Âù”«“Ì ›«Ì· Ê—œ
+            WordDoc.Save;
+            MBaseForm.MessageShowString('«„÷« Ã«Ìê“Ì‰ ‘œ ·ÿ›« œ— ’Ê—   „«Ì·  €ÌÌ—«  –ŒÌ—Â ‰„«ÌÌœ'  ,False);
+          except
+             MBaseForm.MessageShowString('Ã«Ìê“Ì‰Ì «„÷« »« Œÿ« „Ê«ÃÂ ‘œ'  ,False);
+          end;
+        end
+        else
+        begin
+          if FileExists(filetemp) then
+          begin
+            SysUtils.FileSetReadOnly(filetemp, false);
+            SysUtils.DeleteFile(filetemp);
+            filetemp :='';
+          end;
+          MBaseForm.MessageShowString('⁄»«—  ((«„÷«)) œ— „ ‰ ›«Ì· Ì«›  ‰‘œ Ì« ﬁ»·« «„÷« Ã«Ìê“Ì‰ ‘œÂ Ê Ì« ⁄»«—  »Â œ—” Ì œ— „ ‰ ÃÂ  Ã«Ìê“Ì‰Ì ﬁ—«— œ«œÂ ‰‘œÂ'  ,False);
+        end;
+
+      finally
+        // »” ‰ ”‰œ
+        WordDoc.Close;
+       // WordDoc.Free;
+      end;
+    finally
+
+      WordApp.Disconnect;
+      WordApp.Free;
+    end;
+  end;
+
+
+  //end;
+end;
+
+procedure TFrAddLetterDataDialog.MakePage;
+var
+  OReadOnly,
+  itemindex,olv,emp,f,fals,tru:OleVariant;
+  HNDL : THandle;
+  isError : Boolean;
+
+begin
+  emp := '';
+  fals:= False;
+  tru := True;
+  olv := wdOpenFormatAuto;
+
+  With WordApp do
+  begin
+
+    try
+     Caption := 'YeganehSign'; //_Yeganeh;
+    except
+      isError := True;
+    end;
+
+
+    try
+
+      if isError then
+       Caption := 'YeganehSign';
+
+
+      // WordApp.Visible := True;
+      ChangeFileOpenDirectory(_TempPath);
+
+      f:= WordSignFileName ;
+      //_Word_Is_Opened := True;
+      HNDL := FindWindow('OpusApp',PAnsiChar('YeganehSign'));
+      SetForegroundWindow(HNDL);
+      OReadOnly := False;
+
+      Documents.Open(f,EmptyParam,OReadOnly,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam,EmptyParam);
+
+      If ActiveWindow.View.SplitSpecial <> wdPaneNone Then
+        ActiveWindow.Panes.Item(2).Close;
+      If ActiveWindow.ActivePane.View.Type_ in[ wdNormalView ,wdOutlineView] Then
+        ActiveWindow.ActivePane.View.Type_:= wdPrintView;
+      ItemIndex := 1;
+      WordDoc.ConnectTo(WordApp.Documents.Item(itemindex));
+
+    except  on e:exception do
+     begin
+       MBaseForm.MessageShowString('›—„  ›«Ì· «‰ Œ«»Ì ÃÂ  »«“ ‘œ‰ „‰«”» ‰„Ì »«‘œ' +Char(10) + e.Message ,False);
+      // WordApp.Visible := false ;
+     end;
+    end;
+     
+
+  end;
 end;
 
 end.

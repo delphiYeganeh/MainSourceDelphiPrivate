@@ -134,7 +134,7 @@ end;
 procedure TFMArticle.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
    inherited;
-   Form_SetShortCut(Self,DBNavigator1,SBSearch,Nil,Sender,Key,Shift);
+   Form_SetShortCut_btn(Self,DBNavigator1,SBSearch,Nil,Sender,Key,Shift);
 
    if (ssctrl in Shift) then
    begin

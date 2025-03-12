@@ -31,6 +31,7 @@ type
     procedure DBGridSearchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
   private
   public
     GlobalSqlText:String;
@@ -310,6 +311,13 @@ end;
 procedure TFmSearch.BitBtn1Click(Sender: TObject);
 begin
   DBGridSearchDblClick(Application);
+  ModalResult := mrOk ;
+end;
+
+procedure TFmSearch.BitBtn2Click(Sender: TObject);
+begin
+  inherited;
+  ModalResult := mrCancel ;
 end;
 
 initialization

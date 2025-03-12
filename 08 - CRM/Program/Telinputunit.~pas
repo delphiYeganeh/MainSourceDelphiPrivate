@@ -20,7 +20,6 @@ type
     pnlMain: TPanel;
     Panel4: TPanel;
     SBSystemSettings: TSpeedButton;
-    DBNavigator1: TDBNavigator;
     Panel2: TPanel;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
@@ -81,7 +80,6 @@ type
     LabelFreeField20: TLabel;
     LabelFreeField21: TLabel;
     LabelFreeField22: TLabel;
-    LabelFreeField23: TLabel;
     LabelFreeField24: TLabel;
     LabelFreeField25: TLabel;
     LabelFreeField26: TLabel;
@@ -96,7 +94,6 @@ type
     DBEFreeField20: TDBEdit;
     DBEFreeField21: TDBEdit;
     DBEFreeField22: TDBEdit;
-    DBEFreeField23: TDBEdit;
     DBEFreeField24: TDBEdit;
     DBEFreeField25: TDBEdit;
     DBEFreeField26: TDBEdit;
@@ -215,6 +212,9 @@ type
     DBLookupComboBox5: TDBLookupComboBox;
     Label35: TLabel;
     DBText1: TDBText;
+    DBNavigator1: TDBNavigator;
+    LabelFreeField23: TLabel;
+    DBEFreeField23: TDBEdit;
     procedure DBEdit7Enter(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -359,6 +359,7 @@ begin
 
     Height := Height + gbInformationSale.Height ;
   end;
+  DBNav_Setup(DBNavigator1);
 end;
 
 procedure TPropertiesForm.YchecklistBox1NeedCheck(ID: Integer;
@@ -449,7 +450,8 @@ begin
     btnFactor.Visible := _UserFactorAccess ;
 //   DBNav_Setup(DBNavigator1);
    if IsNewRecord then
-      PropertiesForm.DBNavigator1.BtnClick(nbInsert);
+      PropertiesForm.DBNavigator1.BtnClick(nbInsert)
+   else Self.Caption := '›—„ À»  Ê «’·«Õ „‘Œ’«  „‘ —Ì«‰' + '"' + Dm.Select_Customer_By_CustomerIDCustomerID.AsString  + '"' ;
 
    GetLabelCaption;
 
@@ -656,7 +658,8 @@ begin
       Exit;
    end;
 
-   FrFollowUp := TFrFollowUp.Create(Application);
+  // FrFollowUp := TFrFollowUp.Create(Application);
+   FrFollowUp := TFrFollowUp.Create(nil,dm.Select_Customer_By_CustomerIDCustomerID.AsInteger,true);
    FrFollowUp.CustomerID := dm.Select_Customer_By_CustomerIDCustomerID.AsInteger;
    FrFollowUp.refreshData;
    FrFollowUp.dbgFollow.DataSource.DataSet.Last;  // 920307 Hadi Mohamed For Bug #56 ¬Œ—Ì‰ «ﬁœ«„ «‰ Œ«» ‘Êœ
@@ -694,6 +697,14 @@ var
    ButtonName : string;
 begin
   inherited;
+  if  button = nbEdit then
+      Self.Caption := '›—„ À»  Ê «’·«Õ „‘Œ’«  „‘ —Ì«‰' + '"ÊÌ—«Ì‘"' + Dm.Select_Customer_By_CustomerIDCustomerID.AsString
+  else
+  if  button = nbInsert then
+      Self.Caption := '›—„ À»  Ê «’·«Õ „‘Œ’«  „‘ —Ì«‰' + '"„‘ —Ì ÃœÌœ"'
+  else
+  Self.Caption := '›—„ À»  Ê «’·«Õ „‘Œ’«  „‘ —Ì«‰' + '"' + Dm.Select_Customer_By_CustomerIDCustomerID.AsString  + '"' ;
+
   if  button in [nbInsert,nbEdit] then
     edtAmount.Enabled := True
   else  edtAmount.Enabled := False;

@@ -137,15 +137,15 @@ inherited ExactCopyF: TExactCopyF
         696
         41)
       object Label1: TLabel
-        Left = 674
+        Left = 643
         Top = 13
-        Width = 11
+        Width = 42
         Height = 13
         Anchors = [akTop, akRight]
-        Caption = #1705#1583
+        Caption = #1705#1583' '#1711#1610#1585#1606#1583#1607
       end
       object Edit1: TEdit
-        Left = 575
+        Left = 535
         Top = 9
         Width = 95
         Height = 21
@@ -153,7 +153,7 @@ inherited ExactCopyF: TExactCopyF
         TabOrder = 0
       end
       object SpeedButton2: TAdvGlowButton
-        Left = 493
+        Left = 245
         Top = 7
         Width = 75
         Height = 25
@@ -193,13 +193,14 @@ inherited ExactCopyF: TExactCopyF
         Appearance.ColorMirrorDisabledTo = 15921906
       end
       object Button1: TAdvGlowButton
-        Left = 417
+        Left = 400
         Top = 7
-        Width = 75
+        Width = 131
         Height = 25
         Cursor = crHandPoint
         Action = APost
         Anchors = [akTop, akRight]
+        Caption = #1575#1590#1575#1601#1607' '#1705#1585#1583#1606' '#1575#1586' '#1591#1585#1610#1602' '#1705#1583
         Font.Charset = ARABIC_CHARSET
         Font.Color = clNavy
         Font.Height = -11
@@ -232,7 +233,7 @@ inherited ExactCopyF: TExactCopyF
         Appearance.ColorMirrorDisabledTo = 15921906
       end
       object SpeedButton1: TAdvGlowButton
-        Left = 341
+        Left = 165
         Top = 7
         Width = 75
         Height = 25
@@ -317,6 +318,22 @@ inherited ExactCopyF: TExactCopyF
     DataSet = Dm.Select_LetterReCommite
     Left = 152
     Top = 168
+  end
+  inherited ActionList: TActionList
+    Left = 272
+    Top = 72
+  end
+  inherited Grid_PopupMenu: TPopupMenu
+    Left = 375
+    Top = 76
+  end
+  inherited Timer1sssss: TTimer
+    Left = 440
+    Top = 64
+  end
+  inherited ApplicationEvents1: TApplicationEvents
+    Left = 232
+    Top = 40
   end
   object ActionManager: TActionManager
     Images = Dm.LetterImages

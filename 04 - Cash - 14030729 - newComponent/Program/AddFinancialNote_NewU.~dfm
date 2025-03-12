@@ -18,6 +18,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
   Scaled = False
   OnCanResize = FormCanResize
   OnClose = FormClose
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 14
@@ -164,7 +165,7 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
       Top = 1
       Width = 1005
       Height = 425
-      ActivePage = TabSheet1
+      ActivePage = TabSheet2
       Align = alClient
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -1472,12 +1473,13 @@ object FrAddFinancialNote_New: TFrAddFinancialNote_New
           TabOrder = 5
         end
         object DBNavigator1: TDBNavigator
-          Left = 19
+          Left = 8
           Top = 138
-          Width = 250
-          Height = 25
+          Width = 365
+          Height = 31
           DataSource = dm.DFinancialNote_Master
           VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbRefresh]
+          Flat = True
           TabOrder = 11
           Visible = False
         end

@@ -210,11 +210,14 @@ uses
   YInputQuery in 'Shared\YInputQuery.pas' {YInputQueryF},
   ShowmessageU in 'Shared\ShowmessageU.pas' {ShowMessageF},
   WorkSheetBaseResultsUnit in 'WorkSheetBaseResultsUnit.pas' {FWorkSheetBaseResults},
-  URStatistic in 'Reports\URStatistic.pas' {FRStatistic};
+  URStatistic in 'Reports\URStatistic.pas' {FRStatistic},
+  FolderToLetterDM in 'Archive\FolderToLetterDM.pas' {DMFolderToLetter: TDataModule},
+  FolderToLetterFm in 'Archive\FolderToLetterFm.pas' {FMFolderToLetter};
 
 {$R *.res}
 {$R Manifest.RES}
-{$R DBNavBitmap.res}
+{$R dbnavigatorIcon.RES}
+//{$R DBNavBitmap.res}
 begin
   Application.Initialize;
   Application.Title := '‘—ﬂ  ‰—„ «›“«—Ì Ìê«‰Â';
@@ -224,6 +227,8 @@ begin
   Application.CreateForm(TDm, Dm);
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TFRStatistic, FRStatistic);
+  //Application.CreateForm(TDMFolderToLetter, DMFolderToLetter);
+ // Application.CreateForm(TFMFolderToLetter, FMFolderToLetter);
   //Application.CreateForm(TShowMessageF, ShowMessageF);
 //  Application.CreateForm(TFWorkSheetBaseResults, FWorkSheetBaseResults);
 //  Application.CreateForm(TfrmScript, frmScript);

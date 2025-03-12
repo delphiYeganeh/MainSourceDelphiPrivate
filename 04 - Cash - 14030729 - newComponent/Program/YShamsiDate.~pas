@@ -1742,7 +1742,11 @@ begin
          Spacing := 0;
          if I<9 then
          begin
-            Glyph.LoadFromResourceName(HInstance,'DBNav'+IntToStr(I));
+           // Glyph.LoadFromResourceName(HInstance,'DBNav'+IntToStr(I));
+            try
+              Glyph.LoadFromResourceName(HInstance,'DBNav'+IntToStr(I));
+            except
+            end;
             Inc(I);
          end;
          Layout := blGlyphTop;
@@ -1877,8 +1881,11 @@ Procedure ChLB_SelectItemsFromStr(aCheckListBox:TYCheckListBox ; aKeyFldVal:Stri
 Var
    I : integer;
 begin
-   For I :=0 to aCheckListBox.Items.Count - 1 do
-       aCheckListBox.Checked[I] := False;
+   if y = false  then
+   begin
+     For I :=0 to aCheckListBox.Items.Count - 1 do
+         aCheckListBox.Checked[I] := False;
+   end;
 
    if (Trim(aKeyFldVal) = '')or(Trim(aKeyFldVal) = '()') then
       Exit;

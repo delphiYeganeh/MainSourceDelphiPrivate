@@ -1,6 +1,6 @@
 inherited FExportToWord: TFExportToWord
-  Left = 632
-  Top = 287
+  Left = 723
+  Top = 281
   BorderStyle = bsSingle
   Caption = #1601#1585#1605' '#1662#1610#1608#1587#1578' WORD'
   ClientHeight = 348
@@ -42,7 +42,7 @@ inherited FExportToWord: TFExportToWord
         Anchors = [akTop, akRight]
         Caption = #1578#1606#1592#1610#1605#1575#1578
         ImageIndex = 46
-        Images = Dm.LetterImages_New
+        Images = Dm.ImageList_MainNew
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
         NotesFont.Height = -11
@@ -320,34 +320,35 @@ inherited FExportToWord: TFExportToWord
   end
   inherited DSForm: TDataSource
     DataSet = GetLetterTemplate_HeaderID
-    Left = 106
-    Top = 176
+    Left = 178
+    Top = 192
   end
   inherited ActionList: TActionList
     Left = 316
     Top = 85
   end
   inherited Grid_PopupMenu: TPopupMenu
-    Left = 255
-    Top = 57
+    Left = 343
+    Top = 41
   end
   inherited ApplicationEvents1: TApplicationEvents
+    Left = 120
     Top = 224
   end
-  object WordApplication: TWordApplication
+  object WordApp: TWordApplication
     AutoConnect = False
     ConnectKind = ckRunningOrNew
     AutoQuit = True
-    OnDocumentOpen = WordApplicationDocumentOpen
-    OnDocumentBeforeClose = WordApplicationDocumentBeforeClose
-    Left = 264
-    Top = 219
+    OnDocumentOpen = WordAppDocumentOpen
+    OnDocumentBeforeClose = WordAppDocumentBeforeClose
+    Left = 248
+    Top = 155
   end
-  object WordDocument: TWordDocument
+  object WordDoc: TWordDocument
     AutoConnect = False
     ConnectKind = ckRunningOrNew
-    Left = 261
-    Top = 152
+    Left = 253
+    Top = 216
   end
   object Dsel: TDataSource
     DataSet = SelectInfo
@@ -366,8 +367,8 @@ inherited FExportToWord: TFExportToWord
         Size = 1900
         Value = '1=1'
       end>
-    Left = 56
-    Top = 192
+    Left = 152
+    Top = 128
   end
   object Fields: TADODataSet
     Connection = Dm.YeganehConnection
@@ -384,8 +385,8 @@ inherited FExportToWord: TFExportToWord
         Size = 50
         Value = Null
       end>
-    Left = 172
-    Top = 97
+    Left = 244
+    Top = 89
     object FieldsID: TAutoIncField
       FieldName = 'ID'
       ReadOnly = True
@@ -426,8 +427,8 @@ inherited FExportToWord: TFExportToWord
         Precision = 10
         Value = Null
       end>
-    Left = 165
-    Top = 45
+    Left = 221
+    Top = 5
     object GetLetterTemplate_HeaderIDLetterID: TAutoIncField
       FieldName = 'LetterID'
       ReadOnly = True
@@ -465,8 +466,8 @@ inherited FExportToWord: TFExportToWord
         Precision = 10
         Value = Null
       end>
-    Left = 56
-    Top = 80
+    Left = 120
+    Top = 72
     object Select_Fields_by_TableIDID: TAutoIncField
       FieldName = 'ID'
       ReadOnly = True
@@ -478,7 +479,7 @@ inherited FExportToWord: TFExportToWord
   end
   object DataSource1: TDataSource
     DataSet = Select_Fields_by_TableID
-    Left = 104
+    Left = 56
     Top = 136
   end
   object OpenDialog: TTntOpenDialog
@@ -491,7 +492,7 @@ inherited FExportToWord: TFExportToWord
     ConnectKind = ckRunningOrNew
     AutoQuit = True
     OnWorkbookBeforeClose = ExcelApplicationWorkbookBeforeClose
-    Left = 48
+    Left = 296
     Top = 144
   end
   object ExcelWorksheet: TExcelWorksheet

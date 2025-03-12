@@ -16,6 +16,7 @@ object FrRestore: TFrRestore
   OldCreateOrder = False
   ParentBiDiMode = False
   Position = poScreenCenter
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 14

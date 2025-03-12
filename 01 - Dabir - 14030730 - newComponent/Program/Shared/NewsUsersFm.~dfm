@@ -35,6 +35,7 @@ object FmNewsUsers: TFmNewsUsers
       Width = 685
       Height = 52
       Align = alTop
+      ParentColor = True
       TabOrder = 0
       DesignSize = (
         685
@@ -84,6 +85,7 @@ object FmNewsUsers: TFmNewsUsers
       Width = 685
       Height = 182
       Align = alClient
+      ParentColor = True
       TabOrder = 1
       object YDBGrid1: TYDBGrid
         Left = 1
@@ -396,6 +398,7 @@ object FmNewsUsers: TFmNewsUsers
       Width = 685
       Height = 43
       Align = alBottom
+      ParentColor = True
       TabOrder = 3
       object BitBtn1: TAdvGlowButton
         Left = 13

@@ -43,7 +43,7 @@ inherited FrAddPayment: TFrAddPayment
       Left = 152
       Top = 0
       Width = 411
-      Height = 25
+      Height = 22
       Anchors = [akLeft, akTop, akRight]
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText

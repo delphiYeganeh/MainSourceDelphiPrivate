@@ -157,6 +157,7 @@ uses
 // ReCommiteDialog in 'ReCommitedialog.pas' {RecommiteSave};
 
 {$R *.res}
+{$R dbnavigatorIcon.RES}
 
 //{$R DBNavBitmap.res}
 

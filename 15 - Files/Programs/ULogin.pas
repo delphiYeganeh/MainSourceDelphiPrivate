@@ -28,6 +28,7 @@ type
     btnExcel: TAdvGlowButton;
     btnPic: TAdvGlowButton;
     btnPicExcel: TAdvGlowButton;
+    btnFolder: TAdvGlowButton;
     procedure btnCancelClick(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -36,6 +37,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShortCut(var Msg: TWMKey; var Handled: Boolean);
     procedure btnPicExcelClick(Sender: TObject);
+    procedure btnFolderClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -242,6 +244,14 @@ begin
   edtPassword.Text := '123'  ;
   _PictureMode := True ;
   _ExcelPicMode := True ;
+  btnOkClick (self);
+end;
+
+procedure TFLogin.btnFolderClick(Sender: TObject);
+begin
+   edtUsername.Text := 'TEMP' ;
+   edtPassword.Text := '123'  ;
+  _FolderMode := True ;
   btnOkClick (self);
 end;
 

@@ -15074,7 +15074,7 @@ inherited LoginForm: TLoginForm
   end
   object lblDate: TLabel [4]
     Left = 72
-    Top = 382
+    Top = 381
     Width = 56
     Height = 13
     Anchors = [akLeft, akBottom]
@@ -15603,7 +15603,6 @@ inherited LoginForm: TLoginForm
     ParentFont = False
     Transparent = True
     Layout = tlCenter
-    OnClick = BitBtn1Click
     OnMouseEnter = Label4MouseEnter
     OnMouseLeave = Label4MouseLeave
   end

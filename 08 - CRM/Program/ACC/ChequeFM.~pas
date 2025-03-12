@@ -19,7 +19,6 @@ type
     N1: TMenuItem;
     pnlMain: TPanel;
     Panel1: TPanel;
-    SBSearch: TSpeedButton;
     LabelDate: TLabel;
     LblType: TLabel;
     Label15: TLabel;
@@ -66,6 +65,7 @@ type
     DBNavigator1: TDBNavigator;
     Panel5: TPanel;
     LabHelp: TLabel;
+    SBSearch: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word;

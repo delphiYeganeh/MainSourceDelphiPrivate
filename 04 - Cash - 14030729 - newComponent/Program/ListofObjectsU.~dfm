@@ -24,7 +24,7 @@ object FrListofObjects: TFrListofObjects
   object Panel1: TPanel
     Left = 0
     Top = 208
-    Width = 492
+    Width = 467
     Height = 42
     Align = alBottom
     TabOrder = 0
@@ -33,7 +33,7 @@ object FrListofObjects: TFrListofObjects
       Top = 4
       Width = 260
       Height = 31
-      DataSource = Dm.DObjects
+      DataSource = dm.DObjects
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbRefresh]
       TabOrder = 0
     end
@@ -41,18 +41,18 @@ object FrListofObjects: TFrListofObjects
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 492
+    Width = 467
     Height = 208
     Align = alTop
     TabOrder = 1
     object YDBGrid1: TYDBGrid
       Left = 1
       Top = 1
-      Width = 490
+      Width = 465
       Height = 206
       Cursor = crHandPoint
       Align = alClient
-      DataSource = Dm.DObjects
+      DataSource = dm.DObjects
       TabOrder = 0
       TitleFont.Charset = ARABIC_CHARSET
       TitleFont.Color = clWindowText
@@ -92,12 +92,12 @@ object FrListofObjects: TFrListofObjects
   object Panel3: TPanel
     Left = 0
     Top = 250
-    Width = 492
+    Width = 467
     Height = 54
     Align = alBottom
     TabOrder = 2
     DesignSize = (
-      492
+      467
       54)
     object Button5: TBitBtn
       Left = 5
@@ -242,7 +242,7 @@ object FrListofObjects: TFrListofObjects
     object ProgressBar: TProgressBar
       Left = 1
       Top = 1
-      Width = 490
+      Width = 465
       Height = 15
       Align = alTop
       Max = 3

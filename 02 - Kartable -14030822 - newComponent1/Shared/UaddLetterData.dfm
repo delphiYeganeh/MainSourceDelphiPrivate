@@ -257,7 +257,7 @@ inherited FrAddLetterData: TFrAddLetterData
       object BitBtn1: TAdvGlowButton
         Left = 12
         Top = 36
-        Width = 75
+        Width = 85
         Height = 28
         Cursor = crHandPoint
         Action = Action1
@@ -334,7 +334,7 @@ inherited FrAddLetterData: TFrAddLetterData
         Appearance.ColorMirrorDisabledTo = 15921906
       end
       object btnECE: TAdvGlowButton
-        Left = 205
+        Left = 13
         Top = 5
         Width = 83
         Height = 28

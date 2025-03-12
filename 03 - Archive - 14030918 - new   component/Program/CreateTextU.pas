@@ -144,7 +144,7 @@ end;
 procedure TCreateText.Edit1Enter(Sender: TObject);
 begin
   inherited;
- TEdit(Sender).Text:='';
+ TCurvyEdit(Sender).Text:='';
 end;
 
 procedure TCreateText.Edit2Change(Sender: TObject);

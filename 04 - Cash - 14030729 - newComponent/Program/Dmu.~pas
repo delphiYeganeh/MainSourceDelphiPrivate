@@ -1312,6 +1312,7 @@ type
     LetterImages_New: TImageList;
     ImageList_MainNew: TImageList;
     Report_ForcePayment2AMERCE: TLargeintField;
+    Report_Payment_ByAccountIDPayTypeSecondId: TIntegerField;
     function  Y_InputQuery (const ACaption, Adefault: string; var Value: string): Boolean;
     function  Y_InputQuery_Double (const ACaption,ACaption2, Adefault,Adefault2: string; var Value,Value2: string): Boolean;
     function  Search(Y:TYwhereEdit):integer;
@@ -1894,7 +1895,7 @@ Var
   DongleProductCode,dongleErrorCode:integer;
   fileName : String;
   frmUpdateDbScripts : TfmUpdateDbScripts;
-  ModeColor : Integer;
+
 Begin
 
 
@@ -1920,7 +1921,9 @@ Begin
     finally
       frmUpdateDbScripts.Free;
     end;
-  end
+  end ;
+  { TODO -oparsa : 14031206 }
+  {
   else
   if CompareStr(_SoftVersion, _DbVersion)>0 then
   begin
@@ -1933,6 +1936,8 @@ Begin
       frmUpdateDbScripts.Free;
     end;
   end;
+  }
+  { TODO -oparsa : 14031206 }
 
   { TODO -oparsa : 14030108 }
   AutoUpdateDatabase;
@@ -2181,7 +2186,9 @@ Begin
 
   {Ranjbar 88.03.23}
   //«Ã—« ﬂ—œ‰ œ” Ê—«  «”ﬂ—ÌÅ 
-  RunCashScripts(dm.YeganehConnection);
+  { TODO -oparsa : 14031207 }  // ÃÂ  «Ã—« ‰‘œ‰ «”ò—ÌÅÂ«Ì ﬁœÌ„Ì Ê œ” ò«—Ì œÌ « »Ì”
+  ///RunCashScripts(dm.YeganehConnection);
+  { TODO -oparsa : 14031207 }
   Read_SystemValue;//_Today,_Year,_TempPath,,,,
   Open_ReferenceTable;
 
@@ -4663,7 +4670,18 @@ begin
 end;
 
 function Tdm.getDBVer: String;
+var
+  qry :TADOQuery;
 begin
+   {
+  qry := TADOQuery.Create(self);
+  qry.Connection := YeganehConnection;
+  qry.SQL.Text   := ' IF COL_LENGTH(''[dbo].[tblAppVer]'', ''ver'') IS not  NULL   EXEC sp_rename ''[dbo].[tblAppVer].[ver]'', ''version'', ''COLUMN''; '  ;
+
+  qry.ExecSQL;
+  qry.Free;
+  }
+
   qryGetDbVer.Close;
   qryGetDbVer.Open;
   Result := qryGetDbVer.Fields.Fields[0].AsString;

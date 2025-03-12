@@ -1,96 +1,33 @@
 [Closed Files]
-File_0=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\YWhereEdit.pas',0,1,100,1,123,0,0
-File_1=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\AddContactU.pas',0,1,229,13,247,1,0
-File_2=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\AddRemainLoanU.pas',0,1,141,41,158,1,0
-File_3=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\ReportAccountPaymentsPBKU.pas',0,1,125,36,131,1,0
-File_4=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\PrintPayment_ByDocumentNoU.pas',0,1,305,67,315,1,0
-File_5=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\searchLoanU.pas',0,1,79,33,97,1,0
-File_6=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\Report_loanPointU.pas',0,1,1,55,19,1,0
-File_7=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\searchLoanU.dfm',0,1,1,1,1,0,0
-File_8=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\SumPaymentU.pas',0,1,318,46,346,1,0
+File_0=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\YInputQuery_Double.pas',0,1,58,62,62,1,0
+File_1=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\SearchFM.pas',0,1,315,21,328,1,0
+File_2=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\ChangePassU.pas',0,1,59,21,72,1,0
+File_3=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\YInputQuery.pas',0,1,53,24,64,1,0
+File_4=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\uSmsSetting.pas',0,1,1,1,1,1,0
+File_5=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\uSendSMS.pas',0,1,1,50,21,1,0
+File_6=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\AddPaymentU.pas',0,1,332,19,335,1,0
+File_7=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\ReportAccountPaymentsU.pas',0,1,128,43,151,1,0
+File_8=SourceModule,'H:\Yeganeh\Windows\Delphi\Component\TMS Component Pack 7.5.3.1 for Delphi 5-XE8\Components\AdvGlowButton.pas',0,1,3230,43,3252,0,0
+File_9=SourceModule,'D:\matin\04 - Cash - 14030729 - newComponent\Program\RestoreU.pas',0,1,109,60,120,1,0
 
 [Modules]
-Module0=D:\matin\04 - Cash - 14030729 - newComponent\Program\MainU.pas
-Module1=D:\matin\04 - Cash - 14030729 - newComponent\Program\BusinessLayer.pas
-Module2=D:\matin\04 - Cash - 14030729 - newComponent\Program\AddFinancialNote_NewU.pas
-Module3=D:\matin\04 - Cash - 14030729 - newComponent\Program\YInputQuery_Double.pas
-Module4=D:\matin\04 - Cash - 14030729 - newComponent\Program\SearchFM.pas
-Module5=D:\matin\04 - Cash - 14030729 - newComponent\Program\ChangePassU.pas
-Module6=D:\matin\04 - Cash - 14030729 - newComponent\Program\YInputQuery.pas
-Module7=D:\matin\04 - Cash - 14030729 - newComponent\Program\Dmu.pas
-Module8=D:\matin\04 - Cash - 14030729 - newComponent\Program\UMagnifier.pas
-Module9=D:\matin\04 - Cash - 14030729 - newComponent\Program\FinancialNoteDetail_NewU.pas
-Module10=D:\matin\04 - Cash - 14030729 - newComponent\Program\SystemSettingU.pas
-Module11=D:\matin\04 - Cash - 14030729 - newComponent\Program\LoginU.pas
-Module12=D:\matin\04 - Cash - 14030729 - newComponent\Program\AccountDetailsU.pas
-Module13=D:\matin\04 - Cash - 14030729 - newComponent\Program\AddLoanU.pas
-Module14=D:\matin\04 - Cash - 14030729 - newComponent\Program\LoanReportU.pas
-Module15=D:\matin\04 - Cash - 14030729 - newComponent\Program\Report_GroupForcePaymentU.pas
-Module16=D:\matin\04 - Cash - 14030729 - newComponent\Program\U_ADV_SEARCH_SANAD_FRM.pas
-Module17=D:\matin\04 - Cash - 14030729 - newComponent\Program\BaseUnit.pas
-Module18=D:\matin\04 - Cash - 14030729 - newComponent\Program\AddLoanRequestU.pas
-Module19=D:\matin\04 - Cash - 14030729 - newComponent\Program\EditLoanU.pas
-Module20=D:\matin\04 - Cash - 14030729 - newComponent\Program\ShowmessageU.pas
-Module21=D:\matin\04 - Cash - 14030729 - newComponent\Program\Yeganeh_DCash_V_4.dpr
-Count=22
+Module0=D:\matin\04 - Cash - 14030729 - newComponent\Program\Dmu.pas
+Module1=D:\matin\04 - Cash - 14030729 - newComponent\Program\AccountDetailsU.pas
+Module2=D:\matin\04 - Cash - 14030729 - newComponent\Program\MainU.pas
+Module3=D:\matin\04 - Cash - 14030729 - newComponent\Program\uUpdateDbScripts.pas
+Module4=D:\matin\04 - Cash - 14030729 - newComponent\Program\LoginU.pas
+Module5=D:\matin\04 - Cash - 14030729 - newComponent\Program\FinancialNoteDetail_NewU.pas
+Module6=D:\matin\04 - Cash - 14030729 - newComponent\Program\AddLoanU.pas
+Module7=D:\matin\04 - Cash - 14030729 - newComponent\Program\BaseUnit.pas
+Module8=D:\matin\04 - Cash - 14030729 - newComponent\Program\ShowmessageU.pas
+Module9=D:\matin\04 - Cash - 14030729 - newComponent\Program\SystemSettingU.pas
+Module10=D:\matin\04 - Cash - 14030729 - newComponent\Program\UMagnifier.pas
+Module11=D:\matin\04 - Cash - 14030729 - newComponent\Program\BusinessLayer.pas
+Module12=D:\matin\04 - Cash - 14030729 - newComponent\Program\Yeganeh_DCash_V_4.dpr
+Count=13
 EditWindowCount=1
 
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\MainU.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\BusinessLayer.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\AddFinancialNote_NewU.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\YInputQuery_Double.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\SearchFM.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\ChangePassU.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\YInputQuery.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
 [D:\matin\04 - Cash - 14030729 - newComponent\Program\Dmu.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\UMagnifier.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\FinancialNoteDetail_NewU.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=1
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\SystemSettingU.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=1
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\LoginU.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -100,22 +37,27 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
+[D:\matin\04 - Cash - 14030729 - newComponent\Program\MainU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\04 - Cash - 14030729 - newComponent\Program\uUpdateDbScripts.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
+
+[D:\matin\04 - Cash - 14030729 - newComponent\Program\LoginU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\04 - Cash - 14030729 - newComponent\Program\FinancialNoteDetail_NewU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
+
 [D:\matin\04 - Cash - 14030729 - newComponent\Program\AddLoanU.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\LoanReportU.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\Report_GroupForcePaymentU.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\U_ADV_SEARCH_SANAD_FRM.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -123,21 +65,26 @@ FormOnTop=0
 [D:\matin\04 - Cash - 14030729 - newComponent\Program\BaseUnit.pas]
 ModuleType=SourceModule
 FormState=1
-FormOnTop=0
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\AddLoanRequestU.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\04 - Cash - 14030729 - newComponent\Program\EditLoanU.pas]
-ModuleType=SourceModule
-FormState=1
 FormOnTop=1
 
 [D:\matin\04 - Cash - 14030729 - newComponent\Program\ShowmessageU.pas]
 ModuleType=SourceModule
 FormState=1
+FormOnTop=0
+
+[D:\matin\04 - Cash - 14030729 - newComponent\Program\SystemSettingU.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
+
+[D:\matin\04 - Cash - 14030729 - newComponent\Program\UMagnifier.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\04 - Cash - 14030729 - newComponent\Program\BusinessLayer.pas]
+ModuleType=SourceModule
+FormState=0
 FormOnTop=0
 
 [D:\matin\04 - Cash - 14030729 - newComponent\Program\Yeganeh_DCash_V_4.dpr]
@@ -154,8 +101,8 @@ FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=22
-CurrentView=1
+ViewCount=13
+CurrentView=6
 View0=0
 View1=1
 View2=2
@@ -169,15 +116,6 @@ View9=9
 View10=10
 View11=11
 View12=12
-View13=13
-View14=14
-View15=15
-View16=16
-View17=17
-View18=18
-View19=19
-View20=20
-View21=21
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -202,155 +140,92 @@ BottomPanelData=00000400020000000B0000004D657373616765566965770B0000005761746368
 [View0]
 Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\Yeganeh_DCash_V_4.dpr
 CursorX=5
-CursorY=147
-TopLine=137
+CursorY=138
+TopLine=125
 LeftCol=1
 
 [View1]
 Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\MainU.pas
-CursorX=72
-CursorY=1367
-TopLine=1349
+CursorX=27
+CursorY=572
+TopLine=565
 LeftCol=1
 
 [View2]
-Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\YInputQuery.pas
-CursorX=24
-CursorY=64
-TopLine=53
+Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\AccountDetailsU.pas
+CursorX=10
+CursorY=96
+TopLine=96
 LeftCol=1
 
 [View3]
-Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\ChangePassU.pas
-CursorX=21
-CursorY=72
-TopLine=59
-LeftCol=1
-
-[View4]
-Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\SearchFM.pas
-CursorX=21
-CursorY=328
-TopLine=315
-LeftCol=1
-
-[View5]
-Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\YInputQuery_Double.pas
-CursorX=1
-CursorY=71
-TopLine=58
-LeftCol=1
-
-[View6]
-Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\AddFinancialNote_NewU.pas
-CursorX=20
-CursorY=290
-TopLine=277
-LeftCol=1
-
-[View7]
-Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\U_ADV_SEARCH_SANAD_FRM.pas
-CursorX=21
-CursorY=127
-TopLine=108
-LeftCol=1
-
-[View8]
-Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\AddLoanRequestU.pas
-CursorX=1
-CursorY=264
-TopLine=251
-LeftCol=1
-
-[View9]
-Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\EditLoanU.pas
-CursorX=16
-CursorY=334
-TopLine=328
-LeftCol=1
-
-[View10]
-Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\Report_GroupForcePaymentU.pas
-CursorX=7
-CursorY=10
-TopLine=1
-LeftCol=1
-
-[View11]
-Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\LoanReportU.pas
-CursorX=1
-CursorY=1
-TopLine=1
-LeftCol=1
-
-[View12]
-Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\AccountDetailsU.pas
-CursorX=79
-CursorY=106
-TopLine=91
-LeftCol=1
-
-[View13]
 Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\FinancialNoteDetail_NewU.pas
-CursorX=41
+CursorX=5
 CursorY=164
 TopLine=142
 LeftCol=1
 
-[View14]
+[View4]
 Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\UMagnifier.pas
-CursorX=60
-CursorY=111
+CursorX=55
+CursorY=108
 TopLine=100
 LeftCol=1
 
-[View15]
+[View5]
 Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\LoginU.pas
-CursorX=1
-CursorY=1
-TopLine=16
+CursorX=27
+CursorY=49
+TopLine=40
 LeftCol=1
 
-[View16]
+[View6]
 Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\Dmu.pas
-CursorX=8
-CursorY=1880
-TopLine=1875
+CursorX=38
+CursorY=2215
+TopLine=2203
 LeftCol=1
 
-[View17]
+[View7]
+Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\uUpdateDbScripts.pas
+CursorX=88
+CursorY=111
+TopLine=103
+LeftCol=1
+
+[View8]
 Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\BaseUnit.pas
 CursorX=15
 CursorY=474
 TopLine=453
 LeftCol=1
 
-[View18]
+[View9]
 Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\ShowmessageU.pas
-CursorX=48
-CursorY=61
+CursorX=1
+CursorY=52
 TopLine=44
 LeftCol=1
 
-[View19]
+[View10]
 Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\AddLoanU.pas
 CursorX=10
 CursorY=237
 TopLine=226
 LeftCol=1
 
-[View20]
+[View11]
 Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\SystemSettingU.pas
-CursorX=76
+CursorX=7
 CursorY=229
 TopLine=216
 LeftCol=1
 
-[View21]
+[View12]
 Module=D:\matin\04 - Cash - 14030729 - newComponent\Program\BusinessLayer.pas
 CursorX=1
-CursorY=2193
-TopLine=2149
+CursorY=1770
+TopLine=1747
 LeftCol=1
 
 [Watches]
@@ -383,7 +258,7 @@ LRDockWidth=1180
 Dockable=1
 
 [Breakpoints]
-Count=14
+Count=19
 Breakpoint0='D:\matin\04 - Cash - 14030729 - newComponent\Program\AddRemainLoanU.pas',164,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint1='D:\matin\04 - Cash - 14030729 - newComponent\Program\AddRemainLoanU.pas',165,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint2='D:\matin\04 - Cash - 14030729 - newComponent\Program\AddRemainLoanU.pas',140,'',0,1,'',1,0,0,'',1,'','',''
@@ -398,6 +273,11 @@ Breakpoint10='D:\matin\04 - Cash - 14030729 - newComponent\Program\MainU.pas',16
 Breakpoint11='D:\matin\04 - Cash - 14030729 - newComponent\Program\MainU.pas',1339,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint12='D:\matin\04 - Cash - 14030729 - newComponent\Program\BusinessLayer.pas',2154,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint13='D:\matin\04 - Cash - 14030729 - newComponent\Program\BusinessLayer.pas',2176,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint14='D:\matin\04 - Cash - 14030729 - newComponent\Program\Dmu.pas',1915,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint15='D:\matin\04 - Cash - 14030729 - newComponent\Program\UAddFamily.pas',79,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint16='D:\matin\04 - Cash - 14030729 - newComponent\Program\Dmu.pas',2226,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint17='D:\matin\04 - Cash - 14030729 - newComponent\Program\Dmu.pas',1899,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint18='D:\matin\04 - Cash - 14030729 - newComponent\Program\Dmu.pas',4675,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -408,7 +288,7 @@ Visible=1
 State=2
 Left=0
 Top=0
-Width=1920
+Width=1680
 Height=123
 MaxLeft=-1
 MaxTop=-1
@@ -469,11 +349,11 @@ Visible=1
 State=0
 Left=-3
 Top=490
-Width=208
+Width=426
 Height=524
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=192
+ClientWidth=410
 ClientHeight=485
 TBDockHeight=556
 LRDockWidth=190

@@ -61,6 +61,36 @@ begin
 end;
 
 procedure TfmUpdateDbScripts.FormShow(Sender: TObject);
+  function GetFileCreationTime(const FilePath: string): TDateTime;
+  var
+    FileHandle: THandle;
+    FileTime: TFileTime;
+    LocalFileTime: TFileTime;
+    SystemTime: TSystemTime;
+  begin
+    Result := 0; // „ﬁœ«— ÅÌ‘ù›—÷ œ— ’Ê—  Œÿ«
+
+    // »«“ ò—œ‰ ›«Ì·
+    FileHandle := FileOpen(FilePath, fmOpenRead or fmShareDenyNone);
+    if FileHandle = THandle(-1) then
+      Exit;
+
+    try
+      // œ—Ì«›  “„«‰ «ÌÃ«œ ›«Ì·
+      if GetFileTime(FileHandle, @FileTime, nil, nil) then
+      begin
+        //  »œÌ· “„«‰ ›«Ì· »Â “„«‰ „Õ·Ì
+        FileTimeToLocalFileTime(FileTime, LocalFileTime);
+        //  »œÌ· »Â SystemTime
+        FileTimeToSystemTime(LocalFileTime, SystemTime);
+        //  »œÌ· »Â TDateTime
+        Result := SystemTimeToDateTime(SystemTime);
+      end;
+    finally
+      // »” ‰ ›«Ì·
+      FileClose(FileHandle);
+    end;
+  end;
 var
   fileName            : String;
   SR                  : TSearchRec;
@@ -70,6 +100,7 @@ var
 
   CountScriptvalidCode : Integer ;
   slInvalid              : TStringList;
+  CreationTime: TDateTime;
 begin
   lblDbVer.Caption := dbVer;
   lblDelphiVer.Caption := delphiVer;
@@ -102,29 +133,35 @@ begin
       begin
         repeat
           fileName := SR.Name;
-          if (UpperCase(File_GetFileExt(fileName)) = 'TXT') then //'SQL'
-          begin
-            //Version Condition
-            try
-              ver := StrToInt(Copy(fileName, 0, 3));
-            except
-              ver := -1;
-            end;
+          { TODO -oparsa : 14031201 }
+          CreationTime := GetFileCreationTime(Path+fileName);
+          if ShamsiString(CreationTime) = _Today then
+          { TODO -oparsa : 14031201 }
 
-            if (ver > fromVer) And (ver <= toVer) then
+            if (UpperCase(File_GetFileExt(fileName)) = 'TXT') then //'SQL'
             begin
-              fileName := fileName + #9 + 'Detected';
-              slMain.Add(fileName);
-              Inc(CountScriptvalidCode );
-            end
-            else if (ver > toVer) then
-            begin
-              Inc(CountScriptInvalidCode );
-              if CountScriptInvalidCode = 1 then
-                 slInvalid.Add('--------- Start Invalid Code ---------');
-              slInvalid.Add(fileName);
+              //Version Condition
+              try
+                ver := 0;//StrToInt(Copy(fileName, 0, 3));
+              except
+                ver := -1;
+              end;
+
+              //if (ver > fromVer) And (ver <= toVer) then
+              if 1=1 then
+              begin
+                fileName := fileName + #9 + 'Detected';
+                slMain.Add(fileName);
+                Inc(CountScriptvalidCode );
+              end
+              else if (ver > toVer) then
+              begin
+                Inc(CountScriptInvalidCode );
+                if CountScriptInvalidCode = 1 then
+                   slInvalid.Add('--------- Start Invalid Code ---------');
+                slInvalid.Add(fileName);
+              end;
             end;
-          end;
         until FindNext(SR) <> 0;
         FindClose(SR);
       end;
@@ -199,7 +236,8 @@ begin
   if blnRunResult then
   begin
     // Update DB Ver
-    fileName := 'INSERT INTO dbo.tblAppVer (ver, changeDate, Descript) VALUES('''+ delphiVer + ''', GETDATE(), N'' »—Ê“ ‘œ  InvalidCount ='+ IntToStr(CountScriptInvalidCode) +''')';
+    //fileName := 'INSERT INTO dbo.tblAppVer (ver, changeDate, Descript) VALUES('''+ delphiVer + ''', GETDATE(), N'' »—Ê“ ‘œ  InvalidCount ='+ IntToStr(CountScriptInvalidCode) +''')';
+    fileName := 'INSERT INTO dbo.tblAppVer (version, changeDate, Descript) VALUES('''+ delphiVer + ''', GETDATE(), N'' »—Ê“ ‘œ  InvalidCount ='+ IntToStr(CountScriptInvalidCode) +''')';
 
     qryRunScript.SQL.Text := fileName;
     qryRunScript.ExecuteOptions := [eoAsyncFetch];
@@ -212,7 +250,9 @@ begin
   else
   begin
     // Update DB Ver
-    fileName := 'INSERT INTO dbo.tblAppVer (ver, changeDate, Descript) VALUES('''+ delphiVer + ''', GETDATE(), N'''+ 'InvalidCount ='+ IntToStr(CountScriptInvalidCode)+ '  '+ faildFilenam+''')';
+    //fileName := 'INSERT INTO dbo.tblAppVer (ver, changeDate, Descript) VALUES('''+ delphiVer + ''', GETDATE(), N'''+ 'InvalidCount ='+ IntToStr(CountScriptInvalidCode)+ '  '+ faildFilenam+''')';
+    fileName := 'INSERT INTO dbo.tblAppVer (version, changeDate, Descript) VALUES('''+ delphiVer + ''', GETDATE(), N'''+ 'InvalidCount ='+ IntToStr(CountScriptInvalidCode)+ '  '+ faildFilenam+''')';
+
 
     qryRunScript.SQL.Text := fileName;
     qryRunScript.ExecuteOptions := [eoAsyncFetch];

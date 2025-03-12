@@ -19,17 +19,17 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
     TabOrder = 0
     object Panel3: TPanel
       Left = 1
-      Top = 162
+      Top = 164
       Width = 386
-      Height = 125
+      Height = 123
       Align = alClient
       TabOrder = 0
       DesignSize = (
         386
-        125)
+        123)
       object BitBtn2: TAdvGlowButton
         Left = 322
-        Top = 91
+        Top = 89
         Width = 60
         Height = 28
         Action = DataSetInsert_Detail
@@ -67,7 +67,7 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
       end
       object BitBtn4: TAdvGlowButton
         Left = 242
-        Top = 91
+        Top = 89
         Width = 79
         Height = 28
         Action = DataSetEdit_Detail
@@ -105,7 +105,7 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
       end
       object BitBtn9: TAdvGlowButton
         Left = 168
-        Top = 91
+        Top = 89
         Width = 73
         Height = 28
         Action = DataSetPost_Detail
@@ -124,7 +124,6 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
         NotesFont.Style = []
         ParentFont = False
         TabOrder = 2
-        OnClick = BitBtn9Click
         Appearance.ColorChecked = 16111818
         Appearance.ColorCheckedTo = 16367008
         Appearance.ColorDisabled = 15921906
@@ -144,7 +143,7 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
       end
       object BitBtn10: TAdvGlowButton
         Left = 106
-        Top = 91
+        Top = 89
         Width = 60
         Height = 28
         Action = DataSetDelete_Detail
@@ -182,7 +181,7 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
       end
       object BitBtn11: TAdvGlowButton
         Left = 45
-        Top = 91
+        Top = 89
         Width = 60
         Height = 28
         Action = DataSetCancel_Detail
@@ -222,7 +221,7 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
         Left = 1
         Top = 1
         Width = 384
-        Height = 85
+        Height = 83
         Align = alTop
         Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = dm.DMonthlyType_Detail
@@ -253,12 +252,12 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
       Left = 1
       Top = 1
       Width = 386
-      Height = 120
+      Height = 122
       Align = alTop
       TabOrder = 1
       DesignSize = (
         386
-        120)
+        122)
       object Label1: TLabel
         Left = 366
         Top = 10
@@ -365,9 +364,9 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
       end
       object DBNavigator1: TDBNavigator
         Left = 16
-        Top = 87
-        Width = 168
-        Height = 27
+        Top = 79
+        Width = 192
+        Height = 42
         DataSource = dm.DMonthlyType
         VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
         Flat = True
@@ -376,7 +375,7 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
     end
     object Panel1: TPanel
       Left = 1
-      Top = 121
+      Top = 123
       Width = 386
       Height = 41
       Align = alTop
@@ -405,7 +404,6 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
         NotesFont.Style = []
         ParentFont = False
         TabOrder = 0
-        OnClick = BitBtn1Click
         Appearance.ColorChecked = 16111818
         Appearance.ColorCheckedTo = 16367008
         Appearance.ColorDisabled = 15921906
@@ -632,8 +630,8 @@ inherited FrAddMonthlyType: TFrAddMonthlyType
     Top = 4
   end
   inherited qSetting: TADOQuery
-    Left = 16
-    Top = 48
+    Left = 0
+    Top = 8
   end
   object ActionManager1: TActionManager
     ActionBars.SessionCount = 12

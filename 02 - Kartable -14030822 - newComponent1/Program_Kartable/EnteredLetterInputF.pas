@@ -8,7 +8,7 @@ uses
   ExtCtrls, Buttons, ToolWin, ActnCtrls, Mask,Forms, Controls,SysUtils,Windows,
   DBLookupEdit, YCheckGroupBox, YDbgrid, ExtActns, XPStyleActnCtrls,
   xpWindow, xpPages, xpBitBtn, Menus,ContractsUnit,FlowUpUnit,CustomerInfoUnit,
-  Spin, Variants,LetterRalationFm;
+  Spin, Variants,LetterRalationFm, xpPanel, AdvGlowButton;
 
 
 type
@@ -68,8 +68,8 @@ type
     DBERegistrationTime: TDBEdit;
     DBEUserTitle: TDBEdit;
     Panel1: TPanel;
-    Apicture: TBitBtn;
-    AExpotToWord: TBitBtn;
+    Apicture: TAdvGlowButton;
+    AExpotToWord: TAdvGlowButton;
     mainPanel: TPanel;
     GroupBox2: TGroupBox;
     Label3: TLabel;
@@ -77,8 +77,8 @@ type
     Label10: TLabel;
     Label4: TLabel;
     Image1: TImage;
-    SpeedButton9: TBitBtn;
-    SpeedButton6: TBitBtn;
+    SpeedButton9: TAdvGlowButton;
+    SpeedButton6: TAdvGlowButton;
     DBEdit3: TDBEdit;
     DBLookupComboBox2: TDBLookupComboBox;
     DBEditToStaffer: TDBEdit;
@@ -92,18 +92,6 @@ type
     Label15: TLabel;
     DBEdit10: TDBEdit;
     DBEdit11: TDBEdit;
-    Properties: TYCheckGroupBox;
-    Label2: TLabel;
-    Label7: TLabel;
-    Label9: TLabel;
-    Label17: TLabel;
-    DBEdit6: TDBEdit;
-    DBEdit8: TDBEdit;
-    DBEdit14: TDBEdit;
-    DBLookupComboBox1: TDBLookupComboBox;
-    DBLookupComboBox3: TDBLookupComboBox;
-    DBLookupComboBox7: TDBLookupComboBox;
-    DBEdit17: TDBEdit;
     UserMemo: TYCheckGroupBox;
     DBEUserMemo: TDBEdit;
     GroupBox1: TGroupBox;
@@ -117,33 +105,33 @@ type
     Select_LetterUserTableTitle: TStringField;
     Label19: TLabel;
     DBLookupComboBox4: TDBLookupComboBox;
-    xpBitBtn1: TBitBtn;
-    SpeedButton2: TBitBtn;
+    xpBitBtn1: TAdvGlowButton;
+    SpeedButton2: TAdvGlowButton;
     Label16: TLabel;
     DBLookupComboBox6: TDBLookupComboBox;
-    SpeedButton7: TBitBtn;
+    SpeedButton7: TAdvGlowButton;
     Select_LetterUserTableID2: TIntegerField;
     Select_LetterUserTableTitle2: TStringField;
     Label14: TLabel;
     DBGToORG: TYDBGrid;
-    AaddLetterData: TBitBtn;
+    AaddLetterData: TAdvGlowButton;
     Label18: TLabel;
     DBLookupComboBox8: TDBLookupComboBox;
     Select_LetterSubjectTitle: TStringField;
     Select_LetterSubjectID: TIntegerField;
-    SpeedButton4: TSpeedButton;
+    SpeedButton4: TAdvGlowButton;
     Label21: TLabel;
-    SpeedButton1: TSpeedButton;
+    SpeedButton1: TAdvGlowButton;
     Label22: TLabel;
-    SBOther: TBitBtn;
+    SBOther: TAdvGlowButton;
     PopMnuOther: TPopupMenu;
     N1: TMenuItem;
     N2: TMenuItem;
     GroupBox4: TGroupBox;
     Label25: TLabel;
     DBEdit1: TDBEdit;
-    Button1: TButton;
-    Button5: TButton;
+    Button1: TAdvGlowButton;
+    Button5: TAdvGlowButton;
     PopupMenu1: TPopupMenu;
     Select_LetterLetterRecommites: TWideStringField;
     Select_LetterPreCode: TWideStringField;
@@ -169,7 +157,7 @@ type
     N3: TMenuItem;
     N4: TMenuItem;
     N5: TMenuItem;
-    Panel2: TPanel;
+    pnlDetail: TxpPanel;
     QAddedForms: TADOQuery;
     QAddedFormsLetterFormsID: TAutoIncField;
     QAddedFormsLetterID: TIntegerField;
@@ -185,25 +173,41 @@ type
     QHasForms: TADOQuery;
     QHasFormsID: TAutoIncField;
     QDelForms: TADOQuery;
-    BitBtn13: TBitBtn;
-    GroupBox7: TGroupBox;
-    lblHasForms: TLabel;
+    BitBtn13: TAdvGlowButton;
     xpForms: TxpTabSheet;
     Panel3: TPanel;
     Label26: TLabel;
     lblCount: TLabel;
     SearchEdit: TEdit;
     YDBGrid1: TYDBGrid;
-    xpBitBtn5: TBitBtn;
-    btnShowForm: TBitBtn;
+    xpBitBtn5: TAdvGlowButton;
+    btnShowForm: TAdvGlowButton;
     xpPageControl2: TxpPageControl;
-    SpeedButton14: TBitBtn;
+    SpeedButton14: TAdvGlowButton;
     acShowSadereh: TAction;
     FollowLetterYear: TSpinEdit;
     RetroactionYear: TSpinEdit;
     Select_LetterFollowLetterYear: TIntegerField;
     Select_LetterRetroactionYear: TIntegerField;
-    BitBtn1: TBitBtn;
+    BitBtn1: TAdvGlowButton;
+    pnlMain: TPanel;
+    pnlTopHeader: TPanel;
+    GroupBox5: TGroupBox;
+    lblHasForms: TLabel;
+    Properties: TYCheckGroupBox;
+    Label2: TLabel;
+    Label7: TLabel;
+    Label9: TLabel;
+    Label11: TLabel;
+    DBEdit2: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBEdit6: TDBEdit;
+    DBLookupComboBox1: TDBLookupComboBox;
+    DBLookupComboBox3: TDBLookupComboBox;
+    DBLookupComboBox5: TDBLookupComboBox;
+    DBEdit7: TDBEdit;
+    Panel2: TPanel;
+    sbSubjectDel: TAdvGlowButton;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure GetLetter(LetterID:integer);
@@ -264,6 +268,7 @@ type
     procedure RetroactionYearChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure sbSubjectDelClick(Sender: TObject);
   private
     FfrmContracts: TfrmContracts;
     FfrmCustomerInfo: TfrmCustomerInfo;
@@ -275,7 +280,8 @@ type
     procedure Show_xpFormsTab;
     procedure ShowCount;
     function LetterHasForms:Boolean;
-    function CheckFormExist:Boolean; 
+    function CheckFormExist:Boolean;
+    procedure TabShow(mode: Boolean);    
   public
     LetterFormat:byte;
     LetterDataID : integer;
@@ -978,6 +984,7 @@ end;
 procedure TReceivedLetterInputForm.Show_xpFormsTab;
 begin
   xpPageControl1.Pages[1].TabVisible:=True;
+  TabShow(True);   
 end;
 
 procedure TReceivedLetterInputForm.ShowCount;
@@ -990,7 +997,7 @@ begin
   inherited;
   if xpPageControl1.ActivePageIndex=0 then
        Select_Letter.Refresh;
-
+  TabShow(false) ; 
 end;
 
 procedure TReceivedLetterInputForm.acShowSaderehExecute(Sender: TObject);
@@ -1076,6 +1083,7 @@ begin
       FraddLetterData.ShowModal;
    end;
    DBEUserMemo.Hint := DBEUserMemo.Text;
+  TabShow(false);
 end;
 
 procedure TReceivedLetterInputForm.BitBtn1Click(Sender: TObject);
@@ -1089,6 +1097,28 @@ begin
   frmFollowRetroactionLetter := TfrmFollowRetroactionLetter.Create(Application);
   frmFollowRetroactionLetter._FR_LetterID := Select_LetterLetterID.AsInteger;
   frmFollowRetroactionLetter.ShowModal;
+end;
+
+procedure TReceivedLetterInputForm.TabShow(mode: Boolean);
+begin
+  if mode then
+  begin
+    pnlTopHeader.Height := 0 ;
+   // xpPageControl1.TabHeight := 23 ;
+   // xpPageControl1.TabWidth  := 0 ;
+  end
+  else
+  begin
+    pnlTopHeader.Height := 25 ; //5 ;
+   // xpPageControl1.TabHeight := 1 ;
+   // xpPageControl1.TabWidth  := 1 ;
+  end;
+end;
+
+procedure TReceivedLetterInputForm.sbSubjectDelClick(Sender: TObject);
+begin
+  inherited;
+  DBLookupComboBox8.KeyValue := null;
 end;
 
 end.

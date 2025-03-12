@@ -111,13 +111,13 @@ begin
       TdbEdit(Sender).Color := clWhite;
       TdbEdit(Sender).Font.Style:=[];
       {Ranjbar}
-      if TDBEdit(Sender).DataSource.DataSet.FieldByName(TDBEdit(Sender).DataField).EditMask = '˛!1399/99/99;1;_' then
+      if TDBEdit(Sender).DataSource.DataSet.FieldByName(TDBEdit(Sender).DataField).EditMask = '˛!1499/99/99;1;_' then
       begin
          D := TDBEdit(Sender).Text;
-         if (Txt_Del254(d)<>'13  /  /  ') and not isValidDate(D) then
+         if (Txt_Del254(d)<>'14  /  /  ') and not isValidDate(D) then
          begin
             ShowMyMessage('ÅÌ€«„',' «—ÌŒ Ê«—œ ‘œÂ  «‘ »«Â „Ì»«‘œ . ·ÿ›«  ’ÕÌÕ ‰„«ÌÌœ',[mbOK],mtInformation);
-            TDBEdit(Sender).Text := #254+'13 /  /  ';
+            TDBEdit(Sender).Text := #254+'14  /  /  ';
             TDBEdit(Sender).SetFocus;
          end;
       end;
@@ -126,13 +126,13 @@ begin
    {Ranjbar}
    if Sender.ClassNameIs('TMaskEdit') then
    begin
-      if TMaskEdit(Sender).EditMask = '˛!1399/99/99;1;_' then
+      if TMaskEdit(Sender).EditMask = '˛!1499/99/99;1;_' then
       begin
          D := TMaskEdit(Sender).Text;
-         if (Txt_Del254(d)<>'13  /  /  ') and not isValidDate(D) then
+         if (Txt_Del254(d)<>'14  /  /  ') and not isValidDate(D) then
          begin
             ShowMyMessage('ÅÌ€«„',' «—ÌŒ Ê«—œ ‘œÂ  «‘ »«Â „Ì»«‘œ . ·ÿ›«  ’ÕÌÕ ‰„«ÌÌœ',[mbOK],mtInformation);
-            TMaskEdit(Sender).Text := #254+'13 /  /  ';
+            TMaskEdit(Sender).Text := #254+'14  /  /  ';
             TDBEdit(Sender).SetFocus;
 
          end;
@@ -204,6 +204,8 @@ begin
 
     if Components[i].ClassNameIs('TQRImage') and (pos('CASHLOGO',UpperCase(Components[i].Name))<>0) then
         try TQRImage(Components[i]).Picture.LoadFromFile(_LogoPath); except end;
+
+  DBNav_Setup(DBNavigator1);        
 
 end;
 

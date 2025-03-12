@@ -600,10 +600,10 @@ begin
 
  //   FitToPageClick(Self);
   if Dm.GetValue(2104) = 0 then
-    FitToPageClick(Self);
-  if Dm.GetValue(2104) = 1 then
-    btnWidthSizeClick(Self);
-  if Dm.GetValue(2104) = 2 then
+    FitToPageClick(Self)
+  else if Dm.GetValue(2104) = 1 then
+    btnWidthSizeClick(Self)
+  else if Dm.GetValue(2104) = 2 then
     btnActualSizeClick(Self);
   flag := 0;
 // acShowNotColorPagesExecute(Application)
@@ -719,6 +719,12 @@ begin
 //      end;
 
   NavigatorHandel;
+  if Dm.GetValue(2104) = 0 then
+    FitToPageClick(Self)
+  else if Dm.GetValue(2104) = 1 then
+    btnWidthSizeClick(Self)
+  else if Dm.GetValue(2104) = 2 then
+    btnActualSizeClick(Self);
 end;
 
 Procedure TFmScanImage.FillData(aFileName:String);

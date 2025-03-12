@@ -147,7 +147,7 @@ object FrAddReportName: TFrAddReportName
         675
         49)
       object DBNavigator1: TDBNavigator
-        Left = 94
+        Left = 142
         Top = 8
         Width = 410
         Height = 33

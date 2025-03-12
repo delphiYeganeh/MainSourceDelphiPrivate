@@ -1,28 +1,27 @@
 inherited FBaseRefere: TFBaseRefere
   Left = 536
   Top = 212
-  Width = 695
+  Width = 722
   Height = 461
   Caption = #1575#1606#1578#1582#1575#1576' '#1575#1585#1580#1575#1593' '#1588#1608#1606#1583#1607' '#1711#1575#1606
   OldCreateOrder = True
-  OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape
-    Width = 679
+    Width = 706
     Height = 422
   end
   object pnlMain: TPanel [1]
     Left = 0
     Top = 0
-    Width = 679
+    Width = 706
     Height = 422
     Align = alClient
     TabOrder = 0
     object Panel1: TPanel
       Left = 1
       Top = 336
-      Width = 677
+      Width = 704
       Height = 85
       Align = alBottom
       TabOrder = 0
@@ -78,14 +77,14 @@ inherited FBaseRefere: TFBaseRefere
     object GroupBox1: TGroupBox
       Left = 1
       Top = 1
-      Width = 677
+      Width = 704
       Height = 335
       Align = alClient
       TabOrder = 1
       object Panel2: TPanel
         Left = 2
         Top = 310
-        Width = 673
+        Width = 700
         Height = 23
         Align = alBottom
         BevelOuter = bvNone
@@ -112,7 +111,7 @@ inherited FBaseRefere: TFBaseRefere
       object dbgCaseType: TYDBGrid
         Left = 2
         Top = 15
-        Width = 673
+        Width = 700
         Height = 295
         Cursor = crHandPoint
         Align = alClient

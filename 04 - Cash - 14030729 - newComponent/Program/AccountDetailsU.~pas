@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, BaseUnit, Grids, DBGrids, YDbgrid, DBCtrls, StdCtrls, Mask, ActnList, ExtCtrls, ComCtrls, jpeg, Menus, DB, ADODB, Buttons;
+  Dialogs, BaseUnit, Grids, DBGrids, YDbgrid, DBCtrls, StdCtrls, Mask, ActnList, ExtCtrls, ComCtrls, jpeg, Menus, DB, ADODB, Buttons,
+  dxGDIPlusClasses;
 
 type
   TFrAccountDetails = class(TYBaseForm)
@@ -41,6 +42,10 @@ type
     DBText3: TDBText;
     DBText4: TDBText;
     DBText5: TDBText;
+    Label9: TLabel;
+    Label11: TLabel;
+    Image1: TImage;
+    Image2: TImage;
     procedure SetAccountID(Value:integer);
     procedure ShowInPanel(P:TWinControl);
     procedure FormCreate(Sender: TObject);
@@ -105,7 +110,7 @@ end;
 procedure TFrAccountDetails.FormCreate(Sender: TObject);
 begin
   inherited;
-  FrAccountDetails.AccountID:= 0;  
+  AccountID:= 0;
   PersonalNo.Caption := Get_SystemSetting('PersonalTitle');
   //FamilyLabel.Caption := Get_SystemSetting('FamilyTitle');
 end;

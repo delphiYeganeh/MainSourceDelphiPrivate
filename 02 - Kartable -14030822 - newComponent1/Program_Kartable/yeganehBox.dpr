@@ -129,8 +129,9 @@ uses
   frmMain in 'frmMain.pas' {Form_WorkGroupFM};
 
 {$R *.res}
+{$R dbnavigatorIcon.RES}
+//{$R DBNavBitmap.res}
 
-   {$R DBNavBitmap.res}
 begin
   Application.Initialize;
   Application.Title := '‘—ﬂ  ‰—„ «›“«—Ì Ìê«‰Â';

@@ -39,6 +39,9 @@ type
     IsCopy_In_Dabir: TCheckBox;
     pnlMain: TPanel;
     procedure FormCreate(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -58,6 +61,27 @@ procedure TfmAssignLetterIndicator.FormCreate(Sender: TObject);
 begin
   inherited;
   ArchiveCurrent.Visible:=_kartable;
+end;
+
+procedure TfmAssignLetterIndicator.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  ModalResult := mrOk ;
+
+end;
+
+procedure TfmAssignLetterIndicator.BitBtn2Click(Sender: TObject);
+begin
+  inherited;
+  ModalResult := mrCancel ;
+
+end;
+
+procedure TfmAssignLetterIndicator.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+//
 end;
 
 end.

@@ -33,9 +33,9 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
         41)
       object BitBtn2: TAdvGlowButton
         Left = 230
-        Top = 9
+        Top = 6
         Width = 75
-        Height = 25
+        Height = 28
         Cursor = crHandPoint
         Anchors = [akTop, akRight]
         Cancel = True
@@ -74,9 +74,9 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
       end
       object BitBtn1: TAdvGlowButton
         Left = 310
-        Top = 9
+        Top = 6
         Width = 75
-        Height = 25
+        Height = 28
         Cursor = crHandPoint
         Anchors = [akTop, akRight]
         Caption = #1578#1575#1610#1610#1583
@@ -96,6 +96,52 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
         ParentFont = False
         TabOrder = 1
         OnClick = BitBtn1Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
+      end
+      object btnSign: TAdvGlowButton
+        Left = 8
+        Top = 6
+        Width = 193
+        Height = 28
+        Cursor = crHandPoint
+        Hint = 
+          #1578#1608#1580#1607' : '#1583#1585' '#1601#1575#1610#1604' '#1608#1585#1583' '#1575#1606#1578#1582#1575#1576#1610' '#1576#1575#1610#1583' '#1705#1604#1605#1607' (('#1575#1605#1590#1575')) '#1580#1607#1578' '#1580#1575#1610#1711#1586#1610#1606#1610' '#1608#1580#1608#1583' ' +
+          #1583#1575#1588#1578#1607' '#1576#1575#1588#1583
+        Anchors = [akTop, akRight]
+        Caption = '  WORD '#1579#1576#1578' (('#1575#1605#1590#1575')) '#1583#1585' '#1601#1575#1610#1604
+        Font.Charset = ARABIC_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 103
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 2
+        Visible = False
+        OnClick = btnSignClick
         Appearance.ColorChecked = 16111818
         Appearance.ColorCheckedTo = 16367008
         Appearance.ColorDisabled = 15921906
@@ -149,16 +195,6 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
         Anchors = [akTop, akRight]
         Caption = #1601#1575#1610#1604' '#1662#1610#1608#1587#1578
       end
-      object SpeedButton1: TSpeedButton
-        Left = 284
-        Top = 72
-        Width = 20
-        Height = 20
-        Cursor = crHandPoint
-        Anchors = [akTop, akRight]
-        Caption = '...'
-        OnClick = SpeedButton1Click
-      end
       object Label4: TLabel
         Left = 314
         Top = 101
@@ -174,6 +210,39 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1578#1575#1585#1610#1582' '#1606#1587#1582#1607
+      end
+      object SpeedButton1: TAdvGlowButton
+        Left = 284
+        Top = 72
+        Width = 20
+        Height = 20
+        Cursor = crHandPoint
+        Anchors = [akTop, akRight]
+        ImageIndex = 78
+        Images = Dm.ImageList_MainNew
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -11
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        TabOrder = 6
+        OnClick = SpeedButton1Click
+        Appearance.ColorChecked = 16111818
+        Appearance.ColorCheckedTo = 16367008
+        Appearance.ColorDisabled = 15921906
+        Appearance.ColorDisabledTo = 15921906
+        Appearance.ColorDown = 16111818
+        Appearance.ColorDownTo = 16367008
+        Appearance.ColorHot = 16117985
+        Appearance.ColorHotTo = 16372402
+        Appearance.ColorMirrorHot = 16107693
+        Appearance.ColorMirrorHotTo = 16775412
+        Appearance.ColorMirrorDown = 16102556
+        Appearance.ColorMirrorDownTo = 16768988
+        Appearance.ColorMirrorChecked = 16102556
+        Appearance.ColorMirrorCheckedTo = 16768988
+        Appearance.ColorMirrorDisabled = 11974326
+        Appearance.ColorMirrorDisabledTo = 15921906
       end
       object Title: TDBEdit
         Left = 30
@@ -245,22 +314,25 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
     end
   end
   inherited DSForm: TDataSource
-    Left = 96
-    Top = 8
+    Top = 65528
   end
   inherited ActionList: TActionList
-    Left = 232
-    Top = 8
+    Left = 256
+    Top = 0
   end
   inherited Grid_PopupMenu: TPopupMenu
-    Left = 319
-    Top = 12
+    Left = 295
+    Top = 65532
+  end
+  inherited Timer1sssss: TTimer
+    Left = 8
+    Top = 48
   end
   object QUpdateGroupImage: TADOQuery
     Connection = Dm.YeganehConnection
     Parameters = <>
-    Left = 176
-    Top = 48
+    Left = 168
+    Top = 8
   end
   object QFileSizeInDB: TADOQuery
     Connection = Dm.YeganehConnection
@@ -269,8 +341,7 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
       
         'SELECT TOP 1 VALUE AS '#39'FileSizeInDB'#39' FROM Settings WHERE Variabl' +
         'eName='#39'SizeOfRecommiteAttachFile'#39)
-    Left = 48
-    Top = 56
+    Left = 24
     object QFileSizeInDBFileSizeInDB: TWideStringField
       FieldName = 'FileSizeInDB'
       Size = 255
@@ -403,8 +474,8 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
       end>
     SQL.Strings = (
       'select * from letterdata where letterdataID = :p1')
-    Left = 40
-    Top = 136
+    Left = 48
+    Top = 120
     object qryUpdateImageLetterDataID: TAutoIncField
       FieldName = 'LetterDataID'
       ReadOnly = True
@@ -518,18 +589,31 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
         Size = 200
         Value = Null
       end>
-    Left = 345
-    Top = 120
+    Left = 337
+    Top = 72
   end
   object OpenDialog: TTntOpenDialog
     Filter = #229#227#229' '#221#199#1740#225'  '#229#199'|*.*'
-    Left = 56
-    Top = 120
+    Left = 336
+    Top = 32
   end
   object ADOQuery1: TADOQuery
     Connection = Dm.YeganehConnection
     Parameters = <>
-    Left = 176
-    Top = 112
+    Left = 312
+    Top = 120
+  end
+  object WordDoc: TWordDocument
+    AutoConnect = False
+    ConnectKind = ckRunningOrNew
+    Left = 205
+    Top = 72
+  end
+  object WordApp: TWordApplication
+    AutoConnect = False
+    ConnectKind = ckRunningOrNew
+    AutoQuit = True
+    Left = 120
+    Top = 75
   end
 end

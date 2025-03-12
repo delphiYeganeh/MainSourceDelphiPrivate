@@ -10,7 +10,6 @@ inherited FMArticle: TFMArticle
   KeyPreview = True
   OldCreateOrder = True
   Position = poMainFormCenter
-  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   inherited ShapeBase: TShape

@@ -303,6 +303,7 @@ type
        FUID : integer;
     CustomerID: integer;
     Edited :Boolean;
+    PinValue : string;
     constructor create(AOwner :TComponent;ExCustomerID : Integer;IsItNewRecord : Boolean = false);reintroduce;virtual;
   end;
 
@@ -365,8 +366,8 @@ OpenDialog.Filter:='Jpeg Files|*.jpg';
 end;
 
 procedure TFrFollowUp.refreshData;
-var
-  PinValue : string;
+//var
+
 begin
    inherited;
    with Select_customer_By_CustomerID do
@@ -412,7 +413,7 @@ begin
   if CustomerID > 0 then
     PinValue := Qry_GetResult(' select 1 FROM dbo.usersPinFollowUP WHERE CustomerID = '+ DBEdit4.text +'  AND  UserID = '+ IntToStr(_UserId ) ,dm.YeganehConnection);
 
-  Pin.Visible    := PinValue = '1' ;
+  Pin.Visible    := PinValue = '' ;
   UnPin.Visible  := not Pin.Visible  ;
 
   { TODO -oparsa : 14030205 }
@@ -956,8 +957,8 @@ begin
 end;
 
 procedure TFrFollowUp.FormShow(Sender: TObject);
-var
-  PinValue : string;
+//var
+ // PinValue : string;
 begin
   inherited;
 
@@ -1004,7 +1005,7 @@ begin
   end;
 
   { TODO -oparsa : 14030205 }
-  Pin.Visible    := PinValue = '1' ;
+  Pin.Visible    := (PinValue = '') ;
   UnPin.Visible  := not Pin.Visible  ;
   { TODO -oparsa : 14030205 }
 
@@ -1216,6 +1217,9 @@ procedure TFrFollowUp.Button3Click(Sender: TObject);
 begin
   inherited;
   if (Dm.Select_FollowUP_By_CustomerID.State=dsInsert) or (Dm.Select_FollowUP_By_CustomerID.State=dsEdit) then
+     if (trim(DBEdit10.Text) = '') then
+       Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString:=ShamsiIncDate(_today,0,0,-1)
+     else
       Dm.Select_FollowUP_By_CustomerIDDoneDate.AsString:=ShamsiIncDate(DBEdit10.Text,0,0,-1)
   else
       ShowMessage('»«Ìœ œ— Õ«·  ÊÌ—«Ì‘ Ì« œ—Ã «ÿ·«⁄«  »«‘Ìœ');
@@ -1423,8 +1427,8 @@ begin
   qry := TADOQuery.Create(self);
   qry.Connection := dm.YeganehConnection;
   qry.CommandTimeout := 1200;
-  
-  if UnPin.Visible then
+
+  if not UnPin.Visible then
   begin
 
     qry.SQL.Text   := ' IF EXISTS ( SELECT 1 FROM dbo.usersPinFollowUP  WITH(NOLOCK)  WHERE CustomerID = '+ DBEdit4.text +' AND  UserID = '+IntToStr(_UserId )+') ' +

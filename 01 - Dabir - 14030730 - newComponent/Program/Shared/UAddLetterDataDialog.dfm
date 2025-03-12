@@ -126,25 +126,25 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
         389
         151)
       object Label2: TLabel
-        Left = 310
+        Left = 316
         Top = 24
-        Width = 65
+        Width = 59
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1588#1585#1581' '#1662#1610#1608#1587#1578
       end
       object Label1: TLabel
-        Left = 310
+        Left = 324
         Top = 49
-        Width = 65
+        Width = 51
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1606#1608#1593' '#1662#1610#1608#1587#1578
       end
       object Label3: TLabel
-        Left = 310
+        Left = 320
         Top = 75
-        Width = 65
+        Width = 55
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1601#1575#1610#1604' '#1662#1610#1608#1587#1578
@@ -160,9 +160,9 @@ inherited FrAddLetterDataDialog: TFrAddLetterDataDialog
         OnClick = SpeedButton1Click
       end
       object Label4: TLabel
-        Left = 310
+        Left = 314
         Top = 101
-        Width = 65
+        Width = 61
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1588#1605#1575#1585#1607' '#1606#1587#1582#1607

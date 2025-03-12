@@ -1,4 +1,4 @@
-[SECTION_MAX_NO]=16
+[SECTION_MAX_NO]=19
 
 [BEGIN_S_NO]=1
 
@@ -2806,3 +2806,578 @@ BEGIN
 END
 
 [END_S_NO]
+
+
+[BEGIN_S_NO]=17
+
+ALTER  procedure [dbo].[SelectInfo]
+	@where nvarchar(1900)
+as 
+declare @mainTable varchar(50), @PrimaryCode varchar(50)
+
+	select @mainTable=value
+	from settings
+	where userid=-1 and variableid=24
+	SET @mainTable=ISNULL(@mainTable,'Added')
+
+	select @PrimaryCode=value
+	from settings
+	where userid=-1 and variableid=26
+	SET @PrimaryCode=ISNULL(@PrimaryCode,'number')
+
+	declare @sqlCommand nvarchar(4000)
+	set @sqlcommand='select l.*,dbo.innerno(l.LetterID,l.Letter_Type) inerno,dbo.innernoForWord(l.LetterID) innernoForWord1,
+	ReceiveTypes.Title AS ReciveTitle,Classifications.Title AS ClassificatioTitle,Urgenceis.Title AS UrgencyTitle,Users.Title AS UserTitle,
+	LetterFormats.Title AS FormatTitle,ToOrganizations.Title AS ToOrgTitle,LetterTemplate.Title AS TemplateTitle, 
+	FromOrganizations.Title AS FromTitle,f.title SignerTitle,dbo.ArchivePlaces(l.letterID,0) ArchivePlaces,FromOrganizations.PreCode, isnull
+	(FromOrganizations.PreCode,FromOrganizations.Code) Org_PreCode,  
+	cast(Year(dbo.ShamsiToMiladi(l.incommingdate)) as varchar)+''/''+cast(month(dbo.ShamsiToMiladi(l.incommingdate)) as varchar)+''/''+cast(Day(dbo.ShamsiToMiladi(l.incommingdate)) as varchar) as ChristIncomDate, 
+	ai.*
+	, ISNULL(US.SecoundSign ,US.UserSign) Sign
+	FROM  Letter l
+	LEFT JOIN '+@mainTable+'  AI  on l.UserMemo=cast (ltrim(ai.'+@PrimaryCode+' ) as nvarchar(255) )
+	LEFT JOIN UserSign US ON US.UserID = L.Signerid
+	LEFT JOIN fromorganizations f on f.id=l.signerid
+	LEFT JOIN ReceiveTypes ReceiveTypes ON ReceiveTypes.ID = L.ReceiveTypeID
+	LEFT JOIN Classifications Classifications ON L.ClassificationID = Classifications.ID 
+	LEFT JOIN Urgenceis Urgenceis ON L.UrgencyID = Urgenceis.ID
+	LEFT JOIN Users Users ON L.UserID = Users.Id
+	LEFT JOIN FromOrganizations FromOrganizations ON L.FromOrgID = FromOrganizations.ID 
+	LEFT JOIN fromorganizations ToOrganizations  ON L.ToOrgID = ToOrganizations.ID 
+	LEFT JOIN LetterFormats LetterFormats ON L.letterformat = LetterFormats.Code
+	LEFT JOIN LetterTemplate LetterTemplate ON l.TemplateID = LetterTemplate.ID '
+	if @where<>'' set @sqlCommand=@sqlCommand+' where '+@where
+	exec sp_executesql @sqlCommand
+
+[END_S_NO]
+
+[BEGIN_S_NO]=18
+
+ALTER proc [dbo].[Get_LetterData_by_LetterID](@LetterID int)
+as
+SELECT   LetterData.letterid,LetterDataID, LetterData.Extention, DESCRIPTION, LetterData.VersionNo, LetterData.VersionDate,  LetterData.archiveID, isDocument,IsTemplate,SignerID
+FROM  dbo.LetterData 
+left JOIN  dbo.Extention ON LetterData.extention = Extention.ExtentionID
+LEFT JOIN dbo.Letter AS L ON l.LetterID = LetterData.LetterID 
+WHERE     (Extention.IsSystem = 0) AND (LetterData.LetterID = @LetterID)
+
+
+[END_S_NO]
+
+[BEGIN_S_NO]=19
+
+ALTER PROCEDURE [dbo].[Get_All_Letter]  
+    @SecretariatID int,                  
+    @Myear int,                  
+    @Letter_Type int,  --0 all                
+    @LetterFormat int,                  
+    @Where nvarchar(4000),                  
+    @Top int,                  
+    @ArchiveFolderID int,                  
+    @ArchiveStatus tinyint ,-- 0 ,1 and 2(= all)               
+    @UserID int 
+	
+    As 
+    
+	 
+    IF ISNULL(LTRIM(RTRIM(@where)),'')=''
+    BEGIN
+		DECLARE @DO_ CHAR(10) SET @DO_ = dbo.ATF_PEY_SETTING ('ATF-PEY')
+    END
+
+    DECLARE @SqlCommand nvarchar(max),@InnerNo NVARCHAR(500)
+                                     
+    IF OBJECT_ID('tempdb..#s') IS NOT NULL 
+		DROP TABLE #s   
+                
+    Set @InnerNo=dbo.InnerNoFormat('Sender','Deliver',@SecretariatID)     
+
+    IF OBJECT_ID('tempdb..#s') IS NOT NULL 
+		DROP TABLE #s
+    
+	CREATE TABLE #s
+    (
+    PEY2 NVARCHAR(200),
+    ATF2 NVARCHAR(200),
+    PEY NVARCHAR(100),
+    ATF NVARCHAR(100),
+    LetterID INT,   
+    CenterNo NVARCHAR(50),                                          
+    IndicatorID INT,
+    MYear INT,
+    SecretariatID INT,
+    Letter_Type INT,
+    letterformat INT,
+    IncommingNO NVARCHAR(50),                                       
+    FromOrgID INT,  
+    IncommingDate NVARCHAR(10),
+    ToOrgID INT,    
+    UrgencyID INT,  
+    Memo NVARCHAR(4000),                                                                                                                                                                                                                                                           
+    RetroactionNo NVARCHAR(1000),                                     
+    RegistrationDate CHAR(10),
+    FollowLetterNo NVARCHAR(1000),                                    
+    ToStaffer NVARCHAR(50),                                         
+    SentLetterID INT,
+    TemplateID  INT,
+    UserMemo  NVARCHAR(1000),                                                                                                                                                                                                                                                      
+    DeadLineDate CHAR(10),
+    SenderTitle NVARCHAR(100),                                                                                         
+    DeliverTitle NVARCHAR(100),                                                                                        
+    has_Page BIT,
+    has_WordPage BIT,
+    has_file BIT,
+    SubjectID INT,  
+    LetterTypeTitle NVARCHAR(50),                                    
+    LetterRecommites NVARCHAR(4000),                                                                                                                                                                                                                                                
+    sendstatusTitle  NVARCHAR(100),                                                                                    
+    InnerNo VARCHAR(500),
+    InnerNoForWord VARCHAR(500),
+    Archived BIT,
+    ActionTypeTitle NVARCHAR(50),                                   
+    SignerID NVARCHAR(200),                                           
+    SignerTitle NVARCHAR(100),                                                                                         
+    ReceiveTypeID INT,
+    ClassificationID INT,
+    ArchivePlace NVARCHAR(500),
+    SubjectDescription NVARCHAR(4000),
+    has_sign BIT ,   
+    HasLetterForms BIT,
+    FolderID INT,
+    ArchivecenterID INT,
+	SecretariatTitle  NVARCHAR(100),
+	EmailFromDateTime Nvarchar(20),
+	EmailFrom nvarchar(1000),
+	EmailSubject nvarchar(2000),
+	IsNetWork bit
+			  
+    )
+
+	IF @ArchiveStatus = 0
+	BEGIN
+		IF isnull(ltrim(rtrim(@where)),'')=''
+		BEGIN
+			INSERT INTO #s
+			(
+				PEY2,ATF2,PEY,ATF,LetterID,CenterNo,IndicatorID,MYear,SecretariatID,Letter_Type,letterformat,IncommingNO,FromOrgID,IncommingDate,
+				ToOrgID,UrgencyID,Memo,RetroactionNo,RegistrationDate,FollowLetterNo,ToStaffer,SentLetterID,TemplateID,UserMemo,DeadLineDate,SenderTitle,
+				DeliverTitle,has_Page,has_WordPage,has_file,SubjectID,LetterTypeTitle,LetterRecommites,sendstatusTitle,InnerNo,InnerNoForWord,Archived,
+				ActionTypeTitle,SignerID,SignerTitle,ReceiveTypeID,ClassificationID,ArchivePlace,SubjectDescription,has_sign,HasLetterForms,FolderID,SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork
+			)
+			SELECT DISTINCT top (@Top)
+					PEY2,ATF2,PEY,ATF,Letter.LetterID,Letter.CenterNo, Letter.IndicatorID, Letter.MYear, Letter.SecretariatID,Letter.Letter_Type, Letter.letterformat, Letter.IncommingNO , Letter.FromOrgID,Letter.IncommingDate,              
+					Letter.ToOrgID, Letter.UrgencyID, Letter.Memo,'-' AS RetroactionNo,Letter.RegistrationDate,'-' AS FollowLetterNo,Letter.ToStaffer, Letter.SentLetterID, Letter.TemplateID, Letter.UserMemo,Letter.DeadLineDate, sender.Title AS SenderTitle,                  
+					Deliver.Title AS DeliverTitle,
+					case when exists(SELECT PageNumber FROM LetterData ld WHERE ld.LetterID=Letter.LetterID and extention in (1,2)) THEN 1 ELSE 0 END AS has_Page, 
+					dbo.has_WordPage(letter.LetterID) AS has_WordPage, 
+					dbo.has_file(letter.LetterID) AS has_File,
+																																	
+					 Letter.SubjectID, LetterTypes.Title LetterTypeTitle,Letter.LetterRecommites,ss.sendstatusTitle,dbo.InnerNo(Letter.LetterID,letter.letter_type),dbo.InnerNoForWord(Letter.LetterID),Letter.Archived,
+					 at.ActionTypeTitle,Letter.SignerID, (Select Title from FromOrganizations FO Where(FO.ID = Letter.SignerID)) as SignerTitle,Letter.ReceiveTypeID ,Letter.ClassificationID,
+					(SELECT top (1)  a.Title FROM ArchiveFolder AS a INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID AND b.LetterID=Letter.LetterID) AS ArchivePlace,
+					Letter.SubjectDescription,dbo.has_sign(Letter.letterID) as has_sign ,dbo.HasLetterForms(Letter.Letterid) HasLetterForms,
+					(SELECT top (1)  a.FolderID 
+					FROM ArchiveFolder AS a INNER JOIN LetterArchiveFolder AS b 
+					ON a.FolderID=b.ArchiveFolderID AND b.LetterID=Letter.LetterID) AS FolderID,
+					Secretariats.SecTitle as SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork
+			FROM Letter
+			INNER JOIN sendstatus AS ss on ss.sendstatusID=Letter.sendstatusID
+			INNER JOIN Secretariats on Secretariats.Secid=Letter.SecretariatID
+			LEFT JOIN FromOrganizations sender ON Letter.ToOrgID = sender.ID
+			LEFT JOIN FromOrganizations Deliver ON Letter.FromOrgID = Deliver.ID
+			LEFT JOIN LetterTypes on LetterTypes.ID=Letter.Letter_type
+			LEFT JOIN ActionType AS at  ON at.ActionTypeID = Letter.LatestActionTypeID
+			WHERE Letter.Finalized=1 AND Letter.Archived=0 AND
+				  ((Letter_Type=@Letter_Type) OR (@Letter_Type=0)) AND
+				  ((Secretariatid=@SecretariatID) OR (@SecretariatID<=0)) AND
+				  ((myear=@Myear) OR (@Myear<=0)) AND
+				  ((Letter.LetterFormat=@LetterFormat) OR (@LetterFormat<=0))AND
+				  (letter.LetterID>=(SELECT ISNULL(MAX(letterID)-10000,0) FROM Letter))	
+			order by myear desc,/*letter.IndicatorID DESC,*/letter.letterid desc
+					
+		END
+		ELSE
+		BEGIN
+			Set @sqlCommand='DECLARE @DO_ CHAR(10) SET @DO_ = dbo.ATF_PEY_SETTING (''ATF-PEY'')'+
+			' INSERT INTO #s'+
+			'('+
+				'PEY2,ATF2,PEY,ATF,LetterID,CenterNo,IndicatorID,MYear,SecretariatID,Letter_Type,letterformat,IncommingNO,FromOrgID,IncommingDate,'+
+				'ToOrgID,UrgencyID,Memo,RetroactionNo,RegistrationDate,FollowLetterNo,ToStaffer,SentLetterID,TemplateID,UserMemo,DeadLineDate,SenderTitle,'+
+				'DeliverTitle,has_Page,has_WordPage,has_file,SubjectID,LetterTypeTitle,LetterRecommites,sendstatusTitle,InnerNo,InnerNoForWord,Archived,'+
+				'ActionTypeTitle,SignerID,SignerTitle,ReceiveTypeID,ClassificationID,ArchivePlace,SubjectDescription,has_sign,HasLetterForms,FolderID,SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork'+
+			 ' )'+
+			' SELECT DISTINCT top ('+CAST(@Top as varchar)+')' + 
+					' PEY2,ATF2,PEY,ATF,Letter.LetterID,Letter.CenterNo, Letter.IndicatorID, Letter.MYear, Letter.SecretariatID,Letter.Letter_Type, Letter.letterformat, Letter.IncommingNO , Letter.FromOrgID,Letter.IncommingDate,'+              
+					'Letter.ToOrgID, Letter.UrgencyID, Letter.Memo,''-'' AS RetroactionNo,Letter.RegistrationDate,''-'' AS FollowLetterNo,Letter.ToStaffer, Letter.SentLetterID, Letter.TemplateID, Letter.UserMemo,Letter.DeadLineDate, sender.Title AS SenderTitle,'+                  
+					'Deliver.Title AS DeliverTitle,'+
+					' case when exists(SELECT PageNumber FROM LetterData ld WHERE ld.LetterID=Letter.LetterID and extention in (1,2)) THEN 1 ELSE 0 END AS has_Page,'+
+					' dbo.has_WordPage(letter.LetterID) AS has_WordPage, '+
+					' dbo.has_file(letter.LetterID) AS has_File,'+
+																																		
+					 'Letter.SubjectID, LetterTypes.Title LetterTypeTitle,Letter.LetterRecommites,ss.sendstatusTitle,dbo.InnerNo(Letter.LetterID,letter.letter_type),dbo.InnerNoForWord(Letter.LetterID),Letter.Archived,'+
+					 'at.ActionTypeTitle,Letter.SignerID, (Select Title from FromOrganizations FO Where(FO.ID = Letter.SignerID)) as SignerTitle,Letter.ReceiveTypeID ,Letter.ClassificationID,'+
+					' (SELECT top (1)  a.Title FROM ArchiveFolder AS a INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID AND b.LetterID=Letter.LetterID) AS ArchivePlace,'+
+					'Letter.SubjectDescription,dbo.has_sign(Letter.letterID) as has_sign ,
+					dbo.HasLetterForms(Letter.Letterid) HasLetterForms,'+
+					' (SELECT top (1)  a.FolderID FROM ArchiveFolder AS a INNER JOIN LetterArchiveFolder AS b 
+					ON a.FolderID=b.ArchiveFolderID AND b.LetterID=Letter.LetterID) AS FolderID,Secretariats.SecTitle SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork'+
+			' FROM Letter 
+			INNER JOIN sendstatus AS ss on ss.sendstatusID=Letter.sendstatusID 
+			INNER JOIN Secretariats on Secretariats.Secid=Letter.SecretariatID LEFT JOIN FromOrganizations sender ON Letter.ToOrgID = sender.ID'+
+			' LEFT JOIN FromOrganizations Deliver ON Letter.FromOrgID = Deliver.ID'+
+			' LEFT JOIN LetterTypes on LetterTypes.ID=Letter.Letter_type'+
+			' LEFT JOIN ActionType AS at  ON at.ActionTypeID = Letter.LatestActionTypeID'+
+			' WHERE Letter.Finalized=1 AND Letter.Archived=0 AND '+
+				  '((Letter_Type='+CAST(@Letter_Type AS VARCHAR(5))+') OR ('+CAST(@Letter_Type AS VARCHAR(5))+'=0)) AND '+
+				  '((Secretariatid='+CAST(@SecretariatID AS VARCHAR(5))+') OR ('+CAST(@SecretariatID AS VARCHAR(5))+'<=0)) AND '+
+				  '((myear='+CAST(@Myear AS VARCHAR(5))+') OR ('+CAST(@Myear AS VARCHAR(5))+'<=0)) AND '+
+				  '((Letter.LetterFormat='+CAST(@LetterFormat AS VARCHAR(5))+') OR ('+CAST(@LetterFormat AS VARCHAR(55))+'<=0))'+
+				  ' And ' + @where + ' order by myear desc,/*letter.IndicatorID DESC,*/letter.letterid desc'
+			
+			Exec Sp_ExecuteSql   @sqlCommand
+		END
+		
+		IF @ArchiveFolderID>0
+		BEGIN
+			DELETE FROM #s WHERE ISNULL(FolderID,0)!=@ArchiveFolderID
+		END
+
+	END
+	ELSE
+	IF @ArchiveStatus=1
+	BEGIN
+		IF isnull(ltrim(rtrim(@where)),'')=''
+		BEGIN
+			INSERT INTO #s
+			(
+				PEY2,ATF2,PEY,ATF,LetterID,CenterNo,IndicatorID,MYear,SecretariatID,Letter_Type,letterformat,IncommingNO,FromOrgID,IncommingDate,
+				ToOrgID,UrgencyID,Memo,RetroactionNo,RegistrationDate,FollowLetterNo,ToStaffer,SentLetterID,TemplateID,UserMemo,DeadLineDate,SenderTitle,
+				DeliverTitle,has_Page,has_WordPage,has_file,SubjectID,LetterTypeTitle,LetterRecommites,sendstatusTitle,InnerNo,InnerNoForWord,Archived,
+				ActionTypeTitle,SignerID,SignerTitle,ReceiveTypeID,ClassificationID,ArchivePlace,SubjectDescription,has_sign,HasLetterForms,FolderID,SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork
+			)
+			SELECT DISTINCT top (@Top)
+					PEY2,ATF2,PEY,ATF,Letter.LetterID,Letter.CenterNo, Letter.IndicatorID, Letter.MYear, Letter.SecretariatID,Letter.Letter_Type, Letter.letterformat, Letter.IncommingNO , Letter.FromOrgID,Letter.IncommingDate,              
+					Letter.ToOrgID, Letter.UrgencyID, Letter.Memo,'-' AS RetroactionNo,Letter.RegistrationDate,'-' AS FollowLetterNo,Letter.ToStaffer, Letter.SentLetterID, Letter.TemplateID, Letter.UserMemo,Letter.DeadLineDate, sender.Title AS SenderTitle,                  
+					Deliver.Title AS DeliverTitle,
+					case when exists(SELECT PageNumber FROM LetterData ld WHERE ld.LetterID=Letter.LetterID and extention in (1,2)) THEN 1 ELSE 0 END AS has_Page, 
+					dbo.has_WordPage(letter.LetterID) AS has_WordPage, 
+					dbo.has_file(letter.LetterID) AS has_File,
+																																	
+					 Letter.SubjectID, LetterTypes.Title LetterTypeTitle,Letter.LetterRecommites,ss.sendstatusTitle,dbo.InnerNo(Letter.LetterID,letter.letter_type),dbo.InnerNoForWord(Letter.LetterID),Letter.Archived,
+					 at.ActionTypeTitle,Letter.SignerID, (Select Title from FromOrganizations FO Where(FO.ID = Letter.SignerID)) as SignerTitle,Letter.ReceiveTypeID ,Letter.ClassificationID,
+					(SELECT top (1)  a.Title FROM ArchiveFolder AS a INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID AND b.LetterID=Letter.LetterID) AS ArchivePlace,
+					Letter.SubjectDescription,dbo.has_sign(Letter.letterID) as has_sign ,dbo.HasLetterForms(Letter.Letterid) HasLetterForms,
+					(SELECT top (1)  a.FolderID FROM ArchiveFolder AS a INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID 
+					AND b.LetterID=Letter.LetterID) AS FolderID,Secretariats.SecTitle as SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork
+			FROM Letter
+			INNER JOIN sendstatus AS ss on ss.sendstatusID=Letter.sendstatusID
+			INNER JOIN Secretariats on Secretariats.Secid=Letter.SecretariatID
+			LEFT JOIN FromOrganizations sender ON Letter.ToOrgID = sender.ID
+			LEFT JOIN FromOrganizations Deliver ON Letter.FromOrgID = Deliver.ID
+			LEFT JOIN LetterTypes on LetterTypes.ID=Letter.Letter_type
+			LEFT JOIN ActionType AS at  ON at.ActionTypeID = Letter.LatestActionTypeID
+			WHERE Letter.Finalized=1 AND Letter.Archived=1 AND
+				  ((Letter_Type=@Letter_Type) OR (@Letter_Type=0)) AND
+				  ((Secretariatid=@SecretariatID) OR (@SecretariatID<=0)) AND
+				  ((myear=@Myear) OR (@Myear<=0)) AND
+				  ((Letter.LetterFormat=@LetterFormat) OR (@LetterFormat<=0))AND
+				  (letter.LetterID>=(SELECT ISNULL(MAX(letterID)-10000,0) FROM Letter))
+			order by myear desc,/*letter.IndicatorID DESC,*/letter.letterid desc
+		END
+		ELSE
+		BEGIN
+			Set @sqlCommand='DECLARE @DO_ CHAR(10) SET @DO_ = dbo.ATF_PEY_SETTING (''ATF-PEY'')'+
+			' INSERT INTO #s'+
+			'('+
+				'PEY2,ATF2,PEY,ATF,LetterID,CenterNo,IndicatorID,MYear,SecretariatID,Letter_Type,letterformat,IncommingNO,FromOrgID,IncommingDate,'+
+				'ToOrgID,UrgencyID,Memo,RetroactionNo,RegistrationDate,FollowLetterNo,ToStaffer,SentLetterID,TemplateID,UserMemo,DeadLineDate,SenderTitle,'+
+				'DeliverTitle,has_Page,has_WordPage,has_file,SubjectID,LetterTypeTitle,LetterRecommites,sendstatusTitle,InnerNo,InnerNoForWord,Archived,'+
+				'ActionTypeTitle,SignerID,SignerTitle,ReceiveTypeID,ClassificationID,ArchivePlace,SubjectDescription,has_sign,HasLetterForms,FolderID,SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork'+
+			')'+
+			' SELECT DISTINCT top ('+CAST(@Top as varchar)+')' + 
+					' PEY2,ATF2,PEY,ATF,Letter.LetterID,Letter.CenterNo, Letter.IndicatorID, Letter.MYear, Letter.SecretariatID,Letter.Letter_Type, Letter.letterformat, Letter.IncommingNO , Letter.FromOrgID,Letter.IncommingDate,'+
+					' Letter.ToOrgID, Letter.UrgencyID, Letter.Memo,''-'' AS RetroactionNo,Letter.RegistrationDate,''-'' AS FollowLetterNo,Letter.ToStaffer, Letter.SentLetterID, Letter.TemplateID, Letter.UserMemo,Letter.DeadLineDate, sender.Title AS SenderTitle,'+
+					'Deliver.Title AS DeliverTitle,'+
+					' case when exists(SELECT PageNumber FROM LetterData ld WHERE ld.LetterID=Letter.LetterID and extention in (1,2)) THEN 1 ELSE 0 END AS has_Page,'+
+					' dbo.has_WordPage(letter.LetterID) AS has_WordPage, '+
+					' dbo.has_file(letter.LetterID) AS has_File,'+
+																																		
+					 'Letter.SubjectID, LetterTypes.Title LetterTypeTitle,Letter.LetterRecommites,ss.sendstatusTitle,dbo.InnerNo(Letter.LetterID,letter.letter_type),dbo.InnerNoForWord(Letter.LetterID),Letter.Archived,'+
+					 'at.ActionTypeTitle,Letter.SignerID, (Select Title from FromOrganizations FO Where(FO.ID = Letter.SignerID)) as SignerTitle,Letter.ReceiveTypeID ,Letter.ClassificationID,'+
+					'(SELECT top (1)  a.Title FROM ArchiveFolder AS a INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID AND b.LetterID=Letter.LetterID) AS ArchivePlace,'+
+					'Letter.SubjectDescription,dbo.has_sign(Letter.letterID) as has_sign ,dbo.HasLetterForms(Letter.Letterid) HasLetterForms,
+					'+
+					'(SELECT top (1)  a.FolderID FROM ArchiveFolder AS a 
+					INNER JOIN LetterArchiveFolder AS b 
+					ON a.FolderID=b.ArchiveFolderID 
+					AND b.LetterID=Letter.LetterID) AS FolderID,Secretariats.SecTitle SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork'+
+			' 
+			 FROM Letter 
+			  INNER JOIN sendstatus AS ss
+			   on ss.sendstatusID=Letter.sendstatusID 
+			   INNER JOIN Secretariats on Secretariats.Secid=Letter.SecretariatID
+			  LEFT JOIN FromOrganizations sender ON Letter.ToOrgID = sender.ID'+
+			' LEFT JOIN FromOrganizations Deliver ON Letter.FromOrgID = Deliver.ID'+
+			' LEFT JOIN LetterTypes on LetterTypes.ID=Letter.Letter_type'+
+			' LEFT JOIN ActionType AS at  ON at.ActionTypeID = Letter.LatestActionTypeID'+
+			' WHERE Letter.Finalized=1 AND Letter.Archived=1 AND '+
+				  ' ((Letter_Type='+CAST(@Letter_Type AS VARCHAR(5))+') OR ('+CAST(@Letter_Type AS VARCHAR(5))+'=0)) AND '+
+				  ' ((Secretariatid='+CAST(@SecretariatID AS VARCHAR(5))+') OR ('+CAST(@SecretariatID AS VARCHAR(5))+'<=0)) AND '+
+				  ' ((myear='+CAST(@Myear AS VARCHAR(5))+') OR ('+CAST(@Myear AS VARCHAR(5))+'<=0)) AND '+
+				  ' ((Letter.LetterFormat='+CAST(@LetterFormat AS VARCHAR(5))+') OR ('+CAST(@LetterFormat AS VARCHAR(5))+'<=0))'+
+				  ' And ' + @where + ' order by myear desc,/*letter.IndicatorID DESC,*/letter.letterid desc'
+
+			Exec Sp_ExecuteSql   @sqlCommand
+		END	 
+		 
+		IF @ArchiveFolderID>0
+		BEGIN
+			DELETE FROM #s WHERE ISNULL(FolderID,0)!=@ArchiveFolderID
+		END
+		
+		DELETE FROM #s WHERE LetterID NOT IN 
+		(
+			SELECT s.LetterID FROM #s AS s
+			INNER JOIN Letter L ON s.LetterID=L.LetterID
+			INNER JOIN LetterArchiveFolder laf ON laf.Letterid = L.letterid And L.LetterID = s.LetterID
+			INNER JOIN Archivefolder af  on laf.ArchiveFolderID = af.FolderID              
+			INNER JOIN UserAccArchive uac on uac.ArchiveFolderID = af.FolderID and uac.secid=L.SecretariatID
+			WHERE ISNULL(uac.UserID, CAST(@userid as varchar(10)))= CAST(@userid as varchar(10)) And ISNULL(uac.ISAccess,1)=1 		
+		)
+			  
+	END
+	ELSE
+	IF @ArchiveStatus=2
+	BEGIN
+		IF isnull(ltrim(rtrim(@where)),'')=''
+		BEGIN
+			INSERT INTO #s
+			(
+				PEY2,ATF2,PEY,ATF,LetterID,CenterNo,IndicatorID,MYear,SecretariatID,Letter_Type,letterformat,IncommingNO,FromOrgID,IncommingDate,
+				ToOrgID,UrgencyID,Memo,RetroactionNo,RegistrationDate,FollowLetterNo,ToStaffer,SentLetterID,TemplateID,UserMemo,DeadLineDate,SenderTitle,
+				DeliverTitle,has_Page,has_WordPage,has_file,SubjectID,LetterTypeTitle,LetterRecommites,sendstatusTitle,InnerNo,InnerNoForWord,Archived,
+				ActionTypeTitle,SignerID,SignerTitle,ReceiveTypeID,ClassificationID,ArchivePlace,SubjectDescription,has_sign,HasLetterForms,FolderID,ArchivecenterID,
+				SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork
+			)
+			SELECT DISTINCT top (@Top) 
+					PEY2,ATF2,PEY,ATF,Letter.LetterID,Letter.CenterNo, Letter.IndicatorID, Letter.MYear, Letter.SecretariatID,Letter.Letter_Type, Letter.letterformat, Letter.IncommingNO , Letter.FromOrgID,Letter.IncommingDate,              
+					Letter.ToOrgID, Letter.UrgencyID, Letter.Memo,'-' AS RetroactionNo,Letter.RegistrationDate,'-' AS FollowLetterNo,Letter.ToStaffer, Letter.SentLetterID, Letter.TemplateID, Letter.UserMemo,Letter.DeadLineDate, sender.Title AS SenderTitle,                  
+					Deliver.Title AS DeliverTitle,
+					case when exists(SELECT PageNumber FROM LetterData ld WHERE ld.LetterID=Letter.LetterID and extention in (1,2)) THEN 1 ELSE 0 END AS has_Page, 
+					dbo.has_WordPage(letter.LetterID) AS has_WordPage, 
+					dbo.has_file(letter.LetterID) AS has_File,                  
+																																					  
+					 Letter.SubjectID, LetterTypes.Title LetterTypeTitle,Letter.LetterRecommites,ss.sendstatusTitle,dbo.InnerNo(Letter.LetterID,letter.letter_type),dbo.InnerNoForWord(Letter.LetterID),Letter.Archived,
+					 at.ActionTypeTitle,Letter.SignerID, (Select Title from FromOrganizations FO Where(FO.ID = Letter.SignerID)) as SignerTitle,Letter.ReceiveTypeID ,Letter.ClassificationID,
+					(SELECT top (1) a.Title FROM ArchiveFolder AS a INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID AND b.LetterID=Letter.LetterID) AS ArchivePlace,
+					Letter.SubjectDescription,dbo.has_sign(Letter.letterID) as has_sign ,dbo.HasLetterForms(Letter.Letterid) HasLetterForms,
+					(SELECT top (1)  a.FolderID FROM ArchiveFolder AS a INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID AND b.LetterID=Letter.LetterID) AS FolderID,
+					(SELECT top (1)  a.ArchiveCenterID FROM ArchiveFolder AS a 
+					INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID 
+					AND b.LetterID=Letter.LetterID) AS ArchiveCenterID,Secretariats.SecTitle as SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork
+			FROM Letter
+			INNER JOIN sendstatus AS ss on ss.sendstatusID=Letter.sendstatusID                  
+			INNER JOIN Secretariats on Secretariats.Secid=Letter.SecretariatID                  
+			LEFT JOIN FromOrganizations sender ON Letter.ToOrgID = sender.ID 
+			LEFT JOIN FromOrganizations Deliver ON Letter.FromOrgID = Deliver.ID                  
+			LEFT JOIN LetterTypes on LetterTypes.ID=Letter.Letter_type
+			LEFT JOIN ActionType AS at  ON at.ActionTypeID = Letter.LatestActionTypeID                  
+			WHERE Letter.Finalized=1 AND Letter.Archived=1 AND
+				  ((Letter_Type=@Letter_Type) OR (@Letter_Type=0)) AND
+				  ((Secretariatid=@SecretariatID) OR (@SecretariatID<=0)) AND
+				  ((myear=@Myear) OR (@Myear<=0)) AND
+				  ((Letter.LetterFormat=@LetterFormat) OR (@LetterFormat<=0))AND
+				  (letter.LetterID>=(SELECT ISNULL(MAX(letterID)-10000,0) FROM Letter))
+			order by myear desc,/*letter.IndicatorID DESC,*/letter.letterid desc
+		END
+		ELSE
+		BEGIN
+			Set @sqlCommand='DECLARE @DO_ VarCHAR(10) SET @DO_=dbo.ATF_PEY_SETTING(''ATF-PEY'')'+
+			' INSERT INTO #s'+
+			'('+
+				'PEY2,ATF2,PEY,ATF,LetterID,CenterNo,IndicatorID,MYear,SecretariatID,Letter_Type,letterformat,IncommingNO,FromOrgID,IncommingDate,'+
+				'ToOrgID,UrgencyID,Memo,RetroactionNo,RegistrationDate,FollowLetterNo,ToStaffer,SentLetterID,TemplateID,UserMemo,DeadLineDate,SenderTitle,'+
+				'DeliverTitle,has_Page,has_WordPage,has_file,SubjectID,LetterTypeTitle,LetterRecommites,sendstatusTitle,InnerNo,InnerNoForWord,Archived,'+
+				'ActionTypeTitle,SignerID,SignerTitle,ReceiveTypeID,ClassificationID,ArchivePlace,SubjectDescription,has_sign,HasLetterForms,FolderID,ArchivecenterID
+				,SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork'+
+			')'+
+			' SELECT DISTINCT top ('+CAST(@Top as varchar)+')' + 
+					' PEY2,ATF2,PEY,ATF,Letter.LetterID,Letter.CenterNo, Letter.IndicatorID, Letter.MYear, Letter.SecretariatID,Letter.Letter_Type, Letter.letterformat, Letter.IncommingNO , Letter.FromOrgID,Letter.IncommingDate,'+
+					'Letter.ToOrgID, Letter.UrgencyID, Letter.Memo,''-'' AS RetroactionNo,Letter.RegistrationDate,''-'' AS FollowLetterNo,Letter.ToStaffer, Letter.SentLetterID, Letter.TemplateID, Letter.UserMemo,Letter.DeadLineDate, sender.Title AS SenderTitle,'+
+					'Deliver.Title AS DeliverTitle,'+
+					' case when exists(SELECT PageNumber FROM LetterData ld WHERE ld.LetterID=Letter.LetterID and extention in (1,2)) THEN 1 ELSE 0 END AS has_Page,'+
+					' dbo.has_WordPage(letter.LetterID) AS has_WordPage,'+ 
+					' dbo.has_file(letter.LetterID) AS has_File,'+
+																																	 
+					 'Letter.SubjectID, LetterTypes.Title LetterTypeTitle,Letter.LetterRecommites,ss.sendstatusTitle,dbo.InnerNo(Letter.LetterID,letter.letter_type),dbo.InnerNoForWord(Letter.LetterID),Letter.Archived,'+
+					 'at.ActionTypeTitle,Letter.SignerID, (Select Title from FromOrganizations FO Where(FO.ID = Letter.SignerID)) as SignerTitle,Letter.ReceiveTypeID ,Letter.ClassificationID,'+
+					'(SELECT top (1)  a.Title FROM ArchiveFolder AS a INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID AND b.LetterID=Letter.LetterID) AS ArchivePlace,'+
+					'Letter.SubjectDescription,
+					dbo.has_sign(Letter.letterID) as has_sign ,
+					dbo.HasLetterForms(Letter.Letterid) HasLetterForms,'+
+					'(SELECT top (1)  a.FolderID FROM ArchiveFolder AS a INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID AND b.LetterID=Letter.LetterID) AS FolderID,'+
+					'(SELECT a.ArchiveCenterID FROM ArchiveFolder AS a 
+					INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID 
+					AND b.LetterID=Letter.LetterID) AS ArchiveCenterID,Secretariats.SecTitle SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork'+
+			' FROM Letter'+
+			' INNER JOIN sendstatus AS ss on ss.sendstatusID=Letter.sendstatusID'+
+			' INNER JOIN Secretariats on Secretariats.Secid=Letter.SecretariatID'+
+			' LEFT JOIN FromOrganizations sender ON Letter.ToOrgID = sender.ID'+
+			' LEFT JOIN FromOrganizations Deliver ON Letter.FromOrgID = Deliver.ID'+
+			' LEFT JOIN LetterTypes on LetterTypes.ID=Letter.Letter_type'+
+			' LEFT JOIN ActionType AS at  ON at.ActionTypeID = Letter.LatestActionTypeID'+
+			' WHERE Letter.Finalized=1 AND Letter.Archived=1 AND '+
+				  '((Letter_Type='+CAST(@Letter_Type AS VARCHAR(5))+') OR ('+CAST(@Letter_Type AS VARCHAR(5))+'=0)) AND '+
+				  '((Secretariatid='+CAST(@SecretariatID AS VARCHAR(5))+') OR ('+CAST(@SecretariatID AS VARCHAR(5))+'<=0)) AND '+
+				  '((myear='+CAST(@Myear AS VARCHAR(5))+') OR ('+CAST(@Myear AS VARCHAR(5))+'<=0)) AND '+
+				  '((Letter.LetterFormat='+CAST(@LetterFormat AS VARCHAR(5))+') OR ('+CAST(@LetterFormat AS VARCHAR(5))+'<=0))'+
+				  ' And ' + @where + ' order by myear desc,/*letter.IndicatorID DESC,*/letter.letterid desc'
+ 
+			Exec Sp_ExecuteSql   @sqlCommand
+		END
+
+		DELETE FROM #s WHERE ISNULL(FolderID,0)>0
+
+		IF @ArchiveFolderID>0
+		BEGIN
+			DELETE FROM #s WHERE ISNULL(FolderID,0)!=@ArchiveFolderID
+		END
+	END
+	ELSE
+	BEGIN
+		IF isnull(ltrim(rtrim(@where)),'')=''
+		BEGIN
+			INSERT INTO #s
+			(
+				PEY2,ATF2,PEY,ATF,LetterID,CenterNo,IndicatorID,MYear,SecretariatID,Letter_Type,letterformat,IncommingNO,FromOrgID,IncommingDate,
+				ToOrgID,UrgencyID,Memo,RetroactionNo,RegistrationDate,FollowLetterNo,ToStaffer,SentLetterID,TemplateID,UserMemo,DeadLineDate,SenderTitle,
+				DeliverTitle,has_Page,has_WordPage,has_file,SubjectID,LetterTypeTitle,LetterRecommites,sendstatusTitle,InnerNo,InnerNoForWord,Archived,
+				ActionTypeTitle,SignerID,SignerTitle,ReceiveTypeID,ClassificationID,ArchivePlace,SubjectDescription,has_sign,HasLetterForms,FolderID,SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork
+			)
+			SELECT DISTINCT top (@Top)
+					PEY2,ATF2,PEY,ATF,Letter.LetterID,Letter.CenterNo, Letter.IndicatorID, Letter.MYear, Letter.SecretariatID,Letter.Letter_Type, Letter.letterformat, Letter.IncommingNO , Letter.FromOrgID,Letter.IncommingDate,              
+					Letter.ToOrgID, Letter.UrgencyID, Letter.Memo,'-' AS RetroactionNo,Letter.RegistrationDate,'-' AS FollowLetterNo,Letter.ToStaffer, Letter.SentLetterID, Letter.TemplateID, Letter.UserMemo,Letter.DeadLineDate, sender.Title AS SenderTitle,                  
+					Deliver.Title AS DeliverTitle,
+					case when exists(SELECT PageNumber FROM LetterData ld WHERE ld.LetterID=Letter.LetterID and extention in (1,2)) THEN 1 ELSE 0 END AS has_Page, 
+					dbo.has_WordPage(letter.LetterID) AS has_WordPage, 
+					dbo.has_file(letter.LetterID) AS has_File,
+																																	
+					 Letter.SubjectID, LetterTypes.Title LetterTypeTitle,Letter.LetterRecommites,ss.sendstatusTitle,dbo.InnerNo(Letter.LetterID,letter.letter_type),dbo.InnerNoForWord(Letter.LetterID),Letter.Archived,
+					 at.ActionTypeTitle,Letter.SignerID, (Select Title from FromOrganizations FO Where(FO.ID = Letter.SignerID)) as SignerTitle,Letter.ReceiveTypeID ,Letter.ClassificationID,
+					(SELECT top (1) a.Title FROM ArchiveFolder AS a INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID AND b.LetterID=Letter.LetterID) AS ArchivePlace,
+					Letter.SubjectDescription,dbo.has_sign(Letter.letterID) as has_sign ,dbo.HasLetterForms(Letter.Letterid) HasLetterForms,
+					(SELECT top (1) a.FolderID FROM ArchiveFolder AS a 
+					INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID
+					 AND b.LetterID=Letter.LetterID) AS FolderID,Secretariats.SecTitle as SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork
+			FROM Letter
+			INNER JOIN sendstatus AS ss on ss.sendstatusID=Letter.sendstatusID
+			INNER JOIN Secretariats on Secretariats.Secid=Letter.SecretariatID
+			LEFT JOIN FromOrganizations sender ON Letter.ToOrgID = sender.ID
+			LEFT JOIN FromOrganizations Deliver ON Letter.FromOrgID = Deliver.ID
+			LEFT JOIN LetterTypes on LetterTypes.ID=Letter.Letter_type
+			LEFT JOIN ActionType AS at  ON at.ActionTypeID = Letter.LatestActionTypeID
+			WHERE Letter.Finalized=1 AND
+				  ((Letter_Type=@Letter_Type) OR (@Letter_Type=0)) AND
+				  ((Secretariatid=@SecretariatID) OR (@SecretariatID<=0)) AND
+				  ((myear=@Myear) OR (@Myear<=0)) AND
+				  ((Letter.LetterFormat=@LetterFormat) OR (@LetterFormat<=0)) AND
+				  (letter.LetterID>=(SELECT ISNULL(MAX(letterID)-10000,0) FROM Letter)) 
+			order by myear desc,/*letter.IndicatorID DESC,*/letter.letterid desc
+		END
+		ELSE
+		BEGIN
+			Set @sqlCommand='DECLARE @DO_ CHAR(10) SET @DO_ = dbo.ATF_PEY_SETTING (''ATF-PEY'')'+
+			' INSERT INTO #s'+
+			' ( '+
+				'PEY2,ATF2,PEY,ATF,LetterID,CenterNo,IndicatorID,MYear,SecretariatID,Letter_Type,letterformat,IncommingNO,FromOrgID,IncommingDate,'+
+				'ToOrgID,UrgencyID,Memo,RetroactionNo,RegistrationDate,FollowLetterNo,ToStaffer,SentLetterID,TemplateID,UserMemo,DeadLineDate,SenderTitle,'+
+				'DeliverTitle,has_Page,has_WordPage,has_file,SubjectID,LetterTypeTitle,LetterRecommites,sendstatusTitle,InnerNo,InnerNoForWord,Archived,'+
+				'ActionTypeTitle,SignerID,SignerTitle,ReceiveTypeID,ClassificationID,ArchivePlace,SubjectDescription,has_sign,HasLetterForms,FolderID,SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork'+
+			')'+
+			' SELECT DISTINCT top ('+CAST(@Top as varchar)+')' + 
+					' PEY2,ATF2,PEY,ATF,Letter.LetterID,Letter.CenterNo, Letter.IndicatorID, Letter.MYear, Letter.SecretariatID,Letter.Letter_Type, Letter.letterformat, Letter.IncommingNO , Letter.FromOrgID,Letter.IncommingDate,'+
+					'Letter.ToOrgID, Letter.UrgencyID, Letter.Memo,''-'' AS RetroactionNo,Letter.RegistrationDate,''-'' AS FollowLetterNo,Letter.ToStaffer, Letter.SentLetterID, Letter.TemplateID, Letter.UserMemo,Letter.DeadLineDate, sender.Title AS SenderTitle,'+
+					'Deliver.Title AS DeliverTitle,'+
+					' case when exists(SELECT PageNumber FROM LetterData ld WHERE ld.LetterID=Letter.LetterID and extention in (1,2)) THEN 1 ELSE 0 END AS has_Page,'+
+					' dbo.has_WordPage(letter.LetterID) AS has_WordPage, '+
+					' dbo.has_file(letter.LetterID) AS has_File,'+
+																																	   
+					 'Letter.SubjectID, LetterTypes.Title LetterTypeTitle,Letter.LetterRecommites,ss.sendstatusTitle,dbo.InnerNo(Letter.LetterID,letter.letter_type),dbo.InnerNoForWord(Letter.LetterID),Letter.Archived,'+
+					' at.ActionTypeTitle,Letter.SignerID, (Select Title from FromOrganizations FO Where(FO.ID = Letter.SignerID)) as SignerTitle,Letter.ReceiveTypeID ,Letter.ClassificationID,'+
+					'(SELECT top (1)  a.Title FROM ArchiveFolder AS a 
+					INNER JOIN LetterArchiveFolder AS b ON a.FolderID=b.ArchiveFolderID AND b.LetterID=Letter.LetterID) AS ArchivePlace,'+
+					'Letter.SubjectDescription,dbo.has_sign(Letter.letterID) as has_sign ,
+					dbo.HasLetterForms(Letter.Letterid) HasLetterForms,'+
+					'(SELECT top (1)  a.FolderID FROM ArchiveFolder AS a 
+					INNER JOIN LetterArchiveFolder AS b 
+					ON a.FolderID=b.ArchiveFolderID 
+					AND b.LetterID=Letter.LetterID) AS FolderID,Secretariats.SecTitle as SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork'+
+			' FROM Letter 
+			INNER JOIN sendstatus AS ss on ss.sendstatusID=Letter.sendstatusID INNER JOIN Secretariats on Secretariats.Secid=Letter.SecretariatID LEFT JOIN FromOrganizations sender ON Letter.ToOrgID = sender.ID'+
+			' LEFT JOIN FromOrganizations Deliver ON Letter.FromOrgID = Deliver.ID'+
+			' LEFT JOIN LetterTypes on LetterTypes.ID=Letter.Letter_type'+
+			' LEFT JOIN ActionType AS at  ON at.ActionTypeID = Letter.LatestActionTypeID'+
+			' WHERE Letter.Finalized=1 AND '+
+				  '((Letter_Type='+CAST(@Letter_Type AS VARCHAR(5))+') OR ('+CAST(@Letter_Type AS VARCHAR(5))+'=0)) AND '+
+				  '((Secretariatid='+CAST(@SecretariatID AS VARCHAR(5))+') OR ('+CAST(@SecretariatID AS VARCHAR(5))+'<=0)) AND '+
+				 ' ((myear='+CAST(@Myear AS VARCHAR(5))+') OR ('+CAST(@Myear AS VARCHAR(5))+'<=0)) AND '+
+				  '((Letter.LetterFormat='+CAST(@LetterFormat AS VARCHAR(5))+') OR ('+CAST(@LetterFormat AS VARCHAR(5))+'<=0))'+
+				  ' And ' + @where + ' order by myear desc,/*letter.IndicatorID DESC,*/letter.letterid desc'
+
+
+				  
+			Exec Sp_ExecuteSql   @sqlCommand				  
+		END
+		IF @ArchiveFolderID>0
+		BEGIN
+			DELETE FROM #s WHERE ISNULL(FolderID,0)!=@ArchiveFolderID
+		END
+		
+	END
+
+    DECLARE @LID INT ,@ArchPlace VARCHAR(100),@AllArchPlace VARCHAR(400)
+    DECLARE cr CURSOR FOR
+    SELECT DISTINCT letterid FROM #s
+    GROUP BY letterid
+    HAVING COUNT(*)>1
+
+    OPEN cr 
+
+    FETCH NEXT FROM cr INTO @LID
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        SET @AllArchPlace=''    
+            DECLARE crin CURSOR FOR         
+            SELECT ArchivePlace FROM #s WHERE letterid=@LID    
+            OPEN crin 
+            FETCH NEXT FROM crin INTO @ArchPlace    
+            WHILE @@FETCH_STATUS = 0
+            BEGIN
+                SET @AllArchPlace=@AllArchPlace+' , '+@ArchPlace
+                FETCH NEXT FROM crin INTO @ArchPlace
+            END
+            CLOSE crin
+            DEALLOCATE crin        
+        UPDATE #s
+        SET ArchivePlace=@AllArchPlace
+        WHERE letterid=@LID AND ArchivePlace=@ArchPlace
+        
+        DELETE FROM #s WHERE letterid=@LID AND ArchivePlace<>@AllArchPlace 
+        
+        FETCH NEXT FROM cr INTO @LID
+    END
+    CLOSE cr
+    DEALLOCATE cr
+
+	SELECT 
+			PEY2,ATF2,PEY,ATF,LetterID,CenterNo,IndicatorID,MYear,SecretariatID,Letter_Type,letterformat,IncommingNO,FromOrgID,IncommingDate,
+		   ToOrgID,UrgencyID,Memo,RetroactionNo,RegistrationDate,FollowLetterNo,ToStaffer,SentLetterID,TemplateID,UserMemo,DeadLineDate,SenderTitle,
+		   DeliverTitle,has_Page,has_WordPage,has_file,SubjectID,LetterTypeTitle,LetterRecommites,sendstatusTitle,InnerNo,InnerNoForWord,Archived,
+		   ActionTypeTitle,SignerID,SignerTitle,ReceiveTypeID,ClassificationID,ArchivePlace,SubjectDescription,has_sign,HasLetterForms,FolderID,SecretariatTitle,EmailFromDateTime, EmailFrom, EmailSubject,IsNetWork
+	FROM #s
+    ORDER BY RegistrationDate DESC,letterid desc
+
+
+[END_S_NO]
+

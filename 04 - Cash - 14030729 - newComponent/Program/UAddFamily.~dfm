@@ -62,7 +62,7 @@ inherited FrmAddFamily: TFrmAddFamily
       Top = 1
       Width = 471
       Height = 258
-      ActivePage = TabSheet1
+      ActivePage = TabSheet2
       Align = alClient
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -177,9 +177,9 @@ inherited FrmAddFamily: TFrmAddFamily
             Visible = False
           end
           object DBEdit1: TDBEdit
-            Left = 152
+            Left = 40
             Top = 51
-            Width = 250
+            Width = 401
             Height = 22
             Anchors = [akTop, akRight]
             DataField = 'FamilyTitle'

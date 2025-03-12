@@ -1,4 +1,4 @@
-[SECTION_MAX_NO]=1
+[SECTION_MAX_NO]=2
 
 [BEGIN_S_NO]=1
 
@@ -19,5 +19,9 @@ CREATE TABLE [dbo].[TBLAPPSETTING](
 
 END 
 
+[END_S_NO]
+
+[BEGIN_S_NO]=2
+  UPDATE dbo.Sexes   SET	Title = 'همه'  WHERE title = 'نامشخص'
 [END_S_NO]
 

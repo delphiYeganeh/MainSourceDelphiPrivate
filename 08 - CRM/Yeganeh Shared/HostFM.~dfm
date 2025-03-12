@@ -54,7 +54,7 @@ inherited FMHost: TFMHost
         ParentFont = False
         Transparent = True
       end
-      object SBSearch1: TBitBtn
+      object SBSearch: TBitBtn
         Left = 691
         Top = 5
         Width = 91

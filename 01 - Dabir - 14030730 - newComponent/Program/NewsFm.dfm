@@ -1,6 +1,6 @@
 inherited FmNews: TFmNews
-  Left = 518
-  Top = 167
+  Left = 587
+  Top = 184
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1601#1585#1605' '#1578#1593#1585#1610#1601' '#1582#1576#1585#1607#1575
@@ -39,9 +39,9 @@ inherited FmNews: TFmNews
         Caption = #1580#1587#1578#1580#1608#1610' '#1593#1606#1608#1575#1606' '#1582#1576#1585' (Enter):'
       end
       object EdtSearch: TEdit
-        Left = 32
+        Left = 8
         Top = 24
-        Width = 185
+        Width = 209
         Height = 21
         Anchors = [akTop, akRight]
         TabOrder = 0
@@ -53,6 +53,7 @@ inherited FmNews: TFmNews
         Width = 457
         Height = 50
         Cursor = crHandPoint
+        DataSource = DSForm
         VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbEdit, nbPost, nbCancel]
         Align = alRight
         Constraints.MaxHeight = 50
@@ -83,8 +84,10 @@ inherited FmNews: TFmNews
         Top = 1
         Width = 680
         Height = 132
+        Cursor = crHandPoint
         Align = alClient
         Color = 16774389
+        DataSource = DSForm
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
         ReadOnly = True
         TabOrder = 0
@@ -135,7 +138,7 @@ inherited FmNews: TFmNews
           end>
       end
     end
-    object Panel3: TPanel
+    object pnlDetail: TPanel
       Left = 1
       Top = 187
       Width = 682
@@ -243,7 +246,7 @@ inherited FmNews: TFmNews
         Height = 50
       end
       object SpeedButton1: TAdvGlowButton
-        Left = 582
+        Left = 278
         Top = 217
         Width = 21
         Height = 20
@@ -282,6 +285,7 @@ inherited FmNews: TFmNews
         Height = 21
         Anchors = [akTop, akRight]
         DataField = 'Title'
+        DataSource = DSForm
         TabOrder = 1
       end
       object wwDBREMemo: TwwDBRichEdit
@@ -293,6 +297,7 @@ inherited FmNews: TFmNews
         Anchors = [akLeft, akTop, akRight]
         AutoURLDetect = False
         DataField = 'Memo'
+        DataSource = DSForm
         PrintJobName = 'Delphi 7'
         TabOrder = 2
         PopupOptions = [rpoPopupCut, rpoPopupCopy, rpoPopupPaste, rpoPopupTabs, rpoPopupFind, rpoPopupReplace]
@@ -327,28 +332,30 @@ inherited FmNews: TFmNews
           685C667331365C7061720D0A7D0D0A00}
       end
       object DBEAttachFileName: TDBEdit
-        Left = 288
+        Left = 301
         Top = 218
-        Width = 291
+        Width = 300
         Height = 19
         Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
         Ctl3D = False
         DataField = 'FileName'
+        DataSource = DMNews.DSImageData
         ParentBiDiMode = False
         ParentCtl3D = False
         ReadOnly = True
         TabOrder = 7
       end
       object DBEUserTitle: TDBEdit
-        Left = 288
+        Left = 276
         Top = 267
-        Width = 291
+        Width = 299
         Height = 19
         TabStop = False
         Anchors = [akTop, akRight]
         Ctl3D = False
-        DataField = 'Title'
+        DataField = 'UserTitle'
+        DataSource = DSForm
         ParentCtl3D = False
         ReadOnly = True
         TabOrder = 8
@@ -361,6 +368,7 @@ inherited FmNews: TFmNews
         Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
         DataField = 'UrgenceisID'
+        DataSource = DSForm
         DropDownRows = 10
         KeyField = 'ID'
         ListField = 'Title'
@@ -376,6 +384,7 @@ inherited FmNews: TFmNews
         Anchors = [akTop, akRight]
         BiDiMode = bdLeftToRight
         DataField = 'TimeAnnounce'
+        DataSource = DSForm
         Font.Charset = ARABIC_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -396,6 +405,7 @@ inherited FmNews: TFmNews
         DropDownRows = 15
         KeyField = 'NewsGroupID'
         ListField = 'Title'
+        ListSource = DMNews.DSNewsGroup
         ParentBiDiMode = False
         TabOrder = 9
         OnClick = DBLkCBNewsGroupClick
@@ -414,6 +424,7 @@ inherited FmNews: TFmNews
         ItemHeight = 13
         ParentCtl3D = False
         TabOrder = 10
+        Ydataset = DMNews.QrUsersList
         TitleField = 'title'
         IDField = 'Id'
       end
@@ -426,6 +437,7 @@ inherited FmNews: TFmNews
         Anchors = [akTop, akRight]
         Ctl3D = False
         DataField = 'Code'
+        DataSource = DSForm
         ParentCtl3D = False
         ReadOnly = True
         TabOrder = 0
@@ -440,6 +452,7 @@ inherited FmNews: TFmNews
         CheckValidity = True
         ShowMsg = False
         DataField = 'DateAnnounce'
+        DataSource = DSForm
         Font.Charset = ARABIC_CHARSET
         Font.Color = clBlack
         Font.Height = -11
@@ -459,6 +472,7 @@ inherited FmNews: TFmNews
         CheckValidity = True
         ShowMsg = False
         DataField = 'DateExpire'
+        DataSource = DSForm
         Font.Charset = ARABIC_CHARSET
         Font.Color = clBlack
         Font.Height = -11
@@ -639,8 +653,25 @@ inherited FmNews: TFmNews
     end
   end
   inherited DSForm: TDataSource
-    Left = 72
+    DataSet = DMNews.SpNews
+    Left = 232
     Top = 112
+  end
+  inherited ActionList: TActionList
+    Left = 376
+    Top = 65528
+  end
+  inherited Grid_PopupMenu: TPopupMenu
+    Left = 271
+    Top = 65524
+  end
+  inherited Timer1sssss: TTimer
+    Left = 472
+    Top = 65528
+  end
+  inherited ApplicationEvents1: TApplicationEvents
+    Left = 32
+    Top = 80
   end
   object OpenDialog1T: TOpenDialog
     Filter = 'All Files|*.*'

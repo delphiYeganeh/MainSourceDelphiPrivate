@@ -42,8 +42,8 @@ object DMReport: TDMReport
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = #1662#1610#1588' '#1601#1585#1590
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 45658.752541527780000000
-    ReportOptions.LastChange = 45658.752541527780000000
+    ReportOptions.CreateDate = 45658.752541527800000000
+    ReportOptions.LastChange = 45658.752541527800000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -70,6 +70,7 @@ object DMReport: TDMReport
       RightMargin = 3.000000000000000000
       TopMargin = 10.000000000000000000
       BottomMargin = 2.000000000000000000
+      Frame.Typ = [ftLeft]
       object AlignLeft_3: TfrxMemoView
         Align = baLeft
         Width = 113.385900000000000000
@@ -86,6 +87,7 @@ object DMReport: TDMReport
       object AlignRight_3_50: TfrxMemoView
         Align = baRight
         Left = 661.039797000000000000
+        Top = 15.118120000000000000
         Width = 132.283550000000000000
         Height = 680.315400000000000000
         Visibility = [vsPreview, vsExport]
@@ -120,7 +122,7 @@ object DMReport: TDMReport
         DisplayFormat.DecimalSeparator = '/'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = '2  Nazanin'
         Font.Style = []
         Frame.Typ = [ftRight, ftTop]
@@ -140,7 +142,7 @@ object DMReport: TDMReport
         DisplayFormat.DecimalSeparator = '/'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = '2  Nazanin'
         Font.Style = []
         Frame.Typ = [ftRight, ftTop, ftBottom]
@@ -160,7 +162,7 @@ object DMReport: TDMReport
         DisplayFormat.DecimalSeparator = '/'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = '2  Nazanin'
         Font.Style = []
         Frame.Typ = [ftRight, ftTop, ftBottom]
@@ -171,15 +173,15 @@ object DMReport: TDMReport
         VAlign = vaCenter
       end
       object MemName5: TfrxMemoView
-        Align = baRight
+        Align = baLeft
         ShiftMode = smDontShift
-        Left = 426.708937000000000000
-        Top = 294.937230000000000000
-        Width = 234.330860000000000000
+        Left = 113.385900000000000000
+        Top = 359.566929130000000000
+        Width = 185.196970000000000000
         Height = 37.795300000000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = '2  Nazanin'
         Font.Style = []
         Frame.Typ = [ftLeft, ftRight, ftBottom]
@@ -203,10 +205,6 @@ object DMReport: TDMReport
         Font.Style = [fsBold]
         Frame.Typ = [ftLeft, ftRight, ftTop]
         HAlign = haCenter
-        Memo.UTF8 = (
-          
-            '1234567890123456789012345678901234567890123456789012345678901234' +
-            '567890123456789012345678901234567890')
         ParentFont = False
         VAlign = vaCenter
       end
@@ -224,10 +222,6 @@ object DMReport: TDMReport
         Font.Style = [fsBold]
         Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
         HAlign = haCenter
-        Memo.UTF8 = (
-          
-            '1234567890123456789012345678901234567890123456789012345678901234' +
-            '567890123456789012345678901234567890')
         ParentFont = False
         VAlign = vaCenter
       end
@@ -245,27 +239,23 @@ object DMReport: TDMReport
         Font.Style = [fsBold]
         Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
         HAlign = haCenter
-        Memo.UTF8 = (
-          '')
         ParentFont = False
         VAlign = vaCenter
       end
       object MemDesc5: TfrxMemoView
-        Align = baRight
+        Align = baLeft
         ShiftMode = smDontShift
-        Left = 426.708937000000000000
-        Top = 333.512060000000000000
-        Width = 234.330860000000000000
+        Left = 113.385900000000000000
+        Top = 398.205010000000000000
+        Width = 185.196970000000000000
         Height = 34.015728500000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
         Font.Name = '2  Nazanin'
         Font.Style = [fsBold]
-        Frame.Typ = [ftLeft, ftRight]
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
         HAlign = haCenter
-        Memo.UTF8 = (
-          '')
         ParentFont = False
         VAlign = vaCenter
       end
@@ -295,7 +285,7 @@ object DMReport: TDMReport
         Height = 49.133858270000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = '2  Nazanin'
         Font.Style = []
         Frame.Typ = [ftRight, ftTop]
@@ -319,44 +309,40 @@ object DMReport: TDMReport
         Font.Style = [fsBold]
         Frame.Typ = [ftLeft, ftRight, ftTop]
         HAlign = haCenter
-        Memo.UTF8 = (
-          
-            '1234567890123456789012345678901234567890123456789012345678901234' +
-            '567890123456789012345678901234567890')
         ParentFont = False
       end
       object Memo4: TfrxMemoView
-        Align = baLeft
+        Align = baRight
         ShiftMode = smDontShift
-        Left = 113.385900000000000000
-        Top = 294.913305280000000000
-        Width = 173.480427000000000000
+        Left = 298.205151330000000000
+        Top = 359.566929130000000000
+        Width = 173.858267720000000000
         Height = 37.795300000000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = '2  Nazanin'
         Font.Style = []
-        Frame.Typ = [ftLeft, ftRight, ftBottom]
-        HAlign = haCenter
+        Frame.Typ = [ftRight, ftBottom]
+        HAlign = haRight
         Memo.UTF8 = (
           #1593#169#1591#175#1592#8230#1592#8222#1592#1657'  ')
         ParentFont = False
         VAlign = vaCenter
       end
       object Memo5: TfrxMemoView
-        Align = baLeft
+        Align = baRight
         ShiftMode = smDontShift
-        Left = 113.385900000000000000
-        Top = 333.488093780000000000
-        Width = 173.480427000000000000
+        Left = 298.205151330000000000
+        Top = 398.362204724409400000
+        Width = 173.858267720000000000
         Height = 34.015728500000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
         Font.Name = '2  Nazanin'
         Font.Style = [fsBold]
-        Frame.Typ = [ftLeft, ftRight, ftTop]
+        Frame.Typ = [ftRight, ftBottom]
         HAlign = haCenter
         ParentFont = False
         VAlign = vaCenter
@@ -364,17 +350,17 @@ object DMReport: TDMReport
       object Memo6: TfrxMemoView
         Align = baRight
         ShiftMode = smDontShift
-        Left = 286.866327000000000000
-        Top = 294.913305280000000000
-        Width = 139.842610000000000000
+        Left = 472.063419050000000000
+        Top = 359.385785280000000000
+        Width = 188.976377950000000000
         Height = 37.795300000000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = '2  Nazanin'
         Font.Style = []
         Frame.Typ = [ftLeft, ftRight, ftBottom]
-        HAlign = haCenter
+        HAlign = haRight
         Memo.UTF8 = (
           ' '#1592#8224#1591#167#1592#8230' '#1592#190#1591#175#1591#177'  ')
         ParentFont = False
@@ -383,19 +369,17 @@ object DMReport: TDMReport
       object Memo7: TfrxMemoView
         Align = baRight
         ShiftMode = smDontShift
-        Left = 286.866327000000000000
-        Top = 333.488093780000000000
-        Width = 139.842610000000000000
+        Left = 472.063419050000000000
+        Top = 398.362204724409400000
+        Width = 188.976377950000000000
         Height = 34.015728500000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
         Font.Name = '2  Nazanin'
         Font.Style = [fsBold]
-        Frame.Typ = [ftLeft, ftRight, ftTop]
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
         HAlign = haCenter
-        Memo.UTF8 = (
-          '')
         ParentFont = False
         VAlign = vaCenter
       end
@@ -435,43 +419,22 @@ object DMReport: TDMReport
           #1591#180#1592#8225#1591#177#1591#175#1591#167#1591#177#1592#1657' '#1591#167#1591#181#1592#1662#1592#8225#1591#167#1592#8224)
         ParentFont = False
       end
-      object MemName6: TfrxMemoView
-        Align = baRight
-        ShiftMode = smDontShift
-        Left = 472.063297000000000000
-        Top = 368.173470000000000000
-        Width = 188.976500000000000000
-        Height = 63.874015750000000000
-        DisplayFormat.DecimalSeparator = '/'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -19
-        Font.Name = '2  Nazanin'
-        Font.Style = []
-        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-        HAlign = haRight
-        Memo.UTF8 = (
-          ' '#1592#8230#1591#180#1591#174#1591#181#1591#167#1591#1726' '#1591#171#1591#168#1591#1726#1594#338' '#1592#8230#1592#8222#1593#169'  ')
-        ParentFont = False
-        VAlign = vaCenter
-      end
       object MemName7: TfrxMemoView
         Align = baRight
         ShiftMode = smDontShift
         Left = 472.063297000000000000
-        Top = 432.354882360000000000
+        Top = 486.709242360000000000
         Width = 188.976500000000000000
         Height = 52.913385830000000000
-        DisplayFormat.DecimalSeparator = '/'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = '2  Nazanin'
         Font.Style = []
         Frame.Typ = [ftLeft, ftRight, ftBottom]
         HAlign = haRight
         Memo.UTF8 = (
-          ' '#1591#162#1591#175#1591#177#1591#179' '#1592#710#1592#8218#1592#710#1591#185' '#1592#8230#1592#8222#1593#169'  ')
+          ' '#1591#162#1591#175#1591#177#1591#179'  ')
         ParentFont = False
         VAlign = vaCenter
       end
@@ -479,7 +442,7 @@ object DMReport: TDMReport
         Align = baLeft
         ShiftMode = smDontShift
         Left = 113.385900000000000000
-        Top = 432.354882360000000000
+        Top = 486.709242360000000000
         Width = 359.055350000000000000
         Height = 52.913385830000000000
         Font.Charset = DEFAULT_CHARSET
@@ -495,47 +458,45 @@ object DMReport: TDMReport
       object MemDesc60: TfrxMemoView
         Align = baRight
         ShiftMode = smDontShift
-        Left = 275.346630000000000000
-        Top = 368.079011100000000000
-        Width = 94.488250000000000000
+        Left = 472.063419050000000000
+        Top = 295.267941100000000000
+        Width = 188.976377950000000000
         Height = 26.456710000000000000
-        DisplayFormat.DecimalSeparator = '/'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = '2  Nazanin'
         Font.Style = []
-        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-        HAlign = haCenter
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haRight
         Memo.UTF8 = (
-          ' '#1591#168#1591#174#1591#180)
+          ' '#1591#168#1591#174#1591#180'  ')
         ParentFont = False
       end
       object MemDesc62: TfrxMemoView
-        Align = baLeft
+        Align = baRight
         ShiftMode = smDontShift
-        Left = 369.834880000000000000
-        Top = 368.197050550000000000
-        Width = 102.047310000000000000
+        Left = 298.205151330000000000
+        Top = 295.425196850000000000
+        Width = 173.858267720000000000
         Height = 26.456710000000000000
-        DisplayFormat.DecimalSeparator = '/'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = '2  Nazanin'
         Font.Style = []
-        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-        HAlign = haCenter
+        Frame.Typ = [ftRight, ftBottom]
+        HAlign = haRight
         Memo.UTF8 = (
-          ' '#1592#190#1592#8222#1591#167#1593#169' '#1592#1662#1591#177#1591#185#1594#338)
+          '   '#1592#190#1592#8222#1591#167#1593#169' '#1592#1662#1591#177#1591#185#1594#338'  ')
         ParentFont = False
       end
       object MemDesc63: TfrxMemoView
         Align = baRight
         ShiftMode = smDontShift
-        Left = 275.346630000000000000
-        Top = 395.157751260000000000
-        Width = 94.488250000000000000
+        Left = 472.063419050000000000
+        Top = 322.346681260000000000
+        Width = 188.976377950000000000
         Height = 36.661417320000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -548,49 +509,46 @@ object DMReport: TDMReport
         VAlign = vaCenter
       end
       object MemDesc65: TfrxMemoView
-        Align = baLeft
+        Align = baRight
         ShiftMode = smDontShift
-        Left = 369.834880000000000000
-        Top = 395.031696220000000000
-        Width = 102.047205040000000000
+        Left = 298.205151330000000000
+        Top = 322.393700790000000000
+        Width = 173.858267720000000000
         Height = 36.661417320000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
         Font.Name = '2  Nazanin'
         Font.Style = [fsBold]
-        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        Frame.Typ = [ftRight, ftBottom]
         HAlign = haCenter
-        Memo.UTF8 = (
-          '')
         ParentFont = False
         VAlign = vaCenter
       end
       object MemDesc61: TfrxMemoView
-        Align = baRight
+        Align = baLeft
         ShiftMode = smDontShift
-        Left = 112.826840000000000000
-        Top = 368.173470000000000000
-        Width = 162.519790000000000000
+        Left = 113.385900000000000000
+        Top = 295.425196850000000000
+        Width = 185.196850390000000000
         Height = 26.456710000000000000
-        DisplayFormat.DecimalSeparator = '/'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = '2  Nazanin'
         Font.Style = []
-        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-        HAlign = haCenter
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haRight
         Memo.UTF8 = (
-          ' '#1592#190#1592#8222#1591#167#1593#169' '#1591#167#1591#181#1592#8222#1594#338)
+          ' '#1592#190#1592#8222#1591#167#1593#169' '#1591#167#1591#181#1592#8222#1594#338'  ')
         ParentFont = False
       end
       object MemDesc64: TfrxMemoView
-        Align = baRight
+        Align = baLeft
         ShiftMode = smDontShift
-        Left = 112.826661810000000000
-        Top = 395.157717080000000000
-        Width = 162.519968190000000000
+        Left = 113.385900000000000000
+        Top = 322.393700790000000000
+        Width = 185.196850390000000000
         Height = 36.661417320000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -599,8 +557,6 @@ object DMReport: TDMReport
         Font.Style = [fsBold]
         Frame.Typ = [ftLeft, ftRight, ftBottom]
         HAlign = haCenter
-        Memo.UTF8 = (
-          '')
         ParentFont = False
         VAlign = vaCenter
       end
@@ -608,12 +564,12 @@ object DMReport: TDMReport
         Align = baRight
         ShiftMode = smDontShift
         Left = 472.063297000000000000
-        Top = 486.338900000000000000
+        Top = 433.307360000000000000
         Width = 188.976500000000000000
         Height = 52.913385830000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = '2  Nazanin'
         Font.Style = []
         Frame.Typ = [ftLeft, ftRight, ftBottom]
@@ -633,7 +589,7 @@ object DMReport: TDMReport
         DisplayFormat.DecimalSeparator = '/'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = '2  Nazanin'
         Font.Style = []
         Frame.Typ = [ftLeft, ftRight, ftBottom]
@@ -647,7 +603,7 @@ object DMReport: TDMReport
         Align = baLeft
         ShiftMode = smDontShift
         Left = 113.385900000000000000
-        Top = 486.338900000000000000
+        Top = 433.133858267716500000
         Width = 359.055350000000000000
         Height = 52.913385830000000000
         Font.Charset = DEFAULT_CHARSET
@@ -657,8 +613,6 @@ object DMReport: TDMReport
         Font.Style = [fsBold]
         Frame.Typ = [ftLeft, ftRight, ftBottom]
         HAlign = haCenter
-        Memo.UTF8 = (
-          '')
         ParentFont = False
         VAlign = vaCenter
       end
@@ -742,7 +696,6 @@ object DMReport: TDMReport
         Top = 619.961535510000000000
         Width = 109.606284570000000000
         Height = 26.456710000000000000
-        DisplayFormat.DecimalSeparator = '/'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
@@ -751,7 +704,7 @@ object DMReport: TDMReport
         Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
         HAlign = haCenter
         Memo.UTF8 = (
-          ' '#1591#162#1592#8230#1591#167#1591#175#1592#8225' '#1591#179#1591#167#1591#178#1594#338)
+          #1591#167#1591#179#1593#169#1592#8224)
         ParentFont = False
       end
       object MemDetail11: TfrxMemoView
@@ -778,7 +731,6 @@ object DMReport: TDMReport
         Top = 619.842920000000000000
         Width = 105.827181720000000000
         Height = 26.456710000000000000
-        DisplayFormat.DecimalSeparator = '/'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
@@ -787,7 +739,7 @@ object DMReport: TDMReport
         Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
         HAlign = haCenter
         Memo.UTF8 = (
-          ' '#1591#167#1591#179#1593#169#1592#8224' '#1592#1662#1592#8222#1591#1726)
+          #1591#168#1591#179#1591#1726#1592#8225' '#1591#168#1592#8224#1591#175#1594#338)
         ParentFont = False
       end
       object MemDetail41: TfrxMemoView
@@ -814,7 +766,6 @@ object DMReport: TDMReport
         Top = 619.842920000000000000
         Width = 120.944874570000000000
         Height = 26.456710000000000000
-        DisplayFormat.DecimalSeparator = '/'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
@@ -823,7 +774,7 @@ object DMReport: TDMReport
         Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
         HAlign = haCenter
         Memo.UTF8 = (
-          ' '#1591#168#1591#179#1591#1726#1592#8225' '#1591#168#1592#8224#1591#175#1594#338' ')
+          #1591#162#1592#8230#1591#167#1591#175#1592#8225' '#1591#179#1591#167#1591#178#1594#338)
         ParentFont = False
       end
       object MemDetail51: TfrxMemoView
@@ -850,7 +801,6 @@ object DMReport: TDMReport
         Top = 619.842920000000000000
         Width = 98.267694570000000000
         Height = 26.456692910000000000
-        DisplayFormat.DecimalSeparator = '/'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
@@ -859,7 +809,7 @@ object DMReport: TDMReport
         Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
         HAlign = haCenter
         Memo.UTF8 = (
-          ' '#1591#167#1591#179#1593#169#1592#8224)
+          #1591#167#1591#179#1593#169#1592#8224' '#1592#1662#1592#8222#1591#1726)
         ParentFont = False
       end
       object MemDetail31: TfrxMemoView
@@ -10915,8 +10865,8 @@ object DMReport: TDMReport
       'begin'
       ''
       'end.')
-    Left = 74
-    Top = 310
+    Left = 170
+    Top = 294
     Datasets = <>
     Variables = <>
     Style = <>
@@ -12484,6 +12434,841 @@ object DMReport: TDMReport
         Font.Style = [fsBold]
         Frame.Typ = [ftLeft, ftRight, ftBottom]
         HAlign = haCenter
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDesc9: TfrxMemoView
+        Align = baLeft
+        ShiftMode = smDontShift
+        Left = 113.385900000000000000
+        Top = 540.031850000000000000
+        Width = 359.055350000000000000
+        Height = 52.913385830000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = '2  Nazanin'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haCenter
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDetail: TfrxMemoView
+        Align = baWidth
+        ShiftMode = smDontShift
+        Left = 113.385900000000000000
+        Top = 593.386210000000000000
+        Width = 547.653897000000000000
+        Height = 26.456710000000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = '2  Nazanin'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          #1593#169#1591#167#1591#177#1591#168#1591#177#1591#167#1592#8224' '#1591#162#1591#177#1591#180#1594#338#1592#710' '#1591#167#1592#8222#1593#169#1591#1726#1591#177#1592#710#1592#8224#1594#338#1593#169#1594#338)
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDetail1: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 547.653982430000000000
+        Top = 619.842920000000000000
+        Width = 113.385814570000000000
+        Height = 26.456710000000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          ' '#1591#167#1591#179#1591#1726#1591#174#1591#177#1591#167#1591#172)
+        ParentFont = False
+      end
+      object MemDetail21: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 317.921630860000000000
+        Top = 646.480761650000000000
+        Width = 109.606284570000000000
+        Height = 34.015743150000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haRight
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDetail2: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 317.921630860000000000
+        Top = 619.961535510000000000
+        Width = 109.606284570000000000
+        Height = 26.456710000000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          ' '#1591#162#1592#8230#1591#167#1591#175#1592#8225' '#1591#179#1591#167#1591#178#1594#338)
+        ParentFont = False
+      end
+      object MemDetail11: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 547.653982430000000000
+        Top = 646.457095670000000000
+        Width = 113.385814570000000000
+        Height = 34.015728500000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haRight
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDetail4: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 113.826754570000000000
+        Top = 619.842920000000000000
+        Width = 105.827181720000000000
+        Height = 26.456710000000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          ' '#1591#167#1591#179#1593#169#1592#8224' '#1592#1662#1592#8222#1591#1726)
+        ParentFont = False
+      end
+      object MemDetail41: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 113.826754570000000000
+        Top = 646.480761650000000000
+        Width = 105.827181720000000000
+        Height = 34.015743150000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haRight
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDetail5: TfrxMemoView
+        Align = baLeft
+        ShiftMode = smDontShift
+        Left = 427.527915430000000000
+        Top = 619.842920000000000000
+        Width = 120.944874570000000000
+        Height = 26.456710000000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          ' '#1591#168#1591#179#1591#1726#1592#8225' '#1591#168#1592#8224#1591#175#1594#338' ')
+        ParentFont = False
+      end
+      object MemDetail51: TfrxMemoView
+        Align = baLeft
+        ShiftMode = smDontShift
+        Left = 427.527915430000000000
+        Top = 646.480761650000000000
+        Width = 120.944874570000000000
+        Height = 34.015743150000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haRight
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDetail3: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 219.653936290000000000
+        Top = 619.842920000000000000
+        Width = 98.267694570000000000
+        Height = 26.456692910000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          ' '#1591#167#1591#179#1593#169#1592#8224)
+        ParentFont = False
+      end
+      object MemDetail31: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 219.653936290000000000
+        Top = 646.480761650000000000
+        Width = 98.267694570000000000
+        Height = 34.015743150000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haRight
+        ParentFont = False
+        VAlign = vaCenter
+      end
+    end
+  end
+  object frxReport12: TfrxReport
+    Version = '5.4.6'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = #1662#1610#1588' '#1601#1585#1590
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 45658.752541527780000000
+    ReportOptions.LastChange = 45658.752541527780000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 29
+    Top = 341
+    Datasets = <
+      item
+        DataSet = frxDBReport
+        DataSetName = #1670#1575#1662
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 215.900000000000000000
+      PaperHeight = 279.400000000000000000
+      PaperSize = 121
+      LeftMargin = 3.000000000000000000
+      RightMargin = 3.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 2.000000000000000000
+      object AlignLeft_3: TfrxMemoView
+        Align = baLeft
+        Width = 113.385900000000000000
+        Height = 680.315400000000000000
+        Visibility = [vsPreview, vsExport]
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Frame.Typ = [ftRight]
+        ParentFont = False
+      end
+      object AlignRight_3_50: TfrxMemoView
+        Align = baRight
+        Left = 661.039797000000000000
+        Width = 132.283550000000000000
+        Height = 680.315400000000000000
+        Visibility = [vsPreview, vsExport]
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Frame.Typ = [ftLeft]
+        ParentFont = False
+      end
+      object AlignBottom_8_70: TfrxMemoView
+        Align = baBottom
+        Top = 681.827212000000000000
+        Width = 801.260360000000000000
+        Height = 328.819110000000000000
+        Visibility = [vsPreview, vsExport]
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object MemName1: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 472.063297000000000000
+        Top = 95.981102360000000000
+        Width = 188.976500000000000000
+        Height = 49.133858270000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftRight, ftTop]
+        HAlign = haRight
+        Memo.UTF8 = (
+          ' '#1593#169#1592#8222#1591#167#1591#179#1592#8225' '#1592#190#1591#177#1592#710#1592#8224#1591#175#1592#8225' '#1591#1726#1591#177#1593#169#1594#338#1591#168#1594#338'  ')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemName2: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 472.063297000000000000
+        Top = 195.551330000000000000
+        Width = 188.976500000000000000
+        Height = 49.133858270000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftRight, ftTop, ftBottom]
+        HAlign = haRight
+        Memo.UTF8 = (
+          ' '#1591#180#1592#8230#1591#167#1591#177#1592#8225' '#1591#172#1592#8222#1591#175' '#1592#190#1591#177#1592#710#1592#8224#1591#175#1592#8225'  ')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemName4: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 472.063297000000000000
+        Top = 245.244280000000000000
+        Width = 188.976500000000000000
+        Height = 49.133858270000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftRight, ftTop, ftBottom]
+        HAlign = haRight
+        Memo.UTF8 = (
+          ' '#1592#8224#1591#167#1592#8230' '#1591#183#1591#177#1591#173'  ')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemName5: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 426.708937000000000000
+        Top = 294.937230000000000000
+        Width = 234.330860000000000000
+        Height = 37.795300000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haRight
+        Memo.UTF8 = (
+          ' '#1592#8224#1591#167#1592#8230' '#1592#710' '#1592#8224#1591#167#1592#8230' '#1591#174#1591#167#1592#8224#1592#710#1591#167#1591#175#1593#175#1594#338'   ')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDesc11: TfrxMemoView
+        Align = baLeft
+        ShiftMode = smDontShift
+        Left = 113.385900000000000000
+        Top = 96.228448980000000000
+        Width = 358.677397000000000000
+        Height = 49.133858270000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Jadid'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight, ftTop]
+        HAlign = haCenter
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDesc2: TfrxMemoView
+        Align = baLeft
+        ShiftMode = smDontShift
+        Left = 113.385900000000000000
+        Top = 195.401574800000000000
+        Width = 358.677397000000000000
+        Height = 49.133858270000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -23
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        HAlign = haCenter
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDesc4: TfrxMemoView
+        Align = baLeft
+        ShiftMode = smDontShift
+        Left = 113.385900000000000000
+        Top = 245.291338580000000000
+        Width = 359.055350000000000000
+        Height = 49.133858270000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -23
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          '')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDesc5: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 426.708937000000000000
+        Top = 333.512060000000000000
+        Width = 234.330860000000000000
+        Height = 34.015728500000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = '2  Nazanin'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          '')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MHeader: TfrxMemoView
+        Align = baWidth
+        ShiftMode = smDontShift
+        Left = 113.385900000000000000
+        Width = 547.653897000000000000
+        Height = 31.748031500000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -25
+        Font.Name = '2  Nazanin'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight, ftTop]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          #1591#180#1591#177#1593#169#1591#1726' '#1593#175#1591#179#1591#1726#1591#177#1591#180' '#1592#1662#1592#8224' '#1591#162#1592#710#1591#177#1591#167#1592#8224' '#1591#167#1591#183#1592#8222#1591#167#1591#185#1591#167#1591#1726' '#1594#338#1593#175#1591#167#1592#8224#1592#8225)
+        ParentFont = False
+      end
+      object MemName0: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 472.063297000000000000
+        Top = 145.944960000000000000
+        Width = 188.976500000000000000
+        Height = 49.133858270000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftRight, ftTop]
+        HAlign = haRight
+        Memo.UTF8 = (
+          ' '#1591#167#1591#183#1592#8222#1591#167#1591#185#1591#167#1591#1726' '#1593#169#1592#8222#1594#338' '#1592#190#1591#177#1592#710#1592#8224#1591#175#1592#8225'  ')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDesc0: TfrxMemoView
+        Align = baLeft
+        ShiftMode = smDontShift
+        Left = 113.385900000000000000
+        Top = 145.889763780000000000
+        Width = 359.055350000000000000
+        Height = 49.133858270000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -23
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight, ftTop]
+        HAlign = haCenter
+        ParentFont = False
+      end
+      object Memo4: TfrxMemoView
+        Align = baLeft
+        ShiftMode = smDontShift
+        Left = 113.385900000000000000
+        Top = 294.913305280000000000
+        Width = 173.480427000000000000
+        Height = 37.795300000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          #1593#169#1591#175#1592#8230#1592#8222#1592#1657'  ')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object Memo5: TfrxMemoView
+        Align = baLeft
+        ShiftMode = smDontShift
+        Left = 113.385900000000000000
+        Top = 333.488093780000000000
+        Width = 173.480427000000000000
+        Height = 34.015728500000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = '2  Nazanin'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight, ftTop]
+        HAlign = haCenter
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object Memo6: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 286.866327000000000000
+        Top = 294.913305280000000000
+        Width = 139.842610000000000000
+        Height = 37.795300000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          ' '#1592#8224#1591#167#1592#8230' '#1592#190#1591#175#1591#177'  ')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object Memo7: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 286.866327000000000000
+        Top = 333.488093780000000000
+        Width = 139.842610000000000000
+        Height = 34.015728500000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = '2  Nazanin'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight, ftTop]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          '')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object Memo8: TfrxMemoView
+        Align = baWidth
+        ShiftMode = smDontShift
+        Left = 113.385900000000000000
+        Top = 32.795300000000000000
+        Width = 547.653897000000000000
+        Height = 30.992125980000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          #1591#177#1592#710#1593#169#1591#180' '#1592#190#1591#177#1592#710#1592#8224#1591#175#1592#8225)
+        ParentFont = False
+      end
+      object Memo9: TfrxMemoView
+        Align = baWidth
+        ShiftMode = smDontShift
+        Left = 113.385900000000000000
+        Top = 63.913420000000000000
+        Width = 547.653897000000000000
+        Height = 30.992099130000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = 'MRT_Abasan'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          #1591#180#1592#8225#1591#177#1591#175#1591#167#1591#177#1592#1657' '#1591#167#1591#181#1592#1662#1592#8225#1591#167#1592#8224)
+        ParentFont = False
+      end
+      object MemName6: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 472.063297000000000000
+        Top = 368.173470000000000000
+        Width = 188.976500000000000000
+        Height = 63.874015750000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        HAlign = haRight
+        Memo.UTF8 = (
+          ' '#1592#8230#1591#180#1591#174#1591#181#1591#167#1591#1726' '#1591#171#1591#168#1591#1726#1594#338' '#1592#8230#1592#8222#1593#169'  ')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemName7: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 472.063297000000000000
+        Top = 432.354882360000000000
+        Width = 188.976500000000000000
+        Height = 52.913385830000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haRight
+        Memo.UTF8 = (
+          ' '#1591#162#1591#175#1591#177#1591#179' '#1592#710#1592#8218#1592#710#1591#185' '#1592#8230#1592#8222#1593#169'  ')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDesc7: TfrxMemoView
+        Align = baLeft
+        ShiftMode = smDontShift
+        Left = 113.385900000000000000
+        Top = 432.354882360000000000
+        Width = 359.055350000000000000
+        Height = 52.913385830000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = '2  Nazanin'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haCenter
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDesc60: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 275.346630000000000000
+        Top = 368.079011100000000000
+        Width = 94.488250000000000000
+        Height = 26.456710000000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          ' '#1591#168#1591#174#1591#180)
+        ParentFont = False
+      end
+      object MemDesc62: TfrxMemoView
+        Align = baLeft
+        ShiftMode = smDontShift
+        Left = 369.834880000000000000
+        Top = 368.197050550000000000
+        Width = 102.047310000000000000
+        Height = 26.456710000000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          ' '#1592#190#1592#8222#1591#167#1593#169' '#1592#1662#1591#177#1591#185#1594#338)
+        ParentFont = False
+      end
+      object MemDesc63: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 275.346630000000000000
+        Top = 395.157751260000000000
+        Width = 94.488250000000000000
+        Height = 36.661417320000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haCenter
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDesc65: TfrxMemoView
+        Align = baLeft
+        ShiftMode = smDontShift
+        Left = 369.834880000000000000
+        Top = 395.031696220000000000
+        Width = 102.047205040000000000
+        Height = 36.661417320000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          '')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDesc61: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 112.826840000000000000
+        Top = 368.173470000000000000
+        Width = 162.519790000000000000
+        Height = 26.456710000000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          ' '#1592#190#1592#8222#1591#167#1593#169' '#1591#167#1591#181#1592#8222#1594#338)
+        ParentFont = False
+      end
+      object MemDesc64: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 112.826661810000000000
+        Top = 395.157717080000000000
+        Width = 162.519968190000000000
+        Height = 36.661417320000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          '')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemName8: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 472.063297000000000000
+        Top = 486.338900000000000000
+        Width = 188.976500000000000000
+        Height = 52.913385830000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haRight
+        Memo.UTF8 = (
+          ' '#1593#169#1591#175' '#1592#8224#1592#710#1591#179#1591#167#1591#178#1592#1657'  ')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemName9: TfrxMemoView
+        Align = baRight
+        ShiftMode = smDontShift
+        Left = 472.063297000000000000
+        Top = 540.031850000000000000
+        Width = 188.976500000000000000
+        Height = 52.913385830000000000
+        DisplayFormat.DecimalSeparator = '/'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = '2  Nazanin'
+        Font.Style = []
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haRight
+        Memo.UTF8 = (
+          ' '#1591#1726#1592#710#1591#182#1594#338#1591#173#1591#167#1591#1726'  ')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object MemDesc8: TfrxMemoView
+        Align = baLeft
+        ShiftMode = smDontShift
+        Left = 113.385900000000000000
+        Top = 486.338900000000000000
+        Width = 359.055350000000000000
+        Height = 52.913385830000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = '2  Nazanin'
+        Font.Style = [fsBold]
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
+        HAlign = haCenter
+        Memo.UTF8 = (
+          '')
         ParentFont = False
         VAlign = vaCenter
       end

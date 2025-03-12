@@ -33,7 +33,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
       ParentShowHint = False
       ShowHint = True
       Style = pcsFlatButtons
-      TabHeight = 28
+      TabHeight = 23
       TabOrder = 0
       TabPosition = tpTop
       OnChange = xpPageControl1Change
@@ -48,7 +48,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
         GradientFillDir = fdTopToBottom
         DesignSize = (
           814
-          592)
+          597)
         object GroupBox3: TPanel
           Left = 0
           Top = 30
@@ -285,7 +285,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           Left = 0
           Top = 58
           Width = 814
-          Height = 534
+          Height = 539
           Align = alClient
           ParentColor = True
           TabOrder = 1
@@ -2379,7 +2379,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Left = 1
             Top = 99
             Width = 812
-            Height = 115
+            Height = 157
             Align = alClient
             Caption = #1605#1590#1605#1608#1606' '#1606#1575#1605#1607
             Font.Charset = ARABIC_CHARSET
@@ -2391,10 +2391,10 @@ inherited SentLetterInputForm: TSentLetterInputForm
             TabOrder = 1
             DesignSize = (
               812
-              115)
+              157)
             object Label14: TLabel
               Left = 713
-              Top = 90
+              Top = 132
               Width = 80
               Height = 13
               Anchors = [akRight, akBottom]
@@ -2408,7 +2408,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             end
             object sbSubjectDel: TAdvGlowButton
               Left = 423
-              Top = 86
+              Top = 128
               Width = 21
               Height = 21
               Hint = #1581#1584#1601
@@ -2476,7 +2476,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             end
             object DBLookupComboBox6: TDBLookupComboBox
               Left = 447
-              Top = 86
+              Top = 128
               Width = 259
               Height = 21
               Anchors = [akRight, akBottom]
@@ -2496,7 +2496,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               Left = 2
               Top = 15
               Width = 808
-              Height = 67
+              Height = 109
               Align = alTop
               Alignment = taRightJustify
               Anchors = [akLeft, akTop, akRight, akBottom]
@@ -2514,51 +2514,49 @@ inherited SentLetterInputForm: TSentLetterInputForm
               OnEnter = DBMemo2Enter
               OnExit = DBMemo2Exit
             end
-          end
-          object GroupBox5: TGroupBox
-            Left = 1
-            Top = 214
-            Width = 812
-            Height = 37
-            Align = alBottom
-            TabOrder = 2
-            DesignSize = (
-              812
-              37)
-            object lblHasForms: TLabel
-              Left = 748
-              Top = 16
-              Width = 57
-              Height = 13
-              Caption = 'lblHasForms'
-            end
-            object DBEIndicatorInnerNo_old: TDBEdit
-              Left = 22
-              Top = 11
-              Width = 94
-              Height = 20
-              TabStop = False
-              Anchors = [akTop, akRight]
-              BevelInner = bvLowered
-              BiDiMode = bdLeftToRight
-              Ctl3D = False
-              DataField = 'IndicatorInnerNo'
-              DataSource = DSForm
+            object btnSubject: TAdvGlowButton
+              Left = 399
+              Top = 128
+              Width = 21
+              Height = 21
+              Cursor = crHandPoint
+              Anchors = [akRight, akBottom]
               Font.Charset = ARABIC_CHARSET
-              Font.Color = clBlue
-              Font.Height = -12
+              Font.Color = clWindowText
+              Font.Height = -11
               Font.Name = 'Tahoma'
               Font.Style = []
-              ParentBiDiMode = False
-              ParentCtl3D = False
+              ImageIndex = 26
+              Images = Dm.ImageList_MainNew
+              NotesFont.Charset = DEFAULT_CHARSET
+              NotesFont.Color = clWindowText
+              NotesFont.Height = -11
+              NotesFont.Name = 'Tahoma'
+              NotesFont.Style = []
               ParentFont = False
-              TabOrder = 0
-              Visible = False
+              TabOrder = 4
+              OnClick = btnSubjectClick
+              Appearance.ColorChecked = 16111818
+              Appearance.ColorCheckedTo = 16367008
+              Appearance.ColorDisabled = 15921906
+              Appearance.ColorDisabledTo = 15921906
+              Appearance.ColorDown = 16111818
+              Appearance.ColorDownTo = 16367008
+              Appearance.ColorHot = 16117985
+              Appearance.ColorHotTo = 16372402
+              Appearance.ColorMirrorHot = 16107693
+              Appearance.ColorMirrorHotTo = 16775412
+              Appearance.ColorMirrorDown = 16102556
+              Appearance.ColorMirrorDownTo = 16768988
+              Appearance.ColorMirrorChecked = 16102556
+              Appearance.ColorMirrorCheckedTo = 16768988
+              Appearance.ColorMirrorDisabled = 11974326
+              Appearance.ColorMirrorDisabledTo = 15921906
             end
           end
           object pnlDetail: TxpPanel
             Left = 1
-            Top = 251
+            Top = 256
             Width = 812
             Height = 282
             StartColor = 16774388
@@ -2584,7 +2582,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             BGImageAlign = iaStretch
             Color = clNone
             Align = alBottom
-            TabOrder = 3
+            TabOrder = 2
             object attachs: TYCheckGroupBox
               Left = 1
               Top = 1
@@ -3451,7 +3449,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Height = 26
             ActionManager = ActionManager
             Align = alNone
-            Anchors = [akTop, akRight]
+            Anchors = [akTop, akRight, akBottom]
             Caption = 'ActionToolBar1'
             ColorMap.HighlightColor = clWhite
             ColorMap.BtnSelectedColor = clBtnFace
@@ -3504,8 +3502,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
           end
         end
         object DBGToORG: TYDBGrid
-          Left = 219
-          Top = 178
+          Left = 267
+          Top = 98
           Width = 423
           Height = 142
           Cursor = crHandPoint
@@ -3752,7 +3750,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           Left = 0
           Top = 216
           Width = 814
-          Height = 376
+          Height = 381
           Align = alClient
           ParentShowHint = False
           ShowHint = True
@@ -3768,11 +3766,52 @@ inherited SentLetterInputForm: TSentLetterInputForm
       Left = 1
       Top = 1
       Width = 822
-      Height = 5
+      Height = 25
       Anchors = [akLeft, akTop, akRight]
       BevelOuter = bvNone
       ParentColor = True
       TabOrder = 1
+      object GroupBox4: TGroupBox
+        Left = 0
+        Top = 0
+        Width = 822
+        Height = 25
+        Align = alClient
+        TabOrder = 0
+        DesignSize = (
+          822
+          25)
+        object lblHasForms: TLabel
+          Left = 738
+          Top = 8
+          Width = 57
+          Height = 13
+          Caption = 'lblHasForms'
+        end
+        object DBEIndicatorInnerNo_old: TDBEdit
+          Left = 390
+          Top = 3
+          Width = 94
+          Height = 20
+          TabStop = False
+          Anchors = [akTop, akRight]
+          BevelInner = bvLowered
+          BiDiMode = bdLeftToRight
+          Ctl3D = False
+          DataField = 'IndicatorInnerNo'
+          DataSource = DSForm
+          Font.Charset = ARABIC_CHARSET
+          Font.Color = clBlue
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentBiDiMode = False
+          ParentCtl3D = False
+          ParentFont = False
+          TabOrder = 0
+          Visible = False
+        end
+      end
     end
   end
   inherited DSForm: TDataSource
@@ -3957,7 +3996,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           end
           item
             Action = DataSetCancel
-            ImageIndex = 90
+            ImageIndex = 1
             ShortCut = 32776
           end
           item
@@ -4005,7 +4044,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
       Category = #1578#1594#1610#1610#1585#1575#1578
       Caption = #1575#1606#1589#1585#1575#1601
       Hint = 'Cancel'
-      ImageIndex = 90
+      ImageIndex = 1
       ShortCut = 32776
       OnExecute = DataSetCancelExecute
       DataSource = DSForm
@@ -4432,16 +4471,17 @@ inherited SentLetterInputForm: TSentLetterInputForm
     end
   end
   object PopupMenu2: TPopupMenu
-    Left = 184
-    Top = 214
+    Images = Dm.ImageList_MainNew
+    Left = 216
+    Top = 110
     object N7: TMenuItem
       Caption = #1601#1585#1605' '#1607#1575#1610' '#1662#1610#1608#1587#1578' '#1588#1583#1607
-      ImageIndex = 1
+      ImageIndex = 11
       OnClick = N7Click
     end
     object N8: TMenuItem
       Caption = #1578#1593#1585#1610#1601' '#1601#1585#1605' '#1580#1583#1610#1583
-      ImageIndex = 2
+      ImageIndex = 7
       OnClick = N8Click
     end
   end

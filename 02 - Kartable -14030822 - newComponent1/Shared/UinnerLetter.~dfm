@@ -956,7 +956,7 @@ inherited FinnerLetter: TFinnerLetter
             Left = 1
             Top = 74
             Width = 831
-            Height = 214
+            Height = 251
             Align = alClient
             Caption = #1605#1590#1605#1608#1606' '#1606#1575#1605#1607
             Font.Charset = ARABIC_CHARSET
@@ -968,10 +968,10 @@ inherited FinnerLetter: TFinnerLetter
             TabOrder = 1
             DesignSize = (
               831
-              214)
+              251)
             object Label14: TLabel
               Left = 738
-              Top = 185
+              Top = 222
               Width = 80
               Height = 13
               Anchors = [akRight, akBottom]
@@ -985,7 +985,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object SpeedButton3: TLabel
               Left = 398
-              Top = 190
+              Top = 227
               Width = 17
               Height = 13
               Anchors = [akRight, akBottom]
@@ -999,7 +999,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object SpeedButton1: TLabel
               Left = 205
-              Top = 191
+              Top = 228
               Width = 25
               Height = 13
               Anchors = [akRight, akBottom]
@@ -1013,7 +1013,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object SBFollowLetterNo: TAdvGlowButton
               Left = 371
-              Top = 185
+              Top = 222
               Width = 22
               Height = 23
               Cursor = crHandPoint
@@ -1052,7 +1052,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object SBRetroactionNo: TAdvGlowButton
               Left = 179
-              Top = 186
+              Top = 223
               Width = 22
               Height = 22
               Cursor = crHandPoint
@@ -1093,7 +1093,7 @@ inherited FinnerLetter: TFinnerLetter
               Left = 2
               Top = 15
               Width = 827
-              Height = 162
+              Height = 199
               Align = alTop
               Alignment = taRightJustify
               Anchors = [akLeft, akTop, akRight, akBottom]
@@ -1113,7 +1113,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object SBSimpleEditor: TAdvGlowButton
               Left = 3
-              Top = 178
+              Top = 215
               Width = 23
               Height = 22
               Cursor = crHandPoint
@@ -1148,7 +1148,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object DBLookupComboBox1: TDBLookupComboBox
               Left = 432
-              Top = 184
+              Top = 221
               Width = 280
               Height = 21
               Anchors = [akRight, akBottom]
@@ -1166,7 +1166,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object DBEFollowLetterNo: TDBEdit
               Left = 242
-              Top = 186
+              Top = 223
               Width = 120
               Height = 21
               Anchors = [akRight, akBottom]
@@ -1185,7 +1185,7 @@ inherited FinnerLetter: TFinnerLetter
             end
             object DBERetroactionNo: TDBEdit
               Left = 51
-              Top = 187
+              Top = 224
               Width = 120
               Height = 21
               Anchors = [akRight, akBottom]
@@ -1202,25 +1202,6 @@ inherited FinnerLetter: TFinnerLetter
               TabOrder = 3
               OnEnter = TEditEnter
               OnExit = TEditExit
-            end
-          end
-          object GroupBox5: TGroupBox
-            Left = 1
-            Top = 288
-            Width = 831
-            Height = 37
-            Align = alBottom
-            TabOrder = 2
-            DesignSize = (
-              831
-              37)
-            object lblHasForms: TLabel
-              Left = 754
-              Top = 16
-              Width = 57
-              Height = 13
-              Anchors = [akTop, akRight]
-              Caption = 'lblHasForms'
             end
           end
           object pnlDetail: TxpPanel
@@ -1251,7 +1232,7 @@ inherited FinnerLetter: TFinnerLetter
             BGImageAlign = iaStretch
             Color = clWindow
             Align = alBottom
-            TabOrder = 3
+            TabOrder = 2
             object Panel3: TPanel
               Left = 1
               Top = 1
@@ -2186,11 +2167,30 @@ inherited FinnerLetter: TFinnerLetter
       Left = 1
       Top = 1
       Width = 841
-      Height = 5
+      Height = 25
       Anchors = [akLeft, akTop, akRight]
       BevelOuter = bvNone
       ParentColor = True
       TabOrder = 1
+      object GroupBox2: TGroupBox
+        Left = 0
+        Top = 0
+        Width = 841
+        Height = 25
+        Align = alClient
+        TabOrder = 0
+        DesignSize = (
+          841
+          25)
+        object lblHasForms: TLabel
+          Left = 754
+          Top = 8
+          Width = 57
+          Height = 13
+          Anchors = [akTop, akRight]
+          Caption = 'lblHasForms'
+        end
+      end
     end
   end
   inherited DSForm: TDataSource
@@ -2378,7 +2378,7 @@ inherited FinnerLetter: TFinnerLetter
           end
           item
             Action = DataSetCancel
-            ImageIndex = 90
+            ImageIndex = 1
             ShortCut = 32776
           end>
         ActionBar = ActionToolBar1
@@ -2423,7 +2423,7 @@ inherited FinnerLetter: TFinnerLetter
       Category = #1578#1594#1610#1610#1585#1575#1578
       Caption = #1575#1606#1589#1585#1575#1601
       Hint = 'Cancel'
-      ImageIndex = 90
+      ImageIndex = 1
       ShortCut = 32776
       OnExecute = DataSetCancelExecute
       DataSource = DSForm
@@ -2451,7 +2451,7 @@ inherited FinnerLetter: TFinnerLetter
       Category = #1578#1594#1610#1610#1585#1575#1578
       Caption = #1581#1584#1601
       Hint = 'Delete'
-      ImageIndex = 1
+      ImageIndex = 90
       ShortCut = 16430
       OnExecute = DataSetDelExecute
       DataSource = DSForm
@@ -2939,16 +2939,17 @@ inherited FinnerLetter: TFinnerLetter
     end
   end
   object PopupMenu2: TPopupMenu
+    Images = Dm.ImageList_MainNew
     Left = 348
     Top = 191
     object N7: TMenuItem
       Caption = #1601#1585#1605' '#1607#1575#1610' '#1662#1610#1608#1587#1578' '#1588#1583#1607
-      ImageIndex = 1
+      ImageIndex = 11
       OnClick = N7Click
     end
     object N8: TMenuItem
       Caption = #1578#1593#1585#1610#1601' '#1601#1585#1605' '#1580#1583#1610#1583
-      ImageIndex = 2
+      ImageIndex = 7
       OnClick = N8Click
     end
   end

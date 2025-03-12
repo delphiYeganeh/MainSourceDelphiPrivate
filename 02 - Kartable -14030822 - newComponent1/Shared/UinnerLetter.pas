@@ -158,8 +158,6 @@ type
     PopupMenu2: TPopupMenu;
     N7: TMenuItem;
     N8: TMenuItem;
-    GroupBox5: TGroupBox;
-    lblHasForms: TLabel;
     Label5: TLabel;
     SpeedButton2: TAdvGlowButton;
     SpeedButton4: TAdvGlowButton;
@@ -198,6 +196,9 @@ type
     ADOQuery1ResponsibleStaffer: TStringField;
     pnlTopHeader: TPanel;
     Panel3: TPanel;
+    GroupBox2: TGroupBox;
+    lblHasForms: TLabel;
+    sbSubjectDel: TAdvGlowButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormActivate(Sender: TObject);
     function GetLetter(LetterID:integer):boolean;
@@ -264,6 +265,7 @@ type
     procedure QAddedFormsAfterScroll(DataSet: TDataSet);
     procedure N3Click(Sender: TObject);
     procedure DataSetDelExecute(Sender: TObject);
+    procedure sbSubjectDelClick(Sender: TObject);
   private
     prewNum : string;
     function IS_Girandeh_in_Group:Boolean;
@@ -1592,15 +1594,21 @@ begin
   if mode then
   begin
     pnlTopHeader.Height := 0 ;
-    xpPageControl1.TabHeight := 23 ;
-    xpPageControl1.TabWidth  := 0 ;
+   // xpPageControl1.TabHeight := 23 ;
+   // xpPageControl1.TabWidth  := 0 ;
   end
   else
   begin
-    pnlTopHeader.Height := 5 ;
-    xpPageControl1.TabHeight := 1 ;
-    xpPageControl1.TabWidth  := 1 ;
+    pnlTopHeader.Height := 25 ; //5 ;
+   // xpPageControl1.TabHeight := 1 ;
+   // xpPageControl1.TabWidth  := 1 ;
   end;
+end;
+
+procedure TFinnerLetter.sbSubjectDelClick(Sender: TObject);
+begin
+  inherited;
+  DBLookupComboBox1.KeyValue := null;
 end;
 
 end.

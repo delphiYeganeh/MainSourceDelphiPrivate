@@ -40,6 +40,7 @@ type
     procedure ExecCommand(s:string);
     procedure FormCreate(Sender: TObject);
     procedure quFileListCalcFields(DataSet: TDataSet);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     function GetTrueFilePath(Path: string): string;
@@ -52,7 +53,7 @@ var
 
 implementation
 
-uses dmu, ConnectU, BusinessLayer;
+uses dmu, ConnectU, BusinessLayer,MainU;
 
 {$R *.dfm}
 
@@ -178,7 +179,10 @@ begin
     s.Add(script);
     //s.SaveToFile('t.txt');
     cmd.Execute;
-    WinExec(pansichar( Application.ExeName),0);
+
+   // FrMain.Close;
+   // WinExec(Pchar(ExtractFileName(Application.ExeName)),0);
+   // WinExec(pansichar( Application.ExeName),0);
     Application.Terminate;
     except on e: exception do
       ShowMessage(e.Message);
@@ -236,6 +240,11 @@ begin
     quFileListDL.Value := '›«Ì· ·«ê';
 
 //   quFileListNewSize.value := IntToStr(quFileListSize.AsInteger div 1048576)+' '+'MB';
+end;
+
+procedure TFrRestore.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+//
 end;
 
 end.

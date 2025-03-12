@@ -84,6 +84,7 @@ type
     QrNewsUsersUsersID: TIntegerField;
     QrNewsUsersIsRead: TBooleanField;
     QrNewsUsersNotShow: TBooleanField;
+    SpNewsUserTitle: TStringField;
     procedure SpNewsAfterScroll(DataSet: TDataSet);
     procedure SpNewsAfterInsert(DataSet: TDataSet);
     procedure SpNewsAfterPost(DataSet: TDataSet);

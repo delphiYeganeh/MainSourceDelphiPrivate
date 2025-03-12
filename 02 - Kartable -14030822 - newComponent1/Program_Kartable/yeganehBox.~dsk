@@ -1,59 +1,37 @@
 [Closed Files]
-File_0=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\shared\UAddDocument.dfm',0,1,1,1,1,0,0
-File_1=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\shared\UinnerLetter.dfm',0,1,1,1,1,0,0
-File_2=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ExitedLetterInputF.dfm',0,1,1,1,1,0,0
-File_3=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\EnteredLetterInputF.pas',0,1,1,5,3,0,0
-File_4=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ArchiveOrganize.dfm',0,1,1,1,1,0,0
-File_5=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ShowMessageFm.pas',0,1,129,45,129,1,0
-File_6=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\shared\ScanImageFm.dfm',0,1,1,1,1,0,0
-File_7=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ShowMessageFm.dfm',0,1,1,1,1,0,0
-File_8=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\U_SEE_PAYVAST_ERJA_FRM.pas',0,1,232,55,260,1,0
+File_0=SourceModule,'c:\program files (x86)\borland\delphi7\source\rtl\Sys\system.pas',0,1,1,1,18,0,0
+File_1=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\frmMain.pas',0,1,353,21,358,1,0
+File_2=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\shared\UchangePassword.pas',0,1,89,50,106,1,0
+File_3=SourceModule,'c:\program files (x86)\borland\delphi7\source\rtl\Sys\sysutils.pas',0,1,14883,1,14885,0,0
+File_4=SourceModule,'c:\program files (x86)\borland\delphi7\source\rtl\Sys\variants.pas',0,1,1,14,10,0,0
+File_5=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\shared\ScanImageFm.pas',0,1,519,14,522,1,0
+File_6=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\shared\Settingsu.pas',0,1,371,56,382,0,0
+File_7=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ArchiveOrganize.pas',0,1,273,10,279,1,0
+File_8=SourceModule,'D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\EnteredLetterInputF.pas',0,1,1118,1,1121,1,0
 
 [Modules]
-Module0=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas
-Module1=D:\matin\02 - Kartable -14030822 - newComponent1\shared\UAddDocument.pas
-Module2=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ArchiveOrganize.pas
-Module3=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Dmu.pas
-Module4=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ExitedLetterInputF.pas
-Module5=D:\matin\02 - Kartable -14030822 - newComponent1\shared\UinnerLetter.pas
-Module6=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\LogOn.pas
-Module7=D:\matin\02 - Kartable -14030822 - newComponent1\shared\ScanImageFm.pas
-Module8=D:\matin\02 - Kartable -14030822 - newComponent1\shared\UaddLetterData.pas
-Module9=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\UMain.pas
-Module10=c:\program files (x86)\borland\delphi7\source\rtl\Sys\system.pas
-Module11=D:\matin\02 - Kartable -14030822 - newComponent1\shared\BaseUnit.pas
-Module12=D:\matin\02 - Kartable -14030822 - newComponent1\shared\Settingsu.pas
-Module13=D:\matin\02 - Kartable -14030822 - newComponent1\shared\URetroExist.pas
-Module14=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\yeganehBox.dpr
-Count=15
+Module0=D:\matin\02 - Kartable -14030822 - newComponent1\shared\businessLayer.pas
+Module1=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Dmu.pas
+Module2=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\LogOn.pas
+Module3=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\UMain.pas
+Module4=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\OtherUnit\UAddLetterDataDialog.pas
+Module5=D:\matin\02 - Kartable -14030822 - newComponent1\shared\UaddLetterData.pas
+Module6=D:\matin\02 - Kartable -14030822 - newComponent1\shared\BaseUnit.pas
+Module7=D:\matin\02 - Kartable -14030822 - newComponent1\shared\ExportToWord.pas
+Module8=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\YInputBox.pas
+Module9=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas
+Module10=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ExitedLetterInputF.pas
+Module11=H:\Yeganeh\Windows\Delphi\Component\MssComponents\MssPackage\Source\WordXP.pas
+Module12=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\yeganehBox.dpr
+Count=13
 EditWindowCount=1
 
-[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas]
+[D:\matin\02 - Kartable -14030822 - newComponent1\shared\businessLayer.pas]
 ModuleType=SourceModule
-FormState=1
+FormState=0
 FormOnTop=0
-
-[D:\matin\02 - Kartable -14030822 - newComponent1\shared\UAddDocument.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ArchiveOrganize.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=1
 
 [D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Dmu.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ExitedLetterInputF.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\02 - Kartable -14030822 - newComponent1\shared\UinnerLetter.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -63,37 +41,47 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\matin\02 - Kartable -14030822 - newComponent1\shared\ScanImageFm.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\matin\02 - Kartable -14030822 - newComponent1\shared\UaddLetterData.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=1
-
 [D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\UMain.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[c:\program files (x86)\borland\delphi7\source\rtl\Sys\system.pas]
+[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\OtherUnit\UAddLetterDataDialog.pas]
 ModuleType=SourceModule
-FormState=0
+FormState=1
+FormOnTop=1
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\shared\UaddLetterData.pas]
+ModuleType=SourceModule
+FormState=1
 FormOnTop=0
 
 [D:\matin\02 - Kartable -14030822 - newComponent1\shared\BaseUnit.pas]
 ModuleType=SourceModule
-FormState=0
+FormState=1
 FormOnTop=0
 
-[D:\matin\02 - Kartable -14030822 - newComponent1\shared\Settingsu.pas]
+[D:\matin\02 - Kartable -14030822 - newComponent1\shared\ExportToWord.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\YInputBox.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ExitedLetterInputF.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\matin\02 - Kartable -14030822 - newComponent1\shared\URetroExist.pas]
+[H:\Yeganeh\Windows\Delphi\Component\MssComponents\MssPackage\Source\WordXP.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -107,9 +95,13 @@ FormOnTop=0
 FormState=0
 FormOnTop=0
 
+[D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\InputPassU.pas]
+FormState=0
+FormOnTop=0
+
 [EditWindow0]
-ViewCount=15
-CurrentView=10
+ViewCount=13
+CurrentView=9
 View0=0
 View1=1
 View2=2
@@ -123,8 +115,6 @@ View9=9
 View10=10
 View11=11
 View12=12
-View13=13
-View14=14
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -142,120 +132,107 @@ LeftPanelSize=0
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=00000400010000000C000000436F64654578706C6F726572000000000000000000000000000000000001000000000000000000000000FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=85
-BottomPanelClients=WatchWindow,MessageView@EditWindow0
-BottomPanelData=00000400010000000B000000576174636857696E646F77BD050000000000000255000000000000000100000001000000000000000002000000009D000000000000000200000002B6060000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000100000000BD0500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelSize=95
+BottomPanelClients=MessageView@EditWindow0,WatchWindow
+BottomPanelData=00000400010000000B000000576174636857696E646F77BD05000000000000025F000000000000000100000001000000000000000002000000009D000000000000000200000002B6060000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000300000000000000000000000003000000000000000000000000030000000000000000000000000100000000BD0500000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\yeganehBox.dpr
-CursorX=1
-CursorY=140
-TopLine=109
+CursorX=41
+CursorY=137
+TopLine=124
 LeftCol=1
 
 [View1]
-Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\URetroExist.pas
-CursorX=6
-CursorY=1
-TopLine=1
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\UaddLetterData.pas
+CursorX=54
+CursorY=415
+TopLine=404
 LeftCol=1
 
 [View2]
-Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\UaddLetterData.pas
-CursorX=1
-CursorY=1
-TopLine=1
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\OtherUnit\UAddLetterDataDialog.pas
+CursorX=61
+CursorY=807
+TopLine=801
 LeftCol=1
 
 [View3]
-Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\LogOn.pas
-CursorX=35
-CursorY=471
-TopLine=444
+Module=H:\Yeganeh\Windows\Delphi\Component\MssComponents\MssPackage\Source\WordXP.pas
+CursorX=1
+CursorY=37097
+TopLine=37078
 LeftCol=1
 
 [View4]
-Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\UMain.pas
-CursorX=18
-CursorY=1206
-TopLine=1195
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\LogOn.pas
+CursorX=65
+CursorY=347
+TopLine=336
 LeftCol=1
 
 [View5]
-Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\UAddDocument.pas
-CursorX=6
-CursorY=771
-TopLine=765
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\UMain.pas
+CursorX=47
+CursorY=2163
+TopLine=2159
 LeftCol=1
 
 [View6]
 Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ExitedLetterInputF.pas
-CursorX=50
-CursorY=1419
-TopLine=1419
+CursorX=42
+CursorY=752
+TopLine=737
 LeftCol=1
 
 [View7]
-Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\UinnerLetter.pas
-CursorX=66
-CursorY=1254
-TopLine=1232
-LeftCol=1
-
-[View8]
-Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ArchiveOrganize.pas
-CursorX=10
-CursorY=279
-TopLine=273
-LeftCol=1
-
-[View9]
-Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\Settingsu.pas
-CursorX=56
-CursorY=382
-TopLine=371
-LeftCol=1
-
-[View10]
-Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas
-CursorX=59
-CursorY=2520
-TopLine=2507
-LeftCol=1
-
-[View11]
 Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\BaseUnit.pas
-CursorX=1
-CursorY=395
+CursorX=108
+CursorY=391
 TopLine=384
 LeftCol=1
 
-[View12]
+[View8]
 Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Dmu.pas
-CursorX=8
-CursorY=1411
-TopLine=1405
+CursorX=31
+CursorY=1141
+TopLine=1119
 LeftCol=1
 
-[View13]
-Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\ScanImageFm.pas
-CursorX=44
-CursorY=2286
-TopLine=2265
+[View9]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\businessLayer.pas
+CursorX=34
+CursorY=5761
+TopLine=5758
 LeftCol=1
 
-[View14]
-Module=c:\program files (x86)\borland\delphi7\source\rtl\Sys\system.pas
+[View10]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\shared\ExportToWord.pas
+CursorX=57
+CursorY=140
+TopLine=125
+LeftCol=1
+
+[View11]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\YInputBox.pas
 CursorX=1
-CursorY=18
+CursorY=1
 TopLine=1
 LeftCol=1
 
+[View12]
+Module=D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas
+CursorX=38
+CursorY=2836
+TopLine=2836
+LeftCol=1
+
 [Watches]
-Count=3
-Watch0='selst',256,0,18,1,0,'Watches'
-Watch1='w',256,0,18,1,0,'Watches'
-Watch2='Result',256,0,18,1,0,'Watches'
+Count=4
+Watch0='Dm.Get_LetterData_by_LetterDataIDLetterDataID.ASINTEGER',256,0,18,1,0,'Watches'
+Watch1='dm.Get_LetterData_by_LetterIDLetterDataID.AsString',256,0,18,1,0,'Watches'
+Watch2='dm.Get_LetterData_by_LetterIDLetterDataID.Value',256,0,18,1,0,'Watches'
+Watch3=' dm.Get_LetterData_by_LetterIDLetterDataID.Value',256,0,18,1,0,'Watches'
 
 [WatchWindow]
 WatchColumnWidth=100
@@ -276,13 +253,23 @@ LRDockWidth=1180
 Dockable=1
 
 [Breakpoints]
-Count=6
+Count=16
 Breakpoint0='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\ReCommitedialog.pas',1182,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint1='D:\matin\02 - Kartable -14030822 - newComponent1\shared\UinnerLetter.pas',1018,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint1='D:\matin\02 - Kartable -14030822 - newComponent1\shared\UinnerLetter.pas',1020,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint2='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas',543,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint3='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas',486,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint4='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\Inbox.pas',564,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint5='D:\matin\02 - Kartable -14030822 - newComponent1\shared\URecommiteReport.pas',171,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint6='D:\matin\02 - Kartable -14030822 - newComponent1\shared\ExportToWord.pas',875,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint7='D:\matin\02 - Kartable -14030822 - newComponent1\shared\ExportToWord.pas',370,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint8='D:\matin\02 - Kartable -14030822 - newComponent1\shared\ExportToWord.pas',148,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint9='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\OtherUnit\UAddLetterDataDialog.pas',102,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint10='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\OtherUnit\UAddLetterDataDialog.pas',829,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint11='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\OtherUnit\UAddLetterDataDialog.pas',840,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint12='D:\matin\02 - Kartable -14030822 - newComponent1\shared\ExportToWord.pas',230,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint13='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\OtherUnit\UAddLetterDataDialog.pas',856,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint14='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\OtherUnit\UAddLetterDataDialog.pas',819,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint15='D:\matin\02 - Kartable -14030822 - newComponent1\Program_Kartable\OtherUnit\UAddLetterDataDialog.pas',727,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -293,13 +280,13 @@ Visible=1
 State=2
 Left=0
 Top=0
-Width=1920
+Width=1680
 Height=123
 MaxLeft=-1
 MaxTop=-1
-MaxWidth=1696
+MaxWidth=1936
 MaxHeight=123
-ClientWidth=1680
+ClientWidth=1920
 ClientHeight=84
 
 [ProjectManager]
@@ -353,7 +340,7 @@ Create=1
 Visible=1
 State=0
 Left=-3
-Top=506
+Top=490
 Width=208
 Height=524
 MaxLeft=-1
@@ -365,8 +352,8 @@ LRDockWidth=190
 Dockable=1
 SplitPos=85
 ArrangeBy=Name
-SelectedItem=Anchors
-ExpandedItems=Anchors,Title
+SelectedItem=Name
+ExpandedItems=Title
 HiddenCategories=
 
 [ObjectTree]
@@ -456,12 +443,12 @@ State=0
 Left=12
 Top=0
 Width=1457
-Height=85
+Height=95
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1457
-ClientHeight=85
-TBDockHeight=85
+ClientHeight=95
+TBDockHeight=95
 LRDockWidth=443
 Dockable=1
 

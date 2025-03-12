@@ -2630,6 +2630,7 @@ inherited MainForm: TMainForm
               end
               item
                 Action = ASaveWord
+                Caption = '&WORD '#1584#1582#1610#1585#1607' '#1583#1585' '#1601#1575#1610#1604
                 ImageIndex = 39
                 LastSession = 661
               end
@@ -2962,6 +2963,14 @@ inherited MainForm: TMainForm
                 ImageIndex = 80
                 LastSession = 661
                 ShortCut = 16504
+              end
+              item
+                Caption = '-'
+              end
+              item
+                Visible = False
+                Action = ActFolderToLetter
+                ImageIndex = 119
               end>
             Caption = #1605#1583#1610#1585#1610#1578' '#1587#1610#1587#1578#1605
             ImageIndex = 155
@@ -4313,6 +4322,12 @@ inherited MainForm: TMainForm
       ImageIndex = 80
       ShortCut = 16504
       OnExecute = Action4Execute
+    end
+    object ActFolderToLetter: TAction
+      Category = #1605#1583#1610#1585#1610#1578' '#1587#1610#1587#1578#1605
+      Caption = #1578#1576#1583#1604' '#1662#1608#1588#1607' '#1576#1607' '#1587#1606#1583
+      Visible = False
+      OnExecute = ActFolderToLetterExecute
     end
   end
   object QueryRefresher: TTimer [7]
@@ -10485,6 +10500,15 @@ inherited MainForm: TMainForm
       object N85: TMenuItem
         Action = Action4
       end
+      object N86: TMenuItem
+        Caption = '-'
+        Visible = False
+      end
+      object N87: TMenuItem
+        Caption = #1578#1576#1583#1610#1604' '#1662#1608#1588#1607' '#1576#1607' '#1587#1606#1583
+        Visible = False
+        OnClick = N87Click
+      end
     end
     object m51: TMenuItem
       Caption = #1711#1586#1575#1585#1588
@@ -11389,11 +11413,11 @@ inherited MainForm: TMainForm
       FieldName = 'IsShow'
     end
   end
-  object WordApplication: TWordApplication [41]
+  object WordApplicationMainForm: TWordApplication [41]
     AutoConnect = False
     ConnectKind = ckRunningOrNew
     AutoQuit = False
-    OnDocumentBeforeClose = WordApplicationDocumentBeforeClose
+    OnDocumentBeforeClose = WordApplicationMainFormDocumentBeforeClose
     Left = 1168
     Top = 269
   end

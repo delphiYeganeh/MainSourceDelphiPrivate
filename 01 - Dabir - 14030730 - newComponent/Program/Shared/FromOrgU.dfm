@@ -119,9 +119,9 @@ inherited FromOrgForm: TFromOrgForm
         Visible = False
       end
       object LblSide: TLabel
-        Left = 8
+        Left = 0
         Top = 70
-        Width = 132
+        Width = 140
         Height = 59
         Caption = #1587#1575#1586#1605#1575#1606' '#1607#1575
         Font.Charset = ARABIC_CHARSET

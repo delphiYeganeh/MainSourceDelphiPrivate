@@ -1,7 +1,7 @@
 object Fconnect: TFconnect
   Tag = 9
-  Left = 459
-  Top = 194
+  Left = 529
+  Top = 203
   BiDiMode = bdRightToLeft
   BorderStyle = bsNone
   Caption = 'Yeganeh'

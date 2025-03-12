@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, BaseUnit, StdCtrls, Buttons, Menus, ExtActns, ActnList, DB,
-  ADODB, ExtCtrls, AppEvnts;
+  ADODB, ExtCtrls, AppEvnts, AdvGlowButton;
 
 type
   TfmAssignLetterIndicator = class(TMBaseForm)
@@ -39,6 +39,9 @@ type
     IsCopy_In_Dabir: TCheckBox;
     pnlMain: TPanel;
     procedure FormCreate(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -58,6 +61,27 @@ procedure TfmAssignLetterIndicator.FormCreate(Sender: TObject);
 begin
   inherited;
   ArchiveCurrent.Visible:=_kartable;
+end;
+
+procedure TfmAssignLetterIndicator.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  ModalResult := mrOk ;
+ // Close;
+end;
+
+procedure TfmAssignLetterIndicator.BitBtn2Click(Sender: TObject);
+begin
+  inherited;
+  ModalResult := mrCancel ;
+  //Close;
+end;
+
+procedure TfmAssignLetterIndicator.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+//
 end;
 
 end.

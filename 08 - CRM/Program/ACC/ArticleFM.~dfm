@@ -36,7 +36,7 @@ inherited FMArticle: TFMArticle
       DesignSize = (
         898
         35)
-      object SBSearch1: TBitBtn
+      object SBSearch: TBitBtn
         Left = 799
         Top = 5
         Width = 91
@@ -81,7 +81,7 @@ inherited FMArticle: TFMArticle
           000000000000151105167F681C84C8A22CCFEABE34F4EABE34F4C7A22CCE7E67
           1C83151105160000000000000000000000000000000000000000}
       end
-      object SBEmkanat1: TBitBtn
+      object SBEmkanat: TBitBtn
         Left = 703
         Top = 5
         Width = 91

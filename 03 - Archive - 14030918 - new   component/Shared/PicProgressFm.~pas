@@ -45,7 +45,7 @@ begin
   if not(DMScanImage.QrSelImage.State in [dsEdit,dsInsert]) then
     Exit;
 
-  With FmScanImage,ImageEnVect1 do
+  With FmScanImage,ImageEnVectMain do
   begin
     //ÃÂ  »«“Ì«»Ì œÊ»«—Â  ’ÊÌ—
     //ImageEnVect1.DataSource := Nil;
@@ -84,8 +84,8 @@ begin
       While not QrLetterData.Bof do
       begin
         QrSelImage.Edit;
-        FmScanImage.ImageEnVect1.Proc.Resample(2480,3508,rfNone); //A4
-        FmScanImage.ImageEnVect1.FitToWidth;
+        FmScanImage.ImageEnVectMain.Proc.Resample(2480,3508,rfNone); //A4
+        FmScanImage.ImageEnVectMain.FitToWidth;
         QrSelImage.Post;
         QrLetterData.Prior;
       end;

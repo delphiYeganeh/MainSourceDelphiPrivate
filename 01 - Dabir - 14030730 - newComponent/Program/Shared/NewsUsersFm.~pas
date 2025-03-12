@@ -225,17 +225,24 @@ begin
   if IsFromWorkSheet then
   begin
     FWorkSheetViews:=TFWorkSheetViews.Create(Application);
-    FWorkSheetViews.WorkSheetID:=GetWorkSheetID;
+    FWorkSheetViews.WorkSheetID := GetWorkSheetID;
     FWorkSheetViews.ShowModal;
   end;
 end;
 
 function TFmNewsUsers.IsFromWorkSheet: Boolean;
 begin
-  Result:=False;
+  Result := False;
+  {
   if Pos('ÏÚæÊ Èå ÌáÓå ÈÇ ˜Ï' ,DMNewsUsers.QrNewsMemo.AsString)>0 then Result:=True;
   if Pos('ÏÚæÊ Èå ãáÇÞÇÊ ÈÇ ˜Ï' ,DMNewsUsers.QrNewsMemo.AsString)>0 then Result:=True;
   if Pos('ÏÚæÊ Èå ÇäÌÇã ˜ÇÑ ÈÇ ˜Ï' ,DMNewsUsers.QrNewsMemo.AsString)>0 then Result:=True;
+  }
+  if (Pos('ÏÚæÊ Èå ÌáÓå ÈÇ ˜Ï' ,DMNewsUsers.QrNewsMemo.AsString)>0) or
+     (Pos('ÏÚæÊ Èå ãáÇÞÇÊ ÈÇ ˜Ï' ,DMNewsUsers.QrNewsMemo.AsString)>0) or
+     (Pos('ÏÚæÊ Èå ÇäÌÇã ˜ÇÑ ÈÇ ˜Ï' ,DMNewsUsers.QrNewsMemo.AsString)>0) then
+    Result:=True;
+
 end;
 
 function TFmNewsUsers.GetWorkSheetID: Integer;
@@ -243,6 +250,7 @@ var
   ID : String;
   x1,x2,x3:Integer;
 begin
+   Result:= 0 ;
    x1:=Length(DMNewsUsers.QrNewsMemo.AsString);
    x2:=Pos(':',DMNewsUsers.QrNewsMemo.AsString);
    x3:=x1-x2;

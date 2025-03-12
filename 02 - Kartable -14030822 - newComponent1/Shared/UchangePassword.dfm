@@ -32,6 +32,7 @@ inherited FchangePassword: TFchangePassword
       FillDirection = fdLeftToRight
       TitleShow = False
       Caption = 'xpPanel'
+      Maximized = True
       Title = 'xpPanelTitle'
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clNavy
@@ -128,7 +129,7 @@ inherited FchangePassword: TFchangePassword
         Width = 97
         Height = 17
         Anchors = [akTop, akRight]
-        Caption = #1606#1605#1575#1610#1588' '#1606#1575#1605' '#1705#1575#1585#1576#1585#1610
+        Caption = #1606#1605#1575#1610#1588' '#1705#1604#1605#1607' '#1593#1576#1608#1585
         TabOrder = 3
         OnClick = CheckBox1Click
       end
@@ -234,6 +235,9 @@ inherited FchangePassword: TFchangePassword
   inherited Grid_PopupMenu: TPopupMenu
     Left = 47
     Top = 60
+  end
+  inherited Timer1sssss: TTimer
+    Top = 0
   end
   object ActionManager: TActionManager
     ActionBars.SessionCount = 171

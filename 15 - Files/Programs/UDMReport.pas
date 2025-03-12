@@ -47,6 +47,7 @@ type
     WordExport: TfrxDOCXExport;
     frxReport_Main: TfrxReport;
     frxReport_New_Backup: TfrxReport;
+    frxReport12: TfrxReport;
 
   private
     { Private declarations }

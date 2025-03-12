@@ -432,6 +432,7 @@ begin
   Exec_get_FromOrganizationsTitle_byID(SelectedId,title,respon,Code);
   ECode.Text:=code;
   Erespon.Text:=respon;
+  lblSite.caption := title ;
 end;
 
 procedure TFromOrgForm.innerOrgClick(Sender: TObject);

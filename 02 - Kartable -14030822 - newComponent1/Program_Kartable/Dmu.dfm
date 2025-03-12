@@ -3147,6 +3147,9 @@ object Dm: TDm
     object Get_LetterData_by_LetterIDIsTemplate: TBooleanField
       FieldName = 'IsTemplate'
     end
+    object Get_LetterData_by_LetterIDSignerID: TStringField
+      FieldName = 'SignerID'
+    end
   end
   object Extention: TADOTable
     Connection = YeganehConnection
@@ -5749,7 +5752,7 @@ object Dm: TDm
     end
   end
   object frxReport1: TfrxReport
-    Version = '4.5'
+    Version = '5.4.6'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -12240,7 +12243,7 @@ object Dm: TDm
     Left = 1171
     Top = 584
     Bitmap = {
-      494C0101C600C700040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C0101C600C700040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002003000001002000000000000020
       0300000000000000000000000000000000000000000000000000000000000000
       00008C510F008C510F008C510F008C510F008C510F008C510F008C510F008C51
@@ -18844,7 +18847,8 @@ object Dm: TDm
       FE7FE107C10BC081FE7FC7C3CF87CFC3FE7F8FE3CFC3CFC3FE7F9991CFE3CF81
       FC3F1019CFF8CF98F01F1839CFF9CFF7E10F3C39CFF7CFF3E3C71819CFF3CFF3
       E7C71119CFF3CFF3FFFF8BB1CFC3CFC3E7C787E3CFC7CFC7E38FC107C00FC00F
-      F00FE10FC01FC01FF81FF93FFFFFFFFF}
+      F00FE10FC01FC01FF81FF93FFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
   object qtemp: TADOQuery
     Connection = YeganehConnection

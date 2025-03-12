@@ -1,6 +1,6 @@
 inherited FMain: TFMain
-  Left = 349
-  Top = 165
+  Left = 354
+  Top = 200
   Width = 1071
   Height = 772
   Caption = #1605#1583#1610#1585#1610#1578' '#1601#1575#1610#1604' '#1607#1575#1610' '#1588#1585#1705#1578' '#1606#1585#1605' '#1575#1601#1586#1575#1585#1610' '#1610#1711#1575#1606#1607
@@ -919,14 +919,14 @@ inherited FMain: TFMain
       Top = 1
       Width = 813
       Height = 707
-      ActivePage = TabSheet2
+      ActivePage = TabSheet3
       Align = alClient
       BiDiMode = bdRightToLeft
       MultiLine = True
       ParentBiDiMode = False
       TabHeight = 30
       TabOrder = 2
-      TabWidth = 150
+      TabWidth = 130
       object TabSheet5: TTabSheet
         Tag = 4
         Caption = #1605#1606#1608' '#1575#1589#1604#1610
@@ -2510,7 +2510,7 @@ inherited FMain: TFMain
           TabOrder = 0
           object pnlSettingandTransfer: TxpPanel
             Left = 1
-            Top = 201
+            Top = 209
             Width = 801
             Height = 344
             StartColor = 16511469
@@ -3443,9 +3443,9 @@ inherited FMain: TFMain
           end
           object GridTemp: TYDBGrid
             Left = 1
-            Top = 633
+            Top = 641
             Width = 801
-            Height = 15
+            Height = 7
             Cursor = crHandPoint
             Align = alClient
             DataSource = DM.DSTemp
@@ -3605,7 +3605,7 @@ inherited FMain: TFMain
           end
           object pnlTempPrint: TxpPanel
             Left = 1
-            Top = 545
+            Top = 553
             Width = 801
             Height = 88
             StartColor = 16511469
@@ -4010,7 +4010,7 @@ inherited FMain: TFMain
             Left = 1
             Top = 1
             Width = 801
-            Height = 200
+            Height = 208
             StartColor = 16511469
             EndColor = 16244694
             FillDirection = fdLeftToRight
@@ -4038,7 +4038,7 @@ inherited FMain: TFMain
               Left = 1
               Top = 1
               Width = 797
-              Height = 166
+              Height = 174
               Align = alClient
               ParentColor = True
               TabOrder = 0
@@ -4046,14 +4046,14 @@ inherited FMain: TFMain
                 Left = 1
                 Top = 1
                 Width = 795
-                Height = 164
+                Height = 172
                 Align = alClient
                 BevelOuter = bvNone
                 Color = 16244694
                 TabOrder = 0
                 DesignSize = (
                   795
-                  164)
+                  172)
                 object Label17: TLabel
                   Left = 651
                   Top = 9
@@ -4101,7 +4101,7 @@ inherited FMain: TFMain
                   Height = 36
                   Cursor = crHandPoint
                   Anchors = [akTop, akRight]
-                  Caption = #1578#1594#1610#1610#1585' '#1578#1585#1578#1610#1576' '#1606#1575#1605#1711#1584#1575#1585#1610' '#1593#1705#1587#1607#1575
+                  Caption = #1593#1605#1604#1610#1575#1578' '#1605#1585#1576#1608#1591' '#1576#1607' '#1593#1705#1587' '#1607#1575
                   NotesFont.Charset = DEFAULT_CHARSET
                   NotesFont.Color = clWindowText
                   NotesFont.Height = -11
@@ -4223,22 +4223,23 @@ inherited FMain: TFMain
                   OnDblClick = ShellTreeView1DblClick
                 end
                 object rbPicReverce: TRadioGroup
-                  Left = 1
+                  Left = -95
                   Top = 2
-                  Width = 249
+                  Width = 347
                   Height = 81
                   Anchors = [akTop, akRight]
                   Caption = #1593#1605#1604#1610#1575#1578' '#1585#1608#1610' '#1593#1705#1587' '#1607#1575
                   ItemIndex = 0
                   Items.Strings = (
-                    #1601#1602#1591' '#1605#1593#1705#1608#1587' '#1705#1585#1583#1606' '#1606#1575#1605' '#1607#1575
-                    #1605#1593#1705#1608#1587' '#1705#1585#1583#1606' '#1606#1575#1605' '#1576#1607' '#1607#1605#1585#1575#1607' '#1705#1662#1610' '#1583#1608#1576#1575#1585#1607' '#1601#1575#1610#1604' '#1575#1608#1604
-                    #1601#1602#1591' '#1705#1662#1610' '#1583#1608#1576#1575#1585#1607' '#1601#1575#1610#1604' '#1575#1608#1604)
+                    #1601#1602#1591' '#1605#1593#1705#1608#1587' '#1705#1585#1583#1606' '#1606#1575#1605' '#1593#1705#1587' '#1607#1575
+                    #1605#1593#1705#1608#1587' '#1705#1585#1583#1606' '#1606#1575#1605' '#1593#1705#1587' '#1607#1575' '#1576#1607' '#1607#1605#1585#1575#1607' '#1705#1662#1610' '#1583#1608#1576#1575#1585#1607' '#1601#1575#1610#1604' '#1575#1608#1604' '#1583#1585' '#1601#1608#1604#1583#1585
+                    #1601#1602#1591' '#1705#1662#1610' '#1583#1608#1576#1575#1585#1607' '#1601#1575#1610#1604' '#1575#1608#1604' '#1583#1585' '#1601#1608#1604#1583#1585
+                    #1581#1584#1601' '#1570#1582#1585#1610#1606' '#1593#1705#1587' '#1607#1585' '#1601#1608#1604#1583#1585)
                   TabOrder = 4
                   Visible = False
                 end
                 object ShellTreeView2: TShellTreeView
-                  Left = 768
+                  Left = 736
                   Top = 25
                   Width = 25
                   Height = 108
@@ -4313,6 +4314,24 @@ inherited FMain: TFMain
                   Appearance.ColorMirrorDisabled = 11974326
                   Appearance.ColorMirrorDisabledTo = 15921906
                 end
+                object ShellTreeView3: TShellTreeView
+                  Left = 768
+                  Top = 25
+                  Width = 25
+                  Height = 108
+                  ObjectTypes = [otFolders]
+                  Root = 'rfDesktop'
+                  UseShellImages = True
+                  Anchors = [akTop, akRight]
+                  AutoRefresh = False
+                  Indent = 19
+                  ParentColor = False
+                  RightClickSelect = True
+                  ShowRoot = False
+                  TabOrder = 7
+                  Visible = False
+                  OnDblClick = ShellTreeView1DblClick
+                end
               end
             end
           end
@@ -4334,12 +4353,643 @@ inherited FMain: TFMain
           end
         end
       end
+      object TabSheet3: TTabSheet
+        Caption = #1587#1575#1582#1578' '#1601#1608#1604#1583#1585
+        ImageIndex = 5
+        object xpPanel4: TxpPanel
+          Left = 0
+          Top = 0
+          Width = 805
+          Height = 353
+          StartColor = 16511469
+          EndColor = 16244694
+          FillDirection = fdLeftToRight
+          Caption = 'xpPanel'
+          Title = #1587#1575#1582#1578' '#1601#1608#1604#1583#1585
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clNavy
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = [fsBold]
+          TitleAlignment = taCenter
+          TitleStartColor = clWhite
+          TitleEndColor = 15777194
+          TitleColor = clWhite
+          TitleFillDirect = fdVerticalFromCenter
+          TitleImageAlign = tiaLeft
+          TitleButtons = [tbMinimize]
+          DefaultHeight = 60
+          BorderColor = clWhite
+          BGImageAlign = iaStretch
+          Align = alTop
+          TabOrder = 0
+          DesignSize = (
+            803
+            321)
+          object AdvGlowButton16: TAdvGlowButton
+            Left = 651
+            Top = 1
+            Width = 62
+            Height = 35
+            Cursor = crHandPoint
+            Anchors = [akTop, akRight]
+            Caption = #1662#1585#1610#1606#1578' '#1608' '#1606#1605#1575#1610#1588' '#1587#1606#1583#1607#1575
+            Images = DM.LetterImages_New
+            NotesFont.Charset = DEFAULT_CHARSET
+            NotesFont.Color = clWindowText
+            NotesFont.Height = -11
+            NotesFont.Name = 'Tahoma'
+            NotesFont.Style = []
+            Picture.Data = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000097048597300000B1300000B1301009A9C180000036649444154789C
+              ED965B48146114C78F3D69BD6B37DF8B752DDD35953421058BACEC417AB0424D
+              290529C9A70A24BC6C174A489370362FA5BBBA6A9AF7CCD25D53434B77D61E0C
+              43F1960616A4E625D3136774D7755D9DD9511FA20E1C766166BEFFEF5CBEEF7C
+              00FFED6F3304B42B0D657D2B23D8988A287D22797958474CC999F75EF46CCB84
+              4BCFB639574619726B620D63DA846EEC60FAB1BB740475B73E615DDC47CC0B68
+              4546AE1D6664BA54C6B3DE69D38411D0AE229255D45EE99A667306F0FBE7495C
+              5840CEE8579F35809AE03654CA75E63EA1946BE3379C114D488B43D525B6A659
+              D1833FFAA738D1892F3368C81BC2EA68033E0B68B114B670AD2ADBAFC15E74E4
+              5597D9AAF6F43E9C9B99C7D9F1397CABE8C12787D613B40A51242A131591ACA2
+              3DBD177FCFCEE3F8D034169C5C9566CCF579897DCA509C6B3D80BD4C28667BBF
+              B10AC1C81AAFD924AE09E9DC531BDB3535F5ED179772D5F17756C5BF169F40EC
+              D86F72DD55C55A9998C8F668D82918A032CA904B9D6D783A8865E73B0489F300
+              50291E08124F00DC561BDB35460015117AC1E2A345416B96802B835C3B2CA817
+              CA2EB047489CDCB2EE3987EB71A4F0D42A710222B0F59A31C3FD153E3A58EEC1
+              9FFE0836C60890EBD76C5A80A2A328C5883F74ABC664977C4C71D1840BA8BF3E
+              D90890E5DD645AA4292E459438B9425AC001244B54377901CA2F767200B5B15D
+              2B16A1061303C0C81B17C5290312F50D5E8017E1FA6802B03C5EC596E0B1ECB5
+              092049AA0EE305D0047FF0A6C1626D31AE090B4EDB0491E656B39C015795272F
+              0002DA2965BAC1B522B2751BDE732DE1C4132579A3828F6446A64B5DAFAE420F
+              A20CF7BAE5E8A5AA0C106A19AECD8E8C4C3B6E2B843940A6AC116F4B0B8D003F
+              EFB8A976832DA6946BE3F9B61741D010E28651E639530948FCAE6BB129FA6489
+              FA3AD86A48BD20D7E5F341AC3EF1EACC23C714A9BA5CF4C524DBAFC19E2E157C
+              FB9CB61A75BBB1E14C2E553FBFEFA57110256E34A2A779BE78CD5A79BC2AA4EA
+              9582C6FD2EC99FA4B46FEA2595F1AC77A291CAC8B4433458AC0ABBE48F50B727
+              ED2BD9055B65086897E65626A7C1425192D37F3A64B6F45AFECFDA0E00700600
+              1700A0CB842F00F8034020001C0380A0250F5C72FFA5773C96BEA16FB78B1577
+              3413D8A8D35AA28CE8F79A65C007008E9A456C99017A46EF183340DFAE9B813F
+              EBF7C469954B54C00000000049454E44AE426082}
+            TabOrder = 0
+            TabStop = True
+            Visible = False
+            OnClick = BtnNextClick
+            Appearance.ColorChecked = 16111818
+            Appearance.ColorCheckedTo = 16367008
+            Appearance.ColorDisabled = 15921906
+            Appearance.ColorDisabledTo = 15921906
+            Appearance.ColorDown = 16111818
+            Appearance.ColorDownTo = 16367008
+            Appearance.ColorHot = 16117985
+            Appearance.ColorHotTo = 16372402
+            Appearance.ColorMirrorHot = 16107693
+            Appearance.ColorMirrorHotTo = 16775412
+            Appearance.ColorMirrorDown = 16102556
+            Appearance.ColorMirrorDownTo = 16768988
+            Appearance.ColorMirrorChecked = 16102556
+            Appearance.ColorMirrorCheckedTo = 16768988
+            Appearance.ColorMirrorDisabled = 11974326
+            Appearance.ColorMirrorDisabledTo = 15921906
+          end
+          object AdvGlowButton20: TAdvGlowButton
+            Left = 720
+            Top = 1
+            Width = 54
+            Height = 35
+            Cursor = crHandPoint
+            Anchors = [akTop, akRight]
+            Caption = #1578#1606#1592#1610#1605#1575#1578' '#1608' '#1575#1606#1578#1602#1575#1604' '#1575#1591#1604#1575#1593#1575#1578
+            Images = DM.LetterImages_New
+            NotesFont.Charset = DEFAULT_CHARSET
+            NotesFont.Color = clWindowText
+            NotesFont.Height = -11
+            NotesFont.Name = 'Tahoma'
+            NotesFont.Style = []
+            Picture.Data = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000097048597300000B1300000B1301009A9C180000036749444154789C
+              ED964B4C136110C7074F88773006BDAB94D716104551386022EAC178D1831205
+              2AE083C8C547428CD2028912158861ABBC422945454BCB4BB4B4048822906E39
+              201A0CA0A0899808C8438431535A288576B7050E462799EC26FBEDF7FF7DF3CD
+              37F301FCB7BFCD10D0431DC7456A13B914AD84BBA54DE46E56C777A53C3DDE11
+              4EDFD64DF84542F736ADC4585A77C1F44D9FDE839D6C3FF6540DA3E1C63B6C48
+              EDC6D2A85664C5FACF2C63C861C31A7DD64C18013D34122EAB2EB57BD2583480
+              DF3F8CE3DC1C9A8D9E5DF201541E7E8372B1C1D6C7E4627DDAAA23A24E78EB55
+              93C4D5B5C8DEE38FFE09B3E8D8D02472A5835823E1B0E440ABBDB09DEB158591
+              3A4FB7575E93CCD5B6E77EC499A9599C1E9DC1E68C5E7C18EA4C7045884AB722
+              A1917059EDB97DF87B7A164707275119FBDA3C6161F82BEC634FE24C5B80F959
+              1C51CF0BC1324D975D12AF39DBEB5B7FD1343131F20BC786A6B02CA66D61B2E6
+              542962E7F605FFFAF8901088B1C210DD66C1005A89B194329B2B19C4AA131D4B
+              26335C922D01100EA1BF23483C1D7043ED796E84009E9FEE5A36116DC197CA58
+              9721E8880ACA85EA33A6FD244E6EDD777B2FDAD388C3CAA32E41E40737605EA0
+              3A843FFC895C8A15A0785F8BC315911009DA435074284AB663EF066A30C3AF0C
+              A57EAA387E8073469915E05158B3D37D75044179623B4E2A2A3703C844CAEBBC
+              009A842E2989D7269B788F97108002A6C92C4E9E29525DE30550C71B93CCFBBF
+              BCBCBAB5050F9897360015A778012A8F75EEA6C6E24CDC9C8415470425E1BD20
+              ED2240802A941700013DE48C61D091B8ABC730DBBFD202A018165C9259C690E3
+              08C0BE123A13CF0B6E5858BD54A4CC07A196EFDFE2CD32FAD19500EC2BA123F1
+              024647596F397E8A9F59418A2DE08AC9C5FA34475BC0D78C487C31F46598E9AF
+              BA02AE1A522E880D657C4771A5B05B573E9FF9E56AB72F2685913A4FBA543813
+              A4734E478DB2DD76D5F385A7E2C9ED5DAA8D6E895B8DE8A99FCF5FB39696576B
+              855BE63B15E314F635BDA4B2618D3ED4525946FF891ACB8AC27E8A61CAF6EC1D
+              1AE1BDDF55A355DD0F7A26A6C62213555C25A7772A32EB7A2DFF676D13006C05
+              003F00A0CBC45E008806801800380800B1168FB178B4654C88E51FFAD7CB5D71
+              6F1B81D53ACDE59611BDAF4D04220020CA66C5F611A06F34C61A01FAD76904FE
+              001617C562C9DDB1CC0000000049454E44AE426082}
+            TabOrder = 1
+            TabStop = True
+            Visible = False
+            OnClick = btnBackClick
+            Appearance.ColorChecked = 16111818
+            Appearance.ColorCheckedTo = 16367008
+            Appearance.ColorDisabled = 15921906
+            Appearance.ColorDisabledTo = 15921906
+            Appearance.ColorDown = 16111818
+            Appearance.ColorDownTo = 16367008
+            Appearance.ColorHot = 16117985
+            Appearance.ColorHotTo = 16372402
+            Appearance.ColorMirrorHot = 16107693
+            Appearance.ColorMirrorHotTo = 16775412
+            Appearance.ColorMirrorDown = 16102556
+            Appearance.ColorMirrorDownTo = 16768988
+            Appearance.ColorMirrorChecked = 16102556
+            Appearance.ColorMirrorCheckedTo = 16768988
+            Appearance.ColorMirrorDisabled = 11974326
+            Appearance.ColorMirrorDisabledTo = 15921906
+            Enabled = False
+            Layout = blGlyphRight
+          end
+          object Panel11: TPanel
+            Left = 1
+            Top = 1
+            Width = 801
+            Height = 319
+            Align = alClient
+            ParentColor = True
+            TabOrder = 2
+            object GroupBox9: TGroupBox
+              Left = 1
+              Top = 1
+              Width = 799
+              Height = 317
+              Align = alClient
+              BiDiMode = bdRightToLeft
+              Caption = #1575#1606#1578#1582#1575#1576' '#1588#1585#1575#1610#1591' '#1580#1607#1578' '#1587#1575#1582#1578' '#1601#1608#1604#1583#1585
+              Color = 16244694
+              ParentBiDiMode = False
+              ParentColor = False
+              TabOrder = 0
+              DesignSize = (
+                799
+                317)
+              object Label18: TLabel
+                Left = 716
+                Top = 134
+                Width = 65
+                Height = 13
+                Anchors = [akTop, akRight]
+                Caption = #1588#1605#1575#1585#1607' '#1585#1583#1610#1601' '#1575#1586
+              end
+              object Label19: TLabel
+                Left = 485
+                Top = 134
+                Width = 64
+                Height = 13
+                Anchors = [akTop, akRight]
+                Caption = #1578#1575' '#1588#1605#1575#1585#1607' '#1585#1583#1610#1601
+              end
+              object Label20: TLabel
+                Left = 656
+                Top = 25
+                Width = 135
+                Height = 13
+                Anchors = [akTop, akRight]
+                Caption = #1605#1587#1610#1585' '#1601#1575#1610#1604' '#1575#1705#1587#1604' '#1580#1607#1578' '#1575#1606#1578#1602#1575#1604
+              end
+              object Label21: TLabel
+                Left = 662
+                Top = 49
+                Width = 128
+                Height = 13
+                Anchors = [akTop, akRight]
+                Caption = #1575#1606#1578#1582#1575#1576' '#1601#1610#1604#1583' '#1580#1607#1578' '#1575#1587#1605' '#1601#1608#1604#1583#1585
+              end
+              object Bevel2: TBevel
+                Left = 0
+                Top = 112
+                Width = 801
+                Height = 17
+                Anchors = [akLeft, akTop, akRight]
+                Shape = bsTopLine
+              end
+              object Label22: TLabel
+                Left = 696
+                Top = 167
+                Width = 87
+                Height = 13
+                Anchors = [akTop, akRight]
+                Caption = #1605#1587#1610#1585' '#1587#1575#1582#1578' '#1601#1608#1604#1583#1585
+              end
+              object Label23: TLabel
+                Left = 481
+                Top = 53
+                Width = 90
+                Height = 13
+                Anchors = [akTop, akRight]
+                Caption = 'WorkSheet '#1575#1606#1578#1582#1575#1576#1610
+              end
+              object Label24: TLabel
+                Left = 194
+                Top = 26
+                Width = 63
+                Height = 13
+                Anchors = [akTop, akRight]
+                Caption = #1575#1705#1587#1604' '#1575#1586' '#1585#1583#1610#1601
+              end
+              object Label25: TLabel
+                Left = 94
+                Top = 26
+                Width = 9
+                Height = 13
+                Anchors = [akTop, akRight]
+                Caption = #1578#1575' '
+              end
+              object lblProcTempExcel: TLabel
+                Left = 374
+                Top = 72
+                Width = 3
+                Height = 13
+              end
+              object Label27: TLabel
+                Left = 337
+                Top = 80
+                Width = 449
+                Height = 13
+                Anchors = [akTop, akRight]
+                Caption = 
+                  ' '#1578#1608#1580#1607' : '#1601#1585#1605#1578' '#1575#1705#1587#1604' '#1575#1606#1578#1582#1575#1576#1610' '#1576#1607' '#1575#1610#1606' '#1589#1608#1585#1578' '#1607#1587#1578' '#1705#1607' '#1581#1583#1575#1602#1604' '#1576#1575#1610#1583' '#1583#1608#1601#1610#1604#1583' '#1585 +
+                  #1583#1610#1601' '#1608' '#1606#1575#1605' '#1601#1608#1604#1583#1585' '#1583#1575#1588#1578#1607' '#1576#1575#1588#1583
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clMaroon
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+              end
+              object edtFromfolder: TEdit
+                Left = 564
+                Top = 130
+                Width = 121
+                Height = 21
+                Anchors = [akTop, akRight]
+                TabOrder = 0
+                Text = '0'
+              end
+              object edtToFolder: TEdit
+                Left = 357
+                Top = 130
+                Width = 121
+                Height = 21
+                Anchors = [akTop, akRight]
+                TabOrder = 1
+                Text = '0'
+              end
+              object edtExcelRoot: TEdit
+                Left = 312
+                Top = 21
+                Width = 338
+                Height = 21
+                Anchors = [akTop, akRight]
+                TabOrder = 2
+              end
+              object AdvGlowButton24: TAdvGlowButton
+                Left = 288
+                Top = 19
+                Width = 25
+                Height = 25
+                Cursor = crHandPoint
+                Hint = #1575#1606#1578#1582#1575#1576' '#1601#1575#1610#1604' '#1575#1705#1587#1604
+                Anchors = [akTop, akRight]
+                ImageIndex = 19
+                Images = DM.ImageList1
+                NotesFont.Charset = DEFAULT_CHARSET
+                NotesFont.Color = clWindowText
+                NotesFont.Height = -11
+                NotesFont.Name = 'Tahoma'
+                NotesFont.Style = []
+                ParentShowHint = False
+                ShowHint = True
+                TabOrder = 3
+                TabStop = True
+                OnClick = AdvGlowButton24Click
+                Appearance.ColorChecked = 16111818
+                Appearance.ColorCheckedTo = 16367008
+                Appearance.ColorDisabled = 15921906
+                Appearance.ColorDisabledTo = 15921906
+                Appearance.ColorDown = 16111818
+                Appearance.ColorDownTo = 16367008
+                Appearance.ColorHot = 16117985
+                Appearance.ColorHotTo = 16372402
+                Appearance.ColorMirrorHot = 16107693
+                Appearance.ColorMirrorHotTo = 16775412
+                Appearance.ColorMirrorDown = 16102556
+                Appearance.ColorMirrorDownTo = 16768988
+                Appearance.ColorMirrorChecked = 16102556
+                Appearance.ColorMirrorCheckedTo = 16768988
+                Appearance.ColorMirrorDisabled = 11974326
+                Appearance.ColorMirrorDisabledTo = 15921906
+              end
+              object CBFildName: TComboBox
+                Tag = 11
+                Left = 593
+                Top = 46
+                Width = 57
+                Height = 21
+                Anchors = [akTop, akRight]
+                ItemHeight = 13
+                TabOrder = 4
+              end
+              object btnExcelTransfer: TAdvGlowButton
+                Left = 24
+                Top = 49
+                Width = 165
+                Height = 36
+                Cursor = crHandPoint
+                Anchors = [akTop, akRight]
+                Caption = #1575#1606#1578#1602#1575#1604' '#1575#1591#1604#1575#1593#1575#1578' '#1575#1606#1578#1582#1575#1576#1610
+                NotesFont.Charset = DEFAULT_CHARSET
+                NotesFont.Color = clWindowText
+                NotesFont.Height = -11
+                NotesFont.Name = 'Tahoma'
+                NotesFont.Style = []
+                Picture.Data = {
+                  89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+                  F4000000097048597300000B1300000B1301009A9C180000028149444154789C
+                  ED975D48536118C7FF51B0BB02C10B8D4062A44412052E0A1AA295B30D82366F
+                  4DF422A2B3CA2D2BA850D7BE8CA9AD955A539058E5D09C966423C461580DA38F
+                  8BD86C379529097AB12048063E714E67DAFC60E7CCCD20F6C08F7338E73DCFFF
+                  77DEF73D17074857BAE2D478985106C2CCB7E00F2D254C98990B8699EE4FA495
+                  406C05C2CCC49AC26360AA440B049316AEA540585B971680D81A9B3946C9E2CD
+                  ACA6336EE015973CBFCE5564A9BD57789DA5FDC57E62710CE591CD9BCDD1E8DD
+                  4ABDE33B69686A8F2846BF1FF6C5153076954EB60C54D2F0874E0EF6DCE25651
+                  455306694C58A0CA21498D80C5ADA227AF1B89689EA3EFA5954EDDCA89098F92
+                  32018B5B45BABBBBC8173A43F6A7722ECCEA2920FFC4A5F513D0B6EEA0FAAE7C
+                  9A8EB492B1672F4DFE7290EDF181F515D098400F5F95D12CB553FFBB13CB96A0
+                  3F942B0AEFE77DCF040B302D522EA4EF6D39CDCC3BC9FBF1E4328136BF701C23
+                  20D7D8F611C102154D19DCBA4FCDDDA6CBF7F3E8CBCF1BE4182C4C48A0790854
+                  DF0D72FA7246E30A181E1C5AD8F5FEAF17A9C123E3CED9FDF07EBA36210163AF
+                  0801CD0A9FDB6A081560C3050BA88D0809092F6F4E9140991952B51157352658
+                  59AA3B3249EBDC1CC3D98E2D647894450D03DB045173278BC3E6C97D1E57602D
+                  4BB21A25D57FD0B7099881FF4E407D6D51E0F4CDEC41F102E60D113181C70D20
+                  E5059042B7181C4555B3D19CC80CF4881160C39706739C4344A147816801851D
+                  12B51195D1AF221EA5E76157E896A08729A1F07F599B0064029002D80D400640
+                  0EA01840098F12808A3F46AF15F3E364FC7352BE0FDB4F7049001CE19B270BB6
+                  9FA8BFA29566E02080A2BFDEF628DF9C3D46AFB1F7D9718267E037131F0A9845
+                  2A35B20000000049454E44AE426082}
+                TabOrder = 5
+                TabStop = True
+                OnClick = btnExcelTransferClick
+                Appearance.ColorChecked = 16111818
+                Appearance.ColorCheckedTo = 16367008
+                Appearance.ColorDisabled = 15921906
+                Appearance.ColorDisabledTo = 15921906
+                Appearance.ColorDown = 16111818
+                Appearance.ColorDownTo = 16367008
+                Appearance.ColorHot = 16117985
+                Appearance.ColorHotTo = 16372402
+                Appearance.ColorMirrorHot = 16107693
+                Appearance.ColorMirrorHotTo = 16775412
+                Appearance.ColorMirrorDown = 16102556
+                Appearance.ColorMirrorDownTo = 16768988
+                Appearance.ColorMirrorChecked = 16102556
+                Appearance.ColorMirrorCheckedTo = 16768988
+                Appearance.ColorMirrorDisabled = 11974326
+                Appearance.ColorMirrorDisabledTo = 15921906
+              end
+              object edtFolderRoot: TEdit
+                Left = 277
+                Top = 163
+                Width = 408
+                Height = 21
+                Anchors = [akTop, akRight]
+                TabOrder = 6
+              end
+              object AdvGlowButton22: TAdvGlowButton
+                Left = 252
+                Top = 161
+                Width = 25
+                Height = 25
+                Cursor = crHandPoint
+                Hint = #1575#1606#1578#1582#1575#1576' '#1601#1575#1610#1604' '#1575#1705#1587#1604
+                Anchors = [akTop, akRight]
+                ImageIndex = 19
+                Images = DM.ImageList1
+                NotesFont.Charset = DEFAULT_CHARSET
+                NotesFont.Color = clWindowText
+                NotesFont.Height = -11
+                NotesFont.Name = 'Tahoma'
+                NotesFont.Style = []
+                ParentShowHint = False
+                ShowHint = True
+                TabOrder = 7
+                TabStop = True
+                OnClick = AdvGlowButton22Click
+                Appearance.ColorChecked = 16111818
+                Appearance.ColorCheckedTo = 16367008
+                Appearance.ColorDisabled = 15921906
+                Appearance.ColorDisabledTo = 15921906
+                Appearance.ColorDown = 16111818
+                Appearance.ColorDownTo = 16367008
+                Appearance.ColorHot = 16117985
+                Appearance.ColorHotTo = 16372402
+                Appearance.ColorMirrorHot = 16107693
+                Appearance.ColorMirrorHotTo = 16775412
+                Appearance.ColorMirrorDown = 16102556
+                Appearance.ColorMirrorDownTo = 16768988
+                Appearance.ColorMirrorChecked = 16102556
+                Appearance.ColorMirrorCheckedTo = 16768988
+                Appearance.ColorMirrorDisabled = 11974326
+                Appearance.ColorMirrorDisabledTo = 15921906
+              end
+              object btnFolderCreate: TAdvGlowButton
+                Left = 13
+                Top = 159
+                Width = 165
+                Height = 36
+                Cursor = crHandPoint
+                Anchors = [akTop, akRight]
+                Caption = #1587#1575#1582#1578' '#1601#1608#1604#1583#1585' '
+                NotesFont.Charset = DEFAULT_CHARSET
+                NotesFont.Color = clWindowText
+                NotesFont.Height = -11
+                NotesFont.Name = 'Tahoma'
+                NotesFont.Style = []
+                Picture.Data = {
+                  89504E470D0A1A0A0000000D49484452000000230000002308060000001ED9B3
+                  59000000097048597300000B1300000B1301009A9C180000030A49444154789C
+                  EDD6DF4B53611807F0C7B4666A26624626246EE98E89A0FD30C3902849CCC02E
+                  B402AFBC096FBA08A2EBFE8182403635104B8B16A568B3B4C6B2E6DCD976B669
+                  9969FE2A0BC37489A04DE7F8C6399BA5E9E6961EF1C207BE8C73F69EF7F9F0BE
+                  EFC54BB4555BB54E055551305AB26297459B13B17188E66391D09C56419B3F83
+                  D705589646E93CEAA80DB574407CCCAB334DD05D02461A00BBD59D1F1D80A114
+                  D0E4020F25401D01B5D40F15458BBB2ADA732E8CBE8450CE297766C7007309A0
+                  8E059A22FFA635E629AC294501859367E17DCA0E3F56E5E431E80A815FC3C0EC
+                  086061C40927EF868539E81BD3929D899E52C0F1C51DB130EEE87D63DE64E761
+                  A00C98D40076B5D818C022DBE31DD39E7559C00C94011FCE8B8FB1C953BD637A
+                  4B323727A63B4F34C4B43E1923CF65186A96A5AF8EE9BF02D80E8B029965E5E8
+                  6B90A2B75E8A4F8DD20CEF988FC547D17B11E83C2EDAAA8C6B9304C8EA189B3C
+                  55EC7332A6D9C2309B6B655C16397ACD717861DA059551827AE34EB4EAA2607E
+                  16BFB198294E86C74609942CAD18B5260A3DEAC423A2631C5C121EB0DBFF34AE
+                  60B7617CBA13BAE1AB4B4035ED2135A263DACDD14B9A569942851B49CF58D5D2
+                  153290ABBC83D244C3B82C72541B83FDC3B004054BB745C34C7252F71658F6A2
+                  6FFC3E06265418B43F1130538E41E1998FFEF33537C6406D2B63B8E4B8B56226
+                  B844A1C9A3AE439899FB0E87D30E87F3A7809977393CCF760CD9EB17B68AF57E
+                  6E38E6DD5A30735C322AD920BFB74969A05A1F87984907C77C5D0BA8D91411C8
+                  99B9E01523800CB2485899425899EBE0E437024D9F39EE8EB283E6171A561A43
+                  E0744DA373F4D6BF90B7000591D8A560A9586920C742E33A5B02EE9AC21643BA
+                  2ACCB48F36AACA3B284DC952C3629482A56F4A966EDEB351F87AF408211226DA
+                  ED49CCA22CBC0BF78C13AA5A4BA1952C2529F4B47F2DDB2221A20422E2AF8739
+                  44944744050124CFF35DBA671E7EBEFFAE8C009BAF16EF775E3F2B8C88E28928
+                  C5833B4144A788289788CE1251BEA711FFCB3FF3EFF9FFF971FC78FE3BFE7B7E
+                  1E9FF51B08C9A59D435BFAB90000000049454E44AE426082}
+                TabOrder = 8
+                TabStop = True
+                OnClick = btnFolderCreateClick
+                Appearance.ColorChecked = 16111818
+                Appearance.ColorCheckedTo = 16367008
+                Appearance.ColorDisabled = 15921906
+                Appearance.ColorDisabledTo = 15921906
+                Appearance.ColorDown = 16111818
+                Appearance.ColorDownTo = 16367008
+                Appearance.ColorHot = 16117985
+                Appearance.ColorHotTo = 16372402
+                Appearance.ColorMirrorHot = 16107693
+                Appearance.ColorMirrorHotTo = 16775412
+                Appearance.ColorMirrorDown = 16102556
+                Appearance.ColorMirrorDownTo = 16768988
+                Appearance.ColorMirrorChecked = 16102556
+                Appearance.ColorMirrorCheckedTo = 16768988
+                Appearance.ColorMirrorDisabled = 11974326
+                Appearance.ColorMirrorDisabledTo = 15921906
+              end
+              object ShellTreeView4: TShellTreeView
+                Left = 277
+                Top = 186
+                Width = 408
+                Height = 125
+                ObjectTypes = [otFolders]
+                Root = 'rfDesktop'
+                UseShellImages = True
+                Anchors = [akTop, akRight]
+                AutoRefresh = True
+                Indent = 19
+                ParentColor = False
+                RightClickSelect = True
+                ShowRoot = False
+                TabOrder = 9
+                Visible = False
+                OnDblClick = ShellTreeView4DblClick
+              end
+              object edtExcelWorkSheet: TEdit
+                Left = 408
+                Top = 46
+                Width = 65
+                Height = 21
+                Anchors = [akTop, akRight]
+                TabOrder = 10
+                Text = '1'
+              end
+              object edtExcelFrom: TEdit
+                Left = 123
+                Top = 22
+                Width = 65
+                Height = 21
+                Anchors = [akTop, akRight]
+                TabOrder = 11
+                Text = '2'
+              end
+              object edtExcelTo: TEdit
+                Left = 24
+                Top = 22
+                Width = 65
+                Height = 21
+                Anchors = [akTop, akRight]
+                TabOrder = 12
+                Text = 'N'
+              end
+              object ProgressBar3: TProgressBar
+                Left = 2
+                Top = 96
+                Width = 795
+                Height = 14
+                Anchors = [akLeft, akTop, akRight]
+                TabOrder = 13
+              end
+            end
+          end
+        end
+        object YDBGrid1: TYDBGrid
+          Left = 0
+          Top = 353
+          Width = 805
+          Height = 314
+          Cursor = crHandPoint
+          Align = alClient
+          DataSource = DM.DSTemp
+          FixedColor = 16774394
+          Font.Charset = ARABIC_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          PopupMenu = PopupMenu1
+          ReadOnly = True
+          TabOrder = 1
+          TitleFont.Charset = ARABIC_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          YeganehColor = True
+          YeganehFinish = False
+          PageNumber = False
+          RecordNumber = False
+          HasTime = False
+          Oriention = poPortrait
+          HasDate = False
+          HasIndex = False
+          PrintTitle = #1604#1610#1587#1578' '#1662#1585#1608#1606#1583#1607' '#1607#1575
+          InvertFarsiDate = False
+          TitleSort = True
+          AutoInsert = False
+          FooterFields = 'Count'
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'F14'
+              Title.Caption = #1585#1583#1610#1601
+              Width = 59
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'F1'
+              Title.Alignment = taCenter
+              Title.Caption = #1606#1575#1605' '#1601#1608#1604#1583#1585
+              Width = 370
+              Visible = True
+            end>
+        end
+      end
     end
   end
   object DForms: TDataSource
     DataSet = SpprintableData
-    Left = 691
-    Top = 235
+    Left = 667
+    Top = 323
   end
   object SpprintableData: TADOStoredProc
     Connection = DM.YeganehConnection
@@ -4356,8 +5006,8 @@ inherited FMain: TFMain
         Size = -1
         Value = Null
       end>
-    Left = 756
-    Top = 240
+    Left = 748
+    Top = 320
     object SpprintableDataid: TIntegerField
       FieldName = 'id'
     end

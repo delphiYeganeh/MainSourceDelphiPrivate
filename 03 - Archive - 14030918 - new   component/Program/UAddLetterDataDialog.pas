@@ -20,7 +20,7 @@ type
     DBLookupComboBox1: TDBLookupComboBox;
     Label3: TLabel;
     path: TEdit;
-    SpeedButton1: TSpeedButton;
+    SpeedButton1: TAdvGlowButton;
     OpenDialog: TOpenDialog;
     Panel1: TPanel;
     BitBtn1: TAdvGlowButton;

@@ -1777,7 +1777,8 @@ begin
          NumGlyphs := 2;
          Glyph := nil;
          Spacing := 0;
-         if I<9 then
+        // if I<9 then
+         if I<10 then
          begin
             Glyph.LoadFromResourceName(HInstance,'DBNav'+IntToStr(I));
             Inc(I);

@@ -2645,10 +2645,10 @@ begin
    imV1 := TImageEnView.Create(self);
    imV2 := TImageEnView.Create(self);
    imV2.IO.LoadFromFileJpeg(FileName);
-   imV2.IO.SaveToFileBMP(_TempPath+'\tmp.bmp');
+   imV2.IO.SaveToFileBMP(_TempPath+'tmp.bmp');
    im1 := TImage.Create(self);
    im2 := TImage.Create(self);
-   im1.Picture.Bitmap.LoadFromFile(_TempPath+'\tmp.bmp');
+   im1.Picture.Bitmap.LoadFromFile(_TempPath+'tmp.bmp');
    im2.Picture.bitmap.Height := im1.Picture.bitmap.Height;
    im2.Picture.bitmap.Width := im1.Picture.bitmap.Width;
    r1 := Rect(0,0,im1.picture.bitmap.Width,im1.picture.bitmap.Height);
@@ -2657,30 +2657,43 @@ begin
    can2 := im2.Picture.Bitmap.Canvas;
    im2.Picture.Bitmap.PixelFormat := pf1bit;
    can2.CopyRect(r2,can1,r1);
-   Im2.Picture.Bitmap.SaveToFile(_TempPath+'\tmp.bmp');
+   Im2.Picture.Bitmap.SaveToFile(_TempPath+'tmp.bmp');
    im1.Free;
    im2.Free;
    try
-      imV1.IO.LoadFromFileTIFF(_TempPath+'\4.tif');
+      imV1.IO.LoadFromFileTIFF(_TempPath+'4.tif');
    except
    end;
-   imV2.IO.Bitmap.PixelFormat := pf1bit;
-   imV2.IO.LoadFromFileBMP(_TempPath+'\tmp.bmp');
+   //imV2.IO.Bitmap.PixelFormat := pf1bit;
+   imV2.IO.LoadFromFileBMP(_TempPath+'tmp.bmp');
 {   imP1 := TImageEnProc.Create(self);
    imP1.AttachedImageEn := imV2;
    imP1.ConvertToBWThreshold(50);  }
-   imV1.IO.Bitmap.PixelFormat := pf1bit;
+   //imV1.IO.Bitmap.PixelFormat := pf1bit;
 //   imV1.IO.Bitmap.Assign();
-   imV2.IO.SaveToFileTIFF(FileName+'.tiff');
+   imV2.IO.SaveToFileTIFF(_TempPath+'tmp.tiff');
    imV1.IEBitmap.Assign(imV2.IEBitmap);
-   imV1.IO.SaveToFileTIFF(FileName+'.tiff');
+   imV1.IO.SaveToFileTIFF(_TempPath+'tmp.tiff');
    imV1.Free;
    imV2.Free;
-   SysUtils.FileSetReadOnly(_TempPath+'\tmp.bmp', false);
-   DeleteFile(_TempPath+'\tmp.bmp');
+   {
+   DeleteFile(_TempPath+'tmp.bmp');
    FillData(FileName+'.tiff');
-   SysUtils.FileSetReadOnly(FileName+'.tiff', false);
    DeleteFile(FileName+'.tiff');
+     }
+   if FileExists(pchar(_TempPath+'tmp.bmp')) then
+   begin
+     SysUtils.FileSetReadOnly(_TempPath+'tmp.bmp', false);
+     DeleteFile(_TempPath+'tmp.bmp');
+   end;
+   if FileExists(pchar(_TempPath+'tmp.tiff')) then
+   begin
+     ChangeMultyTifToTifsAndSave(_TempPath+'tmp.tiff');  //›«Ì· TIFF œ— Â— ’Ê—  »’Ê—  TIFF –ŒÌ—Â ‘Êœ
+     FMWaitPlease.Refresh;
+    // FillData(_TempPath+'tmp.tiff');//(FileName+'.tiff');
+     SysUtils.FileSetReadOnly(_TempPath+'tmp.tiff', false);//(FileName+'.tiff', false);
+     DeleteFile(_TempPath+'tmp.tiff');//(FileName+'.tiff');
+   end;
 end;
 
 procedure TFmScanImage.ImageEnVect1KeyUp(Sender: TObject; var Key: Word;

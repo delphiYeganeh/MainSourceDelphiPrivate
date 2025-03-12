@@ -1,4 +1,4 @@
-[SECTION_MAX_NO]=6
+[SECTION_MAX_NO]=5
 
 [BEGIN_S_NO]=1
 
@@ -50,13 +50,5 @@ END
     INSERT INTO [dbo].[Settings] ([UserID],[Value],[VariableName])
     SELECT -1,0,'DongleType'
   end
-
-[END_S_NO]
-
-
-[BEGIN_S_NO]=6
-
-  INSERT INTO [dbo].[Fields] (FieldName,Description)
-  SELECT 'DateOfCurrentDay','تاریخ مرتبط با شماره دبیرخانه' WHERE (SELECT COUNT(id) FROM dbo.Fields AS F WHERE fieldname='DateOfCurrentDay') = 0 
 
 [END_S_NO]

@@ -491,12 +491,14 @@ object Form_WorkGroupFM: TForm_WorkGroupFM
         Caption = #1582#1585#1608#1580
         ImageIndex = 84
         Images = Dm.ImageList_MainNew
+        ModalResult = 2
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
         NotesFont.Height = -11
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         TabOrder = 0
+        OnClick = BitBtn1Click
         Appearance.ColorChecked = 16111818
         Appearance.ColorCheckedTo = 16367008
         Appearance.ColorDisabled = 15921906

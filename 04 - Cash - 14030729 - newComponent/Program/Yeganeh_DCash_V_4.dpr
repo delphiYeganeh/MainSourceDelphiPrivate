@@ -135,6 +135,7 @@ uses
   UMagnifier in 'UMagnifier.pas' {FMagnifier};
 
 {$R *.res}
+{$R dbnavigatorIcon.RES}
 
 {Var
    CoName:String;

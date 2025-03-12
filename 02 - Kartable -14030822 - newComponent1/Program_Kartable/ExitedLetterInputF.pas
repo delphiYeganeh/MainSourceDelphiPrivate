@@ -147,8 +147,6 @@ type
     btnShowForm: TAdvGlowButton;
     xpPageControl2: TxpPageControl;
     N4: TMenuItem;
-    GroupBox5: TGroupBox;
-    lblHasForms: TLabel;
     FollowLetterYear: TSpinEdit;
     RetroactionYear: TSpinEdit;
     Select_LetterRetroactionYear: TIntegerField;
@@ -194,6 +192,9 @@ type
     xpBitBtn1: TAdvGlowButton;
     pnlTopHeader: TPanel;
     Panel1: TPanel;
+    GroupBox4: TGroupBox;
+    lblHasForms: TLabel;
+    sbSubjectDel: TAdvGlowButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormActivate(Sender: TObject);
     procedure SpeedButton7Click(Sender: TObject);
@@ -259,6 +260,7 @@ type
     procedure btnFollowRetroactionLetterClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure QAddedFormsAfterScroll(DataSet: TDataSet);
+    procedure sbSubjectDelClick(Sender: TObject);
   private
     procedure SetReadOnly(aEnable:Boolean);
     procedure DontShow_xpFormsTab;
@@ -1405,15 +1407,21 @@ begin
   if mode then
   begin
     pnlTopHeader.Height := 0 ;
-    xpPageControl1.TabHeight := 23 ;
-    xpPageControl1.TabWidth  := 0 ;
+   // xpPageControl1.TabHeight := 23 ;
+   // xpPageControl1.TabWidth  := 0 ;
   end
   else
   begin
-    pnlTopHeader.Height := 5 ;
-    xpPageControl1.TabHeight := 1 ;
-    xpPageControl1.TabWidth  := 1 ;
+    pnlTopHeader.Height := 25;//5 ;
+   // xpPageControl1.TabHeight := 1 ;
+   // xpPageControl1.TabWidth  := 1 ;
   end;
+end;
+
+procedure TSentLetterInputForm.sbSubjectDelClick(Sender: TObject);
+begin
+  inherited;
+  DBLookupComboBox8.KeyValue := null;
 end;
 
 end.

@@ -105,7 +105,7 @@ end;
 procedure TFMHost.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
    inherited;
-   Form_SetShortCut(Self,DBNavigator1,SBSearch,nil,Sender,Key,Shift);
+   Form_SetShortCut_btn(Self,DBNavigator1,SBSearch,nil,Sender,Key,Shift);
 
    if (Key = VK_Return)And(Shift=[])And not(ActiveControl=wwDBREImageData) then
       SelectNext(TWinControl(ActiveControl),True,True);

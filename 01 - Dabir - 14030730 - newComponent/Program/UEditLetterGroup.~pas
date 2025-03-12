@@ -4,7 +4,8 @@ interface
 
 uses    Forms,dialogs, Classes, DB,StdCtrls,Graphics,DBCtrls,UemsVCL,
   ActnList, Controls, Grids, DBGrids, YDbgrid, DBLookupEdit,sysutils,Windows,YWhereEdit,
-  ExtActns, Buttons, Mask,baseunit,  xpBitBtn, Menus, ExtCtrls, AppEvnts;
+  ExtActns, Buttons, Mask,baseunit,  xpBitBtn, Menus, ExtCtrls, AppEvnts,
+  AdvGlowButton;
 
 
 type
@@ -15,8 +16,8 @@ type
     DBLookupComboBox1: TDBLookupComboBox;
     pnlMain: TPanel;
     Panel1: TPanel;
-    BitBtn2: TBitBtn;
-    BitBtn1: TBitBtn;
+    BitBtn2: TAdvGlowButton;
+    BitBtn1: TAdvGlowButton;
 
     procedure BitBtn2Click(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);

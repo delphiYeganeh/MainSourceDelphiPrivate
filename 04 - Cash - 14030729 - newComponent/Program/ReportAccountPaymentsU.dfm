@@ -1,7 +1,8 @@
 inherited FrReportAccountPayments: TFrReportAccountPayments
-  Left = 617
-  Top = 282
+  Left = 737
+  Top = 250
   AutoScroll = False
+  BorderIcons = [biSystemMenu, biMaximize]
   Caption = #1583#1585#1610#1575#1601#1578' '#1608' '#1662#1585#1583#1575#1582#1578
   ClientHeight = 521
   ClientWidth = 828
@@ -1478,11 +1479,10 @@ inherited FrReportAccountPayments: TFrReportAccountPayments
       OnExit = TEditExit
     end
     object MakeRep: TAdvGlowButton
-      Left = 9
-      Top = 11
+      Left = 5
+      Top = 16
       Width = 87
       Height = 28
-      Anchors = [akTop, akRight]
       Caption = #1606#1605#1575#1610#1588
       Font.Charset = ARABIC_CHARSET
       Font.Color = clWindowText
@@ -1599,11 +1599,11 @@ inherited FrReportAccountPayments: TFrReportAccountPayments
       DataFieldAutoSaveModified = False
     end
     object DBLkCBPayTypeTitle: TDBLookupComboBox
-      Left = 114
-      Top = 7
-      Width = 133
+      Left = 96
+      Top = 6
+      Width = 151
       Height = 22
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akTop, akRight]
       BiDiMode = bdLeftToRight
       DropDownRows = 10
       Font.Charset = ARABIC_CHARSET
@@ -1701,6 +1701,7 @@ inherited FrReportAccountPayments: TFrReportAccountPayments
       InvertFarsiDate = True
       TitleSort = True
       AutoInsert = False
+      OnNeedColorCondition = YDBGridNeedColorCondition
       FooterFields = 'Count'
       Columns = <
         item
@@ -2122,9 +2123,19 @@ inherited FrReportAccountPayments: TFrReportAccountPayments
     Connection = dm.YeganehConnection
     Parameters = <>
     SQL.Strings = (
-      'Select 0 as PayTypeID , '#39#1607#1605#1607' '#1605#1608#1575#1585#1583#39' as PayTypeTitle'
+      '--Select 0 as PayTypeID , '#39#1607#1605#1607' '#1605#1608#1575#1585#1583#39' as PayTypeTitle'
+      
+        'Select 0 as PayTypeID , '#39#1607#1605#1607' '#1605#1608#1575#1585#1583#39'+'#39' ('#1578#1605#1575#1605' '#1578#1585#1575#1705#1606#1588' '#1607#1575')'#39' as PayTy' +
+        'peTitle'
       'Union'
-      'Select PayTypeID , PayTypeTitle From PayType')
+      '--Select PayTypeID , PayTypeTitle From PayType'
+      
+        'Select PayTypeID , PayTypeTitle From PayType WHERE PayTypeID  NO' +
+        'T IN (5,6,7)'
+      'Union'
+      
+        'Select PayTypeID , ISNULL(PayTypeTitle,'#39#39')+ '#39' * '#39'  From PayType ' +
+        'WHERE PayTypeID   IN (5,6,7)')
     Left = 264
     Top = 235
     object QrPayTypePayTypeID: TWordField

@@ -179,8 +179,6 @@ type
     xpPageControl2: TxpPageControl;
     dsQAddedForms: TDataSource;
     QDelForms: TADOQuery;
-    gbDetail: TGroupBox;
-    lblHasForms: TLabel;
     QHasForms: TADOQuery;
     QHasFormsID: TAutoIncField;
     acReadECE: TAction;
@@ -211,7 +209,6 @@ type
     MssMessage1: TMssMessage;
     Select_LetterInnerNO: TStringField;
     Select_LetterECEAnswer: TBooleanField;
-    ECESend: TDBCheckBox;
     PopupMenu3: TPopupMenu;
     acShowSadereh: TAction;
     N9: TMenuItem;
@@ -279,6 +276,10 @@ type
     sbSubjectDel: TAdvGlowButton;
     Panel1: TPanel;
     pnlTopHeader: TPanel;
+    gbDetail: TGroupBox;
+    lblHasForms: TLabel;
+    ECESend: TDBCheckBox;
+    btnSubject: TAdvGlowButton;
     procedure btnTypeClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -373,6 +374,7 @@ type
     procedure cbPersianClick(Sender: TObject);
     procedure DBEIncommingNOExit(Sender: TObject);
     procedure sbSubjectDelClick(Sender: TObject);
+    procedure btnSubjectClick(Sender: TObject);
   private
     FfrmCustomerInfo: TfrmCustomerInfo;
     FfrmContracts: TfrmContracts;
@@ -397,7 +399,7 @@ type
     function GetEmail:String;
     procedure SetDescForECE(const Value: String);
     procedure TabShow(mode: Boolean);
-
+    procedure hasformDescription ;
   public
     LetterFormat:Byte;
     LetterDataID: integer;
@@ -421,7 +423,7 @@ Uses YShamsiDate, FromOrgU, FixedTableF, QuickSearch, UMain,
      {ScanImageU, ScanImageU1,} businessLayer, Math, ExportToWord,
      UaddLetterData, UUserTable_Input, UBrowsArchive, LetterRalationFm,
      ScanImageFm, SearchFromCRMUnit, UInputUserTable, Variants, mapimail,
-  DescForECEUnit, ShowSaderehUnit, untFollowRetroactionLetter;
+  DescForECEUnit, ShowSaderehUnit, untFollowRetroactionLetter, USubject;
 
 {$R *.dfm}
 procedure TReceivedLetterInputForm.btnTypeClick(Sender: TObject);
@@ -931,13 +933,13 @@ begin
 
 
       FExportToWord:= TFExportToWord.Create(self);
-      with dm.WordApplication do
+      with dm.WordApplicationDM do
       begin
         If ActiveWindow.ActivePane.View.Type_ in[ wdNormalView ,wdOutlineView] Then
           ActiveWindow.ActivePane.View.Type_:= wdPrintView;
         ActiveWindow.ActivePane.View.SeekView := wdSeekMainDocument;
       end;
-      MainForm.ReplaceInWord(FExportToWord.WordApplication,'(('+OldIndicatorId+'))','(('+trim(DBEIndicatorID.Text)+'))' );
+      MainForm.ReplaceInWord(FExportToWord.WordApp,'(('+OldIndicatorId+'))','(('+trim(DBEIndicatorID.Text)+'))' );
       FExportToWord.Close;
       OldIndicatorId:=Trim(DBEIndicatorID.Text);
       { TODO -oparsa : 14030605-bug349 }
@@ -1590,9 +1592,9 @@ begin
 
   if GetUserSetting('EnterLetterpnlDetailMinimize') then
    pnlDetail.Minimized := True ;
-
+  
   TabShow(false) ;
-
+  hasformDescription;
 end;
 
 procedure TReceivedLetterInputForm.N5Click(Sender: TObject);
@@ -1803,11 +1805,18 @@ end;
 
 procedure TReceivedLetterInputForm.N8Click(Sender: TObject);
 begin
+  if DSForm.DataSet.State in [dsEdit,dsInsert] then
+   begin
+     ShowMyMessage('ÅÌ€«„','ﬂ«—»— ê—«„Ì ° ·ÿ›« «» œ« «ÿ·«⁄«  ŒÊœ —« –ŒÌ—Â ‰„«ÌÌœ',[mbOK],mtInformation);
+     Exit;
+   end;
+   
   DontShow_xpFormsTab;
   FrInputUserTable := TFrInputUserTable.Create(Application);
   FrInputUserTable.LetterID:=Select_LetterLetterID.AsInteger;
   FrInputUserTable.showmodal;
   Select_Letter.Refresh;
+  hasformDescription;
 end;
 
 procedure TReceivedLetterInputForm.BitBtn2Click(Sender: TObject);
@@ -1822,6 +1831,12 @@ end;
 
 procedure TReceivedLetterInputForm.N7Click(Sender: TObject);
 begin
+  if DSForm.DataSet.State in [dsEdit,dsInsert] then
+   begin
+     ShowMyMessage('ÅÌ€«„','ﬂ«—»— ê—«„Ì ° ·ÿ›« «» œ« «ÿ·«⁄«  ŒÊœ —« –ŒÌ—Â ‰„«ÌÌœ',[mbOK],mtInformation);
+     Exit;
+   end;
+   
   Show_xpFormsTab;
   QAddedForms.Close;
   QAddedForms.Parameters.ParamByName('letterID').Value:=Select_LetterLetterID.AsInteger;
@@ -2015,7 +2030,7 @@ begin
   inherited;
   if xpPageControl1.ActivePageIndex=0 then
     Select_Letter.Refresh;
-    
+
   TabShow(false) ;
 
 end;
@@ -2899,15 +2914,42 @@ begin
   if mode then
   begin
     pnlTopHeader.Height := 0 ;
-    xpPageControl1.TabHeight := 23 ;
-    xpPageControl1.TabWidth  := 0 ;
+   // xpPageControl1.TabHeight := 23 ;
+   // xpPageControl1.TabWidth  := 0 ;
   end
   else
   begin
-    pnlTopHeader.Height := 5 ;
-    xpPageControl1.TabHeight := 1 ;
-    xpPageControl1.TabWidth  := 1 ;
+    pnlTopHeader.Height := 25;//5 ;
+   // xpPageControl1.TabHeight := 1 ;
+   // xpPageControl1.TabWidth  := 1 ;
+    hasformDescription;
   end;
+end;
+
+procedure TReceivedLetterInputForm.hasformDescription;
+begin
+  if not Select_Letter.IsEmpty then
+  begin
+    if LetterHasForms then
+    begin
+      lblHasForms.Font.Color:=clGreen;
+      lblHasForms.Caption:='«Ì‰ ‰«„Â œ«—«Ì ›—„ ÅÌÊ”  ‘œÂ „Ì »«‘œ';
+
+    end
+    else
+    begin
+      lblHasForms.Font.Color:=clMaroon;
+      lblHasForms.Caption:='«Ì‰ ‰«„Â œ«—«Ì ›—„ ÅÌÊ”  ‘œÂ ‰„Ì »«‘œ';
+
+    end;
+  end;
+end;
+
+procedure TReceivedLetterInputForm.btnSubjectClick(Sender: TObject);
+begin
+  inherited;
+   FrSubject := TFrSubject.Create(Application);
+   FrSubject.ShowModal;
 end;
 
 end.

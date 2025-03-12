@@ -3803,6 +3803,7 @@ object Dm: TDm
     Connection = YeganehConnection
     Parameters = <>
     SQL.Strings = (
+      '/*'
       
         'IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(' +
         'N'#39'[DBO].[TBLAPPVER]'#39') AND TYPE IN (N'#39'U'#39'))'
@@ -3811,6 +3812,36 @@ object Dm: TDm
       #9#9'SELECT VER FROM TBLAPPVER ORDER BY CHANGEDATE DESC'
       #9'ELSE'
       #9#9'SELECT '#39#39' AS VER'
+      'END'
+      'ELSE'
+      #9'SELECT '#39#39' AS VER'
+      '*/'
+      
+        'IF EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(' +
+        'N'#39'[DBO].[TBLAPPVER]'#39') AND TYPE IN (N'#39'U'#39'))'
+      'BEGIN'
+      
+        #9'IF not EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJEC' +
+        'T_ID(N'#39'[DBO].[TBLAPPSETTING]'#39') AND TYPE IN (N'#39'U'#39'))'
+      #9'BEGIN'
+      #9#9'IF EXISTS(SELECT 1 FROM TBLAPPVER)'
+      #9#9#9'SELECT VER FROM TBLAPPVER ORDER BY CHANGEDATE DESC'
+      #9#9'ELSE'
+      #9#9#9'SELECT '#39#39' AS VER'#9#9
+      #9'END'
+      #9'else '
+      #9'BEGIN'
+      #9'  IF EXISTS(SELECT 1 FROM TBLAPPVER)'
+      #9#9#9'SELECT VER FROM TBLAPPVER ORDER BY CHANGEDATE DESC'
+      #9'  else'#9#9#9
+      
+        #9'  IF EXISTS(SELECT 1 FROM dbo.TBLAPPSETTING WHERE AppVersion >=' +
+        #39'12.0.0.11'#39')'#9
+      #9'    SELECT '#39'13.0.0.0'#39' ver'
+      #9'  ELSE '
+      #9'  '#9'SELECT '#39#39' AS VER '
+      #9'END'#9' '#9' '
+      ''
       'END'
       'ELSE'
       #9'SELECT '#39#39' AS VER')

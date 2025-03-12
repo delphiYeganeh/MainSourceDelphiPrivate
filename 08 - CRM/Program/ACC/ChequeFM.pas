@@ -128,7 +128,7 @@ end;
 
 procedure TFMCheque.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-   Form_SetShortCut(Self,DBNavigator1,SBSearch,SBReport,Sender,Key,Shift);
+   Form_SetShortCut_btn(Self,DBNavigator1,SBSearch,SBReport,Sender,Key,Shift);
 
    if (Key = VK_Return)And(Shift=[]) then
       SelectNext(TWinControl(ActiveControl),True,True);

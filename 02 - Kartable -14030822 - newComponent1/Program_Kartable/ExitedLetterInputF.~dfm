@@ -3,7 +3,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
   Left = 451
   Top = 243
   BorderStyle = bsDialog
-  Caption = 'À»  ‰«„Â ’«œ—Â'
+  Caption = #1579#1576#1578' '#1606#1575#1605#1607' '#1589#1575#1583#1585#1607
   ClientHeight = 610
   ClientWidth = 843
   Constraints.MinHeight = 630
@@ -34,14 +34,14 @@ inherited SentLetterInputForm: TSentLetterInputForm
       ParentShowHint = False
       ShowHint = True
       Style = pcsFlatButtons
-      TabHeight = 30
+      TabHeight = 23
       TabOrder = 0
       TabPosition = tpTop
       OnChange = xpPageControl1Change
       BorderColor = clSilver
       TabTextAlignment = taCenter
       object xpTabSheet1: TxpTabSheet
-        Caption = '„‘Œ’«  «’·Ì ‰«„Â'
+        Caption = #1605#1588#1582#1589#1575#1578' '#1575#1589#1604#1610' '#1606#1575#1605#1607
         Color = clWhite
         BGStyle = bgsNone
         GradientStartColor = clWhite
@@ -49,7 +49,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
         GradientFillDir = fdTopToBottom
         DesignSize = (
           833
-          568)
+          575)
         object Panel: TPanel
           Left = 0
           Top = 0
@@ -69,7 +69,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Height = 27
             Cursor = crHandPoint
             Anchors = [akTop, akRight]
-            Caption = 'ÅÌÊ”  Word'
+            Caption = #1662#1610#1608#1587#1578' Word'
             ImageIndex = 43
             Images = Dm.ImageList_MainNew
             NotesFont.Charset = DEFAULT_CHARSET
@@ -103,7 +103,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Height = 27
             Cursor = crHandPoint
             Anchors = [akTop, akRight]
-            Caption = 'ÅÌÊ” Â«'
+            Caption = #1662#1610#1608#1587#1578#1607#1575
             ImageIndex = 120
             Images = Dm.LetterImages_New
             NotesFont.Charset = DEFAULT_CHARSET
@@ -137,7 +137,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Height = 27
             Cursor = crHandPoint
             Anchors = [akTop, akRight]
-            Caption = ' ’«ÊÌ—'
+            Caption = #1578#1589#1575#1608#1610#1585
             ImageIndex = 56
             Images = Dm.ImageList_MainNew
             NotesFont.Charset = DEFAULT_CHARSET
@@ -187,7 +187,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Height = 27
             Cursor = crHandPoint
             Anchors = [akTop, akRight]
-            Caption = '”«Ì— «„ﬂ«‰« '
+            Caption = #1587#1575#1610#1585' '#1575#1605#1603#1575#1606#1575#1578
             ImageIndex = 78
             Images = Dm.ImageList_MainNew
             NotesFont.Charset = DEFAULT_CHARSET
@@ -220,7 +220,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Width = 96
             Height = 27
             Anchors = [akTop, akRight]
-            Caption = '›—„ Â«Ì «œ«—Ì'
+            Caption = #1601#1585#1605' '#1607#1575#1610' '#1575#1583#1575#1585#1610
             ImageIndex = 28
             Images = Dm.ImageList_MainNew
             NotesFont.Charset = DEFAULT_CHARSET
@@ -273,7 +273,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Width = 69
             Height = 13
             Anchors = [akTop, akRight]
-            Caption = '‘„«—Â «‰œÌò« Ê—'
+            Caption = #1588#1605#1575#1585#1607' '#1575#1606#1583#1610#1705#1575#1578#1608#1585
             FocusControl = DBEdit1
             Font.Charset = ARABIC_CHARSET
             Font.Color = clWindowText
@@ -289,7 +289,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Width = 43
             Height = 13
             Anchors = [akTop, akRight]
-            Caption = '“„«‰ À»  '
+            Caption = #1586#1605#1575#1606' '#1579#1576#1578' '
             Font.Charset = ARABIC_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -303,7 +303,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Width = 44
             Height = 13
             Anchors = [akTop, akRight]
-            Caption = ' «—ÌŒ À»  '
+            Caption = #1578#1575#1585#1610#1582' '#1579#1576#1578' '
             FocusControl = DBEdit23
             Font.Charset = ARABIC_CHARSET
             Font.Color = clWindowText
@@ -318,7 +318,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Width = 44
             Height = 13
             Anchors = [akTop, akRight]
-            Caption = 'À»  ò‰‰œÂ'
+            Caption = #1579#1576#1578' '#1705#1606#1606#1583#1607
             Font.Charset = ARABIC_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -332,7 +332,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Width = 86
             Height = 13
             Anchors = [akTop, akRight]
-            Caption = '‘„«—Â ‰«„Â  —òÌ»Ì'
+            Caption = #1588#1605#1575#1585#1607' '#1606#1575#1605#1607' '#1578#1585#1705#1610#1576#1610
             FocusControl = DBEdit3
             Font.Charset = ARABIC_CHARSET
             Font.Color = clWindowText
@@ -461,7 +461,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           Left = 0
           Top = 60
           Width = 833
-          Height = 508
+          Height = 515
           Align = alClient
           Anchors = [akTop, akRight]
           BevelOuter = bvNone
@@ -476,7 +476,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Height = 99
             Align = alTop
             Anchors = [akTop, akRight]
-            Caption = '„ÿ«·» «’·Ì ‰«„Â  '
+            Caption = #1605#1591#1575#1604#1576' '#1575#1589#1604#1610' '#1606#1575#1605#1607'  '
             Font.Charset = ARABIC_CHARSET
             Font.Color = clBlue
             Font.Height = -11
@@ -493,7 +493,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               Width = 40
               Height = 13
               Anchors = [akTop, akRight]
-              Caption = '&›—” ‰œÂ'
+              Caption = '&'#1601#1585#1587#1578#1606#1583#1607
               Font.Charset = ARABIC_CHARSET
               Font.Color = clMaroon
               Font.Height = -11
@@ -507,7 +507,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               Width = 28
               Height = 13
               Anchors = [akTop, akRight]
-              Caption = '&êÌ—‰œÂ'
+              Caption = '&'#1711#1610#1585#1606#1583#1607
               Font.Charset = ARABIC_CHARSET
               Font.Color = clMaroon
               Font.Height = -11
@@ -1033,7 +1033,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               Width = 17
               Height = 13
               Anchors = [akTop, akRight]
-              Caption = 'ÅÌ—Ê'
+              Caption = #1662#1610#1585#1608
               Font.Charset = ARABIC_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -1048,7 +1048,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               Width = 25
               Height = 13
               Anchors = [akTop, akRight]
-              Caption = '⁄ÿ›'
+              Caption = #1593#1591#1601
               Font.Charset = ARABIC_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -1246,7 +1246,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               Height = 24
               Cursor = crHandPoint
               Anchors = [akRight]
-              Caption = '     œÌê— êÌ—‰œê«‰'
+              Caption = '     '#1583#1610#1711#1585' '#1711#1610#1585#1606#1583#1711#1575#1606
               Font.Charset = ARABIC_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -1411,7 +1411,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               Width = 74
               Height = 15
               Anchors = [akTop, akRight]
-              Caption = '»œÊ‰ ›—„Ê·'
+              Caption = #1576#1583#1608#1606' '#1601#1585#1605#1608#1604
               Font.Charset = ARABIC_CHARSET
               Font.Color = clBlack
               Font.Height = -11
@@ -1454,7 +1454,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               Height = 24
               Cursor = crHandPoint
               Anchors = [akRight]
-              Caption = 'ÅÌ—Ê / ⁄ÿ› ‰«„Â '
+              Caption = #1662#1610#1585#1608' / '#1593#1591#1601' '#1606#1575#1605#1607' '
               Font.Charset = ARABIC_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -1492,7 +1492,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               Top = 65
               Width = 115
               Height = 25
-              Caption = '‰«„Â Â«Ì „— »ÿ'
+              Caption = #1606#1575#1605#1607' '#1607#1575#1610' '#1605#1585#1578#1576#1591
               ImageIndex = 78
               Images = Dm.LetterImages_New
               NotesFont.Charset = DEFAULT_CHARSET
@@ -1524,9 +1524,9 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Left = 0
             Top = 99
             Width = 829
-            Height = 102
+            Height = 146
             Align = alClient
-            Caption = '„÷„Ê‰ ‰«„Â'
+            Caption = #1605#1590#1605#1608#1606' '#1606#1575#1605#1607
             Font.Charset = ARABIC_CHARSET
             Font.Color = clMaroon
             Font.Height = -11
@@ -1536,14 +1536,14 @@ inherited SentLetterInputForm: TSentLetterInputForm
             TabOrder = 1
             DesignSize = (
               829
-              102)
+              146)
             object Label13: TLabel
               Left = 734
-              Top = 77
+              Top = 121
               Width = 80
               Height = 13
               Anchors = [akRight, akBottom]
-              Caption = '„Ê÷Ê⁄ Ì« ‰Ê⁄ ‰«„Â'
+              Caption = #1605#1608#1590#1608#1593' '#1610#1575' '#1606#1608#1593' '#1606#1575#1605#1607
               Font.Charset = ARABIC_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -1555,7 +1555,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               Left = 2
               Top = 15
               Width = 825
-              Height = 55
+              Height = 99
               Align = alTop
               Alignment = taRightJustify
               Anchors = [akLeft, akTop, akRight, akBottom]
@@ -1575,7 +1575,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             end
             object DBLookupComboBox8: TDBLookupComboBox
               Left = 468
-              Top = 73
+              Top = 117
               Width = 259
               Height = 21
               Anchors = [akRight, akBottom]
@@ -1591,32 +1591,52 @@ inherited SentLetterInputForm: TSentLetterInputForm
               ParentFont = False
               TabOrder = 1
             end
-          end
-          object GroupBox5: TGroupBox
-            Left = 0
-            Top = 201
-            Width = 829
-            Height = 37
-            Align = alBottom
-            TabOrder = 2
-            object lblHasForms: TLabel
-              Left = 756
-              Top = 16
-              Width = 57
-              Height = 13
-              Caption = 'lblHasForms'
+            object sbSubjectDel: TAdvGlowButton
+              Left = 445
+              Top = 117
+              Width = 21
+              Height = 20
+              Hint = #1581#1584#1601
+              Anchors = [akRight, akBottom]
+              ImageIndex = 65
+              Images = Dm.ImageList_MainNew
+              NotesFont.Charset = DEFAULT_CHARSET
+              NotesFont.Color = clWindowText
+              NotesFont.Height = -11
+              NotesFont.Name = 'Tahoma'
+              NotesFont.Style = []
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 2
+              OnClick = sbSubjectDelClick
+              Appearance.ColorChecked = 16111818
+              Appearance.ColorCheckedTo = 16367008
+              Appearance.ColorDisabled = 15921906
+              Appearance.ColorDisabledTo = 15921906
+              Appearance.ColorDown = 16111818
+              Appearance.ColorDownTo = 16367008
+              Appearance.ColorHot = 16117985
+              Appearance.ColorHotTo = 16372402
+              Appearance.ColorMirrorHot = 16107693
+              Appearance.ColorMirrorHotTo = 16775412
+              Appearance.ColorMirrorDown = 16102556
+              Appearance.ColorMirrorDownTo = 16768988
+              Appearance.ColorMirrorChecked = 16102556
+              Appearance.ColorMirrorCheckedTo = 16768988
+              Appearance.ColorMirrorDisabled = 11974326
+              Appearance.ColorMirrorDisabledTo = 15921906
             end
           end
           object pnlDetail: TxpPanel
             Left = 0
-            Top = 238
+            Top = 245
             Width = 829
             Height = 266
             StartColor = 16774388
             EndColor = 16767449
             FillDirection = fdLeftToRight
             Caption = 'xpPanel'
-            Title = 'Ã“∆Ì« '
+            Title = #1580#1586#1574#1610#1575#1578
             TitleFont.Charset = ARABIC_CHARSET
             TitleFont.Color = clNavy
             TitleFont.Height = -11
@@ -1635,7 +1655,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             BGImageAlign = iaStretch
             Color = clWindow
             Align = alBottom
-            TabOrder = 3
+            TabOrder = 2
             object Panel1: TPanel
               Left = 1
               Top = 1
@@ -1651,8 +1671,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                 Height = 71
                 Align = alTop
                 Anchors = [akTop, akRight]
-                Caption = '   ÅÌÊ”    '
-                Color = clBtnFace
+                Caption = '   '#1662#1610#1608#1587#1578'   '
                 TabOrder = 0
                 MinHeight = 13
                 MaxHeight = 75
@@ -1665,7 +1684,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                   Width = 62
                   Height = 13
                   Anchors = [akTop, akRight]
-                  Caption = '&⁄‰Ê«‰ ÅÌÊ” '
+                  Caption = '&'#1593#1606#1608#1575#1606' '#1662#1610#1608#1587#1578
                   FocusControl = DBEdit8
                   Font.Charset = ARABIC_CHARSET
                   Font.Color = clWindowText
@@ -1680,7 +1699,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                   Width = 54
                   Height = 13
                   Anchors = [akTop, akRight]
-                  Caption = ' ⁄œ«œ &’›ÕÂ'
+                  Caption = #1578#1593#1583#1575#1583' &'#1589#1601#1581#1607
                   FocusControl = DBEdit9
                   Font.Charset = ARABIC_CHARSET
                   Font.Color = clWindowText
@@ -1695,7 +1714,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                   Width = 53
                   Height = 13
                   Anchors = [akTop, akRight]
-                  Caption = '›—„ ÅÌÊ” '
+                  Caption = #1601#1585#1605' '#1662#1610#1608#1587#1578
                   Font.Charset = ARABIC_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -1709,7 +1728,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                   Width = 62
                   Height = 13
                   Anchors = [akTop, akRight]
-                  Caption = '›—„ ÅÌÊ”  2'
+                  Caption = #1601#1585#1605' '#1662#1610#1608#1587#1578' 2'
                   Font.Charset = ARABIC_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -1864,13 +1883,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                 Height = 92
                 Align = alTop
                 Anchors = [akTop, akRight]
-                Caption = '  ÊÌéêÌ ‰«„Â   '
-                Color = clBtnFace
-                Font.Charset = ARABIC_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'Tahoma'
-                Font.Style = []
+                Caption = '  '#1608#1610#1688#1711#1610' '#1606#1575#1605#1607'   '
                 TabOrder = 1
                 MinHeight = 13
                 MaxHeight = 90
@@ -1883,7 +1896,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                   Width = 49
                   Height = 13
                   Anchors = [akTop, akRight]
-                  Caption = '&ÿ»ﬁÂ »‰œÌ'
+                  Caption = '&'#1591#1576#1602#1607' '#1576#1606#1583#1610
                   FocusControl = DBEdit2
                   Font.Charset = ARABIC_CHARSET
                   Font.Color = clWindowText
@@ -1898,7 +1911,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                   Width = 48
                   Height = 13
                   Anchors = [akTop, akRight]
-                  Caption = '›Ê—Ì&  ‰«„Â'
+                  Caption = #1601#1608#1585#1610'&'#1578' '#1606#1575#1605#1607
                   FocusControl = DBEdit5
                   Font.Charset = ARABIC_CHARSET
                   Font.Color = clWindowText
@@ -1913,7 +1926,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                   Width = 46
                   Height = 13
                   Anchors = [akTop, akRight]
-                  Caption = '‰Ê⁄ «—”«·'
+                  Caption = #1606#1608#1593' '#1575#1585#1587#1575#1604
                   FocusControl = DBEdit6
                   Font.Charset = ARABIC_CHARSET
                   Font.Color = clWindowText
@@ -1929,7 +1942,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                   Height = 13
                   Alignment = taRightJustify
                   Anchors = [akTop, akRight]
-                  Caption = '«ﬁœ«„ ò‰‰œÂ'
+                  Caption = #1575#1602#1583#1575#1605' '#1705#1606#1606#1583#1607
                   Font.Charset = ARABIC_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -1943,7 +1956,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                   Width = 54
                   Height = 13
                   Anchors = [akTop, akRight]
-                  Caption = '& ⁄œ«œ ’›ÕÂ'
+                  Caption = '&'#1578#1593#1583#1575#1583' '#1589#1601#1581#1607
                   FocusControl = DBEdit7
                   Font.Charset = ARABIC_CHARSET
                   Font.Color = clWindowText
@@ -1957,7 +1970,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                   Top = 41
                   Width = 21
                   Height = 21
-                  Hint = 'Õ–›'
+                  Hint = #1581#1584#1601
                   Anchors = [akTop, akRight]
                   ImageIndex = 65
                   Images = Dm.ImageList_MainNew
@@ -2172,13 +2185,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                 Width = 823
                 Height = 67
                 Align = alClient
-                Caption = '  ‘„«—Â œ«‰‘ÃÊÌÌ'
-                Color = clBtnFace
-                Font.Charset = ARABIC_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'Tahoma'
-                Font.Style = []
+                Caption = '  '#1588#1605#1575#1585#1607' '#1583#1575#1606#1588#1580#1608#1610#1610
                 TabOrder = 2
                 MinHeight = 13
                 MaxHeight = 38
@@ -2190,7 +2197,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                   Top = 23
                   Width = 82
                   Height = 13
-                  Caption = '‘„«—Â œ«‰‘ÃÊÌÌ'
+                  Caption = #1588#1605#1575#1585#1607' '#1583#1575#1606#1588#1580#1608#1610#1610
                   FocusControl = DBEUserMemo
                   Font.Charset = ARABIC_CHARSET
                   Font.Color = clWindowText
@@ -2239,7 +2246,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                   Height = 25
                   Cursor = crHandPoint
                   Anchors = [akTop, akRight]
-                  Caption = '„‘«ÂœÂ ”«Ì— ”Ê«»ﬁ'
+                  Caption = #1605#1588#1575#1607#1583#1607' '#1587#1575#1610#1585' '#1587#1608#1575#1576#1602
                   Font.Charset = ARABIC_CHARSET
                   Font.Color = clNavy
                   Font.Height = -11
@@ -2277,8 +2284,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
           end
         end
         object DBGToORG: TYDBGrid
-          Left = 171
-          Top = 171
+          Left = 179
+          Top = 139
           Width = 422
           Height = 126
           Anchors = [akTop, akRight]
@@ -2302,7 +2309,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           Oriention = poPortrait
           HasDate = False
           HasIndex = False
-          PrintTitle = '⁄‰Ê«‰'
+          PrintTitle = #1593#1606#1608#1575#1606
           InvertFarsiDate = True
           TitleSort = True
           AutoInsert = False
@@ -2313,7 +2320,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               Expanded = False
               FieldName = 'Title'
               Title.Alignment = taCenter
-              Title.Caption = '⁄‰Ê«‰'
+              Title.Caption = #1593#1606#1608#1575#1606
               Width = 196
               Visible = True
             end
@@ -2321,13 +2328,13 @@ inherited SentLetterInputForm: TSentLetterInputForm
               Expanded = False
               FieldName = 'ResponsibleStaffer'
               Title.Alignment = taCenter
-              Title.Caption = '„”∆Ê·'
+              Title.Caption = #1605#1587#1574#1608#1604
               Visible = True
             end>
         end
       end
       object xpForms: TxpTabSheet
-        Caption = '·Ì”  ›—„ Â«Ì «œ«—Ì ÅÌÊ”  ‘œÂ'
+        Caption = #1604#1610#1587#1578' '#1601#1585#1605' '#1607#1575#1610' '#1575#1583#1575#1585#1610' '#1662#1610#1608#1587#1578' '#1588#1583#1607
         Color = clWhite
         BGStyle = bgsNone
         GradientStartColor = clWhite
@@ -2345,7 +2352,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Top = 8
             Width = 145
             Height = 13
-            Caption = 'Ã” ÃÊ »— «”«” ⁄‰Ê«‰ ›—„'
+            Caption = #1580#1587#1578#1580#1608' '#1576#1585' '#1575#1587#1575#1587' '#1593#1606#1608#1575#1606' '#1601#1585#1605
             Font.Charset = ARABIC_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2405,7 +2412,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               item
                 Expanded = False
                 FieldName = 'Description'
-                Title.Caption = '⁄‰Ê«‰ ›—„'
+                Title.Caption = #1593#1606#1608#1575#1606' '#1601#1585#1605
                 Title.Color = 14011088
                 Width = 220
                 Visible = True
@@ -2413,7 +2420,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               item
                 Expanded = False
                 FieldName = 'TableCode'
-                Title.Caption = 'òœ «Ì“Ê'
+                Title.Caption = #1705#1583' '#1575#1610#1586#1608
                 Title.Color = 14999265
                 Width = 100
                 Visible = True
@@ -2421,7 +2428,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               item
                 Expanded = False
                 FieldName = 'UserField1'
-                Title.Caption = ' Ê÷ÌÕ«  Ìò'
+                Title.Caption = #1578#1608#1590#1610#1581#1575#1578' '#1610#1705
                 Title.Color = 15789294
                 Width = 220
                 Visible = True
@@ -2429,7 +2436,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
               item
                 Expanded = False
                 FieldName = 'UserField2'
-                Title.Caption = ' Ê÷ÌÕ«  œÊ'
+                Title.Caption = #1578#1608#1590#1610#1581#1575#1578' '#1583#1608
                 Title.Color = 16381944
                 Width = 220
                 Visible = True
@@ -2441,7 +2448,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Width = 80
             Height = 24
             Cursor = crHandPoint
-            Caption = 'Õ–› ›—„'
+            Caption = #1581#1584#1601' '#1601#1585#1605
             Font.Charset = ARABIC_CHARSET
             Font.Color = clNavy
             Font.Height = -11
@@ -2480,7 +2487,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
             Width = 80
             Height = 24
             Cursor = crHandPoint
-            Caption = '‰„«Ì‘ ›—„'
+            Caption = #1606#1605#1575#1610#1588' '#1601#1585#1605
             Font.Charset = ARABIC_CHARSET
             Font.Color = clNavy
             Font.Height = -11
@@ -2518,7 +2525,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
           Left = 0
           Top = 216
           Width = 833
-          Height = 352
+          Height = 359
           Align = alClient
           ParentShowHint = False
           ShowHint = True
@@ -2534,11 +2541,26 @@ inherited SentLetterInputForm: TSentLetterInputForm
       Left = 1
       Top = 1
       Width = 841
-      Height = 5
+      Height = 25
       Anchors = [akLeft, akTop, akRight]
       BevelOuter = bvNone
       ParentColor = True
       TabOrder = 1
+      object GroupBox4: TGroupBox
+        Left = 0
+        Top = 0
+        Width = 841
+        Height = 25
+        Align = alClient
+        TabOrder = 0
+        object lblHasForms: TLabel
+          Left = 756
+          Top = 8
+          Width = 57
+          Height = 13
+          Caption = 'lblHasForms'
+        end
+      end
     end
   end
   inherited DSForm: TDataSource
@@ -2563,31 +2585,31 @@ inherited SentLetterInputForm: TSentLetterInputForm
         Items = <
           item
             Action = DataSetInsert
-            Caption = ' ‰«„Â ÃœÌœ &Ins'
+            Caption = ' '#1606#1575#1605#1607' '#1580#1583#1610#1583' &Ins'
             ImageIndex = 2
             ShortCut = 45
           end
           item
             Action = DataSetDelete
-            Caption = 'Õ–› &Ctrl+Del'
+            Caption = #1581#1584#1601' &Ctrl+Del'
             ImageIndex = 3
             ShortCut = 16430
           end
           item
             Action = DataSetEdit
-            Caption = 'ÊÌ—«Ì‘ &F4'
+            Caption = #1608#1610#1585#1575#1610#1588' &F4'
             ImageIndex = 14
             ShortCut = 115
           end
           item
             Action = DataSetPost
-            Caption = '–ŒÌ—Â F&2 '
+            Caption = #1584#1582#1610#1585#1607' F&2 '
             ImageIndex = 4
             ShortCut = 113
           end
           item
             Action = DataSetCancel
-            Caption = '·€Ê C&trl+Z'
+            Caption = #1604#1594#1608' C&trl+Z'
             ImageIndex = 5
             ShortCut = 16474
           end>
@@ -2597,7 +2619,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
         Items = <
           item
             Action = Action11
-            Caption = '&Esc Œ—ÊÃ'
+            Caption = '&Esc '#1582#1585#1608#1580
             ImageIndex = 12
             LastSession = 19
             ShortCut = 27
@@ -2633,10 +2655,10 @@ inherited SentLetterInputForm: TSentLetterInputForm
                 ImageIndex = 5
                 ShortCut = 32776
               end>
-            Caption = ' €ÌÌ—« '
+            Caption = #1578#1594#1610#1610#1585#1575#1578
           end
           item
-            Caption = '‰«„Â'
+            Caption = #1606#1575#1605#1607
           end
           item
             Items = <
@@ -2645,7 +2667,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
                 ImageIndex = 14
                 ShortCut = 27
               end>
-            Caption = '”Ì” „'
+            Caption = #1587#1610#1587#1578#1605
           end>
         AutoSize = False
       end
@@ -2754,8 +2776,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
     StyleName = 'XP Style'
     object DataSetInsert: TDataSetInsert
       Tag = 1
-      Category = ' €ÌÌ—« '
-      Caption = 'ÃœÌœ'
+      Category = #1578#1594#1610#1610#1585#1575#1578
+      Caption = #1580#1583#1610#1583
       Hint = 'Insert'
       ImageIndex = 60
       ShortCut = 45
@@ -2764,8 +2786,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
     end
     object DataSetDelete: TDataSetDelete
       Tag = 2
-      Category = ' €ÌÌ—« '
-      Caption = 'Õ–› '
+      Category = #1578#1594#1610#1610#1585#1575#1578
+      Caption = #1581#1584#1601' '
       Enabled = False
       Hint = 'Delete'
       ImageIndex = 3
@@ -2775,8 +2797,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
     end
     object DataSetEdit: TDataSetEdit
       Tag = 3
-      Category = ' €ÌÌ—« '
-      Caption = 'ÊÌ—«Ì‘ '
+      Category = #1578#1594#1610#1610#1585#1575#1578
+      Caption = #1608#1610#1585#1575#1610#1588' '
       Hint = 'Edit'
       ImageIndex = 37
       ShortCut = 115
@@ -2785,8 +2807,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
     end
     object DataSetPost: TDataSetPost
       Tag = 4
-      Category = ' €ÌÌ—« '
-      Caption = '–ŒÌ—Â'
+      Category = #1578#1594#1610#1610#1585#1575#1578
+      Caption = #1584#1582#1610#1585#1607
       Hint = 'Post'
       ImageIndex = 59
       ShortCut = 113
@@ -2795,8 +2817,8 @@ inherited SentLetterInputForm: TSentLetterInputForm
     end
     object DataSetCancel: TDataSetCancel
       Tag = 5
-      Category = ' €ÌÌ—« '
-      Caption = '«‰’—«›'
+      Category = #1578#1594#1610#1610#1585#1575#1578
+      Caption = #1575#1606#1589#1585#1575#1601
       Hint = 'Cancel'
       ImageIndex = 1
       ShortCut = 32776
@@ -2805,7 +2827,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
     end
     object Action11: TAction
       Tag = 16
-      Caption = 'Œ—ÊÃ'
+      Caption = #1582#1585#1608#1580
       ImageIndex = 84
       ShortCut = 27
       OnExecute = Action11Execute
@@ -3139,7 +3161,7 @@ inherited SentLetterInputForm: TSentLetterInputForm
       FieldName = 'UserID'
     end
     object QrUserSignUserSign: TBlobField
-      DisplayLabel = ' ’ÊÌ— «„÷«Ì ò«—»—'
+      DisplayLabel = #1578#1589#1608#1610#1585' '#1575#1605#1590#1575#1610' '#1705#1575#1585#1576#1585
       FieldName = 'UserSign'
     end
   end
@@ -3148,17 +3170,17 @@ inherited SentLetterInputForm: TSentLetterInputForm
     Left = 396
     Top = 216
     object N1: TMenuItem
-      Caption = '”Ê«»ﬁ «—Ã«⁄'
+      Caption = #1587#1608#1575#1576#1602' '#1575#1585#1580#1575#1593
       ImageIndex = 5
       OnClick = N1Click
     end
     object N2: TMenuItem
-      Caption = '—Ê‰Ê‘ '
+      Caption = #1585#1608#1606#1608#1588#1578
       ImageIndex = 39
       OnClick = N2Click
     end
     object N3: TMenuItem
-      Caption = '«—”«· »Â œ»Ì—Œ«‰Â'
+      Caption = #1575#1585#1587#1575#1604' '#1576#1607' '#1583#1576#1610#1585#1582#1575#1606#1607
       ImageIndex = 3
       OnClick = N3Click
     end
@@ -3257,15 +3279,17 @@ inherited SentLetterInputForm: TSentLetterInputForm
     end
   end
   object PopupMenu2: TPopupMenu
+    Images = Dm.ImageList_MainNew
     Left = 252
     Top = 111
     object N7: TMenuItem
-      Caption = '›—„ Â«Ì ÅÌÊ”  ‘œÂ'
-      ImageIndex = 1
+      Caption = #1601#1585#1605' '#1607#1575#1610' '#1662#1610#1608#1587#1578' '#1588#1583#1607
+      ImageIndex = 11
       OnClick = N7Click
     end
     object N4: TMenuItem
-      Caption = '«›“Êœ‰ ›—„ »Â ‰«„Â'
+      Caption = #1575#1601#1586#1608#1583#1606' '#1601#1585#1605' '#1576#1607' '#1606#1575#1605#1607
+      ImageIndex = 7
       OnClick = N4Click
     end
   end

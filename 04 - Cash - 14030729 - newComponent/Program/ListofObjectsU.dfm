@@ -29,12 +29,14 @@ object FrListofObjects: TFrListofObjects
     Align = alBottom
     TabOrder = 0
     object DBNavigator1: TDBNavigator
-      Left = 144
-      Top = 4
-      Width = 260
-      Height = 31
+      Left = 192
+      Top = 1
+      Width = 274
+      Height = 40
       DataSource = dm.DObjects
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbRefresh]
+      Align = alRight
+      Flat = True
       TabOrder = 0
     end
   end

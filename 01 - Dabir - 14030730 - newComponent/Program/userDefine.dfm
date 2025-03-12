@@ -377,9 +377,9 @@ inherited UserDefineF: TUserDefineF
               Stretch = True
             end
             object xpBitBtn3: TAdvGlowButton
-              Left = 56
+              Left = 48
               Top = 233
-              Width = 62
+              Width = 73
               Height = 25
               Cursor = crHandPoint
               Anchors = [akTop, akRight]
@@ -417,9 +417,9 @@ inherited UserDefineF: TUserDefineF
               Appearance.ColorMirrorDisabledTo = 15921906
             end
             object xpBitBtn2: TAdvGlowButton
-              Left = 128
+              Left = 131
               Top = 233
-              Width = 59
+              Width = 70
               Height = 25
               Cursor = crHandPoint
               Anchors = [akTop, akRight]

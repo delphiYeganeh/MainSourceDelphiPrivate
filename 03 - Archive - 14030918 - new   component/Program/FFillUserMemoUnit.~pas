@@ -50,6 +50,8 @@ var
 
 implementation
 
+uses YShamsiDate ;
+
 {$R *.dfm}
 
 procedure TFFillUserMemo.FormShow(Sender: TObject);
@@ -67,6 +69,9 @@ procedure TFFillUserMemo.FormCreate(Sender: TObject);
 begin
   inherited;
   OpendateSets;
+  DBNav_Setup(DBNavigator1);
+  DBNav_Setup(DBNavigator2);
+  DBNav_Setup(DBNavigator3);
 end;
 
 procedure TFFillUserMemo.OpendateSets;
