@@ -1,0 +1,219 @@
+object frm_ListTafkikiKol: Tfrm_ListTafkikiKol
+  Left = 312
+  Top = 220
+  Width = 695
+  Height = 616
+  BiDiMode = bdRightToLeft
+  Caption = #1604#1610#1587#1578' '#1578#1601#1705#1610#1705#1610' '#1705#1604
+  Color = clBtnFace
+  Font.Charset = ARABIC_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  ParentBiDiMode = False
+  Position = poScreenCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Number: TLabel
+    Left = 511
+    Top = 491
+    Width = 3
+    Height = 13
+  end
+  object YDBGrid1: TYDBGrid
+    Left = 0
+    Top = 0
+    Width = 679
+    Height = 528
+    Align = alClient
+    Color = 16770790
+    DataSource = dusp_ListTafkikiKol
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+    ReadOnly = True
+    TabOrder = 0
+    TitleFont.Charset = ARABIC_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    YeganehColor = True
+    YeganehFinish = False
+    PageNumber = False
+    RecordNumber = False
+    HasTime = False
+    Oriention = poPortrait
+    HasDate = False
+    HasIndex = False
+    PrintTitle = #1604#1610#1587#1578' '#1578#1601#1705#1610#1705#1610' '#1705#1604
+    InvertFarsiDate = True
+    TitleSort = True
+    AutoInsert = False
+    FooterFields = 'Count'
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 528
+    Width = 679
+    Height = 50
+    Align = alBottom
+    TabOrder = 1
+    object Button5: TxpBitBtn
+      Left = 7
+      Top = 9
+      Width = 126
+      Height = 35
+      startColor = 16645629
+      EndColor = 14666957
+      Caption = #1582#1585#1608#1580
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Glyph.Data = {
+        32040000424D3204000000000000360000002800000014000000110000000100
+        180000000000FC030000000000000000000000000000000000001816136788FF
+        0012D16F6CC6F7F1EC9997D90000B1262FBBCBC8DFFFF8CFFFE9C8FFEACCFFEB
+        CCFFEBCBFFEBCBFFEBCBFFECCBFFECCCFFE7C4FFF6EB1D18117987FF0F57FF08
+        37E4060084031FC60753FF002DE78370A4FFCA66FFB156FFB359FFB25AFFB159
+        FFAF59FFAE59FFAC58FFAB59FFAC53FF9B0D282310C0B8E60017CE2565FF154B
+        FC1852FF0B34DF4447BDD8D6EEFFFAFFFFEEFFFFEDFEFFEBFDFFE8FAFFE5F9FF
+        E2F8FFDEF5FFD9EDFFF0FFFF9C13171309FFFFE88079BC1232D32B65FF1C54FE
+        2733B8C3B9D3FFFFF6FFEAE8FFE7E6FFE4E3FFE1E0FFDDDCFFDCDBFFD8D6FFD5
+        D3FFCFCAFFE6FFFFA015161109FFFFED7674CD2257E12355F11344EA1242E565
+        65C7F1EDEDFFF4F0FFEAEBFFE8E8FFE6E6FFE3E3FFE0E0FFDCDCFFD9D9FFD2CF
+        FFE8FFFF9F151B160CEFEDE32739D31952EF363DB66062C00434E6153BDAABA8
+        D8FFFFF7FFECEDFFEBEBFFE8E8FFE5E5FFE1E1FFDDDDFFDADAFFD4D1FFEBFFFF
+        9F141A150CF7F7E53C4ED7021BC3B1AAD7FFFCF76167D5031ED48E93DCFEFFFA
+        FFF0F0FFEDEDFFEBEBFFE5E5FFE3E3FFDEDEFFDCDCFFD5D2FFEAFFFF9F141511
+        0AFFFFE9D8D6F88B89D6F6F5FBFFFFFFF0EFF8A3A3DFD5D2EBFFFFFBFFF3F3FF
+        F0F0FFEDEDFFE8E8FFE4E4FFE0E0FFDEDEFFD6D4FFECFFFFA01315100AFFFFEA
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFAFAFFF4F4FFF2F2FFEF
+        EFFFE9E9FFE5E5FFE1E1FFDFDFFFD8D5FFEEFFFFA01415100AFFFFEAFAFEFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFFFBFBFFF5F5FFF3F3FFEFEFFFEBEB
+        FFE7E7FFE3E3FFDEDEFFD8D5FFEEFFFFA01415100AFFFFEAFAFDFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFFF5F5FFF3F3FFF0F0FFECECFFE8E8FF
+        E4E4FFDFDFFFD9D6FFEFFFFFA01415100AFFFFE9FAFDFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFDFDFFF4F4FFF3F2FFEFEFFFEAEAFFE6E6FFE2E2FFDD
+        DDFFD7D5FFEEFFFFA01415100AFFFFF0FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFDFFFFFAFDFFF5F9FFF1F5FFEDF1FFE7ECFFE3E4
+        FFF8FFFFA11616120DFFFFD4D5D5D6DCD8D4DCD8D4DCD8D4DCD8D4DCD8D4DCD7
+        D2DCD7D2DCD2CDDCD0CCDCCCC7DCC9C4DCC5C0DCC2BDDCBFBADCB8B1D9C8E0FA
+        9E18141611FFE153F87600F77E00F77E00F77E00F77E00F77E00F77E00F77E00
+        F78000F78000F78000F78100F78000F78100F78200F78200F78500FF93001413
+        0DFFFEA7F1A159EFA35CF0A55DF0A55DF0A55DF0A55DF0A55DF0A55DF0A55DF0
+        A55DF0A55DF0A55DF0A55DF0A55DF0A55EEFA661F29B3BFD9300131B21FFFCAE
+        FE9809FEA31CFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA31DFEA3
+        1DFEA31DFEA31DFEA31DFEA31DFEA21AFE9B0BFED99E}
+      Gradient = True
+      TabOrder = 0
+      TabStop = True
+      OnClick = Button5Click
+    end
+    object Button3: TxpBitBtn
+      Left = 543
+      Top = 9
+      Width = 126
+      Height = 35
+      startColor = 16645629
+      EndColor = 14666957
+      Caption = 'Word'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ImageList = Dm.LetterImages
+      ImageIndex = 24
+      Gradient = True
+      TabOrder = 1
+      TabStop = True
+      OnClick = Button3Click
+    end
+    object Button4: TxpBitBtn
+      Left = 409
+      Top = 9
+      Width = 126
+      Height = 35
+      startColor = 16645629
+      EndColor = 14666957
+      Caption = 'Excel'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ImageList = Dm.LetterImages
+      ImageIndex = 23
+      Gradient = True
+      TabOrder = 2
+      TabStop = True
+      OnClick = Button4Click
+    end
+    object xpBitBtn1: TxpBitBtn
+      Left = 273
+      Top = 9
+      Width = 126
+      Height = 35
+      startColor = 16645629
+      EndColor = 14666957
+      Caption = 'Print'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ImageList = Dm.LetterImages
+      ImageIndex = 55
+      Gradient = True
+      TabOrder = 3
+      TabStop = True
+      OnClick = xpBitBtn1Click
+    end
+  end
+  object usp_ListTafkikiKol: TADOStoredProc
+    Connection = Dm.YeganehConnection
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    ProcedureName = 'usp_ListTafkikiKol;1'
+    Parameters = <>
+    Left = 376
+    Top = 272
+  end
+  object dusp_ListTafkikiKol: TDataSource
+    AutoEdit = False
+    DataSet = usp_ListTafkikiKol
+    Left = 264
+    Top = 264
+  end
+  object usp_Course_Count_ForExam: TADOStoredProc
+    Connection = Dm.YeganehConnection
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    ProcedureName = 'usp_Course_Count_ForExam;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@ExamID'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = 285
+      end>
+    Left = 264
+    Top = 376
+    object usp_Course_Count_ForExamCourseCount: TIntegerField
+      FieldName = 'CourseCount'
+      ReadOnly = True
+    end
+  end
+end

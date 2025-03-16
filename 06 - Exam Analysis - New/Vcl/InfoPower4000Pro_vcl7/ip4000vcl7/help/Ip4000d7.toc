@@ -1,0 +1,48 @@
+:Base IP4000D7.hlp 
+:Title InfoPower 4000
+;
+1 InfoPower 4000
+2 InfoPower Contents=InfoPower_Contents@IP4000D7.hlp 
+2 InfoPower License Agreement=InfoPower_License_Agreement@IP4000D7.hlp 
+2 Building Packages=Building_Packages@IP4000D7.hlp 
+2 Database Architecture=InfoPower_4000_Database_Architecture@IP4000D7.hlp 
+2 Distributing Applications=Distributing_Applications@IP4000D7.hlp 
+2 Requirements=InfoPower_4000_Requirements@IP4000D7.hlp 
+2 Technical Support Information=Technical_Support_Options@IP4000D7.hlp 
+2 Uninstalling=Uninstalling@IP4000D7.hlp 
+2 IP Controls
+3 TwwCheckBox=TwwCheckbox@IP4000D7.hlp 
+3 TwwController=TwwController@IP4000D7.hlp 
+3 TwwDataInspector=TwwDataInspector@IP4000D7.hlp 
+3 TwwDBComboBox=TwwDBComboBox@IP4000D7.hlp 
+3 TwwDBComboDlg=TwwDBComboDlg@IP4000D7.hlp 
+3 TwwDBDateTimePicker=TwwDBDateTimePicker@IP4000D7.hlp 
+3 TwwDBEdit=TwwDBEdit@IP4000D7.hlp 
+3 TwwDBGrid=TwwDBGrid@IP4000D7.hlp 
+3 TwwDBLookupCombo=TwwDBLookupCombo@IP4000D7.hlp 
+3 TwwDBLookupComboDlg=TwwDBLookupComboDlg@IP4000D7.hlp 
+3 TwwDBNavigator=TwwDBNavigator@IP4000D7.hlp 
+3 TwwDBRichEdit=TwwDBRichEdit@IP4000D7.hlp 
+3 TwwDBRichEditMSWord=TwwDBRichEditMSWord@IP4000D7.hlp 
+3 TwwDBSpinEdit=TwwDBSpinEdit@IP4000D7.hlp 
+3 TwwExpandButton=TwwExpandButton@IP4000D7.hlp 
+3 TwwIncrementalSearch=TwwIncrementalSearch@IP4000D7.hlp 
+3 TwwKeyCombo=TwwKeyCombo@IP4000D7.hlp 
+3 TwwMonthCalendar=TwwMonthCalendar@IP4000D7.hlp 
+3 TwwRadioGroup=TwwRadioGroup@IP4000D7.hlp 
+3 TwwRecordViewPanel=TwwRecordViewPanel@IP4000D7.hlp 
+2 IP Access
+3 TwwClientDataset=TwwClientDataSet@IP4000D7.hlp 
+3 TwwDataSource=TwwDataSource@IP4000D7.hlp 
+3 TwwQBE=TwwQBE@IP4000D7.hlp 
+3 TwwStoredProc=TwwStoredProc@IP4000D7.hlp 
+3 TwwQuery=TwwQuery@IP4000D7.hlp 
+3 TwwTable=TwwTable@IP4000D7.hlp 
+2 IP Dialogs
+3 TwwFilterDialog=TwwFilterDialog@IP4000D7.hlp 
+3 TwwLocateDialog=TwwLocateDialog@IP4000D7.hlp 
+3 TwwIntl=TwwIntl@IP4000D7.hlp 
+3 TwwLookupDialog=TwwLookupDialog@IP4000D7.hlp 
+3 TwwMemoDialog=TwwMemoDialog@IP4000D7.hlp 
+3 TwwRecordViewDialog=TwwRecordViewDialog@IP4000D7.hlp 
+3 TwwSearchDialog=TwwSearchDialog@IP4000D7.hlp 

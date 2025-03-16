@@ -1,0 +1,21 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[InsertQuestionToTableDeleteQuestion]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[InsertQuestionToTableDeleteQuestion]
+END
+GO
+
+CREATE  procedure [dbo].[InsertQuestionToTableDeleteQuestion](@QuestionID int)
+AS
+BEGIN
+	INSERT INTO QuestionDelete
+	SELECT * FROM Question WHERE QuestionID = @QuestionID
+END
+GO
+
+COMMIT
+GO

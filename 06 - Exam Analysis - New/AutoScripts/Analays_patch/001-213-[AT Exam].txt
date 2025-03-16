@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'GroupExamid'
+          AND Object_ID = Object_ID(N'dbo.Exam'))
+BEGIN
+	ALTER TABLE [dbo].[Exam] 
+	ADD	[GroupExamid] [int] NULL
+END
+GO
+
+COMMIT
+GO

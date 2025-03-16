@@ -1,0 +1,26 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'qqq')
+BEGIN
+	CREATE TABLE [dbo].[qqq](
+		[st] [nvarchar](255) NULL,
+		[ns] [nvarchar](255) NULL,
+		[ترم] [nvarchar](255) NULL,
+		[cc] [nvarchar](255) NULL,
+		[cn] [nvarchar](255) NULL,
+		[s] [nvarchar](255) NULL,
+		[m] [nvarchar](255) NULL,
+		[مقطع] [nvarchar](255) NULL,
+		[cg] [float] NULL
+	) ON [PRIMARY]
+END
+GO
+
+GO
+
+COMMIT
+GO

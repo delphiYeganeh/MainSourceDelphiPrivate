@@ -1,0 +1,7 @@
+Buyer's who are not named John
+Buyer	Buyer	0	Yes			False	False
+First Name	First Name	0	John			False	True
+///
+Companies that start with G
+Company Name	Company Name	0	G			False	False
+///

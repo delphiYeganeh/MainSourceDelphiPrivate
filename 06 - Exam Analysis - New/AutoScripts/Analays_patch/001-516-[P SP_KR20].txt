@@ -1,0 +1,61 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[SP_KR20]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[SP_KR20]
+END
+GO
+
+CREATE  procedure [dbo].[SP_KR20](@examid int, @result float output)/* شماره آزمون */
+AS
+BEGIN 
+declare @qn int, /* تعداد سوالات آزمون */
+		@app int, /* تعداد داوطلبان آزمون */
+		@pq float, /* مجموع (جواب هاي درست * ج.ابهاي غلط براي هر سوال) در */
+		@vp float /* واريانس سوالات آزمون */
+		
+---------------------------------------------------------
+select * into #ApplicantExam  
+from ApplicantExam 
+where examid=@examid
+
+select * into #Question  
+from Question 
+where examid=@examid
+
+select ApplicantAnswer.* into #ApplicantAnswer  
+from ApplicantAnswer inner join Question on ApplicantAnswer.QuestionID = Question.QuestionID
+where examid=@examid
+---------------------------------------------------------
+
+select @app=count(*), @vp=VARP(FinalMark) 
+from #ApplicantExam
+where examid=@examid
+
+
+select @qn=count(*)
+from #Question
+where examid=@examid
+
+
+set @pq=0
+ 
+select @pq=@pq+
+(correct* (@app - Correct))/cast((@app* @app)AS float) 
+from #Question  q
+where questionactivityid =1 and examid=@examid
+set @result = 0
+if @vp<>0 
+	set @result = round( (@qn/ (@qn-1.0) )*(  1-(@pq/(@vp))  ),3)
+IF @result<0 
+SET @result = 0
+return
+END
+
+GO
+
+COMMIT
+GO

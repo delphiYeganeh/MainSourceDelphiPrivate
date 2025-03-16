@@ -1,0 +1,19 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'ROND_INF')
+BEGIN
+	CREATE TABLE [dbo].[ROND_INF](
+		[ROND] [int] NULL,
+		[EXAMID] [int] NULL
+	) ON [PRIMARY]
+END
+GO
+
+GO
+
+COMMIT
+GO

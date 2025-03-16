@@ -1,0 +1,47 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_Question_By_ExamID_and_Where]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_Question_By_ExamID_and_Where]
+END
+GO
+
+CREATE  procedure [dbo].[Select_Question_By_ExamID_and_Where]
+(
+	@examId int,
+	@where 	nvarchar(2000)
+)
+
+AS
+
+declare @SQL nvarchar(4000)
+set @SQL='SELECT 
+Question.QuestionID,Course.CourseTitle,Question.ExamID,Question.Number,Question.DesignerTeacherID,Question.CourseID,Question.Correct,Question.Answerd,Question.All_Count,
+                  Question.Wrong,Question.Difficulty,Question.Discrimination AS Discrimination,Question.G1_0,Question.G3_0,Question.all0,Question.G1_1,Question.G3_1,Question.all1,
+                 Question.G1_2,Question.G3_2,Question.all2,Question.G1_3,Question.G3_3,Question.all3,Question.G1_4,Question.G3_4,Question.all4,Question.G1_5,Question.G3_5,	   
+                 Question.all5,Question.number_Of_Item,Question.QuestionActivityID,Question.TemporaryActive,Question.Coefficient,Question.RPBIS,Question.CorrectItemNumber,
+                 Question.CorrectItemNumber2,Question.Taxonomy,Question.ObjectionNumber,Question.all6	
+	   ,cast(DifficultyTitle as varchar(50)) as DifficultyTitle, DiscriminationTitle,questionActivityTitle,
+       100*all0/All_Count all0_percent
+      ,100*all1/All_Count all1_percent
+      ,100*all2/All_Count all2_percent
+      ,100*all3/All_Count all3_percent
+      ,100*all4/All_Count all4_percent
+      ,100*all5/All_Count all5_percent
+      ,100*all6/All_Count all6_percent
+      
+FROM         Question LEFT JOIN Course ON Question.CourseID=Course.CourseID 
+left JOIN Difficulty       ON Question.Difficulty >= Difficulty.MinValue and Question.Difficulty <Difficulty.MaxValue
+left JOIN Discrimination   ON Question.Discrimination >= Discrimination.MinValue and Question.Discrimination <Discrimination.MaxValue
+left join questionActivity ON questionActivity.questionActivityID= Question.questionActivityID where Question.ExamID='+cast(@examID as varchar(5))
+set @where =case when ltrim(isnull(@where,''))='' then '' else ' and '+@where end 
+set @sql=@sql+@where 
+exec(@sql)
+	
+GO
+
+COMMIT
+GO

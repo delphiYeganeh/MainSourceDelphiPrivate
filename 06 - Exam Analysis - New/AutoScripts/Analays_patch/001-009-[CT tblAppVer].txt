@@ -1,0 +1,18 @@
+BEGIN TRANSACTION
+GO
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'tblAppVer')
+BEGIN
+	CREATE TABLE [dbo].[tblAppVer]
+	(
+	[Id] [int] NOT NULL IDENTITY(1, 1),
+	[ver] [varchar] (50) COLLATE SQL_Latin1_General_CP1256_CI_AS NOT NULL,
+	[changeDate] [datetime] NOT NULL,
+	[Descript] [nvarchar] (2000) COLLATE SQL_Latin1_General_CP1256_CI_AS NULL
+	)
+END
+GO
+COMMIT
+GO

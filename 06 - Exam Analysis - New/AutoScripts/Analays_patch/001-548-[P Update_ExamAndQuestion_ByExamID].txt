@@ -1,0 +1,33 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Update_ExamAndQuestion_ByExamID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Update_ExamAndQuestion_ByExamID]
+END
+GO
+
+CREATE  procedure [dbo].[Update_ExamAndQuestion_ByExamID]
+(
+	@ExamID	[int]
+)
+
+as
+
+DECLARE @Number_of_Question INT,
+	    @number_of_applicant INT
+select @Number_of_Question = count(*) from question where ExamID = @ExamID
+select @number_of_applicant = count(*) from dbo.ApplicantExam where examid = @ExamID
+
+update exam set Number_of_Question = (@Number_of_Question)
+where ExamID = @ExamID
+
+update Exam set number_of_applicant = (@number_of_applicant)
+where examid = @ExamID
+	
+GO
+
+COMMIT
+GO

@@ -1,0 +1,45 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[StandardError]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[StandardError]
+END
+GO
+
+CREATE FUNCTION [dbo].[StandardError]
+(
+	@examid int
+)
+RETURNS float  
+AS  
+BEGIN 
+	
+	DECLARE @SQLString NVARCHAR(500)
+	DECLARE @ParmDefinition NVARCHAR(500)
+	DECLARE @parmIN int
+	DECLARE @parmRET1 float
+
+	SET @parmIN= CONVERT(nvarchar(10),@ExamID)
+	SET @SQLString=N'EXEC SP_KR20 @parm, @parm1OUT OUTPUT'
+	SET @ParmDefinition=N'@parm int, @parm1OUT float OUTPUT'
+
+	EXECUTE sp_executesql
+		@SQLString,
+		@ParmDefinition,
+		@parm=@parmIN,
+		@parm1OUT=@parmRET1 OUTPUT
+
+	declare @vp float
+	select @vp=VARP(FinalMark) 
+	from ApplicantExam
+	where examid=@examid
+	
+	return(round( sqrt(@vp)*sqrt(  1-CONVERT(float,@parmRET1)),2)  )
+END
+GO
+
+COMMIT
+GO

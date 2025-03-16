@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'Pic'
+          AND Object_ID = Object_ID(N'dbo.Applicant'))
+BEGIN
+	ALTER TABLE [dbo].[Applicant] 
+	ADD	[Pic] [image] NULL
+END
+GO
+
+COMMIT
+GO

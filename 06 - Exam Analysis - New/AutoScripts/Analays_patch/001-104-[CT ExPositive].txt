@@ -1,0 +1,27 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'ExPositive')
+BEGIN
+	CREATE TABLE [dbo].[ExPositive](
+		[ID] [int] IDENTITY(1,1) NOT NULL,
+		[ExamID] [int] NULL,
+		[ApplicantId] [nvarchar](500) NULL,
+		[Score] [nvarchar](600) NULL,
+		[SumScore] [nvarchar](600) NULL,
+		[Desc] [nvarchar](500) NULL,
+	CONSTRAINT [PK_ExPositive] PRIMARY KEY NONCLUSTERED 
+	(
+		[ID] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+END
+GO
+
+GO
+
+COMMIT
+GO

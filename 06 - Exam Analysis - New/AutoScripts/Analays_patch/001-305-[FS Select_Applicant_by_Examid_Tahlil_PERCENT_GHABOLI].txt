@@ -1,0 +1,46 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_Applicant_by_Examid_Tahlil_PERCENT_GHABOLI]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[Select_Applicant_by_Examid_Tahlil_PERCENT_GHABOLI]
+END
+GO
+
+CREATE FUNCTION [dbo].[Select_Applicant_by_Examid_Tahlil_PERCENT_GHABOLI]
+(
+	@EXAMID INT
+)
+RETURNS VARCHAR(100) 
+AS
+BEGIN
+	DECLARE	@RES NUMERIC(6,2);
+	DECLARE	@RecCount NUMERIC(6,2);
+
+	SELECT @RecCount = COUNT(*)
+	FROM Applicant    
+		INNER JOIN ApplicantExam  ON ApplicantExam.ApplicantID = Applicant.ApplicantID 
+		left  JOIN Grouping ON Grouping.GroupingID = ApplicantExam.GroupingID
+		left  JOIN Major  ON Applicant.MajorID = Major.MajorID
+		left  join EducationGroup  ON EducationGroup.EducationGroupID = Major.EducationGroupID
+		LEFT  JOIN Faculty ON EducationGroup.FacultyID = Faculty.FacultyID
+	WHERE	ExamId=@ExamId
+
+	SELECT @RES = COUNT(*)
+	FROM Applicant    
+		INNER JOIN ApplicantExam  ON ApplicantExam.ApplicantID = Applicant.ApplicantID 
+		left  JOIN Grouping ON Grouping.GroupingID = ApplicantExam.GroupingID
+		left  JOIN Major  ON Applicant.MajorID = Major.MajorID
+		left  join EducationGroup  ON EducationGroup.EducationGroupID = Major.EducationGroupID
+		LEFT  JOIN Faculty ON EducationGroup.FacultyID = Faculty.FacultyID
+	where ApplicantExam.Accepted = 1 AND ExamId=@ExamId
+
+	RETURN(ROUND((@RES/@RecCount)*100,2))
+
+END
+GO
+
+COMMIT
+GO

@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'CorrectItemNumber6'
+          AND Object_ID = Object_ID(N'dbo.QuestionDelete'))
+BEGIN
+	ALTER TABLE [dbo].[QuestionDelete] 
+	ADD	[CorrectItemNumber6] [tinyint] NULL
+END
+GO
+
+COMMIT
+GO

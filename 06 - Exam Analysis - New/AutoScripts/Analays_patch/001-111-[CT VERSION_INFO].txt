@@ -1,0 +1,25 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'VERSION_INFO')
+BEGIN
+	CREATE TABLE [dbo].[VERSION_INFO](
+		[IDX] [int] NOT NULL,
+		[INFO_] [varchar](500) NULL,
+		[DATE_] [nchar](10) NULL,
+		[VERSION_] [varchar](50) NULL,
+		[CUSTOMER] [varchar](100) NULL,
+		[SQL_SP] [varchar](100) NULL,
+		[DELPHI_FORM] [varchar](500) NULL,
+		[SOFTWARE_NAME] [varchar](50) NULL
+	) ON [PRIMARY]
+END
+GO
+
+GO
+
+COMMIT
+GO

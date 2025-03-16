@@ -1,0 +1,37 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[GetEqualQuestionNumber]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[GetEqualQuestionNumber]
+END
+GO
+
+CREATE FUNCTION [dbo].[GetEqualQuestionNumber] (@QuestionId int,@GroupExamid int ,@Type bit)
+	returns int
+	as 
+	begin
+		declare @Res int
+		if @Type=0
+			begin
+					select @Res=Case When @GroupExamId <>1 then eeq.EqualQuestionNumber Else q.number end  
+					from Question q
+					left join ExamEqualQuestion eeq on eeq.questionNumber=q.number and q.ExamID=eeq.ExamID
+					where QuestionID=@QuestionId and GroupExamid =@GroupExamid	
+			end
+		else 
+			begin
+					select @Res=Case When @GroupExamId <>1 then eeq.EqualQuestionNumber Else q.number end  
+					from Question q
+					left join ExamEqualQuestion eeq on eeq.QuestionNumber=q.number and q.ExamID=eeq.ExamID
+					where QuestionID=@QuestionId and GroupExamid =@GroupExamid	
+			end	
+
+		return @res
+	end
+GO
+
+COMMIT
+GO

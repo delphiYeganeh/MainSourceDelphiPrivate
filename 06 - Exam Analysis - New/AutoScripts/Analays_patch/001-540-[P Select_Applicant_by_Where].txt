@@ -1,0 +1,30 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_Applicant_by_Where]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_Applicant_by_Where]
+END
+GO
+
+CREATE  procedure [dbo].[Select_Applicant_by_Where]
+(@where 	nvarchar(2000))
+AS
+declare @SQL nvarchar(4000)
+set @SQL='SELECT   Faculty.FacultyTitle, EducationGroup.EducationGroupTitle, EducationGroup.EducationGroupCode, 
+                      [Level].LevelTitle, Major.MajorTitle , Major.MajorCode , Applicant.*
+FROM         Applicant 
+left JOIN  Major  ON Applicant.MajorID = Major.MajorID 
+left JOIN [Level] ON Major.LevelID = [Level].LevelID 
+left JOIN EducationGroup ON Major.EducationGroupID = EducationGroup.EducationGroupID 
+left JOIN Faculty ON EducationGroup.FacultyID = Faculty.FacultyID'
+set @where =case when ltrim(isnull(@where,''))='' then '' else ' where '+@where end 
+set @sql=@sql+@where 
+exec(@sql)
+	
+GO
+
+COMMIT
+GO

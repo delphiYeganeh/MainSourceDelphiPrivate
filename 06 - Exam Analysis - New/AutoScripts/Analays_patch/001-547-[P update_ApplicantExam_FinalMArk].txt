@@ -1,0 +1,137 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[update_ApplicantExam_FinalMArk]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[update_ApplicantExam_FinalMArk]
+END
+GO
+
+CREATE  procedure [dbo].[update_ApplicantExam_FinalMArk]
+(
+	@ExamID	[int]
+)
+
+AS
+
+	declare @number_of_applicant int,@Order1 int,@order2 int,@mxMark float,
+			@CorrectItemPoint float,@sumCofficient FLOAT,@BlankItemPoint float,@WrongItemPoint float,@MinPassedMark float,@AcceptedMark FLOAT,@ZaribeFinalMark FLOAT		
+			
+	
+	select @BlankItemPoint=BlankItemPoint, /* بدون جواب */
+		   @CorrectItemPoint= CorrectItemPoint, /* درست */
+		   @WrongItemPoint=WrongItemPoint, /* اشتباه */
+		   @MinPassedMark   = MinPassedMark, /* کمترين نمرمه قبولي درصد */
+		   @ZaribeFinalMark=MaxMark/Number_of_Question, /* امتياز کل آزمون / تعداد سوالات */
+		   @mxMark = MaxMark /* امتياز کل آزمون */
+	from  Exam
+	where ExamID =@ExamID
+
+	/* select MaxMark,Number_of_Question ,*from Exam where ExamID=@ExamID */
+
+	SELECT * into #question FROM question WHERE ExamID=@ExamID and QuestionActivityID in (1,3)
+	select @AcceptedMark = (@MinPassedMark/100.0)*@mxMark /* محاسبه حد قبول يا مردود بر حسب کمترين نمره قبولي و امتاز کل آزمون */
+	from #question
+
+	select * from #question
+	IF OBJECT_ID('tempdb..#m') IS NOT NULL DROP TABLE #m
+
+	SELECT     ApplicantAnswer.ApplicantID,sum(#Question.Coefficient* /* جمع ضريب سوالات ضربدر */
+	case  when  ApplicantAnswer.AnswerItemNumber=0 or QuestionActivityID=2 then @BlankItemPoint /* اگر بدون جواب بود يا سوال از نوع حذفي بود ==>امتياز بدون جواب */
+		  when  ApplicantAnswer.AnswerItemNumber in ( #Question.CorrectItemNumber,#Question.CorrectItemNumber2) or QuestionActivityID=3 then @CorrectItemPoint /* اگر جواب بين گزينه يک درست يا دو درست بود يا جواب سوال درست بود ==>امتياز سوال درست */
+		  when  ApplicantAnswer.AnswerItemNumber in ( #Question.CorrectItemNumber,#Question.CorrectItemNumber3) or QuestionActivityID=3 then @CorrectItemPoint /* اگر جواب بين گزينه يک درست يا دو درست بود يا جواب سوال درست بود ==>امتياز سوال درست */
+		  when  ApplicantAnswer.AnswerItemNumber in ( #Question.CorrectItemNumber,#Question.CorrectItemNumber4) or QuestionActivityID=3 then @CorrectItemPoint /* اگر جواب بين گزينه يک درست يا دو درست بود يا جواب سوال درست بود ==>امتياز سوال درست */
+		  when  ApplicantAnswer.AnswerItemNumber in ( #Question.CorrectItemNumber,#Question.CorrectItemNumber5) or QuestionActivityID=3 then @CorrectItemPoint /* اگر جواب بين گزينه يک درست يا دو درست بود يا جواب سوال درست بود ==>امتياز سوال درست */
+		  when  ApplicantAnswer.AnswerItemNumber in ( #Question.CorrectItemNumber,#Question.CorrectItemNumber6) or QuestionActivityID=3 then @CorrectItemPoint /* اگر جواب بين گزينه يک درست يا دو درست بود يا جواب سوال درست بود ==>امتياز سوال درست */
+		  else    @WrongItemPoint end)/*در غير اين صورت امتياز جواب غلط*//@CorrectItemPoint as finalmark /* تقسيم بر امتياز جواب درست  */
+	into #m
+	FROM         ApplicantAnswer 
+	INNER JOIN   #Question ON ApplicantAnswer.QuestionID = #Question.QuestionID
+	where #Question.ExamID=@ExamID
+	group by ApplicantAnswer.ApplicantID /* امتياز هر دانشجو در آزمون */
+
+	select * from #m /* امتياز هر دانشجو در آزمون */
+
+	SELECT @sumCofficient = sum(#Question.Coefficient) FROM #Question where #Question.ExamID=@ExamID /* جمع ضريب سولات آزمون */
+	select @sumCofficient /* جمع ضريب سولات */
+	SELECT @ZaribeFinalMark=MaxMark/@sumCofficient from  Exam where ExamID =@ExamID /* محاسبه نمره از / جمع ضريب سولات  */
+	select @ZaribeFinalMark 
+
+	UPDATE #m
+	SET finalmark=finalmark*@ZaribeFinalMark  /*  به روزرساني امتياز هر دانشجو در آزمون برحسب جمع ضريب سولات آزمون و محاسبه نمره آزمون از */
+		
+
+		IF OBJECT_ID('tempdb..#n') IS NOT NULL DROP TABLE #n
+		select *,null group27,identity(int,1,1) ord into #n
+		from #m m
+		order by finalmark desc 
+		select @number_of_applicant=max(ord)
+		from #n  /* رتبه بندي دانشجويان آزمون بر حسب امتياز محاسبه شده در آزمون  */
+
+		if @number_of_applicant<20  /* تعيين نفرات گروهها */
+		  set  @Order1=@number_of_applicant/2 /* اگر تعداد دانشجويان آزمون کمتر از بيست نفر بود ==>تعداد دانشجويان آزمون تقسيم بر دو */
+		else
+		if @number_of_applicant between 20  and 40 /*  اگر تعداد دانشجويان بين بيست و چهل نفر بود ==>ده نفر */
+		  set  @Order1=10
+		else 
+		set @Order1=(27*@number_of_applicant)/100  /*  اگر بيشتر از چهل نفر بود بيست و هفت درصر کل شرکت کنندگان  */
+		select 27,@number_of_applicant ,100 ,@Order1 Order1 
+			declare @sql varchar(max)/*تعيين گروه بالا و پايين بر حسب عدد به دست آمده @Order1*/
+			set @sql=''
+			set @sql ='update #n
+						set group27=3 
+						where ApplicantID in (select top '+STR(@Order1) +' ApplicantID from #n order by ord asc)'
+			exec (@sql)			
+			set @sql ='update #n
+						set group27=1 
+						where ApplicantID in (select top '+STR(@Order1) +' ApplicantID from #n order by ord desc)'
+			exec (@sql)			
+			set @sql ='update #n
+						set group27=2 
+						where group27 is null'
+			exec (@sql)			
+
+		update ApplicantExam  /*  به روز رساني جدولي اصلي شرکت کنندگان آزمون */
+		set ApplicantExam.GroupingID=#n.Group27 , /* تعيين گروه بالا و پايين */
+			ApplicantExam.ord=#n.ord, /* تعيين رتبه دانشجو در آرمون */
+			ApplicantExam.finalmark=#n.finalmark, /* امتياز کسب شده توسط دانشجو */
+			accepted=case when #n.finalmark<@AcceptedMark then 0 else 1 end /* قبول يا مردود بر حسب امتياز کسب شده و حد امتياز */
+		from  ApplicantExam
+		 inner join  #n on ApplicantExam.applicantid=#n.applicantid
+		where ApplicantExam.ExamID=@ExamID
+		
+		
+		 /* قبول يا مردود بر حسب امتياز کسب شده و حد امتياز    دوباره نويسي ؟؟؟ */
+			DECLARE @ApplicantID INT, @FinalMark FLOAT,@MaxMark FLOAT,@MinPassedMark1 FLOAT,@Mark FLOAT		
+			SELECT @MaxMark=ISNULL(MaxMark,0),@MinPassedMark1=ISNULL(MinPassedMark,0) FROM Exam WHERE ExamID=@ExamID		
+			DECLARE crr CURSOR FOR 	
+			SELECT ApplicantID FROM Applicant 
+			WHERE ApplicantID IN (SELECT ApplicantID FROM ApplicantExam WHERE ExamID=@ExamID)
+			OPEN crr
+			FETCH NEXT FROM crr INTO @ApplicantID
+
+			WHILE @@FETCH_STATUS = 0
+			BEGIN
+				SELECT @FinalMark=ISNULL(FinalMark,0) FROM ApplicantExam WHERE ExamID=@ExamID AND ApplicantID=@ApplicantID
+				SET @Mark=(@FinalMark*100)/@MaxMark
+				IF ISNULL(@Mark,0)>=ISNULL(@MinPassedMark1,0)
+					UPDATE ApplicantExam
+					SET Accepted=1
+					WHERE ExamID=@ExamID AND ApplicantID=@ApplicantID 
+				ELSE
+					UPDATE ApplicantExam
+					SET Accepted=0
+					WHERE ExamID=@ExamID AND ApplicantID=@ApplicantID			
+				FETCH NEXT FROM crr INTO @ApplicantID
+			END
+			CLOSE crr
+ 			DEALLOCATE crr
+	 	
+
+	
+GO
+
+COMMIT
+GO

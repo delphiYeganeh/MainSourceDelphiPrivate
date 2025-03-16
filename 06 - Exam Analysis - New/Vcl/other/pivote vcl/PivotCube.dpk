@@ -1,0 +1,41 @@
+package PivotCube;
+
+{$R *.res}
+{$ALIGN 2}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $51000000}
+{$DESCRIPTION 'PivotCube VCL components'}
+{$IMPLICITBUILD ON}
+
+requires
+  designide,
+  dclbde,
+  rtl,
+  vcl,
+  tee,
+  vcljpg,
+  dsnap,
+  adortl;
+
+contains
+  PivotCubeReg in '..\PivotCubeReg.pas';
+
+end.

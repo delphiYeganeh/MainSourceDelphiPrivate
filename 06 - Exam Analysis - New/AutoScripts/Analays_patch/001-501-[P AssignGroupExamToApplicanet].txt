@@ -1,0 +1,81 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[AssignGroupExamToApplicanet]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[AssignGroupExamToApplicanet]
+END
+GO
+
+CREATE  procedure [dbo].[AssignGroupExamToApplicanet] (@ExamId int , @Type bit)
+	as
+	begin
+		declare @GroupExamId int =1
+
+		select @GroupExamId= isnull(GroupExamId,1) 
+		from Exam 
+		where  ExamId=@ExamId
+		
+		if @GroupExamId=1
+			begin
+				if @Type=0
+					begin
+									update ApplicantExam
+						set GroupExamId=1,
+						SeatNumber=s.RowNumber
+											 from (	  
+														select	row_number()  over( order by a.LastName) RowNumber,	a.FullName,ae.*   	 
+														from ApplicantExam ae
+														inner join Applicant a on a.ApplicantID=ae.ApplicantID
+														where  ExamId=@ExamId)s
+						where ApplicantExam.ApplicantExamID=s.ApplicantExamID
+					end
+				else
+					begin
+						update ApplicantExam
+						set GroupExamId=1,
+						SeatNumber=s.RowNumber
+											 from (	  
+														select	row_number()  over( order by a.ApplicantCode) RowNumber,	a.FullName,ae.*   	 
+														from ApplicantExam ae
+														inner join Applicant a on a.ApplicantID=ae.ApplicantID
+														where  ExamId=@ExamId)s
+						where ApplicantExam.ApplicantExamID=s.ApplicantExamID
+					end 
+			end
+		else
+			begin
+				if @Type=0 
+					begin
+						update ApplicantExam
+						set GroupExamId=case when s.RowNumber%@GroupExamId>0 then s.RowNumber%@GroupExamId else @GroupExamId end
+						,seatNumber=s.RowNumber	
+											 from (	  
+													select	row_number()  over( order by a.LastName) RowNumber,	a.FullName,ae.*   	 
+													from ApplicantExam ae
+													inner join Applicant a on a.ApplicantID=ae.ApplicantID
+													where  ExamId=@ExamId)s
+						where ApplicantExam.ApplicantExamID=s.ApplicantExamID			
+					
+					end
+				else
+					begin
+					
+						update ApplicantExam
+						set GroupExamId=case when s.RowNumber%@GroupExamId>0 then s.RowNumber%@GroupExamId else @GroupExamId end
+						,seatNumber=s.RowNumber	
+											 from (	  
+													select	row_number()  over( order by a.Applicantcode) RowNumber,	a.ApplicantCode,ae.*   	 
+													from ApplicantExam ae
+													inner join Applicant a on a.ApplicantID=ae.ApplicantID
+													where  ExamId=@ExamId)s
+						where ApplicantExam.ApplicantExamID=s.ApplicantExamID			
+					end
+			end	
+	end
+GO
+
+COMMIT
+GO

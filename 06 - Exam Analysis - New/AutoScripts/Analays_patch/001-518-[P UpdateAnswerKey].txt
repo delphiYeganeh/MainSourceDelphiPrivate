@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[UpdateAnswerKey]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[UpdateAnswerKey]
+END
+GO
+
+CREATE  procedure [dbo].[UpdateAnswerKey] 
+@ExamID INT, @AnswerKey NVARCHAR(500)
+AS
+BEGIN
+	UPDATE Question	SET	CorrectItemNumber = CONVERT(INT,SUBSTRING(@AnswerKey, Number,1))
+	WHERE ExamID = @ExamID 
+END
+
+GO
+
+COMMIT
+GO

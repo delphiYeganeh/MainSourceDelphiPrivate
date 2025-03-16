@@ -1,0 +1,51 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_ApplicantExam_Log]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_ApplicantExam_Log]
+END
+GO
+
+CREATE  procedure [dbo].[Select_ApplicantExam_Log]
+(
+  @applicantID INT ,
+  @ExamID [int]
+ )
+AS
+BEGIN 
+      DECLARE @CorrectItemPoint FLOAT ,
+              @BlankItemPoint FLOAT ,
+              @WrongItemPoint FLOAT
+
+      SELECT    @BlankItemPoint = BlankItemPoint, @CorrectItemPoint = CorrectItemPoint, @WrongItemPoint = WrongItemPoint
+      FROM      Exam
+      WHERE     ExamID = @ExamID
+
+      SELECT    MAX(ApplicantID) ApplicantID, ISNULL(Course.CourseTitle, 'ساير دروس') coursetitle,
+                ROUND(ISNULL(MAX(CourseMark), 100.0) * SUM(Coefficient * CASE WHEN ApplicantAnswer.AnswerItemNumber = 0 OR QuestionActivityID = 2
+                                                                              THEN @BlankItemPoint
+                                                                              WHEN ApplicantAnswer.AnswerItemNumber IN (
+                                                                                   CorrectItemNumber, CorrectItemNumber2,
+                                                                                   CorrectItemNumber3,
+                                                                                   CorrectItemNumber4,
+                                                                                   CorrectItemNumber5,
+                                                                                   CorrectItemNumber6 ) OR QuestionActivityID = 3
+                                                                              THEN @CorrectItemPoint
+                                                                              ELSE @WrongItemPoint
+                                                                         END) / SUM(Coefficient * @CorrectItemPoint), 2) PercentMark
+      FROM      Question
+                INNER JOIN ApplicantAnswer ON Question.QuestionID = ApplicantAnswer.QuestionID
+                LEFT OUTER JOIN Course ON Question.CourseID = Course.CourseID
+      WHERE     ( Question.ExamID = @ExamID ) AND ( ApplicantAnswer.ApplicantID = @ApplicantID ) AND QuestionActivityID IN (
+                1, 3 )
+      GROUP BY  ISNULL(Course.CourseTitle, 'ساير دروس')
+      ORDER BY  1
+END
+	
+GO
+
+COMMIT
+GO

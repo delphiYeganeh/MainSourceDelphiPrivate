@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="Pdemo.exe"/>
+    <OBJFILES value="Pdemo.obj Demo.obj Combos.obj DemoLoc.obj Filtdlg.obj Grdbitmp.obj 
+      Grdbttn.obj Grdlook.obj Grdmemo.obj isearch.obj Lkdtl.obj Lkquery.obj 
+      multi.obj Packdlgs.obj Packtest.obj Pictures.obj Qbe.obj rcdvw.obj 
+      Search.obj savefilt.obj selfilt.obj wwsavflt.obj dtpicker.obj 
+      monthcalu.obj mnthyear.obj navmany.obj navigatorcomb.obj Rcdpnldemo.obj 
+      rcdpnldemo2.obj DataInspectorU.obj dbchecku.obj 
+      gridctrl.obj GridMasterDetail.obj 
+      GridExpand.obj"/>
+    <RESFILES value="Pdemo.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) Demo.dfm Combos.dfm DemoLoc.dfm Filtdlg.dfm Grdbitmp.dfm 
+      Grdbttn.dfm Grdlook.dfm Grdmemo.dfm isearch.dfm Lkdtl.dfm Lkquery.dfm 
+      multi.dfm Packdlgs.dfm Packtest.dfm Pictures.dfm Qbe.dfm rcdvw.dfm 
+      Search.dfm savefilt.dfm selfilt.dfm dtpicker.dfm monthcalu.dfm 
+      mnthyear.dfm navmany.dfm navigatorcomb.dfm Rcdpnldemo.dfm rcdpnldemo2.dfm 
+      DataInspectorU.dfm dbchecku.dfm gridctrl.dfm 
+      gridctrl.dfm GridMasterDetail.dfm 
+      GridExpand.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="ip50_d5.lib"/>
+    <SPARELIBS value="vcl50.lib vclx50.lib vcldb50.lib vclbde50.lib vcldbx50.lib ip50_d5.lib 
+      ip3000v5.lib"/>
+    <PACKAGES value="vclx50.bpi vcl50.bpi vcldb50.bpi vclbde50.bpi vcldbx50.bpi ip3000v5.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;USEPACKAGES"/>
+    <MAINSOURCE value="Pdemo.cpp"/>
+    <INCLUDEPATH value="&quot;d:\Program Files\Borland\CBuilder4\Projects\&quot;;..\source;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="\\RAID\SharedData\ip3000vcl5\package;\\RAID\SharedData\ip5d5\package;&quot;d:\Program Files\Borland\CBuilder4\Projects\&quot;;..\source;\\RAID\SharedData\ip5c4\package;&quot;e:\program files\borland\thunder\lib\release\&quot;;..\package;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I&quot;d:\Program Files\Borland\CBuilder4\Projects\&quot; -I..\source 
+      -I$(BCB)\include -I$(BCB)\include\vcl -src_suffixcpp"/>
+    <CFLAG1 value="-Od -H=d:\PROGRA~1\borland\rampage\lib\vcl50.csm -Hc -Vx -Ve -X- -r- -a8 
+      -b- -k -v -vi- -c -tWM"/>
+    <PFLAGS value="-AWinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE 
+      -$YD -$W -$O- -v -JPHNV -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-Sc:0x6000 -aa -Tpe -x -v"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj $(PACKAGES) sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Excluded Packages]
+d:\Program Files\Woll2Woll\ip2000d5\package\ip50d_d5.bpl=Woll2Woll InfoPower 2000
+$(BCB)\Projects\Bpl\ip50word2000c5.bpl=d:\program files\borland\rampage\Projects\Bpl\ip50word2000c5
+d:\Program Files\Woll2Woll\ip2000c5Trial\package\IP50client_c5trial.bpl=Woll2Woll InfoPower 2000 for Midas
+d:\Program Files\Woll2Woll\ip2000c5Trial\package\ip50d_c5trial.bpl=Woll2Woll InfoPower 2000
+d:\PROGRA~1\Borland\Delphi5\Bin\dclaxserver50.bpl=Borland Sample Automation Server Components
+d:\Program Files\Woll2Woll\ip2000d5\package\ip50word2000_d5.bpl=Woll2Woll InfoPower 2000 RichEdit for MSWord
+
+[HistoryLists\hlUnitAliases]
+Count=1
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE
+
+[Debugging]
+DebugSourceDirs=
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=1
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

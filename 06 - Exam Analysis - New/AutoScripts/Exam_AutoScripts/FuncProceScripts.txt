@@ -1,0 +1,271 @@
+[SECTION_MAX_NO]=11
+
+[BEGIN_S_NO]=1
+
+ALTER  PROCEDURE [dbo].[Update_Table_CustomFieldsCaption]
+		@TableName NVARCHAR(50),
+		@cfc1 NVARCHAR(50),
+		@cfc2 NVARCHAR(50),
+		@cfc3 NVARCHAR(50),
+		@cfc4 NVARCHAR(50),
+		@cfc5 NVARCHAR(50),
+		@UTID INT  = 0 
+AS		
+IF EXISTS(SELECT * FROM sys_Setting WHERE VariableName = @TableName+'.CustomField1' AND ISNULL(UTID,0) = @UTID )
+	UPDATE sys_Setting SET [Value] = @cfc1 WHERE VariableName = @TableName+'.CustomField1' AND ISNULL(UTID,0) = @UTID
+ELSE 
+	INSERT INTO sys_Setting(UserID,VariableName,[Value],UTID)
+	VALUES(-1, @TableName+'.CustomField1', @cfc1,@UTID)
+	
+IF EXISTS(SELECT * FROM sys_Setting WHERE VariableName = @TableName+'.CustomField2' AND ISNULL(UTID,0) = @UTID )
+	UPDATE sys_Setting SET [Value] = @cfc2 WHERE VariableName = @TableName+'.CustomField2'  AND ISNULL(UTID,0) = @UTID
+ELSE 
+	INSERT INTO sys_Setting(UserID,VariableName,[Value],UTID)
+	VALUES(-1, @TableName+'.CustomField2', @cfc2,@UTID)
+	
+IF EXISTS(SELECT * FROM sys_Setting WHERE VariableName = @TableName+'.CustomField3' AND ISNULL(UTID,0) = @UTID )
+	UPDATE sys_Setting SET [Value] = @cfc3 WHERE VariableName = @TableName+'.CustomField3' AND ISNULL(UTID,0) = @UTID
+ELSE 
+	INSERT INTO sys_Setting(UserID,VariableName,[Value],UTID)
+	VALUES(-1, @TableName+'.CustomField3', @cfc3,@UTID)
+
+IF EXISTS(SELECT * FROM sys_Setting WHERE VariableName = @TableName+'.CustomField4' AND ISNULL(UTID,0) = @UTID )
+	UPDATE sys_Setting SET [Value] = @cfc4 WHERE VariableName = @TableName+'.CustomField4' AND ISNULL(UTID,0) = @UTID
+ELSE 
+	INSERT INTO sys_Setting(UserID,VariableName,[Value],UTID)
+	VALUES(-1, @TableName+'.CustomField4', @cfc4,@UTID)
+
+IF EXISTS(SELECT * FROM sys_Setting WHERE VariableName = @TableName+'.CustomField5' AND ISNULL(UTID,0) = @UTID )
+	UPDATE sys_Setting SET [Value] = @cfc5 WHERE VariableName = @TableName+'.CustomField5' AND ISNULL(UTID,0) = @UTID
+ELSE 
+	INSERT INTO sys_Setting(UserID,VariableName,[Value],UTID)
+	VALUES(-1, @TableName+'.CustomField5', @cfc5,@UTID)
+
+
+
+[END_S_NO]
+
+
+[BEGIN_S_NO]=2
+
+ALTER PROCEDURE [dbo].[Select_Table_CustomFieldsCaption]
+@TableName NVARCHAR(50),
+@UTID INT  = 0  
+AS 
+DECLARE @cfc1 NVARCHAR(50),
+		@cfc2 NVARCHAR(50),
+		@cfc3 NVARCHAR(50),
+		@cfc4 NVARCHAR(50),
+		@cfc5 NVARCHAR(50)
+		
+		
+SELECT @cfc1 = VALUE FROM sys_Setting WHERE VariableName = @TableName+'.CustomField1' AND ISNULL(UTID,0) = @UTID 
+SELECT @cfc2 = VALUE FROM sys_Setting WHERE VariableName = @TableName+'.CustomField2' AND ISNULL(UTID,0) = @UTID 
+SELECT @cfc3 = VALUE FROM sys_Setting WHERE VariableName = @TableName+'.CustomField3' AND ISNULL(UTID,0) = @UTID 
+SELECT @cfc4 = VALUE FROM sys_Setting WHERE VariableName = @TableName+'.CustomField4' AND ISNULL(UTID,0) = @UTID 
+SELECT @cfc5 = VALUE FROM sys_Setting WHERE VariableName = @TableName+'.CustomField5' AND ISNULL(UTID,0) = @UTID 
+
+Select	ISNULL(@cfc1,'فيلد 1') AS CFC1,
+		ISNULL(@cfc2,'فيلد 2') AS CFC2,
+		ISNULL(@cfc3,'فيلد 3') AS CFC3,
+		ISNULL(@cfc4,'فيلد 4') AS CFC4,
+		ISNULL(@cfc5,'فيلد 5') AS CFC5
+
+
+
+[END_S_NO]
+
+
+[BEGIN_S_NO]=3
+
+
+ALTER proc [dbo].[Duplicate_CourseTitle]
+@CourseTitle nvarchar(60)
+,@UTID INT = 0
+,@result bit output
+as
+set @result=0
+if exists (SELECT     *
+FROM         Course
+WHERE  ISNULL(utid,0) = @UTID  and   replace(CourseTitle,' ','')=replace(@CourseTitle,' ',''))
+set @result=1
+
+
+
+[END_S_NO]
+
+[BEGIN_S_NO]=4
+
+ALTER Proc [dbo].[select_Course]
+@Like nvarchar(50)
+,@UTID INT = 0
+as
+SELECT     *
+FROM         Course
+WHERE    ( (CourseTitle LIKE '%'+@like+'%') OR  (CourseCode LIKE N'%'+@like+'%'))
+   AND ISNULL(UTID,0) = @UTID
+
+
+
+[END_S_NO]
+
+[BEGIN_S_NO]=5
+
+ALTER PROCEDURE [dbo].[Get_UserSetting]
+@UserID  int ,@VariableName varchar(50),
+@UTID INT = 0,
+@Value nvarchar(100) output
+AS
+SELECT     @Value=Value
+FROM         sys_Setting
+WHERE     (UserID = @UserID) AND (VariableName = @VariableName)
+          AND (ISNULL(UTID,0) = @UTID)
+
+set @Value=isnull(@Value,'')
+
+
+
+[END_S_NO]
+
+[BEGIN_S_NO]=6
+
+ALTER PROCEDURE [dbo].[Get_SystemSetting]
+@VariableName varchar(50),
+@UTID INT = 0,
+@Value nvarchar(100)  output
+AS
+ exec Get_UserSetting -1,@VariableName,@UTID,@value output
+
+
+[END_S_NO]
+
+[BEGIN_S_NO]=7
+
+
+ALTER PROCEDURE [dbo].[Set_UserSetting]
+@UserID  int ,@VariableName varchar(50),@Value nvarchar(100),@UTID INT = 0
+AS
+if not exists(select * From sys_Setting WHERE (UserID = @UserID) AND (VariableName = @VariableName))
+insert into sys_Setting(UserID,VariableName,VALUE,UTID) values(@UserID,@VariableName,@Value,@UTID)
+Update sys_Setting
+set Value=@Value
+WHERE     (UserID = @UserID) AND (VariableName = @VariableName)
+
+
+[END_S_NO]
+
+
+[BEGIN_S_NO]=8
+
+ALTER PROCEDURE [dbo].[Set_systemSetting]
+@VariableName varchar(50),@Value nvarchar(100),@UTID INT = 0
+AS
+exec Set_UserSetting -1 ,@VariableName ,@Value,@UTID
+
+
+[END_S_NO]
+
+[BEGIN_S_NO]=9
+
+	ALTER PROCEDURE [dbo].[Browse_Exam]
+	@where varchar(2047)
+	AS
+	 declare @SqlCommand nvarchar(4000)
+	 set   @SqlCommand='SELECT     GroupExam.Code GroupExam ,Exam.ExamID, Exam.ExamTitle, Exam.MainCourseID, Exam.MainDesignerTeacherID, Exam.ExamDate, Exam.CorrectItemPoint, 
+						  Exam.WrongItemPoint, Exam.BlankItemPoint, Exam.MinPassedMark, Exam.ExamTypeID, Exam.Number_of_Items, Exam.Number_of_Question, 
+						  Exam.number_of_applicant, Exam.TexFormatID, Exam.TermCode, ExamType.ExamTypeTitle, Teacher.TeacherCode, Teacher.FullName, 
+						  TextFormat.TextFormatTitle, Course.CourseCode, Course.CourseTitle,
+						  Exam.CustomField1,Exam.CustomField2,Exam.CustomField3,Exam.CustomField4,Exam.CustomField5,Exam.UTID
+	FROM         Exam 
+	LEFT JOIN  Teacher ON Exam.MainDesignerTeacherID = Teacher.TeacherID 
+	LEFT JOIN  Course ON Exam.MainCourseID = Course.CourseID 
+	LEFT JOIN  TextFormat ON Exam.TexFormatID = TextFormat.TextFormatID 
+	LEFT JOIN  ExamType ON Exam.ExamTypeID = ExamType.ExamTypeID
+	left join  GroupExam on Exam.GroupExamId=GroupExam.GroupExamId
+	'
+	set @where=isnull(ltrim(@where),'')
+	 if @where<>''  set  @where=' where '+@where
+	set @SqlCommand=@SqlCommand+@where+' order by ExamDate desc '
+	exec sp_executesql @SqlCommand
+
+
+[END_S_NO]
+
+[BEGIN_S_NO]=10
+
+ALTER PROCEDURE [dbo].[Select_Exam_ByExamID]
+	(@ExamID 	int)
+AS  
+SELECT  ExamID, ExamTitle, MainCourseID, MainDesignerTeacherID, ExamDate, CorrectItemPoint, WrongItemPoint, DamagedItemPoint, BlankItemPoint,
+ROUND(CorrectItemPoint,3) AS CorrectIP, ROUND(WrongItemPoint,3) AS WrongIP, ROUND(DamagedItemPoint,3) AS DamagedIP,ROUND(BlankItemPoint,3) AS BlankIP, 
+MinPassedMark, ExamTypeID, Number_of_Items, Number_of_Question, number_of_applicant, TexFormatID, AnswerKey, Difficulty, 
+Discrimination, StandardError, Alpha, Reliability, ExamVariance, NumberOf_1item_Question, NumberOf_2item_Question, NumberOf_3item_Question, 
+NumberOf_4item_Question, NumberOf_5item_Question, RPBIS, TermCode, KR20, MaxMark, NumberOf_6item_Question, EducationGroupID, TeacherID, 
+CustomField1, CustomField2, CustomField3, CustomField4, CustomField5
+,GroupExamid,UTID
+FROM         Exam
+WHERE 
+	( ExamID	 = @ExamID)
+
+[END_S_NO]
+
+[BEGIN_S_NO]=11
+
+ALTER  procedure [dbo].[Select_ExamDetail_by_where]
+@where varchar(2047)
+,@UTID INT = 0
+AS
+declare @s nvarchar(4000)
+
+IF OBJECT_ID('tempdb..##E') IS NOT NULL DROP TABLE ##E
+IF OBJECT_ID('tempdb..##ApplicantExam') IS NOT NULL DROP TABLE ##ApplicantExam
+
+set   @s='SELECT  ExamID into ##E FROM   Exam '
+if @where<>''  set  @where=' where '+@where
+set @s=@s+@where
+exec sp_executesql @S
+set @s='
+SELECT  ApplicantExam.ExamID,(select count(*) from QuestionDelete '+@where+') as del ,round(AVG(FinalMark),3)     AS [ميانگين نمرات],
+round( STDEVP(FinalMark),3)  AS [استاندارد دويشن نمرات],
+max((case when FinalMark<0 then 0 else round((FinalMark*(Number_of_Question/MaxMark)*CorrectItemPoint*(case when maxmark is null or maxmark <=0 then 20 else maxmark
+end))/dbo.CalcFullPoint(Exam.examid),2) end)  )  AS [بيشترين نمرات],
+min((case when FinalMark<0 then 0 else round((FinalMark*(Number_of_Question/MaxMark)*CorrectItemPoint*(case when maxmark is null or maxmark <=0 then 20 else maxmark
+end))/dbo.CalcFullPoint(Exam.examid),2) end)  )  AS [کمترين نمرات] '
+set @s=@s+'into ##ApplicantExam FROM ApplicantExam
+inner join Exam on ApplicantExam.examid=Exam.examid  where Exam.examid in (select examid from ##E) group by ApplicantExam.ExamID'
+
+exec(@s)
+
+set @s='
+
+DECLARE @SQLString NVARCHAR(500), @ParmDefinition NVARCHAR(500), @parmIN int, @parmRET1 float
+select @parmIN = examid from exam  '+@where +' SET @SQLString=N''EXEC SP_KR20 @parm, @parm1OUT OUTPUT'' SET @ParmDefinition=N''@parm int, @parm1OUT float OUTPUT''
+EXECUTE sp_executesql @SQLString, @ParmDefinition, @parm=@parmIN, @parm1OUT=@parmRET1 OUTPUT
+SELECT dbo.[Select_Applicant_by_Examid_Tahlil_TEDAD_RADI]('+SUBSTRING(@where,15,LEN(@where)-14)+') [تعداد ردي] ,
+dbo.[Select_Applicant_by_Examid_Tahlil_TEDAD_GHABOLI]('+SUBSTRING(@where,15,LEN(@where)-14)+') [تعداد قبولي] ,
+CAST(ROUND(CAST(dbo.[Select_Applicant_by_Examid_Tahlil_PERCENT_RADI]('+SUBSTRING(@where,15,LEN(@where)-14)+') AS FLOAT),2) AS VARCHAR(100)) [درصد ردي] ,
+CAST(ROUND(CAST(dbo.[Select_Applicant_by_Examid_Tahlil_PERCENT_GHABOLI]('+SUBSTRING(@where,15,LEN(@where)-14)+') AS FLOAT),2) AS VARCHAR(100)) [درصد قبولي],
+Exam.ExamTitle [عنوان آزمون], Exam.ExamDate [تاريخ برگزاري], Exam.CorrectItemPoint [امتياز پاسخ درست], Exam.WrongItemPoint [امتياز پاسخ نادرست],
+Exam.BlankItemPoint [امتياز بدون پاسخ], Exam.MinPassedMark*Exam.Maxmark/100 [نمره قبولي], Exam.Number_of_Items [تعداد گزينه],
+Exam.Number_of_Question [تعداد سئوال], (select count(*) from QuestionDelete '+@where+') as [سوالات حذفي] ,Exam.number_of_applicant [تعداد داوطلب],
+round(exam.Difficulty,2) as [ضريب دشواري], Round(Exam.Discrimination,2) as [ضريب افتراق], NumberOf_1item_Question [تعداد سئوالات 1 گزينه اي],
+NumberOf_2item_Question [تعداد سئوالات 2 گزينه اي], NumberOf_3item_Question [تعداد سئوالات 3 گزينه اي], NumberOf_4item_Question [تعداد سئوالات 4 گزينه اي],
+NumberOf_5item_Question [تعداد سئوالات 5 گزينه اي], NumberOf_6item_Question [تعداد سئوالات 6 گزينه اي], round(StandardError,2)  [خطاي استاندارد],
+Alpha آلفا, round(ExamVariance,2) [واريانس نمرات], RPBIS , @parmRET1 KR20 , 1 taxonomy1, 1 taxonomy2,1 taxonomy3,1 taxonomy23,1 objectionnumber0,1 objectionnumber1,
+1 objectionnumber2,1 objectionnumber3, ##ApplicantExam.* '
+select @s=@s+', (select count(Questionid) from Question where examId=Exam.ExamID and Difficulty >= '+cast(minvalue as varchar(10))+' and Difficulty <'+cast(maxvalue as varchar(10)) +') as [دشواري:'+Difficultytitle+'] '
+from Difficulty WHERE ISNULL(UTID,0) = ISNULL(@UTID,0)
+
+select @s=@s+', (select count(Questionid) from Question where examId=Exam.ExamID and Discrimination >=   '+cast(minvalue as varchar(10))+' and  Discrimination<'+cast(maxvalue as varchar(10))+') as [افتراق:'+DiscriminationTitle+'] '
+from Discrimination  WHERE ISNULL(UTID,0) = ISNULL(@UTID,0)
+set @s=@s+'FROM Exam
+INNER JOIN ##ApplicantExam on ##ApplicantExam.ExamID=Exam.ExamID
+left JOIN   ExamType ON Exam.ExamTypeID = ExamType.ExamTypeID'
+print @s
+exec(@s)
+drop table ##E
+drop Table ##ApplicantExam
+	
+	
+
+[END_S_NO]

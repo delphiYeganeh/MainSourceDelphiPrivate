@@ -1,0 +1,97 @@
+CREATE TABLE [dbo].[University](
+	[UTID] [int] IDENTITY(1,1) NOT NULL,
+	[UTName] [nvarchar](100) NULL,
+	[Description] [nvarchar](500) NULL,
+	[UTCode] [nvarchar](10) NULL
+) ON [PRIMARY]
+GO
+
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'sys_User'))
+BEGIN
+    ALTER TABLE [dbo].[sys_User] ADD UTID INT  null
+END
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'TextFormat'))
+BEGIN
+    ALTER TABLE [dbo].[TextFormat] ADD UTID INT  null
+END
+
+  
+  IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'LetterTemplate'))
+BEGIN
+    ALTER TABLE [dbo].[LetterTemplate] ADD UTID INT  null
+END
+
+    IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'sys_Setting'))
+BEGIN
+    ALTER TABLE [dbo].[sys_Setting] ADD UTID INT  null
+END
+
+    IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'GroupExam'))
+BEGIN
+    ALTER TABLE [dbo].[GroupExam] ADD UTID INT  null
+END
+
+      IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Faculty'))
+BEGIN
+    ALTER TABLE [dbo].[Faculty] ADD UTID INT  null
+END
+
+        IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Applicant'))
+BEGIN
+    ALTER TABLE [dbo].[Applicant] ADD UTID INT  null
+END
+
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Teacher'))
+BEGIN
+    ALTER TABLE [dbo].[Teacher] ADD UTID INT  null
+END
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Course'))
+BEGIN
+    ALTER TABLE [dbo].[Course] ADD UTID INT  null
+END
+
+  IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'ExamType'))
+BEGIN
+    ALTER TABLE [dbo].[ExamType] ADD UTID INT  null
+END
+
+  
+    IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Difficulty'))
+BEGIN
+    ALTER TABLE [dbo].[Difficulty] ADD UTID INT  null
+END
+
+
+    IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Discrimination'))
+BEGIN
+    ALTER TABLE [dbo].[Discrimination] ADD UTID INT  null
+END
+
+    IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Exam'))
+BEGIN
+    ALTER TABLE [dbo].[Exam] ADD UTID INT  null
+END
+
+      IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'EducationGroup'))
+BEGIN
+    ALTER TABLE [dbo].[EducationGroup] ADD UTID INT  null
+END
+
+
+
+ALTER VIEW [dbo].[vw_Teacher]
+AS
+SELECT     TeacherID, FullName,UTID
+FROM         dbo.Teacher
+
+GO
+
+
+
+
+
+

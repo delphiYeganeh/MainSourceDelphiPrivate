@@ -1,0 +1,35 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PRC_ExPositive_Delete]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PRC_ExPositive_Delete]
+END
+GO
+
+CREATE  procedure [dbo].[PRC_ExPositive_Delete]
+			(
+			  @FLAG   INT, --نوع حذف
+			  @ID     INT,
+			  @ExamID INT,
+			  @ApplicantId nvarchar(20)
+
+			)
+AS
+IF @FLAG = 1
+BEGIN 
+	DELETE FROM [dbo].[ExPositive]
+		  WHERE ID = @ID
+END
+IF @FLAG = 2
+BEGIN 
+	DELETE FROM [dbo].[ExPositive]
+		  WHERE ExamID = @ExamID
+          AND ApplicantId = @ApplicantId
+END
+GO
+
+COMMIT
+GO

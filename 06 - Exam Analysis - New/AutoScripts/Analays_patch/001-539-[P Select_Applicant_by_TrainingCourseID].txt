@@ -1,0 +1,39 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_Applicant_by_TrainingCourseID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_Applicant_by_TrainingCourseID]
+END
+GO
+
+CREATE  procedure [dbo].[Select_Applicant_by_TrainingCourseID]
+	(@TrainingCourseID	int)
+AS
+SELECT    top 1000  Applicant.*  , Faculty.FacultyTitle, Major.MajorTitle, ApplicantExam.FinalMark, ApplicantExam.ord, 
+                      CASE WHEN ApplicantExam.Accepted = 1 THEN 'قبول' ELSE 'رد' END ACCEPT, Grouping.GroupingTitle,
+EducationMark   mark20,
+Course.CourseTitle, Course.CourseCode, TrainingCourse.TermCode CourseTerm , TrainingCourse.GrourpCode, TrainingCourse.StartDate, 
+                      Teacher.TeacherCode, Teacher.FullName TeacherTitle, 
+                      isnull(Exam.ExamDate, '') AS ExamDate, isnull(Exam.ExamTitle, '') AS ExamTitle, isnull(Exam.TermCode, 0) ExamTerm,
+                      EducationGroup.EducationGroupTitle
+FROM         Applicant 
+left  JOIN   ApplicantExam ON ApplicantExam.ApplicantID = Applicant.ApplicantID 
+LEFT JOIN Exam ON ApplicantExam.ExamID = Exam.ExamID
+INNER JOIN ApplicantCourse ON Applicant.ApplicantID = ApplicantCourse.ApplicantID
+INNER JOIN TrainingCourse ON ApplicantCourse.TrainingCourseID = TrainingCourse.TrainingCourseID
+INNER JOIN  Course ON TrainingCourse.CourseID = Course.CourseID 
+left JOIN   Grouping ON ApplicantExam.GroupingID = Grouping.GroupingID
+left JOIN  Teacher ON TrainingCourse.TeacherID = Teacher.TeacherID 
+LEFT  JOIN Major ON Applicant.MajorID = Major.MajorID 
+LEFT  JOIN EducationGroup ON EducationGroup.EducationGroupID = Major.EducationGroupID 
+LEFT  JOIN   Faculty ON EducationGroup.FacultyID = Faculty.FacultyID
+WHERE     (TrainingCourse.TrainingCourseID=@TrainingCourseID )
+order by ord
+	
+GO
+
+COMMIT
+GO

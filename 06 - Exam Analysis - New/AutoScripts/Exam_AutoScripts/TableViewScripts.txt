@@ -1,0 +1,143 @@
+[SECTION_MAX_NO]=5
+
+[BEGIN_S_NO]=1
+
+IF NOT EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N'[DBO].[TBLAPPSETTING]') AND TYPE IN (N'U'))
+BEGIN 
+CREATE TABLE [dbo].[TBLAPPSETTING](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descript] [nvarchar](2000) NULL,
+	[Max_TableScriptNumber] [int] NULL,
+	[Max_ViewScriptNumber] [int] NULL,
+	[Last_TableScriptNumber] [int] NULL,
+	[Last_ViewScriptNumber] [int] NULL,
+	[Error_RunTableScriptNumber] [int] NULL,
+	[Error_RunViewScriptNumber] [int] NULL,
+        [Date] datetime null,
+        [AppVersion] nvarchar(100)
+) ON [PRIMARY]
+
+END 
+
+[END_S_NO]
+
+[BEGIN_S_NO]=2
+
+IF NOT EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N'[DBO].[University]') AND TYPE IN (N'U'))
+BEGIN 
+CREATE TABLE [dbo].[University](
+	[UTID] [int] IDENTITY(1,1) NOT NULL,
+	[UTName] [nvarchar](100) NULL,
+	[Description] [nvarchar](500) NULL,
+	[UTCode] [nvarchar](10) NULL
+) ON [PRIMARY]
+
+END 
+
+[END_S_NO]
+
+[BEGIN_S_NO]=3
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'sys_User'))
+BEGIN
+    ALTER TABLE [dbo].[sys_User] ADD UTID INT  null
+END
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'TextFormat'))
+BEGIN
+    ALTER TABLE [dbo].[TextFormat] ADD UTID INT  null
+END
+
+  
+  IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'LetterTemplate'))
+BEGIN
+    ALTER TABLE [dbo].[LetterTemplate] ADD UTID INT  null
+END
+
+    IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'sys_Setting'))
+BEGIN
+    ALTER TABLE [dbo].[sys_Setting] ADD UTID INT  null
+END
+
+    IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'GroupExam'))
+BEGIN
+    ALTER TABLE [dbo].[GroupExam] ADD UTID INT  null
+END
+
+      IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Faculty'))
+BEGIN
+    ALTER TABLE [dbo].[Faculty] ADD UTID INT  null
+END
+
+        IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Applicant'))
+BEGIN
+    ALTER TABLE [dbo].[Applicant] ADD UTID INT  null
+END
+
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Teacher'))
+BEGIN
+    ALTER TABLE [dbo].[Teacher] ADD UTID INT  null
+END
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Course'))
+BEGIN
+    ALTER TABLE [dbo].[Course] ADD UTID INT  null
+END
+
+  IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'ExamType'))
+BEGIN
+    ALTER TABLE [dbo].[ExamType] ADD UTID INT  null
+END
+
+  
+    IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Difficulty'))
+BEGIN
+    ALTER TABLE [dbo].[Difficulty] ADD UTID INT  null
+END
+
+
+    IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Discrimination'))
+BEGIN
+    ALTER TABLE [dbo].[Discrimination] ADD UTID INT  null
+END
+
+    IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'Exam'))
+BEGIN
+    ALTER TABLE [dbo].[Exam] ADD UTID INT  null
+END
+
+      IF NOT EXISTS(SELECT 1 FROM sys.columns  WHERE Name = N'UTID' AND Object_ID = Object_ID(N'EducationGroup'))
+BEGIN
+    ALTER TABLE [dbo].[EducationGroup] ADD UTID INT  null
+END
+
+
+[END_S_NO]
+
+
+[BEGIN_S_NO]=4
+
+ALTER VIEW [dbo].[vw_Teacher]
+AS
+SELECT     TeacherID, FullName,UTID
+FROM         dbo.Teacher
+[END_S_NO]
+
+[BEGIN_S_NO]=5
+
+
+IF NOT EXISTS(SELECT 1 FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N'[DBO].[tblAppVer]') AND TYPE IN (N'U'))
+BEGIN 
+CREATE TABLE [dbo].[tblAppVer](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ver] [varchar](50) NOT NULL,
+	[changeDate] [datetime] NOT NULL,
+	[Descript] [nvarchar](2000) NULL
+) ON [PRIMARY]
+END 
+
+[END_S_NO]
+
+
+

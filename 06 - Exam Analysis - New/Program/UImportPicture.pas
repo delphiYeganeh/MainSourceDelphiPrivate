@@ -1,0 +1,74 @@
+unit UImportPicture;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, BaseUnit, xpWindow, ActnList, FolderDialog, StdCtrls, ComCtrls,
+  xpBitBtn, Buttons, dmu;
+
+type
+  TfrmImportPicture = class(TMBaseForm)
+    Label2: TLabel;
+    sbtBrowseFilePath: TSpeedButton;
+    Button2: TxpBitBtn;
+    EdPath: TEdit;
+    btnSubmitAnswers: TxpBitBtn;
+    DoTrim: TCheckBox;
+    FolderDialog1: TFolderDialog;
+    Label1: TLabel;
+    procedure Button2Click(Sender: TObject);
+    procedure btnSubmitAnswersClick(Sender: TObject);
+    procedure sbtBrowseFilePathClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmImportPicture: TfrmImportPicture;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmImportPicture.Button2Click(Sender: TObject);
+begin
+  inherited;
+ Close;
+end;
+
+procedure TfrmImportPicture.btnSubmitAnswersClick(Sender: TObject);
+begin
+  inherited;
+ if EdPath.Text = '' then
+  begin
+   MessageDlg('ÅÊ‘Â Õ«ÊÌ  ’«ÊÌ— œ«‰‘ÃÊÌ«‰ —« «‰ Œ«» ‰„«ÌÌœ',   mtConfirmation,[mbOK],0);
+   Exit;
+  end;
+ if not DirectoryExists(EdPath.Text) then
+  begin
+   MessageDlg('„”Ì— «‰ Œ«» ‘œÂ ÊÃÊœ ‰œ«—œ',   mtConfirmation,[mbOK],0);
+   Exit;
+  end;
+  Dm.ImportStudentPic.Parameters.ParamByName('@FolderRoot').Value := EdPath.Text;
+  Dm.ImportStudentPic.ExecProc;
+end;
+
+procedure TfrmImportPicture.sbtBrowseFilePathClick(Sender: TObject);
+begin
+  inherited;
+ FolderDialog1.Execute;
+ if FolderDialog1.Directory <> '' then
+  EdPath.Text := FolderDialog1.Directory;
+end;
+
+procedure TfrmImportPicture.FormShow(Sender: TObject);
+begin
+  inherited;
+  //
+end;
+
+end.

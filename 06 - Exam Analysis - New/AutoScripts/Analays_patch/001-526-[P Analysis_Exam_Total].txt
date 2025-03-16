@@ -1,0 +1,55 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Analysis_Exam_Total]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Analysis_Exam_Total]
+END
+GO
+
+CREATE  procedure [dbo].[Analysis_Exam_Total]
+		(@ExamID	int)
+	as
+	DECLARE @SQLString NVARCHAR(500)
+	DECLARE @ParmDefinition NVARCHAR(500)
+	DECLARE @parmIN int
+	DECLARE @parmRET1 float
+
+	SET @parmIN= CONVERT(nvarchar(10),@ExamID)
+	SET @SQLString=N'EXEC SP_KR20 @parm, @parm1OUT OUTPUT'
+	SET @ParmDefinition=N'@parm int,
+					  @parm1OUT float OUTPUT'
+
+	EXECUTE sp_executesql
+	@SQLString,
+	@ParmDefinition,
+	@parm=@parmIN,
+	@parm1OUT=@parmRET1 OUTPUT
+
+	SELECT * into #question FROM Question WHERE ExamID = @ExamID
+	SELECT FinalMark into #finMark FROM ApplicantExam WHERE ExamID = @ExamID
+
+	update exam
+	set
+	NumberOf_1item_Question=(select count(*) from #question where  number_Of_Item=1),
+	NumberOf_2item_Question=(select count(*) from #question where  number_Of_Item=2),
+	NumberOf_3item_Question=(select count(*) from #question where  number_Of_Item=3),
+	NumberOf_4item_Question=(select count(*) from #question where  number_Of_Item=4),
+	NumberOf_5item_Question=(select count(*) from #question where  number_Of_Item=5),
+	NumberOf_6item_Question=(select count(*) from #question where  number_Of_Item=6),
+	Difficulty=round((select avg(Difficulty) from #question),3),
+	Discrimination= round((select avg(Discrimination) from #question),3),
+	RPBIS=round((select avg(RPBIS) from #question),3),
+	StandardError=  @parmRET1,
+	kr20  = @parmRET1,
+	Alpha = @parmRET1 ,
+	ExamVariance=round((select varp(finalmark) from #finMark ),3)
+	FROM    Exam
+	where Exam.examid = @examid
+
+GO
+
+COMMIT
+GO

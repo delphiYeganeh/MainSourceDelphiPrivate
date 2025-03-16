@@ -1,0 +1,20 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[SelectReportFile]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[SelectReportFile]
+END
+GO
+
+CREATE  procedure [dbo].[SelectReportFile]
+@ID INT
+AS
+	SELECT [Name],[File] FROM Reports WHERE [ID]=@ID
+
+GO
+
+COMMIT
+GO

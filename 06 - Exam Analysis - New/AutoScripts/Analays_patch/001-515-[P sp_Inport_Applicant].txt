@@ -1,0 +1,166 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[sp_Inport_Applicant]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[sp_Inport_Applicant]
+END
+GO
+
+CREATE  procedure [dbo].[sp_Inport_Applicant]
+		@ApplicantCode			NVARCHAR(20)='',
+		@FirstName				NVARCHAR(50)='',
+		@LastName				NVARCHAR(50)='',
+		@FatherName				NVARCHAR(50)='',
+		@Termcode				CHAR(3)='',
+		@CustomField1			NVARCHAR(50)='',
+		@CustomField2			NVARCHAR(50)='',
+		@CustomField3			NVARCHAR(100)='',
+		@CustomField4			NVARCHAR(100)='',
+		@CustomField5			NVARCHAR(100)='',
+		@MajorCode				NVARCHAR(20)='',
+		@MajorTitle				NVARCHAR(60)='',
+		@EducationGroupCode		NVARCHAR(50)='',
+		@EducationGroupTitle	NVARCHAR(50)='',
+		@FacultyCode			NVARCHAR(50)='',
+		@FacultyTitle			NVARCHAR(50)='',
+		@LevelTitle				NVARCHAR(50)=''
+	AS
+	BEGIN
+		DECLARE @MajorID SMALLINT
+		SET @MajorID = 0
+					
+		IF @MajorID = 0
+			IF (LTRIM(RTRIM(@MajorTitle)) <> '')
+				IF EXISTS(SELECT * FROM Major WHERE LTRIM(RTRIM(MajorTitle)) = LTRIM(RTRIM(@MajorTitle)))
+					SELECT @MajorID = MajorID FROM Major WHERE LTRIM(RTRIM(MajorTitle)) = LTRIM(RTRIM(@MajorTitle))
+		
+		IF @MajorID = 0
+			IF (LTRIM(RTRIM(@MajorCode)) <> '')
+				IF EXISTS(SELECT * FROM Major WHERE LTRIM(RTRIM(MajorCode)) = LTRIM(RTRIM(@MajorCode)))
+					SELECT @MajorID = MajorID FROM Major WHERE LTRIM(RTRIM(MajorCode)) = LTRIM(RTRIM(@MajorCode))
+
+				
+		IF @MajorID = 0
+		BEGIN
+			DECLARE @EduGrpID SMALLINT
+			SET @EduGrpID = 0
+			
+			IF @EduGrpID = 0
+				IF (LTRIM(RTRIM(@EducationGroupTitle)) <> '')
+					IF EXISTS(SELECT * FROM EducationGroup WHERE LTRIM(RTRIM(EducationGroupTitle)) = LTRIM(RTRIM(@EducationGroupTitle)))
+						SELECT @EduGrpID = EducationGroupID FROM EducationGroup WHERE LTRIM(RTRIM(EducationGroupTitle)) = LTRIM(RTRIM
+	(@EducationGroupTitle))
+		
+			IF @EduGrpID = 0
+				IF (LTRIM(RTRIM(@EducationGroupCode)) <> '')
+					IF EXISTS(SELECT * FROM EducationGroup WHERE LTRIM(RTRIM(EducationGroupCode)) = LTRIM(RTRIM(@EducationGroupCode)))
+						SELECT @EduGrpID = EducationGroupID FROM EducationGroup WHERE LTRIM(RTRIM(EducationGroupCode)) = LTRIM(RTRIM
+	(@EducationGroupCode))	
+			
+			IF @EduGrpID = 0
+			BEGIN
+				DECLARE @FacultyID SMALLINT
+				SET @FacultyID = 0
+			
+				IF @FacultyID = 0
+					IF (LTRIM(RTRIM(@FacultyTitle)) <> '')
+						IF EXISTS(SELECT * FROM Faculty WHERE LTRIM(RTRIM(FacultyTitle)) = LTRIM(RTRIM(@FacultyTitle)))
+							SELECT @FacultyID = FacultyID FROM Faculty WHERE LTRIM(RTRIM(FacultyTitle)) = LTRIM(RTRIM(@FacultyTitle))
+		
+				IF @FacultyID = 0
+					IF (LTRIM(RTRIM(@FacultyCode)) <> '')
+						IF EXISTS(SELECT * FROM Faculty WHERE LTRIM(RTRIM(FacultyCode)) = LTRIM(RTRIM(@FacultyCode)))
+							SELECT @FacultyID = FacultyID FROM Faculty WHERE LTRIM(RTRIM(FacultyCode)) = LTRIM(RTRIM(@FacultyCode))	
+				
+				IF @FacultyID = 0
+				BEGIN
+					IF LTRIM(RTRIM(@FacultyTitle)) = ''
+						SET @FacultyTitle = N'نامشخص'
+					IF EXISTS(SELECT * FROM Faculty WHERE LTRIM(RTRIM(FacultyTitle)) = LTRIM(RTRIM(@FacultyTitle)))
+						SELECT @FacultyID = FacultyID FROM Faculty WHERE LTRIM(RTRIM(FacultyTitle)) = LTRIM(RTRIM(@FacultyTitle))
+					IF @FacultyID = 0
+					BEGIN
+						IF LTRIM(RTRIM(@FacultyCode)) = ''
+							SET @FacultyCode = N'0'
+						INSERT INTO Faculty(FacultyTitle,FacultyCode)
+						VALUES(	@FacultyTitle,	@FacultyCode)
+						SELECT @FacultyID = @@IDENTITY
+					END
+				END
+				
+				IF LTRIM(RTRIM(@EducationGroupTitle)) = ''
+					SET @EducationGroupTitle = N'نامشخص'
+				IF EXISTS(SELECT * FROM EducationGroup WHERE LTRIM(RTRIM(EducationGroupTitle)) = LTRIM(RTRIM(@EducationGroupTitle)))
+					SELECT @EduGrpID = EducationGroupID FROM EducationGroup WHERE LTRIM(RTRIM(EducationGroupTitle)) = LTRIM(RTRIM(@EducationGroupTitle))
+				IF @EduGrpID = 0
+				BEGIN
+					IF LTRIM(RTRIM(@EducationGroupCode)) = ''
+						SET @EducationGroupCode = N'0'
+					INSERT INTO EducationGroup(EducationGroupCode,EducationGroupTitle,FacultyID)
+					VALUES(@EducationGroupCode,@EducationGroupTitle,@FacultyID)
+					SELECT @EduGrpID = @@IDENTITY
+				END
+			END
+			
+			IF LTRIM(RTRIM(@MajorTitle)) = ''
+				SET @MajorTitle = N'نامشخص'
+			IF EXISTS(SELECT * FROM Major WHERE LTRIM(RTRIM(MajorTitle)) = LTRIM(RTRIM(@MajorTitle)))
+				SELECT @MajorID = MajorID FROM Major WHERE LTRIM(RTRIM(MajorTitle)) = LTRIM(RTRIM(@MajorTitle))
+			IF @MajorID = 0
+			BEGIN
+				IF LTRIM(RTRIM(@MajorCode)) = ''
+					SET @MajorCode = N'0'
+				DECLARE @LevelID SMALLINT
+				SET @LevelID = 0 
+				
+				IF @LevelID = 0
+					IF (LTRIM(RTRIM(@LevelTitle)) <> '')
+						IF EXISTS(SELECT * FROM [Level] WHERE LTRIM(RTRIM(LevelTitle)) = LTRIM(RTRIM(@LevelTitle)))
+							SELECT @LevelID = LevelID FROM [Level] WHERE LTRIM(RTRIM(LevelTitle)) = LTRIM(RTRIM(@LevelTitle))
+				IF @LevelID = 0
+				BEGIN
+					IF LTRIM(RTRIM(@LevelTitle)) = ''
+						SET @LevelTitle = N'نامشخص'
+					INSERT INTO [Level](LevelTitle)
+					VALUES(@LevelTitle)
+					SELECT @LevelID = @@IDENTITY	
+				END
+				INSERT INTO Major(MajorCode,MajorTitle,EducationGroupID,LevelID	)
+				VALUES(@MajorCode,@MajorTitle,@EduGrpID,@LevelID)
+				SELECT @MajorID = @@IDENTITY
+			END
+		END	
+		
+		INSERT INTO Applicant(	ApplicantCode,
+								FirstName,
+								LastName,
+								FullName,
+								MajorID,
+								Termcode,
+								FatherName,
+								CustomField1,
+								CustomField2,
+								CustomField3,
+								CustomField4,
+								CustomField5)
+		VALUES(	@ApplicantCode/* ApplicantCode	*/,
+				@FirstName/* FirstName	*/,
+				@LastName/* LastName	*/,
+				@FirstName+' '+@LastName/* FullName	*/,
+				@MajorID/* MajorID	*/,
+				@Termcode/* Termcode	*/,
+				@FatherName/* FatherName	*/,
+				@CustomField1/* CustomField1	*/,
+				@CustomField2/* CustomField2	*/,
+				@CustomField3/* CustomField3	*/,
+				@CustomField4/* CustomField4	*/,
+				@CustomField5/* CustomField5	*/)
+	END
+
+GO
+
+COMMIT
+GO

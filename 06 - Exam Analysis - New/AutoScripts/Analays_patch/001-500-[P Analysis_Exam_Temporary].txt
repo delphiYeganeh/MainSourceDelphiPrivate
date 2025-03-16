@@ -1,0 +1,21 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Analysis_Exam_Temporary]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Analysis_Exam_Temporary]
+END
+GO
+
+CREATE  procedure [dbo].[Analysis_Exam_Temporary]
+	(@ExamID	int)
+AS
+  Select *
+  From exam 
+  Where ExamID = @ExamID
+GO
+
+COMMIT
+GO

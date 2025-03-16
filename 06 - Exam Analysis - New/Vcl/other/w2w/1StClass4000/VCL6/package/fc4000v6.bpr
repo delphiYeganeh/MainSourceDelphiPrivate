@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="fc4000v6.lib"/>
+    <OBJFILES value="fc4000v6.obj ..\obj\fctreeview.obj ..\obj\fcbutton.obj 
+      ..\obj\fcbuttongroup.obj ..\obj\fcCanvas.obj ..\obj\fcChangeLInk.obj 
+      ..\obj\fcclearpanel.obj ..\obj\fcCollection.obj ..\obj\fccolorcombo.obj 
+      ..\obj\fccombo.obj ..\obj\fcCommon.obj ..\obj\fccustomdraw.obj 
+      ..\obj\fcdbcommon.obj ..\obj\fcdbtreeview.obj ..\obj\fcdemorichedit.obj 
+      ..\obj\fcEvaluator.obj ..\obj\fcfontcombo.obj ..\obj\fcframe.obj 
+      ..\obj\fcGraphics.obj ..\obj\fcImage.obj ..\obj\fcimageform.obj 
+      ..\obj\fcimager.obj ..\obj\fcImgBtn.obj ..\obj\fcLabel.obj 
+      ..\obj\fcOutlookbar.obj ..\obj\fcoutlooklist.obj ..\obj\fcscrollbar.obj 
+      ..\obj\fcShapeBtn.obj ..\obj\fcstatusbar.obj ..\obj\fcText.obj 
+      ..\obj\fcToolTip.obj ..\obj\fctreecombo.obj ..\obj\fcbitmap.obj 
+      ..\obj\fcimagepanel.obj ..\obj\fcpanel.obj ..\obj\fctreeheader.obj 
+      ..\obj\fccalculator.obj ..\obj\fccalcedit.obj ..\obj\fcProgressBar.obj 
+      ..\obj\fctrackbar.obj ..\obj\fccombobutton.obj"/>
+    <RESFILES value=""/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value=""/>
+    <PACKAGES value=""/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <LINKER value="TLib"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT"/>
+    <MAINSOURCE value="fc4000v6.cpp"/>
+    <INCLUDEPATH value="S:\1st4000vcl6\package;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="S:\1st4000vcl6\package;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <LISTFILE value=""/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-IS:\1st4000vcl6\package -I$(BCB)\include -I$(BCB)\include\vcl -src_suffix 
+      cpp"/>
+    <CFLAG1 value="-Od -H=c:\PROGRA~1\borland\CBUILD~2\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 
+      -b- -k -y -v -vi- -c -tW -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="/P32"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="$(OBJFILES)"/>
+    <ALLLIB value=""/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="fc4000v6.cpp" FORMNAME="" UNITNAME="fc4000v6" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fctreeview.obj" FORMNAME="" UNITNAME="fctreeview" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcbutton.obj" FORMNAME="" UNITNAME="fcbutton" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcbuttongroup.obj" FORMNAME="" UNITNAME="fcbuttongroup" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcCanvas.obj" FORMNAME="" UNITNAME="fcCanvas" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcChangeLInk.obj" FORMNAME="" UNITNAME="fcChangeLInk" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcclearpanel.obj" FORMNAME="" UNITNAME="fcclearpanel" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcCollection.obj" FORMNAME="" UNITNAME="fcCollection" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fccolorcombo.obj" FORMNAME="" UNITNAME="fccolorcombo" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fccombo.obj" FORMNAME="" UNITNAME="fccombo" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcCommon.obj" FORMNAME="" UNITNAME="fcCommon" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fccustomdraw.obj" FORMNAME="" UNITNAME="fccustomdraw" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcdbcommon.obj" FORMNAME="" UNITNAME="fcdbcommon" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcdbtreeview.obj" FORMNAME="" UNITNAME="fcdbtreeview" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcdemorichedit.obj" FORMNAME="" UNITNAME="fcdemorichedit" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcEvaluator.obj" FORMNAME="" UNITNAME="fcEvaluator" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcfontcombo.obj" FORMNAME="" UNITNAME="fcfontcombo" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcframe.obj" FORMNAME="" UNITNAME="fcframe" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcGraphics.obj" FORMNAME="" UNITNAME="fcGraphics" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcImage.obj" FORMNAME="" UNITNAME="fcImage" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcimageform.obj" FORMNAME="" UNITNAME="fcimageform" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcimager.obj" FORMNAME="" UNITNAME="fcimager" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcImgBtn.obj" FORMNAME="" UNITNAME="fcImgBtn" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcLabel.obj" FORMNAME="" UNITNAME="fcLabel" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcOutlookbar.obj" FORMNAME="" UNITNAME="fcOutlookbar" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcoutlooklist.obj" FORMNAME="" UNITNAME="fcoutlooklist" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcscrollbar.obj" FORMNAME="" UNITNAME="fcscrollbar" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcShapeBtn.obj" FORMNAME="" UNITNAME="fcShapeBtn" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcstatusbar.obj" FORMNAME="" UNITNAME="fcstatusbar" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcText.obj" FORMNAME="" UNITNAME="fcText" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcToolTip.obj" FORMNAME="" UNITNAME="fcToolTip" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fctreecombo.obj" FORMNAME="" UNITNAME="fctreecombo" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcbitmap.obj" FORMNAME="" UNITNAME="fcbitmap" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcimagepanel.obj" FORMNAME="" UNITNAME="fcimagepanel" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcpanel.obj" FORMNAME="" UNITNAME="fcpanel" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fctreeheader.obj" FORMNAME="" UNITNAME="fctreeheader" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fccalculator.obj" FORMNAME="" UNITNAME="fccalculator" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fccalcedit.obj" FORMNAME="" UNITNAME="fccalcedit" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fcProgressBar.obj" FORMNAME="" UNITNAME="fcProgressBar.obj" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fctrackbar.obj" FORMNAME="" UNITNAME="fctrackbar.obj" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\obj\fccombobutton.obj" FORMNAME="" UNITNAME="fccombobutton.obj" CONTAINERID="OBJTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=2
+Item0=S:\1st4000vcl6\package;$(BCB)\include;$(BCB)\include\vcl
+Item1=S:\1st3000vcl6\package;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=2
+Item0=S:\1st4000vcl6\package;$(BCB)\lib\obj;$(BCB)\lib
+Item1=S:\1st3000vcl6\package;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlTlibPageSize]
+Count=2
+Item0=0x0020
+Item1=0x0010
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

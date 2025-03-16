@@ -1,0 +1,109 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PRC_ExPositive_Insert]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PRC_ExPositive_Insert]
+END
+GO
+
+CREATE  procedure [dbo].[PRC_ExPositive_Insert]
+      (
+            @ExamID      INT
+           ,@ApplicantId NVARCHAR(20)
+           ,@Score       NVARCHAR(max)
+           ,@Desc        NVARCHAR(500)
+		   ,@ExPositiveKey  NVARCHAR(max)
+		   
+	  )
+AS
+  IF EXISTS (
+             SELECT  * 
+             FROM  [ExPositive] 
+			 WHERE ExamID = @ExamID 
+			 And ApplicantId = @ApplicantId
+			)
+BEGIN
+  EXEC [dbo].[PRC_ExPositive_Delete] 2,0,@ExamID,@ApplicantId
+END 
+  
+  DECLARE @InputStringPurchaseRequestItemID NVARCHAR(max) = @Score + '-0' 
+  DECLARE @_PurchaseRequestItemID NVARCHAR(max) 
+  DECLARE @value_New NVARCHAR(max) = ''
+  DECLARE @number INT
+  DECLARE @number2  NVARCHAR(max)
+  DECLARE @number1  NVARCHAR(max) =  replace (@ExPositiveKey,'-','+')
+  CREATE TABLE #tmp (ExPositiveKey NVARCHAR(max) )
+  
+  SELECT 
+    * 
+  INTO #tp
+  FROM ( SELECT  @number1 AS f2	)sub1
+  SELECT @number2 = ' SELECT ' + f2   FROM #tp
+  INSERT INTO #tmp EXECUTE SP_EXECUTESQL @number2
+  SELECT CAST(ExPositiveKey AS float) FROM #tmp
+
+  SET @number = (SELECT CAST(ExPositiveKey AS float) FROM #tmp)
+  print '@number'
+  print @number
+
+	  WHILE (CHARINDEX('-' , @InputStringPurchaseRequestItemID,0) <> 0) AND (@number > 0)
+	  begin
+		set @_PurchaseRequestItemID = ltrim(rtrim(substring(@InputStringPurchaseRequestItemID , 0 , charindex('-' , @InputStringPurchaseRequestItemID,0))))
+		IF @value_New <> '' 
+		SET @value_New = @value_New + '-'+ @_PurchaseRequestItemID
+		IF @value_New = ''
+		SET @value_New = @_PurchaseRequestItemID
+		set @InputStringPurchaseRequestItemID = substring(@InputStringPurchaseRequestItemID , charindex('-' , @InputStringPurchaseRequestItemID) + 1 , LEN(@InputStringPurchaseRequestItemID))
+	  SET @number = @number - 1
+	  print @number
+	  END 
+  SELECT @value_New
+
+
+/* شروع محاسبه جمع نمرات تشریحی */
+DECLARE @D NVARCHAR(max)
+DECLARE @Score_New NVARCHAR(max)
+CREATE TABLE #temptable (SumScore NVARCHAR(max) )
+
+SET @Score_New = REPLACE( REPLACE(@value_New,'-','+'),',','.')
+
+SELECT 
+   * 
+INTO #temp
+FROM ( SELECT  @Score_New AS f2	)sub1
+
+SELECT @D = ' SELECT ' + f2 + '-0' FROM #temp
+
+INSERT INTO #temptable EXECUTE SP_EXECUTESQL @D
+
+print @d
+print '@value_New' 
+print @value_New
+/* پایان محاسبه جمع نمرات تشریحی */
+
+SELECT SumScore FROM #temptable
+
+INSERT INTO [dbo].[ExPositive]
+           ([ExamID]
+           ,[ApplicantId]
+           ,[Score]
+           ,[SumScore]
+           ,[Desc])
+     VALUES
+           (@ExamID
+           ,@ApplicantId
+           ,@Score
+           ,(SELECT SumScore FROM #temptable)
+           ,@Desc)
+DROP TABLE #temp
+DROP TABLE #temptable
+drop table #tmp
+drop table  #tp
+
+GO
+
+COMMIT
+GO

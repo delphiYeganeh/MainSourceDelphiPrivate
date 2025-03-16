@@ -1,0 +1,44 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[insert_ApplicantAnswer_ByExamID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[insert_ApplicantAnswer_ByExamID]
+END
+GO
+
+CREATE  procedure [dbo].[insert_ApplicantAnswer_ByExamID]
+		(@ExamID	[int])
+	AS
+	declare @GroupExamId int
+	select @GroupExamId=GroupExamId from Exam where ExamID=@ExamID
+	SELECT     Applicant.ApplicantID,  Applicant.ApplicantCode, Question.number,Question.QuestionID, 
+	case when isnumeric(substring(AnswerKey.AnswerKey,Question.number,1))=1  then substring(AnswerKey.AnswerKey,Question.number,1) else '9' END AS Akey,
+	case when isnumeric(substring(AnswerKey.AnswerKey,dbo.GetEqualQuestionNumber(Question.QuestionID,ApplicantExam.GroupExamId,0),1))=1 
+	 then substring(AnswerKey.AnswerKey,dbo.GetEqualQuestionNumber(Question.QuestionID,ApplicantExam.GroupExamId,0),1) else '9' END AS eqAkey,
+	dbo.GetEqualQuestionNumber(Question.QuestionID,ApplicantExam.GroupExamId,0)EqualQuestionNumber
+	INTO #AppAnswer
+	FROM         Applicant 
+	INNER JOIN   ApplicantExam ON Applicant.ApplicantID = ApplicantExam.ApplicantID 
+	INNER JOIN   Question ON ApplicantExam.ExamID = Question.ExamID
+	INNER JOIN   AnswerKey ON ApplicantExam.ApplicantExamID = AnswerKey.ApplicantExamID
+
+	where Question.ExamID=@ExamID
+	delete ApplicantAnswer where questionid in (select questionid from Question where examid=@examid)
+	if @GroupExamId<>1
+		INSERT INTO ApplicantAnswer(ApplicantID, QuestionID, AnswerItemNumber)
+		SELECT     ApplicantID, QuestionID,eqAkey
+		FROM         #AppAnswer
+		order by ApplicantID, QuestionID
+	else 
+		INSERT INTO ApplicantAnswer(ApplicantID, QuestionID, AnswerItemNumber)
+		SELECT     ApplicantID, QuestionID,Akey
+		FROM         #AppAnswer
+		order by ApplicantID, QuestionID
+
+GO
+
+COMMIT
+GO

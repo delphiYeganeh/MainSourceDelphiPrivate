@@ -1,0 +1,189 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_Applicant_by_Examid]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_Applicant_by_Examid]
+END
+GO
+
+CREATE  procedure [dbo].[Select_Applicant_by_Examid] ( @ExamID INT )
+AS
+BEGIN
+      DECLARE @FullPoint FLOAT ,
+              @maxMark FLOAT ,
+              @Number_of_Question INT ,
+              @AcceptCount NUMERIC(6, 2) ,
+              @RejectCount NUMERIC(6, 2) ,
+              @AcceptPercent NUMERIC(6, 2) ,
+              @RejectPercent NUMERIC(6, 2) ,
+              @RecCount NUMERIC(6, 2) ,
+              @DeleteQuestionCount INT ,
+              @CorrectItemPoint NUMERIC(6, 2)
+
+      IF OBJECT_ID('tempdb..#AnswerApplicant') IS NOT NULL
+         DROP TABLE #AnswerApplicant
+
+      SELECT    dbo.Applicant.ApplicantID,
+                ( SELECT    COUNT(Question.QuestionID)
+                  FROM      ApplicantAnswer
+                            INNER JOIN Question ON ApplicantAnswer.QuestionID = Question.QuestionID
+                  WHERE     ( ApplicantAnswer.ApplicantID = Applicant.ApplicantID ) AND ( Question.ExamID = ApplicantExam.Examid ) AND AnswerItemNumber IN (
+                            CorrectItemNumber, CorrectItemNumber2, CorrectItemNumber3, CorrectItemNumber4,
+                            CorrectItemNumber5, CorrectItemNumber6 ) AND QuestionActivityID = 1 ) Correct_Answer,
+                ( SELECT    COUNT(Question.QuestionID)
+                  FROM      ApplicantAnswer
+                            INNER JOIN Question ON ApplicantAnswer.QuestionID = Question.QuestionID
+                  WHERE     ( ApplicantAnswer.ApplicantID = Applicant.ApplicantID ) AND ( Question.ExamID = ApplicantExam.Examid ) AND AnswerItemNumber NOT IN (
+                            CorrectItemNumber, ISNULL(CorrectItemNumber2, 0), ISNULL(CorrectItemNumber3, 0),
+                            ISNULL(CorrectItemNumber4, 0), ISNULL(CorrectItemNumber5, 0), ISNULL(CorrectItemNumber6, 0) ) AND AnswerItemNumber <> 0 AND QuestionActivityID = 1 ) Wrong_Answer,
+                ( SELECT    COUNT(Question.QuestionID)
+                  FROM      ApplicantAnswer
+                            INNER JOIN Question ON ApplicantAnswer.QuestionID = Question.QuestionID
+                  WHERE     ( ApplicantAnswer.ApplicantID = Applicant.ApplicantID ) AND ( Question.ExamID = ApplicantExam.Examid ) AND AnswerItemNumber = 0 AND QuestionActivityID = 1 ) Withot_Answer
+      INTO      #AnswerApplicant
+      FROM      ApplicantExam
+                INNER JOIN Applicant ON ApplicantExam.ApplicantID = Applicant.ApplicantID
+                LEFT OUTER JOIN Major ON Applicant.MajorID = Major.MajorID
+                LEFT OUTER JOIN Grouping ON ApplicantExam.GroupingID = Grouping.GroupingID
+      WHERE     ApplicantExam.examid = @examid
+
+      IF OBJECT_ID('tempdb..#Applicant') IS NOT NULL
+         DROP TABLE #Applicant
+
+      SELECT    @FullPoint = SUM(Coefficient)
+      FROM      Question
+      WHERE     ( ExamID = @ExamID ) AND ( questionactivityid <> 2 )
+
+      SELECT    @FullPoint = CorrectItemPoint * @fullPoint, @maxMark = maxMark, @Number_of_Question = Number_of_Question,
+                @CorrectItemPoint = ISNULL(CustomField2, 0)
+      FROM      Exam
+      WHERE     ( ExamID = @ExamID )
+
+      IF @maxMark IS NULL OR @maxMark <= 0
+         SET @maxMark = 20
+
+      SELECT    @DeleteQuestionCount = COUNT(*)
+      FROM      QuestionDelete
+      WHERE     ExamId = @ExamID
+
+        /* SELECT @Number_of_Question/@MaxMark , @maxMark ,  @FullPoint */
+        /* SELECT FinalMark FROM ApplicantExam WHERE ExamID=223 */
+/*-------------------------------------------------------------begin movahed---------------------------------------------------------------*/
+      SELECT    Applicant.*, Faculty.FacultyTitle, Major.MajorTitle, ApplicantExam.FinalMark AS FinalMark, @FullPoint FullPoint,
+                ApplicantExam.ord, CASE WHEN ApplicantExam.Accepted = 1 THEN 'قبول'
+                                        ELSE 'رد'
+                                   END ACCEPT, Grouping.GroupingTitle,
+                /*case when FinalMark<0 then 0 else round(FinalMark*@maxMark/@FullPoint,2) end mark,
+                case when FinalMark<0 then 0 else round(FinalMark*20.0/@FullPoint,2) end mark20,
+                case when FinalMark<0 then 0 else round(FinalMark*100.0/@FullPoint,2) end mark100
+                CASE WHEN FinalMark < 0 THEN 0
+                     ELSE ROUND(FinalMark, 2) 
+                END mark, */
+				(SELECT 
+				   CASE 
+					  WHEN  [decimal] BETWEEN 0.25 AND 0.49 THEN [Floor] + 0.25
+					  WHEN  [decimal] BETWEEN 0.50 AND 0.74 THEN [Floor] + 0.50
+					  WHEN  [decimal] BETWEEN 0.75 AND 0.99 THEN [Floor] + 0.75
+				   ELSE [floor] END  Floor_New
+				FROM 
+				(
+
+				 SELECT ABS(FinalMark) - FLOOR(ABS(FinalMark)) AS [decimal],FLOOR(ABS(FinalMark)) AS [Floor]
+
+				 )
+                  Sub1) mark,
+				CASE WHEN FinalMark < 0 THEN 0
+                               ELSE ROUND(FinalMark * ( 20 / @maxMark ), 2)
+                          END mark20, CASE WHEN FinalMark < 0 THEN 0
+                                           ELSE ROUND(FinalMark * ( 100.0 / @maxMark ), 2)
+                                      END mark100, CAST(0.0 AS NUMERIC(6, 2)) AS AcceptCount,
+                CAST(0.0 AS NUMERIC(6, 2)) AS RejectCount, CAST(0.0 AS NUMERIC(6, 2)) AS AcceptPercent,
+                CAST(0.0 AS NUMERIC(6, 2)) AS RejectPercent, @DeleteQuestionCount AS DeleteQuestionCount,
+                @CorrectItemPoint AS CorrectItemPoint, @maxMark AS maxMark
+      INTO      #Applicant
+      FROM      Applicant
+                INNER JOIN ApplicantExam ON ApplicantExam.ApplicantID = Applicant.ApplicantID
+                LEFT JOIN Grouping ON Grouping.GroupingID = ApplicantExam.GroupingID
+                LEFT  JOIN Major ON Applicant.MajorID = Major.MajorID
+                LEFT JOIN EducationGroup ON EducationGroup.EducationGroupID = Major.EducationGroupID
+                LEFT  JOIN Faculty ON EducationGroup.FacultyID = Faculty.FacultyID
+				/* LEFT  JOIN ExPositive  e ON Applicant.ApplicantCode = e.ApplicantId AND e.ExamID = @ExamID */
+      WHERE     ExamId = @ExamId
+      ORDER BY  ord
+    /*  SELECT    Applicant.*, Faculty.FacultyTitle, Major.MajorTitle, ISNULL(ApplicantExam.FinalMark,0) + ISNULL(SumScore,0) AS FinalMark, @FullPoint FullPoint,
+                ApplicantExam.ord, CASE WHEN ApplicantExam.Accepted = 1 THEN 'قبول'
+                                        ELSE 'رد'
+                                   END ACCEPT, Grouping.GroupingTitle,
+                --case when FinalMark<0 then 0 else round(FinalMark*@maxMark/@FullPoint,2) end mark,
+                --case when FinalMark<0 then 0 else round(FinalMark*20.0/@FullPoint,2) end mark20,
+                --case when FinalMark<0 then 0 else round(FinalMark*100.0/@FullPoint,2) end mark100
+                CASE WHEN FinalMark < 0 THEN 0
+                     ELSE ROUND(FinalMark, 2) + SumScore 
+                END mark, CASE WHEN FinalMark < 0 THEN 0
+                               ELSE ROUND((FinalMark+SumScore) * ( 20 / @maxMark ), 2)
+                          END mark20, CASE WHEN FinalMark < 0 THEN 0
+                                           ELSE ROUND((FinalMark+SumScore) * ( 100.0 / @maxMark ), 2)
+                                      END mark100, CAST(0.0 AS NUMERIC(6, 2)) AS AcceptCount,
+                CAST(0.0 AS NUMERIC(6, 2)) AS RejectCount, CAST(0.0 AS NUMERIC(6, 2)) AS AcceptPercent,
+                CAST(0.0 AS NUMERIC(6, 2)) AS RejectPercent, @DeleteQuestionCount AS DeleteQuestionCount,
+                @CorrectItemPoint AS CorrectItemPoint, @maxMark AS maxMark
+      INTO      #Applicant
+      FROM      Applicant
+                INNER JOIN ApplicantExam ON ApplicantExam.ApplicantID = Applicant.ApplicantID
+                LEFT JOIN Grouping ON Grouping.GroupingID = ApplicantExam.GroupingID
+                LEFT  JOIN Major ON Applicant.MajorID = Major.MajorID
+                LEFT JOIN EducationGroup ON EducationGroup.EducationGroupID = Major.EducationGroupID
+                LEFT  JOIN Faculty ON EducationGroup.FacultyID = Faculty.FacultyID
+				LEFT  JOIN ExPositive  e ON Applicant.ApplicantCode = e.ApplicantId AND e.ExamID = @ExamID
+      WHERE     ApplicantExam.ExamId = @ExamId
+      ORDER BY  ord */
+/*-------------------------------------------------------------END movahed---------------------------------------------------------------*/
+
+      SELECT    @AcceptCount = COUNT(*)
+      FROM      #Applicant
+      WHERE     ACCEPT = 'قبول'
+
+      SELECT    @RejectCount = COUNT(*)
+      FROM      #Applicant
+      WHERE     ACCEPT = 'رد'
+
+      SELECT    @RecCount = COUNT(*)
+      FROM      #Applicant
+
+      IF @RecCount > 0
+      SELECT    @AcceptPercent = ( @AcceptCount / @RecCount ) * 100
+      ELSE
+      SET @AcceptPercent = ''
+      IF @RecCount > 0
+      SELECT    @RejectPercent = ( @RejectCount / @RecCount ) * 100
+      ELSE
+      SET @RejectPercent = ''
+
+      UPDATE    #Applicant
+      SET       AcceptCount = @AcceptCount, RejectCount = @RejectCount, AcceptPercent = @AcceptPercent,
+                RejectPercent = @RejectPercent
+
+      SELECT    A1.ApplicantID, ApplicantCode, FirstName, LastName,
+                CASE WHEN LEN(RTRIM(LTRIM(IsNull(FirstName, '')))) = 0 THEN RTRIM(LTRIM(LastName))
+                                                                       ELSE RTRIM(LTRIM(LastName)) + '-' + RTRIM(LTRIM(FirstName))
+                                                                       END AS 'FullName'
+                , MajorID, Termcode, FatherName,
+                CustomField1, CustomField2, FacultyTitle, MajorTitle, FinalMark, FullPoint, ord, 
+				ACCEPT
+				, GroupingTitle,
+                MARK, mark20, mark100, CAST(AcceptCount AS INT) AcceptCount, CAST(RejectCount AS INT) RejectCount,
+                AcceptPercent, RejectPercent, DeleteQuestionCount, CorrectItemPoint, maxMark, Correct_answer,
+                Wrong_answer, Withot_answer,ISNULL(e.SumScore,0)AS SumScore
+      FROM      #Applicant A1
+                INNER JOIN #AnswerApplicant A2 ON A1.ApplicantID = A2.ApplicantID
+				LEFT  JOIN ExPositive  e ON A1.ApplicantCode = e.ApplicantId AND e.ExamID = @ExamID
+      ORDER BY  ApplicantCode
+END
+	
+GO
+
+COMMIT
+GO

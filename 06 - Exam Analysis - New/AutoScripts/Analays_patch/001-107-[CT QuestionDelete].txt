@@ -1,0 +1,64 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'QuestionDelete')
+BEGIN
+	CREATE TABLE [dbo].[QuestionDelete](
+		[QuestionID] [int] NOT NULL,
+		[ExamID] [int] NOT NULL,
+		[Number] [smallint] NOT NULL,
+		[DesignerTeacherID] [smallint] NULL,
+		[CourseID] [smallint] NULL,
+		[Correct] [smallint] NULL,
+		[Answerd] [smallint] NULL,
+		[All_Count] [smallint] NULL,
+		[Wrong] [smallint] NULL,
+		[Difficulty] [float] NULL,
+		[Discrimination] [float] NULL,
+		[G1_0] [smallint] NULL,
+		[G3_0] [smallint] NULL,
+		[all0] [smallint] NULL,
+		[G1_1] [smallint] NULL,
+		[G3_1] [smallint] NULL,
+		[all1] [smallint] NULL,
+		[G1_2] [smallint] NULL,
+		[G3_2] [smallint] NULL,
+		[all2] [smallint] NULL,
+		[G1_3] [smallint] NULL,
+		[G3_3] [smallint] NULL,
+		[all3] [smallint] NULL,
+		[G1_4] [smallint] NULL,
+		[G3_4] [smallint] NULL,
+		[all4] [smallint] NULL,
+		[G1_5] [smallint] NULL,
+		[G3_5] [smallint] NULL,
+		[all5] [smallint] NULL,
+		[number_Of_Item] [tinyint] NULL,
+		[QuestionActivityID] [tinyint] NULL,
+		[TemporaryActive] [bit] NULL,
+		[Coefficient] [float] NOT NULL,
+		[RPBIS] [float] NULL,
+		[CorrectItemNumber] [tinyint] NULL,
+		[CorrectItemNumber2] [tinyint] NULL,
+		[CorrectItemNumber3] [tinyint] NULL,
+		[CorrectItemNumber4] [tinyint] NULL,
+		[CorrectItemNumber5] [tinyint] NULL,
+		[CorrectItemNumber6] [tinyint] NULL,
+		[Taxonomy] [tinyint] NULL,
+		[ObjectionNumber] [tinyint] NULL,
+		[all6] [smallint] NULL,
+	CONSTRAINT [PK_QuestionDelete] PRIMARY KEY CLUSTERED 
+	(
+		[QuestionID] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+END
+GO
+
+GO
+
+COMMIT
+GO

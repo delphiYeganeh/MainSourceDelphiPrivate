@@ -1,0 +1,44 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_ExamKey_Details_ByExamID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_ExamKey_Details_ByExamID]
+END
+GO
+
+CREATE  procedure [dbo].[Get_ExamKey_Details_ByExamID]
+@examid int
+as
+/* SELECT     Question.Number, Question.CorrectItemNumber,isnull(CorrectItemNumber2,0) CorrectItemNumber2,
+cast(case when Question.CorrectItemNumber=1 then 1 else 0 end as bit) Item1,
+cast(case when Question.CorrectItemNumber=2 then 1 else 0 end as bit) Item2,
+cast(case when Question.CorrectItemNumber=3 then 1 else 0 end as bit) Item3,
+cast(case when Question.CorrectItemNumber=4 then 1 else 0 end as bit) Item4,
+cast(case when Question.CorrectItemNumber=5 then 1 else 0 end as bit) Item5
+FROM    Question 
+WHERE     examid=@examid */
+
+
+SELECT     
+     Question.Number, 
+     Question.CorrectItemNumber,
+     isnull(CorrectItemNumber2,0) CorrectItemNumber2,
+     isnull(CorrectItemNumber3,0) CorrectItemNumber3,
+     isnull(CorrectItemNumber4,0) CorrectItemNumber4,
+     isnull(CorrectItemNumber5,0) CorrectItemNumber5,
+     isnull(CorrectItemNumber6,0) CorrectItemNumber6,
+     cast(case when Question.CorrectItemNumber=1 then 1 else 0 end as bit) Item1,
+     cast(case when Question.CorrectItemNumber=2 then 1 else 0 end as bit) Item2,
+     cast(case when Question.CorrectItemNumber=3 then 1 else 0 end as bit) Item3,
+     cast(case when Question.CorrectItemNumber=4 then 1 else 0 end as bit) Item4,
+     cast(case when Question.CorrectItemNumber=5 then 1 else 0 end as bit) Item5
+FROM    Question 
+WHERE     examid=@examid
+
+GO
+
+COMMIT
+GO

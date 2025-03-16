@@ -1,0 +1,49 @@
+:Base IP4000c7.hlp>main
+:Title InfoPower 4000
+:Link IP4000c7.hlp
+:Index InfoPower 4000 Help=IP4000c7.hlp
+1 InfoPower 4000
+2 InfoPower Contents=InfoPower_Contents@ip4000c7.hlp>main
+2 InfoPower License Agreement=InfoPower_License_Agreement@ip4000c7.hlp>main
+2 Building Packages=Building_Packages@ip4000c7.hlp>main
+2 Database Architecture=InfoPower_4000_Database_Architecture@ip4000c7.hlp>main
+2 Distributing Applications=Distributing_Applications@ip4000c7.hlp>main
+2 Requirements=InfoPower_4000_Requirements@ip4000c7.hlp>main
+2 Technical Support Information=Technical_Support_Options@ip4000c7.hlp>main
+2 Uninstalling=Uninstalling@ip4000c7.hlp>main
+2 IP Controls
+3 TwwCheckBox=TwwCheckbox@ip4000c7.hlp>main
+3 TwwController=TwwController@ip4000c7.hlp>main
+3 TwwDataInspector=TwwDataInspector@ip4000c7.hlp>main
+3 TwwDBComboBox=TwwDBComboBox@ip4000c7.hlp>main
+3 TwwDBComboDlg=TwwDBComboDlg@ip4000c7.hlp>main
+3 TwwDBDateTimePicker=TwwDBDateTimePicker@ip4000c7.hlp>main
+3 TwwDBEdit=TwwDBEdit@ip4000c7.hlp>main
+3 TwwDBGrid=TwwDBGrid@ip4000c7.hlp>main
+3 TwwDBLookupCombo=TwwDBLookupCombo@ip4000c7.hlp>main
+3 TwwDBLookupComboDlg=TwwDBLookupComboDlg@ip4000c7.hlp>main
+3 TwwDBNavigator=TwwDBNavigator@ip4000c7.hlp>main
+3 TwwDBRichEdit=TwwDBRichEdit@ip4000c7.hlp>main
+3 TwwDBRichEditMSWord=TwwDBRichEditMSWord@ip4000c7.hlp>main
+3 TwwDBSpinEdit=TwwDBSpinEdit@ip4000c7.hlp>main
+3 TwwExpandButton=TwwExpandButton@ip4000c7.hlp>main
+3 TwwIncrementalSearch=TwwIncrementalSearch@ip4000c7.hlp>main
+3 TwwKeyCombo=TwwKeyCombo@ip4000c7.hlp>main
+3 TwwMonthCalendar=TwwMonthCalendar@ip4000c7.hlp>main
+3 TwwRadioGroup=TwwRadioGroup@ip4000c7.hlp>main
+3 TwwRecordViewPanel=TwwRecordViewPanel@ip4000c7.hlp>main
+2 IP Access
+3 TwwClientDataset=TwwClientDataSet@ip4000c7.hlp>main
+3 TwwDataSource=TwwDataSource@ip4000c7.hlp>main
+3 TwwQBE=TwwQBE@ip4000c7.hlp>main
+3 TwwStoredProc=TwwStoredProc@ip4000c7.hlp>main
+3 TwwQuery=TwwQuery@ip4000c7.hlp>main
+3 TwwTable=TwwTable@ip4000c7.hlp>main
+2 IP Dialogs
+3 TwwFilterDialog=TwwFilterDialog@ip4000c7.hlp>main
+3 TwwLocateDialog=TwwLocateDialog@ip4000c7.hlp>main
+3 TwwIntl=TwwIntl@ip4000c7.hlp>main
+3 TwwLookupDialog=TwwLookupDialog@ip4000c7.hlp>main
+3 TwwMemoDialog=TwwMemoDialog@ip4000c7.hlp>main
+3 TwwRecordViewDialog=TwwRecordViewDialog@ip4000c7.hlp>main
+3 TwwSearchDialog=TwwSearchDialog@ip4000c7.hlp>main

@@ -1,0 +1,78 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_TextFormat_By_ExamID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_TextFormat_By_ExamID]
+END
+GO
+
+CREATE  procedure [dbo].[Get_TextFormat_By_ExamID]
+	(
+		 @examId                INT = 7, 
+		 @StnoStart             INT OUTPUT ,
+		 @StnoLength            INT OUTPUT , 
+		 @MajorStart            INT OUTPUT , 
+		 @MajorLength           INT OUTPUT ,
+		 @TermcodeStart         INT OUTPUT , 
+		 @TermCodeLength        INT OUTPUT , 
+		 @CourseStart           INT OUTPUT , 
+		 @CourseLength          INT OUTPUT ,
+		 @CourseGroupStart      INT OUTPUT , 
+		 @CourseGroupLength     INT OUTPUT , 
+		 @AnswerStart           INT OUTPUT ,
+		 @indiscernibleChar     CHAR(1) OUTPUT, 
+		 @KeyLineNumber         INT OUTPUT , 
+		 @AnswerStartLineNumber INT OUTPUT , 
+		 @GroupExamStart        INT OUTPUT ,
+		 @AnserEnd              INT OUTPUT ,
+		 @ExPositive_Start      INT OUTPUT ,
+		 @ExPositive_End        INT OUTPUT 
+	 )
+	AS
+	SELECT 
+	   @StnoStart = TextFormat.StnoStart,
+	   @StnoLength = TextFormat.StnoLength,
+	   @MajorStart = TextFormat.MajorStart,
+	   @MajorLength = TextFormat.MajorLength,
+	   @TermcodeStart = TextFormat.TermcodeStart,
+	   @TermCodeLength = TextFormat.TermCodeLength,
+	   @CourseStart = TextFormat.CourseStart,
+	   @CourseLength = TextFormat.CourseLength,
+	   @CourseGroupStart = TextFormat.CourseGroupStart,
+	   @CourseGroupLength = TextFormat.CourseGroupLength,
+	   @AnswerStart = TextFormat.AnswerStart,
+	   @indiscernibleChar = TextFormat.indiscernibleChar,
+	   @KeyLineNumber = TextFormat.KeyLineNumber,
+	   @AnswerStartLineNumber = TextFormat.AnswerStartLineNumber,
+	   @GroupExamStart = ISNULL(TextFormat.GroupExamStart,0),
+	   @AnserEnd = ISNULL(TextFormat.AnserEnd,0) ,
+	   @ExPositive_Start = ISNULL(TextFormat.ExPositive_Start,0) ,
+	   @ExPositive_End = ISNULL(TextFormat.ExPositive_End,0) 
+
+	FROM Exam 
+	INNER JOIN TextFormat 
+	  ON Exam.TexFormatID = TextFormat.TextFormatID
+	WHERE (Exam.ExamID = @ExamID)
+
+	/* ALTER PROCEDURE [dbo].[Get_TextFormat_By_ExamID]
+	 @examId int , @StnoStart int output , @StnoLength int output , @MajorStart int output , @MajorLength int output ,
+	 @TermcodeStart int output , @TermCodeLength int output , @CourseStart int output , @CourseLength int output ,
+	 @CourseGroupStart int output , @CourseGroupLength int output , @AnswerStart int output ,
+	 @indiscernibleChar char(1) output, @KeyLineNumber int output , @AnswerStartLineNumber int output, @GroupExamStart int output 
+	 as
+	 SELECT @StnoStart=StnoStart,@StnoLength=StnoLength,@MajorStart=MajorStart,@MajorLength=MajorLength,
+	 @TermcodeStart=TermcodeStart,@TermCodeLength=TermCodeLength,@CourseStart=CourseStart,@CourseLength=CourseLength,
+	 @CourseGroupStart=CourseGroupStart,@CourseGroupLength=CourseGroupLength,@AnswerStart=AnswerStart,
+	 @indiscernibleChar=indiscernibleChar,@KeyLineNumber=KeyLineNumber,@AnswerStartLineNumber=AnswerStartLineNumber,
+	 @GroupExamStart=isnull(GroupExamStart,0)
+	 FROM Exam 
+	 INNER JOIN TextFormat ON Exam.TexFormatID = TextFormat.TextFormatID
+	 WHERE (Exam.ExamID = @ExamID) */
+
+GO
+
+COMMIT
+GO

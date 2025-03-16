@@ -1,0 +1,329 @@
+object frmCustomFields: TfrmCustomFields
+  Left = 494
+  Top = 227
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = ' '#1601#1610#1604#1583#1607#1575#1610' '#1587#1601#1575#1585#1588#1610
+  ClientHeight = 217
+  ClientWidth = 279
+  Color = 15658734
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object PageControl1: TPageControl
+    Left = 0
+    Top = 0
+    Width = 279
+    Height = 176
+    ActivePage = TabSheet1
+    Align = alClient
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = #1583#1575#1606#1588#1580#1608
+      object lblApplicantCFC1: TLabel
+        Left = 216
+        Top = 16
+        Width = 35
+        Height = 14
+        Caption = #1601#1610#1604#1583' 1'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblApplicantCFC2: TLabel
+        Left = 216
+        Top = 40
+        Width = 35
+        Height = 14
+        Caption = #1601#1610#1604#1583' 2'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblApplicantCFC3: TLabel
+        Left = 216
+        Top = 64
+        Width = 36
+        Height = 14
+        Caption = #1601#1610#1604#1583' 3'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblApplicantCFC4: TLabel
+        Left = 216
+        Top = 88
+        Width = 36
+        Height = 14
+        Caption = #1601#1610#1604#1583' 4'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblApplicantCFC5: TLabel
+        Left = 216
+        Top = 112
+        Width = 36
+        Height = 14
+        Caption = #1601#1610#1604#1583' 5'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object edApplicantCFC1: TEdit
+        Left = 11
+        Top = 13
+        Width = 201
+        Height = 22
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+      end
+      object edApplicantCFC2: TEdit
+        Left = 11
+        Top = 37
+        Width = 201
+        Height = 22
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 1
+      end
+      object edApplicantCFC3: TEdit
+        Left = 11
+        Top = 61
+        Width = 201
+        Height = 22
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+      end
+      object edApplicantCFC4: TEdit
+        Left = 11
+        Top = 85
+        Width = 201
+        Height = 22
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 3
+      end
+      object edApplicantCFC5: TEdit
+        Left = 11
+        Top = 109
+        Width = 201
+        Height = 22
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 4
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = #1570#1586#1605#1608#1606
+      ImageIndex = 1
+      object lblExamCFC1: TLabel
+        Left = 216
+        Top = 16
+        Width = 35
+        Height = 14
+        Caption = #1601#1610#1604#1583' 1'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblExamCFC2: TLabel
+        Left = 216
+        Top = 40
+        Width = 35
+        Height = 14
+        Caption = #1601#1610#1604#1583' 2'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblExamCFC3: TLabel
+        Left = 216
+        Top = 64
+        Width = 36
+        Height = 14
+        Caption = #1601#1610#1604#1583' 3'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblExamCFC4: TLabel
+        Left = 216
+        Top = 88
+        Width = 36
+        Height = 14
+        Caption = #1601#1610#1604#1583' 4'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblExamCFC5: TLabel
+        Left = 216
+        Top = 112
+        Width = 36
+        Height = 14
+        Caption = #1601#1610#1604#1583' 5'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object edExamCFC1: TEdit
+        Left = 11
+        Top = 13
+        Width = 201
+        Height = 22
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+      end
+      object edExamCFC2: TEdit
+        Left = 11
+        Top = 37
+        Width = 201
+        Height = 22
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 1
+      end
+      object edExamCFC3: TEdit
+        Left = 11
+        Top = 61
+        Width = 201
+        Height = 22
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+      end
+      object edExamCFC4: TEdit
+        Left = 11
+        Top = 85
+        Width = 201
+        Height = 22
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 3
+      end
+      object edExamCFC5: TEdit
+        Left = 11
+        Top = 109
+        Width = 201
+        Height = 22
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 4
+      end
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 176
+    Width = 279
+    Height = 41
+    Align = alBottom
+    Color = 15658734
+    TabOrder = 1
+    DesignSize = (
+      279
+      41)
+    object xpBitBtn1: TxpBitBtn
+      Left = 21
+      Top = 3
+      Width = 94
+      Height = 36
+      startColor = 14671839
+      EndColor = clWhite
+      Caption = #1584#1582#1610#1585#1607
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ImageList = Dm.LetterImages
+      ImageIndex = 17
+      Gradient = True
+      Anchors = [akTop, akRight]
+      TabOrder = 0
+      TabStop = True
+      OnClick = xpBitBtn1Click
+    end
+  end
+end

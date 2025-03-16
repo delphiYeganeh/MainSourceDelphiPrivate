@@ -1,0 +1,19 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[EditReportFile]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[EditReportFile]
+END
+GO
+
+CREATE  procedure [dbo].[EditReportFile]
+@ID INT, @File IMAGE
+AS
+	UPDATE Reports SET [File] = @File WHERE [ID] = @ID
+GO
+
+COMMIT
+GO

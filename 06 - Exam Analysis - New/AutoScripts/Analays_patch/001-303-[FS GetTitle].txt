@@ -1,0 +1,41 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[GetTitle]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[GetTitle]
+END
+GO
+
+CREATE FUNCTION [dbo].[GetTitle](@Examid int )
+	returns varchar(max)
+	as
+	begin
+		declare @Title varchar(max)='',			
+				@CT varchar(200)
+		DECLARE _cursor CURSOR FOR
+		select distinct  isnull(c.CourseTitle ,'ساير دروس')
+		from Question q 
+		left join Course c on c.CourseID=q.CourseID
+		where ExamID=@ExamId 
+		open _cursor
+		fetch next from _cursor 
+		into 	@ct 
+
+		while @@FETCH_STATUS=0
+		begin
+			Set @Title=@Title+'['+@CT+'],'
+			fetch next from _cursor 
+			into 	@ct 
+		end 						
+		close _cursor
+		deallocate _cursor
+		set @Title=SUBSTRING(@Title,1,LEN(@Title)-1)
+		Return @Title
+	end
+GO
+
+COMMIT
+GO

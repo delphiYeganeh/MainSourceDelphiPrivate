@@ -1,0 +1,26 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'DESIGN_REP_01')
+BEGIN
+	CREATE TABLE [dbo].[DESIGN_REP_01](
+		[ITEM_01] [varchar](50) NULL,
+		[ITEM_02] [varchar](50) NULL,
+		[ITEM_03] [varchar](50) NULL,
+		[ITEM_04] [varchar](50) NULL,
+		[ITEM_05] [varchar](50) NULL,
+		[ITEM_06] [varchar](50) NULL,
+		[ITEM_07] [varchar](50) NULL,
+		[ITEM_08] [varchar](50) NULL,
+		[ITEM_09] [varchar](50) NULL
+	) ON [PRIMARY]
+END
+GO
+
+GO
+
+COMMIT
+GO

@@ -1,0 +1,45 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_ApplicantCodeExam_Info]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_ApplicantCodeExam_Info]
+END
+GO
+
+CREATE  procedure [dbo].[Get_ApplicantCodeExam_Info]
+	 @ApplicantCode varchar(15),@examid int
+	as
+	SELECT     Applicant.ApplicantCode, Applicant.FirstName, Applicant.LastName, Applicant.Termcode, Major.MajorTitle, ApplicantExam.FinalMark, Grouping.GroupingTitle, 
+						  ApplicantExam.ord,
+	(SELECT     count(Question.QuestionID)
+	FROM         ApplicantAnswer INNER JOIN
+						  Question ON ApplicantAnswer.QuestionID = Question.QuestionID
+	WHERE     (ApplicantAnswer.ApplicantID = Applicant.ApplicantID) AND (Question.ExamID = ApplicantExam.Examid)
+	and AnswerItemNumber in (CorrectItemNumber,CorrectItemNumber2,CorrectItemNumber3,CorrectItemNumber4,CorrectItemNumber5,CorrectItemNumber6)
+	 and QuestionActivityID=1) Correct_answer
+	,
+	(SELECT     count(Question.QuestionID)
+	FROM         ApplicantAnswer INNER JOIN
+						  Question ON ApplicantAnswer.QuestionID = Question.QuestionID
+	WHERE     (ApplicantAnswer.ApplicantID = Applicant.ApplicantID) AND (Question.ExamID = ApplicantExam.Examid)
+	and AnswerItemNumber not in (CorrectItemNumber,isnull(CorrectItemNumber2,0),isnull(CorrectItemNumber3,0),isnull(CorrectItemNumber4,0),isnull(CorrectItemNumber5,0),isnull(CorrectItemNumber6,0))
+	 and AnswerItemNumber<>0 and QuestionActivityID=1) Wrong_answer
+	,
+	(SELECT     count(Question.QuestionID)
+	FROM         ApplicantAnswer INNER JOIN
+						  Question ON ApplicantAnswer.QuestionID = Question.QuestionID
+	WHERE     (ApplicantAnswer.ApplicantID = Applicant.ApplicantID) AND (Question.ExamID = ApplicantExam.Examid)
+	and  AnswerItemNumber=0 and QuestionActivityID=1) Withot_answer
+	FROM         ApplicantExam INNER JOIN
+						  Applicant ON ApplicantExam.ApplicantID = Applicant.ApplicantID LEFT OUTER JOIN
+						  Major ON Applicant.MajorID = Major.MajorID LEFT OUTER JOIN
+						  Grouping ON ApplicantExam.GroupingID = Grouping.GroupingID
+	WHERE     (Applicant.ApplicantCode = @ApplicantCode) and ApplicantExam.examid=@examid
+
+GO
+
+COMMIT
+GO

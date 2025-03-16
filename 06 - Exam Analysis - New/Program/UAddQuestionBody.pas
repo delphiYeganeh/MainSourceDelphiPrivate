@@ -1,0 +1,245 @@
+unit UAddQuestionBody;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, BaseUnit, DB, ADODB, xpWindow, ActnList, ExtCtrls, DBCtrls,
+  StdCtrls, Mask, WordXP, OleServer, Buttons, xpBitBtn, YWhereEdit;
+
+type
+  TFrAddQuestionBody = class(TMBaseForm)
+    DSelect_QuestionBody_by_QuestionBodyID: TDataSource;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label4: TLabel;
+    DBEdit3: TDBEdit;
+    Label5: TLabel;
+    Select_QuestionBody_by_QuestionBodyID: TADOStoredProc;
+    WordBtn: TButton;
+    WordDocument: TWordDocument;
+    WordApplication: TWordApplication;
+    Timer: TTimer;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
+    BitBtn5: TBitBtn;
+    Label3: TLabel;
+    Select_QuestionBody_by_QuestionBodyIDQuestionBodyID: TAutoIncField;
+    Select_QuestionBody_by_QuestionBodyIDTitle: TWideStringField;
+    Select_QuestionBody_by_QuestionBodyIDText: TWideStringField;
+    Select_QuestionBody_by_QuestionBodyIDWordBody: TBlobField;
+    Select_QuestionBody_by_QuestionBodyIDSubCourseID: TIntegerField;
+    Select_QuestionBody_by_QuestionBodyIDCorrectItem: TWordField;
+    btnClose: TxpBitBtn;
+    DBComboBox1: TDBComboBox;
+    YWhereEdit16: TYWhereEdit;
+    SpeedButton5: TSpeedButton;
+    Label27: TLabel;
+    procedure TimerTimer(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BitBtn5Click(Sender: TObject);
+    procedure WordBtnClick(Sender: TObject);
+    procedure SaveToFile;
+    procedure openFile;
+    procedure BitBtn3Click(Sender: TObject);
+    procedure WordApplicationDocumentBeforeClose(ASender: TObject;
+      const Doc: _Document; var Cancel: WordBool);
+    function  ReadItem(i:byte):string;
+    procedure btnCloseClick(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    constructor create(AOwner: TComponent;QuestionBdyID: integer = 0);reintroduce;virtual;
+
+  end;
+
+var
+  FrAddQuestionBody: TFrAddQuestionBody;
+
+implementation
+
+uses dmu, BusinessLayer, UAddSubCourse;
+var saved: boolean;
+
+{$R *.dfm}
+function TFrAddQuestionBody.ReadItem(i:byte):string;
+var u,wc,ws,fals,tru:OleVariant;
+begin
+
+with WordApplication do
+ begin
+ ws:=wdStory;
+ wc:=wdCell;
+ u:=2*i+1;
+   Selection.HomeKey(ws,tru);
+    Selection.MoveRight(wc,u,tru);
+    result:=Selection.Text;
+
+end;
+end;
+procedure TFrAddQuestionBody.SaveToFile;
+begin
+  inherited;
+   if Select_QuestionBody_by_QuestionBodyIDWordBody.IsNull then
+    with dm do
+     begin
+      Select_QuestionBodyTemplate.Close;
+      Select_QuestionBodyTemplate.Open;
+      Select_QuestionBody_by_QuestionBodyID.Edit;
+      Select_QuestionBody_by_QuestionBodyIDWordBody.Value:=Select_QuestionBodyTemplateWordBody.Value;
+     end;
+      Select_QuestionBody_by_QuestionBodyIDWordBody.SaveToFile(_EXEDIR+'Yeganeh_Template_File.doc');
+end;
+
+
+
+procedure TFrAddQuestionBody.openFile;
+var ItemIndex,olv,emp,f,fals,tru:OleVariant;
+begin
+    emp:='';
+    fals:=false;
+    tru:=true;
+    olv:=wdOpenFormatAuto;
+
+    WordApplication.Caption := '   Ìê«‰Â';
+
+   with WordApplication do
+    begin
+     ChangeFileOpenDirectory(_EXEDIR);
+     f:='YEGANEH_TEMPlate_FILE.doc';
+     Documents.Open(f,fals,fals,fals,emp,emp,fals,emp,emp,olv,emp,tru,tru,tru,tru);
+
+     If ActiveWindow.View.SplitSpecial <> wdPaneNone Then
+        ActiveWindow.Panes.Item(2).Close;
+
+     If ActiveWindow.ActivePane.View.Type_ in[ wdNormalView ,wdOutlineView] Then
+        ActiveWindow.ActivePane.View.Type_:= wdPrintView;
+
+    ItemIndex := 1;
+    WordDocument.ConnectTo(WordApplication.Documents.Item(itemindex));
+    Visible:=true;
+  end;{with wordapplication}
+
+
+end;
+procedure TFrAddQuestionBody.TimerTimer(Sender: TObject);
+begin
+  inherited;
+ if Saved
+ then exit;
+  try
+     with Select_QuestionBody_by_QuestionBodyID do
+      begin
+      Edit;
+      Select_QuestionBody_by_QuestionBodyIDWordBody.LoadFromFile(_EXEDIR+'Yeganeh_Template_File.doc');
+      post;
+      Timer.Enabled:=false;
+      saved:=true;
+   end;
+  except
+  end;
+end;
+
+procedure TFrAddQuestionBody.BitBtn4Click(Sender: TObject);
+begin
+  inherited;
+Select_QuestionBody_by_QuestionBodyID.Insert;
+DBEdit1.SetFocus;
+end;
+
+procedure TFrAddQuestionBody.BitBtn2Click(Sender: TObject);
+begin
+  inherited;
+  if Select_QuestionBody_by_QuestionBodyID.State in [dsedit,dsinsert] then
+  Select_QuestionBody_by_QuestionBodyID.Post;
+
+end;
+
+procedure TFrAddQuestionBody.BitBtn5Click(Sender: TObject);
+begin
+  inherited;
+  if MessageDlg('¬Ì« „ÿ„∆‰ Â” Ìœ',mtConfirmation,[mbyes,mbno],0)=mryes then
+   Select_QuestionBody_by_QuestionBodyID.Delete;
+
+end;
+
+procedure TFrAddQuestionBody.WordBtnClick(Sender: TObject);
+begin
+  inherited;
+ WordBtn.Enabled:=false;
+ SaveToFile;
+openFile;
+
+end;
+
+procedure TFrAddQuestionBody.BitBtn3Click(Sender: TObject);
+begin
+  inherited;
+Select_QuestionBody_by_QuestionBodyID.edit;
+end;
+
+procedure TFrAddQuestionBody.WordApplicationDocumentBeforeClose(
+  ASender: TObject; const Doc: _Document; var Cancel: WordBool);
+
+  var txt,Title: string;
+begin
+  inherited;
+  if UpperCase(WordApplication.ActiveDocument.Name)<>'YEGANEH_TEMPLATE_FILE.DOC' then
+     exit;
+  saved:=false;
+  WordDocument.Save;
+  WordBtn.Enabled:=true;
+ with WordApplication do
+   begin
+     Selection.WholeStory;
+     txt:=Selection.Text;
+     Title:=ReadItem(0) ;
+     Disconnect;
+  end;
+
+
+     Select_QuestionBody_by_QuestionBodyID.Edit;
+     Select_QuestionBody_by_QuestionBodyIDText.AsString:=txt;
+     Select_QuestionBody_by_QuestionBodyIDTitle.AsString:=Title;
+     Select_QuestionBody_by_QuestionBodyID.Post;
+  Timer.Enabled:=true;
+end;
+
+procedure TFrAddQuestionBody.btnCloseClick(Sender: TObject);
+begin
+  inherited;
+close;
+end;
+
+procedure TFrAddQuestionBody.SpeedButton5Click(Sender: TObject);
+begin
+  inherited;
+  if not (Select_QuestionBody_by_QuestionBodyID.State  in [dsedit,dsinsert]) then
+    exit;
+    
+FrAddSubCourse:=TFrAddSubCourse.Create(Application);
+FrAddSubCourse.ShowModal;
+YWhereEdit16.Text:=Dm.CourseCourseTitle.AsString+' : '+ FrAddSubCourse.select_SubCourse_By_CourseIDSubCourseTitle.AsString;
+Select_QuestionBody_by_QuestionBodyIDSubCourseID.AsInteger:=FrAddSubCourse.SelectedSubCourseID;
+
+end;
+
+constructor TFrAddQuestionBody.create(AOwner: TComponent;
+  QuestionBdyID: integer);
+begin
+  inherited create(AOwner);
+with Select_QuestionBody_by_QuestionBodyID do
+ begin
+   close;
+   Parameters.ParamByName('@QuestionBodyID').Value:= QuestionBdyID;
+   Open;
+   YWhereEdit16.Text:=Exec_select_SubCourseTitle_By_bysubCourseID(Select_QuestionBody_by_QuestionBodyIDSubCourseID.AsInteger);
+ end;
+
+end;
+
+end.

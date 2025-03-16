@@ -1,0 +1,25 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_Applicant_Picture_By_ApplicantID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_Applicant_Picture_By_ApplicantID]
+END
+GO
+
+CREATE  procedure [dbo].[Select_Applicant_Picture_By_ApplicantID]
+(
+	@ApplicantID 	int
+)
+
+AS  
+Select ApplicantID,ApplicantPicture 
+	FROM ApplicantData 
+	WHERE (ApplicantID = @ApplicantID)
+
+GO
+
+COMMIT
+GO

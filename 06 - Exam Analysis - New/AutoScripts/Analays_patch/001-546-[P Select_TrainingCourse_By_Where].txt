@@ -1,0 +1,33 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_TrainingCourse_By_Where]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_TrainingCourse_By_Where]
+END
+GO
+
+CREATE  procedure [dbo].[Select_TrainingCourse_By_Where]
+(
+	@where 	nvarchar(2000)
+)
+
+AS
+
+declare @SQL nvarchar(4000)
+set @SQL='SELECT  TrainingCourse.*,Course.CourseCode, Course.CourseTitle, Teacher.TeacherCode, Teacher.FirstName, Teacher.LastName, Teacher.FullName, 
+                      Teacher.Title, Exam.ExamTitle
+FROM	Course 
+		LEFT OUTER JOIN TrainingCourse ON TrainingCourse.CourseID = Course.CourseID 
+		LEFT OUTER JOIN Teacher ON TrainingCourse.TeacherID = Teacher.TeacherID 
+		LEFT OUTER JOIN Exam ON TrainingCourse.ExamID = Exam.ExamID '
+set @where =case when ltrim(isnull(@where,''))='' then '' else ' where '+@where + ' --and TrainingCourseID IS NULL'end 
+set @sql=@sql+@where 
+exec(@sql)
+	
+GO
+
+COMMIT
+GO

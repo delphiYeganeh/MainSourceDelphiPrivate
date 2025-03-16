@@ -1,0 +1,24 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_Question]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_Question]
+END
+GO
+
+CREATE  procedure [dbo].[Select_Question]
+		(@QuestionID 	int)
+	AS  
+    
+    Select QuestionID, ExamID, Number, DesignerTeacherID, CourseID, CorrectItemNumber, Coefficient, QuestionActivityID, CorrectItemNumber2,CorrectItemNumber3,CorrectItemNumber4,
+	CorrectItemNumber5,CorrectItemNumber6,Taxonomy
+	FROM Question 
+	WHERE (QuestionID = @QuestionID)
+	
+GO
+
+COMMIT
+GO

@@ -1,0 +1,19 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'ApplicantData')
+BEGIN
+	CREATE TABLE [dbo].[ApplicantData](
+		[ApplicantID] [int] NOT NULL,
+		[ApplicantPicture] [image] NOT NULL
+	) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+
+GO
+
+COMMIT
+GO

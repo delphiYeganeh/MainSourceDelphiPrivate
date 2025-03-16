@@ -1,0 +1,53 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[insert_AnswerLine]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[insert_AnswerLine]
+END
+GO
+
+CREATE  procedure [dbo].[insert_AnswerLine]
+		(
+	@ExamID        int,
+	@ApplicantCode varchar(20),
+	@AnswerKey     varchar(1000) ,
+	@termcode      char(3),
+	@majorCode     varchar(20),
+	@CourseCode    varchar(15),
+	@CourseGroup   varchar(5),
+	@GroupExamId   int
+	)
+	AS 
+	begin
+		set @AnswerKey=replace(@AnswerKey,' ','0')
+		declare @CourseID smallint ,
+				@MajorID int, 
+				@ApplicantID int,
+				@TrainingCourseID int,
+				@ApplicantExamID int,
+				@AnswerKeyID int,
+				@ApplicantCourseID int, 
+				@CurrentTermcode char(3),
+				@TempApplicantCode varchar(20)
+				set @TempApplicantCode=@ApplicantCode
+				set @ApplicantCode=LEFT(@TempApplicantCode,12)
+				set @ApplicantCode=REPLACE(@ApplicantCode,'+','') 
+		        
+		select @CurrentTermcode=Termcode from Exam where ExamID=@ExamID
+
+		exec insert_Course_byCode              @CourseID          output , @CourseCode 
+		exec insert_Major_ByCode               @MajorID           output , @MajorCode 
+		exec insert_Applicant_ByCode           @ApplicantID       output , @ApplicantCode    , @MajorID  , @Termcode 
+		exec insert_ApplicantExam              @ApplicantExamID	  output , @ApplicantID      , @ExamID	 , @GroupExamId	
+		exec insert_TrainingCourse_Bycode      @TrainingCourseID  output , @CourseID         , @CurrentTermcode , @CourseGroup , @ExamID
+		exec insert_AnswerKey                  @AnswerKeyID       output , @ApplicantExamID  , @AnswerKey 
+		exec insert_ApplicantCourse_byCode     @ApplicantCourseID output , @ApplicantID      , @TrainingCourseID	
+	end
+
+GO
+
+COMMIT
+GO

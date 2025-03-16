@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'ExPositive_End'
+          AND Object_ID = Object_ID(N'dbo.TextFormat'))
+BEGIN
+	ALTER TABLE [dbo].[TextFormat] 
+	ADD	[ExPositive_End] [int] NULL CONSTRAINT [DF_TextFormat_ExPositive_End] DEFAULT ((0))
+END
+GO
+
+COMMIT
+GO

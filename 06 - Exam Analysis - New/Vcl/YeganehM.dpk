@@ -1,0 +1,72 @@
+package YeganehM;
+
+{$R *.res}
+{$R 'uCiaTrayIcon.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcljpg,
+  vcl,
+  dbrtl,
+  designide,
+  vclactnband,
+  vclx,
+  indy,
+  bdertl,
+  vcldb,
+  adortl,
+  dss,
+  tee,
+  MssComponents,
+  dsnap,
+  YeganehN,
+  frxDB7,
+  fsDB7,
+  fs7,
+  fqb70,
+  frx7,
+  vclZipForged7;
+
+contains
+  AcquireImage in 'acquireimage.pas',
+  DBLookupEdit in 'DBLookupEdit.pas',
+  DBTreeViewReg in 'DBTreeViewReg.pas',
+  Fgrid in 'Fgrid.pas' {Grid},
+  FilterGrid in 'FilterGrid.pas',
+  fldchk in 'FLDCHK.PAS' {FldChooseDlg},
+  IdCoderHeader_yeganeh in 'IdCoderHeader_yeganeh.pas',
+  ImageButton4 in 'ImageButton4.pas',
+  ImgBtn in 'ImgBtn.pas',
+  LookupEdit in 'LookupEdit.pas',
+  PDJRotoLabel in 'PDJRotoLabel.pas',
+  tools in 'tools.pas',
+  twainh in 'TWAINH.PAS',
+  uCiaTrayIcon in 'uCiaTrayIcon.pas',
+  UemsVCL in 'UemsVCL.pas',
+  UfrBase in 'Ufrbase.pas' {BaseForm},
+  YAmountEdit in 'YAmountEdit.pas',
+  YCheckGroupBox in 'YCheckGroupBox.pas';
+
+end.

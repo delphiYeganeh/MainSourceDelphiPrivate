@@ -1,0 +1,47 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[sp_EntityCaptions]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[sp_EntityCaptions]
+END
+GO
+
+CREATE  procedure [dbo].[sp_EntityCaptions] 
+AS
+BEGIN
+	DECLARE @ApplicantEntityCaption NVARCHAR(50),
+		@ApplicantEntityPular NVARCHAR(50),
+		@ApplicantCodeEntityCaption NVARCHAR(50)
+
+	SELECT @ApplicantEntityCaption = [Value]
+	FROM [sys_Setting] WHERE [VariableName] = N'AplicantCaption'
+	
+	SELECT @ApplicantEntityPular = [Value]
+	FROM [sys_Setting] WHERE [VariableName] = N'AplicantPluralCaption'
+	
+	SELECT @ApplicantCodeEntityCaption = [Value]
+	FROM [sys_Setting] WHERE [VariableName] = N'AplicantCodeCaption'
+
+	IF @ApplicantEntityCaption IS NULL
+		SET @ApplicantEntityCaption = N'دانشجو'
+	IF @ApplicantEntityPular IS NULL
+		SET @ApplicantEntityPular = N'دانشجويان'
+	IF @ApplicantCodeEntityCaption IS NULL
+		SET @ApplicantCodeEntityCaption = N'شماره دانشجويي'
+	
+	UPDATE sys_ActionGroup SET ActionGroupTitle = @ApplicantEntityPular WHERE ActionGroupID = 3
+
+	UPDATE sys_Action SET ActionCaption = N'پاسخ هاي '+@ApplicantEntityCaption WHERE ActionName = N'xpBitBtn22'
+	UPDATE sys_Action SET ActionCaption = N'پاسخ هاي '+@ApplicantEntityCaption WHERE ActionName = N'btnGetStno'
+	UPDATE sys_Action SET ActionCaption = N'ايجاد '+@ApplicantEntityCaption WHERE ActionName = N'xpBitBtn50'
+	UPDATE sys_Action SET ActionCaption = @ApplicantEntityPular+N' اين درس' WHERE ActionName = N'xpBitBtn33'
+	UPDATE sys_Action SET ActionCaption = @ApplicantEntityPular+N' آزمون' WHERE ActionName = N'xpBitBtn6'
+END
+
+GO
+
+COMMIT
+GO

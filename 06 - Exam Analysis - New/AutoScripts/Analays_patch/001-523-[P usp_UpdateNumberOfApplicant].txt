@@ -1,0 +1,29 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[usp_UpdateNumberOfApplicant]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[usp_UpdateNumberOfApplicant]
+END
+GO
+
+CREATE  procedure [dbo].[usp_UpdateNumberOfApplicant](@ExamID int)
+AS
+BEGIN
+    DECLARE @Number_of_Applicant INT 
+    
+    SELECT @Number_of_Applicant = COUNT(*)
+    FROM dbo.ApplicantExam
+    WHERE ExamID = @ExamID
+     
+    UPDATE dbo.Exam SET number_of_applicant = @Number_of_Applicant
+    FROM dbo.Exam 
+    WHERE ExamID = @ExamID
+END
+
+GO
+
+COMMIT
+GO

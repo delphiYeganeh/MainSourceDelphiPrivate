@@ -1,0 +1,61 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[ViewExamEqualQuestion]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[ViewExamEqualQuestion]
+END
+GO
+
+CREATE  procedure [dbo].[ViewExamEqualQuestion] (@ExamId int,@res Varchar(200) out) 
+	 as
+	begin
+		 
+			select distinct  
+			(select top 1 EqualQuestionNumber from ExamEqualQuestion e1 where groupexamid=1 and e1.questionnumber=e.questionnumber and e1.examid=e.examid)Group1,   
+			(select top 1 EqualQuestionNumber from ExamEqualQuestion e2 where groupexamid=2 and e2.questionnumber=e.questionnumber and e2.examid=e.examid)Group2,
+			(select top 1 EqualQuestionNumber from ExamEqualQuestion e3 where groupexamid=3 and e3.questionnumber=e.questionnumber and e3.examid=e.examid)Group3,
+			(select top 1 EqualQuestionNumber from ExamEqualQuestion e4 where groupexamid=4 and e4.questionnumber=e.questionnumber and e4.examid=e.examid)Group4
+			into #temp
+			from ExamEqualQuestion e 
+			inner join GroupExam on GroupExam.GroupExamId=e.GroupExamId
+			where e.examid=@ExamId
+			
+			
+
+			declare @MaxNumber int=0
+			declare @count int =0
+			declare @GroupExamCount int =0
+			declare @ExamEqualQuestion int =0
+			set @res=''
+			
+			select @GroupExamCount=GroupExamid from Exam where ExamID=@examid
+			select @MaxNumber=MAX (Group1) from #temp
+			select @count=count(distinct Group1) from #temp
+			select @ExamEqualQuestion=max (distinct GroupExamId) from ExamEqualQuestion where examid=@examid
+
+			if @ExamEqualQuestion<>@GroupExamCount
+				set @res ='تعداد گروه سوالات با تعداد گروه برگزاري آزمون مطابقت ندارد'
+
+			if (@MaxNumber<>(select MAX (Group2) from #temp) or  @count<>(select Count (distinct Group2) from #temp)) and @GroupExamCount>=2
+				select @res=@res+'
+				خطا در سوالات گروه دوم'
+			if (@MaxNumber<>(select MAX (Group3) from #temp) or  @count<>(select Count (distinct Group3) from #temp)) and @GroupExamCount>=3
+				select @res=@res+'
+				خطا در سوالات گروه سوم'
+			if (@MaxNumber<>(select MAX (Group4) from #temp) or  @count<>(select Count (distinct Group4) from #temp)) and @GroupExamCount>=4
+				select @res=@res+'
+				خطا در سوالات گروه چهارم'
+
+			select Group1 'گروه يک',Group2 'گروه دو',Group3 'گروه سه',Group4 'گروه چهار' 
+			from #temp 
+			
+			order by group1
+	end
+
+GO
+
+COMMIT
+GO

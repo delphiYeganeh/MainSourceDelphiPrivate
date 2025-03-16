@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[InsertReport]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[InsertReport]
+END
+GO
+
+CREATE  procedure [dbo].[InsertReport]
+@Name NVARCHAR(50), @File IMAGE
+AS
+	DECLARE @ID INT
+	SELECT @ID = ID FROM Reports 
+	SET @ID = isnull(@ID,0)+1
+	INSERT INTO Reports([ID],[NAME],[File])
+	VALUES(@ID,@Name,@File)
+GO
+
+COMMIT
+GO

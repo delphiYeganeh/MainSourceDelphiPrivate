@@ -1,0 +1,40 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Select_Applicant_by_ExamAndWhere]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Select_Applicant_by_ExamAndWhere]
+END
+GO
+
+CREATE  procedure [dbo].[Select_Applicant_by_ExamAndWhere]
+		(@ExamID	int,@where nvarchar(1000),@order varchar(100) )
+	AS
+	 declare @SQL nvarchar(4000)
+	set @SQL=' SELECT
+		dbo.GenerateBarcode(Applicant.ApplicantCode)+ case when len (ApplicantExam.GroupExamId)<2 then ''0''+CONVERT(varchar(02),ApplicantExam.GroupExamId) else CONVERT(varchar(02),ApplicantExam.GroupExamId) end Barcode, 
+	 Applicant.*, Faculty.FacultyTitle, Major.MajorTitle, Exam.ExamTitle, Course.CourseCode, 
+	 Course.CourseCode, Course.CourseTitle, Exam.ExamDate, Exam.TermCode ExamTerm,T.FullName, T.FullName as TeacherTitle, EducationGroup.EducationGroupTitle,
+	 Exam.CustomField1 as ECF1, Exam.CustomField2 as ECF2, Exam.CustomField3 as ECF3, Exam.CustomField4 as ECF4, Exam.CustomField5 as ECF5 ,GE.Title GroupExamTitle,ApplicantExam.SeatNumber
+	FROM ApplicantExam 
+	inner JOIN  Applicant ON ApplicantExam.ApplicantID = Applicant.ApplicantID
+	inner JOIN Exam ON ApplicantExam.ExamID = Exam.ExamID
+	Left join Teacher T on Exam.TeacherID = T.TeacherID 
+	left JOIN Course ON Exam.MainCourseID = Course.CourseID 
+	LEFT JOIN Major ON Applicant.MajorID = Major.MajorID 
+	LEFT JOIN EducationGroup ON EducationGroup.EducationGroupID = Exam.EducationGroupID 
+	LEFT JOIN Faculty ON EducationGroup.FacultyID = Faculty.FacultyID
+	left join GroupExam GE on GE.GroupExamId =ApplicantExam.GroupExamId 
+	where Exam.ExamID='+cast(@examID as varchar(10))                      
+	set @order =case when isnull(ltrim(@order),'')='' then '' else ' order by '+isnull(ltrim(@order),'') end
+	set @where =case when ltrim(isnull(@where,''))='' then '' else ' and '+@where end 
+	set @sql=@sql+@where +@order
+	print @sql
+	exec(@sql)
+	
+GO
+
+COMMIT
+GO

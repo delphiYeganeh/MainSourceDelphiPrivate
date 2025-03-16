@@ -1,0 +1,23 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[usp_Course_Count_ForExam]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[usp_Course_Count_ForExam]
+END
+GO
+
+CREATE  procedure [dbo].[usp_Course_Count_ForExam] ( @ExamID INT )
+AS
+BEGIN 
+      SELECT    COUNT(DISTINCT ( CourseID )) CourseCount
+      FROM      dbo.Question
+      WHERE     ExamID = @ExamID
+END
+
+GO
+
+COMMIT
+GO

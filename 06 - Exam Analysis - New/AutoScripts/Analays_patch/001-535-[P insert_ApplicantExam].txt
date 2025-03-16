@@ -1,0 +1,33 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[insert_ApplicantExam]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[insert_ApplicantExam]
+END
+GO
+
+CREATE  procedure [dbo].[insert_ApplicantExam]
+		( @ApplicantExamID	int output,
+		 @ApplicantID 	int,
+		 @ExamID 	int,
+		 @GroupExamId int =1)
+	AS
+	begin
+		if exists (select * from ApplicantExam where ApplicantID=@applicantID and ExamID=@Examid)
+		begin
+		  select @ApplicantExamID=ApplicantExamID from ApplicantExam where ApplicantID=@applicantID and ExamID=@Examid
+		end
+		else
+		begin
+		 INSERT INTO ApplicantExam( ApplicantID, ExamID,GroupExamId) VALUES ( @ApplicantID,	 @ExamID ,@GroupExamId)
+		 select @ApplicantExamID=@@identity
+		end
+	end
+
+GO
+
+COMMIT
+GO

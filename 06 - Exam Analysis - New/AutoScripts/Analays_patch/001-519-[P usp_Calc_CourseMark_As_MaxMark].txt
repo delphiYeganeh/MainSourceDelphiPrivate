@@ -1,0 +1,30 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[usp_Calc_CourseMark_As_MaxMark]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[usp_Calc_CourseMark_As_MaxMark]
+END
+GO
+
+CREATE  procedure [dbo].[usp_Calc_CourseMark_As_MaxMark] ( @ExamID INT )
+AS
+BEGIN
+      SELECT    MAX(ExamID) ExamID, SUM(distinct ( CourseMark )) CourseMark
+      INTO      #Tmp
+      FROM      dbo.Question
+      WHERE     ExamID = @ExamID
+      GROUP BY  CourseID
+    
+      SELECT    MAX(Exam.MaxMark) MaxMark, ISNULL(SUM(CourseMark), 0) SumCourseMark
+      FROM      exam
+                INNER JOIN #Tmp ON #Tmp.ExamID = dbo.Exam.ExamID
+      WHERE     Exam.ExamID = @ExamID
+END
+
+GO
+
+COMMIT
+GO

@@ -1,0 +1,111 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Analysis_Question_byExamID]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Analysis_Question_byExamID]
+END
+GO
+
+CREATE  procedure [dbo].[Analysis_Question_byExamID]
+		(@ExamID	[int])
+	AS
+
+	 IF OBJECT_ID('tempdb..##m') IS NOT NULL DROP TABLE ##m	
+
+	 declare @select nvarchar(4000)
+	 set   @select='SELECT Question.QuestionID  , 
+	 sum ( case when AnswerItemNumber in (CorrectItemNumber,CorrectItemNumber2,CorrectItemNumber3,CorrectItemNumber4,CorrectItemNumber5,CorrectItemNumber6) then 1 else 0 
+end)  Correct,
+	 sum ( case when AnswerItemNumber in (1,2,3,4,5,6) then 1 else 0 end) Answerd,
+	 count(*) All_Count,
+	 sum ( case when AnswerItemNumber not in (CorrectItemNumber,CorrectItemNumber2,CorrectItemNumber3,CorrectItemNumber4,CorrectItemNumber5,CorrectItemNumber6) and 
+AnswerItemNumber<>0 then 1 else 0 end) Wrong,
+	Round( sum ( case when AnswerItemNumber in (CorrectItemNumber,CorrectItemNumber2,CorrectItemNumber3,CorrectItemNumber4,CorrectItemNumber5,CorrectItemNumber6) then 1 
+else 0 end) /
+	cast(count(AnswerItemNumber )as float),3) as  Di,
+	sum ( case when  GroupingID=3  then 1 else 0 end) Group3,
+	sum ( case when  GroupingID=1  then 1 else 0 end) Group1, 
+	sum ( case when  GroupingID=3 and AnswerItemNumber in 
+(CorrectItemNumber,CorrectItemNumber2,CorrectItemNumber3,CorrectItemNumber4,CorrectItemNumber5,CorrectItemNumber6) then 1 else 0 end) Correct_G3,
+	sum ( case when  GroupingID=1 and AnswerItemNumber in 
+(CorrectItemNumber,CorrectItemNumber2,CorrectItemNumber3,CorrectItemNumber4,CorrectItemNumber5,CorrectItemNumber6) then 1 else 0 end) Correct_G1,
+	0.0 dis
+	 '
+	declare @Number_Of_Item tinyint
+	SELECT     @Number_Of_Item=Number_of_Items
+	FROM         Exam
+	WHERE     (ExamID = @ExamID)
+	declare @ItemNumber tinyint,@GroupingID tinyint
+	set @ItemNumber=0 
+	while @ItemNumber<=6 /* @Number_Of_Item */
+	 begin
+	  set @GroupingID=1 
+	  while @GroupingID<=3 
+	   begin
+		 if @GroupingID<>2   
+		  set @select=@select+',sum ( case when AnswerItemNumber= '+cast(@ItemNumber as char(1))+' and GroupingID='+cast(@GroupingID as char(1)) +
+								' then 1 else 0 end ) G'+cast(@GroupingID as char(1))+'_'+cast(@ItemNumber as char(1))
+
+		 set @GroupingID=@GroupingID+1
+	  end  /* @GroupingID */
+	  
+	  
+	  set @select=@select+',
+	sum ( case when AnswerItemNumber= '+cast(@ItemNumber as char(1))+ 
+	' then 1 else 0 end ) all'+cast(@ItemNumber as char(1))
+	 set @ItemNumber=@ItemNumber+1
+	end /* @ItemNumber */
+		  set @select=@select+' into ##m
+	FROM          Question
+	INNER JOIN   ApplicantAnswer ON ApplicantAnswer.QuestionID = Question.QuestionID 
+	INNER JOIN   ApplicantExam ON ApplicantExam.ApplicantID = ApplicantAnswer.ApplicantID and Question.Examid=ApplicantExam.ExamID
+	where Question.Examid='+cast(@ExamID as varchar(10))+'-- and QuestionActivityID=1
+	group by Question.QuestionID,Number, CorrectItemNumber  '
+
+	exec sp_executesql @Select
+	print @Select
+
+	update Question
+	set Question.Correct=##m.Correct ,
+	Question.Answerd=##m.Answerd ,
+	Question.All_Count=##m.All_Count ,
+	Question.Wrong=##m.Wrong ,
+	Question.Difficulty  =##m.Di ,
+	Question.Discrimination =round(
+	(Correct_G3 -Correct_G1)/cast(case when group3>group1 then group3 else group1 end as float) ,3),
+	Question.G1_0=##m.G1_0 ,
+	Question.G3_0=##m.G3_0 ,
+	Question.all0=##m.all0 ,
+	Question.G1_1=##m.G1_1 ,
+	Question.G3_1=##m.G3_1 ,
+	Question.all1=##m.all1 ,
+	Question.G1_2=##m.G1_2 ,
+	Question.G3_2=##m.G3_2 ,
+	Question.all2=##m.all2 ,
+	Question.G1_3=##m.G1_3 ,
+	Question.G3_3=##m.G3_3 ,
+	Question.all3=##m.all3 ,
+	Question.G1_4=##m.G1_4 ,
+	Question.G3_4=##m.G3_4 ,
+	Question.all4=##m.all4 ,
+	Question.all5=##m.all5 ,
+	Question.all6=##m.all6 ,
+	Question.RPBIS=round(Dbo.RPBIS(Question.QuestionID),3)
+	from Question inner join ##m on ##m.QuestionID=Question.QuestionID
+
+	update Question
+	set number_Of_Item=(case  when cast(all1 as float)/all_count>0.05 then 1 else 0 end)+
+	(case  when cast(all2 as float)/all_count>0.05 then 1 else 0 end)+
+	(case  when cast(all3 as float)/all_count>0.05 then 1 else 0 end)+
+	(case  when cast(all4 as float)/all_count>0.05 then 1 else 0 end)+
+	(case  when cast(all5 as float)/all_count>0.05 then 1 else 0 end)+
+	(case  when cast(all6 as float)/all_count>0.05 then 1 else 0 end)
+	WHERE ExamID = @ExamID
+
+GO
+
+COMMIT
+GO

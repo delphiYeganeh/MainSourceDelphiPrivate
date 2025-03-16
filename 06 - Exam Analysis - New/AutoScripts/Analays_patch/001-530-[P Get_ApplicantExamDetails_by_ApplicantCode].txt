@@ -1,0 +1,39 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[Get_ApplicantExamDetails_by_ApplicantCode]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[Get_ApplicantExamDetails_by_ApplicantCode]
+END
+GO
+
+CREATE  procedure [dbo].[Get_ApplicantExamDetails_by_ApplicantCode]
+	 @ApplicantCode varchar(15),@examid int
+	as
+
+	select * from (
+	SELECT     /*Question.Number,*/ Question.CorrectItemNumber, Question.CorrectItemNumber2,Question.CorrectItemNumber3,Question.CorrectItemNumber4,
+	Question.CorrectItemNumber5,Question.CorrectItemNumber6
+	, ApplicantAnswer.AnswerItemNumber,
+	cast(case when ApplicantAnswer.AnswerItemNumber=1 then 1 else 0 end as bit) Item1,
+	cast(case when ApplicantAnswer.AnswerItemNumber=2 then 1 else 0 end as bit) Item2,
+	cast(case when ApplicantAnswer.AnswerItemNumber=3 then 1 else 0 end as bit) Item3,
+	cast(case when ApplicantAnswer.AnswerItemNumber=4 then 1 else 0 end as bit) Item4,
+	cast(case when ApplicantAnswer.AnswerItemNumber=5 then 1 else 0 end as bit) Item5,
+	cast(case when ApplicantAnswer.AnswerItemNumber=6 then 1 else 0 end as bit) Item6,
+	Isnull(dbo.GetEqualQuestionNumber (Question.QuestionID ,ApplicantExam.GroupExamid ,1),Question.Number) Number
+
+	FROM         Applicant 
+	INNER JOIN ApplicantExam ON Applicant.ApplicantID = ApplicantExam.ApplicantID 
+	INNER JOIN Exam ON ApplicantExam.ExamID = Exam.ExamID 
+	INNER JOIN Question ON Exam.ExamID = Question.ExamID
+	INNER JOIN ApplicantAnswer ON Applicant.ApplicantID = ApplicantAnswer.ApplicantID AND Question.QuestionID = ApplicantAnswer.QuestionID
+	WHERE     (Applicant.ApplicantCode = @ApplicantCode) and Exam.examid=@examid)s
+	order by s.Number
+
+GO
+
+COMMIT
+GO

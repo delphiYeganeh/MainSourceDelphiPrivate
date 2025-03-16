@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'CourseMark'
+          AND Object_ID = Object_ID(N'dbo.QuestionDelete'))
+BEGIN
+	ALTER TABLE [dbo].[QuestionDelete] 
+	ADD	[CourseMark] [float] NULL
+END
+GO
+
+COMMIT
+GO

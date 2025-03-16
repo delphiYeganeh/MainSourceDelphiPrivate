@@ -1,0 +1,22 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS (SELECT 1 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'ExamEqualQuestion')
+BEGIN
+	CREATE TABLE [dbo].[ExamEqualQuestion](
+		[ExamEqualQuestionId] [int] IDENTITY(1,1) NOT NULL,
+		[ExamId] [int] NULL,
+		[GroupExamId] [int] NULL,
+		[QuestionNumber] [int] NULL,
+		[EqualQuestionNumber] [int] NULL
+	) ON [PRIMARY]
+END
+GO
+
+GO
+
+COMMIT
+GO

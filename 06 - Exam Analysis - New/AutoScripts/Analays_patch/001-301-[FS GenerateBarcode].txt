@@ -1,0 +1,31 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS (SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[GenerateBarcode]') 
+                   and OBJECTPROPERTY(id, N'IsScalarFunction') = 1)
+BEGIN
+    DROP FUNCTION [dbo].[GenerateBarcode]
+END
+GO
+
+CREATE FUNCTION [dbo].[GenerateBarcode]
+(
+	@Input varchar(12)
+)
+returns varchar(12)
+as
+begin
+	declare @len int 
+	set @len=len(@input)
+	while @len<12
+	begin
+		set @Input=@Input+'+'
+		set @len=@len+1	
+	end
+	return @input
+end
+GO
+
+COMMIT
+GO

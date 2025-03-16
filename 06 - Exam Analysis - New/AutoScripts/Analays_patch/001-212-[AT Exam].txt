@@ -1,0 +1,14 @@
+BEGIN TRANSACTION
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'CustomField5'
+          AND Object_ID = Object_ID(N'dbo.Exam'))
+BEGIN
+	ALTER TABLE [dbo].[Exam] 
+	ADD	[CustomField5] [nvarchar] (50) COLLATE Arabic_CI_AS NULL
+END
+GO
+
+COMMIT
+GO

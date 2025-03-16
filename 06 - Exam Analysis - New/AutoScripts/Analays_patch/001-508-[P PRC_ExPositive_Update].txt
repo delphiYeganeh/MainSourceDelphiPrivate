@@ -1,0 +1,33 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[PRC_ExPositive_Update]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[PRC_ExPositive_Update]
+END
+GO
+
+CREATE  procedure [dbo].[PRC_ExPositive_Update]
+		(
+		   @ID          INT
+		  ,@ExamID      INT
+		  ,@ApplicantId INT
+		  ,@Score       NVARCHAR(600)
+		  ,@SumScore    FLOAT
+		  ,@Desc        NVARCHAR(500)
+		)
+AS
+UPDATE [dbo].[ExPositive]
+   SET [ExamID] = @ExamID
+      ,[ApplicantId] = @ApplicantId
+      ,[Score] = @Score
+      ,[SumScore] = @SumScore
+      ,[Desc] = @Desc
+ WHERE ID = @ID
+
+GO
+
+COMMIT
+GO

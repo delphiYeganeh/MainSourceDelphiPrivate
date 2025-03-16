@@ -1,0 +1,30 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[insert_sys_Action]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[insert_sys_Action]
+END
+GO
+
+CREATE  procedure [dbo].[insert_sys_Action]
+		(@ActionName 	[varchar](50),
+		 @ActionCaption 	[nvarchar](50),
+		 @ActionGroupID	[smallint])
+
+	AS INSERT INTO [sys_Action] 
+		 ( [ActionName],
+		 [ActionCaption],
+		 [ActionGroupID]) 
+	 
+	VALUES 
+		( @ActionName,
+		 @ActionCaption,
+		 @ActionGroupID)
+
+GO
+
+COMMIT
+GO

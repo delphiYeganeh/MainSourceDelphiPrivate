@@ -1,0 +1,186 @@
+
+ALTER  PROCEDURE [dbo].[Update_Table_CustomFieldsCaption]
+		@TableName NVARCHAR(50),
+		@cfc1 NVARCHAR(50),
+		@cfc2 NVARCHAR(50),
+		@cfc3 NVARCHAR(50),
+		@cfc4 NVARCHAR(50),
+		@cfc5 NVARCHAR(50),
+		@UTID INT  = 0 
+AS		
+IF EXISTS(SELECT * FROM sys_Setting WHERE VariableName = @TableName+'.CustomField1' AND ISNULL(UTID,0) = @UTID )
+	UPDATE sys_Setting SET [Value] = @cfc1 WHERE VariableName = @TableName+'.CustomField1' AND ISNULL(UTID,0) = @UTID
+ELSE 
+	INSERT INTO sys_Setting(UserID,VariableName,[Value],UTID)
+	VALUES(-1, @TableName+'.CustomField1', @cfc1,@UTID)
+	
+IF EXISTS(SELECT * FROM sys_Setting WHERE VariableName = @TableName+'.CustomField2' AND ISNULL(UTID,0) = @UTID )
+	UPDATE sys_Setting SET [Value] = @cfc2 WHERE VariableName = @TableName+'.CustomField2'  AND ISNULL(UTID,0) = @UTID
+ELSE 
+	INSERT INTO sys_Setting(UserID,VariableName,[Value],UTID)
+	VALUES(-1, @TableName+'.CustomField2', @cfc2,@UTID)
+	
+IF EXISTS(SELECT * FROM sys_Setting WHERE VariableName = @TableName+'.CustomField3' AND ISNULL(UTID,0) = @UTID )
+	UPDATE sys_Setting SET [Value] = @cfc3 WHERE VariableName = @TableName+'.CustomField3' AND ISNULL(UTID,0) = @UTID
+ELSE 
+	INSERT INTO sys_Setting(UserID,VariableName,[Value],UTID)
+	VALUES(-1, @TableName+'.CustomField3', @cfc3,@UTID)
+
+IF EXISTS(SELECT * FROM sys_Setting WHERE VariableName = @TableName+'.CustomField4' AND ISNULL(UTID,0) = @UTID )
+	UPDATE sys_Setting SET [Value] = @cfc4 WHERE VariableName = @TableName+'.CustomField4' AND ISNULL(UTID,0) = @UTID
+ELSE 
+	INSERT INTO sys_Setting(UserID,VariableName,[Value],UTID)
+	VALUES(-1, @TableName+'.CustomField4', @cfc4,@UTID)
+
+IF EXISTS(SELECT * FROM sys_Setting WHERE VariableName = @TableName+'.CustomField5' AND ISNULL(UTID,0) = @UTID )
+	UPDATE sys_Setting SET [Value] = @cfc5 WHERE VariableName = @TableName+'.CustomField5' AND ISNULL(UTID,0) = @UTID
+ELSE 
+	INSERT INTO sys_Setting(UserID,VariableName,[Value],UTID)
+	VALUES(-1, @TableName+'.CustomField5', @cfc5,@UTID)
+
+
+-------------
+
+
+ALTER PROCEDURE [dbo].[Select_Table_CustomFieldsCaption]
+@TableName NVARCHAR(50),
+@UTID INT  = 0  
+AS 
+DECLARE @cfc1 NVARCHAR(50),
+		@cfc2 NVARCHAR(50),
+		@cfc3 NVARCHAR(50),
+		@cfc4 NVARCHAR(50),
+		@cfc5 NVARCHAR(50)
+		
+		
+SELECT @cfc1 = VALUE FROM sys_Setting WHERE VariableName = @TableName+'.CustomField1' AND ISNULL(UTID,0) = @UTID 
+SELECT @cfc2 = VALUE FROM sys_Setting WHERE VariableName = @TableName+'.CustomField2' AND ISNULL(UTID,0) = @UTID 
+SELECT @cfc3 = VALUE FROM sys_Setting WHERE VariableName = @TableName+'.CustomField3' AND ISNULL(UTID,0) = @UTID 
+SELECT @cfc4 = VALUE FROM sys_Setting WHERE VariableName = @TableName+'.CustomField4' AND ISNULL(UTID,0) = @UTID 
+SELECT @cfc5 = VALUE FROM sys_Setting WHERE VariableName = @TableName+'.CustomField5' AND ISNULL(UTID,0) = @UTID 
+
+Select	ISNULL(@cfc1,'فيلد 1') AS CFC1,
+		ISNULL(@cfc2,'فيلد 2') AS CFC2,
+		ISNULL(@cfc3,'فيلد 3') AS CFC3,
+		ISNULL(@cfc4,'فيلد 4') AS CFC4,
+		ISNULL(@cfc5,'فيلد 5') AS CFC5
+
+
+--------------
+
+
+ALTER proc [dbo].[Duplicate_CourseTitle]
+@CourseTitle nvarchar(60)
+,@UTID INT = 0
+,@result bit output
+as
+set @result=0
+if exists (SELECT     *
+FROM         Course
+WHERE  ISNULL(utid,0) = @UTID  and   replace(CourseTitle,' ','')=replace(@CourseTitle,' ',''))
+set @result=1
+
+--------
+
+ALTER Proc [dbo].[select_Course]
+@Like nvarchar(50)
+,@UTID INT = 0
+as
+SELECT     *
+FROM         Course
+WHERE    ( (CourseTitle LIKE '%'+@like+'%') OR  (CourseCode LIKE N'%'+@like+'%'))
+   AND ISNULL(UTID,0) = @UTID
+
+---
+
+ALTER PROCEDURE [dbo].[Get_UserSetting]
+@UserID  int ,@VariableName varchar(50),
+@UTID INT = 0,
+@Value nvarchar(100) output
+AS
+SELECT     @Value=Value
+FROM         sys_Setting
+WHERE     (UserID = @UserID) AND (VariableName = @VariableName)
+          AND (ISNULL(UTID,0) = @UTID)
+
+set @Value=isnull(@Value,'')
+
+-----
+
+
+
+
+ALTER PROCEDURE [dbo].[Get_SystemSetting]
+@VariableName varchar(50),
+@UTID INT = 0,
+@Value nvarchar(100)  output
+AS
+ exec Get_UserSetting -1,@VariableName,@UTID,@value output
+
+
+----
+
+ALTER PROCEDURE [dbo].[Set_UserSetting]
+@UserID  int ,@VariableName varchar(50),@Value nvarchar(100),@UTID INT = 0
+AS
+if not exists(select * From sys_Setting WHERE (UserID = @UserID) AND (VariableName = @VariableName))
+insert into sys_Setting(UserID,VariableName,VALUE,UTID) values(@UserID,@VariableName,@Value,@UTID)
+Update sys_Setting
+set Value=@Value
+WHERE     (UserID = @UserID) AND (VariableName = @VariableName)
+
+----
+
+ALTER PROCEDURE [dbo].[Set_systemSetting]
+@VariableName varchar(50),@Value nvarchar(100),@UTID INT = 0
+AS
+exec Set_UserSetting -1 ,@VariableName ,@Value,@UTID
+
+---
+
+	ALTER PROCEDURE [dbo].[Browse_Exam]
+	@where varchar(2047)
+	AS
+	 declare @SqlCommand nvarchar(4000)
+	 set   @SqlCommand='SELECT     GroupExam.Code GroupExam ,Exam.ExamID, Exam.ExamTitle, Exam.MainCourseID, Exam.MainDesignerTeacherID, Exam.ExamDate, Exam.CorrectItemPoint, 
+						  Exam.WrongItemPoint, Exam.BlankItemPoint, Exam.MinPassedMark, Exam.ExamTypeID, Exam.Number_of_Items, Exam.Number_of_Question, 
+						  Exam.number_of_applicant, Exam.TexFormatID, Exam.TermCode, ExamType.ExamTypeTitle, Teacher.TeacherCode, Teacher.FullName, 
+						  TextFormat.TextFormatTitle, Course.CourseCode, Course.CourseTitle,
+						  Exam.CustomField1,Exam.CustomField2,Exam.CustomField3,Exam.CustomField4,Exam.CustomField5,Exam.UTID
+	FROM         Exam 
+	LEFT JOIN  Teacher ON Exam.MainDesignerTeacherID = Teacher.TeacherID 
+	LEFT JOIN  Course ON Exam.MainCourseID = Course.CourseID 
+	LEFT JOIN  TextFormat ON Exam.TexFormatID = TextFormat.TextFormatID 
+	LEFT JOIN  ExamType ON Exam.ExamTypeID = ExamType.ExamTypeID
+	left join  GroupExam on Exam.GroupExamId=GroupExam.GroupExamId
+	'
+	set @where=isnull(ltrim(@where),'')
+	 if @where<>''  set  @where=' where '+@where
+	set @SqlCommand=@SqlCommand+@where+' order by ExamDate desc '
+	exec sp_executesql @SqlCommand
+
+-------
+
+
+ALTER PROCEDURE [dbo].[Select_Exam_ByExamID]
+	(@ExamID 	int)
+AS  
+SELECT  ExamID, ExamTitle, MainCourseID, MainDesignerTeacherID, ExamDate, CorrectItemPoint, WrongItemPoint, DamagedItemPoint, BlankItemPoint,
+ROUND(CorrectItemPoint,3) AS CorrectIP, ROUND(WrongItemPoint,3) AS WrongIP, ROUND(DamagedItemPoint,3) AS DamagedIP,ROUND(BlankItemPoint,3) AS BlankIP, 
+MinPassedMark, ExamTypeID, Number_of_Items, Number_of_Question, number_of_applicant, TexFormatID, AnswerKey, Difficulty, 
+Discrimination, StandardError, Alpha, Reliability, ExamVariance, NumberOf_1item_Question, NumberOf_2item_Question, NumberOf_3item_Question, 
+NumberOf_4item_Question, NumberOf_5item_Question, RPBIS, TermCode, KR20, MaxMark, NumberOf_6item_Question, EducationGroupID, TeacherID, 
+CustomField1, CustomField2, CustomField3, CustomField4, CustomField5
+,GroupExamid,UTID
+FROM         Exam
+WHERE 
+	( ExamID	 = @ExamID)
+
+-----
+
+
+
+
+
+
+

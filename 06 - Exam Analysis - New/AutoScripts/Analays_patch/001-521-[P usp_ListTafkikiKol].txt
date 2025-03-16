@@ -1,0 +1,110 @@
+BEGIN TRANSACTION
+GO
+IF EXISTS ( SELECT 1
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[usp_ListTafkikiKol]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[usp_ListTafkikiKol]
+END
+GO
+
+CREATE  procedure [dbo].[usp_ListTafkikiKol] ( @ExamId INT )
+AS
+BEGIN
+
+      CREATE TABLE tmpTable
+      (
+        ApplicantID INT ,
+        ApplicantCode VARCHAR(20) ,
+        FullName NVARCHAR(50) ,
+        CourseTitle NVARCHAR(100) ,
+        PercentMark DECIMAL(8, 5) ,
+        FinalMark DECIMAL(8, 5),
+        ExamID INT
+      )
+
+      DECLARE @CorrectItemPoint FLOAT ,
+              @BlankItemPoint FLOAT ,
+              @WrongItemPoint FLOAT
+              
+      DECLARE @ROND INT
+                
+      IF EXISTS(SELECT ROND FROM ROND_INF WHERE EXAMID =  @ExamId)
+         SELECT @ROND = ROND FROM ROND_INF WHERE EXAMID =  @ExamId
+         ELSE
+         SET    @ROND = 0
+              
+
+      SELECT    @BlankItemPoint = BlankItemPoint, @CorrectItemPoint = CorrectItemPoint, @WrongItemPoint = WrongItemPoint
+      FROM      Exam
+      WHERE     ExamID = @ExamID
+
+      INSERT    INTO tmpTable
+                SELECT  dbo.Applicant.ApplicantID, MAX(ApplicantCode) ApplicantCode,
+                        MAX(dbo.Applicant.LastName) FullName, ISNULL(Course.CourseTitle, 'ساير دروس') CourseTitle,
+                        ROUND(ISNULL(MAX(CourseMark), 100.0) * SUM(Coefficient * CASE WHEN ApplicantAnswer.AnswerItemNumber = 0 OR QuestionActivityID = 2
+                                                                                      THEN @BlankItemPoint
+                                                                                      WHEN ApplicantAnswer.AnswerItemNumber IN (
+                                                                                           CorrectItemNumber,
+                                                                                           CorrectItemNumber2,
+                                                                                           CorrectItemNumber3,
+                                                                                           CorrectItemNumber4,
+                                                                                           CorrectItemNumber5,
+                                                                                           CorrectItemNumber6 ) OR QuestionActivityID = 3
+                                                                                      THEN @CorrectItemPoint
+                                                                                      ELSE @WrongItemPoint
+                                                                                 END) / SUM(Coefficient * @CorrectItemPoint),
+                              /* 2,1) PercentMark */
+                              @ROND) PercentMark
+                              ,CASE WHEN MAX(FinalMark) < 0 THEN 0
+                                                   /* ELSE ROUND(MAX(FinalMark), 2,1) */
+                                                   ELSE ROUND(MAX(FinalMark), @ROND)
+                                              END FinalMark,@ExamID
+                FROM    dbo.Question
+                        INNER JOIN ApplicantAnswer ON Question.QuestionID = ApplicantAnswer.QuestionID
+                        LEFT  JOIN Course ON Question.CourseID = Course.CourseID
+                        INNER JOIN dbo.Applicant ON dbo.Applicant.ApplicantID = dbo.ApplicantAnswer.ApplicantID
+                        INNER JOIN dbo.ApplicantExam ON dbo.ApplicantExam.ApplicantID = dbo.Applicant.ApplicantID AND dbo.ApplicantExam.ExamID = dbo.Question.ExamID
+                WHERE   ( Question.ExamID = @ExamID ) AND QuestionActivityID IN ( 1, 3 )
+                GROUP BY dbo.Applicant.ApplicantID, ISNULL(Course.CourseTitle, 'ساير دروس')
+                ORDER BY 1
+
+/*
+UPDATE tmpTable SET FinalMark = (
+SELECT ROUND(SUM(PercentMark), 2)
+FROM tmpTable AS TT
+WHERE TT.applicantcode = tmpTable.applicantcode
+GROUP by ApplicantCode
+)
+*/
+
+      DECLARE @SQLQuery AS NVARCHAR(MAX)
+      DECLARE @PivotColumns AS NVARCHAR(MAX)
+
+    /* Get unique values of pivot column */
+      SELECT    @PivotColumns = COALESCE(@PivotColumns + ',', '') + QUOTENAME(CourseTitle)
+      FROM      ( SELECT DISTINCT
+                            CourseTitle
+                  FROM      tmpTable ) AS [PIVOT]
+
+    /* Create the dynamic query with all the values for
+    pivot column at runtime */
+      SET @SQLQuery = N'    SELECT ApplicantCode [شماره دانشجويي], FullName [نام کامل], FinalMark [نمره نهايي], ' + @PivotColumns + '
+                            FROM tmpTable
+                            PIVOT( SUM(PercentMark)
+                            FOR CourseTitle IN (' + @PivotColumns + ')) AS Query'
+      EXEC sp_executesql @SQLQuery
+
+
+      IF EXISTS ( SELECT    *
+                  FROM      sys.objects
+                  WHERE     object_id = OBJECT_ID(N'[dbo].[tmpTable]') AND type IN ( N'U' ) )
+         DROP TABLE tmpTable
+
+END
+
+GO
+
+COMMIT
+GO
